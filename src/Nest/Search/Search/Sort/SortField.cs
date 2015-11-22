@@ -34,7 +34,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISort
 	{
-		FieldName SortKey { get; }
+		Field SortKey { get; }
 
 		[JsonProperty("missing")]
 		string Missing { get; set; }
@@ -49,7 +49,7 @@ namespace Nest
 		QueryContainer NestedFilter { get; set; }
 
 		[JsonProperty("nested_path")]
-		FieldName NestedPath { get; set; }
+		Field NestedPath { get; set; }
 	}
 
 	public abstract class SortBase : ISort
@@ -58,9 +58,9 @@ namespace Nest
 		public SortOrder? Order { get; set; }
 		public SortMode? Mode { get; set; }
 		public QueryContainer NestedFilter { get; set; }
-		public FieldName NestedPath { get; set; }
+		public Field NestedPath { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
-		public abstract FieldName SortKey { get; }
+		public abstract Field SortKey { get; }
 	}
 
 	//TODO rename to SortDescriptorFieldBase in 2.0
@@ -76,9 +76,9 @@ namespace Nest
 
 		QueryContainer ISort.NestedFilter { get; set; }
 
-		FieldName ISort.NestedPath { get; set; }
+		Field ISort.NestedPath { get; set; }
 
-		FieldName ISort.SortKey { get { throw new NotImplementedException(); } }
+		Field ISort.SortKey { get { throw new NotImplementedException(); } }
 
 		public virtual TDescriptor Ascending()
 		{
@@ -128,7 +128,7 @@ namespace Nest
 
 	public interface IFieldSort : ISort
 	{
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("ignore_unmapped")]
 		bool? IgnoreUnmappedFields { get; set; }
@@ -139,9 +139,9 @@ namespace Nest
 
 	public class Sort : SortBase, IFieldSort
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 
-		public override FieldName SortKey
+		public override Field SortKey
 		{
 			get { return Field; }
 		}
@@ -150,11 +150,11 @@ namespace Nest
 
 	public class SortDescriptor<T> where T : class
 	{
-		internal IList<KeyValuePair<FieldName, ISort>> InternalSortState { get; set; }
+		internal IList<KeyValuePair<Field, ISort>> InternalSortState { get; set; }
 
 		public SortDescriptor()
 		{
-			this.InternalSortState = new List<KeyValuePair<FieldName, ISort>>();
+			this.InternalSortState = new List<KeyValuePair<Field, ISort>>();
 		}
 
 		/// <summary>
@@ -167,7 +167,7 @@ namespace Nest
 		/// </summary>
 		public SortDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>(objectPath, new Sort() { Order = SortOrder.Ascending}));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>(objectPath, new Sort() { Order = SortOrder.Ascending}));
 			return this;
 		}
 
@@ -181,7 +181,7 @@ namespace Nest
 		/// </summary>
 		public SortDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>(objectPath, new Sort() { Order = SortOrder.Descending }));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>(objectPath, new Sort() { Order = SortOrder.Descending }));
 			return this;
 		}
 
@@ -195,7 +195,7 @@ namespace Nest
 		/// </summary>
 		public SortDescriptor<T> SortAscending(string field)
 		{
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>(field, new Sort() { Order = SortOrder.Ascending }));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>(field, new Sort() { Order = SortOrder.Ascending }));
 			return this;
 		}
 
@@ -209,7 +209,7 @@ namespace Nest
 		/// </summary>
 		public SortDescriptor<T> SortDescending(string field)
 		{
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>(field, new Sort() { Order = SortOrder.Descending}));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>(field, new Sort() { Order = SortOrder.Descending}));
 			return this;
 		}
 
@@ -225,7 +225,7 @@ namespace Nest
 			if (descriptor == null || descriptor.Field.IsConditionless())
 				return this;
 
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>(descriptor.Field, descriptor));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>(descriptor.Field, descriptor));
 			return this;
 		}
 
@@ -240,7 +240,7 @@ namespace Nest
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
 			if (descriptor == null || descriptor.Field.IsConditionless())
 				return this;
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>("_geo_distance", descriptor));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>("_geo_distance", descriptor));
 			return this;
 		}
 
@@ -255,7 +255,7 @@ namespace Nest
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
 			if (descriptor == null || (descriptor.Script.IsNullOrEmpty() && descriptor.File.IsNullOrEmpty()))
 				return this;
-			this.InternalSortState.Add(new KeyValuePair<FieldName, ISort>("_script", descriptor));
+			this.InternalSortState.Add(new KeyValuePair<Field, ISort>("_script", descriptor));
 			return this;
 		}
 
@@ -266,20 +266,20 @@ namespace Nest
 	{
 		private IFieldSort Self => this;
 
-		FieldName IFieldSort.Field { get; set; }
+		Field IFieldSort.Field { get; set; }
 
 		bool? IFieldSort.IgnoreUnmappedFields { get; set; }
 		FieldType? IFieldSort.UnmappedType { get; set; }
 
-		FieldName ISort.SortKey { get { return Self.Field; } }
+		Field ISort.SortKey { get { return Self.Field; } }
 
-		public virtual SortFieldDescriptor<T> OnField(string field)
+		public virtual SortFieldDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public virtual SortFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

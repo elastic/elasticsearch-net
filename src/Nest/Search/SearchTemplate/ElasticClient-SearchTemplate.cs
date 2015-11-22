@@ -9,105 +9,92 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// The /_search/template endpoint allows to use the mustache language to pre render search 
+		/// requests, before they are executed and fill existing templates with template parameters.
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
+		/// <returns></returns>
+		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+			where T : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
+			where T : class
+			where TResult : class;
+	}
+
 	public partial class ElasticClient
 	{
-		public ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector) where T : class
-		{
-			return this.SearchTemplate<T, T>(selector);
-		}
+		public ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
+			this.SearchTemplate<T, T>(selector);
 
-		public ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+		public ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
-			where TResult : class
-		{
-			selector.ThrowIfNull("searchSelector");
-			var descriptor = selector(new SearchTemplateDescriptor<T>());
+			where TResult : class =>
+			this.SearchTemplate<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
 
-			IPathInfo<SearchTemplateRequestParameters> p = descriptor;
-			var pathInfo = p
-				.ToPathInfo(ConnectionSettings)
-				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(descriptor));
-
-			var status = this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
-			return status.Success ? status.Body : CreateInvalidInstance<SearchResponse<TResult>>(status);
-		}
-
-		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request) where T : class
-		{
-			return this.SearchTemplate<T, T>(request);
-		}
+		public ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request) where T : class =>
+			this.SearchTemplate<T, T>(request);
 
 		public ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
-			where TResult : class
-		{
-			var pathInfo = request
-				.ToPathInfo(ConnectionSettings)
-				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
+			where TResult : class =>
+			this.Dispatcher.Dispatch<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>>(
+				request,
+				this.CreateSearchDeserializer<T, TResult>(request),
+				this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
+			);
 
-			var status = this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>(pathInfo, request);
-			return status.Success ? status.Body : CreateInvalidInstance<SearchResponse<TResult>>(status);
-		}
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
+			this.SearchTemplateAsync<T, T>(selector);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector) where T : class
-		{
-			return this.SearchTemplateAsync<T, T>(selector);
-		}
-
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
 			where T : class
-			where TResult : class
-		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new SearchTemplateDescriptor<T>());
+			where TResult : class =>
+			this.SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
 
-			IPathInfo<SearchTemplateRequestParameters> p = descriptor;
-			var pathInfo = p
-				.ToPathInfo(ConnectionSettings)
-				.DeserializationState(CreateSearchDeserializer<T, TResult>(descriptor));
-
-			return this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
-				.ContinueWith<ISearchResponse<TResult>>(t =>
-				{
-					if (t.IsFaulted && t.Exception != null)
-					{
-						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
-						return null; //won't be hit
-					}
-
-					return t.Result.Success
-						? t.Result.Body
-						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
-				});
-		}
-
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request) where T : class
-		{
-			return this.SearchTemplateAsync<T, T>(request);
-		}
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request) where T : class =>
+			this.SearchTemplateAsync<T, T>(request);
 
 		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
 			where T : class
-			where TResult : class
-		{
-			var pathInfo = request
-				.ToPathInfo(ConnectionSettings)
-				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
-
-			return this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
-				.ContinueWith<ISearchResponse<TResult>>(t =>
-				{
-					if (t.IsFaulted && t.Exception != null)
-					{
-						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
-						return null; //won't be hit
-					}
-
-					return t.Result.Success
-						? t.Result.Body
-						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
-				});
-		}
+			where TResult : class =>
+			this.Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
+				request,
+				this.CreateSearchDeserializer<T, TResult>(request),
+				this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
+			);
 
 		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IApiCallDetails response, Stream stream, ISearchTemplateRequest d)
 			where T : class
@@ -134,8 +121,9 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-			SearchTemplatePathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, originalSearchDescriptor);
+			CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, originalSearchDescriptor);
 			return originalSearchDescriptor.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(originalSearchDescriptor.TypeSelector);
 		}
+
 	}
 }

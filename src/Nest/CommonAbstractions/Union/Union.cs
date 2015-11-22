@@ -11,7 +11,7 @@ namespace Nest
 	{
 		internal readonly TFirst Item1;
 		internal readonly TSecond Item2;
-		private readonly int _tag;
+		internal readonly int _tag;
 
 		public Union(TFirst item) { Item1 = item; _tag = 0; }
 		public Union(TSecond item) { Item2 = item; _tag = 1; }

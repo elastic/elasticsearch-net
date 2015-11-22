@@ -7,58 +7,47 @@ namespace Nest
 {
 	using SearchExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector) where T : class;
+
+		/// <inheritdoc/>
+		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
+
+		/// <inheritdoc/>
+		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector) where T : class;
+
+		/// <inheritdoc/>
+		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<SearchExistsDescriptor<T>, SearchExistsRequestParameters, ExistsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>(
-					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
-					, d
-					)
-				);
-		}
+		public IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
+			where T : class =>
+			this.SearchExists(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IExistsResponse SearchExists(ISearchExistsRequest indexRequest)
-		{
-			return this.Dispatcher.Dispatch<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse>(
+		public IExistsResponse SearchExists(ISearchExistsRequest indexRequest) => 
+			this.Dispatcher.Dispatch<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse>(
 				indexRequest,
-				(p, d) => this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>(
-					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
-					, d
-					)
-				);
-		}
+				new SearchExistConverter(DeserializeExistsResponse),
+				this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>
+			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<SearchExistsDescriptor<T>, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>(
-					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
-					, d
-					)
-				);
-		}
+		public Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
+			where T : class => 
+			this.SearchExistsAsync(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest)
-		{
-			return this.Dispatcher.DispatchAsync<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				indexRequest,
-				(p, d) => this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>(
-					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
-					, d
-					)
-				);
-		}
-
-
+		public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest) => 
+			this.Dispatcher.DispatchAsync<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
+				indexRequest, 
+				new SearchExistConverter(DeserializeExistsResponse),
+				this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>
+			);
 	}
 }

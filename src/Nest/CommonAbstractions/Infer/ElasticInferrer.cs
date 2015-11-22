@@ -4,29 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Nest.Resolvers;
+using System.Linq.Expressions;
 
 namespace Nest
 {
-	public static class Infer
-	{
-		public static IndexName Index<T>()
-		{
-			return typeof(T);
-		}
-		public static IndexName Index(Type t)
-		{
-			return t;
-		}
-		public static TypeName Type<T>()
-		{
-			return typeof(T);
-		}
-		public static TypeName Type(Type t)
-		{
-			return t;
-		}
-	}
-
 	public class ElasticInferrer
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
@@ -34,7 +15,8 @@ namespace Nest
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
 		private TypeNameResolver TypeNameResolver { get; set; }
-		private FieldNameResolver FieldNameResolver { get; set; }
+		private FieldResolver FieldResolver { get; set; }
+
 		public string DefaultIndex
 		{
 			get
@@ -50,32 +32,48 @@ namespace Nest
 			this.IdResolver = new IdResolver(this._connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
-			this.FieldNameResolver = new FieldNameResolver(this._connectionSettings);
+			this.FieldResolver = new FieldResolver(this._connectionSettings);
 		}
 
-		public string FieldName(FieldName field)
+		public string Field(Field field)
 		{
 			if (field.IsConditionless())
 				return null;
-			var name = !field.Name.IsNullOrEmpty() 
-				? field.Name 
-				: field.Expression != null 
-					? this.FieldNameResolver.Resolve(field.Expression)
-					: this.TypeName(field.Type);
-			if (field.Boost.HasValue)
+
+			var name = !field.Name.IsNullOrEmpty()
+				? field.Name
+				: field.Expression != null
+					? this.FieldResolver.Resolve(field.Expression)
+					: field.Property != null
+						? this.FieldResolver.Resolve(field.Property)
+						: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a field name");
+
+			if (field != null && field.Boost.HasValue)
 				name += "^" + field.Boost.Value.ToString(CultureInfo.InvariantCulture);
+
 			return name;
 		}
 
-		public string FieldName(MemberInfo member)
+		public string PropertyName(PropertyName property)
 		{
-			return member == null ? null : this.FieldNameResolver.Resolve(member);
-		}
-		
-		public string FieldNames(IEnumerable<FieldName> fields)
-		{
-			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
-			return string.Join(",", fields.Select(FieldName).Where(f => !f.IsNullOrEmpty()));
+			if (property.IsConditionless())
+				return null;
+
+			var name = !property.Name.IsNullOrEmpty()
+				? property.Name
+				: property.Expression != null
+					? this.FieldResolver.Resolve(property.Expression)
+					: property.Property != null
+						? this.FieldResolver.Resolve(property.Property)
+						: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a property name");
+
+			return name;
 		}
 
 		public string IndexName<T>() where T : class
@@ -113,6 +111,12 @@ namespace Nest
 			return this.IdResolver.GetIdFor(obj);
 		}
 
+		public string Id(Type objType, object obj)
+		{
+			if (obj == null) return null;
+			
+			return this.IdResolver.GetIdFor(objType, obj);
+		}
 		public string TypeName<T>() where T : class
 		{
 			return this.TypeName(typeof(T));

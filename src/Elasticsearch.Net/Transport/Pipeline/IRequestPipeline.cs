@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,9 +8,11 @@ namespace Elasticsearch.Net.Connection
 	public interface IRequestPipeline : IDisposable
 	{
 		bool FirstPoolUsageNeedsSniffing { get; }
-		bool OutOfDateClusterInformation { get; }
+		bool SniffsOnConnectionFailure { get; }
+		bool SniffsOnStaleCluster { get; }
+		bool StaleClusterState { get; }
+		
 		DateTime StartedOn { get; }
-		DateTime CompletedOn { get; }
 		bool IsTakingTooLong { get; }
 
 		int Retried { get; }
@@ -18,13 +21,13 @@ namespace Elasticsearch.Net.Connection
 		ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class;
 		Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class;
 
-		void MarkAlive();
-		void MarkDead();
+		void MarkAlive(Node node);
+		void MarkDead(Node node);
 
-		bool NextNode();
+		IEnumerable<Node> NextNode();
 
-		void Ping();
-		Task PingAsync();
+		void Ping(Node node);
+		Task PingAsync(Node node);
 
 		void FirstPoolUsage(SemaphoreSlim semaphore);
 		Task FirstPoolUsageAsync(SemaphoreSlim semaphore);
@@ -32,6 +35,10 @@ namespace Elasticsearch.Net.Connection
 		void Sniff();
 		Task SniffAsync();
 
-		void BadResponse(IApiCallDetails response);
+		void SniffOnStaleCluster();
+		Task SniffOnStaleClusterAsync();
+
+		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<ElasticsearchException> seenExceptions)
+			where TReturn : class;
 	}
 }

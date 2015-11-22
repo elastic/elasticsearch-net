@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
+	// ReSharper disable once UnusedMember.Global
 	public class DeleteWarmerDescriptorOverrides : IDescriptorOverrides
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public IEnumerable<string> SkipQueryStringParams => new []
 		{
-			get
-			{
-				return new string[]
-				{
-					"name" 
-				};
-			}
-		}
+			"name" 
+		};
 
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
+		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

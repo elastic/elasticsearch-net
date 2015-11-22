@@ -25,10 +25,9 @@ namespace Nest
 		public string Key { get; set; }
 	}
 
-	public class DateRangeExpressionDescriptor : IDateRangeExpression
+	public class DateRangeExpressionDescriptor
+		: DescriptorBase<DateRangeExpressionDescriptor, IDateRangeExpression>, IDateRangeExpression
 	{
-		protected DateRangeExpressionDescriptor Assign(Action<IDateRangeExpression> assigner) => Fluent.Assign(this, assigner);
-
 		DateMath IDateRangeExpression.From { get; set; }
 		public DateRangeExpressionDescriptor From(DateMath from) => Assign(a => a.From = from);
 

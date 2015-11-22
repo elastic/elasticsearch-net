@@ -8,7 +8,7 @@ namespace Nest
 	public interface IBoostField : ISpecialField
 	{
 		[JsonProperty("name")]
-		FieldName Name { get; set; }
+		Field Name { get; set; }
 
 		[JsonProperty("null_value")]
 		double NullValue { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 
 	public class BoostField : IBoostField
 	{
-		public FieldName Name { get; set; }
+		public Field Name { get; set; }
 
 		public double NullValue { get; set; }
 	}
@@ -25,7 +25,7 @@ namespace Nest
 	public class BoostFieldDescriptor<T> 
 		: DescriptorBase<BoostFieldDescriptor<T>, IBoostField>, IBoostField
 	{
-		FieldName IBoostField.Name { get; set; }
+		Field IBoostField.Name { get; set; }
 		double IBoostField.NullValue { get; set; }
 
 		public BoostFieldDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);

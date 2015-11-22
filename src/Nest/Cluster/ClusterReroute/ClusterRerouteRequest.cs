@@ -7,82 +7,31 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ClusterRerouteRequest>))]
+	public partial interface IClusterRerouteRequest 
 	{
 		[JsonProperty("commands")]
-		[JsonConverter(typeof(ClusterRerouteCommandsJsonConverter))]
 		IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 
-	internal static class ClusterReroutePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
 	public partial class ClusterRerouteRequest 
-		: BasePathRequest<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		public IList<IClusterRerouteCommand> Commands { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			ClusterReroutePathInfo.Update(pathInfo);
-		}
 	}
 
 	public partial class ClusterRerouteDescriptor 
-		: BasePathDescriptor<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
-		IClusterRerouteRequest Self => this;
+		IList<IClusterRerouteCommand> IClusterRerouteRequest.Commands { get; set; } = new List<IClusterRerouteCommand>();
 
-		IList<IClusterRerouteCommand> IClusterRerouteRequest.Commands { get; set; }
+		public ClusterRerouteDescriptor Move(Func<MoveClusterRerouteCommandDescriptor, IMoveClusterRerouteCommand> selector) =>
+			AddCommand(selector?.Invoke(new MoveClusterRerouteCommandDescriptor()));
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			ClusterReroutePathInfo.Update(pathInfo);
-		}
+		public ClusterRerouteDescriptor Cancel(Func<CancelClusterRerouteCommandDescriptor, ICancelClusterRerouteCommand> selector)=>
+			AddCommand(selector?.Invoke(new CancelClusterRerouteCommandDescriptor()));
 
-		public ClusterRerouteDescriptor Move(Func<MoveClusterRerouteCommandDescriptor, MoveClusterRerouteCommandDescriptor> moveCommandDescriptor)
-		{
-			moveCommandDescriptor.ThrowIfNull("moveCommandDescriptor");
-			var selector = moveCommandDescriptor(new MoveClusterRerouteCommandDescriptor());
-			AddCommand(selector.Command);
-			return this;
-		}
+		public ClusterRerouteDescriptor Allocate(Func<AllocateClusterRerouteCommandDescriptor, IAllocateClusterRerouteCommand> selector) =>
+			AddCommand(selector?.Invoke(new AllocateClusterRerouteCommandDescriptor()));
 
-		public ClusterRerouteDescriptor Cancel(Func<CancelClusterRerouteCommandDescriptor, CancelClusterRerouteCommandDescriptor> cancelCommandDescriptor)
-		{
-			cancelCommandDescriptor.ThrowIfNull("cancelCommandDescriptor");
-			var selector = cancelCommandDescriptor(new CancelClusterRerouteCommandDescriptor());
-			AddCommand(selector.Command);
-			return this;
-		}
-
-		public ClusterRerouteDescriptor Allocate(Func<AllocateClusterRerouteCommandDescriptor, AllocateClusterRerouteCommandDescriptor> allocateCommandDescriptor)
-		{
-			allocateCommandDescriptor.ThrowIfNull("allocateCommandDescriptor");
-			var selector = allocateCommandDescriptor(new AllocateClusterRerouteCommandDescriptor());
-			AddCommand(selector.Command);
-			return this;
-		}
-
-		public ClusterRerouteDescriptor Commands(IEnumerable<IClusterRerouteCommand> commands)
-		{
-			commands.ThrowIfNull("commands");
-			this.Self.Commands = commands.ToList();
-			return this;
-		}
-
-		private void AddCommand(IClusterRerouteCommand rerouteCommand)
-		{
-			rerouteCommand.ThrowIfNull("rerouteCommand");
-			if (this.Self.Commands == null)
-				this.Self.Commands = new List<IClusterRerouteCommand>();
-			this.Self.Commands.Add(rerouteCommand);
-		}
+		private ClusterRerouteDescriptor AddCommand(IClusterRerouteCommand rerouteCommand) => Assign(a => a.Commands?.AddIfNotNull(rerouteCommand));
 	}
 }

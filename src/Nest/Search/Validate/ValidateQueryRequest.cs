@@ -5,11 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IValidateQueryRequest : IQueryPath<ValidateQueryRequestParameters>
+	public partial interface IValidateQueryRequest 
 	{
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -17,71 +16,22 @@ namespace Nest
 		where T : class
 	{ }
 
-	internal static class ValidateQueryPathInfo
+	public partial class ValidateQueryRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo, IValidateQueryRequest request)
-		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			var q = request.RequestParameters.GetQueryStringValue<string>("q");
-			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-				? HttpMethod.GET
-				: HttpMethod.POST;
-		}
+		public QueryContainer Query { get; set; }
 	}
 
-	public partial class ValidateQueryRequest : QueryPathBase<ValidateQueryRequestParameters>, IValidateQueryRequest
-	{
-		public ValidateQueryRequest() { }
-
-		public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
-		}
-	}
-
-	public partial class ValidateQueryRequest<T> : QueryPathBase<ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
+	public partial class ValidateQueryRequest<T> 
 		where T : class
 	{
-
-		public ValidateQueryRequest() { }
-
-		public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
-		}
+		public QueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("IndicesValidateQuery")]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class ValidateQueryDescriptor<T>
-		: QueryPathDescriptorBase<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
-		where T : class
+	public partial class ValidateQueryDescriptor<T> where T : class
 	{
-		private IValidateQueryRequest Self => this;
+		QueryContainer IValidateQueryRequest.Query { get; set; }
 
-		IQueryContainer IValidateQueryRequest.Query { get; set; }
-
-		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
-		}
+		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

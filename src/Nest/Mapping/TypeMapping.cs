@@ -21,8 +21,8 @@ namespace Nest
 		bool? NumericDetection { get; set; }
 
 		[JsonProperty("transform")]
-		[JsonConverter(typeof(MappingTransformJsonConverter))]
-		IList<MappingTransform> Transform { get; set; }
+		[JsonConverter(typeof(MappingTransformCollectionJsonConverter))]
+		IList<IMappingTransform> Transform { get; set; }
 
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
@@ -122,7 +122,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<MappingTransform> Transform { get; set; }
+		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
@@ -133,9 +133,6 @@ namespace Nest
 	public class TypeMappingDescriptor<T> : DescriptorBase<TypeMappingDescriptor<T>, ITypeMapping>, ITypeMapping
 		where T : class
 	{
-		//TODO delete when we normalize properties and dynamic
-		private ITypeMapping Self => this;
-
 		IAllField ITypeMapping.AllField { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }
@@ -155,7 +152,7 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 		ITimestampField ITypeMapping.TimestampField { get; set; }
-		IList<MappingTransform> ITypeMapping.Transform { get; set; }
+		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 		ITypeField ITypeMapping.TypeField { get; set; }
 
@@ -210,14 +207,13 @@ namespace Nest
 		public TypeMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, MappingTransformDescriptor> mappingTransformSelector)
+		public TypeMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, IMappingTransform> mappingTransformSelector)
 		{
-		/// <inheritdoc/>
-			mappingTransformSelector.ThrowIfNull("mappingTransformSelector");
-			var transformDescriptor = mappingTransformSelector(new MappingTransformDescriptor());
-			if (Self.Transform == null)
-				Self.Transform = new List<MappingTransform>();
-			Self.Transform.Add(transformDescriptor._mappingTransform);
+			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
+			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
+			if (t == null) return this;
+			if (Self.Transform == null) Self.Transform = new List<IMappingTransform>();
+			Self.Transform.Add(t);
 			return this;
 		}
 
@@ -248,8 +244,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IProperties> propertiesSelector) => 
-			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties)));
+		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector) => 
+			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.PromisedValue);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)

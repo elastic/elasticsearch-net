@@ -12,11 +12,11 @@ namespace Nest
 		where TInterface : class, IFieldNameQuery
 		where T : class
 	{
-		FieldName IFieldNameQuery.Field { get; set; }
+		Field IFieldNameQuery.Field { get; set; }
 
-		public TDescriptor OnField(string field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
 
-		public TDescriptor OnField(Expression<Func<T, object>> objectPath) =>
+		public TDescriptor Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 	}
 }

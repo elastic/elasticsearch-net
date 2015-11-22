@@ -7,154 +7,79 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(BulkRequestJsonConverter))]
-	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
+	public partial interface IBulkRequest
 	{
 		[JsonIgnore]
-		IList<IBulkOperation> Operations { get; set;}
+		IList<IBulkOperation> Operations { get; set; }
 	}
 
-	internal static class BulkPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<BulkRequestParameters> pathInfo, IBulkRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class BulkRequest : FixedIndexTypePathBase<BulkRequestParameters>, IBulkRequest
+	public partial class BulkRequest
 	{
 		public IList<IBulkOperation> Operations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
-		{
-			BulkPathInfo.Update(pathInfo, this);
-		}
 	}
 
-	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
+	public partial class BulkDescriptor
 	{
-		private IBulkRequest Self => this;
+		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
 
-		IList<IBulkOperation> IBulkRequest.Operations { get; set; }
+		private BulkDescriptor AddOperation(IBulkOperation operation) => Assign(a => a.Operations.AddIfNotNull(operation));
 
-		public BulkDescriptor()
-		{
-			Self.Operations = new SynchronizedCollection<IBulkOperation>();
-		}
+		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class =>
+			Assign(a => AddOperation(bulkCreateSelector?.Invoke(new BulkCreateDescriptor<T>())));
 
-		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
-		{
-			bulkCreateSelector.ThrowIfNull("bulkCreateSelector");
-			var descriptor = bulkCreateSelector(new BulkCreateDescriptor<T>());
-			if (descriptor == null)
-				return this;
-			Self.Operations.Add(descriptor);
-			return this;
-		}
-		
 		/// <summary>
 		/// CreateMany, convenience method to create many documents at once.
 		/// </summary>
 		/// <param name="objects">the objects to create</param>
 		/// <param name="bulkCreateSelector">A func called on each object to describe the individual create operation</param>
-		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class
-		{
-			bulkCreateSelector = bulkCreateSelector ?? ((d, o) => d);
-			foreach (var descriptor in @objects.Select(o => bulkCreateSelector(new BulkCreateDescriptor<T>().Document(o), o)))
-				Self.Operations.Add(descriptor);
-			return this;
-		}
+		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class =>
+			Assign(a => @objects.ForEach(o => AddOperation(bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(o), o))));
 
-		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector) where T : class
-		{
-			bulkIndexSelector.ThrowIfNull("bulkIndexSelector");
-			var descriptor = bulkIndexSelector(new BulkIndexDescriptor<T>());
-			if (descriptor == null)
-				return this;
-			Self.Operations.Add(descriptor);
-			return this;
-		}
+		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector) where T : class =>
+			Assign(a => AddOperation(bulkIndexSelector?.Invoke(new BulkIndexDescriptor<T>())));
 
 		/// <summary>
 		/// IndexMany, convenience method to pass many objects at once.
 		/// </summary>
 		/// <param name="objects">the objects to index</param>
 		/// <param name="bulkIndexSelector">A func called on each object to describe the individual index operation</param>
-		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class
-		{
-			bulkIndexSelector = bulkIndexSelector ?? ((d, o) => d);
-			foreach (var descriptor in @objects.Select(o => bulkIndexSelector(new BulkIndexDescriptor<T>().Document(o), o)))
-				Self.Operations.Add(descriptor);
-			return this;
-		}
+		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class =>
+			Assign(a => @objects.ForEach(o => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>().Document(o), o))));
 
-		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector) where T : class
-		{
-			bulkDeleteSelector.ThrowIfNull("bulkDeleteSelector");
-			var descriptor = bulkDeleteSelector(new BulkDeleteDescriptor<T>());
-			if (descriptor == null)
-				return this;
-			Self.Operations.Add(descriptor);
-			return this;
-		}
-		
+		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector) where T : class =>
+			Assign(a => AddOperation(bulkDeleteSelector?.Invoke(new BulkDeleteDescriptor<T>())));
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
 		/// <param name="objects">the objects to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each object to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
-		{
-			bulkDeleteSelector = bulkDeleteSelector ?? ((d, o)=>d);
-			foreach (var descriptor in @objects.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Document(o), o)))
-				Self.Operations.Add(descriptor);
-			return this;
-		}
-		
+		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class =>
+			Assign(a => @objects.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Document(o), o))));
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
 		/// <param name="ids">Enumerable of string ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
-		{
-			bulkDeleteSelector = bulkDeleteSelector ?? ((d, s)=> d);
-			foreach (var descriptor in ids.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Id(o), o)))
-				Self.Operations.Add(descriptor);
-			return this;
-		}
-		
+		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class=>
+			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
 		/// <param name="ids">Enumerable of int ids to delete</param>
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
-		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
-		{
-			return this.DeleteMany(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), bulkDeleteSelector);
-		}
+		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, long, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class =>
+			Assign(a => ids.ForEach(o => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Id(o), o))));
 
-		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, BulkUpdateDescriptor<T, T>> bulkUpdateSelector) where T : class
-		{
-			return this.Update<T, T>(bulkUpdateSelector);
-		}
+		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, BulkUpdateDescriptor<T, T>> bulkUpdateSelector) where T : class => 
+			this.Update<T, T>(bulkUpdateSelector);
+
 		public BulkDescriptor Update<T, K>(Func<BulkUpdateDescriptor<T, K>, BulkUpdateDescriptor<T, K>> bulkUpdateSelector)
 			where T : class
-			where K : class
-		{
-			bulkUpdateSelector.ThrowIfNull("bulkUpdateSelector");
-			var descriptor = bulkUpdateSelector(new BulkUpdateDescriptor<T, K>());
-			if (descriptor == null)
-				return this;
-			Self.Operations.Add(descriptor);
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
-		{
-			BulkPathInfo.Update(pathInfo, this);
-		}
+			where K : class =>
+			Assign(a => AddOperation(bulkUpdateSelector?.Invoke(new BulkUpdateDescriptor<T, K>())));
 	}
 }

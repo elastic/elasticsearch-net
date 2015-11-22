@@ -6,6 +6,8 @@ using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
+	/// TODO SOME OF THESE ARE NO LONGER USED
+	/// this either means we broke something or something no longer applies
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
@@ -17,13 +19,6 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>
 		IElasticsearchSerializer Serializer { get; }
 
-		/// <summary>
-		/// When set to a value > 0, this will signal the IConnection what the maximum 
-		/// concurrent connections is, NEST favors IOCP ports over threads but in multi tenant 
-		/// situations this may still proof a valuable throttle
-		/// </summary>
-		int MaximumAsyncConnections { get; }
-		
 		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch
 		/// </summary>
@@ -71,7 +66,7 @@ namespace Elasticsearch.Net.Connection
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
-		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
 		

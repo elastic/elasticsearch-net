@@ -6,76 +6,47 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiPercolateRequest : IFixedIndexTypePath<MultiPercolateRequestParameters>
+	[JsonConverter(typeof(MultiPercolateJsonConverter))]
+	public partial interface IMultiPercolateRequest 
 	{
 		IList<IPercolateOperation> Percolations { get; set; }
 	}
 
-	internal static class MultiPercolatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo, IMultiPercolateRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class MultiPercolateRequest : FixedIndexTypePathBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateRequest 
 	{
 		public IList<IPercolateOperation> Percolations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo)
-		{
-			MultiPercolatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Mpercolate")]
-	public partial class MultiPercolateDescriptor : FixedIndexTypePathDescriptor<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateDescriptor 
 	{
-		private IMultiPercolateRequest Self => this;
+		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; } = new SynchronizedCollection<IPercolateOperation>();
 
-		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; }
-
-		public MultiPercolateDescriptor()
-		{
-			this.Self.Percolations = new List<IPercolateOperation>();
-		}
-
-		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> getSelector) 
+		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, IPercolateOperation> percolateSelector) 
 			where T : class
 		{
-			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>());
-			Self.Percolations.Add(descriptor);
+			var percolation = percolateSelector.InvokeOrDefault((new PercolateDescriptor<T>(typeof(T), typeof(T))));
+			Self.Percolations.Add(percolation);
 			return this;
 		}
 
-		public MultiPercolateDescriptor PercolateMany<T>(IEnumerable<T> sources, Func<PercolateDescriptor<T>, T, PercolateDescriptor<T>> getSelector)
+		public MultiPercolateDescriptor PercolateMany<T>(IEnumerable<T> sources, Func<PercolateDescriptor<T>, T, IPercolateOperation> percolateSelector)
 			where T : class
 		{
 			foreach (var source in sources)
 			{
-				getSelector.ThrowIfNull("getSelector");
-				var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>(), source);
-				Self.Percolations.Add(descriptor);
+				var percolation = percolateSelector?.InvokeOrDefault(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
+				Self.Percolations.Add(percolation);
 			}
 			return this;
 		}
 
-		public MultiPercolateDescriptor Count<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> getSelector) 
+		public MultiPercolateDescriptor Count<T>(Func<PercolateCountDescriptor<T>, IPercolateOperation> countSelector) 
 			where T : class
 		{
-			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateCountDescriptor<T>().Index<T>().Type<T>());
-			Self.Percolations.Add(descriptor);
+			var percolation = countSelector?.InvokeOrDefault(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
+			Self.Percolations.Add(percolation);
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo)
-		{
-			MultiPercolatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

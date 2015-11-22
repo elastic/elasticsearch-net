@@ -7,11 +7,11 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IBinaryProperty : IElasticsearchProperty
+	public interface IBinaryProperty : IProperty
 	{
 	}
 
-	public class BinaryProperty : ElasticsearchProperty, IBinaryProperty
+	public class BinaryProperty : Property, IBinaryProperty
 	{
 		public BinaryProperty() : base("binary") { }
 

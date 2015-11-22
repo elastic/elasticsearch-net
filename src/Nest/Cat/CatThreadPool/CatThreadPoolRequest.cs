@@ -7,18 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> { }
+	public partial interface ICatThreadPoolRequest { }
 
-	public partial class CatThreadPoolRequest : BasePathRequest<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo) =>
-			CatRequestPathInfo.Update(pathInfo);
-	}
+	public partial class CatThreadPoolRequest { }
 
-	public partial class CatThreadPoolDescriptor : BasePathDescriptor<CatThreadPoolDescriptor, CatThreadPoolRequestParameters>, ICatThreadPoolRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo) =>
-			CatRequestPathInfo.Update(pathInfo);
-	}
+	public partial class CatThreadPoolDescriptor { }
 }

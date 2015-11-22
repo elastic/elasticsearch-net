@@ -139,10 +139,10 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit FieldName 
+		/// By default NEST camelCases property name (EmailAddress => emailAddress) expressions
 		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
 		/// <pre>
-		/// Here you can register a function that transforms FieldNames (default casing, pre- or suffixing)
+		/// Here you can register a function that transforms these expressions (default casing, pre- or suffixing)
 		/// </pre>
 		/// </summary>
 		public TConnectionSettings SetDefaultFieldNameInferrer(Func<string, string> FieldNameSelector)
@@ -164,6 +164,7 @@ namespace Nest
 		/// <summary>
 		/// Map types to a index names. Takes precedence over SetDefaultIndex().
 		/// </summary>
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
@@ -173,6 +174,7 @@ namespace Nest
 		/// <summary>
 		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
 		/// </summary>
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
@@ -180,27 +182,29 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull("objectPath");
 
 			var memberInfo = new MemberInfoResolver(this, objectPath);
-			var FieldName = memberInfo.Members.Single().Name;
+			var fieldName = memberInfo.Members.Single().Name;
 
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (this._idProperties[typeof(TDocument)].Equals(FieldName))
+				if (this._idProperties[typeof(TDocument)].Equals(fieldName))
 					return (TConnectionSettings)this;
 
 				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
-					.F(FieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+					.F(fieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
 			}
 
-			this._idProperties.Add(typeof(TDocument), FieldName);
+			this._idProperties.Add(typeof(TDocument), fieldName);
 
 			return (TConnectionSettings)this;
 		}
 
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
@@ -257,8 +261,10 @@ namespace Nest
 				this._defaultTypeNames.Add(inferMapping.Type, inferMapping.TypeName);
 
 			if (inferMapping.IdProperty != null)
+#pragma warning disable CS0618 // Type or member is obsolete but will be private in the future OK to call here
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
-			
+#pragma warning restore CS0618 
+
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
 			

@@ -10,20 +10,21 @@ using Tests.Framework.MockData;
 using Elasticsearch.Net.ConnectionPool;
 using System.IO;
 using System.Text;
+using Tests.Framework.Configuration;
 
 namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = true;
-		private static string _manualOverrideVersion = "2.0.0";
+		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.config");
 
-		public static string ElasticsearchVersion => 
-			Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION") ?? (_integrationOverride ? _manualOverrideVersion : null);
+		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 
-		public static bool RunIntegrationTests => _integrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion.Trim() : null);
 
-		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
+		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+
+		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
 		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
 		{
@@ -39,13 +40,14 @@ namespace Tests.Framework
 					.TypeName("commits")
 				)
 				.InferMappingFor<Developer>(map => map
+					.IndexName("devs")
 					.Ignore(p => p.PrivateValue)
 					.Rename(p => p.OnlineHandle, "nickname")
 				)
 				//We try and fetch the test name during integration tests when running fiddler to send the name 
 				//as the TestMethod header, this allows us to quickly identify which test sent which request
 				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
-			
+
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
@@ -61,7 +63,7 @@ namespace Tests.Framework
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
 			var serializer = new NestSerializer(new ConnectionSettings());
-			string fixedResult = string.Empty;
+			string fixedResult;
 			using (var ms = new MemoryStream())
 			{
 				serializer.Serialize(responseJson, ms);

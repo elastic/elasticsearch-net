@@ -1,0 +1,16 @@
+[source, csharp]
+----
+serialized = null;
+serialized = this.Serialize(o);
+serialized.Should().NotBeNullOrWhiteSpace(o.ToString());
+var actualJson = JToken.Parse(serialized);
+var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
+var message = "This is the first time I am serializing";
+message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
+_expectedJsonString.Diff(serialized, message);
+var bytes = GetSerializer().SerializeToBytes(o);
+int iteration = 0;
+string serialized;
+var oAgain = this.Deserialize<T>(serialized);
+this.SerializesAndMatches(oAgain, ++iteration,out serialized);
+----

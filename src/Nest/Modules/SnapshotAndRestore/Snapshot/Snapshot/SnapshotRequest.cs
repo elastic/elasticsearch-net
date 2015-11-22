@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public interface ISnapshotRequest : IRepositorySnapshotPath<SnapshotRequestParameters>
-    {
-        [JsonProperty("indices")]
-		IEnumerable<IndexName> Indices { get; set; }
+	public partial interface ISnapshotRequest 
+	{
+		[JsonProperty("indices")]
+		Indices Indices { get; set; }
 
 		[JsonProperty("ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
@@ -19,92 +19,40 @@ namespace Nest
 
 		[JsonProperty("partial")]
 		bool? Partial { get; set; }
-    }
+	}
 
-    internal static class SnapshotPathInfo
-    {
-        public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-        {
-            pathInfo.HttpMethod = HttpMethod.PUT;
-        }
-    }
+	public partial class SnapshotRequest 
+	{
+		public Indices Indices { get; set; }
 
-    public partial class SnapshotRequest : RepositorySnapshotPathBase<SnapshotRequestParameters>, ISnapshotRequest
-    {
-	    public SnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
+		public bool? IgnoreUnavailable { get; set; }
 
-	    public IEnumerable<IndexName> Indices { get; set; }
+		public bool? IncludeGlobalState { get; set; }
 
-        public bool? IgnoreUnavailable { get; set; }
+		public bool? Partial { get; set; }
 
-        public bool? IncludeGlobalState { get; set; }
-
-        public bool? Partial { get; set; }
-
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-        {
-            SnapshotPathInfo.Update(settings, pathInfo);
-        }
-    }
-
+	}
 
 	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor 
-        : RepositorySnapshotPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>, ISnapshotRequest
 	{
-        private ISnapshotRequest Self => this;
+		Indices ISnapshotRequest.Indices { get; set; }
+		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
 
-        IEnumerable<IndexName> ISnapshotRequest.Indices { get; set; }
-        bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
+		bool? ISnapshotRequest.IncludeGlobalState { get; set; }
 
-        bool? ISnapshotRequest.IncludeGlobalState { get; set; }
+		bool? ISnapshotRequest.Partial { get; set; }
 
-        bool? ISnapshotRequest.Partial { get; set; }
+		public SnapshotDescriptor Index(IndexName index) => this.Indices(index);
 
-        string IRepositorySnapshotPath<SnapshotRequestParameters>.Repository { get; set; }
+		public SnapshotDescriptor Index<T>() where T : class => this.Indices(typeof(T));
 
-        string IRepositorySnapshotPath<SnapshotRequestParameters>.Snapshot { get; set; }
+		public SnapshotDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
 
-		public SnapshotDescriptor Index(string index)
-		{
-			return this.Indices(index);
-		}
-	
-		public SnapshotDescriptor Index<T>() where T : class
-		{
-			return this.Indices(typeof(T));
-		}
-			
-		public SnapshotDescriptor Indices(params string[] indices)
-		{
-			this.Self.Indices = indices.Select(s=>(IndexName)s);
-			return this;
-		}
+		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
-		public SnapshotDescriptor Indices(params Type[] indicesTypes)
-		{
-			this.Self.Indices = indicesTypes.Select(s=>(IndexName)s);
-			return this;
-		}
-		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)
-		{
-			this.Self.IgnoreUnavailable = ignoreUnavailable;
-			return this;
-		}
-		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true)
-		{
-			this.Self.IncludeGlobalState = includeGlobalState;
-			return this;
-		}
-		public SnapshotDescriptor Partial(bool partial = true)
-		{
-			this.Self.Partial = partial;
-			return this;
-		}
+		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-    }
+		public SnapshotDescriptor Partial(bool partial = true) => Assign(a => a.Partial = partial);
+	}
 }

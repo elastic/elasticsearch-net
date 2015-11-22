@@ -6,50 +6,55 @@ using System.Text;
 
 namespace Nest
 {
-	public class CancelClusterRerouteCommand : IClusterRerouteCommand
-	{
-		[JsonIgnore]
-		public string Name { get { return "cancel"; } }
 
+	public interface ICancelClusterRerouteCommand : IClusterRerouteCommand
+	{
 		[JsonProperty("index")]
-		public string Index { get; set; }
+		IndexName Index { get; set; }
 
 		[JsonProperty("shard")]
-		public int Shard { get; set; }
+		int Shard { get; set; }
 
 		[JsonProperty("node")]
-		public string Node { get; set; }
+		string Node { get; set; }
 
 		[JsonProperty("allow_primary")]
+		bool? AllowPrimary { get; set; }
+	}
+	public class CancelClusterRerouteCommand : ICancelClusterRerouteCommand
+	{
+		public string Name => "cancel";
+
+		public IndexName Index { get; set; }
+
+		public int Shard { get; set; }
+
+		public string Node { get; set; }
+
 		public bool? AllowPrimary { get; set; }
 	}
 
-	public class CancelClusterRerouteCommandDescriptor
+	public class CancelClusterRerouteCommandDescriptor 
+		: DescriptorBase<CancelClusterRerouteCommandDescriptor, ICancelClusterRerouteCommand>, ICancelClusterRerouteCommand
 	{
-		internal CancelClusterRerouteCommand Command = new CancelClusterRerouteCommand();
+		string IClusterRerouteCommand.Name => "cancel";
 
-		public CancelClusterRerouteCommandDescriptor Index(string index)
-		{
-			this.Command.Index = index;
-			return this;
-		}
+		IndexName ICancelClusterRerouteCommand.Index { get; set; }
 
-		public CancelClusterRerouteCommandDescriptor Shard(int shard)
-		{
-			this.Command.Shard = shard;
-			return this;
-		}
+		int ICancelClusterRerouteCommand.Shard { get; set; }
 
-		public CancelClusterRerouteCommandDescriptor Node(string node)
-		{
-			this.Command.Node = node;
-			return this;
-		}
+		string ICancelClusterRerouteCommand.Node { get; set; }
 
-		public CancelClusterRerouteCommandDescriptor AllowPrimary(bool allowPrimary = true)
-		{
-			this.Command.AllowPrimary = allowPrimary;
-			return this;
-		}
+		bool? ICancelClusterRerouteCommand.AllowPrimary { get; set; }
+
+		public CancelClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+
+		public CancelClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+
+		public CancelClusterRerouteCommandDescriptor Shard(int shard) => Assign(a => a.Shard = shard);
+
+		public CancelClusterRerouteCommandDescriptor Node(string node) => Assign(a => a.Node = node);
+
+		public CancelClusterRerouteCommandDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(a => a.AllowPrimary = allowPrimary);
 	}
 }

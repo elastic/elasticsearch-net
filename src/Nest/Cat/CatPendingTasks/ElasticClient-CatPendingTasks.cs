@@ -6,18 +6,36 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null);
+
+		/// <inheritdoc/>
+		ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request);
+
+		/// <inheritdoc/>
+		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null);
+
+		/// <inheritdoc/>
+		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null) =>
-			this.DoCat<CatPendingTasksDescriptor, CatPendingTasksRequestParameters, CatPendingTasksRecord>(selector, this.LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
+		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null) =>
+			this.CatPendingTasks(selector.InvokeOrDefault(new CatPendingTasksDescriptor()));
 
+		/// <inheritdoc/>
 		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request) =>
 			this.DoCat<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, this.LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
 
-		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null) =>
-			this.DoCatAsync<CatPendingTasksDescriptor, CatPendingTasksRequestParameters, CatPendingTasksRecord>(selector, this.LowLevelDispatch.CatPendingTasksDispatchAsync<CatResponse<CatPendingTasksRecord>>);
+		/// <inheritdoc/>
+		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, ICatPendingTasksRequest> selector = null) =>
+			this.CatPendingTasksAsync(selector.InvokeOrDefault(new CatPendingTasksDescriptor()));
 
+		/// <inheritdoc/>
 		public Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request) =>
 			this.DoCatAsync<ICatPendingTasksRequest, CatPendingTasksRequestParameters, CatPendingTasksRecord>(request, this.LowLevelDispatch.CatPendingTasksDispatchAsync<CatResponse<CatPendingTasksRecord>>);
 	}

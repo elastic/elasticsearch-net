@@ -7,16 +7,16 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Property;
+using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.SlowLog
 {
 	public class Index_TranslogSettings
 	{
 		/**
 		 */
 
-		public class Usage : GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -39,14 +39,14 @@ namespace Tests.Aggregations
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.SlowLog(sl => sl
 					.Indexing(i => i
 						.ThresholdWarn("10s")
 						.ThresholdInfo("5s")
 						.ThresholdDebug(TimeSpan.FromSeconds(2))
 						.ThresholdTrace(TimeSpan.FromMilliseconds(500))
-						.LogLevel(SlowLogLevel.Debug)
+						.LogLevel(LogLevel.Debug)
 						.Source(100)
 					)
 					.Search(search => search
@@ -62,20 +62,20 @@ namespace Tests.Aggregations
 							.ThresholdDebug(TimeSpan.FromMilliseconds(500))
 							.ThresholdTrace(TimeSpan.FromMilliseconds(200))
 						)
-						.LogLevel(SlowLogLevel.Info)
+						.LogLevel(LogLevel.Info)
 					)
 				);
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings
 				{
-					SlowLog = new SlowLog
+					SlowLog = new Nest.SlowLog
 					{
 						Indexing = new SlowLogIndexing
 						{
-							LogLevel = SlowLogLevel.Debug,
+							LogLevel = LogLevel.Debug,
 							Source = 100,
 							ThresholdInfo = TimeSpan.FromSeconds(5),
 							ThresholdDebug = "2s",
@@ -84,7 +84,7 @@ namespace Tests.Aggregations
 						},
 						Search = new SlowLogSearch
 						{
-							LogLevel = SlowLogLevel.Info,
+							LogLevel = LogLevel.Info,
 							Fetch = new SlowLogSearchFetch
 							{
 

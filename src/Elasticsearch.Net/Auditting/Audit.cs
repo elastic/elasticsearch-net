@@ -15,5 +15,11 @@ namespace Elasticsearch.Net.Connection
 			this.Event = type;
 			this.Started = occured;
 		}
+
+		public override string ToString()
+		{
+			var took = Started - Ended;
+			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took.ToString()}";
+		}
 	}
 }

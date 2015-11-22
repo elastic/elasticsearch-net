@@ -8,8 +8,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPercolateOperation
 	{
-
-		string Id { get; set; }
+		[JsonIgnore]
+		string MultiPercolateName { get; }
 
 		[JsonProperty(PropertyName = "size")]
 		int? Size { get; set; }
@@ -19,10 +19,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "score")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<FieldName, ISort> Sort { get; set; }
+		IDictionary<Field, ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
-		IHighlightRequest Highlight { get; set; }
+		IHighlight Highlight { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		QueryContainer Query { get; set; }
@@ -36,6 +36,5 @@ namespace Nest
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		IRequestParameters GetRequestParameters();
-	
 	}
 }

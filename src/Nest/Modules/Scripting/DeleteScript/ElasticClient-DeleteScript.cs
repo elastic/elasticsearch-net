@@ -4,22 +4,43 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-    public partial class ElasticClient
-    {
-        public IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor)
-        {
-            return this.Dispatcher.Dispatch<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse>(
-                    deleteScriptDescriptor,
-                    (p, d) => this.LowLevelDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
-                );
-        }
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
 
-        public Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor)
-        {
-            return this.Dispatcher.DispatchAsync<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
-                    deleteScriptDescriptor,
-                    (p, d) => this.LowLevelDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p)
-                );
-        }
-    }
+		/// <inheritdoc/>
+		IAcknowledgedResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest);
+
+		/// <inheritdoc/>
+		Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
+
+		/// <inheritdoc/>
+		Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest);
+
+	}
+	public partial class ElasticClient
+	{
+		/// <inheritdoc/>
+		public IAcknowledgedResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest) => 
+			this.Dispatcher.Dispatch<IDeleteScriptRequest, DeleteScriptRequestParameters, AcknowledgedResponse>(
+				deleteScriptRequest,
+				(p, d) => this.LowLevelDispatch.DeleteScriptDispatch<AcknowledgedResponse>(p)
+			);
+
+		/// <inheritdoc/>
+		public IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) =>
+			this.DeleteScript(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
+
+		/// <inheritdoc/>
+		public Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) => 
+			this.DeleteScriptAsync(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
+
+		/// <inheritdoc/>
+		public Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest) => 
+			this.Dispatcher.DispatchAsync<IDeleteScriptRequest, DeleteScriptRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+				deleteScriptRequest,
+				(p, d) => this.LowLevelDispatch.DeleteScriptDispatchAsync<AcknowledgedResponse>(p)
+			);
+	}
 }

@@ -24,6 +24,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class @method.QueryStringParamName : FluentRequestParameters<@method.QueryStringParamName> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
 	  @foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	  {
 		  var mm = kv.Key;

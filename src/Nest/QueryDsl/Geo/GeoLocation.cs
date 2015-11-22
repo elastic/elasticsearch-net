@@ -21,14 +21,14 @@ namespace Nest
 		/// Latitude
 		/// </summary>
 		[JsonProperty("lat")]
-		public double Latitude { get { return _latitude; } }
+		public double Latitude => _latitude;
 		private readonly double _latitude;
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
 		[JsonProperty("lon")]
-		public double Longtitude { get { return _longitude; } }
+		public double Longitude => _longitude;
 		private readonly double _longitude;
 
 		/// <summary>
@@ -111,9 +111,25 @@ namespace Nest
 		public override int GetHashCode() =>
 			unchecked((_latitude.GetHashCode()*397) ^ _longitude.GetHashCode());
 
-		public string ToString(string format, IFormatProvider formatProvider)
+		public string ToString(string format, IFormatProvider formatProvider) => ToString();
+
+		public static implicit operator GeoLocation(string latLon)
 		{
-			return ToString();
+			var parts = latLon.Split(',');
+			if (parts.Length != 2) throw new DslException("Invalid format: string must be in the form of lat,lon");
+			double lat;
+			if (!double.TryParse(parts[0], out lat))
+				throw new DslException("Invalid latitude value");
+			double lon;
+			if (!double.TryParse(parts[1], out lon))
+				throw new DslException("Invalid longitude format");
+			return new GeoLocation(lat, lon);
+		}
+
+		public static implicit operator GeoLocation(double[] lonLat)
+		{
+			if (lonLat.Length != 2) throw new DslException("Invalid lon,lat array, must have a length of 2");
+			return new GeoLocation(lonLat[1], lonLat[0]);
 		}
 	}
 }

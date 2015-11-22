@@ -33,11 +33,9 @@ namespace Nest
 		ITermQuery Term { get; set; }
 
 		[JsonProperty(PropertyName = "wildcard")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 		IWildcardQuery Wildcard { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<PrefixQuery>))]
 		IPrefixQuery Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "boosting")]
@@ -66,23 +64,18 @@ namespace Nest
 		IFuzzyQuery Fuzzy { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		//TODO BROKE this for now this should NOT use FieldNameQuery
-		//[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<CommonTermsQuery>))]
 		ICommonTermsQuery CommonTerms { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
 		ITermsQuery Terms { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<RangeQuery>))]
 		IRangeQuery Range { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<RegexpQuery>))]
 		IRegexpQuery Regexp { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]
@@ -114,6 +107,12 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "span_not")]
 		ISpanNotQuery SpanNot { get; set; }
+
+		[JsonProperty(PropertyName = "span_containing")]
+		ISpanContainingQuery SpanContaining { get; set; }
+
+		[JsonProperty(PropertyName = "span_within")]
+		ISpanWithinQuery SpanWithin { get; set; }
 
 		[JsonProperty(PropertyName = "span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
@@ -223,6 +222,10 @@ namespace Nest
 		
 		ISpanNearQuery IQueryContainer.SpanNear { get; set; }
 
+		ISpanContainingQuery IQueryContainer.SpanContaining { get; set; }
+
+		ISpanWithinQuery IQueryContainer.SpanWithin { get; set; }
+
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get; set; }
 
 		INestedQuery IQueryContainer.Nested { get; set; }
@@ -252,13 +255,13 @@ namespace Nest
 		ITypeQuery IQueryContainer.Type { get; set; }
 
 		bool IQueryContainer.IsConditionless { get; set; }
-		public bool IsConditionless { get { return Self.IsConditionless; } }
+		internal bool IsConditionless => Self.IsConditionless;
 
 		bool IQueryContainer.IsStrict { get; set; }
-		public bool IsStrict { get { return Self.IsStrict; } }
-		
+		internal bool IsStrict => Self.IsStrict;
+
 		bool IQueryContainer.IsVerbatim { get; set; }
-		public bool IsVerbatim { get { return Self.IsVerbatim; } }
+		internal bool IsVerbatim => Self.IsVerbatim;
 
 		public QueryContainer() {}
 	
@@ -340,6 +343,7 @@ namespace Nest
 			return q;
 		}
 
+		//TODO remove rely on a custom serializer
 		public object GetCustomJson()
 		{	
 			var f = ((IQueryContainer)this);

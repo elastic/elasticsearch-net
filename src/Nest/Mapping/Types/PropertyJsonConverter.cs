@@ -18,7 +18,7 @@ namespace Nest
 			throw new NotSupportedException();
 		}
 
-		private IElasticsearchProperty GetTypeFromJObject(JObject po, JsonSerializer serializer)
+		private IProperty GetTypeFromJObject(JObject po, JsonSerializer serializer)
 		{
 			JToken typeToken;
 			JToken propertiesToken;
@@ -76,7 +76,7 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(IElasticsearchProperty);
+			return objectType == typeof(IProperty);
 		}
 
 	}

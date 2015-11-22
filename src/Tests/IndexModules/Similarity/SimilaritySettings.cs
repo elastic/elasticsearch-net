@@ -7,16 +7,16 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Property;
+using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.Similarity
 {
 	public class SimilaritySettings
 	{
 		/**
 		 */
 
-		public class Usage : GeneralUsageBase<ISimilarities, SimilaritiesDescriptor, Similarities>
+		public class Usage : PromiseUsageTestBase<ISimilarities, SimilaritiesDescriptor, Similarities>
 		{
 			protected override object ExpectJson => new
 			{
@@ -61,7 +61,7 @@ namespace Tests.Aggregations
 			/**
 			 * 
 			 */
-			protected override Func<SimilaritiesDescriptor, ISimilarities> Fluent => s => s
+			protected override Func<SimilaritiesDescriptor, IPromise<ISimilarities>> Fluent => s => s
 				.BM25("bm25", b => b
 					.B(1.0)
 					.K1(1.1)

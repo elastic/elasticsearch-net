@@ -29,8 +29,9 @@ namespace Elasticsearch.Net.Connection
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues) 
-			: this(configurationValues, null, null, null) { }
+		public Transport(TConnectionSettings configurationValues)
+			: this(configurationValues, null, null, null)
+		{ }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
@@ -68,25 +69,33 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				while (pipeline.NextNode())
+				var exceptions = new List<ElasticsearchException>();
+				foreach (var node in pipeline.NextNode())
 				{
+					requestData.Node = node;
 					try
 					{
-						pipeline.Ping();
+						pipeline.SniffOnStaleCluster();
+						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
 					catch (ElasticsearchException exception) when (!exception.Recoverable)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
+					}
+					catch (ElasticsearchException exception)
+					{
+						pipeline.MarkDead(node);
+						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						pipeline.MarkAlive();
+						pipeline.MarkAlive(node);
 						return response;
 					}
-					pipeline.BadResponse(response);
 				}
+				pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
@@ -101,25 +110,33 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				while (pipeline.NextNode())
+				var exceptions = new List<ElasticsearchException>();
+				foreach (var node in pipeline.NextNode())
 				{
+					requestData.Node = node;
 					try
 					{
-						await pipeline.PingAsync();
+						await pipeline.SniffOnStaleClusterAsync();
+						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
 					catch (ElasticsearchException exception) when (!exception.Recoverable)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
+					}
+					catch (ElasticsearchException exception)
+					{
+						pipeline.MarkDead(node);
+						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						pipeline.MarkAlive();
+						pipeline.MarkAlive(node);
 						return response;
 					}
-					pipeline.BadResponse(response);
 				}
+				pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}

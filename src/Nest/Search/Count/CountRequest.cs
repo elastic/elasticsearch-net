@@ -5,78 +5,46 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest : IQueryPath<CountRequestParameters>
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CountRequest>))]
+	public partial interface ICountRequest 
 	{
-		
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
-	public interface ICountRequest<T> : ICountRequest
-		where T : class {}
-
-	internal static class CountPathInfo
+	public partial interface ICountRequest<T> : ICountRequest
+		where T :class
 	{
-		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
-		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			pathInfo.HttpMethod = source.IsNullOrEmpty() 
-				&& (request.Query == null || request.Query.IsConditionless)
-				? HttpMethod.GET
-				: HttpMethod.POST;
-		}
+
 	}
-	
-	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
+
+	public partial class CountRequest 
 	{
-		public CountRequest() {}
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
+		public QueryContainer Query { get; set; }
 	}
 
-	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
-		where T : class
+	public partial class CountRequest<T>
 	{
-		public CountRequest() {}
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
+		public QueryContainer Query { get; set; }
 	}
-	
+
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, CountRequestParameters, T>, ICountRequest
-		where T : class
+	public partial class CountDescriptor<T> where T : class
 	{
-		private ICountRequest Self => this;
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+		
+		QueryContainer ICountRequest.Query { get; set; }
 
-		IQueryContainer ICountRequest.Query { get; set; }
-
-		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
+		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

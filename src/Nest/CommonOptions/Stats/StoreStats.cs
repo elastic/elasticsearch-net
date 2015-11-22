@@ -10,6 +10,7 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "size")]
 		public string Size { get; set; }
+
 		[JsonProperty(PropertyName = "size_in_bytes")]
 		public double SizeInBytes { get; set; }
 
@@ -17,7 +18,7 @@ namespace Nest
 		public string ThrottleTime { get; set; }
 
 		[JsonProperty("throttle_time_in_millis")]
-		public double ThrottleTimeInMilliseconds { get; set; }
+		public long ThrottleTimeInMilliseconds { get; set; }
 	}
 
 }

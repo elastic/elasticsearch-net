@@ -22,7 +22,7 @@ namespace Nest
 		public string PathUnmatch { get; set; }
 
 		[JsonProperty("mapping"), JsonConverter(typeof(PropertyJsonConverter))]
-		public IElasticsearchProperty Mapping { get; set; }
+		public IProperty Mapping { get; set; }
 
     }
 
@@ -94,7 +94,7 @@ namespace Nest
 			return this;
 		}
 
-		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingDescriptor<T>, IElasticsearchProperty> mappingSelector)
+		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingDescriptor<T>, IProperty> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var mapping = mappingSelector(new SingleMappingDescriptor<T>());

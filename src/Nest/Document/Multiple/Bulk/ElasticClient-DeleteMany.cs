@@ -10,6 +10,8 @@ namespace Nest
 	public static class DeleteManyExtensions
 	{
 
+		//TODO nullable IndexName and IndexType?
+
 		/// <summary>
 		/// Shortcut into the Bulk call that deletes the specified objects
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
@@ -45,7 +47,7 @@ namespace Nest
 		private static BulkRequest CreateDeleteBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			@objects.ThrowIfEmpty("objects");
-			var bulkRequest = new BulkRequest {Index = index, Type = type};
+			var bulkRequest = new BulkRequest(index, type);
 			var deletes = @objects
 				.Select(o => new BulkDeleteOperation<T>(o))
 				.Cast<IBulkOperation>()

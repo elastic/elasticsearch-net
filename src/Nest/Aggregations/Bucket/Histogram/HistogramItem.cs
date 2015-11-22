@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class HistogramItem : BucketAggregationBase, IBucketItem
+	public class HistogramItem : BucketBase, IBucketItem
 	{
 		public HistogramItem() { }
 		public HistogramItem(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }

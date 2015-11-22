@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+
 	[JsonConverter(typeof(IndexNameJsonConverter))]
-	public class IndexName : IEquatable<IndexName>
+	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
@@ -45,6 +49,15 @@ namespace Nest
 			return 0;
 		}
 
+		public override string ToString()
+		{
+			if (!this.Name.IsNullOrEmpty())
+				return this.Name;
+            if (this.Type != null)
+				return this.Type.Name;
+			return string.Empty;
+		}
+
 		public bool EqualsString(string other)
 		{
 			return !other.IsNullOrEmpty() && other == this.Name;
@@ -58,5 +71,12 @@ namespace Nest
 				return this.GetHashCode() == other.GetHashCode();
 			return false;
 		}
+
+		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)(Indices)(Indices.Index(this))).GetString(settings);
+
+		public static IndexName From<T>() => typeof(T);
+
+		public Indices And<T>() => new Indices(new IndexName[] { this, typeof(T)});
+		public Indices And(IndexName index) => new Indices(new IndexName[] { this, index});
 	}
 }

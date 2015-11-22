@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ICompletionProperty : IElasticsearchProperty
+	public interface ICompletionProperty : IProperty
 	{
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
@@ -32,7 +32,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class CompletionProperty : ElasticsearchProperty, ICompletionProperty
+	public class CompletionProperty : Property, ICompletionProperty
 	{
 		public CompletionProperty() : base("completion") { }
 

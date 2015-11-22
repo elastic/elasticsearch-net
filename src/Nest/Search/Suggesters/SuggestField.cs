@@ -19,7 +19,7 @@ namespace Nest
 		public object Payload { get; set; }
 
 		[JsonProperty("weight")]
-		public uint Weight { get; set; }
+		public int Weight { get; set; }
 
 		[JsonProperty("context")]
 		public IDictionary<string, IEnumerable<string>> Context { get; set; }

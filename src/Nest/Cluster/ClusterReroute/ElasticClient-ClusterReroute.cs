@@ -7,44 +7,48 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Allows to explicitly execute a cluster reroute allocation command including specific commands. 
+		/// For example, a shard can be moved from one node to another explicitly, an allocation can be canceled, 
+		/// or an unassigned shard can be explicitly allocated on a specific node.
+		/// </summary>
+		IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector);
+
+		/// <inheritdoc/>
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector);
+
+		/// <inheritdoc/>
+		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest);
+
+		/// <inheritdoc/>
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector)
-		{
-			clusterRerouteSelector = clusterRerouteSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
-				clusterRerouteSelector,
-				(p, d) => this.LowLevelDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>(p, d)
-			);
-		}
+		public IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector) =>
+			this.ClusterReroute(clusterRerouteSelector?.Invoke(new ClusterRerouteDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector)
-		{
-			clusterRerouteSelector = clusterRerouteSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
-				clusterRerouteSelector,
-				(p, d) => this.LowLevelDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>(p, d)
-			);
-		}
+		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector) =>
+			this.ClusterRerouteAsync(clusterRerouteSelector?.Invoke(new ClusterRerouteDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest)
-		{
-			return this.Dispatcher.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
+		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest) => 
+			this.Dispatcher.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
 				clusterRerouteRequest,
-				(p, d) => this.LowLevelDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>(p, d)
+				this.LowLevelDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
+		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest) => 
+			this.Dispatcher.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
 				clusterRerouteRequest,
-				(p, d) => this.LowLevelDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>(p, d)
+				this.LowLevelDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>
 			);
-		}
 	}
 }

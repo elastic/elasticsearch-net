@@ -11,20 +11,19 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedQueryDescriptor<object>>))]
 	public interface INestedQuery : IQuery
 	{
-		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
-		NestedScore? Score { get; set; }
+		[JsonProperty("score_mode")]
+		NestedScoreMode? ScoreMode { get; set; }
 
 		[JsonProperty("filter")]
-		IQueryContainer Filter { get; set; }
+		QueryContainer Filter { get; set; }
 
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -32,10 +31,10 @@ namespace Nest
 	public class NestedQuery : QueryBase, INestedQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public NestedScore? Score { get; set; }
-		public IQueryContainer Filter { get; set; }
-		public IQueryContainer Query { get; set; }
-		public FieldName Path { get; set; }
+		public NestedScoreMode? ScoreMode { get; set; }
+		public QueryContainer Filter { get; set; }
+		public QueryContainer Query { get; set; }
+		public Field Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Nested = this;
@@ -51,12 +50,11 @@ namespace Nest
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 		, INestedQuery where T : class
 	{
-		private INestedQuery Self => this;
 		bool IQuery.Conditionless => NestedQuery.IsConditionless(this);
-		NestedScore? INestedQuery.Score { get; set; }
-		IQueryContainer INestedQuery.Filter { get; set; }
-		IQueryContainer INestedQuery.Query { get; set; }
-		FieldName INestedQuery.Path { get; set; }
+		NestedScoreMode? INestedQuery.ScoreMode { get; set; }
+		QueryContainer INestedQuery.Filter { get; set; }
+		QueryContainer INestedQuery.Query { get; set; }
+		Field INestedQuery.Path { get; set; }
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
 		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
@@ -65,15 +63,13 @@ namespace Nest
 		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
 			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> Score(NestedScore score) => Assign(a => a.Score = score);
+		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 
-		public NestedQueryDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public NestedQueryDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
-		public NestedQueryDescriptor<T> InnerHits() => Assign(a => a.InnerHits = new InnerHits());
-
-		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector) => 
-			Assign(a => a.InnerHits = selector(new InnerHitsDescriptor<T>()));	
+		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) => 
+			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));	
 	}
 }

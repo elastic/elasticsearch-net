@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" />
-  <Import Project="..\..\dep\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props" Condition="Exists('..\..\dep\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,8 +12,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,16 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'IntegrationTests|AnyCPU'">
-    <OutputPath>bin\IntegrationTests\</OutputPath>
-    <DefineConstants>TRACE;INTEGRATIONTESTS</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,68 +40,193 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\Bucket\FiltersAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\FilterAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\DateRangeAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\DateHistogramAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
-    <Compile Include="Aggregations\AggregationUsageBase.cs" />
-    <Compile Include="Aggregations\WritingAggregations.cs" />
-    <Compile Include="Analysis\Analyzers\AnalyzerTests.cs" />
-    <Compile Include="Analysis\CharFilters\CharFilterTests.cs" />
-    <Compile Include="Analysis\AnalysisCrud.cs" />
-    <Compile Include="Analysis\TokenFilters\TokenizerTests.cs" />
-    <Compile Include="Analysis\Tokenizers\TokenizerTests.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
-    <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
-    <Compile Include="Document\Single\Indexing.cs" />
-    <Compile Include="Framework\IApiCall.cs" />
+    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
+    <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashGridAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Global\GlobalAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Histogram\HistogramAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\IpRange\IpRangeAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Missing\MissingAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Nested\NestedAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Range\RangeAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\ReverseNested\ReverseNestedAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
+    <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Cardinality\CardinalityAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Average\AverageAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Max\MaxAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Min\MinAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Stats\StatsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Sum\SumAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MaxBucket\MaxBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageHoltLinearAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageEwmaAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageLinearAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageSimpleAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageHoltWintersAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\WritingAggregations.doc.cs" />
+    <Compile Include="Analysis\Analyzers\AnalyzerUsageTests.cs" />
+    <Compile Include="Analysis\CharFilters\CharFilterUsageTests.cs" />
+    <Compile Include="Analysis\AnalysisCrudTests.cs" />
+    <Compile Include="Analysis\TokenFilters\TokenFilterUsageTests.cs" />
+    <Compile Include="Analysis\Tokenizers\TokenizerUsageTests.cs" />
+    <Compile Include="Cat\CatAliases\CatAliasesUrlTests.cs" />
+    <Compile Include="Cat\CatAliases\CatAliasesApiTests.cs" />
+    <Compile Include="Cat\CatAllocation\CatAllocationApiTests.cs" />
+    <Compile Include="Cat\CatAllocation\CatAllocationUrlTests.cs" />
+    <Compile Include="Cat\CatCount\CatCountApiTests.cs" />
+    <Compile Include="Cat\CatCount\CatCountUrlTests.cs" />
+    <Compile Include="Cat\CatFielddata\CatFielddataApiTests.cs" />
+    <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
+    <Compile Include="Cat\CatHealth\CatHealthApiTests.cs" />
+    <Compile Include="Cat\CatHealth\CatHealthUrlTests.cs" />
+    <Compile Include="Cat\CatIndices\CatIndicesApiTests.cs" />
+    <Compile Include="Cat\CatIndices\CatIndicesUrlTests.cs" />
+    <Compile Include="Cat\CatMaster\CatMasterApiTests.cs" />
+    <Compile Include="Cat\CatMaster\CatMasterUrlTests.cs" />
+    <Compile Include="Cat\CatNodes\CatNodesApiTests.cs" />
+    <Compile Include="Cat\CatNodes\CatNodesUrlTests.cs" />
+    <Compile Include="Cat\CatPendingTasks\CatPendingTasksApiTests.cs" />
+    <Compile Include="Cat\CatPendingTasks\CatPendingTasksUrlTests.cs" />
+    <Compile Include="Cat\CatPlugins\CatPluginsApiTests.cs" />
+    <Compile Include="Cat\CatPlugins\CatPluginsUrlTests.cs" />
+    <Compile Include="Cat\CatRecovery\CatRecoveryApiTests.cs" />
+    <Compile Include="Cat\CatRecovery\CatRecoveryUrlTests.cs" />
+    <Compile Include="Cat\CatSegments\CatSegmentsApiTests.cs" />
+    <Compile Include="Cat\CatSegments\CatSegmentsUrlTests.cs" />
+    <Compile Include="Cat\CatShards\CatShardsApiTests.cs" />
+    <Compile Include="Cat\CatShards\CatShardsUrlTests.cs" />
+    <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
+    <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\RoundRobin.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\SkipDeadNodes.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipelines.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Pinging\Revival.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Pinging\FirstUsage.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnConnectionFailure.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStaleClusterState.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\DocumentPaths\DocumentPaths.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\RouteValues\FeaturesInference.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.doc.cs" />
+    <Compile Include="Cluster\ClusterHealth\ClusterHealthApiTests.cs" />
+    <Compile Include="Cluster\ClusterHealth\ClusterHealthUrlTests.cs" />
+    <Compile Include="Cluster\ClusterReroute\ClusterRerouteApiTests.cs" />
+    <Compile Include="Cluster\ClusterReroute\ClusterRerouteUrlTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsApiTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsUrlTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsApiTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutUrlTests.cs" />
+    <Compile Include="Cluster\ClusterStats\ClusterStatsApiTests.cs" />
+    <Compile Include="Cluster\ClusterState\ClusterStateUrlTests.cs" />
+    <Compile Include="Cluster\ClusterState\ClusterStatsApiTests.cs" />
+    <Compile Include="Cluster\ClusterStats\ClusterStatsUrlTests.cs" />
+    <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsApiTests.cs" />
+    <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsUrlTests.cs" />
+    <Compile Include="Cluster\NodesInfo\NodesInfoApiTests.cs" />
+    <Compile Include="Cluster\NodesInfo\NodesInfoUrlTests.cs" />
+    <Compile Include="Cluster\NodesStats\NodesStatsApiTests.cs" />
+    <Compile Include="Cluster\NodesStats\NodesStatsUrlTests.cs" />
+    <Compile Include="Cluster\ClusterPendingTasks\ClusterPendingTasksApiTests.cs" />
+    <Compile Include="Cluster\ClusterPendingTasks\ClusterPendingTasksUrlTests.cs" />
+    <Compile Include="Cluster\Ping\PingApiTests.cs" />
+    <Compile Include="Cluster\Ping\PingUrlTests.cs" />
+    <Compile Include="Cluster\RootNodeInfo\RootNodeInfoApiTests.cs" />
+    <Compile Include="Cluster\RootNodeInfo\RootNodeInfoUrlTests.cs" />
+    <Compile Include="CodeStandards\Descriptors.doc.cs" />
+    <Compile Include="CodeStandards\ElasticClient.doc.cs" />
+    <Compile Include="CodeStandards\NamingConventions.doc.cs" />
+    <Compile Include="Document\Multiple\Bulk\BulkInvalidApiTests.cs" />
+    <Compile Include="Document\Multiple\Bulk\BulkUrlTests.cs" />
+    <Compile Include="Document\Multiple\Bulk\BulkApiTests.cs" />
+    <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTests.cs" />
+    <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryApiTests.cs" />
+    <Compile Include="Document\Multiple\MultiGet\MultiGetApiTests.cs" />
+    <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTests.cs" />
+    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsApiTests.cs" />
+    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsUrlTests.cs" />
+    <Compile Include="Document\Multiple\Reindex\ReindexApiTests.cs" />
+    <Compile Include="Document\Single\Delete\DeleteApiTests.cs" />
+    <Compile Include="Document\Single\Exists\DocumentExistsApiTests.cs" />
+    <Compile Include="Document\Single\Exists\DocumentExistsUrlTests.cs" />
+    <Compile Include="Document\Single\Delete\DeleteUrlTests.cs" />
+    <Compile Include="Document\Single\Get\GetApiTests.cs" />
+    <Compile Include="Document\Single\Get\GetUrlTests.cs" />
+    <Compile Include="Document\Single\Index\IndexUrlTests.cs" />
+    <Compile Include="Document\Single\Index\IndexApiTests.cs" />
+    <Compile Include="Document\Single\DocumentCrudTests.cs" />
+    <Compile Include="Document\Single\Source\SourceApiTests.cs" />
+    <Compile Include="Document\Single\TermVectors\TermVectorsApiTests.cs" />
+    <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />
+    <Compile Include="Document\Single\Update\UpdateApiTests.cs" />
+    <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
+    <Compile Include="Framework\ApiTestBase.cs" />
+    <Compile Include="Framework\Configuration\LocalConfiguration.cs" />
+    <Compile Include="Framework\CrudTestBase.cs" />
+    <Compile Include="Framework\Extensions\Promisify.cs" />
+    <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />
+    <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
+    <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
-    <Compile Include="Framework\ApiCallExample.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
-    <Compile Include="Framework\Audit\AuditTrailTester.cs" />
-    <Compile Include="Framework\Audit\ClientCall.cs" />
-    <Compile Include="Framework\Audit\ClientCallAssertations.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
+    <Compile Include="Framework\Audit\Auditor.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.doc.cs" />
     <Compile Include="Framework\Extensions\DiffExtensions.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />
-    <Compile Include="Framework\Integration\ApiUsage.cs" />
-    <Compile Include="Framework\Integration\ClusterBase.cs" />
-    <Compile Include="Framework\Integration\IIntegrationCluster.cs" />
+    <Compile Include="Framework\Integration\EndpointUsage.cs" />
+    <Compile Include="Framework\Integration\Clusters\ClusterBase.cs" />
+    <Compile Include="Framework\Integration\Clusters\IIntegrationCluster.cs" />
     <Compile Include="Framework\Integration\IntegrationContext.cs" />
-    <Compile Include="Framework\Integration\IndexingCluster.cs" />
+    <Compile Include="Framework\Integration\Clusters\IndexingCluster.cs" />
     <Compile Include="Framework\Providers\TestableDateTimeProvider.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
     <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
-    <Compile Include="Framework\VirtualClustering\Rules.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\ClientCallRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\PingRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\RuleBase.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\SniffRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\TimesHelper.cs" />
     <Compile Include="Framework\VirtualClustering\SealedVirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualClusterConnection.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualizedCluster.cs" />
-    <Compile Include="ClientConcepts\HighLevel\Inferrence\FieldNames\FieldInference.cs" />
-    <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Nodes.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\DateTimeProviders.cs" />
-    <Compile Include="ClientConcepts\LowLevel\PostData.cs" />
-    <Compile Include="CommonOptions\DateMath\DateMathExpressions.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnits.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\FieldNames\FieldInference.doc.cs" />
+    <Compile Include="ClientConcepts\LowLevel\Connecting.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\KeepingTrackOfNodes.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\DateTimeProviders.doc.cs" />
+    <Compile Include="ClientConcepts\LowLevel\PostData.doc.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMathExpressions.doc.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeUnits.doc.cs" />
     <Compile Include="Framework\MockData\CommitActivity.cs" />
     <Compile Include="Framework\MockData\Developer.cs" />
     <Compile Include="Framework\MockData\Gender.cs" />
@@ -123,42 +234,209 @@
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\Roundtrip.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\TypedIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
-    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullExample.cs" />
-    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndex.cs" />
-    <Compile Include="Mapping\MapUsageBase.cs" />
-    <Compile Include="Mapping\Types\String.cs" />
-    <Compile Include="Search\Request\Fields.cs" />
-    <Compile Include="Search\Request\FielddataFields.cs" />
-    <Compile Include="Search\Request\Highlighting.cs" />
-    <Compile Include="Search\Request\IndexBoost.cs" />
-    <Compile Include="Search\Request\MinScore.cs" />
-    <Compile Include="Search\Request\PostFilter.cs" />
-    <Compile Include="Search\Request\Explain.cs" />
-    <Compile Include="Search\Request\Query.cs" />
-    <Compile Include="Search\Request\Sort.cs" />
-    <Compile Include="Search\Request\TermFilter.cs" />
+    <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\AliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\AliasApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\DeleteAlias\AliasDeleteApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliases\GetAliasesApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliases\GetAliasesUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\GetAliasApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\GetAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\PutAlias\PutAliasApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\PutAlias\PutAliasUrlTests.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeUrlTests.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\GetIndex\GetIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\GetIndex\GetIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsApiTests.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsApiTests.cs" />
+    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingApiTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\GetMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\GetMappingApiTest.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusApiTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsApiTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\Flush\FlushApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\Flush\FlushUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Optimize\OptimizeApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\Optimize\OptimizeUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Refresh\RefreshApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\Refresh\RefreshUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFushApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Upgrade\UpgradeApiTests.cs" />
+    <Compile Include="Indices\StatusManagement\Upgrade\UpgradeUrlTests.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerApiTests.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerApiTests.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\WarmerCrudTests.cs" />
+    <Compile Include="Mapping\Types\TypeMappingTestBase.cs" />
+    <Compile Include="Mapping\Types\String\StringMappingTests.cs" />
+    <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
+    <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />
+    <Compile Include="Modules\Scripting\GetScript\GetScriptApiTests.cs" />
+    <Compile Include="Modules\Scripting\GetScript\GetScriptUrlTests.cs" />
+    <Compile Include="Modules\Scripting\PutScript\PutScriptApiTests.cs" />
+    <Compile Include="Modules\Scripting\PutScript\PutScriptUrlTests.cs" />
+    <Compile Include="Modules\Scripting\ScriptingCrudTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\RepositoryCrudTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\DeleteRepository\DeleteRepositoryApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\DeleteRepository\DeleteRepositoryUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\GetRepository\GetRepositoryApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\GetRepository\GetRepositoryUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\VerifyRepository\VerifyRepositoryApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\VerifyRepository\VerifyRepositoryUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Restore\RestoreUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Restore\RestoreApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSnapshot\GetSnapshotApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSnapshot\GetSnapshotUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotCrudTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\Exact\Term\TermQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\Match\MatchUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\Match\MatchPhraseUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\QueryString\QueryStringUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\BoundingBox\GeoBoundingBoxQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\Envelope\GeoEnvelopeUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\LineString\GeoLineStringUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\MultiLineString\GeoMultiLineStringUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\ShapeQueryUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\QueryDslUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Span\Container\SpanContainingQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\First\SpanFirstQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\Near\SpanNearQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\Not\SpanNotQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\Or\SpanOrQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\Term\SpanTermQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Span\Within\SpanWithinQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryUsageTests.cs" />
+    <Compile Include="Search\Count\CountUrlTests.cs" />
+    <Compile Include="Search\Count\CountApiTests.cs" />
+    <Compile Include="Search\Explain\ExplainUrlTests.cs" />
+    <Compile Include="Search\Explain\ExplainApiTests.cs" />
+    <Compile Include="Search\FieldStats\FieldStatsUrlTests.cs" />
+    <Compile Include="Search\FieldStats\FieldStatsApiTests.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchUrlTests.cs" />
+    <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateUrlTests.cs" />
+    <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateApiTests.cs" />
+    <Compile Include="Search\Percolator\PercolateCount\PercolateCountUrlTests.cs" />
+    <Compile Include="Search\Percolator\PercolateCount\PercolateCountApiTests.cs" />
+    <Compile Include="Search\Percolator\Percolate\PercolateApiTests.cs" />
+    <Compile Include="Search\Percolator\Percolate\PercolateUrlTests.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorApiTests.cs" />
+    <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorApiTests.cs" />
+    <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
+    <Compile Include="Search\Scroll\ClearScroll\ClearScrollApiTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollUrlTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollApiTests.cs" />
+    <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
+    <Compile Include="Search\SearchExists\SearchExistsApiTests.cs" />
+    <Compile Include="Search\SearchShards\SearchShardsApiTests.cs" />
+    <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateApiTests.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateApiTests.cs" />
+    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateApiTests.cs" />
+    <Compile Include="Search\SearchTemplate\SearchTemplateCrudTests.cs" />
+    <Compile Include="Search\Search\SearchApiTests.cs" />
+    <Compile Include="Search\Search\SearchUrlTests.cs" />
+    <Compile Include="Search\Request\FieldsUsageTests.cs" />
+    <Compile Include="Search\Request\FielddataFieldsUsageTests.cs" />
+    <Compile Include="Search\Request\HighlightingUsageTests.cs" />
+    <Compile Include="Search\Request\IndexBoostUsageTests.cs" />
+    <Compile Include="Search\Request\MinScoreUsageTests.cs" />
+    <Compile Include="Search\Request\PostFilterUsageTests.cs" />
+    <Compile Include="Search\Request\ExplainUsageTests.cs" />
+    <Compile Include="Search\Request\QueryUsageTests.cs" />
+    <Compile Include="Search\Request\SortUsageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\Request\FromAndSize.cs" />
-    <Compile Include="Search\SearchUsageBase.cs" />
+    <Compile Include="Search\Request\FromAndSizeUsageTests.cs" />
+    <Compile Include="Search\SearchUsageTestBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
-    <Compile Include="Framework\ApiCallIntegration.cs" />
-    <Compile Include="Framework\GeneralUsageBase.cs" />
-    <Compile Include="Framework\Integration\Seeder.cs" />
+    <Compile Include="Framework\ApiIntegrationTestBase.cs" />
+    <Compile Include="Framework\UsageTestBase.cs" />
+    <Compile Include="Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />
-    <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
-    <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
-    <Compile Include="Framework\SerializationBase.cs" />
+    <Compile Include="Framework\Integration\Process\ElasticsearchNode.cs" />
+    <Compile Include="Framework\Integration\Clusters\ReadOnlyCluster.cs" />
+    <Compile Include="Framework\SerializationTestBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
+    <Compile Include="Search\Validate\ValidateApiTests.cs" />
+    <Compile Include="Search\Validate\ValidateUrlTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="index.asciidoc" />
-    <None Include="packages.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
@@ -175,20 +453,13 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregations\Metric\" />
-    <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Cat\" />
-    <Folder Include="ClientConcepts\ConnectionPooling\FailOver\" />
-    <Folder Include="Cluster\" />
     <Folder Include="Migration\" />
-    <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
-    <Folder Include="QueryDsl\" />
-    <Folder Include="Search\Suggesters\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientConcepts\ConnectionPooling\BuildingBlocks\timeoutplot.png" />
+    <None Include="tests.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -198,25 +469,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props'))" />
-  </Target>
+  <Import Project="..\..\.paket\paket.targets" />
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
-      <ItemGroup>
-        <Reference Include="Ploeh.AutoFixture">
-          <HintPath>..\..\packages\AutoFixture\lib\net40\Ploeh.AutoFixture.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
       <ItemGroup>
         <Reference Include="Bogus">
           <HintPath>..\..\packages\Bogus\lib\net40\Bogus.dll</HintPath>
@@ -227,7 +482,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile259') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile259') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
       <ItemGroup>
         <Reference Include="DiffPlex">
           <HintPath>..\..\packages\DiffPlex\lib\portable-net40+sl50+win+wpa81+wp80\DiffPlex.dll</HintPath>
@@ -238,20 +493,6 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
-      <ItemGroup>
-        <Reference Include="FluentAssertions.Core">
-          <HintPath>..\..\packages\FluentAssertions\lib\win8\FluentAssertions.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="FluentAssertions">
-          <HintPath>..\..\packages\FluentAssertions\lib\win8\FluentAssertions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="FluentAssertions.Core">
@@ -261,6 +502,38 @@
         </Reference>
         <Reference Include="FluentAssertions">
           <HintPath>..\..\packages\FluentAssertions\lib\net40\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Core">
+          <HintPath>..\..\packages\FluentAssertions\lib\net45\FluentAssertions.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Core">
+          <HintPath>..\..\packages\FluentAssertions\lib\monoandroid\FluentAssertions.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Core">
+          <HintPath>..\..\packages\FluentAssertions\lib\monotouch\FluentAssertions.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -299,35 +572,16 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+    <When Condition="$(TargetFrameworkIdentifier) == 'Xamarin.iOS'">
       <ItemGroup>
         <Reference Include="FluentAssertions.Core">
-          <HintPath>..\..\packages\FluentAssertions\lib\net45\FluentAssertions.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="FluentAssertions">
-          <HintPath>..\..\packages\FluentAssertions\lib\net45\FluentAssertions.dll</HintPath>
+          <HintPath>..\..\packages\FluentAssertions\lib\xamarin.ios\FluentAssertions.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
-      <ItemGroup>
-        <Reference Include="FluentAssertions.Core">
-          <HintPath>..\..\packages\FluentAssertions\lib\portable-win81+wpa81\FluentAssertions.Core.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-        <Reference Include="FluentAssertions">
-          <HintPath>..\..\packages\FluentAssertions\lib\portable-win81+wpa81\FluentAssertions.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-    <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile259') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile259') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
       <ItemGroup>
         <Reference Include="FluentAssertions.Core">
           <HintPath>..\..\packages\FluentAssertions\lib\portable-net40+sl5+win8+wp8+wpa81\FluentAssertions.Core.dll</HintPath>
@@ -336,6 +590,20 @@
         </Reference>
         <Reference Include="FluentAssertions">
           <HintPath>..\..\packages\FluentAssertions\lib\portable-net40+sl5+win8+wp8+wpa81\FluentAssertions.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1') Or ($(TargetFrameworkProfile) == 'Profile32')">
+      <ItemGroup>
+        <Reference Include="FluentAssertions.Core">
+          <HintPath>..\..\packages\FluentAssertions\lib\portable-win81+wpa81\FluentAssertions.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+        <Reference Include="FluentAssertions">
+          <HintPath>..\..\packages\FluentAssertions\lib\portable-win81+wpa81\FluentAssertions.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -370,10 +638,19 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="Newtonsoft.Json">
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -388,10 +665,93 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile259')">
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
-        <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\windows8\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\net40\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\net45\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\sl5\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\windowsphone71\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\windowsphone8\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\portable-win81+wpa81\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\portable-net40+sl5+win8+wp8\System.Reactive.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Core">
+          <HintPath>..\..\packages\Rx-Core\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -399,7 +759,283 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v3.5' Or $(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windows8\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\net40\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\sl5\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windowsphone71\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windowsphone8\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-win81+wpa81\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-net40+sl5+win8+wp8\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Interfaces">
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Interfaces.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\windows8\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\net40\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\net45\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\sl5\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\windowsphone71\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\windowsphone8\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-win81+wpa81\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-net40+sl5+win8+wp8\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.Linq">
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Linq.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windows8\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\net40\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\sl5\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windowsphone71\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windowsphone8\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-win81+wpa81\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-net40+sl5+win8+wp8\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="System.Reactive.PlatformServices">
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.PlatformServices.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
       <ItemGroup>
         <Reference Include="xunit.abstractions">
           <HintPath>..\..\packages\xunit.abstractions\lib\net35\xunit.abstractions.dll</HintPath>
@@ -408,7 +1044,7 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.abstractions">
           <HintPath>..\..\packages\xunit.abstractions\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
@@ -419,10 +1055,10 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.assert">
-          <HintPath>..\..\packages\xunit.assert\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.assert.dll</HintPath>
+          <HintPath>..\..\packages\xunit.assert\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -430,41 +1066,28 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">
       <PropertyGroup>
-        <__paket__xunit_core_props>monoandroid\xunit.core</__paket__xunit_core_props>
+        <__paket__xunit_core_props>win81\xunit.core</__paket__xunit_core_props>
       </PropertyGroup>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
       <PropertyGroup>
-        <__paket__xunit_core_props>monotouch\xunit.core</__paket__xunit_core_props>
+        <__paket__xunit_core_props>wpa81\xunit.core</__paket__xunit_core_props>
       </PropertyGroup>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <PropertyGroup>
-        <__paket__xunit_core_props>wp8\xunit.core</__paket__xunit_core_props>
-        <__paket__xunit_core_targets>wp8\xunit.core</__paket__xunit_core_targets>
-      </PropertyGroup>
-    </When>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
-      <PropertyGroup>
-        <__paket__xunit_core_props>portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core</__paket__xunit_core_props>
-      </PropertyGroup>
-    </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1') Or ($(TargetFrameworkProfile) == 'Profile32')">
-      <PropertyGroup>
-        <__paket__xunit_core_props>portable-win81+wpa81\xunit.core</__paket__xunit_core_props>
-        <__paket__xunit_core_targets>portable-win81+wpa81\xunit.core</__paket__xunit_core_targets>
+        <__paket__xunit_core_props>portable-net45+win8+wp8+wpa81\xunit.core</__paket__xunit_core_props>
       </PropertyGroup>
     </When>
   </Choose>
   <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
-  <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_targets).targets" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_targets).targets')" Label="Paket" />
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.core">
-          <HintPath>..\..\packages\xunit.extensibility.core\lib\portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.core.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.core\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -472,6 +1095,15 @@
     </When>
   </Choose>
   <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\win8\xunit.execution.dotnet.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
       <ItemGroup>
         <Reference Include="xunit.execution.desktop">
@@ -483,8 +1115,8 @@
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
       <ItemGroup>
-        <Reference Include="xunit.execution.MonoAndroid">
-          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monoandroid\xunit.execution.MonoAndroid.dll</HintPath>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monoandroid\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -492,26 +1124,35 @@
     </When>
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
       <ItemGroup>
-        <Reference Include="xunit.execution.MonoTouch">
-          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monotouch\xunit.execution.MonoTouch.dll</HintPath>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monotouch\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0'">
       <ItemGroup>
-        <Reference Include="xunit.execution.wp8">
-          <HintPath>..\..\packages\xunit.extensibility.execution\lib\wp8\xunit.execution.wp8.dll</HintPath>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\wp8\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1') Or ($(TargetFrameworkProfile) == 'Profile32')">
+    <When Condition="$(TargetFrameworkIdentifier) == 'Xamarin.iOS'">
       <ItemGroup>
-        <Reference Include="xunit.execution.universal">
-          <HintPath>..\..\packages\xunit.extensibility.execution\lib\portable-wpa81+win81\xunit.execution.universal.dll</HintPath>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\xamarinios\xunit.execution.dotnet.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <ItemGroup>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\portable-net45+win8+wp8+wpa81\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

@@ -53,17 +53,17 @@ namespace Elasticsearch.Net.Serialization
 		
 		public string AttemptTheRightToString(object value)
 		{
-			var explicitImplementation = this.QueryStringValueType(value as IQueryStringValue);
+			var explicitImplementation = this.QueryStringValueType(value as IUrlParameter);
 			if (explicitImplementation != null) return explicitImplementation;
 			
 
 			return value.ToString();
 		}
 
-		public string QueryStringValueType(IQueryStringValue value)
+		public string QueryStringValueType(IUrlParameter value)
 		{
 			if (value == null) return null;
-			return value.ToQueryStringValue(this._settings);
+			return value.GetString(this._settings);
 		}
 
 

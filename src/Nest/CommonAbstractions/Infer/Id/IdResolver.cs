@@ -27,41 +27,19 @@ namespace Nest.Resolvers
 			return idSelector;
 		}
 
-		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
+		internal static Func<object, object> MakeDelegate<T, U>(MethodInfo @get)
 		{
 			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
-			return t => f(t);
+			return t => f((T)t);
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, is not cached and not used internally")]
-		public string GetIdFor<T>(T @object, string idProperty)
+		public string GetIdFor(Type type, object @object)
 		{
-			try
-			{
-				var value = @object
-					.GetType()
-					.GetProperty(idProperty)
-					.GetValue(@object, null);
-
-				return value.ToString();
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		public string GetIdFor<T>(T @object)
-		{
-			if (@object == null)
-				return null;
-
-			var type = typeof(T);
 			Func<object, string> cachedLookup;
-			string FieldName;
+			string field;
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
-			
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out field);
+
 			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);
 
@@ -73,28 +51,28 @@ namespace Nest.Resolvers
 			{
 				return null;
 			}
-			try
+			var getMethod = idProperty.GetGetMethod();
+			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
+			var func = (Func<object, object>)generic.Invoke(null, new[] { getMethod });
+			cachedLookup = o =>
 			{
-				var getMethod = idProperty.GetGetMethod();
-				var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-				var func = (Func<T, object>)generic.Invoke(null, new[] { getMethod });
-				cachedLookup = o =>
-				{
-					T obj = (T)o;
-					var v = func(obj);
-					return v != null ? v.ToString() : null;
-				};
-				if (preferLocal) 
-					LocalIdDelegates.TryAdd(type, cachedLookup);
-				else 
-					IdDelegates.TryAdd(type, cachedLookup);
-				return cachedLookup(@object);
-			}
-			catch 
-			{
-				var value = idProperty.GetValue(@object, null);
-				return value.ToString();
-			}
+				var v = func(o);
+				return v != null ? v.ToString() : null;
+			};
+			if (preferLocal)
+				LocalIdDelegates.TryAdd(type, cachedLookup);
+			else
+				IdDelegates.TryAdd(type, cachedLookup);
+			return cachedLookup(@object);
+		}
+
+		public string GetIdFor<T>(T @object)
+		{
+			if (@object == null)
+				return null;
+
+			//var type = typeof(T);
+			return GetIdFor(@object.GetType(), @object);
 		}
 
 		private PropertyInfo GetInferredId(Type type)
@@ -109,7 +87,7 @@ namespace Nest.Resolvers
 				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticsearchTypeAttribute.From(type);
-			propertyName = (esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ) ? "Id" : esTypeAtt?.IdProperty;
+			propertyName = (esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true) ? "Id" : esTypeAtt?.IdProperty;
 
 			return GetPropertyCaseInsensitive(type, propertyName);
 		}

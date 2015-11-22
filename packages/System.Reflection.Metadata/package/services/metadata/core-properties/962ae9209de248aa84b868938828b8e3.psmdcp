@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"><dc:creator>Microsoft</dc:creator><dc:description>This packages provides a low-level .NET (ECMA-335) metadata reader. It's geared for performance and is the ideal choice for building higher-level libraries that intend to provide their own object model, such as compilers.
-
-Supported Platforms:
-- .NET Framework 4.5
-- Windows 8
-- Portable Class Libraries</dc:description><dc:identifier>System.Reflection.Metadata</dc:identifier><version>1.0.17-beta</version><keywords>BCL Microsoft System ECMA ECMA335 Metadata Reflection</keywords><dc:title>Microsoft ECMA-335 Metadata Reader</dc:title><lastModifiedBy>NuGet, Version=2.8.50204.16, Culture=neutral, PublicKeyToken=null;Microsoft Windows NT 6.2.9200.0;.NET Framework 4.5.1</lastModifiedBy></coreProperties>

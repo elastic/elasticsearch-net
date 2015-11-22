@@ -84,13 +84,13 @@ namespace Nest
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(string field, IEnumerable<string> terms) =>
-			this.Terms(t => t.OnField(field).Terms(terms));
+			this.Terms(t => t.Field(field).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms<K>(Expression<Func<T, object>> objectPath, IEnumerable<K> terms) =>
-			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
+			this.Terms<K>(t => t.Field(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -102,7 +102,7 @@ namespace Nest
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
-			this.Terms(t => t.OnField(objectPath).Terms(terms));
+			this.Terms(t => t.Field(objectPath).Terms(terms));
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
@@ -202,6 +202,12 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
+		/// Use an indexed shape for the geo shape query
+		/// </summary>
+		public QueryContainer GeoIndexedShape(Func<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+
+		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
 		/// that have a shape that intersects with the line string shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
@@ -248,6 +254,21 @@ namespace Nest
 		/// </summary>
 		public QueryContainer GeoShapeMultiPolygon(Func<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+
+		public QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoPolygon = query);
+
+		public QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoHashCell = query);
+
+		public QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoDistanceRange = query);
+
+		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoDistance = query);
+
+		public QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoBoundingBox = query);
 
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
@@ -342,7 +363,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -357,7 +378,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -372,7 +393,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -397,7 +418,7 @@ namespace Nest
 		{
 			return this.Wildcard(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -415,7 +436,7 @@ namespace Nest
 		{
 			return this.Wildcard(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -440,7 +461,7 @@ namespace Nest
 		{
 			return this.Prefix(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -455,7 +476,7 @@ namespace Nest
 		{
 			return this.Prefix(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -484,7 +505,7 @@ namespace Nest
 		{
 			return this.SpanTerm(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				return t;
 			});
@@ -497,7 +518,7 @@ namespace Nest
 		{
 			return this.SpanTerm(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				return t;
 			});
@@ -543,6 +564,16 @@ namespace Nest
 		/// </summary>
 		public QueryContainer SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.SpanMultiTerm = query);
+
+		/// <summary>
+		/// </summary>
+		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanContaining = query);
+
+		/// <summary>
+		/// </summary>
+		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanWithin = query);
 
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 

@@ -7,9 +7,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface ISuggestRequest : IIndicesOptionalExplicitAllPath<SuggestRequestParameters>, ICustomJson
+	public partial interface ISuggestRequest : ICustomJson
 	{
 		string GlobalText { get; set; }
 		IDictionary<string, ISuggester> Suggest { get; set; }
@@ -17,11 +16,7 @@ namespace Nest
 
 	internal static class SuggestPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-
+		//TODO this is ugly
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
 		{
 			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
@@ -53,36 +48,22 @@ namespace Nest
 		}
 	}
 
-	public partial class SuggestRequest : IndicesOptionalExplicitAllPathBase<SuggestRequestParameters>, ISuggestRequest
+	public partial class SuggestRequest 
 	{
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			SuggestPathInfo.Update(pathInfo, this);
-		}
-
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
-
 	}
 
 
 	[DescriptorFor("Suggest")]
-	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
-		where T : class
+	public partial class SuggestDescriptor<T> where T : class
 	{
-		private ISuggestRequest Self => this;
-
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 
 		string ISuggestRequest.GlobalText { get; set; }
-		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; }
-
-		public SuggestDescriptor()
-		{
-			Self.Suggest = new Dictionary<string, ISuggester>();
-		}
+		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; } = new Dictionary<string, ISuggester>();
 
 		/// <summary>
 		/// To avoid repetition of the suggest text, it is possible to define a global text.
@@ -135,27 +116,6 @@ namespace Nest
 			var item = suggest(desc);
 			Self.Suggest.Add(name, item);
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			SuggestPathInfo.Update(pathInfo, this);
-		}
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			var inferrer = new ElasticInferrer(settings);
-
-			var index = inferrer.IndexName<T>();
-			pathInfo.Index = index;
-
-			if (Self.Indices.HasAny())
-				pathInfo.Index = inferrer.IndexNames(Self.Indices);
-			else
-				pathInfo.Index = Self.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
-
-			if (pathInfo.Index.IsNullOrEmpty())
-				pathInfo.Index = "_all";
 		}
 	}
 }

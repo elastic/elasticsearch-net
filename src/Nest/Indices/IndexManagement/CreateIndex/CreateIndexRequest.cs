@@ -8,25 +8,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
-	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
+	public partial interface ICreateIndexRequest : IIndexState
 	{
-
 	}
 
-	internal static class CreateIndexPathInfo
+	public partial class CreateIndexRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request) =>
-			pathInfo.HttpMethod = HttpMethod.POST;
-	}
-
-	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
-	{
-		internal CreateIndexRequest() : base(null) { }
-
-		public CreateIndexRequest(IndexName index) : base(index) { }
+		//TODO Only here for ReadAsType new() constraint needs to be updated
+		public CreateIndexRequest() { }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -37,16 +27,11 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 
 		public ISimilarities Similarity { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
-			CreateIndexPathInfo.Update(pathInfo, this);
 	}
 
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexDescriptor 
 	{
-		protected CreateIndexDescriptor Assign(Action<ICreateIndexRequest> assigner) => Fluent.Assign(this, assigner);
-
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		IMappings IIndexState.Mappings { get; set; }
@@ -65,23 +50,19 @@ namespace Nest
 			a.Aliases = indexSettings.Aliases;
 		});
 
-		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> selector) =>
-			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor()));
+		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
+			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IMappings> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
+		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IWarmers> selector) =>
-			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor()));
+		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> selector) =>
+			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor())?.Value);
 
-		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IAliases> selector) =>
-			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor()));
+		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
+			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);
 
-		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, ISimilarities> selector) =>
-			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor()));
-
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
-			CreateIndexPathInfo.Update(pathInfo, this);
+		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
+			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
 }

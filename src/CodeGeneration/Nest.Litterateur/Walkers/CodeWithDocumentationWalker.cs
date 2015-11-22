@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Nest.Litterateur.Walkers
 {
@@ -20,12 +19,13 @@ namespace Nest.Litterateur.Walkers
 		private string _code;
 		public int ClassDepth { get; }
 		private readonly int? _lineNumberOverride;
-		
+
 		/// <summary>
 		/// We want to support inlining /** */ documentations because its super handy 
 		/// to document fluent code, what ensues is total hackery
 		/// </summary>
 		/// <param name="classDepth"></param>
+		/// <param name="lineNumber">line number used for sorting</param>
 		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null) : base(SyntaxWalkerDepth.StructuredTrivia) 
 		{
 			ClassDepth = classDepth;
@@ -54,7 +54,7 @@ namespace Nest.Litterateur.Walkers
 				base.Visit(node);
 
 				var nodeHasLeadingTriva = node.HasLeadingTrivia && node.GetLeadingTrivia()
-					.Any(c=>c.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+					.Any(c=>c.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
 				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks, swap: nodeHasLeadingTriva);
 				this.Blocks.Add(new CombinedBlock(blocks, line));
 				return;
@@ -68,7 +68,7 @@ namespace Nest.Litterateur.Walkers
 			var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 			var line = _lineNumberOverride ?? nodeLine;
 			var text = node.TextTokens
-				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
+				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
 			this.TextBlocks.Add(new TextBlock(text, line));

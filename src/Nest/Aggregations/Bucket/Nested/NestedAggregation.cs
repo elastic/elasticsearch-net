@@ -5,36 +5,33 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedAggregator>))]
-	public interface INestedAggregator : IBucketAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedAggregation>))]
+	public interface INestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")] 
-		FieldName Path { get; set;}
+		Field Path { get; set;}
 	}
 
-	public class NestedAggregator : BucketAggregator, INestedAggregator
+	public class NestedAggregation : BucketAggregationBase, INestedAggregation
 	{
-		public FieldName Path { get; set; }
-	}
+		public Field Path { get; set; }
 
-	public class NestedAgg : BucketAgg, INestedAggregator
-	{
-		public FieldName Path { get; set; }
+		internal NestedAggregation() { }
 
-		public NestedAgg(string name) : base(name) { }
+		public NestedAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Nested = this;
 	}
 
-	public class NestedAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<NestedAggregatorDescriptor<T>, INestedAggregator, T>
-			, INestedAggregator 
+	public class NestedAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<NestedAggregationDescriptor<T>, INestedAggregation, T>
+			, INestedAggregation 
 		where T : class
 	{
-		FieldName INestedAggregator.Path { get; set; }
+		Field INestedAggregation.Path { get; set; }
 
-		public NestedAggregatorDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public NestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 
-		public NestedAggregatorDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
+		public NestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
 	}
 }

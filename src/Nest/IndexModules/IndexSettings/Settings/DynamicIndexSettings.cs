@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IndexSettingsConverter))]
-	public interface IDynamicIndexSettings : IHasADictionary
+	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>
 		///The number of replicas each primary shard has. Defaults to 1. 
@@ -102,7 +102,7 @@ namespace Nest
 		IAnalysis Analysis { get; set; }
 	}
 
-	public class DynamicIndexSettings : HasADictionary<string, object>, IDynamicIndexSettings
+	public class DynamicIndexSettings : IsADictionary<string, object>, IDynamicIndexSettings
 	{
 		public DynamicIndexSettings() : base() { }
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -110,55 +110,55 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public string AutoExpandReplicas { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksMetadata { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksRead { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksReadOnly { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksWrite { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? Priority { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? WarmersEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? RequestCacheEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IMergeSettings Merge { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? NumberOfReplicas { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression RefreshInterval { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ISlowLog SlowLog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ITranslogSettings Translog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
 
 		/// <summary>
@@ -167,115 +167,83 @@ namespace Nest
 		public void Add(string setting, object value) => this.BackingDictionary.Add(setting, value);
 
 	}
-	
-	public class DynamicIndexSettingsDescriptor : DynamicIndexSettingsDescriptor<DynamicIndexSettingsDescriptor>
-	{
 
+	public class DynamicIndexSettingsDescriptor :
+		DynamicIndexSettingsDescriptor<DynamicIndexSettingsDescriptor, DynamicIndexSettings>
+	{
+		public DynamicIndexSettingsDescriptor() : base(new DynamicIndexSettings()) { }
 	}
 
-	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> : HasADictionary<string, object>, IDynamicIndexSettings
-		where TIndexSettings : DynamicIndexSettingsDescriptor<TIndexSettings> 
+	public abstract class DynamicIndexSettingsDescriptor<TDescriptor, TIndexSettings> : IsADictionaryDescriptor<TDescriptor, TIndexSettings, string, object>
+		where TDescriptor : DynamicIndexSettingsDescriptor<TDescriptor, TIndexSettings>
+		where TIndexSettings : class, IDynamicIndexSettings
 	{
-		protected TIndexSettings Assign(Action<IDynamicIndexSettings> assigner) =>
-			Fluent.Assign((TIndexSettings)this, assigner);
-
-		public DynamicIndexSettingsDescriptor() : base() { }
-		protected DynamicIndexSettingsDescriptor(IDictionary<string, object> container) : base(container) { }
-
-		int? IDynamicIndexSettings.NumberOfReplicas { get; set; }
-		string IDynamicIndexSettings.AutoExpandReplicas { get; set; }
-		bool? IDynamicIndexSettings.BlocksMetadata { get; set; }
-		bool? IDynamicIndexSettings.BlocksRead { get; set; }
-		bool? IDynamicIndexSettings.BlocksReadOnly { get; set; }
-		bool? IDynamicIndexSettings.BlocksWrite { get; set; }
-		int? IDynamicIndexSettings.Priority { get; set; }
-		bool? IDynamicIndexSettings.WarmersEnabled { get; set; }
-		bool? IDynamicIndexSettings.RequestCacheEnabled { get; set; }
-		IMergeSettings IDynamicIndexSettings.Merge { get; set; }
-		Union<int, RecoveryInitialShards> IDynamicIndexSettings.RecoveryInitialShards { get; set; }
-		TimeUnitExpression IDynamicIndexSettings.RefreshInterval { get; set; }
-		int? IDynamicIndexSettings.RoutingAllocationTotalShardsPerNode { get; set; }
-		ISlowLog IDynamicIndexSettings.SlowLog { get; set; }
-		ITranslogSettings IDynamicIndexSettings.Translog { get; set; }
-		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
-		IAnalysis IDynamicIndexSettings.Analysis { get; set; }
+		protected DynamicIndexSettingsDescriptor(TIndexSettings instance) : base(instance) { }
 
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public TIndexSettings Add(string setting, object value)
+		public TDescriptor Setting(string setting, object value)
 		{
-			this.BackingDictionary.Add(setting, value);
-			return (TIndexSettings)this;
+			this.PromisedValue.Add(setting, value);
+			return (TDescriptor)this;
 		}
 
-		/// <inheritdoc/ >
-		public TIndexSettings NumberOfReplicas(int? numberOfReplicas) =>
-			Assign(a => a.NumberOfReplicas = numberOfReplicas);
+		/// <inheritdoc/>
+		public TDescriptor NumberOfReplicas(int? numberOfReplicas) => Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
-		/// <inheritdoc/ >
-		public TIndexSettings AutoExpandReplicas(string AutoExpandReplicas) =>
-			Assign(a => a.AutoExpandReplicas = AutoExpandReplicas);
+		/// <inheritdoc/>
+		public TDescriptor AutoExpandReplicas(string AutoExpandReplicas) => Assign(a => a.AutoExpandReplicas = AutoExpandReplicas);
 
-		/// <inheritdoc/ >
-		public TIndexSettings BlocksMetadata(bool? blocksMetadata = true) =>
-			Assign(a => a.BlocksMetadata = blocksMetadata);
+		/// <inheritdoc/>
+		public TDescriptor BlocksMetadata(bool? blocksMetadata = true) => Assign(a => a.BlocksMetadata = blocksMetadata);
 
-		/// <inheritdoc/ >
-		public TIndexSettings BlocksRead(bool? blocksRead = true) =>
-			Assign(a => a.BlocksRead = blocksRead);
+		/// <inheritdoc/>
+		public TDescriptor BlocksRead(bool? blocksRead = true) => Assign(a => a.BlocksRead = blocksRead);
 
-		/// <inheritdoc/ >
-		public TIndexSettings BlocksReadOnly(bool? blocksReadOnly = true) =>
-			Assign(a => a.BlocksReadOnly = blocksReadOnly);
+		/// <inheritdoc/>
+		public TDescriptor BlocksReadOnly(bool? blocksReadOnly = true) => Assign(a => a.BlocksReadOnly = blocksReadOnly);
 
-		/// <inheritdoc/ >
-		public TIndexSettings BlocksWrite(bool? blocksWrite = true) =>
-			Assign(a => a.BlocksWrite = blocksWrite);
+		/// <inheritdoc/>
+		public TDescriptor BlocksWrite(bool? blocksWrite = true) => Assign(a => a.BlocksWrite = blocksWrite);
 
-		/// <inheritdoc/ >
-		public TIndexSettings Priority(int? priority) =>
-			Assign(a => a.Priority = priority);
+		/// <inheritdoc/>
+		public TDescriptor Priority(int? priority) => Assign(a => a.Priority = priority);
 
-		/// <inheritdoc/ >
-		public TIndexSettings WarmersEnabled(bool enabled = true) =>
-			Assign(a => a.WarmersEnabled = enabled);
+		/// <inheritdoc/>
+		public TDescriptor WarmersEnabled(bool enabled = true) => Assign(a => a.WarmersEnabled = enabled);
 
-		/// <inheritdoc/ >
-		public TIndexSettings RequestCacheEnabled(bool enabled = true) =>
-			Assign(a => a.RequestCacheEnabled = enabled);
+		/// <inheritdoc/>
+		public TDescriptor RequestCacheEnabled(bool enabled = true) => Assign(a => a.RequestCacheEnabled = enabled);
 
-		/// <inheritdoc/ >
-		public TIndexSettings Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
+		/// <inheritdoc/>
+		public TDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
-		/// <inheritdoc/ >
-		public TIndexSettings RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
+		/// <inheritdoc/>
+		public TDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
-		/// <inheritdoc/ >
-		public TIndexSettings RefreshInterval(TimeUnitExpression time) =>
-			Assign(a => a.RefreshInterval = time);
+		/// <inheritdoc/>
+		public TDescriptor RefreshInterval(TimeUnitExpression time) => Assign(a => a.RefreshInterval = time);
 
-		/// <inheritdoc/ >
-		public TIndexSettings TotalShardsPerNode(int? totalShardsPerNode) =>
+		/// <inheritdoc/>
+		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
-		/// <inheritdoc/ >
-		public TIndexSettings SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
+		/// <inheritdoc/>
+		public TDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
-		/// <inheritdoc/ >
-		public TIndexSettings Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
+		/// <inheritdoc/>
+		public TDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
-		/// <inheritdoc/ >
-		public TIndexSettings UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
+		/// <inheritdoc/>
+		public TDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		//TODO DSL for shard allocation filtering
-
-		public TIndexSettings Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
+		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 	}
 

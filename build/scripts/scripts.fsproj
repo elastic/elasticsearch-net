@@ -62,7 +62,6 @@
     <None Include="Signing.fsx" />
     <None Include="Testing.fsx" />
     <None Include="Documentation.fsx" />
-    <None Include="build.fsx" />
     <None Include="Targets.fsx" />
   </ItemGroup>
   <ItemGroup>
@@ -86,4 +85,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\.paket\paket.targets" />
 </Project>

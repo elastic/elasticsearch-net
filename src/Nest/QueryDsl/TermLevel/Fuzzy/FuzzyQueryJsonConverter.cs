@@ -26,7 +26,7 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-			JToken v = null;
+			JToken v;
 			if (!jo.TryGetValue("value", out v)) return null;
 
 			IFuzzyQuery fq = new FuzzyQueryDescriptor<object>();
@@ -61,10 +61,10 @@ namespace Nest
 			return fq;
 		}
 
-		public TReturn GetPropValue<TReturn>(JObject jObject, string FieldName)
+		public TReturn GetPropValue<TReturn>(JObject jObject, string field)
 		{
 			JToken jToken = null;
-			return !jObject.TryGetValue(FieldName, out jToken) 
+			return !jObject.TryGetValue(field, out jToken) 
 				? default(TReturn) 
 				: jToken.Value<TReturn>();
 		}
@@ -83,7 +83,7 @@ namespace Nest
 			if (contract == null)
 				return;
 
-			var field = contract.Infer.FieldName(fieldName);
+			var field = contract.Infer.Field(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
 			

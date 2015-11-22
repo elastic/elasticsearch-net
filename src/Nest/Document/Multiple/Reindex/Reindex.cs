@@ -1,35 +1,53 @@
 ﻿using System;
+using Elasticsearch.Net;
+
 namespace Nest
 {
-	public class ReindexDescriptor<T> where T : class
+	public interface IReindexRequest 
 	{
-		internal string _ToIndexName { get; set; }
-		internal string _FromIndexName { get; set; }
-		internal string _Scroll { get; set; }
-		internal int? _Size { get; set; }
+		IndexName To { get; set; }
+		IndexName From { get; set; }
+		//TODO TimeUnitExpression, needs to propagate to generated querystring methods
+		string Scroll { get; set; }
+		int? Size { get; set; }
 		
-		internal Func<QueryContainerDescriptor<T>, QueryContainer> _QuerySelector { get; set; }
+		QueryContainer Query { get; set; }
 
-		internal Func<CreateIndexDescriptor, CreateIndexDescriptor> _CreateIndexSelector { get; set; }
+		ICreateIndexRequest CreateIndexRequest { get; set; }
 
-		internal PutMappingDescriptor<T> _RootObjectMappingDescriptor { get; set; } 
-
-		/// <summary>
-		/// The index into which we're indexing
-		/// </summary>
-		public ReindexDescriptor<T> ToIndex(string name)
+		IPutMappingRequest PutMappingRequest { get; set; } 
+	}
+	public class ReindexRequest : IReindexRequest
+	{
+		public IndexName To { get; set; }
+		public IndexName From { get; set; }
+		public string Scroll { get; set; }
+		public int? Size { get; set; }
+		public QueryContainer Query { get; set; }
+		public ICreateIndexRequest CreateIndexRequest { get; set; }
+		public IPutMappingRequest PutMappingRequest { get; set; } 
+		public ReindexRequest(IndexName from, IndexName to)
 		{
-			this._ToIndexName = name;
-			return this;
+			this.To = to;
+			this.From = from;
 		}
+	}
 
-		/// <summary>
-		/// The index from which we're reindexing 
-		/// </summary>
-		public ReindexDescriptor<T> FromIndex(string name)
+	public class ReindexDescriptor<T> : IReindexRequest where T : class
+	{
+		ReindexDescriptor<T> Assign(Action<IReindexRequest> assign)  => Fluent.Assign(this, assign);
+
+		IndexName IReindexRequest.To { get; set; }
+		IndexName IReindexRequest.From { get; set; }
+		string IReindexRequest.Scroll { get; set; }
+		int? IReindexRequest.Size { get; set; }
+		QueryContainer IReindexRequest.Query { get; set; }
+		ICreateIndexRequest IReindexRequest.CreateIndexRequest { get; set; }
+		IPutMappingRequest IReindexRequest.PutMappingRequest { get; set; } 
+		
+		public ReindexDescriptor(IndexName from, IndexName to)
 		{
-			this._FromIndexName = name;
-			return this;
+			Assign(a => a.From = from).Assign(a => a.To = to);
 		}
 
 		/// <summary>
@@ -37,61 +55,41 @@ namespace Nest
 		/// </summary>
 		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
 		/// <returns></returns>
-		public ReindexDescriptor<T> Scroll(string scrollTime)
-		{
-			scrollTime.ThrowIfNullOrEmpty("scrollTime");
-			this._Scroll = scrollTime;
-			return this;
-		}
+		public ReindexDescriptor<T> Scroll(string scrollTime) => Assign(a => a.Scroll = scrollTime);
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 100. When using scroll search type,
 		/// size is actually multiplied by the number of shards!
 		/// </summary>
-		public ReindexDescriptor<T> Size(int size)
-		{
-			this._Size = size;
-			return this;
-		}
+		public ReindexDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 100.
 		/// </summary>
-		public ReindexDescriptor<T> Take(int take)
-		{
-			this.Size(take);
-			return this;
-		}
+		public ReindexDescriptor<T> Take(int? take) => Assign(a => a.Size = take);
 
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
-		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			this._QuerySelector = querySelector;
-			return this;
-		}
+		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// The new index name to reindex too. 
+		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
-		public ReindexDescriptor<T> NewIndexName(string name)
-		{
-			this._ToIndexName = name;
-			return this;
-		}
+		public ReindexDescriptor<T> Query(QueryContainer query) => Assign(a => a.Query = query);
 
 		/// <summary>
 		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from
 		/// the index we're reindexing from
 		/// </summary>
-		public ReindexDescriptor<T> CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
-		{
-			createIndexSelector.ThrowIfNull("createIndexSelector");
-			this._CreateIndexSelector = createIndexSelector;
-			return this;
-		}
+		public ReindexDescriptor<T> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
+			Assign(a => a.CreateIndexRequest = createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(a.From)));
 
+		/// <summary>
+		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from
+		/// the index we're reindexing from
+		/// </summary>
+		public ReindexDescriptor<T> CreateIndex(ICreateIndexRequest createIndexRequest) => Assign(a => a.CreateIndexRequest = createIndexRequest);
 	}
 }

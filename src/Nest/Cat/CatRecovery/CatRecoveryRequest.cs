@@ -7,18 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters> { }
+	public partial interface ICatRecoveryRequest { }
 
-	public partial class CatRecoveryRequest : BasePathRequest<CatRecoveryRequestParameters>, ICatRecoveryRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo) =>
-			CatRequestPathInfo.Update(pathInfo);
-	}
+	public partial class CatRecoveryRequest { }
 
-	public partial class CatRecoveryDescriptor : BasePathDescriptor<CatRecoveryDescriptor, CatRecoveryRequestParameters>, ICatRecoveryRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo) =>
-			CatRequestPathInfo.Update(pathInfo);
-	}
+	public partial class CatRecoveryDescriptor { }
 }

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<CharFilters, string, ICharFilter>))]
-	public interface ICharFilters : IHasADictionary { }
+	public interface ICharFilters : IIsADictionary<string, ICharFilter> { }
 
 	public class CharFilters : IsADictionary<string, ICharFilter>, ICharFilters
 	{
@@ -19,15 +19,11 @@ namespace Nest
 		public void Add(string name, ICharFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class CharFiltersDescriptor : HasADictionary<string, ICharFilter>, ICharFilters
+	public class CharFiltersDescriptor : IsADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>
 	{
-		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer)
-		{
-			this.BackingDictionary.Add(name, analyzer);
-			return this;
-		}
+		public CharFiltersDescriptor() : base(new CharFilters()) { }
 
-		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
+		public CharFiltersDescriptor UserDefined(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
 		/// <summary>
 		/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis. 

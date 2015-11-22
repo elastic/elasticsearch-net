@@ -1,4 +1,4 @@
-﻿#I @"../tools/FAKE/tools"
+﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #r "System.Xml.Linq.dll"
 
@@ -21,7 +21,7 @@ module Tests =
     let htmlOutput = Paths.Output("TestResults.html")
 
     let RunAllUnitTests() =
-        !! Paths.Source("**/bin/Release/Tests.dll") 
+        !! Paths.Source("Tests/bin/Release/Tests.dll") 
             |> xUnit2 (fun p -> 
             {
                 p with 
@@ -79,7 +79,7 @@ module Tests =
             | 0 ->
                 let successMessage = sprintf "\"All %i tests are passing!\"" total
                 printfn "%s" successMessage
-                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]  
+                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
                 ignore
             | _ ->
                 let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
@@ -89,14 +89,14 @@ module Tests =
 
     let RunContinuous = fun _ ->
         ActivateBuildFailureTarget "NotifyTestFailures"
-        Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]  
-        try  
-            !! Paths.Source("**/bin/Release/Tests.dll") 
-            |> xUnit2 (fun p -> 
-            { 
-                p with 
-                    XmlOutputPath = Some <| xmlOutput 
-                    HtmlOutputPath = Some <| htmlOutput 
-            })
-        finally
-            Notify() |> ignore
+        Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]
+        //try 
+        !! Paths.Source("Tests/bin/Release/Tests.dll") 
+        |> xUnit2 (fun p -> 
+        { 
+            p with 
+                XmlOutputPath = Some <| xmlOutput 
+                HtmlOutputPath = Some <| htmlOutput 
+        })
+        //finally
+        Notify() |> ignore

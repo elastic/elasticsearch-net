@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(SpanTermQueryJsonConverter))]
+	[JsonConverter(typeof(FieldNameQueryJsonConverter<SpanTermQuery>))]
 	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery
 	{
 	}

@@ -4,35 +4,27 @@ using System;
 
 namespace Nest
 {
-	public class ScriptedHeuristic
+	[JsonObject]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptedHeuristic>))]
+	public interface IScriptedHeuristic : INestSerializable
 	{
 		[JsonProperty("script")]
-		public string Script { get; set; }
-		[JsonProperty("lang")]
-		public string Lang { get; set; }
-		[JsonProperty("params")]
-		public IDictionary<string, object> Params { get; set; }
+		IScript Script { get; set; }
 	}
 
-	public class ScriptedHeuristicDescriptor
+	public class ScriptedHeuristic : IScriptedHeuristic
 	{
-		internal ScriptedHeuristic ScriptedHeuristic = new ScriptedHeuristic();
-		public ScriptedHeuristicDescriptor Script(string script)
-		{
-			this.ScriptedHeuristic.Script = script;
-			return this;
-		}
+		public IScript Script { get; set; }
+	}
 
-		public ScriptedHeuristicDescriptor Lang(string lang)
-		{
-			this.ScriptedHeuristic.Lang = lang;
-			return this;
-		}
+	public class ScriptedHeuristicDescriptor 
+		: DescriptorBase<ScriptedHeuristicDescriptor, IScriptedHeuristic>, IScriptedHeuristic
+	{
+		IScript IScriptedHeuristic.Script { get; set; }
 
-		public ScriptedHeuristicDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsSelector)
-		{
-			this.ScriptedHeuristic.Params = paramsSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ScriptedHeuristicDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
+
+		public ScriptedHeuristicDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 	}
 }

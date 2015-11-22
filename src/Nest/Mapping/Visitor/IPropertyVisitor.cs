@@ -23,8 +23,8 @@ namespace Nest
 		void Visit(IMurmur3HashProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
 		void Visit(ITokenCountProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
 
-		void Visit(IElasticsearchProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
+		void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
 
-		IElasticsearchProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
+		IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute);
 	}
 }

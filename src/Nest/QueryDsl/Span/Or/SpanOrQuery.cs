@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanOrQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanOrQuery>))]
 	public interface ISpanOrQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]
@@ -26,7 +26,6 @@ namespace Nest
 		: QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>
 		, ISpanOrQuery where T : class
 	{
-		private ISpanOrQuery Self => this;
 		bool IQuery.Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 

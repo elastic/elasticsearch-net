@@ -6,34 +6,10 @@ using System.Text;
 
 namespace Nest
 {
-	public interface ISyncedFlushRequest : IIndicesOptionalExplicitAllPath<SyncedFlushRequestParameters>
-	{
-	}
+	public partial interface ISyncedFlushRequest { }
 
-	internal static class SyncedFlushPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
-	public partial class SyncedFlushRequest : IndicesOptionalExplicitAllPathBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
-		{
-			SyncedFlushPathInfo.Update(settings, pathInfo);
-		}
-	}
+	public partial class SyncedFlushRequest { }
 	
 	[DescriptorFor("IndicesFlushSynced")]
-	public partial class SyncedFlushDescriptor 
-		: IndicesOptionalExplicitAllPathDescriptor<SyncedFlushDescriptor, SyncedFlushRequestParameters>
-		, ISyncedFlushRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
-		{
-			SyncedFlushPathInfo.Update(settings, pathInfo);
-		}
-	}
+	public partial class SyncedFlushDescriptor { }
 }

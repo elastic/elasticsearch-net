@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest.Litterateur.Walkers
 {
@@ -68,7 +67,7 @@ namespace Nest.Litterateur.Walkers
 			{
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
-				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
+				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
 					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
@@ -88,7 +87,7 @@ namespace Nest.Litterateur.Walkers
 			{
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
+				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
 					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
@@ -103,7 +102,7 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitXmlText(XmlTextSyntax node)
 		{
 			var text = node.TextTokens
-				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
+				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
@@ -114,7 +113,7 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitTrivia(SyntaxTrivia trivia)
 		{
-			if (trivia.CSharpKind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
+			if (trivia.Kind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
 			{
 				base.VisitTrivia(trivia);
 				return;
@@ -123,29 +122,6 @@ namespace Nest.Litterateur.Walkers
 			this.InsideMultiLineDocumentation = true;
 			base.VisitTrivia(trivia);
 			this.InsideMultiLineDocumentation = false;
-		}
-
-		public override void VisitTrailingTrivia(SyntaxToken token)
-		{
-			//if (!this.InsideMultiLineDocumentation) return;
-			//if (token.CSharpKind() != SyntaxKind.XmlTextLiteralToken) return;
-
-			base.VisitTrailingTrivia(token);
-		}
-
-		public override void VisitToken(SyntaxToken token)
-		{
-			base.VisitToken(token);
-		}
-
-		public override void DefaultVisit(SyntaxNode node)
-		{
-			base.DefaultVisit(node);
-		}
-
-		public override void Visit(SyntaxNode node)
-		{
-			base.Visit(node);
 		}
 	}
 }

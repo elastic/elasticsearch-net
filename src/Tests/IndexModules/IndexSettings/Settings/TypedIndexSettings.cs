@@ -7,16 +7,16 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Property;
+using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.Settings
 {
 	public class TypedIndexSettings
 	{
 		/**
 		 */
 
-		public class Usage : GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -42,11 +42,11 @@ namespace Tests.Aggregations
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
-				.Add("any.setting", "can be set")
-				.Add("doubles", 1.1)
-				.Add("bools", false)
-				.Add("enums", FieldIndexOption.Analyzed)
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
+				.Setting("any.setting", "can be set")
+				.Setting("doubles", 1.1)
+				.Setting("bools", false)
+				.Setting("enums", FieldIndexOption.Analyzed)
 				.NumberOfShards(1)
 				.NumberOfReplicas(2)
 				.AutoExpandReplicas("1-3")
@@ -63,8 +63,8 @@ namespace Tests.Aggregations
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings(new Dictionary<string, object>
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings(new Dictionary<string, object>
 				{
 					{ "any.setting", "can be set" },
 					{ "doubles", 1.1 },

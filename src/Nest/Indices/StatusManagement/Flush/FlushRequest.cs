@@ -6,30 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFlushRequest : IIndicesOptionalExplicitAllPath<FlushRequestParameters> { }
+	public partial interface IFlushRequest { }
 
-	internal static class FlushPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<FlushRequestParameters> pathInfo, IFlushRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class FlushRequest : IndicesOptionalExplicitAllPathBase<FlushRequestParameters>, IFlushRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FlushRequestParameters> pathInfo)
-		{
-			FlushPathInfo.Update(pathInfo, this);
-		}
-	}
+	public partial class FlushRequest { }
+
 	[DescriptorFor("IndicesFlush")]
-	public partial class FlushDescriptor : IndicesOptionalExplicitAllPathDescriptor<FlushDescriptor, FlushRequestParameters>, IFlushRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FlushRequestParameters> pathInfo)
-		{
-			FlushPathInfo.Update(pathInfo, this);
-		}
-	}
+	public partial class FlushDescriptor { }
 }

@@ -6,19 +6,37 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial class ElasticClient
+	public partial interface IElasticClient
 	{
+		/// <inheritdoc/>
+		ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, ICatHealthRequest> selector = null);
+
+		/// <inheritdoc/>
+		ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request);
 		
 		/// <inheritdoc/>
-		public ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null) => 
-			DoCat<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector = null);
+		
+		/// <inheritdoc/>
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request);
 
+	}
+
+	public partial class ElasticClient
+	{
+		/// <inheritdoc/>
+		public ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, ICatHealthRequest> selector = null) =>
+			this.CatHealth(selector.InvokeOrDefault(new CatHealthDescriptor()));
+
+		/// <inheritdoc/>
 		public ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request) =>
 			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 
-		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null) => 
-			DoCatAsync<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
+		/// <inheritdoc/>
+		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector = null) => 
+			this.CatHealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()));
 
+		/// <inheritdoc/>
 		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request) => 
 			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
 	}

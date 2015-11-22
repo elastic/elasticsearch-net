@@ -1,10 +1,12 @@
 ﻿using System;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(TypeNameJsonConverter))]
-	public class TypeName : IEquatable<TypeName>
+	public class TypeName : IEquatable<TypeName> , IUrlParameter
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
@@ -56,6 +58,15 @@ namespace Nest
 			return base.Equals(obj);
 		}
 
+		public override string ToString()
+		{
+			if (!this.Name.IsNullOrEmpty())
+				return this.Name;
+			if (this.Type != null)
+				return this.Type.Name;
+			return string.Empty;
+		}
+
 		public bool EqualsMarker(TypeName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
@@ -69,5 +80,11 @@ namespace Nest
 		{
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
+		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)(Types)(Types.Type(this))).GetString(settings);
+
+		public static TypeName From<T>() => typeof(T);
+
+		public Types And<T>() => new Types(new TypeName[] { this, typeof(T)});
+		public Types And(TypeName type) => new Types(new TypeName[] { this, type });
 	}
 }

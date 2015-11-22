@@ -53,6 +53,7 @@ namespace Nest
 			if (filter != null) BackingDictionary.Add(name, filter);
 			return this;
 		}
+
 		public NamedFiltersContainerDescriptor<T> Filter<TOther>(string name, Func<QueryContainerDescriptor<TOther>, IQueryContainer> selector)
 			where TOther : class
 		{

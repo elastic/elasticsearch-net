@@ -2,48 +2,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesAggregator>))]
-	public interface IPercentilesAggregator : IMetricAggregator
+	[JsonConverter(typeof(PercentilesAggregationJsonConverter))]
+	public interface IPercentilesAggregation : IMetricAggregation
 	{
-		[JsonProperty("percents")]
-		IEnumerable<double> Percentages { get; set; }
-
-		[JsonProperty("compression")]
-		int? Compression { get; set; }
+		IEnumerable<double> Percents { get; set; }
+		IPercentilesMethod Method { get; set; }
 	}
 
-	public class PercentilesAggregator : MetricAggregator, IPercentilesAggregator
+	public class PercentilesAggregation : MetricAggregationBase, IPercentilesAggregation
 	{
-		public IEnumerable<double> Percentages { get; set; }
-		public int? Compression { get; set; }
-	}
+		public IEnumerable<double> Percents { get; set; }
+		public IPercentilesMethod Method { get; set; }
+			
+		internal PercentilesAggregation() { }
 
-	public class PercentilesAgg : MetricAgg, IPercentilesAggregator
-	{
-		public IEnumerable<double> Percentages { get; set; }
-		public int? Compression { get; set; }
-
-		public PercentilesAgg(string name, FieldName field) : base(name, field) { } 
+		public PercentilesAggregation(string name, Field field) : base(name, field) { } 
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Percentiles = this;
 	}
 
-	public class PercentilesAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentilesAggregatorDescriptor<T>, IPercentilesAggregator, T>
-			, IPercentilesAggregator 
+	public class PercentilesAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<PercentilesAggregationDescriptor<T>, IPercentilesAggregation, T>
+			, IPercentilesAggregation 
 		where T : class
 	{
-		IEnumerable<double> IPercentilesAggregator.Percentages { get; set; }
+		IEnumerable<double> IPercentilesAggregation.Percents { get; set; }
 
-		int? IPercentilesAggregator.Compression { get; set; }
+		IPercentilesMethod IPercentilesAggregation.Method { get; set; }
 
-		public PercentilesAggregatorDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
+		public PercentilesAggregationDescriptor<T> Percents(IEnumerable<double> percentages) => 
+			Assign(a => a.Percents = percentages?.ToList());
 
-		public PercentilesAggregatorDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
+		public PercentilesAggregationDescriptor<T> Percents(params double[] percentages) => 
+			Assign(a => a.Percents = percentages?.ToList());
 
+		public PercentilesAggregationDescriptor<T> Method(Func<PercentilesMethodDescriptor, IPercentilesMethod> methodSelector) => 
+			Assign(a => a.Method = methodSelector?.Invoke(new PercentilesMethodDescriptor()));
 	}
 }

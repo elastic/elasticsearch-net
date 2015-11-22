@@ -9,6 +9,13 @@ using System.Collections;
 
 namespace Nest.Resolvers
 {
+
+	internal static class IsPromiseExtension
+	{
+		public static bool IsAssignableFrom<T>(this Type objectType) where T : class =>
+			typeof (T).IsAssignableFrom(objectType);
+	}
+
 	public class ElasticContractResolver : DefaultContractResolver
 	{
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
@@ -24,13 +31,24 @@ namespace Nest.Resolvers
 			this.ConnectionSettings = connectionSettings;
 		}
 
+
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
 
 			// this will only be called once and then cached
 
-			if (typeof(IDictionary).IsAssignableFrom(objectType))
+			if (typeof(IDictionary).IsAssignableFrom(objectType)
+
+				&& !objectType.IsAssignableFrom<IMappings>()
+				&& !objectType.IsAssignableFrom<IProperties>()
+				&& !objectType.IsAssignableFrom<IAnalyzers>()
+				&& !objectType.IsAssignableFrom<ITokenizers>()
+				&& !objectType.IsAssignableFrom<ISimilarities>()
+				&& !objectType.IsAssignableFrom<ICharFilters>()
+				&& !objectType.IsAssignableFrom<ITokenFilters>()
+				&& !objectType.IsAssignableFrom<IDynamicIndexSettings>()
+				)
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 
 			else if (objectType == typeof(IAggregation)) contract.Converter = new AggregationJsonConverter();
@@ -39,13 +57,20 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(IAnalyzer)) contract.Converter = new AnalyzerJsonConverter();
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
 			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
-			
+
+
+
+			else if (typeof(IClusterRerouteCommand).IsAssignableFrom(objectType))
+				contract.Converter = new ClusterRerouteCommandJsonConverter();
+
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
 
 			else if (objectType == typeof(TypeName)) contract.Converter = new TypeNameJsonConverter();
 			else if (objectType == typeof(IndexName)) contract.Converter = new IndexNameJsonConverter();
-			else if (objectType == typeof(FieldName)) contract.Converter = new FieldNameJsonConverter(this.ConnectionSettings);
+			else if (objectType == typeof(Fields)) contract.Converter = new FieldsJsonConverter(this.ConnectionSettings);
+			else if (objectType == typeof(Field)) contract.Converter = new FieldJsonConverter(this.ConnectionSettings);
+			else if (objectType == typeof(PropertyName)) contract.Converter = new PropertyNameJsonConverter(this.ConnectionSettings);
 
 			//TODO these should not be necessary here
 			else if (objectType == typeof(MultiSearchResponse)) contract.Converter = new MultiSearchJsonConverter();
@@ -82,8 +107,6 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ITokenizer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ITokenFilter>(type, memberSerialization, defaultProperties, lookup);
 
-
-
 			defaultProperties = PropertiesOf<ITypeMapping>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
@@ -93,13 +116,15 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IHighlightRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IHighlight>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IIndexedGeoShape>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IMetricAggregator>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IBucketAggregator>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMetricAggregation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBucketAggregation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IPipelineAggregation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
@@ -108,11 +133,18 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAliasAction>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAlias>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IElasticsearchProperty>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBoundingBox>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepositorySettings>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IScript>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IScriptField>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();

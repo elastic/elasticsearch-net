@@ -5,34 +5,44 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IFieldStatsResponse FieldStats(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null);
+
+		/// <inheritdoc/>
+		IFieldStatsResponse FieldStats(IFieldStatsRequest request);
+
+		/// <inheritdoc/>
+		Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector= null);
+
+		/// <inheritdoc/>
+		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
+	}
+
+	//TODO pass indices along on descriptor, we promote a more scoped fieldstats from the highlevel client
+
 	public partial class ElasticClient
 	{
-		public IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector)
-		{
-			return this.Dispatcher.Dispatch<FieldStatsDescriptor, FieldStatsRequestParameters, FieldStatsResponse>(
-				selector, this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>
-			);
-		}
+		/// <inheritdoc/>
+		public IFieldStatsResponse FieldStats(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) =>
+			this.FieldStats(selector.InvokeOrDefault(new FieldStatsDescriptor().Index(indices)));
 
-		public IFieldStatsResponse FieldStats(IFieldStatsRequest request)
-		{
-			return this.Dispatcher.Dispatch<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse>(
+		/// <inheritdoc/>
+		public IFieldStatsResponse FieldStats(IFieldStatsRequest request) => 
+			this.Dispatcher.Dispatch<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse>(
 				request, this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>
 			);
-		}
 
-		public Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector)
-		{
-			return this.Dispatcher.DispatchAsync<FieldStatsDescriptor, FieldStatsRequestParameters, FieldStatsResponse, IFieldStatsResponse>(
-				selector, this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>
-			);
-		}
+		/// <inheritdoc/>
+		public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) => 
+			this.FieldStatsAsync(selector.InvokeOrDefault(new FieldStatsDescriptor().Index(indices)));
 
-		public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request)
-		{
-			return this.Dispatcher.DispatchAsync<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse, IFieldStatsResponse>(
-				request, this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>
+		/// <inheritdoc/>
+		public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request) 
+			=> this.Dispatcher.DispatchAsync<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse, IFieldStatsResponse>(
+				request,
+				this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>
 			);
-		}
 	}
 }

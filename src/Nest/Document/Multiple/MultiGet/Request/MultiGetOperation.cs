@@ -9,32 +9,37 @@ namespace Nest
 
 	public class MultiGetOperation<T> : IMultiGetOperation
 	{
-		public MultiGetOperation(string id)
+		public MultiGetOperation(Id id)
 		{
 			this.Id = id;
 			this.Index = typeof(T);
 			this.Type = typeof(T);
 		}
 
-		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
 
-		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
-		
+		Type IMultiGetOperation.ClrType => typeof(T);
+
 		public IndexName Index { get; set; }
-		
+
 		public TypeName Type { get; set; }
-		
-		public string Id { get; set; }
-		
-		public IList<FieldName> Fields { get; set; }
-		
-		public ISourceFilter Source { get; set; }
+
+		public Id Id { get; set; }
+
+		public IList<Field> Fields { get; set; }
+
+		public Union<bool, ISourceFilter> Source { get; set; }
 
 		public string Routing { get; set; }
 
-		public object Document { get; set; }
+		bool IMultiGetOperation.CanBeFlattened =>
+			this.Index == null 
+			&& this.Type == null
+			&& this.Routing == null
+			&& this.Source == null
+			&& this.Fields == null;
 
-		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
+
+		public object Document { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
@@ -44,13 +49,18 @@ namespace Nest
 
 		IndexName IMultiGetOperation.Index { get; set; }
 		TypeName IMultiGetOperation.Type { get; set; }
-		string IMultiGetOperation.Id { get; set; }
+		Id IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
-		ISourceFilter IMultiGetOperation.Source { get; set; }
-		IList<FieldName> IMultiGetOperation.Fields { get; set; }
-		object IMultiGetOperation.Document { get; set; }
-		IDictionary<FieldName, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
-		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
+		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
+		IList<Field> IMultiGetOperation.Fields { get; set; }
+		Type IMultiGetOperation.ClrType => typeof(T);
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			Self.Index == null
+			&& Self.Type == null
+			&& Self.Routing == null
+			&& Self.Source == null
+			&& Self.Fields == null;
 
 		public MultiGetOperationDescriptor()
 		{
@@ -104,31 +114,27 @@ namespace Nest
 			return this;
 		}
 
-		public MultiGetOperationDescriptor<T> Id(long id)
-		{
-			return this.Id(id.ToString(CultureInfo.InvariantCulture));
-		}
-
-		public MultiGetOperationDescriptor<T> Id(string id)
+		public MultiGetOperationDescriptor<T> Id(Id id)
 		{
 			Self.Id = id;
 			return this;
 		}
+
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(ISourceFilter source)
+		public MultiGetOperationDescriptor<T> Source(bool? sourceEnabled = true)
 		{
-			Self.Source = source;
+			Self.Source = sourceEnabled;
 			return this;
 		}
 
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> source)
+		public MultiGetOperationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> source)
 		{
-			Self.Source = source(new SearchSourceDescriptor<T>());
+			Self.Source = new Union<bool, ISourceFilter>(source(new SourceFilterDescriptor<T>()));
 			return this;
 		}
 
@@ -148,7 +154,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			Self.Fields = expressions.Select(e => (FieldName)e).ToList();
+			Self.Fields = expressions.Select(e => (Field)e).ToList();
 			return this;
 		}
 
@@ -158,39 +164,9 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params string[] fields)
 		{
-			Self.Fields = fields.Select(f => (FieldName)f).ToList();
+			Self.Fields = fields.Select(f => (Field)f).ToList();
 			return this;
 		}
 
-		// Only used for the MLT query for specifying an artificial document.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> Document(T document)
-		{
-			Self.Document = document;
-			return this;
-		}
-
-		// Only used for the MLT query for providing a different analyzer per
-		// artificial document field.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<T, object>>, string>, FluentDictionary<Expression<Func<T, object>>, string>> analyzerSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
-			analyzerSelector(d);
-			Self.PerFieldAnalyzer = d.ToDictionary(x => FieldName.Create(x.Key), x => x.Value);
-			return this;
-		}
-
-		// Only used for the MLT query for providing a different analyzer per
-		// artificial document field.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<FieldName, string>, FluentDictionary<FieldName, string>> analyzerSelector)
-		{
-			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
-			return this;
-		}
 	}
 }

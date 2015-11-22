@@ -7,75 +7,40 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiGetRequest : IFixedIndexTypePath<MultiGetRequestParameters>
+	[JsonConverter(typeof(MultiGetRequestJsonConverter))]
+	public partial interface IMultiGetRequest 
 	{
 		[JsonProperty("docs")]
-		IList<IMultiGetOperation> GetOperations { get; set; }
+		IEnumerable<IMultiGetOperation> Documents { get; set; }
 	}
 
-	internal static class MultiGetPathInfo
+	public partial class MultiGetRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo, IMultiGetRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class MultiGetRequest : FixedIndexTypePathBase<MultiGetRequestParameters>, IMultiGetRequest
-	{
-		public IList<IMultiGetOperation> GetOperations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
-		{
-			MultiGetPathInfo.Update(pathInfo, this);
-		}
+		public IEnumerable<IMultiGetOperation> Documents { get; set; }
 	}
 
 	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
+	public partial class MultiGetDescriptor
 	{
-		private IMultiGetRequest Self => this;
+		private List<IMultiGetOperation> _operations = new List<IMultiGetOperation>();
 
-		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; }
+		IEnumerable<IMultiGetOperation> IMultiGetRequest.Documents { get { return this._operations; } set { this._operations = value?.ToList(); } }
 
-		public MultiGetDescriptor()
-		{
-			this.Self.GetOperations = new List<IMultiGetOperation>();
-		}
+		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, IMultiGetOperation> getSelector)
+			where T : class => 
+			Assign(a => this._operations.AddIfNotNull(getSelector?.Invoke(new MultiGetOperationDescriptor<T>())));
 
-		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector) 
-			where T : class
-		{
-			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new MultiGetOperationDescriptor<T>());
-			Self.GetOperations.Add(descriptor);
-			return this;
+		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids,
+			Func<MultiGetOperationDescriptor<T>, long, IMultiGetOperation> getSelector = null)
+			where T : class => 
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
 
-		}
+		public MultiGetDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiGetOperationDescriptor<T>, string, IMultiGetOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
 
-		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids, Func<MultiGetOperationDescriptor<T>, long, MultiGetOperationDescriptor<T>> getSelector=null) 
-			where T : class
-		{
-			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this.Self.GetOperations.Add(sg);
-			return this;
-
-		}
-		public MultiGetDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiGetOperationDescriptor<T>, string, MultiGetOperationDescriptor<T>> getSelector=null)
-			where T : class
-		{
-			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this.Self.GetOperations.Add(sg);
-			return this;
-
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
-		{
-			MultiGetPathInfo.Update(pathInfo, this);
-		}
+		public MultiGetDescriptor GetMany<T>(IEnumerable<Id> ids, Func<MultiGetOperationDescriptor<T>, Id, IMultiGetOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
 	}
 }

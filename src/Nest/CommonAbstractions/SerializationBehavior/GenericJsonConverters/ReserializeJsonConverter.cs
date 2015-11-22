@@ -20,16 +20,7 @@ namespace Nest
 			if (reader.TokenType != JsonToken.StartObject) return null;
 			var depth = reader.Depth;
 			var deserialized = this.DeserializeJson(reader, objectType, existingValue, serializer);
-
-			if (reader.Depth > depth)
-			{
-				do
-				{
-					reader.Read();
-				} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
-			}
-
-			return deserialized;
+			return reader.ReadToEnd(depth, deserialized);
 		}
 
 		protected TReadAs ReadAs(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>

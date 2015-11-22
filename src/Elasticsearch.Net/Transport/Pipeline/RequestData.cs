@@ -9,6 +9,7 @@ using Elasticsearch.Net.Connection.Security;
 using System.Threading;
 using System.IO.Compression;
 using Elasticsearch.Net.Serialization;
+using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -17,15 +18,15 @@ namespace Elasticsearch.Net.Connection
 		public const string MimeType = "application/json";
 		public const int BufferSize = 8096;
 
-		public Uri Uri { get; internal set; }
-		public HttpMethod Method { get; internal set; }
+		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
+
+		public HttpMethod Method { get; private set; }
 		public string Path { get; }
 		public PostData<object> Data { get; }
-
+		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
-
 
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
@@ -51,7 +52,7 @@ namespace Elasticsearch.Net.Connection
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
 		{
-			this.CustomConverter = local?.DeserializationState;
+			this.CustomConverter = local?.DeserializationOverride;
 			this.Path = this.CreatePathWithQueryStrings(path, this._settings, local);
 		}
 
@@ -128,7 +129,7 @@ namespace Elasticsearch.Net.Connection
 			if (!SetSpecialTypes(responseStream, cs, bytes))
 			{
 				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
-				cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				else cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
 			}
 
 			return FinalizeReponse(cs);
@@ -137,14 +138,17 @@ namespace Elasticsearch.Net.Connection
 		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> cs)
 		{
 			var passAlongConnectionStatus = cs.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null) passAlongConnectionStatus.CallDetails = cs;
+			if (passAlongConnectionStatus != null)
+			{
+				passAlongConnectionStatus.CallDetails = cs;
+			}
 			return cs;
 		}
 
 		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception e)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(e);
-			cs.RequestBodyInBytes = this.Data?.Bytes;
+			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
 			cs.OriginalException = e;
@@ -154,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(statusCode);
-			cs.RequestBodyInBytes = this.Data?.Bytes;
+			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
 			cs.OriginalException = innerException;

@@ -11,7 +11,7 @@ namespace Nest
 		public string Name { get; internal set;  }
 
 		[JsonProperty("indices")]
-		public IEnumerable<string> Indices { get; internal set; }
+		public IEnumerable<IndexName> Indices { get; internal set; }
 
 		[JsonProperty("state")]
 		public string State { get; internal set; }

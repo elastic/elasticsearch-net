@@ -4,15 +4,15 @@ namespace Nest
 {
 	public class DateMathExpression : DateMath
 	{
-		public DateMathExpression(string anchor) { this._anchor = anchor; }
-		public DateMathExpression(DateTime anchor) { this._anchor = anchor; }
+		public DateMathExpression(string anchor) { this.Anchor = anchor; }
+		public DateMathExpression(DateTime anchor) { this.Anchor = anchor; }
 
 		public DateMathExpression(Union<DateTime, string> anchor, TimeUnitExpression range, DateMathOperation operation)
 		{
 			anchor.ThrowIfNull(nameof(anchor));
 			range.ThrowIfNull(nameof(range));
 			operation.ThrowIfNull(nameof(operation));
-			this._anchor = anchor;
+			this.Anchor = anchor;
 			Self.Ranges.Add(Tuple.Create(operation, range));
 		}
 
@@ -36,7 +36,7 @@ namespace Nest
 
 		public DateMath RoundTo(TimeUnit round)
 		{
-			this._round = round;
+			this.Round = round;
 			return this;
 		}
 	}

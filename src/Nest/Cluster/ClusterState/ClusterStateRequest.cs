@@ -6,48 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterStateRequest : IIndicesOptionalPath<ClusterStateRequestParameters>
-	{
-		IEnumerable<ClusterStateMetric> Metrics { get; set; }
-	}
+	public partial interface IClusterStateRequest { }
 
-	internal static class ClusterStatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo, IClusterStateRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-		}
-	}
-	
-	public partial class ClusterStateRequest : IndicesOptionalPathBase<ClusterStateRequestParameters>, IClusterStateRequest
-	{
-		public IEnumerable<ClusterStateMetric> Metrics { get; set; }
+	public partial class ClusterStateRequest { }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
-		{
-			ClusterStatePathInfo.Update(pathInfo, this);
-		}
-
-	}
-
-
-	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
-	{
-		private IClusterStateRequest Self => this;
-
-		IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
-		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)
-		{
-			Self.Metrics = metrics;
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
-		{
-			ClusterStatePathInfo.Update(pathInfo, this);
-		}
-	}
+	public partial class ClusterStateDescriptor { }
 }

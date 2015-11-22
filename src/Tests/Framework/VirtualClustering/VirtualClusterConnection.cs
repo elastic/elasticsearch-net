@@ -6,79 +6,146 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Tests.Framework.MockResponses;
+using System.Threading;
+using FluentAssertions;
 
 namespace Tests.Framework
 {
 	public class VirtualClusterConnection : InMemoryConnection
 	{
-		private VirtualCluster _cluster;
+		private static readonly object _lock = new object();
+		private class State { public int Pinged = 0; public int Sniffed = 0; public int Called = 0; public int Successes = 0; public int Failures = 0; }
+		private IDictionary<int, State> Calls = new Dictionary<int, State> { };
 
-		public VirtualClusterConnection(VirtualCluster cluster)
+		private VirtualCluster _cluster;
+		private TestableDateTimeProvider _dateTimeProvider;
+
+		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider) 
 		{
-			this._cluster = cluster;
+			this.UpdateCluster(cluster);
+			this._dateTimeProvider = dateTimeProvider;
 		}
 
-		public bool IsSniffRequest(RequestData requestData) =>
-			requestData.Path.StartsWith("_nodes/_all/clear", StringComparison.Ordinal);
+		public void UpdateCluster(VirtualCluster cluster)
+		{
+			if (cluster == null) return;
+			lock (_lock)
+			{
+				this._cluster = cluster;
+				this.Calls = cluster.Nodes.ToDictionary(n => n.Uri.Port, v => new State());
+			}
+		}
+
+		public bool IsSniffRequest(RequestData requestData) => requestData.Path.StartsWith("_nodes/_all/settings", StringComparison.Ordinal);
+		public bool IsPingRequest(RequestData requestData) => requestData.Path == "/" && requestData.Method == HttpMethod.HEAD;
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
+			this.Calls.Should().ContainKey(requestData.Uri.Port);
+
+			var state = this.Calls[requestData.Uri.Port];
 			if (IsSniffRequest(requestData))
 			{
-				foreach (var sniffRule in this._cluster.SniffingRules.Where(s => s.OnPort.HasValue))
-				{
-					if (sniffRule.OnPort.Value == requestData.Uri.Port)
-					{
-						//if (sniffRule.NthCall)
-						if (sniffRule.Succeeds)
-						{
-							this._cluster = sniffRule.NewClusterState ?? this._cluster;
-							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
-						}
-						throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
-					}
-				}
-				foreach (var sniffRule in this._cluster.SniffingRules.Where(s => !s.OnPort.HasValue))
-				{
-					if (sniffRule.AllCalls.GetValueOrDefault(false))
-					{
-						if (sniffRule.Succeeds)
-						{
-							this._cluster = sniffRule.NewClusterState ?? this._cluster;
-							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
-						}
-						throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
-					}
-				}
-				return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
+				var sniffed = Interlocked.Increment(ref state.Sniffed);
+				return HandleRules<TReturn, ISniffRule>(
+					requestData,
+					this._cluster.SniffingRules,
+					(r) => this.UpdateCluster(r.NewClusterState),
+					() => SniffResponse.Create(this._cluster.Nodes)
+				);
 			}
-			return this.ReturnConnectionStatus<TReturn>(requestData, CallResponse());
+			if (IsPingRequest(requestData))
+			{
+				var pinged = Interlocked.Increment(ref state.Pinged);
+				return HandleRules<TReturn, IRule>(
+					requestData,
+					this._cluster.PingingRules,
+					(r) => { },
+					() => null //HEAD request
+				);
+			}
+			var called = Interlocked.Increment(ref state.Called);
+			return HandleRules<TReturn, IClientCallRule>(
+				requestData,
+				this._cluster.ClientCallRules,
+				(r) => { },
+				() => CallResponse() //TODO search response
+			);
 		}
 
-		private IDictionary<string, object> SniffResponseNodes() =>
-		this._cluster.Nodes.ToDictionary(kv => kv.Id ?? Guid.NewGuid().ToString("N").Substring(0, 8), kv => (object)new
+		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
+			RequestData requestData, IEnumerable<TRule> rules,
+			Action<TRule> beforeReturn,
+			Func<byte[]> successResponse
+			) where TReturn : class where TRule : IRule
 		{
-			name = kv.Name ?? Guid.NewGuid().ToString("N").Substring(0, 8),
-			transport_address = $"inet[/127.0.0.1:{kv.Uri.Port}]",
-			http_address = $"inet[/127.0.0.1:{kv.Uri.Port}]",
-			host = Guid.NewGuid().ToString("N").Substring(0, 8),
-			ip = "127.0.0.1",
-			version = TestClient.ElasticsearchVersion,
-			build = Guid.NewGuid().ToString("N").Substring(0, 8),
-		});
+			var state = this.Calls[requestData.Uri.Port];
+			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
+			{
+				var always = rule.Times.Match(t => true, t => false);
+				var times = rule.Times.Match(t => -1, t => t);
+				if (rule.OnPort.Value == requestData.Uri.Port)
+				{
+					if (always)
+						return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 
-		private byte[] SniffResponse()
-		{
-			var response = new
-			{
-				cluster_name = "elasticsearch-test-cluster",
-				nodes = this.SniffResponseNodes()
-			};
-			using (var ms = new MemoryStream())
-			{
-				new ElasticsearchDefaultSerializer().Serialize(response, ms);
-				return ms.ToArray();
+					return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
+				}
 			}
+			foreach (var rule in rules.Where(s => !s.OnPort.HasValue))
+			{
+				var always = rule.Times.Match(t => true, t => false);
+				var times = rule.Times.Match(t => -1, t => t);
+				if (always)
+					return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+
+				return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
+			}
+			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
+		}
+
+		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+			where TReturn : class
+			where TRule : IRule
+		{
+			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+
+			return rule.Succeeds
+				? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
+				: Fail<TReturn>(requestData);
+		}
+
+		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
+			where TReturn : class
+			where TRule : IRule
+		{
+			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+
+			if (rule.Succeeds && times >= state.Successes)
+				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+			else if (rule.Succeeds) return Fail<TReturn>(requestData);
+
+			if (!rule.Succeeds && times >= state.Failures)
+				return Fail<TReturn>(requestData);
+			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+		}
+
+		private ElasticsearchResponse<TReturn> Fail<TReturn>(RequestData requestData)
+		{
+			var state = this.Calls[requestData.Uri.Port];
+			var failed = Interlocked.Increment(ref state.Failures);
+			throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+		}
+
+		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+			where TReturn : class
+			where TRule : IRule
+		{
+			var state = this.Calls[requestData.Uri.Port];
+			var succeeded = Interlocked.Increment(ref state.Successes);
+			beforeReturn?.Invoke(rule);
+			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
 		}
 
 		private byte[] CallResponse()

@@ -11,7 +11,6 @@ using System.Runtime.Serialization;
 namespace Elasticsearch.Net
 {
 	
-	
 	public enum Consistency 
 	{
 		[EnumMember(Value = "one")]
@@ -157,148 +156,161 @@ namespace Elasticsearch.Net
 	}
 	
 	
-	public enum ClusterStateMetric 
+	[Flags]public enum ClusterStateMetric 
 	{
-		[EnumMember(Value = "_all")]
-		All,
 		[EnumMember(Value = "blocks")]
-		Blocks,
+		Blocks = 1 << 0,
 		[EnumMember(Value = "metadata")]
-		Metadata,
+		Metadata = 1 << 1,
 		[EnumMember(Value = "nodes")]
-		Nodes,
+		Nodes = 1 << 2,
 		[EnumMember(Value = "routing_table")]
-		RoutingTable,
+		RoutingTable = 1 << 3,
 		[EnumMember(Value = "routing_nodes")]
-		RoutingNodes,
+		RoutingNodes = 1 << 4,
 		[EnumMember(Value = "master_node")]
-		MasterNode,
+		MasterNode = 1 << 5,
 		[EnumMember(Value = "version")]
-		Version
-	}
-	
-	
-	public enum IndicesStatsMetric 
-	{
+		Version = 1 << 6,
 		[EnumMember(Value = "_all")]
-		All,
-		[EnumMember(Value = "completion")]
-		Completion,
-		[EnumMember(Value = "docs")]
-		Docs,
-		[EnumMember(Value = "fielddata")]
-		Fielddata,
-		[EnumMember(Value = "query_cache")]
-		QueryCache,
-		[EnumMember(Value = "flush")]
-		Flush,
-		[EnumMember(Value = "get")]
-		Get,
-		[EnumMember(Value = "indexing")]
-		Indexing,
-		[EnumMember(Value = "merge")]
-		Merge,
-		[EnumMember(Value = "percolate")]
-		Percolate,
-		[EnumMember(Value = "request_cache")]
-		RequestCache,
-		[EnumMember(Value = "refresh")]
-		Refresh,
-		[EnumMember(Value = "search")]
-		Search,
-		[EnumMember(Value = "segments")]
-		Segments,
-		[EnumMember(Value = "store")]
-		Store,
-		[EnumMember(Value = "warmer")]
-		Warmer,
-		[EnumMember(Value = "suggest")]
-		Suggest
+		All = 1 << 7
 	}
 	
 	
-	public enum NodesInfoMetric 
+	[Flags]public enum Feature 
+	{
+		[EnumMember(Value = "_settings")]
+		Settings = 1 << 0,
+		[EnumMember(Value = "_mappings")]
+		Mappings = 1 << 1,
+		[EnumMember(Value = "_warmers")]
+		Warmers = 1 << 2,
+		[EnumMember(Value = "_aliases")]
+		Aliases = 1 << 3
+	}
+	
+	
+	[Flags]public enum IndicesStatsMetric 
+	{
+		[EnumMember(Value = "completion")]
+		Completion = 1 << 0,
+		[EnumMember(Value = "docs")]
+		Docs = 1 << 1,
+		[EnumMember(Value = "fielddata")]
+		Fielddata = 1 << 2,
+		[EnumMember(Value = "query_cache")]
+		QueryCache = 1 << 3,
+		[EnumMember(Value = "flush")]
+		Flush = 1 << 4,
+		[EnumMember(Value = "get")]
+		Get = 1 << 5,
+		[EnumMember(Value = "indexing")]
+		Indexing = 1 << 6,
+		[EnumMember(Value = "merge")]
+		Merge = 1 << 7,
+		[EnumMember(Value = "percolate")]
+		Percolate = 1 << 8,
+		[EnumMember(Value = "request_cache")]
+		RequestCache = 1 << 9,
+		[EnumMember(Value = "refresh")]
+		Refresh = 1 << 10,
+		[EnumMember(Value = "search")]
+		Search = 1 << 11,
+		[EnumMember(Value = "segments")]
+		Segments = 1 << 12,
+		[EnumMember(Value = "store")]
+		Store = 1 << 13,
+		[EnumMember(Value = "warmer")]
+		Warmer = 1 << 14,
+		[EnumMember(Value = "suggest")]
+		Suggest = 1 << 15,
+		[EnumMember(Value = "_all")]
+		All = 1 << 16
+	}
+	
+	
+	[Flags]public enum NodesInfoMetric 
 	{
 		[EnumMember(Value = "settings")]
-		Settings,
+		Settings = 1 << 0,
 		[EnumMember(Value = "os")]
-		Os,
+		Os = 1 << 1,
 		[EnumMember(Value = "process")]
-		Process,
+		Process = 1 << 2,
 		[EnumMember(Value = "jvm")]
-		Jvm,
+		Jvm = 1 << 3,
 		[EnumMember(Value = "thread_pool")]
-		ThreadPool,
+		ThreadPool = 1 << 4,
 		[EnumMember(Value = "transport")]
-		Transport,
+		Transport = 1 << 5,
 		[EnumMember(Value = "http")]
-		Http,
+		Http = 1 << 6,
 		[EnumMember(Value = "plugins")]
-		Plugins
+		Plugins = 1 << 7
 	}
 	
 	
-	public enum NodesStatsMetric 
+	[Flags]public enum NodesStatsMetric 
 	{
-		[EnumMember(Value = "_all")]
-		All,
 		[EnumMember(Value = "breaker")]
-		Breaker,
+		Breaker = 1 << 0,
 		[EnumMember(Value = "fs")]
-		Fs,
+		Fs = 1 << 1,
 		[EnumMember(Value = "http")]
-		Http,
+		Http = 1 << 2,
 		[EnumMember(Value = "indices")]
-		Indices,
+		Indices = 1 << 3,
 		[EnumMember(Value = "jvm")]
-		Jvm,
+		Jvm = 1 << 4,
 		[EnumMember(Value = "os")]
-		Os,
+		Os = 1 << 5,
 		[EnumMember(Value = "process")]
-		Process,
+		Process = 1 << 6,
 		[EnumMember(Value = "thread_pool")]
-		ThreadPool,
+		ThreadPool = 1 << 7,
 		[EnumMember(Value = "transport")]
-		Transport
+		Transport = 1 << 8,
+		[EnumMember(Value = "_all")]
+		All = 1 << 9
 	}
 	
 	
-	public enum NodesStatsIndexMetric 
+	[Flags]public enum NodesStatsIndexMetric 
 	{
-		[EnumMember(Value = "_all")]
-		All,
 		[EnumMember(Value = "completion")]
-		Completion,
+		Completion = 1 << 0,
 		[EnumMember(Value = "docs")]
-		Docs,
+		Docs = 1 << 1,
 		[EnumMember(Value = "fielddata")]
-		Fielddata,
+		Fielddata = 1 << 2,
 		[EnumMember(Value = "query_cache")]
-		QueryCache,
+		QueryCache = 1 << 3,
 		[EnumMember(Value = "flush")]
-		Flush,
+		Flush = 1 << 4,
 		[EnumMember(Value = "get")]
-		Get,
+		Get = 1 << 5,
 		[EnumMember(Value = "indexing")]
-		Indexing,
+		Indexing = 1 << 6,
 		[EnumMember(Value = "merge")]
-		Merge,
+		Merge = 1 << 7,
 		[EnumMember(Value = "percolate")]
-		Percolate,
+		Percolate = 1 << 8,
 		[EnumMember(Value = "request_cache")]
-		RequestCache,
+		RequestCache = 1 << 9,
 		[EnumMember(Value = "refresh")]
-		Refresh,
+		Refresh = 1 << 10,
 		[EnumMember(Value = "search")]
-		Search,
+		Search = 1 << 11,
 		[EnumMember(Value = "segments")]
-		Segments,
+		Segments = 1 << 12,
 		[EnumMember(Value = "store")]
-		Store,
+		Store = 1 << 13,
 		[EnumMember(Value = "warmer")]
-		Warmer,
+		Warmer = 1 << 14,
 		[EnumMember(Value = "suggest")]
-		Suggest
+		Suggest = 1 << 15,
+		[EnumMember(Value = "_all")]
+		All = 1 << 16
 	}
 	
 
@@ -307,20 +319,19 @@ namespace Elasticsearch.Net
 		public static string UnknownEnum { get; } = "_UNKNOWN_ENUM_";
 		public static string Resolve(Enum e)
 		{
-			
 			if (e is Consistency)
-			{
+			{ 
 				switch((Consistency)e)
 				{
 					case Consistency.One: return "one";
 					case Consistency.Quorum: return "quorum";
 					case Consistency.All: return "all";
 				}
+			
 			}
 			
-			
 			if (e is Bytes)
-			{
+			{ 
 				switch((Bytes)e)
 				{
 					case Bytes.B: return "b";
@@ -328,33 +339,33 @@ namespace Elasticsearch.Net
 					case Bytes.M: return "m";
 					case Bytes.G: return "g";
 				}
+			
 			}
 			
-			
 			if (e is Level)
-			{
+			{ 
 				switch((Level)e)
 				{
 					case Level.Cluster: return "cluster";
 					case Level.Indices: return "indices";
 					case Level.Shards: return "shards";
 				}
+			
 			}
 			
-			
 			if (e is WaitForStatus)
-			{
+			{ 
 				switch((WaitForStatus)e)
 				{
 					case WaitForStatus.Green: return "green";
 					case WaitForStatus.Yellow: return "yellow";
 					case WaitForStatus.Red: return "red";
 				}
+			
 			}
 			
-			
 			if (e is ExpandWildcards)
-			{
+			{ 
 				switch((ExpandWildcards)e)
 				{
 					case ExpandWildcards.Open: return "open";
@@ -362,21 +373,21 @@ namespace Elasticsearch.Net
 					case ExpandWildcards.None: return "none";
 					case ExpandWildcards.All: return "all";
 				}
+			
 			}
 			
-			
 			if (e is DefaultOperator)
-			{
+			{ 
 				switch((DefaultOperator)e)
 				{
 					case DefaultOperator.And: return "AND";
 					case DefaultOperator.Or: return "OR";
 				}
+			
 			}
 			
-			
 			if (e is VersionType)
-			{
+			{ 
 				switch((VersionType)e)
 				{
 					case VersionType.Internal: return "internal";
@@ -384,31 +395,31 @@ namespace Elasticsearch.Net
 					case VersionType.ExternalGte: return "external_gte";
 					case VersionType.Force: return "force";
 				}
+			
 			}
 			
-			
 			if (e is OpType)
-			{
+			{ 
 				switch((OpType)e)
 				{
 					case OpType.Index: return "index";
 					case OpType.Create: return "create";
 				}
+			
 			}
 			
-			
 			if (e is Format)
-			{
+			{ 
 				switch((Format)e)
 				{
 					case Format.Detailed: return "detailed";
 					case Format.Text: return "text";
 				}
+			
 			}
 			
-			
 			if (e is SearchType)
-			{
+			{ 
 				switch((SearchType)e)
 				{
 					case SearchType.QueryThenFetch: return "query_then_fetch";
@@ -418,137 +429,144 @@ namespace Elasticsearch.Net
 					case SearchType.Count: return "count";
 					case SearchType.Scan: return "scan";
 				}
+			
 			}
 			
-			
 			if (e is ThreadType)
-			{
+			{ 
 				switch((ThreadType)e)
 				{
 					case ThreadType.Cpu: return "cpu";
 					case ThreadType.Wait: return "wait";
 					case ThreadType.Block: return "block";
 				}
+			
 			}
 			
-			
 			if (e is PercolateFormat)
-			{
+			{ 
 				switch((PercolateFormat)e)
 				{
 					case PercolateFormat.Ids: return "ids";
 				}
+			
 			}
 			
-			
 			if (e is SuggestMode)
-			{
+			{ 
 				switch((SuggestMode)e)
 				{
 					case SuggestMode.Missing: return "missing";
 					case SuggestMode.Popular: return "popular";
 					case SuggestMode.Always: return "always";
 				}
-			}
 			
+			}
 			
 			if (e is ClusterStateMetric)
-			{
-				switch((ClusterStateMetric)e)
-				{
-					case ClusterStateMetric.All: return "_all";
-					case ClusterStateMetric.Blocks: return "blocks";
-					case ClusterStateMetric.Metadata: return "metadata";
-					case ClusterStateMetric.Nodes: return "nodes";
-					case ClusterStateMetric.RoutingTable: return "routing_table";
-					case ClusterStateMetric.RoutingNodes: return "routing_nodes";
-					case ClusterStateMetric.MasterNode: return "master_node";
-					case ClusterStateMetric.Version: return "version";
-				}
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(ClusterStateMetric.Blocks)) list.Add("blocks");
+				if (e.HasFlag(ClusterStateMetric.Metadata)) list.Add("metadata");
+				if (e.HasFlag(ClusterStateMetric.Nodes)) list.Add("nodes");
+				if (e.HasFlag(ClusterStateMetric.RoutingTable)) list.Add("routing_table");
+				if (e.HasFlag(ClusterStateMetric.RoutingNodes)) list.Add("routing_nodes");
+				if (e.HasFlag(ClusterStateMetric.MasterNode)) list.Add("master_node");
+				if (e.HasFlag(ClusterStateMetric.Version)) list.Add("version");
+				if (e.HasFlag(ClusterStateMetric.All)) return "_all";
+				return string.Join(",", list);
+			
 			}
 			
+			if (e is Feature)
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(Feature.Settings)) list.Add("_settings");
+				if (e.HasFlag(Feature.Mappings)) list.Add("_mappings");
+				if (e.HasFlag(Feature.Warmers)) list.Add("_warmers");
+				if (e.HasFlag(Feature.Aliases)) list.Add("_aliases");
+				return string.Join(",", list);
+			
+			}
 			
 			if (e is IndicesStatsMetric)
-			{
-				switch((IndicesStatsMetric)e)
-				{
-					case IndicesStatsMetric.All: return "_all";
-					case IndicesStatsMetric.Completion: return "completion";
-					case IndicesStatsMetric.Docs: return "docs";
-					case IndicesStatsMetric.Fielddata: return "fielddata";
-					case IndicesStatsMetric.QueryCache: return "query_cache";
-					case IndicesStatsMetric.Flush: return "flush";
-					case IndicesStatsMetric.Get: return "get";
-					case IndicesStatsMetric.Indexing: return "indexing";
-					case IndicesStatsMetric.Merge: return "merge";
-					case IndicesStatsMetric.Percolate: return "percolate";
-					case IndicesStatsMetric.RequestCache: return "request_cache";
-					case IndicesStatsMetric.Refresh: return "refresh";
-					case IndicesStatsMetric.Search: return "search";
-					case IndicesStatsMetric.Segments: return "segments";
-					case IndicesStatsMetric.Store: return "store";
-					case IndicesStatsMetric.Warmer: return "warmer";
-					case IndicesStatsMetric.Suggest: return "suggest";
-				}
-			}
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(IndicesStatsMetric.Completion)) list.Add("completion");
+				if (e.HasFlag(IndicesStatsMetric.Docs)) list.Add("docs");
+				if (e.HasFlag(IndicesStatsMetric.Fielddata)) list.Add("fielddata");
+				if (e.HasFlag(IndicesStatsMetric.QueryCache)) list.Add("query_cache");
+				if (e.HasFlag(IndicesStatsMetric.Flush)) list.Add("flush");
+				if (e.HasFlag(IndicesStatsMetric.Get)) list.Add("get");
+				if (e.HasFlag(IndicesStatsMetric.Indexing)) list.Add("indexing");
+				if (e.HasFlag(IndicesStatsMetric.Merge)) list.Add("merge");
+				if (e.HasFlag(IndicesStatsMetric.Percolate)) list.Add("percolate");
+				if (e.HasFlag(IndicesStatsMetric.RequestCache)) list.Add("request_cache");
+				if (e.HasFlag(IndicesStatsMetric.Refresh)) list.Add("refresh");
+				if (e.HasFlag(IndicesStatsMetric.Search)) list.Add("search");
+				if (e.HasFlag(IndicesStatsMetric.Segments)) list.Add("segments");
+				if (e.HasFlag(IndicesStatsMetric.Store)) list.Add("store");
+				if (e.HasFlag(IndicesStatsMetric.Warmer)) list.Add("warmer");
+				if (e.HasFlag(IndicesStatsMetric.Suggest)) list.Add("suggest");
+				if (e.HasFlag(IndicesStatsMetric.All)) return "_all";
+				return string.Join(",", list);
 			
+			}
 			
 			if (e is NodesInfoMetric)
-			{
-				switch((NodesInfoMetric)e)
-				{
-					case NodesInfoMetric.Settings: return "settings";
-					case NodesInfoMetric.Os: return "os";
-					case NodesInfoMetric.Process: return "process";
-					case NodesInfoMetric.Jvm: return "jvm";
-					case NodesInfoMetric.ThreadPool: return "thread_pool";
-					case NodesInfoMetric.Transport: return "transport";
-					case NodesInfoMetric.Http: return "http";
-					case NodesInfoMetric.Plugins: return "plugins";
-				}
-			}
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(NodesInfoMetric.Settings)) list.Add("settings");
+				if (e.HasFlag(NodesInfoMetric.Os)) list.Add("os");
+				if (e.HasFlag(NodesInfoMetric.Process)) list.Add("process");
+				if (e.HasFlag(NodesInfoMetric.Jvm)) list.Add("jvm");
+				if (e.HasFlag(NodesInfoMetric.ThreadPool)) list.Add("thread_pool");
+				if (e.HasFlag(NodesInfoMetric.Transport)) list.Add("transport");
+				if (e.HasFlag(NodesInfoMetric.Http)) list.Add("http");
+				if (e.HasFlag(NodesInfoMetric.Plugins)) list.Add("plugins");
+				return string.Join(",", list);
 			
+			}
 			
 			if (e is NodesStatsMetric)
-			{
-				switch((NodesStatsMetric)e)
-				{
-					case NodesStatsMetric.All: return "_all";
-					case NodesStatsMetric.Breaker: return "breaker";
-					case NodesStatsMetric.Fs: return "fs";
-					case NodesStatsMetric.Http: return "http";
-					case NodesStatsMetric.Indices: return "indices";
-					case NodesStatsMetric.Jvm: return "jvm";
-					case NodesStatsMetric.Os: return "os";
-					case NodesStatsMetric.Process: return "process";
-					case NodesStatsMetric.ThreadPool: return "thread_pool";
-					case NodesStatsMetric.Transport: return "transport";
-				}
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(NodesStatsMetric.Breaker)) list.Add("breaker");
+				if (e.HasFlag(NodesStatsMetric.Fs)) list.Add("fs");
+				if (e.HasFlag(NodesStatsMetric.Http)) list.Add("http");
+				if (e.HasFlag(NodesStatsMetric.Indices)) list.Add("indices");
+				if (e.HasFlag(NodesStatsMetric.Jvm)) list.Add("jvm");
+				if (e.HasFlag(NodesStatsMetric.Os)) list.Add("os");
+				if (e.HasFlag(NodesStatsMetric.Process)) list.Add("process");
+				if (e.HasFlag(NodesStatsMetric.ThreadPool)) list.Add("thread_pool");
+				if (e.HasFlag(NodesStatsMetric.Transport)) list.Add("transport");
+				if (e.HasFlag(NodesStatsMetric.All)) return "_all";
+				return string.Join(",", list);
+			
 			}
 			
-			
 			if (e is NodesStatsIndexMetric)
-			{
-				switch((NodesStatsIndexMetric)e)
-				{
-					case NodesStatsIndexMetric.All: return "_all";
-					case NodesStatsIndexMetric.Completion: return "completion";
-					case NodesStatsIndexMetric.Docs: return "docs";
-					case NodesStatsIndexMetric.Fielddata: return "fielddata";
-					case NodesStatsIndexMetric.QueryCache: return "query_cache";
-					case NodesStatsIndexMetric.Flush: return "flush";
-					case NodesStatsIndexMetric.Get: return "get";
-					case NodesStatsIndexMetric.Indexing: return "indexing";
-					case NodesStatsIndexMetric.Merge: return "merge";
-					case NodesStatsIndexMetric.Percolate: return "percolate";
-					case NodesStatsIndexMetric.RequestCache: return "request_cache";
-					case NodesStatsIndexMetric.Refresh: return "refresh";
-					case NodesStatsIndexMetric.Search: return "search";
-					case NodesStatsIndexMetric.Segments: return "segments";
-					case NodesStatsIndexMetric.Store: return "store";
-					case NodesStatsIndexMetric.Warmer: return "warmer";
-					case NodesStatsIndexMetric.Suggest: return "suggest";
-				}
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(NodesStatsIndexMetric.Completion)) list.Add("completion");
+				if (e.HasFlag(NodesStatsIndexMetric.Docs)) list.Add("docs");
+				if (e.HasFlag(NodesStatsIndexMetric.Fielddata)) list.Add("fielddata");
+				if (e.HasFlag(NodesStatsIndexMetric.QueryCache)) list.Add("query_cache");
+				if (e.HasFlag(NodesStatsIndexMetric.Flush)) list.Add("flush");
+				if (e.HasFlag(NodesStatsIndexMetric.Get)) list.Add("get");
+				if (e.HasFlag(NodesStatsIndexMetric.Indexing)) list.Add("indexing");
+				if (e.HasFlag(NodesStatsIndexMetric.Merge)) list.Add("merge");
+				if (e.HasFlag(NodesStatsIndexMetric.Percolate)) list.Add("percolate");
+				if (e.HasFlag(NodesStatsIndexMetric.RequestCache)) list.Add("request_cache");
+				if (e.HasFlag(NodesStatsIndexMetric.Refresh)) list.Add("refresh");
+				if (e.HasFlag(NodesStatsIndexMetric.Search)) list.Add("search");
+				if (e.HasFlag(NodesStatsIndexMetric.Segments)) list.Add("segments");
+				if (e.HasFlag(NodesStatsIndexMetric.Store)) list.Add("store");
+				if (e.HasFlag(NodesStatsIndexMetric.Warmer)) list.Add("warmer");
+				if (e.HasFlag(NodesStatsIndexMetric.Suggest)) list.Add("suggest");
+				if (e.HasFlag(NodesStatsIndexMetric.All)) return "_all";
+				return string.Join(",", list);
+			
 			}
 			
 			return UnknownEnum;

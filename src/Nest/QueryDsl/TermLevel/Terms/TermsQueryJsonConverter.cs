@@ -24,7 +24,7 @@ namespace Nest
 
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 			if (contract != null && contract.ConnectionSettings != null)
-				field = contract.Infer.FieldName(t.Field);
+				field = contract.Infer.Field(t.Field);
 
 			writer.WriteStartObject();
 			{

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Tokenizers, string, ITokenizer>))]
-	public interface ITokenizers : IHasADictionary { }
+	public interface ITokenizers : IIsADictionary<string, ITokenizer> { }
 
 	public class Tokenizers : IsADictionary<string, ITokenizer>, ITokenizers
 	{
@@ -19,12 +19,11 @@ namespace Nest
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor : HasADictionary<string, ITokenizer>, ITokenizers
+	public class TokenizersDescriptor :IsADictionaryDescriptor<TokenizersDescriptor, ITokenizers, string, ITokenizer>
 	{
-		protected TokenizersDescriptor Assign(string name, ITokenizer analyzer) =>
-			Fluent.Assign<TokenizersDescriptor, TokenizersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
+		public TokenizersDescriptor() : base(new Tokenizers()) { }
 
-		public TokenizersDescriptor Add(string name, ITokenizer analyzer) => Assign(name, analyzer);
+		public TokenizersDescriptor UserDefined(string name, ITokenizer analyzer) => Assign(name, analyzer);
 		
 		/// <summary>
 		/// A tokenizer of type edgeNGram.

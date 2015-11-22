@@ -9,40 +9,43 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IAcknowledgedResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector);
+
+		/// <inheritdoc/>
+		IAcknowledgedResponse PutSearchTemplate(IPutSearchTemplateRequest request);
+
+		/// <inheritdoc/>
+		Task<IAcknowledgedResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector);
+
+		/// <inheritdoc/>
+		Task<IAcknowledgedResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
+	}
+
 	public partial class ElasticClient
 	{
-		public IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.Dispatch<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse>(
-				d => selector(d.Name(name)),
-				(p, d) => this.LowLevelDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
-			);
-		}
+		/// <inheritdoc/>
+		public IAcknowledgedResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector) =>
+			this.PutSearchTemplate(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
 
-		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request)
-		{
-			return this.Dispatcher.Dispatch<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse>(
+		/// <inheritdoc/>
+		public IAcknowledgedResponse PutSearchTemplate(IPutSearchTemplateRequest request) => 
+			this.Dispatcher.Dispatch<IPutSearchTemplateRequest, PutSearchTemplateRequestParameters, AcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
+				this.LowLevelDispatch.PutTemplateDispatch<AcknowledgedResponse>
 			);
-		}
 
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
-				d => selector(d.Name(name)),
-				(p, d) => this.LowLevelDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
-			);
-		}
+		/// <inheritdoc/>
+		public Task<IAcknowledgedResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector) => 
+			this.PutSearchTemplateAsync(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
 
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)
-		{
-			return this.Dispatcher.DispatchAsync<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
+		/// <inheritdoc/>
+		public Task<IAcknowledgedResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request) => 
+			this.Dispatcher.DispatchAsync<IPutSearchTemplateRequest, PutSearchTemplateRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
+				this.LowLevelDispatch.PutTemplateDispatchAsync<AcknowledgedResponse>
 			);
-		}
 	}
 }

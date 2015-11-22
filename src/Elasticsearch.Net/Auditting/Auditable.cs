@@ -6,9 +6,7 @@ namespace Elasticsearch.Net.Connection
 {
 	internal class Auditable : IDisposable
 	{
-		readonly List<Audit> _auditTrail;
 		readonly IDateTimeProvider _dateTimeProvider;
-		private readonly DateTime _started;
 		private readonly Audit _audit;
 
 		public Node Node { set { this._audit.Node = value; } }
@@ -18,10 +16,10 @@ namespace Elasticsearch.Net.Connection
 		public Auditable(AuditEvent type, List<Audit> auditTrail, IDateTimeProvider dateTimeProvider)
 		{
 			this._dateTimeProvider = dateTimeProvider;
-			this._auditTrail = auditTrail;
-			this._started = _dateTimeProvider.Now();
-			this._audit = new Audit(type, this._started);
-			this._auditTrail.Add(this._audit);
+			var started = _dateTimeProvider.Now();
+
+			this._audit = new Audit(type, started);
+			auditTrail.Add(this._audit);
 		}
 
 		public void Dispose()

@@ -13,10 +13,10 @@ namespace Nest
 		public string IndexName { get; set; }
 		public string Name { get; set; }
 		public bool Ignore { get; set; }
-		public SimilarityOption? Similarity { get; set; }
+		public SimilarityOption Similarity { get; set; }
 		public bool Store { get; set; }
 
-		public abstract IElasticsearchProperty ToProperty();
+		public abstract IProperty ToProperty();
 
 		public static ElasticsearchPropertyAttribute From(MemberInfo memberInfo)
 		{

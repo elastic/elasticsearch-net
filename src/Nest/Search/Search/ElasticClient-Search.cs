@@ -8,22 +8,60 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// The search API allows to execute a search query and get back search hits that match the query.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+		/// </summary>
+		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
+		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<T> Search<T>(ISearchRequest request) where T : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
+		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+			where T : class
+			where TResult : class;
+
+		/// <inheritdoc/>
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
+			where T : class
+			where TResult : class;
+	}
+
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class =>
+		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class =>
 			this.Search<T, T>(searchSelector);
 
 		/// <inheritdoc/>
-		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
+		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
-				searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
-					)
-				);
+			this.Search<TResult>(searchSelector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class => 
@@ -36,25 +74,20 @@ namespace Nest
 			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
+					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
 					)
 				);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
+		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
 			where T : class => 
 			this.SearchAsync<T, T>(searchSelector);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
+		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
-				searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
-					)
-				);
+			this.SearchAsync<TResult>(searchSelector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class => 
@@ -67,20 +100,23 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
+					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
 					)
 				);
 
-		private ElasticsearchPathInfo<SearchRequestParameters> AttachCustomConverterWhenNeeded<T, TResult>(ElasticsearchPathInfo<SearchRequestParameters> p, ISearchRequest d)
+		private ISearchRequest AttachCustomConverterWhenNeeded<T, TResult>(RouteValues p, ISearchRequest d)
 			where T : class
-			where TResult : class => 
-			p.DeserializationState(this.CreateSearchDeserializer<T, TResult>(d));
+			where TResult : class
+		{
+			d.RequestParameters.DeserializationOverride(this.CreateSearchDeserializer<T, TResult>(d));
+			return d;
+		}
 
 		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class
 		{
-			SearchPathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, request);
+			CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, request);
 			if (request.TypeSelector == null) return null;
 			return (r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
 		}

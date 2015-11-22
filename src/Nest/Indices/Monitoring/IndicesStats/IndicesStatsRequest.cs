@@ -6,66 +6,44 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndicesStatsRequest : IIndicesOptionalPath<IndicesStatsRequestParameters>
+	public partial interface IIndicesStatsRequest 
 	{
 		IEnumerable<TypeName> Types { get; set; }
-		IEnumerable<IndicesStatsMetric> Metrics { get; set; }
-
 	}
 
-	internal static class IndicesStatsPathInfo
+	public partial class IndicesStatsRequest 
 	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo, IIndicesStatsRequest request)
+		private IEnumerable<TypeName> _types;
+		public IEnumerable<TypeName> Types
 		{
-			if (request.Types.HasAny())
+			get { return _types; }
+			set
 			{
-				var inferrer = new ElasticInferrer(settings);
-				var types = inferrer.TypeNames(request.Types);
-				pathInfo.RequestParameters.AddQueryString("types", string.Join(",", types));
+				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				else this.RequestState.RequestParameters.RemoveQueryString("types");
+				this._types = value;
 			}
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			pathInfo.HttpMethod = HttpMethod.GET;
 		}
-	}
-
-	public partial class IndicesStatsRequest : IndicesOptionalPathBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
-	{
-		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
-		public IEnumerable<TypeName> Types { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo , this);
-		}
-
 	}
 
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor : IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsDescriptor 
 	{
-		private IIndicesStatsRequest Self => this;
-
-		IEnumerable<TypeName> IIndicesStatsRequest.Types { get; set; }
-		IEnumerable<IndicesStatsMetric> IIndicesStatsRequest.Metrics { get; set; }
+		private IEnumerable<TypeName> _types;
+		IEnumerable<TypeName> IIndicesStatsRequest.Types 
+		{
+			get { return _types; }
+			set
+			{
+				if (value.HasAny()) this.RequestState.RequestParameters.AddQueryString("types", value);
+				else this.RequestState.RequestParameters.RemoveQueryString("types");
+				this._types = value;
+			}
+		}
 
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Types(params TypeName[] types)
-		{
-			Self.Types = types;
-			return this;
-		}
+		public IndicesStatsDescriptor Types(params TypeName[] types) =>
+			Assign(a => a.Types = types);
 
-		public IndicesStatsDescriptor Metrics(params IndicesStatsMetric[] metrics)
-		{
-			Self.Metrics = metrics;
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo, this);
-		}
 	}
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net
@@ -18,26 +15,17 @@ namespace Elasticsearch.Net
 	public abstract class FluentRequestParameters<T> : IRequestParameters 
 		where T : FluentRequestParameters<T>
 	{
-		private IRequestParameters Self { get { return this; } }
+		private IRequestParameters Self => this;
+
+		public abstract HttpMethod DefaultHttpMethod { get; }
 
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
-		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationState { get; set; }
+		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
 
-		public FluentRequestParameters()
+		protected FluentRequestParameters()
 		{
 			Self.QueryString = new Dictionary<string, object>();
-		}
-
-		//TODO only called once investigate removing the need for this
-		public T CopyQueryStringValuesFrom(IRequestParameters requestParameters)
-		{
-			if (requestParameters == null)
-				return (T)this;
-			var from = requestParameters.QueryString;
-			foreach (var k in from.Keys)
-				Self.QueryString[k] = from[k];
-			return (T)this;
 		}
 
 		void IRequestParameters.AddQueryStringValue(string name, object value)
@@ -58,16 +46,15 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-		public T RequestConfiguration(Func<IRequestConfiguration, RequestConfigurationDescriptor> selector)
+		public T RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> selector)
 		{
-			selector.ThrowIfNull("selector");
-			Self.RequestConfiguration = selector(Self.RequestConfiguration ?? new RequestConfigurationDescriptor());
+			Self.RequestConfiguration = selector?.Invoke(new RequestConfigurationDescriptor()) ?? Self.RequestConfiguration;
 			return (T)this;
 		}
 		
-		public T DeserializationState(Func<IApiCallDetails, Stream, object> customResponseCreator)
+		public T DeserializationOverride(Func<IApiCallDetails, Stream, object> customResponseCreator)
 		{
-			Self.DeserializationState = customResponseCreator;
+			Self.DeserializationOverride = customResponseCreator;
 			return (T)this;
 		}
 

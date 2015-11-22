@@ -11,7 +11,7 @@ namespace Nest
 		bool Enabled { get; set; }
 
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	public class TimestampField : ITimestampField
 	{
 		public bool Enabled { get; set; }
-		public FieldName Path { get; set; }
+		public Field Path { get; set; }
 		public string Format { get; set; }
 		public string Default { get; set; }
 		public bool? IgnoreMissing { get; set; }
@@ -36,7 +36,7 @@ namespace Nest
 	public class TimestampFieldDescriptor<T> : DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
 	{
 		bool ITimestampField.Enabled { get; set;}
-		FieldName ITimestampField.Path { get; set;}
+		Field ITimestampField.Path { get; set;}
 		string ITimestampField.Format { get; set; }
 		string ITimestampField.Default { get; set; }
 		bool? ITimestampField.IgnoreMissing { get; set; }

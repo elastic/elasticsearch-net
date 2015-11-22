@@ -10,19 +10,17 @@ namespace Nest
 	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Filter { get; set; }
+		QueryContainer Filter { get; set; }
 	}
 
 	public class FilteredQuery : QueryBase, IFilteredQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IQueryContainer Query { get; set; }
-		public IQueryContainer Filter { get; set; }
+		public QueryContainer Query { get; set; }
+		public QueryContainer Filter { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Filtered = this;
 
@@ -43,8 +41,8 @@ namespace Nest
 		, IFilteredQuery where T : class
 	{
 		bool IQuery.Conditionless => FilteredQuery.IsConditionless(this);
-		IQueryContainer IFilteredQuery.Query { get; set; }
-		IQueryContainer IFilteredQuery.Filter { get; set; }
+		QueryContainer IFilteredQuery.Query { get; set; }
+		QueryContainer IFilteredQuery.Filter { get; set; }
 
 		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
 			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));

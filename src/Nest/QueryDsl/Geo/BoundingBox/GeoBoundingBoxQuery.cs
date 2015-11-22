@@ -7,48 +7,69 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(VariableFieldNameQueryJsonConverter<GeoBoundingBoxQuery, IGeoBoundingBoxQuery>))]
 	public interface IGeoBoundingBoxQuery : IFieldNameQuery
 	{
-		[JsonProperty("top_left")]
-		string TopLeft { get; set; }
+		[VariableField]
+		IBoundingBox BoundingBox { get; set; }
 
-		[JsonProperty("bottom_right")]
-		string BottomRight { get; set; }
-		
 		[JsonProperty("type")]
 		GeoExecution? Type { get; set; }
+
+		[JsonProperty("coerce")]
+		bool? Coerce { get; set; }
+
+		[JsonProperty("ignore_malformed")]
+		bool? IgnoreMalformed { get; set; }
+
+		[JsonProperty("validation_method")]
+		GeoValidationMethod? ValidationMethod { get; set; }
 	}
-	
+
+
 	public class GeoBoundingBoxQuery : FieldNameQueryBase, IGeoBoundingBoxQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public string TopLeft { get; set; }
-		public string BottomRight { get; set; }
+		public IBoundingBox BoundingBox { get; set; }
 		public GeoExecution? Type { get; set; }
+		public bool? Coerce { get; set; }
+		public bool? IgnoreMalformed { get; set; }
+		public GeoValidationMethod? ValidationMethod { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
 		internal static bool IsConditionless(IGeoBoundingBoxQuery q)
 		{
-			return q.Field.IsConditionless() 
-				|| q.TopLeft.IsNullOrEmpty() 
-				|| q.BottomRight.IsNullOrEmpty();
+			return q.Field.IsConditionless() || q.BoundingBox == null;
 		}
 	}
 
-	public class GeoBoundingBoxQueryDescriptor<T> 
+	public class GeoBoundingBoxQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
 		, IGeoBoundingBoxQuery where T : class
 	{
 		bool IQuery.Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
-		string IGeoBoundingBoxQuery.TopLeft { get; set; }
-		string IGeoBoundingBoxQuery.BottomRight { get; set; }
+		IBoundingBox IGeoBoundingBoxQuery.BoundingBox { get; set; }
 		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
+		bool? IGeoBoundingBoxQuery.Coerce { get; set; }
+		bool? IGeoBoundingBoxQuery.IgnoreMalformed { get; set; }
+		GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
 
-		public GeoBoundingBoxQueryDescriptor<T> TopLeft(string topLeft) => Assign(a => a.TopLeft = topLeft);
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) => 
+			BoundingBox(f=>f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
 
-		public GeoBoundingBoxQueryDescriptor<T> BottomRight(string bottomRight) => Assign(a => a.BottomRight = bottomRight);
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) => 
+			BoundingBox(f=>f.TopLeft(topLeft).BottomRight(bottomRight));
+
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) => 
+			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));
 
 		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution type) => Assign(a => a.Type = type);
-    }
+
+		public GeoBoundingBoxQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
+
+		public GeoBoundingBoxQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
+
+		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);
+	}
 }

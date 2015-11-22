@@ -9,53 +9,46 @@ namespace Nest
 {
 	using RecoveryStatusConverter = Func<IApiCallDetails, Stream, RecoveryStatusResponse>;
 
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IRecoveryStatusResponse RecoveryStatus(Indices infices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+
+		/// <inheritdoc/>
+		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
+
+		/// <inheritdoc/>
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+
+		/// <inheritdoc/>
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.Dispatch<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
-					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
-				)
-			);
-		}
+		public IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
+			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest)
-		{
-			return this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
+		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest) => 
+			this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				statusRequest,
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
-					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
-				)
+				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
-					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
-				)
-			);
-		}
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
+			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest) => 
+			this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				statusRequest,
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
-					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
-				)
+				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p)
 			);
-		}
 
 		private RecoveryStatusResponse DeserializeRecoveryStatusResponse(IApiCallDetails response, Stream stream)
 		{

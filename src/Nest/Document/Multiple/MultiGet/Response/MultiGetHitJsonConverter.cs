@@ -78,7 +78,7 @@ namespace Nest
 			if (this._request == null || docsJarray == null)
 				return response;
 
-			var withMeta = docsJarray.Zip(this._request.GetOperations, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
+			var withMeta = docsJarray.Zip(this._request.Documents, (doc, desc) => new MultiHitTuple { Hit = doc, Descriptor = desc });
 			foreach (var m in withMeta)
 			{
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(m.Descriptor.ClrType);

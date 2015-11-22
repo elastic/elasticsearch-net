@@ -10,53 +10,62 @@ namespace Nest
 	using GetAliasesConverter = Func<IApiCallDetails, Stream, GetAliasesResponse>;
 	using CrazyAliasesResponse = Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>;
 
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
+		/// the requested index aliases, if available. This api only serialises the found index aliases.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
+		/// </summary>
+		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
+
+		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
+
+		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
+
+		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
-	
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
-		{
-			return this.Dispatcher.Dispatch<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse>(
-				getAliasesDescriptor,
-				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(
-					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
-				)
-			);
-		}
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null) =>
+			this.GetAliases(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest)
-		{
-			return this.Dispatcher.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest) => 
+			this.Dispatcher.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
 				getAliasesRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(
-					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
-				)
+				new GetAliasesConverter(DeserializeGetAliasesResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
-		{
-			return this.Dispatcher.DispatchAsync<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
-				getAliasesDescriptor,
-				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(
-					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
-				)
-			);
-		}
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor = null) =>
+			this.GetAliasesAsync(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
+		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest) => 
+			this.Dispatcher.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(
-					p.DeserializationState(new GetAliasesConverter(DeserializeGetAliasesResponse))
-				)
+				new GetAliasesConverter(DeserializeGetAliasesResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(p)
 			);
-		}
-
+		
+		//TODO map the response properly, remove list flattening
 		/// <inheritdoc/>
 		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{

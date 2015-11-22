@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Connection;
 using static Elasticsearch.Net.HttpMethod;
 using static Nest.DispatchException;
 
@@ -36,7 +37,7 @@ namespace Nest
 		};
 		foreach(var gen in generate)
 		{
-		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, object body</text>}) where T : class
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, @(Raw("PostData<object>")) body</text>}) where T : class
 		{
 			switch(p.HttpMethod)
 			{

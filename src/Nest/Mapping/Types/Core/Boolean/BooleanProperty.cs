@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IBooleanProperty : IElasticsearchProperty
+	public interface IBooleanProperty : IProperty
 	{
 		[JsonProperty("index")]
 		NonStringIndexOption? Index { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 	
-	public class BooleanProperty : ElasticsearchProperty, IBooleanProperty
+	public class BooleanProperty : Property, IBooleanProperty
 	{
 		public BooleanProperty() : base("boolean") { }
 

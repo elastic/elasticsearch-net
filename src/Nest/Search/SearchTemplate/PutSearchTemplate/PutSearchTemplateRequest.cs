@@ -7,53 +7,23 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutSearchTemplateRequest : INamePath<PutTemplateRequestParameters>
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutSearchTemplateRequest>))]
+	public partial interface IPutSearchTemplateRequest 
 	{
 		[JsonProperty("template")]
 		string Template { get; set; }
 	}
 
-	public partial class PutSearchTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
+	public partial class PutSearchTemplateRequest 
 	{
 		public string Template { get; set; }
-
-		public PutSearchTemplateRequest(string templateName)
-			: base(templateName)
-		{
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
-		{
-			PutSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 
-	internal static class PutSearchTemplatePathInfo
+	[DescriptorFor("PutTemplate")]
+	public partial class PutSearchTemplateDescriptor 
 	{
-		public static void Update(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo, IPutSearchTemplateRequest request)
-		{
-			pathInfo.Id = request.Name;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
+		string IPutSearchTemplateRequest.Template { get; set; }
 
-	[DescriptorFor("SearchTemplatePut")]
-	public partial class PutSearchTemplateDescriptor
-		: NamePathDescriptor<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
-	{
-		IPutSearchTemplateRequest Self => this;
-		string IPutSearchTemplateRequest.Template { get; set;}
-
-		public PutSearchTemplateDescriptor Template(string template)
-		{
-			this.Self.Template = template;
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
-		{
-			PutSearchTemplatePathInfo.Update(pathInfo, this);
-		}
+		public PutSearchTemplateDescriptor Template(string template) => Assign(a => a.Template = template);
 	}
 }

@@ -6,86 +6,42 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchExistsRequest : IQueryPath<SearchExistsRequestParameters>
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchExistsRequest>))]
+	public partial interface ISearchExistsRequest 
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonIgnore]
 		string QueryString { get; set; }
 	}
-	public interface ISearchExistsRequest<T> : ISearchExistsRequest { }
 
-	internal static class SearchExistsPathInfo
+	public partial interface ISearchExistsRequest<T> : ISearchExistsRequest { }
+
+	public partial class SearchExistsRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo, ISearchExistsRequest request)
-		{
-			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
-				pathInfo.HttpMethod = HttpMethod.GET;
-			else
-				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
-		}
-	}
-	
-	public partial class SearchExistsRequest : QueryPathBase<SearchExistsRequestParameters>, ISearchExistsRequest
-	{
-		public IQueryContainer Query { get; set; }
+		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
+		public QueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
-
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
-	public partial class SearchExistsRequest<T> : QueryPathBase<SearchExistsRequestParameters, T>, ISearchExistsRequest<T>
-		where T : class
+	public partial class SearchExistsRequest<T> 
 	{
-		public IQueryContainer Query { get; set; }
+		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
+		public QueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
-
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesExists")]
-	public partial class SearchExistsDescriptor<T> : QueryPathDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters, T>, ISearchExistsRequest
-		where T : class
+	public partial class SearchExistsDescriptor<T> where T : class
 	{
-		private ISearchExistsRequest Self => this;
+		protected override HttpMethod HttpMethod => Self.Query != null ? HttpMethod.POST : HttpMethod.GET;
 
-		IQueryContainer ISearchExistsRequest.Query { get; set; }
+		QueryContainer ISearchExistsRequest.Query { get; set; }
 
 		string ISearchExistsRequest.QueryString { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
 
 		internal bool _Strict { get; set; }
 		
@@ -110,15 +66,10 @@ namespace Nest
 			return this.Query(bq);
 		}
 
-		public SearchExistsDescriptor<T> Query(QueryContainer query)
-		{
-			return this.Query((IQueryContainer)query);
-		}
-
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchExistsDescriptor<T> Query(IQueryContainer query)
+		public SearchExistsDescriptor<T> Query(QueryContainer query)
 		{
 			if (query == null)
 				return this;

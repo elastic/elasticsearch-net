@@ -62,7 +62,7 @@ namespace Nest
 		/// <summary>
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
-		public BulkIndexDescriptor<T> Index(string index)
+		public BulkIndexDescriptor<T> Index(IndexName index)
 		{
 			Self.Index = index;
 			return this;
@@ -72,15 +72,6 @@ namespace Nest
 		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
 		/// </summary>
 		public BulkIndexDescriptor<T> Type(string type)
-		{
-			Self.Type = type;
-			return this;
-		}
-
-		/// <summary>
-		/// Manually set the type of which a typename will be inferred
-		/// </summary>
-		public BulkIndexDescriptor<T> Type(Type type)
 		{
 			Self.Type = type;
 			return this;

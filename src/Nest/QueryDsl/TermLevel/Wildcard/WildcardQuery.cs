@@ -6,6 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{
 		[JsonProperty(PropertyName = "rewrite")]
@@ -36,13 +37,11 @@ namespace Nest
 		IWildcardQuery 
 		where T : class
 	{
-		private IWildcardQuery Self => this;
-
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
 
 		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewrite;
+			((IWildcardQuery)this).Rewrite = rewrite;
 			return this;
 		}
 	}

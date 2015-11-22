@@ -13,7 +13,7 @@ namespace Nest
 	/// </summary>
 	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t) || typeof (IHasADictionary).IsAssignableFrom(t);
+		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 
 		public override bool CanRead => false;
 
@@ -26,29 +26,29 @@ namespace Nest
 		{
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 
-			var isADictionary = value as IHasADictionary;
-			IDictionary dictionary = isADictionary?.Dictionary ?? (value as IDictionary);
-			writer.WriteStartObject();
+			var dictionary = value as IDictionary;
+			if (dictionary == null) return;
 
+			writer.WriteStartObject();
 			foreach (DictionaryEntry entry in dictionary)
 			{
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var pp = entry.Key as FieldName;
-				var pn = entry.Key as FieldName;
-				var im = entry.Key as IndexName;
-				var tm = entry.Key as TypeName;
+				var fieldName = entry.Key as Field;
+				var propertyName = entry.Key as PropertyName;
+				var indexName = entry.Key as IndexName;
+				var typeName = entry.Key as TypeName;
 				if (contract == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
-				else if (pp != null)
-					key = contract.Infer.FieldName(pp);
-				else if (pn != null)
-					key = contract.Infer.FieldName(pn);
-				else if (im != null)
-					key = contract.Infer.IndexName(im);
-				else if (tm != null)
-					key = contract.Infer.TypeName(tm);
+				else if (fieldName != null)
+					key = contract.Infer.Field(fieldName);
+				else if (propertyName != null)
+					key = contract.Infer.PropertyName(propertyName);
+				else if (indexName != null)
+					key = contract.Infer.IndexName(indexName);
+				else if (typeName != null)
+					key = contract.Infer.TypeName(typeName);
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 				writer.WritePropertyName(key);
@@ -59,28 +59,17 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysJsonConverter<THasDictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
-		where THasDictionary : IHasADictionary
+	internal class VerbatimDictionaryKeysJsonConverter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
+		where TIsADictionary : IIsADictionary
 	{
+		public override bool CanConvert(Type t) => true;
+
 		public override bool CanRead => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var dictionary = serializer.Deserialize<Dictionary<TKey, TValue>>(reader);
-			return typeof(THasDictionary).CreateInstance<THasDictionary>(dictionary);
+			return typeof(TIsADictionary).CreateInstance<TIsADictionary>(dictionary);
 		}
-	}
-
-	internal class VerbatimDictionaryKeysJsonConverter<TJsonReader> : VerbatimDictionaryKeysJsonConverter 
-		where TJsonReader : JsonConverter, new()
-	{
-		public override bool CanConvert(Type t) => base.CanConvert(t) || Reader.CanConvert(t);
-
-		public override bool CanRead => true;
-
-		private static TJsonReader Reader { get; } = new TJsonReader();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			Reader.ReadJson(reader, objectType, existingValue, serializer);
 	}
 }

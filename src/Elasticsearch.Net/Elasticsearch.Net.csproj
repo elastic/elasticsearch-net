@@ -41,19 +41,6 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'IntegrationTests|AnyCPU'">
-    <OutputPath>bin\IntegrationTests\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,29 +70,22 @@
     <Compile Include="Transport\Sniff\SniffResponse.cs" />
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />
-    <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Responses\IApiCallDetails.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Responses\VoidResponse.cs" />
-    <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
-    <Compile Include="Exceptions\OneToOneServerException.cs" />
-    <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\Fluent.cs" />
     <Compile Include="Extensions\FormattableString.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Exceptions\ElasticsearchServerException.cs" />
-    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
     <Compile Include="Providers\IMemoryStreamFactory.cs" />
-    <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
     <Compile Include="Transport\ITransport.cs" />
@@ -116,8 +96,6 @@
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Responses\DynamicResponse.cs" />
     <Compile Include="Responses\ElasticsearchDynamicValue.cs" />
-    <Compile Include="Exceptions\MaxRetryException.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -136,7 +114,7 @@
     <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
-    <Compile Include="Serialization\IQueryStringValue.cs" />
+    <Compile Include="Serialization\IUrlParameter.cs" />
     <Compile Include="Serialization\UrlFormatProvider.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
@@ -145,7 +123,10 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\Response\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -154,4 +135,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\.paket\paket.targets" />
 </Project>

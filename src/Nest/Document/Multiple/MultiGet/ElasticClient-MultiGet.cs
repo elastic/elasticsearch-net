@@ -10,56 +10,52 @@ namespace Nest
 {
 	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
 	
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
+		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
+		/// provided by the get API.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
+		/// </summary>
+		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
+		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
+
+		/// <inheritdoc/>
+		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
+
+		/// <inheritdoc/>
+		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
+
+		/// <inheritdoc/>
+		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
-		{
-			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor());
-			var converter = CreateCovariantMultiGetConverter(descriptor);
-			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatcher.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
-				descriptor,
-				(p, d) => this.LowLevelDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
-			);
-		}
+		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
+			this.MultiGet(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest)
-		{
-			var converter = CreateCovariantMultiGetConverter(multiRequest);
-			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
+		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest) => 
+			this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				multiRequest,
-				(p, d) => this.LowLevelDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(multiRequest))),
+				this.LowLevelDispatch.MgetDispatch<MultiGetResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
-		{
-			multiGetSelector.ThrowIfNull("multiGetSelector");
-			var descriptor = multiGetSelector(new MultiGetDescriptor());
-			var converter = CreateCovariantMultiGetConverter(descriptor);
-			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatcher.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
-				descriptor,
-				(p, d) => this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
-			);
-		}
+		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
+			this.MultiGetAsync(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest)
-		{
-			var converter = CreateCovariantMultiGetConverter(multiGetRequest);
-			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
-				multiGetRequest,
-				(p, d) => this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
+		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiRequest) => 
+			this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
+				multiRequest,
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(multiRequest))),
+				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
-		}
-
 		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>
 			new NestSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
 

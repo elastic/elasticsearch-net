@@ -14,11 +14,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Bulk
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-bulk.html
 	///</pre>
 	///</summary>
 	public class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public BulkRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
@@ -47,11 +48,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatAliases
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-alias.html
 	///</pre>
 	///</summary>
 	public class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -77,11 +79,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatAllocation
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-allocation.html
 	///</pre>
 	///</summary>
 	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
@@ -110,11 +113,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatCount
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-count.html
 	///</pre>
 	///</summary>
 	public class CatCountRequestParameters : FluentRequestParameters<CatCountRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -140,11 +144,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatFielddata
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-fielddata.html
 	///</pre>
 	///</summary>
 	public class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
@@ -176,11 +181,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatHealth
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-health.html
 	///</pre>
 	///</summary>
 	public class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -209,11 +215,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatHelp
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat.html
 	///</pre>
 	///</summary>
 	public class CatHelpRequestParameters : FluentRequestParameters<CatHelpRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return help information</summary>
 		public CatHelpRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
@@ -227,11 +234,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatIndices
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-indices.html
 	///</pre>
 	///</summary>
 	public class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
@@ -263,11 +271,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatMaster
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-master.html
 	///</pre>
 	///</summary>
 	public class CatMasterRequestParameters : FluentRequestParameters<CatMasterRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -293,11 +302,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatNodeattrs
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-nodeattrs.html
 	///</pre>
 	///</summary>
 	public class CatNodeattrsRequestParameters : FluentRequestParameters<CatNodeattrsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeattrsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -323,11 +333,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatNodes
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-nodes.html
 	///</pre>
 	///</summary>
 	public class CatNodesRequestParameters : FluentRequestParameters<CatNodesRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -353,11 +364,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatPendingTasks
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -383,11 +395,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatPlugins
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-plugins.html
 	///</pre>
 	///</summary>
 	public class CatPluginsRequestParameters : FluentRequestParameters<CatPluginsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -413,11 +426,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatRecovery
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-recovery.html
 	///</pre>
 	///</summary>
 	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
@@ -443,11 +457,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatSegments
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-segments.html
 	///</pre>
 	///</summary>
 	public class CatSegmentsRequestParameters : FluentRequestParameters<CatSegmentsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsRequestParameters H(params string[] h) => this.AddQueryString("h", h);
 		
@@ -467,11 +482,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatShards
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-shards.html
 	///</pre>
 	///</summary>
 	public class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -497,11 +513,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatThreadPool
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-thread-pool.html
 	///</pre>
 	///</summary>
 	public class CatThreadPoolRequestParameters : FluentRequestParameters<CatThreadPoolRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -530,11 +547,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClearScroll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ClearScrollRequestParameters : FluentRequestParameters<ClearScrollRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>The URL-encoded request definition</summary>
 		public ClearScrollRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -545,11 +563,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterGetSettings
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public class ClusterGetSettingsRequestParameters : FluentRequestParameters<ClusterGetSettingsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterGetSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
@@ -569,11 +588,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterHealth
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-health.html
 	///</pre>
 	///</summary>
 	public class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthRequestParameters Level(Level level) => this.AddQueryString("level", level);
 		
@@ -608,11 +628,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterPendingTasks
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-pending.html
 	///</pre>
 	///</summary>
 	public class ClusterPendingTasksRequestParameters : FluentRequestParameters<ClusterPendingTasksRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -629,35 +650,37 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterPutSettings
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public class ClusterSettingsRequestParameters : FluentRequestParameters<ClusterSettingsRequestParameters> 
+	public class ClusterPutSettingsRequestParameters : FluentRequestParameters<ClusterPutSettingsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public ClusterPutSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public ClusterPutSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterSettingsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		public ClusterPutSettingsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ClusterPutSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ClusterPutSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for ClusterReroute
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public class ClusterRerouteRequestParameters : FluentRequestParameters<ClusterRerouteRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteRequestParameters DryRun(bool dry_run) => this.AddQueryString("dry_run", dry_run);
 		
@@ -683,11 +706,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterState
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-state.html
 	///</pre>
 	///</summary>
 	public class ClusterStateRequestParameters : FluentRequestParameters<ClusterStateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -716,16 +740,20 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterStats
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-stats.html
 	///</pre>
 	///</summary>
 	public class ClusterStatsRequestParameters : FluentRequestParameters<ClusterStatsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public ClusterStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		///<summary>Explicit operation timeout</summary>
+		public ClusterStatsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -737,11 +765,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Count
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-count.html
 	///</pre>
 	///</summary>
 	public class CountRequestParameters : FluentRequestParameters<CountRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -761,7 +790,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public CountRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public CountRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -789,13 +818,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for CountPercolateGet
+	///<summary>Request parameters descriptor for CountPercolate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html
 	///</pre>
 	///</summary>
 	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateCountRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
 		
@@ -833,11 +863,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Delete
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-delete.html
 	///</pre>
 	///</summary>
 	public class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
@@ -874,6 +905,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
 		
@@ -893,7 +925,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public DeleteByQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -911,11 +943,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for DeleteScript
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class DeleteScriptRequestParameters : FluentRequestParameters<DeleteScriptRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteScriptRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
@@ -932,32 +965,34 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for DeleteTemplate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html
 	///</pre>
 	///</summary>
-	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
+	public class DeleteSearchTemplateRequestParameters : FluentRequestParameters<DeleteSearchTemplateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		public DeleteSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
 		///<summary>Specific version type</summary>
-		public DeleteTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		public DeleteSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DeleteSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DeleteSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for Exists
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html
 	///</pre>
 	///</summary>
 	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
 		
@@ -981,13 +1016,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ExplainGet
+	///<summary>Request parameters descriptor for Explain
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-explain.html
 	///</pre>
 	///</summary>
 	public class ExplainRequestParameters : FluentRequestParameters<ExplainRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainRequestParameters AnalyzeWildcard(bool analyze_wildcard) => this.AddQueryString("analyze_wildcard", analyze_wildcard);
 		
@@ -1016,7 +1052,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ExplainRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public ExplainRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -1038,13 +1074,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for FieldStatsGet
+	///<summary>Request parameters descriptor for FieldStats
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-field-stats.html
 	///</pre>
 	///</summary>
 	public class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
 		public FieldStatsRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
@@ -1070,11 +1107,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Get
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html
 	///</pre>
 	///</summary>
 	public class GetRequestParameters : FluentRequestParameters<GetRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
@@ -1118,11 +1156,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for GetScript
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class GetScriptRequestParameters : FluentRequestParameters<GetScriptRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetScriptRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
@@ -1139,11 +1178,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for GetSource
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html
 	///</pre>
 	///</summary>
 	public class SourceRequestParameters : FluentRequestParameters<SourceRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The ID of the parent document</summary>
 		public SourceRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
 		
@@ -1184,32 +1224,34 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for GetTemplate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html
 	///</pre>
 	///</summary>
-	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
+	public class GetSearchTemplateRequestParameters : FluentRequestParameters<GetSearchTemplateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		public GetSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
 		///<summary>Specific version type</summary>
-		public GetTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		public GetSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for Index
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-index_.html
 	///</pre>
 	///</summary>
 	public class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public IndexRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
@@ -1248,13 +1290,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for IndicesAnalyzeGetForAll
+	///<summary>Request parameters descriptor for IndicesAnalyzeForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-analyze.html
 	///</pre>
 	///</summary>
 	public class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
 		
@@ -1292,11 +1335,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public class ClearCacheRequestParameters : FluentRequestParameters<ClearCacheRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Clear field data</summary>
 		public ClearCacheRequestParameters FieldData(bool field_data) => this.AddQueryString("field_data", field_data);
 		
@@ -1334,11 +1378,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesClose
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class CloseIndexRequestParameters : FluentRequestParameters<CloseIndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1364,11 +1409,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesCreate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-create-index.html
 	///</pre>
 	///</summary>
 	public class CreateIndexRequestParameters : FluentRequestParameters<CreateIndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1388,11 +1434,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDelete
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public class DeleteIndexRequestParameters : FluentRequestParameters<DeleteIndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1409,11 +1456,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDeleteAlias
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1428,13 +1476,36 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for IndicesDeleteTemplateForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html
+	///</pre>
+	///</summary>
+	public class DeleteIndexTemplateRequestParameters : FluentRequestParameters<DeleteIndexTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Explicit operation timeout</summary>
+		public DeleteIndexTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteWarmerRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -1448,11 +1519,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExists
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-exists.html
 	///</pre>
 	///</summary>
 	public class IndexExistsRequestParameters : FluentRequestParameters<IndexExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndexExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1475,11 +1547,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public AliasExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1502,32 +1575,34 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html
 	///</pre>
 	///</summary>
-	public class TemplateExistsRequestParameters : FluentRequestParameters<TemplateExistsRequestParameters> 
+	public class IndexTemplateExistsRequestParameters : FluentRequestParameters<IndexTemplateExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TemplateExistsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public IndexTemplateExistsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public TemplateExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		public IndexTemplateExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public TemplateExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public IndexTemplateExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TemplateExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public IndexTemplateExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesExistsType
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public TypeExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1550,11 +1625,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesFlushForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-flush.html
 	///</pre>
 	///</summary>
 	public class FlushRequestParameters : FluentRequestParameters<FlushRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushRequestParameters Force(bool force) => this.AddQueryString("force", force);
 		
@@ -1580,11 +1656,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesFlushSyncedForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-synced-flush.html
 	///</pre>
 	///</summary>
 	public class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SyncedFlushRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SyncedFlushRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SyncedFlushRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		
 		///<summary>The URL-encoded request definition</summary>
 		public SyncedFlushRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -1595,11 +1681,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGet
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-index.html
 	///</pre>
 	///</summary>
 	public class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -1628,11 +1715,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasRequestParameters : FluentRequestParameters<GetAliasRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1655,11 +1743,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout</summary>
 		public GetAliasesRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1676,11 +1765,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
@@ -1706,11 +1796,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public class GetMappingRequestParameters : FluentRequestParameters<GetMappingRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1733,11 +1824,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public class GetIndexSettingsRequestParameters : FluentRequestParameters<GetIndexSettingsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1764,13 +1856,39 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for IndicesGetTemplateForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html
+	///</pre>
+	///</summary>
+	public class GetIndexTemplateRequestParameters : FluentRequestParameters<GetIndexTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetIndexTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetIndexTemplateRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for IndicesGetUpgradeForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public class UpgradeStatusRequestParameters : FluentRequestParameters<UpgradeStatusRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpgradeStatusRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1793,11 +1911,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetWarmerRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -1820,11 +1939,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesOpen
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class OpenIndexRequestParameters : FluentRequestParameters<OpenIndexRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout</summary>
 		public OpenIndexRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1850,11 +1970,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-optimize.html
 	///</pre>
 	///</summary>
 	public class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public OptimizeRequestParameters Flush(bool flush) => this.AddQueryString("flush", flush);
 		
@@ -1889,11 +2010,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutAlias
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1910,11 +2032,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutMapping
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public class PutMappingRequestParameters : FluentRequestParameters<PutMappingRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -1943,68 +2066,71 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public class UpdateSettingsRequestParameters : FluentRequestParameters<UpdateSettingsRequestParameters> 
+	public class UpdateIndexSettingsRequestParameters : FluentRequestParameters<UpdateIndexSettingsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public UpdateIndexSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		public UpdateIndexSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateSettingsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		public UpdateIndexSettingsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		public UpdateIndexSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public UpdateIndexSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public UpdateIndexSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public UpdateIndexSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html
 	///</pre>
 	///</summary>
-	public class PutTemplateRequestParameters : FluentRequestParameters<PutTemplateRequestParameters> 
+	public class PutIndexTemplateRequestParameters : FluentRequestParameters<PutIndexTemplateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public PutTemplateRequestParameters Create(bool create) => this.AddQueryString("create", create);
+		public PutIndexTemplateRequestParameters Create(bool create) => this.AddQueryString("create", create);
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		public PutIndexTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public PutIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public PutIndexTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public PutTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public PutIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public PutIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
 	///<summary>Request parameters descriptor for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
 		public PutWarmerRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2030,11 +2156,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesRecoveryForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-recovery.html
 	///</pre>
 	///</summary>
 	public class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusRequestParameters Detailed(bool detailed) => this.AddQueryString("detailed", detailed);
 		
@@ -2054,11 +2181,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesRefreshForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-refresh.html
 	///</pre>
 	///</summary>
 	public class RefreshRequestParameters : FluentRequestParameters<RefreshRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public RefreshRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2084,11 +2212,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-segments.html
 	///</pre>
 	///</summary>
 	public class SegmentsRequestParameters : FluentRequestParameters<SegmentsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2114,11 +2243,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesShardStoresForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-shards-stores.html
 	///</pre>
 	///</summary>
 	public class IndicesShardStoresRequestParameters : FluentRequestParameters<IndicesShardStoresRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresRequestParameters Status(params string[] status) => this.AddQueryString("status", status);
 		
@@ -2144,11 +2274,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesStatsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-stats.html
 	///</pre>
 	///</summary>
 	public class IndicesStatsRequestParameters : FluentRequestParameters<IndicesStatsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsRequestParameters CompletionFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
 		
@@ -2177,11 +2308,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class BulkAliasRequestParameters : FluentRequestParameters<BulkAliasRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Request timeout</summary>
 		public BulkAliasRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
@@ -2198,11 +2330,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesUpgradeForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public class UpgradeRequestParameters : FluentRequestParameters<UpgradeRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
@@ -2226,13 +2359,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for IndicesValidateQueryGetForAll
+	///<summary>Request parameters descriptor for IndicesValidateQueryForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-validate.html
 	///</pre>
 	///</summary>
 	public class ValidateQueryRequestParameters : FluentRequestParameters<ValidateQueryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
 		
@@ -2249,7 +2383,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ValidateQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -2285,23 +2419,25 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
-	public class InfoRequestParameters : FluentRequestParameters<InfoRequestParameters> 
+	public class RootNodeInfoRequestParameters : FluentRequestParameters<RootNodeInfoRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The URL-encoded request definition</summary>
-		public InfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public RootNodeInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public InfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public RootNodeInfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
-	///<summary>Request parameters descriptor for MgetGet
+	///<summary>Request parameters descriptor for Mget
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MultiGetRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
@@ -2331,13 +2467,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for MpercolateGet
+	///<summary>Request parameters descriptor for Mpercolate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html
 	///</pre>
 	///</summary>
 	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public MultiPercolateRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2355,13 +2492,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for MsearchGet
+	///<summary>Request parameters descriptor for Msearch
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-multi-search.html
 	///</pre>
 	///</summary>
 	public class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Search operation type</summary>
 		public MultiSearchRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
 		
@@ -2373,13 +2511,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for MtermvectorsGet
+	///<summary>Request parameters descriptor for Mtermvectors
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsRequestParameters TermStatistics(bool term_statistics) => this.AddQueryString("term_statistics", term_statistics);
 		
@@ -2426,11 +2565,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public class NodesHotThreadsRequestParameters : FluentRequestParameters<NodesHotThreadsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsRequestParameters Interval(string interval) => this.AddQueryString("interval", interval);
 		
@@ -2446,6 +2586,9 @@ namespace Elasticsearch.Net
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type) => this.AddQueryString("type", thread_type);
 		
+		///<summary>Explicit operation timeout</summary>
+		public NodesHotThreadsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesHotThreadsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2456,16 +2599,20 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesInfoForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public class NodesInfoRequestParameters : FluentRequestParameters<NodesInfoRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		///<summary>Explicit operation timeout</summary>
+		public NodesInfoRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -2477,11 +2624,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesStatsForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public class NodesStatsRequestParameters : FluentRequestParameters<NodesStatsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsRequestParameters CompletionFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
 		
@@ -2503,6 +2651,9 @@ namespace Elasticsearch.Net
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsRequestParameters Types(params string[] types) => this.AddQueryString("types", types);
 		
+		///<summary>Explicit operation timeout</summary>
+		public NodesStatsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2511,13 +2662,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for PercolateGet
+	///<summary>Request parameters descriptor for Percolate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html
 	///</pre>
 	///</summary>
 	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
 		
@@ -2569,6 +2721,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class PingRequestParameters : FluentRequestParameters<PingRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>The URL-encoded request definition</summary>
 		public PingRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2579,11 +2732,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for PutScript
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class PutScriptRequestParameters : FluentRequestParameters<PutScriptRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation type</summary>
 		public PutScriptRequestParameters OpType(OpType op_type) => this.AddQueryString("op_type", op_type);
 		
@@ -2601,13 +2755,39 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for RenderSearchTemplateGet
+	///<summary>Request parameters descriptor for PutTemplate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html
+	///</pre>
+	///</summary>
+	public class PutSearchTemplateRequestParameters : FluentRequestParameters<PutSearchTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Explicit operation type</summary>
+		public PutSearchTemplateRequestParameters OpType(OpType op_type) => this.AddQueryString("op_type", op_type);
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public PutSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		///<summary>Specific version type</summary>
+		public PutSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for RenderSearchTemplate
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/2.0/search-template.html
 	///</pre>
 	///</summary>
 	public class RenderSearchTemplateRequestParameters : FluentRequestParameters<RenderSearchTemplateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The URL-encoded request definition</summary>
 		public RenderSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2616,13 +2796,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ScrollGet
+	///<summary>Request parameters descriptor for Scroll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ScrollRequestParameters : FluentRequestParameters<ScrollRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The URL-encoded request definition</summary>
 		public ScrollRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2631,13 +2812,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for SearchGet
+	///<summary>Request parameters descriptor for Search
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-search.html
 	///</pre>
 	///</summary>
 	public class SearchRequestParameters : FluentRequestParameters<SearchRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
 		
@@ -2702,11 +2884,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SearchExists
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-exists.html
 	///</pre>
 	///</summary>
 	public class SearchExistsRequestParameters : FluentRequestParameters<SearchExistsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2726,7 +2909,7 @@ namespace Elasticsearch.Net
 		public SearchExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public SearchExistsRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchExistsRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -2754,13 +2937,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for SearchShardsGet
+	///<summary>Request parameters descriptor for SearchShards
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-shards.html
 	///</pre>
 	///</summary>
 	public class SearchShardsRequestParameters : FluentRequestParameters<SearchShardsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
@@ -2787,13 +2971,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for SearchTemplateGet
+	///<summary>Request parameters descriptor for SearchTemplate
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
 	///</pre>
 	///</summary>
 	public class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2825,11 +3010,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotCreate
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2846,11 +3032,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotCreateRepository
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CreateRepositoryRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2870,11 +3057,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotDelete
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2888,11 +3076,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteRepositoryRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2909,11 +3098,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotGet
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetSnapshotRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2927,11 +3117,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotGetRepository
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetRepositoryRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2948,11 +3139,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotRestore
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public RestoreRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2969,11 +3161,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotStatus
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class SnapshotStatusRequestParameters : FluentRequestParameters<SnapshotStatusRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotStatusRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -2987,11 +3180,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotVerifyRepository
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class VerifyRepositoryRequestParameters : FluentRequestParameters<VerifyRepositoryRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public VerifyRepositoryRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
@@ -3008,11 +3202,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Suggest
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-suggesters.html
 	///</pre>
 	///</summary>
 	public class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SuggestRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -3036,13 +3231,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for TermvectorsGet
+	///<summary>Request parameters descriptor for Termvectors
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public class TermVectorsRequestParameters : FluentRequestParameters<TermVectorsRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public TermVectorsRequestParameters TermStatistics(bool term_statistics) => this.AddQueryString("term_statistics", term_statistics);
 		
@@ -3092,11 +3288,12 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Update
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-update.html
 	///</pre>
 	///</summary>
 	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
 	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public UpdateRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
@@ -3138,6 +3335,9 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public UpdateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
+		public UpdateRequestParameters DetectNoop(bool detect_noop) => this.AddQueryString("detect_noop", detect_noop);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateRequestParameters Source(string source) => this.AddQueryString("source", source);

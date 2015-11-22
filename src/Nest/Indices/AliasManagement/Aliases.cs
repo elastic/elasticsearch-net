@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public interface IAliases : IHasADictionary { }
+	public interface IAliases : IIsADictionary<IndexName, IAlias> { }
 	public class Aliases : IsADictionary<IndexName, IAlias>, IAliases
 	{
 		public Aliases() : base() { }
@@ -19,16 +19,13 @@ namespace Nest
 		/// Add any setting to the index
 		/// </summary>
 		public void Add(IndexName index, IAlias alias) => BackingDictionary.Add(index, alias);
-
 	}
 	
-	public class AliasesDescriptor : HasADictionary<AliasesDescriptor, IndexName, IAlias>, IAliases
+	public class AliasesDescriptor : IsADictionaryDescriptor<AliasesDescriptor, IAliases, IndexName, IAlias>
 	{
-		public AliasesDescriptor Alias(string alias, Func<AliasDescriptor, IAlias> selector = null)
-		{
-			this.BackingDictionary.Add(alias, selector?.InvokeOrDefault(new AliasDescriptor()));
-			return this;
-		}
+		public AliasesDescriptor() : base(new Aliases()) { }
+
+		public AliasesDescriptor Alias(string alias, Func<AliasDescriptor, IAlias> selector = null) => Assign(alias, selector.InvokeOrDefault(new AliasDescriptor()));
 	}
 
 }

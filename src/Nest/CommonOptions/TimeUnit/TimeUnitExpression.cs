@@ -100,11 +100,9 @@ namespace Nest
 			if (!match.Success) throw new ArgumentException($"Time expression '{unitExpression}' string is invalid", nameof(unitExpression));
 
 			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
-			if (match.Groups["interval"].Success)
-			{
-				this.Interval = match.Groups["interval"].Value.ToEnum<TimeUnit>();
-			}
-			else this.Interval = TimeUnit.Millisecond; 
+			this.Interval = match.Groups["interval"].Success 
+				? match.Groups["interval"].Value.ToEnum<TimeUnit>() 
+				: TimeUnit.Millisecond; 
 			
 			if (this.Interval == TimeUnit.Year)
 				Milliseconds = (long)(this.Factor*_year);

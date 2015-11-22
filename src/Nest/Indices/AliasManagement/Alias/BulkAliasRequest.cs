@@ -6,34 +6,20 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
+	public partial interface IBulkAliasRequest 
 	{
 		[JsonProperty("actions")]
 		IList<IAliasAction> Actions { get; set; }
 	}
 
-	internal static class BulkAliasPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo, IBulkAliasRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class BulkAliasRequest : BasePathRequest<BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasRequest 
 	{
 		public IList<IAliasAction> Actions { get; set; }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo)
-		{
-			BulkAliasPathInfo.Update(pathInfo, this);
-		}
 	}
 
 
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class BulkAliasDescriptor : BasePathDescriptor<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasDescriptor 
 	{
 		public BulkAliasDescriptor Add(IAliasAction action) => 
 			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));
@@ -43,11 +29,5 @@ namespace Nest
 		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 
 		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo)
-		{
-			BulkAliasPathInfo.Update(pathInfo, this);
-		}
-
 	}
 }

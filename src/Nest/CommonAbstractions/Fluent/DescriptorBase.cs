@@ -6,10 +6,13 @@ using System.Text;
 
 namespace Nest
 {
-	public abstract class DescriptorBase<TDescriptor, TInterface>
+	public interface IDescriptor { }
+
+	public abstract class DescriptorBase<TDescriptor, TInterface> : IDescriptor
 		where TDescriptor : DescriptorBase<TDescriptor, TInterface>, TInterface
 		where TInterface : class
 	{
+		protected TInterface Self => (TDescriptor)this;
 		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign((TDescriptor)this, assigner);
 
 		/// <summary>

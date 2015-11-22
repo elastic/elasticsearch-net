@@ -9,7 +9,7 @@ namespace Nest
 	public interface IGlobalInnerHit : IInnerHits
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class GlobalInnerHit : InnerHits, IGlobalInnerHit
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 	}
 
@@ -28,20 +28,20 @@ namespace Nest
 
 		private GlobalInnerHitDescriptor<T> _assign(Action<IGlobalInnerHit> assigner) => Fluent.Assign(this, assigner);
 
-		IQueryContainer IGlobalInnerHit.Query { get; set; }
+		QueryContainer IGlobalInnerHit.Query { get; set; }
 		IDictionary<string, IInnerHitsContainer> IGlobalInnerHit.InnerHits { get; set; }
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
-		IList<KeyValuePair<FieldName, ISort>> IInnerHits.Sort { get; set; }
-		IHighlightRequest IInnerHits.Highlight { get; set; }
+		IList<KeyValuePair<Field, ISort>> IInnerHits.Sort { get; set; }
+		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<FieldName> IInnerHits.FielddataFields { get; set; }
+		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
-		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, IQueryContainer> querySelector) => 
+		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
 			_assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> InnerHits(Func<
@@ -75,10 +75,10 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 		
 		public GlobalInnerHitDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		public GlobalInnerHitDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 
@@ -90,13 +90,13 @@ namespace Nest
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public GlobalInnerHitDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+		public GlobalInnerHitDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> Source(bool include = true)=> _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 		
-		public GlobalInnerHitDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
-			_assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		public GlobalInnerHitDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
+			_assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		//TODO ScriptFileds needs an encapsulated descriptor
 		public GlobalInnerHitDescriptor<T> ScriptFields(

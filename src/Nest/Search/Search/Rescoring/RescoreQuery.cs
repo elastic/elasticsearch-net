@@ -8,7 +8,7 @@ namespace Nest
 	public interface IRescoreQuery
 	{
 		[JsonProperty("rescore_query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty("query_weight")]
 		double? QueryWeight { get; set; }
@@ -22,7 +22,7 @@ namespace Nest
 	
 	public class RescoreQuery : IRescoreQuery
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public double? QueryWeight { get; set; }
 		public double? RescoreQueryWeight { get; set; }
 		public ScoreMode? ScoreMode { get; set; }
@@ -32,7 +32,7 @@ namespace Nest
 	{
 		public IRescoreQuery Self => this;
 
-		IQueryContainer IRescoreQuery.Query { get; set; }
+		QueryContainer IRescoreQuery.Query { get; set; }
 
 		double? IRescoreQuery.QueryWeight { get; set; }
 
@@ -40,13 +40,13 @@ namespace Nest
 
 		ScoreMode? IRescoreQuery.ScoreMode { get; set; }
 
-		public virtual RescoreQueryDescriptor<T> QueryWeight(double queryWeight)
+		public virtual RescoreQueryDescriptor<T> QueryWeight(double? queryWeight)
 		{
 			Self.QueryWeight = queryWeight;
 			return this;
 		}
 
-		public virtual RescoreQueryDescriptor<T> RescoreQueryWeight(double rescoreQueryWeight)
+		public virtual RescoreQueryDescriptor<T> RescoreQueryWeight(double? rescoreQueryWeight)
 		{
 			Self.RescoreQueryWeight = rescoreQueryWeight;
 			return this;

@@ -17,9 +17,8 @@ namespace Nest
 		public ISlowLogSearch Search { get; set; }
 	}
 
-	public class SlowLogDescriptor : ISlowLog
+	public class SlowLogDescriptor : DescriptorBase<SlowLogDescriptor, ISlowLog>, ISlowLog
 	{
-		SlowLogDescriptor Assign(Action<ISlowLog> assigner) => Fluent.Assign(this, assigner);
 		ISlowLogIndexing ISlowLog.Indexing { get; set; }
 		ISlowLogSearch ISlowLog.Search { get; set; }
 

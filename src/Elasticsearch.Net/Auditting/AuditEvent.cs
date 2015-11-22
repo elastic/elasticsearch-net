@@ -1,14 +1,19 @@
 namespace Elasticsearch.Net.Connection
 {
+	//TODO SNIFFONFAIL AND SKIPNODE ARE NEVER USED
 	public enum AuditEvent
 	{
 		SniffOnStartup,
 		SniffOnFail,
 		SniffOnStaleCluster,
-		SniffFail,
+
 		SniffSuccess,
-		Ping,
+		SniffFailure,
+		PingSuccess,
+		PingFailure,
+
+		SkipNode,
 		BadResponse,
-		HealhyResponse
+		HealthyResponse
 	}
 }

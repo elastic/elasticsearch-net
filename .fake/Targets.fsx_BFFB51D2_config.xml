@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FAKECache>
+  <Assemblies>
+    <Assembly Location="C:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll" FullName="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+    <Assembly Location="c:\Projects\elasticsearch\vnext\packages\build\FAKE\tools\FAKE.exe" FullName="FAKE, Version=4.5.6.0, Culture=neutral, PublicKeyToken=null" Version="4.5.6.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\FSharp.Core\v4.0_4.4.0.0__b03f5f7f11d50a3a\FSharp.Core.dll" FullName="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.4.0.0" />
+    <Assembly Location="c:\Projects\elasticsearch\vnext\packages\build\FAKE\tools\FakeLib.dll" FullName="FakeLib, Version=4.5.6.0, Culture=neutral, PublicKeyToken=null" Version="4.5.6.0" />
+    <Assembly Location="c:\Projects\elasticsearch\vnext\packages\build\FAKE\tools\Argu.dll" FullName="Argu, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null" Version="1.1.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Core\v4.0_4.0.0.0__b77a5c561934e089\System.Core.dll" FullName="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll" FullName="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Numerics\v4.0_4.0.0.0__b77a5c561934e089\System.Numerics.dll" FullName="System.Numerics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll" FullName="System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll" FullName="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+    <Assembly Location="c:\Projects\elasticsearch\vnext\packages\build\FAKE\tools\FSharp.Compiler.Service.dll" FullName="FSharp.Compiler.Service, Version=1.4.0.6, Culture=neutral, PublicKeyToken=null" Version="1.4.0.6" />
+    <Assembly Location="c:\Projects\elasticsearch\vnext\packages\build\FAKE\tools\HashLib.dll" FullName="HashLib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null" Version="2.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Build.Framework\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.Build.Framework.dll" FullName="Microsoft.Build.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Build.Tasks.v4.0\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.Build.Tasks.v4.0.dll" FullName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\Microsoft.Build.Utilities.v4.0\v4.0_4.0.0.0__b03f5f7f11d50a3a\Microsoft.Build.Utilities.v4.0.dll" FullName="Microsoft.Build.Utilities.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_32\ISymWrapper\v4.0_4.0.0.0__b03f5f7f11d50a3a\ISymWrapper.dll" FullName="ISymWrapper, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" Version="4.0.0.0" />
+    <Assembly Location="C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\System.Xml.Linq\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.Linq.dll" FullName="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" Version="4.0.0.0" />
+  </Assemblies>
+</FAKECache>

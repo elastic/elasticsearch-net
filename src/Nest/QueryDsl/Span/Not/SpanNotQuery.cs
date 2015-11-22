@@ -65,10 +65,10 @@ namespace Nest
 		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector) =>
 			Assign(a => a.Exclude = selector(new SpanQueryDescriptor<T>()));
 
-		public SpanNotQueryDescriptor<T> Pre(int pre) => Assign(a => a.Pre = pre);
+		public SpanNotQueryDescriptor<T> Pre(int? pre) => Assign(a => a.Pre = pre);
 
-		public SpanNotQueryDescriptor<T> Post(int post) => Assign(a => a.Post = post);
+		public SpanNotQueryDescriptor<T> Post(int? post) => Assign(a => a.Post = post);
 
-		public SpanNotQueryDescriptor<T> Dist(int dist) => Assign(a => a.Dist = dist);
+		public SpanNotQueryDescriptor<T> Dist(int? dist) => Assign(a => a.Dist = dist);
 	}
 }

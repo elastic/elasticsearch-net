@@ -5,32 +5,36 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-  [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-  public class Range<T> where T : struct
-  {
-    [JsonProperty(PropertyName = "from")]
-    internal T? _From { get; set; }
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Range>))]
+	public interface IRange : INestSerializable
+	{
+		[JsonProperty(PropertyName = "from")]
+		double? From { get; set; }
 
-    [JsonProperty(PropertyName = "to")]
-    internal T? _To { get; set; }
-	  
-	[JsonProperty(PropertyName = "key")]
-    internal string _Key { get; set; }
+		[JsonProperty(PropertyName = "to")]
+		double? To { get; set; }
 
-    public Range<T> Key(string key)
-    {
-      this._Key = key;
-      return this;
-    }
-    public Range<T> From(T value)
-    {
-      this._From = value;
-      return this;
-    }
-    public Range<T> To(T value)
-    {
-      this._To = value;
-      return this;
-    }
-  }
+		[JsonProperty(PropertyName = "key")]
+		string Key { get; set; }
+	}
+
+	public class Range : IRange
+	{
+		public double? From { get; set; }
+		public double? To { get; set; }
+		public string Key { get; set; }
+	}
+
+	public class RangeDescriptor
+		: DescriptorBase<RangeDescriptor, IRange>, IRange
+	{
+		double? IRange.From { get; set; }
+		string IRange.Key { get; set; }
+		double? IRange.To { get; set; }
+
+		public RangeDescriptor Key(string key) => Assign(a => a.Key = key);
+		public RangeDescriptor From(double from) => Assign(a => a.From = from);
+		public RangeDescriptor To(double to) => Assign(a => a.To = to);
+	}
 }

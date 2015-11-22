@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Linq.Expressions;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IAttachmentProperty : IElasticsearchProperty
+	public interface IAttachmentProperty : IProperty
 	{
 		IDateProperty DateField { get; set; }
 		IStringProperty TitleField { get; set; }
@@ -19,11 +20,11 @@ namespace Nest
 		IStringProperty LanguageField { get; set; }
 	}
 
-	public class AttachmentProperty : ElasticsearchProperty, IAttachmentProperty
+	public class AttachmentProperty : Property, IAttachmentProperty
 	{
 		public AttachmentProperty() : base("attachment") { }
 
-		private IDictionary<FieldName, IElasticsearchProperty> Dictionary => this.Fields.Dictionary as IDictionary<FieldName, IElasticsearchProperty>;
+		private IDictionary Dictionary => this.Fields;
 
 		internal AttachmentProperty(AttachmentAttribute attribute) : base("attachment", attribute) { }
 
@@ -96,16 +97,16 @@ namespace Nest
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		IStringProperty IAttachmentProperty.LanguageField { get; set; }
 
-		private IDictionary<FieldName, IElasticsearchProperty> Dictionary => ((IAttachmentProperty)this).Fields.Dictionary as IDictionary<FieldName, IElasticsearchProperty>;
+		private IDictionary Dictionary => Self.Fields;
 
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 
 		private AttachmentPropertyDescriptor<T> SetMetadataField<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector, string fieldName)
-			where TDescriptor : TInterface
-			where TInterface : IElasticsearchProperty
+			where TDescriptor : TInterface, new()
+			where TInterface : IProperty
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var type = selector(Activator.CreateInstance<TDescriptor>());
+			var type = selector(new TDescriptor());
 			this.Dictionary[fieldName] = type;
 			return this;
 		}

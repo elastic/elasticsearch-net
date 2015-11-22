@@ -18,11 +18,14 @@ namespace Nest
 		[JsonProperty("description")]
 		public string Description { get; set; }
 
-		[JsonProperty("url")]
-		public string Url { get; set; }
+		[JsonProperty("classname")]
+		public string ClassName { get; set; }
 
 		[JsonProperty("jvm")]
 		public bool Jvm { get; set; }
+
+		[JsonProperty("isolated")]
+		public bool Isolated { get; set; }
 
 		[JsonProperty("site")]
 		public bool Site { get; set; }

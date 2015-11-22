@@ -29,7 +29,7 @@ namespace Nest
 		public string Type { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
-		public override FieldName SortKey { get { return "_script"; } }
+		public override Field SortKey { get { return "_script"; } }
 		public string Language { get; set; }
 		public string File { get; set; }
 	}
@@ -46,7 +46,7 @@ namespace Nest
 
 		string IScriptSort.File { get; set; }
 
-		FieldName ISort.SortKey { get { return "_script"; } }
+		Field ISort.SortKey { get { return "_script"; } }
 
 		Dictionary<string, object> IScriptSort.Params { get; set; }
 

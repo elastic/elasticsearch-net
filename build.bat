@@ -1,29 +1,13 @@
 @echo off
-REM we need nuget to install tools locally
-if not exist build\tools\nuget\nuget.exe (
-    ECHO Nuget not found.. Downloading..
-	mkdir build\tools\nuget
-    PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& 'build\download-nuget.ps1'"
-)
 
-REM we need FAKE to process our build scripts
-if not exist build\tools\FAKE\tools\Fake.exe (
-    ECHO FAKE not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+.paket\paket.bootstrapper.exe
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
-
-REM we need FSharp.Data so we can use type providers in our build scripts
-if not exist build\tools\FSharp.Data\lib\net40\Fsharp.Data.dll (
-    ECHO FSharp.Data not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "FSharp.Data" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+.paket\paket.exe install
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
-
-REM we need Microsoft.CodeAnalysis.CSharp so we can use type providers in our build scripts
-if not exist build\tools\FAKE\tools\Microsoft.CodeAnalysis.CSharp (
-    ECHO Microsoft.CodeAnalysis.CSharp not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "Microsoft.CodeAnalysis.CSharp" "-OutputDirectory" "build\tools\FAKE\tools" "-ExcludeVersion" "-Prerelease"
-)
-
 
 SET TARGET="build"
 SET VERSION=
@@ -42,4 +26,4 @@ IF "%1%"=="integrate" (
 shift
 shift
 
-"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" esversions=%ESVERSIONS%
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" esversions=%ESVERSIONS%

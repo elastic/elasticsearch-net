@@ -3,6 +3,7 @@ using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net.Providers
 {
+	//TODO find all instantations and replace with DateTimeProvider.Default
 	public class DateTimeProvider : IDateTimeProvider
 	{
 		public static TimeSpan DefaultTimeout = TimeSpan.FromSeconds(60);

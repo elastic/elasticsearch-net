@@ -1,5 +1,5 @@
 // include Fake lib
-#I @"../tools/FAKE/tools"
+#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 open Fake 
 
@@ -37,7 +37,7 @@ Target "WatchTests"  <| fun _ ->
     use watcher = (!! "src/Tests/**/*.cs").And("src/Tests/**/*.md") |> WatchChanges (fun changes -> 
             printfn "%A" changes
             Build.QuickCompile()
-            Documentation.RunLitterateur()
+            //Documentation.RunLitterateur()
             Tests.RunContinuous()
         )
     
@@ -53,12 +53,6 @@ Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
 Target "Release" <| fun _ -> 
     Release.PackAll()
     Sign.ValidateNugetDllAreSignedCorrectly()
-
-Target "Docs" <| fun _ -> Documentation.Execute "build" 
-
-Target "DocsPreview" <| fun _ -> 
-  Documentation.Execute "plugin install livereload" 
-  Documentation.Execute "preview" 
 
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
@@ -86,7 +80,6 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 "Build"
   ==> "Release"
 
-"DocsPreview"
 "BuildApp"
 "CreateKeysIfAbsent"
 "Version"

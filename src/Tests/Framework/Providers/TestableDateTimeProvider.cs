@@ -9,8 +9,10 @@ namespace Tests.Framework
 {
 	public class TestableDateTimeProvider : DateTimeProvider
 	{
-		public DateTime MutableNow { get; set; } = DateTime.UtcNow;
+		private DateTime MutableNow { get; set; } = DateTime.UtcNow;
 
 		public override DateTime Now() => MutableNow;
+
+		public void ChangeTime(Func<DateTime, DateTime> change) => this.MutableNow = change(this.MutableNow);
 	}
 }

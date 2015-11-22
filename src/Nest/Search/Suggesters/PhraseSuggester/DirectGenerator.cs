@@ -11,7 +11,7 @@ namespace Nest
 	public interface IDirectGenerator
 	{
 		[JsonProperty(PropertyName = "field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty(PropertyName = "size")]
 		int? Size { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 
 	public class DirectGenerator : IDirectGenerator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? PrefixLen { get; set; }
 		public SuggestMode? SuggestMode { get; set; }
@@ -64,7 +64,7 @@ namespace Nest
 	{
 		private IDirectGenerator Self => this;
 
-		FieldName IDirectGenerator.Field { get; set; }
+		Field IDirectGenerator.Field { get; set; }
 
 		int? IDirectGenerator.Size { get; set; }
 
@@ -86,13 +86,13 @@ namespace Nest
 
 		string IDirectGenerator.PostFilter { get; set; }
 
-		public DirectGeneratorDescriptor<T> OnField(string field)
+		public DirectGeneratorDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public DirectGeneratorDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public DirectGeneratorDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

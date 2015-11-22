@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Analyzers, string, IAnalyzer>))]
-	public interface IAnalyzers : IHasADictionary { }
+	public interface IAnalyzers : IIsADictionary<string, IAnalyzer> { }
 
 	public class Analyzers : IsADictionary<string, IAnalyzer>, IAnalyzers
 	{
@@ -19,12 +19,11 @@ namespace Nest
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class AnalyzersDescriptor : HasADictionary<string, IAnalyzer>, IAnalyzers
+	public class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>
 	{
-		protected AnalyzersDescriptor Assign(string name, IAnalyzer analyzer) =>
-			Fluent.Assign<AnalyzersDescriptor, AnalyzersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
+		public AnalyzersDescriptor() : base(new Analyzers()) { }
 
-		public AnalyzersDescriptor Add(string name, IAnalyzer analyzer) => Assign(name, analyzer);
+		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 
 		/// <summary>
 		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters, 
@@ -34,7 +33,7 @@ namespace Nest
 		/// </summary>
 		public AnalyzersDescriptor Custom(string name, Func<CustomAnalyzerDescriptor, ICustomAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new CustomAnalyzerDescriptor()));
-		
+
 		/// <summary>
 		/// An analyzer of type keyword that “tokenizes” an entire stream as a single token. This is useful for data like zip codes, ids and so on. 
 		/// <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>

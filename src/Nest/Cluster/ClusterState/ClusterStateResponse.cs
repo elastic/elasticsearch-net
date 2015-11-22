@@ -5,37 +5,53 @@ namespace Nest
 {
 	public interface IClusterStateResponse : IResponse
 	{
-		string ClusterName { get; }
-		string MasterNode { get; }
-		Dictionary<string, NodeState> Nodes { get; }
-		MetadataState Metadata { get; }
-		RoutingTableState RoutingTable { get; }
-		RoutingNodesState RoutingNodes { get; }
-		BlockState Blocks { get; }
-	}
-
-	[JsonObject]
-	public class ClusterStateResponse : BaseResponse, IClusterStateResponse
-	{
 		[JsonProperty("cluster_name")]
-		public string ClusterName { get; internal set; }
+		string ClusterName { get; }
+
 		[JsonProperty("master_node")]
-		public string MasterNode { get; internal set; }
+		string MasterNode { get; }
+
+		[JsonProperty("state_uuid")]
+		string StateUUID { get; }
+
+		[JsonProperty("version")]
+		long Version { get; }
 
 		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, NodeState> Nodes { get; internal set; }
+		Dictionary<string, NodeState> Nodes { get; }
 
 		[JsonProperty("metadata")]
-		public MetadataState Metadata { get; internal set; }
+		MetadataState Metadata { get; }
 
 		[JsonProperty("routing_table")]
-		public RoutingTableState RoutingTable { get; internal set; }
+		RoutingTableState RoutingTable { get; }
 
 		[JsonProperty("routing_nodes")]
-		public RoutingNodesState RoutingNodes { get; internal set; }
+		RoutingNodesState RoutingNodes { get; }
 
 		[JsonProperty("blocks")]
+		BlockState Blocks { get; }
+	}
+
+	public class ClusterStateResponse : BaseResponse, IClusterStateResponse
+	{
+		public string ClusterName { get; internal set; }
+
+		public string MasterNode { get; internal set; }
+
+		public string StateUUID { get; internal set; }
+
+		public long Version { get; internal set; }
+
+		public Dictionary<string, NodeState> Nodes { get; internal set; }
+
+		public MetadataState Metadata { get; internal set; }
+
+		public RoutingTableState RoutingTable { get; internal set; }
+
+		public RoutingNodesState RoutingNodes { get; internal set; }
+
 		public BlockState Blocks { get; internal set; }
 	}
 }

@@ -50,7 +50,7 @@ namespace Nest.Domain
 		public K[] FieldValues<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
 			where TBindTo : class
 		{
-			var path = this.Infer.FieldName(objectPath);
+			var path = this.Infer.Field(objectPath);
 			return this.FieldArray<K[]>(path);
 		}
 
@@ -60,7 +60,7 @@ namespace Nest.Domain
 		/// </summary>
 		public K[] FieldValues<K>(Expression<Func<T, K>> objectPath)
 		{
-			var path = this.Infer.FieldName(objectPath);
+			var path = this.Infer.Field(objectPath);
 			return this.FieldArray<K[]>(path);
 		}
 

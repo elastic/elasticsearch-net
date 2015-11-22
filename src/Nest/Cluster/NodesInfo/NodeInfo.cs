@@ -14,30 +14,38 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "transport_address")]
 		public string TransportAddress { get; internal set; }
+
 		[JsonProperty(PropertyName = "host")]
 		public string Hostname { get; internal set; }
+
+		[JsonProperty(PropertyName = "ip")]
+		public string Ip { get; internal set; }
+
 		[JsonProperty(PropertyName = "version")]
 		public string Version { get; internal set; }
+
+		[JsonProperty(PropertyName = "build")]
+		public string Build { get; internal set; }
+
 		[JsonProperty(PropertyName = "http_address")]
 		public string HttpAddress { get; internal set; }
-
 
 		[JsonProperty(PropertyName = "settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public DynamicResponse Settings { get; internal set; }
 
 		[JsonProperty(PropertyName = "os")]
-		public NodeInfoOS OS { get; internal set; }
+		public NodeOperatingSystemInfo OperatingSystem { get; internal set; }
 
 		[JsonProperty(PropertyName = "process")]
-		public NodeInfoProcess Process { get; internal set; }
+		public NodeProcessInfo Process { get; internal set; }
 
 		[JsonProperty(PropertyName = "jvm")]
-		public NodeInfoJVM JVM { get; internal set; }
+		public NodeJvmInfo Jvm { get; internal set; }
 
 		[JsonProperty(PropertyName = "thread_pool")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, NodeInfoThreadPoolThreadInfo> ThreadPool { get; internal set; }
+		public Dictionary<string, NodeThreadPoolInfo> ThreadPool { get; internal set; }
 
 		[JsonProperty(PropertyName = "network")]
 		public NodeInfoNetwork Network { get; internal set; }
@@ -46,16 +54,25 @@ namespace Nest
 		public NodeInfoTransport Transport { get; internal set; }
 
 		[JsonProperty(PropertyName = "http")]
-		public NodeInfoHTTP HTTP { get; internal set; }
+		public NodeInfoHttp Http { get; internal set; }
 
-    [JsonProperty("plugins")]
-    public List<PluginStats> Plugins { get; internal set; }
+		[JsonProperty("plugins")]
+		public List<PluginStats> Plugins { get; internal set; }
 	}
 
 	[JsonObject]
-	public class NodeInfoOS
+	public class NodeOperatingSystemInfo
 	{
-		[JsonProperty(PropertyName = "refresh_interval")]
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; internal set; }
+
+		[JsonProperty(PropertyName = "arch")]
+		public string Architecture { get; internal set; }
+
+		[JsonProperty(PropertyName = "version")]
+		public string Version { get; internal set; }
+
+		[JsonProperty(PropertyName = "refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
 		[JsonProperty(PropertyName = "available_processors")]
@@ -63,8 +80,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "cpu")]
 		public NodeInfoOSCPU Cpu { get; internal set; }
+
 		[JsonProperty(PropertyName = "mem")]
 		public NodeInfoMemory Mem { get; internal set; }
+
 		[JsonProperty(PropertyName = "swap")]
 		public NodeInfoMemory Swap { get; internal set; }
 	}
@@ -100,18 +119,21 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class NodeInfoProcess
+	public class NodeProcessInfo
 	{
 		[JsonProperty(PropertyName = "refresh_interval")]
-		public int RefreshInterval { get; internal set; }
+		public string RefreshInterval { get; internal set; }
+
+		[JsonProperty(PropertyName = "refresh_interval_in_millis")]
+		public long RefreshIntervalInMilliseconds { get; internal set; }
+
 		[JsonProperty(PropertyName = "id")]
 		public long Id { get; internal set; }
-		[JsonProperty(PropertyName = "max_file_descriptors")]
-		public int MaxFileDescriptors { get; internal set; }
+
 	}
 
 	[JsonObject]
-	public class NodeInfoJVM
+	public class NodeJvmInfo
 	{
 		[JsonProperty(PropertyName = "pid")]
 		public int PID { get; internal set; }
@@ -123,7 +145,11 @@ namespace Nest
 		public string VMVersion { get; internal set; }
 		[JsonProperty(PropertyName = "vm_vendor")]
 		public string VMVendor { get; internal set; }
-		[JsonProperty(PropertyName = "start_time")]
+		[JsonProperty(PropertyName = "memory_pools")]
+		public IEnumerable<string> MemoryPools { get; internal set; }
+		[JsonProperty(PropertyName = "gc_collectors")]
+		public IEnumerable<string> GCCollectors { get; internal set; }
+		[JsonProperty(PropertyName = "start_time_in_millis")]
 		public long StartTime { get; internal set; }
 		[JsonProperty(PropertyName = "mem")]
 		public NodeInfoJVMMemory Memory { get; internal set; }
@@ -155,7 +181,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class NodeInfoThreadPoolThreadInfo
+	public class NodeThreadPoolInfo
 	{
 		[JsonProperty(PropertyName = "type")]
 		public string Type { get; internal set; }
@@ -163,6 +189,8 @@ namespace Nest
 		public int? Min { get; internal set; }
 		[JsonProperty(PropertyName = "max")]
 		public int? Max { get; internal set; }
+		[JsonProperty(PropertyName = "queue_size")]
+		public int? QueueSize { get; internal set; }
 		[JsonProperty(PropertyName = "keep_alive")]
 		public string KeepAlive { get; internal set; }
 	}
@@ -191,16 +219,16 @@ namespace Nest
 	public class NodeInfoTransport
 	{
 		[JsonProperty(PropertyName = "bound_address")]
-		public string BoundAddress { get; internal set; }
+		public IEnumerable<string> BoundAddress { get; internal set; }
 		[JsonProperty(PropertyName = "publish_address")]
 		public string PublishAddress { get; internal set; }
 	}
 
 	[JsonObject]
-	public class NodeInfoHTTP
+	public class NodeInfoHttp
 	{
 		[JsonProperty(PropertyName = "bound_address")]
-		public string BoundAddress { get; internal set; }
+		public IEnumerable<string> BoundAddress { get; internal set; }
 		[JsonProperty(PropertyName = "publish_address")]
 		public string PublishAddress { get; internal set; }
 		[JsonProperty(PropertyName = "max_content_length")]
@@ -209,5 +237,3 @@ namespace Nest
 		public long MaxContentLengthInBytes { get; internal set; }
 	}
 }
-// 503-528-3500
-// 503-528-3549 // 3570

@@ -7,10 +7,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument,TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
+	public partial interface IUpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
-		where TPartialDocument : class 
+		where TPartialDocument : class
 	{
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		string Language { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
@@ -38,60 +38,10 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
-	internal static class UpdateRequestPathInfo
-	{
-		public static void Update<TDocument, TPartialDocument>(
-			IConnectionSettingsValues settings,
-			ElasticsearchPathInfo<UpdateRequestParameters> pathInfo,
-			IUpdateRequest<TDocument, TPartialDocument> self)
-			where TDocument : class
-			where TPartialDocument : class
-		{
-			if (pathInfo.Id.IsNullOrEmpty())
-			{
-				if (self.Doc != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Doc);
-				else if (self.Upsert != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Upsert);
-			}
-
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
-	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
-		where TDocument : class 
-	{
-		public UpdateRequest(string id) : base(id) { }
-
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument document, bool useAsUpsert = false) : base(document, useAsUpsert)
-		{
-			
-		}
-	}
-
-	public partial class UpdateRequest<TDocument,TPartialDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TDocument>, IUpdateRequest<TDocument, TPartialDocument> 
+	public partial class UpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
-		where TPartialDocument : class 
+		where TPartialDocument : class
 	{
-		public UpdateRequest(string id) : base(id) { }
-
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument idFrom, bool useAsUpsert = false) : base(idFrom)
-		{
-			if (useAsUpsert)
-				this.Upsert = idFrom;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
-		}
-		
-
 		public string Script { get; set; }
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
@@ -101,19 +51,14 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 	}
 
-	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
-		: DocumentPathDescriptor<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, TDocument>
-		, IUpdateRequest<TDocument, TPartialDocument> 
-		where TDocument : class 
+	public partial class UpdateDescriptor<TDocument, TPartialDocument>
+		where TDocument : class
 		where TPartialDocument : class
 	{
-
-		private IUpdateRequest<TDocument, TPartialDocument> Self => this;
-
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptId { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptFile { get; set; }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Language { get; set; }
@@ -126,89 +71,34 @@ namespace Nest
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
-		
-		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)
-		{
-			script.ThrowIfNull("script");
-			Self.Script = script;
-			return this;
-		}
 
-		public UpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile)
-		{
-			scriptFile.ThrowIfNull("scriptFile");
-			Self.ScriptFile = scriptFile;
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script) => Assign(a => a.Script = script);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
-		{
-			paramDictionary.ThrowIfNull("paramDictionary");
-			Self.Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> Language(string language)
-		{
-			Self.Language = language;
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
+			Assign(a => a.Params = paramDictionary(new FluentDictionary<string, object>()));
 
-		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
-		{
-			((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
-			if (useAsUpsert)
-				return this.Upsert(document);
-			return this;
-		}
-
+		public UpdateDescriptor<TDocument, TPartialDocument> Language(string language) => Assign(a => a.Language = language);
 
 		/// <summary>
 		/// The full document to be created if an existing document does not exist for a partial merge.
 		/// </summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Upsert(TDocument upsertObject)
-		{
-			upsertObject.ThrowIfNull("upsertObject");
-			Self.Upsert = upsertObject;
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> Upsert(TDocument upsertObject) => Assign(a => a.Upsert = upsertObject);
 
 		/// <summary>
 		/// The partial update document to be merged on to the existing object.
 		/// </summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object)
-		{
-			Self.Doc = @object;
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object) => Assign(a => a.Doc = @object);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool docAsUpsert = true)
-		{
-			Self.DocAsUpsert = docAsUpsert;
-			return this;
-		}
+		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.AddQueryString("fields", fields);
-			return this;
-		}
-		
-			
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
-			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
-			return this;
-		}
-			
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
-		}
+		///<summary>A comma-separated list of fields to return in the response</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
 	}
 }

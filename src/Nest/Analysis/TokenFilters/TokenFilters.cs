@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TokenFilters, string, ITokenFilter>))]
-	public interface ITokenFilters : IHasADictionary { }
+	public interface ITokenFilters : IIsADictionary<string, ITokenFilter> { }
 
 	public class TokenFilters : IsADictionary<string, ITokenFilter>, ITokenFilters
 	{
@@ -19,13 +19,11 @@ namespace Nest
 		public void Add(string name, ITokenFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenFiltersDescriptor : HasADictionary<string, ITokenFilter>, ITokenFilters
+	public class TokenFiltersDescriptor : IsADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>
 	{
-		protected TokenFiltersDescriptor Assign(string name, ITokenFilter analyzer) =>
-			Fluent.Assign<TokenFiltersDescriptor, TokenFiltersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
+		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
 
-		public TokenFiltersDescriptor Add(string name, ITokenFilter analyzer) => Assign(name, analyzer);
-
+		public TokenFiltersDescriptor UserDefined(string name, ITokenFilter analyzer) => Assign(name, analyzer);
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using a dictionary

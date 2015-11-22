@@ -4,97 +4,52 @@ using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using System.ServiceModel.Configuration;
 
 namespace Nest
 {
-	public interface ITermVectorsRequest : IDocumentOptionalPath<TermVectorsRequestParameters>
+	public partial interface ITermVectorsRequest<TDocument>
+		where TDocument : class
 	{
 		/// <summary>
 		/// An optional document to get termvectors for instead of using an already indexed document
 		/// </summary>
 		[JsonProperty("doc")]
-		object Document { get; set; }
+		TDocument Document { get; set; }
 
 		[JsonProperty("per_field_analyzer")]
-		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
+		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 	}
 
-	public interface ITermVectorsRequest<T> : ITermVectorsRequest where T : class { }
-
-	internal static class TermVectorsPathInfo
+	public partial class TermVectorsRequest<TDocument>
+		where TDocument : class
 	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermVectorsRequestParameters> pathInfo, ITermVectorsRequest request)
+		HttpMethod IRequest.HttpMethod => this.Document == null ? HttpMethod.GET : HttpMethod.POST;
+
+		public TDocument Document { get; set; }
+
+		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
+
+		partial void DocumentFromPath(TDocument document)
 		{
-			pathInfo.HttpMethod = request.Document == null ? HttpMethod.GET : HttpMethod.POST;
-		}
-	}
-
-	public partial class TermVectorsRequest : DocumentOptionalPathBase<TermVectorsRequestParameters>, ITermVectorsRequest
-	{
-		public TermVectorsRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermVectorsRequestParameters> pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
-		}
-
-		public object Document { get; set; }
-
-		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
-	}
-
-	public partial class TermVectorsRequest<T> : DocumentOptionalPathBase<TermVectorsRequestParameters, T>, ITermVectorsRequest<T>
-		where T : class
-	{
-		object ITermVectorsRequest.Document { get; set; }
-
-		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
-
-		public TermVectorsRequest(string id) : base(id) { }
-
-		public TermVectorsRequest(long id) : base(id) { }
-
-		public TermVectorsRequest(T document) : base(document) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermVectorsRequestParameters> pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
+			Self.Document = document;
+			if (Self.Document != null)
+				Self.RouteValues.Remove("id");
 		}
 	}
 
 	[DescriptorFor("Termvectors")]
-	public partial class TermVectorsDescriptor<T> : DocumentOptionalPathDescriptor<TermVectorsDescriptor<T>, TermVectorsRequestParameters, T>
-		, ITermVectorsRequest
-		where T : class
+	public partial class TermVectorsDescriptor<TDocument> where TDocument : class
 	{
-		private ITermVectorsRequest Self => this;
-		
-		object ITermVectorsRequest.Document { get; set; }
+		HttpMethod IRequest.HttpMethod => Self.Document == null ? HttpMethod.GET : HttpMethod.POST;
 
-		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
+		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
 
-		public TermVectorsDescriptor<T> Document<TDocument>(TDocument document) where TDocument : class
-		{
-			Self.Document = document;	
-			return this;
-		}
-		public TermVectorsDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<T, object>>, string>, FluentDictionary<Expression<Func<T, object>>, string>> analyzerSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
-			analyzerSelector(d);
-			Self.PerFieldAnalyzer = d.ToDictionary(x => FieldName.Create(x.Key), x => x.Value);
-			return this;
-		}
+		IPerFieldAnalyzer ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
 
-		public TermVectorsDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<FieldName, string>, FluentDictionary<FieldName, string>> analyzerSelector)
-		{
-			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
-			return this;
-		}
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermVectorsRequestParameters> pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
-		}
+		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
 
+		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector) =>
+			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
 	}
 }

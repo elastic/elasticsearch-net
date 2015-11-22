@@ -7,80 +7,41 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiTermVectorsRequest : IIndexTypePath<MultiTermVectorsRequestParameters>
+	public partial interface IMultiTermVectorsRequest 
 	{
 		[JsonProperty("docs")]
-		IEnumerable<MultiTermVectorDocument> Documents { get; set;}
+		IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 	}
 
-	internal static class MultiTermVectorsPathInfo
+	public partial class MultiTermVectorsRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo, IMultiTermVectorsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
-	{
-		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
-		{
-		}
-
-		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
-			MultiTermVectorsPathInfo.Update(pathInfo, this);
-		}
-
+		public IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 	}
 
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>, IMultiTermVectorsRequest
-		where T : class
+	public partial class MultiTermVectorsDescriptor
 	{
-		private IMultiTermVectorsRequest Self => this;
+		private List<IMultiTermVectorOperation> _operations = new List<IMultiTermVectorOperation>();
+		IEnumerable<IMultiTermVectorOperation> IMultiTermVectorsRequest.Documents { get { return this._operations; }
+			set { this._operations = value?.ToList(); }
+		}	
 
-		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
+		public MultiTermVectorsDescriptor Get<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> getSelector)
+			where T : class => 
+			Assign(a => this._operations.AddIfNotNull(getSelector?.Invoke(new MultiTermVectorOperationDescriptor<T>())));
 
-		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
-		{
-			Self.Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d=>d!= null).ToList();
-			return this;
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<long> ids,
+			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> getSelector = null)
+			where T : class => 
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
-		{
-			Self.Documents = documents;
-			return this;
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiTermVectorOperationDescriptor<T>, string, IMultiTermVectorOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor<T> Ids(params string[] ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
-		}
-		
-		public MultiTermVectorsDescriptor<T> Ids(params long[] ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
-		}
-		
-		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<string> ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
-		}
-		
-		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<long> ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<Id> ids, Func<MultiTermVectorOperationDescriptor<T>, Id, IMultiTermVectorOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
 	}
 }

@@ -6,34 +6,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetSnapshotRequest : IRepositorySnapshotPath<GetSnapshotRequestParameters> { }
+	public partial interface IGetSnapshotRequest { }
 
-	internal static class GetSnapshotPathInfo
+	public partial class GetSnapshotRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo, IGetSnapshotRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-	
-	public partial class GetSnapshotRequest : RepositorySnapshotPathBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
-	{
-		public GetSnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
-		{
-			GetSnapshotPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("SnapshotGet")]
-	public partial class GetSnapshotDescriptor : RepositorySnapshotPathDescriptor<GetSnapshotDescriptor, GetSnapshotRequestParameters>, IGetSnapshotRequest
+	public partial class GetSnapshotDescriptor 
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo)
-		{
-			GetSnapshotPathInfo.Update(pathInfo, this);
-		}
-
 	}
 }

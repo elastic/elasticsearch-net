@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis.CSharp;
 using Nest.Litterateur.Walkers;
 using System;
 using System.Collections.Generic;
@@ -7,17 +6,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Nest.Litterateur.Documentation
 {
-	abstract class DocumentationFile
+	public abstract class DocumentationFile
 	{
-		protected readonly static string DocFolder = @"..\..\..\..\..\docs\contents\new";
+		protected static readonly string DocFolder = @"..\..\..\..\..\docs\contents\new";
 
-		public FileInfo FileLocation { get; }
+		protected FileInfo FileLocation { get; }
 
-		public string Extension => this.FileLocation?.Extension?.ToLowerInvariant();
+		protected string Extension => this.FileLocation?.Extension.ToLowerInvariant();
 
 		protected DocumentationFile(FileInfo fileLocation)
 		{
@@ -50,7 +48,8 @@ namespace Nest.Litterateur.Documentation
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(DocFolder, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
-			Directory.CreateDirectory(fileInfo.Directory.FullName);
+			if (fileInfo.Directory != null)
+				Directory.CreateDirectory(fileInfo.Directory.FullName);
 			return fileInfo;
 		}
 	}
@@ -73,7 +72,8 @@ namespace Nest.Litterateur.Documentation
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(DocFolder, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
-			Directory.CreateDirectory(fileInfo.Directory.FullName);
+			if (fileInfo.Directory != null)
+				Directory.CreateDirectory(fileInfo.Directory.FullName);
 			return fileInfo;
 		}
 	}

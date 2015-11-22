@@ -1,6 +1,5 @@
 ﻿using System;
 using PurifyNet;
-using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -76,8 +75,10 @@ namespace Elasticsearch.Net.Connection
 			};
 
 
+		// ReSharper disable once PossibleNullReferenceException
 		public static bool operator ==(Node left, Node right) => left.Equals(right);
 
+		// ReSharper disable once PossibleNullReferenceException
 		public static bool operator !=(Node left, Node right) => !left.Equals(right);
 
 		public static implicit operator Node(Uri uri) => new Node(uri);

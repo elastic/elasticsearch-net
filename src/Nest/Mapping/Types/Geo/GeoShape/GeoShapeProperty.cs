@@ -7,13 +7,13 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IGeoShapeProperty : IElasticsearchProperty
+	public interface IGeoShapeProperty : IProperty
 	{
 		[JsonProperty("tree")]
 		GeoTree? Tree { get; set; }
 
 		[JsonProperty("precision")]
-		GeoPrecision Precision { get; set; }
+		GeoDistance Precision { get; set; }
 
 		[JsonProperty("orientation")]
 		GeoOrientation? Orientation { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		double? DistanceErrorPercentage { get; set; }
 	}
 
-	public class GeoShapeProperty : ElasticsearchProperty, IGeoShapeProperty
+	public class GeoShapeProperty : Property, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
 		
@@ -40,7 +40,7 @@ namespace Nest
 
 		public GeoTree? Tree { get; set; }
 
-		public GeoPrecision Precision { get; set; }
+		public GeoDistance Precision { get; set; }
 
 		public GeoOrientation? Orientation { get; set; }
 
@@ -54,7 +54,7 @@ namespace Nest
 		where T : class
 	{
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
-		GeoPrecision IGeoShapeProperty.Precision { get; set; }
+		GeoDistance IGeoShapeProperty.Precision { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
@@ -65,8 +65,8 @@ namespace Nest
 
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
 
-		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecisionUnit unit) =>
-			Assign(a => a.Precision = new GeoPrecision(precision, unit));
+		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecision unit) =>
+			Assign(a => a.Precision = new GeoDistance(precision, unit));
 
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);
 

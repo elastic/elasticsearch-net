@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
 namespace Nest
@@ -29,6 +28,7 @@ namespace Nest
 
 		public IElasticsearchClient Raw { get; }
 
+		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
 		public ElasticClient(IConnectionSettingsValues connectionSettings) 
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
@@ -69,48 +69,45 @@ namespace Nest
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 
-
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
 		{
-			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
-			var response = dispatch(pathInfo, descriptor);
-			return ResultsSelector<D, Q, R>(response, descriptor);
+			return this.Dispatcher.Dispatch<D,Q,R>(request, null, dispatch);
 		}
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
 		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.Dispatcher.Dispatch<D, Q, R>(descriptor, dispatch);
+			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+
+			var response = dispatch(request, request);
+			return ResultsSelector<D, Q, R>(response, request);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
 		{
-			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
-			return dispatch(pathInfo, descriptor)
+			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
+		}
+
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
+		{
+			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+			return dispatch(request, request)
 				.ContinueWith<I>(r =>
 				{
 					if (r.IsFaulted && r.Exception != null)
 					{
-						var mr = r.Exception.InnerException as MaxRetryException;
-						if (mr != null)
-							mr.RethrowKeepingStackTrace();
-
+						//TODO this whole continuewith smells, investigate
 						var ae = r.Exception.Flatten();
 						if (ae.InnerException != null)
 							ae.InnerException.RethrowKeepingStackTrace();
 
 						ae.RethrowKeepingStackTrace();
 					}
-					return ResultsSelector<D, Q, R>(r.Result, descriptor);
+					return ResultsSelector<D, Q, R>(r.Result, request);
 				});
-		}
-
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
-		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.Dispatcher.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
 		private static R ResultsSelector<D, Q, R>(
@@ -128,26 +125,16 @@ namespace Nest
 		{
 			var r = typeof(R).CreateInstance<R>();
 			((IBodyWithApiCallDetails)r).CallDetails = response;
-			r.IsValid = false;
 			return r;
 		}
 
-		private TRequest ForceConfiguration<TRequest>(
-			Func<TRequest, TRequest> selector, Action<IRequestConfiguration> setter
-			)
-			where TRequest : class, IRequest, new()
+		private TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
+			where TRequest : IRequest<TParams>
+			where TParams : IRequestParameters, new()
 		{
-			selector = selector ?? (s => s);
-			var request = selector(new TRequest());
-			return ForceConfiguration(request, setter);
-		}
-
-		private TRequest ForceConfiguration<TRequest>(TRequest request, Action<IRequestConfiguration> setter)
-			where TRequest : IRequest
-		{
-			var configuration = request.RequestConfiguration ?? new RequestConfiguration();
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			setter(configuration);
-			request.RequestConfiguration = configuration;
+			request.RequestParameters.RequestConfiguration = configuration;
 			return request;
 		}
 	}

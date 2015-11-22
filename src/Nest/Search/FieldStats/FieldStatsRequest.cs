@@ -6,33 +6,9 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IFieldStatsRequest : IIndicesOptionalExplicitAllPath<FieldStatsRequestParameters>
-	{
-	}
+	public partial interface IFieldStatsRequest { }
 
-	public partial class FieldStatsRequest : IndicesOptionalExplicitAllPathBase<FieldStatsRequestParameters>, IFieldStatsRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
-		{
-			FieldStatsPathInfo.Update(settings, pathInfo);
-		}
-	}
+	public partial class FieldStatsRequest { }
 
-	internal static class FieldStatsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-
-	public partial class FieldStatsDescriptor 
-		: IndicesOptionalExplicitAllPathDescriptor<FieldStatsDescriptor, FieldStatsRequestParameters>
-		, IFieldStatsRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
-		{
-			FieldStatsPathInfo.Update(settings, pathInfo);	
-		}
-	}
+	public partial class FieldStatsDescriptor { }
 }

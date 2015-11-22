@@ -4,6 +4,7 @@ using Nest;
 using System;
 using System.Threading.Tasks;
 using Tests.Framework.MockData;
+using Elasticsearch.Net.Connection;
 
 namespace Tests.Framework
 {
@@ -13,11 +14,13 @@ namespace Tests.Framework
 		private readonly VirtualCluster _cluster;
 		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
-		private FixedPipelineFactory _fixedRequestPipeline;
+		public FixedPipelineFactory _fixedRequestPipeline;
 
-		public VirtualizedCluster(VirtualCluster cluster, IConnectionPool pool, ConnectionSettings settings)
+		public IConnectionPool ConnectionPool => this._client.ConnectionSettings.ConnectionPool;
+
+		public VirtualizedCluster(VirtualCluster cluster, IConnectionPool pool, TestableDateTimeProvider dateTimeProvider, ConnectionSettings settings)
 		{
-			this._dateTimeProvider = new TestableDateTimeProvider();
+			this._dateTimeProvider = dateTimeProvider;
 			this._fixedRequestPipeline = new FixedPipelineFactory(settings, this._dateTimeProvider);
 			this._client = this._fixedRequestPipeline.Client;
 
@@ -29,7 +32,7 @@ namespace Tests.Framework
 
 		public async Task<ISearchResponse<Project>> ClientCallAsync() => await this._client.SearchAsync<Project>(s => s);
 
-		public void ChangeTime(Func<DateTime, DateTime> change) => change(_dateTimeProvider.MutableNow);
+		public void ChangeTime(Func<DateTime, DateTime> change) => _dateTimeProvider.ChangeTime(change);
 	}
 
 }

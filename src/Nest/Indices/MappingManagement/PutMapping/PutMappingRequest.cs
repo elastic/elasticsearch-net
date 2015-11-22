@@ -5,55 +5,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
-	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>, ITypeMapping
+	public partial interface IPutMappingRequest : ITypeMapping
 	{
 	}
 
-	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class {}
+	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	internal static class PutMappingPathInfo
+	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		public static void Update(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo, IPutMappingRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
-	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
-	{
-		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
-		public PutMappingRequest()
-		{
-		}
-
-		/// <summary>
-		/// Calls putmapping on /_all/{type}
-		/// </summary>
-		public PutMappingRequest(TypeName type)
-		{
-			this.Type = type;
-			this.AllIndices = true;
-		}
-
-		/// <summary>
-		/// Calls putmapping on /{indices}/{type}
-		/// </summary>
-		public PutMappingRequest(IEnumerable<IndexName> indices, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = indices;
-		}
-
-		/// <summary>
-		/// Calls putmapping on /{index}/{type}
-		/// </summary>
-		public PutMappingRequest(IndexName index, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = new [] { index };
-		}
+		// Needed for ReadAsType
+		internal PutMappingRequest() { }
 
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
@@ -94,21 +56,18 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<MappingTransform> Transform { get; set; }
+		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
 		public ITypeField TypeField { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
-		}
 	}
 
-	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
-		where T : class
+	public partial class PutMappingRequest<T> where T : class
 	{
+		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
+
+		//TODO constructors
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
 		/// <inheritdoc/>
@@ -148,25 +107,22 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<MappingTransform> Transform { get; set; }
+		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
 		public ITypeField TypeField { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
-		}
 	}
+
+	//TODO why is there no typed generated descriptor
 
 	[DescriptorFor("IndicesPutMapping")]
-	public partial class PutMappingDescriptor<T> :
-		IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>, IPutMappingRequest<T>
-		where T : class
+	public partial class PutMappingDescriptor<T> where T : class
 	{
+		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
+		public PutMappingDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)) { }
+
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
-		private ITypeMapping Self => this;
 
 		IAllField ITypeMapping.AllField { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }
@@ -187,7 +143,7 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 		ITimestampField ITypeMapping.TimestampField { get; set; }
-		IList<MappingTransform> ITypeMapping.Transform { get; set; }
+		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 		ITypeField ITypeMapping.TypeField { get; set; }
 
@@ -197,7 +153,13 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a => a.Properties = new PropertyWalker(typeof(T), visitor).GetProperties());
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
+		{
+			a.Properties = a.Properties ?? new Properties();
+			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
+			foreach (var autoProperty in autoProperties)
+				a.Properties[autoProperty.Key] = autoProperty.Value;
+		});
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
@@ -215,7 +177,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer)=> Assign(a => a.SearchAnalyzer = searchAnalyzer);
+		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
@@ -242,14 +204,13 @@ namespace Nest
 		public PutMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, MappingTransformDescriptor> mappingTransformSelector)
+		public PutMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, IMappingTransform> mappingTransformSelector)
 		{
-		/// <inheritdoc/>
-			mappingTransformSelector.ThrowIfNull("mappingTransformSelector");
-			var transformDescriptor = mappingTransformSelector(new MappingTransformDescriptor());
-			if (Self.Transform == null)
-				Self.Transform = new List<MappingTransform>();
-			Self.Transform.Add(transformDescriptor._mappingTransform);
+			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
+			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
+			if (t == null) return this;
+			if (((IPutMappingRequest)this).Transform == null) ((IPutMappingRequest)this).Transform = new List<IMappingTransform>();
+			((IPutMappingRequest)this).Transform.Add(t);
 			return this;
 		}
 
@@ -280,7 +241,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector) => Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>()));
+		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
+			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(a.Properties))?.Value);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)
@@ -288,18 +250,13 @@ namespace Nest
 			//TODO _DELETES concept is wrong?
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
 			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
-			if (Self.DynamicTemplates == null)
-				Self.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
+			if (((IPutMappingRequest)this).DynamicTemplates == null)
+				((IPutMappingRequest)this).DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 			foreach (var t in templates._Deletes)
-				Self.DynamicTemplates.Remove(t);
+				((IPutMappingRequest)this).DynamicTemplates.Remove(t);
 			foreach (var t in templates.Templates)
-				Self.DynamicTemplates[t.Key] = t.Value;
+				((IPutMappingRequest)this).DynamicTemplates[t.Key] = t.Value;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
 		}
 	}
 }

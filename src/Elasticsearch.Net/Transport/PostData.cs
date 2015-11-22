@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Elasticsearch.Net.Connection.Configuration;
-using PurifyNet;
 using System.IO;
-using System.Collections.Specialized;
 using System.Threading;
+using static Elasticsearch.Net.Connection.PostType;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -20,40 +15,48 @@ namespace Elasticsearch.Net.Connection
 	}
 	public interface IPostData<out T> : IPostData { }
 
+	public enum PostType
+	{
+		ByteArray,
+		LiteralString,
+		EnumerableOfString,
+		EnumerableOfObject,
+		Serializable
+	}
+
 	public class PostData<T> : IPostData<T>
 	{
-		protected readonly string LiteralString;
-		protected readonly IEnumerable<string> EnumurabeOfStrings;
-		protected readonly IEnumerable<object> EnumerableOfObject;
-		protected readonly T Serializable;
+		private readonly string _literalString;
+		private readonly IEnumerable<string> _enumurabeOfStrings;
+		private readonly IEnumerable<object> _enumerableOfObject;
+		private readonly T _serializable;
 
-		public byte[] Bytes { get; private set; }
+		public byte[] WrittenBytes { get; private set; }
+		public PostType Type { get; }
 
-		readonly int _tag;
-
-		public PostData(byte[] item) { Bytes = item; _tag = 0; }
-		public PostData(string item) { LiteralString = item; _tag = 1; }
-		public PostData(IEnumerable<string> item) { EnumurabeOfStrings = item; _tag = 2; }
-		public PostData(IEnumerable<object> item) { EnumerableOfObject = item; _tag = 3; }
-		public PostData(T item) { Serializable = item; _tag = 4; }
+		public PostData(byte[] item) { WrittenBytes = item; Type = ByteArray; }
+		public PostData(string item) { _literalString = item; Type = LiteralString; }
+		public PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = EnumerableOfString; }
+		public PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = EnumerableOfObject; }
+		public PostData(T item) { _serializable = item; Type = Serializable; }
 
 		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
-			switch (_tag)
+			switch (Type)
 			{
-				case 0:
-					ms = new MemoryStream(Bytes);
+				case ByteArray: 
+					ms = new MemoryStream(WrittenBytes);
 					break;
-				case 1:
-					ms = new MemoryStream(LiteralString?.Utf8Bytes());
+				case LiteralString: 
+					ms = new MemoryStream(_literalString?.Utf8Bytes());
 					break;
-				case 2:
-					ms = EnumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes()) : null;
+				case EnumerableOfString: 
+					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case 3:
-					if (!EnumerableOfObject.HasAny()) return;
+				case EnumerableOfObject:
+					if (!_enumerableOfObject.HasAny()) return;
 
 					if (settings.DisableDirectStreaming)
 					{
@@ -61,20 +64,20 @@ namespace Elasticsearch.Net.Connection
 						stream = ms;
 					}
 					else stream = writableStream;
-					foreach (var o in EnumerableOfObject)
+					foreach (var o in _enumerableOfObject)
 					{
 						settings.Serializer.Serialize(o, stream, indent);
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
-				case 4:
+				case Serializable: 
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this.Serializable, writableStream, indent);
+					settings.Serializer.Serialize(this._serializable, stream, indent);
 					break;
 			}
 			if (ms != null)
@@ -82,56 +85,56 @@ namespace Elasticsearch.Net.Connection
 				ms.Position = 0;
 				ms.CopyTo(writableStream, 8096);
 			}
-			if (this._tag != 0)
-				this.Bytes = ms?.ToArray();
+			if (this.Type != 0)
+				this.WrittenBytes = ms?.ToArray();
 		}
 
 		public async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
-			switch (_tag)
+			switch (Type)
 			{
-				case 0:
-					ms = new MemoryStream(Bytes);
+				case ByteArray: 
+					ms = new MemoryStream(WrittenBytes);
 					break;
-				case 1:
-					ms = new MemoryStream(LiteralString?.Utf8Bytes());
+				case LiteralString: 
+					ms = new MemoryStream(_literalString?.Utf8Bytes());
 					break;
-				case 2:
-					ms = EnumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes()) : null;
+				case EnumerableOfString: 
+					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case 3:
-					if (!EnumerableOfObject.HasAny()) return;
+				case EnumerableOfObject:
+					if (!_enumerableOfObject.HasAny()) return;
 					if (settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
 					else stream = writableStream;
-					foreach (var o in EnumerableOfObject)
+					foreach (var o in _enumerableOfObject)
 					{
 						settings.Serializer.Serialize(o, stream, indent);
-						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
+						await stream.WriteAsync(new byte[] { (byte)'\n' }, 0, 1, cancellationToken);
 					}
 					break;
-				case 4:
+				case Serializable: 
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this.Serializable, writableStream, indent);
+					settings.Serializer.Serialize(this._serializable, stream, indent);
 					break;
 			}
 			if (ms != null)
 			{
 				ms.Position = 0;
-				await ms.CopyToAsync(writableStream, 8096);
+				await ms.CopyToAsync(writableStream, 8096, cancellationToken);
 			}
-			if (this._tag != 0)
-				this.Bytes = ms?.ToArray();
+			if (this.Type != 0)
+				this.WrittenBytes = ms?.ToArray();
 		}
 
 		public static implicit operator PostData<T>(byte[] byteArray) => new PostData<T>(byteArray);

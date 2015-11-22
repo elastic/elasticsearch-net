@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
@@ -55,7 +54,7 @@ namespace Elasticsearch.Net
 			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
 			if (allow404)
 				requestParams.RequestConfiguration.AllowedStatusCodes = new[] { 404 };
-			if (!contentType.IsNullOrEmpty())
+			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			return requestParams;
 		}
