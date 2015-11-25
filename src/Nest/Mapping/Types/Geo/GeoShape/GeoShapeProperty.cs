@@ -28,15 +28,6 @@ namespace Nest
 	public class GeoShapeProperty : Property, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
-		
-		internal GeoShapeProperty(GeoShapeAttribute attribute)
-			: base("geo_shape", attribute)
-		{
-			Tree = attribute.Tree;
-			Orientation = attribute.Orientation;
-			TreeLevels = attribute.TreeLevels;
-			DistanceErrorPercentage = attribute.DistanceErrorPercentage;
-		}
 
 		public GeoTree? Tree { get; set; }
 

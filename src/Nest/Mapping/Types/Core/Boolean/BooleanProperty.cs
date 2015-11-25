@@ -28,14 +28,6 @@ namespace Nest
 	{
 		public BooleanProperty() : base("boolean") { }
 
-		internal BooleanProperty(BooleanAttribute attribute) 
-			: base("boolean", attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-		}
-		
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public bool? NullValue { get; set; }

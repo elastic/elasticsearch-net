@@ -40,23 +40,6 @@ namespace Nest
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }
 		protected NumberProperty(string type) : base(type) { }
 
-		internal NumberProperty(NumberAttribute attribute)
-			: base(attribute.Type.GetStringValue(), attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-			IncludeInAll = attribute.IncludeInAll;
-			PrecisionStep = attribute.PrecisionStep;
-			IgnoreMalformed = attribute.IgnoreMalformed;
-		}
-
-		internal NumberProperty(string typeName, NumberAttribute attribute)
-			: this(attribute)
-		{
-			Type = typeName;
-		}
-
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
@@ -89,6 +72,8 @@ namespace Nest
 		public NumberPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
 		public NumberPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
+
+		public NumberPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public NumberPropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 

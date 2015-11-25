@@ -14,8 +14,6 @@ namespace Nest
 	public class BinaryProperty : Property, IBinaryProperty
 	{
 		public BinaryProperty() : base("binary") { }
-
-		internal BinaryProperty(BinaryAttribute attribute) : base("binary", attribute) { }
 	}
 
 	public class BinaryPropertyDescriptor<T> 

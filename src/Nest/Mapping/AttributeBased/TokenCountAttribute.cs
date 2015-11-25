@@ -2,10 +2,14 @@
 
 namespace Nest
 {
-	public class TokenCountAttribute : NumberAttribute
+	public class TokenCountAttribute : NumberAttribute, ITokenCountProperty
 	{
-		public string Analyzer { get; set; }
+		ITokenCountProperty Self => this;
 
-		public override IProperty ToProperty() => new TokenCountProperty(this);
+		string ITokenCountProperty.Analyzer { get; set; }
+
+		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }
+
+		public TokenCountAttribute() : base("token_count") { }
 	}	
 }

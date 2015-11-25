@@ -39,15 +39,6 @@ namespace Nest
 			Type = typeName;
 		}
 
-		internal Property(TypeName typeName, ElasticsearchPropertyAttribute attribute)
-			: this(typeName)
-		{
-			DocValues = attribute.DocValues;
-			IndexName = attribute.IndexName;
-			Similarity = attribute.Similarity;
-			Store = attribute.Store;
-		}
-
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
 		public Fields CopyTo { get; set; }

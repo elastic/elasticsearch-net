@@ -30,21 +30,6 @@ namespace Nest
 
 		protected ObjectProperty(TypeName typeName) : base(typeName) { }
 
-		protected internal ObjectProperty(TypeName typeName, ObjectAttribute attribute)
-			: this(attribute)
-		{
-			Type = typeName;
-		}
-
-		internal ObjectProperty(ObjectAttribute attribute)
-			: base("object", attribute)
-		{
-			Dynamic = attribute.Dynamic;
-			Enabled = attribute.Enabled;
-			IncludeInAll = attribute.IncludeInAll;
-			Path = attribute.Path;
-		}
-
 		public DynamicMapping? Dynamic { get; set; }
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }

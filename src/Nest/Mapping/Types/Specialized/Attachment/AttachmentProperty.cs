@@ -26,8 +26,6 @@ namespace Nest
 
 		private IDictionary Dictionary => this.Fields;
 
-		internal AttachmentProperty(AttachmentAttribute attribute) : base("attachment", attribute) { }
-
 		public IStringProperty AuthorField
 		{
 			get { return Dictionary["author"] as IStringProperty; }
