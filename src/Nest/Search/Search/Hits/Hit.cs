@@ -14,6 +14,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long? Version { get; }
+		double Score { get; }
 		string Id { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
