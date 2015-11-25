@@ -6,6 +6,7 @@ using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Connection.Security;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net.Connection
 {

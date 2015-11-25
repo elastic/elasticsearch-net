@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
 using System.IO;
 using System.Threading;
+using Elasticsearch.Net.Extensions;
 using static Elasticsearch.Net.Connection.PostType;
 
 namespace Elasticsearch.Net.Connection

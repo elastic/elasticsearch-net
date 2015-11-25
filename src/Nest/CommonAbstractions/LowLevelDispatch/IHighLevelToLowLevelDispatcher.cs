@@ -11,26 +11,40 @@ namespace Nest
 {
 	public interface IHighLevelToLowLevelDispatcher
 	{
-		R Dispatch<D, Q, R>(D descriptor, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse;
+		TResponse Dispatch<TRequest, TQueryString, TResponse>(
+			TRequest descriptor, 
+			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
+		)
+			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TRequest : IRequest<TQueryString>
+			where TResponse : BaseResponse;
 
-		R Dispatch<D, Q, R>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse;
+		TResponse Dispatch<TRequest, TQueryString, TResponse>(
+			TRequest descriptor, 
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
+			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
+			)
+			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TRequest : IRequest<TQueryString>
+			where TResponse : BaseResponse;
 
-		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse, I
-			where I : IResponse;
+		Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
+			TRequest descriptor, 
+			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
+			)
+			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TRequest : IRequest<TQueryString>
+			where TResponse : BaseResponse, TResponseInterface
+			where TResponseInterface : IResponse;
 
-		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse, I
-			where I : IResponse;
+		Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
+			TRequest descriptor, 
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
+			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
+		)
+			where TQueryString : FluentRequestParameters<TQueryString>, new()
+			where TRequest : IRequest<TQueryString>
+			where TResponse : BaseResponse, TResponseInterface
+			where TResponseInterface : IResponse;
 	}
 }

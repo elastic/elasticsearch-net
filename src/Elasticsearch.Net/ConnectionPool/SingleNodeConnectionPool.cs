@@ -20,14 +20,14 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public IReadOnlyCollection<Node> Nodes { get; }
 
-		public DateTime LastUpdate { get; set; }
+		public DateTime LastUpdate { get; }
 
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
 			var node = new Node(uri);
 			this.UsingSsl = node.Uri.Scheme == Uri.UriSchemeHttps;
 			this.Nodes = new List<Node> { node };
-			this.LastUpdate = (dateTimeProvider ?? new DateTimeProvider()).Now();
+			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
 		public IEnumerable<Node> CreateView() => this.Nodes;

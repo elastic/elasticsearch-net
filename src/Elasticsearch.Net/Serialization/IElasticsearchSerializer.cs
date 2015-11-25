@@ -1,4 +1,3 @@
-using Elasticsearch.Net.Connection;
 using System;
 using System.IO;
 using System.Linq;

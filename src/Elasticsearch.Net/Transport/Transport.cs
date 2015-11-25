@@ -7,10 +7,11 @@ using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Connection.Configuration;
-using PurifyNet;
+using Purify;
 using System.IO;
 using System.Collections.Specialized;
 using System.Threading;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -54,7 +55,7 @@ namespace Elasticsearch.Net.Connection
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
+			this.DateTimeProvider = dateTimeProvider ?? Providers.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 			this._semaphore = new SemaphoreSlim(1, 1);
 		}

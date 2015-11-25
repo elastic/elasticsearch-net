@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.ConnectionPool

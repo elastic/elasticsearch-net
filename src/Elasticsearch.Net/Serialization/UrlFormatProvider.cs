@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net.Serialization
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.ConnectionPool
@@ -28,7 +29,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public bool SniffedOnStartup { get; set; }
 
-		public DateTime LastUpdate { get; set; }
+		public DateTime LastUpdate { get; protected set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
 			: this(uris.Select(uri=>new Node(uri)), randomize, dateTimeProvider) { }
@@ -38,7 +39,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			nodes.ThrowIfEmpty(nameof(nodes));
 
 			this.Randomize = randomize;
-			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
+			this.DateTimeProvider = dateTimeProvider ?? Providers.DateTimeProvider.Default;
 
 			var nn = nodes.ToList();
 			var uris = nn.Select(n => n.Uri).ToList();

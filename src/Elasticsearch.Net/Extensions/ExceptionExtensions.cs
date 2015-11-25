@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class ExceptionExtensions
 	{

@@ -16,9 +16,9 @@ namespace Nest
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
 
-		internal IHighLevelToLowLevelDispatcher Dispatcher => this;
+		private IHighLevelToLowLevelDispatcher Dispatcher => this;
 
-		internal LowLevelDispatch LowLevelDispatch { get; set; }
+		private LowLevelDispatch LowLevelDispatch { get; }
 	
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
@@ -45,57 +45,41 @@ namespace Nest
 			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
 		}
 
-		/// <summary>
-		/// stPerform any request you want over the configured IConnection while taking advantage of the cluster failover.
-		/// </summary>
-		/// <typeparam name="T">The type representing the response JSON</typeparam>
-		/// <param name="method">the HTTP Method to use</param>
-		/// <param name="path">The path of the the url that you would like to hit</param>
-		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
-		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
-		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null) 
-			where T : class => this.Raw.DoRequest<T>(method, path, data, requestParameters);
+		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
+			TRequest request, 
+			Func<TRequest, PostData<object>, 
+			ElasticsearchResponse<TResponse>> dispatch
+			) => this.Dispatcher.Dispatch<TRequest,TQueryString,TResponse>(request, null, dispatch);
 
-		/// <summary>
-		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
-		/// </summary>
-		/// <typeparam name="T">The type representing the response JSON</typeparam>
-		/// <param name="method">the HTTP Method to use</param>
-		/// <param name="path">The path of the the url that you would like to hit</param>
-		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
-		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
-		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
-			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
-
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
-		{
-			return this.Dispatcher.Dispatch<D,Q,R>(request, null, dispatch);
-		}
-
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
+		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
+			TRequest request, Func<IApiCallDetails, Stream, TResponse> responseGenerator,
+			Func<TRequest, PostData<object>, ElasticsearchResponse<TResponse>> dispatch
+			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			var response = dispatch(request, request);
-			return ResultsSelector<D, Q, R>(response, request);
+			return ResultsSelector(response);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
-		{
-			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
-		}
+		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
+			TRequest descriptor, 
+			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
+			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, null, dispatch);
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
+			TRequest request, 
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
+			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
+			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 			return dispatch(request, request)
-				.ContinueWith<I>(r =>
+				.ContinueWith<TResponseInterface>(r =>
 				{
 					if (r.IsFaulted && r.Exception != null)
 					{
@@ -106,24 +90,18 @@ namespace Nest
 
 						ae.RethrowKeepingStackTrace();
 					}
-					return ResultsSelector<D, Q, R>(r.Result, request);
+					return ResultsSelector(r.Result);
 				});
 		}
 
-		private static R ResultsSelector<D, Q, R>(
-			ElasticsearchResponse<R> c,
-			D descriptor
-			)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse
-		{
-			return c.Body ?? CreateInvalidInstance<R>(c);
-		}
+		private static TResponse ResultsSelector<TResponse>(ElasticsearchResponse<TResponse> c)
+			where TResponse : BaseResponse =>
+			c.Body ?? CreateInvalidInstance<TResponse>(c);
 
-		private static R CreateInvalidInstance<R>(IApiCallDetails response) where R : BaseResponse
+		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response) 
+			where TResponse : BaseResponse
 		{
-			var r = typeof(R).CreateInstance<R>();
+			var r = typeof(TResponse).CreateInstance<TResponse>();
 			((IBodyWithApiCallDetails)r).CallDetails = response;
 			return r;
 		}

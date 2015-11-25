@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net.Extensions;
+
 // ReSharper disable VirtualMemberNeverOverriden.Global
 
 namespace Elasticsearch.Net.Connection

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net.Extensions;
 using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net

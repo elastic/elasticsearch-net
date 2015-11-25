@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Elasticsearch.Net
+namespace Elasticsearch.Net.Extensions
 {
 	internal static class Fluent
 	{
@@ -10,7 +12,6 @@ namespace Elasticsearch.Net
 			assign(self);
 			return self;
 		}
-
 	}
 
 }
