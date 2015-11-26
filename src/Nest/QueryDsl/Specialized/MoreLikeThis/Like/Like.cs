@@ -44,6 +44,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var union = Unionconverter.ReadJson(reader, objectType, existingValue, serializer) as Union<string, ILikeDocument>;
+			if (union == null) return null;
 			if (union.Item1 != null) return new Like(union.Item1);
 			return new Like(union.Item2);
 		}

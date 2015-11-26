@@ -18,7 +18,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 			{
 				fields = new[] { "name" },
 				minimum_should_match = 1,
-				stop_words = new[] { "and", "the " },
+				stop_words = new[] { "and", "the" },
 				min_term_freq = 1,
 				max_query_terms = 12,
 				min_doc_freq = 1,
@@ -63,7 +63,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 			MinTermFrequency = 1,
 			MinWordLength = 10,
 			MinimumShouldMatch = 1,
-			StopWords = new [] { "and", "the "},
+			StopWords = new [] { "and", "the"},
 			Unlike = new List<Like>
 			{
 				"not like this text"
@@ -75,7 +75,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				.Name("named_query")
 				.Boost(1.1)
 				.Like(l=>l
-					.Document(d=>d .Document(Project.Instance))
+					.Document(d=>d .Id(Project.Instance.Name))
 					.Text("some long text")
 				)
 				.Analyzer("some_analyzer")
@@ -88,6 +88,8 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				.MinTermFrequency(1)
 				.MinWordLength(10)
 				.StopWords("and", "the")
+				.MinimumShouldMatch(1)
+				.Fields(f=>f.Field(p=>p.Name))
 				.Unlike(l=>l
 					.Text("not like this text")
 				)

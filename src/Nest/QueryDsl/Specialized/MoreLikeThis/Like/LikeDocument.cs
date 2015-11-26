@@ -66,6 +66,7 @@ namespace Nest
 	public class LikeDocument<T> : LikeDocumentBase
 	{
 		protected override Type ClrType => typeof(T);
+		internal LikeDocument() { } 
 
 		public LikeDocument(Id id)
 		{

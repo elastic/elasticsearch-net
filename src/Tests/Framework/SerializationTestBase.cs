@@ -71,18 +71,42 @@ namespace Tests.Framework
 			return TokenMatches(expectedJson, expectedString, iteration, serialized);
 		}
 
-		private bool TokenMatches(JToken expectedJson, string expectedString,int iteration, string serialized)
+		private bool TokenMatches(JToken expectedJson, string expectedString,int iteration, string actual)
 		{
-			var actualJson = JToken.Parse(serialized);
+			var actualJson = JToken.Parse(actual);
 			var matches = JToken.DeepEquals(expectedJson, actualJson);
 			if (matches) return true;
+
+			Sort(actualJson as JObject);
+			Sort(expectedJson as JObject);
+
+			var sortedExpected = expectedJson.ToString();
+			var sortedActual = actualJson.ToString();
 
 			var message = "This is the first time I am serializing";
 			if (iteration > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
 
-			expectedString.Diff(serialized, message);
+			sortedExpected.Diff(sortedActual, message);
 			return false;
+		}
+
+		private void Sort(JObject jObj)
+		{
+			if (jObj == null) return;
+
+			var props = jObj.Properties().ToList();
+			foreach (var prop in props)
+			{
+				prop.Remove();
+			}
+
+			foreach (var prop in props.OrderBy(p => p.Name))
+			{
+				jObj.Add(prop);
+				if (prop.Value is JObject)
+					Sort((JObject)prop.Value);
+			}
 		}
 
 		private TObject Deserialize<TObject>(string json) =>

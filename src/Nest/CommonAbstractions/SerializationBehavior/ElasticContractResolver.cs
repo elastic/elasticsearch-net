@@ -145,6 +145,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IScript>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IScriptField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ILikeDocument>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
