@@ -311,8 +311,12 @@
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Indices\Warmers\WarmerCrudTests.cs" />
+    <Compile Include="Mapping\Types\Core\Binary\BinaryMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\Boolean\BooleanMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\Date\DateMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\Number\NumberMappingTests.cs" />
     <Compile Include="Mapping\Types\TypeMappingTestBase.cs" />
-    <Compile Include="Mapping\Types\String\StringMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\String\StringMappingTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptApiTests.cs" />

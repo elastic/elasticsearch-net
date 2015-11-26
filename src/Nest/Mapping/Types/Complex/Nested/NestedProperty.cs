@@ -19,13 +19,6 @@ namespace Nest
 	{
 		public NestedProperty() : base("nested") { }
 
-		public NestedProperty(NestedAttribute attribute)
-			: base("nested", attribute)
-		{
-			IncludeInParent = attribute.IncludeInParent;
-			IncludeInRoot = attribute.IncludeInRoot;
-		}
-
 		public bool? IncludeInParent { get; set; }
 		public bool? IncludeInRoot { get; set; }
 	}

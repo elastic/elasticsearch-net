@@ -41,19 +41,6 @@ namespace Nest
 	{
 		public DateProperty() : base("date") { }
 
-		internal DateProperty(DateAttribute attribute)
-			: base("date", attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-			IncludeInAll = attribute.IncludeInAll;
-			PrecisionStep = attribute.PrecisionStep;
-			IgnoreMalformed = attribute.IgnoreMalformed;
-			Format = attribute.Format;
-			NumericResolution = attribute.NumericResolution;
-		}
-
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public DateTime? NullValue { get; set; }

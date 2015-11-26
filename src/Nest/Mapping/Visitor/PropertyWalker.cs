@@ -64,7 +64,7 @@ namespace Nest
 				return null;
 
 			if (attribute != null)
-				property = attribute.ToProperty();
+				property = attribute;
 			else
 				property = InferProperty(propertyInfo.PropertyType);
 

@@ -16,12 +16,6 @@ namespace Nest
 	{
 		public TokenCountProperty() : base("token_count") { }
 
-		internal TokenCountProperty(TokenCountAttribute attribute)
-			: base("token_count", attribute)
-		{
-			Analyzer = attribute.Analyzer;
-		}
-
 		public string Analyzer { get; set; }
 	}
 

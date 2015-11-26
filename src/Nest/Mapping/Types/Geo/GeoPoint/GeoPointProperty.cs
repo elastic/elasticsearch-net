@@ -48,21 +48,6 @@ namespace Nest
 	public class GeoPointProperty : Property, IGeoPointProperty
 	{
 		public GeoPointProperty() : base("geo_point") { }
-		internal GeoPointProperty(GeoPointAttribute attribute) 
-			: base("geo_point", attribute)
-		{
-			LatLon = attribute.LatLon;
-			GeoHash = attribute.GeoHash;
-			GeoHashPrefix = attribute.GeoHashPrefix;
-			GeoHashPrecision = attribute.GeoHashPrecision;
-			Validate = attribute.Validate;
-			ValidateLatitude = attribute.ValidateLatitude;
-			ValidateLongitude = attribute.ValidateLongitude;
-			Normalize = attribute.Normalize;
-			NormalizeLatitude = attribute.NormalizeLatitude;
-			NormalizeLongitude = attribute.NormalizeLongitude;
-			PrecisionStep = attribute.PrecisionStep;
-		}
 
 		public bool? LatLon { get; set; }
 		public bool? GeoHash { get; set; }

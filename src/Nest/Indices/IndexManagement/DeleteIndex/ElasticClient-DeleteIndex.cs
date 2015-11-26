@@ -39,7 +39,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector) =>
+		public Task<IIndicesResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
 			this.DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)));
 
 		/// <inheritdoc/>

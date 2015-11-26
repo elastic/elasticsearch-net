@@ -51,21 +51,6 @@ namespace Nest
 	{
 		public StringProperty() : base("string") { }
 
-		internal StringProperty(StringAttribute attribute)
-			: base("string", attribute)
-		{
-			Analyzer = attribute.Analyzer;
-			Boost = attribute.Boost;
-			IgnoreAbove = attribute.IgnoreAbove;
-			IncludeInAll = attribute.IncludeInAll;
-			Index = attribute.Index;
-			IndexOptions = attribute.IndexOptions;
-			NullValue = attribute.NullValue;
-			PositionOffsetGap = attribute.PositionOffsetGap;
-			SearchAnalyzer = attribute.SearchAnalyzer;
-			TermVector = attribute.TermVector;
-		}
-
 		public FieldIndexOption? Index { get; set; }
 		public TermVectorOption? TermVector { get; set; }
 		public double? Boost { get; set; }

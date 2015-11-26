@@ -2,13 +2,21 @@
 
 namespace Nest
 {
-	public class GeoShapeAttribute : ElasticsearchPropertyAttribute 
+	public class GeoShapeAttribute : ElasticsearchPropertyAttribute, IGeoShapeProperty
 	{
-		public GeoTree Tree { get; set; }
-		public GeoOrientation Orientation { get; set; }
-		public int TreeLevels { get; set; }
-		public double DistanceErrorPercentage { get; set; }
+		IGeoShapeProperty Self => this;
 
-		public override IProperty ToProperty() => new GeoShapeProperty(this);
+		GeoTree? IGeoShapeProperty.Tree { get; set; }
+		GeoDistance IGeoShapeProperty.Precision { get; set; }
+		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
+		int? IGeoShapeProperty.TreeLevels { get; set; }
+		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
+
+		public GeoTree Tree { get { return Self.Tree.GetValueOrDefault(); } set { Self.Tree = value; } }
+		public GeoOrientation Orientation { get { return Self.Orientation.GetValueOrDefault(); } set { Self.Orientation = value; } }
+		public int TreeLevels { get { return Self.TreeLevels.GetValueOrDefault(); } set { Self.TreeLevels = value; } }
+		public double DistanceErrorPercentage { get { return Self.DistanceErrorPercentage.GetValueOrDefault(); } set { Self.DistanceErrorPercentage = value; } }
+
+		public GeoShapeAttribute() : base("geo_shape") { }
 	}
 }
