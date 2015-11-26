@@ -379,6 +379,8 @@
     <Compile Include="QueryDsl\Span\Term\SpanTermQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Specialized\Script\ScriptQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Specialized\Template\TemplateQueryUsageTests.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Count\CountApiTests.cs" />
     <Compile Include="Search\Explain\ExplainUrlTests.cs" />

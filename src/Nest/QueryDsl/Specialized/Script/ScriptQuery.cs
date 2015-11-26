@@ -10,13 +10,14 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "script")]
-		string Script { get; set; }
-		[JsonProperty(PropertyName = "script_id")]
-		string ScriptId { get; set; }
+		[JsonProperty(PropertyName = "inline")]
+		string Inline { get; set; }
 
-		[JsonProperty("script_file")]
-		string ScriptFile { get; set; }
+		[JsonProperty(PropertyName = "id")]
+		Id Id { get; set; }
+
+		[JsonProperty("file")]
+		string File { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -29,14 +30,14 @@ namespace Nest
 	public class ScriptQuery : QueryBase, IScriptQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public string Script { get; set; }
-		public string ScriptId { get; set; }
-		public string ScriptFile { get; set; }
+		public string Inline { get; set; }
+		public Id Id { get; set; }
+		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Script = this;
-		internal static bool IsConditionless(IScriptQuery q) => q.Script.IsNullOrEmpty();
+		internal static bool IsConditionless(IScriptQuery q) => q.Inline.IsNullOrEmpty();
 	}
 
 	public class ScriptQueryDescriptor<T> 
@@ -44,26 +45,26 @@ namespace Nest
 		, IScriptQuery where T : class
 	{
 		bool IQuery.Conditionless => ScriptQuery.IsConditionless(this);
-		string IScriptQuery.Script { get; set; }
-		string IScriptQuery.ScriptId { get; set; }
-		string IScriptQuery.ScriptFile { get; set; }
+		string IScriptQuery.Inline { get; set; }
+		Id IScriptQuery.Id { get; set; }
+		string IScriptQuery.File { get; set; }
 		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
 
 		/// <summary>
 		/// Inline script to execute
 		/// </summary>
-		public ScriptQueryDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public ScriptQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
 
 		/// <summary>
 		/// Id of an indexed script to execute
 		/// </summary
-		public ScriptQueryDescriptor<T> ScriptId(string scriptId) => Assign(a => a.ScriptId = scriptId);
+		public ScriptQueryDescriptor<T> Id(string scriptId) => Assign(a => a.Id = scriptId);
 
 		/// <summary>
 		/// File name of a script to execute
 		/// </summary>
-		public ScriptQueryDescriptor<T> ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
+		public ScriptQueryDescriptor<T> File(string scriptFile) => Assign(a => a.File = scriptFile);
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.

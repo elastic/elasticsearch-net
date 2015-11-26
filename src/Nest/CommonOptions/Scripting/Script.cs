@@ -17,6 +17,7 @@ namespace Nest
 
 		[JsonProperty("lang")]
 		string Lang { get; set; }
+
 	}
 
 	public abstract class Script : IScript

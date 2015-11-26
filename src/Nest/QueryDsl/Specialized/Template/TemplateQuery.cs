@@ -7,10 +7,17 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TemplateQuery>))]
 	public interface ITemplateQuery : IQuery
 	{
-		[JsonProperty("query")]
-		string Query { get; set; }
+		[JsonProperty("file")]
+		string File { get; set; }
+
+		[JsonProperty("inline")]
+		string Inline { get; set; }
+
+		[JsonProperty("id")]
+		Id Id { get; set; }
 
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; } 
@@ -19,11 +26,13 @@ namespace Nest
 	public class TemplateQuery : QueryBase, ITemplateQuery
 	{
 		public bool Conditionless => IsConditionless(this);
-		public string Query { get; set; }
+		public string File { get; set; }
+		public string Inline { get; set; }
+		public Id Id { get; set; }
 		public IDictionary<string, object> Params { get; set;}
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Template = this;
-		internal static bool IsConditionless(ITemplateQuery q) => q.Query.IsNullOrEmpty();
+		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Inline.IsNullOrEmpty();
 	}
 
 	public class TemplateQueryDescriptor<T> 
@@ -31,10 +40,16 @@ namespace Nest
 		, ITemplateQuery where T : class
 	{
 		bool IQuery.Conditionless => TemplateQuery.IsConditionless(this);
-		string ITemplateQuery.Query { get; set; }
+		string ITemplateQuery.File { get; set; }
+		string ITemplateQuery.Inline { get; set; }
+		Id ITemplateQuery.Id { get; set; }
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 
-		public TemplateQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+		public TemplateQueryDescriptor<T> Inline(string script) => Assign(a => a.Inline = script);
+
+		public TemplateQueryDescriptor<T> File(string file) => Assign(a => a.File = file);
+
+		public TemplateQueryDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
 
 		public TemplateQueryDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(a => a.Params = paramsDictionary);
 

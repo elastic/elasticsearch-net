@@ -591,5 +591,9 @@ namespace Nest
 
 		public QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Template = query);
+
+		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Script = query);
+
 	}
 }
