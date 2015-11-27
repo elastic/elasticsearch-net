@@ -344,6 +344,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\Specialized\BoolQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Exact\Term\TermQueryUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchUsageTests.cs" />
