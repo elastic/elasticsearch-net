@@ -26,6 +26,7 @@ namespace Elasticsearch.Net.Connection.RequestState
 	public class TransportRequestState<T> : IDisposable, ITransportRequestState
 	{
 		private readonly bool _traceEnabled;
+        private readonly TextWriter _traceWriter;
 		private readonly bool _metricsEnabled;
 		private readonly long _requestId;
 
@@ -110,17 +111,26 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this.ClientSettings = settings;
 			this.RequestParameters = requestParameters;
 			this._traceEnabled = settings.TraceEnabled;
+            this._traceWriter = settings.TraceWriter;
 			this._metricsEnabled = settings.MetricsEnabled;
 			if (this._metricsEnabled || this._traceEnabled)
 				this._stopwatch = Stopwatch.StartNew();
 
 			if (this._traceEnabled)
 			{
-				Trace.TraceInformation("NEST start:{0} {1} {2}"
-					, this._requestId
-					, this.Method
-					, this.Path
-				);
+                string traceMessage = string.Format("NEST start:{0} {1} {2}"
+                    , this._requestId
+                    , this.Method
+                    , this.Path);
+
+                if (_traceWriter == null)
+                {
+                    Trace.TraceInformation(traceMessage);
+                }
+                else
+                {
+                    _traceWriter.WriteLine(traceMessage);
+                }
 			}
 
 			if (this.RequestParameters != null)
@@ -201,28 +211,23 @@ namespace Elasticsearch.Net.Connection.RequestState
 			if (!_traceEnabled || this._result == null)
 				return;
 
-			if (_result.Success)
-			{
-				Trace.TraceInformation("NEST end:{0} {1} {2} ({3}):\r\n{4}"
-					, this._requestId
-					, _result.RequestMethod
-					, _result.RequestUrl
-					, _stopwatch.Elapsed
-					, _result
-				);
-			}
-			else
-			{
-				Trace.TraceError(
-					"NEST end:{0} {1} {2} ({3}):\r\n{4}"
-					, this._requestId
-					, _result.RequestMethod
-					, _result.RequestUrl
-					, _stopwatch.Elapsed
-					, _result.ToString()
-				);
-			}
-		}
+            string traceMessage = string.Format(
+                "NEST end:{0} {1} {2} ({3}):\r\n{4}"
+                , this._requestId
+                , _result.RequestMethod
+                , _result.RequestUrl
+                , _stopwatch.Elapsed
+                , _result
+            );
 
+            if (_traceWriter == null)
+            {
+                Trace.TraceInformation(traceMessage);
+            }
+            else
+            {
+                _traceWriter.WriteLine(traceMessage);
+            }
+		}
 	}
 }

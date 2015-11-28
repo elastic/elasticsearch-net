@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
@@ -132,6 +133,9 @@ namespace Elasticsearch.Net.Connection
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
 
+        private TextWriter _traceWriter;
+        TextWriter IConnectionConfigurationValues.TraceWriter { get{ return _traceWriter; } }
+
 		private bool _httpPipeliningEnabled;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
 
@@ -220,9 +224,10 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
 		/// </summary>
-		public T EnableTrace(bool enabled = true)
+        public T EnableTrace(bool enabled = true, TextWriter traceWriter = null)
 		{
 			this._traceEnabled = enabled;
+            this._traceWriter = traceWriter;
 			return (T) this;
 		}
 
