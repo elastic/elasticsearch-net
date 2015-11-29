@@ -473,6 +473,7 @@
   <ItemGroup>
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
+    <Folder Include="QueryDsl\TermLevel\Range\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

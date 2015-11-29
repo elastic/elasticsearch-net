@@ -136,7 +136,6 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAlias>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBoundingBox>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
@@ -147,6 +146,8 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ILikeDocument>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
+
+			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
 		}
