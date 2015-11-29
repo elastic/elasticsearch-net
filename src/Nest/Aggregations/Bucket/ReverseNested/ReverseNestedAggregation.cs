@@ -8,7 +8,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ReverseNestedAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ReverseNestedAggregation>))]
 	public interface IReverseNestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")]

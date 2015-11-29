@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexSettingsConverter))]
+	[ContractJsonConverter(typeof(IndexSettingsConverter))]
 	public interface IDynamicIndexSettings : IIsADictionary<string, object>
 	{
 		/// <summary>

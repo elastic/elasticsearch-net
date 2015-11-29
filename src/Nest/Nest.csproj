@@ -166,6 +166,7 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\Field.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\ContractJsonConverterAttribute.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\FromJson.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />

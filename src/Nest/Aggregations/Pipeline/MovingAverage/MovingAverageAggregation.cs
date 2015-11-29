@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(MovingAverageAggregationJsonConverter))]
+	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{
 		IMovingAverageModel Model { get; set; }

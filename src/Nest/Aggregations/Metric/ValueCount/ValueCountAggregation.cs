@@ -5,7 +5,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ValueCountAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ValueCountAggregation>))]
 	public interface IValueCountAggregation : IMetricAggregation { }
 
 	public class ValueCountAggregation : MetricAggregationBase, IValueCountAggregation

@@ -9,13 +9,6 @@ using System.Collections;
 
 namespace Nest.Resolvers
 {
-
-	internal static class IsPromiseExtension
-	{
-		public static bool IsAssignableFrom<T>(this Type objectType) where T : class =>
-			typeof (T).IsAssignableFrom(objectType);
-	}
-
 	public class ElasticContractResolver : DefaultContractResolver
 	{
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
@@ -38,33 +31,14 @@ namespace Nest.Resolvers
 
 			// this will only be called once and then cached
 
-			if (typeof(IDictionary).IsAssignableFrom(objectType)
-
-				&& !objectType.IsAssignableFrom<IMappings>()
-				&& !objectType.IsAssignableFrom<IProperties>()
-				&& !objectType.IsAssignableFrom<IAnalyzers>()
-				&& !objectType.IsAssignableFrom<ITokenizers>()
-				&& !objectType.IsAssignableFrom<ISimilarities>()
-				&& !objectType.IsAssignableFrom<ICharFilters>()
-				&& !objectType.IsAssignableFrom<ITokenFilters>()
-				&& !objectType.IsAssignableFrom<IDynamicIndexSettings>()
-				)
+			if (typeof(IDictionary).IsAssignableFrom(objectType) && !typeof(IIsADictionary).IsAssignableFrom(objectType))
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
-
-			else if (objectType == typeof(IAggregation)) contract.Converter = new AggregationJsonConverter();
-			else if (objectType == typeof(ISimilarity)) contract.Converter = new SimilarityJsonConverter();
-			else if (objectType == typeof(ICharFilter)) contract.Converter = new CharFilterJsonConverter();
-			else if (objectType == typeof(IAnalyzer)) contract.Converter = new AnalyzerJsonConverter();
-			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
-			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
-
-
-
-			else if (typeof(IClusterRerouteCommand).IsAssignableFrom(objectType))
-				contract.Converter = new ClusterRerouteCommandJsonConverter();
-
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
+			else if (!objectType.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
+
+			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
+			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
 
 			else if (objectType == typeof(TypeName)) contract.Converter = new TypeNameJsonConverter();
 			else if (objectType == typeof(IndexName)) contract.Converter = new IndexNameJsonConverter();
@@ -88,13 +62,44 @@ namespace Nest.Resolvers
 					break;
 				}
 			}
-
 			return contract;
 		}
+
+		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
+		{
+			var attribute = objectType.GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault() as ExactContractJsonConverterAttribute;
+			if (attribute?.Converter == null) return false;
+			contract.Converter = attribute.Converter;
+			return true;
+		}
+		private bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
+		{
+			foreach (var t in this.TypeWithInterfaces(objectType))
+			{
+				var attribute = t.GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault() as ContractJsonConverterAttribute;
+				if (attribute?.Converter == null) continue;
+				contract.Converter = attribute.Converter;
+				return true;
+			}
+			return false;
+		}
+
+		private IEnumerable<Type> TypeWithInterfaces(Type objectType)
+		{
+			yield return objectType;
+			foreach (var i in objectType.GetInterfaces()) yield return i;
+		}
+
+
 
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
 			var defaultProperties = base.CreateProperties(type, memberSerialization);
+
+
+
+
+
 			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
 
 			defaultProperties = PropertiesOf<IIndexState>(type, memberSerialization, defaultProperties, lookup);
@@ -159,7 +164,7 @@ namespace Nest.Resolvers
 				select base.CreateProperties(i, memberSerialization)
 				)
 				.SelectMany(interfaceProps => interfaceProps)
-				.DistinctBy(p=>p.PropertyName)
+				.DistinctBy(p => p.PropertyName)
 				.ToList();
 
 		}
@@ -168,13 +173,14 @@ namespace Nest.Resolvers
 		{
 			return base.CreateProperties(t, memberSerialization)
 				.Concat(PropertiesOfAllInterfaces(t, memberSerialization))
-				.DistinctBy(p=>p.PropertyName)
+				.DistinctBy(p => p.PropertyName)
 				.ToList();
 
 		}
+
 		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
 		{
-			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;
+			if (!typeof(T).IsAssignableFrom(type)) return defaultProperties;
 			var jsonProperties = (
 				from i in type.GetInterfaces()
 				select base.CreateProperties(i, memberSerialization)
@@ -205,9 +211,9 @@ namespace Nest.Resolvers
 			var property = base.CreateProperty(member, memberSerialization);
 
 			// Skip serialization of empty collections that has DefaultValueHandling set to Ignore.
-			if (property.DefaultValueHandling.HasValue 
-				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore 
-				&& !typeof(string).IsAssignableFrom(property.PropertyType) 
+			if (property.DefaultValueHandling.HasValue
+				&& property.DefaultValueHandling.Value == DefaultValueHandling.Ignore
+				&& !typeof(string).IsAssignableFrom(property.PropertyType)
 				&& typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
 			{
 				Predicate<object> shouldSerialize = obj =>

@@ -28,11 +28,11 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
-				var index = (request.Index != null && !request.Index.Equals(operation.Index))
+				var indices = (request.Index != null && !request.Index.Equals(operation.Index))
 					? operation.Index
 					: null;
 
-				var type = (request.Type != null && !request.Type.Equals(operation.Type))
+				var types = (request.Type != null && !request.Type.Equals(operation.Type))
 					? operation.Type
 					: null;
 
@@ -42,8 +42,8 @@ namespace Nest
 
 				var header = new
 				{
-					index = index,
-					type = type,
+					index = (indices as IUrlParameter)?.GetString(contract.ConnectionSettings),
+					type = (types as IUrlParameter)?.GetString(contract.ConnectionSettings),
 					search_type = searchType,
 					preference = operation.Preference,
 					routing = operation.Routing,

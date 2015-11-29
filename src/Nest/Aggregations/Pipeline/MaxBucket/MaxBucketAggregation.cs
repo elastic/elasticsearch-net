@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MaxBucketAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxBucketAggregation>))]
 	public interface IMaxBucketAggregation : IPipelineAggregation { }
 
 	public class MaxBucketAggregation
