@@ -6,14 +6,17 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExistsQuery : IFieldNameQuery
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
+	public interface IExistsQuery : IQuery
 	{
+		[JsonProperty("field")]
+		Field Field { get; set; }
 	}
 
-	public class ExistsQuery : FieldNameQueryBase, IExistsQuery
+	public class ExistsQuery : QueryBase, IExistsQuery
 	{
+		public Field Field { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Exists = this;
@@ -21,9 +24,15 @@ namespace Nest
 	}
 
 	public class ExistsQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery, T>
+		: QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>
 		, IExistsQuery where T : class
 	{
 		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
+
+		Field IExistsQuery.Field { get; set; }
+
+		public ExistsQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+
 	}
 }

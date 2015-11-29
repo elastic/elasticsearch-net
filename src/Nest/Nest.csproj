@@ -378,6 +378,7 @@
     <Compile Include="Analysis\Tokenizers\UaxEmailUrlTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
+    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
     <Compile Include="QueryDsl\VariableFieldNameQueryJsonConverter.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchResponsJsonConverter.cs" />
@@ -936,7 +937,7 @@
     <Compile Include="QueryDsl\Span\SpanQuery.cs" />
     <Compile Include="QueryDsl\Span\Term\SpanTermQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQuery.cs" />
+    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryBase.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQuery.cs" />
     <Compile Include="QueryDsl\Compound\Dismax\DismaxQuery.cs" />
@@ -1102,7 +1103,6 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -117,6 +117,12 @@ namespace Nest
 		public QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
 
+		public QueryContainer FuzzyNumeric(Func<FuzzyNumericQueryDescriptor<T>, IFuzzyQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
+
+		public QueryContainer FuzzyDate(Func<FuzzyDateQueryDescriptor<T>, IFuzzyQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
+
 		/// <summary>
 		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
 		/// process constructs a boolean query from the provided text.
@@ -594,6 +600,9 @@ namespace Nest
 
 		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Script = query);
+
+		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Exists = query);
 
 	}
 }

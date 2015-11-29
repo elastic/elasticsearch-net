@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class FuzzyQueryJsonConverter: JsonConverter
+	internal class FuzzyQueryJsonConverter: FieldNameQueryJsonConverter<FuzzyQuery>
 	{
 		public override bool CanConvert(Type objectType) => true;
 
@@ -29,70 +29,60 @@ namespace Nest
 			JToken v;
 			if (!jo.TryGetValue("value", out v)) return null;
 
-			IFuzzyQuery fq = new FuzzyQueryDescriptor<object>();
-			fq.Field = field;
-			fq.Boost = GetPropValue<double?>(jo, "boost");
-			fq.Fuzziness = GetPropValue<string>(jo, "fuzziness");
+			IFuzzyQuery fq;
+			if (v.Type == JTokenType.String)
+			{
+				fq = new FuzzyQuery()
+				{
+					Value = GetPropValue<string>(jo, "value"),
+					Fuzziness = GetPropObject<Fuzziness>(jo, "fuzziness")
+				};
+			}
+			else if (v.Type == JTokenType.Date)
+			{
+				fq = new FuzzyDateQuery()
+				{
+					Value = GetPropValue<DateTime?>(jo, "value"),
+					Fuzziness = GetPropObject<TimeUnitExpression>(jo, "fuzziness")
+				};
+			}
+			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
+			{
+				fq = new FuzzyNumericQuery()
+				{
+					Value = GetPropValue<double?>(jo, "value"),
+					Fuzziness = GetPropValue<double?>(jo, "fuzziness")
+				};
+			}
+			else return null; 
+
+			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length"); 
 			fq.MaxExpansions = GetPropValue<int?>(jo, "max_expansions");
-			fq.UnicodeAware = GetPropValue<bool?>(jo, "unicode_aware");
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
 				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
-			if (v.Type == JTokenType.String)
-			{
-				fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length"); 
-				fq.Value = GetPropValue<string>(jo, "value"); 
-			}
-			else if (v.Type == JTokenType.Date)
-			{
-				fq.Value = GetPropValue<DateTime?>(jo, "value"); 
-			}
-			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
-			{
-				fq.Value = GetPropValue<double?>(jo, "value");  
-			}
-			else
-			{
-				return null;
-			}
+			fq.Name = GetPropValue<string>(jo, "_name");
+			fq.Boost = GetPropValue<double?>(jo, "boost");
+			fq.Field = field;
 
 			return fq;
 		}
 
+		public TReturn GetPropObject<TReturn>(JObject jObject, string field)
+		{
+			JToken jToken = null;
+			return !jObject.TryGetValue(field, out jToken) 
+				? default(TReturn) 
+				: jToken.ToObject<TReturn>();
+		}
 		public TReturn GetPropValue<TReturn>(JObject jObject, string field)
 		{
 			JToken jToken = null;
 			return !jObject.TryGetValue(field, out jToken) 
 				? default(TReturn) 
 				: jToken.Value<TReturn>();
-		}
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			var v = value as IFieldNameQuery;
-			if (v == null || v.Conditionless)
-				return;
-
-			var fieldName = v.Field;
-			if (fieldName == null)
-				return;
-
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract == null)
-				return;
-
-			var field = contract.Infer.Field(fieldName);
-			if (field.IsNullOrEmpty())
-				return;
-			
-			writer.WriteStartObject();
-			{
-				writer.WritePropertyName(field);
-				serializer.Serialize(writer, value);
-			}
-			writer.WriteEndObject();
 		}
 	}
 }
