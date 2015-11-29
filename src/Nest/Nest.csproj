@@ -126,9 +126,10 @@
     <Compile Include="CommonAbstractions\Infer\Fields\FieldsDescriptor.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\Id.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Indices\IndicesMultiSyntaxJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Metrics\IndexMetrics.cs" />
     <Compile Include="CommonAbstractions\Infer\Metrics\Metrics.cs" />
     <Compile Include="CommonAbstractions\Infer\Name\Name.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Types\TypesMultiSyntaxJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Types\TypesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Types\Types.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />

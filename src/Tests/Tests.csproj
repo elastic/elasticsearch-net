@@ -348,6 +348,7 @@
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Exists\ExistsQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\TermLevel\Ids\IdsQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Term\TermQueryUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchUsageTests.cs" />

@@ -9,6 +9,7 @@ namespace Nest
 	public partial interface ISnapshotRequest 
 	{
 		[JsonProperty("indices")]
+		[JsonConverter(typeof(TypesJsonConverter))]
 		Indices Indices { get; set; }
 
 		[JsonProperty("ignore_unavailable")]

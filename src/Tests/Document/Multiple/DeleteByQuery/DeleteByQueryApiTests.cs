@@ -77,7 +77,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			IgnoreUnavailable = true,
 			Query = new IdsQuery
 			{
-				Values = new [] { Project.Projects.First().Name, "x" }
+				Values = new Id[] { Project.Projects.First().Name, "x" }
 			}
 		};
 	}

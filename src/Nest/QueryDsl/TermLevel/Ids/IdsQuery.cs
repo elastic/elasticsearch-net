@@ -10,21 +10,21 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdsQueryDescriptor>))]
 	public interface IIdsQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "type")]
-		IEnumerable<string> Type { get; set; }
+		[JsonProperty(PropertyName = "types")]
+		Types Types { get; set; }
 
 		[JsonProperty(PropertyName = "values")]
-		IEnumerable<string> Values { get; set; }
+		IEnumerable<Id> Values { get; set; }
 	}
 	
 	public class IdsQuery : QueryBase, IIdsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IEnumerable<string> Type { get; set; }
-		public IEnumerable<string> Values { get; set; }
+		public Types Types { get; set; }
+		public IEnumerable<Id> Values { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Ids = this;
-		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny() || q.Values.All(v => v.IsNullOrEmpty());
+		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny();
 	}
 
 	public class IdsQueryDescriptor 
@@ -32,21 +32,17 @@ namespace Nest
 		, IIdsQuery
 	{
 		bool IQuery.Conditionless => IdsQuery.IsConditionless(this);
-		IEnumerable<string> IIdsQuery.Values { get; set; }
-		IEnumerable<string> IIdsQuery.Type { get; set; }
+		IEnumerable<Id> IIdsQuery.Values { get; set; }
+		Types IIdsQuery.Types { get; set; }
 
-		public IdsQueryDescriptor Type(params string[] types) => Assign(a => a.Type = types);
+		public IdsQueryDescriptor Types(params TypeName[] types) => Assign(a=>a.Types = types);
 
-		public IdsQueryDescriptor Type(IEnumerable<string> values) => Type(values.ToArray());
+		public IdsQueryDescriptor Types(IEnumerable<TypeName> values) => Types(values.ToArray());
+		
+		public IdsQueryDescriptor Types(Types types) => Assign(a=>a.Types = types);
 
-		public IdsQueryDescriptor Values(params long[] values) =>
-			Assign(a => a.Values = values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
+		public IdsQueryDescriptor Values(params Id[] values) => Assign(a => a.Values = values);
 
-		public IdsQueryDescriptor Values(IEnumerable<long> values) =>
-			Values(values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
-
-		public IdsQueryDescriptor Values(params string[] values) => Assign(a => a.Values = values);
-
-		public IdsQueryDescriptor Values(IEnumerable<string> values) => Values(values.ToArray());
+		public IdsQueryDescriptor Values(IEnumerable<Id> values) => Values(values.ToArray());
 	}
 }
