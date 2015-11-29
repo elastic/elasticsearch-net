@@ -33,6 +33,6 @@ namespace Nest
 
 		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));
 
-		public TypeQueryDescriptor Value(string type) => Assign(a => a.Value = type);
+		public TypeQueryDescriptor Value(TypeName type) => Assign(a => a.Value = type);
 	}
 }

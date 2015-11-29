@@ -33,20 +33,20 @@ namespace Nest
 					writer.WritePropertyName(field);
 					serializer.Serialize(writer, t.Terms);
 				}
-				else if (t.ExternalField != null)
+				else if (t.TermsLookup != null)
 				{
 					writer.WritePropertyName(field);
-					serializer.Serialize(writer, t.ExternalField);
+					serializer.Serialize(writer, t.TermsLookup);
 				}
 				if (t.DisableCoord.HasValue)
 				{
 					writer.WritePropertyName("disable_coord");
 					writer.WriteValue(t.DisableCoord.Value);
 				}
-				if (!t.MinimumShouldMatch.IsNullOrEmpty())
+				if (t.MinimumShouldMatch != null)
 				{
 					writer.WritePropertyName("minimum_should_match");
-					writer.WriteValue(t.MinimumShouldMatch);
+					serializer.Serialize(writer, t.MinimumShouldMatch);
 				}
 				if (t.Boost.HasValue)
 				{
@@ -80,7 +80,9 @@ namespace Nest
 						f.DisableCoord = reader.Value as bool?;
 						break;
 					case "minimum_should_match":
-						f.MinimumShouldMatch = reader.ReadAsString();	
+						reader.Read();
+						var min = serializer.Deserialize<MinimumShouldMatch>(reader);
+						f.MinimumShouldMatch = min;	
 						break;
 					case "boost":
 						reader.Read();
@@ -92,7 +94,7 @@ namespace Nest
 					default:
 						f.Field = property;
 						//reader.Read();
-						ReadTerms(f, reader);
+						ReadTerms(f, reader, serializer);
 						//reader.Read();
 						break;
 				}
@@ -101,12 +103,12 @@ namespace Nest
 
 		}
 
-		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader)
+		private void ReadTerms(ITermsQuery termsQuery, JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			if (reader.TokenType == JsonToken.StartObject)
 			{
-				var ef = new ExternalFieldDeclaration();
+				var ef = new FieldLookup();
 				var depth = reader.Depth;
 				while (reader.Read() && reader.Depth >= depth && reader.Value != null)
 				{
@@ -115,7 +117,8 @@ namespace Nest
 					{
 						case "id":
 							reader.Read();
-							ef.Id = reader.Value as string;
+							var id = serializer.Deserialize<Id>(reader);
+							ef.Id = id;
 							break;
 						case "index":
 							reader.Read();
@@ -131,7 +134,7 @@ namespace Nest
 							break;
 					}
 				}
-				termsQuery.ExternalField = ef;
+				termsQuery.TermsLookup = ef;
 			}
 			else if (reader.TokenType == JsonToken.StartArray)
 			{

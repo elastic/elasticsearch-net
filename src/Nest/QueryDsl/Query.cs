@@ -119,9 +119,6 @@ namespace Nest
 		public static QueryContainer Term<K>(string field, K value, double? Boost = null) => 
 			new QueryContainerDescriptor<T>().Term(field, value, Boost);
 
-		public static QueryContainer Terms(string field, params string[] terms) => 
-			new QueryContainerDescriptor<T>().Terms(field, terms);
-
 		public static QueryContainer TermsDescriptor(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) => 
 			new QueryContainerDescriptor<T>().Terms(selector);
 

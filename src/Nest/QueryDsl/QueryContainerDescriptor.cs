@@ -83,30 +83,13 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer Terms(string field, IEnumerable<string> terms) =>
-			this.Terms(t => t.Field(field).Terms(terms));
+		public QueryContainer Terms<TValue>(Func<TermsQueryDescriptor<T, TValue>, ITermsQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Terms = query);
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer Terms<K>(Expression<Func<T, object>> objectPath, IEnumerable<K> terms) =>
-			this.Terms<K>(t => t.Field(objectPath).Terms(terms));
-
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) =>
-			this.Terms<object>(selector);
-
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
-			this.Terms(t => t.Field(objectPath).Terms(terms));
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms<K>(Func<TermsQueryDescriptor<T, K>, ITermsQuery> selector) =>
+		public QueryContainer Terms(Func<TermsQueryDescriptor<T, string>, ITermsQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Terms = query);
 
 		/// <summary>
@@ -603,6 +586,14 @@ namespace Nest
 
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Exists = query);
+
+		public QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Missing = query);
+
+		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Type = query);
+
+		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
 
 	}
 }

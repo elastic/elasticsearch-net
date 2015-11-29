@@ -15,10 +15,11 @@ namespace Nest
 		public MinimumShouldMatch(string percentage) : base(percentage) { }
 
 		public static MinimumShouldMatch Fixed(int count) => count;
-		public static MinimumShouldMatch Percentage(float percentage) => $"{percentage}%";
+		public static MinimumShouldMatch Percentage(double percentage) => $"{percentage}%";
 
 		public static implicit operator MinimumShouldMatch(string first) => new MinimumShouldMatch(first);
 		public static implicit operator MinimumShouldMatch(int second) => new MinimumShouldMatch(second);
+		public static implicit operator MinimumShouldMatch(double second) => Percentage(second);
 	}
 
 	internal class MinimumShouldMatchJsonConverter :JsonConverter 

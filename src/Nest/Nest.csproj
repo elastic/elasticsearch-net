@@ -838,7 +838,7 @@
     <Compile Include="QueryDsl\Joining\HasParent\ParentScoreMode.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorRequest.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
-    <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
+    <Compile Include="QueryDsl\FieldLookup.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
