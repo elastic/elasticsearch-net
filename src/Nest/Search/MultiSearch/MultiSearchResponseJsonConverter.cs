@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	internal class MultiSearchResponsJsonConverter : JsonConverter
+	internal class MultiSearchResponseJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanWrite => false;
@@ -22,7 +22,7 @@ namespace Nest
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
 
-		public MultiSearchResponsJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
+		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
 		{
 			this._settings = settings;
 			_request = request;
@@ -32,13 +32,7 @@ namespace Nest
 		{
 			if (this._settings == null)
 			{
-				var realConverter = (
-					(serializer.ContractResolver as SettingsContractResolver)
-					?.PiggyBackState?.ActualJsonConverter as MultiSearchJsonConverter
-				);
-				if (realConverter == null)
-					throw new DslException("could not find a stateful multi search converter");
-
+				var realConverter = serializer.GetStatefulConverter<MultiSearchJsonConverter>();
 				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
 				return mr;
 			}

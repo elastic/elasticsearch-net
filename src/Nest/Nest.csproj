@@ -115,6 +115,7 @@
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\PerFieldAnalyzer\PerFieldAnalyzer.cs" />
+    <Compile Include="CommonAbstractions\Extensions\JsonExtensions.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Fluent\Promise\DescriptorPromiseBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
@@ -384,7 +385,7 @@
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
     <Compile Include="QueryDsl\VariableFieldNameQueryJsonConverter.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
-    <Compile Include="Search\MultiSearch\MultiSearchResponsJsonConverter.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchResponseJsonConverter.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateJsonConverter.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorJsonConverter.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />

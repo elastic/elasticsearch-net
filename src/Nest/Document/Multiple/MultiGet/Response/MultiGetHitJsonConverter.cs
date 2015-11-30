@@ -20,10 +20,10 @@ namespace Nest
 		private readonly IMultiGetRequest _request;
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiGetHitJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
-		
+
 		internal MultiGetHitJsonConverter()
 		{
-			
+
 		}
 
 		public MultiGetHitJsonConverter(IMultiGetRequest request)
@@ -39,16 +39,15 @@ namespace Nest
 		private static void CreateMultiHit<T>(MultiHitTuple tuple, JsonSerializer serializer, ICollection<IMultiGetHit<object>> collection) where T : class
 		{
 			var hit = new MultiGetHit<T>();
-			var reader = tuple.Hit.CreateReader();	
+			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, hit);
 
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			var settings = contract.ConnectionSettings;
+			var settings = serializer.GetConnectionSettings();
 			var f = new FieldSelection<T>(settings);
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{
-				((IFieldSelection<T>)f).FieldValuesDictionary = serializer.Deserialize<Dictionary<string, object>>( source.CreateReader());
+				((IFieldSelection<T>)f).FieldValuesDictionary = serializer.Deserialize<Dictionary<string, object>>(source.CreateReader());
 				hit.FieldSelection = f;
 			}
 
@@ -60,13 +59,7 @@ namespace Nest
 		{
 			if (this._request == null)
 			{
-				var realConverter = (
-					(serializer.ContractResolver as SettingsContractResolver)
-					?.PiggyBackState?.ActualJsonConverter as MultiGetHitJsonConverter
-				);
-				if (realConverter == null)
-					throw new DslException("could not find a stateful multigethit converter");
-
+				var realConverter = serializer.GetStatefulConverter<MultiGetHitJsonConverter>();
 				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}
 
@@ -74,7 +67,6 @@ namespace Nest
 			var jsonObject = JObject.Load(reader);
 
 			var docsJarray = (JArray)jsonObject["docs"];
-			var multiGetDescriptor = this._request;
 			if (this._request == null || docsJarray == null)
 				return response;
 

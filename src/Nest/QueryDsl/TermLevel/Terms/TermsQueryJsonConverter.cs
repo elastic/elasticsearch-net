@@ -20,11 +20,8 @@ namespace Nest
 			var t = value as ITermsQuery;
 			if (t == null) return;
 
-			string field = null;
-
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract != null && contract.ConnectionSettings != null)
-				field = contract.Infer.Field(t.Field);
+			var settings = serializer.GetConnectionSettings();
+			var field = settings.Inferrer.Field(t.Field);
 
 			writer.WriteStartObject();
 			{
@@ -58,7 +55,6 @@ namespace Nest
 					writer.WritePropertyName("_name");
 					writer.WriteValue(t.Name);
 				}
-				
 			}
 			writer.WriteEndObject();
 		}

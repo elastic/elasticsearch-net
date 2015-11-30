@@ -65,11 +65,8 @@ namespace Nest
 			if (fieldName == null)
 				return;
 
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract == null)
-				return;
-
-			var field = contract.Infer.Field(fieldName);
+			var settings = serializer.GetConnectionSettings();
+			var field = settings.Inferrer.Field(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
 

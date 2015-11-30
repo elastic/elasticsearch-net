@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TypeNameJsonConverter))]
+	[ContractJsonConverter(typeof(TypeNameJsonConverter))]
 	public class TypeName : IEquatable<TypeName> , IUrlParameter
 	{
 		public string Name { get; set; }

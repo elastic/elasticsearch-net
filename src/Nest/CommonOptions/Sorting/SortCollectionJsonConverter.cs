@@ -72,16 +72,13 @@ namespace Nest
 			var sorts = value as IList<ISort>;
 			if (sorts == null) return;
 
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract == null) 
-				throw new Exception("Can not serialize sort because the current json contract does not extend SettingsContractResolver");
-
+			var settings = serializer.GetConnectionSettings();
 			writer.WriteStartArray();
 			foreach (var sort in sorts)
 			{
 
 				writer.WriteStartObject();
-				var fieldName = contract.Infer.Field(sort.SortKey);
+				var fieldName = settings.Inferrer.Field(sort.SortKey);
 				writer.WritePropertyName(fieldName);
 				serializer.Serialize(writer, sort);
 				writer.WriteEndObject();
@@ -96,6 +93,7 @@ namespace Nest
 			if (field != null)
 			{
 				sort.Field = field.Name;
+				// TODO use field.Value.Type instead of try catch
 
 				try
 				{

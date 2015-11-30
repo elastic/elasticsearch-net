@@ -19,16 +19,14 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract == null || contract.ConnectionSettings == null)
-				throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
 			marker.Match(
 				all=> writer.WriteNull(),
 				many =>
 				{
+					var settings = serializer.GetConnectionSettings();
 					writer.WriteStartArray();
 					foreach(var m in many.Indices.Cast<IUrlParameter>())
-						writer.WriteValue(m.GetString(contract.ConnectionSettings));
+						writer.WriteValue(m.GetString(settings));
 					writer.WriteEndArray();
 				}
 			);
