@@ -287,6 +287,7 @@
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\FieldNameAsValueJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
     <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />

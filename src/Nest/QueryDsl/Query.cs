@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
 
 namespace Nest
@@ -155,5 +152,7 @@ namespace Nest
 		public static QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) => 
 			new QueryContainerDescriptor<T>().Regexp(selector);
 
+		public static QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
+			new QueryContainerDescriptor<T>().Exists(selector);
 	}
 }

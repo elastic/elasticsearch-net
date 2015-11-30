@@ -591,5 +591,12 @@ namespace Nest
 
 		public QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Template = query);
+
+		/// <summary>
+		/// Matches documents which have a not null value set for the field specified.
+		/// </summary>
+		/// <returns></returns>
+		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Exists = query);
 	}
 }
