@@ -19,7 +19,7 @@ namespace Nest
 	}
 
 	public abstract class BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
-		: IBucketAggregation
+		: IBucketAggregation, IDescriptor
 		where TBucketAggregation : BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
 			, TBucketAggregationInterface, IBucketAggregation
 		where T : class

@@ -2,42 +2,50 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class FunctionScoreDecayFieldDescriptor
+
+	public interface IFunctionScoreDecayField
 	{
 		[JsonProperty(PropertyName = "origin")]
-		internal string _Origin { get; set; }
+		string Origin { get; set; }
 
 		[JsonProperty(PropertyName = "scale")]
-		internal string _Scale { get; set; }
+		string Scale { get; set; }
 
 		[JsonProperty(PropertyName = "offset")]
-		internal string _Offset { get; set; }
+		string Offset { get; set; }
 
 		[JsonProperty(PropertyName = "decay")]
-		internal double? _Decay { get; set; }
+		double? Decay { get; set; }
+	}
 
-		public FunctionScoreDecayFieldDescriptor Origin(string origin)
-		{
-			this._Origin = origin;
-			return this;
-		}
 
-		public FunctionScoreDecayFieldDescriptor Scale(string scale)
-		{
-			this._Scale = scale;
-			return this;
-		}
+	public class FunctionScoreDecayField : IFunctionScoreDecayField
+	{
+		public string Origin { get; set; }
 
-		public FunctionScoreDecayFieldDescriptor Offset(string offset)
-		{
-			this._Offset = offset;
-			return this;
-		}
+		public string Scale { get; set; }
 
-		public FunctionScoreDecayFieldDescriptor Decay(double? decay)
-		{
-			this._Decay = decay;
-			return this;
-		}
+		public string Offset { get; set; }
+
+		public double? Decay { get; set; }
+	}
+
+	public class FunctionScoreDecayFieldDescriptor : DescriptorBase<FunctionScoreDecayFieldDescriptor, IFunctionScoreDecayField>, IFunctionScoreDecayField
+	{
+		string IFunctionScoreDecayField.Origin { get; set; }
+
+		string IFunctionScoreDecayField.Scale { get; set; }
+
+		string IFunctionScoreDecayField.Offset { get; set; }
+
+		double? IFunctionScoreDecayField.Decay { get; set; }
+
+		public FunctionScoreDecayFieldDescriptor Origin(string origin) => Assign(a => a.Origin = origin);
+
+		public FunctionScoreDecayFieldDescriptor Scale(string scale) => Assign(a => a.Scale = scale);
+
+		public FunctionScoreDecayFieldDescriptor Offset(string offset) => Assign(a => a.Offset = offset);
+
+		public FunctionScoreDecayFieldDescriptor Decay(double? decay) => Assign(a => a.Decay = decay);
 	}
 }

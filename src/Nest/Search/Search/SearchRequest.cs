@@ -591,12 +591,12 @@ namespace Nest
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 
 		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into account that is part of request.
 		/// </summary>
-		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest) => Assign(a =>
+		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggesterDescriptor<T>, TermSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null) a.Suggest = new Dictionary<string, ISuggestBucket>();
-			var desc = new TermSuggestDescriptor<T>();
+			var desc = new TermSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			ITermSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Term = item };
@@ -607,14 +607,14 @@ namespace Nest
 		/// The phrase suggester adds additional logic on top of the term suggester to select entire corrected phrases 
 		/// instead of individual tokens weighted based on ngram-langugage models. 
 		/// </summary>
-		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest) => Assign(a =>
+		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggesterDescriptor<T>, PhraseSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
-			var desc = new PhraseSuggestDescriptor<T>();
+			var desc = new PhraseSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			IPhraseSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Phrase = item };
@@ -625,13 +625,13 @@ namespace Nest
 		/// The completion suggester is a so-called prefix suggester. 
 		/// It does not do spell correction like the term or phrase suggesters but allows basic auto-complete functionality.
 		/// </summary>
-		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest) => Assign(a => {
+		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggesterDescriptor<T>, CompletionSuggesterDescriptor<T>> suggest) => Assign(a => {
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
-			var desc = new CompletionSuggestDescriptor<T>();
+			var desc = new CompletionSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			ICompletionSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Completion = item };

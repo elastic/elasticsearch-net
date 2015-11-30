@@ -61,7 +61,7 @@
     <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
     <Compile Include="Aggregations\Bucket\KeyedBucket.cs" />
     <Compile Include="Aggregations\Bucket\BucketAggregationBase.cs" />
-    <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainerBase.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainer.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ChiSquareHeuristic.cs" />
@@ -578,8 +578,8 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusRequest.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusRequest.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggestCollate.cs" />
-    <Compile Include="Search\Suggesters\ContextSuggester\CategorySuggest.cs" />
-    <Compile Include="Search\Suggesters\ContextSuggester\GeoLocationSuggest.cs" />
+    <Compile Include="Search\Suggesters\ContextSuggester\CategorySuggestContext.cs" />
+    <Compile Include="Search\Suggesters\ContextSuggester\GeoLocationSuggestContext.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\ISuggestContext.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\ElasticClient-DeleteSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\ElasticClient-GetSearchTemplate.cs" />
@@ -812,7 +812,7 @@
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQuery.cs" />
     <Compile Include="Mapping\DynamicMapping.cs" />
-    <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggest.cs" />
+    <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggester.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQuery.cs" />
     <Compile Include="CommonAbstractions\Infer\ElasticInferrer.cs" />
     <Compile Include="Document\Multiple\Reindex\IReindexResponse.cs" />
@@ -821,9 +821,9 @@
     <Compile Include="Document\Multiple\Reindex\Reindex.cs" />
     <Compile Include="Search\Suggesters\BaseSuggest.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\DirectGenerator.cs" />
-    <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggest.cs" />
+    <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
-    <Compile Include="Search\Suggesters\TermSuggester\TermSuggest.cs" />
+    <Compile Include="Search\Suggesters\TermSuggester\TermSuggester.cs" />
     <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />

@@ -56,5 +56,6 @@ namespace Nest
 
 		public MovingAverageAggregationDescriptor Model(Func<MovingAverageModelDescriptor, IMovingAverageModel> modelSelector) =>
 			Assign(a => a.Model = modelSelector?.Invoke(new MovingAverageModelDescriptor()));
+
 	}
 }

@@ -40,9 +40,6 @@ namespace Nest.Resolvers
 			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
 			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
 
-			//TODO these should not be necessary here
-			else if (objectType == typeof(MultiGetResponse)) contract.Converter = new MultiGetHitJsonConverter();
-
 			if (this.ConnectionSettings.ContractConverters.HasAny())
 			{
 				foreach (var c in this.ConnectionSettings.ContractConverters)
@@ -82,71 +79,12 @@ namespace Nest.Resolvers
 			foreach (var i in objectType.GetInterfaces()) yield return i;
 		}
 
-
-
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
-			var defaultProperties = base.CreateProperties(type, memberSerialization);
-
-
-
-
-
-			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
-
-			defaultProperties = PropertiesOf<IIndexState>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IIndexSettings>(type, memberSerialization, defaultProperties, lookup);
-
-			defaultProperties = PropertiesOf<IAnalysis>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISimilarity>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ICharFilter>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IAnalyzer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ITokenizer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ITokenFilter>(type, memberSerialization, defaultProperties, lookup);
-
-			defaultProperties = PropertiesOf<ITypeMapping>(type, memberSerialization, defaultProperties, lookup);
-
-			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IFieldLookup>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IHighlight>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IIndexedGeoShape>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IMetricAggregation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IBucketAggregation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IPipelineAggregation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IFuzzySuggester>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IDirectGenerator>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IAliasAction>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IAlias>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IBoundingBox>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRepositorySettings>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IScript>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IScriptField>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ILikeDocument>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
-
-			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
-
-			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
+			//descriptors implement properties explicitly these are not picked up by default
+			return !typeof(IDescriptor).IsAssignableFrom(type) 
+				? base.CreateProperties(type, memberSerialization) : 
+				PropertiesOfAll(type, memberSerialization);
 		}
 
 		public IList<JsonProperty> PropertiesOfAllInterfaces(Type t, MemberSerialization memberSerialization)

@@ -31,8 +31,8 @@ namespace Nest
 	{
 		Union<INamedFiltersContainer, List<IQueryContainer>> IFiltersAggregation.Filters { get; set; }
 
-		public FiltersAggregationDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, NamedFiltersContainerBase> selector) =>
-			Assign(a => a.Filters = selector?.Invoke(new NamedFiltersContainerDescriptor<T>()));
+		public FiltersAggregationDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>
+			Assign(a => a.Filters = new Union<INamedFiltersContainer, List<IQueryContainer>>(selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, IQueryContainer>[] selectors) =>
 			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());

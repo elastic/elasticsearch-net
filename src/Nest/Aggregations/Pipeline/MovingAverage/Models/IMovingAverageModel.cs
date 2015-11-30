@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IMovingAverageModel : INestSerializable
+	public interface IMovingAverageModel 
 	{
 		string Name { get; }
 	}
 
-	public class MovingAverageModelDescriptor
+	public class MovingAverageModelDescriptor : DescriptorBase<MovingAverageModelDescriptor, IDescriptor>
 	{
 		public IEwmaModel Ewma(Func<EwmaModelDescriptor, IEwmaModel> ewmaSelector = null) => 
 			ewmaSelector.InvokeOrDefault(new EwmaModelDescriptor());

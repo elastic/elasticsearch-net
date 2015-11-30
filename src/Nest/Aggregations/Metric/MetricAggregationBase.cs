@@ -33,7 +33,7 @@ namespace Nest
 	}
 
 	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T> 
-		:  IMetricAggregation 
+		:  IMetricAggregation, IDescriptor
 		where TMetricAggregation : MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
 			, TMetricAggregationInterface, IMetricAggregation 
 		where T : class
