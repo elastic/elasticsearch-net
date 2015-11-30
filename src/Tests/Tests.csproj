@@ -369,6 +369,7 @@
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Other\MissingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\QueryDslUsageTestsBase.cs" />
     <Compile Include="QueryDsl\Span\Container\SpanContainingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Span\First\SpanFirstQueryUsageTests.cs" />

@@ -154,5 +154,8 @@ namespace Nest
 
 		public static QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Exists(selector);
+
+		public static QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
+			new QueryContainerDescriptor<T>().Missing(selector);
 	}
 }

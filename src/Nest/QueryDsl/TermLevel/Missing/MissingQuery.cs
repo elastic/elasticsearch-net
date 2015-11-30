@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MissingQuery>))]
+	[JsonConverter(typeof(FieldNameAsValueJsonConverter<MissingQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMissingQuery : IFieldNameQuery
 	{
