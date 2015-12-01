@@ -128,7 +128,7 @@ namespace Tests.Aggregations.Metric.TopHits
 						Sort = new List<ISort>
 						{
 							{
-								new Sort { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
+								new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
 							}
 						},
 						Source = new SourceFilter

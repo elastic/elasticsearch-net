@@ -52,5 +52,15 @@ namespace Nest
 		public MappingTransformDescriptor Language(string language) => Assign(a => a.Language = language);
 
 		public MappingTransformDescriptor Language(ScriptLang language) => Assign(a => a.Language = language.GetStringValue());
+
+	}
+
+	public class MappingTransformsDescriptor: DescriptorPromiseBase<MappingTransformsDescriptor, IList<IMappingTransform>>
+	{
+		public MappingTransformsDescriptor() : base(new List<IMappingTransform>()) { }
+
+		public MappingTransformsDescriptor Add(Func<MappingTransformDescriptor, IMappingTransform> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new MappingTransformDescriptor())));
+
 	}
 }

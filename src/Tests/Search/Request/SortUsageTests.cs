@@ -20,19 +20,15 @@ namespace Tests.Search.Request
 			{
 				sort = new object[]
 				{
-						new { startedOn = new { order = "asc" } },
-						new { name = new { order = "desc" } }
+					new { startedOn = new { order = "asc" } },
+					new { name = new { order = "desc" } }
 				}
 			};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Sort(ss => ss
-				.Field(p => p.StartedOn)
-				.Order(SortOrder.Ascending)
-			)
-			.Sort(ss => ss
-				.Field(p => p.Name)
-				.Order(SortOrder.Descending)
+				.Ascending(p => p.StartedOn)
+				.Descending(p => p.Name)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
@@ -40,16 +36,8 @@ namespace Tests.Search.Request
 			{
 				Sort = new List<ISort>
 				{
-						new Nest.Sort
-						{
-							Field = "startedOn",
-							Order = SortOrder.Ascending
-						},
-						new Nest.Sort
-						{
-							Field = "name",
-							Order = SortOrder.Descending
-						}
+					new SortField { Field = "startedOn", Order = SortOrder.Ascending },
+					new SortField { Field = "name", Order = SortOrder.Descending }
 				}
 			};
 	}

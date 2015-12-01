@@ -6,6 +6,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IProperty : IFieldMapping
 	{
 		PropertyName Name { get; set; }

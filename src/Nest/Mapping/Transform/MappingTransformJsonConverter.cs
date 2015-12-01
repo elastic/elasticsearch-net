@@ -9,7 +9,7 @@ namespace Nest
 {
 	internal class MappingTransformCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanWrite { get { return false; } }
+		public override bool CanWrite => false;
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IMappingTransform);
 

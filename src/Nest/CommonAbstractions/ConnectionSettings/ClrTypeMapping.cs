@@ -54,46 +54,41 @@ namespace Nest.CommonAbstractions.ConnectionSettings
 		public IList<IClrTypePropertyMapping<T>> Properties { get; set; }
 	}
 
-	public class ClrTypeMappingDescriptor<T> : IClrTypeMapping<T> where T : class
+	public class ClrTypeMappingDescriptor<T> : DescriptorBase<ClrTypeMappingDescriptor<T>,IClrTypeMapping<T>> , IClrTypeMapping<T>
+		where T : class
 	{
-		ClrTypeMappingDescriptor<T> _assign(Action<IClrTypeMapping<T>> assigner) => Fluent.Assign(this, assigner);
-
 		Type IClrTypeMapping<T>.Type { get; } = typeof (T);
-
 		string IClrTypeMapping<T>.IndexName { get; set; }
-
 		string IClrTypeMapping<T>.TypeName { get; set; }
-
 		Expression<Func<T, object>> IClrTypeMapping<T>.IdProperty { get; set; }
-
 		IList<IClrTypePropertyMapping<T>> IClrTypeMapping<T>.Properties { get; set; } = new List<IClrTypePropertyMapping<T>>();
 
 		/// <summary>
 		/// When specified dictates the default Elasticsearch index name for <typeparamref name="T"/> 
 		/// </summary>
-		public ClrTypeMappingDescriptor<T> IndexName(string indexName) => _assign(a => a.IndexName = indexName);
+		public ClrTypeMappingDescriptor<T> IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
 		/// <summary>
 		/// When specified dictates the default Elasticsearch type name for <typeparamref name="T" />
 		/// </summary>
-		public ClrTypeMappingDescriptor<T> TypeName(string typeName) => _assign(a => a.TypeName = typeName);
+		public ClrTypeMappingDescriptor<T> TypeName(string typeName) => Assign(a => a.TypeName = typeName);
 
 		/// <summary>
 		/// Allows you to set a default Id property on <typeparamref name="T" /> that NEST will evaluate 
 		/// </summary>
-		public ClrTypeMappingDescriptor<T> IdProperty(Expression<Func<T, object>> property) => _assign(a => a.IdProperty = property);
+		public ClrTypeMappingDescriptor<T> IdProperty(Expression<Func<T, object>> property) => Assign(a => a.IdProperty = property);
 
 		/// <summary>
 		/// When specified allows you to ignore <param name="property"></param> on clr type <typeparamref name="T" />
 		/// </summary>
 		public ClrTypeMappingDescriptor<T> Ignore(Expression<Func<T, object>> property) => 
-			_assign(a => a.Properties.Add(new IgnorePropertyMapping<T>(property)));
+			Assign(a => a.Properties.Add(new IgnorePropertyMapping<T>(property)));
 
 		/// <summary>
 		/// When specified allows you to rename <param name="property"></param> on clr type <typeparamref name="T" />
 		/// </summary>
 		public ClrTypeMappingDescriptor<T> Rename(Expression<Func<T, object>> property, string newName) => 
-			_assign(a => a.Properties.Add(new RenamePropertyMapping<T>(property, newName)));
+			Assign(a => a.Properties.Add(new RenamePropertyMapping<T>(property, newName)));
 
 	}
 
@@ -121,11 +116,7 @@ namespace Nest.CommonAbstractions.ConnectionSettings
 			Self.Property = property;
 		}
 
-		IPropertyMapping IClrTypePropertyMapping<T>.ToPropertyMapping()
-		{
-			if (Self.Ignore) return PropertyMapping.Ignored;
-			return new PropertyMapping {Name = Self.NewName};
-		}
+		IPropertyMapping IClrTypePropertyMapping<T>.ToPropertyMapping() => Self.Ignore ? PropertyMapping.Ignored : new PropertyMapping {Name = Self.NewName};
 	}
 
 	public class IgnorePropertyMapping<T> : ClrPropertyMappingBase<T> where T : class

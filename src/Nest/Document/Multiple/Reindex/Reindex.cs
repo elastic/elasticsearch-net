@@ -33,10 +33,8 @@ namespace Nest
 		}
 	}
 
-	public class ReindexDescriptor<T> : IReindexRequest where T : class
+	public class ReindexDescriptor<T> : DescriptorBase<ReindexDescriptor<T>, IReindexRequest>, IReindexRequest where T : class
 	{
-		ReindexDescriptor<T> Assign(Action<IReindexRequest> assign)  => Fluent.Assign(this, assign);
-
 		IndexName IReindexRequest.To { get; set; }
 		IndexName IReindexRequest.From { get; set; }
 		string IReindexRequest.Scroll { get; set; }

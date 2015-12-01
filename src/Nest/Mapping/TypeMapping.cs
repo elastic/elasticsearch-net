@@ -70,9 +70,8 @@ namespace Nest
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		FluentDictionary<string, object> Meta { get; set; }
 
-		[JsonProperty("dynamic_templates", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
-		IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
+		[JsonProperty("dynamic_templates")]
+		IDynamicTemplateContainer DynamicTemplates { get; set; }
 
 		[JsonProperty("dynamic")]
 		DynamicMapping? Dynamic { get; set; }
@@ -96,7 +95,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IEnumerable<string> DynamicDateFormats { get; set; }
 		/// <inheritdoc/>
-		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
+		public IDynamicTemplateContainer DynamicTemplates { get; set; }
 		/// <inheritdoc/>
 		public IFieldNamesField FieldNamesField { get; set; }
 		/// <inheritdoc/>
@@ -139,7 +138,7 @@ namespace Nest
 		bool? ITypeMapping.DateDetection { get; set; }
 		DynamicMapping? ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
-		IDictionary<string, DynamicTemplate> ITypeMapping.DynamicTemplates { get; set; }
+		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
 		IIdField ITypeMapping.IdField { get; set; }
 		IIndexField ITypeMapping.IndexField { get; set; }
@@ -207,15 +206,11 @@ namespace Nest
 		public TypeMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, IMappingTransform> mappingTransformSelector)
-		{
-			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
-			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
-			if (t == null) return this;
-			if (Self.Transform == null) Self.Transform = new List<IMappingTransform>();
-			Self.Transform.Add(t);
-			return this;
-		}
+		public TypeMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transforms) => Assign(a => a.Transform = transforms.ToListOrNullIfEmpty());
+
+		/// <inheritdoc/>
+		public TypeMappingDescriptor<T> Transform(Func<MappingTransformsDescriptor, IPromise<IList<IMappingTransform>>> selector) =>
+			Assign(a => a.Transform = selector?.Invoke(new MappingTransformsDescriptor())?.Value);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> IdField(Func<IdFieldDescriptor, IIdField> idMapper) => Assign(a => a.IdField = idMapper?.Invoke(new IdFieldDescriptor()));
@@ -248,19 +243,8 @@ namespace Nest
 			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.PromisedValue);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)
-		{
-			//TODO _DELETES concept is wrong?
-			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
-			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
-			if (Self.DynamicTemplates == null)
-				Self.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
-			foreach (var t in templates._Deletes)
-				Self.DynamicTemplates.Remove(t);
-			foreach (var t in templates.Templates)
-				Self.DynamicTemplates[t.Key] = t.Value;
-			return this;
-		}
+		public TypeMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplateContainerDescriptor<T>, IPromise<IDynamicTemplateContainer>> dynamicTemplatesSelector) =>
+			Assign(a => a.DynamicTemplates = dynamicTemplatesSelector?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
 
 	}
 }

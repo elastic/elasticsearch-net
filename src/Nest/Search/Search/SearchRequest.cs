@@ -234,13 +234,6 @@ namespace Nest
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
-		//TODO probably remove this when we normalize sorting
-		private void AddSort(ISort sort) => Assign(a =>
-		{
-			a.Sort = a.Sort ?? new List<ISort>();
-			a.Sort.Add(sort);
-		});
-
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		/// </summary>
@@ -456,136 +449,10 @@ namespace Nest
 				 }
 			 });
 
-		/// <summary>
-		/// <para>Allows adding a prebuilt sort of any type.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Sort(ISort sort)
-		{
-			AddSort(sort);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
-		{
-			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
-		{
-			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Descending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortAscending(string field)
-		{
-			AddSort(new Sort() { Field = field, Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortDescending(string field)
-		{
-			AddSort(new Sort() { Field = field, Order = SortOrder.Descending});
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortMulti(params Func<SortFieldDescriptor<T>, IFieldSort>[] sorts)
-		{
-			foreach (var sort in sorts)
-			{
-				this.Sort(sort);
-			}
-
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortMulti(IEnumerable<SortFieldDescriptor<T>> sorts)
-		{
-			foreach (var sort in sorts)
-			{
-				var copy = sort;
-				this.Sort(s => copy);
-			}
-
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortScript() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 

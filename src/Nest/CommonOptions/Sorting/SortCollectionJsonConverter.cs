@@ -10,61 +10,48 @@ namespace Nest
 {
 	internal class SortCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => typeof(IList<ISort>).IsAssignableFrom(objectType);
+		public override bool CanConvert(Type objectType) => typeof(ISort).IsAssignableFrom(objectType);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var sorts = new List<ISort>();
-			while (reader.TokenType != JsonToken.EndArray)
-			{
-				reader.Read();
-				if (reader.TokenType == JsonToken.EndArray)
-					break;
-				reader.Read();
-				var field = reader.Value as string;
-				reader.Read();
+			ISort sort = null;
+			reader.Read();
+			var field = reader.Value as string;
+			reader.Read();
 
-				if (field == "_geo_distance")
+			if (field == "_geo_distance")
+			{
+				var j = JObject.Load(reader);
+				if (j != null)
 				{
-					var j = JObject.Load(reader);
-					if (j != null)
+					var s = j.ToObject<GeoDistanceSort>(serializer);
+					if (s != null)
 					{
-						var sort = j.ToObject<GeoDistanceSort>(serializer);
-						if (sort != null)
-						{
-							LoadGeoDistanceSortLocation(sort, j);
-							sorts.Add(sort);
-						}
+						LoadGeoDistanceSortLocation(s, j);
+						sort = s;
 					}
 				}
-				else if (field == "_script")
-				{
-					var j = JObject.Load(reader);
-					if (j != null)
-					{
-						var sort = j.ToObject<ScriptSort>(serializer);
-						if (sort != null)
-						{
-							sorts.Add(sort);
-						}
-					}
-				}
-				else
-				{
-					var j = JObject.Load(reader);
-					if (j != null)
-					{
-						var sort = j.ToObject<Sort>(serializer);
-						if (sort != null)
-						{
-							sort.Field = field;
-							sorts.Add(sort);
-						}
-					}
-				}
-				reader.Read();
 			}
-			return sorts;
+			else if (field == "_script")
+			{
+				var j = JObject.Load(reader);
+				if (j != null)
+				{
+					sort = j.ToObject<ScriptSort>(serializer);
+				}
+			}
+			else
+			{
+				var j = JObject.Load(reader);
+				if (j != null)
+				{
+					var s = j.ToObject<SortField>(serializer);
+					s.Field = field;
+					sort = s;
+				}
+			}
+			reader.Read();
+			return sort;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -88,25 +75,25 @@ namespace Nest
 
 		private void LoadGeoDistanceSortLocation(GeoDistanceSort sort, JObject j)
 		{
-			var field = j.Properties().FirstOrDefault(p => !GeoDistanceSort.Params.Contains(p.Name));
+			//var field = j.Properties().FirstOrDefault(p => !GeoDistanceSort.Params.Contains(p.Name));
 
-			if (field != null)
-			{
-				sort.Field = field.Name;
-				// TODO use field.Value.Type instead of try catch
+			//if (field != null)
+			//{
+			//	sort.Field = field.Name;
+			//	// TODO use field.Value.Type instead of try catch
 
-				try
-				{
-					sort.PinLocation = field.Value.Value<string>();
-				}
-				catch { }
+			//	try
+			//	{
+			//		sort.PinLocation = field.Value.Value<string>();
+			//	}
+			//	catch { }
 
-				try
-				{
-					sort.Points = field.Value.Value<IEnumerable<string>>();
-				}
-				catch { }
-			}
+			//	try
+			//	{
+			//		sort.Points = field.Value.Value<IEnumerable<string>>();
+			//	}
+			//	catch { }
+			//}
 		}
 	}
 }

@@ -83,36 +83,17 @@ namespace Nest
 		IScriptQuery IFunctionScoreQuery.ScriptScore { get; set; }
 		double? IFunctionScoreQuery.Weight { get; set; }
 		float? IFunctionScoreQuery.MinScore { get; set; }
-		
-		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless)
-		{
-			this._forcedConditionless = isConditionless;
-			return this;
-		}
 
-		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var query = new QueryContainerDescriptor<T>();
-			var q = selector(query);
-			a.Query = q.IsConditionless ? null : q;
-		});
+		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless) => Assign(a => _forcedConditionless = isConditionless);
 
-		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var filter = new QueryContainerDescriptor<T>();
-			var f = selector(filter);
-			a.Filter = f.IsConditionless ? null : f;
-		});
+		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions) => Assign(a =>
-		{
-			var descriptor = new FunctionScoreFunctionsDescriptor<T>();
-			foreach (var f in functions)
-				f(descriptor);
-			a.Functions = descriptor;
-		});
+		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
+
+		public FunctionScoreQueryDescriptor<T> Functions(Func<FunctionScoreFunctionsDescriptor<T>, IPromise<IList<IFunctionScoreFunction>>> functions) =>
+			Assign(a => a.Functions = functions?.Invoke(new FunctionScoreFunctionsDescriptor<T>())?.Value);
 
 		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IFunctionScoreFunction> functions) => Assign(a => a.Functions = functions);
 
@@ -122,12 +103,7 @@ namespace Nest
 
 		public FunctionScoreQueryDescriptor<T> MaxBoost(float maxBoost) => Assign(a => a.MaxBoost = maxBoost);
 
-		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null) => Assign(a =>
-		{
-			a.RandomScore = new RandomScoreFunction();
-			if (seed.HasValue)
-				a.RandomScore.Seed = seed.Value;
-		});
+		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null) => Assign(a => a.RandomScore = new RandomScoreFunction { Seed = seed});
 
 		public FunctionScoreQueryDescriptor<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) => 
 			Assign(a => a.ScriptScore = selector?.Invoke(new ScriptQueryDescriptor<T>()));

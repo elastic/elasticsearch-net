@@ -7,105 +7,33 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	public class FunctionScoreFunctionsDescriptor<T> : IEnumerable<FunctionScoreFunction<T>> where T : class
+	public class FunctionScoreFunctionsDescriptor<T> : DescriptorPromiseBase<FunctionScoreFunctionsDescriptor<T>, IList<IFunctionScoreFunction>>
+		where T : class
 	{
-		internal List<FunctionScoreFunction<T>> _Functions { get; set; }
+		public FunctionScoreFunctionsDescriptor() : base(new List<IFunctionScoreFunction>()) { }
 
-		public FunctionScoreFunctionsDescriptor()
-		{
-			this._Functions = new List<FunctionScoreFunction<T>>();
-		}
+		public FunctionScoreFunctionsDescriptor<T> Gauss(Func<GaussFunctionDescriptor<T>, IGaussFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new GaussFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Gauss(
-			string field, 
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new GaussFunction<T>(field, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> Linear(Func<LinearFunctionDescriptor<T>, ILinearFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new LinearFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Gauss(
-			Expression<Func<T, object>> objectPath,
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new GaussFunction<T>(objectPath, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> Exp(Func<ExpFunctionDescriptor<T>, IExpFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ExpFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Linear(
-			string field,
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new LinearFunction<T>(field, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> BoostFactor(Func<BoostFactorFunctionDescriptor<T>, IBoostFactorFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new BoostFactorFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Linear(
-			Expression<Func<T, object>> objectPath,
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new LinearFunction<T>(objectPath, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> ScriptScoreFactor(Func<ScriptScoreFunctionDescriptor<T>, IScriptScoreFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ScriptScoreFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Exp(
-			string field,
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new ExpFunction<T>(field, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> FieldValueFactor(Func<FieldValueFactorFunctionDescriptor<T>, IFieldValueFactorFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new FieldValueFactorFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> Exp(
-			Expression<Func<T, object>> objectPath, 
-			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
-		{
-			var fn = new ExpFunction<T>(objectPath, descriptorBuilder);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> Weight(Func<WeightFunctionDescriptor<T>, IWeightFunction> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new WeightFunctionDescriptor<T>())));
 
-		public FunctionScoreFunction<T> BoostFactor(double value)
-		{
-			var fn = new BoostFactorFunction<T>(value);
-			this._Functions.Add(fn);
-			return fn;
-		}
+		public FunctionScoreFunctionsDescriptor<T> Weight(double weight) => Assign(a => a.AddIfNotNull(new WeightFunction { Weight = weight }));
 
-		public FunctionScoreFunction<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> scriptSelector)
-		{
-			var fn = new ScriptScoreFunction<T>(scriptSelector);
-			this._Functions.Add(fn);
-			return fn;
-		}
-
-		public FunctionScoreFunction<T> FieldValueFactor(Func<FieldValueFactorDescriptor<T>, FieldValueFactorDescriptor<T>> db)
-		{
-			var fn = new FieldValueFactor<T>(db);
-			this._Functions.Add(fn);
-			return fn;
-		}
-
-		public FunctionScoreFunction<T> Weight(double weight)
-		{
-			var fn = new WeightFunction<T>(weight);
-			this._Functions.Add(fn);
-			return fn;
-		}
-
-		public IEnumerator<FunctionScoreFunction<T>> GetEnumerator()
-		{
-			return _Functions.GetEnumerator();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return _Functions.GetEnumerator();
-		}
 	}
 }

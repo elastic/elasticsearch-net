@@ -29,12 +29,10 @@ namespace Nest
 		public Field Path { get; set; }
 	}
 
-	public class FieldLookupDescriptor<T> : IFieldLookup 
+	public class FieldLookupDescriptor<T> : DescriptorBase<FieldLookupDescriptor<T>,IFieldLookup>, IFieldLookup
 		where T : class
 	{
 		internal Type _ClrType => typeof(T);
-
-		private IFieldLookup Self => this;
 
 		IndexName IFieldLookup.Index { get; set; }
 		
@@ -50,30 +48,14 @@ namespace Nest
 			Self.Index = new IndexName { Type = this._ClrType };
 		}
 
-		public FieldLookupDescriptor<T> Index(IndexName index)
-		{
-			Self.Index = index;
-			return this;
-		}
-		public FieldLookupDescriptor<T> Id(Id id)
-		{
-			Self.Id = id;
-			return this;
-		}
-		public FieldLookupDescriptor<T> Type(TypeName type)
-		{
-			Self.Type = type;
-			return this;
-		}
-		public FieldLookupDescriptor<T> Path(Field path)
-		{
-			Self.Path = path;
-			return this;
-		}
-		public FieldLookupDescriptor<T> Path(Expression<Func<T, object>> objectPath)
-		{
-			Self.Path = objectPath;
-			return this;
-		}
+		public FieldLookupDescriptor<T> Index(IndexName index) => Assign(a => a.Index = index);
+
+		public FieldLookupDescriptor<T> Id(Id id) => Assign(a => a.Id = id);
+
+		public FieldLookupDescriptor<T> Type(TypeName type) => Assign(a => a.Type = type);
+
+		public FieldLookupDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
+
+		public FieldLookupDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 	}
 }
