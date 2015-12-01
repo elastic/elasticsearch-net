@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(SortCollectionJsonConverter))]
+	[ContractJsonConverter(typeof(SortJsonConverter))]
 	public interface ISort
 	{
 		Field SortKey { get; }
@@ -72,6 +72,13 @@ namespace Nest
 		public virtual TDescriptor NestedPath(Field path) => Assign(a => a.NestedPath = path);
 
 		public virtual TDescriptor NestedPath(Expression<Func<T, object>> objectPath) => Assign(a => a.NestedPath = objectPath);
+
+		public virtual TDescriptor MissingLast() => Assign(a => a.Missing = "_last");
+
+		public virtual TDescriptor MissingFirst() => Assign(a => a.Missing = "_first");
+
+		public virtual TDescriptor MissingValue(string value) => Assign(a => a.Missing = value);
+
 	}
 
 

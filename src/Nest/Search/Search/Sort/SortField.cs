@@ -36,13 +36,8 @@ namespace Nest
 
 		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => _field = objectPath);
 
-		public virtual SortFieldDescriptor<T> MissingLast() => Assign(a => a.Missing = "_last");
+		public virtual SortFieldDescriptor<T> UnmappedType(FieldType? type) => Assign(a => a.UnmappedType = type);
 
-		public virtual SortFieldDescriptor<T> MissingFirst() => Assign(a => a.Missing = "_first");
-
-		public virtual SortFieldDescriptor<T> MissingValue(string value) => Assign(a => a.Missing = value);
-
-		public virtual SortFieldDescriptor<T> UnmappedType(FieldType type) => Assign(a => a.UnmappedType = type);
-
+		public virtual SortFieldDescriptor<T> IgnoreUnmappedFields(bool? ignore = true) => Assign(a => a.IgnoreUnmappedFields = ignore);
 	}
 }

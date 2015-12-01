@@ -385,7 +385,7 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
-    <Compile Include="QueryDsl\VariableFieldNameQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\VariableFields.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchResponseJsonConverter.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateJsonConverter.cs" />
@@ -427,7 +427,7 @@
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
-    <Compile Include="Search\Search\Sort\Sort.cs" />
+    <Compile Include="Search\Search\Sort\SortBase.cs" />
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
     <Compile Include="Search\Search\Sort\SortMode.cs" />
     <Compile Include="Search\Search\Sort\SortOrder.cs" />
@@ -1036,7 +1036,7 @@
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkResponseItemJsonConverter.cs" />
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryJsonConverter.cs" />
-    <Compile Include="CommonOptions\Sorting\SortCollectionJsonConverter.cs" />
+    <Compile Include="CommonOptions\Sorting\SortJsonConverter.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestResponseJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\VerbatimDictionaryKeysConverter.cs" />

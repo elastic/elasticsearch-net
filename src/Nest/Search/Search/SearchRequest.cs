@@ -40,7 +40,6 @@ namespace Nest
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(SortCollectionJsonConverter))]
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]

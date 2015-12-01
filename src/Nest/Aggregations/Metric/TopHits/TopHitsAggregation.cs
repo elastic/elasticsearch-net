@@ -18,7 +18,6 @@ namespace Nest
 		int? Size { get; set; }
 
 		[JsonProperty("sort")]
-		[JsonConverter(typeof(SortCollectionJsonConverter))]
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty("_source")]
