@@ -10,6 +10,11 @@ namespace Tests.Mapping.Types.Complex.Nested
 {
 	public class NestedTest
 	{
+		public class InnerObject
+		{
+			public string Name { get; set; }
+		}
+
 		[Nested(
 			IncludeInParent = true,
 			IncludeInRoot = false,
@@ -17,10 +22,10 @@ namespace Tests.Mapping.Types.Complex.Nested
 			Enabled = true,
 			IncludeInAll = true,
 			Path = "mypath")]
-		public Project Full { get; set; }
+		public InnerObject Full { get; set; }
 
 		[Nested]
-		public Project Minimal { get; set; }
+		public InnerObject Minimal { get; set; }
 	}
 
 	public class NestedMappingTests : TypeMappingTestBase<NestedTest>
@@ -37,17 +42,32 @@ namespace Tests.Mapping.Types.Complex.Nested
 					dynamic = "strict",
 					enabled = true,
 					include_in_all = true,
-					path = "mypath"
+					path = "mypath",
+					properties = new
+					{
+						name = new
+						{
+							type = "string"
+						}
+					}
 				},
 				minimal = new
 				{
-					type = "nested"
+					type = "nested",
+					properties = new
+					{
+						name = new
+						{
+							type = "string"
+						}
+					}
 				}
 			}
 		};
 
 		protected override Func<PropertiesDescriptor<NestedTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Nested<Project>(s => s
+			.Nested<NestedTest.InnerObject>(s => s
+				.AutoMap()
 				.Name(o => o.Full)
 				.IncludeInParent()
 				.IncludeInRoot(false)
@@ -56,7 +76,8 @@ namespace Tests.Mapping.Types.Complex.Nested
 				.IncludeInAll()
 				.Path("mypath")
 			)
-			.Nested<Project>(b => b
+			.Nested<NestedTest.InnerObject>(b => b
+				.AutoMap()
 				.Name(o => o.Minimal)
 			);
 	}

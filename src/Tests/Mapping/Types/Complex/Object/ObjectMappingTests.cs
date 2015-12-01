@@ -10,15 +10,20 @@ namespace Tests.Mapping.Types.Complex.Object
 {
 	public class ObjectTest
 	{
+		public class InnerObject
+		{
+			public string Name { get; set; }
+		}
+
 		[Object(
 			Dynamic = DynamicMapping.Strict,
 			Enabled = true,
 			IncludeInAll = true,
 			Path = "mypath")]
-		public Project Full { get; set; }
+		public InnerObject Full { get; set; }
 
 		[Object]
-		public Project Minimal { get; set; }
+		public InnerObject Minimal { get; set; }
 	}
 
 	public class ObjectMappingTests : TypeMappingTestBase<ObjectTest>
@@ -33,24 +38,40 @@ namespace Tests.Mapping.Types.Complex.Object
 					dynamic = "strict",
 					enabled = true,
 					include_in_all = true,
-					path = "mypath"
+					path = "mypath",
+					properties = new
+					{
+						name = new
+						{
+							type = "string"
+						}
+					}
 				},
 				minimal = new
 				{
-					type = "object"
+					type = "object",
+					properties = new
+					{
+						name = new
+						{
+							type = "string"
+						}
+					}
 				}
 			}
 		};
 
 		protected override Func<PropertiesDescriptor<ObjectTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Object<Project>(s => s
+			.Object<ObjectTest.InnerObject>(s => s
+				.AutoMap()
 				.Name(o => o.Full)
 				.Dynamic(DynamicMapping.Strict)
 				.Enabled()
 				.IncludeInAll()
 				.Path("mypath")
 			)
-			.Object<Project>(b => b
+			.Object<ObjectTest.InnerObject>(b => b
+				.AutoMap()
 				.Name(o => o.Minimal)
 			);
 	}

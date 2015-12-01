@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Nest
 {
+	[JsonObject(ItemTypeNameHandling = TypeNameHandling.Auto)]
 	public class BooleanAttribute : ElasticsearchPropertyAttribute, IBooleanProperty
 	{
 		IBooleanProperty Self => this;

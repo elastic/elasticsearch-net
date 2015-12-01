@@ -86,10 +86,15 @@ namespace Nest.Resolvers
 
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
-			//descriptors implement properties explicitly these are not picked up by default
-			return !typeof(IDescriptor).IsAssignableFrom(type) 
-				? base.CreateProperties(type, memberSerialization) : 
-				PropertiesOfAll(type, memberSerialization);
+			// Only serialize explicitly implemented IProperty properties on attribute types
+			if (typeof(ElasticsearchPropertyAttribute).IsAssignableFrom(type))
+				return PropertiesOfInterface<IProperty>(type, memberSerialization);
+
+			// Descriptors implement properties explicitly, these are not picked up by default
+			if (typeof(IDescriptor).IsAssignableFrom(type))
+				return PropertiesOfAll(type, memberSerialization);
+
+			return base.CreateProperties(type, memberSerialization);
 		}
 
 		public IList<JsonProperty> PropertiesOfAllInterfaces(Type t, MemberSerialization memberSerialization)
@@ -101,7 +106,18 @@ namespace Nest.Resolvers
 				.SelectMany(interfaceProps => interfaceProps)
 				.DistinctBy(p => p.PropertyName)
 				.ToList();
+		}
 
+		public IList<JsonProperty> PropertiesOfInterface<TInterface>(Type t, MemberSerialization memberSerialization)
+			where TInterface : class
+		{
+			return (
+				from i in t.GetInterfaces().Where(i => typeof(TInterface).IsAssignableFrom(i))
+				select base.CreateProperties(i, memberSerialization)
+				)
+				.SelectMany(interfaceProps => interfaceProps)
+				.DistinctBy(p => p.PropertyName)
+				.ToList();
 		}
 
 		public IList<JsonProperty> PropertiesOfAll(Type t, MemberSerialization memberSerialization)
@@ -110,7 +126,6 @@ namespace Nest.Resolvers
 				.Concat(PropertiesOfAllInterfaces(t, memberSerialization))
 				.DistinctBy(p => p.PropertyName)
 				.ToList();
-
 		}
 
 		protected override string ResolvePropertyName(string fieldName)
