@@ -13,7 +13,7 @@ namespace Nest
 		bool? ICompletionProperty.PreserveSeparators { get; set; }
 		bool? ICompletionProperty.PreservePositionIncrements { get; set; }
 		int? ICompletionProperty.MaxInputLength { get; set; }
-		IDictionary<string, ISuggestContext> ICompletionProperty.Context { get; set; }
+		ISuggestContextMapping ICompletionProperty.Context { get; set; }
 
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }

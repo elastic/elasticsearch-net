@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentageScoreHeuristic>))]
-	public interface IPercentageScoreHeuristic : INestSerializable { }
+	public interface IPercentageScoreHeuristic { }
 
 	public class PercentageScoreHeuristic { }
 

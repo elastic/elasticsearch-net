@@ -15,12 +15,16 @@ namespace Tests.CodeStandards
 		/**
 		* Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
 		*/
-		//[U]
-		public void ShouldInheritFromDescriptorBase()
+		[U]
+		public void DescriptorsHaveToBeMarkedWithIDescriptor()
 		{
+			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
+
 			var descriptors = from t in typeof(DescriptorBase<,>).Assembly.Types()
-							  where t.Name.EndsWith("Descriptor", StringComparison.Ordinal) && t.IsClass
-								&& (!t.GetInterfaces().Any(i => i == typeof(IDescriptor)))
+							  where t.IsClass 
+								&& t.Name.Contains("Descriptor") 
+								&& !notDescriptors.Contains(t.Name)
+								&& !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
 							  select t.FullName;
 			descriptors.Should().BeEmpty();
 		}

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoDistanceAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoDistanceAggregation>))]
 	public interface IGeoDistanceAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

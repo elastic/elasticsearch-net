@@ -40,7 +40,6 @@ namespace Nest
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(SortCollectionJsonConverter))]
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
@@ -233,13 +232,6 @@ namespace Nest
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
-
-		//TODO probably remove this when we normalize sorting
-		private void AddSort(ISort sort) => Assign(a =>
-		{
-			a.Sort = a.Sort ?? new List<ISort>();
-			a.Sort.Add(sort);
-		});
 
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
@@ -456,147 +448,21 @@ namespace Nest
 				 }
 			 });
 
-		/// <summary>
-		/// <para>Allows adding a prebuilt sort of any type.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Sort(ISort sort)
-		{
-			AddSort(sort);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
-		{
-			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
-		{
-			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Descending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortAscending(string field)
-		{
-			AddSort(new Sort() { Field = field, Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortDescending(string field)
-		{
-			AddSort(new Sort() { Field = field, Order = SortOrder.Descending});
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortMulti(params Func<SortFieldDescriptor<T>, IFieldSort>[] sorts)
-		{
-			foreach (var sort in sorts)
-			{
-				this.Sort(sort);
-			}
-
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortMulti(IEnumerable<SortFieldDescriptor<T>> sorts)
-		{
-			foreach (var sort in sorts)
-			{
-				var copy = sort;
-				this.Sort(s => copy);
-			}
-
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortScript() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
-		{
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			AddSort(descriptor);
-			return this;
-		}
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 
 		/// The suggested terms are provided per analyzed suggest text token. The term suggester doesn’t take the query into account that is part of request.
 		/// </summary>
-		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggestDescriptor<T>, TermSuggestDescriptor<T>> suggest) => Assign(a =>
+		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggesterDescriptor<T>, TermSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null) a.Suggest = new Dictionary<string, ISuggestBucket>();
-			var desc = new TermSuggestDescriptor<T>();
+			var desc = new TermSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			ITermSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Term = item };
@@ -607,14 +473,14 @@ namespace Nest
 		/// The phrase suggester adds additional logic on top of the term suggester to select entire corrected phrases 
 		/// instead of individual tokens weighted based on ngram-langugage models. 
 		/// </summary>
-		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggestDescriptor<T>, PhraseSuggestDescriptor<T>> suggest) => Assign(a =>
+		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggesterDescriptor<T>, PhraseSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
-			var desc = new PhraseSuggestDescriptor<T>();
+			var desc = new PhraseSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			IPhraseSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Phrase = item };
@@ -625,13 +491,13 @@ namespace Nest
 		/// The completion suggester is a so-called prefix suggester. 
 		/// It does not do spell correction like the term or phrase suggesters but allows basic auto-complete functionality.
 		/// </summary>
-		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggestDescriptor<T>, CompletionSuggestDescriptor<T>> suggest) => Assign(a => {
+		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggesterDescriptor<T>, CompletionSuggesterDescriptor<T>> suggest) => Assign(a => {
 			name.ThrowIfNullOrEmpty("name");
 			suggest.ThrowIfNull("suggest");
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
-			var desc = new CompletionSuggestDescriptor<T>();
+			var desc = new CompletionSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			ICompletionSuggester i = item;
 			var bucket = new SuggestBucket { Text = i.Text, Completion = item };

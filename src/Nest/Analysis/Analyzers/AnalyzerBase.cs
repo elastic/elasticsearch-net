@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[ContractJsonConverter(typeof(AnalyzerJsonConverter))]
 	public interface IAnalyzer
 	{
 		[JsonProperty(PropertyName = "version")]

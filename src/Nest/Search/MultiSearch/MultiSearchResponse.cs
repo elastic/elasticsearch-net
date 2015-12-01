@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[JsonObject]
+	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
 	public class MultiSearchResponse : BaseResponse, IMultiSearchResponse
 	{
 		public MultiSearchResponse()

@@ -9,7 +9,7 @@ using FluentAssertions;
 
 namespace Tests.CodeStandards
 {
-	public class ElasticClient
+	public class ElasticClientStandards
 	{
 		/*
 		* Fluent methods on IElasticClient (Func<Descriptor, Interface>) should be named `selector`.

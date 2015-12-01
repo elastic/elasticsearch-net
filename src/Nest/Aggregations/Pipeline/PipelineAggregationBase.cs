@@ -34,8 +34,8 @@ namespace Nest
 		public GapPolicy? GapPolicy { get; set; }
 	}
 
-	public abstract class PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath>
-		: IPipelineAggregation
+	public abstract class PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath> 
+		: DescriptorBase<TPipelineAggregation, TPipelineAggregationInterface>, IPipelineAggregation
 		where TPipelineAggregation : PipelineAggregationDescriptorBase<TPipelineAggregation, TPipelineAggregationInterface, TBucketsPath>
 			, TPipelineAggregationInterface, IPipelineAggregation
 		where TPipelineAggregationInterface : class, IPipelineAggregation
@@ -44,9 +44,6 @@ namespace Nest
 		IBucketsPath IPipelineAggregation.BucketsPath { get; set; }
 		string IPipelineAggregation.Format { get; set; }
 		GapPolicy? IPipelineAggregation.GapPolicy { get; set; }
-
-		protected TPipelineAggregation Assign(Action<TPipelineAggregationInterface> assigner) =>
-			Fluent.Assign(((TPipelineAggregation)this), assigner);
 
 		public TPipelineAggregation Format(string format) => Assign(a => a.Format = format);
 

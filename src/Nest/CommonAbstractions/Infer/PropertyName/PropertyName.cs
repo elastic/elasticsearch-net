@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace Nest
 {
+	[ContractJsonConverter(typeof(PropertyNameJsonConverter))]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
 		public string Name { get; set; }

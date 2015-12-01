@@ -103,12 +103,12 @@ namespace Nest
 
 		protected void WriteMetricProperties(IMetricAggregation metric, JsonWriter writer, JsonSerializer serializer)
 		{
-			var contract = serializer.ContractResolver as SettingsContractResolver;
 
 			if (metric.Field != null)
 			{
+				var settings = serializer.GetConnectionSettings();
 				writer.WritePropertyName("field");
-				writer.WriteValue(contract.Infer.Field(metric.Field));
+				writer.WriteValue(settings.Inferrer.Field(metric.Field));
 			}
 			
 			if (metric.Script != null)

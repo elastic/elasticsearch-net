@@ -7,12 +7,6 @@ namespace Nest
 {
 	internal class FieldJsonConverter : JsonConverter
 	{
-		private readonly ElasticInferrer _infer;
-		public FieldJsonConverter(IConnectionSettingsValues connectionSettings)
-		{
-			_infer = new ElasticInferrer(connectionSettings);
-		}
-
 		public override bool CanRead => false;
 
 		public override bool CanWrite => true;
@@ -27,7 +21,8 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			writer.WriteValue(this._infer.Field(field));
+			var settings = serializer.GetConnectionSettings();
+			writer.WriteValue(settings.Inferrer.Field(field));
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

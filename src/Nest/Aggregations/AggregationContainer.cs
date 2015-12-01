@@ -261,7 +261,7 @@ namespace Nest
 		}
 	}
 
-	public class AggregationContainerDescriptor<T> : IAggregationContainer
+	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>, IAggregationContainer>, IAggregationContainer
 		where T : class
 	{
 		AggregationDictionary IAggregationContainer.Aggregations { get; set; }

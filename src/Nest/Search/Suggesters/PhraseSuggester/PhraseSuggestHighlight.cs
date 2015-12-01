@@ -23,24 +23,14 @@ namespace Nest
 		public string PostTag { get; set; }
 	}
 
-	public class PhraseSuggestHighlightDescriptor : IPhraseSuggestHighlight
+	public class PhraseSuggestHighlightDescriptor : DescriptorBase<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight>, IPhraseSuggestHighlight
 	{
-		internal IPhraseSuggestHighlight Highlight = new PhraseSuggestHighlight();
-
 		string IPhraseSuggestHighlight.PreTag { get; set; }
 
 		string IPhraseSuggestHighlight.PostTag { get; set; }
 
-		public PhraseSuggestHighlightDescriptor PreTag(string preTag)
-		{
-			this.Highlight.PreTag = preTag;
-			return this;
-		}
-		
-		public PhraseSuggestHighlightDescriptor PostTag(string postTag)
-		{
-			this.Highlight.PostTag = postTag;
-			return this;
-		}
+		public PhraseSuggestHighlightDescriptor PreTag(string preTag) => Assign(a => a.PreTag = preTag);
+
+		public PhraseSuggestHighlightDescriptor PostTag(string postTag) => Assign(a => a.PostTag = postTag);
 	}
 }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Aliases, IndexName, IAlias>))]
 	public interface IAliases : IIsADictionary<IndexName, IAlias> { }
 	public class Aliases : IsADictionary<IndexName, IAlias>, IAliases
 	{

@@ -31,7 +31,7 @@ namespace Nest
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public TDocument Document { get; set; }
-		public IDictionary<Field, ISort> Sort { get; set; }
+		public IList<ISort> Sort { get; set; }
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
 
@@ -56,7 +56,7 @@ namespace Nest
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		TDocument IPercolateRequest<TDocument>.Document { get; set; }
-		IDictionary<Field, ISort> IPercolateOperation.Sort { get; set; }
+		IList<ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 
 		string IPercolateOperation.MultiPercolateName => "percolate";
@@ -103,114 +103,7 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortAscending(Expression<Func<TDocument, object>> objectPath)
-		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
-
-			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortDescending(Expression<Func<TDocument, object>> objectPath)
-		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
-
-			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Descending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort ascending.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortAscending(string field)
-		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
-			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-		/// The sort is defined on a per field level, with special field name for _score to sort by score.
-		/// </para>
-		/// <para>
-		/// Sort descending.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortDescending(string field)
-		{
-			if (Self.Sort == null)
-				Self.Sort = new Dictionary<Field, ISort>();
-
-			Self.Sort.Add(field, new Sort() { Order = SortOrder.Descending });
-			return this;
-		}
-
-		/// <summary>
-		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> Sort(Func<SortFieldDescriptor<TDocument>, IFieldSort> sortSelector)
-		{
-			if (Self.Sort == null)
-				Self.Sort = new Dictionary<Field, ISort>();
-
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortFieldDescriptor<TDocument>());
-			Self.Sort.Add(descriptor.Field, descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortGeoDistance(Func<SortGeoDistanceDescriptor<TDocument>, IGeoDistanceSort> sortSelector)
-		{
-			if (Self.Sort == null)
-				Self.Sort = new Dictionary<Field, ISort>();
-
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortGeoDistanceDescriptor<TDocument>());
-			Self.Sort.Add("_geo_distance", descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// <para>SortScript() allows you to sort by a distance from a geo point.
-		/// </para>
-		/// </summary>
-		public PercolateDescriptor<TDocument> SortScript(Func<SortScriptDescriptor<TDocument>, IScriptSort> sortSelector)
-		{
-			if (Self.Sort == null)
-				Self.Sort = new Dictionary<Field, ISort>();
-
-			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortScriptDescriptor<TDocument>());
-			Self.Sort.Add("_script", descriptor);
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda

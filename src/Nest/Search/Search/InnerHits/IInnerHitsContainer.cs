@@ -22,10 +22,9 @@ namespace Nest
 		public IDictionary<Field, IGlobalInnerHit> Path { get; set; }
 	}
 
-	public class InnerHitsContainerDescriptor<T> : IInnerHitsContainer where T : class
+	public class InnerHitsContainerDescriptor<T> : DescriptorBase<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>, IInnerHitsContainer 
+		where T : class
 	{
-		private IInnerHitsContainer Self { get { return this; }}
-
 		IDictionary<TypeName, IGlobalInnerHit> IInnerHitsContainer.Type { get; set; }
 		IDictionary<Field, IGlobalInnerHit> IInnerHitsContainer.Path { get; set; }
 

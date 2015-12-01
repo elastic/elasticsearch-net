@@ -9,11 +9,9 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IPercentilesMethod 
-	{
-	}
+	public interface IPercentilesMethod { }
 
-	public class PercentilesMethodDescriptor
+	public class PercentilesMethodDescriptor : DescriptorBase<PercentilesMethodDescriptor, IPercentilesMethod>, IPercentilesMethod
 	{
 		public IPercentilesMethod HDRHistogram(Func<HDRHistogramMethodDescriptor, IHDRHistogramMethod> hdrSelector = null) =>
 			hdrSelector?.InvokeOrDefault(new HDRHistogramMethodDescriptor());

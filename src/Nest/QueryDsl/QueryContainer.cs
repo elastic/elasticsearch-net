@@ -160,7 +160,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class QueryContainer : IQueryContainer
+	public class QueryContainer : IQueryContainer, IDescriptor
 	{
 		private IQueryContainer Self => this;
 

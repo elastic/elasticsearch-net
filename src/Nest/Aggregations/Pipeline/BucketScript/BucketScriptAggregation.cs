@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<BucketScriptAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketScriptAggregation>))]
 	public interface IBucketScriptAggregation : IPipelineAggregation
 	{
 		[JsonProperty("script")]

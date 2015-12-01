@@ -21,13 +21,10 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract != null && contract.ConnectionSettings != null)
-			{
-				var typeName = contract.Infer.TypeName(marker);
-				writer.WriteValue(typeName);
-			}
-			else throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
+			var settings = serializer.GetConnectionSettings();
+
+			var typeName = settings.Inferrer.TypeName(marker);
+			writer.WriteValue(typeName);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonConverter(typeof(PercentilesAggregationJsonConverter))]
+	[ContractJsonConverter(typeof(PercentilesAggregationJsonConverter))]
 	public interface IPercentilesAggregation : IMetricAggregation
 	{
 		IEnumerable<double> Percents { get; set; }

@@ -34,11 +34,9 @@ namespace Nest
 		public string Preference { get; set; }
 	}
 
-	public class PhraseSuggestCollateDescriptor<T> : IPhraseSuggestCollate
+	public class PhraseSuggestCollateDescriptor<T> : DescriptorBase<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate>, IPhraseSuggestCollate
 		where T : class
 	{
-		internal IPhraseSuggestCollate Collate = new PhraseSuggestCollate();
-
 		QueryContainer IPhraseSuggestCollate.Query { get; set; }
 
 		QueryContainer IPhraseSuggestCollate.Filter { get; set; }
@@ -47,35 +45,18 @@ namespace Nest
 
 		string IPhraseSuggestCollate.Preference { get; set; }
 
-		public PhraseSuggestCollateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
-		{
-			this.Collate.Query = query(new QueryContainerDescriptor<T>());
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) => 
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public PhraseSuggestCollateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter)
-		{
-			this.Collate.Filter = filter(new QueryContainerDescriptor<T>());
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
+			Assign(a => a.Filter = filter?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary)
-		{
-			this.Collate.Params = paramsDictionary;
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(a => a.Params = paramsDictionary);
 
-		public PhraseSuggestCollateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary)
-		{
-			this.Collate.Params = paramsDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
+			Assign(a => a.Params = paramsDictionary(new FluentDictionary<string, object>()));
 
-		public PhraseSuggestCollateDescriptor<T> Preference(string preference)
-		{
-			this.Collate.Preference = preference;
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Preference(string preference) => Assign(a => a.Preference = preference);
 	}
 
 }

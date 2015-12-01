@@ -15,7 +15,7 @@ namespace Nest
 		ICompletionSuggester Completion { get; set; }
 	}
 
-	public class SuggestBucket : ISuggestBucket 
+	public class SuggestBucket : ISuggestBucket
 	{
 		public string Text { get; set; }
 
@@ -23,6 +23,6 @@ namespace Nest
 
 		public IPhraseSuggester Phrase { get; set; }
 
-        public ICompletionSuggester Completion { get; set; }
+		public ICompletionSuggester Completion { get; set; }
 	}
 }

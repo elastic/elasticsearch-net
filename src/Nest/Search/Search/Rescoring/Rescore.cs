@@ -22,27 +22,16 @@ namespace Nest
 		public IRescoreQuery Query { get; set; }
 	}
 
-	public class RescoreDescriptor<T> : IRescore where T : class
+	public class RescoreDescriptor<T> : DescriptorBase<RescoreDescriptor<T>, IRescore>, IRescore 
+		where T : class
 	{
-		protected IRescore Self { get { return this;  } }
-
 		int? IRescore.WindowSize { get; set; }
-
 		IRescoreQuery IRescore.Query { get; set; }
 
-		public virtual RescoreDescriptor<T> RescoreQuery(Func<RescoreQueryDescriptor<T>, RescoreQueryDescriptor<T>> rescoreQuerySelector)
-		{
-			rescoreQuerySelector.ThrowIfNull("rescoreQuerySelector");
-			Self.Query = rescoreQuerySelector(new RescoreQueryDescriptor<T>());
-			return this;
-		}
+		public virtual RescoreDescriptor<T> RescoreQuery(Func<RescoreQueryDescriptor<T>, RescoreQueryDescriptor<T>> rescoreQuerySelector) =>
+			Assign(a=>a.Query = rescoreQuerySelector?.Invoke(new RescoreQueryDescriptor<T>()));
 
-		public virtual RescoreDescriptor<T> WindowSize(int windowSize)
-		{
-			Self.WindowSize = windowSize;
-			return this;
-		}
-
+		public virtual RescoreDescriptor<T> WindowSize(int? windowSize) => Assign(a => a.WindowSize = windowSize);
 	
 	}
 }

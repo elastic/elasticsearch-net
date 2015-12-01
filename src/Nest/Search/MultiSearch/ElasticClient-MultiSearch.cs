@@ -83,7 +83,7 @@ namespace Nest
 					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, operation);
 			}
 
-			return new MultiSearchResponsJsonConverter(this.ConnectionSettings, request);
+			return new MultiSearchResponseJsonConverter(this.ConnectionSettings, request);
 		}
 	}
 }

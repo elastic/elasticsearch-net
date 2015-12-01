@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -79,7 +80,10 @@ namespace Nest
 			};
 
 			_settings.ModifyJsonSerializerSettings?.Invoke(settings);
-			settings.ContractResolver = new SettingsContractResolver(settings.ContractResolver, this._settings) { PiggyBackState = piggyBackState };
+
+			var contract = settings.ContractResolver as ElasticContractResolver;
+			if (contract == null) throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
+			contract.PiggyBackState = piggyBackState;
 
 			return settings;
 		}

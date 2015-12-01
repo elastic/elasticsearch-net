@@ -23,13 +23,15 @@ namespace Nest
 
 	}
 
+	internal static class VariableFields
+	{
+		public static readonly ConcurrentDictionary<Type, Tuple<JsonProperty, VariableFieldAttribute>> CachedTypeInformation =
+			new ConcurrentDictionary<Type, Tuple<JsonProperty, VariableFieldAttribute>>();
+	}
+
 	internal class VariableFieldNameQueryJsonConverter<TReadAs, TInterface> : ReserializeJsonConverter<TReadAs, IFieldNameQuery>
 		where TReadAs : class, IFieldNameQuery, TInterface, new()
 	{
-
-		private static readonly ConcurrentDictionary<Type, Tuple<JsonProperty, VariableFieldAttribute>> _cachedTypeInformation =
-			new ConcurrentDictionary<Type, Tuple<JsonProperty, VariableFieldAttribute>>();
-
 
 		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -65,11 +67,8 @@ namespace Nest
 			if (fieldName == null)
 				return;
 
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract == null)
-				return;
-
-			var field = contract.Infer.Field(fieldName);
+			var settings = serializer.GetConnectionSettings();
+			var field = settings.Inferrer.Field(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
 
@@ -101,7 +100,7 @@ namespace Nest
 		private static Tuple<JsonProperty, VariableFieldAttribute> GetOrCreateTypeInfo(Type t)
 		{
 			Tuple<JsonProperty, VariableFieldAttribute> info;
-			if (!_cachedTypeInformation.TryGetValue(t, out info))
+			if (!VariableFields.CachedTypeInformation.TryGetValue(t, out info))
 			{
 				var properties = from prop in t.GetCachedObjectProperties(MemberSerialization.OptOut)
 					let attributes = prop.AttributeProvider.GetAttributes(typeof (VariableFieldAttribute), true)
@@ -110,7 +109,7 @@ namespace Nest
 				info = properties.FirstOrDefault();
 				if (info == null)
 					throw new Exception("Can not use VariableFieldNameJsonConverter<T> if T has no property with VariableFieldAttribute set");
-				_cachedTypeInformation.TryAdd(t, info);
+				VariableFields.CachedTypeInformation.TryAdd(t, info);
 			}
 			return info;
 		}

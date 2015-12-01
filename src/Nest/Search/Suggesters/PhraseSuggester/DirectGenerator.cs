@@ -60,103 +60,44 @@ namespace Nest
 		public string PostFilter { get; set; }
 	}
 
-	public class DirectGeneratorDescriptor<T> : IDirectGenerator where T : class
+	public class DirectGeneratorDescriptor<T> : DescriptorBase<DirectGeneratorDescriptor<T>, IDirectGenerator>, IDirectGenerator 
+		where T : class
 	{
-		private IDirectGenerator Self => this;
-
 		Field IDirectGenerator.Field { get; set; }
-
 		int? IDirectGenerator.Size { get; set; }
-
 		int? IDirectGenerator.PrefixLen { get; set; }
-
 		SuggestMode? IDirectGenerator.SuggestMode { get; set; }
-
 		int? IDirectGenerator.MinWordLen { get; set; }
-
 		int? IDirectGenerator.MaxEdits { get; set; }
-
 		decimal? IDirectGenerator.MaxInspections { get; set; }
-
 		decimal? IDirectGenerator.MinDocFrequency { get; set; }
-
 		decimal? IDirectGenerator.MaxTermFrequency { get; set; }
-
 		string IDirectGenerator.PreFilter { get; set; }
-
 		string IDirectGenerator.PostFilter { get; set; }
 
-		public DirectGeneratorDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
-		public DirectGeneratorDescriptor<T> Field(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		public DirectGeneratorDescriptor<T> Size(int size)
-		{
-			Self.Size = size;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> Size(int? size) => Assign(a => a.Size = size);
 
-		public DirectGeneratorDescriptor<T> SuggestMode(SuggestMode mode)
-		{
-			Self.SuggestMode = mode;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> SuggestMode(SuggestMode? mode) => Assign(a => a.SuggestMode = mode);
 
-		public DirectGeneratorDescriptor<T> MinWordLength(int length)
-		{
-			Self.MinWordLen = length;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> MinWordLength(int? length) => Assign(a => a.MinWordLen = length);
 
-		public DirectGeneratorDescriptor<T> PrefixLength(int length)
-		{
-			Self.PrefixLen = length;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLen = length);
 
-		public DirectGeneratorDescriptor<T> MaxEdits(int maxEdits)
-		{
-			Self.MaxEdits = maxEdits;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> MaxEdits(int? maxEdits) => Assign(a => a.MaxEdits = maxEdits);
 
-		public DirectGeneratorDescriptor<T> MaxInspections(decimal maxInspections)
-		{
-			Self.MaxInspections = maxInspections;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> MaxInspections(decimal? maxInspections) => Assign(a => a.MaxInspections = maxInspections);
 
-		public DirectGeneratorDescriptor<T> MinDocFrequency(decimal frequency)
-		{
-			Self.MinDocFrequency = frequency;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> MinDocFrequency(decimal? frequency) => Assign(a => a.MinDocFrequency = frequency);
 
-		public DirectGeneratorDescriptor<T> MaxTermFrequency(decimal frequency)
-		{
-			Self.MaxTermFrequency = frequency;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(a => a.MaxTermFrequency = frequency);
 
-		public DirectGeneratorDescriptor<T> PreFilter(string analyzer)
-		{
-			Self.PreFilter = analyzer;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> PreFilter(string preFilter) => Assign(a => a.PreFilter = preFilter);
 
-		public DirectGeneratorDescriptor<T> PostFilter(string analyzer)
-		{
-			Self.PostFilter = analyzer;
-			return this;
-		}
+		public DirectGeneratorDescriptor<T> PostFilter(string postFilter) => Assign(a => a.PostFilter = postFilter);
 
 	}
 }

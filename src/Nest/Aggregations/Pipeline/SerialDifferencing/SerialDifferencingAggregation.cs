@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SerialDifferencingAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<SerialDifferencingAggregation>))]
 	public interface ISerialDifferencingAggregation : IPipelineAggregation
 	{
 		[JsonProperty("lag")]

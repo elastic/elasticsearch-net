@@ -55,11 +55,12 @@ namespace Nest
 			this.Reserialize(writer, value, serializer);
 		}
 
-		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer)
+		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer, Action<JsonWriter> inlineWriter = null)
 		{
 			var properties = value.GetType().GetCachedObjectProperties();
 			if (properties.Count == 0) return;
 			writer.WriteStartObject();
+			inlineWriter?.Invoke(writer);
 			foreach (var p in properties)
 			{
 				if (p.Ignored) continue;

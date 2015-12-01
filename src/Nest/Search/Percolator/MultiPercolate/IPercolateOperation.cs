@@ -18,8 +18,7 @@ namespace Nest
 		bool? TrackScores { get; set; }
 
 		[JsonProperty(PropertyName = "score")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<Field, ISort> Sort { get; set; }
+		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
 		IHighlight Highlight { get; set; }

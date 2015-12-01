@@ -9,7 +9,8 @@ using Nest.Resolvers;
 namespace Nest
 {
 	
-	public class PropertyMappingDescriptor<TDocument>  where TDocument : class
+	public class PropertyMappingDescriptor<TDocument> : DescriptorBase<PropertyMappingDescriptor<TDocument>, IDescriptor>
+		where TDocument : class
 	{
 		internal IList<IClrTypePropertyMapping<TDocument>> Mappings { get; } = new List<IClrTypePropertyMapping<TDocument>>();
 
