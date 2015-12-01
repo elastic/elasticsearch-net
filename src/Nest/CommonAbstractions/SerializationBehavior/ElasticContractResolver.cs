@@ -19,6 +19,11 @@ namespace Nest.Resolvers
 		/// </summary>
 		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
+		/// <summary>
+		/// Signals to custom converter that it can get serialization state from one of the converters. Ugly but massive performance gain
+		/// </summary>
+		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
+
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
 			this.ConnectionSettings = connectionSettings;
@@ -106,26 +111,6 @@ namespace Nest.Resolvers
 				.DistinctBy(p => p.PropertyName)
 				.ToList();
 
-		}
-
-		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
-		{
-			if (!typeof(T).IsAssignableFrom(type)) return defaultProperties;
-			var jsonProperties = (
-				from i in type.GetInterfaces()
-				select base.CreateProperties(i, memberSerialization)
-				)
-				.SelectMany(interfaceProps => interfaceProps)
-				.Where(p => !lookup.Contains(p.PropertyName));
-			if (!append)
-			{
-				foreach (var p in jsonProperties)
-				{
-					defaultProperties.Add(p);
-				}
-				return defaultProperties;
-			}
-			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
 		protected override string ResolvePropertyName(string fieldName)

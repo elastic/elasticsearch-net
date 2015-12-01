@@ -1080,7 +1080,6 @@
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\SettingsContractResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameResolver.cs" />
