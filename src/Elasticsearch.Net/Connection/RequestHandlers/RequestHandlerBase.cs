@@ -125,12 +125,12 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				);
 		}
 
-		protected void ThrowMaxRetryExceptionWhenNeeded<T>(TransportRequestState<T> requestState, int maxRetries)
+		protected Exception GetMaxRetryExceptionWhenNeeded<T>(TransportRequestState<T> requestState, int maxRetries)
 		{
 			var tookToLong = this._delegator.TookTooLongToRetry(requestState);
 			
 			//not out of date and we havent depleted our retries, get the hell out of here
-			if (!tookToLong && requestState.Retried < maxRetries) return;
+			if (!tookToLong && requestState.Retried < maxRetries) return null;
 
 			var innerExceptions = requestState.SeenExceptions.Where(e => e != null).ToList();
 			var innerException = !innerExceptions.HasAny()
@@ -142,14 +142,14 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			//When we are not using pooling we forcefully rethrow the exception
 			if (!requestState.UsingPooling && innerException != null && maxRetries == 0)
 			{
-				innerException.RethrowKeepingStackTrace();
-				return;
+				innerException.KeepStackTrace();
+				return innerException;
 			}
 		
 			var exceptionMessage = tookToLong 
 				? CreateTookTooLongExceptionMessage(requestState, innerException) 
 				: CreateMaxRetryExceptionMessage(requestState, innerException);
-			throw new MaxRetryException(exceptionMessage, innerException);
+			return new MaxRetryException(exceptionMessage, innerException);
 		}
 
 		protected string CreateInnerExceptionMessage<T>(TransportRequestState<T> requestState, Exception e)
