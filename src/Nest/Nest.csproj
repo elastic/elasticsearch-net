@@ -245,6 +245,7 @@
     <Compile Include="Mapping\AttributeBased\GeoPointAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\GeoShapeAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\IpAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\Murmur3HashAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\NestedAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\NumberAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\ObjectAttribute.cs" />
@@ -256,7 +257,7 @@
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
     <Compile Include="Mapping\Types\PropertyJsonConverter.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
-    <Compile Include="Mapping\Types\Specialized\TokenCount\TokenCountType.cs" />
+    <Compile Include="Mapping\Types\Specialized\TokenCount\TokenCountProperty.cs" />
     <Compile Include="Mapping\Types\PropertyDescriptorBase.cs" />
     <Compile Include="Mapping\Visitor\IPropertyVisitor.cs" />
     <Compile Include="Mapping\Visitor\NoopPropertyVisitor.cs" />

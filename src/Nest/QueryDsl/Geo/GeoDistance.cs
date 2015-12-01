@@ -25,5 +25,7 @@ namespace Nest
 		public static GeoDistance Meters(double meters) => new GeoDistance(meters, GeoPrecision.Meters);
 		public static GeoDistance Centimeters(double centimeters) => new GeoDistance(centimeters, GeoPrecision.Centimeters);
 		public static GeoDistance Millimeter(double millimeter) => new GeoDistance(millimeter, GeoPrecision.Millimeters);
+
+		// TODO implicitly cast from string so this can be set on GeoDistanceAttribute
 	}
 }

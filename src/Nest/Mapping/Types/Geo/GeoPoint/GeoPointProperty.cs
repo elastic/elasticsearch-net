@@ -90,17 +90,17 @@ namespace Nest
 
 		public GeoPointPropertyDescriptor<T> GeoHashPrefix(bool geoHashPrefix = true) => Assign(a => a.GeoHashPrefix = geoHashPrefix);
 
-		public GeoPointPropertyDescriptor<T> Validate(bool validate) => Assign(a => a.Validate = validate);
+		public GeoPointPropertyDescriptor<T> Validate(bool validate = true) => Assign(a => a.Validate = validate);
 
-		public GeoPointPropertyDescriptor<T> ValidateLongitude(bool validateLatitude) => Assign(a => a.ValidateLatitude = validateLatitude);
+		public GeoPointPropertyDescriptor<T> ValidateLongitude(bool validateLatitude = true) => Assign(a => a.ValidateLatitude = validateLatitude);
 
-		public GeoPointPropertyDescriptor<T> ValidateLatitude(bool validateLongitude) => Assign(a => a.ValidateLongitude = validateLongitude);
+		public GeoPointPropertyDescriptor<T> ValidateLatitude(bool validateLongitude = true) => Assign(a => a.ValidateLongitude = validateLongitude);
 
-		public GeoPointPropertyDescriptor<T> Normalize(bool normalize) => Assign(a => a.Normalize = normalize);
+		public GeoPointPropertyDescriptor<T> Normalize(bool normalize = true) => Assign(a => a.Normalize = normalize);
 
-		public GeoPointPropertyDescriptor<T> NormalizeLatitude(bool normalizeLatitude) => Assign(a => a.NormalizeLatitude = normalizeLatitude);
+		public GeoPointPropertyDescriptor<T> NormalizeLatitude(bool normalizeLatitude = true) => Assign(a => a.NormalizeLatitude = normalizeLatitude);
 
-		public GeoPointPropertyDescriptor<T> NormalizeLongitude(bool normalizeLongitude) => Assign(a => a.NormalizeLongitude = normalizeLongitude);
+		public GeoPointPropertyDescriptor<T> NormalizeLongitude(bool normalizeLongitude = true) => Assign(a => a.NormalizeLongitude = normalizeLongitude);
 
 		public GeoPointPropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
