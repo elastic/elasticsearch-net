@@ -28,7 +28,7 @@ namespace Nest
 	{
 		public ObjectProperty() : base("object") { }
 
-		protected ObjectProperty(TypeName typeName) : base(typeName) { }
+		protected ObjectProperty(string type) : base(type) { }
 
 		public DynamicMapping? Dynamic { get; set; }
 		public bool? Enabled { get; set; }
@@ -61,7 +61,7 @@ namespace Nest
 
 		public ObjectPropertyDescriptorBase() : this("object") { }
 
-		public ObjectPropertyDescriptorBase(string type) : base(type)
+		protected ObjectPropertyDescriptorBase(string type) : base(type)
 		{
 			_TypeName = TypeName.Create<TChild>();
 		}

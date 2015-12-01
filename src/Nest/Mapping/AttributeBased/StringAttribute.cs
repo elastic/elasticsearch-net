@@ -26,7 +26,7 @@ namespace Nest
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
 		public FieldIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }
-		public string NullValue { get { return Self.Analyzer; } set { Self.Analyzer = value; } }
+		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
 		public int PositionOffsetGap { get { return Self.PositionOffsetGap.GetValueOrDefault(); } set { Self.PositionOffsetGap = value; } }
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault(); } set { Self.TermVector = value; } }
