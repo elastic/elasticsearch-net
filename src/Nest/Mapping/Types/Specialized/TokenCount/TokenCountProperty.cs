@@ -7,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITokenCountProperty : IProperty
+	public interface ITokenCountProperty : INumberProperty
 	{
 		string Analyzer { get; set; }
 	}
@@ -19,15 +19,14 @@ namespace Nest
 		public string Analyzer { get; set; }
 	}
 
-	public class TokenCountPropertyDescriptor<T> : NumberPropertyDescriptor<T>, ITokenCountProperty
+	public class TokenCountPropertyDescriptor<T> 
+		: NumberPropertyDescriptorBase<TokenCountPropertyDescriptor<T>, ITokenCountProperty, T>, ITokenCountProperty
 		where T : class
 	{
+		public TokenCountPropertyDescriptor() : base("token_count") { }
+
 		string ITokenCountProperty.Analyzer { get; set; }
 
-		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer)
-		{
-			((ITokenCountProperty)this).Analyzer = analyzer;
-			return this;
-		}
+		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 	}
 }

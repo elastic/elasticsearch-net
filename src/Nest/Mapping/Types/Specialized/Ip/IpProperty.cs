@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIpProperty : IProperty
 	{
 		[JsonProperty("index")]
@@ -23,7 +24,6 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class IpProperty : Property, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
