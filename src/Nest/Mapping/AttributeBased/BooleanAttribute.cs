@@ -3,7 +3,6 @@ using System;
 
 namespace Nest
 {
-	[JsonObject(ItemTypeNameHandling = TypeNameHandling.Auto)]
 	public class BooleanAttribute : ElasticsearchPropertyAttribute, IBooleanProperty
 	{
 		IBooleanProperty Self => this;
