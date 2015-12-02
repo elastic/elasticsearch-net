@@ -359,6 +359,8 @@
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Exists\ExistsQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Ids\IdsQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\DateRangeQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Type\TypeQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQueryUsageTests.cs" />
@@ -482,7 +484,6 @@
   <ItemGroup>
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
-    <Folder Include="QueryDsl\TermLevel\Range\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

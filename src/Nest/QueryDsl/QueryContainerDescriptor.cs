@@ -161,11 +161,15 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.Indices = query);
 
 		/// <summary>
-		/// Matches documents with fields that have terms within a certain range. The type of the Lucene query depends
-		/// on the field type, for string fields, the TermRangeQuery, while for number/date fields, the query is
-		/// a NumericRangeQuery
+		/// Matches documents with fields that have terms within a certain numeric range. 
 		/// </summary>
-		public QueryContainer Range(Func<RangeQueryDescriptor<T>, IRangeQuery> selector) =>
+		public QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Range = query);
+
+		/// <summary>
+		/// Matches documents with fields that have terms within a certain date range. 
+		/// </summary>
+		public QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Range = query);
 
 		/// <summary>

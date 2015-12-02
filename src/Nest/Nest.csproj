@@ -386,6 +386,9 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\DateRangeQuery .cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
     <Compile Include="QueryDsl\VariableFields.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchResponseJsonConverter.cs" />
