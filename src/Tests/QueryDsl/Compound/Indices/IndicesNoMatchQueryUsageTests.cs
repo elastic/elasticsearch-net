@@ -17,7 +17,7 @@ namespace Tests.QueryDsl.Compound.Indices
 			{
 				_name = "named_query",
 				boost = 1.1,
-				indices = "_all",
+				indices = new[] { "_all" },
 				no_match_query = "all",
 				query = new
 				{

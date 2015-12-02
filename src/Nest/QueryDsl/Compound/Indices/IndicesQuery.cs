@@ -12,6 +12,7 @@ namespace Nest
 	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("indices")]
+		[JsonConverter(typeof(IndicesJsonConverter))]
 		Indices Indices { get; set; }
 
 		[JsonProperty("query")]

@@ -4,6 +4,7 @@ using System.Linq;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using static Nest.Static;
 
 namespace Tests.QueryDsl.Compound.Indices
 {
@@ -17,7 +18,7 @@ namespace Tests.QueryDsl.Compound.Indices
 			{
 				_name = "named_query",
 				boost = 1.1,
-				indices = "_all",
+				indices = new[] { "project" },
 				no_match_query = new
 				{
 					match_all = new
@@ -36,7 +37,7 @@ namespace Tests.QueryDsl.Compound.Indices
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Indices = Nest.Indices.All,
+			Indices = Index<Project>(),
 			Query = new MatchAllQuery(),
 			NoMatchQuery = new MatchAllQuery { Name ="no_match" }
 
@@ -46,7 +47,7 @@ namespace Tests.QueryDsl.Compound.Indices
 			.Indices(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.Indices(Nest.Indices.All)
+				.Indices(Index<Project>())
 				.Query(qq => qq.MatchAll())
 				.NoMatchQuery(qq => qq.MatchAll(m => m.Name("no_match")))
 			);
