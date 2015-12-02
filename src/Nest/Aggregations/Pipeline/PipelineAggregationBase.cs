@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPipelineAggregation : IAggregation
 	{
 		[JsonProperty("buckets_path")]
