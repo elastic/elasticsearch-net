@@ -12,14 +12,32 @@ namespace Nest
 	{
 		public FunctionScoreFunctionsDescriptor() : base(new List<IFunctionScoreFunction>()) { }
 
-		public FunctionScoreFunctionsDescriptor<T> Gauss(Func<GaussFunctionDescriptor<T>, IGaussFunction> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new GaussFunctionDescriptor<T>())));
+		public FunctionScoreFunctionsDescriptor<T> Gauss(Func<GaussDecayFunctionDescriptor<double?, double?, T>, IDecayFunction<double?, double?>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new GaussDecayFunctionDescriptor<double?, double?, T>())));
 
-		public FunctionScoreFunctionsDescriptor<T> Linear(Func<LinearFunctionDescriptor<T>, ILinearFunction> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new LinearFunctionDescriptor<T>())));
+		public FunctionScoreFunctionsDescriptor<T> GaussDate(Func<GaussDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>, IDecayFunction<DateMath, TimeUnitExpression>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new GaussDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>())));
 
-		public FunctionScoreFunctionsDescriptor<T> Exp(Func<ExpFunctionDescriptor<T>, IExpFunction> selector) =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new ExpFunctionDescriptor<T>())));
+		public FunctionScoreFunctionsDescriptor<T> GaussGeoLocation(Func<GaussDecayFunctionDescriptor<GeoLocation, GeoDistance, T>, IDecayFunction<GeoLocation, GeoDistance>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new GaussDecayFunctionDescriptor<GeoLocation, GeoDistance, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> Linear(Func<LinearDecayFunctionDescriptor<double?, double?, T>, IDecayFunction<double?, double?>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new LinearDecayFunctionDescriptor<double?, double?, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> LinearDate(Func<LinearDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>, IDecayFunction<DateMath, TimeUnitExpression>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new LinearDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> LinearGeoLocation(Func<LinearDecayFunctionDescriptor<GeoLocation, GeoDistance, T>, IDecayFunction<GeoLocation, GeoDistance>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new LinearDecayFunctionDescriptor<GeoLocation, GeoDistance, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> Exponential(Func<ExponentialDecayFunctionDescriptor<double?, double?, T>, IDecayFunction<double?, double?>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ExponentialDecayFunctionDescriptor<double?, double?, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> ExponentialDate(Func<ExponentialDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>, IDecayFunction<DateMath, TimeUnitExpression>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ExponentialDecayFunctionDescriptor<DateMath, TimeUnitExpression, T>())));
+
+		public FunctionScoreFunctionsDescriptor<T> ExponentialGeoLocation(Func<ExponentialDecayFunctionDescriptor<GeoLocation, GeoDistance, T>, IDecayFunction<GeoLocation, GeoDistance>> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new ExponentialDecayFunctionDescriptor<GeoLocation, GeoDistance, T>())));
 
 		public FunctionScoreFunctionsDescriptor<T> BoostFactor(Func<BoostFactorFunctionDescriptor<T>, IBoostFactorFunction> selector) =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new BoostFactorFunctionDescriptor<T>())));

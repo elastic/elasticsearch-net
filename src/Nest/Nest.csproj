@@ -292,6 +292,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\MultiValueMode.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValue\FieldValueFactorFunction.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
@@ -696,15 +697,15 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\CompositeJsonConverter.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSapshot\GetSnapshotRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\BoostFactor\BoostFactorFunction.cs" />
-    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\ExpFunction.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\ExponentialDecayFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FunctionBoostMode.cs" />
-    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\FunctionScoreDecayField.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\DecayFunctionBase.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FunctionScoreFunctions.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FunctionScoreMode.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\IFunctionScoreFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Random\RandomScoreFunction.cs" />
-    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\GaussFunction.cs" />
-    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\LinearFunction.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\GaussDecayFunction.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\LinearDecayFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ScriptScore\ScriptScoreFunction.cs" />
     <Compile Include="QueryDsl\Span\ISpanSubQuery.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorOperation.cs" />
