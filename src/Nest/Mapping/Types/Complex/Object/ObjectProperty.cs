@@ -84,12 +84,14 @@ namespace Nest
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
 			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);
 
-		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
+		public TDescriptor AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) => Assign(a =>
 		{
 			a.Properties = a.Properties ?? new Properties();
-			var autoProperties = new PropertyWalker(typeof(TChild), visitor).GetProperties();
+			var autoProperties = new PropertyWalker(typeof(TChild), visitor, maxRecursion).GetProperties();
 			foreach (var autoProperty in autoProperties)
 				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
+
+		public TDescriptor AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 	}
 }

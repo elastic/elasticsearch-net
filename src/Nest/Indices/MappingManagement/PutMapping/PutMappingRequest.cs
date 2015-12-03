@@ -153,13 +153,16 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) => Assign(a =>
 		{
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
 			foreach (var autoProperty in autoProperties)
 				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
+
+		/// <inheritdoc/>
+		public PutMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
