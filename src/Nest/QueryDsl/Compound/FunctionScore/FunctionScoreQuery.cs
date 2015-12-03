@@ -14,7 +14,7 @@ namespace Nest
 		QueryContainer Query { get; set; }
 
 		[JsonProperty("functions")]
-		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
+		IEnumerable<IScoreFunction> Functions { get; set; }
 
 		[JsonProperty("max_boost")]
 		double? MaxBoost { get; set; }
@@ -32,7 +32,7 @@ namespace Nest
 	public class FunctionScoreQuery : QueryBase, IFunctionScoreQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
+		public IEnumerable<IScoreFunction> Functions { get; set; }
 		public QueryContainer Query { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
 		public FunctionBoostMode? BoostMode { get; set; }
@@ -53,7 +53,7 @@ namespace Nest
 	{
 		private bool _forcedConditionless = false;
 		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
-		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
+		IEnumerable<IScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 		QueryContainer IFunctionScoreQuery.Query { get; set; }
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
@@ -65,10 +65,10 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public FunctionScoreQueryDescriptor<T> Functions(Func<FunctionScoreFunctionsDescriptor<T>, IPromise<IList<IFunctionScoreFunction>>> functions) =>
-			Assign(a => a.Functions = functions?.Invoke(new FunctionScoreFunctionsDescriptor<T>())?.Value);
+		public FunctionScoreQueryDescriptor<T> Functions(Func<ScoreFunctionsDescriptor<T>, IPromise<IList<IScoreFunction>>> functions) =>
+			Assign(a => a.Functions = functions?.Invoke(new ScoreFunctionsDescriptor<T>())?.Value);
 
-		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IFunctionScoreFunction> functions) => Assign(a => a.Functions = functions);
+		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IScoreFunction> functions) => Assign(a => a.Functions = functions);
 
 		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode? mode) => Assign(a => a.ScoreMode = mode);
 

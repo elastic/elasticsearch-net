@@ -44,5 +44,26 @@ namespace Tests.QueryDsl
 				Query = this.QueryInitializer
 			};
 
+
+		protected virtual ConditionlessWhen ConditionlessWhen => null;
+
+	}
+	public abstract class ConditionlessWhen : List<Tuple<Action<IQuery>, Action<dynamic>>>
+	{
+
+	}
+	public class ConditionlessWhen<TQuery> : ConditionlessWhen where TQuery : IQuery
+	{
+		public ConditionlessWhen(Func<IQueryContainer, TQuery> dispatch)
+		{
+
+		}
+		public void Add(Action<TQuery> when, Action<dynamic> verbatim)
+		{
+			this.Add(Tuple.Create<Action<IQuery>, Action<dynamic>>(
+				q=> when((TQuery)q), 
+				verbatim
+			));
+		}
 	}
 }

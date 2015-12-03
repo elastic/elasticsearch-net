@@ -28,5 +28,12 @@ namespace Nest
 
 			return realConverter;
 		}
+
+		public static void WriteProperty(this JsonWriter writer, JsonSerializer serializer, string propertyName, object value)
+		{
+			if (value == null) return;
+			writer.WritePropertyName(propertyName);
+			serializer.Serialize(writer, value);
+		}
 	}
 }

@@ -7,7 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RandomScoreFunction>))]
-	public interface IRandomScoreFunction : IFunctionScoreFunction
+	public interface IRandomScoreFunction : IScoreFunction
 	{
 		[JsonProperty(PropertyName = "seed")]
 		int? Seed { get; set; }

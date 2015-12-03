@@ -4,8 +4,8 @@ using System;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FunctionScoreFunction>))]
-	public interface IFunctionScoreFunction
+	[ContractJsonConverter(typeof(ScoreFunctionJsonConverter))]
+	public interface IScoreFunction
 	{
 		[JsonProperty("filter")]
 		QueryContainer Filter { get; set; }
@@ -15,24 +15,24 @@ namespace Nest
 	}
 
 	public class FunctionScoreFunction : FunctionScoreFunctionBase { }
-	public abstract class FunctionScoreFunctionBase : IFunctionScoreFunction
+	public abstract class FunctionScoreFunctionBase : IScoreFunction
 	{
 		public QueryContainer Filter { get; set; }
 		public double? Weight { get; set; }
 	}
 
-	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionBaseDescriptor<FunctionScoreFunctionDescriptor<T>, IFunctionScoreFunction, T>
+	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionBaseDescriptor<FunctionScoreFunctionDescriptor<T>, IScoreFunction, T>
 		where T : class { } 
 
 	public abstract class FunctionScoreFunctionBaseDescriptor<TDescriptor, TInterface, T> : 
-		DescriptorBase<TDescriptor, TInterface>, IFunctionScoreFunction
-		where TDescriptor : FunctionScoreFunctionBaseDescriptor<TDescriptor, TInterface, T>, TInterface, IFunctionScoreFunction
-		where TInterface : class, IFunctionScoreFunction
+		DescriptorBase<TDescriptor, TInterface>, IScoreFunction
+		where TDescriptor : FunctionScoreFunctionBaseDescriptor<TDescriptor, TInterface, T>, TInterface, IScoreFunction
+		where TInterface : class, IScoreFunction
 		where T : class
 	{
-		QueryContainer IFunctionScoreFunction.Filter { get; set; }
+		QueryContainer IScoreFunction.Filter { get; set; }
 
-		double? IFunctionScoreFunction.Weight { get; set; }
+		double? IScoreFunction.Weight { get; set; }
 
 		public TDescriptor Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
