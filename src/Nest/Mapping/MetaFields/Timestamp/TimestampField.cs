@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimestampField>))]
-	public interface ITimestampField : ISpecialField
+	public interface ITimestampField : IFieldMapping
 	{
 		[JsonProperty("enabled")]
 		bool Enabled { get; set; }

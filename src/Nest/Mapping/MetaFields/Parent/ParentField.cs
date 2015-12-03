@@ -5,7 +5,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ParentField>))]
-	public interface IParentField : ISpecialField
+	public interface IParentField : IFieldMapping
 	{
 		[JsonProperty("type")]
 		TypeName Type { get; set; }

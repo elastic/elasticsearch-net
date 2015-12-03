@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndexField>))]
-	public interface IIndexField : ISpecialField
+	public interface IIndexField : IFieldMapping
 	{
 		[JsonProperty("enabled")]
 		bool? Enabled { get; set; }

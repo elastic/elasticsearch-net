@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<RoutingField>))]
-	public interface IRoutingField : ISpecialField
+	public interface IRoutingField : IFieldMapping
 	{
 		[JsonProperty("required")]
 		bool? Required { get; set; }
