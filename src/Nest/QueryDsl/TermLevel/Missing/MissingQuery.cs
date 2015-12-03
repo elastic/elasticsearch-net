@@ -22,11 +22,11 @@ namespace Nest
 
 	public class MissingQuery : QueryBase, IMissingQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
 		public Field Field { get; set; }
-		protected override void WrapInContainer(IQueryContainer container) => container.Missing = this;
+		internal override void WrapInContainer(IQueryContainer container) => container.Missing = this;
 		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 
@@ -34,7 +34,7 @@ namespace Nest
 		: QueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery>
 		, IMissingQuery where T : class
 	{
-		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
+		protected override bool Conditionless => MissingQuery.IsConditionless(this);
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
 		Field IMissingQuery.Field { get; set; }

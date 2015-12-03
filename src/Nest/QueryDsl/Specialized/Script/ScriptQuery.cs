@@ -29,14 +29,14 @@ namespace Nest
 
 	public class ScriptQuery : QueryBase, IScriptQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public string Inline { get; set; }
 		public Id Id { get; set; }
 		public string File { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Script = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Script = this;
 		internal static bool IsConditionless(IScriptQuery q) => q.Inline.IsNullOrEmpty();
 	}
 
@@ -44,7 +44,7 @@ namespace Nest
 		: QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>
 		, IScriptQuery where T : class
 	{
-		bool IQuery.Conditionless => ScriptQuery.IsConditionless(this);
+		protected override bool Conditionless => ScriptQuery.IsConditionless(this);
 		string IScriptQuery.Inline { get; set; }
 		Id IScriptQuery.Id { get; set; }
 		string IScriptQuery.File { get; set; }

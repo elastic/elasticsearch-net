@@ -30,14 +30,14 @@ namespace Nest
 
 	public class NestedQuery : QueryBase, INestedQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public NestedScoreMode? ScoreMode { get; set; }
 		public QueryContainer Filter { get; set; }
 		public QueryContainer Query { get; set; }
 		public Field Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Nested = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Nested = this;
 		internal static bool IsConditionless(INestedQuery q)
 		{
 			return (q.Query == null || q.Query.IsConditionless)
@@ -50,7 +50,7 @@ namespace Nest
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 		, INestedQuery where T : class
 	{
-		bool IQuery.Conditionless => NestedQuery.IsConditionless(this);
+		protected override bool Conditionless => NestedQuery.IsConditionless(this);
 		NestedScoreMode? INestedQuery.ScoreMode { get; set; }
 		QueryContainer INestedQuery.Filter { get; set; }
 		QueryContainer INestedQuery.Query { get; set; }

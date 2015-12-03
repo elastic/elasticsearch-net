@@ -55,7 +55,7 @@ namespace Nest
 	public class SpanQueryDescriptor<T> : QueryDescriptorBase<SpanQueryDescriptor<T>, ISpanQuery>
 		, ISpanQuery where T : class
 	{
-		bool IQuery.Conditionless => SpanQuery.IsConditionless(this);
+		protected override bool Conditionless => SpanQuery.IsConditionless(this);
 		ISpanTermQuery ISpanQuery.SpanTerm { get; set; }
 		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
 		ISpanNearQuery ISpanQuery.SpanNear { get; set; }

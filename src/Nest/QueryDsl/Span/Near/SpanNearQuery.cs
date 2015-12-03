@@ -24,13 +24,13 @@ namespace Nest
 
 	public class SpanNearQuery : QueryBase, ISpanNearQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		protected override bool Conditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }
 		public bool? CollectPayloads { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
 		internal static bool IsConditionless(ISpanNearQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
@@ -38,7 +38,7 @@ namespace Nest
 		: QueryDescriptorBase<SpanNearQueryDescriptor<T>, ISpanNearQuery>
 		, ISpanNearQuery where T : class
 	{
-		bool IQuery.Conditionless => SpanNearQuery.IsConditionless(this);
+		protected override bool Conditionless => SpanNearQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 		int? ISpanNearQuery.Slop { get; set; }
 		bool? ISpanNearQuery.InOrder { get; set; }

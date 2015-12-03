@@ -20,11 +20,11 @@ namespace Nest
 	[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 	public class FilteredQuery : QueryBase, IFilteredQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Filtered = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Filtered = this;
 
 		internal static bool IsConditionless(IFilteredQuery q)
 		{
@@ -43,7 +43,7 @@ namespace Nest
 		: QueryDescriptorBase<FilteredQueryDescriptor<T>, IFilteredQuery>  
 		, IFilteredQuery where T : class
 	{
-		bool IQuery.Conditionless => FilteredQuery.IsConditionless(this);
+		protected override bool Conditionless => FilteredQuery.IsConditionless(this);
 		QueryContainer IFilteredQuery.Query { get; set; }
 		QueryContainer IFilteredQuery.Filter { get; set; }
 

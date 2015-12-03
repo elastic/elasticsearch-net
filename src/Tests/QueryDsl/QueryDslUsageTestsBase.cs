@@ -16,7 +16,7 @@ namespace Tests.QueryDsl
 	{
 		protected QueryDslUsageTestsBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Search<Project>(f ),
+			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
 			request: (client, r) => client.Search<Project>(r),
 			requestAsync: (client, r) => client.SearchAsync<Project>(r)
@@ -44,26 +44,51 @@ namespace Tests.QueryDsl
 				Query = this.QueryInitializer
 			};
 
-
 		protected virtual ConditionlessWhen ConditionlessWhen => null;
 
-	}
-	public abstract class ConditionlessWhen : List<Tuple<Action<IQuery>, Action<dynamic>>>
-	{
 
+		[U] public void ConditionlessWhenExpectedToBe()
+		{
+			if (ConditionlessWhen == null) return;
+			foreach (var when in ConditionlessWhen)
+			{
+				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+				when(query);
+				query = this.QueryInitializer;
+				when(query);
+			}
+
+			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
+		}
+
+		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
+
+	}
+
+	public abstract class ConditionlessWhen : List<Action<QueryContainer>> { 
 	}
 	public class ConditionlessWhen<TQuery> : ConditionlessWhen where TQuery : IQuery
 	{
+		private readonly Func<IQueryContainer, TQuery> _dispatch;
+
 		public ConditionlessWhen(Func<IQueryContainer, TQuery> dispatch)
 		{
-
+			_dispatch = dispatch;
 		}
-		public void Add(Action<TQuery> when, Action<dynamic> verbatim)
+
+		public void Add(Action<TQuery> when)
 		{
-			this.Add(Tuple.Create<Action<IQuery>, Action<dynamic>>(
-				q=> when((TQuery)q), 
-				verbatim
-			));
+			this.Add(q=>  Assert(q, when));
+		}
+
+		private void Assert(IQueryContainer c, Action<TQuery> when)
+		{
+			TQuery q = this._dispatch(c);
+			q.Conditionless.Should().BeFalse();
+			c.IsConditionless.Should().BeFalse();
+			when(q);
+			q.Conditionless.Should().BeTrue();
+			c.IsConditionless.Should().BeTrue();
 		}
 	}
 }

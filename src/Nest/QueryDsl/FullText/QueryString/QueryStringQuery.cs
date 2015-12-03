@@ -94,7 +94,7 @@ namespace Nest
 
 	public class QueryStringQuery : QueryBase, IQueryStringQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public int? FuzzyMaxExpansions { get; set; }
 		public Fuzziness Fuzziness { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -122,7 +122,7 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.QueryString = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
@@ -131,7 +131,7 @@ namespace Nest
 		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
 		, IQueryStringQuery where T : class
 	{
-		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
+		protected override bool Conditionless => QueryStringQuery.IsConditionless(this);
 
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Locale { get; set; }

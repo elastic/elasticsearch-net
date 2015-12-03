@@ -19,11 +19,11 @@ namespace Nest
 	
 	public class IdsQuery : QueryBase, IIdsQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public Types Types { get; set; }
 		public IEnumerable<Id> Values { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Ids = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Ids = this;
 		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny();
 	}
 
@@ -31,7 +31,7 @@ namespace Nest
 		: QueryDescriptorBase<IdsQueryDescriptor, IIdsQuery>
 		, IIdsQuery
 	{
-		bool IQuery.Conditionless => IdsQuery.IsConditionless(this);
+		protected override bool Conditionless => IdsQuery.IsConditionless(this);
 		IEnumerable<Id> IIdsQuery.Values { get; set; }
 		Types IIdsQuery.Types { get; set; }
 

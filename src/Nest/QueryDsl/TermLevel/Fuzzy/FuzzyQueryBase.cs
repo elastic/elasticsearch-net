@@ -21,44 +21,52 @@ namespace Nest
 		[JsonProperty(PropertyName = "transpositions")]
 		bool? Transpositions { get; set; }
 	}
-	public abstract class FuzzyQueryBase<TValue, TFuzziness> : FieldNameQueryBase, IFuzzyQuery
+	public interface IFuzzyQuery<TValue, TFuzziness> : IFuzzyQuery
 	{
-		[JsonProperty(PropertyName = "prefix_length")]
-		public int? PrefixLength { get; set; }
-		
 		[JsonProperty(PropertyName = "value")]
-		public TValue Value { get; set; }
+		TValue Value { get; set; }
 
 		[JsonProperty(PropertyName = "fuzziness")]
+		TFuzziness Fuzziness { get; set; }
+	}
+
+	internal static class FuzzyQueryBase
+	{
+		internal static bool IsConditionless<TValue, TFuzziness>(IFuzzyQuery<TValue, TFuzziness> fuzzy) => fuzzy.Value == null || fuzzy.Fuzziness == null;
+	}
+
+	public abstract class FuzzyQueryBase<TValue, TFuzziness> : FieldNameQueryBase, IFuzzyQuery<TValue, TFuzziness>
+	{
+		public int? PrefixLength { get; set; }
+		
+		public TValue Value { get; set; }
+
 		public TFuzziness Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "rewrite")]
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
 		public int? MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "transpositions")]
 		public bool? Transpositions { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+
+		protected override bool Conditionless => FuzzyQueryBase.IsConditionless(this);
+
 	}
 
 	public class FuzzyQueryDescriptorBase<TDescriptor, T, TValue, TFuzziness> 
-		: FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery, T> , IFuzzyQuery 
+		: FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T> , IFuzzyQuery<TValue, TFuzziness>
 		where T : class
-		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery, T>, IFuzzyQuery
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T>, IFuzzyQuery<TValue, TFuzziness>
 	{
+		protected override bool Conditionless => FuzzyQueryBase.IsConditionless(this);
 		int? IFuzzyQuery.PrefixLength { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		bool? IFuzzyQuery.Transpositions { get; set; }
 		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
-
-		[JsonProperty(PropertyName = "fuzziness")]
-		internal TFuzziness _Fuzziness { get; set; }
-
-		[JsonProperty(PropertyName = "value")]
-		internal TValue _Value { get; set; }
+		TFuzziness IFuzzyQuery<TValue, TFuzziness>.Fuzziness { get; set; }
+		TValue IFuzzyQuery<TValue, TFuzziness>.Value { get; set; }
 
 		public TDescriptor MaxExpansions(int? maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
 

@@ -19,13 +19,13 @@ namespace Nest
 
 	public class TermsQuery : FieldNameQueryBase, ITermsQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 		public IEnumerable<object> Terms { get; set; }
 		public IFieldLookup TermsLookup { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Terms = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Terms = this;
 		internal static bool IsConditionless(ITermsQuery q)
 		{
 			return q.Field.IsConditionless() || (!q.Terms.HasAny() && q.TermsLookup == null);
@@ -42,7 +42,7 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T, TValue>, ITermsQuery, T>
 		, ITermsQuery where T : class
 	{
-		bool IQuery.Conditionless => TermsQuery.IsConditionless(this);
+		protected override bool Conditionless => TermsQuery.IsConditionless(this);
 		MinimumShouldMatch ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }

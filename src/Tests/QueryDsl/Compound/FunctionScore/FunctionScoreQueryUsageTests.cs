@@ -125,7 +125,8 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFunctionScoreQuery>(a => a.FunctionScore)
 		{
-			{ q=> q.Functions = null, d => d.functions = null }
+			q=> q.Functions = null,
+			q=> q.Functions = Enumerable.Empty<IScoreFunction>(),
 		};
 	}
 }

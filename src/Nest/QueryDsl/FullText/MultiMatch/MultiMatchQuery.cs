@@ -64,7 +64,7 @@ namespace Nest
 
 	public class MultiMatchQuery : QueryBase, IMultiMatchQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -82,7 +82,7 @@ namespace Nest
 		public Fields Fields { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
 		internal static bool IsConditionless(IMultiMatchQuery q) => q.Fields.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
@@ -92,7 +92,7 @@ namespace Nest
 		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery> 
 		, IMultiMatchQuery where T : class
 	{
-		bool IQuery.Conditionless => MultiMatchQuery.IsConditionless(this);
+		protected override bool Conditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }

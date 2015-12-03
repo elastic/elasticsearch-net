@@ -57,7 +57,7 @@ namespace Nest
 	
 	public class MatchQuery : FieldNameQueryBase, IMatchQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		string IMatchQuery.Type => this.MatchQueryType;
 		protected virtual string MatchQueryType => null;
 
@@ -75,7 +75,7 @@ namespace Nest
 		public Operator? Operator { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Match = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Match = this;
 
 		internal static bool IsConditionless(IMatchQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
@@ -87,7 +87,7 @@ namespace Nest
 	{
 		protected virtual string MatchQueryType => null;
 		string IMatchQuery.Type => this.MatchQueryType;
-		bool IQuery.Conditionless => MatchQuery.IsConditionless(this);
+		protected override bool Conditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
 		MinimumShouldMatch IMatchQuery.MinimumShouldMatch { get; set; }

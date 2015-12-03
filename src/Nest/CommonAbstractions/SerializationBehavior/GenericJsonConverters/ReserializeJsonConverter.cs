@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	internal class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
-		where TReadAs : class, TInterface, new()
+		where TReadAs : class, TInterface
 		where TInterface : class
 	{
 		protected ReadAsTypeJsonConverter<TReadAs> Reader { get; } = new ReadAsTypeJsonConverter<TReadAs>();

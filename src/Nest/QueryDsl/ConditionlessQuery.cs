@@ -21,7 +21,7 @@ namespace Nest
 
 		QueryContainer IConditionlessQuery.Fallback { get; set; }
 
-		bool IQuery.Conditionless => (Self.Query == null || Self.Query.IsConditionless)
+		protected override bool Conditionless => (Self.Query == null || Self.Query.IsConditionless)
 										&& (Self.Fallback == null || Self.Fallback.IsConditionless);
 
 		public ConditionlessQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 

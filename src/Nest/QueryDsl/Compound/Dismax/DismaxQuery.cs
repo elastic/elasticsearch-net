@@ -19,11 +19,11 @@ namespace Nest
 
 	public class DismaxQuery : QueryBase, IDisMaxQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public double? TieBreaker { get; set; }
 		public IEnumerable<QueryContainer> Queries { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.DisMax = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.DisMax = this;
 		internal static bool IsConditionless(IDisMaxQuery q) => !q.Queries.HasAny() || q.Queries.All(qq => qq.IsConditionless);
 	}
 
@@ -31,7 +31,7 @@ namespace Nest
 		: QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>
 		, IDisMaxQuery where T : class
 	{
-		bool IQuery.Conditionless => DismaxQuery.IsConditionless(this);
+		protected override bool Conditionless => DismaxQuery.IsConditionless(this);
 		double? IDisMaxQuery.TieBreaker { get; set; }
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 

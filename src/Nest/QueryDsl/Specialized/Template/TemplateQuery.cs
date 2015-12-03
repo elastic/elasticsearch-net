@@ -25,13 +25,13 @@ namespace Nest
 
 	public class TemplateQuery : QueryBase, ITemplateQuery
 	{
-		public bool Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public string File { get; set; }
 		public string Inline { get; set; }
 		public Id Id { get; set; }
 		public IDictionary<string, object> Params { get; set;}
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Template = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Template = this;
 		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Inline.IsNullOrEmpty();
 	}
 
@@ -39,7 +39,7 @@ namespace Nest
 		: QueryDescriptorBase<TemplateQueryDescriptor<T>, ITemplateQuery>
 		, ITemplateQuery where T : class
 	{
-		bool IQuery.Conditionless => TemplateQuery.IsConditionless(this);
+		protected override bool Conditionless => TemplateQuery.IsConditionless(this);
 		string ITemplateQuery.File { get; set; }
 		string ITemplateQuery.Inline { get; set; }
 		Id ITemplateQuery.Id { get; set; }

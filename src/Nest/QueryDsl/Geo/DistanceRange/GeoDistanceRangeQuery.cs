@@ -45,7 +45,7 @@ namespace Nest
 
 	public class GeoDistanceRangeQuery : FieldNameQueryBase, IGeoDistanceRangeQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public GeoLocation Location { get; set; }
 		public GeoDistance From { get; set; }
 		public GeoDistance To { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
 
 		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => q.Location == null || (q.To == null && q.From == null);
 	}
@@ -65,7 +65,7 @@ namespace Nest
 	public class GeoDistanceRangeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T> 
 		, IGeoDistanceRangeQuery where T : class
 	{
-		bool IQuery.Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
+		protected override bool Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
 		GeoLocation IGeoDistanceRangeQuery.Location { get; set; }
 		GeoDistance IGeoDistanceRangeQuery.From { get; set; }
 		GeoDistance IGeoDistanceRangeQuery.To { get; set; }

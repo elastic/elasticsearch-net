@@ -39,12 +39,12 @@ namespace Nest
 
 	public class IndicesQuery : QueryBase, IIndicesQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public QueryContainer Query { get; set; }
 		public QueryContainer NoMatchQuery { get; set; }
 		public Indices Indices { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Indices = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Indices = this;
 		internal static bool IsConditionless(IIndicesQuery q) => q.NoMatchQuery == null && q.Query == null;
 	}
 
@@ -52,7 +52,7 @@ namespace Nest
 		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery> 
 		, IIndicesQuery where T : class
 	{
-		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
+		protected override bool Conditionless => IndicesQuery.IsConditionless(this);
 		QueryContainer IIndicesQuery.Query { get; set; }
 		QueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		Indices IIndicesQuery.Indices { get; set; }

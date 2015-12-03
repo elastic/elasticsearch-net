@@ -23,6 +23,24 @@ namespace Nest
 		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
 			where T1: class, TReturn where TReturn: class =>
 			func?.Invoke(@default, param2) ?? @default;
+		
+		internal static QueryContainer InvokeQuery<T>(
+			this Func<QueryContainerDescriptor<T>, QueryContainer> f,
+			QueryContainerDescriptor<T> container)
+			where T : class
+		{
+			var c = f.Invoke(container);
+			//if query is not conditionless or is verbatim: return a container that holds the query
+			if (!c.IsConditionless || c.IsVerbatim)
+				return c;
+
+			//query is conditionless but the container is marked as strict, throw exception
+			if (c.IsStrict)
+				throw new DslException("Query is conditionless but strict is turned on") { Offender = c };
+
+			//query is conditionless return an empty container that can later be rewritten
+			return QueryContainer.CreateEmptyContainer(c);
+		}
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
@@ -152,7 +170,7 @@ namespace Nest
 		}
 		internal static bool IsNullOrEmpty(this string value)
 		{
-			return string.IsNullOrEmpty(value);
+			return string.IsNullOrWhiteSpace(value);
 		}
 
 

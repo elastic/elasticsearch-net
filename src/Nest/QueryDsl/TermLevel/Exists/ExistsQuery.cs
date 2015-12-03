@@ -17,9 +17,9 @@ namespace Nest
 	public class ExistsQuery : QueryBase, IExistsQuery
 	{
 		public Field Field { get; set; }
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Exists = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Exists = this;
 		internal static bool IsConditionless(IExistsQuery q) => q.Field.IsConditionless();
 	}
 
@@ -27,7 +27,7 @@ namespace Nest
 		: QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>
 		, IExistsQuery where T : class
 	{
-		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
+		protected override bool Conditionless => ExistsQuery.IsConditionless(this);
 
 		Field IExistsQuery.Field { get; set; }
 

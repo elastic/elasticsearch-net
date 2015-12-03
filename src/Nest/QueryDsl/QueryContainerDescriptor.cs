@@ -10,49 +10,43 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
-		private IQueryContainer Self => this;
-
-		QueryContainerDescriptor<T> _assign(Action<IQueryContainer> assigner) =>
-			Fluent.Assign<QueryContainerDescriptor<T>, IQueryContainer>(new QueryContainerDescriptor<T>(), a =>
+		QueryContainerDescriptor<T> Assign(Action<IQueryContainer> assigner) =>
+			Fluent.Assign<QueryContainerDescriptor<T>, IQueryContainer>(this, a =>
 			{
 				a.IsStrict = this.IsStrict;
 				a.IsVerbatim = this.IsVerbatim;
 				assigner(a);
 			});
 
-		//TODO remove all the shortcuts into descriptors except for .Term(s)()
 		public QueryContainerDescriptor() { }
 
-		internal QueryContainerDescriptor(bool forceConditionless)
-		{
-			Self.IsConditionless = forceConditionless;
-		}
+		public QueryContainerDescriptor<T> Strict(bool strict = true) => Assign(a => a.IsStrict = strict);
 
-		public QueryContainerDescriptor<T> Strict(bool strict = true) => _assign(a => a.IsStrict = strict);
-
-		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => _assign(a =>
+		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => Assign(a =>
 		{
 			//TODO do we need to set IsStrict to verbatim value here?
 			a.IsStrict = verbatim;
 			a.IsVerbatim = verbatim;
 		});
 
-		private QueryContainer _assignSelector<TQuery, TQueryInterface>(
+		QueryContainer Assign<TQuery, TQueryInterface>(
 			Func<TQuery, TQueryInterface> create,
 			Action<TQueryInterface, IQueryContainer> assign
 			)
-			where TQuery : TQueryInterface, IQuery, new()
-			where TQueryInterface : IQuery
+			where TQuery : class, TQueryInterface, IQuery, new()
+			where TQueryInterface : class,IQuery
 		{
-			var query = create(new TQuery());
+			var query = create.InvokeOrDefault(new TQuery());
+			assign(query, this);
+			this.ContainedQuery = query;
 
 			//if query is not conditionless or is verbatim: return a container that holds the query
 			if (!query.Conditionless || this.IsVerbatim)
-				return _assign(a => assign(query, a));
+				return this;
 
 			//query is conditionless but the container is marked as strict, throw exception
 			if (this.IsStrict)
-				throw new DslException(CreateConditionlessWhenStrictExceptionMessage(query));
+				throw new DslException("Query is conditionless but strict is turned on") { Offender = query };
 
 			//query is conditionless return an empty container that can later be rewritten
 			return CreateEmptyContainer();
@@ -64,13 +58,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="rawJson"></param>
 		/// <returns></returns>
-		public QueryContainer Raw(string rawJson) => _assign(a => a.RawQuery = rawJson);
+		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = rawJson);
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.
 		/// </summary>
 		public QueryContainer QueryString(Func<QueryStringQueryDescriptor<T>, IQueryStringQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.QueryString = query);
+			this.Assign(selector, (query, container) => container.QueryString = query);
 
 		/// <summary>
 		/// A query that uses the SimpleQueryParser to parse its context. 
@@ -78,19 +72,19 @@ namespace Nest
 		/// never throw an exception, and discards invalid parts of the query. 
 		/// </summary>
 		public QueryContainer SimpleQueryString(Func<SimpleQueryStringQueryDescriptor<T>, ISimpleQueryStringQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SimpleQueryString = query);
+			this.Assign(selector, (query, container) => container.SimpleQueryString = query);
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms<TValue>(Func<TermsQueryDescriptor<T, TValue>, ITermsQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Terms = query);
+			this.Assign(selector, (query, container) => container.Terms = query);
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(Func<TermsQueryDescriptor<T, string>, ITermsQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Terms = query);
+			this.Assign(selector, (query, container) => container.Terms = query);
 
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
@@ -98,33 +92,33 @@ namespace Nest
 		/// every term will be enumerated and cause an edit score calculation or max_expansions is not set.
 		/// </summary>
 		public QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
+			this.Assign(selector, (query, container) => container.Fuzzy = query);
 
 		public QueryContainer FuzzyNumeric(Func<FuzzyNumericQueryDescriptor<T>, IFuzzyQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
+			this.Assign(selector, (query, container) => container.Fuzzy = query);
 
 		public QueryContainer FuzzyDate(Func<FuzzyDateQueryDescriptor<T>, IFuzzyQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
+			this.Assign(selector, (query, container) => container.Fuzzy = query);
 
 		/// <summary>
 		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
 		/// process constructs a boolean query from the provided text.
 		/// </summary>
 		public QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Match = query);
+			this.Assign(selector, (query, container) => container.Match = query);
 
 		/// <summary>
 		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 
 		/// </summary>
 		public QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Match = query);
+			this.Assign(selector, (query, container) => container.Match = query);
 
 		/// <summary>
 		/// The text_phrase_prefix is the same as text_phrase, expect it allows for prefix matches on the last term 
 		/// in the text
 		/// </summary>
 		public QueryContainer MatchPhrasePrefix(Func<MatchPhrasePrefixQueryDescriptor<T>, IMatchQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Match = query);
+			this.Assign(selector, (query, container) => container.Match = query);
 
 		/// <summary>
 		/// The multi_match query builds further on top of the match query by allowing multiple fields to be specified. 
@@ -132,7 +126,7 @@ namespace Nest
 		/// relatively more expressive query by using multiple match queries within a bool query.
 		/// </summary>
 		public QueryContainer MultiMatch(Func<MultiMatchQueryDescriptor<T>, IMultiMatchQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.MultiMatch = query);
+			this.Assign(selector, (query, container) => container.MultiMatch = query);
 
 		/// <summary>
 		/// Nested query allows to query nested objects / docs (see nested mapping). The query is executed against the 
@@ -140,7 +134,7 @@ namespace Nest
 		/// root parent doc (or parent nested mapping).
 		/// </summary>
 		public QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Nested = query);
+			this.Assign(selector, (query, container) => container.Nested = query);
 
 		/// <summary>
 		/// A thin wrapper allowing fined grained control what should happen if a query is conditionless
@@ -158,25 +152,25 @@ namespace Nest
 		/// when it is executed on an index that does not match the listed indices.
 		/// </summary>
 		public QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Indices = query);
+			this.Assign(selector, (query, container) => container.Indices = query);
 
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain numeric range. 
 		/// </summary>
 		public QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Range = query);
+			this.Assign(selector, (query, container) => container.Range = query);
 
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain date range. 
 		/// </summary>
 		public QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Range = query);
+			this.Assign(selector, (query, container) => container.Range = query);
 
 		/// <summary>
 		/// More like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
 		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.MoreLikeThis = query);
+			this.Assign(selector, (query, container) => container.MoreLikeThis = query);
 
 		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -184,7 +178,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeEnvelope(Func<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -192,13 +186,13 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeCircle(Func<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// Use an indexed shape for the geo shape query
 		/// </summary>
 		public QueryContainer GeoIndexedShape(Func<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -206,7 +200,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeLineString(Func<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -214,7 +208,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeMultiLineString(Func<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -222,7 +216,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapePoint(Func<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -230,7 +224,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeMultiPoint(Func<GeoShapeMultiPointQueryDescriptor<T>, IGeoShapeMultiPointQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -238,7 +232,7 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapePolygon(Func<GeoShapePolygonQueryDescriptor<T>, IGeoShapePolygonQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
 		/// The geo_shape circle Filter uses the same grid square representation as the geo_shape mapping to find documents 
@@ -246,29 +240,29 @@ namespace Nest
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.
 		/// </summary>
 		public QueryContainer GeoShapeMultiPolygon(Func<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+			this.Assign(selector, (query, container) => container.GeoShape = query);
 
 		public QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoPolygon = query);
+			this.Assign(selector, (query, container) => container.GeoPolygon = query);
 
 		public QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoHashCell = query);
+			this.Assign(selector, (query, container) => container.GeoHashCell = query);
 
 		public QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoDistanceRange = query);
+			this.Assign(selector, (query, container) => container.GeoDistanceRange = query);
 
 		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoDistance = query);
+			this.Assign(selector, (query, container) => container.GeoDistance = query);
 
 		public QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.GeoBoundingBox = query);
+			this.Assign(selector, (query, container) => container.GeoBoundingBox = query);
 
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.
 		/// </summary>
 		public QueryContainer CommonTerms(Func<CommonTermsQueryDescriptor<T>, ICommonTermsQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.CommonTerms = query);
+			this.Assign(selector, (query, container) => container.CommonTerms = query);
 
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
@@ -276,7 +270,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
 		public QueryContainer HasChild<K>(Func<HasChildQueryDescriptor<K>, IHasChildQuery> selector) where K : class =>
-			this._assignSelector(selector, (query, container) => container.HasChild = query);
+			this.Assign(selector, (query, container) => container.HasChild = query);
 
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
@@ -284,14 +278,14 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="K">Type of the child</typeparam>
 		public QueryContainer HasParent<K>(Func<HasParentQueryDescriptor<K>, IHasParentQuery> selector) where K : class =>
-			this._assignSelector(selector, (query, container) => container.HasParent = query);
+			this.Assign(selector, (query, container) => container.HasParent = query);
 
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
 		/// </summary>
 		[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 		public QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Filtered = query);
+			this.Assign(selector, (query, container) => container.Filtered = query);
 
 		/// <summary>
 		/// A query that generates the union of documents produced by its subqueries, and that scores each document 
@@ -299,14 +293,14 @@ namespace Nest
 		/// any additional matching subqueries.
 		/// </summary>
 		public QueryContainer Dismax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.DisMax = query);
+			this.Assign(selector, (query, container) => container.DisMax = query);
 
 		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost 
 		/// for every document in the filter. Maps to Lucene ConstantScoreQuery.
 		/// </summary>
 		public QueryContainer ConstantScore(Func<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.ConstantScore = query);
+			this.Assign(selector, (query, container) => container.ConstantScore = query);
 
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
@@ -314,7 +308,7 @@ namespace Nest
 		/// It is built using one or more boolean clauses, each clause with a typed occurrence
 		/// </summary>
 		public QueryContainer Bool(Func<BoolQueryDescriptor<T>, IBoolQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Bool = query);
+			this.Assign(selector, (query, container) => container.Bool = query);
 
 		/// <summary>
 		/// the boosting query can be used to effectively demote results that match a given query. 
@@ -323,7 +317,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="boostingQuery"></param>
 		public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Boosting = query);
+			this.Assign(selector, (query, container) => container.Boosting = query);
 
 		/// <summary>
 		/// A query that matches all documents. Maps to Lucene MatchAllDocsQuery.
@@ -336,7 +330,7 @@ namespace Nest
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </param>
 		public QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
-			_assign(a => a.MatchAllQuery = selector?.Invoke(new MatchAllQueryDescriptor()) ?? new MatchAllQuery());
+			this.Assign(selector, (query, container) => container.MatchAllQuery = query ?? new MatchAllQuery());
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
@@ -388,7 +382,7 @@ namespace Nest
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
 		public QueryContainer Term(Func<TermQueryDescriptor<T>, ITermQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Term = query);
+			this.Assign(selector, (query, container) => container.Term = query);
 
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
@@ -434,7 +428,7 @@ namespace Nest
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
 		public QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Wildcard = query);
+			this.Assign(selector, (query, container) => container.Wildcard = query);
 
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
@@ -471,7 +465,7 @@ namespace Nest
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
 		public QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Prefix = query);
+			this.Assign(selector, (query, container) => container.Prefix = query);
 
 		/// <summary>
 		/// Filters documents that only have the provided ids. 
@@ -479,7 +473,7 @@ namespace Nest
 		/// it works using the _uid field.
 		/// </summary>
 		public QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Ids = query);
+			this.Assign(selector, (query, container) => container.Ids = query);
 
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
@@ -511,13 +505,13 @@ namespace Nest
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
 		/// </summary>
 		public QueryContainer SpanTerm(Func<SpanTermQueryDescriptor<T>, ISpanTermQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanTerm = query);
+			this.Assign(selector, (query, container) => container.SpanTerm = query);
 
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
 		/// </summary>
 		public QueryContainer SpanFirst(Func<SpanFirstQueryDescriptor<T>, ISpanFirstQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanFirst = query);
+			this.Assign(selector, (query, container) => container.SpanFirst = query);
 
 		/// <summary>
 		/// Matches spans which are near one another. One can specify slop, the maximum number of 
@@ -525,67 +519,67 @@ namespace Nest
 		/// The span near query maps to Lucene SpanNearQuery.
 		/// </summary>
 		public QueryContainer SpanNear(Func<SpanNearQueryDescriptor<T>, ISpanNearQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanNear = query);
+			this.Assign(selector, (query, container) => container.SpanNear = query);
 
 		/// <summary>
 		/// Matches the union of its span clauses. 
 		/// The span or query maps to Lucene SpanOrQuery. 
 		/// </summary>
 		public QueryContainer SpanOr(Func<SpanOrQueryDescriptor<T>, ISpanOrQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanOr = query);
+			this.Assign(selector, (query, container) => container.SpanOr = query);
 
 		/// <summary>
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
 		/// </summary>
 		public QueryContainer SpanNot(Func<SpanNotQueryDescriptor<T>, ISpanNotQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanNot = query);
+			this.Assign(selector, (query, container) => container.SpanNot = query);
 
 		/// <summary>
 		/// Wrap a multi term query (one of fuzzy, prefix, term range or regexp query) 
 		/// as a span query so it can be nested.
 		/// </summary>
 		public QueryContainer SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanMultiTerm = query);
+			this.Assign(selector, (query, container) => container.SpanMultiTerm = query);
 
 		/// <summary>
 		/// </summary>
 		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanContaining = query);
+			this.Assign(selector, (query, container) => container.SpanContaining = query);
 
 		/// <summary>
 		/// </summary>
 		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.SpanWithin = query);
+			this.Assign(selector, (query, container) => container.SpanWithin = query);
 
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>
 		public QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Regexp = query);
+			this.Assign(selector, (query, container) => container.Regexp = query);
 
 		/// <summary>
 		/// Function score query
 		/// </summary>
 		/// <returns></returns>
 		public QueryContainer FunctionScore(Func<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.FunctionScore = query);
+			this.Assign(selector, (query, container) => container.FunctionScore = query);
 
 		public QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Template = query);
+			this.Assign(selector, (query, container) => container.Template = query);
 
 		public QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Script = query);
+			this.Assign(selector, (query, container) => container.Script = query);
 
 		public QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Exists = query);
+			this.Assign(selector, (query, container) => container.Exists = query);
 
 		public QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Missing = query);
+			this.Assign(selector, (query, container) => container.Missing = query);
 
 		public QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Type = query);
+			this.Assign(selector, (query, container) => container.Type = query);
 
 		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
 

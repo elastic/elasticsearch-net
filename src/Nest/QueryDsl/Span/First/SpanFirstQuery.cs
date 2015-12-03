@@ -19,11 +19,11 @@ namespace Nest
 
 	public class SpanFirstQuery : QueryBase, ISpanFirstQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.SpanFirst = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.SpanFirst = this;
 		internal static bool IsConditionless(ISpanFirstQuery q) => q.Match == null || q.Match.Conditionless;
 	}
 
@@ -31,7 +31,7 @@ namespace Nest
 		: QueryDescriptorBase<SpanFirstQueryDescriptor<T>, ISpanFirstQuery>
 		, ISpanFirstQuery where T : class
 	{
-		bool IQuery.Conditionless => SpanFirstQuery.IsConditionless(this);	
+		protected override bool Conditionless => SpanFirstQuery.IsConditionless(this);	
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 		int? ISpanFirstQuery.End { get; set; }
 

@@ -20,12 +20,12 @@ namespace Nest
 
 	public class RegexpQuery : FieldNameQueryBase, IRegexpQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public string Value { get; set; }
 		public string Flags { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Regexp = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Regexp = this;
 		internal static bool IsConditionless(IRegexpQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 
@@ -33,7 +33,7 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, IRegexpQuery, T>
 		, IRegexpQuery where T : class
 	{
-		bool IQuery.Conditionless => RegexpQuery.IsConditionless(this);
+		protected override bool Conditionless => RegexpQuery.IsConditionless(this);
 		string IRegexpQuery.Value { get; set; }
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }

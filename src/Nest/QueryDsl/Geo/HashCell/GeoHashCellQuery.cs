@@ -22,13 +22,13 @@ namespace Nest
 
 	public class GeoHashCellQuery : FieldNameQueryBase, IGeoHashCellQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 
 		public GeoLocation Location { get; set; }
 		public GeoDistance Precision { get; set; }
 		public bool? Neighbors { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
 
 		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location == null;
 	}
@@ -37,7 +37,7 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery, T>
 		, IGeoHashCellQuery where T : class
 	{
-		bool IQuery.Conditionless => GeoHashCellQuery.IsConditionless(this);
+		protected override bool Conditionless => GeoHashCellQuery.IsConditionless(this);
 
 		GeoLocation IGeoHashCellQuery.Location { get; set; }
 		GeoDistance IGeoHashCellQuery.Precision { get; set; }

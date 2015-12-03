@@ -39,5 +39,12 @@ namespace Tests.QueryDsl.TermLevel.Term
 				.Field(p => p.Description)
 				.Value("project description")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermQuery>(q => q.Term)
+		{
+			q=> q.Field = null,
+			q=> q.Value = "  ",
+			q=> q.Value = null
+		};
 	}
 }

@@ -23,13 +23,13 @@ namespace Nest
 
 	public class NumericRangeQuery : FieldNameQueryBase, INumericRangeQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public double? GreaterThanOrEqualTo { get; set; }
 		public double? LessThanOrEqualTo { get; set; }
 		public double? GreaterThan { get; set; }
 		public double? LessThan { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Range = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Range = this;
 
 		internal static bool IsConditionless(INumericRangeQuery q)
 		{
@@ -46,7 +46,7 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<NumericRangeQueryDescriptor<T>, INumericRangeQuery, T>
 		, INumericRangeQuery where T : class
 	{
-		bool IQuery.Conditionless => NumericRangeQuery.IsConditionless(this);
+		protected override bool Conditionless => NumericRangeQuery.IsConditionless(this);
 		double? INumericRangeQuery.GreaterThanOrEqualTo { get; set; }
 		double? INumericRangeQuery.LessThanOrEqualTo { get; set; }
 		double? INumericRangeQuery.GreaterThan { get; set; }

@@ -19,9 +19,9 @@ namespace Nest
 	{
 		public string NormField { get;  set; }
 
-		bool IQuery.Conditionless => false;
+		protected override bool Conditionless => false;
 
-		protected override void WrapInContainer(IQueryContainer container)
+		internal override void WrapInContainer(IQueryContainer container)
 		{
 			container.MatchAllQuery = this;
 		}
@@ -31,7 +31,7 @@ namespace Nest
 		: QueryDescriptorBase<MatchAllQueryDescriptor, IMatchAllQuery>
 		, IMatchAllQuery 
 	{
-		bool IQuery.Conditionless => false;
+		protected override bool Conditionless => false;
 
 		string IMatchAllQuery.NormField { get; set; }
 

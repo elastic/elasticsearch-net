@@ -26,13 +26,13 @@ namespace Nest
 
 	public class HasParentQuery : QueryBase, IHasParentQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public TypeName Type { get; set; }
 		public ParentScoreMode? ScoreMode { get; set; }
 		public QueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.HasParent = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.HasParent = this;
 		internal static bool IsConditionless(IHasParentQuery q) => q.Query == null || q.Query.IsConditionless;
 	}
 
@@ -40,7 +40,7 @@ namespace Nest
 		: QueryDescriptorBase<HasParentQueryDescriptor<T>, IHasParentQuery>
 		, IHasParentQuery where T : class
 	{
-		bool IQuery.Conditionless => HasParentQuery.IsConditionless(this);
+		protected override bool Conditionless => HasParentQuery.IsConditionless(this);
 		TypeName IHasParentQuery.Type { get; set; }
 		ParentScoreMode? IHasParentQuery.ScoreMode { get; set; }
 		IInnerHits IHasParentQuery.InnerHits { get; set; }

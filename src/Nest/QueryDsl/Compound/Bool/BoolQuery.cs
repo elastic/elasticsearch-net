@@ -31,7 +31,6 @@ namespace Nest
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<QueryContainer> Must { get; set; }
 		public IEnumerable<QueryContainer> MustNot { get; set; }
 		public IEnumerable<QueryContainer> Should { get; set; }
@@ -39,8 +38,9 @@ namespace Nest
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Bool = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Bool = this;
 
+		protected override bool Conditionless => IsConditionless(this);
 		internal static bool IsConditionless(IBoolQuery q)
 		{
 			if (!q.Must.HasAny() && !q.Should.HasAny() && !q.MustNot.HasAny() && !q.Filter.HasAny())
@@ -57,7 +57,7 @@ namespace Nest
 		: QueryDescriptorBase<BoolQueryDescriptor<T>, IBoolQuery>
 		, IBoolQuery where T : class
 	{
-		bool IQuery.Conditionless => BoolQuery.IsConditionless(this);
+		protected override bool Conditionless => BoolQuery.IsConditionless(this);
 		IEnumerable<QueryContainer> IBoolQuery.Must { get; set; }
 		IEnumerable<QueryContainer> IBoolQuery.MustNot { get; set; }
 		IEnumerable<QueryContainer> IBoolQuery.Should { get; set; }

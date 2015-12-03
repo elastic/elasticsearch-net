@@ -31,7 +31,7 @@ namespace Nest
 
 	public class FunctionScoreQuery : QueryBase, IFunctionScoreQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public IEnumerable<IScoreFunction> Functions { get; set; }
 		public QueryContainer Query { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 		public double? MaxBoost { get; set; }
 		public double? MinScore { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.FunctionScore = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.FunctionScore = this;
 
 		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false)
 		{
@@ -52,7 +52,7 @@ namespace Nest
 		, IFunctionScoreQuery where T : class
 	{
 		private bool _forcedConditionless = false;
-		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
+		protected override bool Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 		QueryContainer IFunctionScoreQuery.Query { get; set; }
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }

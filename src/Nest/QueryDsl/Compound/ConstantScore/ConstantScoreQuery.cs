@@ -15,13 +15,13 @@ namespace Nest
 
 	public class ConstantScoreQuery : QueryBase, IConstantScoreQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public QueryContainer Filter { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
 		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter == null;
 	}
 
@@ -29,7 +29,7 @@ namespace Nest
 		: QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>
 		, IConstantScoreQuery where T : class
 	{
-		bool IQuery.Conditionless => ConstantScoreQuery.IsConditionless(this);
+		protected override bool Conditionless => ConstantScoreQuery.IsConditionless(this);
 		QueryContainer IConstantScoreQuery.Filter { get; set; }
 
 		public ConstantScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 

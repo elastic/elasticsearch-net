@@ -15,10 +15,10 @@ namespace Nest
 
 	public class GeoIndexedShapeQuery : FieldNameQueryBase, IGeoIndexedShapeQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public IIndexedGeoShape IndexedShape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
 		internal static bool IsConditionless(IGeoIndexedShapeQuery q) => q.Field.IsConditionless() || q.IndexedShape == null;
 	}
@@ -26,7 +26,7 @@ namespace Nest
 	public class GeoIndexedShapeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery, T>
 		, IGeoIndexedShapeQuery where T : class
 	{
-		bool IQuery.Conditionless => GeoIndexedShapeQuery.IsConditionless(this);
+		protected override bool Conditionless => GeoIndexedShapeQuery.IsConditionless(this);
 		IIndexedGeoShape IGeoIndexedShapeQuery.IndexedShape { get; set; }
 
 		public GeoIndexedShapeQueryDescriptor<T> IndexedShape(Func<IndexedGeoShapeDescriptor<T>, IIndexedGeoShape> selector) =>

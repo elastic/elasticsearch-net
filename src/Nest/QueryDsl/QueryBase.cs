@@ -22,7 +22,8 @@ namespace Nest
 	{
 		public string Name { get; set; }
 		public double? Boost { get; set; }
-		bool IQuery.Conditionless { get; }
+		bool IQuery.Conditionless => this.Conditionless;
+		protected abstract bool Conditionless { get; }
 
 		//always evaluate to false so that each side of && equation is evaluated
 		public static bool operator false(QueryBase a) => false;
@@ -45,28 +46,8 @@ namespace Nest
 			};
 		}
 
-		public QueryContainer ToContainer()
-		{
-			return ToContainer(this);
-		}
+		public static implicit operator QueryContainer(QueryBase query) => new QueryContainer(query);
 
-		public static QueryContainer ToContainer(QueryBase query, QueryContainer queryContainer = null)
-		{
-			if (query == null) return null;
-			var c = queryContainer ?? new QueryContainer();
-			IQueryContainer fc = c;
-			query.WrapInContainer(c);
-			return c;
-		}
-
-		public static implicit operator QueryContainer(QueryBase query)
-		{
-			if (query == null) return null;
-			var c = new QueryContainer();
-			query.WrapInContainer(c);
-			return c;
-		}
-
-		protected abstract void WrapInContainer(IQueryContainer container);
+		internal abstract void WrapInContainer(IQueryContainer container);
 	}
 }

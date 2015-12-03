@@ -58,7 +58,7 @@ namespace Nest
 
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public Fields Fields { get; set; }
 		public double? TermMatchPercentage { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -75,7 +75,7 @@ namespace Nest
 		public IEnumerable<Like> Like { get; set; }
 		public IEnumerable<Like> Unlike { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
 		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
 	}
 
@@ -83,7 +83,7 @@ namespace Nest
 		: QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>
 		, IMoreLikeThisQuery where T : class
 	{
-		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
+		protected override bool Conditionless => MoreLikeThisQuery.IsConditionless(this);
 		Fields IMoreLikeThisQuery.Fields { get; set; }
 		MinimumShouldMatch IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
 		StopWords IMoreLikeThisQuery.StopWords { get; set; }
