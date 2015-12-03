@@ -27,7 +27,7 @@ namespace Nest
 		IEnumerable<IQueryContainer> Filter { get; set; }
 
  		[JsonProperty("minimum_should_match")]
-		string MinimumShouldMatch { get; set; }
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
@@ -40,7 +40,7 @@ namespace Nest
 		public IEnumerable<IQueryContainer> MustNot { get; set; }
 		public IEnumerable<IQueryContainer> Should { get; set; }
 		public IEnumerable<IQueryContainer> Filter { get; set; }
-		public string MinimumShouldMatch { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Bool = this;
@@ -66,7 +66,7 @@ namespace Nest
 		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.Filter { get; set; }
-		string IBoolQuery.MinimumShouldMatch { get; set; }
+		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
 		bool? IBoolQuery.DisableCoord { get; set; }
 
 		public BoolQueryDescriptor<T> DisableCoord() => Assign(a => a.DisableCoord = true);
@@ -76,16 +76,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches) => 
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
-
-		/// <summary>
-		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied. String overload where you can specify percentages
-		/// </summary>
-		/// <param name="minimumShouldMatches"></param>
-		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches) => 
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches);
+		public BoolQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatches) => Assign(a => a.MinimumShouldMatch = minimumShouldMatches);
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents

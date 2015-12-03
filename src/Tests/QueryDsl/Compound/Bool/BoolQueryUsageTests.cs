@@ -1,13 +1,15 @@
-﻿using Nest;
-using Tests.Framework.MockData;
-using Tests.Framework.Integration;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Nest;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 
-namespace Tests.QueryDsl
+namespace Tests.QueryDsl.Compound.Bool
 {
 	public class BoolQueryUsageTests : QueryDslUsageTestsBase
 	{
-		public BoolQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public BoolQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 
 		protected override object QueryJson => new
@@ -15,7 +17,7 @@ namespace Tests.QueryDsl
 			@bool = new
 			{
 				boost = 2.0,
-				must_not = new []
+				must_not = new[]
 				{
 					new { match_all = new { } }
 				},
@@ -27,7 +29,7 @@ namespace Tests.QueryDsl
 				{
 					new { match_all = new { } }
 				},
-				filter = new []
+				filter = new[]
 				{
 					new { match_all = new { } }
 				},
@@ -45,7 +47,7 @@ namespace Tests.QueryDsl
 				MinimumShouldMatch = "1",
 				Boost = 2
 			};
-        protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
 				.MustNot(m => m.MatchAll())
 				.Should(m => m.MatchAll())
