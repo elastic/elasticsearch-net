@@ -161,11 +161,15 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.Indices = query);
 
 		/// <summary>
-		/// Matches documents with fields that have terms within a certain range. The type of the Lucene query depends
-		/// on the field type, for string fields, the TermRangeQuery, while for number/date fields, the query is
-		/// a NumericRangeQuery
+		/// Matches documents with fields that have terms within a certain numeric range. 
 		/// </summary>
-		public QueryContainer Range(Func<RangeQueryDescriptor<T>, IRangeQuery> selector) =>
+		public QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.Range = query);
+
+		/// <summary>
+		/// Matches documents with fields that have terms within a certain date range. 
+		/// </summary>
+		public QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Range = query);
 
 		/// <summary>
@@ -285,19 +289,9 @@ namespace Nest
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
 		/// </summary>
+		[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 		public QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) =>
-			this._assignSelector(selector, (query, container) =>
-			{
-				//TODO THIS SHOULD BE HANDLED by the filtered descriptor
-				//this is done because filter and query can not be send as {} here
-				if (query.Query != null && query.Query.IsConditionless)
-					query.Query = null;
-
-				if (query.Filter != null && query.Filter.IsConditionless)
-					query.Filter = null;
-
-				container.Filtered = query;
-			});
+			this._assignSelector(selector, (query, container) => container.Filtered = query);
 
 		/// <summary>
 		/// A query that generates the union of documents produced by its subqueries, and that scores each document 

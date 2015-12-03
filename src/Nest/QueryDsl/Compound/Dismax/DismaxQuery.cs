@@ -6,7 +6,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(DismaxQueryJsonConverter))]
+	//[JsonConverter(typeof(DismaxQueryJsonConverter))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DismaxQuery>))]
 	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
@@ -34,30 +35,14 @@ namespace Nest
 		double? IDisMaxQuery.TieBreaker { get; set; }
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
-		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors) => Assign(a =>
-		{
-			var queries = new List<QueryContainer>();
-			foreach (var selector in querySelectors)
-			{
-				var query = new QueryContainerDescriptor<T>();
-				var q = selector(query);
-				queries.Add(q);
-			}
-			a.Queries = queries;
-		});
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors) => 
+			Assign(a => a.Queries = querySelectors.Select(q=>q(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
-		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var q in queries)
-			{
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Queries = descriptors.HasAny() ? descriptors : null;
-		});
+		public DisMaxQueryDescriptor<T> Queries(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> querySelectors) => 
+			Assign(a => a.Queries = querySelectors.Select(q=>q(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
-		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
+		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries) => Assign(a => a.Queries = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+
+		public DisMaxQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 	}
 }

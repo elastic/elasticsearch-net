@@ -5,6 +5,8 @@ namespace Nest
 {
 	internal static class BoolQueryExtensions
 	{
+		internal static IQueryContainer Self(this QueryContainer q) => q;
+
 		internal static bool IsBoolQueryWithOnlyMustNots(this IQueryContainer container)
 		{
 			return container != null && container.Bool != null
@@ -39,14 +41,14 @@ namespace Nest
 				   );
 		}
 
-		internal static QueryContainer MergeMustQueries(this IQueryContainer leftContainer, IQueryContainer rightContainer)
+		internal static QueryContainer MergeMustQueries(this QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			if (!leftContainer.CanMergeMustAndMustNots() || !rightContainer.CanMergeMustAndMustNots())
 			{
 				if (rightContainer.IsBoolQueryWithOnlyMustNots()) 
-					return CreateMustContainer(new [] { leftContainer }, rightContainer.Bool.MustNot );
+					return CreateMustContainer(new [] { leftContainer }, rightContainer.Self().Bool.MustNot );
 				if (leftContainer.IsBoolQueryWithOnlyMustNots()) 
-					return CreateMustContainer(new [] { rightContainer }, leftContainer.Bool.MustNot );
+					return CreateMustContainer(new [] { rightContainer }, leftContainer.Self().Bool.MustNot );
 				return CreateMustContainer(new [] { leftContainer, rightContainer }, null);
 			}
 			
@@ -61,18 +63,18 @@ namespace Nest
 			return container;
 		}
 
-		private static IEnumerable<IQueryContainer> CreateMustClauses(IQueryContainer container)
+		private static IEnumerable<QueryContainer> CreateMustClauses(QueryContainer container)
 		{
-			var boolQuery = container.Bool;
+			var boolQuery = container.Self().Bool;
 			var hasMustClauses = boolQuery != null && boolQuery.Must.HasAny();
 			if (hasMustClauses) return boolQuery.Must;
 			if (boolQuery != null && boolQuery.Conditionless)
-				return Enumerable.Empty<IQueryContainer>();
+				return Enumerable.Empty<QueryContainer>();
 
 			return new[] {container};
 		}
 
-		private static IEnumerable<IQueryContainer> OrphanMustNots(IQueryContainer container)
+		private static IEnumerable<QueryContainer> OrphanMustNots(IQueryContainer container)
 		{
 			var lBoolQuery = container.Bool;
 			if (lBoolQuery == null || !lBoolQuery.MustNot.HasAny()) return null;
@@ -82,13 +84,13 @@ namespace Nest
 			return mustNotQueries;
 		}
 
-		internal static QueryContainer MergeShouldQueries(this IQueryContainer leftContainer, IQueryContainer rightContainer)
+		internal static QueryContainer MergeShouldQueries(this QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			if (!leftContainer.CanMergeShould() || !leftContainer.CanMergeShould())
-				return CreateShouldContainer(new List<IQueryContainer> { leftContainer, rightContainer }); 
+				return CreateShouldContainer(new List<QueryContainer> { leftContainer, rightContainer }); 
 
-			var lBoolQuery = leftContainer.Bool;
-			var rBoolQuery = rightContainer.Bool;
+			var lBoolQuery = leftContainer.Self().Bool;
+			var rBoolQuery = rightContainer.Self().Bool;
 
 			var lHasShouldQueries = lBoolQuery != null && lBoolQuery.Should.HasAny();
 			var rHasShouldQueries = rBoolQuery != null && rBoolQuery.Should.HasAny();
@@ -100,7 +102,7 @@ namespace Nest
 			return CreateShouldContainer(shouldClauses);
 		}
 
-		internal static QueryContainer CreateShouldContainer(IList<IQueryContainer> shouldClauses)
+		internal static QueryContainer CreateShouldContainer(IList<QueryContainer> shouldClauses)
 		{
 			IQueryContainer q = new QueryContainer();
 			q.Bool = new BoolQuery();
@@ -108,7 +110,7 @@ namespace Nest
 			return q as QueryContainer;
 		}
 		
-		internal static QueryContainer CreateMustContainer(IList<IQueryContainer> mustClauses, IEnumerable<IQueryContainer> mustNotClauses)
+		internal static QueryContainer CreateMustContainer(IList<QueryContainer> mustClauses, IEnumerable<QueryContainer> mustNotClauses)
 		{
 			IQueryContainer q = new QueryContainer();
 			q.Bool = new BoolQuery();

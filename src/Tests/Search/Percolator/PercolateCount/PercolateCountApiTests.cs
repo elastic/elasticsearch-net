@@ -33,7 +33,7 @@ namespace Tests.Search.Percolator.PercolateCount
 		protected override PercolateCountDescriptor<Project> NewDescriptor() => new PercolateCountDescriptor<Project>(typeof(Project), typeof(Project));
 
 		protected override bool SupportsDeserialization => false;
-	
+
 		protected override object ExpectJson => new
 		{
 			doc = Project.InstanceAnonymous,
@@ -58,21 +58,21 @@ namespace Tests.Search.Percolator.PercolateCount
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => c => c
 			.Document(Project.Instance)
 			.Query(q => q
-				.Range(r => r
+				.DateRange(r => r
 					.Field(p => p.StartedOn)
-					.Greater(new DateTime(2014, 1, 1), "yyyy/MM/dd")
+					.GreaterThan("2014/01/01")
 				)
 			);
 
 		protected override PercolateCountRequest<Project> Initializer => new PercolateCountRequest<Project>
 		{
 			Document = Project.Instance,
-			Query = new QueryContainer(new RangeQuery
+			Query = new QueryContainer(new DateRangeQuery
 			{
 				Field = "startedOn",
 				GreaterThan = "2014/01/01"
 			})
-        };
+		};
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]

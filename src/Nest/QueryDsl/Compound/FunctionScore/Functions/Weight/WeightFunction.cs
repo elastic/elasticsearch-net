@@ -7,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IWeightFunction : IFunctionScoreFunction
+	public interface IWeightFunction : IScoreFunction
 	{
 	}
 

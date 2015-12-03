@@ -354,12 +354,22 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Bool\BoolQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Dismax\DismaxQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Boosting\BoostingQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Filtered\FilteredQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Missing\MissingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Exists\ExistsQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Ids\IdsQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\DateRangeQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Type\TypeQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQueryUsageTests.cs" />
@@ -483,7 +493,6 @@
   <ItemGroup>
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
-    <Folder Include="QueryDsl\TermLevel\Range\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<FilteredQueryDescriptor<object>>))]
+	[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
@@ -16,6 +17,7 @@ namespace Nest
 		QueryContainer Filter { get; set; }
 	}
 
+	[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 	public class FilteredQuery : QueryBase, IFilteredQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
@@ -36,6 +38,7 @@ namespace Nest
 		}
 	}
 
+	[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 	public class FilteredQueryDescriptor<T> 
 		: QueryDescriptorBase<FilteredQueryDescriptor<T>, IFilteredQuery>  
 		, IFilteredQuery where T : class

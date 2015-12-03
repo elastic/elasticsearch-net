@@ -20,12 +20,17 @@ namespace Nest
 				return;
 			}
 			marker.Match(
-				all=> writer.WriteNull(),
+				all =>
+				{
+					writer.WriteStartArray();
+					writer.WriteValue("_all");
+					writer.WriteEndArray();
+				},
 				many =>
 				{
 					var settings = serializer.GetConnectionSettings();
 					writer.WriteStartArray();
-					foreach(var m in many.Indices.Cast<IUrlParameter>())
+					foreach (var m in many.Indices.Cast<IUrlParameter>())
 						writer.WriteValue(m.GetString(settings));
 					writer.WriteEndArray();
 				}

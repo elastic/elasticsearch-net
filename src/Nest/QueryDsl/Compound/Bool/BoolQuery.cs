@@ -10,20 +10,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
-		[JsonProperty("must",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> Must { get; set; }
+		[JsonProperty("must")]
+		IEnumerable<QueryContainer> Must { get; set; }
 
-		[JsonProperty("must_not",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> MustNot { get; set; }
+		[JsonProperty("must_not")]
+		IEnumerable<QueryContainer> MustNot { get; set; }
 
-		[JsonProperty("should",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> Should { get; set; }
+		[JsonProperty("should")]
+		IEnumerable<QueryContainer> Should { get; set; }
 
-		[JsonProperty("minimum_should_match")]
-		string MinimumShouldMatch { get; set; }
+		[JsonProperty("filter")]
+		IEnumerable<QueryContainer> Filter { get; set; }
+
+ 		[JsonProperty("minimum_should_match")]
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
@@ -32,22 +32,24 @@ namespace Nest
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IEnumerable<IQueryContainer> Must { get; set; }
-		public IEnumerable<IQueryContainer> MustNot { get; set; }
-		public IEnumerable<IQueryContainer> Should { get; set; }
-		public string MinimumShouldMatch { get; set; }
+		public IEnumerable<QueryContainer> Must { get; set; }
+		public IEnumerable<QueryContainer> MustNot { get; set; }
+		public IEnumerable<QueryContainer> Should { get; set; }
+		public IEnumerable<QueryContainer> Filter { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Bool = this;
 
 		internal static bool IsConditionless(IBoolQuery q)
 		{
-			if (!q.Must.HasAny() && !q.Should.HasAny() && !q.MustNot.HasAny())
+			if (!q.Must.HasAny() && !q.Should.HasAny() && !q.MustNot.HasAny() && !q.Filter.HasAny())
 				return true;
 
 			return (q.MustNot.HasAny() && q.MustNot.All(qq => qq.IsConditionless))
 				|| (q.Should.HasAny() && q.Should.All(qq => qq.IsConditionless))
-				|| (q.Must.HasAny() && q.Must.All(qq => qq.IsConditionless));
+				|| (q.Must.HasAny() && q.Must.All(qq => qq.IsConditionless))
+				|| (q.Filter.HasAny() && q.Filter.All(qq => qq.IsConditionless));
 		}
 	}
 
@@ -56,10 +58,11 @@ namespace Nest
 		, IBoolQuery where T : class
 	{
 		bool IQuery.Conditionless => BoolQuery.IsConditionless(this);
-		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
-		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
-		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
-		string IBoolQuery.MinimumShouldMatch { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Must { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.MustNot { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Should { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Filter { get; set; }
+		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
 		bool? IBoolQuery.DisableCoord { get; set; }
 
 		public BoolQueryDescriptor<T> DisableCoord() => Assign(a => a.DisableCoord = true);
@@ -69,16 +72,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches) => 
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
-
-		/// <summary>
-		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied. String overload where you can specify percentages
-		/// </summary>
-		/// <param name="minimumShouldMatches"></param>
-		/// <returns></returns>
-		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches) => 
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches);
+		public BoolQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatches) => Assign(a => a.MinimumShouldMatch = minimumShouldMatches);
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
@@ -185,5 +179,42 @@ namespace Nest
 			}
 			a.Should = descriptors.HasAny() ? descriptors : null;
 		});
+
+		/// <summary>
+		/// The clause (query) which is to be used as a filter (in filter context).
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Filter(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) => Assign(a =>
+		{
+			var descriptors = new List<QueryContainer>();
+			foreach (var selector in queries)
+			{
+				var filter = new QueryContainerDescriptor<T>();
+				var q = selector(filter);
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			a.Filter = descriptors.HasAny() ? descriptors : null;
+		});
+
+		/// <summary>
+		/// The clause (query) which is to be used as a filter (in filter context).
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) => Assign(a =>
+		{
+			var descriptors = new List<QueryContainer>();
+			foreach (var q in queries)
+			{
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			a.Filter = descriptors.HasAny() ? descriptors : null;
+		});
+
 	}
 }
