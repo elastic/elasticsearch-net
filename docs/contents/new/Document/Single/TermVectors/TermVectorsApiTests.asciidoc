@@ -1,0 +1,13 @@
+[source, csharp]
+----
+d=>d
+.Id(Id(Project.Instance))
+.Offsets()
+----
+[source, csharp]
+----
+new TermVectorsRequest<Project>(Project.Instance.Name)
+		{
+Offsets = true,
+		}
+----

@@ -139,6 +139,7 @@
     <Compile Include="ClientConcepts\HighLevel\Inferrence\RouteValues\FeaturesInference.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Mapping\AutoMap.doc.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthApiTests.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthUrlTests.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteApiTests.cs" />

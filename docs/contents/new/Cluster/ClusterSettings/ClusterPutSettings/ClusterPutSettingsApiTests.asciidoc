@@ -1,0 +1,6 @@
+[source, csharp]
+----
+new ClusterPutSettingsRequest
+		{
+		}
+----

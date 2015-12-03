@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d
+----
+[source, csharp]
+----
+new GetSnapshotRequest(_repos, _snapshot)
+----

@@ -21,10 +21,25 @@ postData Bytes will always be set if it originated from a byte
 
 [source, csharp]
 ----
-fromByteArray.Bytes.Should().BeSameAs(bytes);
+fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
 ----
 [source, csharp]
 ----
+fromString.Type.Should().Be(PostType.LiteralString);
+fromByteArray.Type.Should().Be(PostType.ByteArray);
+fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+fromObject.Type.Should().Be(PostType.Serializable);
+fromString = ImplicitlyConvertsFrom(fromString);
+fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
+fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
+fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
+fromObject = ImplicitlyConvertsFrom(fromObject);
+fromString.Type.Should().Be(PostType.LiteralString);
+fromByteArray.Type.Should().Be(PostType.ByteArray);
+fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+fromObject.Type.Should().Be(PostType.Serializable);
 await this.AssertOn(new ConnectionSettings());
 await this.AssertOn(new ConnectionConfiguration());
 ----
@@ -84,11 +99,11 @@ await PostAssertAsync(postData(), writes, storesBytes, settings);
 postData.Write(ms, settings);
 var sentBytes = ms.ToArray();
 sentBytes.Should().Equal(writes);
-postData.Bytes.Should().NotBeNull();
-postData.Bytes.Should().BeNull();
+postData.WrittenBytes.Should().NotBeNull();
+postData.WrittenBytes.Should().BeNull();
 await postData.WriteAsync(ms, settings);
 var sentBytes = ms.ToArray();
 sentBytes.Should().Equal(writes);
-postData.Bytes.Should().NotBeNull();
-postData.Bytes.Should().BeNull();
+postData.WrittenBytes.Should().NotBeNull();
+postData.WrittenBytes.Should().BeNull();
 ----

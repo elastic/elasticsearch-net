@@ -13,6 +13,7 @@ s => s
 		.MinimumDocumentCount(2)
 		.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 		.Order(HistogramOrder.CountAscending)
+		.Missing(FixedDate)
 		.Aggregations(childAggs => childAggs
 .Terms("project_tags", avg => avg.Field(p => p.Tags))
 		)
@@ -23,7 +24,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new DateHistogramAgg("projects_started_per_month")
+	Aggregations = new DateHistogramAggregation("projects_started_per_month")
 	{
 		Field = Field<Project>(p => p.StartedOn),
 		Interval = DateInterval.Month,
@@ -34,22 +35,14 @@ Minimum = FixedDate.AddYears(-1),
 Maximum = FixedDate.AddYears(1),
 		},
 		Order = HistogramOrder.CountAscending,
+		Missing = FixedDate,
 		Aggregations =
-new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 	}
 }
 ----
 [source, csharp]
 ----
-var response = this.Client.Search<Project>(s => s
-				.Aggregations(aggs => aggs
-					.DateHistogram("date_hist", dh => dh
-						.Field(p => p.StartedOn)
-						.Interval("2d")
-						.MinimumDocumentCount(1)
-					)
-				)
-			);
 response.IsValid.Should().BeTrue();
 ----
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
@@ -57,7 +50,7 @@ in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on th
 
 [source, csharp]
 ----
-var dateHistogram = response.Aggs.DateHistogram("date_hist");
+var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
 ----
 [source, csharp]
 ----

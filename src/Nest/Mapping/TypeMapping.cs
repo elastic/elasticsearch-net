@@ -30,20 +30,11 @@ namespace Nest
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
-		[JsonProperty("_id")]
-		IIdField IdField { get; set; }
-
 		[JsonProperty("_source")]
 		ISourceField SourceField { get; set; }
 
-		[JsonProperty("_type")]
-		ITypeField TypeField { get; set; }
-
 		[JsonProperty("_all")]
 		IAllField AllField { get; set; }
-
-		[JsonProperty("_boost")]
-		IBoostField BoostField { get; set; }
 
 		[JsonProperty("_parent")]
 		IParentField ParentField { get; set; }
@@ -87,8 +78,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public string Analyzer { get; set; }
 		/// <inheritdoc/>
-		public IBoostField BoostField { get; set; }
-		/// <inheritdoc/>
 		public bool? DateDetection { get; set; }
 		/// <inheritdoc/>
 		public DynamicMapping? Dynamic { get; set; }
@@ -98,8 +87,6 @@ namespace Nest
 		public IDynamicTemplateContainer DynamicTemplates { get; set; }
 		/// <inheritdoc/>
 		public IFieldNamesField FieldNamesField { get; set; }
-		/// <inheritdoc/>
-		public IIdField IdField { get; set; }
 		/// <inheritdoc/>
 		public IIndexField IndexField { get; set; }
 		/// <inheritdoc/>
@@ -124,8 +111,6 @@ namespace Nest
 		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
-		/// <inheritdoc/>
-		public ITypeField TypeField { get; set; }
 	}
 
 
@@ -134,13 +119,11 @@ namespace Nest
 	{
 		IAllField ITypeMapping.AllField { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
-		IBoostField ITypeMapping.BoostField { get; set; }
 		bool? ITypeMapping.DateDetection { get; set; }
 		DynamicMapping? ITypeMapping.Dynamic { get; set; }
 		IEnumerable<string> ITypeMapping.DynamicDateFormats { get; set; }
 		IDynamicTemplateContainer ITypeMapping.DynamicTemplates { get; set; }
 		IFieldNamesField ITypeMapping.FieldNamesField { get; set; }
-		IIdField ITypeMapping.IdField { get; set; }
 		IIndexField ITypeMapping.IndexField { get; set; }
 		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
@@ -153,7 +136,6 @@ namespace Nest
 		ITimestampField ITypeMapping.TimestampField { get; set; }
 		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
-		ITypeField ITypeMapping.TypeField { get; set; }
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
@@ -161,7 +143,11 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a => a.Properties = new PropertyWalker(typeof(T), visitor).GetProperties());
+		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) => 
+			Assign(a => a.Properties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties());
+
+		/// <inheritdoc/>
+		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
@@ -213,18 +199,6 @@ namespace Nest
 			Assign(a => a.Transform = selector?.Invoke(new MappingTransformsDescriptor())?.Value);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> IdField(Func<IdFieldDescriptor, IIdField> idMapper) => Assign(a => a.IdField = idMapper?.Invoke(new IdFieldDescriptor()));
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> TypeField(Func<TypeFieldDescriptor, ITypeField> typeMapper) => Assign(a => a.TypeField = typeMapper?.Invoke(new TypeFieldDescriptor()));
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceMapper) => Assign(a => a.SourceField = sourceMapper?.Invoke(new SourceFieldDescriptor()));
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> BoostField(Func<BoostFieldDescriptor<T>, IBoostField> boostMapper) => Assign(a => a.BoostField = boostMapper?.Invoke(new BoostFieldDescriptor<T>()));
-
-		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingMapper) => Assign(a => a.RoutingField = routingMapper?.Invoke(new RoutingFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
@@ -245,6 +219,5 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplateContainerDescriptor<T>, IPromise<IDynamicTemplateContainer>> dynamicTemplatesSelector) =>
 			Assign(a => a.DynamicTemplates = dynamicTemplatesSelector?.Invoke(new DynamicTemplateContainerDescriptor<T>())?.Value);
-
 	}
 }

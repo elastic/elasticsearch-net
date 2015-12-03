@@ -24,7 +24,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new FiltersAgg("projects_by_state")
+	Aggregations = new FiltersAggregation("projects_by_state")
 	{
 		Filters = new NamedFiltersContainer
 		{
@@ -33,9 +33,33 @@ new SearchRequest<Project>
 	{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 		},
 		Aggregations =
-new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 	}
 }
+----
+[source, csharp]
+----
+response.IsValid.Should().BeTrue();
+----
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+
+[source, csharp]
+----
+var filterAgg = response.Aggs.Filters("projects_by_state");
+----
+[source, csharp]
+----
+filterAgg.Should().NotBeNull();
+var namedResult = filterAgg.NamedBucket("belly_up");
+namedResult.Should().NotBeNull();
+namedResult.DocCount.Should().BeGreaterThan(0);
+namedResult = filterAgg.NamedBucket("stable");
+namedResult.Should().NotBeNull();
+namedResult.DocCount.Should().BeGreaterThan(0);
+namedResult = filterAgg.NamedBucket("very_active");
+namedResult.Should().NotBeNull();
+namedResult.DocCount.Should().BeGreaterThan(0);
 ----
 == Anonymous filters *
 
@@ -59,7 +83,7 @@ f => f.Term(p => p.State, StateOfBeing.VeryActive)
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new FiltersAgg("projects_by_state")
+	Aggregations = new FiltersAggregation("projects_by_state")
 	{
 		Filters = new List<IQueryContainer>
 		{
@@ -68,7 +92,25 @@ new SearchRequest<Project>
 	 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 		},
 		Aggregations =
-new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 	}
 }
+----
+[source, csharp]
+----
+response.IsValid.Should().BeTrue();
+----
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+
+[source, csharp]
+----
+var filterAgg = response.Aggs.Filters("projects_by_state");
+----
+[source, csharp]
+----
+filterAgg.Should().NotBeNull();
+var results = filterAgg.AnonymousBuckets();
+results.Count.Should().Be(3);
+singleBucket.DocCount.Should().BeGreaterThan(0);
 ----

@@ -37,8 +37,6 @@ namespace Nest
 				if (mapping == null)
 				{
 					if (name == "_all") mapping = po.ToObject<AllField>();
-					if (name == "_id") mapping = po.ToObject<IdField>();
-					if (name == "_type") mapping = po.ToObject<TypeField>();
 					if (name == "_source") mapping = po.ToObject<SourceField>();
 					if (name == "_routing") mapping = po.ToObject<RoutingField>();
 					if (name == "_index") mapping = po.ToObject<IndexField>();
