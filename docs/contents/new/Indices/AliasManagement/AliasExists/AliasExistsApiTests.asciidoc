@@ -1,0 +1,9 @@
+[source, csharp]
+----
+d => d
+.Name("alias, x,y")
+----
+[source, csharp]
+----
+new AliasExistsRequest(Static.Names("alias, x","y"))
+----

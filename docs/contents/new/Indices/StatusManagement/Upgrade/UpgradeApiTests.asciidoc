@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d.AllowNoIndices()
+----
+[source, csharp]
+----
+new UpgradeRequest(AllIndices) { AllowNoIndices = true }
+----

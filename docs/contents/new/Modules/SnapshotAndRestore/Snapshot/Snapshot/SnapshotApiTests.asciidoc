@@ -1,0 +1,16 @@
+[source, csharp]
+----
+d => d
+.Index<Project>()
+.IncludeGlobalState()
+.WaitForCompletion()
+----
+[source, csharp]
+----
+new SnapshotRequest(_repos, _snapshot)
+		{
+Indices = Index<Project>(),
+IncludeGlobalState = true,
+WaitForCompletion = true
+		}
+----

@@ -7,6 +7,7 @@ If you simply new an `ElasticsearchClient`, it will be a non-failover connection
 [source, csharp]
 ----
 var client = new ElasticsearchClient();
+var tokenizers = new TokenizersDescriptor();
 ----
 If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
 you will need to pass in some instance of `IConnectionConfigurationValues`.
@@ -138,7 +139,8 @@ Please note that this is the request timeout, the builtin .NET `WebRequest` has 
 
 [source, csharp]
 ----
-.ThrowOnElasticsearchServerExceptions()
+//TODO document this properly once we figure out exceptions
+	.ThrowOnElasticsearchServerExceptions()
 ----
 As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 
 an `ElasticsearchServerException` when a call resulted in an exception on the Elasticsearch server. Reasons for 

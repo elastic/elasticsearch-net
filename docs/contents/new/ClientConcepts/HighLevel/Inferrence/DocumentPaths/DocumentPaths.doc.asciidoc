@@ -15,7 +15,7 @@ IDocumentPath path = new DocumentPath<Project>(1);
 ----
 Expect("project").WhenSerializing(path.Index);
 Expect("project").WhenSerializing(path.Type);
-Expect("1").WhenSerializing(path.Id);
+Expect(1).WhenSerializing(path.Id);
 ----
 You can still override the inferred index and type name
 
@@ -39,7 +39,7 @@ path = DocumentPath<Project>.Id(1);
 ----
 Expect("project").WhenSerializing(path.Index);
 Expect("project").WhenSerializing(path.Type);
-Expect("1").WhenSerializing(path.Id);
+Expect(1).WhenSerializing(path.Id);
 var project = new Project { Name = "hello-world" };
 ----
 here we create a new document path based on a Project 

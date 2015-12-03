@@ -12,6 +12,7 @@ var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(Create
 					.TypeName("commits")
 				)
 				.InferMappingFor<Developer>(map => map
+					.IndexName("devs")
 					.Ignore(p => p.PrivateValue)
 					.Rename(p => p.OnlineHandle, "nickname")
 				)
@@ -20,7 +21,7 @@ var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(Create
 				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
 var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 var serializer = new NestSerializer(new ConnectionSettings());
-string fixedResult = string.Empty;
+string fixedResult;
 serializer.Serialize(responseJson, ms);
 fixedResult =Encoding.UTF8.GetString(ms.ToArray());
 var connection = new InMemoryConnection(fixedResult);

@@ -1,0 +1,14 @@
+[source, csharp]
+----
+response.Indices.Should().NotBeNull();
+----
+[source, csharp]
+----
+d=>d
+.AllIndices()
+.Name(Names)
+----
+[source, csharp]
+----
+new GetAliasRequest(Static.AllIndices, Names)
+----

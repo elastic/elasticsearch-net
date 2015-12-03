@@ -1,0 +1,17 @@
+[source, csharp]
+----
+d => d
+.Properties(prop=>prop
+	.String(s=>s.Name(p=>p.Name).NotAnalyzed())
+)
+----
+[source, csharp]
+----
+new PutMappingRequest<Project>
+		{
+Properties = new Properties<Project>
+{
+	{ p=>p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  }
+}
+		}
+----
