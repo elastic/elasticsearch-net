@@ -10,21 +10,17 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
-		[JsonProperty("must",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> Must { get; set; }
+		[JsonProperty("must")]
+		IEnumerable<QueryContainer> Must { get; set; }
 
-		[JsonProperty("must_not",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> MustNot { get; set; }
+		[JsonProperty("must_not")]
+		IEnumerable<QueryContainer> MustNot { get; set; }
 
-		[JsonProperty("should",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> Should { get; set; }
+		[JsonProperty("should")]
+		IEnumerable<QueryContainer> Should { get; set; }
 
-		[JsonProperty("filter",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IEnumerable<IQueryContainer> Filter { get; set; }
+		[JsonProperty("filter")]
+		IEnumerable<QueryContainer> Filter { get; set; }
 
  		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
@@ -36,10 +32,10 @@ namespace Nest
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IEnumerable<IQueryContainer> Must { get; set; }
-		public IEnumerable<IQueryContainer> MustNot { get; set; }
-		public IEnumerable<IQueryContainer> Should { get; set; }
-		public IEnumerable<IQueryContainer> Filter { get; set; }
+		public IEnumerable<QueryContainer> Must { get; set; }
+		public IEnumerable<QueryContainer> MustNot { get; set; }
+		public IEnumerable<QueryContainer> Should { get; set; }
+		public IEnumerable<QueryContainer> Filter { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 
@@ -62,10 +58,10 @@ namespace Nest
 		, IBoolQuery where T : class
 	{
 		bool IQuery.Conditionless => BoolQuery.IsConditionless(this);
-		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
-		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
-		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
-		IEnumerable<IQueryContainer> IBoolQuery.Filter { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Must { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.MustNot { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Should { get; set; }
+		IEnumerable<QueryContainer> IBoolQuery.Filter { get; set; }
 		MinimumShouldMatch IBoolQuery.MinimumShouldMatch { get; set; }
 		bool? IBoolQuery.DisableCoord { get; set; }
 
