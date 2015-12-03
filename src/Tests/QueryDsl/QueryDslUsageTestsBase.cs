@@ -32,8 +32,10 @@ namespace Tests.QueryDsl
 
 		protected override object ExpectJson => new { query = this.QueryJson };
 
-		[U] public void FluentIsNotConditionless() => ((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
-		[U] public void InitializerIsNotConditionless() => ((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
+		[U] public void FluentIsNotConditionless() => 
+			((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
+		[U] public void InitializerIsNotConditionless() => 
+			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Query(this.QueryFluent);

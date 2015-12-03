@@ -18,16 +18,9 @@ namespace Nest
 				assigner(a);
 			});
 
-		public QueryContainerDescriptor() { }
-
 		public QueryContainerDescriptor<T> Strict(bool strict = true) => Assign(a => a.IsStrict = strict);
 
-		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => Assign(a =>
-		{
-			//TODO do we need to set IsStrict to verbatim value here?
-			a.IsStrict = verbatim;
-			a.IsVerbatim = verbatim;
-		});
+		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => Assign(a => a.IsVerbatim = verbatim);
 
 		QueryContainer Assign<TQuery, TQueryInterface>(
 			Func<TQuery, TQueryInterface> create,

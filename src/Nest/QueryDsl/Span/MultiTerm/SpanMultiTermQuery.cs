@@ -32,6 +32,6 @@ namespace Nest
 		QueryContainer ISpanMultiTermQuery.Match { get; set; }
 
 		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Match = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Match = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

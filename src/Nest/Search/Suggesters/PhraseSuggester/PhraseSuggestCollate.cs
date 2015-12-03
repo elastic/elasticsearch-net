@@ -46,10 +46,10 @@ namespace Nest
 		string IPhraseSuggestCollate.Preference { get; set; }
 
 		public PhraseSuggestCollateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) => 
-			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public PhraseSuggestCollateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
-			Assign(a => a.Filter = filter?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = filter?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(a => a.Params = paramsDictionary);
 

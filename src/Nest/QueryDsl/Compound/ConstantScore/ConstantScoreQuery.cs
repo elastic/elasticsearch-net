@@ -33,6 +33,6 @@ namespace Nest
 		QueryContainer IConstantScoreQuery.Filter { get; set; }
 
 		public ConstantScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

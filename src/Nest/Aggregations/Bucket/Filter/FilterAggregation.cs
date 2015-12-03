@@ -29,7 +29,7 @@ namespace Nest
 		QueryContainer IFilterAggregation.Filter { get; set; }
 
 		public FilterAggregationDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a=> a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a=> a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 	}
 }

@@ -46,24 +46,13 @@ namespace Nest
 		/// <summary>
 		/// Add metadata associated with this percolator query document that can later be used to query or filter specific percolated queries
 		/// </summary>
-		public RegisterPercolatorDescriptor<T> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			if (selector == null)
-				return this;
-
-			Self.Metadata = selector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public RegisterPercolatorDescriptor<T> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Metadata = selector?.Invoke(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// The query to perform the percolation
 		/// </summary>
-		public RegisterPercolatorDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			var d = querySelector(new QueryContainerDescriptor<T>());
-			Self.Query = d;
-			return this;
-		}
+		public RegisterPercolatorDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

@@ -58,10 +58,10 @@ namespace Nest
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
 		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Filter = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 

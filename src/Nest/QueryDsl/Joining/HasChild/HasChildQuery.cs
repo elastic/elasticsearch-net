@@ -61,7 +61,7 @@ namespace Nest
 		}
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 

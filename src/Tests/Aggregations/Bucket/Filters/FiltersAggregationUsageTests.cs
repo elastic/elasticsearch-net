@@ -151,7 +151,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			{
 				Aggregations = new FiltersAggregation("projects_by_state")
 				{
-					Filters = new List<IQueryContainer>
+					Filters = new List<QueryContainer>
 					{
 							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
 							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,

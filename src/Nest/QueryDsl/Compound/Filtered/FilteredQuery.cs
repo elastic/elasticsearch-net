@@ -48,9 +48,9 @@ namespace Nest
 		QueryContainer IFilteredQuery.Filter { get; set; }
 
 		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public FilteredQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Filter = selector(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

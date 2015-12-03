@@ -39,7 +39,7 @@ namespace Nest
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> InnerHits(Func<
 				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
