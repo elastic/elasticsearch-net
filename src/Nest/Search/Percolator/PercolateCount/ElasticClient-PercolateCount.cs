@@ -8,14 +8,14 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector)
+		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector)
 			where T : class;
 
 		/// <inheritdoc/>
 		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
 			where T : class;
 
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector = null)
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -27,9 +27,9 @@ namespace Nest
 	{
 
 		/// <inheritdoc/>
-		public IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector)
+		public IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector)
 			where T : class =>
-			this.PercolateCount<T>(percolateSelector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
+			this.PercolateCount<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
 
 		/// <inheritdoc/>
 		public IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
@@ -40,9 +40,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector)
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector)
 			where T : class => 
-			this.PercolateCountAsync<T>(percolateSelector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
+			this.PercolateCountAsync<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
 
 		/// <inheritdoc/>
 		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)

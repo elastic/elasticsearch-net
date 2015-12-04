@@ -507,7 +507,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
 
 		/// <summary>
-		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
+		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
 		/// </summary>
 		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregator, TAggregatorInterface>(
 			string key,

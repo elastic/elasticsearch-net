@@ -11,13 +11,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector) where T : class;
+		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector) where T : class;
 
 		/// <inheritdoc/>
 		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
 
 		/// <inheritdoc/>
-		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector)
+		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -27,8 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector) where T : class =>
-			this.SearchShards(searchSelector?.Invoke(new SearchShardsDescriptor<T>()));
+		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector) where T : class =>
+			this.SearchShards(selector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) => 
@@ -38,9 +38,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector)
+		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
 			where T : class => 
-			this.SearchShardsAsync(searchSelector?.Invoke(new SearchShardsDescriptor<T>()));
+			this.SearchShardsAsync(selector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request) => 

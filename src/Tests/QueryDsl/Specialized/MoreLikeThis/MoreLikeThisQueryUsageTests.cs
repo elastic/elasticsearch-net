@@ -40,7 +40,6 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 				_name = "named_query",
 				boost = 1.1
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new MoreLikeThisQuery

@@ -7,13 +7,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
+		IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		IAcknowledgedResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
+		Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest);
@@ -29,12 +29,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) =>
-			this.DeleteScript(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
+		public IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) =>
+			this.DeleteScript(selector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) => 
-			this.DeleteScriptAsync(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
+		public Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null) => 
+			this.DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest) => 

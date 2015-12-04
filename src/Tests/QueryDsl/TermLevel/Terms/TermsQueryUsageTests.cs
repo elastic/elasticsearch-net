@@ -21,7 +21,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				disable_coord = true,
 				minimum_should_match = 2
 			}
-
 		};
 
 		protected override QueryContainer QueryInitializer => new TermsQuery

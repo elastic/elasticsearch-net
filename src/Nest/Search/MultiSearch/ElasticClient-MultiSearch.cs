@@ -15,16 +15,16 @@ namespace Nest
 	{
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
+		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html</a>
 		/// </summary>
-		/// <param name="multiSearchSelector">A descriptor that describes the search operations on the multi search api</param>
-		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector);
+		/// <param name="selector">A descriptor that describes the search operations on the multi search api</param>
+		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
 
 		/// <inheritdoc/>
 		IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest);
 
 		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector);
+		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
@@ -33,8 +33,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector) =>
-			this.MultiSearch(multiSearchSelector?.Invoke(new MultiSearchDescriptor()));
+		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector) =>
+			this.MultiSearch(selector?.Invoke(new MultiSearchDescriptor()));
 
 		/// <inheritdoc />
 		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest)
@@ -54,8 +54,8 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector) =>
-			this.MultiSearchAsync(multiSearchSelector?.Invoke(new MultiSearchDescriptor()));
+		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector) =>
+			this.MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()));
 
 
 		/// <inheritdoc />

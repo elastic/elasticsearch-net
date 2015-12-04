@@ -17,13 +17,13 @@ namespace Nest
 		IBulkResponse Bulk(IBulkRequest bulkRequest);
 
 		/// <inheritdoc/>
-		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> bulkSelector = null);
+		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest);
 
 		/// <inheritdoc/>
-		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> bulkSelector = null);
+		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector = null);
 
 	}
 
@@ -36,8 +36,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> bulkSelector = null) =>
-			this.Bulk(bulkSelector.InvokeOrDefault(new BulkDescriptor()));
+		public IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector = null) =>
+			this.Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest) => 
@@ -46,7 +46,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> bulkSelector = null) =>
-			this.BulkAsync(bulkSelector.InvokeOrDefault(new BulkDescriptor()));
+		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector = null) =>
+			this.BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()));
 	}
 }

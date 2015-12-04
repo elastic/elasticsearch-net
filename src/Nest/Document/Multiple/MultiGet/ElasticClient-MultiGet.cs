@@ -18,14 +18,14 @@ namespace Nest
 		/// provided by the get API.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
-		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
-		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
+		/// <param name="selector">A descriptor describing which documents should be fetched</param>
+		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null);
 
 		/// <inheritdoc/>
 		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
 
 		/// <inheritdoc/>
-		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
+		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
@@ -34,8 +34,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
-			this.MultiGet(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
+		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) =>
+			this.MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
 		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest) => 
@@ -46,8 +46,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
-			this.MultiGetAsync(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
+		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) =>
+			this.MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiRequest) => 

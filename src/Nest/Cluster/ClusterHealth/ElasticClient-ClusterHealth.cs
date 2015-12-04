@@ -9,16 +9,16 @@ namespace Nest
 	{
 		/// <summary>
 		/// The cluster health API allows to get a very simple status on the health of the cluster.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
+		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html</a>
 		/// </summary>
-		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
-		IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
+		/// <param name="selector">An optional descriptor to further describe the cluster health operation</param>
+		IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
 
 		/// <inheritdoc/>
 		IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
 
 		/// <inheritdoc/>
-		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
+		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
@@ -27,8 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
-			this.ClusterHealth(clusterHealthSelector.InvokeOrDefault(new ClusterHealthDescriptor()));
+		public IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) =>
+			this.ClusterHealth(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
 		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest) => 
@@ -38,8 +38,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
-			this.ClusterHealthAsync(clusterHealthSelector.InvokeOrDefault(new ClusterHealthDescriptor()));
+		public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) =>
+			this.ClusterHealthAsync(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest) => 
