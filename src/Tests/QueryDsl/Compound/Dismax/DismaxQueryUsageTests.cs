@@ -48,5 +48,12 @@ namespace Tests.QueryDsl.Compound.Dismax
 					qq => qq.MatchAll(m => m.Name("query2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
+		{
+			q => q.Queries = null,
+			q => q.Queries = Enumerable.Empty<QueryContainer>(),
+			q => q.Queries = new [] { ConditionlessQuery },
+		};
 	}
 }

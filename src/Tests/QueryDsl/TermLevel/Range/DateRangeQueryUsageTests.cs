@@ -54,5 +54,20 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.Format("dd/MM/yyyy||yyyy")
 				.TimeZone("+01:00")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IDateRangeQuery>(q => q.Range as IDateRangeQuery)
+		{
+			q=> q.Field = null,
+			q=>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+			},
+			q=>
+			{
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			}
+		};
 	}
 }

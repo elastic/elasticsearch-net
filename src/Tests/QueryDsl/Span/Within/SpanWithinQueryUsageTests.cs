@@ -48,5 +48,17 @@ namespace Tests.QueryDsl.Joining.SpanWithin
 					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanWithinQuery>(a => a.SpanWithin)
+		{
+			q => {
+				q.Big = null;
+				q.Little = null;
+			},
+			q => {
+				q.Big = new SpanQuery { };
+				q.Little = new SpanQuery { };
+			},
+		};
 	}
 }

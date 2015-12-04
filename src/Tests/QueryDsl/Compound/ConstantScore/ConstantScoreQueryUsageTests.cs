@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.Compound.ConstantScore
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Filter = new MatchAllQuery { Name ="filter" },
+			Filter = new MatchAllQuery { Name = "filter" },
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -42,5 +42,11 @@ namespace Tests.QueryDsl.Compound.ConstantScore
 				.Boost(1.1)
 				.Filter(qq => qq.MatchAll(m => m.Name("filter")))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IConstantScoreQuery>(a => a.ConstantScore)
+		{
+			q => q.Filter = null ,
+			q => q.Filter =  ConditionlessQuery,
+		};
 	}
 }

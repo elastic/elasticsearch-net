@@ -39,5 +39,12 @@ namespace Tests.QueryDsl.TermLevel.Ids
 				.Values(1, 2, 3, 4)
 				.Types(typeof(Project), typeof(Developer))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIdsQuery>(a => a.Ids)
+		{
+			q => q.Types = null,
+			q => q.Values = null,
+			q => q.Values = Enumerable.Empty<Id>()
+		};
 	}
 }

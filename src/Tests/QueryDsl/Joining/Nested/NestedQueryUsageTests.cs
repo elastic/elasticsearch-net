@@ -47,5 +47,12 @@ namespace Tests.QueryDsl.Joining.Nested
 				.Query(qq=>qq.MatchAll())
 				.Path(p=>p.CuratedTags)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)
+		{
+			q =>  q.Query = null,
+			q =>  q.Query = ConditionlessQuery,
+			q =>  q.Path = null,
+		};
 	}
 }

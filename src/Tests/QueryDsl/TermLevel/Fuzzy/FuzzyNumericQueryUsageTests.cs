@@ -55,5 +55,14 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 				.Rewrite(RewriteMultiTerm.ConstantScore)
 				.Transpositions()
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<double?, double?>>(
+			a => a.Fuzzy as IFuzzyQuery<double?, double?>
+		)
+		{
+			q => q.Field = null,
+			q => q.Fuzziness = null,
+			q => q.Value = null
+		};
 	}
 }

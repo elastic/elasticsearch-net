@@ -67,5 +67,12 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Type(GeoExecution.Indexed)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoBoundingBoxQuery>(a => a.GeoBoundingBox)
+		{
+			q => q.BoundingBox = null,
+			q => q.BoundingBox = new Nest.BoundingBox { } ,
+			q =>  q.Field = null
+		};
 	}
 }

@@ -46,6 +46,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				MinimumShouldMatch = 1,
 				Boost = 2
 			};
+
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Bool(b => b
 				.MustNot(m => m.MatchAll())
@@ -54,5 +55,27 @@ namespace Tests.QueryDsl.Compound.Bool
 				.Filter(f => f.MatchAll())
 				.MinimumShouldMatch(1)
 				.Boost(2));
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IBoolQuery>(a => a.Bool)
+		{
+			q=> {
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = null;
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = Enumerable.Empty<QueryContainer>();
+				q.Should = Enumerable.Empty<QueryContainer>();
+				q.Must = Enumerable.Empty<QueryContainer>();
+				q.Filter = Enumerable.Empty<QueryContainer>();
+			},
+			q => {
+				q.MustNot = new [] { ConditionlessQuery };
+				q.Should = new [] { ConditionlessQuery };
+				q.Must = new [] { ConditionlessQuery };
+				q.Filter = new [] { ConditionlessQuery };
+			},
+		};
 	}
 }

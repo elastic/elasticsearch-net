@@ -35,5 +35,10 @@ namespace Tests.QueryDsl.TypeLevel.Type
 				.Boost(1.1)
 				.Value<Developer>()
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITypeQuery>(a => a.Type)
+		{
+			q => q.Value = null,
+		};
 	}
 }

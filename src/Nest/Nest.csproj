@@ -306,6 +306,7 @@
     <Compile Include="QueryDsl\FullText\MultiMatch\ZeroTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringFlags.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\BoundingBox.cs" />
+    <Compile Include="QueryDsl\Geo\GeoLocationArrayConverter.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\IndexedGeoShape.cs" />

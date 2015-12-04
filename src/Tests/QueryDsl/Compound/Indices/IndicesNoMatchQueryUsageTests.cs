@@ -43,5 +43,12 @@ namespace Tests.QueryDsl.Compound.Indices
 				.Query(qq => qq.MatchAll())
 				.NoMatchQuery(NoMatchShortcut.All)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIndicesQuery>(p => p.Indices)
+		{
+			q => q.Indices = null,
+			q => q.Query = null,
+			q => q.Query = ConditionlessQuery
+		};
 	}
 }

@@ -12,7 +12,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 	{
 		public GeoShapeCircleUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<double> _coordinates = new[] {-45.0, 45.0};
+		private readonly GeoCoordinate _coordinates = new GeoCoordinate(-45.0, 45.0);
 
 		protected override object ShapeJson => new
 		{
@@ -37,5 +37,12 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 				.Coordinates(this._coordinates)
 				.Radius("100m")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeCircleQuery>(a => a.GeoShape as IGeoShapeCircleQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.Shape = null,
+			q =>  q.Shape.Coordinates = null,
+		};
 	}
 }

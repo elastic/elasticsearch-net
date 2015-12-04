@@ -48,5 +48,20 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.LessThan(2.1)
 				.LessThanOrEquals(2.0)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INumericRangeQuery>(q => q.Range as INumericRangeQuery)
+		{
+			q=> q.Field = null,
+			q=>
+			{
+				q.GreaterThan = null;
+				q.GreaterThanOrEqualTo = null;
+			},
+			q=>
+			{
+				q.LessThan = null;
+				q.LessThanOrEqualTo = null;
+			}
+		};
 	}
 }

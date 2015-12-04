@@ -12,11 +12,11 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 	{
 		public GeoMultiLineStringUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<IEnumerable<IEnumerable<double>>> _coordinates = new[]
+		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
 		{
-			new [] { new [] { 102.0, 2.0 }, new [] { 103.0, 2.0},new [] { 103.0, 3.0 }, new []{ 102.0, 3.0 } },
-			new [] { new [] { 100.0, 0.0 }, new [] { 101.0, 0.0},new [] { 101.0, 1.0 }, new []{ 100.0, 1.0 } },
-			new [] { new [] { 100.2, 0.2 }, new [] { 100.8, 0.2},new [] { 100.8, 0.8 }, new []{ 102.0, 0.8 } },
+			new GeoCoordinate[] { new [] { 102.0, 2.0 }, new [] { 103.0, 2.0},new [] { 103.0, 3.0 }, new []{ 102.0, 3.0 } },
+			new GeoCoordinate[] { new [] { 100.0, 0.0 }, new [] { 101.0, 0.0},new [] { 101.0, 1.0 }, new []{ 100.0, 1.0 } },
+			new GeoCoordinate[] { new [] { 100.2, 0.2 }, new [] { 100.8, 0.2},new [] { 100.8, 0.8 }, new []{ 102.0, 0.8 } },
 		};
 
 		protected override object ShapeJson => new
@@ -40,5 +40,12 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiLineStringQuery>(a => a.GeoShape as IGeoShapeMultiLineStringQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.Shape = null,
+			q =>  q.Shape.Coordinates = null,
+		};
 	}
 }

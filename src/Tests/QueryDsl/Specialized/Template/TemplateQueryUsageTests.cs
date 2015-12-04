@@ -48,5 +48,19 @@ namespace Tests.QueryDsl.Specialized.Template
 				.Inline(_templateString)
 				.Params(p=>p.Add("query_string", "all about search"))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITemplateQuery>(a => a.Template)
+		{
+			q => {
+				q.Inline = "";
+				q.Id = null;
+				q.File = "";
+			},
+			q => {
+				q.Inline = null;
+				q.Id = null;
+				q.File = null;
+			}
+		};
 	}
 }

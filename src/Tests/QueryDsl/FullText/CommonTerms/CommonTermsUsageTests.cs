@@ -59,5 +59,12 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 				.Name("named_query")
 				.Query("nelly the elephant not as a")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ICommonTermsQuery>(a => a.CommonTerms)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+			q => q.Field = null
+		};
 	}
 }

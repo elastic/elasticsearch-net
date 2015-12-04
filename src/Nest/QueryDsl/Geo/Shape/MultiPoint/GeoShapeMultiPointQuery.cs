@@ -32,7 +32,7 @@ namespace Nest
 		protected override bool Conditionless => GeoShapeMultiPointQuery.IsConditionless(this);
 		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
 
-		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates) => Assign(a =>
+		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<GeoCoordinate> coordinates) => Assign(a =>
 		{
 			a.Shape = a.Shape ?? new MultiPointGeoShape();
 			a.Shape.Coordinates = coordinates;

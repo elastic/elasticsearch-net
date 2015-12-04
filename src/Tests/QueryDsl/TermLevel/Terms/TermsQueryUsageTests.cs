@@ -42,5 +42,13 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
 				.Terms("term1", "term2")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
+		{
+			q => q.Field = null,
+			q => q.Terms = null,
+			q => q.Terms = Enumerable.Empty<object>(),
+			q => q.Terms = new [] { "" }
+		};
 	}
 }

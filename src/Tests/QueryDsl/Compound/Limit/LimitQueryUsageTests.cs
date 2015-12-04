@@ -35,5 +35,10 @@ namespace Tests.QueryDsl.Compound.Limit
 				.Boost(1.1)
 				.Limit(100)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ILimitQuery>(p => p.Limit)
+		{
+			q => q.Limit = null
+		};
 	}
 }

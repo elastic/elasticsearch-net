@@ -93,5 +93,12 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 					.Text("not like this text")
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMoreLikeThisQuery>(a => a.MoreLikeThis)
+		{
+			q => q.Like = null,
+			q => q.Like = Enumerable.Empty<Like>(),
+			q => q.Fields = null,
+		};
 	}
 }

@@ -32,7 +32,7 @@ namespace Tests.QueryDsl.FullText.Match
 					slop = 2,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or",
+					@operator = "or",
 					type = "phrase_prefix"
 				}
 			}
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.FullText.Match
 
 		protected override QueryContainer QueryInitializer => new MatchPhrasePrefixQuery
 		{
-			Field = Field<Project>(p=>p.Description),
+			Field = Field<Project>(p => p.Description),
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",
@@ -76,5 +76,12 @@ namespace Tests.QueryDsl.FullText.Match
 				.Slop(2)
 				.Name("named_query")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMatchQuery>(a => a.Match)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+			q => q.Field = null
+		};
 	}
 }

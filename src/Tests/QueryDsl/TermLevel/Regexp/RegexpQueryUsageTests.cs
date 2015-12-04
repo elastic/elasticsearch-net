@@ -45,5 +45,12 @@ namespace Tests.QueryDsl.TermLevel.Regexp
 				.Flags("INTERSECTION|COMPLEMENT|EMPTY")
 				.MaximumDeterminizedStates(20000)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IRegexpQuery>(a => a.Regexp)
+		{
+			q => q.Field = null,
+			q => q.Value = null,
+			q => q.Value = string.Empty
+		};
 	}
 }

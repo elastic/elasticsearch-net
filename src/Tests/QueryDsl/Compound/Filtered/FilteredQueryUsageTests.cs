@@ -39,5 +39,18 @@ namespace Tests.QueryDsl.Compound.Filtered
 				.Filter(qq => qq.MatchAll(m => m.Name("filter")))
 				.Query(qq => qq.MatchAll(m => m.Name("query")))
 			);
+
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFilteredQuery>(a => a.Filtered)
+		{
+			q=> {
+				q.Filter = null;
+				q.Query = null;
+			},
+			q => {
+				q.Filter =  ConditionlessQuery;
+				q.Query =  ConditionlessQuery;
+			},
+		};
 	}
 }

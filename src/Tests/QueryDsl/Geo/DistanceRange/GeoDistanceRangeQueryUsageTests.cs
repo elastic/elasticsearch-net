@@ -41,13 +41,13 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			Field = Static.Field<Project>(p=>p.Location),
 			DistanceType = GeoDistanceType.Arc,
 			Coerce = true,
-			From = GeoDistance.Kilometers(200),
+			GreaterThanOrEqualTo = GeoDistance.Kilometers(200),
 			IgnoreMalformed = true,
-			IncludeLower = false,
-			IncludeUpper = false,
+			GreaterThan = GeoDistance.Kilometers(200),
+			LessThan = GeoDistance.Miles(400),
 			Location = new GeoLocation(40, -70),
 			OptimizeBoundingBox = GeoOptimizeBBox.Indexed,
-			To = GeoDistance.Miles(400),
+			LessThanOrEqualTo = GeoDistance.Miles(400),
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
@@ -58,14 +58,28 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
-				.From(200, GeoPrecision.Kilometers)
+				.GreaterThanOrEqualTo(200, GeoPrecision.Kilometers)
+				.GreaterThan(200, GeoPrecision.Kilometers)
 				.IgnoreMalformed()
-				.FromExclusive()
-				.ToExclusive()
 				.Location(new GeoLocation(40, -70))
 				.Optimize(GeoOptimizeBBox.Indexed)
-				.To(GeoDistance.Miles(400))
+				.LessThanOrEqualTo(GeoDistance.Miles(400))
+				.LessThan(GeoDistance.Miles(400))
 				.ValidationMethod(GeoValidationMethod.Strict)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceRangeQuery>(a => a.GeoDistanceRange)
+		{
+			q => {
+				q.LessThanOrEqualTo = null;
+				q.LessThan = null;
+			},
+			q => {
+				q.GreaterThanOrEqualTo = null;
+				q.GreaterThan = null;
+			},
+			q =>  q.Field = null,
+			q =>  q.Location = null
+		};
 	}
 }

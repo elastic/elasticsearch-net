@@ -45,5 +45,10 @@ namespace Tests.QueryDsl.Compound.Not
 					qq => qq.MatchAll(m => m.Name("query2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INotQuery>(a => a.Not)
+		{
+			{ q=>q.Filters = null }, { q=> q.Filters = Enumerable.Empty<QueryContainer>() }, { q=>q.Filters = new [] { ConditionlessQuery } }
+		};
 	}
 }

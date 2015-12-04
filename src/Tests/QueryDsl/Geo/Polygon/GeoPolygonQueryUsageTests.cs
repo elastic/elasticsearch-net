@@ -54,5 +54,13 @@ namespace Tests.QueryDsl.FullText.GeoPolygon
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Points( new GeoLocation(45,-45), new GeoLocation(-34,34))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoPolygonQuery>(a => a.GeoPolygon)
+		{
+			q =>  q.Field = null,
+			q =>  q.Points = null,
+			q =>  q.Points = Enumerable.Empty<GeoLocation>()
+		};
+
 	}
 }

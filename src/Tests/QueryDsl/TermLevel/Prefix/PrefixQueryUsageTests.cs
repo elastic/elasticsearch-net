@@ -42,5 +42,12 @@ namespace Tests.QueryDsl.PrefixLevel.Prefix
 				.Value("proj")
 				.Rewrite(RewriteMultiTerm.TopTermsBoostN)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IPrefixQuery>(a => a.Prefix)
+		{
+			q => q.Field = null,
+			q => q.Value = null,
+			q => q.Value = string.Empty
+		};
 	}
 }

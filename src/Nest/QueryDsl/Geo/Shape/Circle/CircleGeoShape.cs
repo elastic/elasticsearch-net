@@ -9,7 +9,7 @@ namespace Nest
 	public interface ICircleGeoShape : IGeoShape
 	{
 		[JsonProperty("coordinates")]
-		IEnumerable<double> Coordinates { get; set; }
+		GeoCoordinate Coordinates { get; set; }
 
 		[JsonProperty("radius")]
 		string Radius { get; set; }
@@ -19,12 +19,12 @@ namespace Nest
 	{
 		public CircleGeoShape() : this(null) { }
 
-		public CircleGeoShape(IEnumerable<double> coordinates) : base("circle")
+		public CircleGeoShape(GeoCoordinate location) : base("circle")
 		{
-			this.Coordinates = coordinates ?? new List<double>();
+			this.Coordinates = location;
 		}
 
-		public IEnumerable<double> Coordinates { get; set; }
+		public GeoCoordinate Coordinates { get; set; }
 
 		public string Radius { get; set; }
 	}

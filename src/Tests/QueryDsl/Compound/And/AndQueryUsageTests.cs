@@ -45,5 +45,10 @@ namespace Tests.QueryDsl.Compound.And
 					qq => qq.MatchAll(m => m.Name("query2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IAndQuery>(a => a.And)
+		{
+			{ q=>q.Filters = null }, { q=> q.Filters = Enumerable.Empty<QueryContainer>() }, { q=>q.Filters = new [] { ConditionlessQuery } }
+		};
 	}
 }

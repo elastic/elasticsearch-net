@@ -48,5 +48,17 @@ namespace Tests.QueryDsl.Compound.Boosting
 				.Negative(qq => qq.MatchAll(m => m.Name("query")))
 				.NegativeBoost(1.12)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IBoostingQuery>(a => a.Boosting)
+		{
+			q=> {
+				q.NegativeQuery = null;
+				q.PositiveQuery = null;
+			},
+			q => {
+				q.NegativeQuery =  ConditionlessQuery;
+				q.PositiveQuery =  ConditionlessQuery;
+			},
+		};
 	}
 }

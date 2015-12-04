@@ -63,5 +63,12 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 				.AnalyzeWildcard()
 				.MinimumShouldMatch("30%")
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISimpleQueryStringQuery>(a => a.SimpleQueryString)
+		{
+			q => q.Query = null,
+			q => q.Query = string.Empty,
+			q =>  q.Fields = null
+		};
 	}
 }

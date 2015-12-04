@@ -58,5 +58,12 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Optimize(GeoOptimizeBBox.Memory)
 				.ValidationMethod(GeoValidationMethod.Strict)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceQuery>(a => a.GeoDistance)
+		{
+			q => q.Distance = null,
+			q =>  q.Field = null,
+			q =>  q.Location = null
+		};
 	}
 }

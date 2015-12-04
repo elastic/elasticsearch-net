@@ -49,5 +49,15 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Field(p => p.Description)
 				.TermsLookup<Developer>(e=>e.Path(p=>p.LastName).Id(12))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ITermsQuery>(a => a.Terms)
+		{
+			q => q.Field = null,
+			q => q.TermsLookup = null,
+			q => q.TermsLookup.Id = null,
+			q => q.TermsLookup.Type = null,
+			q => q.TermsLookup.Index = null,
+			q => q.TermsLookup.Path = null,
+		};
 	}
 }

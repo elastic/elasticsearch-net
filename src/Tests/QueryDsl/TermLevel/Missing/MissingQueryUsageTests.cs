@@ -40,5 +40,10 @@ namespace Tests.QueryDsl.TermLevel.Missing
 				.NullValue()
 				.Existence()
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IMissingQuery>(a => a.Missing)
+		{
+			q => q.Field = null,
+		};
 	}
 }

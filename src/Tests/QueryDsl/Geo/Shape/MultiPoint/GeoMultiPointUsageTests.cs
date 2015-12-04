@@ -12,7 +12,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 	{
 		public GeoMultiPointUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<IEnumerable<double>> _coordinates = new[]
+		private readonly IEnumerable<GeoCoordinate> _coordinates = new GeoCoordinate[]
 		{
 			new [] {-77.03653, 38.897676},
 			new [] {-77.009051, 38.889939 }
@@ -39,5 +39,12 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPointQuery>(a => a.GeoShape as IGeoShapeMultiPointQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.Shape = null,
+			q =>  q.Shape.Coordinates = null,
+		};
 	}
 }

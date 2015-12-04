@@ -42,5 +42,12 @@ namespace Tests.QueryDsl.TermLevel.Wildcard
 				.Value("p*oj")
 				.Rewrite(RewriteMultiTerm.TopTermsBoostN)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IWildcardQuery>(a => a.Wildcard)
+		{
+			q => q.Field = null,
+			q => q.Value = null,
+			q => q.Value = string.Empty
+		};
 	}
 }

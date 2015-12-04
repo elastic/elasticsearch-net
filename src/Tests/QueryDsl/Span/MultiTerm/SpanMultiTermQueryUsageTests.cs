@@ -40,5 +40,11 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 					.Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanMultiTermQuery>(a => a.SpanMultiTerm)
+		{
+			q => q.Match = null,
+			q => q.Match = ConditionlessQuery,
+		};
 	}
 }

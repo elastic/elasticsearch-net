@@ -12,8 +12,6 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 	{
 		public GeoIndexedShapeUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<double> _coordinates = new[] { -77.03653, 38.897676 };
-
 		protected override object QueryJson => new
 		{
 			geo_shape = new
@@ -57,5 +55,15 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 					.Path(pp=>pp.Location)
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoIndexedShapeQuery>(a => a.GeoShape as IGeoIndexedShapeQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.IndexedShape = null,
+			q =>  q.IndexedShape.Id = null,
+			q =>  q.IndexedShape.Index = null,
+			q =>  q.IndexedShape.Type = null,
+			q =>  q.IndexedShape.Path = null,
+		};
 	}
 }

@@ -48,5 +48,12 @@ namespace Tests.QueryDsl.Joining.SpanOr
 					c => c.SpanTerm(st => st.Field("field").Value("value3"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanOrQuery>(a => a.SpanOr)
+		{
+			q => q.Clauses = null,
+			q => q.Clauses = Enumerable.Empty<ISpanQuery>(),
+			q => q.Clauses = new [] { new SpanQuery() },
+		};
 	}
 }

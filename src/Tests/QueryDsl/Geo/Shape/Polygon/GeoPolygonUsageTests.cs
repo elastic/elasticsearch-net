@@ -12,13 +12,13 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 	{
 		public GeoPolygonUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<IEnumerable<IEnumerable<double>>> _coordinates = new[]
+		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
 		{
-			new []
+			new GeoCoordinate[]
 			{
 				new [] {-177.0, 10.0}, new [] {176.0, 15.0}, new [] {172.0, 0.0}, new [] {176.0, -15.0}, new [] {-177.0, -10.0}, new [] {-177.0, 10.0}
 			},
-			new []
+			new GeoCoordinate[]
 			{
 				new [] {178.2, 8.2}, new [] {-178.8, 8.2}, new [] {-180.8, -8.8}, new [] {178.2, 8.8}
 			}
@@ -45,5 +45,12 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 				.Field(p => p.Location)
 				.Coordinates(this._coordinates)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePolygonQuery>(a => a.GeoShape as IGeoShapePolygonQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.Shape = null,
+			q =>  q.Shape.Coordinates = null,
+		};
 	}
 }

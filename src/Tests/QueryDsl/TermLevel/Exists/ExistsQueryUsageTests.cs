@@ -34,5 +34,10 @@ namespace Tests.QueryDsl.TermLevel.Exists
 				.Boost(1.1)
 				.Field(p => p.Description)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IExistsQuery>(a => a.Exists)
+		{
+			q => q.Field = null
+		};
 	}
 }

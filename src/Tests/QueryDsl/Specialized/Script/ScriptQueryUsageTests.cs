@@ -49,5 +49,19 @@ namespace Tests.QueryDsl.Specialized.Script
 				.Inline(_templateString)
 				.Params(p=>p.Add("param1", 1))
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IScriptQuery>(a => a.Script)
+		{
+			q => {
+				q.Inline = "";
+				q.Id = null;
+				q.File = "";
+			},
+			q => {
+				q.Inline = null;
+				q.Id = null;
+				q.File = null;
+			}
+		};
 	}
 }

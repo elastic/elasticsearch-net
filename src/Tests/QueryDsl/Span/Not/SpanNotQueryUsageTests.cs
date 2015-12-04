@@ -40,8 +40,8 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			Dist = 12,
 			Post = 13,
 			Pre = 14,
-			Include = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
-			Exclude = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
+			Include = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
+			Exclude = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -51,12 +51,24 @@ namespace Tests.QueryDsl.Joining.SpanNot
 				.Dist(12)
 				.Post(13)
 				.Pre(14)
-				.Include(i=>i
-					.SpanTerm(st=>st.Field("field1").Value("hoya"))
+				.Include(i => i
+					.SpanTerm(st => st.Field("field1").Value("hoya"))
 				)
-				.Exclude(e=>e
-					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
+				.Exclude(e => e
+					.SpanTerm(st => st.Field("field1").Value("hoya2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanNotQuery>(a => a.SpanNot)
+		{
+			q => {
+				q.Include = null;
+				q.Exclude = null;
+			},
+			q => {
+				q.Include = new SpanQuery();
+				q.Exclude = new SpanQuery();
+			},
+		};
 	}
 }

@@ -48,6 +48,7 @@ namespace Tests.QueryDsl
 
 		protected virtual ConditionlessWhen ConditionlessWhen => null;
 
+		protected QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
 		[U] public void ConditionlessWhenExpectedToBe()
 		{

@@ -59,5 +59,17 @@ namespace Tests.QueryDsl.Span.Container
 					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
 				)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<ISpanContainingQuery>(a => a.SpanContaining)
+		{
+			q => {
+				q.Big = null;
+				q.Little = null;
+			},
+			q => {
+				q.Big = new SpanQuery { };
+				q.Little = new SpanQuery { };
+			},
+		};
 	}
 }

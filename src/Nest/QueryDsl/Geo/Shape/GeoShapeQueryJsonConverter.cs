@@ -13,11 +13,11 @@ namespace Nest
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
 
-		public virtual T GetCoordinates<T>(JToken shape)
+		public virtual T GetCoordinates<T>(JToken shape, JsonSerializer serializer)
 		{
 			var coordinates = shape["coordinates"];
 			if (coordinates != null)
-				return coordinates.ToObject<T>();
+				return coordinates.ToObject<T>(serializer);
 			return default(T);
 		}
 
@@ -39,7 +39,7 @@ namespace Nest
 			JToken indexedShape;
 			IGeoShapeQuery query = null;
 			if (jo.TryGetValue("shape", out shape))
-				query = ParseShape(shape);
+				query = ParseShape(shape, serializer);
 			else if (jo.TryGetValue("indexed_shape", out indexedShape))
 				query = ParseIndexedShape(indexedShape);
 
@@ -55,7 +55,7 @@ namespace Nest
 		private IGeoShapeQuery ParseIndexedShape(JToken indexedShape) =>
 			new GeoIndexedShapeQuery {IndexedShape = (indexedShape as JObject)?.ToObject<IndexedGeoShape>()};
 
-		private IGeoShapeQuery ParseShape(JToken shape)
+		private IGeoShapeQuery ParseShape(JToken shape, JsonSerializer serializer)
 		{
 			var type = shape["type"];
 			var typeName = type?.Value<string>();
@@ -67,49 +67,49 @@ namespace Nest
 					{
 						Shape = new CircleGeoShape
 						{
-							Coordinates = GetCoordinates<IEnumerable<double>>(shape),
+							Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer),
 							Radius = radius?.Value<string>()
 						}
 					};
 				case "envelope":
 					return new GeoShapeEnvelopeQuery
 					{
-						Shape = new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape)}
+						Shape = new EnvelopeGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
 					};
 				case "linestring":
 					return new GeoShapeLineStringQuery
 					{
-						Shape = new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape)}
+						Shape = new LineStringGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
 					};
 				case "multilinestring":
 					return new GeoShapeMultiLineStringQuery
 					{
 						Shape = new MultiLineStringGeoShape
 						{
-							Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape)
+							Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)
 						}
 					};
 				case "point":
 					return new GeoShapePointQuery
 					{
-						Shape = new PointGeoShape {Coordinates = GetCoordinates<IEnumerable<double>>(shape)}
+						Shape = new PointGeoShape {Coordinates = GetCoordinates<GeoCoordinate>(shape, serializer)}
 					};
 				case "multipoint":
 					return new GeoShapeMultiPointQuery
 					{
-						Shape = new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<double>>>(shape)}
+						Shape = new MultiPointGeoShape {Coordinates = GetCoordinates<IEnumerable<GeoCoordinate>>(shape, serializer)}
 					};
 				case "polygon":
 					return new GeoShapePolygonQuery
 					{
-						Shape = new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<double>>>>(shape)}
+						Shape = new PolygonGeoShape {Coordinates = GetCoordinates<IEnumerable<IEnumerable<GeoCoordinate>>>(shape, serializer)}
 					};
 				case "multipolygon":
 					return new GeoShapeMultiPolygonQuery
 					{
 						Shape = new MultiPolygonGeoShape
 						{
-							Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>>>(shape)
+							Coordinates = GetCoordinates<IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>>>(shape, serializer)
 						}
 					};
 				default:

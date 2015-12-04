@@ -12,7 +12,7 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 	{
 		public GeoPointUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
-		private readonly IEnumerable<double> _coordinates = new[] { -77.03653, 38.897676 };
+		private readonly GeoCoordinate _coordinates = new[] { -77.03653, 38.897676 };
 
 		protected override object ShapeJson => new
 		{
@@ -35,5 +35,12 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 			);
+
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePointQuery>(a => a.GeoShape as IGeoShapePointQuery)
+		{
+			q =>  q.Field = null,
+			q =>  q.Shape = null,
+			q =>  q.Shape.Coordinates = null,
+		};
 	}
 }
