@@ -15,14 +15,14 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class;
+		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
+		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
 		ISearchResponse<T> Search<T>(ISearchRequest request) where T : class;
 
 		/// <inheritdoc/>
-		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
 			where T : class
 			where TResult : class;
 
@@ -33,14 +33,14 @@ namespace Nest
 
 		/// <inheritdoc/>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class;
+		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
 		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
 			where T : class
 			where TResult : class;
 
@@ -54,14 +54,14 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null) where T : class =>
-			this.Search<T, T>(searchSelector);
+		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class =>
+			this.Search<T, T>(selector);
 
 		/// <inheritdoc/>
-		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
 			where T : class
 			where TResult : class =>
-			this.Search<TResult>(searchSelector.InvokeOrDefault(new SearchDescriptor<T>()));
+			this.Search<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class => 
@@ -79,15 +79,15 @@ namespace Nest
 				);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
 			where T : class => 
-			this.SearchAsync<T, T>(searchSelector);
+			this.SearchAsync<T, T>(selector);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector = null)
+		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
 			where T : class
 			where TResult : class =>
-			this.SearchAsync<TResult>(searchSelector.InvokeOrDefault(new SearchDescriptor<T>()));
+			this.SearchAsync<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class => 

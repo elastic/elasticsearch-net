@@ -13,14 +13,14 @@ namespace Nest
 		/// A closed index can be opened which will then go through the normal recovery process.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
-		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
-		IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null);
+		/// <param name="selector">A descriptor that describes the open index operation</param>
+		IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null);
+		Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest);
@@ -29,8 +29,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null) =>
-			this.OpenIndex(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
+		public IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null) =>
+			this.OpenIndex(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest) => 
@@ -40,8 +40,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null)=>
-			this.OpenIndexAsync(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
+		public Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null)=>
+			this.OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest) => 

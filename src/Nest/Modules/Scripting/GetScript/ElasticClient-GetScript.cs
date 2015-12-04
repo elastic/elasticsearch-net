@@ -8,13 +8,13 @@ namespace Nest
 	{
 
 		/// <inheritdoc/>
-		IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null);
+		IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		IGetScriptResponse GetScript(IGetScriptRequest getScriptRequest);
 
 		/// <inheritdoc/>
-		Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null);
+		Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest getScriptRequest);
@@ -24,8 +24,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null) =>
-			this.GetScript(getScriptSelector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
+		public IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) =>
+			this.GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
 		public IGetScriptResponse GetScript(IGetScriptRequest getScriptRequest) => 
@@ -35,8 +35,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null) => 
-			this.GetScriptAsync(getScriptSelector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
+		public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) => 
+			this.GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
 		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest getScriptRequest) => 

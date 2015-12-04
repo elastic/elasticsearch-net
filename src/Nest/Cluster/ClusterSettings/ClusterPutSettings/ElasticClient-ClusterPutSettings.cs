@@ -12,10 +12,10 @@ namespace Nest
 		/// (applied cross restarts) or transient (will not survive a full cluster restart). 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		IClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> clusterHealthSelector);
+		IClusterPutSettingsResponse ClusterPutSettings(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> clusterHealthSelector);
+		Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(Func<ClusterPutSettingsDescriptor, IClusterPutSettingsRequest> selector);
 
 		/// <inheritdoc/>
 		IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest clusterSettingsRequest);

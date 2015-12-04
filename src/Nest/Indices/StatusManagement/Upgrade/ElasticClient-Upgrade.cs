@@ -14,13 +14,13 @@ namespace Nest
 		IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest);
 
 		/// <inheritdoc/>
-		IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null);
+		IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest);
 
 		/// <inheritdoc/>
-		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null);
+		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 	}
 
 	public partial class ElasticClient
@@ -31,8 +31,8 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
 			);
 
-		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null) =>
-			this.Upgrade(upgradeSelector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
+		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
+			this.Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
 		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest) =>
 			this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
@@ -40,7 +40,7 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
 			);
 
-		public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null) =>
-			this.UpgradeAsync(upgradeSelector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
+		public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
+			this.UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 	}
 }

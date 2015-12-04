@@ -12,15 +12,15 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
 		/// </summary>
 		/// <typeparam name="T">The type used to describe the query</typeparam>
-		/// <param name="querySelector">A descriptor that describes the query operation</param>
-		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
+		/// <param name="selector">A descriptor that describes the query operation</param>
+		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
 		IValidateResponse Validate(IValidateQueryRequest validateQueryRequest);
 
 		/// <inheritdoc/>
-		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
+		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -30,9 +30,9 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
+		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class =>
-			this.Validate(querySelector?.Invoke(new ValidateQueryDescriptor<T>()));
+			this.Validate(selector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IValidateResponse Validate(IValidateQueryRequest validateQueryRequest) => 
@@ -42,9 +42,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
+		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class => 
-			this.ValidateAsync(querySelector?.Invoke(new ValidateQueryDescriptor<T>()));
+			this.ValidateAsync(selector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest) => 

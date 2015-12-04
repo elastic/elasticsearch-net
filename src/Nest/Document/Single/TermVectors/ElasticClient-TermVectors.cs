@@ -10,11 +10,11 @@ namespace Nest
 	{
 		/// <summary>
 		/// Returns information and statistics on terms in the fields of a particular document as stored in the index.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
+		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html</a>
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="termVectorSelector"></param>
-		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector)
+		/// <typeparam name="T">The type of the document</typeparam>
+		/// <param name="selector">A descriptor for the terms vector operation</param>
+		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -22,7 +22,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector)
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -34,8 +34,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		///<inheritdoc/>
-		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector) where T : class =>
-			this.TermVectors(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
+		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
+			this.TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 		
 		///<inheritdoc/>
 		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> termvectorRequest) where T : class
@@ -47,8 +47,8 @@ namespace Nest
 		}
 
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector) where T : class =>
-			this.TermVectorsAsync(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
+			this.TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 		
 		///<inheritdoc/>
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> termvectorRequest) where T : class => 

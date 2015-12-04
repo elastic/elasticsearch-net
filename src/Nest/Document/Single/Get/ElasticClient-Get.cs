@@ -13,14 +13,14 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
-		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
-		IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
+		/// <param name="selector">A descriptor that describes which document's source to fetch</param>
+		IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
 		IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
 		Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class;
@@ -37,8 +37,8 @@ namespace Nest
 		//Source(Document.Id<T>(2), s=>s)
 
 		/// <inheritdoc/>
-		public IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class =>
-			this.Get<T>(getSelector.InvokeOrDefault(new GetDescriptor<T>(document)));
+		public IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class =>
+			this.Get<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>
 		public IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class => 
@@ -48,8 +48,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class=>
-			this.GetAsync<T>(getSelector.InvokeOrDefault(new GetDescriptor<T>(document)));
+		public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class =>
+			this.GetAsync<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>
 		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class => 

@@ -14,13 +14,13 @@ namespace Nest
 		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest);
 
 		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest);
 
 		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 	}
 
 	public partial class ElasticClient
@@ -33,8 +33,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) =>
-			this.UpgradeStatus(upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()));
+		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) =>
+			this.UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest) => 
@@ -44,7 +44,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) => 
-			this.UpgradeStatusAsync(upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()));
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => 
+			this.UpgradeStatusAsync(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 	}
 }

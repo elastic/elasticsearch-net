@@ -75,8 +75,6 @@ namespace Tests.Framework
 			return new ElasticClient(settings);
 		}
 
-
-
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
 			if (!(RunningFiddler && RunIntegrationTests)) return "ignore";
@@ -96,6 +94,5 @@ namespace Tests.Framework
 				select type).ToList();
 			return types;
 		}
-
-		}
+	}
 }
