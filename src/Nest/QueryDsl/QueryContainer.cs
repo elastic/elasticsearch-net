@@ -44,14 +44,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "ids")]
 		IIdsQuery Ids { get; set; }
 
+		[JsonProperty(PropertyName = "limit")]
+		ILimitQuery Limit { get; set; }
+
 		[JsonProperty(PropertyName = "constant_score")]
 		IConstantScoreQuery ConstantScore { get; set; }
 
 		[JsonProperty(PropertyName = "dis_max")]
 		IDisMaxQuery DisMax { get; set; }
-
-		[JsonProperty(PropertyName = "filtered")]
-		IFilteredQuery Filtered { get; set; }
 
 		[JsonProperty(PropertyName = "multi_match")]
 		IMultiMatchQuery MultiMatch { get; set; }
@@ -156,6 +156,19 @@ namespace Nest
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
 
+
+		[JsonProperty(PropertyName = "filtered")]
+		IFilteredQuery Filtered { get; set; }
+
+		[JsonProperty(PropertyName = "and")]
+		IAndQuery And { get; set; }
+
+		[JsonProperty(PropertyName = "or")]
+		IOrQuery Or { get; set; }
+
+		[JsonProperty(PropertyName = "not")]
+		INotQuery Not { get; set; }
+
 		void Accept(IQueryVisitor visitor);
 	}
 
@@ -186,7 +199,15 @@ namespace Nest
 		
 #pragma warning disable 618
 		IFilteredQuery IQueryContainer.Filtered { get; set; }
+
+		IAndQuery IQueryContainer.And { get; set; }
+
+		IOrQuery IQueryContainer.Or { get; set; }
+
+		INotQuery IQueryContainer.Not { get; set; }
 #pragma warning restore 618
+
+		ILimitQuery IQueryContainer.Limit { get; set; }
 
 		IMultiMatchQuery IQueryContainer.MultiMatch { get; set; }
 		

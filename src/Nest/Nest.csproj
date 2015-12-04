@@ -290,6 +290,10 @@
     <Compile Include="Modules\Indices\Recovery\IndicesRecoverySettings.cs" />
     <Compile Include="Modules\Indices\TtlInterval\TtlIntervalSettings.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryJsonConverter.cs" />
+    <Compile Include="QueryDsl\Compound\Limit\LimitQuery.cs" />
+    <Compile Include="QueryDsl\Compound\Not\NotQuery.cs" />
+    <Compile Include="QueryDsl\Compound\Or\OrQuery.cs" />
+    <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ScoreFunctionJsonConverter.cs" />
@@ -973,7 +977,6 @@
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecordJsonConverter.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\GetRepository\GetRepositoryResponseJsonConverter.cs" />
     <Compile Include="Mapping\Transform\MappingTransformJsonConverter.cs" />
-    <Compile Include="QueryDsl\Compound\Dismax\DismaxQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryJsonConverter.cs" />
     <Compile Include="IndexModules\Similarity\SimilarityJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
@@ -1149,7 +1152,7 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>

@@ -7,7 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	//[JsonConverter(typeof(DismaxQueryJsonConverter))]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DismaxQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DisMaxQuery>))]
 	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
@@ -17,7 +17,7 @@ namespace Nest
 		IEnumerable<QueryContainer> Queries { get; set; }
 	}
 
-	public class DismaxQuery : QueryBase, IDisMaxQuery
+	public class DisMaxQuery : QueryBase, IDisMaxQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public double? TieBreaker { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 		: QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>
 		, IDisMaxQuery where T : class
 	{
-		protected override bool Conditionless => DismaxQuery.IsConditionless(this);
+		protected override bool Conditionless => DisMaxQuery.IsConditionless(this);
 		double? IDisMaxQuery.TieBreaker { get; set; }
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 

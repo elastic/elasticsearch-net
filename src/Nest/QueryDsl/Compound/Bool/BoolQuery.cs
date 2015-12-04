@@ -22,7 +22,7 @@ namespace Nest
 		[JsonProperty("filter")]
 		IEnumerable<QueryContainer> Filter { get; set; }
 
- 		[JsonProperty("minimum_should_match")]
+		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		[JsonProperty("disable_coord")]
@@ -53,7 +53,7 @@ namespace Nest
 		}
 	}
 
-	public class BoolQueryDescriptor<T> 
+	public class BoolQueryDescriptor<T>
 		: QueryDescriptorBase<BoolQueryDescriptor<T>, IBoolQuery>
 		, IBoolQuery where T : class
 	{
@@ -77,34 +77,19 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) => Assign(a => 
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var selector in queries)
-			{
-				var filter = new QueryContainerDescriptor<T>();
-				var q = selector(filter);
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Must = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Must(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
+			Assign(a => a.Must = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params QueryContainer[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var q in queries)
-			{
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Must = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Must(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
+			Assign(a => a.Must = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+
+		/// <summary>
+		/// The clause(s) that must appear in matching documents
+		/// </summary>
+		public BoolQueryDescriptor<T> Must(params QueryContainer[] queries) => Assign(a => a.Must = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
@@ -112,19 +97,17 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var selector in queries)
-			{
-				var filter = new QueryContainerDescriptor<T>();
-				var q = selector(filter);
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.MustNot = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
+			Assign(a => a.MustNot = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+
+		/// <summary>
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
+		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> MustNot(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
+			Assign(a => a.MustNot = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
@@ -132,89 +115,52 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params QueryContainer[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var q in queries)
-			{
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.MustNot = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> MustNot(params QueryContainer[] queries) => Assign(a => a.MustNot = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var selector in queries)
-			{
-				var filter = new QueryContainerDescriptor<T>();
-				var q = selector(filter);
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Should = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Should(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
+			Assign(a => a.Should = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params QueryContainer[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var q in queries)
-			{
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Should = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Should(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
+			Assign(a => a.Should = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+
+		/// <summary>
+		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Should(params QueryContainer[] queries) => Assign(a => a.Should = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Filter(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var selector in queries)
-			{
-				var filter = new QueryContainerDescriptor<T>();
-				var q = selector(filter);
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Filter = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Filter(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries) =>
+			Assign(a => a.Filter = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// The clause (query) which is to be used as a filter (in filter context).
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) => Assign(a =>
-		{
-			var descriptors = new List<QueryContainer>();
-			foreach (var q in queries)
-			{
-				if (q.IsConditionless)
-					continue;
-				descriptors.Add(q);
-			}
-			a.Filter = descriptors.HasAny() ? descriptors : null;
-		});
+		public BoolQueryDescriptor<T> Filter(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> queries) =>
+			Assign(a => a.Filter = queries.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 
+		/// <summary>
+		/// The clause (query) which is to be used as a filter (in filter context).
+		/// </summary>
+		/// <param name="queries"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Filter(params QueryContainer[] queries) => Assign(a => a.Filter = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
 	}
 }

@@ -281,6 +281,33 @@ namespace Nest
 			this.Assign(selector, (query, container) => container.Filtered = query);
 
 		/// <summary>
+		///A query that matches documents using the AND boolean operator on other queries.
+		/// </summary>
+		[Obsolete("Use the bool query instead")]
+		public QueryContainer And(Func<AndQueryDescriptor<T>, IAndQuery> selector) =>
+			this.Assign(selector, (query, container) => container.And = query);
+
+		/// <summary>
+		/// A query that matches documents using the OR boolean operator on other queries
+		/// </summary>
+		[Obsolete("Use the bool query instead")]
+		public QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
+			this.Assign(selector, (query, container) => container.Or = query);
+
+		/// <summary>
+		/// A query that filters out matched documents using a query.
+		/// </summary>
+		[Obsolete("Use the bool query with must_not clause instead..")]
+		public QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
+			this.Assign(selector, (query, container) => container.Not = query);
+
+		/// <summary>
+		/// A limit query limits the number of documents (per shard) to execute on. For example:
+		/// </summary>
+		public QueryContainer Limit(Func<LimitQueryDescriptor<T>, ILimitQuery> selector) =>
+			this.Assign(selector, (query, container) => container.Limit = query);
+
+		/// <summary>
 		/// A query that generates the union of documents produced by its subqueries, and that scores each document 
 		/// with the maximum score for that document as produced by any subquery, plus a tie breaking increment for 
 		/// any additional matching subqueries.
