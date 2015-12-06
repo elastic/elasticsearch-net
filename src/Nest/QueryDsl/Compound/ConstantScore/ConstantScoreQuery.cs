@@ -22,7 +22,7 @@ namespace Nest
 		public QueryContainer Filter { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
-		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter == null;
+		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.IsConditionless();
 	}
 
 	public class ConstantScoreQueryDescriptor<T> 

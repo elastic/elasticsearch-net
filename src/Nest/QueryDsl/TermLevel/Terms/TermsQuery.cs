@@ -28,7 +28,17 @@ namespace Nest
 		internal override void WrapInContainer(IQueryContainer c) => c.Terms = this;
 		internal static bool IsConditionless(ITermsQuery q)
 		{
-			return q.Field.IsConditionless() || (!q.Terms.HasAny() && q.TermsLookup == null);
+			return q.Field.IsConditionless() 
+				|| (
+				(!q.Terms.HasAny() || q.Terms.All(t=>t == null || ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false))
+				)
+				&& 
+				(q.TermsLookup == null
+					|| q.TermsLookup.Id == null
+					|| q.TermsLookup.Path.IsConditionless()
+					|| q.TermsLookup.Index == null
+					|| q.TermsLookup.Type == null
+				));
 		}
 	}
 

@@ -14,9 +14,9 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 
 		private readonly IEnumerable<IEnumerable<GeoCoordinate>> _coordinates = new[]
 		{
-			new GeoCoordinate[] { new [] { 102.0, 2.0 }, new [] { 103.0, 2.0},new [] { 103.0, 3.0 }, new []{ 102.0, 3.0 } },
-			new GeoCoordinate[] { new [] { 100.0, 0.0 }, new [] { 101.0, 0.0},new [] { 101.0, 1.0 }, new []{ 100.0, 1.0 } },
-			new GeoCoordinate[] { new [] { 100.2, 0.2 }, new [] { 100.8, 0.2},new [] { 100.8, 0.8 }, new []{ 102.0, 0.8 } },
+			new GeoCoordinate[] { new [] { 12.0, 2.0 }, new [] { 13.0, 2.0},new [] { 13.0, 3.0 }, new []{ 12.0, 3.0 } },
+			new GeoCoordinate[] { new [] { 10.0, 0.0 }, new [] { 11.0, 0.0},new [] { 11.0, 1.0 }, new []{ 10.0, 1.0 } },
+			new GeoCoordinate[] { new [] { 10.2, 0.2 }, new [] { 10.8, 0.2},new [] { 10.8, 0.8 }, new []{ 12.0, 0.8 } },
 		};
 
 		protected override object ShapeJson => new

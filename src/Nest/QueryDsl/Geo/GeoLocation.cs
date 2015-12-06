@@ -136,7 +136,7 @@ namespace Nest
 	/// <summary>
 	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as new [] { lon, lat }
 	/// </summary>
-	[JsonConverter(typeof(GeoLocationArrayConverter))]
+	[JsonConverter(typeof(GeoCoordinateJsonConverter))]
 	public class GeoCoordinate : GeoLocation
 	{
 		public GeoCoordinate(double latitude, double longitude) : base(latitude, longitude)

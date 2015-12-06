@@ -108,7 +108,6 @@ namespace Nest.QueryDsl.Visitor
 			{
 				v.Visit(d);
 				this.Accept(v, d.Query);
-				this.Accept(v, d.Filter);
 			});
 		}
 	}

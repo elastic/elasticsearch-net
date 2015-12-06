@@ -15,12 +15,12 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 		{
 			geo_distance_range = new
 			{
-				from = "200.0km",
-				to = "400.0mi",
+				gt = "200.0km",
+				gte = "200.0km",
+				lt = "400.0mi",
+				lte = "400.0mi",
 				distance_type = "arc",
 				optimize_bbox = "indexed",
-				include_lower = false,
-				include_upper = false,
 				coerce = true,
 				ignore_malformed = true,
 				validation_method = "strict",
@@ -73,8 +73,6 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			q => {
 				q.LessThanOrEqualTo = null;
 				q.LessThan = null;
-			},
-			q => {
 				q.GreaterThanOrEqualTo = null;
 				q.GreaterThan = null;
 			},

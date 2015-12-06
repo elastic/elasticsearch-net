@@ -17,7 +17,7 @@ namespace Nest
 		[JsonIgnore]
 		bool Conditionless { get; }
 	}
-
+	
 	public abstract class QueryBase : IQuery
 	{
 		public string Name { get; set; }

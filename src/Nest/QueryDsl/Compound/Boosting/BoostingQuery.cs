@@ -28,14 +28,8 @@ namespace Nest
 		public double? NegativeBoost { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.Boosting = this;
-		internal static bool IsConditionless(IBoostingQuery q)
-		{
-			if (q.NegativeQuery == null && q.PositiveQuery == null)
-				return true;
-
-			return (q.PositiveQuery == null && q.NegativeQuery.IsConditionless)
-				|| (q.NegativeQuery == null && q.PositiveQuery.IsConditionless);
-		}
+		internal static bool IsConditionless(IBoostingQuery q) =>
+			q.NegativeQuery.IsConditionless() && q.PositiveQuery.IsConditionless();
 	}
 
 	public class BoostingQueryDescriptor<T> 

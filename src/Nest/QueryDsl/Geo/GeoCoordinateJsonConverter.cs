@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace Nest
 {
-	internal class GeoLocationArrayConverter : JsonConverter
+	internal class GeoCoordinateJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var p = value as GeoLocation;
+			var p = value as GeoCoordinate;
 			if (p == null)
 			{
 				writer.WriteNull();
@@ -28,7 +28,7 @@ namespace Nest
 			if (reader.TokenType != JsonToken.StartArray) return null;
 			var doubles = serializer.Deserialize<double[]>(reader);
 			if (doubles.Length != 2) return null;
-			return new GeoLocation(doubles[1], doubles[0]);
+			return new GeoCoordinate(doubles[1], doubles[0]);
 		}
 
 	}

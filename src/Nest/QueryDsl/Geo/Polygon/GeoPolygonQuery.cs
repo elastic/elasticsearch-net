@@ -33,7 +33,7 @@ namespace Nest
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoPolygon = this;
-		internal static bool IsConditionless(IGeoPolygonQuery q) => !q.Points.HasAny();
+		internal static bool IsConditionless(IGeoPolygonQuery q) => q.Field == null || !q.Points.HasAny();
 	}
 
 	public class GeoPolygonQueryDescriptor<T> 

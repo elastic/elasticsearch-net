@@ -20,7 +20,10 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
-		internal static bool IsConditionless(IGeoIndexedShapeQuery q) => q.Field.IsConditionless() || q.IndexedShape == null;
+		internal static bool IsConditionless(IGeoIndexedShapeQuery q) => 
+			q.Field.IsConditionless() || q.IndexedShape == null
+			|| q.IndexedShape.Id == null | q.IndexedShape.Index == null || q.IndexedShape.Type == null
+			|| q.IndexedShape.Path == null;
 	}
 
 	public class GeoIndexedShapeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery, T>
