@@ -18,7 +18,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> termvectorRequest)
+		ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -26,7 +26,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> termvectorRequest)
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request)
 			where T : class;
 
 	}
@@ -38,10 +38,10 @@ namespace Nest
 			this.TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 		
 		///<inheritdoc/>
-		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> termvectorRequest) where T : class
+		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class
 		{
 			return this.Dispatcher.Dispatch<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse>(
-				termvectorRequest,
+				request,
 				this.LowLevelDispatch.TermvectorsDispatch<TermVectorsResponse>
 			);
 		}
@@ -51,9 +51,9 @@ namespace Nest
 			this.TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 		
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> termvectorRequest) where T : class => 
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request) where T : class => 
 			this.Dispatcher.DispatchAsync<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
-				termvectorRequest,
+				request,
 				this.LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse>
 			);
 	}

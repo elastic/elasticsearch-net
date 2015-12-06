@@ -12,14 +12,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
+		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> request)
 			where T : class;
 
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
 			where T : class;
 	}
 
@@ -32,10 +32,10 @@ namespace Nest
 			this.PercolateCount<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
 
 		/// <inheritdoc/>
-		public IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
+		public IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> request)
 			where T : class => 
 			this.Dispatcher.Dispatch<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse>(
-				percolateCountRequest,
+				request,
 				this.LowLevelDispatch.CountPercolateDispatch<PercolateCountResponse>
 			);
 
@@ -45,10 +45,10 @@ namespace Nest
 			this.PercolateCountAsync<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
 
 		/// <inheritdoc/>
-		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
 			where T : class => 
 			this.Dispatcher.DispatchAsync<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
-				percolateCountRequest,
+				request,
 				this.LowLevelDispatch.CountPercolateDispatchAsync<PercolateCountResponse>
 			);
 	}

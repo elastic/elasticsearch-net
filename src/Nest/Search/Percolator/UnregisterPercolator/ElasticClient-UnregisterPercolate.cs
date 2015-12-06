@@ -17,14 +17,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest);
+		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest request);
 
 		/// <inheritdoc/>
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(Name name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest);
+		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request);
 	}
 
 	public partial class ElasticClient
@@ -36,9 +36,9 @@ namespace Nest
 			this.UnregisterPercolator(selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>(name)));
 
 		/// <inheritdoc/>
-		public IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest) => 
+		public IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest request) => 
 			this.Dispatcher.Dispatch<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse>(
-				unregisterPercolatorRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
 
@@ -48,9 +48,9 @@ namespace Nest
 			this.UnregisterPercolatorAsync(selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>(name)));
 
 		/// <inheritdoc/>
-		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest) => 
+		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest request) => 
 			this.Dispatcher.DispatchAsync<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
-				unregisterPercolatorRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 			);
 	}

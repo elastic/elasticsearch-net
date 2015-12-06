@@ -20,13 +20,13 @@ namespace Nest
 		IGetIndexTemplateResponse GetIndexTemplate(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest getTemplateRequest);
+		IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(Func<GetIndexTemplateDescriptor, IGetIndexTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest getTemplateRequest);
+		Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request);
 
 	}
 
@@ -39,10 +39,10 @@ namespace Nest
 			this.GetIndexTemplate(selector.InvokeOrDefault(new GetIndexTemplateDescriptor()));
 		
 		/// <inheritdoc/>
-		public IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest getTemplateRequest)
+		public IGetIndexTemplateResponse GetIndexTemplate(IGetIndexTemplateRequest request)
 		{
 			return this.Dispatcher.Dispatch<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse>(
-				getTemplateRequest,
+				request,
 				new GetIndexTemplateConverter(DeserializeGetIndexTemplateResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetTemplateDispatch<GetIndexTemplateResponse>(p)
 			);
@@ -53,9 +53,9 @@ namespace Nest
 			this.GetIndexTemplateAsync(selector.InvokeOrDefault(new GetIndexTemplateDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest getTemplateRequest) => 
+		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse, IGetIndexTemplateResponse>(
-				getTemplateRequest,
+				request,
 				new GetIndexTemplateConverter(DeserializeGetIndexTemplateResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetTemplateDispatchAsync<GetIndexTemplateResponse>(p)
 			);

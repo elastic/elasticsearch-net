@@ -18,13 +18,13 @@ namespace Nest
 		T Source<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		T Source<T>(ISourceRequest sourceRequest) where T : class;
+		T Source<T>(ISourceRequest request) where T : class;
 
 		/// <inheritdoc/>
 		Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class;
+		Task<T> SourceAsync<T>(ISourceRequest request) where T : class;
 
 	}
 
@@ -40,10 +40,10 @@ namespace Nest
 			this.Source<T>(selector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public T Source<T>(ISourceRequest sourceRequest) where T : class
+		public T Source<T>(ISourceRequest request) where T : class
 		{
-			sourceRequest.RouteValues.Resolve(ConnectionSettings); 
-			var response = this.LowLevelDispatch.GetSourceDispatch<T>(sourceRequest);
+			request.RouteValues.Resolve(ConnectionSettings); 
+			var response = this.LowLevelDispatch.GetSourceDispatch<T>(request);
 			return response.Body;
 		}
 
@@ -52,10 +52,10 @@ namespace Nest
 			this.SourceAsync<T>(selector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class
+		public Task<T> SourceAsync<T>(ISourceRequest request) where T : class
 		{
-			sourceRequest.RouteValues.Resolve(ConnectionSettings); 
-			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(sourceRequest)
+			request.RouteValues.Resolve(ConnectionSettings); 
+			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(request)
 				.ContinueWith(t => t.Result.Body, TaskContinuationOptions.ExecuteSynchronously);
 			return response;
 		}

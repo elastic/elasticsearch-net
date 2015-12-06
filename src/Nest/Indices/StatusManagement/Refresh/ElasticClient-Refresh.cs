@@ -16,13 +16,13 @@ namespace Nest
 		IShardsOperationResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse Refresh(IRefreshRequest refreshRequest);
+		IShardsOperationResponse Refresh(IRefreshRequest request);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest);
+		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest request);
 
 	}
 	public partial class ElasticClient
@@ -32,9 +32,9 @@ namespace Nest
 			this.Refresh(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Refresh(IRefreshRequest refreshRequest) => 
+		public IShardsOperationResponse Refresh(IRefreshRequest request) => 
 			this.Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse>(
-				refreshRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
 			);
 
@@ -43,9 +43,9 @@ namespace Nest
 			this.RefreshAsync(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest) => 
+		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest request) => 
 			this.Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				refreshRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
 			);
 	}

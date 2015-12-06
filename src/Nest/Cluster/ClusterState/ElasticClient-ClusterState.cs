@@ -15,13 +15,13 @@ namespace Nest
 		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
 
 		/// <inheritdoc/>
-		IClusterStateResponse ClusterState(IClusterStateRequest clusterStateRequest);
+		IClusterStateResponse ClusterState(IClusterStateRequest request);
 
 		/// <inheritdoc/>
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest);
+		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request);
 	}
 
 	public partial class ElasticClient
@@ -31,9 +31,9 @@ namespace Nest
 			this.ClusterState(selector.InvokeOrDefault(new ClusterStateDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterStateResponse ClusterState(IClusterStateRequest clusterStateRequest) => 
+		public IClusterStateResponse ClusterState(IClusterStateRequest request) => 
 			this.Dispatcher.Dispatch<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse>(
-				clusterStateRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
 			);
 
@@ -42,9 +42,9 @@ namespace Nest
 			this.ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest) => 
+		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request) => 
 			this.Dispatcher.DispatchAsync<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
-				clusterStateRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p)
 			);
 	}

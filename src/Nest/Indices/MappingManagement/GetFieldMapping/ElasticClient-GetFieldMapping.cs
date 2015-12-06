@@ -16,14 +16,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
+		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request);
 	}
 
 	public partial class ElasticClient
@@ -34,10 +34,10 @@ namespace Nest
 			this.GetFieldMapping(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
-		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest) => 
+		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request) => 
 			this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
-				getFieldMappingRequest,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				request,
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(p)
 			);
 
@@ -47,10 +47,10 @@ namespace Nest
 			this.GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest) => 
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
-				getFieldMappingRequest,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				request,
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p)
 			);
 		//TODO DictionaryResponse!

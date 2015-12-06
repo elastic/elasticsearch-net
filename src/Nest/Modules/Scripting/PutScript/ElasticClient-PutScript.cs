@@ -10,13 +10,13 @@ namespace Nest
 		IAcknowledgedResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutScript(IPutScriptRequest putScriptRequest);
+		IAcknowledgedResponse PutScript(IPutScriptRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest putScriptRequest);
+		Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest request);
 
 	}
 	public partial class ElasticClient
@@ -24,18 +24,18 @@ namespace Nest
 		public IAcknowledgedResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) =>
 			this.PutScript(selector?.Invoke(new PutScriptDescriptor(language, id)));
 
-		public IAcknowledgedResponse PutScript(IPutScriptRequest putScriptRequest) => 
+		public IAcknowledgedResponse PutScript(IPutScriptRequest request) => 
 			this.Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, AcknowledgedResponse>(
-				putScriptRequest,
+				request,
 				this.LowLevelDispatch.PutScriptDispatch<AcknowledgedResponse>
 			);
 
 		public Task<IAcknowledgedResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => 
 			this.PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(language, id)));
 
-		public Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest putScriptRequest) => 
+		public Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest request) => 
 			this.Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				putScriptRequest,
+				request,
 				this.LowLevelDispatch.PutScriptDispatchAsync<AcknowledgedResponse>
 			);
 	}

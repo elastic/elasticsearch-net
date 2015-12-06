@@ -19,10 +19,10 @@ namespace Nest
 		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> selector = null);
 
 		/// <inheritdoc/>
-		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest);
+		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest);
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request);
 	}
 
 	public partial class ElasticClient
@@ -36,16 +36,16 @@ namespace Nest
 			this.ClusterPendingTasksAsync(selector.InvokeOrDefault(new ClusterPendingTasksDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest) => 
+		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest request) => 
 			this.Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
-				pendingTasksRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest) => 
+		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest request) => 
 			this.Dispatcher.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
-				pendingTasksRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);
 	}

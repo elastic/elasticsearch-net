@@ -13,11 +13,11 @@ namespace Nest
 		/// Add a single index alias
 		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-adding
 		/// </summary>
-		/// <param name="putAliasRequest">A descriptor that describes the put alias request</param>
-		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
+		/// <param name="request">A descriptor that describes the put alias request</param>
+		IPutAliasResponse PutAlias(IPutAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
+		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request);
 
 		/// <inheritdoc/>
 		IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> selector = null); 
@@ -29,16 +29,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest) => 
+		public IPutAliasResponse PutAlias(IPutAliasRequest request) => 
 			this.Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
-				putAliasRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest) => 
+		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest request) => 
 			this.Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
-				putAliasRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>
 			);
 

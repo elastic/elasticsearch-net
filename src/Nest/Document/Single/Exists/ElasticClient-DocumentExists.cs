@@ -20,14 +20,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest);
+		IExistsResponse DocumentExists(IDocumentExistsRequest request);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest);
+		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request);
 	}
 
 	//TODO assume 404 is allowed on head requests I removed this code:
@@ -39,9 +39,9 @@ namespace Nest
 			this.DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest) => 
+		public IExistsResponse DocumentExists(IDocumentExistsRequest request) => 
 			this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
-				documentExistsRequest,
+				request,
 				new ExistConverter(this.DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.ExistsDispatch<ExistsResponse>(p)
 			);
@@ -51,9 +51,9 @@ namespace Nest
 			this.DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest) => 
+		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request) => 
 			this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				documentExistsRequest,
+				request,
 				new ExistConverter(this.DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p)
 			);

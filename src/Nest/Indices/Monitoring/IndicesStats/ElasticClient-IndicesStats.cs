@@ -17,13 +17,13 @@ namespace Nest
 		IIndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
+		IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
+		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request);
 
 	}
 
@@ -34,9 +34,9 @@ namespace Nest
 			this.IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest statsRequest) => 
+		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest request) => 
 			this.Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse>(
-				statsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesStatsDispatch<IndicesStatsResponse>(p)
 			);
 
@@ -45,9 +45,9 @@ namespace Nest
 			this.IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest) => 
+		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest request) => 
 			this.Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse, IIndicesStatsResponse>(
-				statsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesStatsDispatchAsync<IndicesStatsResponse>(p)
 			);
 	}

@@ -20,10 +20,10 @@ namespace Nest
 		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> selector);
 
 		/// <inheritdoc/>
-		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest);
+		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest);
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request);
 
 	}
 
@@ -38,16 +38,16 @@ namespace Nest
 			this.ClusterRerouteAsync(selector?.Invoke(new ClusterRerouteDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest) => 
+		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest request) => 
 			this.Dispatcher.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
-				clusterRerouteRequest,
+				request,
 				this.LowLevelDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest) => 
+		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest request) => 
 			this.Dispatcher.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
-				clusterRerouteRequest,
+				request,
 				this.LowLevelDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>
 			);
 	}

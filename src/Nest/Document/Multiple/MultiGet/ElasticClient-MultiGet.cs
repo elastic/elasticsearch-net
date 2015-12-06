@@ -22,13 +22,13 @@ namespace Nest
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> selector = null);
 
 		/// <inheritdoc/>
-		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
+		IMultiGetResponse MultiGet(IMultiGetRequest request);
 
 		/// <inheritdoc/>
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
+		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request);
 	}
 
 	public partial class ElasticClient
@@ -38,10 +38,10 @@ namespace Nest
 			this.MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest) => 
+		public IMultiGetResponse MultiGet(IMultiGetRequest request) => 
 			this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
-				multiRequest,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(multiRequest))),
+				request,
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
 				this.LowLevelDispatch.MgetDispatch<MultiGetResponse>
 			);
 
@@ -50,10 +50,10 @@ namespace Nest
 			this.MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiRequest) => 
+		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request) => 
 			this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
-				multiRequest,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(multiRequest))),
+				request,
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
 				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
 		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>

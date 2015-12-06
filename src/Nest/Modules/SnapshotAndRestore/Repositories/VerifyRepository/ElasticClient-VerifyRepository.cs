@@ -12,13 +12,13 @@ namespace Nest
 		IVerifyRepositoryResponse VerifyRepository(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
-		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest);
+		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest request);
 
 		/// <inheritdoc/>
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(Name repository, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
+		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request);
 	}
 
 	public partial class ElasticClient
@@ -28,9 +28,9 @@ namespace Nest
 			this.VerifyRepository(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository)));
 
 		/// <inheritdoc/>
-		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest) => 
+		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest request) => 
 			this.Dispatcher.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
-				verifyRepositoryRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
 			);
 
@@ -39,9 +39,9 @@ namespace Nest
 			this.VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor(repository)));
 
 		/// <inheritdoc/>
-		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest) => 
+		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest request) => 
 			this.Dispatcher.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
-				verifyRepositoryRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
 			);
 	}

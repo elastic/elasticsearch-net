@@ -17,13 +17,13 @@ namespace Nest
 		IAcknowledgedResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest createRepositoryRequest);
+		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest createRepositoryRequest);
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request);
 
 	}
 

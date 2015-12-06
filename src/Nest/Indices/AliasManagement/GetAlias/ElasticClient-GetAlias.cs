@@ -21,13 +21,13 @@ namespace Nest
 		IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
 
 		/// <inheritdoc/>
-		IGetAliasesResponse GetAlias(IGetAliasRequest getAliasRequest);
+		IGetAliasesResponse GetAlias(IGetAliasRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest);
+		Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,9 +37,9 @@ namespace Nest
 			this.GetAlias(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAlias(IGetAliasRequest getAliasRequest) => 
+		public IGetAliasesResponse GetAlias(IGetAliasRequest request) => 
 			this.Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse>(
-				getAliasRequest,
+				request,
 				new GetAliasesConverter(DeserializeGetAliasesResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(p)
 			);
@@ -49,9 +49,9 @@ namespace Nest
 			this.GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest) => 
+		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
-				getAliasRequest,
+				request,
 				new GetAliasesConverter(DeserializeGetAliasesResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(p)
 			);

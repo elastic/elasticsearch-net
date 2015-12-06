@@ -17,13 +17,13 @@ namespace Nest
 		IShardsOperationResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
+		IShardsOperationResponse ClearCache(IClearCacheRequest request);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
+		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest request);
 
 	}
 
@@ -37,9 +37,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest) => 
+		public IShardsOperationResponse ClearCache(IClearCacheRequest request) => 
 			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse>(
-				clearCacheRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
 			);
 
@@ -50,9 +50,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest) => 
+		public Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest request) => 
 			this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				clearCacheRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
 			);
 	}

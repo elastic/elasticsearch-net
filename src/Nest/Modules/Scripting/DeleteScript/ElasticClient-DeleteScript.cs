@@ -10,21 +10,21 @@ namespace Nest
 		IAcknowledgedResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest);
+		IAcknowledgedResponse DeleteScript(IDeleteScriptRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest);
+		Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest request);
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest) => 
+		public IAcknowledgedResponse DeleteScript(IDeleteScriptRequest request) => 
 			this.Dispatcher.Dispatch<IDeleteScriptRequest, DeleteScriptRequestParameters, AcknowledgedResponse>(
-				deleteScriptRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteScriptDispatch<AcknowledgedResponse>(p)
 			);
 
@@ -37,9 +37,9 @@ namespace Nest
 			this.DeleteScriptAsync(selector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest) => 
+		public Task<IAcknowledgedResponse> DeleteScriptAsync(IDeleteScriptRequest request) => 
 			this.Dispatcher.DispatchAsync<IDeleteScriptRequest, DeleteScriptRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				deleteScriptRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteScriptDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}

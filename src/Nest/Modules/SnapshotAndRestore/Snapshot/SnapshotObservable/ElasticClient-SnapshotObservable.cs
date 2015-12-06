@@ -10,7 +10,7 @@ namespace Nest
 		IObservable<ISnapshotStatusResponse> SnapshotObservable(Name repository, Name snapshotName, TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
 		/// <inheritdoc/>
-		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest);
+		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest request);
 	}
 
 	public partial class ElasticClient
@@ -23,6 +23,6 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest) => new SnapshotObservable(this, snapshotRequest);
+		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest request) => new SnapshotObservable(this, request);
 	}
 }

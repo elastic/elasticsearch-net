@@ -18,14 +18,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
+		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
 
 		/// <inheritdoc/>
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Indices indices, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request);
 
 	}
 
@@ -36,9 +36,9 @@ namespace Nest
 			this.DeleteByQuery(selector?.Invoke(new DeleteByQueryDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
-		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest) => 
+		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request) => 
 			this.Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
-				deleteByQueryRequest,
+				request,
 				this.LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>
 			);
 
@@ -47,9 +47,9 @@ namespace Nest
 			this.DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest) => 
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request) => 
 			this.Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
-				deleteByQueryRequest,
+				request,
 				this.LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>
 			);
 	}

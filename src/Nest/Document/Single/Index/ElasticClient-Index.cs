@@ -17,13 +17,13 @@ namespace Nest
 		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		IIndexResponse Index(IIndexRequest indexRequest);
+		IIndexResponse Index(IIndexRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		Task<IIndexResponse> IndexAsync(IIndexRequest indexRequest);
+		Task<IIndexResponse> IndexAsync(IIndexRequest request);
 
 	}
 
@@ -37,9 +37,9 @@ namespace Nest
 				: selector.InvokeOrDefault(new IndexDescriptor<T>(@object)));
 
 		/// <inheritdoc/>
-		public IIndexResponse Index(IIndexRequest indexRequest) =>
+		public IIndexResponse Index(IIndexRequest request) =>
 			this.Dispatcher.Dispatch<IIndexRequest, IndexRequestParameters, IndexResponse>(
-				indexRequest, this.LowLevelDispatch.IndexDispatch<IndexResponse>
+				request, this.LowLevelDispatch.IndexDispatch<IndexResponse>
 			);
 
 		/// <inheritdoc/>
@@ -50,9 +50,9 @@ namespace Nest
 				: selector.InvokeOrDefault(new IndexDescriptor<T>(@object)));
 
 		/// <inheritdoc/>
-		public Task<IIndexResponse> IndexAsync(IIndexRequest indexRequest) =>
+		public Task<IIndexResponse> IndexAsync(IIndexRequest request) =>
 			this.Dispatcher.DispatchAsync<IIndexRequest, IndexRequestParameters, IndexResponse, IIndexResponse>(
-				indexRequest, this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>
+				request, this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>
 			);
 	}
 }

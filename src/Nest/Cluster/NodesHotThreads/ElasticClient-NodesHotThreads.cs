@@ -21,13 +21,13 @@ namespace Nest
 		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
 
 		/// <inheritdoc/>
-		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest);
+		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request);
 
 		/// <inheritdoc/>
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,9 +37,9 @@ namespace Nest
 			this.NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest) =>
+		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request) =>
 			this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
-				nodesHotThreadsRequest,
+				request,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
 				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(p)
 			);
@@ -49,9 +49,9 @@ namespace Nest
 			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest) =>
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request) =>
 			this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
-				nodesHotThreadsRequest,
+				request,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
 				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p)
 			);

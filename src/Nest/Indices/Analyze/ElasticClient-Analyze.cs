@@ -14,13 +14,13 @@ namespace Nest
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
 
 		/// <inheritdoc/>
-		IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest);
+		IAnalyzeResponse Analyze(IAnalyzeRequest request);
 
 		/// <inheritdoc/>
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest);
+		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request);
 
 	}
 
@@ -31,10 +31,10 @@ namespace Nest
 			this.Analyze(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc/>
-		public IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest) => 
+		public IAnalyzeResponse Analyze(IAnalyzeRequest request) => 
 			this.Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
-				analyzeRequest,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(analyzeRequest))
+				request,
+				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(request))
 			);
 
 		/// <inheritdoc/>
@@ -42,10 +42,10 @@ namespace Nest
 			this.AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest) => 
+		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request) => 
 			this.Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
-				analyzeRequest,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(analyzeRequest))
+				request,
+				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(request))
 			);
 
 		private static string MoveTextFromQueryString(IAnalyzeRequest d)

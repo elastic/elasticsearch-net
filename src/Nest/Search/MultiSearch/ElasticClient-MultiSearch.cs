@@ -21,13 +21,13 @@ namespace Nest
 		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
 
 		/// <inheritdoc/>
-		IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest);
+		IMultiSearchResponse MultiSearch(IMultiSearchRequest request);
 
 		/// <inheritdoc/>
 		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
+		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,17 +37,17 @@ namespace Nest
 			this.MultiSearch(selector?.Invoke(new MultiSearchDescriptor()));
 
 		/// <inheritdoc />
-		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest)
+		public IMultiSearchResponse MultiSearch(IMultiSearchRequest request)
 		{
 			return this.Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
-				multiSearchRequest,
+				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchDeserializer(multiSearchRequest);
+					var converter = CreateMultiSearchDeserializer(request);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
 					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					multiSearchRequest.RequestParameters.DeserializationOverride(creator);
+					request.RequestParameters.DeserializationOverride(creator);
 					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
 				}
 			);
@@ -59,17 +59,17 @@ namespace Nest
 
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest)
+		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request)
 		{
 			return this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
-				multiSearchRequest,
+				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchDeserializer(multiSearchRequest);
+					var converter = CreateMultiSearchDeserializer(request);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
 					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					multiSearchRequest.RequestParameters.DeserializationOverride(creator);
+					request.RequestParameters.DeserializationOverride(creator);
 					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json);
 				}
 			);

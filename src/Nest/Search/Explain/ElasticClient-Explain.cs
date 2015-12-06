@@ -16,7 +16,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IExplainResponse<T> Explain<T>(IExplainRequest<T> explainRequest)
+		IExplainResponse<T> Explain<T>(IExplainRequest<T> request)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -24,7 +24,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> explainRequest)
+		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)
 			where T : class;
 
 	}
@@ -37,10 +37,10 @@ namespace Nest
 			this.Explain<T>(selector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public IExplainResponse<T> Explain<T>(IExplainRequest<T> explainRequest)
+		public IExplainResponse<T> Explain<T>(IExplainRequest<T> request)
 			where T : class => 
 			this.Dispatcher.Dispatch<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>>(
-				explainRequest,
+				request,
 				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
 			);
 
@@ -50,10 +50,10 @@ namespace Nest
 			this.ExplainAsync<T>(selector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> explainRequest)
+		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)
 			where T : class => 
 			this.Dispatcher.DispatchAsync<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
-				explainRequest,
+				request,
 				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
 			);
 	}

@@ -17,13 +17,13 @@ namespace Nest
 		IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest);
+		IIndicesOperationResponse OpenIndex(IOpenIndexRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest);
+		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest request);
 	}
 
 	public partial class ElasticClient
@@ -33,9 +33,9 @@ namespace Nest
 			this.OpenIndex(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest) => 
+		public IIndicesOperationResponse OpenIndex(IOpenIndexRequest request) => 
 			this.Dispatcher.Dispatch<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse>(
-				openIndexRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
 
@@ -44,9 +44,9 @@ namespace Nest
 			this.OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest) => 
+		public Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest request) => 
 			this.Dispatcher.DispatchAsync<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				openIndexRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
 	}

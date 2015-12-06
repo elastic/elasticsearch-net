@@ -16,13 +16,13 @@ namespace Nest
 		IIndicesOperationResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
+		IIndicesOperationResponse CreateIndex(ICreateIndexRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);
+		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest request);
 	}
 
 	public partial class ElasticClient
@@ -32,9 +32,9 @@ namespace Nest
 			this.CreateIndex(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest) => 
+		public IIndicesOperationResponse CreateIndex(ICreateIndexRequest request) => 
 			this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
-				createIndexRequest,
+				request,
 				this.LowLevelDispatch.IndicesCreateDispatch<IndicesOperationResponse>
 			);
 
@@ -43,9 +43,9 @@ namespace Nest
 			this.CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest) => 
+		public Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest request) => 
 			this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				createIndexRequest,
+				request,
 				this.LowLevelDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>
 			);
 	}

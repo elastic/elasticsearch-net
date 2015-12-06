@@ -17,13 +17,13 @@ namespace Nest
 		IAcknowledgedResponse DeleteRepository(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest);
+		IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest);
+		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request);
 
 	}
 	public partial class ElasticClient
@@ -33,9 +33,9 @@ namespace Nest
 			this.DeleteRepository(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest) => 
+		public IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest request) => 
 			this.Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
-				deleteRepositoryRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
 			);
 
@@ -44,9 +44,9 @@ namespace Nest
 			this.DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest) => 
+		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request) => 
 			this.Dispatcher.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				deleteRepositoryRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}

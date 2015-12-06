@@ -14,13 +14,13 @@ namespace Nest
 		IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest infoRequest);
+		IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request);
 
 		/// <inheritdoc/>
 		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest infoRequest);
+		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request);
 	}
 
 	public partial class ElasticClient
@@ -30,9 +30,9 @@ namespace Nest
 			this.RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest infoRequest) => 
+		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest request) => 
 			this.Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
-				infoRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
 			);
 
@@ -41,9 +41,9 @@ namespace Nest
 			this.RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest infoRequest) => 
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest request) => 
 			this.Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
-				infoRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p)
 			);
 	}

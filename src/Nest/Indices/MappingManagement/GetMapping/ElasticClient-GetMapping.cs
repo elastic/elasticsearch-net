@@ -19,14 +19,14 @@ namespace Nest
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest);
+		IGetMappingResponse GetMapping(IGetMappingRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest);
+		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,10 +37,10 @@ namespace Nest
 			this.GetMapping(selector.InvokeOrDefault(new GetMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest) => 
+		public IGetMappingResponse GetMapping(IGetMappingRequest request) => 
 			this.Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
-				getMappingRequest,
-				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, getMappingRequest, s)),
+				request,
+				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(p)
 			);
 
@@ -50,10 +50,10 @@ namespace Nest
 			this.GetMappingAsync(selector.InvokeOrDefault(new GetMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest) => 
+		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
-				getMappingRequest,
-				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, getMappingRequest, s)),
+				request,
+				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p)
 			);
 		

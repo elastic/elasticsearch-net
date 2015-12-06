@@ -17,14 +17,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IValidateResponse Validate(IValidateQueryRequest validateQueryRequest);
+		IValidateResponse Validate(IValidateQueryRequest request);
 
 		/// <inheritdoc/>
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest);
+		Task<IValidateResponse> ValidateAsync(IValidateQueryRequest request);
 
 	}
 	public partial class ElasticClient
@@ -35,9 +35,9 @@ namespace Nest
 			this.Validate(selector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IValidateResponse Validate(IValidateQueryRequest validateQueryRequest) => 
+		public IValidateResponse Validate(IValidateQueryRequest request) => 
 			this.Dispatcher.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse>(
-				validateQueryRequest,
+				request,
 				this.LowLevelDispatch.IndicesValidateQueryDispatch<ValidateResponse>
 			);
 
@@ -47,9 +47,9 @@ namespace Nest
 			this.ValidateAsync(selector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest) => 
+		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest request) => 
 			this.Dispatcher.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
-				validateQueryRequest,
+				request,
 				this.LowLevelDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>
 			);
 	}

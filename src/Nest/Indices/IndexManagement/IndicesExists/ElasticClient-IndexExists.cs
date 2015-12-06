@@ -17,13 +17,13 @@ namespace Nest
 		IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
-		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
+		IExistsResponse IndexExists(IIndexExistsRequest request);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
+		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request);
 	}
 
 
@@ -36,9 +36,9 @@ namespace Nest
 			this.IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IExistsResponse IndexExists(IIndexExistsRequest indexRequest) => 
+		public IExistsResponse IndexExists(IIndexExistsRequest request) => 
 			this.Dispatcher.Dispatch<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse>(
-				indexRequest,
+				request,
 				new IndexExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsDispatch<ExistsResponse>(p)
 			);
@@ -48,9 +48,9 @@ namespace Nest
 			this.IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexRequest) => 
+		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request) => 
 			this.Dispatcher.DispatchAsync<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				indexRequest,
+				request,
 				new IndexExistConverter(DeserializeExistsResponse),
 				(p, d) => this.LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p)
 			);

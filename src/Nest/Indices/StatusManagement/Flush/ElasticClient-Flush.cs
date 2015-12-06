@@ -18,13 +18,13 @@ namespace Nest
 		IShardsOperationResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse Flush(IFlushRequest flushRequest);
+		IShardsOperationResponse Flush(IFlushRequest request);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
+		Task<IShardsOperationResponse> FlushAsync(IFlushRequest request);
 	}
 	
 	public partial class ElasticClient
@@ -34,9 +34,9 @@ namespace Nest
 			this.Flush(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Flush(IFlushRequest flushRequest) => 
+		public IShardsOperationResponse Flush(IFlushRequest request) => 
 			this.Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, ShardsOperationResponse>(
-				flushRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesFlushDispatch<ShardsOperationResponse>(p)
 			);
 
@@ -45,9 +45,9 @@ namespace Nest
 			this.FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest) => 
+		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest request) => 
 			this.Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				flushRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
 			);
 	}
