@@ -93,7 +93,7 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query)
 		{
-			query.ThrowIfNull("query");
+			query.ThrowIfNull(nameof(query));
 			var q = new QueryContainerDescriptor<TDocument>();
 			var bq = query(q);
 			return this.Query(bq);
@@ -128,7 +128,7 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter)
 		{
-			filter.ThrowIfNull("filter");
+			filter.ThrowIfNull(nameof(filter));
 			var f = new QueryContainerDescriptor<TDocument>();
 
 			var bf = filter(f);
@@ -141,13 +141,14 @@ namespace Nest
 			Self.Filter = bf;
 			return this;
 		}
+
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public PercolateCountDescriptor<TDocument> Filter(QueryContainer QueryDescriptor)
+		public PercolateCountDescriptor<TDocument> Filter(QueryContainer filter)
 		{
-			QueryDescriptor.ThrowIfNull("filter");
-			Self.Filter = QueryDescriptor;
+			filter.ThrowIfNull(nameof(filter));
+			Self.Filter = filter;
 			return this;
 		}
 	}

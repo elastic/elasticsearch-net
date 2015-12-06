@@ -24,7 +24,7 @@ namespace Nest
 
 		public PropertyMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property)
 		{
-			property.ThrowIfNull("property");
+			property.ThrowIfNull(nameof(property));
 			this.Mappings.Add(new IgnorePropertyMapping<TDocument>(property));
 			return this;
 		}

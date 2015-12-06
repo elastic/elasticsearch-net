@@ -59,7 +59,7 @@ namespace Nest
 		/// </summary>
 		public SearchExistsDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
-			query.ThrowIfNull("query");
+			query.ThrowIfNull(nameof(query));
 			var q = new QueryContainerDescriptor<T>();
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);

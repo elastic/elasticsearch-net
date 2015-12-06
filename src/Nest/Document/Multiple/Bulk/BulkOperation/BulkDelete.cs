@@ -21,10 +21,10 @@ namespace Nest
 		public BulkDeleteOperation(string id) { this.Id = id; }
 		public BulkDeleteOperation(double id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
 
-		public override string Operation { get { return "delete"; } }
+		public override string Operation => "delete";
 
-		public override Type ClrType { get { return typeof(T); } } 
-		
+		public override Type ClrType => typeof(T);
+
 		public override object GetBody()
 		{
 			return null;
@@ -42,9 +42,9 @@ namespace Nest
 	{
 		private IBulkDeleteOperation<T> Self => this; 
 
-		protected override string BulkOperationType { get { return "delete"; } }
-		protected override Type BulkOperationClrType { get { return typeof(T); } }
-		
+		protected override string BulkOperationType => "delete";
+		protected override Type BulkOperationClrType => typeof(T);
+
 		T IBulkDeleteOperation<T>.Document { get; set; }
 
 		protected override object GetBulkOperationBody()
@@ -62,7 +62,7 @@ namespace Nest
 		/// </summary>
 		public BulkDeleteDescriptor<T> Index(string index)
 		{
-			index.ThrowIfNullOrEmpty("indices");
+			index.ThrowIfNullOrEmpty(nameof(index));
 			Self.Index = index;
 			return this;
 		}
@@ -72,7 +72,7 @@ namespace Nest
 		/// </summary>
 		public BulkDeleteDescriptor<T> Type(string type)
 		{
-			type.ThrowIfNullOrEmpty("type");
+			type.ThrowIfNullOrEmpty(nameof(type));
 			Self.Type = type;
 			return this;
 		}
@@ -82,7 +82,7 @@ namespace Nest
 		/// </summary>
 		public BulkDeleteDescriptor<T> Type(Type type)
 		{
-			type.ThrowIfNull("type");
+			type.ThrowIfNull(nameof(type));
 			Self.Type = type;
 			return this;
 		}

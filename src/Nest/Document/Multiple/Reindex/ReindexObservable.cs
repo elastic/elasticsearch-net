@@ -5,7 +5,7 @@ namespace Nest
 {
 	public class ReindexObservable<T> : IDisposable, IObservable<IReindexResponse<T>> where T : class
 	{
-		private IReindexRequest _reindexRequest;
+		private readonly IReindexRequest _reindexRequest;
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		private IElasticClient _client { get; set; }
@@ -19,7 +19,7 @@ namespace Nest
 
 		public IDisposable Subscribe(IObserver<IReindexResponse<T>> observer)
 		{
-			observer.ThrowIfNull("observer");
+			observer.ThrowIfNull(nameof(observer));
 			try 
 			{
 				this.Reindex(observer);
@@ -40,9 +40,9 @@ namespace Nest
 			var size = this._reindexRequest.Size ?? 100;
 
 			var resolvedFrom = fromIndex.Resolve(this._connectionSettings);
-			resolvedFrom.ThrowIfNullOrEmpty("fromIndex");
+			resolvedFrom.ThrowIfNullOrEmpty(nameof(fromIndex));
 			var resolvedTo = toIndex.Resolve(this._connectionSettings);
-			resolvedTo.ThrowIfNullOrEmpty("toIndex");
+			resolvedTo.ThrowIfNullOrEmpty(nameof(toIndex));
 
 			var indexSettings = this._client.GetIndexSettings(i=>i.Index(fromIndex));
 			Func<CreateIndexDescriptor, ICreateIndexRequest> settings =  (ci) => this._reindexRequest.CreateIndexRequest ?? ci;

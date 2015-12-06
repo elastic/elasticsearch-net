@@ -1036,7 +1036,7 @@
     <Compile Include="Search\Search\Hits\Hit.cs" />
     <Compile Include="Search\Search\Hits\HitsMetaData.cs" />
     <Compile Include="IElasticClient.cs" />
-    <Compile Include="Properties\ClsCompiancy.cs" />
+    <Compile Include="Properties\ClsCompliancy.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkResponseItemJsonConverter.cs" />
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryJsonConverter.cs" />
@@ -1114,7 +1114,6 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

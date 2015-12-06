@@ -10,7 +10,7 @@ namespace Nest.Resolvers
 
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
-			connectionSettings.ThrowIfNull("connectionSettings");
+			connectionSettings.ThrowIfNull(nameof(connectionSettings));
 			this._connectionSettings = connectionSettings;
 		}
 

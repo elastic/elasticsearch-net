@@ -90,7 +90,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<TDocument> Highlight(int size, Func<HighlightDescriptor<TDocument>,HighlightDescriptor<TDocument>> highlightDescriptor)
 		{
-			highlightDescriptor.ThrowIfNull("highlightDescriptor");
+			highlightDescriptor.ThrowIfNull(nameof(highlightDescriptor));
 			var d  = highlightDescriptor(new HighlightDescriptor<TDocument>());
 			Self.Size = size;
 			Self.Highlight = d;
@@ -110,7 +110,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query)
 		{
-			query.ThrowIfNull("query");
+			query.ThrowIfNull(nameof(query));
 			var q = new QueryContainerDescriptor<TDocument>();
 			var bq = query(q);
 			return this.Query(bq);
@@ -145,7 +145,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter)
 		{
-			filter.ThrowIfNull("filter");
+			filter.ThrowIfNull(nameof(filter));
 			var f = new QueryContainerDescriptor<TDocument>();
 
 			var bf = filter(f);
@@ -154,17 +154,17 @@ namespace Nest
 			if (bf.IsConditionless)
 				return this;
 
-
 			Self.Filter = bf;
 			return this;
 		}
+
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public PercolateDescriptor<TDocument> Filter(QueryContainer QueryDescriptor)
+		public PercolateDescriptor<TDocument> Filter(QueryContainer filter)
 		{
-			QueryDescriptor.ThrowIfNull("filter");
-			Self.Filter = QueryDescriptor;
+			filter.ThrowIfNull(nameof(filter));
+			Self.Filter = filter;
 			return this;
 		}
 	}

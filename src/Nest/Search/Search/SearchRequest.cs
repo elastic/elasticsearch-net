@@ -382,8 +382,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
 		{
-			node.ThrowIfNull("node");
-			return this.Preference(string.Format("_prefer_node:{0}", node));
+			node.ThrowIfNull(nameof(node));
+			return this.Preference($"_prefer_node:{node}");
 		}
 
 		/// <summary>
@@ -432,7 +432,7 @@ namespace Nest
 			Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
 			 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields) => Assign(a =>
 			 {
-				 scriptFields.ThrowIfNull("scriptFields");
+				 scriptFields.ThrowIfNull(nameof(scriptFields));
 				 var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
 				 if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 				 {
@@ -459,8 +459,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SuggestTerm(string name, Func<TermSuggesterDescriptor<T>, TermSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 			if (a.Suggest == null) a.Suggest = new Dictionary<string, ISuggestBucket>();
 			var desc = new TermSuggesterDescriptor<T>();
 			var item = suggest(desc);
@@ -475,8 +475,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SuggestPhrase(string name, Func<PhraseSuggesterDescriptor<T>, PhraseSuggesterDescriptor<T>> suggest) => Assign(a =>
 		{
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
@@ -492,8 +492,8 @@ namespace Nest
 		/// It does not do spell correction like the term or phrase suggesters but allows basic auto-complete functionality.
 		/// </summary>
 		public SearchDescriptor<T> SuggestCompletion(string name, Func<CompletionSuggesterDescriptor<T>, CompletionSuggesterDescriptor<T>> suggest) => Assign(a => {
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 			if (a.Suggest == null)
 				a.Suggest = new Dictionary<string, ISuggestBucket>();
 
@@ -509,7 +509,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
-			query.ThrowIfNull("query");
+			query.ThrowIfNull(nameof(query));
 			var q = new QueryContainerDescriptor<T>();
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
@@ -540,7 +540,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) => Assign(a =>
 		{
-			filter.ThrowIfNull("filter");
+			filter.ThrowIfNull(nameof(filter));
 			var f = new QueryContainerDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
@@ -555,9 +555,9 @@ namespace Nest
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> PostFilter(QueryContainer QueryDescriptor) => Assign(a => {
-			QueryDescriptor.ThrowIfNull("filter");
-			a.PostFilter = QueryDescriptor;
+		public SearchDescriptor<T> PostFilter(QueryContainer filter) => Assign(a => {
+			filter.ThrowIfNull(nameof(filter));
+			a.PostFilter = filter;
 		});
 
 		/// <summary>

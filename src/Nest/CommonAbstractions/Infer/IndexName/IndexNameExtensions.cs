@@ -9,7 +9,7 @@ namespace Nest
 		{
 			if (marker == null)
 				return null;
-			connectionSettings.ThrowIfNull("connectionSettings");
+			connectionSettings.ThrowIfNull(nameof(connectionSettings));
 
 			if (marker.Type == null)
 				return marker.Name;

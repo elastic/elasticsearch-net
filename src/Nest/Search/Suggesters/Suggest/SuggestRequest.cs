@@ -80,8 +80,8 @@ namespace Nest
 		/// </summary>
 		public SuggestDescriptor<T> Term(string name, Func<TermSuggesterDescriptor<T>, TermSuggesterDescriptor<T>> suggest)
 		{
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 			var desc = new TermSuggesterDescriptor<T>();
 			var item = suggest(desc);
 			Self.Suggest.Add(name, item);
@@ -94,8 +94,8 @@ namespace Nest
 		/// </summary>
 		public SuggestDescriptor<T> Phrase(string name, Func<PhraseSuggesterDescriptor<T>, PhraseSuggesterDescriptor<T>> suggest)
 		{
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 
 			var desc = new PhraseSuggesterDescriptor<T>();
 			var item = suggest(desc);
@@ -109,8 +109,8 @@ namespace Nest
 		/// </summary>
 		public SuggestDescriptor<T> Completion(string name, Func<CompletionSuggesterDescriptor<T>, CompletionSuggesterDescriptor<T>> suggest)
 		{
-			name.ThrowIfNullOrEmpty("name");
-			suggest.ThrowIfNull("suggest");
+			name.ThrowIfNullOrEmpty(nameof(name));
+			suggest.ThrowIfNull(nameof(suggest));
 
 			var desc = new CompletionSuggesterDescriptor<T>();
 			var item = suggest(desc);
