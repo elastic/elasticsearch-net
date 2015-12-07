@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -81,11 +82,12 @@ namespace Nest
 			{
 				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name);
 
-				var enumAttributes = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true));
-				if (!enumAttributes.HasAny()) continue;
+				var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
 
-				var enumMemberAttribute = enumAttributes.Single();
-				if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
+				if (enumMemberAttribute != null)
+				{
+					if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
+				}
 			}
 			//throw exception or whatever handling you want or
 			return null;

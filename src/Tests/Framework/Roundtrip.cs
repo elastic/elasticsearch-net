@@ -42,7 +42,7 @@ namespace Tests.Framework
 
 	public class IntermediateChangedSettings
 	{
-		private Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
+		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
@@ -60,13 +60,11 @@ namespace Tests.Framework
 			this.Sut = sut;
 		}
 
-
 		public RoundTripper<T> WhenSerializing(T actual)
 		{
 			Sut = this.AssertSerializesAndRoundTrips(actual);
 			return this;
 		}
-
 
 		public RoundTripper<T> Result(Action<T> assert)
 		{
@@ -80,7 +78,5 @@ namespace Tests.Framework
 			assert((TOther)this.Sut);
 			return this;
 		}
-
-
 	}
 }
