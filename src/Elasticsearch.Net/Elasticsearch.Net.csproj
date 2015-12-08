@@ -55,13 +55,13 @@
     <Compile Include="Configuration\IRequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
-    <Compile Include="Connection\ElasticsearchConnectionException.cs" />
+    <Compile Include="Connection\ConnectionException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Auditting\Audit.cs" />
     <Compile Include="Auditting\Auditable.cs" />
     <Compile Include="Auditting\AuditEvent.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
-    <Compile Include="Exceptions\ElasticsearchNetException.cs" />
+    <Compile Include="Exceptions\ElasticsearchClientException.cs" />
     <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
     <Compile Include="Transport\Pipeline\RequestData.cs" />
