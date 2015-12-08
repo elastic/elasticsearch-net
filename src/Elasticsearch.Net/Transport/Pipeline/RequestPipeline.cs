@@ -375,13 +375,12 @@ namespace Elasticsearch.Net.Connection
 		{
 			var pipelineFailure = PipelineFailure.BadResponse;
 			if (this.IsTakingTooLong) pipelineFailure = PipelineFailure.RetryTimeout;
-			if (this.Retried >= this.MaxRetries) pipelineFailure = PipelineFailure.RetryMaximum;
-
-			if (_settings.ThrowOnElasticsearchServerExceptions && response.SuccessOrKnownError)
-				throw new ElasticsearchServerException();
-
+			if (this.Retried >= this.MaxRetries && this.MaxRetries > 0) pipelineFailure = PipelineFailure.RetryMaximum;
+			
 			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
 			var exception = new ElasticsearchClientException(new ConnectionException(pipelineFailure, seenAggregate));
+
+			if (!response.SuccessOrKnownError) throw exception;
 
 			if (response == null)
 				response = data.CreateResponse<TReturn>(exception);
