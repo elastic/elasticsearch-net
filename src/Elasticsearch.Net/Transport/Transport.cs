@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				var exceptions = new List<ElasticsearchConnectionException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -80,12 +80,12 @@ namespace Elasticsearch.Net.Connection
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (ElasticsearchConnectionException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
-					catch (ElasticsearchException exception)
+					catch (ElasticsearchConnectionException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -111,7 +111,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				var exceptions = new List<ElasticsearchConnectionException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -121,12 +121,12 @@ namespace Elasticsearch.Net.Connection
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (ElasticsearchConnectionException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
-					catch (ElasticsearchException exception)
+					catch (ElasticsearchConnectionException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);

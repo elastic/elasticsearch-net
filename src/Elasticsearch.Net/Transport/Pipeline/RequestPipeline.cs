@@ -114,7 +114,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			if (!semaphore.Wait(this._settings.Timeout))
-				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+				throw new ElasticsearchConnectionException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
@@ -135,7 +135,7 @@ namespace Elasticsearch.Net.Connection
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			var success = await semaphore.WaitAsync(this._settings.Timeout, this._cancellationToken);
 			if (!success)
-				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+				throw new ElasticsearchConnectionException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
@@ -252,7 +252,7 @@ namespace Elasticsearch.Net.Connection
 		public void Sniff()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<ElasticsearchException>();
+			var exceptions = new List<ElasticsearchConnectionException>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
@@ -267,13 +267,13 @@ namespace Elasticsearch.Net.Connection
 						this.Refresh = true;
 						return;
 					}
-					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
+					catch (ElasticsearchConnectionException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
-					catch (ElasticsearchException e)
+					catch (ElasticsearchConnectionException e)
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
@@ -281,13 +281,13 @@ namespace Elasticsearch.Net.Connection
 					}
 				}
 			}
-			throw new ElasticsearchException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new ElasticsearchConnectionException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public async Task SniffAsync()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<ElasticsearchException>();
+			var exceptions = new List<ElasticsearchConnectionException>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
@@ -301,13 +301,13 @@ namespace Elasticsearch.Net.Connection
 						this.Refresh = true;
 						return;
 					}
-					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
+					catch (ElasticsearchConnectionException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
-					catch (ElasticsearchException e)
+					catch (ElasticsearchConnectionException e)
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
@@ -315,7 +315,7 @@ namespace Elasticsearch.Net.Connection
 					}
 				}
 			}
-			throw new ElasticsearchException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new ElasticsearchConnectionException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
@@ -339,7 +339,7 @@ namespace Elasticsearch.Net.Connection
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					if (this.SniffsOnConnectionFailure) this.Sniff();
-					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
+					throw new ElasticsearchConnectionException(PipelineFailure.BadResponse, e);
 				}
 			}
 		}
@@ -365,12 +365,12 @@ namespace Elasticsearch.Net.Connection
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
-					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
+					throw new ElasticsearchConnectionException(PipelineFailure.BadResponse, e);
 				}
 			}
 		}
 
-		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchException> seenExceptions)
+		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchConnectionException> seenExceptions)
 			where TReturn : class
 		{
 			var pipelineFailure = PipelineFailure.BadResponse;
@@ -378,8 +378,11 @@ namespace Elasticsearch.Net.Connection
 			if (this.Retried >= this.MaxRetries) pipelineFailure = PipelineFailure.RetryMaximum;
 
 			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
+			var exception = new ElasticsearchNetException(new ElasticsearchConnectionException(pipelineFailure, seenAggregate));
+			if (_settings.ThrowOnElasticsearchServerExceptions && exception.IsElasticsearchServerException())
+				throw exception;
 			if (response == null)
-				response = data.CreateResponse<TReturn>(new ElasticsearchException(pipelineFailure, seenAggregate));
+				response = data.CreateResponse<TReturn>(exception);
 			response.AuditTrail = this.AuditTrail;
 		}
 
