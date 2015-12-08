@@ -31,11 +31,11 @@ namespace Nest
 		{
 			var c = f.Invoke(container);
 			//if query is not conditionless or is verbatim: return a container that holds the query
-			if (!c.IsConditionless || c.IsVerbatim)
+			if (c != null && (!c.IsConditionless || c.IsVerbatim))
 				return c;
 
 			//query is conditionless but the container is marked as strict, throw exception
-			if (c.IsStrict)
+			if (c != null && c.IsStrict)
 				throw new DslException("Query is conditionless but strict is turned on") { Offender = c };
 
 			//query is conditionless return an empty container that can later be rewritten

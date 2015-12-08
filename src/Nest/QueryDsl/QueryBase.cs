@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace Nest
 {
@@ -33,11 +34,18 @@ namespace Nest
 
 		public static QueryBase operator &(QueryBase leftQuery, QueryBase rightQuery)
 		{
-			var lc = new QueryContainer();
-			leftQuery.WrapInContainer(lc);
-			var rc = new QueryContainer();
-			rightQuery.WrapInContainer(rc);
-			var query = ((lc && rc) as IQueryContainer).Bool;
+			QueryBase q;
+			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftQuery, rightQuery, out q))
+				return q;
+			
+
+
+
+			var lc = new QueryContainer(leftQuery);
+			var rc = new QueryContainer(rightQuery);
+
+			IQueryContainer container = lc && rc;
+			var query = container.Bool;
 			return new BoolQuery()
 			{
 				Must = query.Must,
@@ -46,7 +54,34 @@ namespace Nest
 			};
 		}
 
-		public static implicit operator QueryContainer(QueryBase query) => new QueryContainer(query);
+		public static QueryBase operator |(QueryBase leftQuery, QueryBase rightQuery)
+		{
+			QueryBase q;
+			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftQuery, rightQuery, out q))
+				return q;
+
+			var lc = new QueryContainer(leftQuery);
+			var rc = new QueryContainer(rightQuery);
+
+			IQueryContainer container = lc || rc;
+			var query = container.Bool;
+			return new BoolQuery()
+			{
+				Must = query.Must,
+				MustNot = query.MustNot,
+				Should = query.Should
+			};
+		}
+
+		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryBase leftQuery, QueryBase rightQuery, out QueryBase query)
+		{
+			var combined = new [] {leftQuery, rightQuery};
+			var any = combined.Any(bf => bf == null || ((IQuery) bf).Conditionless); 
+			query = any ?  combined.FirstOrDefault(bf => bf != null && !((IQuery)bf).Conditionless) : null;
+			return any;
+		}
+
+		public static implicit operator QueryContainer(QueryBase query) => query == null || query.Conditionless ? null : new QueryContainer(query);
 
 		internal abstract void WrapInContainer(IQueryContainer container);
 	}

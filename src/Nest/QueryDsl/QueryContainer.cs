@@ -283,7 +283,7 @@ namespace Nest
 
 		ITypeQuery IQueryContainer.Type { get; set; }
 
-		protected IQuery ContainedQuery { get; set; }
+		internal IQuery ContainedQuery { get; set; }
 
 		bool IQueryContainer.IsConditionless => (ContainedQuery?.Conditionless).GetValueOrDefault(true);
 		internal bool IsConditionless => Self.IsConditionless;
@@ -299,14 +299,14 @@ namespace Nest
 		public QueryContainer(QueryBase query) : this()
 		{
 			this.ContainedQuery = query;
-			if (query == null) return;
-			query.WrapInContainer(this);
+			query?.WrapInContainer(this);
 		}
 	
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)) return queryContainer;
+			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer))
+				return queryContainer;
 
 			return leftContainer.MergeMustQueries(rightContainer);
 		}
@@ -319,14 +319,12 @@ namespace Nest
 			return leftContainer.MergeShouldQueries(rightContainer);
 		}
 
-		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer,
-			out QueryContainer queryContainer)
+		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
 		{
 			var combined = new[] {leftContainer, rightContainer};
-			queryContainer = !combined.Any(bf => bf == null || bf.IsConditionless)
-				? null
-				: combined.FirstOrDefault(bf => bf != null && !bf.IsConditionless) ?? CreateEmptyContainer();
-			return queryContainer != null;
+			var any = combined.Any(bf => bf == null || bf.IsConditionless);
+			queryContainer = any ? combined.FirstOrDefault(bf => bf != null && !bf.IsConditionless) : null;
+			return any;
 		}
 
 		public static QueryContainer operator !(QueryContainer queryContainer)
@@ -356,8 +354,7 @@ namespace Nest
 			walker.Walk(this, visitor);
 		}
 
-		private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-		internal static QueryContainer CreateEmptyContainer(QueryContainer c = null)
+		public static QueryContainer CreateEmptyContainer(QueryContainer c = null)
 		{
 			var nc = new QueryContainer();
 			IQueryContainer ic = nc;
