@@ -19,14 +19,14 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		IIndicesResponse Map(IPutMappingRequest putMappingRequest);
+		IIndicesResponse Map(IPutMappingRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest);
+		Task<IIndicesResponse> MapAsync(IPutMappingRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,9 +37,9 @@ namespace Nest
 			this.Map(selector?.Invoke(new PutMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IIndicesResponse Map(IPutMappingRequest putMappingRequest) => 
+		public IIndicesResponse Map(IPutMappingRequest request) => 
 			this.Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
-				putMappingRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutMappingDispatch<IndicesResponse>
 			);
 
@@ -49,9 +49,9 @@ namespace Nest
 			this.MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest) => 
+		public Task<IIndicesResponse> MapAsync(IPutMappingRequest request) => 
 			this.Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
-				putMappingRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutMappingDispatchAsync<IndicesResponse>
 			);
 	}

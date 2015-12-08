@@ -27,13 +27,13 @@ namespace Nest
 		IDeleteResponse Delete<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		IDeleteResponse Delete(IDeleteRequest deleteRequest);
+		IDeleteResponse Delete(IDeleteRequest request);
 
 		/// <inheritdoc/>
 		Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest);
+		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request);
 	}
 
 	public partial class ElasticClient
@@ -43,9 +43,9 @@ namespace Nest
 			this.Delete(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public IDeleteResponse Delete(IDeleteRequest deleteRequest) => 
+		public IDeleteResponse Delete(IDeleteRequest request) => 
 			this.Dispatcher.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
-				deleteRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
 
@@ -54,9 +54,9 @@ namespace Nest
 			this.DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest) => 
+		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request) => 
 			this.Dispatcher.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
-				deleteRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);
 	}

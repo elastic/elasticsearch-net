@@ -8,7 +8,7 @@ namespace Nest.DSL.Visitor
 
 		public MappingWalker(IMappingVisitor visitor)
 		{
-			visitor.ThrowIfNull("visitor");
+			visitor.ThrowIfNull(nameof(visitor));
 			_visitor = visitor;
 		}
 

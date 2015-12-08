@@ -24,7 +24,7 @@ namespace Nest
 		public IEnumerable<Id> Values { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.Ids = this;
-		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny();
+		internal static bool IsConditionless(IIdsQuery q) => q.Types == null || !q.Values.HasAny();
 	}
 
 	public class IdsQueryDescriptor 

@@ -23,13 +23,13 @@ namespace Nest
 		IAcknowledgedResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
+		IAcknowledgedResponse PutWarmer(IPutWarmerRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
+		Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest request);
 
 	}
 
@@ -42,9 +42,9 @@ namespace Nest
 			this.PutWarmer(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse PutWarmer(IPutWarmerRequest putWarmerRequest) => 
+		public IAcknowledgedResponse PutWarmer(IPutWarmerRequest request) => 
 			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, AcknowledgedResponse>(
-				putWarmerRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutWarmerDispatch<AcknowledgedResponse>
 			);
 
@@ -53,9 +53,9 @@ namespace Nest
 			this.PutWarmerAsync(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest) => 
+		public Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest request) => 
 			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				putWarmerRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<AcknowledgedResponse>
 			);
 	}

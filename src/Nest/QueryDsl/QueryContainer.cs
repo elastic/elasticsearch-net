@@ -172,6 +172,12 @@ namespace Nest
 		void Accept(IQueryVisitor visitor);
 	}
 
+	internal static class QueryContainerExtensions
+	{
+		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
+	}
+
+
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainer : IQueryContainer, IDescriptor
 	{

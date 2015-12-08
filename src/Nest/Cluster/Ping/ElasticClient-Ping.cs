@@ -22,10 +22,10 @@ namespace Nest
 		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null);
 
 		/// <inheritdoc/>
-		IPingResponse Ping(IPingRequest pingRequest);
+		IPingResponse Ping(IPingRequest request);
 
 		/// <inheritdoc/>
-		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
+		Task<IPingResponse> PingAsync(IPingRequest request);
 	}
 
 	public partial class ElasticClient
@@ -39,17 +39,17 @@ namespace Nest
 			this.PingAsync(selector.InvokeOrDefault(new PingDescriptor()));
 
 		/// <inheritdoc/>
-		public IPingResponse Ping(IPingRequest pingRequest) => 
+		public IPingResponse Ping(IPingRequest request) => 
 			this.Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
-				SetPingTimeout(pingRequest),
+				SetPingTimeout(request),
 				new PingConverter(DeserializePingResponse),
 				(p, d) => this.LowLevelDispatch.PingDispatch<PingResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IPingResponse> PingAsync(IPingRequest pingRequest) => 
+		public Task<IPingResponse> PingAsync(IPingRequest request) => 
 			this.Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
-				SetPingTimeout(pingRequest),
+				SetPingTimeout(request),
 				new PingConverter(DeserializePingResponse),
 				(p, d) => this.LowLevelDispatch.PingDispatchAsync<PingResponse>(p)
 			);

@@ -17,13 +17,13 @@ namespace Nest
 		ISegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
 
 		/// <inheritdoc/>
-		ISegmentsResponse Segments(ISegmentsRequest segmentsRequest);
+		ISegmentsResponse Segments(ISegmentsRequest request);
 
 		/// <inheritdoc/>
 		Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest);
+		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request);
 
 	}
 	public partial class ElasticClient
@@ -33,9 +33,9 @@ namespace Nest
 			this.Segments(selector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public ISegmentsResponse Segments(ISegmentsRequest segmentsRequest) => 
+		public ISegmentsResponse Segments(ISegmentsRequest request) => 
 			this.Dispatcher.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
-				segmentsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
 
@@ -44,9 +44,9 @@ namespace Nest
 			this.SegmentsAsync(selector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest) => 
+		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest request) => 
 			this.Dispatcher.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
-				segmentsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
 	}

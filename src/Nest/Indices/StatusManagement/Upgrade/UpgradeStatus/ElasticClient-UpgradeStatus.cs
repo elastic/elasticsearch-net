@@ -11,13 +11,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest);
+		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request);
 
 		/// <inheritdoc/>
 		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest);
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request);
 
 		/// <inheritdoc/>
 		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
@@ -26,9 +26,9 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest) => 
+		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) => 
 			this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
-				upgradeStatusRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
 			);
 
@@ -37,9 +37,9 @@ namespace Nest
 			this.UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest) => 
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request) => 
 			this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
-				upgradeStatusRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
 

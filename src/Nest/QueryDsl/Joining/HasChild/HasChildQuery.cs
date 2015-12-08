@@ -40,7 +40,7 @@ namespace Nest
 		public IInnerHits InnerHits { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.HasChild = this;
-		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless;
+		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
 	}
 
 	public class HasChildQueryDescriptor<T> 

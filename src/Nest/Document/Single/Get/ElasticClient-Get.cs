@@ -17,13 +17,13 @@ namespace Nest
 		IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class;
+		IGetResponse<T> Get<T>(IGetRequest request) where T : class;
 
 		/// <inheritdoc/>
 		Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(IGetRequest request) where T : class;
 
 	}
 
@@ -41,9 +41,9 @@ namespace Nest
 			this.Get<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>
-		public IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class => 
+		public IGetResponse<T> Get<T>(IGetRequest request) where T : class => 
 			this.Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<T>>(
-				getRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 
@@ -52,9 +52,9 @@ namespace Nest
 			this.GetAsync<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>
-		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class => 
+		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request) where T : class => 
 			this.Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
-				getRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
 	}

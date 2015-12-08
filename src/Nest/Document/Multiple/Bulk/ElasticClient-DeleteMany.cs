@@ -46,7 +46,7 @@ namespace Nest
 		
 		private static BulkRequest CreateDeleteBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
-			@objects.ThrowIfEmpty("objects");
+			@objects.ThrowIfEmpty(nameof(objects));
 			var bulkRequest = new BulkRequest(index, type);
 			var deletes = @objects
 				.Select(o => new BulkDeleteOperation<T>(o))

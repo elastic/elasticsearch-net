@@ -68,7 +68,7 @@ namespace Nest
 
 		public LanguageAnalyzerDescriptor Language(Language language)
 		{
-			language.ThrowIfNull("language");
+			language.ThrowIfNull(nameof(language));
 			var langName = language.GetStringValue().ToLowerInvariant();
 			_type = langName;
 			return this;

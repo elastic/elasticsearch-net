@@ -16,11 +16,11 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		{
 			new GeoCoordinate[]
 			{
-				new [] {-177.0, 10.0}, new [] {176.0, 15.0}, new [] {172.0, 0.0}, new [] {176.0, -15.0}, new [] {-177.0, -10.0}, new [] {-177.0, 10.0}
+				new [] {-17.0, 10.0}, new [] {16.0, 15.0}, new [] {12.0, 0.0}, new [] {16.0, -15.0}, new [] {-17.0, -10.0}, new [] {-17.0, 10.0}
 			},
 			new GeoCoordinate[]
 			{
-				new [] {178.2, 8.2}, new [] {-178.8, 8.2}, new [] {-180.8, -8.8}, new [] {178.2, 8.8}
+				new [] {18.2, 8.2}, new [] {-18.8, 8.2}, new [] {-10.8, -8.8}, new [] {18.2, 8.8}
 			}
 		};
 
@@ -50,7 +50,7 @@ namespace Tests.QueryDsl.Geo.Shape.Polygon
 		{
 			q =>  q.Field = null,
 			q =>  q.Shape = null,
-			q =>  q.Shape.Coordinates = null,
+			q =>  q.Shape.Coordinates = null
 		};
 	}
 }

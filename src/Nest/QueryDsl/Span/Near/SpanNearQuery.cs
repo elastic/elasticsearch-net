@@ -24,7 +24,7 @@ namespace Nest
 
 	public class SpanNearQuery : QueryBase, ISpanNearQuery
 	{
-		protected override bool Conditionless { get { return false; } }
+		protected override bool Conditionless => SpanNearQuery.IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }

@@ -17,13 +17,13 @@ namespace Nest
 		IShardsOperationResponse Optimize(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
+		IShardsOperationResponse Optimize(IOptimizeRequest request);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> OptimizeAsync(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
+		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest request);
 
 	}
 
@@ -34,9 +34,9 @@ namespace Nest
 			this.Optimize(selector.InvokeOrDefault(new OptimizeDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest) => 
+		public IShardsOperationResponse Optimize(IOptimizeRequest request) => 
 			this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
-				optimizeRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
 
@@ -45,9 +45,9 @@ namespace Nest
 			this.OptimizeAsync(selector.InvokeOrDefault(new OptimizeDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest) => 
+		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest request) => 
 			this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				optimizeRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
 	}

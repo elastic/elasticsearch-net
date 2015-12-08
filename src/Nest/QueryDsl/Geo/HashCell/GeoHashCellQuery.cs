@@ -30,7 +30,7 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
 
-		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location == null;
+		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location == null || q.Field == null;
 	}
 
 	public class GeoHashCellQueryDescriptor<T>

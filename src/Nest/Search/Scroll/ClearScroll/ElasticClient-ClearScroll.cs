@@ -14,13 +14,13 @@ namespace Nest
 		IEmptyResponse ClearScroll(ScrollIds scrollIds, Func<ClearScrollDescriptor, IClearScrollRequest> selector = null);
 
 		/// <inheritdoc/>
-		IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest);
+		IEmptyResponse ClearScroll(IClearScrollRequest request);
 
 		/// <inheritdoc/>
 		Task<IEmptyResponse> ClearScrollAsync(ScrollIds scrollIds, Func<ClearScrollDescriptor, IClearScrollRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest);
+		Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest request);
 	}
 
 	public partial class ElasticClient
@@ -30,9 +30,9 @@ namespace Nest
 			this.ClearScroll(selector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollIds)));
 
 		/// <inheritdoc/>
-		public IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest) => 
+		public IEmptyResponse ClearScroll(IClearScrollRequest request) => 
 			this.Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
-				clearScrollRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, PatchClearScroll(p))
 			);
 	
@@ -42,9 +42,9 @@ namespace Nest
 			this.ClearScrollAsync(selector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollIds)));
 
 		/// <inheritdoc/>
-		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest) => 
+		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest request) => 
 			this.Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
-				clearScrollRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, PatchClearScroll(p))
 			);
 

@@ -38,10 +38,8 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
-		internal static bool IsConditionless(IGeoBoundingBoxQuery q)
-		{
-			return q.Field.IsConditionless() || q.BoundingBox == null;
-		}
+		internal static bool IsConditionless(IGeoBoundingBoxQuery q) =>
+			q.Field.IsConditionless() || q.BoundingBox?.BottomRight == null || q.BoundingBox?.TopLeft == null;
 	}
 
 	public class GeoBoundingBoxQueryDescriptor<T>

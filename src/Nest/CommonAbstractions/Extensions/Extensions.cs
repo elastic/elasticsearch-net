@@ -154,12 +154,12 @@ namespace Nest
 		internal static string F(this string format, params object[] args)
 		{
 			var c = CultureInfo.InvariantCulture;
-			format.ThrowIfNull("format");
+			format.ThrowIfNull(nameof(format));
 			return string.Format(c, format, args);
 		}
 		internal static string EscapedFormat(this string format, params object[] args)
 		{
-			format.ThrowIfNull("format");
+			format.ThrowIfNull(nameof(format));
 			var arguments = new List<object>();
 			foreach (var a in args)
 			{

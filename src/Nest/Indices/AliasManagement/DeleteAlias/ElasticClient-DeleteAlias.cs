@@ -11,13 +11,13 @@ namespace Nest
 	{
 		/// <summary>
 		/// Delete an index alias
-		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
 		/// </summary>
-		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
-		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+		/// <param name="request">A descriptor that describes the delete alias request</param>
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request);
 
 		/// <inheritdoc/>
 		IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
@@ -30,16 +30,16 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest) => 
+		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request) => 
 			this.Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
-				deleteAliasRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest) => 
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request) => 
 			this.Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
-				deleteAliasRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
 			);
 

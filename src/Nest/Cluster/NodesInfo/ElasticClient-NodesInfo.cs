@@ -21,13 +21,13 @@ namespace Nest
 		INodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		INodesInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest);
+		INodesInfoResponse NodesInfo(INodesInfoRequest request);
 
 		/// <inheritdoc/>
 		Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest);
+		Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request);
 
 	}
 
@@ -38,9 +38,9 @@ namespace Nest
 			this.NodesInfo(selector.InvokeOrDefault(new NodesInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest) => 
+		public INodesInfoResponse NodesInfo(INodesInfoRequest request) => 
 			this.Dispatcher.Dispatch<INodesInfoRequest, NodesInfoRequestParameters, NodesInfoResponse>(
-				nodesInfoRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.NodesInfoDispatch<NodesInfoResponse>(p)
 			);
 
@@ -49,9 +49,9 @@ namespace Nest
 			this.NodesInfoAsync(selector.InvokeOrDefault(new NodesInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest) => 
+		public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest request) => 
 			this.Dispatcher.DispatchAsync<INodesInfoRequest, NodesInfoRequestParameters, NodesInfoResponse, INodesInfoResponse>(
-				nodesInfoRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.NodesInfoDispatchAsync<NodesInfoResponse>(p)
 			);
 	}

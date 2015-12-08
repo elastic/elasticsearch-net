@@ -15,13 +15,13 @@ namespace Nest
 		IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
 
 		/// <inheritdoc/>
-		IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
+		IClusterHealthResponse ClusterHealth(IClusterHealthRequest request);
 
 		/// <inheritdoc/>
 		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
+		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request);
 	}
 
 	public partial class ElasticClient
@@ -31,9 +31,9 @@ namespace Nest
 			this.ClusterHealth(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest) => 
+		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest request) => 
 			this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse>(
-				clusterHealthRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<ClusterHealthResponse>(p)
 			);
 
@@ -42,9 +42,9 @@ namespace Nest
 			this.ClusterHealthAsync(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest) => 
+		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request) => 
 			this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse, IClusterHealthResponse>(
-				clusterHealthRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<ClusterHealthResponse>(p)
 			);
 	}

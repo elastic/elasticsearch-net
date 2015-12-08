@@ -56,9 +56,6 @@ namespace Tests.QueryDsl.TermLevel.Range
 			{
 				q.GreaterThan = null;
 				q.GreaterThanOrEqualTo = null;
-			},
-			q=>
-			{
 				q.LessThan = null;
 				q.LessThanOrEqualTo = null;
 			}

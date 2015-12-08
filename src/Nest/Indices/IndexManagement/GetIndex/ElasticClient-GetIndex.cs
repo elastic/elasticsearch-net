@@ -15,13 +15,13 @@ namespace Nest
 		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
+		IGetIndexResponse GetIndex(IGetIndexRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request);
 	}
 
 
@@ -32,9 +32,9 @@ namespace Nest
 			this.GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest) => 
+		public IGetIndexResponse GetIndex(IGetIndexRequest request) => 
 			this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
-				createIndexRequest,
+				request,
 				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
 			);
@@ -44,9 +44,9 @@ namespace Nest
 			this.GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest) => 
+		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
-				createIndexRequest,
+				request,
 				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p)
 			);

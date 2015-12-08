@@ -134,8 +134,8 @@ namespace Nest
 
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
-			type.ThrowIfNull("type");
-			return Inflector.MakePlural(type.Name).ToLowerInvariant();
+			type.ThrowIfNull(nameof(type));
+			return type.Name.MakePlural().ToLowerInvariant();
 		}
 
 		/// <summary>
@@ -156,7 +156,7 @@ namespace Nest
 		/// </summary>
 		public TConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
 		{
-			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
+			defaultTypeNameInferrer.ThrowIfNull(nameof(defaultTypeNameInferrer));
 			this._defaultTypeNameInferrer = defaultTypeNameInferrer;
 			return (TConnectionSettings)this;
 		}
@@ -167,7 +167,7 @@ namespace Nest
 		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector.ThrowIfNull(nameof(mappingSelector));
 			mappingSelector(this._defaultIndices);
 			return (TConnectionSettings)this;
 		}
@@ -177,7 +177,7 @@ namespace Nest
 		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector.ThrowIfNull(nameof(mappingSelector));
 			mappingSelector(this._defaultTypeNames);
 			return (TConnectionSettings)this;
 		}
@@ -185,7 +185,7 @@ namespace Nest
 		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
-			objectPath.ThrowIfNull("objectPath");
+			objectPath.ThrowIfNull(nameof(objectPath));
 
 			var memberInfo = new MemberInfoResolver(this, objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
@@ -208,7 +208,7 @@ namespace Nest
 		public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
-			propertiesSelector.ThrowIfNull("propertiesSelector");
+			propertiesSelector.ThrowIfNull(nameof(propertiesSelector));
 			var mapper = new PropertyMappingDescriptor<TDocument>();
 			propertiesSelector(mapper);
 			ApplyPropertyMappings(mapper.Mappings);

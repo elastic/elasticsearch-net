@@ -285,7 +285,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T SetProxy(Uri proxyAdress, string username, string password)
 		{
-			proxyAdress.ThrowIfNull("proxyAdress");
+			proxyAdress.ThrowIfNull(nameof(proxyAdress));
 			this._proxyAddress = proxyAdress.ToString();
 			this._proxyUsername = username;
 			this._proxyPassword = password;

@@ -20,13 +20,13 @@ namespace Nest
 		IIndicesOperationResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest putTemplateRequest);
+		IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest putTemplateRequest);
+		Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request);
 
 	}
 	public partial class ElasticClient
@@ -36,9 +36,9 @@ namespace Nest
 			this.PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest putTemplateRequest) => 
+		public IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest request) => 
 			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse>(
-				putTemplateRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>
 			);
 
@@ -47,9 +47,9 @@ namespace Nest
 			this.PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest putTemplateRequest) => 
+		public Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request) => 
 			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				putTemplateRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>
 			);
 	}

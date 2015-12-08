@@ -23,7 +23,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
-		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
+		IGetAliasesResponse GetAliases(IGetAliasesRequest request);
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
@@ -31,7 +31,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
-		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
+		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest request);
 
 	}
 
@@ -44,9 +44,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
-		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest) => 
+		public IGetAliasesResponse GetAliases(IGetAliasesRequest request) => 
 			this.Dispatcher.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
-				getAliasesRequest,
+				request,
 				new GetAliasesConverter(DeserializeGetAliasesResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatch<GetAliasesResponse>(p)
 			);
@@ -58,9 +58,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
-		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest) => 
+		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
-				getAliasesRequest,
+				request,
 				new GetAliasesConverter(DeserializeGetAliasesResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(p)
 			);

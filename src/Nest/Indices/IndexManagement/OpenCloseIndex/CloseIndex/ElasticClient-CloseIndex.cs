@@ -17,13 +17,13 @@ namespace Nest
 		IIndicesOperationResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest);
+		IIndicesOperationResponse CloseIndex(ICloseIndexRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
+		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest request);
 	}
 
 	public partial class ElasticClient
@@ -34,9 +34,9 @@ namespace Nest
 			this.CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest) => 
+		public IIndicesOperationResponse CloseIndex(ICloseIndexRequest request) => 
 			this.Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, IndicesOperationResponse>(
-				closeIndexRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesCloseDispatch<IndicesOperationResponse>(p)
 			);
 
@@ -45,9 +45,9 @@ namespace Nest
 			this.CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest) => 
+		public Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest request) => 
 			this.Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				closeIndexRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesCloseDispatchAsync<IndicesOperationResponse>(p)
 			);
 	}

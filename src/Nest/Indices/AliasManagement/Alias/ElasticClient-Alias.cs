@@ -21,20 +21,20 @@ namespace Nest
 		IIndicesOperationResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse Alias(IBulkAliasRequest aliasRequest);
+		IIndicesOperationResponse Alias(IBulkAliasRequest request);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest aliasRequest);
+		Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest request);
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse Alias(IBulkAliasRequest aliasRequest) => 
+		public IIndicesOperationResponse Alias(IBulkAliasRequest request) => 
 			this.Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, IndicesOperationResponse>(
-				aliasRequest,
+				request,
 				this.LowLevelDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>
 			);
 
@@ -43,9 +43,9 @@ namespace Nest
 			this.Alias(selector?.Invoke(new BulkAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest aliasRequest) => 
+		public Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest request) => 
 			this.Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				aliasRequest,
+				request,
 				this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>
 			);
 

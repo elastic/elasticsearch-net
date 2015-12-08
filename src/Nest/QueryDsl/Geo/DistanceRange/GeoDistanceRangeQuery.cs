@@ -59,7 +59,9 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
 
-		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => q.Location == null || (q.LessThanOrEqualTo == null && q.GreaterThanOrEqualTo == null);
+		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => 
+			q.Field == null || q.Location == null 
+			|| (q.LessThan == null && q.LessThanOrEqualTo == null && q.GreaterThanOrEqualTo == null && q.GreaterThan == null);
 	}
 
 	public class GeoDistanceRangeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T> 

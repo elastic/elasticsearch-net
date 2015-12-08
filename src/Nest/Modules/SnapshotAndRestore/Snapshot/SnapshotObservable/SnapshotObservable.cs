@@ -20,8 +20,8 @@ namespace Nest
 
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			snapshotRequest.ThrowIfNull("snapshotRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			snapshotRequest.ThrowIfNull(nameof(snapshotRequest));
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
@@ -33,15 +33,15 @@ namespace Nest
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest, TimeSpan interval)
 			: this(elasticClient, snapshotRequest)
 		{
-			interval.ThrowIfNull("interval");
-			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException("interval");
+			interval.ThrowIfNull(nameof(interval));
+			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException(nameof(interval));
 
 			_interval = interval;
 		}
 
 		public IDisposable Subscribe(IObserver<ISnapshotStatusResponse> observer)
 		{
-			observer.ThrowIfNull("observer");
+			observer.ThrowIfNull(nameof(observer));
 
 			try
 			{
@@ -171,8 +171,8 @@ namespace Nest
 
 		public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			snapshotRequest.ThrowIfNull("snapshotRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			snapshotRequest.ThrowIfNull(nameof(snapshotRequest));
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;

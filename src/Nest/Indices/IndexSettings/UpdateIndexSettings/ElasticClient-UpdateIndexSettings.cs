@@ -15,13 +15,13 @@ namespace Nest
 		IAcknowledgedResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest updateSettingsRequest);
+		IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest updateSettingsRequest);
+		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request);
 
 	}
 	public partial class ElasticClient
@@ -31,9 +31,9 @@ namespace Nest
 			this.UpdateIndexSettings(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest updateSettingsRequest) => 
+		public IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) => 
 			this.Dispatcher.Dispatch<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, AcknowledgedResponse>(
-				updateSettingsRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>
 			);
 
@@ -42,9 +42,9 @@ namespace Nest
 			this.UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest updateSettingsRequest) => 
+		public Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request) => 
 			this.Dispatcher.DispatchAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				updateSettingsRequest,
+				request,
 				this.LowLevelDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>
 			);
 	}

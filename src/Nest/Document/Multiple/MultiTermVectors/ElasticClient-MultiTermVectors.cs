@@ -16,13 +16,13 @@ namespace Nest
 		IMultiTermVectorsResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
 
 		/// <inheritdoc/>
-		IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest);
+		IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
 
 		/// <inheritdoc/>
 		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest);
+		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -32,9 +32,9 @@ namespace Nest
 			this.MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		///<inheritdoc/>
-		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest) => 
+		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => 
 			this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse>(
-				multiTermVectorsRequest,
+				request,
 				this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorsResponse>
 			);
 
@@ -43,9 +43,9 @@ namespace Nest
 			this.MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		///<inheritdoc/>
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest) => 
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request) => 
 			this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse, IMultiTermVectorsResponse>(
-				multiTermVectorsRequest,
+				request,
 				this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorsResponse>
 			);
 	}

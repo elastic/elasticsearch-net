@@ -18,10 +18,10 @@ namespace Nest
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null);
 
 		/// <inheritdoc/>
-		IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest);
+		IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest);
+		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -35,16 +35,16 @@ namespace Nest
 			this.ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest) => 
+		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest request) => 
 			this.Dispatcher.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
-				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
+				request ?? new ClusterGetSettingsRequest(),
 				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null) => 
+		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest request = null) => 
 			this.Dispatcher.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
-				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
+				request ?? new ClusterGetSettingsRequest(),
 				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);
 	}
