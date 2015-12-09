@@ -61,6 +61,10 @@ namespace Nest
 			? null
 			: new QueryContainer(new BoolQuery {MustNot = new[] {queryContainer}});
 
+		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || queryContainer.IsConditionless
+			? null
+			: new QueryContainer(new BoolQuery {Filter = new[] {queryContainer}});
+
 		public static bool operator false(QueryContainer a)
 		{
 			return false;

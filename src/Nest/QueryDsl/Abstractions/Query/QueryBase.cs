@@ -40,6 +40,10 @@ namespace Nest
 			? null
 			: new BoolQuery { MustNot = new QueryContainer[] {query}};
 
+		public static QueryBase operator +(QueryBase query) => query == null || ((IQuery)query).Conditionless
+			? null
+			: new BoolQuery { Filter = new QueryContainer[] {query}};
+
 		private static QueryBase Combine(QueryBase leftQuery, QueryBase rightQuery, Func<QueryContainer, QueryContainer, QueryContainer> combine)
 		{
 			QueryBase q;
