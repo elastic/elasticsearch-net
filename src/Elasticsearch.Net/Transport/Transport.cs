@@ -92,7 +92,7 @@ namespace Elasticsearch.Net.Connection
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						if (this.Settings.ThrowOnElasticsearchServerExceptions && !response.Success)
+						if (this.Settings.ThrowExceptions && !response.Success)
 							throw new ElasticsearchServerException(response.ErrorDetails.Info.Reason, response.ErrorDetails);
 						pipeline.MarkAlive(node);
 						return response;
@@ -135,7 +135,7 @@ namespace Elasticsearch.Net.Connection
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						if (this.Settings.ThrowOnElasticsearchServerExceptions && !response.Success)
+						if (this.Settings.ThrowExceptions && !response.Success)
 							throw new ElasticsearchServerException(response.ErrorDetails.Info.Reason, response.ErrorDetails);
 						pipeline.MarkAlive(node);
 						return response;

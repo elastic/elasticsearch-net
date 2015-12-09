@@ -380,7 +380,7 @@ namespace Elasticsearch.Net.Connection
 			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
 			var exception = new ElasticsearchClientException(new ConnectionException(pipelineFailure, seenAggregate));
 
-			if (!response.SuccessOrKnownError) throw exception;
+			if (!response.SuccessOrKnownError && _settings.ThrowExceptions) throw exception;
 
 			if (response == null)
 				response = data.CreateResponse<TReturn>(exception);

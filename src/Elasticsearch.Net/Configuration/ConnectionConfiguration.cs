@@ -125,8 +125,8 @@ namespace Elasticsearch.Net.Connection
 		private bool _httpPipeliningEnabled;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
-		private bool _throwOnServerExceptions;
-		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
+		private bool _throwExceptions;
+		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 
 		private static void DefaultApiCallHandler(IApiCallDetails status) {}
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
@@ -220,7 +220,7 @@ namespace Elasticsearch.Net.Connection
 		/// on the client when a call resulted in an exception on the elasticsearch server. 
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
 		/// </summary>
-		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true) => Assign(a => a._throwOnServerExceptions = alwaysThrow);
+		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true) => Assign(a => a._throwExceptions = alwaysThrow);
 
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead

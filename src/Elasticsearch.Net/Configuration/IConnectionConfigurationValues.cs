@@ -113,11 +113,11 @@ namespace Elasticsearch.Net.Connection
 		bool HttpPipeliningEnabled { get; }
 
 		/// <summary>
-		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
-		/// on the client when a call resulted in an exception on the elasticsearch server. 
-		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		bool ThrowOnElasticsearchServerExceptions { get;  }
+		bool ThrowExceptions { get;  }
 
 		/// <summary>
 		/// Sniff the cluster state immediatly on startup
