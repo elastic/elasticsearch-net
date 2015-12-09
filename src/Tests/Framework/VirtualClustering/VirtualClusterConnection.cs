@@ -135,7 +135,7 @@ namespace Tests.Framework
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
-			throw new Elasticsearch.Net.Connection.ElasticsearchConnectionException(PipelineFailure.BadResponse, (Exception)null);
+			throw new Elasticsearch.Net.Connection.ConnectionException(PipelineFailure.BadResponse, (Exception)null);
 		}
 
 		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)

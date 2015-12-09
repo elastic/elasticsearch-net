@@ -18,11 +18,8 @@ namespace Elasticsearch.Net
 		/// Can be a CLR exception or a mapped server side exception (ElasticsearchServerException)
 		/// </summary>
 		Exception OriginalException { get; }
-		
-		/// <summary>
-		/// TODO
-		/// </summary>
-		ElasticsearchError ErrorDetails { get; }
+
+		ElasticsearchServerException ServerException { get; }
 
 		/// <summary>
 		/// The HTTP method used by the request

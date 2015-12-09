@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 
 		public Exception OriginalException { get; protected internal set; }
 
-		public ElasticsearchError ErrorDetails { get; internal set; }
+		public ElasticsearchServerException ServerException { get { return OriginalException as ElasticsearchServerException; } }
 
 		public ElasticsearchResponse(Exception e)
 		{

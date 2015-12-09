@@ -93,7 +93,7 @@ namespace Elasticsearch.Net.Connection
 					if (response != null && response.SuccessOrKnownError)
 					{
 						if (this.Settings.ThrowExceptions && !response.Success)
-							throw new ElasticsearchServerException(response.ErrorDetails.Info.Reason, response.ErrorDetails);
+							throw response.ServerException;
 						pipeline.MarkAlive(node);
 						return response;
 					}
@@ -136,7 +136,7 @@ namespace Elasticsearch.Net.Connection
 					if (response != null && response.SuccessOrKnownError)
 					{
 						if (this.Settings.ThrowExceptions && !response.Success)
-							throw new ElasticsearchServerException(response.ErrorDetails.Info.Reason, response.ErrorDetails);
+							throw response.ServerException;
 						pipeline.MarkAlive(node);
 						return response;
 					}

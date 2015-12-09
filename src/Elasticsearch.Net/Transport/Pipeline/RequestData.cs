@@ -100,7 +100,7 @@ namespace Elasticsearch.Net.Connection
 			var cs = InitializeResponse<TReturn>(statusCode, innerException);
 
 			if (cs.SuccessOrKnownError && innerException != null)
-				cs.ErrorDetails = this._settings.Serializer.Deserialize<ElasticsearchError>(responseStream);
+				cs.OriginalException = this._settings.Serializer.Deserialize<ElasticsearchServerException>(responseStream);
 				
 			byte[] bytes = null;
 			if (NeedsToEagerReadStream<TReturn>())
@@ -125,7 +125,7 @@ namespace Elasticsearch.Net.Connection
 			var cs = InitializeResponse<TReturn>(statusCode, innerException);
 
 			if (cs.SuccessOrKnownError && innerException != null)
-				cs.ErrorDetails = await this._settings.Serializer.DeserializeAsync<ElasticsearchError>(responseStream, this.CancellationToken);
+				cs.OriginalException = await this._settings.Serializer.DeserializeAsync<ElasticsearchServerException>(responseStream, this.CancellationToken);
 
 			byte[] bytes = null;
 			if (NeedsToEagerReadStream<TReturn>())

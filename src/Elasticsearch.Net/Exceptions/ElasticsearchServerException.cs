@@ -9,18 +9,17 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchServerException : Exception
 	{
-		public ElasticsearchError Error { get; private set; }
-
-		public ElasticsearchServerException(string message, ElasticsearchError error) : base(message)
+		public ElasticsearchServerException(SerializationInfo info, StreamingContext context)
+			: this()
 		{
-			Error = error;
-		}
-	}
 
-	public class ElasticsearchError
-	{
-		public ErrorInfo Info { get; set; }
-		public int Status { get; set; }
+		}
+
+		public ElasticsearchServerException()
+			: base("An error occurred within Elasticsearch.  Check the 'Error' property for details.") { }
+
+		public ElasticsearchError Error { get; set; }
+		public int StatusCode { get; set; }
 	}
 
 	public interface IRootCause
@@ -32,7 +31,7 @@ namespace Elasticsearch.Net
 		string Index { get; set; }
 	}
 
-	public class ErrorInfo : IRootCause
+	public class ElasticsearchError : IRootCause
 	{
 		public string Index { get; set; }
 		public string Reason { get; set; }
