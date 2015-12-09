@@ -31,6 +31,8 @@ namespace Nest
 	public class DateRangeQuery : FieldNameQueryBase, IDateRangeQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
+		internal override void WrapInContainer(IQueryContainer c) => c.Range = this;
+
 		public DateMath GreaterThanOrEqualTo { get; set; }
 		public DateMath LessThanOrEqualTo { get; set; }
 		public DateMath GreaterThan { get; set; }
@@ -38,7 +40,6 @@ namespace Nest
 		public string TimeZone { get; set; }
 		public string Format { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Range = this;
 
 		internal static bool IsConditionless(IDateRangeQuery q)
 		{

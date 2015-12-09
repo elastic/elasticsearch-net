@@ -39,7 +39,7 @@ namespace Nest
 				throw new DslException("Query is conditionless but strict is turned on") { Offender = c };
 
 			//query is conditionless return an empty container that can later be rewritten
-			return QueryContainer.CreateEmptyContainer(c);
+			return null;
 		}
 
 		internal static string GetStringValue(this Enum enumValue)
