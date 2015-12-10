@@ -181,7 +181,7 @@ namespace Purify
 				if (pathEnd == -1)
 					pathEnd = source.Length + 1;
 				Path = queryPos > -1 ? source.Substring(start, pathEnd - start) : source.Substring(start);
-				Query = fragPos > -1 ? source.Substring(queryPos, fragPos - queryPos) : source.Substring(queryPos);
+				Query = fragPos > -1 ? source.Substring(queryPos, fragPos - queryPos) : source.Substring(queryPos>-1?queryPos:0);
 			}
 		}
 	}
