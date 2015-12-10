@@ -7,9 +7,6 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class UnaryAddOperatorUsageTests : OperatorUsageBase
 	{
-		private static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		private static readonly TermQuery ConditionlessQuery = new TermQuery { };
-		private static readonly TermQuery NullQuery = null;
 
 		[U] public void UnaryAdd()
 		{

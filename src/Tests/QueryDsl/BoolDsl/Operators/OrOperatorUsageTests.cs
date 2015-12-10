@@ -7,10 +7,6 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class OrOperatorUsageTests : OperatorUsageBase
 	{
-		private static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		private static readonly TermQuery ConditionlessQuery = new TermQuery { };
-		private static readonly TermQuery NullQuery = null;
-
 		[U] public void Or()
 		{
 			ReturnsBool(Query || Query, q => q.Query() || q.Query(), b =>

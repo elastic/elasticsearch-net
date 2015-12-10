@@ -7,6 +7,10 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public abstract class OperatorUsageBase
 	{
+		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
+		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
+		protected static readonly TermQuery NullQuery = null;
+
 		protected void ReturnsNull(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector)
 		{
 			combined.Should().BeNull(); selector.InvokeQuery(new QueryContainerDescriptor<Project>()).Should().BeNull();

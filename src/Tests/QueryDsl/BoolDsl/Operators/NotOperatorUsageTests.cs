@@ -7,12 +7,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 {
 	public class NotOperatorUsageTests : OperatorUsageBase
 	{
-		private static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		private static readonly TermQuery ConditionlessQuery = new TermQuery { };
-		private static readonly TermQuery NullQuery = null;
-
-		[U]
-		public void Not()
+		[U] public void Not()
 		{
 			ReturnsBool(!Query && !Query, q => !q.Query() && !q.Query(), b =>
 			{
