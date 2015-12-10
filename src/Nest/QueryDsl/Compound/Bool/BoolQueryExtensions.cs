@@ -10,20 +10,20 @@ namespace Nest
 			if (!leftContainer.CanMergeMustAndMustNots() || !rightContainer.CanMergeMustAndMustNots())
 			{
 				if (rightContainer.IsBoolQueryWithOnlyMustNots())
-					return CreateMustContainer(new[] { leftContainer }, rightContainer.Self().Bool.MustNot);
-				if (leftContainer.IsBoolQueryWithOnlyMustNots())
-					return CreateMustContainer(new[] { rightContainer }, leftContainer.Self().Bool.MustNot);
-				return CreateMustContainer(new[] { leftContainer, rightContainer }, null);
+					return CreateMustContainer(new[] { leftContainer }, rightContainer.Self().Bool.MustNot, rightContainer.Self().Bool.Filter);
+				else if (leftContainer.IsBoolQueryWithOnlyMustNots())
+					return CreateMustContainer(new[] { rightContainer }, leftContainer.Self().Bool.MustNot, leftContainer.Self().Bool.Filter);
+				return CreateMustContainer(new[] { leftContainer, rightContainer }, null, null);
 			}
 
-			var mustNots = OrphanMustNots(leftContainer)
-				.EagerConcat(OrphanMustNots(rightContainer));
+			var mustNots = OrphanMustNots(leftContainer).EagerConcat(OrphanMustNots(rightContainer));
+			var filters = OrphanFilters(leftContainer).EagerConcat(OrphanFilters(rightContainer));
 
 			var leftClauses = CreateMustClauses(leftContainer);
 			var rightClauses = CreateMustClauses(rightContainer);
 
 			var mustClauses = leftClauses.EagerConcat(rightClauses);
-			var container = CreateMustContainer(mustClauses, mustNots);
+			var container = CreateMustContainer(mustClauses, mustNots, filters);
 			return container;
 		}
 
@@ -88,15 +88,25 @@ namespace Nest
 			return mustNotQueries;
 		}
 
+		private static IEnumerable<QueryContainer> OrphanFilters(IQueryContainer container)
+		{
+			var lBoolQuery = container.Bool;
+			if (lBoolQuery == null || !lBoolQuery.Filter.HasAny()) return null;
+
+			var filters = lBoolQuery.Filter.ToList();
+			lBoolQuery.Filter = null;
+			return filters;
+		}
 
 		private static QueryContainer CreateShouldContainer(IList<QueryContainer> shouldClauses) =>
 			new QueryContainer(new BoolQuery { Should = shouldClauses.ToListOrNullIfEmpty() });
 
-		private static QueryContainer CreateMustContainer(IList<QueryContainer> mustClauses, IEnumerable<QueryContainer> mustNotClauses) =>
+		private static QueryContainer CreateMustContainer(IList<QueryContainer> mustClauses, IEnumerable<QueryContainer> mustNotClauses, IEnumerable<QueryContainer> filters) =>
 			new QueryContainer(new BoolQuery
 			{
 				Must = mustClauses.ToListOrNullIfEmpty(),
-				MustNot = mustNotClauses.ToListOrNullIfEmpty()
+				MustNot = mustNotClauses.ToListOrNullIfEmpty(),
+				Filter = filters.ToListOrNullIfEmpty()
 			});
 	}
 }

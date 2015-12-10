@@ -11,8 +11,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		private static readonly TermQuery ConditionlessQuery = new TermQuery { };
 		private static readonly TermQuery NullQuery = null;
 
-		//[U]
-		public void UnaryAdd()
+		[U] public void UnaryAdd()
 		{
 			ReturnsBool(+Query && +Query, q => +q.Query() && +q.Query(), b =>
 			{
@@ -24,7 +23,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 			ReturnsBool(+Query || +Query || +ConditionlessQuery, q => +q.Query() || +q.Query() || +q.ConditionlessQuery(), b =>
 			{
-				b.Filter.Should().NotBeEmpty().And.HaveCount(2);
+				b.Should.Should().NotBeEmpty().And.HaveCount(2);
 				b.Must.Should().BeNull();
 				b.MustNot.Should().BeNull();
 				b.MustNot.Should().BeNull();
@@ -36,25 +35,25 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			});
 
 			ReturnsSingleQuery(+Query || +ConditionlessQuery, q => +q.Query() || +q.ConditionlessQuery(),
-				c => c.Bool.MustNot.Should().NotBeNull().And.HaveCount(1));
+				c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 
 			ReturnsSingleQuery(+ConditionlessQuery || +Query, q => +q.ConditionlessQuery() || +q.Query(),
-				c => c.Bool.MustNot.Should().NotBeNull().And.HaveCount(1));
+				c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 
 			ReturnsSingleQuery(+Query || +NullQuery, q => +q.Query() || +q.NullQuery(),
-				c => c.Bool.MustNot.Should().NotBeNull().And.HaveCount(1));
+				c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 
 			ReturnsSingleQuery(+NullQuery && +Query, q => +q.NullQuery() && +q.Query(),
-				c => c.Bool.MustNot.Should().NotBeNull().And.HaveCount(1));
+				c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 
 			ReturnsSingleQuery(+ConditionlessQuery || +ConditionlessQuery && +ConditionlessQuery || +Query,
 				q => +q.ConditionlessQuery() || +q.ConditionlessQuery() && +q.ConditionlessQuery() || +q.Query(),
-				c => c.Bool.MustNot.Should().NotBeNull().And.HaveCount(1));
+				c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 
 			ReturnsSingleQuery(
 				+NullQuery || +NullQuery || +ConditionlessQuery || +Query,
 				q => +q.NullQuery() || +q.NullQuery() || +q.ConditionlessQuery() || +q.Query(),
-				c => c.Bool.MustNot.Should().NotBeNull());
+				c => c.Bool.Filter.Should().NotBeNull());
 
 			ReturnsNull(+NullQuery || +ConditionlessQuery, q => +q.NullQuery() || +q.ConditionlessQuery());
 			ReturnsNull(+ConditionlessQuery && +NullQuery, q => +q.ConditionlessQuery() && +q.NullQuery());
@@ -73,7 +72,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		[U]
 		public void CombiningManyUsingAggregate()
 		{
-			var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
+			var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);
 			LotsOfUnaryAdds(lotsOfUnaryAdds);
 		}
 
@@ -82,7 +81,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		{
 			QueryContainer container = null;
 			foreach (var i in Enumerable.Range(0, 100))
-				container |= Query;
+				container &= +Query;
 			LotsOfUnaryAdds(container);
 		}
 
@@ -91,7 +90,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		{
 			var container = new QueryContainer();
 			foreach (var i in Enumerable.Range(0, 100))
-				container |= Query;
+				container &= +Query;
 			LotsOfUnaryAdds(container);
 		}
 
@@ -99,7 +98,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		{
 			lotsOfUnaryAdds.Should().NotBeNull();
 			lotsOfUnaryAdds.Bool.Should().NotBeNull();
-			lotsOfUnaryAdds.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
+			lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
 		}
 
 	}

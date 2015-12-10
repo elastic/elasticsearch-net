@@ -59,7 +59,8 @@ namespace Nest
 			{
 				Must = query.Must,
 				MustNot = query.MustNot,
-				Should = query.Should
+				Should = query.Should,
+				Filter = query.Filter,
 			};
 		}
 
