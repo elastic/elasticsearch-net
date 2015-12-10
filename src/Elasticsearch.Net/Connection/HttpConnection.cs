@@ -141,8 +141,9 @@ namespace Elasticsearch.Net.Connection
 			}
 			catch (WebException webException)
 			{
-				var response = (HttpWebResponse)webException.Response;
-				return requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), webException);
+				var errorResponse = (HttpWebResponse)webException.Response;
+				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);					
+				return requestData.CreateResponse<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
 			}
 			catch (Exception exception)
 			{
@@ -177,10 +178,11 @@ namespace Elasticsearch.Net.Connection
 				var cs = await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, responseStream);
 				return cs;
 			}
-			catch (WebException exception)
+			catch (WebException webException)
 			{
-				var response = (HttpWebResponse)exception.Response;
-				return await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, response.GetResponseStream(), exception);
+				var errorResponse = (HttpWebResponse)webException.Response;
+				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);
+				return await requestData.CreateResponseAsync<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
 			}
 			catch (Exception exception)
 			{

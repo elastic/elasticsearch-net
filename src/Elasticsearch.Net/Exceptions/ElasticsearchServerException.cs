@@ -10,13 +10,10 @@ namespace Elasticsearch.Net
 	public class ElasticsearchServerException : Exception
 	{
 		public ElasticsearchServerException(SerializationInfo info, StreamingContext context)
-			: this()
-		{
-
-		}
+			: this() { }
 
 		public ElasticsearchServerException()
-			: base("An error occurred within Elasticsearch.  Check the 'Error' property for details.") { }
+			: base("Elasticsearch returned an error.") { }
 
 		public ElasticsearchError Error { get; set; }
 		public int StatusCode { get; set; }

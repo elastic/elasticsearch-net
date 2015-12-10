@@ -80,11 +80,6 @@ namespace Elasticsearch.Net.Connection
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
-					catch (ConnectionException exception) when (!exception.Recoverable)
-					{
-						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
-					}
 					catch (ConnectionException exception)
 					{
 						pipeline.MarkDead(node);
@@ -122,11 +117,6 @@ namespace Elasticsearch.Net.Connection
 						await pipeline.SniffOnStaleClusterAsync();
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
-					}
-					catch (ConnectionException exception) when (!exception.Recoverable)
-					{
-						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
 					}
 					catch (ConnectionException exception)
 					{

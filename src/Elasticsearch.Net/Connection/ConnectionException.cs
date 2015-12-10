@@ -32,10 +32,10 @@ namespace Elasticsearch.Net.Connection
 		{
 			switch(failure)
 			{
+				case PipelineFailure.BadResponse:
+					return "An error occurred trying to establish a connection with the specified node.";
 				case PipelineFailure.BadAuthentication:
 					return "Could not authenticate with the specified node. Try verifying your credentials or check your Shield configuration.";
-				case PipelineFailure.BadResponse:
-					return "An Elasticsearch server error occurred. See the original exception for details.";
 				case PipelineFailure.BadPing:
 					return "Failed to ping the specified node.";
 				case PipelineFailure.BadSniff:

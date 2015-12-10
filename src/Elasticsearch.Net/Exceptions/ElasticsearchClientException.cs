@@ -12,6 +12,7 @@ namespace Elasticsearch.Net
 		public ElasticsearchClientException(string message, Exception inner)
 			: base(message, inner) { }
 
-		public ElasticsearchClientException(Exception inner) : this(inner.Message, inner) { }
+		public ElasticsearchClientException(Exception inner) 
+			: this("An error occurred within the client.", inner) { }
 	}
 }

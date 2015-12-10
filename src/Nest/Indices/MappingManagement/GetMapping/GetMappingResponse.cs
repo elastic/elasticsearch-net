@@ -23,6 +23,8 @@ namespace Nest
 	{
 		public override bool IsValid => base.IsValid && this.Mapping != null;
 
+		internal GetMappingResponse() { }
+
 		internal GetMappingResponse(IApiCallDetails status, GetRootObjectMappingWrapping dict)
 		{
 			this.Mappings = new Dictionary<string, IList<TypeMapping>>();
