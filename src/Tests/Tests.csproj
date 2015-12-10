@@ -361,6 +361,7 @@
     <Compile Include="QueryDsl\BoolDsl\Operators\AndOperatorUsageTests.cs" />
     <Compile Include="QueryDsl\BoolDsl\Operators\OperatorUsageBase.cs" />
     <Compile Include="QueryDsl\BoolDsl\QueryContainerDescriptorExtensions.cs" />
+    <Compile Include="QueryDsl\Compound\Bool\BoolDslComplexQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Not\NotQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Limit\LimitQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Or\OrQueryUsageTests.cs" />

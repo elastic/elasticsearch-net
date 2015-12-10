@@ -297,7 +297,7 @@
     <Compile Include="QueryDsl\Compound\Or\OrQuery.cs" />
     <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
+    <Compile Include="QueryDsl\Abstractions\Query\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ScoreFunctionJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\MultiValueMode.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValue\FieldValueFactorFunction.cs" />

@@ -50,10 +50,7 @@ namespace Nest
 			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftQuery, rightQuery, out q))
 				return q;
 
-			var lc = new QueryContainer(leftQuery);
-			var rc = new QueryContainer(rightQuery);
-
-			IQueryContainer container = combine(lc, rc);
+			IQueryContainer container = combine(leftQuery, rightQuery);
 			var query = container.Bool;
 			return new BoolQuery()
 			{

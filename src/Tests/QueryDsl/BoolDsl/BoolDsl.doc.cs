@@ -92,6 +92,11 @@ namespace Tests.QueryDsl.BoolDsl
 
 		[U] public void UnaryAddOperator() => Assert(q => +q.Query(), +Query, c => c.Bool.Filter.Should().HaveCount(1));
 
+		/** Both of these can be combined with ands to a single bool query  */
+
+		[U] public void MustNotOperatorAnd() => Assert(q => !q.Query() && !q.Query(), !Query && !Query, c => c.Bool.MustNot.Should().HaveCount(2));
+		[U] public void UnaryAddOperatorAnd() => Assert(q => +q.Query() && +q.Query(), +Query && +Query, c => c.Bool.Filter.Should().HaveCount(2));
+
 		/** When combining multiple queries some or all possibly marked as must_not or filter NEST still combines to a single bool query
 
 		*     bool
@@ -245,6 +250,23 @@ namespace Tests.QueryDsl.BoolDsl
 					var nestedBool = c.Bool.Should.First() as IQueryContainer;
 					nestedBool.Bool.Should.Should().HaveCount(4);
 				});
+
+		/* Nest will also not combine if any metadata is set on the bool e.g boost/name nest will treat these as locked */
+
+		[U] public void DoNotCombineLockedBools() =>
+			Assert(
+				q => q.Bool(b=>b.Name("firstBool").Should(mq=>mq.Query())) 
+					|| q.Bool(b=>b.Name("secondBool").Should(mq=>mq.Query())),
+				new BoolQuery { Name = "firstBool", Should = new QueryContainer[] { Query } }
+				 || new BoolQuery { Name = "secondBool", Should = new QueryContainer[] { Query } },
+				c=>
+				{
+					c.Bool.Should.Should().HaveCount(2);
+					var nestedBool = c.Bool.Should.First() as IQueryContainer;
+					nestedBool.Bool.Should.Should().HaveCount(1);
+					nestedBool.Bool.Name.Should().Be("firstBool");
+				});
+
 
 		private void Assert(
 			Func<QueryContainerDescriptor<Project>, QueryContainer> fluent,

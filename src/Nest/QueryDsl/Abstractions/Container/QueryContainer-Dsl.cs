@@ -35,18 +35,17 @@ namespace Nest
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer))
-				return queryContainer;
-
-			return leftContainer.MergeMustQueries(rightContainer);
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
+				? queryContainer 
+				: leftContainer.CombineAsMust(rightContainer);
 		}
 		
 		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			if (IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)) return queryContainer;
-
-			return leftContainer.MergeShouldQueries(rightContainer);
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
+				? queryContainer 
+				: leftContainer.CombineAsShould(rightContainer);
 		}
 
 		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
@@ -65,21 +64,14 @@ namespace Nest
 			? null
 			: new QueryContainer(new BoolQuery {Filter = new[] {queryContainer}});
 
-		public static bool operator false(QueryContainer a)
-		{
-			return false;
-		}
+		public static bool operator false(QueryContainer a) => false;
 
-		public static bool operator true(QueryContainer a)
-		{
-			return false;
-		}
+		public static bool operator true(QueryContainer a) => false;
 
 		public void Accept(IQueryVisitor visitor)
 		{
-			var walker = new QueryWalker();
 			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
-			walker.Walk(this, visitor);
+			new QueryWalker().Walk(this, visitor);
 		}
 
 		//TODO remove rely on a custom serializer
