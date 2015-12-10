@@ -245,7 +245,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
+		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout.TotalMilliseconds + "ms";
 
 		public IEnumerable<Node> SniffNodes => this._connectionPool.CreateView().ToList().OrderBy(n =>  n.MasterEligable ? n.Uri.Port : int.MaxValue);
 
