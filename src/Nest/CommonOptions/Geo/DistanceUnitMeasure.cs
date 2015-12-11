@@ -1,18 +1,24 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Runtime.Serialization;
+using Nest.CommonOptions.Attributes;
 
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum GeoPrecision
+	public enum DistanceUnitMeasure
 	{
 		[EnumMember(Value = "in")]
 		Inch,
+		[EnumMember(Value = "ft")]
+		Feet,
 		[EnumMember(Value = "yd")]
-		Yard,
+		Yards,
 		[EnumMember(Value = "mi")]
 		Miles,
+		[EnumMember(Value = "nmi")]
+		[AlternativeEnumMember("NM")]
+		NauticalMiles,
 		[EnumMember(Value = "km")]
 		Kilometers,
 		[EnumMember(Value = "m")]

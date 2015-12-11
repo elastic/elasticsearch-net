@@ -11,7 +11,7 @@ namespace Nest
 	{
 		Field Field { get; set; }
 		IEnumerable<GeoLocation> Points { get; set; }
-		GeoPrecision? GeoUnit { get; set; }
+		DistanceUnitMeasure? GeoUnit { get; set; }
 		GeoDistanceType? DistanceType { get; set; }
 	}
 
@@ -20,7 +20,7 @@ namespace Nest
 		protected override Field SortKey => "_geo_distance";
 		public Field Field { get; set; }
 		public IEnumerable<GeoLocation> Points { get; set; }
-		public GeoPrecision? GeoUnit { get; set; }
+		public DistanceUnitMeasure? GeoUnit { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 
 	}
@@ -33,13 +33,13 @@ namespace Nest
 
 		Field IGeoDistanceSort.Field { get; set; }
 		IEnumerable<GeoLocation> IGeoDistanceSort.Points { get; set; }
-		GeoPrecision? IGeoDistanceSort.GeoUnit { get; set; }
+		DistanceUnitMeasure? IGeoDistanceSort.GeoUnit { get; set; }
 		GeoDistanceType? IGeoDistanceSort.DistanceType { get; set; }
 
 		public SortGeoDistanceDescriptor<T> PinTo(params GeoLocation[] geoLocations) => Assign(a => a.Points = geoLocations);
 		public SortGeoDistanceDescriptor<T> PinTo(IEnumerable<GeoLocation> geoLocations) => Assign(a => a.Points = geoLocations);
 
-		public SortGeoDistanceDescriptor<T> Unit(GeoPrecision unit) => Assign(a => a.GeoUnit = unit);
+		public SortGeoDistanceDescriptor<T> Unit(DistanceUnitMeasure unit) => Assign(a => a.GeoUnit = unit);
 
 		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType distanceType) => Assign(a => a.DistanceType = distanceType);
 

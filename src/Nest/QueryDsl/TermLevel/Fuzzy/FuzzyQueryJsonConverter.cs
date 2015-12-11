@@ -43,7 +43,7 @@ namespace Nest
 				fq = new FuzzyDateQuery()
 				{
 					Value = GetPropValue<DateTime?>(jo, "value"),
-					Fuzziness = GetPropObject<TimeUnitExpression>(jo, "fuzziness")
+					Fuzziness = GetPropObject<TimeUnit>(jo, "fuzziness")
 				};
 			}
 			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)

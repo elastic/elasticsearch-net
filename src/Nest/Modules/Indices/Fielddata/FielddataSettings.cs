@@ -11,6 +11,6 @@ namespace Nest
 		public string CacheSize { get; internal set; }
 
 		///<inheritdoc/>
-		public TimeUnitExpression CacheExpire { get; internal set; }
+		public TimeUnit CacheExpire { get; internal set; }
 	}
 }

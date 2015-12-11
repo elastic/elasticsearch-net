@@ -17,7 +17,7 @@ namespace Nest
 	}
 
 	public class ExponentialDecayFunction : ExponentialDecayFunction<double?, double?> { }
-	public class ExponentialDateDecayFunction : ExponentialDecayFunction<DateMath, TimeUnitExpression> { }
-	public class ExponentialGeoDecayFunction : ExponentialDecayFunction<GeoLocation, GeoDistance> { }
+	public class ExponentialDateDecayFunction : ExponentialDecayFunction<DateMath, TimeUnit> { }
+	public class ExponentialGeoDecayFunction : ExponentialDecayFunction<GeoLocation, DistanceUnit> { }
 
 }

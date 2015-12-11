@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial interface IScrollRequest 
 	{
-		TimeUnitExpression Scroll { get; set; }
+		TimeUnit Scroll { get; set; }
 	}
 	
 	//TODO complex old route update routine needs to be ported
@@ -31,9 +31,9 @@ namespace Nest
 	//TODO signal to codegen to not generate constructors for this one
 	public partial class ScrollRequest 
 	{
-		public TimeUnitExpression Scroll { get; set; }
+		public TimeUnit Scroll { get; set; }
 
-		public ScrollRequest(ScrollId scrollId, TimeUnitExpression scrollTimeout) : this(scrollId)
+		public ScrollRequest(ScrollId scrollId, TimeUnit scrollTimeout) : this(scrollId)
 		{
 			this.Scroll = scrollTimeout;
 		}
@@ -41,9 +41,9 @@ namespace Nest
 
 	public partial class ScrollDescriptor<T> where T : class
 	{
-		TimeUnitExpression IScrollRequest.Scroll { get; set; }
+		TimeUnit IScrollRequest.Scroll { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll) => Assign(a => a.Scroll = scroll);
+		public ScrollDescriptor<T> Scroll(TimeUnit scroll) => Assign(a => a.Scroll = scroll);
 	}
 }

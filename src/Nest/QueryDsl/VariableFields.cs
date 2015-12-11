@@ -20,7 +20,6 @@ namespace Nest
 		{
 			this.FieldName = fieldName;
 		}
-
 	}
 
 	internal static class VariableFields
@@ -32,7 +31,6 @@ namespace Nest
 	internal class VariableFieldNameQueryJsonConverter<TReadAs, TInterface> : ReserializeJsonConverter<TReadAs, IFieldNameQuery>
 		where TReadAs : class, IFieldNameQuery, TInterface, new()
 	{
-
 		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var jo = JObject.Load(reader);
@@ -108,7 +106,7 @@ namespace Nest
 					select Tuple.Create(prop, (VariableFieldAttribute) attributes.First());
 				info = properties.FirstOrDefault();
 				if (info == null)
-					throw new Exception("Can not use VariableFieldNameJsonConverter<T> if T has no property with VariableFieldAttribute set");
+					throw new Exception($"Can not use {typeof(VariableFieldNameQueryJsonConverter<TReadAs,TInterface>).Name} if TInterface has no property with VariableFieldAttribute set");
 				VariableFields.CachedTypeInformation.TryAdd(t, info);
 			}
 			return info;

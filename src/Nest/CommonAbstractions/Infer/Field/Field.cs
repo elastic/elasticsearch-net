@@ -62,7 +62,6 @@ namespace Nest
 				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
 			
 			return new Field { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
-
 		}
 
 		public static implicit operator Field(PropertyInfo property)
@@ -76,7 +75,7 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
+			return ComparisonValue?.GetHashCode() ?? 0;	
 		}
 
 		bool IEquatable<Field>.Equals(Field other)

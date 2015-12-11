@@ -16,6 +16,6 @@ namespace Nest
 	}
 
 	public class LinearDecayFunction : LinearDecayFunction<double?, double?> { }
-	public class LinearDateDecayFunction : LinearDecayFunction<DateMath, TimeUnitExpression> { }
-	public class LinearGeoDecayFunction : LinearDecayFunction<GeoLocation, GeoDistance> { }
+	public class LinearDateDecayFunction : LinearDecayFunction<DateMath, TimeUnit> { }
+	public class LinearGeoDecayFunction : LinearDecayFunction<GeoLocation, DistanceUnit> { }
 }

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net;
+using Nest.CommonOptions.Attributes;
 
 namespace Nest
 {
@@ -50,12 +51,9 @@ namespace Nest
 
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());
-			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
+			var da = info.GetCustomAttribute<EnumMemberAttribute>();
 
-			if (da.Length > 0)
-				return da[0].Value;
-			else
-				return Enum.GetName(enumValue.GetType(), enumValue);
+			return da != null ? da.Value : Enum.GetName(enumValue.GetType(), enumValue);
 		}
 		
 		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
@@ -80,13 +78,23 @@ namespace Nest
 			var enumType = typeof(T);
 			foreach (var name in Enum.GetNames(enumType))
 			{
-				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name);
+				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
 
-				var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
+				var enumFieldInfo = enumType.GetField(name);
+				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
 
 				if (enumMemberAttribute != null)
 				{
-					if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
+					if (enumMemberAttribute.Value == str)
+						return (T)Enum.Parse(enumType, name);
+				}
+
+				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
+
+				if (alternativeEnumMemberAttribute != null)
+				{
+					if (alternativeEnumMemberAttribute.Value == str)
+						return (T) Enum.Parse(enumType, name);
 				}
 			}
 			//throw exception or whatever handling you want or

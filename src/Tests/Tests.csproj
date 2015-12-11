@@ -374,6 +374,7 @@
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Distance\DistanceUnits.doc.cs" />
     <Compile Include="QueryDsl\TermLevel\Missing\MissingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />

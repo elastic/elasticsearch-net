@@ -175,6 +175,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
     <Compile Include="CommonAbstractions\Static\Static.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
+    <Compile Include="CommonOptions\Attributes\AlternativeEnumMemberAttribute.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
     <Compile Include="CommonOptions\Scripting\FileScript.cs" />
@@ -193,7 +194,7 @@
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkRequestJsonConverter.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitExpressionJsonConverter.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeUnitJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
     <Compile Include="CommonAbstractions\Union\Union.cs" />
     <Compile Include="CommonOptions\DateMath\DateMath.cs" />
@@ -202,8 +203,8 @@
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeExpression.cs" />
     <Compile Include="Aggregations\Bucket\IpRange\IpRange.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeUnitMeasure.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnit.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
@@ -309,6 +310,7 @@
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringFlags.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\BoundingBox.cs" />
     <Compile Include="QueryDsl\Geo\GeoCoordinateJsonConverter.cs" />
+    <Compile Include="QueryDsl\Geo\GeoValidationMethod.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
@@ -426,7 +428,7 @@
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksRecord.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocument.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
-    <Compile Include="QueryDsl\Geo\GeoDistance.cs" />
+    <Compile Include="QueryDsl\Geo\DistanceUnit.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />
     <Compile Include="Mapping\CodeBased\PropertyMapping.cs" />
     <Compile Include="Modules\Indices\Fielddata\FielddataFilter.cs" />
@@ -566,7 +568,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\ElasticClient-Snapshot.cs" />
     <Compile Include="Search\FieldStats\ElasticClient-FieldStats.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
-    <Compile Include="CommonOptions\Geo\GeoPrecision.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceUnitMeasure.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptRequest.cs" />
     <Compile Include="Search\SearchExists\SearchExistsRequest.cs" />
     <Compile Include="Modules\Scripting\PutScript\PutScriptRequest.cs" />
@@ -1048,7 +1050,7 @@
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
-    <Compile Include="QueryDsl\Geo\GeoDistanceJsonConverter.cs" />
+    <Compile Include="QueryDsl\Geo\DistanceUnitJsonConverter.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHitJsonConverter.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />

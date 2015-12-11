@@ -9,8 +9,8 @@ namespace Nest
 	public interface IDateMath
 	{
 		Union<DateTime, string> Anchor { get; }
-		IList<Tuple<DateMathOperation, TimeUnitExpression>> Ranges { get; }
-		TimeUnit? Round { get; }
+		IList<Tuple<DateMathOperation, TimeUnit>> Ranges { get; }
+		TimeUnitMeasure? Round { get; }
 	}
 
 	[JsonConverter(typeof(DateMath.Json))]
@@ -21,10 +21,10 @@ namespace Nest
 		protected Union<DateTime, string> Anchor;
 		Union<DateTime, string> IDateMath.Anchor => Anchor;
 
-		protected TimeUnit? Round;
-		TimeUnit? IDateMath.Round => Round;
+		protected TimeUnitMeasure? Round;
+		TimeUnitMeasure? IDateMath.Round => Round;
 
-		IList<Tuple<DateMathOperation, TimeUnitExpression>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, TimeUnitExpression>>();
+		IList<Tuple<DateMathOperation, TimeUnit>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, TimeUnit>>();
 
 		protected DateMath() { }
 
@@ -69,7 +69,7 @@ namespace Nest
 
 			if (match.Groups["rounding"].Success)
 			{
-				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<TimeUnit>();
+				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<TimeUnitMeasure>();
 				if (rounding.HasValue)
 					return math.RoundTo(rounding.Value);
 			}

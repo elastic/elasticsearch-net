@@ -68,7 +68,7 @@ namespace Tests.CommonOptions.DateMath
 			Expect("now+1d-1m").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
 
 			/** a rounding value can also be chained at the end afterwhich no more ranges can be appended */
-			Expect("now+1d-1m/d").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)).RoundTo(Nest.TimeUnit.Day));
+			Expect("now+1d-1m/d").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)).RoundTo(Nest.TimeUnitMeasure.Day));
 			
 			/** When anchoring date's we need to append `||` as clear separator between anchor and ranges */
 			/** plural means that you can chain multiple */

@@ -117,7 +117,7 @@ namespace Nest
 			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv => kv.Name);
 			Set<int?>(settings, UpdatableIndexSettings.NumberOfReplicas, v => s.NumberOfReplicas = v);
 			Set<string>(settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.RefreshInterval, v => s.RefreshInterval = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.RefreshInterval, v => s.RefreshInterval = v);
 			Set<bool?>(settings, UpdatableIndexSettings.BlocksReadOnly, v => s.BlocksReadOnly = v);
 			Set<bool?>(settings, UpdatableIndexSettings.BlocksRead, v => s.BlocksRead = v);
 			Set<bool?>(settings, UpdatableIndexSettings.BlocksWrite, v => s.BlocksWrite = v);
@@ -129,19 +129,19 @@ namespace Nest
 				v => s.RecoveryInitialShards = v);
 			Set<int?>(settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode,
 				v => s.RoutingAllocationTotalShardsPerNode = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout,
 				v => s.UnassignedNodeLeftDelayedTimeout = v);
 
 			var t = s.Translog = new TranslogSettings();
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogSyncInterval, v => t.SyncInterval = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.TranslogSyncInterval, v => t.SyncInterval = v);
 			Set<TranslogDurability?>(settings, UpdatableIndexSettings.TranslogDurability, v => t.Durability = v);
 			Set<TranslogWriteMode?>(settings, UpdatableIndexSettings.TranslogFsType, v => t.FileSystemType = v);
 
 			var tf = s.Translog.Flush = new TranslogFlushSettings();
 			Set<string>(settings, UpdatableIndexSettings.TranslogFlushThresholdSize, v => tf.ThresholdSize = v);
 			Set<int?>(settings, UpdatableIndexSettings.TranslogFlushTreshHoldOps, v => tf.ThresholdOps = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogInterval, v => tf.Interval = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.TranslogInterval, v => tf.Interval = v);
 
 			s.Merge = new MergeSettings();
 			var p = s.Merge.Policy = new MergePolicySettings();
@@ -161,29 +161,29 @@ namespace Nest
 			var search = s.SlowLog.Search = new SlowLogSearch();
 			Set<LogLevel?>(settings, UpdatableIndexSettings.SlowlogSearchLevel, v => search.LogLevel = v);
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug,
 				v => query.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace,
 				v => query.ThresholdTrace = v);
 
 			var fetch = s.SlowLog.Search.Fetch = new SlowLogSearchFetch();
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug,
 				v => fetch.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace,
 				v => fetch.ThresholdTrace = v);
 
 			var indexing = s.SlowLog.Indexing = new SlowLogIndexing();
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn,
 				v => indexing.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo,
 				v => indexing.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug,
 				v => indexing.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace,
+			Set<TimeUnit>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace,
 				v => indexing.ThresholdTrace = v);
 			Set<LogLevel?>(settings, UpdatableIndexSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(settings, UpdatableIndexSettings.SlowlogIndexingSource, v => indexing.Source = v);

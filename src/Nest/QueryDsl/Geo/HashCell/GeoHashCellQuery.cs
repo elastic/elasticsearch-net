@@ -14,7 +14,7 @@ namespace Nest
 		GeoLocation Location { get; set; }
 
 		[JsonProperty("precision")]
-		GeoDistance Precision { get; set; }
+		Union<int,DistanceUnit> Precision { get; set; }
 
 		[JsonProperty("neighbors")]
 		bool? Neighbors { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 
 		public GeoLocation Location { get; set; }
-		public GeoDistance Precision { get; set; }
+		public Union<int, DistanceUnit> Precision { get; set; }
 		public bool? Neighbors { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
@@ -40,13 +40,14 @@ namespace Nest
 		protected override bool Conditionless => GeoHashCellQuery.IsConditionless(this);
 
 		GeoLocation IGeoHashCellQuery.Location { get; set; }
-		GeoDistance IGeoHashCellQuery.Precision { get; set; }
+		Union<int, DistanceUnit> IGeoHashCellQuery.Precision { get; set; }
 		bool? IGeoHashCellQuery.Neighbors { get; set; }
 
 		public GeoHashCellQueryDescriptor<T> Location(GeoLocation location) => Assign(a => a.Location = location);
 		public GeoHashCellQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
 
-		public GeoHashCellQueryDescriptor<T> Precision(GeoDistance distance) => Assign(a => a.Precision = distance);
+		public GeoHashCellQueryDescriptor<T> Precision(DistanceUnit precision) => Assign(a => a.Precision = precision);
+		public GeoHashCellQueryDescriptor<T> Precision(int precision) => Assign(a => a.Precision = precision);
 
 		public GeoHashCellQueryDescriptor<T> Neighbors(bool? neighbors = true) => Assign(a => a.Neighbors = neighbors);
 	}
