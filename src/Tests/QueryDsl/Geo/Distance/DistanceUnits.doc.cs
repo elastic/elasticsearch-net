@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using FluentAssertions;
-using Nest;
+﻿using Nest;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 

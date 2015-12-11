@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	public abstract class GaussDecayFunction<TOrigin, TScale> : DecayFunctionBase<TOrigin, TScale>

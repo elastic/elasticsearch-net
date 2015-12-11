@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -28,7 +29,7 @@ namespace Nest
 			if (!match.Success)
 				throw new ArgumentException("must be a valid distance unit", nameof(distanceUnit));
 
-			var precision = double.Parse(match.Groups["precision"].Value);
+			var precision = double.Parse(match.Groups["precision"].Value, NumberStyles.Any, CultureInfo.InvariantCulture);
 			var unit = match.Groups["unit"].Value;
 
 			this.Precision = precision;

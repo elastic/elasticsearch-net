@@ -177,6 +177,8 @@
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="CommonOptions\Attributes\AlternativeEnumMemberAttribute.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceUnit.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceUnitJsonConverter.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
     <Compile Include="CommonOptions\Scripting\FileScript.cs" />
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
@@ -428,7 +430,6 @@
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksRecord.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocument.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
-    <Compile Include="QueryDsl\Geo\DistanceUnit.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />
     <Compile Include="Mapping\CodeBased\PropertyMapping.cs" />
     <Compile Include="Modules\Indices\Fielddata\FielddataFilter.cs" />
@@ -1050,7 +1051,6 @@
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
-    <Compile Include="QueryDsl\Geo\DistanceUnitJsonConverter.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHitJsonConverter.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />

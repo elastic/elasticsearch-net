@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
