@@ -7,16 +7,10 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchServerException : Exception
+	public class ServerError
 	{
-		public ElasticsearchServerException(SerializationInfo info, StreamingContext context)
-			: this() { }
-
-		public ElasticsearchServerException()
-			: base("Elasticsearch returned an error.") { }
-
-		public ElasticsearchError Error { get; set; }
-		public int StatusCode { get; set; }
+		public Error Error { get; set; }
+		public int Status { get; set; }
 	}
 
 	public interface IRootCause
@@ -28,7 +22,7 @@ namespace Elasticsearch.Net
 		string Index { get; set; }
 	}
 
-	public class ElasticsearchError : IRootCause
+	public class Error : IRootCause
 	{
 		public string Index { get; set; }
 		public string Reason { get; set; }

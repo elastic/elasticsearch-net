@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ConnectionException>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -80,20 +80,25 @@ namespace Elasticsearch.Net.Connection
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
-					catch (ConnectionException exception)
+					catch (PipelineException exception) when (!exception.Recoverable)
+					{
+						pipeline.MarkDead(node);
+						exceptions.Add(exception);
+						break;
+					}
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						if (this.Settings.ThrowExceptions && !response.Success)
-							throw response.ServerException;
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
@@ -108,7 +113,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ConnectionException>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -118,20 +123,24 @@ namespace Elasticsearch.Net.Connection
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
-					catch (ConnectionException exception)
+					catch (PipelineException exception) when (!exception.Recoverable)
+					{
+						pipeline.MarkDead(node);
+						break;
+					}
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						if (this.Settings.ThrowExceptions && !response.Success)
-							throw response.ServerException;
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}

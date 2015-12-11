@@ -99,21 +99,21 @@ namespace Elasticsearch.Net.Connection
 		{
 			var response = InitializeResponse<TReturn>(statusCode, exception);
 
-			if (!response.Success)
-				return ErrorResponse(response, responseStream);
-
-			byte[] bytes = null;
-			if (NeedsToEagerReadStream<TReturn>())
+			if (response.Success)
 			{
-				var inMemoryStream = this._memoryStreamFactory.Create();
-				responseStream.CopyTo(inMemoryStream, BufferSize);
-				bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
-			}
+				byte[] bytes = null;
+				if (NeedsToEagerReadStream<TReturn>())
+				{
+					var inMemoryStream = this._memoryStreamFactory.Create();
+					responseStream.CopyTo(inMemoryStream, BufferSize);
+					bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				}
 
-			if (!SetSpecialTypes(responseStream, response, bytes))
-			{
-				if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
-				else response.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+				if (!SetSpecialTypes(responseStream, response, bytes))
+				{
+					if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
+					else response.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+				}
 			}
 
 			return FinalizeReponse(response);
@@ -124,21 +124,21 @@ namespace Elasticsearch.Net.Connection
 		{
 			var response = InitializeResponse<TReturn>(statusCode, exception);
 
-			if (!response.Success)
-				return ErrorResponse(response, responseStream);
-
-			byte[] bytes = null;
-			if (NeedsToEagerReadStream<TReturn>())
+			if (response.Success)
 			{
-				var inMemoryStream = this._memoryStreamFactory.Create();
-				await responseStream.CopyToAsync(inMemoryStream, BufferSize, this.CancellationToken);
-				bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
-			}
+				byte[] bytes = null;
+				if (NeedsToEagerReadStream<TReturn>())
+				{
+					var inMemoryStream = this._memoryStreamFactory.Create();
+					await responseStream.CopyToAsync(inMemoryStream, BufferSize, this.CancellationToken);
+					bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				}
 
-			if (!SetSpecialTypes(responseStream, response, bytes))
-			{
-				if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
-				else response.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				if (!SetSpecialTypes(responseStream, response, bytes))
+				{
+					if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
+					else response.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				}
 			}
 
 			return FinalizeReponse(response);
@@ -162,14 +162,6 @@ namespace Elasticsearch.Net.Connection
 			cs.HttpMethod = this.Method;
 			cs.OriginalException = exception;
 			return cs;
-		}
-
-		private ElasticsearchResponse<TReturn> ErrorResponse<TReturn>(ElasticsearchResponse<TReturn> response, Stream responseStream)
-		{
-			if (response.SuccessOrKnownError)
-				response.OriginalException = this._settings.Serializer.Deserialize<ElasticsearchServerException>(responseStream);
-
-			return FinalizeReponse(response);
 		}
 
 		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> response)

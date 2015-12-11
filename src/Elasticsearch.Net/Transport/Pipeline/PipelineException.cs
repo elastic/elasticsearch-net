@@ -6,23 +6,16 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
 {
-	//TODO make sure we attach as much information from this pipeline to unrecoverable exceptions
-	public class ConnectionException : Exception
+	public class PipelineException : Exception
 	{
 		public PipelineFailure FailureReason { get; }
-		public IApiCallDetails Response { get; }
+		
 		public bool Recoverable => FailureReason == PipelineFailure.BadResponse || FailureReason == PipelineFailure.Unexpected || FailureReason == PipelineFailure.BadPing;
 
-		public ConnectionException(PipelineFailure failure, Exception innerException) 
+		public PipelineException(PipelineFailure failure, Exception innerException) 
 			: base(failure.Explanation(), innerException)
 		{
 			this.FailureReason = failure;
-		}
-
-		public ConnectionException(PipelineFailure failure, IApiCallDetails response, Exception innerException) : base("", innerException)
-		{
-			this.FailureReason = failure;
-			this.Response = response;
 		}
 	}
 
@@ -42,10 +35,6 @@ namespace Elasticsearch.Net.Connection
 					return "Failed sniffing cluster state.";
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 					return "Failed sniffing cluster state upon client startup.";
-				case PipelineFailure.RetryTimeout:
-					return "Maximum timeout reached while retrying request.";
-				case PipelineFailure.RetryMaximum:
-					return "Maximum number of retries reached.";
 				default:
 					return "An unexpected error occurred. Try checking the original exception for more information.";
 			}

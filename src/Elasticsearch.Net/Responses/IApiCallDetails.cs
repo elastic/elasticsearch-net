@@ -19,7 +19,10 @@ namespace Elasticsearch.Net
 		/// </summary>
 		Exception OriginalException { get; }
 
-		ElasticsearchServerException ServerException { get; }
+		/// <summary>
+		/// The error returned by Elasticsearch
+		/// </summary>
+		ServerError ServerError { get; }
 
 		/// <summary>
 		/// The HTTP method used by the request

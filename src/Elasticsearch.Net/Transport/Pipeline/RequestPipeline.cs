@@ -51,6 +51,8 @@ namespace Elasticsearch.Net.Connection
 
 		public int MaxRetries => Math.Min(this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
+		private bool MaxRetriesReached => this.Retried >= this.MaxRetries && this.MaxRetries > 0;
+
 		public bool FirstPoolUsageNeedsSniffing =>
 			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
@@ -94,7 +96,7 @@ namespace Elasticsearch.Net.Connection
 				return tookToLong;
 			}
 		}
-		
+
 		public bool Refresh { get; private set; }
 
 		public bool DepleededRetries => this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong;
@@ -114,7 +116,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			if (!semaphore.Wait(this._settings.Timeout))
-				throw new ConnectionException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
@@ -135,7 +137,7 @@ namespace Elasticsearch.Net.Connection
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			var success = await semaphore.WaitAsync(this._settings.Timeout, this._cancellationToken);
 			if (!success)
-				throw new ConnectionException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
@@ -178,7 +180,7 @@ namespace Elasticsearch.Net.Connection
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
 			var refreshed = false;
-			for(var i = 0; i < 100; i++)
+			for (var i = 0; i < 100; i++)
 			{
 				if (this.DepleededRetries) yield break;
 				foreach (var node in this._connectionPool.CreateView().TakeWhile(node => !this.DepleededRetries))
@@ -247,12 +249,12 @@ namespace Elasticsearch.Net.Connection
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
 
-		public IEnumerable<Node> SniffNodes => this._connectionPool.CreateView().ToList().OrderBy(n =>  n.MasterEligable ? n.Uri.Port : int.MaxValue);
+		public IEnumerable<Node> SniffNodes => this._connectionPool.CreateView().ToList().OrderBy(n => n.MasterEligable ? n.Uri.Port : int.MaxValue);
 
 		public void Sniff()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<ConnectionException>();
+			var exceptions = new List<PipelineException>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
@@ -267,13 +269,13 @@ namespace Elasticsearch.Net.Connection
 						this.Refresh = true;
 						return;
 					}
-					catch (ConnectionException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
+					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
-					catch (ConnectionException e)
+					catch (PipelineException e)
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
@@ -281,13 +283,13 @@ namespace Elasticsearch.Net.Connection
 					}
 				}
 			}
-			throw new ConnectionException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public async Task SniffAsync()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<ConnectionException>();
+			var exceptions = new List<PipelineException>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
@@ -301,13 +303,13 @@ namespace Elasticsearch.Net.Connection
 						this.Refresh = true;
 						return;
 					}
-					catch (ConnectionException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
+					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
-					catch (ConnectionException e)
+					catch (PipelineException e)
 					{
 						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
@@ -315,7 +317,7 @@ namespace Elasticsearch.Net.Connection
 					}
 				}
 			}
-			throw new ConnectionException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
@@ -339,7 +341,7 @@ namespace Elasticsearch.Net.Connection
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					if (this.SniffsOnConnectionFailure) this.Sniff();
-					throw new ConnectionException(PipelineFailure.BadResponse, e);
+					throw new PipelineException(PipelineFailure.BadResponse, e);
 				}
 			}
 		}
@@ -365,26 +367,31 @@ namespace Elasticsearch.Net.Connection
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
-					throw new ConnectionException(PipelineFailure.BadResponse, e);
+					throw new PipelineException(PipelineFailure.BadResponse, e);
 				}
 			}
 		}
 
-		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ConnectionException> seenExceptions)
+        public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<PipelineException> pipelineExceptions)
 			where TReturn : class
 		{
-			var pipelineFailure = PipelineFailure.BadResponse;
-			if (this.IsTakingTooLong) pipelineFailure = PipelineFailure.RetryTimeout;
-			if (this.Retried >= this.MaxRetries && this.MaxRetries > 0) pipelineFailure = PipelineFailure.RetryMaximum;
-			
-			Exception innerException = seenExceptions.HasAny() 
-				? new AggregateException(seenExceptions) 
-				: response.OriginalException;
+			var innerException = pipelineExceptions.HasAny()
+				? new AggregateException(pipelineExceptions) 
+				: response?.OriginalException;
 
-			var exception = new ElasticsearchClientException(new ConnectionException(pipelineFailure, innerException));
+			var message = (this.IsTakingTooLong)
+				? "Maximum timeout reached while retrying request."
+				: (this.MaxRetriesReached)
+					? "Maximum number of retries reached."
+					: innerException?.Message ?? "Could not complete the request to Elasticsearch.";
 
-			if (!response.SuccessOrKnownError && _settings.ThrowExceptions)
-				exception.RethrowKeepingStackTrace();
+			var exception = new ElasticsearchClientException(message, innerException)
+			{
+				Response = response,
+				AuditTrail = this.AuditTrail
+			};
+
+			if (_settings.ThrowExceptions) exception.RethrowKeepingStackTrace();
 
 			if (response == null)
 				response = data.CreateResponse<TReturn>(exception);

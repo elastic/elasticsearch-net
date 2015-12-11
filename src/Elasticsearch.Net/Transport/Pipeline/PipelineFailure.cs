@@ -9,8 +9,6 @@ namespace Elasticsearch.Net.Connection
 		BadPing,
 		BadSniff,
 		CouldNotStartSniffOnStartup,
-		RetryTimeout,
-		RetryMaximum,
 		Unexpected
 	}	
 }

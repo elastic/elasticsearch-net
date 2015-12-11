@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
+	// TODO come up with a better name for this?
 	public class ElasticsearchClientException : Exception
 	{
-		public ElasticsearchClientException(string message, Exception inner)
-			: base(message, inner) { }
+		public IApiCallDetails Response { get; internal set; }
 
-		public ElasticsearchClientException(Exception inner) 
-			: this("An error occurred within the client.", inner) { }
+		public List<Audit> AuditTrail { get; internal set; }
+
+		public ElasticsearchClientException(string message, Exception innerException)
+			: base(message, innerException) { }
 	}
 }
