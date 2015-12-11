@@ -145,10 +145,6 @@ namespace Elasticsearch.Net.Connection
 				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);					
 				return requestData.CreateResponse<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
 			}
-			catch (Exception exception)
-			{
-				return requestData.CreateResponse<TReturn>(exception);
-			}
 		}
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
@@ -183,12 +179,6 @@ namespace Elasticsearch.Net.Connection
 				var errorResponse = (HttpWebResponse)webException.Response;
 				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);
 				return await requestData.CreateResponseAsync<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
-			}
-			catch (Exception exception)
-			{
-#pragma warning disable AsyncFixer002 //this overload does not need to be async
-				return requestData.CreateResponse<TReturn>(exception);
-#pragma warning restore AsyncFixer002
 			}
 		}
 	}
