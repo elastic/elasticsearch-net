@@ -39,7 +39,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.Dismax(c => c
+			.DisMax(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.TieBreaker(1.11)

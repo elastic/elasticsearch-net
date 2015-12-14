@@ -10,13 +10,13 @@ namespace Nest
 	public interface IGeoIndexedShapeQuery : IGeoShapeQuery
 	{
 		[JsonProperty("indexed_shape")]
-		IIndexedGeoShape IndexedShape { get; set; }
+		IFieldLookup IndexedShape { get; set; }
 	}
 
 	public class GeoIndexedShapeQuery : FieldNameQueryBase, IGeoIndexedShapeQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
-		public IIndexedGeoShape IndexedShape { get; set; }
+		public IFieldLookup IndexedShape { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
@@ -30,9 +30,9 @@ namespace Nest
 		, IGeoIndexedShapeQuery where T : class
 	{
 		protected override bool Conditionless => GeoIndexedShapeQuery.IsConditionless(this);
-		IIndexedGeoShape IGeoIndexedShapeQuery.IndexedShape { get; set; }
+		IFieldLookup IGeoIndexedShapeQuery.IndexedShape { get; set; }
 
-		public GeoIndexedShapeQueryDescriptor<T> IndexedShape(Func<IndexedGeoShapeDescriptor<T>, IIndexedGeoShape> selector) =>
-			Assign(a => a.IndexedShape = selector?.Invoke(new IndexedGeoShapeDescriptor<T>()));
+		public GeoIndexedShapeQueryDescriptor<T> IndexedShape(Func<FieldLookupDescriptor<T>, IFieldLookup> selector) =>
+			Assign(a => a.IndexedShape = selector?.Invoke(new FieldLookupDescriptor<T>()));
 	}
 }

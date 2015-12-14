@@ -28,7 +28,7 @@ namespace Nest
 		public SimilarityOption Similarity { get { return Self.Similarity.GetValueOrDefault(); } set { Self.Similarity = value; } }
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
 
-		public ElasticsearchPropertyAttribute(TypeName type)
+		protected ElasticsearchPropertyAttribute(TypeName type)
 		{
 			Self.Type = type;
 		}

@@ -17,32 +17,32 @@ namespace Nest
 		/// <summary>
 		/// How long to wait before triggering a flush regardless of translog size. Defaults to 30m.
 		/// </summary>
-		TimeUnitExpression ThresholdPeriod { get; set; }
+		Time ThresholdPeriod { get; set; }
 
 		/// <summary>
 		/// How often to check if a flush is needed, randomized between 
 		/// the interval value and 2x the interval value. Defaults to 5s.
 		/// </summary>
-		TimeUnitExpression Interval { get; set; }
+		Time Interval { get; set; }
 	}
 
 	public class TranslogFlushSettings : ITranslogFlushSettings
 	{
 		/// <inheritdoc/>
-		public TimeUnitExpression Interval { get; set; }
+		public Time Interval { get; set; }
 		/// <inheritdoc/>
 		public int? ThresholdOps { get; set; }
 		/// <inheritdoc/>
-		public TimeUnitExpression ThresholdPeriod { get; set; }
+		public Time ThresholdPeriod { get; set; }
 		/// <inheritdoc/>
 		public string ThresholdSize { get; set; }
 	}
 
 	public class TranslogFlushSettingsDescriptor: DescriptorBase<TranslogFlushSettingsDescriptor, ITranslogFlushSettings>, ITranslogFlushSettings
 	{
-		TimeUnitExpression ITranslogFlushSettings.Interval { get; set; }
+		Time ITranslogFlushSettings.Interval { get; set; }
 		int? ITranslogFlushSettings.ThresholdOps { get; set; }
-		TimeUnitExpression ITranslogFlushSettings.ThresholdPeriod { get; set; }
+		Time ITranslogFlushSettings.ThresholdPeriod { get; set; }
 		string ITranslogFlushSettings.ThresholdSize { get; set; }
 
 		/// <inheritdoc/>
@@ -52,10 +52,10 @@ namespace Nest
 		public TranslogFlushSettingsDescriptor ThresholdOps(int? operations) => Assign(a => a.ThresholdOps = operations);
 
 		/// <inheritdoc/>
-		public TranslogFlushSettingsDescriptor ThresholdPeriod(TimeUnitExpression time) => 
+		public TranslogFlushSettingsDescriptor ThresholdPeriod(Time time) => 
 			Assign(a => a.ThresholdPeriod = time);
 
 		/// <inheritdoc/>
-		public TranslogFlushSettingsDescriptor Interval(TimeUnitExpression time) => Assign(a => a.Interval = time);
+		public TranslogFlushSettingsDescriptor Interval(Time time) => Assign(a => a.Interval = time);
 	}
 }

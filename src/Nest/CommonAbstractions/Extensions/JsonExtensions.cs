@@ -23,9 +23,6 @@ namespace Nest
 		{
 			var resolver = serializer.ContractResolver as ElasticContractResolver;
 			var realConverter = resolver?.PiggyBackState?.ActualJsonConverter as TConverter;
-			if (realConverter == null)
-				throw new DslException($"could not find a stateful {typeof(TConverter).Name} converter");
-
 			return realConverter;
 		}
 

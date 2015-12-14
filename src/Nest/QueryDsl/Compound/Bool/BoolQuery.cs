@@ -27,10 +27,15 @@ namespace Nest
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
+
+		bool Locked { get; }
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
 	{
+		internal static bool Locked(IBoolQuery q) => !q.Name.IsNullOrEmpty() || q.Boost.HasValue || q.DisableCoord.HasValue || q.MinimumShouldMatch != null;
+		bool IBoolQuery.Locked => BoolQuery.Locked(this);
+
 		public IEnumerable<QueryContainer> Must { get; set; }
 		public IEnumerable<QueryContainer> MustNot { get; set; }
 		public IEnumerable<QueryContainer> Should { get; set; }
@@ -46,10 +51,12 @@ namespace Nest
 			if (!q.Must.HasAny() && !q.Should.HasAny() && !q.MustNot.HasAny() && !q.Filter.HasAny())
 				return true;
 
-			return (q.MustNot.HasAny() && q.MustNot.All(qq => qq.IsConditionless))
-				|| (q.Should.HasAny() && q.Should.All(qq => qq.IsConditionless))
-				|| (q.Must.HasAny() && q.Must.All(qq => qq.IsConditionless))
-				|| (q.Filter.HasAny() && q.Filter.All(qq => qq.IsConditionless));
+			var mustNots = q.MustNot.HasAny() && q.MustNot.All(qq => qq.IsConditionless);
+			var shoulds = q.Should.HasAny() && q.Should.All(qq => qq.IsConditionless);
+			var musts = q.Must.HasAny() && q.Must.All(qq => qq.IsConditionless);
+			var filters =  q.Filter.HasAny() && q.Filter.All(qq => qq.IsConditionless);
+
+			return mustNots && shoulds && musts && filters;
 		}
 	}
 
@@ -57,6 +64,8 @@ namespace Nest
 		: QueryDescriptorBase<BoolQueryDescriptor<T>, IBoolQuery>
 		, IBoolQuery where T : class
 	{
+		bool IBoolQuery.Locked => BoolQuery.Locked(this);
+
 		protected override bool Conditionless => BoolQuery.IsConditionless(this);
 		IEnumerable<QueryContainer> IBoolQuery.Must { get; set; }
 		IEnumerable<QueryContainer> IBoolQuery.MustNot { get; set; }

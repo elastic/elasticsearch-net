@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System.Globalization;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,16 +10,16 @@ namespace Nest
 		GeoLocation Location { get; set; }
 
 		[JsonProperty("gte")]
-		GeoDistance GreaterThanOrEqualTo { get; set; }
+		Distance GreaterThanOrEqualTo { get; set; }
 		
 		[JsonProperty("lte")]
-		GeoDistance LessThanOrEqualTo { get; set; }
+		Distance LessThanOrEqualTo { get; set; }
 		
 		[JsonProperty("gt")]
-		GeoDistance GreaterThan { get; set; }
+		Distance GreaterThan { get; set; }
 
 		[JsonProperty("lt")]
-		GeoDistance LessThan { get; set; }
+		Distance LessThan { get; set; }
 
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
@@ -47,10 +42,10 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public GeoLocation Location { get; set; }
-		public GeoDistance GreaterThan { get; set; }
-		public GeoDistance LessThan { get; set; }
-		public GeoDistance GreaterThanOrEqualTo { get; set; }
-		public GeoDistance LessThanOrEqualTo { get; set; }
+		public Distance GreaterThan { get; set; }
+		public Distance LessThan { get; set; }
+		public Distance GreaterThanOrEqualTo { get; set; }
+		public Distance LessThanOrEqualTo { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public bool? Coerce { get; set; }
@@ -69,10 +64,10 @@ namespace Nest
 	{
 		protected override bool Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
 		GeoLocation IGeoDistanceRangeQuery.Location { get; set; }
-		GeoDistance IGeoDistanceRangeQuery.GreaterThanOrEqualTo { get; set; }
-		GeoDistance IGeoDistanceRangeQuery.LessThanOrEqualTo { get; set; }
-		GeoDistance IGeoDistanceRangeQuery.GreaterThan { get; set; }
-		GeoDistance IGeoDistanceRangeQuery.LessThan { get; set; }
+		Distance IGeoDistanceRangeQuery.GreaterThanOrEqualTo { get; set; }
+		Distance IGeoDistanceRangeQuery.LessThanOrEqualTo { get; set; }
+		Distance IGeoDistanceRangeQuery.GreaterThan { get; set; }
+		Distance IGeoDistanceRangeQuery.LessThan { get; set; }
 		GeoDistanceType? IGeoDistanceRangeQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceRangeQuery.OptimizeBoundingBox { get; set; }
 		bool? IGeoDistanceRangeQuery.Coerce { get; set; }
@@ -82,21 +77,21 @@ namespace Nest
 		public GeoDistanceRangeQueryDescriptor<T> Location(GeoLocation geoLocation) => Assign(a => a.Location = geoLocation);
 		public GeoDistanceRangeQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
 
-		public GeoDistanceRangeQueryDescriptor<T> GreaterThan(GeoDistance from) => Assign(a => a.GreaterThan = from);
-		public GeoDistanceRangeQueryDescriptor<T> GreaterThan(double distance, GeoPrecision unit) =>
-			Assign(a => a.GreaterThan = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> GreaterThan(Distance from) => Assign(a => a.GreaterThan = from);
+		public GeoDistanceRangeQueryDescriptor<T> GreaterThan(double distance, DistanceUnit unit) =>
+			Assign(a => a.GreaterThan = new Distance(distance, unit));
 
-		public GeoDistanceRangeQueryDescriptor<T> GreaterThanOrEqualTo(GeoDistance from) => Assign(a => a.GreaterThanOrEqualTo = from);
-		public GeoDistanceRangeQueryDescriptor<T> GreaterThanOrEqualTo(double distance, GeoPrecision unit) =>
-			Assign(a => a.GreaterThanOrEqualTo = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> GreaterThanOrEqualTo(Distance from) => Assign(a => a.GreaterThanOrEqualTo = from);
+		public GeoDistanceRangeQueryDescriptor<T> GreaterThanOrEqualTo(double distance, DistanceUnit unit) =>
+			Assign(a => a.GreaterThanOrEqualTo = new Distance(distance, unit));
 
-		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(GeoDistance to) => Assign(a => a.LessThanOrEqualTo = to);
-		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(double distance, GeoPrecision unit) => 
-			Assign(a => a.LessThanOrEqualTo = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(Distance to) => Assign(a => a.LessThanOrEqualTo = to);
+		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(double distance, DistanceUnit unit) => 
+			Assign(a => a.LessThanOrEqualTo = new Distance(distance, unit));
 
-		public GeoDistanceRangeQueryDescriptor<T> LessThan(GeoDistance to) => Assign(a => a.LessThan = to);
-		public GeoDistanceRangeQueryDescriptor<T> LessThan(double distance, GeoPrecision unit) => 
-			Assign(a => a.LessThan = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> LessThan(Distance to) => Assign(a => a.LessThan = to);
+		public GeoDistanceRangeQueryDescriptor<T> LessThan(double distance, DistanceUnit unit) => 
+			Assign(a => a.LessThan = new Distance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 

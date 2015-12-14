@@ -118,10 +118,10 @@ namespace Nest
 			var parts = latLon.Split(',');
 			if (parts.Length != 2) throw new DslException("Invalid format: string must be in the form of lat,lon");
 			double lat;
-			if (!double.TryParse(parts[0], out lat))
+			if (!double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat))
 				throw new DslException("Invalid latitude value");
 			double lon;
-			if (!double.TryParse(parts[1], out lon))
+			if (!double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out lon))
 				throw new DslException("Invalid longitude format");
 			return new GeoLocation(lat, lon);
 		}

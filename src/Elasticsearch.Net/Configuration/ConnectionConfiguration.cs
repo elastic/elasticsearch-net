@@ -132,10 +132,10 @@ namespace Elasticsearch.Net.Connection
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
-		private NameValueCollection _queryString = new NameValueCollection();
+		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
-		private NameValueCollection _headers = new NameValueCollection();
+		private readonly NameValueCollection _headers = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
 		BasicAuthenticationCredentials _basicAuthCredentials;

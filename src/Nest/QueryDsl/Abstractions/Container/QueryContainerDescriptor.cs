@@ -29,20 +29,25 @@ namespace Nest
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class,IQuery
 		{
+			var container = new QueryContainerDescriptor<T>();
+			IQueryContainer c = container;
+			c.IsStrict = this.IsStrict;
+			c.IsVerbatim = this.IsVerbatim;
+
 			var query = create.InvokeOrDefault(new TQuery());
-			assign(query, this);
-			this.ContainedQuery = query;
+			assign(query, container);
+			container.ContainedQuery = query;
 
 			//if query is not conditionless or is verbatim: return a container that holds the query
 			if (!query.Conditionless || this.IsVerbatim)
-				return this;
+				return container;
 
 			//query is conditionless but the container is marked as strict, throw exception
 			if (this.IsStrict)
 				throw new DslException("Query is conditionless but strict is turned on") { Offender = query };
 
 			//query is conditionless return an empty container that can later be rewritten
-			return CreateEmptyContainer();
+			return null;
 		}
 
 		/// <summary>
@@ -312,7 +317,7 @@ namespace Nest
 		/// with the maximum score for that document as produced by any subquery, plus a tie breaking increment for 
 		/// any additional matching subqueries.
 		/// </summary>
-		public QueryContainer Dismax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
+		public QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
 			this.Assign(selector, (query, container) => container.DisMax = query);
 
 		/// <summary>
@@ -350,7 +355,7 @@ namespace Nest
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </param>
 		public QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
-			this.Assign(selector, (query, container) => container.MatchAllQuery = query ?? new MatchAllQuery());
+			this.Assign(selector, (query, container) => container.MatchAll = query ?? new MatchAllQuery());
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
@@ -494,32 +499,6 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Ids = query);
-
-		/// <summary>
-		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
-		/// </summary>
-		public QueryContainer SpanTerm(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null)
-		{
-			return this.SpanTerm(t =>
-			{
-				t.Field(fieldDescriptor).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				return t;
-			});
-		}
-
-		/// <summary>
-		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 
-		/// </summary>
-		public QueryContainer SpanTerm(string field, string value, double? Boost = null)
-		{
-			return this.SpanTerm(t =>
-			{
-				t.Field(field).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				return t;
-			});
-		}
 
 		/// <summary>
 		/// Matches spans containing a term. The span term query maps to Lucene SpanTermQuery. 

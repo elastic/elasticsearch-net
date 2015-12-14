@@ -31,14 +31,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "get")]
 		public ExplainGet<T> Get { get; internal set; }
 
-		public T Source
-		{
-			get
-			{
-				if (this.Get == null) return null;
-				return this.Get.Source;
-			}
-		}
+		public T Source => this.Get?.Source;
 
 		public FieldSelection<T> Fields
 		{

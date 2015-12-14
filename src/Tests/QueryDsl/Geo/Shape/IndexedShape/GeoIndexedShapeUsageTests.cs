@@ -36,7 +36,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			IndexedShape = new IndexedGeoShape
+			IndexedShape = new FieldLookup
 			{
 				Id = 2,
 				Index = Index<Project>(),

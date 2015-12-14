@@ -15,25 +15,25 @@ namespace Tests.CommonOptions.TimeUnit
 	public class TimeUnits 
 	{
 		/** #  Time units
-		 *Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
-		 as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
+		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
+		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
 		 * 
 		 * ## Using Time units in NEST
-		 * NEST uses `TimeUnitExpression` to strongly type this and there are several ways to construct one.
+		 * NEST uses `Time` to strongly type this and there are several ways to construct one.
 		 *
 		 * ### Constructor
-		 * The most straight forward way to construct a `TimeUnitExpression` is through its constructor
+		 * The most straight forward way to construct a `Time` is through its constructor
 		 */
 		
 		[U] public void Constructor()
 		{
-			var unitString = new TimeUnitExpression("2d");
-			var unitComposed = new TimeUnitExpression(2, Nest.TimeUnit.Day);
-			var unitTimeSpan = new TimeUnitExpression(TimeSpan.FromDays(2));
-			var unitMilliseconds = new TimeUnitExpression(1000 * 60 * 60 * 24 * 2);
+			var unitString = new Time("2d");
+			var unitComposed = new Time(2, Nest.TimeUnit.Day);
+			var unitTimeSpan = new Time(TimeSpan.FromDays(2));
+			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
 			
 			/**
-			* When serializing TimeUnitExpression constructed from a string, composition of factor and interval, or a `TimeSpan`
+			* When serializing Time constructed from a string, composition of factor and interval, or a `TimeSpan`
 			* the expression will be serialized as time unit string
 			*/
 			Expect("2d")
@@ -56,15 +56,15 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 		/**
 		* ### Implicit conversion
-		* Alternatively `string`, `TimeSpan` and `long` can be implicitly assigned to `TimeUnitExpression` properties and variables 
+		* Alternatively `string`, `TimeSpan` and `long` can be implicitly assigned to `Time` properties and variables 
 		*/
 
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
 		{
-			TimeUnitExpression oneAndHalfYear = "1.5y";
-			TimeUnitExpression twoWeeks = TimeSpan.FromDays(14);
-			TimeUnitExpression twoDays = 1000*60*60*24*2;
+			Time oneAndHalfYear = "1.5y";
+			Time twoWeeks = TimeSpan.FromDays(14);
+			Time twoDays = 1000*60*60*24*2;
 
 			Expect("1.5y").WhenSerializing(oneAndHalfYear);
 			Expect("2w").WhenSerializing(twoWeeks);
@@ -75,9 +75,9 @@ namespace Tests.CommonOptions.TimeUnit
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void EqualityAndComparable()
 		{
-			TimeUnitExpression oneAndHalfYear = "1.5y";
-			TimeUnitExpression twoWeeks = TimeSpan.FromDays(14);
-			TimeUnitExpression twoDays = 1000*60*60*24*2;
+			Time oneAndHalfYear = "1.5y";
+			Time twoWeeks = TimeSpan.FromDays(14);
+			Time twoDays = 1000*60*60*24*2;
 
 			/**
 			* Milliseconds are calculated even when values are not passed as long
@@ -91,41 +91,40 @@ namespace Tests.CommonOptions.TimeUnit
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
-			(twoDays >= new TimeUnitExpression("2d")).Should().BeTrue();
+			(twoDays >= new Time("2d")).Should().BeTrue();
 			
 			twoDays.Should().BeLessThan(twoWeeks);
 			(twoDays < twoWeeks).Should().BeTrue();
 			(twoDays <= twoWeeks).Should().BeTrue();
-			(twoDays <= new TimeUnitExpression("2d")).Should().BeTrue();
+			(twoDays <= new Time("2d")).Should().BeTrue();
 			
 			/**
 			* And assert equality
 			*/
-			twoDays.Should().Be(new TimeUnitExpression("2d"));
-			(twoDays == new TimeUnitExpression("2d")).Should().BeTrue();
-			(twoDays != new TimeUnitExpression("2.1d")).Should().BeTrue();
-			(new TimeUnitExpression("2.1d") == new TimeUnitExpression(TimeSpan.FromDays(2.1))).Should().BeTrue();
+			twoDays.Should().Be(new Time("2d"));
+			(twoDays == new Time("2d")).Should().BeTrue();
+			(twoDays != new Time("2.1d")).Should().BeTrue();
+			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
 		}
 
 		[U]
 		public void UsingInterval()
 		{
 			/**
-			* Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
+			* Time units are specified as a union of either a `DateInterval` or `Time`
 			* both of which implicitly convert to the `Union` of these two.
 			*/
-			Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
-			Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);
-			Expect("hour").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Hour);
-			Expect("minute").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Minute);
-			Expect("quarter").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Quarter);
-			Expect("second").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Second);
-			Expect("week").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Week);
-			Expect("year").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Year);
+			Expect("month").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Month);
+			Expect("day").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Day);
+			Expect("hour").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Hour);
+			Expect("minute").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Minute);
+			Expect("quarter").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Quarter);
+			Expect("second").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Second);
+			Expect("week").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Week);
+			Expect("year").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Year);
 
-
-			Expect("2d").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)"2d");
-			Expect("1.16w").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)TimeSpan.FromDays(8.1));
+			Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
+			Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
 	}
 }

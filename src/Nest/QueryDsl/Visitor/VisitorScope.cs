@@ -3,7 +3,6 @@
 	public enum VisitorScope
 	{
 		Unknown,
-		Filter,
 		Query,
 		Must,
 		MustNot,
@@ -11,6 +10,7 @@
 		PositiveQuery,
 		NegativeQuery,
 		NoMatchQuery,
+		Span,
 
 	}
 }

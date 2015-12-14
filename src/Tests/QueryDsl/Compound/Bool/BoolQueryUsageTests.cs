@@ -15,7 +15,10 @@ namespace Tests.QueryDsl.Compound.Bool
 		{
 			@bool = new
 			{
-				boost = 2.0,
+				must = new[]
+				{
+					new { match_all = new { } }
+				},
 				must_not = new[]
 				{
 					new { match_all = new { } }
@@ -24,15 +27,12 @@ namespace Tests.QueryDsl.Compound.Bool
 				{
 					new { match_all = new { } }
 				},
-				must = new[]
-				{
-					new { match_all = new { } }
-				},
 				filter = new[]
 				{
 					new { match_all = new { } }
 				},
 				minimum_should_match = 1,
+				boost = 2.0,
 			}
 		};
 

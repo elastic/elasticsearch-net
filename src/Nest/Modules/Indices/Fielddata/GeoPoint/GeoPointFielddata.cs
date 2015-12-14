@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Nest
 {
@@ -10,7 +6,7 @@ namespace Nest
 	public interface IGeoPointFielddata : IFielddata
 	{
 		[JsonProperty("precision")]
-		GeoDistance Precision { get; set; }
+		Distance Precision { get; set; }
 
 		[JsonProperty("format")]
 		GeoPointFielddataFormat? Format { get; set; }
@@ -18,7 +14,7 @@ namespace Nest
 
 	public class GeoPointFielddata : FielddataBase, IGeoPointFielddata
 	{
-		public GeoDistance Precision { get; set; }
+		public Distance Precision { get; set; }
 
 		public GeoPointFielddataFormat? Format { get; set; }
 	}
@@ -27,10 +23,10 @@ namespace Nest
 		: FielddataDescriptorBase<GeoPointFielddataDescriptor, IGeoPointFielddata>, IGeoPointFielddata
 	{
 		GeoPointFielddataFormat? IGeoPointFielddata.Format { get; set; }
-		GeoDistance IGeoPointFielddata.Precision { get; set; }
+		Distance IGeoPointFielddata.Precision { get; set; }
 
 		public GeoPointFielddataDescriptor Format(GeoPointFielddataFormat format) => Assign(a => a.Format = format);
 
-		public GeoPointFielddataDescriptor Precision(GeoDistance distance) => Assign(a => a.Precision = distance);
+		public GeoPointFielddataDescriptor Precision(Distance distance) => Assign(a => a.Precision = distance);
 	}
 }
