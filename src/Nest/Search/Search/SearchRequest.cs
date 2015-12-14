@@ -523,8 +523,9 @@ namespace Nest
 		{
 			if (query == null) return ;
 
+			// TODO should this be an ElasticsearchClientException?
 			if (this._Strict && query.IsConditionless)
-				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
+				throw new ArgumentException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
 
 			else if (query.IsConditionless) return ;
 			a.Query = query;
@@ -545,8 +546,9 @@ namespace Nest
 
 			var bf = filter(f);
 			if (bf == null) return;
+			// TODO should this be an ElasticsearchClientException?
 			if (this._Strict && bf.IsConditionless)
-				throw new DslException("Filter resulted in a conditionless filter:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
+				throw new ArgumentException("Filter resulted in a conditionless filter:\n{0}".F(JsonConvert.SerializeObject(bf, Formatting.Indented)));
 
 			else if (bf.IsConditionless) return ;
 			a.PostFilter = bf;

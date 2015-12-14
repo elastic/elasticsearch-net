@@ -16,5 +16,9 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchClientException(string message, Exception innerException)
 			: base(message, innerException) { }
+
+		public ElasticsearchClientException(string message) : base(message)
+		{
+		}
 	}
 }

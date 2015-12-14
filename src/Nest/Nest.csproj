@@ -1084,7 +1084,6 @@
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
-    <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />

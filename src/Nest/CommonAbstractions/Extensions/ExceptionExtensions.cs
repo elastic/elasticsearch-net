@@ -30,7 +30,7 @@ namespace Nest
 		{
 			var x = predicate?.Invoke(@object);
 			if (x.GetValueOrDefault(false))
-				throw new DslException(exceptionMessage);
+				throw new ArgumentException(exceptionMessage);
 
 			return @object;
 		}
