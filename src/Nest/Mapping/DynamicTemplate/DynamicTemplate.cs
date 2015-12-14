@@ -27,7 +27,7 @@ namespace Nest
 		IProperty Mapping { get; set; }
 	}
 
-	public class DynamicTemplate
+	public class DynamicTemplate : IDynamicTemplate
 	{
 		public string Match { get; set; }
 

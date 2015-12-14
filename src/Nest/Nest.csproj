@@ -255,6 +255,7 @@
     <Compile Include="Mapping\AttributeBased\TokenCountAttribute.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\FieldMappingJsonConverter.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplateContainer.cs" />
+    <Compile Include="Mapping\DynamicTemplate\DynamicTemplatesJsonConverter.cs" />
     <Compile Include="Mapping\Mappings.cs" />
     <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
