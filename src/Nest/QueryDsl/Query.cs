@@ -24,16 +24,16 @@ namespace Nest
 			new QueryContainerDescriptor<T>().Conditionless(selector);
 
 		public static QueryContainer Dismax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) => 
-			new QueryContainerDescriptor<T>().Dismax(selector);
-
-		public static QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) => 
-			new QueryContainerDescriptor<T>().Filtered(selector);
+			new QueryContainerDescriptor<T>().DisMax(selector);
 
 		public static QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) => 
 			new QueryContainerDescriptor<T>().Fuzzy(selector);
 
-		public static QueryContainer HasChild<K>(Func<HasChildQueryDescriptor<K>, IHasChildQuery> selector) where K : class => 
-			new QueryContainerDescriptor<T>().HasChild<K>(selector);
+		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class => 
+			new QueryContainerDescriptor<T>().HasChild<TChild>(selector);
+
+		public static QueryContainer HasParent<TParent>(Func<HasParentQueryDescriptor<TParent>, IHasParentQuery> selector) where TParent : class =>
+			new QueryContainerDescriptor<T>().HasParent<TParent>(selector);
 
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) => 
 			new QueryContainerDescriptor<T>().Ids(selector);
@@ -86,6 +86,21 @@ namespace Nest
 		public static QueryContainer GeoShapeMultiPolygon(Func<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery> selector) => 
 			new QueryContainerDescriptor<T>().GeoShapeMultiPolygon(selector);
 
+		public static QueryContainer GeoPolygon(Func<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoPolygon(selector);
+
+		public static QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoHashCell(selector);
+
+		public static QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoDistanceRange(selector);
+
+		public static QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoDistance(selector);
+
+		public static QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery> selector) =>
+			new QueryContainerDescriptor<T>().GeoBoundingBox(selector);
+
 		public static QueryContainer QueryString(Func<QueryStringQueryDescriptor<T>, IQueryStringQuery> selector) => 
 			new QueryContainerDescriptor<T>().QueryString(selector);
 
@@ -94,6 +109,9 @@ namespace Nest
 
 		public static QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) => 
 			new QueryContainerDescriptor<T>().DateRange(selector);
+
+		public static QueryContainer SpanTerm(Func<SpanTermQueryDescriptor<T>, ISpanTermQuery> selector) =>
+			new QueryContainerDescriptor<T>().SpanTerm(selector);
 
 		public static QueryContainer SpanFirst(Func<SpanFirstQueryDescriptor<T>, ISpanFirstQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanFirst(selector);
@@ -107,19 +125,19 @@ namespace Nest
 		public static QueryContainer SpanOr(Func<SpanOrQueryDescriptor<T>, ISpanOrQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanOr(selector);
 
-		public static QueryContainer SpanTerm(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null) => 
-			new QueryContainerDescriptor<T>().SpanTerm(fieldDescriptor, value, Boost);
-
-		public static QueryContainer SpanTerm(string field, string value, double? Boost = null) => 
-			new QueryContainerDescriptor<T>().SpanTerm(field, value, Boost);
-
 		public static QueryContainer SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanMultiTerm(selector);
 
-		public static QueryContainer Term<K>(Expression<Func<T, object>> fieldDescriptor, K value, double? Boost = null) => 
+		public static QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
+			new QueryContainerDescriptor<T>().SpanContaining(selector);
+
+		public static QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
+			new QueryContainerDescriptor<T>().SpanWithin(selector);
+
+		public static QueryContainer Term<TOther>(Expression<Func<T, object>> fieldDescriptor, TOther value, double? Boost = null) => 
 			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, Boost);
 
-		public static QueryContainer Term<K>(string field, K value, double? Boost = null) => 
+		public static QueryContainer Term<TOther>(string field, TOther value, double? Boost = null) => 
 			new QueryContainerDescriptor<T>().Term(field, value, Boost);
 
 		public static QueryContainer TermsDescriptor(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) => 
@@ -154,6 +172,46 @@ namespace Nest
 
 		public static QueryContainer Regexp(Func<RegexpQueryDescriptor<T>, IRegexpQuery> selector) => 
 			new QueryContainerDescriptor<T>().Regexp(selector);
+
+		public static QueryContainer Limit(Func<LimitQueryDescriptor<T>, ILimitQuery> selector) => 
+			new QueryContainerDescriptor<T>().Limit(selector);
+
+		public static QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) => 
+			new QueryContainerDescriptor<T>().DisMax(selector);
+
+		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
+			new QueryContainerDescriptor<T>().Template(selector);
+
+		public static QueryContainer Script(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) =>
+			new QueryContainerDescriptor<T>().Script(selector);
+
+		public static QueryContainer Exists(Func<ExistsQueryDescriptor<T>, IExistsQuery> selector) =>
+			new QueryContainerDescriptor<T>().Exists(selector);
+
+		public static QueryContainer Missing(Func<MissingQueryDescriptor<T>, IMissingQuery> selector) =>
+			new QueryContainerDescriptor<T>().Missing(selector);
+
+		public static QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
+			new QueryContainerDescriptor<T>().Type(selector);
+
+		public static QueryContainer Type<TOther>() => Query<T>.Type(q => q.Value<TOther>());
+
+		public static QueryContainer Terms<TValue>(Func<TermsQueryDescriptor<T, TValue>, ITermsQuery> selector) =>
+			new QueryContainerDescriptor<T>().Terms<TValue>(selector);
+
+#pragma warning disable 618
+		public static QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) => 
+			new QueryContainerDescriptor<T>().Filtered(selector);
+
+		public static QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
+			new QueryContainerDescriptor<T>().Or(selector);
+
+		public static QueryContainer And(Func<AndQueryDescriptor<T>, IAndQuery> selector) =>
+			new QueryContainerDescriptor<T>().And(selector);
+
+		public static QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
+			new QueryContainerDescriptor<T>().Not(selector);
+#pragma warning restore 618
 
 	}
 }

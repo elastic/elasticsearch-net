@@ -18,7 +18,7 @@ namespace Nest
 		TypeName Type { get; set; }
 
 		[JsonProperty(PropertyName = "_id")]
-		string Id { get; set; }
+		Id Id { get; set; }
 
 		[JsonProperty(PropertyName = "_version")]
 		long? Version { get; set; }
@@ -31,19 +31,19 @@ namespace Nest
 		string Routing { get; set; }
 
 		[JsonProperty(PropertyName = "_parent")]
-		string Parent { get; set; }
+		Id Parent { get; set; }
 
 		[JsonProperty("_timestamp")]
 		long? Timestamp { get; set; }
 
 		[JsonProperty("_ttl")]
-		string Ttl { get; set; }
+		Time Ttl { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]
 		int? RetriesOnConflict { get; set; }
 
 		object GetBody();
 
-		string GetIdForOperation(ElasticInferrer inferrer);
+		Id GetIdForOperation(ElasticInferrer inferrer);
 	}
 }

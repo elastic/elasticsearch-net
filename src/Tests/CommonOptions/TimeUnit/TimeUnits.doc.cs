@@ -27,10 +27,10 @@ namespace Tests.CommonOptions.TimeUnit
 		
 		[U] public void Constructor()
 		{
-			var unitString = new Nest.Time("2d");
-			var unitComposed = new Nest.Time(2, Nest.TimeUnit.Day);
-			var unitTimeSpan = new Nest.Time(TimeSpan.FromDays(2));
-			var unitMilliseconds = new Nest.Time(1000 * 60 * 60 * 24 * 2);
+			var unitString = new Time("2d");
+			var unitComposed = new Time(2, Nest.TimeUnit.Day);
+			var unitTimeSpan = new Time(TimeSpan.FromDays(2));
+			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
 			
 			/**
 			* When serializing Time constructed from a string, composition of factor and interval, or a `TimeSpan`
@@ -62,9 +62,9 @@ namespace Tests.CommonOptions.TimeUnit
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
 		{
-			Nest.Time oneAndHalfYear = "1.5y";
-			Nest.Time twoWeeks = TimeSpan.FromDays(14);
-			Nest.Time twoDays = 1000*60*60*24*2;
+			Time oneAndHalfYear = "1.5y";
+			Time twoWeeks = TimeSpan.FromDays(14);
+			Time twoDays = 1000*60*60*24*2;
 
 			Expect("1.5y").WhenSerializing(oneAndHalfYear);
 			Expect("2w").WhenSerializing(twoWeeks);
@@ -75,9 +75,9 @@ namespace Tests.CommonOptions.TimeUnit
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void EqualityAndComparable()
 		{
-			Nest.Time oneAndHalfYear = "1.5y";
-			Nest.Time twoWeeks = TimeSpan.FromDays(14);
-			Nest.Time twoDays = 1000*60*60*24*2;
+			Time oneAndHalfYear = "1.5y";
+			Time twoWeeks = TimeSpan.FromDays(14);
+			Time twoDays = 1000*60*60*24*2;
 
 			/**
 			* Milliseconds are calculated even when values are not passed as long
@@ -91,20 +91,20 @@ namespace Tests.CommonOptions.TimeUnit
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
-			(twoDays >= new Nest.Time("2d")).Should().BeTrue();
+			(twoDays >= new Time("2d")).Should().BeTrue();
 			
 			twoDays.Should().BeLessThan(twoWeeks);
 			(twoDays < twoWeeks).Should().BeTrue();
 			(twoDays <= twoWeeks).Should().BeTrue();
-			(twoDays <= new Nest.Time("2d")).Should().BeTrue();
+			(twoDays <= new Time("2d")).Should().BeTrue();
 			
 			/**
 			* And assert equality
 			*/
-			twoDays.Should().Be(new Nest.Time("2d"));
-			(twoDays == new Nest.Time("2d")).Should().BeTrue();
-			(twoDays != new Nest.Time("2.1d")).Should().BeTrue();
-			(new Nest.Time("2.1d") == new Nest.Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
+			twoDays.Should().Be(new Time("2d"));
+			(twoDays == new Time("2d")).Should().BeTrue();
+			(twoDays != new Time("2.1d")).Should().BeTrue();
+			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
 		}
 
 		[U]
@@ -114,17 +114,17 @@ namespace Tests.CommonOptions.TimeUnit
 			* Time units are specified as a union of either a `DateInterval` or `Time`
 			* both of which implicitly convert to the `Union` of these two.
 			*/
-			Expect("month").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Month);
-			Expect("day").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Day);
-			Expect("hour").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Hour);
-			Expect("minute").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Minute);
-			Expect("quarter").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Quarter);
-			Expect("second").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Second);
-			Expect("week").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Week);
-			Expect("year").WhenSerializing<Union<DateInterval, Nest.Time>>(DateInterval.Year);
+			Expect("month").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Month);
+			Expect("day").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Day);
+			Expect("hour").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Hour);
+			Expect("minute").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Minute);
+			Expect("quarter").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Quarter);
+			Expect("second").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Second);
+			Expect("week").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Week);
+			Expect("year").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Year);
 
-			Expect("2d").WhenSerializing<Union<DateInterval, Nest.Time>>((Nest.Time)"2d");
-			Expect("1.16w").WhenSerializing<Union<DateInterval, Nest.Time>>((Nest.Time)TimeSpan.FromDays(8.1));
+			Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
+			Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
 	}
 }

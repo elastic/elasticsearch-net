@@ -35,6 +35,7 @@ _NCrunch*/
 [Tt]est[Rr]esult*
 
 .fake/*	
+.fake
 packages/*
 paket.exe
 

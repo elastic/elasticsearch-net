@@ -38,7 +38,7 @@ namespace Nest
 
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => this.BackingDictionary.GetEnumerator();
 
-		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => this.BackingDictionary.GetEnumerator();
+		//public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => this.BackingDictionary.GetEnumerator();
 
 		void ICollection<KeyValuePair<TKey, TValue>>.Clear() => this.BackingDictionary.Clear();
 		[EditorBrowsable(EditorBrowsableState.Never)]
