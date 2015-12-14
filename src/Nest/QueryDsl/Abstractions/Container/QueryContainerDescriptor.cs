@@ -29,20 +29,25 @@ namespace Nest
 			where TQuery : class, TQueryInterface, IQuery, new()
 			where TQueryInterface : class,IQuery
 		{
+			var container = new QueryContainerDescriptor<T>();
+			IQueryContainer c = container;
+			c.IsStrict = this.IsStrict;
+			c.IsVerbatim = this.IsVerbatim;
+
 			var query = create.InvokeOrDefault(new TQuery());
-			assign(query, this);
-			this.ContainedQuery = query;
+			assign(query, container);
+			container.ContainedQuery = query;
 
 			//if query is not conditionless or is verbatim: return a container that holds the query
 			if (!query.Conditionless || this.IsVerbatim)
-				return this;
+				return container;
 
 			//query is conditionless but the container is marked as strict, throw exception
 			if (this.IsStrict)
 				throw new DslException("Query is conditionless but strict is turned on") { Offender = query };
 
 			//query is conditionless return an empty container that can later be rewritten
-			return CreateEmptyContainer();
+			return null;
 		}
 
 		/// <summary>

@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using System.Globalization;
-using System;
-using Newtonsoft.Json.Converters;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -16,7 +10,7 @@ namespace Nest
 		GeoLocation Location { get; set; }
 		
 		[JsonProperty("distance")]
-		GeoDistance Distance { get; set; }
+		Distance Distance { get; set; }
 		
 		[JsonProperty("optimize_bbox")]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
@@ -39,7 +33,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public GeoLocation Location { get; set; }
-		public GeoDistance Distance { get; set; }
+		public Distance Distance { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 		public bool? Coerce { get; set; }
@@ -58,19 +52,20 @@ namespace Nest
 	{
 		protected override bool Conditionless => GeoDistanceQuery.IsConditionless(this);
 		GeoLocation IGeoDistanceQuery.Location { get; set; }
-		GeoDistance IGeoDistanceQuery.Distance { get; set; }
+		Distance IGeoDistanceQuery.Distance { get; set; }
 		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 		bool? IGeoDistanceQuery.Coerce { get; set; }
 		bool? IGeoDistanceQuery.IgnoreMalformed { get; set; }
 		GeoValidationMethod? IGeoDistanceQuery.ValidationMethod { get; set; }
 
-
 		public GeoDistanceQueryDescriptor<T> Location(GeoLocation location) => Assign(a => a.Location = location);
+
 		public GeoDistanceQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
 
-		public GeoDistanceQueryDescriptor<T> Distance(GeoDistance distance) => Assign(a => a.Distance = distance);
-		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoPrecision unit) => Assign(a => a.Distance = new GeoDistance(distance, unit));
+		public GeoDistanceQueryDescriptor<T> Distance(Distance distance) => Assign(a => a.Distance = distance);
+
+		public GeoDistanceQueryDescriptor<T> Distance(double distance, DistanceUnit unit) => Assign(a => a.Distance = new Distance(distance, unit));
 
 		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 

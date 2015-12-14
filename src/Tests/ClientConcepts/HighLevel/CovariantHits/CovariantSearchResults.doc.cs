@@ -29,6 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 	{
 		string Name { get; set; }
 	} 
+
 	/**
 	* We have three implementations of `ISearchResult` namely `A`, `B` and `C`
 	*/

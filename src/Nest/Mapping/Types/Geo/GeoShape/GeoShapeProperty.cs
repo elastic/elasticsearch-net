@@ -1,8 +1,4 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
-using System;
-using System.Linq.Expressions;
-using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -13,7 +9,7 @@ namespace Nest
 		GeoTree? Tree { get; set; }
 
 		[JsonProperty("precision")]
-		GeoDistance Precision { get; set; }
+		Distance Precision { get; set; }
 
 		[JsonProperty("orientation")]
 		GeoOrientation? Orientation { get; set; }
@@ -34,7 +30,7 @@ namespace Nest
 
 		public GeoTree? Tree { get; set; }
 
-		public GeoDistance Precision { get; set; }
+		public Distance Precision { get; set; }
 
 		public GeoOrientation? Orientation { get; set; }
 
@@ -50,7 +46,7 @@ namespace Nest
 		where T : class
 	{
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
-		GeoDistance IGeoShapeProperty.Precision { get; set; }
+		Distance IGeoShapeProperty.Precision { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
@@ -62,8 +58,8 @@ namespace Nest
 
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
 
-		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecision unit) =>
-			Assign(a => a.Precision = new GeoDistance(precision, unit));
+		public GeoShapePropertyDescriptor<T> Precision(double precision, DistanceUnit unit) =>
+			Assign(a => a.Precision = new Distance(precision, unit));
 
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);
 

@@ -354,7 +354,14 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
-    <Compile Include="QueryDsl\CombiningQueries.doc.cs" />
+    <Compile Include="QueryDsl\BoolDsl\BoolDsl.doc.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\UnaryAddOperatorUsageTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\NotOperatorUsageTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OrOperatorUsageTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\AndOperatorUsageTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\Operators\OperatorUsageBase.cs" />
+    <Compile Include="QueryDsl\BoolDsl\QueryContainerDescriptorExtensions.cs" />
+    <Compile Include="QueryDsl\Compound\Bool\BoolDslComplexQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Not\NotQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Limit\LimitQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Or\OrQueryUsageTests.cs" />
@@ -367,6 +374,7 @@
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\Distance\DistanceUnits.doc.cs" />
     <Compile Include="QueryDsl\TermLevel\Missing\MissingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />

@@ -5,25 +5,27 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TimeUnitExpressionJsonConverter))]
-	public class TimeUnitExpression : IComparable<TimeUnitExpression>, IEquatable<TimeUnitExpression>
+	[JsonConverter(typeof(TimeJsonConverter))]
+	public class Time : IComparable<Time>, IEquatable<Time>
 	{
+		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+
+		private static readonly long _year = (long)TimeSpan.FromDays(365).TotalMilliseconds;
+		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
+		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
+		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
+		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
+		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
+
 		public double? Factor { get; }
 		public TimeUnit? Interval { get; }
 		public long Milliseconds { get; }
 
-		private static long _year = (long)TimeSpan.FromDays(365).TotalMilliseconds;
-		private static long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
-		private static long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
-		private static long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
-		private static long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
+		public static implicit operator Time(TimeSpan span) => new Time(span);
+		public static implicit operator Time(long milliseconds) => new Time(milliseconds);
+		public static implicit operator Time(string expression) => new Time(expression);
 
-		public static implicit operator TimeUnitExpression(TimeSpan span) => new TimeUnitExpression(span);
-		public static implicit operator TimeUnitExpression(long milliseconds) => new TimeUnitExpression(milliseconds);
-		public static implicit operator TimeUnitExpression(string expression) => new TimeUnitExpression(expression);
-
-		public TimeUnitExpression(double factor, TimeUnit interval)
+		public Time(double factor, TimeUnit interval)
 		{
 			this.Factor = factor;
 			this.Interval = interval;
@@ -44,7 +46,7 @@ namespace Nest
 				Milliseconds = (long)factor;
 		}
 
-		public TimeUnitExpression(TimeSpan timeSpan)
+		public Time(TimeSpan timeSpan)
 		{
 			var ms = timeSpan.TotalMilliseconds;
 			this.Milliseconds = (long)ms;
@@ -86,18 +88,16 @@ namespace Nest
 			}
 		}
 
-		public TimeUnitExpression(long milliseconds)
+		public Time(long milliseconds)
 		{
 			this.Milliseconds = milliseconds;
 		}
 
-		private readonly Regex _expressionRegex = new Regex(@"^(?<factor>\d+(?:\.\d+)?)(?<interval>(?:y|m|w|d|h|m|s|ms))?$", RegexOptions.IgnoreCase);
-
-		public TimeUnitExpression(string unitExpression)
+		public Time(string timeUnit)
 		{
-			if (unitExpression.IsNullOrEmpty()) throw new ArgumentException("Time expression string is empty", nameof(unitExpression));
-			var match = _expressionRegex.Match(unitExpression);
-			if (!match.Success) throw new ArgumentException($"Time expression '{unitExpression}' string is invalid", nameof(unitExpression));
+			if (timeUnit.IsNullOrEmpty()) throw new ArgumentException("Time expression string is empty", nameof(timeUnit));
+			var match = _expressionRegex.Match(timeUnit);
+			if (!match.Success) throw new ArgumentException($"Time expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
 			this.Interval = match.Groups["interval"].Success
@@ -122,7 +122,7 @@ namespace Nest
 
 		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
 
-		public int CompareTo(TimeUnitExpression other)
+		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
 			if (this.Milliseconds == other.Milliseconds) return 0;
@@ -130,16 +130,16 @@ namespace Nest
 			return 1;
 		}
 
-		public static bool operator <(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) < 0;
-		public static bool operator <=(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) < 0 || left.Equals(right);
+		public static bool operator <(Time left, Time right) => left.CompareTo(right) < 0;
+		public static bool operator <=(Time left, Time right) => left.CompareTo(right) < 0 || left.Equals(right);
 
-		public static bool operator >(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) > 0;
-		public static bool operator >=(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) > 0 || left.Equals(right);
+		public static bool operator >(Time left, Time right) => left.CompareTo(right) > 0;
+		public static bool operator >=(Time left, Time right) => left.CompareTo(right) > 0 || left.Equals(right);
 
-		public static bool operator ==(TimeUnitExpression left, TimeUnitExpression right) => 
+		public static bool operator ==(Time left, Time right) => 
 			object.ReferenceEquals(left, null) ? object.ReferenceEquals(right, null) : left.Equals(right);
 
-		public static bool operator !=(TimeUnitExpression left, TimeUnitExpression right) =>
+		public static bool operator !=(Time left, Time right) =>
 			!object.ReferenceEquals(left, null) && !object.ReferenceEquals(right, null) && !left.Equals(right);
 
 		public override string ToString()
@@ -149,7 +149,7 @@ namespace Nest
 				   this.Interval.GetValueOrDefault().GetStringValue();
 		}
 
-		public bool Equals(TimeUnitExpression other)
+		public bool Equals(Time other)
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
@@ -161,7 +161,7 @@ namespace Nest
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != this.GetType()) return false;
-			return Equals((TimeUnitExpression)obj);
+			return Equals((Time)obj);
 		}
 
 		public override int GetHashCode() => this.Milliseconds.GetHashCode();

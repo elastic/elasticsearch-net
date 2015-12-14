@@ -18,13 +18,13 @@ namespace Elasticsearch.Net.Connection
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		private SemaphoreSlim _semaphore;
+		private readonly SemaphoreSlim _semaphore;
 
 		//TODO discuss which should be public
 		public TConnectionSettings Settings { get; }
 		public IDateTimeProvider DateTimeProvider { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
-		public IRequestPipelineFactory PipelineProvider { get; private set; }
+		public IRequestPipelineFactory PipelineProvider { get; }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
@@ -38,7 +38,7 @@ namespace Elasticsearch.Net.Connection
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		/// <param name="requestPipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
+		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
 		/// <param name="dateTimeProvider">The date time proved to use, safe to pass null to use the default</param>
 		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>
 		public Transport(

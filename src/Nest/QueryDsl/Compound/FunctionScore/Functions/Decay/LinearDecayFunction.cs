@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	public abstract class LinearDecayFunction<TOrigin, TScale> : DecayFunctionBase<TOrigin, TScale>
@@ -16,6 +11,6 @@ namespace Nest
 	}
 
 	public class LinearDecayFunction : LinearDecayFunction<double?, double?> { }
-	public class LinearDateDecayFunction : LinearDecayFunction<DateMath, TimeUnitExpression> { }
-	public class LinearGeoDecayFunction : LinearDecayFunction<GeoLocation, GeoDistance> { }
+	public class LinearDateDecayFunction : LinearDecayFunction<DateMath, Time> { }
+	public class LinearGeoDecayFunction : LinearDecayFunction<GeoLocation, Distance> { }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class GeoShapeAttribute : ElasticsearchPropertyAttribute, IGeoShapeProperty
 	{
 		IGeoShapeProperty Self => this;
 
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
-		GeoDistance IGeoShapeProperty.Precision { get; set; }
+		Distance IGeoShapeProperty.Precision { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
