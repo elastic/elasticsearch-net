@@ -56,8 +56,8 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 				.Transpositions()
 			);
 
-		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<DateTime?, TimeUnit>>(
-			a => a.Fuzzy as IFuzzyQuery<DateTime?, TimeUnit>
+		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IFuzzyQuery<DateTime?, Time>>(
+			a => a.Fuzzy as IFuzzyQuery<DateTime?, Time>
 		)
 		{
 			q => q.Field = null,

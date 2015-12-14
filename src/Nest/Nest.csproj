@@ -177,8 +177,8 @@
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="CommonOptions\Attributes\AlternativeEnumMemberAttribute.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
-    <Compile Include="CommonOptions\Geo\DistanceUnit.cs" />
-    <Compile Include="CommonOptions\Geo\DistanceUnitJsonConverter.cs" />
+    <Compile Include="CommonOptions\Geo\Distance.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceJsonConverter.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
     <Compile Include="CommonOptions\Scripting\FileScript.cs" />
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkRequestJsonConverter.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitJsonConverter.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
     <Compile Include="CommonAbstractions\Union\Union.cs" />
     <Compile Include="CommonOptions\DateMath\DateMath.cs" />
@@ -205,8 +205,8 @@
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeExpression.cs" />
     <Compile Include="Aggregations\Bucket\IpRange\IpRange.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitMeasure.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnit.cs" />
+    <Compile Include="CommonOptions\TimeUnit\Time.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
@@ -569,7 +569,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\ElasticClient-Snapshot.cs" />
     <Compile Include="Search\FieldStats\ElasticClient-FieldStats.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
-    <Compile Include="CommonOptions\Geo\DistanceUnitMeasure.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceUnit.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptRequest.cs" />
     <Compile Include="Search\SearchExists\SearchExistsRequest.cs" />
     <Compile Include="Modules\Scripting\PutScript\PutScriptRequest.cs" />

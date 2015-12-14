@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class DistanceUnitJsonConverter : JsonConverter
+	internal class DistanceJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var p = value as DistanceUnit;
+			var p = value as Distance;
 			if (p == null)
 			{
 				writer.WriteNull();
@@ -31,7 +31,7 @@ namespace Nest
 			var v = reader.Value as string;
 			if (v == null) return null;
 
-			return new DistanceUnit(v);
+			return new Distance(v);
 		}
 
 		public override bool CanConvert(Type objectType)

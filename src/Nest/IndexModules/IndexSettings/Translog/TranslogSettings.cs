@@ -12,7 +12,7 @@ namespace Nest
 		/// <summary>
 		/// How often the translog is fsynced to disk and committed, regardless of write operations. Defaults to 5s.
 		/// </summary>
-		TimeUnit SyncInterval { get; set; }
+		Time SyncInterval { get; set; }
 
 		/// <summary>
 		/// Whether or not to fsync and commit the translog after every index, delete, update, or bulk request
@@ -30,7 +30,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITranslogFlushSettings Flush { get; set; }
 		/// <inheritdoc/>
-		public TimeUnit SyncInterval { get; set; }
+		public Time SyncInterval { get; set; }
 		/// <inheritdoc/>
 		public TranslogDurability? Durability { get; set; }
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 	public class TranslogSettingsDescriptor: DescriptorBase<TranslogSettingsDescriptor, ITranslogSettings>, ITranslogSettings
 	{
 		ITranslogFlushSettings ITranslogSettings.Flush { get; set; }
-		TimeUnit ITranslogSettings.SyncInterval { get; set; }
+		Time ITranslogSettings.SyncInterval { get; set; }
 		TranslogDurability? ITranslogSettings.Durability { get; set; }
 		TranslogWriteMode? ITranslogSettings.FileSystemType { get; set; }
 
@@ -53,7 +53,7 @@ namespace Nest
 			Assign(a => a.Durability = durability);
 
 		/// <inheritdoc/>
-		public TranslogSettingsDescriptor SyncInterval(TimeUnit time) =>
+		public TranslogSettingsDescriptor SyncInterval(Time time) =>
 			Assign(a => a.SyncInterval = time);
 
 		/// <inheritdoc/>

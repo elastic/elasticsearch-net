@@ -86,7 +86,7 @@ namespace Tests.Search.Request
 					.Field(p => p.Location)
 					.DistanceType(GeoDistanceType.SloppyArc)
 					.Order(SortOrder.Ascending)
-					.Unit(DistanceUnitMeasure.Centimeters)
+					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
 					.PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
@@ -124,7 +124,7 @@ namespace Tests.Search.Request
 						Field = "location",
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = DistanceUnitMeasure.Centimeters,
+						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},

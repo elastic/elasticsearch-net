@@ -7,7 +7,7 @@ namespace Nest
 	{
 		IndexName To { get; set; }
 		IndexName From { get; set; }
-		//TODO TimeUnit, needs to propagate to generated querystring methods
+		//TODO Time, needs to propagate to generated querystring methods
 		string Scroll { get; set; }
 		int? Size { get; set; }
 		

@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.Geo.HashCell
 			Field = Static.Field<Project>(p=>p.Location),
 			Location = new GeoLocation(13.4080, 52.5186),
 			Neighbors = true,
-			Precision = DistanceUnit.Meters(3)
+			Precision = Nest.Distance.Meters(3)
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Geo.HashCell
 				.Field(p=>p.Location)
 				.Location(new GeoLocation(13.4080, 52.5186))
 				.Neighbors()
-				.Precision(DistanceUnit.Meters(3))
+				.Precision(Nest.Distance.Meters(3))
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoHashCellQuery>(a => a.GeoHashCell)

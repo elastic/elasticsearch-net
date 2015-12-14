@@ -19,7 +19,7 @@ namespace Nest
 		IDictionary<string, object> Params { get; set; }
 
 		[JsonProperty("interval")]
-		Union<DateInterval, TimeUnit> Interval { get; set; }
+		Union<DateInterval, Time> Interval { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -51,7 +51,7 @@ namespace Nest
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
-		public Union<DateInterval, TimeUnit> Interval { get; set; }
+		public Union<DateInterval, Time> Interval { get; set; }
 		public string Format { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public string TimeZone { get; set; }
@@ -79,7 +79,7 @@ namespace Nest
 
 		IDictionary<string, object> IDateHistogramAggregation.Params { get; set; }
 
-		Union<DateInterval, TimeUnit> IDateHistogramAggregation.Interval { get; set; }
+		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
 
 		string IDateHistogramAggregation.Format { get; set; }
 
@@ -106,7 +106,7 @@ namespace Nest
 		public DateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public DateHistogramAggregationDescriptor<T> Interval(TimeUnit interval) => Assign(a => a.Interval = interval);
+		public DateHistogramAggregationDescriptor<T> Interval(Time interval) => Assign(a => a.Interval = interval);
 
 		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval) =>
 			Assign(a => a.Interval = interval);

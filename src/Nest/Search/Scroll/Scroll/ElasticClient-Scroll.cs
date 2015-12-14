@@ -20,7 +20,7 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class;
 
 		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(TimeUnit scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
+		ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
 			where T : class;
 
 		///<inheritdoc/>
@@ -28,7 +28,7 @@ namespace Nest
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnit scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
 			where T : class;
 
 	}
@@ -48,7 +48,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(TimeUnit scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class =>
+		public ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class =>
 			this.Scroll<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
@@ -65,7 +65,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnit scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
+		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
 			this.ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 	}
 }

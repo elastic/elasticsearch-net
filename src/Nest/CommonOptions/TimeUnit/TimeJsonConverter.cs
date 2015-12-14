@@ -3,11 +3,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class TimeUnitJsonConverter : JsonConverter
+	internal class TimeJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = value as TimeUnit;
+			var v = value as Time;
 			if (v.Factor.HasValue)
 				writer.WriteValue(v.ToString());
 			else writer.WriteValue(v.Milliseconds); 
@@ -16,12 +16,12 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.String)
-				return new TimeUnit(reader.Value as string);
+				return new Time(reader.Value as string);
 
 			if (reader.TokenType == JsonToken.Integer || reader.TokenType == JsonToken.Float)
 			{
 				var milliseconds = Convert.ToInt64(reader.Value);
-				return new TimeUnit(milliseconds);
+				return new Time(milliseconds);
 			}
 
 			return null;

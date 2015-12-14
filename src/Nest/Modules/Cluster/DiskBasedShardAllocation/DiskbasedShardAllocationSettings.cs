@@ -19,7 +19,7 @@ namespace Nest
 		string HighWatermark { get; set; }
 
 		/// <summary>How often Elasticsearch should check on disk usage for each node in the cluster. Defaults to 30s.</summary>
-		TimeUnit UpdateInterval { get; set; }
+		Time UpdateInterval { get; set; }
 
 		/// <summary>
 		/// Defaults to true, which means that Elasticsearch will take into account shards that are currently being relocated to the target node when computing 
@@ -42,7 +42,7 @@ namespace Nest
 		public string HighWatermark { get; set; }
 
 		///<inheritdoc/>
-		public TimeUnit UpdateInterval { get; set; }
+		public Time UpdateInterval { get; set; }
 
 		///<inheritdoc/>
 		public bool? IncludeRelocations { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 
 		string IDiskBasedShardAllocationSettings.HighWatermark { get; set; }
 
-		TimeUnit IDiskBasedShardAllocationSettings.UpdateInterval { get; set; }
+		Time IDiskBasedShardAllocationSettings.UpdateInterval { get; set; }
 
 		bool? IDiskBasedShardAllocationSettings.IncludeRelocations { get; set; }
 
@@ -71,7 +71,7 @@ namespace Nest
 		public DiskBasedShardAllocationSettingsDescriptor HighWatermark(string high) => Assign(a => a.HighWatermark = high);
 
 		///<inheritdoc/>
-		public DiskBasedShardAllocationSettingsDescriptor UpdateInterval(TimeUnit time) => Assign(a => a.UpdateInterval = time);
+		public DiskBasedShardAllocationSettingsDescriptor UpdateInterval(Time time) => Assign(a => a.UpdateInterval = time);
 
 		///<inheritdoc/>
 		public DiskBasedShardAllocationSettingsDescriptor IncludeRelocations(bool? include) => Assign(a => a.IncludeRelocations = include);

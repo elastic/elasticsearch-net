@@ -12,6 +12,6 @@ namespace Nest
 	}
 
 	public class GaussDecayFunction : GaussDecayFunction<double?, double?> { }
-	public class GaussDateDecayFunction : GaussDecayFunction<DateMath, TimeUnit> { }
-	public class GaussGeoDecayFunction : GaussDecayFunction<GeoLocation, DistanceUnit> { }
+	public class GaussDateDecayFunction : GaussDecayFunction<DateMath, Time> { }
+	public class GaussGeoDecayFunction : GaussDecayFunction<GeoLocation, Distance> { }
 }

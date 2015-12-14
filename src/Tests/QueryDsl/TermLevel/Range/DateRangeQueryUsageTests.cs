@@ -35,7 +35,7 @@ namespace Tests.QueryDsl.TermLevel.Range
 			Boost = 1.1,
 			Field = "description",
 			GreaterThan = FixedDate,
-			GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnitMeasure.Month),
+			GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
 			LessThan = "01/01/2012",
 			LessThanOrEqualTo = DateMath.Now,
 			TimeZone = "+01:00",
@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.TermLevel.Range
 				.Boost(1.1)
 				.Field(p => p.Description)
 				.GreaterThan(FixedDate)
-				.GreaterThanOrEquals(DateMath.Anchored(FixedDate).RoundTo(TimeUnitMeasure.Month))
+				.GreaterThanOrEquals(DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month))
 				.LessThan("01/01/2012")
 				.LessThanOrEquals(DateMath.Now)
 				.Format("dd/MM/yyyy||yyyy")

@@ -18,7 +18,7 @@ namespace Nest
 		GeoLocation Origin { get; set; }
 
 		[JsonProperty("unit")]
-		DistanceUnitMeasure? Unit { get; set; }
+		DistanceUnit? Unit { get; set; }
 
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 
 		public GeoLocation Origin { get; set; }
 
-		public DistanceUnitMeasure? Unit { get; set; }
+		public DistanceUnit? Unit { get; set; }
 
 		public GeoDistanceType? DistanceType { get; set; }
 
@@ -55,7 +55,7 @@ namespace Nest
 
 		GeoLocation IGeoDistanceAggregation.Origin { get; set; }
 
-		DistanceUnitMeasure? IGeoDistanceAggregation.Unit { get; set; }
+		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
 
 		GeoDistanceType? IGeoDistanceAggregation.DistanceType { get; set; }
 
@@ -69,7 +69,7 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnitMeasure unit) => Assign(a => a.Unit = unit);
+		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.Unit = unit);
 
 		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
