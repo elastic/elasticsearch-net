@@ -19,7 +19,7 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
-		public static ElasticsearchClientException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
+		internal static ElasticsearchClientException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
