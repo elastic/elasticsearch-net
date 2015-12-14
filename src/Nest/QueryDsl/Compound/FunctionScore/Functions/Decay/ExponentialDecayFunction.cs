@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
-
 namespace Nest
 {
 	public abstract class ExponentialDecayFunction<TOrigin, TScale> : DecayFunctionBase<TOrigin, TScale>
@@ -17,7 +12,7 @@ namespace Nest
 	}
 
 	public class ExponentialDecayFunction : ExponentialDecayFunction<double?, double?> { }
-	public class ExponentialDateDecayFunction : ExponentialDecayFunction<DateMath, TimeUnitExpression> { }
-	public class ExponentialGeoDecayFunction : ExponentialDecayFunction<GeoLocation, GeoDistance> { }
+	public class ExponentialDateDecayFunction : ExponentialDecayFunction<DateMath, Time> { }
+	public class ExponentialGeoDecayFunction : ExponentialDecayFunction<GeoLocation, Distance> { }
 
 }

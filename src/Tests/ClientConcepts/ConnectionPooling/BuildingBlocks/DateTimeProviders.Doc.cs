@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		[U] public void DefaultNowBehaviour()
 		{
-			var dateTimeProvider = new DateTimeProvider();
+			var dateTimeProvider = DateTimeProvider.Default;
 			/** dates are always returned in UTC */
 			dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
 		}
@@ -38,7 +38,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		[U] public void DeadTimeoutCalculation()
 		{
-			var dateTimeProvider = new DateTimeProvider();
+			var dateTimeProvider = DateTimeProvider.Default;
 			/**  
 			* The default timeout calculation is: `min(timeout * 2 ^ (attempts * 0.5 -1), maxTimeout)`
 			* The default values for `timeout` and `maxTimeout` are

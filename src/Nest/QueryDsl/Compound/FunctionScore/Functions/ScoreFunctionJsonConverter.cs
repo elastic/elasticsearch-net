@@ -93,8 +93,8 @@ namespace Nest
 				writer.WriteStartObject();
 				{
 					var write = WriteNumericDecay(writer, decay as IDecayFunction<double?, double?>, serializer)
-								|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, TimeUnitExpression>, serializer)
-								|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, GeoDistance>, serializer);
+								|| WriteDateDecay(writer, decay as IDecayFunction<DateMath, Time>, serializer)
+								|| WriteGeoDecay(writer, decay as IDecayFunction<GeoLocation, Distance>, serializer);
 					if (!write) throw new Exception($"Can not write decay function json for {decay.GetType().Name}");
 
 					if (decay.Decay.HasValue)
@@ -130,7 +130,7 @@ namespace Nest
 			return true;
 		}
 
-		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, TimeUnitExpression> value, JsonSerializer serializer)
+		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
 			writer.WritePropertyName("origin");
@@ -146,7 +146,7 @@ namespace Nest
 
 		}
 
-		private bool WriteGeoDecay(JsonWriter writer, IDecayFunction<GeoLocation, GeoDistance> value, JsonSerializer serializer)
+		private bool WriteGeoDecay(JsonWriter writer, IDecayFunction<GeoLocation, Distance> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
 			writer.WritePropertyName("origin");

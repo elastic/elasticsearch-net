@@ -41,7 +41,6 @@ namespace Tests.Framework
 				throw new ArgumentNullException(nameof(this._expectedJsonString));
 		}
 
-
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
 		protected void ShouldBeEquivalentTo(string serialized) =>
@@ -104,8 +103,9 @@ namespace Tests.Framework
 			foreach (var prop in props.OrderBy(p => p.Name))
 			{
 				jObj.Add(prop);
-				if (prop.Value is JObject)
-					Sort((JObject)prop.Value);
+				var o = prop.Value as JObject;
+				if (o != null)
+					Sort(o);
 			}
 		}
 

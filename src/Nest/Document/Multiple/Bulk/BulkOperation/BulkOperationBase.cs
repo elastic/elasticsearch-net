@@ -13,7 +13,7 @@ namespace Nest
 		public string Routing { get; set; }
 		public Id Parent { get; set; }
 		public long? Timestamp { get; set; }
-		public TimeUnitExpression Ttl { get; set; }
+		public Time Ttl { get; set; }
 		public int? RetriesOnConflict { get; set; }
 
 		string IBulkOperation.Operation => this.Operation;
@@ -60,7 +60,7 @@ namespace Nest
 		string IBulkOperation.Routing { get; set; }
 		Id IBulkOperation.Parent { get; set; }
 		long? IBulkOperation.Timestamp { get; set; }
-		TimeUnitExpression IBulkOperation.Ttl { get; set; }
+		Time IBulkOperation.Ttl { get; set; }
 		int? IBulkOperation.RetriesOnConflict { get; set; }
 
 		/// <summary>
@@ -89,6 +89,6 @@ namespace Nest
 
 		public TDescriptor Timestamp(long timestamp) => Assign(a => a.Timestamp = timestamp);
 
-		public TDescriptor Ttl(TimeUnitExpression ttl) => Assign(a => a.Ttl = ttl);
+		public TDescriptor Ttl(Time ttl) => Assign(a => a.Ttl = ttl);
 	}
 }

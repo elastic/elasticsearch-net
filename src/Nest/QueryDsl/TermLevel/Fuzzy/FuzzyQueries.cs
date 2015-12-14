@@ -29,14 +29,15 @@ namespace Nest
 		public FuzzyNumericQueryDescriptor<T> Value(double? value) => Assign(a => a.Value = value);
 	}
 
-	public interface IFuzzyDateQuery : IFuzzyQuery<DateTime?, TimeUnitExpression> { }
-	public class FuzzyDateQuery : FuzzyQueryBase<DateTime?, TimeUnitExpression>, IFuzzyDateQuery { }
+	public interface IFuzzyDateQuery : IFuzzyQuery<DateTime?, Time> { }
+	public class FuzzyDateQuery : FuzzyQueryBase<DateTime?, Time>, IFuzzyDateQuery { }
+
 
 	public class FuzzyDateQueryDescriptor<T> 
-		: FuzzyQueryDescriptorBase<FuzzyDateQueryDescriptor<T>, T, DateTime?, TimeUnitExpression>
+		: FuzzyQueryDescriptorBase<FuzzyDateQueryDescriptor<T>, T, DateTime?, Time>
 		, IFuzzyDateQuery where T : class
 	{
-		public FuzzyDateQueryDescriptor<T> Fuzziness(TimeUnitExpression fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public FuzzyDateQueryDescriptor<T> Fuzziness(Time fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value) => Assign(a => a.Value = value);
 	}

@@ -37,7 +37,7 @@ namespace Nest
 		long? Timestamp { get; set; }
 
 		[JsonProperty("_ttl")]
-		TimeUnitExpression Ttl { get; set; }
+		Time Ttl { get; set; }
 
 		[JsonProperty("_retry_on_conflict")]
 		int? RetriesOnConflict { get; set; }

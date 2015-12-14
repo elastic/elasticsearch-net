@@ -17,7 +17,7 @@ namespace Nest
 		public int? ExpectedDataNodes { get; internal set; }
 
 		///<inheritdoc/>
-		public TimeUnitExpression RecoveryAfterTime { get; internal set; }
+		public Time RecoveryAfterTime { get; internal set; }
 
 	}
 }

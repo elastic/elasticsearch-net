@@ -39,7 +39,7 @@ namespace Tests.QueryDsl.Geo.Distance
 			DistanceType = GeoDistanceType.Arc,
 			Coerce = true,
 			Location = new GeoLocation(34,-34),
-			Distance = GeoDistance.Meters(200),
+			Distance = "200.0m",
 			IgnoreMalformed = true,
 			OptimizeBoundingBox = GeoOptimizeBBox.Memory,
 			ValidationMethod = GeoValidationMethod.Strict
@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
 				.Location(34, -34)
-				.Distance(200, GeoPrecision.Meters)
+				.Distance("200.0m")
 				.IgnoreMalformed()
 				.Optimize(GeoOptimizeBBox.Memory)
 				.ValidationMethod(GeoValidationMethod.Strict)
