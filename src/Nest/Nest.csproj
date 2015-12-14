@@ -694,8 +694,6 @@
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
-    <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
-    <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
@@ -842,7 +840,6 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\TermSuggester\TermSuggester.cs" />
-    <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />

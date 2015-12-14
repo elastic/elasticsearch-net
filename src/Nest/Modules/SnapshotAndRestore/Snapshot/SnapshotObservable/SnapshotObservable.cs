@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace Nest
 				var snapshotResponse = this._elasticClient.Snapshot(_snapshotRequest);
 
 				if (!snapshotResponse.IsValid)
-					throw new SnapshotException(snapshotResponse.ApiCall, "Can't create snapshot");
+					throw new ElasticsearchClientException("Failed to create snapshot.", snapshotResponse.ApiCall);
 
 				EventHandler<SnapshotNextEventArgs> onNext = (sender, args) => observer.OnNext(args.SnapshotStatusResponse);
 				EventHandler<SnapshotCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -187,7 +188,7 @@ namespace Nest
 						_snapshotRequest.Snapshot));
 
 				if (!snapshotStatusResponse.IsValid)
-					throw new SnapshotException(snapshotStatusResponse.ApiCall, "Can't check snapshot status");
+					throw new ElasticsearchClientException("Failed to get snapshot status.", snapshotStatusResponse.ApiCall);
 
 				if (snapshotStatusResponse.Snapshots.All(s => s.ShardsStats.Done == s.ShardsStats.Total))
 				{
