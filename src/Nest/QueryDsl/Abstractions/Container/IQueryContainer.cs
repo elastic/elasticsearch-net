@@ -7,9 +7,6 @@ namespace Nest
 	[JsonConverter(typeof(ReserializeJsonConverter<QueryContainer, IQueryContainer>))]
 	public interface IQueryContainer : ICustomJson
 	{
-		[JsonProperty(PropertyName = "bool")]
-		IBoolQuery Bool { get; set; }
-
 		[JsonIgnore]
 		bool IsConditionless { get; }
 
@@ -22,106 +19,109 @@ namespace Nest
 		[JsonIgnore]
 		string RawQuery { get; set; }
 		
-		[JsonProperty(PropertyName = "match_all")]
-		IMatchAllQuery MatchAllQuery { get; set; }
+		[JsonProperty("bool")]
+		IBoolQuery Bool { get; set; }
 
-		[JsonProperty(PropertyName = "term")]
+		[JsonProperty("match_all")]
+		IMatchAllQuery MatchAll { get; set; }
+
+		[JsonProperty("term")]
 		ITermQuery Term { get; set; }
 
-		[JsonProperty(PropertyName = "wildcard")]
+		[JsonProperty("wildcard")]
 		IWildcardQuery Wildcard { get; set; }
 
-		[JsonProperty(PropertyName = "prefix")]
+		[JsonProperty("prefix")]
 		IPrefixQuery Prefix { get; set; }
 
-		[JsonProperty(PropertyName = "boosting")]
+		[JsonProperty("boosting")]
 		IBoostingQuery Boosting { get; set; }
 
-		[JsonProperty(PropertyName = "ids")]
+		[JsonProperty("ids")]
 		IIdsQuery Ids { get; set; }
 
-		[JsonProperty(PropertyName = "limit")]
+		[JsonProperty("limit")]
 		ILimitQuery Limit { get; set; }
 
-		[JsonProperty(PropertyName = "constant_score")]
+		[JsonProperty("constant_score")]
 		IConstantScoreQuery ConstantScore { get; set; }
 
-		[JsonProperty(PropertyName = "dis_max")]
+		[JsonProperty("dis_max")]
 		IDisMaxQuery DisMax { get; set; }
 
-		[JsonProperty(PropertyName = "multi_match")]
+		[JsonProperty("multi_match")]
 		IMultiMatchQuery MultiMatch { get; set; }
 
-		[JsonProperty(PropertyName = "match")]
+		[JsonProperty("match")]
 		IMatchQuery Match { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy")]
+		[JsonProperty("fuzzy")]
 		IFuzzyQuery Fuzzy { get; set; }
 
-		[JsonProperty(PropertyName = "geo_shape")]
+		[JsonProperty("geo_shape")]
 		IGeoShapeQuery GeoShape { get; set; }
 
-		[JsonProperty(PropertyName = "common")]
+		[JsonProperty("common")]
 		ICommonTermsQuery CommonTerms { get; set; }
 
-		[JsonProperty(PropertyName = "terms")]
+		[JsonProperty("terms")]
 		ITermsQuery Terms { get; set; }
 
-		[JsonProperty(PropertyName = "range")]
+		[JsonProperty("range")]
 		IRangeQuery Range { get; set; }
 
-		[JsonProperty(PropertyName = "regexp")]
+		[JsonProperty("regexp")]
 		IRegexpQuery Regexp { get; set; }
 
-		[JsonProperty(PropertyName = "has_child")]
+		[JsonProperty("has_child")]
 		IHasChildQuery HasChild { get; set; }
 
-		[JsonProperty(PropertyName = "has_parent")]
+		[JsonProperty("has_parent")]
 		IHasParentQuery HasParent { get; set; }
 		
-		[JsonProperty(PropertyName = "span_term")]
+		[JsonProperty("span_term")]
 		ISpanTermQuery SpanTerm { get; set; }
 
-		[JsonProperty(PropertyName = "simple_query_string")]
+		[JsonProperty("simple_query_string")]
 		ISimpleQueryStringQuery SimpleQueryString { get; set; }
 
-		[JsonProperty(PropertyName = "query_string")]
+		[JsonProperty("query_string")]
 		IQueryStringQuery QueryString { get; set; }
 
-		[JsonProperty(PropertyName = "mlt")]
+		[JsonProperty("mlt")]
 		IMoreLikeThisQuery MoreLikeThis { get; set; }
 
-		[JsonProperty(PropertyName = "span_first")]
+		[JsonProperty("span_first")]
 		ISpanFirstQuery SpanFirst { get; set; }
 
-		[JsonProperty(PropertyName = "span_or")]
+		[JsonProperty("span_or")]
 		ISpanOrQuery SpanOr { get; set; }
 
-		[JsonProperty(PropertyName = "span_near")]
+		[JsonProperty("span_near")]
 		ISpanNearQuery SpanNear { get; set; }
 
-		[JsonProperty(PropertyName = "span_not")]
+		[JsonProperty("span_not")]
 		ISpanNotQuery SpanNot { get; set; }
 
-		[JsonProperty(PropertyName = "span_containing")]
+		[JsonProperty("span_containing")]
 		ISpanContainingQuery SpanContaining { get; set; }
 
-		[JsonProperty(PropertyName = "span_within")]
+		[JsonProperty("span_within")]
 		ISpanWithinQuery SpanWithin { get; set; }
 
-		[JsonProperty(PropertyName = "span_multi")]
+		[JsonProperty("span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
 
-		[JsonProperty(PropertyName = "nested")]
+		[JsonProperty("nested")]
 		INestedQuery Nested { get; set; }
 
-		[JsonProperty(PropertyName = "indices")]
+		[JsonProperty("indices")]
 		IIndicesQuery Indices { get; set; }
 
-		[JsonProperty(PropertyName = "function_score")]
+		[JsonProperty("function_score")]
 		IFunctionScoreQuery FunctionScore { get; set; }
 
-		[JsonProperty(PropertyName = "template")]
+		[JsonProperty("template")]
 		ITemplateQuery Template { get; set; }
 
 		[JsonProperty("geo_bounding_box")]
@@ -151,17 +151,19 @@ namespace Nest
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
 
-		[JsonProperty(PropertyName = "filtered")]
+#pragma warning disable 618
+		[JsonProperty("filtered")]
 		IFilteredQuery Filtered { get; set; }
 
-		[JsonProperty(PropertyName = "and")]
+		[JsonProperty("and")]
 		IAndQuery And { get; set; }
 
-		[JsonProperty(PropertyName = "or")]
+		[JsonProperty("or")]
 		IOrQuery Or { get; set; }
 
-		[JsonProperty(PropertyName = "not")]
+		[JsonProperty("not")]
 		INotQuery Not { get; set; }
+#pragma warning restore 618
 
 		void Accept(IQueryVisitor visitor);
 	}

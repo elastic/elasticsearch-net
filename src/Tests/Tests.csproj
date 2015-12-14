@@ -165,6 +165,7 @@
     <Compile Include="Cluster\RootNodeInfo\RootNodeInfoApiTests.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootNodeInfoUrlTests.cs" />
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
+    <Compile Include="CodeStandards\Queries.doc.cs" />
     <Compile Include="CodeStandards\ElasticClient.doc.cs" />
     <Compile Include="CodeStandards\NamingConventions.doc.cs" />
     <Compile Include="CodeStandards\Serialization\Properties.doc.cs" />

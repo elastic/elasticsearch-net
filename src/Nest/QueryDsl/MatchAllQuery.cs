@@ -23,7 +23,7 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer container)
 		{
-			container.MatchAllQuery = this;
+			container.MatchAll = this;
 		}
 	}
 

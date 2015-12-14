@@ -13,7 +13,6 @@ namespace Tests.QueryDsl.Compound.Bool
 	public class BoolDslComplexQueryUsageTests : BoolQueryUsageTests
 	{
 		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
 		protected static readonly TermQuery NullQuery = null;
 
 		public BoolDslComplexQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -47,11 +47,5 @@ namespace Nest
 
 		public SortGeoDistanceDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		public SortGeoDistanceDescriptor<T> MissingLast() => Assign(a => a.Missing = "_last");
-
-		public SortGeoDistanceDescriptor<T> MissingFirst() => Assign(a => a.Missing = "_first");
-
-		public SortGeoDistanceDescriptor<T> MissingValue(string value) => Assign(a => a.Missing = value);
-
 	}
 }

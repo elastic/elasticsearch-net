@@ -86,7 +86,9 @@ namespace Nest.QueryDsl.Visitor
 			Write("dis_max");
 		}
 
+#pragma warning disable 618
 		public virtual void Visit(IFilteredQuery query)
+#pragma warning restore 618
 		{
 			Write("filtered");
 		}

@@ -29,7 +29,9 @@
 		void Visit(ICommonTermsQuery query);
 		void Visit(IConstantScoreQuery query);
 		void Visit(IDisMaxQuery query);
+#pragma warning disable 618
 		void Visit(IFilteredQuery query);
+#pragma warning restore 618
 		void Visit(IFunctionScoreQuery query);
 		void Visit(IFuzzyQuery query);
 		void Visit(IGeoShapeQuery query);
@@ -104,9 +106,11 @@
 		{
 		}
 
+#pragma warning disable 618
 		public virtual void Visit(IFilteredQuery customFiltersScore)
 		{
 		}
+#pragma warning restore 618
 
 		public virtual void Visit(IFunctionScoreQuery customFiltersScore)
 		{
