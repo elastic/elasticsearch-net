@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using static Elasticsearch.Net.HttpMethod;
-using static Nest.DispatchException;
 
 //Generated File Please Do Not Edit Manually
 
@@ -17,6 +16,18 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
+		public static ElasticsearchClientException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
+		{
+			var sb = new StringBuilder();
+			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
+			sb.AppendLine($"Recieved a request marked as {provided.HttpMethod.GetStringValue()}");
+			sb.AppendLine($"This endpoint accepts {string.Join(",", methods.Select(p=>p.GetStringValue()))}");
+			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
+			foreach (var endpoint in endpoints)
+				sb.AppendLine($"  - {endpoint}");
+			return new ElasticsearchClientException(sb.ToString());
+		}
+
 		internal ElasticsearchResponse<T> BulkDispatch<T>(IRequest<BulkRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
