@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.ConnectionPool
 {
-	public class SniffingConnectionPool : StaticConnectionPool
+	public class SniffingConnectionPool : StaticConnectionPool, IDisposable
 	{
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
+	    private bool _isDisposed;
 
 		public override bool AcceptsUpdates { get { return true; } }
 
@@ -23,6 +23,8 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
 		{
+		    CheckDisposed();
+
 			try
 			{
 				this._readerWriter.EnterWriteLock();
@@ -40,7 +42,9 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
 		{
-			try
+            CheckDisposed();
+
+            try
 			{
 				this._readerWriter.EnterReadLock();
 				return base.GetNext(initialSeed, out seed, out shouldPingHint);
@@ -53,7 +57,9 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override void MarkAlive(Uri uri)
 		{
-			try
+            CheckDisposed();
+
+            try
 			{
 				this._readerWriter.EnterReadLock();
 				base.MarkAlive(uri);
@@ -67,7 +73,9 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override void MarkDead(Uri uri, int? deadTimeout, int? maxDeadTimeout)
 		{
-			try
+            CheckDisposed();
+
+            try
 			{
 				this._readerWriter.EnterReadLock();
 				base.MarkDead(uri, deadTimeout, maxDeadTimeout);
@@ -79,5 +87,18 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-	}
+	    public void Dispose()
+	    {
+            CheckDisposed();
+            
+            _readerWriter.Dispose();
+            _isDisposed = true;
+        }
+
+	    private void CheckDisposed()
+	    {
+            if(_isDisposed)
+                throw new ObjectDisposedException(nameof(SniffingConnectionPool));
+	    }
+    }
 }
