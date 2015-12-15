@@ -40,7 +40,7 @@ namespace Nest
 		{
 			if (this.Name != null)
 				return this.Name.GetHashCode();
-			return this.Type != null ? this.Type.GetHashCode() : 0;
+			return this.Type?.GetHashCode() ?? 0;
 		}
 
 		bool IEquatable<TypeName>.Equals(TypeName other)
