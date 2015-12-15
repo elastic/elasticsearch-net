@@ -115,6 +115,10 @@ namespace Elasticsearch.Net.Connection
 					else response.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
 				}
 			}
+			else if (response.SuccessOrKnownError)
+			{
+				response.ServerError = new ElasticsearchDefaultSerializer().Deserialize<ServerError>(responseStream);
+			}
 
 			return FinalizeReponse(response);
 		}
@@ -139,6 +143,10 @@ namespace Elasticsearch.Net.Connection
 					if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
 					else response.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
 				}
+			}
+			else if (response.SuccessOrKnownError)
+			{
+				response.ServerError = await new ElasticsearchDefaultSerializer().DeserializeAsync<ServerError>(responseStream, this.CancellationToken);
 			}
 
 			return FinalizeReponse(response);

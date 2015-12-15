@@ -27,8 +27,8 @@ namespace Tests.ClientConcepts.Exceptions
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
 			exception.InnerException.Should().NotBeNull();
 			exception.Response.Should().NotBeNull();
-			//exception.Error.Should().NotBeNull();
-			//exception.StatusCode.Should().BeGreaterThan(0);
+			exception.Response.ServerError.Should().NotBeNull();
+			exception.Response.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
 		[I]
@@ -47,9 +47,10 @@ namespace Tests.ClientConcepts.Exceptions
 		{
 			var settings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"));
 			var client = new ElasticClient(settings);
-			var r = client.GetMapping<Project>(s => s.Index("doesntexist"));
-			r.CallDetails.OriginalException.Should().NotBeNull();
-			//r.CallDetails.ServerError.Should().NotBeNull();
+			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
+			response.CallDetails.OriginalException.Should().NotBeNull();
+			response.CallDetails.ServerError.Should().NotBeNull();
+			response.CallDetails.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
 		[I]
@@ -57,9 +58,9 @@ namespace Tests.ClientConcepts.Exceptions
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
 			var client = new ElasticClient(settings);
-			var r = client.RootNodeInfo();
-			r.CallDetails.OriginalException.Should().NotBeNull();
-			r.CallDetails.ServerError.Should().BeNull();
+			var response = client.RootNodeInfo();
+			response.CallDetails.OriginalException.Should().NotBeNull();
+			response.CallDetails.ServerError.Should().BeNull();
 		}
 	}
 }
