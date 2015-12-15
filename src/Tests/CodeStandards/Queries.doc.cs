@@ -1,15 +1,10 @@
-﻿using Nest;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
 using FluentAssertions;
-using Nest.QueryDsl.Visitor;
+using Nest;
 using Newtonsoft.Json;
-using Xunit;
+using Tests.Framework;
 
 namespace Tests.CodeStandards
 {

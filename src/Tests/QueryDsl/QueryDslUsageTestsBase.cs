@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Nest.QueryDsl.Visitor;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;

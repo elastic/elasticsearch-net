@@ -1,14 +1,12 @@
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Tests.Framework.MockResponses;
 using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
 using FluentAssertions;
+using Tests.Framework.MockResponses;
 
 namespace Tests.Framework
 {

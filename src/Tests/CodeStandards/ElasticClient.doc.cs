@@ -1,12 +1,8 @@
-﻿using Nest;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
 using FluentAssertions;
-using Xunit;
+using Nest;
+using Tests.Framework;
 
 namespace Tests.CodeStandards
 {

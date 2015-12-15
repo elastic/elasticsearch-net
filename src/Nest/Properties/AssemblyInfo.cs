@@ -3,7 +3,7 @@ using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Nest")]
 [assembly: AssemblyCopyrightAttribute("Elasticsearch 2015")]
-[assembly: AssemblyDescriptionAttribute("NEST - oficial high level elasticsearch client")]
+[assembly: AssemblyDescriptionAttribute("NEST - official high level elasticsearch client")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]

@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tests.Framework.Configuration
 {
 	public class LocalConfiguration
 	{
-		public bool IntegrationOverride { get; private set; } = false;
-		public string ManualOverrideVersion { get; private set; } = "2.0.0-rc1";
+		public TestMode Mode { get; private set; } = TestMode.Unit;
+		public string ElasticsearchVersion { get; private set; } = "2.0.0-rc1";
+
+		public bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
+		public bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 
 		public LocalConfiguration(string configurationFile)
 		{
@@ -18,12 +18,29 @@ namespace Tests.Framework.Configuration
 
 			var config = File.ReadAllLines(configurationFile)
 				.ToDictionary(l => ConfigName(l), l => ConfigValue(l));
-			this.IntegrationOverride = bool.Parse(config["integration_override"]);
-			this.ManualOverrideVersion = config["override_version"];
+			this.Mode = GetTestMode(config["mode"]);
+			this.ElasticsearchVersion = config["elasticsearch_version"];
 		}
 
 		private string ConfigName(string configLine) => Parse(configLine, 0);
 		private string ConfigValue(string configLine) => Parse(configLine, 1);
 		private string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
+		private TestMode GetTestMode(string mode)
+		{
+			switch(mode)
+			{
+				case "unit":
+				case "u":
+					return TestMode.Unit;
+				case "integration":
+				case "i":
+					return TestMode.Integration;
+				case "mixed":
+				case "m":
+					return TestMode.Mixed;
+				default:
+					throw new ArgumentException($"Unknown test mode: {mode}");
+			}
+		}
 	}
 }

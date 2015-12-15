@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

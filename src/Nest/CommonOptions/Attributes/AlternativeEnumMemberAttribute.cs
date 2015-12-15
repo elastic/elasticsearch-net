@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nest.CommonOptions.Attributes
+namespace Nest
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
 	public class AlternativeEnumMemberAttribute : Attribute

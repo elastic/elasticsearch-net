@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class CompletionAttribute : ElasticsearchPropertyAttribute, ICompletionProperty
 	{

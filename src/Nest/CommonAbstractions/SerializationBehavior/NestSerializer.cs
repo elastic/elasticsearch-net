@@ -2,11 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Serialization;
-using Nest.Resolvers;
-using Newtonsoft.Json;
 using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.IO;
-using Elasticsearch.Net.Serialization;
-using Nest.Resolvers;
 
 namespace Nest
 {

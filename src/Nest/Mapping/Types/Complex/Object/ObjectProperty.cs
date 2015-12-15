@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System;
-using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -88,7 +87,7 @@ namespace Nest
 		{
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(TChild), visitor, maxRecursion).GetProperties();
-			foreach (var autoProperty in autoProperties)
+			foreach (var autoProperty in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)autoProperties)
 				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
 

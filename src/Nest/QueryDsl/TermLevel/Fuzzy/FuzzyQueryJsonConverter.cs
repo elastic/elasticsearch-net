@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

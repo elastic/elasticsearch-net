@@ -1,7 +1,4 @@
-﻿using Elasticsearch.Net.Connection;
-using System;
-
-namespace Elasticsearch.Net.Providers
+﻿namespace Elasticsearch.Net
 {
 	public interface IRequestPipelineFactory
 	{

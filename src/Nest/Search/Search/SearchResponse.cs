@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Nest.Domain;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {

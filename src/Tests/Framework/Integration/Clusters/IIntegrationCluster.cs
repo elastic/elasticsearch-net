@@ -1,5 +1,5 @@
-using Nest;
 using System;
+using Nest;
 
 namespace Tests.Framework.Integration
 {

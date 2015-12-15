@@ -1,9 +1,5 @@
-﻿using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Nest;
 
 namespace Tests.Mapping.Types.Specialized.Murmur3Hash
 {

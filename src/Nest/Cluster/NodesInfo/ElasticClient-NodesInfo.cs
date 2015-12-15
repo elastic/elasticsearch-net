@@ -1,11 +1,7 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {

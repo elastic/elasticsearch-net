@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 

@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Xunit;
 
 namespace Tests.Framework
 {

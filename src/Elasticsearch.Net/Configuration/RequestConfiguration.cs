@@ -1,9 +1,8 @@
-using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Elasticsearch.Net.Connection.Configuration
+namespace Elasticsearch.Net
 {
 	/// TODO some of these settings are not used
 	/// this indicates they are not properly tested

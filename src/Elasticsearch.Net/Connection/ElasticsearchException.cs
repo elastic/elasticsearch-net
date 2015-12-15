@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	//TODO make sure we attach as much information from this pipeline to unrecoverable exceptions
 	public class ElasticsearchException : Exception

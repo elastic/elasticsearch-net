@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class GeoPointAttribute : ElasticsearchPropertyAttribute, IGeoPointProperty
 	{

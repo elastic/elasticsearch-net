@@ -1,13 +1,9 @@
-﻿using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using Nest;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
-using static Nest.Static;
-using System.Reflection;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {

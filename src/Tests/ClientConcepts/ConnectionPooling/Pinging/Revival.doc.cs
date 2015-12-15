@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
+using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
 using FluentAssertions;
 using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
-using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using static Elasticsearch.Net.Connection.AuditEvent;
 using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Pinging
@@ -42,16 +31,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				new ClientCall { { PingSuccess, 9200 }, { HealthyResponse, 9200 } },
 				new ClientCall { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
 				new ClientCall { 
-					{ PingSuccess, 9202},
-					{ BadResponse, 9202},
-					{ HealthyResponse, 9200},
+					{ AuditEvent.PingSuccess, 9202},
+					{ AuditEvent.BadResponse, 9202},
+					{ AuditEvent.HealthyResponse, 9200},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				},
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall { { HealthyResponse, 9200 } },
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall {
-					{ HealthyResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9200 },
                     { pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
 				}
 			);

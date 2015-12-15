@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
@@ -15,7 +10,6 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
-
 		private IHighLevelToLowLevelDispatcher Dispatcher => this;
 
 		private LowLevelDispatch LowLevelDispatch { get; }
@@ -85,9 +79,7 @@ namespace Nest
 					{
 						//TODO this whole continuewith smells, investigate
 						var ae = r.Exception.Flatten();
-						if (ae.InnerException != null)
-							ae.InnerException.RethrowKeepingStackTrace();
-
+						ae.InnerException?.RethrowKeepingStackTrace();
 						ae.RethrowKeepingStackTrace();
 					}
 					return ResultsSelector(r.Result);

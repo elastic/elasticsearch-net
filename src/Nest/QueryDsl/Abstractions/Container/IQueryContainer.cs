@@ -1,4 +1,3 @@
-using Nest.QueryDsl.Visitor;
 using Newtonsoft.Json;
 
 namespace Nest

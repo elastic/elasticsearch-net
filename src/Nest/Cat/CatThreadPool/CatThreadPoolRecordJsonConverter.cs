@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -29,7 +27,7 @@ namespace Nest
 			"t", "a", "s", "q", "qs", "r", "l", "c", "mi", "ma", "k"
 		};
 		private static IEnumerable<Tuple<string, string>> _combinations =
-			_threadPoolShortHands.SelectMany(t => _fieldShortHands, Tuple.Create);
+			_threadPoolShortHands.SelectMany<string, string, Tuple<string, string>>(t => _fieldShortHands, Tuple.Create);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)

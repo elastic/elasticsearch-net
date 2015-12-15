@@ -1,5 +1,3 @@
-using Elasticsearch.Net.Connection;
-using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +41,5 @@ namespace Tests.Framework
 		public void Add(AuditEvent key) => this.Add(new CallTraceState(key));
 
 		public void Add(Action<IConnectionPool> pool) => this.AssertPoolAfterCall = pool;
-
-
 	}
 }

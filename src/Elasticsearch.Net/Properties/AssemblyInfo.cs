@@ -3,7 +3,7 @@ using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Elasticsearch.Net")]
 [assembly: AssemblyCopyrightAttribute("Elasticsearch 2015")]
-[assembly: AssemblyDescriptionAttribute("Elasticsearch.Net - oficial low level elasticsearch client")]
+[assembly: AssemblyDescriptionAttribute("Elasticsearch.Net - official low level elasticsearch client")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]

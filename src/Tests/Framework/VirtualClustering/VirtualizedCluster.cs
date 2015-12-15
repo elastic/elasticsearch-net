@@ -1,17 +1,15 @@
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Nest;
 using System;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Nest;
 using Tests.Framework.MockData;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Tests.Framework
 {
 	public class VirtualizedCluster
 	{
-		private ElasticClient _client;
+		private readonly ElasticClient _client;
 		private readonly VirtualCluster _cluster;
 		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;

@@ -1,13 +1,10 @@
-﻿using Elasticsearch.Net.Serialization;
-using Nest.Resolvers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {

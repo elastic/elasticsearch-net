@@ -1,7 +1,7 @@
 ﻿using System;
 using Purify;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class Node : IEquatable<Node>
 	{

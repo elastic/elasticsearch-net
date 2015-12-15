@@ -1,21 +1,7 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
-using FluentAssertions;
-using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using static Elasticsearch.Net.Connection.AuditEvent;
-using static Tests.Framework.TimesHelper;
+using Elasticsearch.Net;
+using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 {
@@ -39,16 +25,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ BadResponse, 9201 },
-					{ BadResponse, 9202 },
-					{ BadResponse, 9203 },
-					{ BadResponse, 9204 },
-					{ BadResponse, 9205 },
-					{ BadResponse, 9206 },
-					{ BadResponse, 9207 },
-					{ BadResponse, 9208 },
-					{ HealthyResponse, 9209 }
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
+					{ AuditEvent.BadResponse, 9202 },
+					{ AuditEvent.BadResponse, 9203 },
+					{ AuditEvent.BadResponse, 9204 },
+					{ AuditEvent.BadResponse, 9205 },
+					{ AuditEvent.BadResponse, 9206 },
+					{ AuditEvent.BadResponse, 9207 },
+					{ AuditEvent.BadResponse, 9208 },
+					{ AuditEvent.HealthyResponse, 9209 }
 				}
             );
 		}
@@ -70,10 +56,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ BadResponse, 9201 },
-					{ BadResponse, 9202 },
-					{ BadResponse, 9203 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
+					{ AuditEvent.BadResponse, 9202 },
+					{ AuditEvent.BadResponse, 9203 },
 				}
             );
 		}
@@ -94,8 +80,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ BadResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
 				}
             );
 
@@ -119,11 +105,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ BadResponse, 9201 },
-					{ BadResponse, 9202 },
-					{ BadResponse, 9203 },
-					{ BadResponse, 9204 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
+					{ AuditEvent.BadResponse, 9202 },
+					{ AuditEvent.BadResponse, 9203 },
+					{ AuditEvent.BadResponse, 9204 },
 				}
             );
 
@@ -143,8 +129,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 },
-					{ BadResponse, 9201 },
+					{ AuditEvent.BadResponse, 9200 },
+					{ AuditEvent.BadResponse, 9201 },
 				}
             );
 		}
@@ -166,7 +152,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 			audit = await audit.TraceCall(
 				new ClientCall {
-					{ BadResponse, 9200 }
+					{ AuditEvent.BadResponse, 9200 }
 				}
             );
 
