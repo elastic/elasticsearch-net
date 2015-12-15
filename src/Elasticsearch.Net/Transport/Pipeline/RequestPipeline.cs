@@ -45,7 +45,10 @@ namespace Elasticsearch.Net
 			this.StartedOn = dateTimeProvider.Now();
 		}
 
-		public int MaxRetries =>  Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
+		public int MaxRetries => 
+			this.RequestConfiguration?.ForceNode != null 
+			? 0
+			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
 		public bool FirstPoolUsageNeedsSniffing =>
 			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
@@ -172,6 +175,12 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<Node> NextNode()
 		{
+			if (this.RequestConfiguration?.ForceNode != null)
+			{
+				yield return new Node(this.RequestConfiguration.ForceNode);
+				yield break;
+			}
+
 			//This for loop allows to break out of the view state machine if we need to 
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
