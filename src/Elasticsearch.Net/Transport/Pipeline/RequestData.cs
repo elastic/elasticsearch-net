@@ -26,6 +26,7 @@ namespace Elasticsearch.Net.Connection
 		public PostData<object> Data { get; }
 		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
+		public TimeSpan PingTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
 
@@ -72,7 +73,12 @@ namespace Elasticsearch.Net.Connection
 			this.ContentType = local?.ContentType ?? MimeType;
 			this.Headers = global.Headers;
 
-			this.RequestTimeout = local?.RequestTimeout ?? global.Timeout;
+			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
+			this.PingTimeout = 
+				local?.PingTimeout
+				?? global?.PingTimeout
+				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
 			this.KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			this.KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
 

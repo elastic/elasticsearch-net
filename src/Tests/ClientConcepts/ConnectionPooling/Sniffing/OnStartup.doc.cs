@@ -37,7 +37,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			 await audit.TraceCall(new CallTrace {
+			 await audit.TraceCall(new ClientCall {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -58,7 +58,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new CallTrace {
+			await audit.TraceCall(new ClientCall {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new CallTrace {
+			await audit.TraceCall(new ClientCall {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -110,7 +110,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new CallTrace {
+			await audit.TraceCall(new ClientCall {
 				{ SniffOnStartup},
 				{ SniffSuccess, 9202},
 				{ PingSuccess, 9200},
@@ -133,7 +133,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new CallTrace {
+			await audit.TraceCall(new ClientCall {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFailure, 9200},
 				{ AuditEvent.SniffFailure, 9201},

@@ -71,7 +71,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.EnableTrace()
 				.DisableDirectStreaming()
 				.SetBasicAuthentication("user", "pass")
-				.SetTimeout(TimeSpan.FromSeconds(5));
+				.RequestTimeout(TimeSpan.FromSeconds(5));
 
 		}
 		/**
@@ -136,7 +136,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SetProxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
-				.SetTimeout(TimeSpan.FromSeconds(4))
+				.RequestTimeout(TimeSpan.FromSeconds(4))
 				/**
 				* Sets the global maximum time a connection may take.
 				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 

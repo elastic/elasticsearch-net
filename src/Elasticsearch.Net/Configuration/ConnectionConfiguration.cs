@@ -56,14 +56,11 @@ namespace Elasticsearch.Net.Connection
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
-		private TimeSpan _timeout;
-		TimeSpan IConnectionConfigurationValues.Timeout => _timeout;
+		private TimeSpan _requestTimeout;
+		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 
 		private TimeSpan? _pingTimeout;
 		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
-
-		private TimeSpan? _connectTimeout;
-		TimeSpan? IConnectionConfigurationValues.ConnectTimeout => _connectTimeout;
 
 		private TimeSpan? _deadTimeout;
 		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
@@ -162,7 +159,7 @@ namespace Elasticsearch.Net.Connection
 			// ReSharper disable once VirtualMemberCallInContructor
 			this._serializer = serializer ?? this.DefaultSerializer();
 
-			this._timeout = ConnectionConfiguration.DefaultTimeout;
+			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
 			this._sniffLifeSpan = TimeSpan.FromHours(1);
@@ -244,19 +241,14 @@ namespace Elasticsearch.Net.Connection
 		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		public T SetTimeout(TimeSpan timeout) => Assign(a => a._timeout = timeout);
+		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default ping timeout in milliseconds for ping requests, which are used
 		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
 		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
-		public T SetPingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
-
-		/// <summary>
-		/// Sets the default connection timeout in milliseconds.
-		/// </summary>
-		public T SetConnectTimeout(TimeSpan timeout) => Assign(a => a._connectTimeout = timeout);
+		public T PingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default dead timeout factor when a node has been marked dead.
@@ -273,9 +265,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
 		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="SetTimeout"/>
+		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
 		/// <pre>
-		/// When not specified defaults to <see cref="SetTimeout"/> which itself defaults to 60seconds
+		/// When not specified defaults to <see cref="RequestTimeout"/> which itself defaults to 60seconds
 		/// </pre>
 		/// </summary>
 		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);

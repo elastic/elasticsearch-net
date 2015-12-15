@@ -3,6 +3,7 @@ using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net.Connection.Configuration;
 using Tests.Framework;
 using Elasticsearch.Net.ConnectionPool;
 
@@ -21,8 +22,15 @@ namespace Tests.Framework
 		public Action<string, Audit> AssertWithBecause { get; set; }
 	}
 
-	public class CallTrace : List<CallTraceState>
+	public class ClientCall : List<CallTraceState>
 	{
+		public Func<RequestConfigurationDescriptor, IRequestConfiguration> RequestOverrides { get; }
+		public ClientCall() { } 
+
+		public ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides)
+		{
+			RequestOverrides = requestOverrides;
+		}
 
 		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
 

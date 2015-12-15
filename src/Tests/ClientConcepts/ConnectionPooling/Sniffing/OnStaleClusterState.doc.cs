@@ -57,17 +57,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 			/** healty cluster all nodes return healthy responses*/
 			audit = await audit.TraceCalls(
-				new CallTrace { { HealthyResponse, 9200 } },
-				new CallTrace { { HealthyResponse, 9201 } },
-				new CallTrace { { HealthyResponse, 9202 } },
-				new CallTrace { { HealthyResponse, 9203 } },
-				new CallTrace { { HealthyResponse, 9204 } },
-				new CallTrace { { HealthyResponse, 9205 } },
-				new CallTrace { { HealthyResponse, 9206 } },
-				new CallTrace { { HealthyResponse, 9207 } },
-				new CallTrace { { HealthyResponse, 9208 } },
-				new CallTrace { { HealthyResponse, 9209 } },
-				new CallTrace {
+				new ClientCall { { HealthyResponse, 9200 } },
+				new ClientCall { { HealthyResponse, 9201 } },
+				new ClientCall { { HealthyResponse, 9202 } },
+				new ClientCall { { HealthyResponse, 9203 } },
+				new ClientCall { { HealthyResponse, 9204 } },
+				new ClientCall { { HealthyResponse, 9205 } },
+				new ClientCall { { HealthyResponse, 9206 } },
+				new ClientCall { { HealthyResponse, 9207 } },
+				new ClientCall { { HealthyResponse, 9208 } },
+				new ClientCall { { HealthyResponse, 9209 } },
+				new ClientCall {
 					{ HealthyResponse, 9200 },
                     { pool => pool.Nodes.Count.Should().Be(10) }
 				}
@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			*/
 			audit.ChangeTime(d => d.AddMinutes(31));
 			audit = await audit.TraceCalls(
-				new CallTrace {
+				new ClientCall {
 					/** a sniff is done first and it prefers the first node master node */
 					{ SniffOnStaleCluster },
 					{ SniffSuccess, 9202 },
@@ -88,7 +88,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 			audit.ChangeTime(d => d.AddMinutes(31));
 			audit = await audit.TraceCalls(
-				new CallTrace {
+				new ClientCall {
 					//TODO discuss with @gmarz prefering master nodes is good, always picking the first though?
 					/** a sniff is done first and it prefers the first node master node */
 					{ SniffOnStaleCluster },

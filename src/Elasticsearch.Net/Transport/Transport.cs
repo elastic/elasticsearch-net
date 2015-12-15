@@ -70,7 +70,8 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				//todo code review 
+				var exceptions = new List<Exception>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -85,7 +86,7 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
-					catch (ElasticsearchException exception)
+					catch (Exception exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -111,7 +112,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				var exceptions = new List<Exception>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -126,7 +127,7 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
-					catch (ElasticsearchException exception)
+					catch (Exception exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);

@@ -38,7 +38,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -69,7 +69,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -89,11 +89,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(20)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(20)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 				}
@@ -114,11 +114,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -138,11 +138,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 				}
@@ -165,7 +165,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 }
 				}
             );

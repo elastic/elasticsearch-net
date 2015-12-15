@@ -75,15 +75,17 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.ConnectTimeout
+			 this.RequestConfiguration?.PingTimeout
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
+		TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
 
 		public bool IsTakingTooLong
 		{
 			get
 			{
-				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
+				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this.RequestTimeout);
 				var now = this._dateTimeProvider.Now();
 
 				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
@@ -113,7 +115,7 @@ namespace Elasticsearch.Net.Connection
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			if (!semaphore.Wait(this._settings.Timeout))
+			if (!semaphore.Wait(this._settings.RequestTimeout))
 				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
@@ -133,7 +135,7 @@ namespace Elasticsearch.Net.Connection
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			var success = await semaphore.WaitAsync(this._settings.Timeout, this._cancellationToken);
+			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, this._cancellationToken);
 			if (!success)
 				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
@@ -199,8 +201,15 @@ namespace Elasticsearch.Net.Connection
 		{
 			audit.Node = node;
 
-			var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
-			requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
+			var requestOverrides = new RequestConfiguration
+			{
+				PingTimeout = this.PingTimeout,
+				RequestTimeout =  this.RequestTimeout,
+				BasicAuthenticationCredentials = this._settings.BasicAuthenticationCredentials,
+				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
+				ForceNode = this.RequestConfiguration?.ForceNode,
+				CancellationToken = this.RequestConfiguration?.CancellationToken ?? default(CancellationToken)
+			};
 
 			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory) { Node = node };
 		}
@@ -370,7 +379,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchException> seenExceptions)
+		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<Exception> seenExceptions)
 			where TReturn : class
 		{
 			var pipelineFailure = PipelineFailure.BadResponse;

@@ -75,11 +75,11 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<ClientCall, IResponse>();
-				dict.Add(ClientCall.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
-				dict.Add(ClientCall.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
-				dict.Add(ClientCall.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
-				dict.Add(ClientCall.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
+				var dict = new Dictionary<Integration.ClientCall, IResponse>();
+				dict.Add(Integration.ClientCall.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
+				dict.Add(Integration.ClientCall.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
+				dict.Add(Integration.ClientCall.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
+				dict.Add(Integration.ClientCall.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
 				return dict;
 			});
 		}

@@ -10,6 +10,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
+using ClientCall = Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {

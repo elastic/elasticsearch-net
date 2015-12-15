@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Tests.Framework.MockData;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Connection.Configuration;
 
 namespace Tests.Framework
 {
@@ -28,9 +29,11 @@ namespace Tests.Framework
 			this._connectionPool = pool;
 		}
 
-		public ISearchResponse<Project> ClientCall() => this._client.Search<Project>(s => s);
+		public ISearchResponse<Project> ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) 
+			=> this._client.Search<Project>(s => s.RequestConfiguration(requestOverrides));
 
-		public async Task<ISearchResponse<Project>> ClientCallAsync() => await this._client.SearchAsync<Project>(s => s);
+		public async Task<ISearchResponse<Project>> ClientCallAsync(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) => 
+			await this._client.SearchAsync<Project>(s => s.RequestConfiguration(requestOverrides));
 
 		public void ChangeTime(Func<DateTime, DateTime> change) => _dateTimeProvider.ChangeTime(change);
 	}

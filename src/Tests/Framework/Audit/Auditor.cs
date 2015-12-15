@@ -40,22 +40,22 @@ namespace Tests.Framework
 			this._clusterAsync.ChangeTime(selector);
 		}
 
-		public async Task<Auditor> TraceStartup()
+		public async Task<Auditor> TraceStartup(ClientCall callTrace = null)
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
-			this.Response = this._cluster.ClientCall();
+			this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides);
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
-			this.ResponseAsync = await this._clusterAsync.ClientCallAsync();
+			this.ResponseAsync = await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
-		public async Task<Auditor> TraceCall(CallTrace callTrace, int nthCall = 0)
+		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
-			await this.TraceStartup();
+			await this.TraceStartup(callTrace);
 			var auditTrail = this.Response.ApiCall.AuditTrail;
 			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 
@@ -68,7 +68,7 @@ namespace Tests.Framework
 			callTrace?.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
-		public async Task<Auditor> TraceCalls(params CallTrace[] audits)
+		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;
 			foreach (var a in audits.Select((a, i)=> new { a, i }))
@@ -78,7 +78,7 @@ namespace Tests.Framework
 			return auditor;
 		}
 
-		private static void AssertTrailOnResponse(CallTrace callTrace, List<Audit> auditTrail, bool sync, int nthCall)
+		private static void AssertTrailOnResponse(ClientCall callTrace, List<Audit> auditTrail, bool sync, int nthCall)
 		{
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
 			var nthClientCall = (nthCall + 1).ToOrdinal();
@@ -96,6 +96,8 @@ namespace Tests.Framework
 				c.SimpleAssert?.Invoke(audit);
 				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
+
+			callTrace.Count.Should().Be(auditTrail.Count);
 		}
 	}
 }

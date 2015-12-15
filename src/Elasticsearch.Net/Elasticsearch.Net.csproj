@@ -52,9 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IRequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
-    <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
     <Compile Include="Connection\ElasticsearchException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Auditting\Audit.cs" />
