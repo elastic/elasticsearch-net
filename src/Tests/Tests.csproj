@@ -195,6 +195,7 @@
     <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include="Framework\ApiTestBase.cs" />
     <Compile Include="Framework\Configuration\LocalConfiguration.cs" />
+    <Compile Include="Framework\Configuration\TestMode.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Extensions\Promisify.cs" />
     <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />

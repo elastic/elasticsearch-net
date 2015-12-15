@@ -45,7 +45,7 @@ namespace Tests.Framework
 	public class UnitTestDiscoverer : NestTestDiscoverer
 	{
 		public UnitTestDiscoverer(IMessageSink diagnosticMessageSink) 
-			: base(diagnosticMessageSink, !TestClient.RunIntegrationTests)
+			: base(diagnosticMessageSink, TestClient.RunUnitTests)
 		{
 		}
 	}

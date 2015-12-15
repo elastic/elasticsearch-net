@@ -20,9 +20,13 @@ namespace Tests.Framework
 
 		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 
-		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion.Trim() : null);
+		public static string ElasticsearchVersion => 
+			ElasticVersionInEnvironment ?? (LocalConfig.RunIntegrationTests ? LocalConfig.ElasticsearchVersion.Trim() : null);
 
-		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static bool RunIntegrationTests => 
+			LocalConfig.RunIntegrationTests || !string.IsNullOrEmpty(ElasticsearchVersion);
+
+		public static bool RunUnitTests => LocalConfig.RunUnitTests;
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
