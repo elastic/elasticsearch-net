@@ -19,6 +19,13 @@ namespace Tests.Framework.Integration
 
 		public void SeedNode()
 		{
+			if (TestClient.Configuration.ForceReseed)
+			{
+				this.Client.DeleteIndexTemplate("raw_fields");
+				this.Client.DeleteIndex(typeof(Project));
+				this.Client.DeleteIndex(typeof(Developer));
+			}
+
 			var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
 			//if raw_fields exists assume this cluster is already seeded
 			//sometimes we run against an manually started elasticsearch when writing tests

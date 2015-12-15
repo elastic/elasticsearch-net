@@ -14,17 +14,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.yml");
-
-		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-
-		public static string ElasticsearchVersion => 
-			ElasticVersionInEnvironment ?? (LocalConfig.RunIntegrationTests ? LocalConfig.ElasticsearchVersion.Trim() : null);
-
-		public static bool RunIntegrationTests => 
-			LocalConfig.RunIntegrationTests || !string.IsNullOrEmpty(ElasticsearchVersion);
-
-		public static bool RunUnitTests => LocalConfig.RunUnitTests;
+		public static TestConfiguration Configuration = new TestConfiguration(@"..\..\tests.yml");
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
@@ -60,7 +50,7 @@ namespace Tests.Framework
 		public static Uri CreateNode(int? port = null) => 
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+		public static IConnection CreateConnection() => Configuration.RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
@@ -79,7 +69,7 @@ namespace Tests.Framework
 
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
-			if (!(RunningFiddler && RunIntegrationTests)) return "ignore";
+			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
 			var st = new StackTrace();
 			var types = GetTypes(st);

@@ -5,13 +5,13 @@ namespace Tests.Framework.Integration
 {
 	public abstract class ClusterBase : IIntegrationCluster, IDisposable
 	{
-		protected virtual bool DoNotSpawnIfAlreadyRunning => false;
+		protected virtual bool DoNotSpawnIfAlreadyRunning => TestClient.Configuration.ForceReseed;
 		public ElasticsearchNode Node { get; }
 		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
 
 		public ClusterBase()
 		{
-			this.Node = new ElasticsearchNode(TestClient.ElasticsearchVersion, TestClient.RunIntegrationTests, DoNotSpawnIfAlreadyRunning);
+			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning);
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
 				this.Boostrap();
