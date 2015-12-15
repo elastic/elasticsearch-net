@@ -57,7 +57,7 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
 
 		/// <summary>
-		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
+		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining defaults to true
 		/// </summary>
 		bool EnableHttpPipelining { get; set; }
 
@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 		public bool? DisablePing { get; set; }
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
-		public bool EnableHttpPipelining { get; set; }
+		public bool EnableHttpPipelining { get; set; } = true;
 		public CancellationToken CancellationToken { get; set; }
 	}
 
@@ -103,7 +103,7 @@ namespace Elasticsearch.Net
 
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
 
-		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
+		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
 
 		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
 

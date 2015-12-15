@@ -10,7 +10,6 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-
 		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 		public static TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
@@ -113,7 +112,7 @@ namespace Elasticsearch.Net
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled => _traceEnabled;
 
-		private bool _httpPipeliningEnabled;
+		private bool _httpPipeliningEnabled = true;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
 		private bool _throwOnServerExceptions;

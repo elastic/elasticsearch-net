@@ -99,8 +99,7 @@ namespace Elasticsearch.Net
 		bool DisableAutomaticProxyDetection { get; }
 
 		/// <summary>
-		/// By default the client disabled http pipelining as elasticsearch did not support it until 1.4
-		/// If you are using a version of elasticsearch >= 1.4 you can enable this and expect some performance gains
+		/// By default the client enables http pipelining as elasticsearch 2.0 defaults to true as well
 		/// </summary>
 		bool HttpPipeliningEnabled { get; }
 

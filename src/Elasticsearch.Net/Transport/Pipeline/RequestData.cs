@@ -63,7 +63,6 @@ namespace Elasticsearch.Net
 			this.Data = data;
 			this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
 
-			//TODO default to true in 2.0?
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
