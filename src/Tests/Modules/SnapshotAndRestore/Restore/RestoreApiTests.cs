@@ -16,7 +16,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		{
 			_repositoryName = RandomString();
 			_snapshotName = RandomString();
-			if (!TestClient.RunIntegrationTests) return;
+			if (!TestClient.Configuration.RunIntegrationTests) return;
 
 			var createRepository = this.Client.CreateRepository(_repositoryName, r => r
 				.FileSystem(fs => fs

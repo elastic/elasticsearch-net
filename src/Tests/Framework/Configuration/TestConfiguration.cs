@@ -4,22 +4,27 @@ using System.Linq;
 
 namespace Tests.Framework.Configuration
 {
-	public class LocalConfiguration
+	public class TestConfiguration
 	{
 		public TestMode Mode { get; private set; } = TestMode.Unit;
 		public string ElasticsearchVersion { get; private set; } = "2.0.0-rc1";
+		public bool ForceReseed { get; private set; }
+		public bool DoNotSpawnIfAlreadyRunning { get; private set; }
 
 		public bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 
-		public LocalConfiguration(string configurationFile)
+		public TestConfiguration(string configurationFile)
 		{
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
 				.ToDictionary(l => ConfigName(l), l => ConfigValue(l));
+
 			this.Mode = GetTestMode(config["mode"]);
 			this.ElasticsearchVersion = config["elasticsearch_version"];
+			this.ForceReseed = bool.Parse(config["force_reseed"]);
+			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
 		}
 
 		private string ConfigName(string configLine) => Parse(configLine, 0);
