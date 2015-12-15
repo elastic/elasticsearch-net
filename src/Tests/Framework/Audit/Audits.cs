@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net;
 using Tests.Framework;
-using Elasticsearch.Net.ConnectionPool;
 
 namespace Tests.Framework
 {

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.MockData;
-using Elasticsearch.Net.Connection.Configuration;
 
 namespace Tests.Framework
 {

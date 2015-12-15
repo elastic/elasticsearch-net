@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
+using static Elasticsearch.Net.AuditEvent;
 using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
@@ -28,8 +28,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 
 			audit = await audit.TraceCalls(
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9200 },
-					{ AuditEvent.BadResponse, 9201 },
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
 				},
 				/**
 				* On the second request we specify a request timeout override to 60 seconds
@@ -37,12 +37,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				*/
 				new ClientCall(r=>r.RequestTimeout(TimeSpan.FromSeconds(60)))
 				{
-					{ AuditEvent.BadResponse, 9203 },
-					{ AuditEvent.BadResponse, 9204 },
-					{ AuditEvent.BadResponse, 9205 },
-					{ AuditEvent.BadResponse, 9206 },
-					{ AuditEvent.BadResponse, 9207 },
-					{ AuditEvent.BadResponse, 9208 },
+					{ BadResponse, 9203 },
+					{ BadResponse, 9204 },
+					{ BadResponse, 9205 },
+					{ BadResponse, 9206 },
+					{ BadResponse, 9207 },
+					{ BadResponse, 9208 },
 				}
             );
 
@@ -72,7 +72,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				* calls always take 20, so we should see a single ping failure
 				*/
 				new ClientCall {
-					{ AuditEvent.PingFailure, 9200 }
+					{ PingFailure, 9200 }
 				},
 				/**
 				* On the second request we set a request ping timeout override of 2seconds
@@ -80,11 +80,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				*/
 				new ClientCall(r=>r.PingTimeout(TimeSpan.FromSeconds(2)))
 				{
-					{ AuditEvent.PingFailure, 9202 },
-					{ AuditEvent.PingFailure, 9203 },
-					{ AuditEvent.PingFailure, 9204 },
-					{ AuditEvent.PingFailure, 9205 },
-					{ AuditEvent.PingFailure, 9206 },
+					{ PingFailure, 9202 },
+					{ PingFailure, 9203 },
+					{ PingFailure, 9204 },
+					{ PingFailure, 9205 },
+					{ PingFailure, 9206 },
 				}
             );
 

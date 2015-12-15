@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -55,22 +56,22 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			audit = await audit.TraceCalls(
 			/** */
 				new ClientCall {
-					{ AuditEvent.HealthyResponse, 9200 },
+					{ HealthyResponse, 9200 },
 					{ pool =>  pool.Nodes.Count.Should().Be(5) }
 				},
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9201},
+					{ BadResponse, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
-					{ AuditEvent.SniffSuccess, 9202},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ SniffSuccess, 9202},
+					{ HealthyResponse, 9200},
 					/** Our pool should now have three nodes */
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
 				new ClientCall {
-					{ AuditEvent.BadResponse, 9201},
+					{ BadResponse, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
-					{ AuditEvent.SniffSuccess, 9200},
-					{ AuditEvent.HealthyResponse, 9210},
+					{ SniffSuccess, 9200},
+					{ HealthyResponse, 9210},
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
 				new ClientCall { { HealthyResponse, 9211 } },
@@ -111,25 +112,25 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 			audit = await audit.TraceCalls(
 				new ClientCall {
-					{ AuditEvent.PingSuccess, 9200 },
-					{ AuditEvent.HealthyResponse, 9200 },
+					{ PingSuccess, 9200 },
+					{ HealthyResponse, 9200 },
 					{ pool =>  pool.Nodes.Count.Should().Be(5) }
 				},
 				new ClientCall {
-					{ AuditEvent.PingFailure, 9201},
+					{ PingFailure, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
-					{ AuditEvent.SniffSuccess, 9202},
-					{ AuditEvent.PingSuccess, 9200},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ SniffSuccess, 9202},
+					{ PingSuccess, 9200},
+					{ HealthyResponse, 9200},
 					/** Our pool should now have three nodes */
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
 				new ClientCall {
-					{ AuditEvent.PingFailure, 9201},
+					{ PingFailure, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
-					{ AuditEvent.SniffSuccess, 9200},
-					{ AuditEvent.PingSuccess, 9210},
-					{ AuditEvent.HealthyResponse, 9210},
+					{ SniffSuccess, 9200},
+					{ PingSuccess, 9210},
+					{ HealthyResponse, 9210},
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
 				new ClientCall { { PingSuccess, 9211 }, { HealthyResponse, 9211 } },

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Elasticsearch.Net
 {
@@ -115,7 +116,7 @@ namespace Elasticsearch.Net
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
-				using (this.Audit(AuditEvent.SniffOnStartup))
+				using (this.Audit(SniffOnStartup))
 				{
 					this.Sniff();
 					this._connectionPool.SniffedOnStartup = true;
@@ -137,7 +138,7 @@ namespace Elasticsearch.Net
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
-				using (this.Audit(AuditEvent.SniffOnStartup))
+				using (this.Audit(SniffOnStartup))
 				{
 					await this.SniffAsync();
 					this._connectionPool.SniffedOnStartup = true;
@@ -213,7 +214,7 @@ namespace Elasticsearch.Net
 		{
 			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
 
-			using (var audit = this.Audit(AuditEvent.PingSuccess))
+			using (var audit = this.Audit(PingSuccess))
 			{
 				try
 				{
@@ -222,7 +223,7 @@ namespace Elasticsearch.Net
 				}
 				catch
 				{
-					audit.Event = AuditEvent.PingFailure;
+					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) this.Sniff();
 					throw;
 				}
@@ -233,7 +234,7 @@ namespace Elasticsearch.Net
 		{
 			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
 
-			using (var audit = this.Audit(AuditEvent.PingSuccess))
+			using (var audit = this.Audit(PingSuccess))
 			{
 				try
 				{
@@ -242,7 +243,7 @@ namespace Elasticsearch.Net
 				}
 				catch
 				{
-					audit.Event = AuditEvent.PingFailure;
+					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
 					throw;
 				}
@@ -259,7 +260,7 @@ namespace Elasticsearch.Net
 			var exceptions = new List<ElasticsearchException>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(AuditEvent.SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
@@ -273,13 +274,13 @@ namespace Elasticsearch.Net
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (ElasticsearchException e)
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
@@ -294,7 +295,7 @@ namespace Elasticsearch.Net
 			var exceptions = new List<ElasticsearchException>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(AuditEvent.SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
@@ -307,13 +308,13 @@ namespace Elasticsearch.Net
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (ElasticsearchException e)
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
@@ -324,7 +325,7 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;
@@ -350,7 +351,7 @@ namespace Elasticsearch.Net
 
 		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -56,7 +57,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall { { HealthyResponse, 9208 } },
 				new ClientCall { { HealthyResponse, 9209 } },
 				new ClientCall {
-					{ AuditEvent.HealthyResponse, 9200 },
+					{ HealthyResponse, 9200 },
                     { pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);
@@ -67,9 +68,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			audit = await audit.TraceCalls(
 				new ClientCall {
 					/** a sniff is done first and it prefers the first node master node */
-					{ AuditEvent.SniffOnStaleCluster },
-					{ AuditEvent.SniffSuccess, 9202 },
-					{ AuditEvent.HealthyResponse, 9201 },
+					{ SniffOnStaleCluster },
+					{ SniffSuccess, 9202 },
+					{ HealthyResponse, 9201 },
                     { pool => pool.Nodes.Count.Should().Be(100) }
 				}
 			);
@@ -79,9 +80,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall {
 					//TODO discuss with @gmarz prefering master nodes is good, always picking the first though?
 					/** a sniff is done first and it prefers the first node master node */
-					{ AuditEvent.SniffOnStaleCluster },
-					{ AuditEvent.SniffSuccess, 9202 },
-					{ AuditEvent.HealthyResponse, 9200 },
+					{ SniffOnStaleCluster },
+					{ SniffSuccess, 9202 },
+					{ HealthyResponse, 9200 },
                     { pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);

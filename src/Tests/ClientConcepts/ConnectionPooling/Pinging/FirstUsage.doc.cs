@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
@@ -32,8 +33,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
 				new ClientCall { 
-					{ AuditEvent.PingSuccess, 9200},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ PingSuccess, 9200},
+					{ HealthyResponse, 9200},
 					{ pool =>
 					{
 						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
@@ -42,8 +43,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				/** The 2nd call does a ping on 9201 because its used for the first time. 
 				* It fails so we wrap over to node 9200 which we've already pinged */
 				new ClientCall { 
-					{ AuditEvent.PingFailure, 9201},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ PingFailure, 9201},
+					{ HealthyResponse, 9200},
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				}
@@ -65,8 +66,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
 				new ClientCall { 
-					{ AuditEvent.PingSuccess, 9200},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ PingSuccess, 9200},
+					{ HealthyResponse, 9200},
 					{ pool =>
 					{
 						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
@@ -76,10 +77,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				* It fails and so we ping 9202 which also fails. We then ping 9203 becuase 
 				* we haven't used it before and it succeeds */
 				new ClientCall { 
-					{ AuditEvent.PingFailure, 9201},
-					{ AuditEvent.PingFailure, 9202},
-					{ AuditEvent.PingSuccess, 9203},
-					{ AuditEvent.HealthyResponse, 9203},
+					{ PingFailure, 9201},
+					{ PingFailure, 9202},
+					{ PingSuccess, 9203},
+					{ HealthyResponse, 9203},
 					/** Finally we assert that the connectionpool has two nodes that are marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				}

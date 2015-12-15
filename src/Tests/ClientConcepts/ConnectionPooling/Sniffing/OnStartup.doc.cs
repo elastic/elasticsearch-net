@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -25,13 +26,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.AllDefaults()
 			);
 
-			 await audit.TraceCall(new ClientCall {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFailure, 9200},
-				{ AuditEvent.SniffFailure, 9201},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.PingSuccess , 9200},
-				{ AuditEvent.HealthyResponse, 9200}
+			 await audit.TraceCall(new ClientCall
+			 {
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffSuccess, 9202},
+				{ PingSuccess , 9200},
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -47,12 +49,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			await audit.TraceCall(new ClientCall {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFailure, 9200},
-				{ AuditEvent.SniffFailure, 9201},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.PingSuccess, 9204},
-				{ AuditEvent.HealthyResponse, 9204}
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffSuccess, 9202},
+				{ PingSuccess, 9204},
+				{ HealthyResponse, 9204}
 			});
 		}
 
@@ -68,19 +70,19 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			await audit.TraceCall(new ClientCall {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFailure, 9200},
-				{ AuditEvent.SniffFailure, 9201},
-				{ AuditEvent.SniffFailure, 9202},
-				{ AuditEvent.SniffFailure, 9203},
-				{ AuditEvent.SniffFailure, 9204},
-				{ AuditEvent.SniffFailure, 9205},
-				{ AuditEvent.SniffFailure, 9206},
-				{ AuditEvent.SniffFailure, 9207},
-				{ AuditEvent.SniffFailure, 9208},
-				{ AuditEvent.SniffSuccess, 9209},
-				{ AuditEvent.PingSuccess, 9200},
-				{ AuditEvent.HealthyResponse, 9200}
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffFailure, 9202},
+				{ SniffFailure, 9203},
+				{ SniffFailure, 9204},
+				{ SniffFailure, 9205},
+				{ SniffFailure, 9206},
+				{ SniffFailure, 9207},
+				{ SniffFailure, 9208},
+				{ SniffSuccess, 9209},
+				{ PingSuccess, 9200},
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -99,10 +101,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			await audit.TraceCall(new ClientCall {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.PingSuccess, 9200},
-				{ AuditEvent.HealthyResponse, 9200}
+				{ SniffOnStartup},
+				{ SniffSuccess, 9202},
+				{ PingSuccess, 9200},
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -122,12 +124,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			await audit.TraceCall(new ClientCall {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFailure, 9200},
-				{ AuditEvent.SniffFailure, 9201},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.PingSuccess, 9200},
-				{ AuditEvent.HealthyResponse, 9200}
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffSuccess, 9202},
+				{ PingSuccess, 9200},
+				{ HealthyResponse, 9200}
 			});
 		}
 	}

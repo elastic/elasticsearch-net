@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework;
 using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
@@ -31,16 +32,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				new ClientCall { { PingSuccess, 9200 }, { HealthyResponse, 9200 } },
 				new ClientCall { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
 				new ClientCall { 
-					{ AuditEvent.PingSuccess, 9202},
-					{ AuditEvent.BadResponse, 9202},
-					{ AuditEvent.HealthyResponse, 9200},
+					{ PingSuccess, 9202},
+					{ BadResponse, 9202},
+					{ HealthyResponse, 9200},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				},
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall { { HealthyResponse, 9200 } },
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall {
-					{ AuditEvent.HealthyResponse, 9200 },
+					{ HealthyResponse, 9200 },
                     { pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
 				}
 			);
