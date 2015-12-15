@@ -16,7 +16,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.config");
+		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.yml");
 
 		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 
