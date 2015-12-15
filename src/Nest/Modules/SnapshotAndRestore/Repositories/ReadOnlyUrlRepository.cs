@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {

@@ -1,5 +1,4 @@
 using System;
-using System.Reactive.Linq;
 using Nest;
 
 namespace Tests.Framework.Integration

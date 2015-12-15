@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 using FluentAssertions;
-using Nest;
 using Tests.Framework;
-using Tests.Framework.MockResponses;
 using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing

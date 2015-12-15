@@ -1,6 +1,4 @@
-﻿using Nest.Resolvers;
-
-namespace Nest
+﻿namespace Nest
 {
 	public static class IndexNameExtensions
 	{

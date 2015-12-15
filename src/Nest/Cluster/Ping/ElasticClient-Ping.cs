@@ -1,14 +1,10 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	using Elasticsearch.Net.Connection.Configuration;
 	using PingConverter = Func<IApiCallDetails, Stream, PingResponse>;
 
 	public partial interface IElasticClient

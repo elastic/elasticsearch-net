@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
-using System.ServiceModel.Configuration;
 
 namespace Nest
 {

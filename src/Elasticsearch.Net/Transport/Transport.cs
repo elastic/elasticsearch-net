@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Elasticsearch.Net.Connection.Configuration;
-using Purify;
-using System.IO;
-using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
+using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
@@ -55,7 +44,7 @@ namespace Elasticsearch.Net.Connection
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Providers.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 			this._semaphore = new SemaphoreSlim(1, 1);
 		}

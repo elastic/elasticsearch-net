@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using Elasticsearch.Net.Connection;
-using Nest;
-using Tests.Framework.MockData;
-using Elasticsearch.Net.ConnectionPool;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
+using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework
 {

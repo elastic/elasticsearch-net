@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Collections.Concurrent;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Text;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
 	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.	

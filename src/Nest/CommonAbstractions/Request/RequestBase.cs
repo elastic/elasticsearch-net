@@ -1,10 +1,7 @@
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection.Configuration;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {

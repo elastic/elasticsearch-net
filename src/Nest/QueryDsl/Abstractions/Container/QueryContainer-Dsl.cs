@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest.DSL.Visitor;
-using Newtonsoft.Json;
-using Nest.QueryDsl.Visitor;
+﻿using System.Linq;
 
 namespace Nest
 {

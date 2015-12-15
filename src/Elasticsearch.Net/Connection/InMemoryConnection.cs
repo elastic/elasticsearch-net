@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class InMemoryConnection : HttpConnection
 	{

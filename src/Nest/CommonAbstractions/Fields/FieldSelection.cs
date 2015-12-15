@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Nest.Domain
+namespace Nest
 {
 	public interface IFieldSelection<out T>
 	{

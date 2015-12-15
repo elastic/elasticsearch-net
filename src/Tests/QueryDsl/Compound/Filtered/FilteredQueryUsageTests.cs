@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest;
+﻿using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
+
 #pragma warning disable 618 //Testing an obsolete method
 
 namespace Tests.QueryDsl.Compound.Filtered

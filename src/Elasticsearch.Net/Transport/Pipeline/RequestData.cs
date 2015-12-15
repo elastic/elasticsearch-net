@@ -1,18 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 using System.Collections.Specialized;
-using Elasticsearch.Net.Connection.Security;
+using System.IO;
 using System.Threading;
-using System.IO.Compression;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Serialization;
+using System.Threading.Tasks;
 using Purify;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class RequestData
 	{

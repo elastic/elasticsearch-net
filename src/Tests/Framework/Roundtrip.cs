@@ -1,10 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using DiffPlex;
-using DiffPlex.DiffBuilder;
-using DiffPlex.DiffBuilder.Model;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;

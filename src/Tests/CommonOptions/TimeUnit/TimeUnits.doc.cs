@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using System.IO;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {

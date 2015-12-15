@@ -1,16 +1,11 @@
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Connection.Sniff;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 
 	public class RequestPipeline : IRequestPipeline

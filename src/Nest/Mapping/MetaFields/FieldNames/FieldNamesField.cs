@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {

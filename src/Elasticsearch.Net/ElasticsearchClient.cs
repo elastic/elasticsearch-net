@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
@@ -17,10 +8,10 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
-		private UrlFormatProvider _formatter;
+		private readonly UrlFormatProvider _formatter;
 
-		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
-		public IElasticsearchSerializer Serializer { get { return this.Transport.Settings.Serializer; } }
+		public IConnectionConfigurationValues Settings => this.Transport.Settings;
+		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
 
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
 

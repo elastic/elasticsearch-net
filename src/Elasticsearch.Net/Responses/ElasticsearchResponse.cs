@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -14,6 +11,7 @@ namespace Elasticsearch.Net
 		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
 
 	}
+
 	public class ElasticsearchResponse<T> : IApiCallDetails
 	{
 		public bool Success { get; }

@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 
 namespace Tests.Framework.MockResponses
 {

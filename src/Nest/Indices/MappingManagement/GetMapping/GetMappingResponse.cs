@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.DSL.Visitor;
 
 namespace Nest
 {

@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
 
 ///Generated File Please Do Not Edit Manually
 namespace Elasticsearch.Net

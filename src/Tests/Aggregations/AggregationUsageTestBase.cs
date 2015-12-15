@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using Elasticsearch.Net;
 
 namespace Tests.Aggregations
 {

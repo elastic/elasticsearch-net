@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.Connection.Security;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	/// TODO SOME OF THESE ARE NO LONGER USED
 	/// this either means we broke something or something no longer applies

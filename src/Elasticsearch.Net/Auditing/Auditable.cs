@@ -1,8 +1,7 @@
-using Elasticsearch.Net.Providers;
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	internal class Auditable : IDisposable
 	{

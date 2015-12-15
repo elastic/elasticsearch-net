@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Providers;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public class StaticConnectionPool : IConnectionPool
 	{
@@ -39,7 +36,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			nodes.ThrowIfEmpty(nameof(nodes));
 
 			this.Randomize = randomize;
-			this.DateTimeProvider = dateTimeProvider ?? Providers.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Elasticsearch.Net.DateTimeProvider.Default;
 
 			var nn = nodes.ToList();
 			var uris = nn.Select(n => n.Uri).ToList();

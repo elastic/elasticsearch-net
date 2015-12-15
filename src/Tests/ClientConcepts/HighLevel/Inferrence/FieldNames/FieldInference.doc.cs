@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 using static Nest.Static;
 using Field = Nest.Field;

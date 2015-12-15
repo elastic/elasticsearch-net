@@ -62,7 +62,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation

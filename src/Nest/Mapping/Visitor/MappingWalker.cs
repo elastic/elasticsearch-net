@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Nest.DSL.Visitor
+namespace Nest
 {
 	public class MappingWalker
 	{

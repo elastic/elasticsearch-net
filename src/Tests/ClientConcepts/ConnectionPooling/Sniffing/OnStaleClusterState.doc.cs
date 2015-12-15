@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
 using FluentAssertions;
 using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
-using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using static Elasticsearch.Net.Connection.AuditEvent;
-using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -57,18 +45,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 			/** healty cluster all nodes return healthy responses*/
 			audit = await audit.TraceCalls(
-				new CallTrace { { HealthyResponse, 9200 } },
-				new CallTrace { { HealthyResponse, 9201 } },
-				new CallTrace { { HealthyResponse, 9202 } },
-				new CallTrace { { HealthyResponse, 9203 } },
-				new CallTrace { { HealthyResponse, 9204 } },
-				new CallTrace { { HealthyResponse, 9205 } },
-				new CallTrace { { HealthyResponse, 9206 } },
-				new CallTrace { { HealthyResponse, 9207 } },
-				new CallTrace { { HealthyResponse, 9208 } },
-				new CallTrace { { HealthyResponse, 9209 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9200 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9201 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9202 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9203 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9204 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9205 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9206 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9207 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9208 } },
+				new CallTrace { { AuditEvent.HealthyResponse, 9209 } },
 				new CallTrace {
-					{ HealthyResponse, 9200 },
+					{ AuditEvent.HealthyResponse, 9200 },
                     { pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);
@@ -79,9 +67,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			audit = await audit.TraceCalls(
 				new CallTrace {
 					/** a sniff is done first and it prefers the first node master node */
-					{ SniffOnStaleCluster },
-					{ SniffSuccess, 9202 },
-					{ HealthyResponse, 9201 },
+					{ AuditEvent.SniffOnStaleCluster },
+					{ AuditEvent.SniffSuccess, 9202 },
+					{ AuditEvent.HealthyResponse, 9201 },
                     { pool => pool.Nodes.Count.Should().Be(100) }
 				}
 			);
@@ -91,9 +79,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new CallTrace {
 					//TODO discuss with @gmarz prefering master nodes is good, always picking the first though?
 					/** a sniff is done first and it prefers the first node master node */
-					{ SniffOnStaleCluster },
-					{ SniffSuccess, 9202 },
-					{ HealthyResponse, 9200 },
+					{ AuditEvent.SniffOnStaleCluster },
+					{ AuditEvent.SniffSuccess, 9202 },
+					{ AuditEvent.HealthyResponse, 9200 },
                     { pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);

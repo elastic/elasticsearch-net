@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
 
 // ReSharper disable VirtualMemberNeverOverriden.Global
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 	internal class ElasticsearchNetJsonStrategy : PocoJsonSerializerStrategy
 	{

@@ -1,10 +1,7 @@
-﻿using FluentAssertions;
-using Nest;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FluentAssertions;
+using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
