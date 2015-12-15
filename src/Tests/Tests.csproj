@@ -125,6 +125,9 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RequestTimeoutsOverrides.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\DisableSniffPingPerRequest.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsAllowedStatusCode.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsForceNode.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsMaxRetryOverrides.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\RoundRobin.doc.cs" />

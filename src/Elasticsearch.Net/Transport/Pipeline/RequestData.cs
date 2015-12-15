@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Purify;
@@ -34,6 +36,7 @@ namespace Elasticsearch.Net
 		public bool DisableAutomaticProxyDetection { get; }
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public CancellationToken CancellationToken { get; }
+		public IEnumerable<int> AllowedStatusCodes { get; }
 		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
 
 		private readonly IConnectionConfigurationValues _settings;
@@ -81,6 +84,7 @@ namespace Elasticsearch.Net
 			this.DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			this.BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			this.CancellationToken = local?.CancellationToken ?? CancellationToken.None;
+			this.AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
 		}
 
 		public void Write(Stream writableStream)
@@ -157,7 +161,7 @@ namespace Elasticsearch.Net
 
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
-			var cs = new ElasticsearchResponse<TReturn>(statusCode);
+			var cs = new ElasticsearchResponse<TReturn>(statusCode, this.AllowedStatusCodes);
 			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;

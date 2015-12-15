@@ -122,7 +122,7 @@ namespace Tests.Framework
 
 			return rule.Succeeds
 				? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
-				: Fail<TReturn>(requestData);
+				: Fail<TReturn, TRule>(requestData, rule);
 		}
 
 		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
@@ -139,18 +139,28 @@ namespace Tests.Framework
 
 			if (rule.Succeeds && times >= state.Successes)
 				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
-			else if (rule.Succeeds) return Fail<TReturn>(requestData);
+			else if (rule.Succeeds) return Fail<TReturn, TRule>(requestData, rule);
 
 			if (!rule.Succeeds && times >= state.Failures)
-				return Fail<TReturn>(requestData);
+				return Fail<TReturn, TRule>(requestData, rule);
 			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Fail<TReturn>(RequestData requestData)
+		private ElasticsearchResponse<TReturn> Fail<TReturn, TRule>(RequestData requestData, TRule rule)
+			where TReturn : class
+			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
-			throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+			if (rule.Return == null)
+				throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+			return rule.Return.Match(
+				(e) =>
+				{
+					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
+				},
+				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
+			);
 		}
 
 		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)

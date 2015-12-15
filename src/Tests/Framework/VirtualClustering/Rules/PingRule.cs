@@ -1,3 +1,4 @@
+using System;
 using Nest;
 
 namespace Tests.Framework
@@ -6,19 +7,23 @@ namespace Tests.Framework
 	{
 		private IRule Self => this;
 
-		public PingRule Succeeds(Union<TimesHelper.AllTimes, int> times)
-		{
-			Self.Times = times;
-			Self.Succeeds = true;
-			return this;
-		}
-		public PingRule Fails(Union<TimesHelper.AllTimes, int> times)
+		public PingRule Fails(Union<TimesHelper.AllTimes, int> times, Union<Exception, int> errorState = null)
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
+			Self.Return = errorState;
 			return this;
 		}
-		public PingRule SucceedAlways(VirtualCluster cluster = null) => this.Succeeds(TimesHelper.Always);
-		public PingRule FailAlways() => this.Fails(TimesHelper.Always);
+
+		public PingRule Succeeds(Union<TimesHelper.AllTimes, int> times, int? validResponseCode = 200)
+		{
+			Self.Times = times;
+			Self.Succeeds = true;
+			Self.Return = validResponseCode;
+			return this;
+		}
+
+		public PingRule SucceedAlways(int? validResponseCode = 200) => this.Succeeds(TimesHelper.Always, validResponseCode);
+		public PingRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
 	}
 }

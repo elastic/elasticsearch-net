@@ -354,7 +354,7 @@ namespace Elasticsearch.Net
 				{
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.SuccessOrKnownError)
+					if (!response.Success)
 						audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
@@ -380,7 +380,7 @@ namespace Elasticsearch.Net
 				{
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.SuccessOrKnownError)
+					if (!response.Success)
 						audit.Event = AuditEvent.BadResponse;
 					return response;
 				}

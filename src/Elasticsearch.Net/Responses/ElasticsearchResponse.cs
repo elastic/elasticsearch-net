@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Elasticsearch.Net
 {
@@ -50,9 +51,9 @@ namespace Elasticsearch.Net
 			this.OriginalException = e;
 		}
 
-		public ElasticsearchResponse(int statusCode)
+		public ElasticsearchResponse(int statusCode, IEnumerable<int> allowedStatusCodes)
 		{
-			this.Success = statusCode >= 200 && statusCode < 300;
+			this.Success = statusCode >= 200 && statusCode < 300 || allowedStatusCodes.Contains(statusCode);
 			this.HttpStatusCode = statusCode;
 		}
 
