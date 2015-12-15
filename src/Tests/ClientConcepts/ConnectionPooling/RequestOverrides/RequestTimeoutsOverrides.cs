@@ -5,7 +5,7 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
-	public class RequestTimeouts
+	public class RequestTimeoutsOverrides
 	{
 		/** == Request Timeouts
 		* While you can specify Request time out globally you can override this per request too
