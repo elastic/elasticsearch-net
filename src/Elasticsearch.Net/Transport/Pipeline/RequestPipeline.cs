@@ -51,11 +51,16 @@ namespace Elasticsearch.Net
 			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
 		public bool FirstPoolUsageNeedsSniffing =>
-			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
-		public bool SniffsOnConnectionFailure => this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
+		public bool SniffsOnConnectionFailure => 
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
-		public bool SniffsOnStaleCluster => this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
+		public bool SniffsOnStaleCluster => 
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&&this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
 
 		public bool StaleClusterState
 		{
@@ -72,6 +77,10 @@ namespace Elasticsearch.Net
 				return sniffLifeSpan < (now - lastSniff);
 			}
 		}
+
+		private bool PingDisabled(Node node) => 
+			(this.RequestConfiguration?.DisablePing).GetValueOrDefault(false)
+				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
 
 		TimeSpan PingTimeout =>
 			 this.RequestConfiguration?.PingTimeout
@@ -221,7 +230,7 @@ namespace Elasticsearch.Net
 
 		public void Ping(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
+			if (PingDisabled(node)) return;
 
 			using (var audit = this.Audit(PingSuccess))
 			{
@@ -239,9 +248,10 @@ namespace Elasticsearch.Net
 			}
 		}
 
+
 		public async Task PingAsync(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
+			if (PingDisabled(node)) return;
 
 			using (var audit = this.Audit(PingSuccess))
 			{
