@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
 
 namespace Nest
@@ -23,10 +20,10 @@ namespace Nest
 		public static QueryContainer Conditionless(Func<ConditionlessQueryDescriptor<T>, IConditionlessQuery> selector) => 
 			new QueryContainerDescriptor<T>().Conditionless(selector);
 
-		public static QueryContainer Dismax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) => 
-			new QueryContainerDescriptor<T>().DisMax(selector);
+        public static QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) =>
+            new QueryContainerDescriptor<T>().DisMax(selector);
 
-		public static QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) => 
+        public static QueryContainer Fuzzy(Func<FuzzyQueryDescriptor<T>, IFuzzyQuery> selector) => 
 			new QueryContainerDescriptor<T>().Fuzzy(selector);
 
 		public static QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class => 
@@ -175,9 +172,6 @@ namespace Nest
 
 		public static QueryContainer Limit(Func<LimitQueryDescriptor<T>, ILimitQuery> selector) => 
 			new QueryContainerDescriptor<T>().Limit(selector);
-
-		public static QueryContainer DisMax(Func<DisMaxQueryDescriptor<T>, IDisMaxQuery> selector) => 
-			new QueryContainerDescriptor<T>().DisMax(selector);
 
 		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Template(selector);

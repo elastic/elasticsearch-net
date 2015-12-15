@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
-using FluentAssertions;
-using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using static Elasticsearch.Net.Connection.AuditEvent;
-using static Tests.Framework.TimesHelper;
+using Elasticsearch.Net;
+using Tests.Framework;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 {
@@ -38,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -69,7 +56,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -89,11 +76,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(20)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(20)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 				}
@@ -114,11 +101,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
@@ -138,11 +125,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
 				.StaticConnectionPool()
-				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
+				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
 				}
@@ -165,7 +152,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 
 			audit = await audit.TraceCall(
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9200 }
 				}
             );

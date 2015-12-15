@@ -2,16 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using DiffPlex;
-using DiffPlex.DiffBuilder;
-using DiffPlex.DiffBuilder.Model;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Elasticsearch.Net.Serialization;
-using Tests.Framework;
-using System.Text.RegularExpressions;
-using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Nest;
 using System.Runtime.ExceptionServices;
 
 namespace Nest

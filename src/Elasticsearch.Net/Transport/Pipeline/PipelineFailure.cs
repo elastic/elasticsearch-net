@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Elasticsearch.Net.Connection
+﻿namespace Elasticsearch.Net
 {
 	public enum PipelineFailure
 	{

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
@@ -40,7 +37,7 @@ namespace Tests.Framework
 
 			return base.AssertOnAllResponses((r) =>
 			{
-				if (TestClient.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null)
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null)
 				{
 					ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
 					return;

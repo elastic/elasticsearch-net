@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elasticsearch.Net
 {
 	internal static class Fluent
 	{

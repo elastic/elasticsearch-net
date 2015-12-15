@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.Connection.Security;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	/// TODO SOME OF THESE ARE NO LONGER USED
 	/// this either means we broke something or something no longer applies
@@ -22,18 +19,13 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch
 		/// </summary>
-		TimeSpan Timeout { get; }
+		TimeSpan RequestTimeout { get; }
 
 		/// <summary>
 		/// The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive
 		/// </summary>
 		TimeSpan? PingTimeout { get; }
 
-		/// <summary>
-		/// The connect timeout in milliseconds
-		/// </summary>
-		TimeSpan? ConnectTimeout { get; }
-		
 		/// <summary>
 		/// The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
 		/// </summary>
@@ -45,9 +37,9 @@ namespace Elasticsearch.Net.Connection
 		TimeSpan? MaxDeadTimeout { get; }
 
 		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
 		/// <pre>
-		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60 seconds
+		/// When not specified defaults to <see cref="RequestTimeout"/> which itself defaults to 60 seconds
 		/// </pre>
 		/// </summary>
 		TimeSpan? MaxRetryTimeout { get; }
@@ -107,8 +99,7 @@ namespace Elasticsearch.Net.Connection
 		bool DisableAutomaticProxyDetection { get; }
 
 		/// <summary>
-		/// By default the client disabled http pipelining as elasticsearch did not support it until 1.4
-		/// If you are using a version of elasticsearch >= 1.4 you can enable this and expect some performance gains
+		/// By default the client enables http pipelining as elasticsearch 2.0 defaults to true as well
 		/// </summary>
 		bool HttpPipeliningEnabled { get; }
 

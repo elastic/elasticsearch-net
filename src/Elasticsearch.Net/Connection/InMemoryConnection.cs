@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class InMemoryConnection : HttpConnection
 	{
@@ -31,10 +31,10 @@ namespace Elasticsearch.Net.Connection
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) => 
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
-		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null)
+		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null, int? statusCode = null)
 			where TReturn : class
 		{
-			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes));
+			var cs = requestData.CreateResponse<TReturn>(statusCode ?? this._statusCode, new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes));
 			return cs;
 		}
 

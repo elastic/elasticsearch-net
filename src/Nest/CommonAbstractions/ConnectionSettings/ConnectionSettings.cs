@@ -5,12 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest.CommonAbstractions.ConnectionSettings;
-using Nest.Resolvers;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {

@@ -1,14 +1,12 @@
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Tests.Framework.MockResponses;
 using System.Threading;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
 using FluentAssertions;
+using Tests.Framework.MockResponses;
 
 namespace Tests.Framework
 {
@@ -51,6 +49,7 @@ namespace Tests.Framework
 				return HandleRules<TReturn, ISniffRule>(
 					requestData,
 					this._cluster.SniffingRules,
+					requestData.RequestTimeout,
 					(r) => this.UpdateCluster(r.NewClusterState),
 					() => SniffResponse.Create(this._cluster.Nodes)
 				);
@@ -61,6 +60,7 @@ namespace Tests.Framework
 				return HandleRules<TReturn, IRule>(
 					requestData,
 					this._cluster.PingingRules,
+					requestData.PingTimeout,
 					(r) => { },
 					() => null //HEAD request
 				);
@@ -69,13 +69,16 @@ namespace Tests.Framework
 			return HandleRules<TReturn, IClientCallRule>(
 				requestData,
 				this._cluster.ClientCallRules,
+				requestData.RequestTimeout,
 				(r) => { },
-				() => CallResponse() //TODO search response
+				CallResponse //TODO search response
 			);
 		}
 
 		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
-			RequestData requestData, IEnumerable<TRule> rules,
+			RequestData requestData, 
+			IEnumerable<TRule> rules,
+			TimeSpan timeout,
 			Action<TRule> beforeReturn,
 			Func<byte[]> successResponse
 			) where TReturn : class where TRule : IRule
@@ -88,9 +91,9 @@ namespace Tests.Framework
 				if (rule.OnPort.Value == requestData.Uri.Port)
 				{
 					if (always)
-						return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+						return Always<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
-					return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
+					return Sometimes<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 				}
 			}
 			foreach (var rule in rules.Where(s => !s.OnPort.HasValue))
@@ -98,44 +101,66 @@ namespace Tests.Framework
 				var always = rule.Times.Match(t => true, t => false);
 				var times = rule.Times.Match(t => -1, t => t);
 				if (always)
-					return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+					return Always<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, rule);
 
-				return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
+				return Sometimes<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 			}
 			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
 		}
 
-		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
 			where TReturn : class
 			where TRule : IRule
 		{
-			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+			if (rule.Takes.HasValue)
+			{
+				var time = timeout < rule.Takes.Value ? timeout: rule.Takes.Value;
+				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
+				if (rule.Takes.Value > requestData.RequestTimeout)
+					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+			}
 
 			return rule.Succeeds
 				? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
-				: Fail<TReturn>(requestData);
+				: Fail<TReturn, TRule>(requestData, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
+		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
 			where TReturn : class
 			where TRule : IRule
 		{
-			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+			if (rule.Takes.HasValue)
+			{
+				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
+				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
+				if (rule.Takes.Value > requestData.RequestTimeout)
+					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+			}
 
 			if (rule.Succeeds && times >= state.Successes)
 				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
-			else if (rule.Succeeds) return Fail<TReturn>(requestData);
+			else if (rule.Succeeds) return Fail<TReturn, TRule>(requestData, rule);
 
 			if (!rule.Succeeds && times >= state.Failures)
-				return Fail<TReturn>(requestData);
+				return Fail<TReturn, TRule>(requestData, rule);
 			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Fail<TReturn>(RequestData requestData)
+		private ElasticsearchResponse<TReturn> Fail<TReturn, TRule>(RequestData requestData, TRule rule)
+			where TReturn : class
+			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
-			throw new Elasticsearch.Net.Connection.PipelineException(PipelineFailure.BadResponse, (Exception)null);
+			if (rule.Return == null)
+				throw new PipelineException(PipelineFailure.BadResponse, (Exception)null);
+			return rule.Return.Match(
+				(e) =>
+				{
+					throw new PipelineException(PipelineFailure.BadResponse, e);
+				},
+				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
+			);
 		}
 
 		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)

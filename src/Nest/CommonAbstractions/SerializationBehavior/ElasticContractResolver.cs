@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
-using System.Collections;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	public class ElasticContractResolver : DefaultContractResolver
 	{

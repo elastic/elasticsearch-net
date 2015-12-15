@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 
 namespace Tests.Framework.MockResponses
 {
@@ -42,7 +39,7 @@ namespace Tests.Framework.MockResponses
 				http_address = $"127.0.0.1:{node.Uri.Port}",
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
-				version = TestClient.ElasticsearchVersion,
+				version = TestClient.Configuration.ElasticsearchVersion,
 				build = Guid.NewGuid().ToString("N").Substring(0, 8),
 				settings = new Dictionary<string, object> {
 					{ "cluster.name", ClusterName },

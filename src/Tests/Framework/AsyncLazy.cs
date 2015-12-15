@@ -53,12 +53,12 @@ namespace Tests.Framework
 		}
 	}
 
-	public class LazyResponses : AsyncLazy<Dictionary<ClientCall, IResponse>>
+	public class LazyResponses : AsyncLazy<Dictionary<Integration.ClientCall, IResponse>>
 	{
-		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<ClientCall, IResponse> { });
+		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<Integration.ClientCall, IResponse> { });
 
-		public LazyResponses(Func<Dictionary<ClientCall, IResponse>> factory) : base(factory) { }
+		public LazyResponses(Func<Dictionary<Integration.ClientCall, IResponse>> factory) : base(factory) { }
 
-		public LazyResponses(Func<Task<Dictionary<ClientCall, IResponse>>> factory) : base(factory) { }
+		public LazyResponses(Func<Task<Dictionary<Integration.ClientCall, IResponse>>> factory) : base(factory) { }
 	}
 }

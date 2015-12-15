@@ -1,5 +1,4 @@
 ﻿using System;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest

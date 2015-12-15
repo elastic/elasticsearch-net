@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
-
 	/// <summary>
 	/// Used by the raw client to compose querystring parameters in a matter that still exposes some xmldocs
 	/// You can always pass a simple NameValueCollection if you want.

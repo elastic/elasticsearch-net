@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
 using static Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Framework.Integration

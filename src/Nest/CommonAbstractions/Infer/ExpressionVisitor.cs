@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Linq.Expressions;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	/// <summary>
 	/// This comes from Matt Warren's sample:

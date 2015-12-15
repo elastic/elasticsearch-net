@@ -5,14 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Newtonsoft.Json.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net;
-using Nest.CommonOptions.Attributes;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {

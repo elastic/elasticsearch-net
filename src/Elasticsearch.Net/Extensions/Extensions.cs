@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Elasticsearch.Net.Extensions
+namespace Elasticsearch.Net
 {
 	internal static class Extensions
 	{

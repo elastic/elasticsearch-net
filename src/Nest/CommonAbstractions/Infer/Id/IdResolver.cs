@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	public class IdResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
 			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -23,7 +21,7 @@ namespace Nest.Resolvers
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
-			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
+			Func<T, string> idSelector = this.GetIdFor;
 			return idSelector;
 		}
 
@@ -57,7 +55,7 @@ namespace Nest.Resolvers
 			cachedLookup = o =>
 			{
 				var v = func(o);
-				return v != null ? v.ToString() : null;
+				return v?.ToString();
 			};
 			if (preferLocal)
 				LocalIdDelegates.TryAdd(type, cachedLookup);

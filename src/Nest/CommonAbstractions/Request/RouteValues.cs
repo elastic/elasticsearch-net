@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {

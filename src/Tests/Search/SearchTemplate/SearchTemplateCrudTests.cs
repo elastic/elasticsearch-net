@@ -1,10 +1,5 @@
 ﻿using FluentAssertions;
 using Nest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.QueryDsl.Visitor
+namespace Nest
 {
 	public class DslPrettyPrintVisitor : IQueryVisitor
 	{
 		private readonly StringBuilder _sb;
 		private string _final;
-		private ElasticInferrer _infer;
+		private readonly ElasticInferrer _infer;
 
 		public string PrettyPrint
 		{

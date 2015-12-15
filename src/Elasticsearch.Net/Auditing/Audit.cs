@@ -1,7 +1,6 @@
 using System;
-using Elasticsearch.Net.Extensions;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class Audit
 	{

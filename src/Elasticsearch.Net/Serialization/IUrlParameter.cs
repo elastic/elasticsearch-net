@@ -1,6 +1,4 @@
-using Elasticsearch.Net.Connection;
-
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 	public interface IUrlParameter
 	{

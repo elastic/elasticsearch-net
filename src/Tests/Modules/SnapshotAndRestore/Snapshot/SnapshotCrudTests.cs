@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
-using Nest;
-using Xunit;
-using Tests.Framework.Integration;
 using System.IO;
+using System.Linq;
 using FluentAssertions;
+using Nest;
+using Tests.Framework;
+using Tests.Framework.Integration;
+using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {

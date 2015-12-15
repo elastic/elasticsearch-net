@@ -52,14 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IRequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
-    <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
     <Compile Include="Transport\Pipeline\PipelineException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
-    <Compile Include="Auditting\Audit.cs" />
-    <Compile Include="Auditting\Auditable.cs" />
-    <Compile Include="Auditting\AuditEvent.cs" />
+    <Compile Include="Auditing\Audit.cs" />
+    <Compile Include="Auditing\Auditable.cs" />
+    <Compile Include="Auditing\AuditEvent.cs" />
     <Compile Include="Responses\ServerError.cs" />
     <Compile Include="Exceptions\ElasticsearchClientException.cs" />
     <Compile Include="Responses\IBodyWithApiCallDetails.cs" />

@@ -1,16 +1,12 @@
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Connection.Sniff;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
+using static Elasticsearch.Net.AuditEvent;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 
 	public class RequestPipeline : IRequestPipeline
@@ -49,16 +45,24 @@ namespace Elasticsearch.Net.Connection
 			this.StartedOn = dateTimeProvider.Now();
 		}
 
-		public int MaxRetries => Math.Min(this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
+		public int MaxRetries => 
+			this.RequestConfiguration?.ForceNode != null 
+			? 0
+			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
 		private bool MaxRetriesReached => this.Retried >= this.MaxRetries && this.MaxRetries > 0;
 
 		public bool FirstPoolUsageNeedsSniffing =>
-			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
-		public bool SniffsOnConnectionFailure => this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
+		public bool SniffsOnConnectionFailure => 
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
-		public bool SniffsOnStaleCluster => this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
+		public bool SniffsOnStaleCluster => 
+			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
+				&&this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
 
 		public bool StaleClusterState
 		{
@@ -76,16 +80,22 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
+		private bool PingDisabled(Node node) => 
+			(this.RequestConfiguration?.DisablePing).GetValueOrDefault(false)
+				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
+
 		TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.ConnectTimeout
+			 this.RequestConfiguration?.PingTimeout
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
+		TimeSpan RequestTimeout => this.RequestConfiguration?.RequestTimeout ?? this._settings.RequestTimeout;
 
 		public bool IsTakingTooLong
 		{
 			get
 			{
-				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
+				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this.RequestTimeout);
 				var now = this._dateTimeProvider.Now();
 
 				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
@@ -115,12 +125,12 @@ namespace Elasticsearch.Net.Connection
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			if (!semaphore.Wait(this._settings.Timeout))
+			if (!semaphore.Wait(this._settings.RequestTimeout))
 				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
-				using (this.Audit(AuditEvent.SniffOnStartup))
+				using (this.Audit(SniffOnStartup))
 				{
 					this.Sniff();
 					this._connectionPool.SniffedOnStartup = true;
@@ -135,14 +145,14 @@ namespace Elasticsearch.Net.Connection
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			var success = await semaphore.WaitAsync(this._settings.Timeout, this._cancellationToken);
+			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, this._cancellationToken);
 			if (!success)
 				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
 			if (!this.FirstPoolUsageNeedsSniffing) return;
 			try
 			{
-				using (this.Audit(AuditEvent.SniffOnStartup))
+				using (this.Audit(SniffOnStartup))
 				{
 					await this.SniffAsync();
 					this._connectionPool.SniffedOnStartup = true;
@@ -176,6 +186,12 @@ namespace Elasticsearch.Net.Connection
 
 		public IEnumerable<Node> NextNode()
 		{
+			if (this.RequestConfiguration?.ForceNode != null)
+			{
+				yield return new Node(this.RequestConfiguration.ForceNode);
+				yield break;
+			}
+
 			//This for loop allows to break out of the view state machine if we need to 
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
@@ -201,17 +217,24 @@ namespace Elasticsearch.Net.Connection
 		{
 			audit.Node = node;
 
-			var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
-			requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
+			var requestOverrides = new RequestConfiguration
+			{
+				PingTimeout = this.PingTimeout,
+				RequestTimeout =  this.RequestTimeout,
+				BasicAuthenticationCredentials = this._settings.BasicAuthenticationCredentials,
+				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
+				ForceNode = this.RequestConfiguration?.ForceNode,
+				CancellationToken = this.RequestConfiguration?.CancellationToken ?? default(CancellationToken)
+			};
 
 			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory) { Node = node };
 		}
 
 		public void Ping(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
+			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(AuditEvent.PingSuccess))
+			using (var audit = this.Audit(PingSuccess))
 			{
 				try
 				{
@@ -220,18 +243,19 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch
 				{
-					audit.Event = AuditEvent.PingFailure;
+					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) this.Sniff();
 					throw;
 				}
 			}
 		}
 
+
 		public async Task PingAsync(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
+			if (PingDisabled(node)) return;
 
-			using (var audit = this.Audit(AuditEvent.PingSuccess))
+			using (var audit = this.Audit(PingSuccess))
 			{
 				try
 				{
@@ -240,7 +264,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch
 				{
-					audit.Event = AuditEvent.PingFailure;
+					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
 					throw;
 				}
@@ -257,7 +281,7 @@ namespace Elasticsearch.Net.Connection
 			var exceptions = new List<PipelineException>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(AuditEvent.SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
@@ -271,13 +295,13 @@ namespace Elasticsearch.Net.Connection
 					}
 					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (PipelineException e)
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
@@ -292,7 +316,7 @@ namespace Elasticsearch.Net.Connection
 			var exceptions = new List<PipelineException>();
 			foreach (var node in this.SniffNodes)
 			{
-				using (var audit = this.Audit(AuditEvent.SniffSuccess))
+				using (var audit = this.Audit(SniffSuccess))
 				{
 					audit.Node = node;
 					try
@@ -305,13 +329,13 @@ namespace Elasticsearch.Net.Connection
 					}
 					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (PipelineException e)
 					{
-						audit.Event = AuditEvent.SniffFailure;
+						audit.Event = SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
@@ -322,7 +346,7 @@ namespace Elasticsearch.Net.Connection
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;
@@ -332,7 +356,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.SuccessOrKnownError)
+					if (!response.Success)
 						audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
@@ -348,7 +372,7 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealthyResponse))
+			using (var audit = this.Audit(HealthyResponse))
 			{
 				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;
@@ -358,7 +382,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.SuccessOrKnownError)
+					if (!response.Success)
 						audit.Event = AuditEvent.BadResponse;
 					return response;
 				}

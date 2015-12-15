@@ -1,18 +1,13 @@
 ﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using Elasticsearch.Net.Connection.Security;
+using System.IO;
+using System.Linq;
 using System.Threading;
-using System.IO.Compression;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Serialization;
+using System.Threading.Tasks;
 using Purify;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class RequestData
 	{
@@ -26,6 +21,7 @@ namespace Elasticsearch.Net.Connection
 		public PostData<object> Data { get; }
 		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
+		public TimeSpan PingTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
 
@@ -40,6 +36,7 @@ namespace Elasticsearch.Net.Connection
 		public bool DisableAutomaticProxyDetection { get; }
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public CancellationToken CancellationToken { get; }
+		public IEnumerable<int> AllowedStatusCodes { get; }
 		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
 
 		private readonly IConnectionConfigurationValues _settings;
@@ -66,13 +63,17 @@ namespace Elasticsearch.Net.Connection
 			this.Data = data;
 			this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
 
-			//TODO default to true in 2.0?
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
 			this.Headers = global.Headers;
 
-			this.RequestTimeout = local?.RequestTimeout ?? global.Timeout;
+			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
+			this.PingTimeout = 
+				local?.PingTimeout
+				?? global?.PingTimeout
+				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
 			this.KeepAliveInterval = (int)(global.KeepAliveInterval?.TotalMilliseconds ?? 2000);
 			this.KeepAliveTime = (int)(global.KeepAliveTime?.TotalMilliseconds ?? 2000);
 
@@ -82,6 +83,7 @@ namespace Elasticsearch.Net.Connection
 			this.DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
 			this.BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			this.CancellationToken = local?.CancellationToken ?? CancellationToken.None;
+			this.AllowedStatusCodes = local?.AllowedStatusCodes ?? Enumerable.Empty<int>();
 		}
 
 		public void Write(Stream writableStream)
@@ -164,7 +166,7 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception exception)
 		{
-			var cs = new ElasticsearchResponse<TReturn>(statusCode);
+			var cs = new ElasticsearchResponse<TReturn>(statusCode, this.AllowedStatusCodes);
 			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;

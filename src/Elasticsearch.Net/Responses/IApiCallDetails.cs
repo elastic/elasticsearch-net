@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {

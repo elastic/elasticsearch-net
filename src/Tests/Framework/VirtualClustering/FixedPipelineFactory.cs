@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
 using Nest;
 
 namespace Tests.Framework
@@ -32,6 +25,6 @@ namespace Tests.Framework
 		}
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters) => 
-			new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
+			new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters ?? new SearchRequestParameters());
 	}
 }

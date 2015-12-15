@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Nest.DSL.Visitor
+namespace Nest
 {
 	public class MappingWalker
 	{
@@ -28,7 +28,7 @@ namespace Nest.DSL.Visitor
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
-			foreach (var kv in properties)
+			foreach (var kv in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)properties)
 			{
 				var prop = kv.Key;
 				var field = kv.Value;
