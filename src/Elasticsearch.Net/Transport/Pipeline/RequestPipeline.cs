@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using static Elasticsearch.Net.AuditEvent;
@@ -17,9 +18,11 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly CancellationToken _cancellationToken;
+		private List<Exception> _exceptions = new List<Exception>();
 
 		private IRequestParameters RequestParameters { get; }
 		private IRequestConfiguration RequestConfiguration { get; }
+
 
 		public DateTime StartedOn { get; }
 
@@ -45,8 +48,8 @@ namespace Elasticsearch.Net
 			this.StartedOn = dateTimeProvider.Now();
 		}
 
-		public int MaxRetries => 
-			this.RequestConfiguration?.ForceNode != null 
+		public int MaxRetries =>
+			this.RequestConfiguration?.ForceNode != null
 			? 0
 			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
@@ -56,13 +59,13 @@ namespace Elasticsearch.Net
 			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
-		public bool SniffsOnConnectionFailure => 
+		public bool SniffsOnConnectionFailure =>
 			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
-		public bool SniffsOnStaleCluster => 
+		public bool SniffsOnStaleCluster =>
 			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
-				&&this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
+				&& this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
 
 		public bool StaleClusterState
 		{
@@ -80,7 +83,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private bool PingDisabled(Node node) => 
+		private bool PingDisabled(Node node) =>
 			(this.RequestConfiguration?.DisablePing).GetValueOrDefault(false)
 				|| this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected;
 
@@ -220,7 +223,7 @@ namespace Elasticsearch.Net
 			var requestOverrides = new RequestConfiguration
 			{
 				PingTimeout = this.PingTimeout,
-				RequestTimeout =  this.RequestTimeout,
+				RequestTimeout = this.RequestTimeout,
 				BasicAuthenticationCredentials = this._settings.BasicAuthenticationCredentials,
 				EnableHttpPipelining = this.RequestConfiguration?.EnableHttpPipelining ?? this._settings.HttpPipeliningEnabled,
 				ForceNode = this.RequestConfiguration?.ForceNode,
@@ -239,17 +242,24 @@ namespace Elasticsearch.Net
 				try
 				{
 					var pingData = CreatePingRequestData(node, audit);
-					this._connection.Request<VoidResponse>(pingData);
+					var response = this._connection.Request<VoidResponse>(pingData);
+					ThrowIfNotRecoverable(response);
 				}
-				catch(Exception e)
+				catch (PipelineException e) when (!e.Recoverable)
 				{
 					audit.Event = PingFailure;
+					e.RethrowKeepingStackTrace();
+				}
+				catch (Exception e)
+				{
+					audit.Event = PingFailure;
+					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
+					_exceptions.Add(pipelineException);
 					if (this.SniffsOnConnectionFailure) this.Sniff();
-					throw new PipelineException(PipelineFailure.BadPing, e);
+					throw pipelineException;
 				}
 			}
 		}
-
 
 		public async Task PingAsync(Node node)
 		{
@@ -260,15 +270,29 @@ namespace Elasticsearch.Net
 				try
 				{
 					var pingData = CreatePingRequestData(node, audit);
-					await this._connection.RequestAsync<VoidResponse>(pingData);
+					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
+					ThrowIfNotRecoverable(response);
 				}
-				catch(Exception e)
+				catch (PipelineException e) when (!e.Recoverable)
 				{
 					audit.Event = PingFailure;
+					e.RethrowKeepingStackTrace();
+				}
+				catch (Exception e)
+				{
+					audit.Event = PingFailure;
+					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
+					_exceptions.Add(pipelineException);
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
-					throw new PipelineException(PipelineFailure.BadPing, e);
+					throw pipelineException;
 				}
 			}
+		}
+
+		private void ThrowIfNotRecoverable<TReturn>(ElasticsearchResponse<TReturn> response)
+		{
+			if (response.HttpStatusCode == 403)
+				throw new PipelineException(PipelineFailure.BadAuthentication, new AggregateException(_exceptions));
 		}
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
@@ -278,7 +302,6 @@ namespace Elasticsearch.Net
 		public void Sniff()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -288,26 +311,31 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
+						ThrowIfNotRecoverable(response);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
 						return;
 					}
+					catch (PipelineException e) when (!e.Recoverable)
+					{
+						audit.Event = SniffFailure;
+						e.RethrowKeepingStackTrace();
+					}
 					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
-						exceptions.Add(e);
+						_exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(_exceptions));
 		}
 
 		public async Task SniffAsync()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -317,19 +345,25 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
+						ThrowIfNotRecoverable(response);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
 					}
+					catch (PipelineException e) when (!e.Recoverable)
+					{
+						audit.Event = SniffFailure;
+						e.RethrowKeepingStackTrace();
+					}				
 					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
-						exceptions.Add(e);
+						_exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(_exceptions));
 		}
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
@@ -384,16 +418,16 @@ namespace Elasticsearch.Net
 			}
 		}
 
-        public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<PipelineException> pipelineExceptions)
+		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<PipelineException> pipelineExceptions)
 			where TReturn : class
 		{
 			var innerException = pipelineExceptions.HasAny()
-				? new AggregateException(pipelineExceptions) 
+				? new AggregateException(pipelineExceptions)
 				: response?.OriginalException;
 
-			var message = (this.IsTakingTooLong)
+			var message = (this.IsTakingTooLong) // TODO add to audittrail
 				? "Maximum timeout reached while retrying request."
-				: (this.MaxRetriesReached)
+				: (this.MaxRetriesReached) // TODO add to audittrail
 					? "Maximum number of retries reached."
 					: innerException?.Message ?? "Could not complete the request to Elasticsearch.";
 
