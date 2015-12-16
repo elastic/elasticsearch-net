@@ -97,6 +97,9 @@
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationWalker.cs" />
+    <Compile Include="Aggregations\Visitor\VisitorScope.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />

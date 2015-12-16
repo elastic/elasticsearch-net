@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Nest.Aggregations.Visitor;
 
 namespace Nest
 {
@@ -171,6 +172,8 @@ namespace Nest
 
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
+
+        void Accept(IAggregationVisitor visitor);
 	}
 
 	public class AggregationContainer : IAggregationContainer
@@ -259,7 +262,13 @@ namespace Nest
 			container.Aggregations = bucket?.Aggregations;
 			return container;
 		}
-	}
+
+        public void Accept(IAggregationVisitor visitor)
+        {
+            if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Aggregation;
+            new AggregationWalker().Walk(this, visitor);
+        }
+    }
 
 	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>, IAggregationContainer>, IAggregationContainer
 		where T : class
@@ -540,5 +549,11 @@ namespace Nest
 			self.Aggregations[key] = container;
 			return this;
 		}
-	}
+
+        public void Accept(IAggregationVisitor visitor)
+        {
+            if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Aggregation;
+            new AggregationWalker().Walk(this, visitor);
+        }
+    }
 }
