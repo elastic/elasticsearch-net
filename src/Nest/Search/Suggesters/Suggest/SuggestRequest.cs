@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public partial interface ISuggestRequest : ICustomJson
 	{

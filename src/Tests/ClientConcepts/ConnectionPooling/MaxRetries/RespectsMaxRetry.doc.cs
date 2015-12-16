@@ -85,7 +85,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9201 },
 				}
             );
-
 		}
 
 		/** 

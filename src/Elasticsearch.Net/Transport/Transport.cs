@@ -60,7 +60,6 @@ namespace Elasticsearch.Net
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				//todo code review 
 				var exceptions = new List<Exception>();
 				foreach (var node in pipeline.NextNode())
 				{

@@ -58,7 +58,7 @@ namespace Nest
 					.Type(Types.All)
 					.From(0)
 					.Size(size)
-					.Query(this._reindexRequest.Query)
+					.Query(q=>this._reindexRequest.Query)
 					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
 				);

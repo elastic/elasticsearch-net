@@ -71,7 +71,7 @@ namespace Tests.Framework
 				this._cluster.ClientCallRules,
 				requestData.RequestTimeout,
 				(r) => { },
-				CallResponse //TODO search response
+				CallResponse 
 			);
 		}
 
