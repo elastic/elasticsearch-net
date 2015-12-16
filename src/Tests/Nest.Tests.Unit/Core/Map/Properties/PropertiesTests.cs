@@ -354,7 +354,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 				.Properties(props => props
 					.Completion(c => c
 						.Name(p => p.Suggest)
-						.IndexAnalyzer("simple")
+						.Analyzer("simple")
 						.SearchAnalyzer("simple")
 						.Payloads()
 						.MaxInputLength(25)

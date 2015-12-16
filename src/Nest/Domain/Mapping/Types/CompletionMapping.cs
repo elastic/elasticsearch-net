@@ -19,8 +19,8 @@ namespace Nest
 		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
 
-		[JsonProperty("index_analyzer")]
-		public string IndexAnalyzer { get; set; }
+		[JsonProperty("analyzer")]
+		public string Analyzer { get; set; }
 
 		[JsonProperty("payloads")]
 		public bool? Payloads { get; set; }

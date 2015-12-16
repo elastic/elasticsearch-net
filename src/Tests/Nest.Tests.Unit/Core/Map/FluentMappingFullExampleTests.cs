@@ -234,7 +234,7 @@ namespace Nest.Tests.Unit.Core.Map
 					)
 					.Completion(s=>s
 						.Name(p=>p.Name.Suffix("completion"))
-						.IndexAnalyzer("standard")
+						.Analyzer("standard")
 						.SearchAnalyzer("standard")
 						.MaxInputLength(20)
 						.Payloads()
