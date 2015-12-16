@@ -28,9 +28,9 @@ namespace Nest
             return this;
         }
 
-        public CompletionMappingDescriptor<T> IndexAnalyzer(string name)
+        public CompletionMappingDescriptor<T> Analyzer(string name)
         {
-            this._Mapping.IndexAnalyzer = name;
+            this._Mapping.Analyzer = name;
             return this;
         }
 
