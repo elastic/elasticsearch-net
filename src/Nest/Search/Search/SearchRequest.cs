@@ -58,8 +58,7 @@ namespace Nest
 		IList<Field> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
@@ -106,7 +105,7 @@ namespace Nest
 		public long? TerminateAfter { get; set; }
 		public IList<Field> Fields { get; set; }
 		public IList<Field> FielddataFields { get; set; }
-		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		public IScriptFields ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
@@ -149,7 +148,7 @@ namespace Nest
 		public long? TerminateAfter { get; set; }
 		public IList<Field> Fields { get; set; }
 		public IList<Field> FielddataFields { get; set; }
-		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		public IScriptFields ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
@@ -212,7 +211,7 @@ namespace Nest
 		QueryContainer ISearchRequest.PostFilter { get; set; }
 		IList<Field> ISearchRequest.Fields { get; set; }
 		IList<Field> ISearchRequest.FielddataFields { get; set; }
-		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
+		IScriptFields ISearchRequest.ScriptFields { get; set; }
 		ISourceFilter ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
@@ -402,26 +401,8 @@ namespace Nest
 		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
 			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
-		//TODO scriptfields needs a seperate encapsulation
-		public SearchDescriptor<T> ScriptFields(
-			Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
-			 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields) => Assign(a =>
-			 {
-				 scriptFields.ThrowIfNull(nameof(scriptFields));
-				 var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
-				 if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
-				 {
-					 a.ScriptFields = null;
-					 return;
-				 }
-				 a.ScriptFields = new FluentDictionary<string, IScriptQuery>();
-				 foreach (var d in scriptFieldDescriptors)
-				 {
-					 if (d.Value == null)
-						 continue;
-					 a.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor<T>()));
-				 }
-			 });
+		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
+			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit

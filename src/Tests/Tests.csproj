@@ -452,6 +452,7 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorApiTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorApiTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Request\FielddataFieldsUsageTests.cs" />
     <Compile Include="Search\Request\SuggestUsageTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollApiTests.cs" />
@@ -471,7 +472,7 @@
     <Compile Include="Search\Search\SearchApiTests.cs" />
     <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\FieldsUsageTests.cs" />
-    <Compile Include="Search\Request\FielddataFieldsUsageTests.cs" />
+    <Compile Include="Search\Request\ScriptFieldsUsageTests.cs" />
     <Compile Include="Search\Request\HighlightingUsageTests.cs" />
     <Compile Include="Search\Request\IndexBoostUsageTests.cs" />
     <Compile Include="Search\Request\MinScoreUsageTests.cs" />
