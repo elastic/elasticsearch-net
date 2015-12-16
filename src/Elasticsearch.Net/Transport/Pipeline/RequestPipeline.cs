@@ -241,11 +241,11 @@ namespace Elasticsearch.Net
 					var pingData = CreatePingRequestData(node, audit);
 					this._connection.Request<VoidResponse>(pingData);
 				}
-				catch
+				catch(Exception e)
 				{
 					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) this.Sniff();
-					throw;
+					throw new PipelineException(PipelineFailure.BadPing, e);
 				}
 			}
 		}
@@ -262,11 +262,11 @@ namespace Elasticsearch.Net
 					var pingData = CreatePingRequestData(node, audit);
 					await this._connection.RequestAsync<VoidResponse>(pingData);
 				}
-				catch
+				catch(Exception e)
 				{
 					audit.Event = PingFailure;
 					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
-					throw;
+					throw new PipelineException(PipelineFailure.BadPing, e);
 				}
 			}
 		}
@@ -278,7 +278,7 @@ namespace Elasticsearch.Net
 		public void Sniff()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<PipelineException>();
+			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -293,13 +293,7 @@ namespace Elasticsearch.Net
 						this.Refresh = true;
 						return;
 					}
-					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
-					{
-						audit.Event = SniffFailure;
-						e.RethrowKeepingStackTrace();
-						continue;
-					}
-					catch (PipelineException e)
+					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
 						exceptions.Add(e);
@@ -313,7 +307,7 @@ namespace Elasticsearch.Net
 		public async Task SniffAsync()
 		{
 			var path = this.SniffPath;
-			var exceptions = new List<PipelineException>();
+			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -327,13 +321,7 @@ namespace Elasticsearch.Net
 						this.Refresh = true;
 						return;
 					}
-					catch (PipelineException e) when (e.FailureReason == PipelineFailure.BadAuthentication) //unrecoverable
-					{
-						audit.Event = SniffFailure;
-						e.RethrowKeepingStackTrace();
-						continue;
-					}
-					catch (PipelineException e)
+					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
 						exceptions.Add(e);
