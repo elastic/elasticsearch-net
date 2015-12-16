@@ -138,12 +138,9 @@ namespace Elasticsearch.Net
 			}
 			catch (WebException webException)
 			{
-				var response = (HttpWebResponse)webException.Response;
-				return requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), webException);
-			}
-			catch (Exception exception)
-			{
-				return requestData.CreateResponse<TReturn>(exception);
+				var errorResponse = (HttpWebResponse)webException.Response;
+				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);					
+				return requestData.CreateResponse<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
 			}
 		}
 
@@ -174,16 +171,11 @@ namespace Elasticsearch.Net
 				var cs = await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, responseStream);
 				return cs;
 			}
-			catch (WebException exception)
+			catch (WebException webException)
 			{
-				var response = (HttpWebResponse)exception.Response;
-				return await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, response.GetResponseStream(), exception);
-			}
-			catch (Exception exception)
-			{
-#pragma warning disable AsyncFixer002 //this overload does not need to be async
-				return requestData.CreateResponse<TReturn>(exception);
-#pragma warning restore AsyncFixer002
+				var errorResponse = (HttpWebResponse)webException.Response;
+				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);
+				return await requestData.CreateResponseAsync<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
 			}
 		}
 	}

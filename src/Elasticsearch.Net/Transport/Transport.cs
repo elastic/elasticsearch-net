@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Elasticsearch.Net
 {
@@ -60,7 +59,7 @@ namespace Elasticsearch.Net
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<Exception>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -70,12 +69,13 @@ namespace Elasticsearch.Net
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (PipelineException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
+						exceptions.Add(exception);
+						break;
 					}
-					catch (Exception exception)
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -83,10 +83,11 @@ namespace Elasticsearch.Net
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
@@ -101,7 +102,7 @@ namespace Elasticsearch.Net
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<Exception>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -111,12 +112,12 @@ namespace Elasticsearch.Net
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (PipelineException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
+						break;
 					}
-					catch (Exception exception)
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -124,14 +125,13 @@ namespace Elasticsearch.Net
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
-
-
 	}
 }
