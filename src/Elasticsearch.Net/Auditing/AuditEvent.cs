@@ -1,7 +1,6 @@
 namespace Elasticsearch.Net
 {
 	//TODO SNIFFONFAIL AND SKIPNODE ARE NEVER USED
-	//TODO add MaxRetry, RetryTimeout?
 	public enum AuditEvent
 	{
 		SniffOnStartup,
@@ -15,6 +14,9 @@ namespace Elasticsearch.Net
 
 		SkipNode,
 		BadResponse,
-		HealthyResponse
+		HealthyResponse,
+
+		MaxTimeoutReached,
+		MaxRetriesReached
 	}
 }

@@ -53,8 +53,6 @@ namespace Elasticsearch.Net
 			? 0
 			: Math.Min(this.RequestConfiguration?.MaxRetries ?? this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
-		private bool MaxRetriesReached => this.Retried >= this.MaxRetries && this.MaxRetries > 0;
-
 		public bool FirstPoolUsageNeedsSniffing =>
 			(!this.RequestConfiguration?.DisableSniff).GetValueOrDefault(true)
 				&& this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
@@ -425,22 +423,29 @@ namespace Elasticsearch.Net
 				? new AggregateException(pipelineExceptions)
 				: response?.OriginalException;
 
-			var message = (this.IsTakingTooLong) // TODO add to audittrail
-				? "Maximum timeout reached while retrying request."
-				: (this.MaxRetriesReached) // TODO add to audittrail
-					? "Maximum number of retries reached."
-					: innerException?.Message ?? "Could not complete the request to Elasticsearch.";
+			var exceptionMessage = innerException?.Message ?? "Could not complete the request to Elasticsearch.";
 
-			var exception = new ElasticsearchClientException(message, innerException)
+			if (this.IsTakingTooLong)
+			{
+				this.Audit(MaxTimeoutReached);
+				exceptionMessage = "Maximum timout reached while retrying request";
+			}
+			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
+			{
+				this.Audit(MaxRetriesReached);
+				exceptionMessage = "Maximum number of retries reached.";
+			}
+
+			var clientException = new ElasticsearchClientException(exceptionMessage, innerException)
 			{
 				Response = response,
 				AuditTrail = this.AuditTrail
 			};
 
-			if (_settings.ThrowExceptions) exception.RethrowKeepingStackTrace();
+			if (_settings.ThrowExceptions) throw clientException;
 
 			if (response == null)
-				response = data.CreateResponse<TReturn>(exception);
+				response = data.CreateResponse<TReturn>(clientException);
 
 			response.AuditTrail = this.AuditTrail;
 		}
