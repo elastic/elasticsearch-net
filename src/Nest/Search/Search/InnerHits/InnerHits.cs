@@ -37,7 +37,7 @@ namespace Nest
 		IList<Field> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		IScriptFields ScriptFields { get; set; }
 	}
 
 	public class InnerHits : IInnerHits
@@ -60,7 +60,7 @@ namespace Nest
 
 		public IList<Field> FielddataFields { get; set; }
 
-		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		public IScriptFields ScriptFields { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -75,7 +75,7 @@ namespace Nest
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
-		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
+		IScriptFields IInnerHits.ScriptFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -107,27 +107,7 @@ namespace Nest
 		public InnerHitsDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
-		//TODO ScriptFileds needs an encapsulated descriptor
-		public InnerHitsDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
-				 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
-		{
-			if (scriptFields == null) return null;
-
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
-			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
-			{
-				Self.ScriptFields = null;
-				return this;
-			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
-			foreach (var d in scriptFieldDescriptors)
-			{
-				if (d.Value == null)
-					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor<T>()));
-			}
-			return this;
-		}
+		public InnerHitsDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
+			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 	}
 }

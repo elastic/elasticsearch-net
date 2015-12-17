@@ -452,6 +452,7 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorApiTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorApiTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Request\InnerHitsUsageTests.cs" />
     <Compile Include="Search\Request\FielddataFieldsUsageTests.cs" />
     <Compile Include="Search\Request\SuggestUsageTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />

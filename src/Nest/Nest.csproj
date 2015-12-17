@@ -443,6 +443,7 @@
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
+    <Compile Include="Search\Search\InnerHits\NamedInnerHits.cs" />
     <Compile Include="Search\Search\Sort\SortBase.cs" />
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
     <Compile Include="Search\Search\Sort\SortMode.cs" />

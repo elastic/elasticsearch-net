@@ -74,8 +74,7 @@ namespace Nest
 		QueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		INamedInnerHits InnerHits { get; set; }
 
 		string Preference { get; }
 		
@@ -110,7 +109,7 @@ namespace Nest
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		public INamedInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -153,7 +152,7 @@ namespace Nest
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		public INamedInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -214,35 +213,10 @@ namespace Nest
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
 		ISourceFilter ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
-		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
+		INamedInnerHits ISearchRequest.InnerHits { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a=>a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
-
-		//TODO refactor!
-		public SearchDescriptor<T> InnerHits(
-			Func<
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>,
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
-			> innerHitsSelector) => Assign(a => 
-			{
-				if (innerHitsSelector == null)
-				{
-					a.InnerHits = null;
-					return;
-				}
-				var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
-					.Where(kv => kv.Value != null)
-					.Select(kv => new { Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>()) })
-					.Where(kv => kv.Value != null)
-					.ToDictionary(kv => kv.Key, kv => kv.Value);
-				if (containers == null || containers.Count == 0)
-				{
-					a.InnerHits = null;
-					return;
-				}
-				a.InnerHits = containers;
-			});
 
 		public SearchDescriptor<T> Source(bool include = true)=> Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 		
@@ -409,6 +383,9 @@ namespace Nest
 		///</summary>
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
 
+		public SearchDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) => 
+			Assign(a => a.InnerHits = selector?.Invoke(new NamedInnerHitsDescriptor<T>())?.Value);
+
 		///<summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester
 		///</summary>
@@ -420,6 +397,11 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) => 
 			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
+
+		/// <summary>
+		/// Shortcut to default to a match all query
+		/// </summary>
+		public SearchDescriptor<T> MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) => this.Query(q => q.MatchAll(selector));
 
 		/// <summary>
 		/// Filter search using a filter descriptor lambda

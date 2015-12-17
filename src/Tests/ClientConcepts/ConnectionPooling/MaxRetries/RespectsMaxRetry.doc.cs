@@ -98,7 +98,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
-				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+				.ClientCalls(r => r.OnPort(9209).FailAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);

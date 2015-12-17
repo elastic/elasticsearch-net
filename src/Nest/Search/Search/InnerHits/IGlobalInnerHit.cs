@@ -12,21 +12,20 @@ namespace Nest
 		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		INamedInnerHits InnerHits { get; set; }
 	}
 
 	public class GlobalInnerHit : InnerHits, IGlobalInnerHit
 	{
 		public QueryContainer Query { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		public INamedInnerHits InnerHits { get; set; }
 	}
 
 	public class GlobalInnerHitDescriptor<T> : DescriptorBase<GlobalInnerHitDescriptor<T>, IGlobalInnerHit>, IGlobalInnerHit
 		where T : class
 	{
 		QueryContainer IGlobalInnerHit.Query { get; set; }
-		IDictionary<string, IInnerHitsContainer> IGlobalInnerHit.InnerHits { get; set; }
+		INamedInnerHits IGlobalInnerHit.InnerHits { get; set; }
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
@@ -36,34 +35,13 @@ namespace Nest
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
-		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
+		IScriptFields IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
 			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 		
-		public GlobalInnerHitDescriptor<T> InnerHits(Func<
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
-			> innerHitsSelector)
-		{
-			if (innerHitsSelector == null)
-			{
-				Self.InnerHits = null;
-				return this;
-			}
-			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
-				.Where(kv => kv.Value != null)
-				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
-				.Where(kv => kv.Value != null)
-				.ToDictionary(kv => kv.Key, kv => kv.Value);
-			if (containers == null || containers.Count == 0)
-			{
-				Self.InnerHits = null;
-				return this;
-			}
-			Self.InnerHits = containers;
-			return this;
-		}
+		public GlobalInnerHitDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) => 
+			Assign(a => a.InnerHits = selector?.Invoke(new NamedInnerHitsDescriptor<T>())?.Value);
 
 		public GlobalInnerHitDescriptor<T> From(int? from) => Assign(a => a.From = from);
 
@@ -94,27 +72,8 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
-		//TODO ScriptFileds needs an encapsulated descriptor
-		public GlobalInnerHitDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
-				 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
-		{
-			if (scriptFields == null) return null;
+		public GlobalInnerHitDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
+			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
-			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
-			{
-				Self.ScriptFields = null;
-				return this;
-			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
-			foreach (var d in scriptFieldDescriptors)
-			{
-				if (d.Value == null)
-					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor<T>()));
-			}
-			return this;
-		}
 	}
 }

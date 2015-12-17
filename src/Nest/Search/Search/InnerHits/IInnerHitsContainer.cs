@@ -42,7 +42,7 @@ namespace Nest
 			return this;
 		}
 
-		public InnerHitsContainerDescriptor<T> Path(string path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
+		public InnerHitsContainerDescriptor<T> Path(Field path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
 			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
 			Self.Path = new Dictionary<Field, IGlobalInnerHit> {{ path, globalInnerHit}};

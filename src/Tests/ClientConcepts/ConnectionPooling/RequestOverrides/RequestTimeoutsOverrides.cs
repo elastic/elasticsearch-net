@@ -35,7 +35,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				* On the second request we specify a request timeout override to 60 seconds
 				* We should now see more nodes being tried.
 				*/
-				new ClientCall(r=>r.RequestTimeout(TimeSpan.FromSeconds(60)))
+				new ClientCall(r=>r.RequestTimeout(TimeSpan.FromSeconds(80)))
 				{
 					{ BadResponse, 9203 },
 					{ BadResponse, 9204 },
@@ -43,6 +43,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ BadResponse, 9206 },
 					{ BadResponse, 9207 },
 					{ BadResponse, 9208 },
+					{ HealthyResponse, 9209 },
 				}
             );
 
