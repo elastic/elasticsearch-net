@@ -12,7 +12,8 @@ namespace Elasticsearch.Net
 		PingSuccess,
 		PingFailure,
 
-		SkipNode,
+		Resurrection,
+		AllNodesDead,
 		BadResponse,
 		HealthyResponse,
 

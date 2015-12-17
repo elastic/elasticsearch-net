@@ -200,7 +200,9 @@ namespace Elasticsearch.Net
 			for (var i = 0; i < 100; i++)
 			{
 				if (this.DepleededRetries) yield break;
-				foreach (var node in this._connectionPool.CreateView().TakeWhile(node => !this.DepleededRetries))
+				foreach (var node in this._connectionPool
+					.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }); })
+					.TakeWhile(node => !this.DepleededRetries))
 				{
 					yield return node;
 					if (!this.Refresh) continue;
@@ -295,7 +297,10 @@ namespace Elasticsearch.Net
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
 
-		public IEnumerable<Node> SniffNodes => this._connectionPool.CreateView().ToList().OrderBy(n => n.MasterEligable ? n.Uri.Port : int.MaxValue);
+		public IEnumerable<Node> SniffNodes => this._connectionPool
+			.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }); })
+			.ToList()
+			.OrderBy(n => n.MasterEligable ? n.Uri.Port : int.MaxValue);
 
 		public void Sniff()
 		{

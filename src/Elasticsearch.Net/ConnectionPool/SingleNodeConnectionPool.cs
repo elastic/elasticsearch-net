@@ -28,6 +28,6 @@ namespace Elasticsearch.Net
 			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
-		public IEnumerable<Node> CreateView() => this.Nodes;
+		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 	}
 }
