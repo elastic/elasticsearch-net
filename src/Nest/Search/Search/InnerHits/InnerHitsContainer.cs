@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHitsContainer>))]
 	public interface IInnerHitsContainer
 	{
 		[JsonProperty(PropertyName = "type")]

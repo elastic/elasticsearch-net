@@ -40,10 +40,10 @@ namespace Nest
 		public PathInnerHitDescriptor() : base(new PathInnerHit()) { }
 
 		public PathInnerHitDescriptor<T> Path(Field name,Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) => 
-			this.Assign(name, globalInnerHitsSelector?.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
+			this.Assign(name, globalInnerHitsSelector.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
 
 		public PathInnerHitDescriptor<T> Path(Expression<Func<T, object>> name,Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) => 
-			this.Assign(name, globalInnerHitsSelector?.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
+			this.Assign(name, globalInnerHitsSelector.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
 
 	}
 }

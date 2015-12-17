@@ -33,9 +33,6 @@ namespace Tests.Search.Request
 	public class King : RoyalBase<King>
 	{
 		public List<King> Foes { get; set; }
-		public new static Faker<King> Generator { get; } =
-			RoyalBase<King>.Generator
-				.RuleFor(p => p.Foes, f => RoyalBase<King>.Generator.Generate(3));
 	}
 	public class Prince : RoyalBase<Prince> { }
 	public class Duke : RoyalBase<Duke> { }
@@ -70,16 +67,24 @@ namespace Tests.Search.Request
 				 )
 			);
 
+			var kings = King.Generator.Generate(2)
+				.Select(k =>
+				{
+					k.Foes = King.Generator.Generate(2).ToList();
+					return k;
+				});
+
 			var bulk = new BulkDescriptor();
-			IndexAll(bulk, () => King.Generator.Generate(2), indexChildren: king =>
-			   IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
-				   IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
-					   IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
-						   IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
-					   )
-				   )
-			   )
+			IndexAll(bulk, () => kings, indexChildren: king =>
+				 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
+					 IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
+						 IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
+							 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
+						 )
+					 )
+				 )
 			);
+			this._client.Bulk(bulk);
 			this._client.Refresh(this._index);
 		}
 
@@ -91,7 +96,7 @@ namespace Tests.Search.Request
 		{
 			var current = create();
 			//looping twice horrible but easy to debug :)
-			var royals = current as IList<TRoyal> ?? current.ToList();
+			var royals = current.ToList();
 			foreach (var royal in royals)
 			{
 				var royal1 = royal;
@@ -112,7 +117,7 @@ namespace Tests.Search.Request
 	{
 		public InnerHitsApiTestsBase(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) => new RoyalSeeder(this.Client, this.Index).Seed();
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) => new RoyalSeeder(this.Client, Index).Seed();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -121,16 +126,16 @@ namespace Tests.Search.Request
 			requestAsync: (client, r) => client.SearchAsync<TRoyal>(r)
 		);
 
-		protected IndexName Index => Index(CallIsolatedValue);
+		protected static IndexName Index { get; } = RandomString();
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/{CallIsolatedValue},x/_query?ignore_unavailable=true";
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => $"/{Index}/{this.Client.Infer.TypeName<TRoyal>()}/_search";
 
 		protected override bool SupportsDeserialization => true;
 
-		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(this.Index);
+		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
@@ -140,13 +145,24 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson { get; } = new
 		{
-			query = new
-			{
+			inner_hits = new {
+				earls = new {
+					type = new {
+						earl = new {
+							fielddata_fields = new[] { "name" },
+							inner_hits = new
+							{
+								barons = new { type = new { baron = new { } } }
+							},
+							size = 5
+						}
+					}
+				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
-			.Index(this.Index)
+			.Index(Index)
 			.InnerHits(ih => ih
 				.Type<Earl>("earls", g => g
 					.Size(5)
@@ -157,11 +173,11 @@ namespace Tests.Search.Request
 				)
 			);
 
-		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(this.Index)
+		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
 		{
 			InnerHits = new NamedInnerHits
 			{
-				{ "earls",  new InnerHitsContainer
+				{ "earls", new InnerHitsContainer
 				{
 					Type = new TypeInnerHit<Earl>
 					{
@@ -178,6 +194,32 @@ namespace Tests.Search.Request
 				} }
 			}
 		};
+
+		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		{
+			r.IsValid.Should().BeTrue();
+			r.Hits.Should().NotBeEmpty();
+			foreach (var hit in r.Hits)
+			{
+				hit.InnerHits.Should().NotBeEmpty();
+				hit.InnerHits.Should().ContainKey("earls");
+				var earlHits = hit.InnerHits["earls"].Hits;
+				earlHits.Total.Should().BeGreaterThan(0);
+				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
+				foreach(var earlHit in earlHits.Hits)
+					earlHit.Fields.FieldValues<string[]>("name").Should().NotBeEmpty();
+				var earls = earlHits.Documents<Earl>();
+				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
+				foreach (var earlHit in earlHits.Hits)
+				{
+					var baronHits = earlHit.InnerHits["barons"];
+					baronHits.Should().NotBeNull();
+					var baron = baronHits.Documents<Baron>().FirstOrDefault();
+					baron.Should().NotBeNull();
+					baron.Name.Should().NotBeNullOrWhiteSpace();
+				}
+			}
+		});
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
@@ -187,13 +229,30 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson { get; } = new
 		{
-			query = new
-			{
+			query = new {
+				@bool = new {
+					should = new object[] {
+					new {
+						has_child = new {
+							type = "prince",
+							query = new { match_all = new {} },
+							inner_hits = new { name = "princes" }
+						}
+					},
+					new {
+						nested = new {
+							query = new { match_all = new {} },
+							path = "foes",
+							inner_hits = new {}
+						}
+					}
+				}
+				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
-			.Index(this.Index)
+			.Index(Index)
 			.Query(q => 
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.MatchAll())
@@ -205,13 +264,13 @@ namespace Tests.Search.Request
 				)
 			);
 
-		protected override SearchRequest<King> Initializer => new SearchRequest<King>(this.Index)
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
 		{
 			Query = new HasChildQuery
 			{
 				Type = typeof(Prince),
 				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits { Name = "princes "}
+				InnerHits = new InnerHits { Name = "princes"}
 			} || new NestedQuery
 			{
 				Path = Field<King>(p=>p.Foes),
@@ -220,6 +279,18 @@ namespace Tests.Search.Request
 			}
 		};
 
+		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		{
+			r.Hits.Should().NotBeEmpty();
+			foreach (var hit in r.Hits)
+			{
+				var princes = hit.InnerHits["princes"].Documents<Prince>();
+				princes.Should().NotBeEmpty();
+
+				var foes = hit.InnerHits["foes"].Documents<King>();
+				foes.Should().NotBeEmpty();
+			};
+		});
 	}
 
 }

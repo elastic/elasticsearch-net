@@ -27,6 +27,7 @@ namespace Nest
 		public TypeInnerHit() : base()
 		{
 			_name = typeof(T);
+			this.InnerHit = new GlobalInnerHit();
 		}
 
 		public IGlobalInnerHit InnerHit
@@ -43,7 +44,7 @@ namespace Nest
 		public TypeInnerHitDescriptor() : base(new TypeInnerHit()) { }
 
 		public TypeInnerHitDescriptor<T> Type(TypeName name, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) => 
-			this.Assign(name, globalInnerHitsSelector?.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
+			this.Assign(name, globalInnerHitsSelector.InvokeOrDefault(new GlobalInnerHitDescriptor<T>()));
 
 	}
 }

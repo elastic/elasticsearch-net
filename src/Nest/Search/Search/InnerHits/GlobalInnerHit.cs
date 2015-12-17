@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GlobalInnerHit>))]
 	public interface IGlobalInnerHit : IInnerHits
 	{
 		[JsonProperty(PropertyName = "query")]

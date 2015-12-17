@@ -143,19 +143,16 @@ namespace Tests.Framework
 			}
 		}
 
-		protected async Task HitsTheCorrectUrl() =>
+		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
-		[U]
-		protected async Task UsesCorrectHttpMethod() =>
+		[U] protected async Task UsesCorrectHttpMethod() =>
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
-		[U]
-		protected void SerializesInitializer() =>
+		[U] protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
-		[U]
-		protected void SerializesFluent() =>
+		[U] protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(this.ClientDoesThisInternally(NewDescriptor())));
 	}
 }

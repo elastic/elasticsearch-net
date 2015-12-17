@@ -116,16 +116,16 @@ namespace Nest
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
 		public SignificantTermsAggregationDescriptor<T> MutualInformation(Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null) =>
-			Assign(a => a.MutualInformation = mutualInformationSelector?.InvokeOrDefault(new MutualInformationHeuristicDescriptor()));
+			Assign(a => a.MutualInformation = mutualInformationSelector.InvokeOrDefault(new MutualInformationHeuristicDescriptor()));
 
 		public SignificantTermsAggregationDescriptor<T> ChiSquare(Func<ChiSquareHeuristicDescriptor, IChiSquareHeuristic> chiSquareSelector) =>
-			Assign(a => a.ChiSquare = chiSquareSelector?.InvokeOrDefault(new ChiSquareHeuristicDescriptor()));
+			Assign(a => a.ChiSquare = chiSquareSelector.InvokeOrDefault(new ChiSquareHeuristicDescriptor()));
 
 		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(Func<GoogleNormalizedDistanceHeuristicDescriptor, IGoogleNormalizedDistanceHeuristic> gndSelector) =>
-			Assign(a => a.GoogleNormalizedDistance = gndSelector?.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()));
+			Assign(a => a.GoogleNormalizedDistance = gndSelector.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()));
 
 		public SignificantTermsAggregationDescriptor<T> PercentageScore(Func<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic> percentageScoreSelector) =>
-			Assign(a => a.PercentageScore = percentageScoreSelector?.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()));
+			Assign(a => a.PercentageScore = percentageScoreSelector.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()));
 
 		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
