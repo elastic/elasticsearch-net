@@ -34,7 +34,12 @@ namespace Elasticsearch.Net
 		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null, int? statusCode = null)
 			where TReturn : class
 		{
-			var cs = requestData.CreateResponse<TReturn>(statusCode ?? this._statusCode, new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes));
+			var builder = new ResponseBuilder(requestData)
+			{
+				StatusCode = statusCode ?? this._statusCode,
+				Stream = new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes)
+			};
+			var cs = builder.ToResponse<TReturn>();
 			return cs;
 		}
 

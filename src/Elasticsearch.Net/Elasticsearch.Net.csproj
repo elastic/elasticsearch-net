@@ -67,6 +67,7 @@
     <Compile Include="Transport\Pipeline\PipelineFailure.cs" />
     <Compile Include="ConnectionPool\Node.cs" />
     <Compile Include="Configuration\Security\BasicAuthorizationCredentials.cs" />
+    <Compile Include="Transport\Pipeline\ResponseBuilder.cs" />
     <Compile Include="Transport\Sniff\SniffResponse.cs" />
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />

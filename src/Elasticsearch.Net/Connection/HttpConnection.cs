@@ -49,6 +49,7 @@ namespace Elasticsearch.Net
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");
 				request.Headers.Add("Content-Encoding", "gzip");
 			}
+
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);
 
@@ -56,13 +57,12 @@ namespace Elasticsearch.Net
 			request.Timeout = timeout;
 			request.ReadWriteTimeout = timeout;
 
-
 			//WebRequest won't send Content-Length: 0 for empty bodies
 			//which goes against RFC's and might break i.e IIS when used as a proxy.
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
 			var m = requestData.Method.GetStringValue();
 			request.Method = m;
-			if (m != "head" && m != "get" && (requestData.Data == null))
+			if (m != "head" && m != "get" && (requestData.PostData == null))
 				request.ContentLength = 0;
 
 			return request;
@@ -79,7 +79,7 @@ namespace Elasticsearch.Net
 			requestServicePoint.SetTcpKeepAlive(true, requestData.KeepAliveTime, requestData.KeepAliveInterval);
 		}
 
-		protected virtual void SetProxyIfNeeded(HttpWebRequest myReq, RequestData requestData)
+		protected virtual void SetProxyIfNeeded(HttpWebRequest request, RequestData requestData)
 		{
 			if (!requestData.ProxyAddress.IsNullOrEmpty())
 			{
@@ -88,10 +88,11 @@ namespace Elasticsearch.Net
 				var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
 				proxy.Address = uri;
 				proxy.Credentials = credentials;
-				myReq.Proxy = proxy;
+				request.Proxy = proxy;
 			}
+
 			if (requestData.DisableAutomaticProxyDetection)
-				myReq.Proxy = null;
+				request.Proxy = null;
 		}
 
 		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
@@ -112,70 +113,86 @@ namespace Elasticsearch.Net
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
+			var builder = new ResponseBuilder(requestData);
+
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
-				var data = requestData.Data;
+				var data = requestData.PostData;
+
 				if (data != null)
 				{
-					using (var r = request.GetRequestStream())
+					using (var stream = request.GetRequestStream())
 					{
 						if (requestData.HttpCompression)
-							using (var zipStream = new GZipStream(r, CompressionMode.Compress))
-								requestData.Write(zipStream);
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								data.Write(zipStream, requestData.ConnectionSettings);
 						else
-							requestData.Write(r);
+							data.Write(stream, requestData.ConnectionSettings);
 					}
 				}
+
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
 				var response = (HttpWebResponse)request.GetResponse();
-				var responseStream = response.GetResponseStream();
-				var cs = requestData.CreateResponse<TReturn>((int)response.StatusCode, responseStream);
-				return cs;
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
 			}
-			catch (WebException webException)
+			catch (WebException e)
 			{
-				var errorResponse = (HttpWebResponse)webException.Response;
-				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);					
-				return requestData.CreateResponse<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
+				HandleException(builder, e);
 			}
+
+			return builder.ToResponse<TReturn>();
 		}
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
+			var builder = new ResponseBuilder(requestData);
+
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
-				var data = requestData.Data;
+				var data = requestData.PostData;
+
 				if (data != null)
 				{
-					using (var r = await request.GetRequestStreamAsync())
+					using (var stream = await request.GetRequestStreamAsync())
 					{
 						if (requestData.HttpCompression)
-							using (var zipStream = new GZipStream(r, CompressionMode.Compress))
-								await requestData.WriteAsync(zipStream);
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								await data.WriteAsync(zipStream, requestData.ConnectionSettings);
 						else
-							await requestData.WriteAsync(r);
+							await data.WriteAsync(stream, requestData.ConnectionSettings);
 					}
 				}
+
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var webResponse = await request.GetResponseAsync();
-				var response = (HttpWebResponse)webResponse;
-				var responseStream = response.GetResponseStream();
-				var cs = await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, responseStream);
-				return cs;
+				var response = (HttpWebResponse)(await request.GetResponseAsync());
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
 			}
-			catch (WebException webException)
+			catch (WebException e)
 			{
-				var errorResponse = (HttpWebResponse)webException.Response;
-				if (errorResponse == null) return requestData.CreateResponse<TReturn>(webException);
-				return await requestData.CreateResponseAsync<TReturn>((int)errorResponse.StatusCode, errorResponse.GetResponseStream(), webException);
+				HandleException(builder, e);
+			}
+
+			return await builder.ToResponseAsync<TReturn>();
+		}
+
+		private void HandleException(ResponseBuilder builder, WebException exception)
+		{
+			builder.Exception = exception;
+			var response = exception.Response as HttpWebResponse;
+			if (response != null)
+			{
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
 			}
 		}
 	}
