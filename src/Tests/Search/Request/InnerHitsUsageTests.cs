@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Bogus;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -31,10 +32,10 @@ namespace Tests.Search.Request
 
 	public class King : RoyalBase<King>
 	{
-		public List<King> Foes { get; set; } 
+		public List<King> Foes { get; set; }
 		public new static Faker<King> Generator { get; } =
 			RoyalBase<King>.Generator
-				.RuleFor(p => p.Foes, f=>RoyalBase<King>.Generator.Generate(3));
+				.RuleFor(p => p.Foes, f => RoyalBase<King>.Generator.Generate(3));
 	}
 	public class Prince : RoyalBase<Prince> { }
 	public class Duke : RoyalBase<Duke> { }
@@ -50,39 +51,39 @@ namespace Tests.Search.Request
 
 		public void Seed()
 		{
-			var create = this._client.CreateIndex(this._index, c => c		
-				.Settings(s=>s
+			var create = this._client.CreateIndex(this._index, c => c
+				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
 				)
-				.Mappings(map=>map
-					.Map<King>(m=>m.AutoMap()
-						.Properties(props=>
+				.Mappings(map => map
+					.Map<King>(m => m.AutoMap()
+						.Properties(props =>
 							RoyalProps(props)
-							.Nested<King>(n=>n.Name(p=>p.Foes).AutoMap())
+							.Nested<King>(n => n.Name(p => p.Foes).AutoMap())
 						)
 					)
-					.Map<Prince>(m=>m.AutoMap().Properties(RoyalProps).Parent<King>())
-					.Map<Duke>(m=>m.AutoMap().Properties(RoyalProps).Parent<Prince>())
-					.Map<Earl>(m=>m.AutoMap().Properties(RoyalProps).Parent<Duke>())
-					.Map<Baron>(m=>m.AutoMap().Properties(RoyalProps).Parent<Earl>())
+					.Map<Prince>(m => m.AutoMap().Properties(RoyalProps).Parent<King>())
+					.Map<Duke>(m => m.AutoMap().Properties(RoyalProps).Parent<Prince>())
+					.Map<Earl>(m => m.AutoMap().Properties(RoyalProps).Parent<Duke>())
+					.Map<Baron>(m => m.AutoMap().Properties(RoyalProps).Parent<Earl>())
 				 )
 			);
 
 			var bulk = new BulkDescriptor();
-			IndexAll(bulk, () =>  King.Generator.Generate(2), indexChildren: king =>
-				IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
-					IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
-						IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
-							IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
-						)
-					)
-				)
+			IndexAll(bulk, () => King.Generator.Generate(2), indexChildren: king =>
+			   IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
+				   IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
+					   IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
+						   IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
+					   )
+				   )
+			   )
 			);
 			this._client.Refresh(this._index);
 		}
 
-		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal => 
+		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal =>
 			props.String(s => s.Name(p => p.Name).NotAnalyzed());
 
 		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null)
@@ -100,9 +101,7 @@ namespace Tests.Search.Request
 			foreach (var royal in royals)
 				indexChildren(royal);
 		}
-
 	}
-
 
 	[CollectionDefinition(IntegrationContext.OwnIndex)]
 	public class InnerHitsCluster : ClusterBase, ICollectionFixture<InnerHitsCluster>, IClassFixture<EndpointUsage> { }
@@ -129,19 +128,8 @@ namespace Tests.Search.Request
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/{CallIsolatedValue},x/_query?ignore_unavailable=true";
 
-		protected override bool SupportsDeserialization => false;
+		protected override bool SupportsDeserialization => true;
 
-		protected override object ExpectJson { get; } = new
-		{
-			query = new
-			{
-				ids = new
-				{
-					types = new[] { "project" },
-					values = new[] { Project.Projects.First().Name, "x" }
-				}
-			}
-		};
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(this.Index);
 	}
 
@@ -149,6 +137,13 @@ namespace Tests.Search.Request
 	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
 		public GlobalInnerHitsApiTests(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson { get; } = new
+		{
+			query = new
+			{
+			}
+		};
 
 		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
 			.Index(this.Index)
@@ -184,4 +179,47 @@ namespace Tests.Search.Request
 			}
 		};
 	}
+
+	[Collection(IntegrationContext.OwnIndex)]
+	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
+	{
+		public QueryInnerHitsApiTests(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson { get; } = new
+		{
+			query = new
+			{
+			}
+		};
+
+		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
+			.Index(this.Index)
+			.Query(q => 
+				q.HasChild<Prince>(hc => hc
+					.Query(hcq => hcq.MatchAll())
+					.InnerHits(ih => ih.Name("princes"))
+				) || q.Nested(n=>n
+					.Path(p=>p.Foes)
+					.Query(nq=>nq.MatchAll())
+					.InnerHits()
+				)
+			);
+
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(this.Index)
+		{
+			Query = new HasChildQuery
+			{
+				Type = typeof(Prince),
+				Query = new MatchAllQuery(),
+				InnerHits = new InnerHits { Name = "princes "}
+			} || new NestedQuery
+			{
+				Path = Field<King>(p=>p.Foes),
+				Query = new MatchAllQuery(),
+				InnerHits = new InnerHits()
+			}
+		};
+
+	}
+
 }
