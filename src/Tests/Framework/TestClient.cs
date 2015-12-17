@@ -14,7 +14,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		public static TestConfiguration Configuration = new TestConfiguration(@"..\..\tests.yml");
+		public static TestConfiguration Configuration = new TestConfiguration(@"..\..\tests.yaml");
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 

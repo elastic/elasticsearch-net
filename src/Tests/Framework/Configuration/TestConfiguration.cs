@@ -19,6 +19,7 @@ namespace Tests.Framework.Configuration
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
+				.Where(l=>!l.Trim().StartsWith("#"))
 				.ToDictionary(l => ConfigName(l), l => ConfigValue(l));
 
 			this.Mode = GetTestMode(config["mode"]);
