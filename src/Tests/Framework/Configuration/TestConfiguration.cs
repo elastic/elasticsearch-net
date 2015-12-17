@@ -6,12 +6,12 @@ namespace Tests.Framework.Configuration
 {
 	public class TestConfiguration
 	{
-		public TestMode Mode { get; private set; } = TestMode.Unit;
-		public string ElasticsearchVersion { get; private set; } = "2.0.0-rc1";
-		public bool ForceReseed { get; private set; }
-		public bool DoNotSpawnIfAlreadyRunning { get; private set; }
+		public TestMode Mode { get; } = TestMode.Unit;
+		public string ElasticsearchVersion { get; } = "2.0.0-rc1";
+		public bool ForceReseed { get; }
+		public virtual bool DoNotSpawnIfAlreadyRunning { get; }
 
-		public bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
+		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 
 		public TestConfiguration(string configurationFile)
@@ -19,7 +19,7 @@ namespace Tests.Framework.Configuration
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
-				.ToDictionary(l => ConfigName(l), l => ConfigValue(l));
+				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
 			this.ElasticsearchVersion = config["elasticsearch_version"];
@@ -27,10 +27,11 @@ namespace Tests.Framework.Configuration
 			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
 		}
 
-		private string ConfigName(string configLine) => Parse(configLine, 0);
-		private string ConfigValue(string configLine) => Parse(configLine, 1);
-		private string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
-		private TestMode GetTestMode(string mode)
+		private static string ConfigName(string configLine) => Parse(configLine, 0);
+		private static string ConfigValue(string configLine) => Parse(configLine, 1);
+		private static string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
+
+		private static TestMode GetTestMode(string mode)
 		{
 			switch(mode)
 			{

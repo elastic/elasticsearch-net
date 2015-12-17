@@ -1,5 +1,7 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+#r "System.Xml.Linq.dll"
+
 open System.Xml
 open System.Xml.XPath
 open System.Linq

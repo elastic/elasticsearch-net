@@ -1,10 +1,12 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+#r @"System.IO.Compression.FileSystem.dll"
 open Fake
 
 open System
 open System.IO
 open System.Diagnostics
+open System.Net
 
 module Paths =
 
@@ -33,7 +35,6 @@ module Paths =
         sprintf "%s/%s/bin/Release" SourceFolder f
 
 module Tooling = 
-
     let private fileDoesNotExist path = path |> Path.GetFullPath |> File.Exists |> not
     let private dirDoesNotExist path = path |> Path.GetFullPath |> Directory.Exists |> not
     let private doesNotExist path = (fileDoesNotExist path) && (dirDoesNotExist path)
@@ -70,16 +71,37 @@ module Tooling =
     let private exec = execAt Environment.CurrentDirectory
 
     type NugetTooling(nugetId, path) =
-        member this.Path = sprintf "%s/%s" Paths.ToolsFolder path 
-        member this.Exec arguments = 
-            exec this.Path arguments
+        member this.Path = Paths.Tool(path)
+        member this.Exec arguments = exec this.Path arguments
+
+    let private dotTraceCommandLineTools = "JetBrains.dotTrace.CommandLineTools.10.0.20151114.191633"
+    let private buildToolsDirectory = sprintf "%s/tools" Paths.BuildFolder
+    let private dotTraceDirectory = sprintf "%s/%s" buildToolsDirectory dotTraceCommandLineTools
+    
+    if (Directory.Exists(dotTraceDirectory) = false)
+    then
+        trace (sprintf "No JetBrains DotTrace tooling found in %s. Downloading now" buildToolsDirectory) 
+        let url = sprintf "https://d1opms6zj7jotq.cloudfront.net/resharper/%s.zip" dotTraceCommandLineTools      
+        let zipFile = sprintf "%s/%s.zip" buildToolsDirectory dotTraceCommandLineTools
+        let webClient = new WebClient()
+        webClient.DownloadFile(url, zipFile)
+        System.IO.Compression.ZipFile.ExtractToDirectory(zipFile, dotTraceDirectory)
+        File.Delete zipFile
+        trace "JetBrains DotTrace tooling downloaded"
+
+    type ProfilerTooling(path) =
+        member this.Path = sprintf "%s/%s" dotTraceDirectory path
+        member this.Exec arguments = exec this.Path arguments
 
     let GitLink = new NugetTooling("GitLink", "gitlink/lib/net45/gitlink.exe")
     let Node = new NugetTooling("node.js", "Node.js/node.exe")
     let private npmCli = "Npm/node_modules/npm/cli.js"
     let Npm = new NugetTooling("npm", npmCli)
     let XUnit = new NugetTooling("xunit.runner.console", "xunit.runner.console/tools/xunit.console.exe")
-    
+    let DotTraceProfiler = new ProfilerTooling("ConsoleProfiler.exe")
+    let DotTraceReporter = new ProfilerTooling("Reporter.exe")           
+    let DotTraceSnapshotStats = new ProfilerTooling("SnapshotStat.exe")
+
     //only used to boostrap fake itself
     let Fake = new NugetTooling("FAKE", "FAKE/tools/FAKE.exe")
     let private FSharpData = new NugetTooling("FSharp.Data", "Fsharp.Data/lib/net40/Fsharp.Data.dll")
