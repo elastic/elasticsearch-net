@@ -96,76 +96,92 @@ namespace Elasticsearch.Net
 			return this.Data.WriteAsync(writableStream, this._settings, this.CancellationToken);
 		}
 
-		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(int statusCode, Stream responseStream, Exception innerException = null)
+		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(int statusCode, Stream responseStream, Exception exception = null)
 			where TReturn : class
 		{
-			var cs = InitializeResponse<TReturn>(statusCode, innerException);
-			byte[] bytes = null;
-			if (NeedsToEagerReadStream<TReturn>())
+			var response = InitializeResponse<TReturn>(statusCode, exception);
+
+			if (response.Success)
 			{
-				var inMemoryStream = this._memoryStreamFactory.Create();
-				responseStream.CopyTo(inMemoryStream, BufferSize);
-				bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				byte[] bytes = null;
+				if (NeedsToEagerReadStream<TReturn>())
+				{
+					var inMemoryStream = this._memoryStreamFactory.Create();
+					responseStream.CopyTo(inMemoryStream, BufferSize);
+					bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				}
+
+				if (!SetSpecialTypes(responseStream, response, bytes))
+				{
+					if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
+					else response.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+				}
+			}
+			else if (response.SuccessOrKnownError)
+			{
+				response.ServerError = new ElasticsearchDefaultSerializer().Deserialize<ServerError>(responseStream);
 			}
 
-			if (!SetSpecialTypes(responseStream, cs, bytes))
-			{
-				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
-				else cs.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
-			}
-
-			return FinalizeReponse(cs);
+			return FinalizeReponse(response);
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> CreateResponseAsync<TReturn>(int statusCode, Stream responseStream, Exception innerException = null)
+		public async Task<ElasticsearchResponse<TReturn>> CreateResponseAsync<TReturn>(int statusCode, Stream responseStream, Exception exception = null)
 			where TReturn : class
 		{
-			var cs = InitializeResponse<TReturn>(statusCode, innerException);
-			byte[] bytes = null;
-			if (NeedsToEagerReadStream<TReturn>())
+			var response = InitializeResponse<TReturn>(statusCode, exception);
+
+			if (response.Success)
 			{
-				var inMemoryStream = this._memoryStreamFactory.Create();
-				await responseStream.CopyToAsync(inMemoryStream, BufferSize, this.CancellationToken);
-				bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				byte[] bytes = null;
+				if (NeedsToEagerReadStream<TReturn>())
+				{
+					var inMemoryStream = this._memoryStreamFactory.Create();
+					await responseStream.CopyToAsync(inMemoryStream, BufferSize, this.CancellationToken);
+					bytes = this.SwapStreams(ref responseStream, ref inMemoryStream);
+				}
+
+				if (!SetSpecialTypes(responseStream, response, bytes))
+				{
+					if (this.CustomConverter != null) response.Body = this.CustomConverter(response, responseStream) as TReturn;
+					else response.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				}
+			}
+			else if (response.SuccessOrKnownError)
+			{
+				response.ServerError = await new ElasticsearchDefaultSerializer().DeserializeAsync<ServerError>(responseStream, this.CancellationToken);
 			}
 
-			if (!SetSpecialTypes(responseStream, cs, bytes))
-			{
-				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
-				else cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
-			}
-
-			return FinalizeReponse(cs);
+			return FinalizeReponse(response);
 		}
 
-		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> cs)
+		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception exception)
 		{
-			var passAlongConnectionStatus = cs.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null)
-			{
-				passAlongConnectionStatus.CallDetails = cs;
-			}
-			return cs;
-		}
-
-		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception e)
-		{
-			var cs = new ElasticsearchResponse<TReturn>(e);
+			var cs = new ElasticsearchResponse<TReturn>(exception);
 			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
-			cs.OriginalException = e;
+			cs.OriginalException = exception;
 			return cs;
 		}
 
-		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
+		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception exception)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(statusCode, this.AllowedStatusCodes);
 			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
-			cs.OriginalException = innerException;
+			cs.OriginalException = exception;
 			return cs;
+		}
+
+		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> response)
+		{
+			var passAlongConnectionStatus = response.Body as IBodyWithApiCallDetails;
+			if (passAlongConnectionStatus != null)
+			{
+				passAlongConnectionStatus.CallDetails = response;
+			}
+			return response;
 		}
 
 		private bool NeedsToEagerReadStream<TReturn>() =>

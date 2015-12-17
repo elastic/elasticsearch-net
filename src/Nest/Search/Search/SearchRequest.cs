@@ -36,7 +36,7 @@ namespace Nest
 		long? TerminateAfter { get; set; }
 
 		[JsonProperty(PropertyName = "indices_boost")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
@@ -77,22 +77,22 @@ namespace Nest
 		INamedInnerHits InnerHits { get; set; }
 
 		string Preference { get; }
-		
+
 		string Routing { get; }
 
-		SearchType? SearchType { get;  }
+		SearchType? SearchType { get; }
 
 		bool? IgnoreUnavalable { get; }
 	}
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
-	public partial class SearchRequest 
+	public partial class SearchRequest
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -129,14 +129,14 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
-	public partial class SearchRequest<T> 
+	public partial class SearchRequest<T>
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
-		
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
+
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -181,7 +181,7 @@ namespace Nest
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 		protected override HttpMethod HttpMethod =>
-			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
@@ -216,10 +216,10 @@ namespace Nest
 		INamedInnerHits ISearchRequest.InnerHits { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			Assign(a=>a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
+			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
-		public SearchDescriptor<T> Source(bool include = true)=> Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
-		
+		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
@@ -347,35 +347,35 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
-			Assign(a => a.Fields = expressions?.Select(e => (Field) e).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = expressions?.Select(e => (Field)e).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties) =>
-			Assign(a => a.Fields  = properties?.Invoke(new FluentFieldList<T>()).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = properties?.Invoke(new FluentFieldList<T>()).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields) =>
-			Assign(a => a.Fields = fields?.Select(f => (Field) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = fields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
 
-		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
+		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
 		///<summary>
@@ -389,13 +389,13 @@ namespace Nest
 		///<summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester
 		///</summary>
-		public SearchDescriptor<T> Suggest(Func<SuggestContainerDescriptor<T>, IPromise<ISuggestContainer>> selector) => 
+		public SearchDescriptor<T> Suggest(Func<SuggestContainerDescriptor<T>, IPromise<ISuggestContainer>> selector) =>
 			Assign(a => a.Suggest = selector?.Invoke(new SuggestContainerDescriptor<T>())?.Value);
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) => 
+		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
 			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
@@ -406,7 +406,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) => 
+		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
 			Assign(a => a.PostFilter = filter.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
@@ -414,13 +414,13 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
-		
+
 		/// <summary>
 		/// Allows you to specify a rescore query
 		/// </summary>
 		public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector) =>
 			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoreDescriptor<T>()));
-		
+
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			Assign(a => a.TypeSelector = typeSelector);
 

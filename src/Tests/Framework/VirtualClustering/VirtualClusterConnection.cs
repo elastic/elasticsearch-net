@@ -153,11 +153,11 @@ namespace Tests.Framework
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			if (rule.Return == null)
-				throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+				throw new PipelineException(PipelineFailure.BadResponse, (Exception)null);
 			return rule.Return.Match(
 				(e) =>
 				{
-					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
+					throw new PipelineException(PipelineFailure.BadResponse, e);
 				},
 				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
 			);

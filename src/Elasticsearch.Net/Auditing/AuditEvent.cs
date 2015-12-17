@@ -14,6 +14,9 @@ namespace Elasticsearch.Net
 
 		SkipNode,
 		BadResponse,
-		HealthyResponse
+		HealthyResponse,
+
+		MaxTimeoutReached,
+		MaxRetriesReached
 	}
 }

@@ -97,6 +97,9 @@
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationWalker.cs" />
+    <Compile Include="Aggregations\Visitor\VisitorScope.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -698,8 +701,6 @@
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
-    <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
-    <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
@@ -821,7 +822,6 @@
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashPrecision.cs" />
-    <Compile Include="CommonAbstractions\Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
@@ -846,7 +846,6 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\TermSuggester\TermSuggester.cs" />
-    <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
@@ -1088,7 +1087,6 @@
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
-    <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />

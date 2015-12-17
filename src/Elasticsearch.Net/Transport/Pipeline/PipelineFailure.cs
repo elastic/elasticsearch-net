@@ -7,8 +7,6 @@
 		BadPing,
 		BadSniff,
 		CouldNotStartSniffOnStartup,
-		RetryTimeout,
-		RetryMaximum,
 		Unexpected
-	}
+	}	
 }

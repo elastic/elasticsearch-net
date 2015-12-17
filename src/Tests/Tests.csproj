@@ -140,6 +140,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnConnectionFailure.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStaleClusterState.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.doc.cs" />
+    <Compile Include="ClientConcepts\Exceptions\ExceptionTests.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\DocumentPaths\DocumentPaths.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\RouteValues\FeaturesInference.cs" />

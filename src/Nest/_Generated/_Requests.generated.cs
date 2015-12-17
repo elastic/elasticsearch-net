@@ -4544,6 +4544,9 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
+		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		

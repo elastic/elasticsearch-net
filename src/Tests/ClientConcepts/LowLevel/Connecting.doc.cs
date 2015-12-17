@@ -142,7 +142,7 @@ namespace Tests.ClientConcepts.LowLevel
 				*/
 
 				//TODO document this properly once we figure out exceptions
-				.ThrowOnElasticsearchServerExceptions()
+				.ThrowExceptions()
 				/**
 				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 
 				 * an `ElasticsearchServerException` when a call resulted in an exception on the Elasticsearch server. Reasons for 

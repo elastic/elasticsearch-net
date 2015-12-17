@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 		void SniffOnStaleCluster();
 		Task SniffOnStaleClusterAsync();
 
-		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<Exception> seenExceptions)
+		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<PipelineException> seenExceptions)
 			where TReturn : class;
 	}
 }
