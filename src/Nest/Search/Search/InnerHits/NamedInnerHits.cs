@@ -17,7 +17,11 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(string name, IInnerHitsContainer script) => this.BackingDictionary.Add(name, script);
+		public void Add(string name, IInnerHitsContainer container) => this.BackingDictionary.Add(name, container);
+
+		public void Add(string name, ITypeInnerHit typeInnerHit) => this.BackingDictionary.Add(name, new InnerHitsContainer { Type = typeInnerHit });
+
+		public void Add(string name, IPathInnerHit pathInnerHit) => this.BackingDictionary.Add(name, new InnerHitsContainer { Path = pathInnerHit });
 	}
 
 	public class NamedInnerHitsDescriptor<T>
@@ -26,42 +30,20 @@ namespace Nest
 	{
 		public NamedInnerHitsDescriptor() : base(new NamedInnerHits()) { }
 
-		public NamedInnerHitsDescriptor<T> Type(string name,Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
-		{
-			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			return AssignToInnerHit(name, globalInnerHit, (g, c) => c.Type = new Dictionary<TypeName, IGlobalInnerHit> { { typeof(T), globalInnerHit } });
-		}
+		public NamedInnerHitsDescriptor<T> Type(string name, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> selector = null) =>
+			Assign(name, new InnerHitsContainerDescriptor<T>().Type(selector));
 		
-		public NamedInnerHitsDescriptor<T> Type<TOther>(string name, Func<GlobalInnerHitDescriptor<TOther>, IGlobalInnerHit> globalInnerHitsSelector = null) where TOther : class
-		{
-			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<TOther>());
-			return AssignToInnerHit(name, globalInnerHit, (g, c) => c.Type = new Dictionary<TypeName, IGlobalInnerHit> { { typeof(TOther), globalInnerHit } });
-		}
+		public NamedInnerHitsDescriptor<T> Type(string name, TypeName type, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> selector = null) =>
+			Assign(name, new InnerHitsContainerDescriptor<T>().Type(type,selector));
 
-		public NamedInnerHitsDescriptor<T> Type(string name, TypeName type, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
-		{
-			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			return AssignToInnerHit(name, globalInnerHit, (g, c) => c.Type = new Dictionary<TypeName, IGlobalInnerHit> { { type, globalInnerHit } });
-		}
+		public NamedInnerHitsDescriptor<T> Type<TOther>(string name, Func<GlobalInnerHitDescriptor<TOther>, IGlobalInnerHit> selector = null) where TOther : class =>
+			Assign(name, new InnerHitsContainerDescriptor<T>().Type<TOther>(selector));
 
-		public NamedInnerHitsDescriptor<T> Path(string name, Field path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
-		{
-			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			return AssignToInnerHit(name, globalInnerHit, (g, c) => c.Path = new Dictionary<Field, IGlobalInnerHit> { { path, globalInnerHit } });
-		}
+		public NamedInnerHitsDescriptor<T> Path(string name, Field path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> selector = null)  =>
+			Assign(name, new InnerHitsContainerDescriptor<T>().Path(path, selector));
 
-		public NamedInnerHitsDescriptor<T> Path(string name, Expression<Func<T, object>> path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
-		{
-			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			return AssignToInnerHit(name, globalInnerHit, (g, c) => c.Path = new Dictionary<Field, IGlobalInnerHit> { { path, globalInnerHit } });
-		}
+		public NamedInnerHitsDescriptor<T> Path(string name, Expression<Func<T, object>> path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> selector = null)  =>
+			Assign(name, new InnerHitsContainerDescriptor<T>().Path(path, selector));
 
-
-		private NamedInnerHitsDescriptor<T> AssignToInnerHit(string name, IGlobalInnerHit innerHit, Action<IGlobalInnerHit, InnerHitsContainer> assign)
-		{
-			var c = new InnerHitsContainer();
-			assign(innerHit, c);
-			return Assign(name, c);
-		}
 	}
 }

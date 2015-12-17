@@ -146,7 +146,7 @@ namespace Tests.Search.Request
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
-	public abstract class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
+	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
 		public GlobalInnerHitsApiTests(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -161,5 +161,27 @@ namespace Tests.Search.Request
 					.FielddataFields(p => p.Name)
 				)
 			);
+
+		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(this.Index)
+		{
+			InnerHits = new NamedInnerHits
+			{
+				{ "earls",  new InnerHitsContainer
+				{
+					Type = new TypeInnerHit<Earl>
+					{
+						InnerHit = new GlobalInnerHit
+						{
+							Size = 5,
+							FielddataFields = new Field[]{ "name" },
+							InnerHits = new NamedInnerHits
+							{
+								{ "barons", new TypeInnerHit<Baron>() }
+							}
+						}
+					}
+				} }
+			}
+		};
 	}
 }

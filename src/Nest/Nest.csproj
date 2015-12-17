@@ -443,6 +443,8 @@
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
+    <Compile Include="Search\Search\InnerHits\PathInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\TypeInnerHit.cs" />
     <Compile Include="Search\Search\InnerHits\NamedInnerHits.cs" />
     <Compile Include="Search\Search\Sort\SortBase.cs" />
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
@@ -540,8 +542,8 @@
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Weight\WeightFunction.cs" />
-    <Compile Include="Search\Search\InnerHits\IGlobalInnerHit.cs" />
-    <Compile Include="Search\Search\InnerHits\IInnerHitsContainer.cs" />
+    <Compile Include="Search\Search\InnerHits\GlobalInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\InnerHitsContainer.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\ElasticClient-UpgradeStatus.cs" />
