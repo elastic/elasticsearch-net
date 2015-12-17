@@ -99,7 +99,7 @@
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
     <Compile Include="Aggregations\Visitor\AggregationWalker.cs" />
-    <Compile Include="Aggregations\Visitor\VisitorScope.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitorScope.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />

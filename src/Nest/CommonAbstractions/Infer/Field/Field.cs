@@ -69,15 +69,9 @@ namespace Nest
 			};
 		}
 
-		public override int GetHashCode()
-		{
-			return ComparisonValue?.GetHashCode() ?? 0;	
-		}
+		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
 
-		bool IEquatable<Field>.Equals(Field other)
-		{
-			return Equals(other);
-		}
+		bool IEquatable<Field>.Equals(Field other) => Equals(other);
 
 		public override bool Equals(object obj)
 		{

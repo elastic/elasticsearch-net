@@ -30,7 +30,7 @@ namespace Nest
 				var dict = new Dictionary<string, AggregationContainer>();
 				foreach (var agg in combinator.Aggregations)
 				{
-					b =  agg;
+					b = agg;
 					if (b.Name.IsNullOrEmpty())
 						throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
 					dict.Add(b.Name, agg);
@@ -145,7 +145,7 @@ namespace Nest
 
 		[JsonProperty("max_bucket")]
 		IMaxBucketAggregation MaxBucket { get; set; }
-	
+
 		[JsonProperty("min_bucket")]
 		IMinBucketAggregation MinBucket { get; set; }
 
@@ -173,7 +173,7 @@ namespace Nest
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
-        void Accept(IAggregationVisitor visitor);
+		void Accept(IAggregationVisitor visitor);
 	}
 
 	public class AggregationContainer : IAggregationContainer
@@ -263,12 +263,12 @@ namespace Nest
 			return container;
 		}
 
-        public void Accept(IAggregationVisitor visitor)
-        {
-            if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Aggregation;
-            new AggregationWalker().Walk(this, visitor);
-        }
-    }
+		public void Accept(IAggregationVisitor visitor)
+		{
+			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
+			new AggregationWalker().Walk(this, visitor);
+		}
+	}
 
 	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>, IAggregationContainer>, IAggregationContainer
 		where T : class
@@ -550,10 +550,10 @@ namespace Nest
 			return this;
 		}
 
-        public void Accept(IAggregationVisitor visitor)
-        {
-            if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Aggregation;
-            new AggregationWalker().Walk(this, visitor);
-        }
-    }
+		public void Accept(IAggregationVisitor visitor)
+		{
+			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
+			new AggregationWalker().Walk(this, visitor);
+		}
+	}
 }

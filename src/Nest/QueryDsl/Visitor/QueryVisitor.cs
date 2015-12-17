@@ -8,7 +8,7 @@
 		int Depth { get; set; }
 
 		/// <summary>
-		/// Hints the relation with the parent, i,e queries inside a Must clause will have VisitorScope.Must set.
+		/// Hints the relation with the parent, i,e queries inside a Must clause will have AggregationVisitorScope.Must set.
 		/// </summary>
 		VisitorScope Scope { get; set; }
 
