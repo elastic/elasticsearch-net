@@ -62,6 +62,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall {
 					{ BadResponse, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
+					{ SniffOnFail },
 					{ SniffSuccess, 9202},
 					{ HealthyResponse, 9200},
 					/** Our pool should now have three nodes */
@@ -70,6 +71,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall {
 					{ BadResponse, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
+					{ SniffOnFail },
 					{ SniffSuccess, 9200},
 					{ HealthyResponse, 9210},
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
@@ -119,6 +121,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall {
 					{ PingFailure, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
+					{ SniffOnFail },
 					{ SniffSuccess, 9202},
 					{ PingSuccess, 9200},
 					{ HealthyResponse, 9200},
@@ -128,6 +131,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall {
 					{ PingFailure, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
+					{ SniffOnFail },
 					{ SniffSuccess, 9200},
 					{ PingSuccess, 9210},
 					{ HealthyResponse, 9210},

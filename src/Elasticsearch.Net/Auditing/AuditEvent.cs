@@ -1,6 +1,5 @@
 namespace Elasticsearch.Net
 {
-	//TODO SNIFFONFAIL AND SKIPNODE ARE NEVER USED
 	public enum AuditEvent
 	{
 		SniffOnStartup,

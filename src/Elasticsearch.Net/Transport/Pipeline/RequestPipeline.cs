@@ -255,7 +255,11 @@ namespace Elasticsearch.Net
 					audit.Event = PingFailure;
 					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
 					_exceptions.Add(pipelineException);
-					if (this.SniffsOnConnectionFailure) this.Sniff();
+					if (this.SniffsOnConnectionFailure)
+					{
+						using (this.Audit(SniffOnFail))
+							this.Sniff();
+					}
 					throw pipelineException;
 				}
 			}
@@ -283,7 +287,11 @@ namespace Elasticsearch.Net
 					audit.Event = PingFailure;
 					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
 					_exceptions.Add(pipelineException);
-					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
+					if (this.SniffsOnConnectionFailure)
+					{
+						using (this.Audit(SniffOnFail))
+							await this.SniffAsync();
+					}
 					throw pipelineException;
 				}
 			}
@@ -389,7 +397,11 @@ namespace Elasticsearch.Net
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					if (this.SniffsOnConnectionFailure) this.Sniff();
+					if (this.SniffsOnConnectionFailure)
+					{
+						using (this.Audit(SniffOnFail))
+							this.Sniff();
+					}
 					throw new PipelineException(PipelineFailure.BadResponse, e);
 				}
 			}
@@ -415,7 +427,11 @@ namespace Elasticsearch.Net
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
+					if (this.SniffsOnConnectionFailure)
+					{
+						using (this.Audit(SniffOnFail))
+							await this.SniffAsync();
+					}
 					throw new PipelineException(PipelineFailure.BadResponse, e);
 				}
 			}
