@@ -78,171 +78,171 @@ namespace Nest.Aggregations.Visitor
 
         public VisitorScope Scope { get; set; }
 
-        public void Visit(IValueCountAggregation aggregation)
+        public virtual void Visit(IValueCountAggregation aggregation)
         {
         }
 
-        public void Visit(IMinAggregation aggregation)
+        public virtual void Visit(IMinAggregation aggregation)
         {
         }
 
-        public void Visit(ISumAggregation aggregation)
+        public virtual void Visit(ISumAggregation aggregation)
         {
         }
 
-        public void Visit(IDateHistogramAggregation aggregation)
+        public virtual void Visit(IDateHistogramAggregation aggregation)
         {
         }
 
-        public void Visit(IDateRangeAggregation aggregation)
+        public virtual void Visit(IDateRangeAggregation aggregation)
         {
         }
 
-        public void Visit(IFiltersAggregation aggregation)
+        public virtual void Visit(IFiltersAggregation aggregation)
         {
         }
 
-        public void Visit(IGeoHashGridAggregation aggregation)
+        public virtual void Visit(IGeoHashGridAggregation aggregation)
         {
         }
 
-        public void Visit(IHistogramAggregation aggregation)
+        public virtual void Visit(IHistogramAggregation aggregation)
         {
         }
 
-        public void Visit(IIpRangeAggregation aggregation)
+        public virtual void Visit(IIpRangeAggregation aggregation)
         {
         }
 
-        public void Visit(IMissingAggregation aggregation)
+        public virtual void Visit(IMissingAggregation aggregation)
         {
         }
 
-        public void Visit(IReverseNestedAggregation aggregation)
+        public virtual void Visit(IReverseNestedAggregation aggregation)
         {
         }
 
-        public void Visit(ITermsAggregation aggregation)
+        public virtual void Visit(ITermsAggregation aggregation)
         {
         }
 
-        public void Visit(IPercentileRanksAggregation aggregation)
+        public virtual void Visit(IPercentileRanksAggregation aggregation)
         {
         }
 
-        public void Visit(IChildrenAggregation aggregation)
+        public virtual void Visit(IChildrenAggregation aggregation)
         {
         }
 
-        public void Visit(IAverageBucketAggregation aggregation)
+        public virtual void Visit(IAverageBucketAggregation aggregation)
         {
         }
 
-        public void Visit(IMaxBucketAggregation aggregation)
+        public virtual void Visit(IMaxBucketAggregation aggregation)
         {
         }
 
-        public void Visit(ISumBucketAggregation aggregation)
+        public virtual void Visit(ISumBucketAggregation aggregation)
         {
         }
 
-        public void Visit(ICumulativeSumAggregation aggregation)
+        public virtual void Visit(ICumulativeSumAggregation aggregation)
         {
         }
 
-        public void Visit(IBucketScriptAggregation aggregation)
+        public virtual void Visit(IBucketScriptAggregation aggregation)
         {
         }
 
-        public void Visit(ISamplerAggregation aggregation)
+        public virtual void Visit(ISamplerAggregation aggregation)
         {
         }
 
-        public void Visit(IBucketSelectorAggregation aggregation)
+        public virtual void Visit(IBucketSelectorAggregation aggregation)
         {
         }
 
-        public void Visit(ISerialDifferencingAggregation aggregation)
+        public virtual void Visit(ISerialDifferencingAggregation aggregation)
         {
         }
 
-        public void Visit(IMovingAverageAggregation aggregation)
+        public virtual void Visit(IMovingAverageAggregation aggregation)
         {
         }
 
-        public void Visit(IMinBucketAggregation aggregation)
+        public virtual void Visit(IMinBucketAggregation aggregation)
         {
         }
 
-        public void Visit(IDerivativeAggregation aggregation)
+        public virtual void Visit(IDerivativeAggregation aggregation)
         {
         }
 
-        public void Visit(IScriptedMetricAggregation aggregation)
+        public virtual void Visit(IScriptedMetricAggregation aggregation)
         {
         }
 
-        public void Visit(ITopHitsAggregation aggregation)
+        public virtual void Visit(ITopHitsAggregation aggregation)
         {
         }
 
-        public void Visit(ISignificantTermsAggregation aggregation)
+        public virtual void Visit(ISignificantTermsAggregation aggregation)
         {
         }
 
-        public void Visit(IRangeAggregation aggregation)
+        public virtual void Visit(IRangeAggregation aggregation)
         {
         }
 
-        public void Visit(INestedAggregation aggregation)
+        public virtual void Visit(INestedAggregation aggregation)
         {
         }
 
-        public void Visit(ICardinalityAggregation aggregation)
+        public virtual void Visit(ICardinalityAggregation aggregation)
         {
         }
 
-        public void Visit(IGlobalAggregation aggregation)
+        public virtual void Visit(IGlobalAggregation aggregation)
         {
         }
 
-        public void Visit(IGeoBoundsAggregation aggregation)
+        public virtual void Visit(IGeoBoundsAggregation aggregation)
         {
         }
 
-        public void Visit(IGeoDistanceAggregation aggregation)
+        public virtual void Visit(IGeoDistanceAggregation aggregation)
         {
         }
 
-        public void Visit(IFilterAggregation aggregation)
+        public virtual void Visit(IFilterAggregation aggregation)
         {
         }
 
-        public void Visit(IPercentilesAggregation aggregation)
+        public virtual void Visit(IPercentilesAggregation aggregation)
         {
         }
 
-        public void Visit(IExtendedStatsAggregation aggregation)
+        public virtual void Visit(IExtendedStatsAggregation aggregation)
         {
         }
 
-        public void Visit(IStatsAggregator aggregation)
+        public virtual void Visit(IStatsAggregator aggregation)
         {
         }
 
-        public void Visit(IMaxAggregation aggregation)
+        public virtual void Visit(IMaxAggregation aggregation)
         {
         }
 
-        public void Visit(IAverageAggregation aggregation)
+        public virtual void Visit(IAverageAggregation aggregation)
         {
         }
 
-        public void Visit(IAggregation aggregation)
+        public virtual void Visit(IAggregation aggregation)
         {
         }
 
-        public void Visit(IAggregationContainer aggregationContainer)
+        public virtual void Visit(IAggregationContainer aggregationContainer)
         {
         }
     }
