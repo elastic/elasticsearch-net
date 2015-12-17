@@ -108,14 +108,11 @@ namespace Tests.Search.Request
 		}
 	}
 
-	[CollectionDefinition(IntegrationContext.OwnIndex)]
-	public class InnerHitsCluster : ClusterBase, ICollectionFixture<InnerHitsCluster>, IClassFixture<EndpointUsage> { }
-
 	[Collection(IntegrationContext.OwnIndex)]
 	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		public InnerHitsApiTestsBase(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) => new RoyalSeeder(this.Client, Index).Seed();
 
@@ -141,7 +138,7 @@ namespace Tests.Search.Request
 	[Collection(IntegrationContext.OwnIndex)]
 	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public GlobalInnerHitsApiTests(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GlobalInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -225,7 +222,7 @@ namespace Tests.Search.Request
 	[Collection(IntegrationContext.OwnIndex)]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(InnerHitsCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{

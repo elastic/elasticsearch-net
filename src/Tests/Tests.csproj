@@ -205,6 +205,7 @@
     <Compile Include="Framework\Configuration\TestMode.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Extensions\Promisify.cs" />
+    <Compile Include="Framework\Integration\Clusters\OwnIndexCluster.cs" />
     <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />

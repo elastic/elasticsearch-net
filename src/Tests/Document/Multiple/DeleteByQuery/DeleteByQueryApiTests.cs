@@ -13,13 +13,10 @@ using ClientCall = Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	[CollectionDefinition(IntegrationContext.OwnIndex)]
-	public class DeleteByQueryCluster : ClusterBase, ICollectionFixture<DeleteByQueryCluster>, IClassFixture<EndpointUsage> { } 
-
 	[Collection(IntegrationContext.OwnIndex)]
 	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
-		public DeleteByQueryApiTests(DeleteByQueryCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values)
 		{
