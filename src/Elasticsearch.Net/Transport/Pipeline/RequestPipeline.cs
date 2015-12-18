@@ -250,11 +250,10 @@ namespace Elasticsearch.Net
 					audit.Event = PingFailure;
 					e.RethrowKeepingStackTrace();
 				}
-				catch (Exception e)
+				catch (PipelineException e)
 				{
 					audit.Event = PingFailure;
 					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
-					_exceptions.Add(pipelineException);
 					if (this.SniffsOnConnectionFailure)
 					{
 						using (this.Audit(SniffOnFail))
@@ -282,11 +281,10 @@ namespace Elasticsearch.Net
 					audit.Event = PingFailure;
 					e.RethrowKeepingStackTrace();
 				}
-				catch (Exception e)
+				catch (PipelineException e)
 				{
 					audit.Event = PingFailure;
 					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
-					_exceptions.Add(pipelineException);
 					if (this.SniffsOnConnectionFailure)
 					{
 						using (this.Audit(SniffOnFail))
@@ -300,7 +298,10 @@ namespace Elasticsearch.Net
 		private void Validate<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
 			if (response.HttpStatusCode == 401)
-				throw new PipelineException(PipelineFailure.BadAuthentication, new AggregateException(_exceptions));
+				throw new PipelineException(PipelineFailure.BadAuthentication);
+
+			if (!response.Success)
+				throw new PipelineException(PipelineFailure.BadResponse);
 		}
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
@@ -333,7 +334,7 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 					}
-					catch (Exception e)
+					catch (PipelineException e)
 					{
 						audit.Event = SniffFailure;
 						_exceptions.Add(e);
@@ -366,7 +367,7 @@ namespace Elasticsearch.Net
 						audit.Event = SniffFailure;
 						e.RethrowKeepingStackTrace();
 					}				
-					catch (Exception e)
+					catch (PipelineException e)
 					{
 						audit.Event = SniffFailure;
 						_exceptions.Add(e);
@@ -389,20 +390,20 @@ namespace Elasticsearch.Net
 				{
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.Success)
-						audit.Event = AuditEvent.BadResponse;
+					Validate(response);
 					return response;
 				}
-				catch (Exception e)
+				catch (PipelineException e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
+					_exceptions.Add(e);
 					if (this.SniffsOnConnectionFailure)
 					{
 						using (this.Audit(SniffOnFail))
 							this.Sniff();
 					}
-					throw new PipelineException(PipelineFailure.BadResponse, e);
+					throw e;
 				}
 			}
 		}
@@ -419,20 +420,20 @@ namespace Elasticsearch.Net
 				{
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					if (!response.Success)
-						audit.Event = AuditEvent.BadResponse;
+					Validate(response);	
 					return response;
 				}
-				catch (Exception e)
+				catch (PipelineException e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
+					_exceptions.Add(e);
 					if (this.SniffsOnConnectionFailure)
 					{
 						using (this.Audit(SniffOnFail))
 							await this.SniffAsync();
 					}
-					throw new PipelineException(PipelineFailure.BadResponse, e);
+					throw e;
 				}
 			}
 		}

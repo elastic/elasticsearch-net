@@ -12,8 +12,11 @@ namespace Elasticsearch.Net
 		
 		public bool Recoverable => FailureReason == PipelineFailure.BadResponse || FailureReason == PipelineFailure.Unexpected || FailureReason == PipelineFailure.BadPing;
 
+		public PipelineException(PipelineFailure failure)
+			: base(failure.ToMessage()) { }
+
 		public PipelineException(PipelineFailure failure, Exception innerException) 
-			: base(failure.Explanation(), innerException)
+			: base(failure.ToMessage(), innerException)
 		{
 			this.FailureReason = failure;
 		}
@@ -21,7 +24,7 @@ namespace Elasticsearch.Net
 
 	public static class PipelineFailureExtensions
 	{
-		public static string Explanation(this PipelineFailure failure)
+		public static string ToMessage(this PipelineFailure failure)
 		{
 			switch(failure)
 			{
