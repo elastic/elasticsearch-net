@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
+	// TODO HitsTheCorrectUrl is flaky here, sometimes it fails sometimes it passes
 	[Collection(IntegrationContext.Indexing)]
 	public class RestoreApiTests 
 		: ApiIntegrationTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
