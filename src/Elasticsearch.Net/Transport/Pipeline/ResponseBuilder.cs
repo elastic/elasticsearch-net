@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 		{
 			var response = Initialize<TReturn>(this.StatusCode, this.Exception);
 			if (this.Stream != null)
-				SetBodyAsync(response, this.Stream);
+				await SetBodyAsync(response, this.Stream);
 			Finalize(response);
 			return response;
 		}
@@ -77,7 +77,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private async void SetBodyAsync<TReturn>(ElasticsearchResponse<TReturn> response, Stream stream)
+		private async Task SetBodyAsync<TReturn>(ElasticsearchResponse<TReturn> response, Stream stream)
 			where TReturn : class
 		{
 			if (response.Success)
