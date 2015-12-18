@@ -243,7 +243,7 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = this._connection.Request<VoidResponse>(pingData);
-					ThrowIfNotRecoverable(response);
+					Validate(response);
 				}
 				catch (PipelineException e) when (!e.Recoverable)
 				{
@@ -275,7 +275,7 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
-					ThrowIfNotRecoverable(response);
+					Validate(response);
 				}
 				catch (PipelineException e) when (!e.Recoverable)
 				{
@@ -297,9 +297,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private void ThrowIfNotRecoverable<TReturn>(ElasticsearchResponse<TReturn> response)
+		private void Validate<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
-			if (response.HttpStatusCode == 403)
+			if (response.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, new AggregateException(_exceptions));
 		}
 
@@ -322,7 +322,7 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
-						ThrowIfNotRecoverable(response);
+						Validate(response);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -356,7 +356,7 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
-						ThrowIfNotRecoverable(response);
+						Validate(response);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
