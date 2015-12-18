@@ -243,7 +243,7 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = this._connection.Request<VoidResponse>(pingData);
-					Validate(response);
+					ContinueIfValidOtherwiseThrow(response);
 				}
 				catch (PipelineException e) when (!e.Recoverable)
 				{
@@ -274,7 +274,7 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
-					Validate(response);
+					ContinueIfValidOtherwiseThrow(response);
 				}
 				catch (PipelineException e) when (!e.Recoverable)
 				{
@@ -295,7 +295,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private void Validate<TReturn>(ElasticsearchResponse<TReturn> response)
+		private void ContinueIfValidOtherwiseThrow<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
 			if (response.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication);
@@ -323,7 +323,7 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
-						Validate(response);
+						ContinueIfValidOtherwiseThrow(response);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -357,7 +357,7 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
-						Validate(response);
+						ContinueIfValidOtherwiseThrow(response);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
@@ -390,7 +390,7 @@ namespace Elasticsearch.Net
 				{
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					Validate(response);
+					ContinueIfValidOtherwiseThrow(response);
 					return response;
 				}
 				catch (PipelineException e)
@@ -420,7 +420,7 @@ namespace Elasticsearch.Net
 				{
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					Validate(response);	
+					ContinueIfValidOtherwiseThrow(response);	
 					return response;
 				}
 				catch (PipelineException e)
