@@ -6,11 +6,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Nest
 {
 	[ContractJsonConverter(typeof(FieldsJsonConverter))]
-	public class Fields : IUrlParameter
+	public class Fields : IUrlParameter, IEnumerable<Field>
 	{
 		internal readonly List<Field> ListOfFields;
 
@@ -46,5 +47,14 @@ namespace Nest
 			return this;
 		}
 
-	}
+        public IEnumerator<Field> GetEnumerator()
+        {
+            return ((IEnumerable<Field>)this.ListOfFields).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<Field>)this.ListOfFields).GetEnumerator();
+        }
+    }
 }
