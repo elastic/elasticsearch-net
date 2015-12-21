@@ -11,12 +11,17 @@ namespace Elasticsearch.Net
 
 		internal static ServerError Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
-			var serverError = new ServerError
+			object status;
+			object error;
+			if (dict.TryGetValue("status", out status) && dict.TryGetValue("error", out error))
 			{
-				Status = Convert.ToInt32(dict["status"]),
-				Error = (Error)strategy.DeserializeObject(dict["error"], typeof(Error))
-			};
-			return serverError;
+				return new ServerError
+				{
+					Status = Convert.ToInt32(status),
+					Error = (Error)strategy.DeserializeObject(error, typeof(Error))
+				};
+			}
+			return null;
 		}
 	}
 
