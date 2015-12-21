@@ -441,6 +441,7 @@ namespace Elasticsearch.Net
 
 			var clientException = new ElasticsearchClientException(exceptionMessage, innerException)
 			{
+				Request = data,
 				Response = response,
 				AuditTrail = this.AuditTrail
 			};

@@ -87,6 +87,7 @@ namespace Elasticsearch.Net
 					{
 						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
 						{
+							Request = requestData,
 							Response = response,
 							AuditTrail = pipeline.AuditTrail
 						};
@@ -139,6 +140,7 @@ namespace Elasticsearch.Net
 					{
 						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
 						{
+							Request = requestData,
 							Response = response,
 							AuditTrail = pipeline.AuditTrail
 						};
