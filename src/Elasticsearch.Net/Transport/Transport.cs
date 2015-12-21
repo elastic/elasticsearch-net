@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace Elasticsearch.Net
 {
@@ -59,7 +60,7 @@ namespace Elasticsearch.Net
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<PipelineException>();
+				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -68,17 +69,27 @@ namespace Elasticsearch.Net
 						pipeline.SniffOnStaleCluster();
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
+						if (!response.Success)
+							pipeline.SniffOnConnectionFailure();
 					}
-					catch (PipelineException exception) when (!exception.Recoverable)
+					catch (PipelineException e) when (!e.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						exceptions.Add(exception);
+						seenExceptions.Add(e);
 						break;
 					}
-					catch (PipelineException exception)
+					catch (PipelineException e)
 					{
 						pipeline.MarkDead(node);
-						exceptions.Add(exception);
+						seenExceptions.Add(e);
+					}
+					catch (Exception e)
+					{
+						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
+						{
+							Response = response,
+							AuditTrail = pipeline.AuditTrail
+						};
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
@@ -87,7 +98,7 @@ namespace Elasticsearch.Net
 					}
 				}
 				if (response == null || !response.Success)
-					pipeline.BadResponse(ref response, requestData, exceptions);
+					pipeline.BadResponse(ref response, requestData, seenExceptions);
 				return response;
 			}
 		}
@@ -102,7 +113,7 @@ namespace Elasticsearch.Net
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<PipelineException>();
+				var seenExceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -111,16 +122,26 @@ namespace Elasticsearch.Net
 						await pipeline.SniffOnStaleClusterAsync();
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
+						if (!response.Success)
+							await pipeline.SniffOnConnectionFailureAsync();
 					}
-					catch (PipelineException exception) when (!exception.Recoverable)
+					catch (PipelineException e) when (!e.Recoverable)
 					{
 						pipeline.MarkDead(node);
 						break;
 					}
-					catch (PipelineException exception)
+					catch (PipelineException e)
 					{
 						pipeline.MarkDead(node);
-						exceptions.Add(exception);
+						seenExceptions.Add(e);
+					}
+					catch (Exception e)
+					{
+						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
+						{
+							Response = response,
+							AuditTrail = pipeline.AuditTrail
+						};
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
@@ -129,7 +150,7 @@ namespace Elasticsearch.Net
 					}
 				}
 				if (response == null || !response.Success)
-					pipeline.BadResponse(ref response, requestData, exceptions);
+					pipeline.BadResponse(ref response, requestData, seenExceptions);
 				return response;
 			}
 		}

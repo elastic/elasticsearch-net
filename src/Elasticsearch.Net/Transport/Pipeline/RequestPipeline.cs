@@ -18,7 +18,6 @@ namespace Elasticsearch.Net
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly CancellationToken _cancellationToken;
-		private List<Exception> _exceptions = new List<Exception>();
 
 		private IRequestParameters RequestParameters { get; }
 		private IRequestConfiguration RequestConfiguration { get; }
@@ -245,21 +244,10 @@ namespace Elasticsearch.Net
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ContinueIfValidOtherwiseThrow(response);
 				}
-				catch (PipelineException e) when (!e.Recoverable)
+				catch (Exception e)
 				{
 					audit.Event = PingFailure;
-					e.RethrowKeepingStackTrace();
-				}
-				catch (PipelineException e)
-				{
-					audit.Event = PingFailure;
-					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
-					if (this.SniffsOnConnectionFailure)
-					{
-						using (this.Audit(SniffOnFail))
-							this.Sniff();
-					}
-					throw pipelineException;
+					throw new PipelineException(PipelineFailure.BadPing, e);
 				}
 			}
 		}
@@ -276,22 +264,11 @@ namespace Elasticsearch.Net
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
 					ContinueIfValidOtherwiseThrow(response);
 				}
-				catch (PipelineException e) when (!e.Recoverable)
+				catch (Exception e)
 				{
 					audit.Event = PingFailure;
-					e.RethrowKeepingStackTrace();
-				}
-				catch (PipelineException e)
-				{
-					audit.Event = PingFailure;
-					var pipelineException = new PipelineException(PipelineFailure.BadPing, e);
-					if (this.SniffsOnConnectionFailure)
-					{
-						using (this.Audit(SniffOnFail))
-							await this.SniffAsync();
-					}
-					throw pipelineException;
-				}
+					throw new PipelineException(PipelineFailure.BadPing, e);
+				}	
 			}
 		}
 
@@ -300,10 +277,6 @@ namespace Elasticsearch.Net
 			//TODO TEST
 			if (response.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException);
-
-
-			//if (!response.Success)
-			//	throw new PipelineException(PipelineFailure.BadResponse, response.OriginalException);
 		}
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
@@ -313,9 +286,24 @@ namespace Elasticsearch.Net
 			.ToList()
 			.OrderBy(n => n.MasterEligable ? n.Uri.Port : int.MaxValue);
 
+		public void SniffOnConnectionFailure()
+		{
+			if (!this.SniffsOnConnectionFailure) return;
+			using (this.Audit(SniffOnFail))
+				this.Sniff();
+		}
+
+		public async Task SniffOnConnectionFailureAsync()
+		{
+			if (!this.SniffsOnConnectionFailure) return;
+			using (this.Audit(SniffOnFail))
+				await this.SniffAsync();
+		}
+
 		public void Sniff()
 		{
 			var path = this.SniffPath;
+			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -326,30 +314,31 @@ namespace Elasticsearch.Net
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ContinueIfValidOtherwiseThrow(response);
+						if (!response.Success)
+						{
+							audit.Event = SniffFailure;
+							continue;
+						}
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
 						return;
 					}
-					catch (PipelineException e) when (!e.Recoverable)
+					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
-						e.RethrowKeepingStackTrace();
-					}
-					catch (PipelineException e)
-					{
-						audit.Event = SniffFailure;
-						_exceptions.Add(e);
+						exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(_exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public async Task SniffAsync()
 		{
 			var path = this.SniffPath;
+			var exceptions = new List<Exception>();
 			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(SniffSuccess))
@@ -360,24 +349,24 @@ namespace Elasticsearch.Net
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
 						ContinueIfValidOtherwiseThrow(response);
+						if (!response.Success)
+						{
+							audit.Event = SniffFailure;
+							continue;
+						}
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
 					}
-					catch (PipelineException e) when (!e.Recoverable)
+					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
-						e.RethrowKeepingStackTrace();
-					}				
-					catch (PipelineException e)
-					{
-						audit.Event = SniffFailure;
-						_exceptions.Add(e);
+						exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(_exceptions));
+			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
@@ -396,16 +385,10 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (PipelineException e)
+				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					_exceptions.Add(e);
-					if (this.SniffsOnConnectionFailure)
-					{
-						using (this.Audit(SniffOnFail))
-							this.Sniff();
-					}
 					throw e;
 				}
 			}
@@ -427,16 +410,10 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (PipelineException e)
+				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					_exceptions.Add(e);
-					if (this.SniffsOnConnectionFailure)
-					{
-						using (this.Audit(SniffOnFail))
-							await this.SniffAsync();
-					}
 					throw e;
 				}
 			}

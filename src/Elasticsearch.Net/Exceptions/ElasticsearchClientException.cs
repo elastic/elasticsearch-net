@@ -6,6 +6,8 @@ namespace Elasticsearch.Net
 	// TODO come up with a better name for this?
 	public class ElasticsearchClientException : Exception
 	{
+		// TODO add RequestData
+
 		public IApiCallDetails Response { get; internal set; }
 
 		public List<Audit> AuditTrail { get; internal set; }

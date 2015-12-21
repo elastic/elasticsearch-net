@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\RequestConfiguration.cs" />
+    <Compile Include="Exceptions\UnexpectedElasticsearchClientException.cs" />
     <Compile Include="Transport\Pipeline\PipelineException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Auditing\Audit.cs" />

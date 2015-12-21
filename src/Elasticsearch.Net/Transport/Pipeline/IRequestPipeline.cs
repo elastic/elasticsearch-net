@@ -12,6 +12,8 @@ namespace Elasticsearch.Net
 		bool SniffsOnStaleCluster { get; }
 		bool StaleClusterState { get; }
 		
+		List<Audit> AuditTrail { get; }
+
 		DateTime StartedOn { get; }
 		bool IsTakingTooLong { get; }
 
@@ -37,6 +39,9 @@ namespace Elasticsearch.Net
 
 		void SniffOnStaleCluster();
 		Task SniffOnStaleClusterAsync();
+
+		void SniffOnConnectionFailure();
+		Task SniffOnConnectionFailureAsync();
 
 		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<PipelineException> seenExceptions)
 			where TReturn : class;

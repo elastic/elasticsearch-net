@@ -117,7 +117,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout: rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new PipelineException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			return rule.Succeeds
@@ -134,7 +134,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new PipelineException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			if (rule.Succeeds && times >= state.Successes)
@@ -153,11 +153,11 @@ namespace Tests.Framework
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			if (rule.Return == null)
-				throw new PipelineException(PipelineFailure.BadResponse, (Exception)null);
+				throw new Exception();
 			return rule.Return.Match(
 				(e) =>
 				{
-					throw new PipelineException(PipelineFailure.BadResponse, e);
+					throw e;
 				},
 				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
 			);
