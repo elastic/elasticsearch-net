@@ -2970,6 +2970,9 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public SegmentsDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
+		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public SegmentsDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
+
 		///<summary>The URL-encoded request definition</summary>
 		public SegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
+
 #pragma warning disable 618 //Testing an obsolete method
 
 namespace Tests.QueryDsl.Compound.Dismax
@@ -39,7 +37,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.Dismax(c => c
+			.DisMax(c => c
 				.Name("named_query")
 				.Boost(1.1)
 				.TieBreaker(1.11)

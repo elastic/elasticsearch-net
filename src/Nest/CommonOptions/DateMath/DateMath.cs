@@ -9,7 +9,7 @@ namespace Nest
 	public interface IDateMath
 	{
 		Union<DateTime, string> Anchor { get; }
-		IList<Tuple<DateMathOperation, TimeUnitExpression>> Ranges { get; }
+		IList<Tuple<DateMathOperation, Time>> Ranges { get; }
 		TimeUnit? Round { get; }
 	}
 
@@ -24,7 +24,7 @@ namespace Nest
 		protected TimeUnit? Round;
 		TimeUnit? IDateMath.Round => Round;
 
-		IList<Tuple<DateMathOperation, TimeUnitExpression>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, TimeUnitExpression>>();
+		IList<Tuple<DateMathOperation, Time>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, Time>>();
 
 		protected DateMath() { }
 

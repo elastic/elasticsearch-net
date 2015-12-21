@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -24,7 +23,7 @@ namespace Nest
 		/// How often to perform a refresh operation, which makes recent changes to the index visible to search.
 		/// Defaults to 1s. Can be set to -1 to disable refresh.
 		/// </summary>
-		TimeUnitExpression RefreshInterval { get; set; }
+		Time RefreshInterval { get; set; }
 
 		/// <summary>
 		/// Set to true to make the index and index metadata read only, false to allow writes and metadata changes.
@@ -77,7 +76,7 @@ namespace Nest
 		/// The allocation of replica shards which become unassigned because a node has left can be 
 		/// delayed with this dynamic setting, which defaults to 1m.
 		/// </summary>
-		TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
+		Time UnassignedNodeLeftDelayedTimeout { get; set; }
 
 		/// <summary>
 		/// The maximum number of shards (replicas and primaries) that will be allocated to a single node. Defaults to unbounded.
@@ -144,7 +143,7 @@ namespace Nest
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 		
 		/// <inheritdoc/>
-		public TimeUnitExpression RefreshInterval { get; set; }
+		public Time RefreshInterval { get; set; }
 		
 		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
@@ -156,7 +155,7 @@ namespace Nest
 		public ITranslogSettings Translog { get; set; }
 		
 		/// <inheritdoc/>
-		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
+		public Time UnassignedNodeLeftDelayedTimeout { get; set; }
 
 		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
@@ -225,7 +224,7 @@ namespace Nest
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
 		/// <inheritdoc/>
-		public TDescriptor RefreshInterval(TimeUnitExpression time) => Assign(a => a.RefreshInterval = time);
+		public TDescriptor RefreshInterval(Time time) => Assign(a => a.RefreshInterval = time);
 
 		/// <inheritdoc/>
 		public TDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
@@ -240,7 +239,7 @@ namespace Nest
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public TDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
+		public TDescriptor UnassignedNodeLeftDelayedTimeout(Time time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
 		public TDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>

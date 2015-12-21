@@ -1,8 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {

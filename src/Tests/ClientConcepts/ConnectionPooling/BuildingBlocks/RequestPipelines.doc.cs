@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
-using FluentAssertions;
-using Tests.Framework;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
+using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -26,17 +20,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var settings = TestClient.CreateSettings();
 
 			/** When calling Request(Async) on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
-			var pipeline = new RequestPipeline(settings, new DateTimeProvider(), new MemoryStreamFactory(), new SearchRequestParameters());
+			var pipeline = new RequestPipeline(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
 			pipeline.GetType().Should().Implement<IDisposable>();
 
 			/** However the transport does not instantiate RequestPipeline directly, it uses a pluggable `IRequestPipelineFactory`*/
 			var requestPipelineFactory = new RequestPipelineFactory();
-			var requestPipeline = requestPipelineFactory.Create(settings, new DateTimeProvider(), new MemoryStreamFactory(), new SearchRequestParameters());
+			var requestPipeline = requestPipelineFactory.Create(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
 			requestPipeline.Should().BeOfType<RequestPipeline>();
 			requestPipeline.GetType().Should().Implement<IDisposable>();
 
 			/** which can be passed to the transport when instantiating a client */
-			var transport = new Transport<ConnectionSettings>(settings, requestPipelineFactory, new DateTimeProvider(), new MemoryStreamFactory());
+			var transport = new Transport<ConnectionSettings>(settings, requestPipelineFactory, DateTimeProvider.Default, new MemoryStreamFactory());
 
 			/** this allows you to have requests executed on your own custom request pipeline */
 		}
@@ -47,7 +41,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var pool = setupPool(new[] {TestClient.CreateNode(), TestClient.CreateNode(9201)});
 			var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
-			return new FixedPipelineFactory(settings, dateTimeProvider ?? new DateTimeProvider()).Pipeline;
+			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}
 
 		[U] public void FirstUsageCheck()

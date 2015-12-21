@@ -11,9 +11,6 @@ namespace Tests.QueryDsl.BoolDsl
 {
 	public class BoolDslTests : OperatorUsageBase
 	{
-		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
-		protected static readonly TermQuery NullQuery = null;
 		protected readonly IElasticClient Client = TestClient.GetFixedReturnClient(new { });
 		
 		/** Writing boolean queries can grow rather verbose rather quickly using the querydsl e.g */

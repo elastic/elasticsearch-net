@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.DSL.Visitor;
 
 namespace Nest
 {
@@ -22,6 +21,8 @@ namespace Nest
 	public class GetMappingResponse : BaseResponse, IGetMappingResponse
 	{
 		public override bool IsValid => base.IsValid && this.Mapping != null;
+
+		internal GetMappingResponse() { }
 
 		internal GetMappingResponse(IApiCallDetails status, GetRootObjectMappingWrapping dict)
 		{

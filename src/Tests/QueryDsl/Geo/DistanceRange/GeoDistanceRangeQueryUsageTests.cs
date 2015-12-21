@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest;
+﻿using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
@@ -41,13 +38,13 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			Field = Static.Field<Project>(p=>p.Location),
 			DistanceType = GeoDistanceType.Arc,
 			Coerce = true,
-			GreaterThanOrEqualTo = GeoDistance.Kilometers(200),
+			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
 			IgnoreMalformed = true,
-			GreaterThan = GeoDistance.Kilometers(200),
-			LessThan = GeoDistance.Miles(400),
+			GreaterThan = Nest.Distance.Kilometers(200),
+			LessThan = Nest.Distance.Miles(400),
 			Location = new GeoLocation(40, -70),
 			OptimizeBoundingBox = GeoOptimizeBBox.Indexed,
-			LessThanOrEqualTo = GeoDistance.Miles(400),
+			LessThanOrEqualTo = Nest.Distance.Miles(400),
 			ValidationMethod = GeoValidationMethod.Strict
 		};
 
@@ -58,13 +55,13 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
-				.GreaterThanOrEqualTo(200, GeoPrecision.Kilometers)
-				.GreaterThan(200, GeoPrecision.Kilometers)
+				.GreaterThanOrEqualTo(200, DistanceUnit.Kilometers)
+				.GreaterThan(200, DistanceUnit.Kilometers)
 				.IgnoreMalformed()
 				.Location(new GeoLocation(40, -70))
 				.Optimize(GeoOptimizeBBox.Indexed)
-				.LessThanOrEqualTo(GeoDistance.Miles(400))
-				.LessThan(GeoDistance.Miles(400))
+				.LessThanOrEqualTo(Nest.Distance.Miles(400))
+				.LessThan(Nest.Distance.Miles(400))
 				.ValidationMethod(GeoValidationMethod.Strict)
 			);
 

@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using Newtonsoft.Json.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -35,8 +33,9 @@ namespace Nest
 				return c;
 
 			//query is conditionless but the container is marked as strict, throw exception
-			if (c != null && c.IsStrict)
-				throw new DslException("Query is conditionless but strict is turned on") { Offender = c };
+			// TODO should this be an ElasticsearchClientException { Offender = c }?
+			if (c != null && c.IsStrict) 
+				throw new ArgumentException("Query is conditionless but strict is turned on"); 
 
 			//query is conditionless return an empty container that can later be rewritten
 			return null;
@@ -49,12 +48,9 @@ namespace Nest
 
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());
-			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
+			var da = info.GetCustomAttribute<EnumMemberAttribute>();
 
-			if (da.Length > 0)
-				return da[0].Value;
-			else
-				return Enum.GetName(enumValue.GetType(), enumValue);
+			return da != null ? da.Value : Enum.GetName(enumValue.GetType(), enumValue);
 		}
 		
 		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
@@ -79,13 +75,24 @@ namespace Nest
 			var enumType = typeof(T);
 			foreach (var name in Enum.GetNames(enumType))
 			{
-				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name);
+				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
 
-				var enumAttributes = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true));
-				if (!enumAttributes.HasAny()) continue;
+				var enumFieldInfo = enumType.GetField(name);
+				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
 
-				var enumMemberAttribute = enumAttributes.Single();
-				if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
+				if (enumMemberAttribute != null)
+				{
+					if (enumMemberAttribute.Value == str)
+						return (T)Enum.Parse(enumType, name);
+				}
+
+				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
+
+				if (alternativeEnumMemberAttribute != null)
+				{
+					if (alternativeEnumMemberAttribute.Value == str)
+						return (T) Enum.Parse(enumType, name);
+				}
 			}
 			//throw exception or whatever handling you want or
 			return null;

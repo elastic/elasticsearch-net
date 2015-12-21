@@ -1,5 +1,4 @@
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {

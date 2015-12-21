@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Nest
+﻿namespace Nest
 {
 	/// <summary>
 	/// A Query that matches documents containing a particular sequence of terms.

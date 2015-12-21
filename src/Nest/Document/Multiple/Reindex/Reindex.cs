@@ -1,5 +1,4 @@
 ﻿using System;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -7,7 +6,7 @@ namespace Nest
 	{
 		IndexName To { get; set; }
 		IndexName From { get; set; }
-		//TODO TimeUnitExpression, needs to propagate to generated querystring methods
+		//TODO Time, needs to propagate to generated querystring methods
 		string Scroll { get; set; }
 		int? Size { get; set; }
 		

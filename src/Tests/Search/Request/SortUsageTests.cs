@@ -86,7 +86,7 @@ namespace Tests.Search.Request
 					.Field(p => p.Location)
 					.DistanceType(GeoDistanceType.SloppyArc)
 					.Order(SortOrder.Ascending)
-					.Unit(GeoPrecision.Centimeters)
+					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)
 					.PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
 				)
@@ -94,9 +94,8 @@ namespace Tests.Search.Request
 					.Type("number")
 					.Ascending()
 					.Script(script => script
-						.Inline("doc['field_name'].value * factor", i => i
-							.Params(p => p.Add("factor", 1.1))
-						)
+						.Inline("doc['field_name'].value * factor")
+						.Params(p => p.Add("factor", 1.1))
 					)
 				)
 			);
@@ -124,7 +123,7 @@ namespace Tests.Search.Request
 						Field = "location",
 						Order = SortOrder.Ascending,
 						DistanceType = GeoDistanceType.Arc,
-						GeoUnit = GeoPrecision.Centimeters,
+						GeoUnit = DistanceUnit.Centimeters,
 						Mode = SortMode.Min,
 						Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
 					},

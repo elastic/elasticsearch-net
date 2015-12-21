@@ -1,12 +1,8 @@
-﻿using Nest;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
 using FluentAssertions;
-using Xunit;
+using Nest;
+using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
@@ -15,8 +11,7 @@ namespace Tests.CodeStandards
 		/*
 		* Fluent methods on IElasticClient (Func<Descriptor, Interface>) should be named `selector`.
 		*/
-		[U]
-		public void ConsistentFluentParameterNames()
+		[U] public void ConsistentFluentParameterNames()
 		{
 			var fluentParametersNotNamedSelector =
 				from m in typeof (IElasticClient).GetMethods()
@@ -31,8 +26,7 @@ namespace Tests.CodeStandards
 		/*
 		* Similarly, OIS methods on IElasticClient (IRequest) should be named `request`.
 		*/
-		[U]
-		public void ConsistentInitializerParameterNames()
+		[U] public void ConsistentInitializerParameterNames()
 		{
 			var requestParametersNotNamedRequest =
 				from m in typeof(IElasticClient).GetMethods()
@@ -47,8 +41,7 @@ namespace Tests.CodeStandards
 		/*
 		* Request objects on OIS methods are always required, and so they shouldn't be nullable
 		*/
-		[U]
-		public void InitializerRequestsAreNotOptional()
+		[U] public void InitializerRequestsAreNotOptional()
 		{
 			var requestParameters =
 				(from m in typeof(IElasticClient).GetMethods()

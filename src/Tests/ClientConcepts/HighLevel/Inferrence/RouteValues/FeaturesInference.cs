@@ -1,16 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Elasticsearch.Net;
-using FluentAssertions;
+﻿using Elasticsearch.Net;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using Xunit.Sdk;
 using static Nest.Indices;
 using static Tests.Framework.RoundTripper;
-using static Nest.Static;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {

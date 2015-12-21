@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -23,9 +18,6 @@ namespace Nest
 		{
 			var resolver = serializer.ContractResolver as ElasticContractResolver;
 			var realConverter = resolver?.PiggyBackState?.ActualJsonConverter as TConverter;
-			if (realConverter == null)
-				throw new DslException($"could not find a stateful {typeof(TConverter).Name} converter");
-
 			return realConverter;
 		}
 

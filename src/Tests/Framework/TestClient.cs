@@ -2,27 +2,19 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using Elasticsearch.Net.Connection;
-using Nest;
-using Tests.Framework.MockData;
-using Elasticsearch.Net.ConnectionPool;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
+using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.config");
-
-		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-
-		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion.Trim() : null);
-
-		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static TestConfiguration Configuration = new TestConfiguration(@"..\..\tests.yaml");
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
@@ -58,7 +50,7 @@ namespace Tests.Framework
 		public static Uri CreateNode(int? port = null) => 
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+		public static IConnection CreateConnection() => Configuration.RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
@@ -77,7 +69,7 @@ namespace Tests.Framework
 
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
-			if (!(RunningFiddler && RunIntegrationTests)) return "ignore";
+			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
 			var st = new StackTrace();
 			var types = GetTypes(st);

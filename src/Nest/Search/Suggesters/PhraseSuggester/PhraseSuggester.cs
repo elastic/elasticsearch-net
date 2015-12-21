@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -14,13 +13,13 @@ namespace Nest
 		int? GramSize { get; set; }
 
 		[JsonProperty(PropertyName = "real_word_error_likelihood")]
-		decimal? RealWordErrorLikelihood { get; set; }
+		double? RealWordErrorLikelihood { get; set; }
 
 		[JsonProperty(PropertyName = "confidence")]
-		decimal? Confidence { get; set; }
+		double? Confidence { get; set; }
 
 		[JsonProperty(PropertyName = "max_errors")]
-		decimal? MaxErrors { get; set; }
+		double? MaxErrors { get; set; }
 
 		[JsonProperty(PropertyName = "separator")]
 		char? Separator { get; set; }
@@ -38,9 +37,9 @@ namespace Nest
 	public class PhraseSuggester : SuggesterBase, IPhraseSuggester
 	{
 		public int? GramSize { get; set; }
-		public decimal? RealWordErrorLikelihood { get; set; }
-		public decimal? Confidence { get; set; }
-		public decimal? MaxErrors { get; set; }
+		public double? RealWordErrorLikelihood { get; set; }
+		public double? Confidence { get; set; }
+		public double? MaxErrors { get; set; }
 		public char? Separator { get; set; }
 		public IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 		public IPhraseSuggestHighlight Highlight { get; set; }
@@ -51,9 +50,9 @@ namespace Nest
 		where T : class
 	{
 		int? IPhraseSuggester.GramSize { get; set; }
-		decimal? IPhraseSuggester.RealWordErrorLikelihood { get; set; }
-		decimal? IPhraseSuggester.Confidence { get; set; }
-		decimal? IPhraseSuggester.MaxErrors { get; set; }
+		double? IPhraseSuggester.RealWordErrorLikelihood { get; set; }
+		double? IPhraseSuggester.Confidence { get; set; }
+		double? IPhraseSuggester.MaxErrors { get; set; }
 		char? IPhraseSuggester.Separator { get; set; }
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
 		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
@@ -61,9 +60,9 @@ namespace Nest
 
 		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(a => a.GramSize = gramSize);
 
-		public PhraseSuggesterDescriptor<T> Confidence(decimal? confidence) => Assign(a => a.Confidence = confidence);
+		public PhraseSuggesterDescriptor<T> Confidence(double? confidence) => Assign(a => a.Confidence = confidence);
 
-		public PhraseSuggesterDescriptor<T> MaxErrors(decimal? maxErrors) => Assign(a => a.MaxErrors = maxErrors);
+		public PhraseSuggesterDescriptor<T> MaxErrors(double? maxErrors) => Assign(a => a.MaxErrors = maxErrors);
 
 		public PhraseSuggesterDescriptor<T> Separator(char? separator) => Assign(a => a.Separator = separator);
 

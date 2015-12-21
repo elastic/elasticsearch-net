@@ -1,11 +1,10 @@
-﻿using Elasticsearch.Net;
-using Nest;
-using FluentAssertions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
 using Tests.Framework.Integration;
 
 namespace Tests.Framework
@@ -24,10 +23,10 @@ namespace Tests.Framework
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 
-		protected IDictionary<ClientCall, string> UniqueValues { get; } 		
+		protected IDictionary<Integration.ClientCall, string> UniqueValues { get; } 		
 		protected string CallIsolatedValue { get; private set; }
 
-		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) { }
+		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<Integration.ClientCall, string> values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
@@ -50,7 +49,7 @@ namespace Tests.Framework
 			this._responses = usage.CallOnce(this.ClientUsage);
 			this.Port = cluster.Node.Port;
 			this.UniqueValues = usage.CallUniqueValues;
-			this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
+			this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Fluent];
 			this.SetupSerialization();
 		}
 
@@ -66,25 +65,25 @@ namespace Tests.Framework
 			{
 				this.BeforeAllCalls(client, UniqueValues);
 
-				var dict = new Dictionary<ClientCall, IResponse>();
-				this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
+				var dict = new Dictionary<Integration.ClientCall, IResponse>();
+				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Fluent];
 				OnBeforeCall(client);
-				dict.Add(ClientCall.Fluent, fluent(client, this.Fluent));
+				dict.Add(Integration.ClientCall.Fluent, fluent(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[ClientCall.FluentAsync];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.FluentAsync];
 				OnBeforeCall(client);
-				dict.Add(ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
+				dict.Add(Integration.ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[ClientCall.Initializer];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Initializer];
 				OnBeforeCall(client);
-				dict.Add(ClientCall.Initializer, request(client, this.Initializer));
+				dict.Add(Integration.ClientCall.Initializer, request(client, this.Initializer));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[ClientCall.InitializerAsync];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.InitializerAsync];
 				OnBeforeCall(client);
-				dict.Add(ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
+				dict.Add(Integration.ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
 				return dict;
 			});
@@ -144,19 +143,16 @@ namespace Tests.Framework
 			}
 		}
 
-		protected async Task HitsTheCorrectUrl() =>
+		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
-		[U]
-		protected async Task UsesCorrectHttpMethod() =>
+		[U] protected async Task UsesCorrectHttpMethod() =>
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
-		[U]
-		protected void SerializesInitializer() =>
+		[U] protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
-		[U]
-		protected void SerializesFluent() =>
+		[U] protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(this.ClientDoesThisInternally(NewDescriptor())));
 	}
 }

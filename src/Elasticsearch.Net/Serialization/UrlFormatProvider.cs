@@ -1,13 +1,8 @@
-using Elasticsearch.Net.Connection;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Extensions;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 	class UrlFormatProvider : IFormatProvider, ICustomFormatter
 	{

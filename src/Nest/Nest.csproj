@@ -97,6 +97,9 @@
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationWalker.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitorScope.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -175,7 +178,10 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
     <Compile Include="CommonAbstractions\Static\Static.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
+    <Compile Include="CommonOptions\Attributes\AlternativeEnumMemberAttribute.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="CommonOptions\Geo\Distance.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceJsonConverter.cs" />
     <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
     <Compile Include="CommonOptions\Scripting\FileScript.cs" />
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
@@ -193,7 +199,7 @@
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkRequestJsonConverter.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitExpressionJsonConverter.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
     <Compile Include="CommonAbstractions\Union\Union.cs" />
     <Compile Include="CommonOptions\DateMath\DateMath.cs" />
@@ -203,7 +209,7 @@
     <Compile Include="Aggregations\Bucket\IpRange\IpRange.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnit.cs" />
-    <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
+    <Compile Include="CommonOptions\TimeUnit\Time.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
@@ -255,6 +261,7 @@
     <Compile Include="Mapping\AttributeBased\TokenCountAttribute.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\FieldMappingJsonConverter.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplateContainer.cs" />
+    <Compile Include="Mapping\DynamicTemplate\DynamicTemplatesJsonConverter.cs" />
     <Compile Include="Mapping\Mappings.cs" />
     <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
@@ -309,6 +316,7 @@
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringFlags.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\BoundingBox.cs" />
     <Compile Include="QueryDsl\Geo\GeoCoordinateJsonConverter.cs" />
+    <Compile Include="QueryDsl\Geo\GeoValidationMethod.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
@@ -426,7 +434,6 @@
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksRecord.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocument.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
-    <Compile Include="QueryDsl\Geo\GeoDistance.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />
     <Compile Include="Mapping\CodeBased\PropertyMapping.cs" />
     <Compile Include="Modules\Indices\Fielddata\FielddataFilter.cs" />
@@ -439,10 +446,14 @@
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
+    <Compile Include="Search\Search\InnerHits\PathInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\TypeInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\NamedInnerHits.cs" />
     <Compile Include="Search\Search\Sort\SortBase.cs" />
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
     <Compile Include="Search\Search\Sort\SortMode.cs" />
     <Compile Include="Search\Search\Sort\SortOrder.cs" />
+    <Compile Include="Search\Suggesters\SuggestContainer.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
     <Compile Include="Mapping\MetaFields\IFieldMapping.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\CircleGeoShape.cs" />
@@ -534,8 +545,8 @@
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Weight\WeightFunction.cs" />
-    <Compile Include="Search\Search\InnerHits\IGlobalInnerHit.cs" />
-    <Compile Include="Search\Search\InnerHits\IInnerHitsContainer.cs" />
+    <Compile Include="Search\Search\InnerHits\GlobalInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\InnerHitsContainer.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\ElasticClient-UpgradeStatus.cs" />
@@ -566,7 +577,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\ElasticClient-Snapshot.cs" />
     <Compile Include="Search\FieldStats\ElasticClient-FieldStats.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
-    <Compile Include="CommonOptions\Geo\GeoPrecision.cs" />
+    <Compile Include="CommonOptions\Geo\DistanceUnit.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptRequest.cs" />
     <Compile Include="Search\SearchExists\SearchExistsRequest.cs" />
     <Compile Include="Modules\Scripting\PutScript\PutScriptRequest.cs" />
@@ -690,8 +701,6 @@
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
-    <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
-    <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
@@ -813,7 +822,6 @@
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashPrecision.cs" />
-    <Compile Include="CommonAbstractions\Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
@@ -838,7 +846,6 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\TermSuggester\TermSuggester.cs" />
-    <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
@@ -1048,7 +1055,6 @@
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
-    <Compile Include="QueryDsl\Geo\GeoDistanceJsonConverter.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHitJsonConverter.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />
@@ -1081,7 +1087,6 @@
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
-    <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />

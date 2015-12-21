@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elasticsearch.Net.Serialization;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
-using static Elasticsearch.Net.Connection.PostType;
+using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public interface IPostData
 	{
@@ -35,11 +30,11 @@ namespace Elasticsearch.Net.Connection
 		public byte[] WrittenBytes { get; private set; }
 		public PostType Type { get; }
 
-		public PostData(byte[] item) { WrittenBytes = item; Type = ByteArray; }
-		public PostData(string item) { _literalString = item; Type = LiteralString; }
-		public PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = EnumerableOfString; }
-		public PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = EnumerableOfObject; }
-		public PostData(T item) { _serializable = item; Type = Serializable; }
+		public PostData(byte[] item) { WrittenBytes = item; Type = PostType.ByteArray; }
+		public PostData(string item) { _literalString = item; Type = PostType.LiteralString; }
+		public PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = PostType.EnumerableOfString; }
+		public PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = PostType.EnumerableOfObject; }
+		public PostData(T item) { _serializable = item; Type = PostType.Serializable; }
 
 		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
@@ -47,16 +42,16 @@ namespace Elasticsearch.Net.Connection
 			MemoryStream ms = null; Stream stream = null;
 			switch (Type)
 			{
-				case ByteArray: 
+				case PostType.ByteArray: 
 					ms = new MemoryStream(WrittenBytes);
 					break;
-				case LiteralString: 
+				case PostType.LiteralString: 
 					ms = new MemoryStream(_literalString?.Utf8Bytes());
 					break;
-				case EnumerableOfString: 
+				case PostType.EnumerableOfString: 
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case EnumerableOfObject:
+				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 
 					if (settings.DisableDirectStreaming)
@@ -71,7 +66,7 @@ namespace Elasticsearch.Net.Connection
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
-				case Serializable: 
+				case PostType.Serializable: 
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
@@ -96,16 +91,16 @@ namespace Elasticsearch.Net.Connection
 			MemoryStream ms = null; Stream stream = null;
 			switch (Type)
 			{
-				case ByteArray: 
+				case PostType.ByteArray: 
 					ms = new MemoryStream(WrittenBytes);
 					break;
-				case LiteralString: 
+				case PostType.LiteralString: 
 					ms = new MemoryStream(_literalString?.Utf8Bytes());
 					break;
-				case EnumerableOfString: 
+				case PostType.EnumerableOfString: 
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case EnumerableOfObject:
+				case PostType.EnumerableOfObject:
 					if (!_enumerableOfObject.HasAny()) return;
 					if (settings.DisableDirectStreaming)
 					{
@@ -119,7 +114,7 @@ namespace Elasticsearch.Net.Connection
 						await stream.WriteAsync(new byte[] { (byte)'\n' }, 0, 1, cancellationToken);
 					}
 					break;
-				case Serializable: 
+				case PostType.Serializable: 
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{

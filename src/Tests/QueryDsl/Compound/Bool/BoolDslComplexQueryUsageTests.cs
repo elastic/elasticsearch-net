@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl;
-using FluentAssertions;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
 	public class BoolDslComplexQueryUsageTests : BoolQueryUsageTests
 	{
 		protected static readonly TermQuery Query = new TermQuery { Field = "x", Value = "y" };
-		protected static readonly TermQuery ConditionlessQuery = new TermQuery { };
 		protected static readonly TermQuery NullQuery = null;
 
 		public BoolDslComplexQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

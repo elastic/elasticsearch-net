@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Net;
+﻿using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
 using FluentAssertions;
 using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
-using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
-using static Elasticsearch.Net.Connection.AuditEvent;
 using static Tests.Framework.TimesHelper;
+using static Elasticsearch.Net.AuditEvent;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -67,34 +55,36 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 			audit = await audit.TraceCalls(
 			/** */
-				new CallTrace {
+				new ClientCall {
 					{ HealthyResponse, 9200 },
 					{ pool =>  pool.Nodes.Count.Should().Be(5) }
 				},
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
+					{ SniffOnFail },
 					{ SniffSuccess, 9202},
 					{ HealthyResponse, 9200},
 					/** Our pool should now have three nodes */
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
-				new CallTrace {
+				new ClientCall {
 					{ BadResponse, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
+					{ SniffOnFail },
 					{ SniffSuccess, 9200},
 					{ HealthyResponse, 9210},
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
-				new CallTrace { { HealthyResponse, 9211 } },
-				new CallTrace { { HealthyResponse, 9212 } },
-				new CallTrace { { HealthyResponse, 9210 } },
-				new CallTrace { { HealthyResponse, 9211 } },
-				new CallTrace { { HealthyResponse, 9212 } },
-				new CallTrace { { HealthyResponse, 9210 } },
-				new CallTrace { { HealthyResponse, 9211 } },
-				new CallTrace { { HealthyResponse, 9212 } },
-				new CallTrace { { HealthyResponse, 9210 } }
+				new ClientCall { { HealthyResponse, 9211 } },
+				new ClientCall { { HealthyResponse, 9212 } },
+				new ClientCall { { HealthyResponse, 9210 } },
+				new ClientCall { { HealthyResponse, 9211 } },
+				new ClientCall { { HealthyResponse, 9212 } },
+				new ClientCall { { HealthyResponse, 9210 } },
+				new ClientCall { { HealthyResponse, 9211 } },
+				new ClientCall { { HealthyResponse, 9212 } },
+				new ClientCall { { HealthyResponse, 9210 } }
 			);
 		}
 
@@ -123,35 +113,37 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			);
 
 			audit = await audit.TraceCalls(
-				new CallTrace {
+				new ClientCall {
 					{ PingSuccess, 9200 },
 					{ HealthyResponse, 9200 },
 					{ pool =>  pool.Nodes.Count.Should().Be(5) }
 				},
-				new CallTrace {
+				new ClientCall {
 					{ PingFailure, 9201},
 					/** We assert we do a sniff on our first known master node 9202 */
+					{ SniffOnFail },
 					{ SniffSuccess, 9202},
 					{ PingSuccess, 9200},
 					{ HealthyResponse, 9200},
 					/** Our pool should now have three nodes */
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
-				new CallTrace {
+				new ClientCall {
 					{ PingFailure, 9201},
 					/** We assert we do a sniff on the first master node in our updated cluster */
+					{ SniffOnFail },
 					{ SniffSuccess, 9200},
 					{ PingSuccess, 9210},
 					{ HealthyResponse, 9210},
 					{ pool =>  pool.Nodes.Count.Should().Be(3) }
 				},
-				new CallTrace { { PingSuccess, 9211 }, { HealthyResponse, 9211 } },
-				new CallTrace { { PingSuccess, 9212 }, { HealthyResponse, 9212 } },
+				new ClientCall { { PingSuccess, 9211 }, { HealthyResponse, 9211 } },
+				new ClientCall { { PingSuccess, 9212 }, { HealthyResponse, 9212 } },
 				/** 9210 was already pinged after the sniff returned the new nodes */
-				new CallTrace { { HealthyResponse, 9210 } },
-				new CallTrace { { HealthyResponse, 9211 } },
-				new CallTrace { { HealthyResponse, 9212 } },
-				new CallTrace { { HealthyResponse, 9210 } }
+				new ClientCall { { HealthyResponse, 9210 } },
+				new ClientCall { { HealthyResponse, 9211 } },
+				new ClientCall { { HealthyResponse, 9212 } },
+				new ClientCall { { HealthyResponse, 9210 } }
 			);
 		}
 

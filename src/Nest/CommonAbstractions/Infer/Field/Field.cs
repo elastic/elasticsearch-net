@@ -1,11 +1,7 @@
-﻿using Elasticsearch.Net.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using Elasticsearch.Net.Connection;
 using System.Reflection;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -62,7 +58,6 @@ namespace Nest
 				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
 			
 			return new Field { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
-
 		}
 
 		public static implicit operator Field(PropertyInfo property)
@@ -74,15 +69,9 @@ namespace Nest
 			};
 		}
 
-		public override int GetHashCode()
-		{
-			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
-		}
+		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
 
-		bool IEquatable<Field>.Equals(Field other)
-		{
-			return Equals(other);
-		}
+		bool IEquatable<Field>.Equals(Field other) => Equals(other);
 
 		public override bool Equals(object obj)
 		{

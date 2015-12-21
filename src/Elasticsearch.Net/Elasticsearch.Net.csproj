@@ -52,21 +52,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IRequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
-    <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
-    <Compile Include="Connection\ElasticsearchException.cs" />
+    <Compile Include="Transport\Pipeline\PipelineException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
-    <Compile Include="Auditting\Audit.cs" />
-    <Compile Include="Auditting\Auditable.cs" />
-    <Compile Include="Auditting\AuditEvent.cs" />
+    <Compile Include="Auditing\Audit.cs" />
+    <Compile Include="Auditing\Auditable.cs" />
+    <Compile Include="Auditing\AuditEvent.cs" />
+    <Compile Include="Responses\ServerError.cs" />
+    <Compile Include="Exceptions\ElasticsearchClientException.cs" />
     <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
     <Compile Include="Transport\Pipeline\RequestData.cs" />
     <Compile Include="Transport\Pipeline\IRequestPipeline.cs" />
-    <Compile Include="Transport\PipelineFailure.cs" />
+    <Compile Include="Transport\Pipeline\PipelineFailure.cs" />
     <Compile Include="ConnectionPool\Node.cs" />
     <Compile Include="Configuration\Security\BasicAuthorizationCredentials.cs" />
+    <Compile Include="Transport\Pipeline\ResponseBuilder.cs" />
     <Compile Include="Transport\Sniff\SniffResponse.cs" />
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />
@@ -119,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Domain\Response\" />
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

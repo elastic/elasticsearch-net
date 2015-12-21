@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
-using FluentAssertions;
-using System.Linq.Expressions;
 
 namespace Tests.Aggregations.Metric.TopHits
 {
@@ -107,9 +103,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							)
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
-									.Script(sc => sc
-										.Inline("doc['numberOfCommits'].value * 2")
-									)
+									.Inline("doc['numberOfCommits'].value * 2")
 								)
 							)
 						)

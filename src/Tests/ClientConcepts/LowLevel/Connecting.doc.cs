@@ -2,8 +2,6 @@
 using System.Collections.Specialized;
 using System.Net;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
 using Nest;
 
 namespace Tests.ClientConcepts.LowLevel
@@ -71,7 +69,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.EnableTrace()
 				.DisableDirectStreaming()
 				.SetBasicAuthentication("user", "pass")
-				.SetTimeout(TimeSpan.FromSeconds(5));
+				.RequestTimeout(TimeSpan.FromSeconds(5));
 
 		}
 		/**
@@ -136,7 +134,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SetProxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
-				.SetTimeout(TimeSpan.FromSeconds(4))
+				.RequestTimeout(TimeSpan.FromSeconds(4))
 				/**
 				* Sets the global maximum time a connection may take.
 				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 
@@ -144,7 +142,7 @@ namespace Tests.ClientConcepts.LowLevel
 				*/
 
 				//TODO document this properly once we figure out exceptions
-				.ThrowOnElasticsearchServerExceptions()
+				.ThrowExceptions()
 				/**
 				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 
 				 * an `ElasticsearchServerException` when a call resulted in an exception on the Elasticsearch server. Reasons for 

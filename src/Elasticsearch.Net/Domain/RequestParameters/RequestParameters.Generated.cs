@@ -2233,6 +2233,9 @@ namespace Elasticsearch.Net
 		///<summary>TODO: ?</summary>
 		public SegmentsRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
+		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public SegmentsRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
+		
 		///<summary>The URL-encoded request definition</summary>
 		public SegmentsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		

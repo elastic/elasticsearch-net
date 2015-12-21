@@ -1,8 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System.IO;
-using System.Text.RegularExpressions;
 
 namespace Nest
 {

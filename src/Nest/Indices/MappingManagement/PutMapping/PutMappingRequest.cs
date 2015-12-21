@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -143,7 +142,7 @@ namespace Nest
 		{
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
-			foreach (var autoProperty in autoProperties)
+			foreach (var autoProperty in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)autoProperties)
 				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,16 +9,14 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
+using ClientCall = Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	[CollectionDefinition(IntegrationContext.DeleteByQuery)]
-	public class DeleteByQueryCluster : ClusterBase, ICollectionFixture<DeleteByQueryCluster>, IClassFixture<EndpointUsage> { } 
-
-	[Collection(IntegrationContext.DeleteByQuery)]
+	[Collection(IntegrationContext.OwnIndex)]
 	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
-		public DeleteByQueryApiTests(DeleteByQueryCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values)
 		{
@@ -37,12 +34,13 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		);
 		protected override void OnAfterCall(IElasticClient client) => client.Refresh(CallIsolatedValue);
 
-		private Nest.Indices Indices => Index(CallIsolatedValue).And("x");
+		private string SecondIndex => $"{CallIsolatedValue}-clone";
+		private Nest.Indices Indices => Index(CallIsolatedValue).And(SecondIndex);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/{CallIsolatedValue},x/_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue},{SecondIndex}/_query?ignore_unavailable=true";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -70,7 +68,10 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
 			.IgnoreUnavailable()
 			.Query(q=>q
-				.Ids(ids=>ids.Types(typeof(Project)).Values(Project.Projects.First().Name, "x"))
+				.Ids(ids=>ids
+					.Types(typeof(Project))
+					.Values(Project.Projects.First().Name, "x")
+				)
 			);
 			
 		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.Indices)

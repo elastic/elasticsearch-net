@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -23,7 +19,7 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer container)
 		{
-			container.MatchAllQuery = this;
+			container.MatchAll = this;
 		}
 	}
 

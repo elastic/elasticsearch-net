@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -137,6 +136,6 @@ namespace Nest
 		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
 
 		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null) =>
-			Assign(a => a.Settings = settingsSelector?.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)));
+			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)));
 	}
 }

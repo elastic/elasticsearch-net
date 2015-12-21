@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Nest.DSL.Visitor;
 using Newtonsoft.Json;
-using Nest.QueryDsl.Visitor;
 
 namespace Nest
 {
@@ -19,10 +15,12 @@ namespace Nest
 		private IIdsQuery _ids;
 		private IConstantScoreQuery _constantScore;
 		private IDisMaxQuery _disMax;
+#pragma warning disable 618
 		private IFilteredQuery _filtered;
 		private IAndQuery _and;
 		private IOrQuery _or;
 		private INotQuery _not;
+#pragma warning restore 618
 		private ILimitQuery _limit;
 		private IMultiMatchQuery _multiMatch;
 		private IMatchQuery _match;
@@ -73,7 +71,7 @@ namespace Nest
 		string IQueryContainer.RawQuery { get; set; }
 
 		IBoolQuery IQueryContainer.Bool { get { return _b; } set { _b = Set(value); } }
-		IMatchAllQuery IQueryContainer.MatchAllQuery { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
+		IMatchAllQuery IQueryContainer.MatchAll { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
 		ITermQuery IQueryContainer.Term { get { return _term; } set { _term = Set(value); } }
 		IWildcardQuery IQueryContainer.Wildcard { get { return _wildcard; } set { _wildcard = Set(value); } }
 		IPrefixQuery IQueryContainer.Prefix { get { return _prefix; } set { _prefix = Set(value); } } 

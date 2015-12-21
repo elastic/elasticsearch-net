@@ -1,8 +1,7 @@
 ﻿using System;
 
-namespace Elasticsearch.Net.Providers
+namespace Elasticsearch.Net
 {
-	//TODO find all instantations and replace with DateTimeProvider.Default
 	public class DateTimeProvider : IDateTimeProvider
 	{
 		private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(60);

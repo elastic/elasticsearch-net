@@ -18,6 +18,7 @@ namespace Nest
 		public string Path { get { return Self.Path; } set { Self.Path = value; } }
 
 		public ObjectAttribute() : base("object") { }
-		protected ObjectAttribute(TypeName type) : base(type) { }
+		protected ObjectAttribute(string typeName) : base(typeName) { }
+		protected ObjectAttribute(Type type) : base(type) { }
 	}	
 }

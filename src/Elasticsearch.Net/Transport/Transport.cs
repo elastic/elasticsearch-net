@@ -1,30 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Elasticsearch.Net.Connection.Configuration;
-using Purify;
-using System.IO;
-using System.Collections.Specialized;
 using System.Threading;
-using Elasticsearch.Net.Extensions;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		private SemaphoreSlim _semaphore;
+		private readonly SemaphoreSlim _semaphore;
 
 		//TODO discuss which should be public
 		public TConnectionSettings Settings { get; }
 		public IDateTimeProvider DateTimeProvider { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
-		public IRequestPipelineFactory PipelineProvider { get; private set; }
+		public IRequestPipelineFactory PipelineProvider { get; }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
@@ -38,7 +27,7 @@ namespace Elasticsearch.Net.Connection
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		/// <param name="requestPipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
+		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
 		/// <param name="dateTimeProvider">The date time proved to use, safe to pass null to use the default</param>
 		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>
 		public Transport(
@@ -55,7 +44,7 @@ namespace Elasticsearch.Net.Connection
 
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
-			this.DateTimeProvider = dateTimeProvider ?? Providers.DateTimeProvider.Default;
+			this.DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 			this._semaphore = new SemaphoreSlim(1, 1);
 		}
@@ -70,7 +59,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -80,12 +69,13 @@ namespace Elasticsearch.Net.Connection
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (PipelineException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
+						exceptions.Add(exception);
+						break;
 					}
-					catch (ElasticsearchException exception)
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -93,10 +83,11 @@ namespace Elasticsearch.Net.Connection
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
@@ -111,7 +102,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
-				var exceptions = new List<ElasticsearchException>();
+				var exceptions = new List<PipelineException>();
 				foreach (var node in pipeline.NextNode())
 				{
 					requestData.Node = node;
@@ -121,12 +112,12 @@ namespace Elasticsearch.Net.Connection
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
-					catch (ElasticsearchException exception) when (!exception.Recoverable)
+					catch (PipelineException exception) when (!exception.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						exception.RethrowKeepingStackTrace();
+						break;
 					}
-					catch (ElasticsearchException exception)
+					catch (PipelineException exception)
 					{
 						pipeline.MarkDead(node);
 						exceptions.Add(exception);
@@ -134,14 +125,13 @@ namespace Elasticsearch.Net.Connection
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive(node);
-						return response;
+						break;
 					}
 				}
-				pipeline.BadResponse(ref response, requestData, exceptions);
+				if (response == null || !response.Success)
+					pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
-
-
 	}
 }

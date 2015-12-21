@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 /*
@@ -116,19 +113,19 @@ namespace Nest
 		public static implicit operator GeoLocation(string latLon)
 		{
 			var parts = latLon.Split(',');
-			if (parts.Length != 2) throw new DslException("Invalid format: string must be in the form of lat,lon");
+			if (parts.Length != 2) throw new ArgumentException("Invalid format: string must be in the form of lat,lon");
 			double lat;
 			if (!double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat))
-				throw new DslException("Invalid latitude value");
+				throw new ArgumentException("Invalid latitude value");
 			double lon;
 			if (!double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out lon))
-				throw new DslException("Invalid longitude format");
+				throw new ArgumentException("Invalid longitude value");
 			return new GeoLocation(lat, lon);
 		}
 
 		public static implicit operator GeoLocation(double[] lonLat)
 		{
-			if (lonLat.Length != 2) throw new DslException("Invalid lon,lat array, must have a length of 2");
+			if (lonLat.Length != 2) throw new ArgumentException("Invalid lon,lat array, must have a length of 2");
 			return new GeoLocation(lonLat[1], lonLat[0]);
 		}
 	}

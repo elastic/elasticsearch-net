@@ -1,11 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Nest
 {
@@ -14,9 +7,9 @@ namespace Nest
 	public class PercentilesMethodDescriptor : DescriptorBase<PercentilesMethodDescriptor, IPercentilesMethod>, IPercentilesMethod
 	{
 		public IPercentilesMethod HDRHistogram(Func<HDRHistogramMethodDescriptor, IHDRHistogramMethod> hdrSelector = null) =>
-			hdrSelector?.InvokeOrDefault(new HDRHistogramMethodDescriptor());
+			hdrSelector.InvokeOrDefault(new HDRHistogramMethodDescriptor());
 
 		public IPercentilesMethod TDigest(Func<TDigestMethodDescriptor, ITDigestMethod> tdigestSelector = null) =>
-			tdigestSelector?.InvokeOrDefault(new TDigestMethodDescriptor());
+			tdigestSelector.InvokeOrDefault(new TDigestMethodDescriptor());
 	}
 }

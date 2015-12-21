@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using System.IO;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
+	// TODO HitsTheCorrectUrl is flaky here, sometimes it fails sometimes it passes
 	[Collection(IntegrationContext.Indexing)]
 	public class RestoreApiTests 
 		: ApiIntegrationTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
@@ -18,7 +17,7 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 		{
 			_repositoryName = RandomString();
 			_snapshotName = RandomString();
-			if (!TestClient.RunIntegrationTests) return;
+			if (!TestClient.Configuration.RunIntegrationTests) return;
 
 			var createRepository = this.Client.CreateRepository(_repositoryName, r => r
 				.FileSystem(fs => fs

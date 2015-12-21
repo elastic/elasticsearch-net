@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
+using System.Linq;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
 using FluentAssertions;
 using Tests.Framework;
-using System.Linq;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -25,7 +18,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		[U] public void DefaultNowBehaviour()
 		{
-			var dateTimeProvider = new DateTimeProvider();
+			var dateTimeProvider = DateTimeProvider.Default;
 			/** dates are always returned in UTC */
 			dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
 		}
@@ -38,7 +31,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		[U] public void DeadTimeoutCalculation()
 		{
-			var dateTimeProvider = new DateTimeProvider();
+			var dateTimeProvider = DateTimeProvider.Default;
 			/**  
 			* The default timeout calculation is: `min(timeout * 2 ^ (attempts * 0.5 -1), maxTimeout)`
 			* The default values for `timeout` and `maxTimeout` are

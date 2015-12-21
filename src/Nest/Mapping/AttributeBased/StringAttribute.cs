@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace Nest
+﻿namespace Nest
 {
 	public class StringAttribute : ElasticsearchPropertyAttribute, IStringProperty
 	{

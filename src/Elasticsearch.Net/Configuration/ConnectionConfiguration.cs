@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.Connection.Security;
-using Elasticsearch.Net.Extensions;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	/// <summary>
 	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -16,7 +10,6 @@ namespace Elasticsearch.Net.Connection
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-
 		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
 		public static TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
 		public static TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
@@ -56,14 +49,11 @@ namespace Elasticsearch.Net.Connection
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
-		private TimeSpan _timeout;
-		TimeSpan IConnectionConfigurationValues.Timeout => _timeout;
+		private TimeSpan _requestTimeout;
+		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 
 		private TimeSpan? _pingTimeout;
 		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
-
-		private TimeSpan? _connectTimeout;
-		TimeSpan? IConnectionConfigurationValues.ConnectTimeout => _connectTimeout;
 
 		private TimeSpan? _deadTimeout;
 		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
@@ -122,20 +112,20 @@ namespace Elasticsearch.Net.Connection
 		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled => _traceEnabled;
 
-		private bool _httpPipeliningEnabled;
+		private bool _httpPipeliningEnabled = true;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
-		private bool _throwOnServerExceptions;
-		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
+		private bool _throwExceptions;
+		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 
 		private static void DefaultApiCallHandler(IApiCallDetails status) {}
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
-		private NameValueCollection _queryString = new NameValueCollection();
+		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
-		private NameValueCollection _headers = new NameValueCollection();
+		private readonly NameValueCollection _headers = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
 		BasicAuthenticationCredentials _basicAuthCredentials;
@@ -162,7 +152,7 @@ namespace Elasticsearch.Net.Connection
 			// ReSharper disable once VirtualMemberCallInContructor
 			this._serializer = serializer ?? this.DefaultSerializer();
 
-			this._timeout = ConnectionConfiguration.DefaultTimeout;
+			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
 			this._sniffLifeSpan = TimeSpan.FromHours(1);
@@ -214,13 +204,12 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T EnableMetrics(bool enabled = true) => Assign(a => a._enableMetrics = enabled);
 
-		//TODO this summary is most likely going out of date when we refactor exceptions
 		/// <summary>
-		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
-		/// on the client when a call resulted in an exception on the elasticsearch server. 
-		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true) => Assign(a => a._throwOnServerExceptions = alwaysThrow);
+		public T ThrowExceptions(bool alwaysThrow = true) => Assign(a => a._throwExceptions = alwaysThrow);
 
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
@@ -244,19 +233,14 @@ namespace Elasticsearch.Net.Connection
 		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		public T SetTimeout(TimeSpan timeout) => Assign(a => a._timeout = timeout);
+		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default ping timeout in milliseconds for ping requests, which are used
 		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
 		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
-		public T SetPingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
-
-		/// <summary>
-		/// Sets the default connection timeout in milliseconds.
-		/// </summary>
-		public T SetConnectTimeout(TimeSpan timeout) => Assign(a => a._connectTimeout = timeout);
+		public T PingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default dead timeout factor when a node has been marked dead.
@@ -273,9 +257,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
 		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="SetTimeout"/>
+		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
 		/// <pre>
-		/// When not specified defaults to <see cref="SetTimeout"/> which itself defaults to 60seconds
+		/// When not specified defaults to <see cref="RequestTimeout"/> which itself defaults to 60seconds
 		/// </pre>
 		/// </summary>
 		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);

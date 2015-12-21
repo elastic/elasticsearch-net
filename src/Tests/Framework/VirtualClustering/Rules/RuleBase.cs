@@ -8,7 +8,12 @@ namespace Tests.Framework
 		Union<TimesHelper.AllTimes, int> Times { get; set; }
 		int? OnPort { get; set; }
 		bool Succeeds { get; set; }
-		Func<DateTime, DateTime> Takes { get; set; }
+		TimeSpan? Takes { get; set; }
+
+		/// <summary>
+		/// Either a hard exception or soft HTTP error code
+		/// </summary>
+		Union<Exception, int> Return { get; set; }
 	}
 
 	public abstract class RuleBase<TRule> : IRule
@@ -17,8 +22,9 @@ namespace Tests.Framework
 		private IRule Self => this;
 		int? IRule.OnPort { get; set; }
 		bool IRule.Succeeds { get; set; }
-		Func<DateTime, DateTime> IRule.Takes { get; set; }
+		TimeSpan? IRule.Takes { get; set; }
 		Union<TimesHelper.AllTimes, int> IRule.Times { get; set; }
+		Union<Exception, int> IRule.Return { get; set; }
 
 		public TRule OnPort(int port)
 		{
@@ -28,15 +34,8 @@ namespace Tests.Framework
 
 		public TRule Takes(TimeSpan span)
 		{
-			Self.Takes = (d) => d.Add(span);
-			return (TRule)this;
-		}
-
-		public TRule Takes(Func<DateTime, DateTime> takes)
-		{
-			Self.Takes = takes;
+			Self.Takes = span;
 			return (TRule)this;
 		}
 	}
-
 }

@@ -1,10 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using DiffPlex;
-using DiffPlex.DiffBuilder;
-using DiffPlex.DiffBuilder.Model;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
@@ -42,7 +36,7 @@ namespace Tests.Framework
 
 	public class IntermediateChangedSettings
 	{
-		private Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
+		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
@@ -60,13 +54,11 @@ namespace Tests.Framework
 			this.Sut = sut;
 		}
 
-
 		public RoundTripper<T> WhenSerializing(T actual)
 		{
 			Sut = this.AssertSerializesAndRoundTrips(actual);
 			return this;
 		}
-
 
 		public RoundTripper<T> Result(Action<T> assert)
 		{
@@ -80,7 +72,5 @@ namespace Tests.Framework
 			assert((TOther)this.Sut);
 			return this;
 		}
-
-
 	}
 }

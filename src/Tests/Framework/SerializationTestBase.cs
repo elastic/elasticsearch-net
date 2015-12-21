@@ -2,16 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
-using DiffPlex;
-using DiffPlex.DiffBuilder;
-using DiffPlex.DiffBuilder.Model;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Elasticsearch.Net.Serialization;
-using Tests.Framework;
-using System.Text.RegularExpressions;
-using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
@@ -40,7 +34,6 @@ namespace Tests.Framework
 			if (string.IsNullOrEmpty(this._expectedJsonString))
 				throw new ArgumentNullException(nameof(this._expectedJsonString));
 		}
-
 
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
@@ -104,8 +97,9 @@ namespace Tests.Framework
 			foreach (var prop in props.OrderBy(p => p.Name))
 			{
 				jObj.Add(prop);
-				if (prop.Value is JObject)
-					Sort((JObject)prop.Value);
+				var o = prop.Value as JObject;
+				if (o != null)
+					Sort(o);
 			}
 		}
 

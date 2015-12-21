@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -32,9 +31,12 @@ namespace Tests.QueryDsl
 
 		protected override object ExpectJson => new { query = this.QueryJson };
 
-		[U] public void FluentIsNotConditionless() => 
+		[U]
+		public void FluentIsNotConditionless() =>
 			((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
-		[U] public void InitializerIsNotConditionless() => 
+
+		[U]
+		public void InitializerIsNotConditionless() =>
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -50,7 +52,19 @@ namespace Tests.QueryDsl
 
 		protected QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
-		[U] public void ConditionlessWhenExpectedToBe()
+		[U]
+		public void SeenByVisitor()
+		{
+			var visitor = new DslPrettyPrintVisitor(TestClient.CreateSettings());
+			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+			query.Accept(visitor);
+			var pretty = visitor.PrettyPrint;
+			pretty.Should().NotBeNullOrWhiteSpace();
+		}
+
+
+		[U]
+		public void ConditionlessWhenExpectedToBe()
 		{
 			if (ConditionlessWhen == null) return;
 			foreach (var when in ConditionlessWhen)
@@ -68,7 +82,8 @@ namespace Tests.QueryDsl
 
 	}
 
-	public abstract class ConditionlessWhen : List<Action<QueryContainer>> { 
+	public abstract class ConditionlessWhen : List<Action<QueryContainer>>
+	{
 	}
 	public class ConditionlessWhen<TQuery> : ConditionlessWhen where TQuery : IQuery
 	{
@@ -81,7 +96,7 @@ namespace Tests.QueryDsl
 
 		public void Add(Action<TQuery> when)
 		{
-			this.Add(q=>  Assert(q, when));
+			this.Add(q => Assert(q, when));
 		}
 
 		private void Assert(IQueryContainer c, Action<TQuery> when)

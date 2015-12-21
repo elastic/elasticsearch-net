@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Nest;
-using Xunit;
-using System.Reactive.Linq;
-using System.Threading;
+﻿using Xunit;
 
 namespace Tests.Framework.Integration
 {

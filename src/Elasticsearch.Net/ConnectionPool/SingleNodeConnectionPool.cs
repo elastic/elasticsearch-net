@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Providers;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
@@ -30,6 +28,6 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
-		public IEnumerable<Node> CreateView() => this.Nodes;
+		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 	}
 }

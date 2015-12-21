@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Elasticsearch.Net;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -51,7 +51,7 @@ namespace Nest
 				var restoreResponse = this._elasticClient.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
-					throw new RestoreException(restoreResponse.ApiCall);
+					throw new ElasticsearchClientException("Failed to restore snapshot.", restoreResponse.ApiCall);
 
 				EventHandler<RestoreNextEventArgs> onNext = (sender, args) => observer.OnNext(args.RecoveryStatusResponse);
 				EventHandler<RestoreCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -201,7 +201,7 @@ namespace Nest
 				});
 
 				if (!recoveryStatus.IsValid)
-					throw new RestoreException(recoveryStatus.ApiCall);
+					throw new ElasticsearchClientException("Failed getting recovery status.", recoveryStatus.ApiCall);
 
 				if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
 				{

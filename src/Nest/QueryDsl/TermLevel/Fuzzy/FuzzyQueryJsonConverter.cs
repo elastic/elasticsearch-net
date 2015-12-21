@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -43,7 +42,7 @@ namespace Nest
 				fq = new FuzzyDateQuery()
 				{
 					Value = GetPropValue<DateTime?>(jo, "value"),
-					Fuzziness = GetPropObject<TimeUnitExpression>(jo, "fuzziness")
+					Fuzziness = GetPropObject<Time>(jo, "fuzziness")
 				};
 			}
 			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)

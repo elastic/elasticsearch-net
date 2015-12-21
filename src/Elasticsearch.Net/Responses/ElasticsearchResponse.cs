@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Extensions;
 
 namespace Elasticsearch.Net
 {
@@ -12,8 +10,8 @@ namespace Elasticsearch.Net
 		public static readonly string PrintFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
 		public static readonly string ErrorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
 		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
-
 	}
+
 	public class ElasticsearchResponse<T> : IApiCallDetails
 	{
 		public bool Success { get; }
@@ -46,15 +44,17 @@ namespace Elasticsearch.Net
 
 		public Exception OriginalException { get; protected internal set; }
 
+		public ServerError ServerError { get; internal set; }
+
 		public ElasticsearchResponse(Exception e)
 		{
 			this.Success = false;
 			this.OriginalException = e;
 		}
 
-		public ElasticsearchResponse(int statusCode)
+		public ElasticsearchResponse(int statusCode, IEnumerable<int> allowedStatusCodes)
 		{
-			this.Success = statusCode >= 200 && statusCode < 300;
+			this.Success = statusCode >= 200 && statusCode < 300 || allowedStatusCodes.Contains(statusCode);
 			this.HttpStatusCode = statusCode;
 		}
 

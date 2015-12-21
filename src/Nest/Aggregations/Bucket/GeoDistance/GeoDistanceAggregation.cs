@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
@@ -18,7 +17,7 @@ namespace Nest
 		GeoLocation Origin { get; set; }
 
 		[JsonProperty("unit")]
-		GeoPrecision? Unit { get; set; }
+		DistanceUnit? Unit { get; set; }
 
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
@@ -33,7 +32,7 @@ namespace Nest
 
 		public GeoLocation Origin { get; set; }
 
-		public GeoPrecision? Unit { get; set; }
+		public DistanceUnit? Unit { get; set; }
 
 		public GeoDistanceType? DistanceType { get; set; }
 
@@ -55,7 +54,7 @@ namespace Nest
 
 		GeoLocation IGeoDistanceAggregation.Origin { get; set; }
 
-		GeoPrecision? IGeoDistanceAggregation.Unit { get; set; }
+		DistanceUnit? IGeoDistanceAggregation.Unit { get; set; }
 
 		GeoDistanceType? IGeoDistanceAggregation.DistanceType { get; set; }
 
@@ -69,7 +68,7 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(GeoPrecision unit) => Assign(a => a.Unit = unit);
+		public GeoDistanceAggregationDescriptor<T> Unit(DistanceUnit unit) => Assign(a => a.Unit = unit);
 
 		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistanceType? geoDistance) => Assign(a => a.DistanceType = geoDistance);
 

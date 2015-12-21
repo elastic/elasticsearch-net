@@ -1,12 +1,11 @@
-﻿using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -56,5 +55,5 @@ namespace Nest
         {
             return ((IEnumerable<Field>)this.ListOfFields).GetEnumerator();
         }
-    }
+	}
 }

@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Nest 
 {
@@ -28,7 +27,12 @@ namespace Nest
 		public SimilarityOption Similarity { get { return Self.Similarity.GetValueOrDefault(); } set { Self.Similarity = value; } }
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
 
-		public ElasticsearchPropertyAttribute(TypeName type)
+        protected ElasticsearchPropertyAttribute(string typeName)
+        {
+            Self.Type = typeName;
+        }
+
+		protected ElasticsearchPropertyAttribute(Type type)
 		{
 			Self.Type = type;
 		}

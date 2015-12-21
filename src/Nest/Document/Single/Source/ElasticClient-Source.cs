@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -27,11 +24,6 @@ namespace Nest
 		Task<T> SourceAsync<T>(ISourceRequest request) where T : class;
 
 	}
-
-	//TODO I Deleted SourceExtensions, when we introduced Document as a parameter folks can do 
-	//Source(Document.Index("a").Type("x").Id("1"), s=>s)
-	//Source(Document.Infer(doc), s=>s)
-	//Source(Document.Index<T>().Type<TOptional>().Id(2), s=>s)
 
 	public partial class ElasticClient
 	{

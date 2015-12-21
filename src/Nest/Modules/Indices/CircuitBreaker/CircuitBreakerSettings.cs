@@ -1,6 +1,3 @@
-using System;
-using System.Reflection;
-
 namespace Nest
 {
 	public interface ICircuitBreakerSettings

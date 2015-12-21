@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Extensions;
-using Elasticsearch.Net.Providers;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public class SniffingConnectionPool : StaticConnectionPool
 	{
@@ -63,12 +60,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override IEnumerable<Node> CreateView()
+		public override IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.CreateView();
+				return base.CreateView(audit);
 			}
 			finally
 			{

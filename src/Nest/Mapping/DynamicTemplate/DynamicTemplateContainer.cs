@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<DynamicTemplateContainer, string, IDynamicTemplate>))]
+	[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
 	public interface IDynamicTemplateContainer : IIsADictionary<string, IDynamicTemplate> { }
+
 	public class DynamicTemplateContainer : IsADictionary<string, IDynamicTemplate>, IDynamicTemplateContainer
 	{
 		public DynamicTemplateContainer() : base() { }

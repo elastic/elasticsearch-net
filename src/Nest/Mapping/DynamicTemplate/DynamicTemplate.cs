@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -27,7 +26,7 @@ namespace Nest
 		IProperty Mapping { get; set; }
 	}
 
-	public class DynamicTemplate
+	public class DynamicTemplate : IDynamicTemplate
 	{
 		public string Match { get; set; }
 

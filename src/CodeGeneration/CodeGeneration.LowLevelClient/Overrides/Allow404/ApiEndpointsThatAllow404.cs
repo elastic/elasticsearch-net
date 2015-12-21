@@ -13,7 +13,7 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 			"IndexExists",
 			"SearchExists",
 			"AliasExists",
-			"TemplateExists",
+			"IndexTemplateExists",
 			"TypeExists",
 			"Exists",
 			"Get"

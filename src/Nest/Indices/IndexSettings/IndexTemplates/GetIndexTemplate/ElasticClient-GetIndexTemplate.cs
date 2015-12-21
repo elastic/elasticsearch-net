@@ -67,7 +67,7 @@ namespace Nest
 
 			var dict = this.Serializer.Deserialize<Dictionary<string, TemplateMapping>>(stream);
 			if (dict.Count == 0)
-				throw new DslException("Could not deserialize TemplateMapping");
+				throw new ElasticsearchClientException("Could not deserialize TemplateMapping");
 
 			return new GetIndexTemplateResponse
 			{
