@@ -20,7 +20,7 @@ if not exist build\tools\gitlink\lib\net45\gitlink.exe (
 REM we need nunit-console to run our tests
 if not exist build\tools\NUnit.Runners\tools\nunit-console.exe (
     ECHO Nunit not found.. Installing
-    "build\tools\nuget\nuget.exe" "install" "NUnit.Runners" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+    "build\tools\nuget\nuget.exe" "install" "NUnit.Runners" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Version" "2.6.4.0"
 )
 
 REM we need wintersmith to build our documentation which in turn needs npm/node
