@@ -8,8 +8,7 @@ namespace Elasticsearch.Net
 {
 	public class InMemoryConnection : HttpConnection
 	{
-		private static readonly byte[] FixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
-		private readonly byte[] _fixedBytes;
+		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 
 		public List<Tuple<string, Uri, PostData<object>>> Requests = new List<Tuple<string, Uri, PostData<object>>>(); 
@@ -19,31 +18,29 @@ namespace Elasticsearch.Net
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(string fixedResult, int statusCode = 200) 
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200) 
 		{
-			_fixedBytes = Encoding.UTF8.GetBytes(fixedResult);
+			_responseBody = responseBody;
 			_statusCode = statusCode;
 		}
 
 		public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) =>
-			Task.FromResult(this.ReturnConnectionStatus<TReturn>(requestData, hasResponseStream: false));
+			Task.FromResult(this.ReturnConnectionStatus<TReturn>(requestData));
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) => 
-			this.ReturnConnectionStatus<TReturn>(requestData, hasResponseStream: false);
+			this.ReturnConnectionStatus<TReturn>(requestData);
 
-		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null, int? statusCode = null, bool hasResponseStream = true)
+		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
 			where TReturn : class
 		{
+			var body = responseBody ?? _responseBody;
 			var builder = new ResponseBuilder(requestData)
 			{
 				StatusCode = statusCode ?? this._statusCode,
-				Stream = hasResponseStream || _fixedBytes != null
-                    ? new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes)
-                    : null
+				Stream = (body != null) ? new MemoryStream(body) : null
 			};
 			var cs = builder.ToResponse<TReturn>();
 			return cs;
 		}
-
 	}
 }
