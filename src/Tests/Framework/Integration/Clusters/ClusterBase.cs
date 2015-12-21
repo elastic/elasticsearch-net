@@ -5,7 +5,7 @@ namespace Tests.Framework.Integration
 {
 	public abstract class ClusterBase : IIntegrationCluster, IDisposable
 	{
-		protected virtual bool DoNotSpawnIfAlreadyRunning => TestClient.Configuration.ForceReseed;
+		protected virtual bool DoNotSpawnIfAlreadyRunning => TestClient.Configuration.DoNotSpawnIfAlreadyRunning;
 		public ElasticsearchNode Node { get; }
 		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
 

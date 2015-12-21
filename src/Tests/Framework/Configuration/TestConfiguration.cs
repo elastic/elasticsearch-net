@@ -7,7 +7,7 @@ namespace Tests.Framework.Configuration
 	public class TestConfiguration
 	{
 		public TestMode Mode { get; private set; } = TestMode.Unit;
-		public string ElasticsearchVersion { get; private set; } = "2.0.01";
+		public string ElasticsearchVersion { get; private set; } = "2.0.0";
 		public bool ForceReseed { get; private set; } = false;
 		public bool DoNotSpawnIfAlreadyRunning { get; private set; } = true;
 
