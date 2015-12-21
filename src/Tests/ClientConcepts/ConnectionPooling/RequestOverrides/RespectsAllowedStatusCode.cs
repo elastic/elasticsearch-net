@@ -26,7 +26,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 					{ BadResponse, 9200 }
 				},
 				new ClientCall(r => r.AllowedStatusCodes(400)) {
-					{ HealthyResponse, 9202 }
+					{ HealthyResponse, 9201 }
 				}
 			);
 		}

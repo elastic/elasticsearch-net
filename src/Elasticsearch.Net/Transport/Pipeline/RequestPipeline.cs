@@ -297,11 +297,13 @@ namespace Elasticsearch.Net
 
 		private void ContinueIfValidOtherwiseThrow<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
+			//TODO TEST
 			if (response.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException);
 
-			if (!response.Success)
-				throw new PipelineException(PipelineFailure.BadResponse, response.OriginalException);
+
+			//if (!response.Success)
+			//	throw new PipelineException(PipelineFailure.BadResponse, response.OriginalException);
 		}
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
@@ -391,6 +393,7 @@ namespace Elasticsearch.Net
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
 					ContinueIfValidOtherwiseThrow(response);
+					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
 				catch (PipelineException e)
@@ -421,6 +424,7 @@ namespace Elasticsearch.Net
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
 					ContinueIfValidOtherwiseThrow(response);
+					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
 				catch (PipelineException e)
