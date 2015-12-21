@@ -58,7 +58,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				new ClientCall { { HealthyResponse, 9209 } },
 				new ClientCall {
 					{ HealthyResponse, 9200 },
-                    { pool => pool.Nodes.Count.Should().Be(10) }
+					{ pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);
 			/** Now let's forward the clock 31 minutes, our sniff lifespan should now go state
@@ -71,19 +71,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					{ SniffOnStaleCluster },
 					{ SniffSuccess, 9202 },
 					{ HealthyResponse, 9201 },
-                    { pool => pool.Nodes.Count.Should().Be(100) }
+					{ pool => pool.Nodes.Count.Should().Be(100) }
 				}
 			);
 
 			audit.ChangeTime(d => d.AddMinutes(31));
 			audit = await audit.TraceCalls(
 				new ClientCall {
-					//TODO discuss with @gmarz prefering master nodes is good, always picking the first though?
 					/** a sniff is done first and it prefers the first node master node */
 					{ SniffOnStaleCluster },
 					{ SniffSuccess, 9202 },
 					{ HealthyResponse, 9200 },
-                    { pool => pool.Nodes.Count.Should().Be(10) }
+					{ pool => pool.Nodes.Count.Should().Be(10) }
 				}
 			);
 		}

@@ -11,8 +11,7 @@ namespace Nest
 		public string Alias { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		public QueryContainer QueryDescriptor { get; set; }
+		public QueryContainer Filter { get; set; }
 
 		[JsonProperty("routing")]
 		public string Routing { get; set; }
