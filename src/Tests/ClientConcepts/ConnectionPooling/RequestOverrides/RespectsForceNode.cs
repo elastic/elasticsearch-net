@@ -13,7 +13,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		* request configuration. This will ignore the pool and not retry.
 		*/
 
-		[U] public async Task DefaultMaxIsNumberOfNodes()
+		[U] public async Task OnlyCallsForcedNode()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
