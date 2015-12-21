@@ -13,7 +13,10 @@ namespace Elasticsearch.Net
 		public bool Recoverable => FailureReason == PipelineFailure.BadResponse || FailureReason == PipelineFailure.Unexpected || FailureReason == PipelineFailure.BadPing;
 
 		public PipelineException(PipelineFailure failure)
-			: base(failure.ToMessage()) { }
+			: base(failure.ToMessage())
+		{
+			this.FailureReason = failure;
+		}
 
 		public PipelineException(PipelineFailure failure, Exception innerException) 
 			: base(failure.ToMessage(), innerException)
