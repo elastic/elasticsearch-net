@@ -55,11 +55,11 @@ namespace Tests.Framework
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
 			var serializer = new NestSerializer(new ConnectionSettings());
-			string fixedResult;
+			byte[] fixedResult;
 			using (var ms = new MemoryStream())
 			{
 				serializer.Serialize(responseJson, ms);
-				fixedResult =Encoding.UTF8.GetString(ms.ToArray());
+				fixedResult = ms.ToArray();
 			}
 			var connection = new InMemoryConnection(fixedResult);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
