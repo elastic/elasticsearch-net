@@ -9,25 +9,31 @@ namespace Elasticsearch.Net
 	public class PipelineException : Exception
 	{
 		public PipelineFailure FailureReason { get; }
-		
-		public bool Recoverable => FailureReason == PipelineFailure.BadResponse || FailureReason == PipelineFailure.Unexpected || FailureReason == PipelineFailure.BadPing;
+
+		public bool Recoverable =>
+			FailureReason == PipelineFailure.BadResponse ||
+			FailureReason == PipelineFailure.Unexpected ||
+			FailureReason == PipelineFailure.BadPing;
 
 		public PipelineException(PipelineFailure failure)
-			: base(failure.ToMessage())
+			: base(GetMessage(failure))
 		{
 			this.FailureReason = failure;
+		}
+
+		public PipelineException(string message)
+			: base(message)
+		{
+			this.FailureReason = PipelineFailure.BadResponse;
 		}
 
 		public PipelineException(PipelineFailure failure, Exception innerException) 
-			: base(failure.ToMessage(), innerException)
+			: base(GetMessage(failure), innerException)
 		{
 			this.FailureReason = failure;
 		}
-	}
 
-	public static class PipelineFailureExtensions
-	{
-		public static string ToMessage(this PipelineFailure failure)
+		private static string GetMessage(PipelineFailure failure)
 		{
 			switch(failure)
 			{
