@@ -21,17 +21,10 @@ namespace Nest
 		QueryContainer NoMatchQuery { get; set; }
 	}
 
-	public class NoMatchQueryContainer : QueryContainer, ICustomJson
+	public class NoMatchQueryContainer : QueryContainer
 	{
 		public NoMatchShortcut? Shortcut { get; set; }
 
-		object ICustomJson.GetCustomJson()
-		{
-			if (this.Shortcut.HasValue) return this.Shortcut;
-			var f = ((IQueryContainer)this);
-			if (f.RawQuery.IsNullOrEmpty()) return f;
-			return new RawJson(f.RawQuery);
-		}
 		public static implicit operator NoMatchQueryContainer(NoMatchShortcut shortcut) => new NoMatchQueryContainer { Shortcut = shortcut };
 	}
 

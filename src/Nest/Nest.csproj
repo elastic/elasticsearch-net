@@ -242,6 +242,7 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
     <Compile Include="Indices\Warmers\GetWarmer\GetWarmerResponseConverter.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerRequestJsonConverter.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
@@ -635,7 +636,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
-    <Compile Include="CommonAbstractions\RawJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
@@ -671,6 +671,7 @@
     <Compile Include="QueryDsl\Visitor\QueryWalker.cs" />
     <Compile Include="QueryDsl\Visitor\QueryVisitor.cs" />
     <Compile Include="QueryDsl\Visitor\VisitorScope.cs" />
+    <Compile Include="Search\Suggesters\Suggest\SuggestRequestJsonConverter.cs" />
     <Compile Include="_Generated\_Descriptors.generated.cs" />
     <Compile Include="_Generated\_Requests.generated.cs" />
     <Compile Include="Cluster\ClusterReroute\ElasticClient-ClusterReroute.cs" />
@@ -1071,7 +1072,6 @@
     <Compile Include="Mapping\TermVectorOption.cs" />
     <Compile Include="Mapping\FieldIndexOption.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
-    <Compile Include="CommonAbstractions\RawJson\CustomJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />

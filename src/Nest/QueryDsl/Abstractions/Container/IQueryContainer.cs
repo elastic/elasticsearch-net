@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReserializeJsonConverter<QueryContainer, IQueryContainer>))]
-	public interface IQueryContainer : ICustomJson
+	public interface IQueryContainer 
 	{
 		[JsonIgnore]
 		bool IsConditionless { get; }
