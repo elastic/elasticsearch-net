@@ -67,7 +67,7 @@ namespace Elasticsearch.Net
 					try
 					{
 						pipeline.SniffOnStaleCluster();
-						pipeline.Ping(node);
+						Ping(pipeline, node, seenExceptions);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 						if (!response.SuccessOrKnownError)
 						{
@@ -124,7 +124,7 @@ namespace Elasticsearch.Net
 					try
 					{
 						await pipeline.SniffOnStaleClusterAsync();
-						await pipeline.PingAsync(node);
+						await PingAsync(pipeline, node, seenExceptions);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 						if (!response.SuccessOrKnownError)
 						{
@@ -163,5 +163,32 @@ namespace Elasticsearch.Net
 				return response;
 			}
 		}
+
+		private static void Ping(IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
+		{
+			try
+			{
+				pipeline.Ping(node);
+			}
+			catch (PipelineException e) when (e.Recoverable)
+			{
+				pipeline.SniffOnConnectionFailure();
+				e.RethrowKeepingStackTrace();
+			}
+		}
+
+		private static async Task PingAsync(IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
+		{
+			try
+			{
+				await pipeline.PingAsync(node);
+			}
+			catch (PipelineException e) when (e.Recoverable)
+			{
+				await pipeline.SniffOnConnectionFailureAsync();
+				e.RethrowKeepingStackTrace();
+			}
+		}
+
 	}
 }

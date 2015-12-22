@@ -242,7 +242,9 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = this._connection.Request<VoidResponse>(pingData);
-					ContinueIfValidOtherwiseThrow(response);
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
+					//ping should not silently accept bad but valid http responses
+					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
 				}
 				catch (Exception e)
 				{
@@ -262,7 +264,9 @@ namespace Elasticsearch.Net
 				{
 					var pingData = CreatePingRequestData(node, audit);
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
-					ContinueIfValidOtherwiseThrow(response);
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
+					//ping should not silently accept bad but valid http responses
+					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
 				}
 				catch (Exception e)
 				{
@@ -272,7 +276,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private void ContinueIfValidOtherwiseThrow<TReturn>(ElasticsearchResponse<TReturn> response)
+		private void ThrowBadAuthPipelineExceptionWhenNeeded<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
 			//TODO TEST
 			if (response.HttpStatusCode == 401)
@@ -313,12 +317,9 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
-						ContinueIfValidOtherwiseThrow(response);
-						if (!response.Success)
-						{
-							audit.Event = SniffFailure;
-							continue;
-						}
+						ThrowBadAuthPipelineExceptionWhenNeeded(response);
+						//sniff should not silently accept bad but valid http responses
+						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -348,12 +349,9 @@ namespace Elasticsearch.Net
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
-						ContinueIfValidOtherwiseThrow(response);
-						if (!response.Success)
-						{
-							audit.Event = SniffFailure;
-							continue;
-						}
+						ThrowBadAuthPipelineExceptionWhenNeeded(response);
+						//sniff should not silently accept bad but valid http responses
+						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
@@ -381,7 +379,7 @@ namespace Elasticsearch.Net
 				{
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					ContinueIfValidOtherwiseThrow(response);
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
@@ -406,7 +404,7 @@ namespace Elasticsearch.Net
 				{
 					response = await this._connection.RequestAsync<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
-					ContinueIfValidOtherwiseThrow(response);
+					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
