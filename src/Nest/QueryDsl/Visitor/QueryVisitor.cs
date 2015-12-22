@@ -93,6 +93,7 @@
 		void Visit(IGeoShapeLineStringQuery query);
 		void Visit(IGeoShapeEnvelopeQuery query);
 		void Visit(IGeoShapeCircleQuery query);
+		void Visit(IRawQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -233,5 +234,7 @@
 		public virtual void Visit(IGeoBoundingBoxQuery query) { }
 
 		public virtual void Visit(IExistsQuery query) { }
+
+		public virtual void Visit(IRawQuery query) { }
 	}
 }

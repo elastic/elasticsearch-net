@@ -54,7 +54,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="rawJson"></param>
 		/// <returns></returns>
-		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = rawJson);
+		public QueryContainer Raw(string rawJson) => Assign(a => a.RawQuery = new RawQueryDescriptor().Raw(rawJson));
 
 		/// <summary>
 		/// A query that uses a query parser in order to parse its content.

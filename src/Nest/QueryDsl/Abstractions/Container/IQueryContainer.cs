@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReserializeJsonConverter<QueryContainer, IQueryContainer>))]
+	[JsonConverter(typeof(QueryContainerJsonConverter))]
 	public interface IQueryContainer 
 	{
 		[JsonIgnore]
@@ -16,7 +16,7 @@ namespace Nest
 		bool IsVerbatim { get; set; }
 		
 		[JsonIgnore]
-		string RawQuery { get; set; }
+		IRawQuery RawQuery { get; set; }
 		
 		[JsonProperty("bool")]
 		IBoolQuery Bool { get; set; }

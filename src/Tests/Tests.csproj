@@ -387,6 +387,8 @@
     <Compile Include="QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\Distance\DistanceUnits.doc.cs" />
+    <Compile Include="QueryDsl\NestSpecific\Raw\RawCombineUsageTests.cs" />
+    <Compile Include="QueryDsl\NestSpecific\Raw\RawQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Missing\MissingQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQueryUsageTests.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQueryUsageTests.cs" />
