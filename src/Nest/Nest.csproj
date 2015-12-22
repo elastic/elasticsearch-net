@@ -298,6 +298,7 @@
     <Compile Include="Modules\Indices\Recovery\IndicesRecoverySettings.cs" />
     <Compile Include="Modules\Indices\TtlInterval\TtlIntervalSettings.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryJsonConverter.cs" />
+    <Compile Include="QueryDsl\Abstractions\Container\QueryContainerJsonConverter.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\IQueryContainer.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainer-Assignments.cs" />
     <Compile Include="QueryDsl\Compound\Limit\LimitQuery.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
+    <Compile Include="QueryDsl\NestSpecific\RawQuery.cs" />
     <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\Like.cs" />
@@ -831,7 +833,7 @@
     <Compile Include="CommonAbstractions\LowLevelDispatch\LowLevelDispatch.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionProperty.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
-    <Compile Include="QueryDsl\ConditionlessQuery.cs" />
+    <Compile Include="QueryDsl\NestSpecific\ConditionlessQuery.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQuery.cs" />
     <Compile Include="Mapping\DynamicMapping.cs" />
