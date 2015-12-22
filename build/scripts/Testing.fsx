@@ -48,7 +48,7 @@ module Tests =
                         HtmlOutputPath = Some <| htmlOutput 
                 })
 
-    let Notify = fun _ -> 
+    let NotifyReal = fun _ ->
         match fileExists xmlOutput with
         | false -> ignore
         | _ ->
@@ -86,6 +86,11 @@ module Tests =
                 printfn "%s" errorMessage
                 Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
                 ignore
+
+    let Notify = fun _ -> 
+        match isLocalBuild with
+        | false -> ignore
+        | _ -> NotifyReal()
 
     let RunContinuous = fun _ ->
         ActivateBuildFailureTarget "NotifyTestFailures"
