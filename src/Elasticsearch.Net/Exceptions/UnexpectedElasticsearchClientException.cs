@@ -8,7 +8,7 @@ namespace Elasticsearch.Net
 		public List<PipelineException> SeenExceptions { get; set; }
 
 		public UnexpectedElasticsearchClientException(Exception killerException, List<PipelineException> seenExceptions)
-			: base(Elasticsearch.Net.PipelineFailure.Unexpected,"An unexpected exception occured.", killerException)
+			: base(PipelineFailure.Unexpected, killerException?.Message ?? "An unexpected exception occured.", killerException)
 		{
 			this.SeenExceptions = seenExceptions;
 		}

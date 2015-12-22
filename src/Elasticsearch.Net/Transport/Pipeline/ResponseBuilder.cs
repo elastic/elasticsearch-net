@@ -73,7 +73,8 @@ namespace Elasticsearch.Net
 			}
 			else if (response.SuccessOrKnownError)
 			{
-				response.ServerError = new ElasticsearchDefaultSerializer().Deserialize<ServerError>(stream);
+				// TODO fix ServerError deserialization
+				//response.ServerError = new ElasticsearchDefaultSerializer().Deserialize<ServerError>(stream);
 			}
 		}
 
@@ -97,7 +98,8 @@ namespace Elasticsearch.Net
 			}
 			else if (response.SuccessOrKnownError)
 			{
-				response.ServerError = await new ElasticsearchDefaultSerializer().DeserializeAsync<ServerError>(stream, this._requestData.CancellationToken);
+				// TODO fix ServerError deserialization
+				//response.ServerError = await new ElasticsearchDefaultSerializer().DeserializeAsync<ServerError>(stream, this._requestData.CancellationToken);
 			}
 		}
 
