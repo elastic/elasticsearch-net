@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework.MockResponses;
+using System.Net;
 
 namespace Tests.Framework
 {
@@ -41,38 +42,46 @@ namespace Tests.Framework
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
 			this.Calls.Should().ContainKey(requestData.Uri.Port);
-
-			var state = this.Calls[requestData.Uri.Port];
-			if (IsSniffRequest(requestData))
+			try
 			{
-				var sniffed = Interlocked.Increment(ref state.Sniffed);
-				return HandleRules<TReturn, ISniffRule>(
+				var state = this.Calls[requestData.Uri.Port];
+				if (IsSniffRequest(requestData))
+				{
+					var sniffed = Interlocked.Increment(ref state.Sniffed);
+					return HandleRules<TReturn, ISniffRule>(
+						requestData,
+						this._cluster.SniffingRules,
+						requestData.RequestTimeout,
+						(r) => this.UpdateCluster(r.NewClusterState),
+						() => SniffResponse.Create(this._cluster.Nodes)
+					);
+				}
+				if (IsPingRequest(requestData))
+				{
+					var pinged = Interlocked.Increment(ref state.Pinged);
+					return HandleRules<TReturn, IRule>(
+						requestData,
+						this._cluster.PingingRules,
+						requestData.PingTimeout,
+						(r) => { },
+						() => null //HEAD request
+					);
+				}
+				var called = Interlocked.Increment(ref state.Called);
+				return HandleRules<TReturn, IClientCallRule>(
 					requestData,
-					this._cluster.SniffingRules,
+					this._cluster.ClientCallRules,
 					requestData.RequestTimeout,
-					(r) => this.UpdateCluster(r.NewClusterState),
-					() => SniffResponse.Create(this._cluster.Nodes)
-				);
-			}
-			if (IsPingRequest(requestData))
-			{
-				var pinged = Interlocked.Increment(ref state.Pinged);
-				return HandleRules<TReturn, IRule>(
-					requestData,
-					this._cluster.PingingRules,
-					requestData.PingTimeout,
 					(r) => { },
-					() => null //HEAD request
+					CallResponse
 				);
 			}
-			var called = Interlocked.Increment(ref state.Called);
-			return HandleRules<TReturn, IClientCallRule>(
-				requestData,
-				this._cluster.ClientCallRules,
-				requestData.RequestTimeout,
-				(r) => { },
-				CallResponse 
-			);
+			catch (WebException e)
+			{
+				var builder = new ResponseBuilder(requestData);
+				builder.Exception = e;
+				return builder.ToResponse<TReturn>();
+			}
 		}
 
 		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
@@ -157,7 +166,7 @@ namespace Tests.Framework
 			return rule.Return.Match(
 				(e) =>
 				{
-					throw e;
+					throw new WebException();
 				},
 				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
 			);

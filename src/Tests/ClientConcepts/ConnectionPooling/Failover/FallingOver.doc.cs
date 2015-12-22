@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
-				.ClientCalls(r => r.FailAlways(new Exception("Boo!")))
+				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
