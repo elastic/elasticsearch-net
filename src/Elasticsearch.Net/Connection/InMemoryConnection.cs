@@ -34,12 +34,12 @@ namespace Elasticsearch.Net
 			where TReturn : class
 		{
 			var body = responseBody ?? _responseBody;
-			var builder = new ResponseBuilder(requestData)
+			var builder = new ResponseBuilder<TReturn>(requestData)
 			{
 				StatusCode = statusCode ?? this._statusCode,
 				Stream = (body != null) ? new MemoryStream(body) : null
 			};
-			var cs = builder.ToResponse<TReturn>();
+			var cs = builder.ToResponse();
 			return cs;
 		}
 	}

@@ -78,9 +78,9 @@ namespace Tests.Framework
 			}
 			catch (WebException e)
 			{
-				var builder = new ResponseBuilder(requestData);
+				var builder = new ResponseBuilder<TReturn>(requestData);
 				builder.Exception = e;
-				return builder.ToResponse<TReturn>();
+				return builder.ToResponse();
 			}
 		}
 

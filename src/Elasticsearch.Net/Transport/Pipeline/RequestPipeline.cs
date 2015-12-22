@@ -449,7 +449,7 @@ namespace Elasticsearch.Net
 			if (_settings.ThrowExceptions) throw clientException;
 
 			if (response == null)
-				response = new ResponseBuilder(data) { Exception = clientException }.ToResponse<TReturn>();
+				response = new ResponseBuilder<TReturn>(data) { Exception = clientException }.ToResponse();
 
 			response.AuditTrail = this.AuditTrail;
 		}

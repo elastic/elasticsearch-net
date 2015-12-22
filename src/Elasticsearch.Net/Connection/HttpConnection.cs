@@ -113,8 +113,7 @@ namespace Elasticsearch.Net
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
-			var builder = new ResponseBuilder(requestData);
-
+			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
@@ -145,13 +144,12 @@ namespace Elasticsearch.Net
 				HandleException(builder, e);
 			}
 
-			return builder.ToResponse<TReturn>();
+			return builder.ToResponse();
 		}
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			var builder = new ResponseBuilder(requestData);
-
+			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
@@ -182,10 +180,11 @@ namespace Elasticsearch.Net
 				HandleException(builder, e);
 			}
 
-			return await builder.ToResponseAsync<TReturn>();
+			return await builder.ToResponseAsync();
 		}
 
-		private void HandleException(ResponseBuilder builder, WebException exception)
+		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)
+			where TReturn : class
 		{
 			builder.Exception = exception;
 			var response = exception.Response as HttpWebResponse;
