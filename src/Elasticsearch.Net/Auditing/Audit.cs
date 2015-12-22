@@ -9,6 +9,7 @@ namespace Elasticsearch.Net
 		public DateTime Ended { get; internal set; }
 		public Node Node { get; internal set; }
 		public string Path { get; internal set; }
+		public Exception Exception { get; internal set; }
 
 		public Audit(AuditEvent type, DateTime occured)
 		{

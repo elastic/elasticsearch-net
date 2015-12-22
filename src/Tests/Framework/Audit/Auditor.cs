@@ -30,6 +30,9 @@ namespace Tests.Framework
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
+		public List<Audit> AsyncAuditTrail { get; set; }
+		public List<Audit> AuditTrail { get; set; }
+
 		public void ChangeTime(Func<DateTime, DateTime> selector)
 		{
 			this._cluster  = _cluster ?? this.Cluster();
@@ -44,10 +47,12 @@ namespace Tests.Framework
 			this._cluster  = _cluster ?? this.Cluster();
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
 			this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides);
+			this.AuditTrail = this.Response.ApiCall.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
 			this.ResponseAsync = await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			this.AsyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
@@ -55,18 +60,47 @@ namespace Tests.Framework
 		public async Task<Auditor> TraceCall(ClientCall callTrace, int nthCall = 0)
 		{
 			await this.TraceStartup(callTrace);
-			var auditTrail = this.Response.ApiCall.AuditTrail;
-			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
+			return AssertAuditTrails(callTrace, nthCall);
+		}
 
-			auditTrail.Count.Should().Be(asyncAuditTrail.Count, "calling async should have the same audit trail length as the sync call");
+		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
+		{
+			this._cluster  = _cluster ?? this.Cluster();
+			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
 
-			AssertTrailOnResponse(callTrace, auditTrail, true, nthCall);
-			AssertTrailOnResponse(callTrace, asyncAuditTrail, false, nthCall);
+			Action call = () => this._cluster.ClientCall(callTrace?.RequestOverrides);
+			var exception = call.ShouldThrowExactly<UnexpectedElasticsearchClientException>()
+				.Subject.First();
+			assert(exception);
+
+			this.AuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
+
+			this._clusterAsync = _clusterAsync ?? this.Cluster();
+			Func<Task> callAsync = async () => await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			exception = callAsync.ShouldThrowExactly<UnexpectedElasticsearchClientException>()
+				.Subject.First();
+			assert(exception);
+
+			this.AsyncAuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
+			return new Auditor(_cluster, _clusterAsync);
+		}
+
+		private Auditor AssertAuditTrails(ClientCall callTrace, int nthCall)
+		{
+			this.AuditTrail.Count.Should()
+				.Be(this.AsyncAuditTrail.Count, "calling async should have the same audit trail length as the sync call");
+
+			AssertTrailOnResponse(callTrace, this.AuditTrail, true, nthCall);
+			AssertTrailOnResponse(callTrace, this.AuditTrail, false, nthCall);
 
 			callTrace?.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 			callTrace?.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
+
+
 		public async Task<Auditor> TraceCalls(params ClientCall[] audits)
 		{
 			var auditor = this;

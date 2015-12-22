@@ -10,6 +10,7 @@ namespace Elasticsearch.Net
 
 		public Node Node { set { this._audit.Node = value; } }
 		public AuditEvent Event { set { this._audit.Event = value; } }
+		public Exception Exception { set { this._audit.Exception = value; } }
 		public string Path { set { this._audit.Path = value; } }
 
 		public Auditable(AuditEvent type, List<Audit> auditTrail, IDateTimeProvider dateTimeProvider)

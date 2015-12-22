@@ -162,11 +162,11 @@ namespace Tests.Framework
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			if (rule.Return == null)
-				throw new Exception();
+				throw new WebException();
 			return rule.Return.Match(
 				(e) =>
 				{
-					throw new WebException();
+					throw e;
 				},
 				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
 			);

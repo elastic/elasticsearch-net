@@ -249,7 +249,8 @@ namespace Elasticsearch.Net
 				catch (Exception e)
 				{
 					audit.Event = PingFailure;
-					throw new PipelineException(PipelineFailure.BadPing, e);
+					audit.Exception = e;
+					throw new PipelineException(PipelineFailure.PingFailure, e);
 				}
 			}
 		}
@@ -271,7 +272,8 @@ namespace Elasticsearch.Net
 				catch (Exception e)
 				{
 					audit.Event = PingFailure;
-					throw new PipelineException(PipelineFailure.BadPing, e);
+					audit.Exception = e;
+					throw new PipelineException(PipelineFailure.PingFailure, e);
 				}	
 			}
 		}
@@ -328,12 +330,13 @@ namespace Elasticsearch.Net
 					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
+						audit.Exception = e;
 						exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
 		}
 
 		public async Task SniffAsync()
@@ -359,12 +362,13 @@ namespace Elasticsearch.Net
 					catch (Exception e)
 					{
 						audit.Event = SniffFailure;
+						audit.Exception = e;
 						exceptions.Add(e);
 						continue;
 					}
 				}
 			}
-			throw new PipelineException(PipelineFailure.BadSniff, new AggregateException(exceptions));
+			throw new PipelineException(PipelineFailure.SniffFailure, new AggregateException(exceptions));
 		}
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
@@ -383,11 +387,13 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					throw;
+					audit.Exception = e;
+					e.RethrowKeepingStackTrace();
+					return null; //dead code due to call to RethrowKeepingStackTrace()
 				}
 			}
 		}
@@ -408,11 +414,13 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					throw;
+					audit.Exception = e;
+					e.RethrowKeepingStackTrace();
+					return null; //dead code due to call to RethrowKeepingStackTrace()
 				}
 			}
 		}

@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 		public bool Recoverable =>
 			FailureReason == PipelineFailure.BadResponse ||
 			FailureReason == PipelineFailure.Unexpected ||
-			FailureReason == PipelineFailure.BadPing;
+			FailureReason == PipelineFailure.PingFailure;
 
 		public PipelineException(PipelineFailure failure)
 			: base(GetMessage(failure))
@@ -41,9 +41,9 @@ namespace Elasticsearch.Net
 					return "An error occurred trying to establish a connection with the specified node.";
 				case PipelineFailure.BadAuthentication:
 					return "Could not authenticate with the specified node. Try verifying your credentials or check your Shield configuration.";
-				case PipelineFailure.BadPing:
+				case PipelineFailure.PingFailure:
 					return "Failed to ping the specified node.";
-				case PipelineFailure.BadSniff:
+				case PipelineFailure.SniffFailure:
 					return "Failed sniffing cluster state.";
 				case PipelineFailure.CouldNotStartSniffOnStartup:
 					return "Failed sniffing cluster state upon client startup.";

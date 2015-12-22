@@ -4,8 +4,8 @@
 	{
 		BadAuthentication,
 		BadResponse,
-		BadPing,
-		BadSniff,
+		PingFailure,
+		SniffFailure,
 		CouldNotStartSniffOnStartup,
 		Unexpected
 	}	
