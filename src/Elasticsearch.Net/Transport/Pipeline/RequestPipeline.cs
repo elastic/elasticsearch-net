@@ -428,6 +428,10 @@ namespace Elasticsearch.Net
 		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<PipelineException> pipelineExceptions)
 			where TReturn : class
 		{
+			var pipelineFailure = PipelineFailure.BadResponse;
+			if (pipelineExceptions.HasAny())
+				pipelineFailure = pipelineExceptions.Last().FailureReason;
+
 			var innerException = pipelineExceptions.HasAny()
 				? new AggregateException(pipelineExceptions)
 				: response?.OriginalException;
@@ -436,16 +440,18 @@ namespace Elasticsearch.Net
 
 			if (this.IsTakingTooLong)
 			{
+				pipelineFailure = PipelineFailure.MaxTimeoutReached; 
 				this.Audit(MaxTimeoutReached);
 				exceptionMessage = "Maximum timout reached while retrying request";
 			}
 			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
 			{
+				pipelineFailure = PipelineFailure.MaxRetriesReached; 
 				this.Audit(MaxRetriesReached);
 				exceptionMessage = "Maximum number of retries reached.";
 			}
 
-			var clientException = new ElasticsearchClientException(exceptionMessage, innerException)
+			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{
 				Request = data,
 				Response = response,

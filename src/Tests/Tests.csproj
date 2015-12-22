@@ -123,6 +123,7 @@
     <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Exceptions\UnrecoverableExceptions.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Exceptions\UnexpectedExceptions.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Failover\FallingOver.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />

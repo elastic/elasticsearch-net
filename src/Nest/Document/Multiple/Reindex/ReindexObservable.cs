@@ -49,7 +49,7 @@ namespace Nest
 			var createIndexResponse = this._client.CreateIndex(
 				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[resolvedFrom])));
 			if (!createIndexResponse.IsValid)
-				throw new ElasticsearchClientException($"Failed to create destination index {toIndex}.", createIndexResponse.ApiCall);
+				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed to create destination index {toIndex}.", createIndexResponse.ApiCall);
 
 			var page = 0;
 			var searchResult = this._client.Search<T>(
@@ -63,7 +63,7 @@ namespace Nest
 					.Scroll(scroll)
 				);
 			if (searchResult.Total <= 0)
-				throw new ElasticsearchClientException($"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
+				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
 
 			IBulkResponse indexResult = null;
 			do
@@ -82,7 +82,7 @@ namespace Nest
 		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, IndexName toIndex, int page)
 		{
 			if (!searchResult.IsValid)
-				throw new ElasticsearchClientException($"Indexing failed on scroll #{page}.", searchResult.ApiCall);
+				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Indexing failed on scroll #{page}.", searchResult.ApiCall);
 
 			var bb = new BulkDescriptor();
 			foreach (var d in searchResult.Hits)
@@ -93,7 +93,7 @@ namespace Nest
 
 			var indexResult = this._client.Bulk(b=>bb);
 			if (!indexResult.IsValid)
-				throw new ElasticsearchClientException($"Failed indexing page {page}.", indexResult.ApiCall);
+				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed indexing page {page}.", indexResult.ApiCall);
 
 			observer.OnNext(new ReindexResponse<T>()
 			{

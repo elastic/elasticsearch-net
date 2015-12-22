@@ -63,6 +63,65 @@ namespace Tests.Framework
 			return AssertAuditTrails(callTrace, nthCall);
 		}
 
+		public async Task<Auditor> TraceElasticsearchException(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		{
+			this._cluster  = _cluster ?? this.Cluster();
+			this._cluster.ClientThrows(true);
+			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
+
+			Action call = () => this._cluster.ClientCall(callTrace?.RequestOverrides);
+			var exception = call.ShouldThrowExactly<ElasticsearchClientException>()
+				.Subject.First();
+			assert(exception);
+
+			this.AuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
+
+			this._clusterAsync = _clusterAsync ?? this.Cluster();
+			this._clusterAsync.ClientThrows(true);
+			Func<Task> callAsync = async () => await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides);
+			exception = callAsync.ShouldThrowExactly<ElasticsearchClientException>()
+				.Subject.First();
+			assert(exception);
+
+			this.AsyncAuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
+			var audit  = new Auditor(_cluster, _clusterAsync);
+			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert);
+		}
+
+		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+		{
+			this._cluster  = _cluster ?? this.Cluster();
+			this._cluster.ClientThrows(false);
+			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
+
+			Action call = () => { this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides); };
+			call.ShouldNotThrow();
+			this.Response.IsValid.Should().BeFalse();
+			var exception = this.Response.ApiCall.OriginalException as ElasticsearchClientException;
+			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
+			assert(exception);
+
+			this.AuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
+
+			this._clusterAsync = _clusterAsync ?? this.Cluster();
+			this._clusterAsync.ClientThrows(false);
+			Func<Task> callAsync = async () => { this.ResponseAsync = await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides); };
+			callAsync.ShouldNotThrow();
+			this.ResponseAsync.IsValid.Should().BeFalse();
+			exception = this.ResponseAsync.ApiCall.OriginalException as ElasticsearchClientException;
+			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
+			assert(exception);
+
+			this.AsyncAuditTrail = exception.AuditTrail;
+			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
+			var audit  = new Auditor(_cluster, _clusterAsync);
+
+			return audit;
+		}
+
 		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
 		{
 			this._cluster  = _cluster ?? this.Cluster();

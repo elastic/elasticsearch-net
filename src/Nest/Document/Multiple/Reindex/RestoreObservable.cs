@@ -51,7 +51,7 @@ namespace Nest
 				var restoreResponse = this._elasticClient.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
-					throw new ElasticsearchClientException("Failed to restore snapshot.", restoreResponse.ApiCall);
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
 
 				EventHandler<RestoreNextEventArgs> onNext = (sender, args) => observer.OnNext(args.RecoveryStatusResponse);
 				EventHandler<RestoreCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -201,7 +201,7 @@ namespace Nest
 				});
 
 				if (!recoveryStatus.IsValid)
-					throw new ElasticsearchClientException("Failed getting recovery status.", recoveryStatus.ApiCall);
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);
 
 				if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
 				{

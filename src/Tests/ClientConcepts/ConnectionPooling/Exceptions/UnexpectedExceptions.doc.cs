@@ -12,8 +12,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 	{
 		/** == Unexpected exceptions 
 		* When a client call throws an exception that the IConnction can not handle, this exception will bubble
-		* out the client as an UnexpectedElasticsearchClientException. An IConnection is in charge of knowning
-		* what exceptions it can recover from or not. The default IConnection that is based on WebRequest can and 
+		* out the client as an UnexpectedElasticsearchClientException, regardless whether the client is configured to throw or not.
+		* An IConnection is in charge of knowning what exceptions it can recover from or not. The default IConnection that is based on WebRequest can and 
 		* will recover from WebExceptions but others will be grounds for immediately exiting the pipeline.
 		*/
 
@@ -74,7 +74,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 					e.InnerException.Message.Should().Be("boom!");
 				}
 			);
-
 		}
 
 		/**
@@ -121,9 +120,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 
 				}
 			);
-
 		}
-
-
 	}
 }

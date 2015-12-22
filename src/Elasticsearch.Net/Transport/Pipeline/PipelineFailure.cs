@@ -7,6 +7,8 @@
 		PingFailure,
 		SniffFailure,
 		CouldNotStartSniffOnStartup,
+		MaxTimeoutReached,
+		MaxRetriesReached,
 		Unexpected
 	}	
 }
