@@ -9,7 +9,7 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNode Node { get; }
 		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
 
-		public ClusterBase()
+		protected ClusterBase()
 		{
 			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning);
 			this.Node.BootstrapWork.Subscribe(handle =>

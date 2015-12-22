@@ -1,4 +1,7 @@
-﻿using Tests.Framework.Integration;
+﻿using System;
+using Nest;
+using Tests.Framework;
+using Tests.Framework.Integration;
 
 namespace Profiling
 {
@@ -10,5 +13,5 @@ namespace Profiling
             seeder.DeleteIndices();
             seeder.CreateIndices();
         }
-    }
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -51,6 +52,19 @@ namespace Tests.CodeStandards
 
 			foreach (var requestParameter in requestParameters)
 				requestParameter.IsOptional.Should().BeFalse();
+		}
+
+		[U]
+		public void List()
+		{
+			var requestParameters =
+				(from m in typeof(IElasticClient).GetMethods()
+				 where m.ReturnType.IsGenericType && typeof(Task<>) == m.ReturnType.GetGenericTypeDefinition()
+				 group m by m.Name into g
+				 orderby g.Key
+				 select g.Key).ToList();
+
+			throw new Exception(string.Join(Environment.NewLine, requestParameters));
 		}
 
 		//TODO ensure xml docs on all IElasticClient methods

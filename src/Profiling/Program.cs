@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using JetBrains.Profiler.Windows.Api;
 using Nest;
+using Profiling.Async;
 using Tests.Framework;
 
 namespace Profiling
@@ -15,13 +18,32 @@ namespace Profiling
             {
                 var client = cluster.Client();
                 var output = new ColoredConsoleWriter();
-                MainAsync(client, output).Wait();
+
+	            using (Snapshot.Create())
+	            {
+					MainAsync(client, output).Wait();
+				}
             }
         }
 
-        static async Task MainAsync(IElasticClient client, ColoredConsoleWriter output)
+	    private static async Task MainAsync(IElasticClient client, ColoredConsoleWriter output)
         {
-            await new BulkAsyncOperation().RunAsync(client, output).ConfigureAwait(false);
+	        var asyncOperations = new List<IAsyncProfiledOperation>
+	        {
+				new AliasAsyncOperation(),
+				new AliasExistsAsyncOperation(),
+				new AnalyzeAsyncOperation(),
+				new BulkAsyncOperation(),
+		        new IndexAsyncOperation(),
+				new SearchAsyncOperation(),
+				new CatAsyncOperation(),
+				new GetMappingAsyncOperation()
+	        };
+
+	        foreach (var asyncOperation in asyncOperations)
+	        {
+		        await asyncOperation.RunAsync(client, output).ConfigureAwait(false);
+	        }
         }
     }
 }

@@ -17,7 +17,7 @@ module Profiler =
     let private patternInput = sprintf "%s/profiling/pattern.xml" Paths.BuildFolder
 
     let Snapshot() = 
-        Tooling.DotTraceProfiler.Exec [@"/app=" + profiledApp; "/profiling_type=tracing"; snapShotOutput; @"/timeout=600"; @"/transparent_exit_code"]
+        Tooling.DotTraceProfiler.Exec [@"/app=" + profiledApp; "/profiling_type=sampling"; snapShotOutput; @"/timeout=600"; @"/use_api"; @"/transparent_exit_code"]
         Tooling.DotTraceSnapshotStats.Exec [snapShotOutput; snapShotStatsOutput; @"/full"]
     
     let Report() =

@@ -9,6 +9,11 @@ namespace Profiling
             Write(ConsoleColor.Green, value);
         }
 
+		public void Write(string value)
+        {
+            Write(ConsoleColor.White, value);
+        }
+
         public void WriteOrange(string value)
         {
             Write(ConsoleColor.DarkYellow, value);

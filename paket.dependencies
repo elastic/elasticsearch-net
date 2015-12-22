@@ -14,6 +14,9 @@ nuget FluentAssertions
 nuget Bogus 
 nuget DiffPlex 
 
+// profiling
+nuget JetBrains.Profiler.Kernel.Windows.Api
+
 //Rx-Main on its does not seem to work
 nuget Rx-Core
 nuget Rx-Interfaces

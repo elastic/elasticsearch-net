@@ -158,7 +158,7 @@ namespace Tests.Framework.Integration
 			.String(s => s.Name(p => p.Gender).NotAnalyzed())
 			.String(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
 			.Ip(s => s.Name(p => p.IPAddress))
-			//.GeoPoint(g=>g.Name(p=>p.Location))
+			.GeoPoint(g => g.Name(p => p.Location).LatLon())
 			;
 	}
 }
