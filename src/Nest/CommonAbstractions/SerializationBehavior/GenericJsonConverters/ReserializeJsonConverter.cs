@@ -31,23 +31,9 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var custom = value as ICustomJson;
-			if (custom != null)
-			{
-				var json = custom.GetCustomJson();
-				var rawJson = json as RawJson;
-				if (rawJson != null)
-				{
-					writer.WriteRawValue(rawJson.Data);
-					return;
-				}
-			}
-
 			var v = value as TInterface;
-			if (v != null)
-			{
-				this.SerializeJson(writer, value, v, serializer);
-			}
+			if (v == null) return;
+			this.SerializeJson(writer, value, v, serializer);
 		}
 
 		protected virtual void SerializeJson(JsonWriter writer, object value, TInterface castValue, JsonSerializer serializer)
