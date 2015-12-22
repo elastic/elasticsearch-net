@@ -39,6 +39,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				},
 				(e) =>
 				{
+					e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 					e.InnerException.Should().NotBeNull();
 					e.InnerException.Message.Should().Be("boom!");
 				}
@@ -70,6 +71,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				},
 				(e) =>
 				{
+					e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 					e.InnerException.Should().NotBeNull();
 					e.InnerException.Message.Should().Be("boom!");
 				}
@@ -101,6 +103,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				},
 				(e) =>
 				{
+					e.FailureReason.Should().Be(PipelineFailure.Unexpected);
+
 					/** InnerException is the exception that brought the request down */
 					e.InnerException.Should().NotBeNull();
 					e.InnerException.Message.Should().Be("boom!");
