@@ -69,8 +69,11 @@ namespace Elasticsearch.Net
 						pipeline.SniffOnStaleCluster();
 						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
-						if (!response.Success)
+						if (!response.SuccessOrKnownError)
+						{
+							pipeline.MarkDead(node);
 							pipeline.SniffOnConnectionFailure();
+						}
 					}
 					catch (PipelineException e) when (!e.Recoverable)
 					{
@@ -123,12 +126,16 @@ namespace Elasticsearch.Net
 						await pipeline.SniffOnStaleClusterAsync();
 						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
-						if (!response.Success)
+						if (!response.SuccessOrKnownError)
+						{
+							pipeline.MarkDead(node);
 							await pipeline.SniffOnConnectionFailureAsync();
+						}
 					}
 					catch (PipelineException e) when (!e.Recoverable)
 					{
 						pipeline.MarkDead(node);
+						seenExceptions.Add(e);
 						break;
 					}
 					catch (PipelineException e)
