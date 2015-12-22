@@ -54,7 +54,7 @@ namespace Tests.Document.Multiple.Bulk
 				item.Id.Should().NotBeNullOrWhiteSpace();
 				item.IsValid.Should().BeTrue();
 				item.Shards.Should().NotBeNull();
-				item.Shards.Total.Should().Be(2);
+				item.Shards.Total.Should().BeGreaterThan(0);
 				item.Shards.Successful.Should().BeGreaterThan(0);
 			}
 
