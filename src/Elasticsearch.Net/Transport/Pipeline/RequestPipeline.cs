@@ -385,11 +385,11 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					throw e;
+					throw;
 				}
 			}
 		}
@@ -410,11 +410,11 @@ namespace Elasticsearch.Net
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;
 					return response;
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
-					throw e;
+					throw;
 				}
 			}
 		}
