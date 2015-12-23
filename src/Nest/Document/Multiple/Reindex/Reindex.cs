@@ -6,8 +6,7 @@ namespace Nest
 	{
 		IndexName To { get; set; }
 		IndexName From { get; set; }
-		//TODO Time, needs to propagate to generated querystring methods
-		string Scroll { get; set; }
+		Time Scroll { get; set; }
 		int? Size { get; set; }
 		
 		QueryContainer Query { get; set; }
@@ -20,7 +19,7 @@ namespace Nest
 	{
 		public IndexName To { get; set; }
 		public IndexName From { get; set; }
-		public string Scroll { get; set; }
+		public Time Scroll { get; set; }
 		public int? Size { get; set; }
 		public QueryContainer Query { get; set; }
 		public ICreateIndexRequest CreateIndexRequest { get; set; }
@@ -36,7 +35,7 @@ namespace Nest
 	{
 		IndexName IReindexRequest.To { get; set; }
 		IndexName IReindexRequest.From { get; set; }
-		string IReindexRequest.Scroll { get; set; }
+		Time IReindexRequest.Scroll { get; set; }
 		int? IReindexRequest.Size { get; set; }
 		QueryContainer IReindexRequest.Query { get; set; }
 		ICreateIndexRequest IReindexRequest.CreateIndexRequest { get; set; }
@@ -52,7 +51,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
 		/// <returns></returns>
-		public ReindexDescriptor<T> Scroll(string scrollTime) => Assign(a => a.Scroll = scrollTime);
+		public ReindexDescriptor<T> Scroll(Time scrollTime) => Assign(a => a.Scroll = scrollTime);
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 100. When using scroll search type,

@@ -123,10 +123,10 @@ namespace Nest
 	{
 		protected IBulkAliasRequest Self => this;
 				///<summary>Request timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -173,7 +173,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
@@ -209,7 +209,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -254,7 +254,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -296,7 +296,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -341,7 +341,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -372,7 +372,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -441,7 +441,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -475,7 +475,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -506,7 +506,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -539,7 +539,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -570,7 +570,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -601,7 +601,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -643,7 +643,7 @@ namespace Nest
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -721,7 +721,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -752,7 +752,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
@@ -868,10 +868,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -902,10 +902,10 @@ namespace Nest
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -941,10 +941,10 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Wait until the specified number of shards is active</summary>
 		public long WaitForActiveShards { get { return Q<long>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
@@ -978,7 +978,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1000,10 +1000,10 @@ namespace Nest
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1031,10 +1031,10 @@ namespace Nest
 		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1075,7 +1075,7 @@ namespace Nest
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
@@ -1123,7 +1123,7 @@ namespace Nest
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1294,10 +1294,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
@@ -1326,10 +1326,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Whether to verify the repository after creation</summary>
 		public bool Verify { get { return Q<bool>("verify"); } set { Q("verify", value); } }
@@ -1361,10 +1361,10 @@ namespace Nest
 		
 
 			///<summary>Explicit timestamp for the document</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1425,7 +1425,7 @@ namespace Nest
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -1476,7 +1476,7 @@ namespace Nest
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -1499,10 +1499,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1528,10 +1528,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1557,10 +1557,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1610,7 +1610,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -1652,7 +1652,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -1748,7 +1748,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1777,7 +1777,7 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2067,7 +2067,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -2323,7 +2323,7 @@ namespace Nest
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -2410,7 +2410,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -2625,7 +2625,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2780,13 +2780,13 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timestamp { get { return Q<string>("timestamp"); } set { Q("timestamp", value); } }
+		public TimeSpan Timestamp { get { return Q<TimeSpan>("timestamp"); } set { Q("timestamp", value); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public string Ttl { get { return Q<string>("ttl"); } set { Q("ttl", value); } }
+		public TimeSpan Ttl { get { return Q<TimeSpan>("ttl"); } set { Q("ttl", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -2818,7 +2818,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -3164,7 +3164,7 @@ namespace Nest
 		
 
 			///<summary>The interval for the second sampling of threads</summary>
-		public string Interval { get { return Q<string>("interval"); } set { Q("interval", value); } }
+		public TimeSpan Interval { get { return Q<TimeSpan>("interval"); } set { Q("interval", value); } }
 		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public long Snapshots { get { return Q<long>("snapshots"); } set { Q("snapshots", value); } }
@@ -3179,7 +3179,7 @@ namespace Nest
 		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q("type", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3228,7 +3228,7 @@ namespace Nest
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3307,7 +3307,7 @@ namespace Nest
 		public  string[] Types { get { return Q< string[]>("types"); } set { Q("types", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3333,10 +3333,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -3586,10 +3586,10 @@ namespace Nest
 		
 
 			///<summary>Explicit timestamp for the document</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3618,10 +3618,10 @@ namespace Nest
 		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
@@ -3658,10 +3658,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -3700,10 +3700,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -3825,7 +3825,7 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -3973,7 +3973,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -4237,7 +4237,7 @@ namespace Nest
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
+		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
@@ -4321,7 +4321,7 @@ namespace Nest
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
+		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
@@ -4497,7 +4497,7 @@ namespace Nest
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
+		public TimeSpan Scroll { get { return Q<TimeSpan>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
@@ -4574,7 +4574,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -4615,7 +4615,7 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4957,7 +4957,7 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -5034,13 +5034,13 @@ namespace Nest
 		public bool ScriptedUpsert { get { return Q<bool>("scripted_upsert"); } set { Q("scripted_upsert", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timestamp { get { return Q<string>("timestamp"); } set { Q("timestamp", value); } }
+		public TimeSpan Timestamp { get { return Q<TimeSpan>("timestamp"); } set { Q("timestamp", value); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public string Ttl { get { return Q<string>("ttl"); } set { Q("ttl", value); } }
+		public TimeSpan Ttl { get { return Q<TimeSpan>("ttl"); } set { Q("ttl", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -5301,10 +5301,10 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		public TimeSpan MasterTimeout { get { return Q<TimeSpan>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		public TimeSpan Timeout { get { return Q<TimeSpan>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

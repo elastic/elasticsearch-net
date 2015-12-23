@@ -23,8 +23,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 					return new [] {"boost", "percen", "score"}.Any(s=>paramName.ToLowerInvariant().Contains(s)) 
 						? "double" 
 						: "long";
-				case "time":
 				case "duration":
+				case "time":
+					return "TimeSpan";
 				case "text":
 				case "":
 				case null:

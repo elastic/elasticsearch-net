@@ -36,7 +36,7 @@ namespace Nest
 		{
 			var fromIndex = this._reindexRequest.From;
 			var toIndex = this._reindexRequest.To;
-			var scroll = this._reindexRequest.Scroll ?? "2m";
+			var scroll = this._reindexRequest.Scroll ?? TimeSpan.FromMinutes(2);
 			var size = this._reindexRequest.Size ?? 100;
 
 			var resolvedFrom = fromIndex.Resolve(this._connectionSettings);
@@ -60,7 +60,7 @@ namespace Nest
 					.Size(size)
 					.Query(q=>this._reindexRequest.Query)
 					.SearchType(SearchType.Scan)
-					.Scroll(scroll)
+					.Scroll(scroll.ToTimeSpan())
 				);
 			if (searchResult.Total <= 0)
 				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
