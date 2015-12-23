@@ -12,6 +12,13 @@ namespace Tests.Indices.AliasManagement.Alias
 	public class AliasApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values)
+				client.CreateIndex(index);
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Alias(f),
 			fluentAsync: (client, f) => client.AliasAsync(f),

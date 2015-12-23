@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -37,7 +38,8 @@ namespace Tests.Framework
 
 			return base.AssertOnAllResponses((r) =>
 			{
-				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null)
+				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null
+					&& r.CallDetails.OriginalException.GetType() != typeof(WebException))
 				{
 					ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
 					return;

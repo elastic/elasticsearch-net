@@ -13,11 +13,10 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var bulk = value as IBulkRequest;
-			if (value == null) return;
-
 			var settings = serializer?.GetConnectionSettings();
 			var elasticsearchSerializer = settings?.Serializer;
-			if (elasticsearchSerializer == null) return ;
+			if (elasticsearchSerializer == null
+				|| bulk?.Operations == null) return ;
 
 			foreach(var op in bulk.Operations)
 			{

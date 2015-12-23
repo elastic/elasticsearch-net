@@ -92,7 +92,7 @@ namespace Elasticsearch.Net
 						{
 							Request = requestData,
 							Response = response,
-							AuditTrail = pipeline.AuditTrail
+							AuditTrail = pipeline?.AuditTrail
 						};
 					}
 					if (response != null && response.SuccessOrKnownError)
