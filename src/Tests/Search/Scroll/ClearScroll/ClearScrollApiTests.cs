@@ -13,7 +13,7 @@ namespace Tests.Search.Scroll.ClearScroll
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private string _scrollId;
+		private string _scrollId = "default-for-unit-tests";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.ClearScroll(_scrollId, f),
@@ -38,7 +38,7 @@ namespace Tests.Search.Scroll.ClearScroll
 			var scroll = this.Client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
 			if (!scroll.IsValid)
 				throw new Exception("Setup: Initial scroll failed.");
-			_scrollId = scroll.ScrollId;
+			_scrollId = scroll.ScrollId ?? _scrollId;
 		}
 	}
 }
