@@ -9,14 +9,14 @@ namespace CodeGeneration.LowLevelClient.Overrides.Allow404
 		public static readonly IEnumerable<string> Endpoints = new List<string>
 		{
 			"DocumentExists",
-			"Delete",
 			"IndexExists",
 			"SearchExists",
 			"AliasExists",
 			"IndexTemplateExists",
 			"TypeExists",
 			"Exists",
-			"Get"
+			//"Get"
+			//"Delete",
 		};
 	}
 }

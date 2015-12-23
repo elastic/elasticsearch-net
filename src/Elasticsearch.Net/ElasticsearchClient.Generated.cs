@@ -1511,7 +1511,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Delete<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1527,7 +1527,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1873,7 +1873,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1889,7 +1889,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

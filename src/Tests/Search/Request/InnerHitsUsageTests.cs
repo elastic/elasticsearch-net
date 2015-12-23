@@ -11,7 +11,6 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
-using ClientCall = Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Search.Request
 {
@@ -114,7 +113,7 @@ namespace Tests.Search.Request
 	{
 		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) => new RoyalSeeder(this.Client, Index).Seed();
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values) => new RoyalSeeder(this.Client, Index).Seed();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),

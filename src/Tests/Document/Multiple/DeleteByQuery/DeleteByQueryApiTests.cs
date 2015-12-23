@@ -9,7 +9,6 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
-using ClientCall = Tests.Framework.Integration.ClientCall;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
@@ -18,7 +17,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	{
 		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values)
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
 		{
 			foreach (var index in values.Values)
 			{

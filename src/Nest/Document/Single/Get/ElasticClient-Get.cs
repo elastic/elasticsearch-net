@@ -28,12 +28,6 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		//TODO I Deleted GetExtensions, when we introduced Document as a parameter folks can do 
-		//Source(Document.Index("a").Type("x").Id("1"), s=>s)
-		//Source(Document.Infer(doc), s=>s)
-		//Source(Document.Index<T>().Type<TOptional>().Id(2), s=>s)
-		//Source(Document.Id<T>(2), s=>s)
-
 		/// <inheritdoc/>
 		public IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class =>
 			this.Get<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));

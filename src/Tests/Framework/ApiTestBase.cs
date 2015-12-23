@@ -23,10 +23,10 @@ namespace Tests.Framework
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 
-		protected IDictionary<Integration.ClientCall, string> UniqueValues { get; } 		
+		protected IDictionary<Integration.ClientMethod, string> UniqueValues { get; } 		
 		protected string CallIsolatedValue { get; private set; }
 
-		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<Integration.ClientCall, string> values) { }
+		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<Integration.ClientMethod, string> values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
@@ -49,7 +49,7 @@ namespace Tests.Framework
 			this._responses = usage.CallOnce(this.ClientUsage);
 			this.Port = cluster.Node.Port;
 			this.UniqueValues = usage.CallUniqueValues;
-			this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Fluent];
+			this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.Fluent];
 			this.SetupSerialization();
 		}
 
@@ -65,25 +65,25 @@ namespace Tests.Framework
 			{
 				this.BeforeAllCalls(client, UniqueValues);
 
-				var dict = new Dictionary<Integration.ClientCall, IResponse>();
-				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Fluent];
+				var dict = new Dictionary<Integration.ClientMethod, IResponse>();
+				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.Fluent];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientCall.Fluent, fluent(client, this.Fluent));
+				dict.Add(Integration.ClientMethod.Fluent, fluent(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.FluentAsync];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.FluentAsync];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
+				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.Initializer];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.Initializer];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientCall.Initializer, request(client, this.Initializer));
+				dict.Add(Integration.ClientMethod.Initializer, request(client, this.Initializer));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientCall.InitializerAsync];
+				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.InitializerAsync];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
+				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
 				return dict;
 			});

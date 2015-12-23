@@ -68,8 +68,6 @@ namespace Tests.Cluster.NodesStats
 			index.Fielddata.Should().NotBeNull();
 
 			index.Flush.Should().NotBeNull();
-			index.Flush.Total.Should().BeGreaterThan(0);
-			index.Flush.TotalTimeInMilliseconds.Should().BeGreaterThan(0);
 
 			index.Get.Should().NotBeNull();
 			index.Indexing.Should().NotBeNull();
