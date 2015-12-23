@@ -56,11 +56,11 @@ namespace Nest
 		/// <param name="ids">IEnumerable of ids as string for the documents to fetch</param>
 		/// <param name="index">Optionally override the default inferred index name for T</param>
 		/// <param name="type">Optionally overiide the default inferred typename for T</param>
-		public static Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
+		public static async Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
-			return client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)))
-				.ContinueWith(t => t.Result.GetMany<T>(ids));
+			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)));
+			return response.GetMany<T>(ids);
 		}
 
 		/// <summary>

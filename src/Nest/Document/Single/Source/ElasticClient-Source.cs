@@ -44,12 +44,11 @@ namespace Nest
 			this.SourceAsync<T>(selector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public Task<T> SourceAsync<T>(ISourceRequest request) where T : class
+		public async Task<T> SourceAsync<T>(ISourceRequest request) where T : class
 		{
-			request.RouteValues.Resolve(ConnectionSettings); 
-			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(request)
-				.ContinueWith(t => t.Result.Body, TaskContinuationOptions.ExecuteSynchronously);
-			return response;
+			request.RouteValues.Resolve(ConnectionSettings);
+			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request);
+			return response.Body;
 		}
 
 	}
