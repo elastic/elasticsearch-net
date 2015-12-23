@@ -131,7 +131,7 @@ namespace Tests.Framework.Integration
 						)
 					)
 					.Map<CommitActivity>(m => m
-						.SetParent<Project>()
+						.Parent<Project>()
 						.Properties(props => props
 							.Object<Developer>(o => o
 								.Name(p => p.Committer)

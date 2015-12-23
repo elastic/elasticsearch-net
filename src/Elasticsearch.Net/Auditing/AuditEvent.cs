@@ -1,6 +1,5 @@
 namespace Elasticsearch.Net
 {
-	//TODO SNIFFONFAIL AND SKIPNODE ARE NEVER USED
 	public enum AuditEvent
 	{
 		SniffOnStartup,
@@ -12,8 +11,12 @@ namespace Elasticsearch.Net
 		PingSuccess,
 		PingFailure,
 
-		SkipNode,
+		Resurrection,
+		AllNodesDead,
 		BadResponse,
-		HealthyResponse
+		HealthyResponse,
+
+		MaxTimeoutReached,
+		MaxRetriesReached
 	}
 }

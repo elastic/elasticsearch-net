@@ -1,5 +1,6 @@
 using System;
 using Nest;
+using System.Net;
 
 namespace Tests.Framework
 {
@@ -15,7 +16,7 @@ namespace Tests.Framework
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
-			Self.Return = errorState;
+			Self.Return = errorState ?? new WebException();
 			return this;
 		}
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Nest.Aggregations.Visitor;
 
 namespace Nest
 {
@@ -29,7 +30,7 @@ namespace Nest
 				var dict = new Dictionary<string, AggregationContainer>();
 				foreach (var agg in combinator.Aggregations)
 				{
-					b =  agg;
+					b = agg;
 					if (b.Name.IsNullOrEmpty())
 						throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
 					dict.Add(b.Name, agg);
@@ -144,7 +145,7 @@ namespace Nest
 
 		[JsonProperty("max_bucket")]
 		IMaxBucketAggregation MaxBucket { get; set; }
-	
+
 		[JsonProperty("min_bucket")]
 		IMinBucketAggregation MinBucket { get; set; }
 
@@ -171,6 +172,8 @@ namespace Nest
 
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
+
+		void Accept(IAggregationVisitor visitor);
 	}
 
 	public class AggregationContainer : IAggregationContainer
@@ -258,6 +261,12 @@ namespace Nest
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
 			return container;
+		}
+
+		public void Accept(IAggregationVisitor visitor)
+		{
+			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
+			new AggregationWalker().Walk(this, visitor);
 		}
 	}
 
@@ -539,6 +548,12 @@ namespace Nest
 			//assign the aggregations container under Aggregations ("aggs" in the json)
 			self.Aggregations[key] = container;
 			return this;
+		}
+
+		public void Accept(IAggregationVisitor visitor)
+		{
+			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
+			new AggregationWalker().Walk(this, visitor);
 		}
 	}
 }

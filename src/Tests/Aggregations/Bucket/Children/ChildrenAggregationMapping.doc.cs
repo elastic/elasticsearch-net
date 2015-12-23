@@ -15,7 +15,7 @@ namespace Tests.Aggregations.Bucket.Children
 				.Mappings(map=>map
 					.Map<Project>(m=>m.AutoMap())
 					.Map<CommitActivity>(m=>m
-						.SetParent<Project>()
+						.Parent<Project>()
 					)
 				)
 			);

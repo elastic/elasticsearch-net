@@ -26,12 +26,10 @@ namespace Nest
 		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		QueryContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		AggregationDictionary Aggregations { get; set; }
 
 		IRequestParameters GetRequestParameters();
 	}

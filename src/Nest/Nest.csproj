@@ -97,6 +97,9 @@
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationWalker.cs" />
+    <Compile Include="Aggregations\Visitor\AggregationVisitorScope.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
     <Compile Include="Indices\Warmers\GetWarmer\GetWarmerResponseConverter.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerRequestJsonConverter.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
@@ -294,6 +298,7 @@
     <Compile Include="Modules\Indices\Recovery\IndicesRecoverySettings.cs" />
     <Compile Include="Modules\Indices\TtlInterval\TtlIntervalSettings.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryJsonConverter.cs" />
+    <Compile Include="QueryDsl\Abstractions\Container\QueryContainerJsonConverter.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\IQueryContainer.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainer-Assignments.cs" />
     <Compile Include="QueryDsl\Compound\Limit\LimitQuery.cs" />
@@ -317,6 +322,7 @@
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
+    <Compile Include="QueryDsl\NestSpecific\RawQuery.cs" />
     <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\Like.cs" />
@@ -397,7 +403,7 @@
     <Compile Include="Analysis\Tokenizers\TokenizerBase.cs" />
     <Compile Include="Analysis\Tokenizers\UaxEmailUrlTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
-    <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
+    <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\DateRangeQuery .cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />
@@ -443,10 +449,14 @@
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\Abstractions\Container\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
+    <Compile Include="Search\Search\InnerHits\PathInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\TypeInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\NamedInnerHits.cs" />
     <Compile Include="Search\Search\Sort\SortBase.cs" />
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
     <Compile Include="Search\Search\Sort\SortMode.cs" />
     <Compile Include="Search\Search\Sort\SortOrder.cs" />
+    <Compile Include="Search\Suggesters\SuggestContainer.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
     <Compile Include="Mapping\MetaFields\IFieldMapping.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\CircleGeoShape.cs" />
@@ -538,8 +548,8 @@
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Weight\WeightFunction.cs" />
-    <Compile Include="Search\Search\InnerHits\IGlobalInnerHit.cs" />
-    <Compile Include="Search\Search\InnerHits\IInnerHitsContainer.cs" />
+    <Compile Include="Search\Search\InnerHits\GlobalInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\InnerHitsContainer.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\ElasticClient-UpgradeStatus.cs" />
@@ -628,7 +638,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
-    <Compile Include="CommonAbstractions\RawJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
@@ -664,6 +673,7 @@
     <Compile Include="QueryDsl\Visitor\QueryWalker.cs" />
     <Compile Include="QueryDsl\Visitor\QueryVisitor.cs" />
     <Compile Include="QueryDsl\Visitor\VisitorScope.cs" />
+    <Compile Include="Search\Suggesters\Suggest\SuggestRequestJsonConverter.cs" />
     <Compile Include="_Generated\_Descriptors.generated.cs" />
     <Compile Include="_Generated\_Requests.generated.cs" />
     <Compile Include="Cluster\ClusterReroute\ElasticClient-ClusterReroute.cs" />
@@ -694,8 +704,6 @@
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
-    <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
-    <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
@@ -817,7 +825,6 @@
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashPrecision.cs" />
-    <Compile Include="CommonAbstractions\Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
@@ -826,7 +833,7 @@
     <Compile Include="CommonAbstractions\LowLevelDispatch\LowLevelDispatch.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionProperty.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
-    <Compile Include="QueryDsl\ConditionlessQuery.cs" />
+    <Compile Include="QueryDsl\NestSpecific\ConditionlessQuery.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
     <Compile Include="QueryDsl\TermLevel\Regexp\RegexpQuery.cs" />
     <Compile Include="Mapping\DynamicMapping.cs" />
@@ -842,7 +849,6 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggester.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\TermSuggester\TermSuggester.cs" />
-    <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
@@ -1068,7 +1074,6 @@
     <Compile Include="Mapping\TermVectorOption.cs" />
     <Compile Include="Mapping\FieldIndexOption.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
-    <Compile Include="CommonAbstractions\RawJson\CustomJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
@@ -1084,7 +1089,6 @@
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
-    <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />

@@ -10,7 +10,6 @@ namespace Elasticsearch.Net
 		public static readonly string PrintFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
 		public static readonly string ErrorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
 		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
-
 	}
 
 	public class ElasticsearchResponse<T> : IApiCallDetails
@@ -34,7 +33,7 @@ namespace Elasticsearch.Net
 		public List<Audit> AuditTrail { get; internal set; }
 
 		/// <summary>
-		/// The response is succesful or has a response code between 400-509 the call should not be retried.
+		/// The response is succesful or has a response code between 400-599 the call should not be retried.
 		/// Only on 502 and 503 will this return false;
 		/// </summary>
 		public bool SuccessOrKnownError =>
@@ -44,6 +43,8 @@ namespace Elasticsearch.Net
 			);
 
 		public Exception OriginalException { get; protected internal set; }
+
+		public ServerError ServerError { get; internal set; }
 
 		public ElasticsearchResponse(Exception e)
 		{

@@ -33,7 +33,7 @@ namespace Nest
 		{
 			foreach (var source in sources)
 			{
-				var percolation = percolateSelector?.InvokeOrDefault(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
+				var percolation = percolateSelector.InvokeOrDefault(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
 				Self.Percolations.Add(percolation);
 			}
 			return this;
@@ -42,7 +42,7 @@ namespace Nest
 		public MultiPercolateDescriptor Count<T>(Func<PercolateCountDescriptor<T>, IPercolateOperation> countSelector) 
 			where T : class
 		{
-			var percolation = countSelector?.InvokeOrDefault(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
+			var percolation = countSelector.InvokeOrDefault(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(percolation);
 			return this;
 		}

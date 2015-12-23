@@ -107,8 +107,6 @@ namespace Elasticsearch.Net
 
 		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
 
-		//TODO none of these request overrides are called from tests meaning these ALL need to have tests written against
-
 		public RequestConfigurationDescriptor RequestTimeout(TimeSpan requestTimeout)
 		{
 			Self.RequestTimeout = requestTimeout;

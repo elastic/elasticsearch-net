@@ -8,8 +8,7 @@ namespace Elasticsearch.Net
 {
 	public class InMemoryConnection : HttpConnection
 	{
-		private static readonly byte[] FixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
-		private readonly byte[] _fixedBytes;
+		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 
 		public List<Tuple<string, Uri, PostData<object>>> Requests = new List<Tuple<string, Uri, PostData<object>>>(); 
@@ -19,9 +18,9 @@ namespace Elasticsearch.Net
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(string fixedResult, int statusCode = 200) 
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200) 
 		{
-			_fixedBytes = Encoding.UTF8.GetBytes(fixedResult);
+			_responseBody = responseBody;
 			_statusCode = statusCode;
 		}
 
@@ -31,12 +30,17 @@ namespace Elasticsearch.Net
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) => 
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
-		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null, int? statusCode = null)
+		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
 			where TReturn : class
 		{
-			var cs = requestData.CreateResponse<TReturn>(statusCode ?? this._statusCode, new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes));
+			var body = responseBody ?? _responseBody;
+			var builder = new ResponseBuilder<TReturn>(requestData)
+			{
+				StatusCode = statusCode ?? this._statusCode,
+				Stream = (body != null) ? new MemoryStream(body) : null
+			};
+			var cs = builder.ToResponse();
 			return cs;
 		}
-
 	}
 }

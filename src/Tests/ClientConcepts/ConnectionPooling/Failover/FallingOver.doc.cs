@@ -14,11 +14,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		* the call to a node throws an exception or returns a 502 or 503
 		*/
 
-		[U] public async Task ExceptionFallsOverToNextNode()
+		[U]
+		public async Task ExceptionFallsOverToNextNode()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
-				.ClientCalls(r => r.FailAlways(new Exception("Boo!")))
+				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
@@ -29,13 +30,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
-            );
+			);
 		}
 
 		/** 502 Bad Gateway
 		* Will be treated as an error that requires retrying 
 		*/
-		[U] public async Task Http502FallsOver()
+		[U]
+		public async Task Http502FallsOver()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -50,13 +52,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
-            );
+			);
 		}
 
 		/** 503 Service Unavailable
 		* Will be treated as an error that requires retrying 
 		*/
-		[U] public async Task Http503FallsOver()
+		[U]
+		public async Task Http503FallsOver()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -71,13 +74,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 					{ BadResponse, 9200 },
 					{ HealthyResponse, 9201 },
 				}
-            );
+			);
 		}
-		
+
 		/**
 		* If a call returns a valid http status code other then 502/503 the request won't be retried.
 		*/
-		[U] public async Task HttpTeapotDoesNotFallOver()
+		[U]
+		public async Task HttpTeapotDoesNotFallOver()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -91,7 +95,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 				new ClientCall {
 					{ BadResponse, 9200 },
 				}
-            );
+			);
 		}
 	}
 }

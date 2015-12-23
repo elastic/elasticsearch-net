@@ -29,7 +29,8 @@ namespace Elasticsearch.Net
 		public DateTime LastUpdate { get; protected set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
-			: this(uris.Select(uri=>new Node(uri)), randomize, dateTimeProvider) { }
+			: this(uris.Select(uri => new Node(uri)), randomize, dateTimeProvider)
+		{ }
 
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
 		{
@@ -47,7 +48,7 @@ namespace Elasticsearch.Net
 
 			this.InternalNodes = nn
 				.OrderBy(item => randomize ? this.Random.Next() : 1)
-				.DistinctBy(n=>n.Uri)
+				.DistinctBy(n => n.Uri)
 				.ToList();
 			this.LastUpdate = this.DateTimeProvider.Now();
 		}
@@ -58,32 +59,42 @@ namespace Elasticsearch.Net
 		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
 		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
-		public virtual IEnumerable<Node> CreateView()
+		public virtual IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
 		{
 			//var count = this.InternalNodes.Count;
 
 			var now = this.DateTimeProvider.Now();
-			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now).ToList();
+			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now)
+				.ToList();
 			var count = nodes.Count;
+			Node node;
 			var globalCursor = Interlocked.Increment(ref GlobalCursor);
+
+			if (count == 0)
+			{
+				//could not find a suitable node retrying on first node off globalCursor
+				audit?.Invoke(AuditEvent.AllNodesDead, null);
+				node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
+				node.IsResurrected = true;
+				audit?.Invoke(AuditEvent.Resurrection, node);
+				yield return node;
+				yield break;
+			}
+
 			var localCursor = globalCursor % count;
 
-			Node node;
 			for (var attempts = 0; attempts < count; attempts++)
 			{
 				node = nodes[localCursor];
 				localCursor = (localCursor + 1) % count;
-				//node is not dead or no longer dead
-				if (node.DeadUntil > now) continue;
-				//if this node is not alive mark it as resurrected
-				if (!node.IsAlive) node.IsResurrected = true;
+				//if this node is not alive or no longer dead mark it as resurrected
+				if (!node.IsAlive)
+				{
+					audit?.Invoke(AuditEvent.Resurrection, node);
+					node.IsResurrected = true;
+				}
 				yield return node;
 			}
-			if (count != 0) yield break;
-			//could not find a suitable node retrying on node that has been dead longest.
-			node = this.InternalNodes[globalCursor % count];
-			node.IsResurrected = true;
-			yield return node;
 		}
 
 	}

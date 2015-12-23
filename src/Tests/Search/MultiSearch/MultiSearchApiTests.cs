@@ -44,7 +44,7 @@ namespace Tests.Search.MultiSearch
 			.Type(typeof(Project))
 			.Search<Project>(s => s.Query(q => q.MatchAll()).From(0).Size(10))
 			.Search<Project>(s => s.Index("otherindex").Query(q => q.Match(m => m.Field(p => p.Name).Query("nest"))))
-			.Search<Project>(s => s.Index("otherindex").Type("othertype").SearchType(SearchType.Count).MatchAll());
+			.Search<Project>(s => s.Index("otherindex").Type("othertype").SearchType(SearchType.Count).Query(q=>q.MatchAll()));
 
 		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
 		{

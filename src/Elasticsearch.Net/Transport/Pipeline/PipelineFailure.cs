@@ -4,11 +4,11 @@
 	{
 		BadAuthentication,
 		BadResponse,
-		BadPing,
-		BadSniff,
+		PingFailure,
+		SniffFailure,
 		CouldNotStartSniffOnStartup,
-		RetryTimeout,
-		RetryMaximum,
+		MaxTimeoutReached,
+		MaxRetriesReached,
 		Unexpected
-	}
+	}	
 }

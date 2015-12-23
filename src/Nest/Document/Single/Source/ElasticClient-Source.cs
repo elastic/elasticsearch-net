@@ -25,11 +25,6 @@ namespace Nest
 
 	}
 
-	//TODO I Deleted SourceExtensions, when we introduced Document as a parameter folks can do 
-	//Source(Document.Index("a").Type("x").Id("1"), s=>s)
-	//Source(Document.Infer(doc), s=>s)
-	//Source(Document.Index<T>().Type<TOptional>().Id(2), s=>s)
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>

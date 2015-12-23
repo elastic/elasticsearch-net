@@ -56,6 +56,7 @@ namespace Nest
 		private IExistsQuery _exists;
 		private IMissingQuery _missing;
 		private ITypeQuery _type;
+		private IRawQuery _rawQuery;
 		private IQueryContainer Self => this;
 
 		internal IQuery ContainedQuery { get; set; }
@@ -68,8 +69,7 @@ namespace Nest
 			return value;
 		}
 
-		string IQueryContainer.RawQuery { get; set; }
-
+		IRawQuery IQueryContainer.RawQuery { get { return _rawQuery; } set { _rawQuery = Set(value); } }
 		IBoolQuery IQueryContainer.Bool { get { return _b; } set { _b = Set(value); } }
 		IMatchAllQuery IQueryContainer.MatchAll { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
 		ITermQuery IQueryContainer.Term { get { return _term; } set { _term = Set(value); } }

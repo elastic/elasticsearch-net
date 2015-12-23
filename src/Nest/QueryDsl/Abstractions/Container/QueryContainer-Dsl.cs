@@ -68,14 +68,6 @@ namespace Nest
 			if (visitor.Scope == VisitorScope.Unknown) visitor.Scope = VisitorScope.Query;
 			new QueryWalker().Walk(this, visitor);
 		}
-
-		//TODO remove rely on a custom serializer
-		public object GetCustomJson()
-		{	
-			var f = ((IQueryContainer)this);
-			if (f.RawQuery.IsNullOrEmpty()) return f; 
-			return new RawJson(f.RawQuery);
-		}
 	}
 
 }

@@ -17,12 +17,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		* before the actual call to make sure its up and running. If its still down we put it back in the dog house a little longer. For an explanation on these timeouts see: TODO LINK
 		*/
 
-		[U] public async Task PingAfterRevival()
+		[U]
+		public async Task PingAfterRevival()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(3)
-				.ClientCalls(r=>r.SucceedAlways())
-				.ClientCalls(r=>r.OnPort(9202).Fails(Once))
+				.ClientCalls(r => r.SucceedAlways())
+				.ClientCalls(r => r.OnPort(9202).Fails(Once))
 				.Ping(p => p.SucceedAlways())
 				.StaticConnectionPool()
 				.AllDefaults()
@@ -31,7 +32,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			audit = await audit.TraceCalls(
 				new ClientCall { { PingSuccess, 9200 }, { HealthyResponse, 9200 } },
 				new ClientCall { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
-				new ClientCall { 
+				new ClientCall {
 					{ PingSuccess, 9202},
 					{ BadResponse, 9202},
 					{ HealthyResponse, 9200},
@@ -42,15 +43,25 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				new ClientCall { { HealthyResponse, 9201 } },
 				new ClientCall {
 					{ HealthyResponse, 9200 },
-                    { pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
+					{ pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
 				}
+			);
+
+			audit = await audit.TraceCalls(
+				new ClientCall { { HealthyResponse, 9201 } },
+				new ClientCall { { HealthyResponse, 9200 } },
+				new ClientCall { { HealthyResponse, 9201 } }
 			);
 
 			audit.ChangeTime(d => d.AddMinutes(20));
 
 			audit = await audit.TraceCalls(
 				new ClientCall { { HealthyResponse, 9201 } },
-				new ClientCall { { PingSuccess, 9202 }, { HealthyResponse, 9202 } }
+				new ClientCall {
+					{ Resurrection, 9202 },
+					{ PingSuccess, 9202 },
+					{ HealthyResponse, 9202 }
+				}
 			);
 		}
 	}

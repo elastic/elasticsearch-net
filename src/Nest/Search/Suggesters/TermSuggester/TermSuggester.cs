@@ -59,19 +59,19 @@ namespace Nest
 
 		decimal? ITermSuggester.MaxTermFrequency { get; set; }
 
-		public TermSuggesterDescriptor<T> SuggestMode(SuggestMode mode) => Assign(a => a.SuggestMode = mode);
+		public TermSuggesterDescriptor<T> SuggestMode(SuggestMode? mode) => Assign(a => a.SuggestMode = mode);
 
-		public TermSuggesterDescriptor<T> MinWordLength(int length) => Assign(a => a.MinWordLen = length);
+		public TermSuggesterDescriptor<T> MinWordLength(int? length) => Assign(a => a.MinWordLen = length);
 
-		public TermSuggesterDescriptor<T> PrefixLength(int length) => Assign(a => a.PrefixLen = length);
+		public TermSuggesterDescriptor<T> PrefixLength(int? length) => Assign(a => a.PrefixLen = length);
 
-		public TermSuggesterDescriptor<T> MaxEdits(int maxEdits) => Assign(a => a.MaxEdits = maxEdits);
+		public TermSuggesterDescriptor<T> MaxEdits(int? maxEdits) => Assign(a => a.MaxEdits = maxEdits);
 
-		public TermSuggesterDescriptor<T> MaxInspections(int maxInspections) => Assign(a => a.MaxInspections = maxInspections);
+		public TermSuggesterDescriptor<T> MaxInspections(int? maxInspections) => Assign(a => a.MaxInspections = maxInspections);
 
-		public TermSuggesterDescriptor<T> MinDocFrequency(decimal frequency) => Assign(a => a.MinDocFrequency = frequency);
+		public TermSuggesterDescriptor<T> MinDocFrequency(decimal? frequency) => Assign(a => a.MinDocFrequency = frequency);
 
-		public TermSuggesterDescriptor<T> MaxTermFrequency(decimal frequency) => Assign(a => a.MaxTermFrequency = frequency);
+		public TermSuggesterDescriptor<T> MaxTermFrequency(decimal? frequency) => Assign(a => a.MaxTermFrequency = frequency);
 
 	}
 }

@@ -94,9 +94,8 @@ namespace Tests.Search.Request
 					.Type("number")
 					.Ascending()
 					.Script(script => script
-						.Inline("doc['field_name'].value * factor", i => i
-							.Params(p => p.Add("factor", 1.1))
-						)
+						.Inline("doc['field_name'].value * factor")
+						.Params(p => p.Add("factor", 1.1))
 					)
 				)
 			);

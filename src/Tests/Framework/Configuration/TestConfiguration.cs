@@ -7,18 +7,32 @@ namespace Tests.Framework.Configuration
 	public class TestConfiguration
 	{
 		public TestMode Mode { get; } = TestMode.Unit;
-		public string ElasticsearchVersion { get; } = "2.0.0-rc1";
-		public virtual bool ForceReseed { get; }
-		public virtual bool DoNotSpawnIfAlreadyRunning { get; }
+		public string ElasticsearchVersion { get; private set; } = "2.0.0";
+		public virtual bool ForceReseed { get; } = false;
+		public virtual bool DoNotSpawnIfAlreadyRunning { get; } = true;
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 
+		private static readonly string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
+
 		public TestConfiguration(string configurationFile)
 		{
+			//if env var NEST_INTEGRATION_VERSION is set assume integration mode
+			//used by the build script FAKE
+			if (!string.IsNullOrWhiteSpace(ElasticVersionInEnvironment))
+			{
+				this.ElasticsearchVersion = ElasticVersionInEnvironment;
+				this.Mode = TestMode.Integration;
+				this.ForceReseed = false;
+				this.DoNotSpawnIfAlreadyRunning = false;
+				return;
+			}
+
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
+				.Where(l=>!l.Trim().StartsWith("#"))
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);

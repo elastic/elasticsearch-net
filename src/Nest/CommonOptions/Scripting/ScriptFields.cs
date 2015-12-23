@@ -39,14 +39,16 @@ namespace Nest
 		{ }
 
 		public void Add(string name, IScriptField script) => this.BackingDictionary.Add(name, script);
+		public void Add(string name, IScript script) => this.BackingDictionary.Add(name, new ScriptField { Script = script });
 	}
 
-	public class ScriptFieldsDescriptor
-		: IsADictionaryDescriptor<ScriptFieldsDescriptor, IScriptFields, string, IScriptField>
+	public class ScriptFieldsDescriptor : IsADictionaryDescriptor<ScriptFieldsDescriptor, IScriptFields, string, IScriptField>
 	{
 		public ScriptFieldsDescriptor() : base(new ScriptFields()) { }
 
-		public ScriptFieldsDescriptor ScriptField(string name, Func<ScriptFieldDescriptor, IScriptField> selector) =>
-			Assign(name, selector?.Invoke(new ScriptFieldDescriptor()));
+		public ScriptFieldsDescriptor ScriptField(string name, Func<ScriptDescriptor, IScript> selector) =>
+			Assign(name, ToScript(selector?.Invoke(new ScriptDescriptor())));
+
+		private static IScriptField ToScript(IScript script) => script != null ? new ScriptField { Script = script } : null;
 	}
 }

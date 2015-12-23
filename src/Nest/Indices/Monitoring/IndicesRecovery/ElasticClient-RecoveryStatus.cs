@@ -11,7 +11,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IRecoveryStatusResponse RecoveryStatus(Indices infices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc/>
 		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request);

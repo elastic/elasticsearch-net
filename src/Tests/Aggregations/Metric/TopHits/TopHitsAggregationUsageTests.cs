@@ -103,9 +103,7 @@ namespace Tests.Aggregations.Metric.TopHits
 							)
 							.ScriptFields(sfs => sfs
 								.ScriptField("commit_factor", sf => sf
-									.Script(sc => sc
-										.Inline("doc['numberOfCommits'].value * 2")
-									)
+									.Inline("doc['numberOfCommits'].value * 2")
 								)
 							)
 						)

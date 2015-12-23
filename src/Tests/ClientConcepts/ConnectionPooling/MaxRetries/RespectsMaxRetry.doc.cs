@@ -14,7 +14,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		* but give up after 20 seconds
 		*/
 
-		[U] public async Task DefaultMaxIsNumberOfNodes()
+		[U]
+		public async Task DefaultMaxIsNumberOfNodes()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -37,7 +38,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9208 },
 					{ HealthyResponse, 9209 }
 				}
-            );
+			);
 		}
 
 		/**
@@ -45,7 +46,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		* Remember that the actual number of requests is initial attempt + set number of retries 
 		*/
 
-		[U] public async Task FixedMaximumNumberOfRetries()
+		[U]
+		public async Task FixedMaximumNumberOfRetries()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -61,15 +63,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9201 },
 					{ BadResponse, 9202 },
 					{ BadResponse, 9203 },
+					{ MaxRetriesReached }
 				}
-            );
+			);
 		}
 		/** 
 		* In our previous test we simulated very fast failures, in the real world a call might take upwards of a second
 		* Here we simulate a particular heavy search that takes 10 seconds to fail, our Request timeout is set to 20 seconds.
 		* In this case it does not make sense to retry our 10 second query on 10 nodes. We should try it twice and give up before a third call is attempted
 		*/
-		[U] public async Task RespectsOveralRequestTimeout()
+		[U]
+		public async Task RespectsOveralRequestTimeout()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -83,9 +87,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
+					{ MaxTimeoutReached }
 				}
-            );
-
+			);
 		}
 
 		/** 
@@ -94,12 +98,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		* We should see 5 attempts to perform this query, testing that our request timeout cuts the query off short and that our max retry timeout of 10
 		* wins over the configured request timeout
 		*/
-		[U] public async Task RespectsMaxRetryTimeoutOverRequestTimeout()
+		[U]
+		public async Task RespectsMaxRetryTimeoutOverRequestTimeout()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
-				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+				.ClientCalls(r => r.OnPort(9209).FailAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
@@ -111,14 +116,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9202 },
 					{ BadResponse, 9203 },
 					{ BadResponse, 9204 },
+					{ MaxTimeoutReached }
 				}
-            );
+			);
 
 		}
 		/** 
 		* If your retry policy expands beyond available nodes we won't retry the same node twice
 		*/
-		[U] public async Task RetriesAreLimitedByNodesInPool()
+		[U]
+		public async Task RetriesAreLimitedByNodesInPool()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(2)
@@ -132,8 +139,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				new ClientCall {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
+					{ MaxRetriesReached }
 				}
-            );
+			);
 		}
 
 		/** 
@@ -141,7 +149,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
 		* not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
 		*/
-		[U] public async Task DoesNotRetryOnSingleNodeConnectionPool()
+		[U]
+		public async Task DoesNotRetryOnSingleNodeConnectionPool()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -155,7 +164,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				new ClientCall {
 					{ BadResponse, 9200 }
 				}
-            );
+			);
 
 		}
 	}

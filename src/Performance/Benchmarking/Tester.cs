@@ -82,7 +82,7 @@ namespace Benchmarking
 			return new ConnectionSettings(connectionPool)
 				.SetDefaultIndex(IndexName)
 				.SniffOnStartup()
-				.ThrowOnElasticsearchServerExceptions();
+				.ThrowExceptions();
 		}
 
 		protected void Connect()

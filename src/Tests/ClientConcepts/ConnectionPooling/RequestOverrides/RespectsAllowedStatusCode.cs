@@ -11,7 +11,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		/** == Allowed status codes
 		*/
 
-		[U] public async Task CanOverrideBadResponse()
+		[U]
+		public async Task CanOverrideBadResponse()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -24,10 +25,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 				new ClientCall() {
 					{ BadResponse, 9200 }
 				},
-				new ClientCall(r=>r.AllowedStatusCodes(400)) {
+				new ClientCall(r => r.AllowedStatusCodes(400)) {
 					{ HealthyResponse, 9201 }
 				}
-            );
+			);
 		}
 	}
 }

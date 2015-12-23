@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
 
 ///Generated File Please Do Not Edit Manually
-
+	
 namespace Elasticsearch.Net
 {
 	///<summary>
@@ -2658,7 +2663,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
+			where T : class => this.DoRequest<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2672,7 +2677,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
+			where T : class => this.DoRequestAsync<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

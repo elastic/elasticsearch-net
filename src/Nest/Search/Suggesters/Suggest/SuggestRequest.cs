@@ -4,62 +4,23 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonConverter(typeof(CustomJsonConverter))]
-	public partial interface ISuggestRequest : ICustomJson
+	//TODO UNTESTED
+	[JsonConverter(typeof(SuggestRequest))]
+	public partial interface ISuggestRequest 
 	{
 		string GlobalText { get; set; }
 		IDictionary<string, ISuggester> Suggest { get; set; }
-	}
-
-	internal static class SuggestPathInfo
-	{
-		//TODO this is ugly
-		public static object GetCustomJson(ISuggestRequest suggestRequest)
-		{
-			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
-				return null;
-
-			var dict = new Dictionary<string, object>();
-			if (!suggestRequest.GlobalText.IsNullOrEmpty())
-				dict.Add("text", suggestRequest.GlobalText);
-
-			if (suggestRequest.Suggest != null)
-			{
-				foreach (var kv in suggestRequest.Suggest)
-				{
-					var item = kv.Value;
-					var bucket = new SuggestBucket() { Text = item.Text };
-
-					var completion = item as ICompletionSuggester;
-					if (completion != null) bucket.Completion = completion;
-
-					var phrase = item as IPhraseSuggester;
-					if (phrase != null) bucket.Phrase = phrase;
-
-					var term = item as ITermSuggester;
-					if (term != null) bucket.Term = term;
-					dict.Add(kv.Key, bucket);
-				}
-			}
-			return dict;
-		}
 	}
 
 	public partial class SuggestRequest 
 	{
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
-
-		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 	}
-
 
 	[DescriptorFor("Suggest")]
 	public partial class SuggestDescriptor<T> where T : class
 	{
-		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
-
 		string ISuggestRequest.GlobalText { get; set; }
 		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; } = new Dictionary<string, ISuggester>();
 

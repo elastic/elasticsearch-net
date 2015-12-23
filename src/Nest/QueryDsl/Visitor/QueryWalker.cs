@@ -60,6 +60,7 @@ namespace Nest
 			VisitQuery(qd.GeoHashCell, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Limit, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 
 			VisitQuery(qd.Not, visitor, (v, d) =>
 			{

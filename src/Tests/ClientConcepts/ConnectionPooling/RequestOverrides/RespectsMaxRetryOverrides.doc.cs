@@ -14,7 +14,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		* but give up after 20 seconds
 		*/
 
-		[U] public async Task DefaultMaxIsNumberOfNodes()
+		[U]
+		public async Task DefaultMaxIsNumberOfNodes()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -25,12 +26,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r=>r.MaxRetries(2)) {
+				new ClientCall(r => r.MaxRetries(2)) {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
-					{ BadResponse, 9202 }
+					{ BadResponse, 9202 },
+					{ MaxRetriesReached }
 				}
-            );
+			);
 		}
 
 		/**
@@ -38,7 +40,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		* Remember that the actual number of requests is initial attempt + set number of retries 
 		*/
 
-		[U] public async Task FixedMaximumNumberOfRetries()
+		[U]
+		public async Task FixedMaximumNumberOfRetries()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -49,12 +52,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r=>r.MaxRetries(2)) {
+				new ClientCall(r => r.MaxRetries(2)) {
 					{ BadResponse, 9200 },
 					{ BadResponse, 9201 },
-					{ BadResponse, 9202 }
+					{ BadResponse, 9202 },
+					{ MaxRetriesReached }
 				}
-            );
+			);
 		}
 
 		/** 
@@ -62,7 +66,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
 		* not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
 		*/
-		[U] public async Task DoesNotRetryOnSingleNodeConnectionPool()
+		[U]
+		public async Task DoesNotRetryOnSingleNodeConnectionPool()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
@@ -73,10 +78,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r=>r.MaxRetries(10)) {
+				new ClientCall(r => r.MaxRetries(10)) {
 					{ BadResponse, 9200 }
 				}
-            );
+			);
 
 		}
 	}

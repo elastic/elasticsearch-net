@@ -13,21 +13,22 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		* request configuration. This will ignore the pool and not retry.
 		*/
 
-		[U] public async Task DefaultMaxIsNumberOfNodes()
+		[U]
+		public async Task OnlyCallsForcedNode()
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.SucceedAlways())
-				.ClientCalls(r => r.OnPort(9220).FailAlways())
+				.ClientCalls(r => r.OnPort(9208).FailAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
 
 			audit = await audit.TraceCall(
-				new ClientCall(r=>r.ForceNode(new Uri("http://localhost:9220"))) {
-					{ BadResponse, 9220 }
+				new ClientCall(r => r.ForceNode(new Uri("http://localhost:9208"))) {
+					{ BadResponse, 9208 }
 				}
-            );
+			);
 		}
 	}
 }

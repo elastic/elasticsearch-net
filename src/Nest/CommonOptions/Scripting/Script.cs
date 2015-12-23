@@ -43,13 +43,10 @@ namespace Nest
 
 	public class ScriptDescriptor : DescriptorBase<ScriptDescriptor, IDescriptor>
 	{
-		public IFileScript File(string file, Func<FileScriptDescriptor, IFileScript> fileScript = null) =>
-			fileScript.InvokeOrDefault(new FileScriptDescriptor().File(file));
+		public FileScriptDescriptor File(string file) => new FileScriptDescriptor().File(file);
 
-		public IIndexedScript Indexed(string id, Func<IndexedScriptDescriptor, IIndexedScript> indexedScript = null) =>
-			indexedScript.InvokeOrDefault(new IndexedScriptDescriptor().Id(id));
+		public IndexedScriptDescriptor Indexed(string id) => new IndexedScriptDescriptor().Id(id);
 
-		public IInlineScript Inline(string script, Func<InlineScriptDescriptor, IInlineScript> inlineScript = null) =>
-			inlineScript.InvokeOrDefault(new InlineScriptDescriptor().Inline(script));
+		public InlineScriptDescriptor Inline(string script) => new InlineScriptDescriptor().Inline(script);
 	}
 }

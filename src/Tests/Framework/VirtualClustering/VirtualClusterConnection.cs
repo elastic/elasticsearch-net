@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework.MockResponses;
+using System.Net;
 
 namespace Tests.Framework
 {
@@ -41,38 +42,46 @@ namespace Tests.Framework
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
 			this.Calls.Should().ContainKey(requestData.Uri.Port);
-
-			var state = this.Calls[requestData.Uri.Port];
-			if (IsSniffRequest(requestData))
+			try
 			{
-				var sniffed = Interlocked.Increment(ref state.Sniffed);
-				return HandleRules<TReturn, ISniffRule>(
+				var state = this.Calls[requestData.Uri.Port];
+				if (IsSniffRequest(requestData))
+				{
+					var sniffed = Interlocked.Increment(ref state.Sniffed);
+					return HandleRules<TReturn, ISniffRule>(
+						requestData,
+						this._cluster.SniffingRules,
+						requestData.RequestTimeout,
+						(r) => this.UpdateCluster(r.NewClusterState),
+						() => SniffResponse.Create(this._cluster.Nodes)
+					);
+				}
+				if (IsPingRequest(requestData))
+				{
+					var pinged = Interlocked.Increment(ref state.Pinged);
+					return HandleRules<TReturn, IRule>(
+						requestData,
+						this._cluster.PingingRules,
+						requestData.PingTimeout,
+						(r) => { },
+						() => null //HEAD request
+					);
+				}
+				var called = Interlocked.Increment(ref state.Called);
+				return HandleRules<TReturn, IClientCallRule>(
 					requestData,
-					this._cluster.SniffingRules,
+					this._cluster.ClientCallRules,
 					requestData.RequestTimeout,
-					(r) => this.UpdateCluster(r.NewClusterState),
-					() => SniffResponse.Create(this._cluster.Nodes)
-				);
-			}
-			if (IsPingRequest(requestData))
-			{
-				var pinged = Interlocked.Increment(ref state.Pinged);
-				return HandleRules<TReturn, IRule>(
-					requestData,
-					this._cluster.PingingRules,
-					requestData.PingTimeout,
 					(r) => { },
-					() => null //HEAD request
+					CallResponse
 				);
 			}
-			var called = Interlocked.Increment(ref state.Called);
-			return HandleRules<TReturn, IClientCallRule>(
-				requestData,
-				this._cluster.ClientCallRules,
-				requestData.RequestTimeout,
-				(r) => { },
-				CallResponse //TODO search response
-			);
+			catch (WebException e)
+			{
+				var builder = new ResponseBuilder<TReturn>(requestData);
+				builder.Exception = e;
+				return builder.ToResponse();
+			}
 		}
 
 		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
@@ -117,7 +126,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout: rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			return rule.Succeeds
@@ -134,7 +143,7 @@ namespace Tests.Framework
 				var time = timeout < rule.Takes.Value ? timeout : rule.Takes.Value;
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
-					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 			}
 
 			if (rule.Succeeds && times >= state.Successes)
@@ -153,11 +162,11 @@ namespace Tests.Framework
 			var state = this.Calls[requestData.Uri.Port];
 			var failed = Interlocked.Increment(ref state.Failures);
 			if (rule.Return == null)
-				throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+				throw new WebException();
 			return rule.Return.Match(
 				(e) =>
 				{
-					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
+					throw e;
 				},
 				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
 			);

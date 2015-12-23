@@ -191,5 +191,7 @@ namespace Nest
 		public virtual void Visit(IExistsQuery filter) => Write("exists");
 
 		public void Visit(IScriptQuery filter) => Write("script");
+
+		public void Visit(IRawQuery filter) => Write("script");
 	}
 }

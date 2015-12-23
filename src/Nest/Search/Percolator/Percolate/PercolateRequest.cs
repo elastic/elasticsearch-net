@@ -23,7 +23,7 @@ namespace Nest
 		public IHighlight Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
-		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
 		
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
@@ -54,115 +54,43 @@ namespace Nest
 		
 		TDocument IPercolateRequest<TDocument>.Document { get; set; }
 		IList<ISort> IPercolateOperation.Sort { get; set; }
-		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
+		AggregationDictionary IPercolateOperation.Aggregations { get; set; }
 
 		string IPercolateOperation.MultiPercolateName => "percolate";
 
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateDescriptor<TDocument> Document(TDocument @object)
-		{
-			Self.Document = @object;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Document(TDocument @object) => Assign(a => a.Document = @object);
+
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
-		public PercolateDescriptor<TDocument> TrackScores(bool trackscores = true)
-		{
-			Self.TrackScores = trackscores;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
 
-		public PercolateDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, AggregationContainerDescriptor<TDocument>> aggregationsSelector)
-		{
-			var aggs = aggregationsSelector(new AggregationContainerDescriptor<TDocument>());
-			if (aggs == null) return this;
-			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, IAggregationContainer> aggregationsSelector) =>
+			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations);
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. 
 		/// </summary>
-		public PercolateDescriptor<TDocument> Highlight(int size, Func<HighlightDescriptor<TDocument>,HighlightDescriptor<TDocument>> highlightDescriptor)
-		{
-			highlightDescriptor.ThrowIfNull(nameof(highlightDescriptor));
-			var d  = highlightDescriptor(new HighlightDescriptor<TDocument>());
-			Self.Size = size;
-			Self.Highlight = d;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Highlight(Func<HighlightDescriptor<TDocument>, IHighlight> highlightDescriptor) =>
+			Assign(a => a.Highlight = highlightDescriptor?.Invoke(new HighlightDescriptor<TDocument>()));
 
-		public PercolateDescriptor<TDocument> Size(int size)
-		{
-			Self.Size = size;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Size(int? size) => Assign(a => a.Size = size);
 
 		public PercolateDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
 
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query)
-		{
-			query.ThrowIfNull(nameof(query));
-			var q = new QueryContainerDescriptor<TDocument>();
-			var bq = query(q);
-			return this.Query(bq);
-		}
-
-		public PercolateDescriptor<TDocument> Query(QueryContainer query)
-		{
-			if (query == null)
-				return this;
-
-			if (query.IsConditionless)
-				return this;
-			Self.Query = query;
-			return this;
-
-		}
-
-		/// <summary>
-		/// Shortcut to .Query(q=>q.QueryString(qs=>qs.Query("string"))
-		/// Does a match_all if the userInput string is null or empty;
-		/// </summary>
-		public PercolateDescriptor<TDocument> QueryString(string userInput)
-		{
-			var q = new QueryContainerDescriptor<TDocument>();
-			var bq = userInput.IsNullOrEmpty() ? q.MatchAll() : q.QueryString(qs => qs.Query(userInput));
-			Self.Query = bq;
-			return this;
-		}
+		public PercolateDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query) =>
+			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
 
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter)
-		{
-			filter.ThrowIfNull(nameof(filter));
-			var f = new QueryContainerDescriptor<TDocument>();
+		public PercolateDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter) =>
+			Assign(a => a.Filter = filter?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
 
-			var bf = filter(f);
-			if (bf == null)
-				return this;
-			if (bf.IsConditionless)
-				return this;
-
-			Self.Filter = bf;
-			return this;
-		}
-
-		/// <summary>
-		/// Filter search
-		/// </summary>
-		public PercolateDescriptor<TDocument> Filter(QueryContainer filter)
-		{
-			filter.ThrowIfNull(nameof(filter));
-			Self.Filter = filter;
-			return this;
-		}
 	}
 }

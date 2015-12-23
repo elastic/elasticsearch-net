@@ -11,7 +11,7 @@ namespace Benchmarking
 		public override bool DoNotSpawnIfAlreadyRunning { get; } = false;
 
 		public BenchmarkingTestConfiguration()
-			: base(@"..\..\..\..\Tests\tests.yml")
+			: base(@"..\..\..\..\Tests\tests.yaml")
 		{
 		}
 	}

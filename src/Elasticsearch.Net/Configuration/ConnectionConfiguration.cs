@@ -115,8 +115,8 @@ namespace Elasticsearch.Net
 		private bool _httpPipeliningEnabled = true;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
-		private bool _throwOnServerExceptions;
-		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
+		private bool _throwExceptions;
+		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 
 		private static void DefaultApiCallHandler(IApiCallDetails status) {}
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
@@ -204,13 +204,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T EnableMetrics(bool enabled = true) => Assign(a => a._enableMetrics = enabled);
 
-		//TODO this summary is most likely going out of date when we refactor exceptions
 		/// <summary>
-		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
-		/// on the client when a call resulted in an exception on the elasticsearch server. 
-		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
+		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true) => Assign(a => a._throwOnServerExceptions = alwaysThrow);
+		public T ThrowExceptions(bool alwaysThrow = true) => Assign(a => a._throwExceptions = alwaysThrow);
 
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
