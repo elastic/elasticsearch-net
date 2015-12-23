@@ -139,7 +139,10 @@ namespace Elasticsearch.Net
 			catch (WebException webException)
 			{
 				var response = (HttpWebResponse)webException.Response;
-				return requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), webException);
+
+				return response != null 
+					? requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), webException) 
+					: requestData.CreateResponse<TReturn>(webException);
 			}
 			catch (Exception exception)
 			{
