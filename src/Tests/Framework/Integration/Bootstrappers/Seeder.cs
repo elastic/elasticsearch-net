@@ -19,50 +19,45 @@ namespace Tests.Framework.Integration
 
 		public void SeedNode()
 		{
-			if (TestClient.Configuration.ForceReseed)
+			if (TestClient.Configuration.ForceReseed || !AlreadySeeded())
 			{
-				this.DeleteIndices();
+				// Ensure a clean slate by deleting everything regardless of whether they may already exist
+				this.DeleteIndicesAndTemplates();
+				// and now recreate everything
+				this.CreateIndicesAndSeedIndexData();
 			}
-
-			var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
-			//if raw_fields exists assume this cluster is already seeded
-			//sometimes we run against an manually started elasticsearch when writing tests
-			//to cut down on cluster startup times
-			if (rawFieldsTemplateExists) return;
-			this.CreateIndicesAndSeedIndexData();
-
 		}
 
-	    public void DeleteIndices()
-	    {
-            if (this.Client.IndexTemplateExists("raw_fields").Exists)
-                this.Client.DeleteIndexTemplate("raw_fields");
+		// Sometimes we run against an manually started elasticsearch when
+		// writing tests to cut down on cluster startup times.
+		// If raw_fields exists assume this cluster is already seeded.
+		private bool AlreadySeeded() => this.Client.IndexTemplateExists("raw_fields").Exists;
 
-            if (this.Client.IndexExists(typeof(Project)).Exists)
-                this.Client.DeleteIndex(typeof(Project));
-
-            if (this.Client.IndexExists(typeof(Developer)).Exists)
-                this.Client.DeleteIndex(typeof(Developer));
-        }
-
-	    public void CreateIndices()
-	    {
-            CreateRawFieldsIndexTemplate();
-            CreateProjectIndex();
-            CreateDeveloperIndex();
-        }
-
-	    private void SeedIndexData()
-	    {
-            this.Client.IndexMany(Project.Projects);
-            this.Client.IndexMany(Developer.Developers);
-            this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
-        }
-
-	    private void CreateIndicesAndSeedIndexData()
+		public void DeleteIndicesAndTemplates()
 		{
-            this.CreateIndices();
-            this.SeedIndexData();
+			this.Client.DeleteIndexTemplate("raw_fields");
+			this.Client.DeleteIndex(typeof(Project));
+			this.Client.DeleteIndex(typeof(Developer));
+		}
+
+		public void CreateIndices()
+		{
+			CreateRawFieldsIndexTemplate();
+			CreateProjectIndex();
+			CreateDeveloperIndex();
+		}
+
+		private void SeedIndexData()
+		{
+			this.Client.IndexMany(Project.Projects);
+			this.Client.IndexMany(Developer.Developers);
+			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
+		}
+
+		private void CreateIndicesAndSeedIndexData()
+		{
+			this.CreateIndices();
+			this.SeedIndexData();
 		}
 
 		private void CreateRawFieldsIndexTemplate()
@@ -94,7 +89,7 @@ namespace Tests.Framework.Integration
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
 
-	    private void CreateDeveloperIndex()
+		private void CreateDeveloperIndex()
 		{
 			var createDeveloperIndex = this.Client.CreateIndex(Index<Developer>(), c => c
 				.Mappings(map => map
@@ -107,7 +102,7 @@ namespace Tests.Framework.Integration
 			createDeveloperIndex.IsValid.Should().BeTrue();
 		}
 
-	    private void CreateProjectIndex()
+		private void CreateProjectIndex()
 		{
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
 				.Aliases(a => a

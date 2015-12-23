@@ -58,7 +58,7 @@ namespace Tests.Search.SearchExists
 			requestAsync: (c, r) => c.SearchExistsAsync(r)
 		);
 
-		protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 404;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/project/project/_search/exists";
@@ -81,6 +81,7 @@ namespace Tests.Search.SearchExists
 
 		protected override void ExpectResponse(IExistsResponse response)
 		{
+			response.IsValid.Should().BeTrue();
 			response.Exists.Should().BeFalse();
 		}
 

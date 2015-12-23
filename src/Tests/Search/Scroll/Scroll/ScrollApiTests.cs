@@ -13,9 +13,11 @@ namespace Tests.Search.Scroll.Scroll
 	{
 		public ScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		private string _scrollId = "default-for-unit-tests"; 
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Scroll("1m", "scroll-id", f),
-			fluentAsync: (c, f) => c.ScrollAsync("1m", "scroll-id", f),
+			fluent: (c, f) => c.Scroll("1m", _scrollId, f),
+			fluentAsync: (c, f) => c.ScrollAsync("1m", _scrollId, f),
 			request: (c, r) => c.Scroll<Project>(r),
 			requestAsync: (c, r) => c.ScrollAsync<Project>(r)
 		);
@@ -29,6 +31,19 @@ namespace Tests.Search.Scroll.Scroll
 
 		protected override Func<ScrollDescriptor<Project>, IScrollRequest> Fluent => null;
 
-		protected override ScrollRequest Initializer => new ScrollRequest("scroll-id", "1m");
+		protected override ScrollRequest Initializer => new ScrollRequest(_scrollId, "1m");
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var response = client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
+			if (!response.IsValid)
+				throw new Exception("Scroll setup failed");
+			_scrollId = response.ScrollId ?? _scrollId;
+		}
+
+		protected override void OnAfterCall(IElasticClient client)
+		{
+			client.ClearScroll(_scrollId);
+		}
 	}
 }

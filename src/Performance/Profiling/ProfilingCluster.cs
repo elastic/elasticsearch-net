@@ -10,7 +10,7 @@ namespace Profiling
         public override void Boostrap()
         {
             var seeder = new Seeder(this.Node.Port);
-            seeder.DeleteIndices();
+            seeder.DeleteIndicesAndTemplates();
             seeder.CreateIndices();
         }
 	}
