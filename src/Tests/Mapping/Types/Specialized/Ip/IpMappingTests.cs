@@ -11,10 +11,10 @@ namespace Tests.Mapping.Types.Specialized.Ip
 			Boost = 1.3,
 			NullValue = "127.0.0.1",
 			IncludeInAll = true)]
-		public SuggestField Full { get; set; }
+		public string Full { get; set; }
 
 		[Ip]
-		public SuggestField Minimal { get; set; }
+		public string Minimal { get; set; }
 	}
 
 	public class IpMappingTests : TypeMappingTestBase<IpTest>

@@ -532,7 +532,7 @@
     <Compile Include="Cluster\ClusterReroute\Commands\IClusterRerouteCommand.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\MoveClusterRerouteCommand.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatus.cs" />
-    <Compile Include="Search\Suggesters\SuggestField.cs" />
+    <Compile Include="Search\Suggesters\CompletionSuggester\CompletionField.cs" />
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregation.cs" />
     <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregation.cs" />

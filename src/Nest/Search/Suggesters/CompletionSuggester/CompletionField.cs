@@ -3,11 +3,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	/// <summary>
+	/// Convenience class for use when indexing completion fields.
+	/// </summary>
 	[JsonObject]
-	public class SuggestField
+	public class CompletionField
 	{
 		[JsonProperty("input")]
-		public string Input { get; set; }
+		public IEnumerable<string> Input { get; set; }
 
 		[JsonProperty("output")]
 		public string Output { get; set; }
