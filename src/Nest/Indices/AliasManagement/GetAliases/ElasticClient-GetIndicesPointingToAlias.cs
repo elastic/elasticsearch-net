@@ -24,14 +24,10 @@ namespace Nest
 		/// </summary>
 		/// <param name="client"></param>
 		/// <param name="aliasName">The exact alias name</param>
-		public static Task<IList<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
+		public static async Task<IList<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
 		{
-			return client.GetAliasAsync(a => a.Index(aliasName))
-				.ContinueWith((t) =>
-				{
-					var aliasesResponse = t.Result;
-					return IndicesPointingToAlias(aliasName, aliasesResponse);
-				});
+			var response = await client.GetAliasAsync(a => a.Index(aliasName));
+			return IndicesPointingToAlias(aliasName, response);
 		}
 
 		private static IList<string> IndicesPointingToAlias(string aliasName, IGetAliasesResponse aliasesResponse)

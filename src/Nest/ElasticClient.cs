@@ -62,7 +62,7 @@ namespace Nest
 			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, null, dispatch);
 
-		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
+		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest request, 
 			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
 			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
@@ -72,18 +72,8 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			request.RequestParameters.DeserializationOverride(responseGenerator);
-			return dispatch(request, request)
-				.ContinueWith<TResponseInterface>(r =>
-				{
-					if (r.IsFaulted && r.Exception != null)
-					{
-						//TODO this whole continuewith smells, investigate
-						var ae = r.Exception.Flatten();
-						ae.InnerException?.RethrowKeepingStackTrace();
-						ae.RethrowKeepingStackTrace();
-					}
-					return ResultsSelector(r.Result);
-				});
+			var response = await dispatch(request, request);
+			return ResultsSelector(response);
 		}
 
 		private static TResponse ResultsSelector<TResponse>(ElasticsearchResponse<TResponse> c)
