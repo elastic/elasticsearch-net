@@ -111,7 +111,12 @@ namespace Tests.Framework.Integration
 				.Mappings(map => map
 					.Map<Project>(m => m
 						.Properties(props => props
-							.String(s => s.Name(p => p.Name).NotAnalyzed())
+							.String(s => s
+								.Name(p => p.Name).NotAnalyzed()
+								.Fields(fs => fs
+									.Completion(cm => cm.Name("suggest"))
+								)
+							)
 							.Date(d => d.Name(p => p.StartedOn))
 							.String(d => d.Name(p => p.State).NotAnalyzed())
 							.Nested<Tag>(mo => mo
@@ -123,6 +128,14 @@ namespace Tests.Framework.Integration
 								.Properties(DeveloperProperties)
 							)
 							.GeoPoint(g => g.Name(p => p.Location))
+							.Completion(cm => cm
+								.Name(p => p.Suggest)
+								.Context(cnt => cnt
+									.Category("color", cat => cat
+										.Default("red")
+									)
+								)					
+							)
 						)
 					)
 					.Map<CommitActivity>(m => m

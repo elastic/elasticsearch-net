@@ -23,11 +23,11 @@ namespace Tests.Search.Request
 				suggest = new Dictionary<string, object>{
 					{  "my-completion-suggest", new {
 					  completion = new {
-						analyzer = "analyzer",
+						analyzer = "standard",
 						context = new {
 						  color = "blue"
 						},
-						field = "name",
+						field = "suggest",
 						fuzzy = new {
 						  fuzziness = "AUTO",
 						  min_length = 1,
@@ -43,13 +43,13 @@ namespace Tests.Search.Request
 					{  "my-phrase-suggest", new {
 					  phrase = new {
 						collate = new {
-				          @params = new {
-							field_name = "title"
+						  query = new {
+							inline = "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+							@params = new {
+						      field_name = "title"
+							}
 						  },
 						  prune = true,
-						  query = new {
-							match_all = new {}
-						  }
 						},
 						confidence = 10.1,
 						direct_generator = new [] {
@@ -62,7 +62,7 @@ namespace Tests.Search.Request
 					} },
 					{  "my-term-suggest", new {
 					  term = new {
-						analyzer = "analyzer",
+						analyzer = "standard",
 						field = "name",
 						max_edits = 1,
 						max_inspections = 2,
@@ -81,7 +81,7 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Suggest(ss => ss
-				.Term("my-term-suggest", t=>t
+				.Term("my-term-suggest", t => t
 					.MaxEdits(1)
 					.MaxInspections(2)
 					.MaxTermFrequency(3)
@@ -89,41 +89,43 @@ namespace Tests.Search.Request
 					.MinWordLength(5)
 					.PrefixLength(6)
 					.SuggestMode(SuggestMode.Always)
-					.Analyzer("analyzer")
-					.Field(p=>p.Name)
+					.Analyzer("standard")
+					.Field(p => p.Name)
 					.ShardSize(7)
 					.Size(8)
 					.Text("hello world")
 				)
-				.Completion("my-completion-suggest", c=>c
-					.Context(ctx=>ctx
+				.Completion("my-completion-suggest", c => c
+					.Context(ctx => ctx
 						.Add("color", "blue")
 					)
-					.Fuzzy(f=>f
+					.Fuzzy(f => f
 						.Fuzziness(Fuzziness.Auto)
 						.MinLength(1)
 						.PrefixLength(2)
 						.Transpositions()
 						.UnicodeAware(false)
 					)
-					.Analyzer("analyzer")
-					.Field(p=>p.Name)
+					.Analyzer("standard")
+					.Field(p => p.Suggest)
 					.ShardSize(7)
 					.Size(8)
 					.Text("hello world")
 				)
-				.Phrase("my-phrase-suggest", ph=>ph
-					.Collate(c=>c
-						.Query(q=>q.MatchAll())
-						.Params(p=>p.Add("field_name", "title"))
+				.Phrase("my-phrase-suggest", ph => ph
+					.Collate(c => c
+						.Query(q => q
+							.Inline("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+							.Params(p => p.Add("field_name", "title"))
+						)
 						.Prune()
 					)
 					.Confidence(10.1)
-					.DirectGenerator(d=>d
-						.Field(p=>p.Description)
+					.DirectGenerator(d => d
+						.Field(p => p.Description)
 					)
 					.GramSize(1)
-					.Field(p=>p.Name)
+					.Field(p => p.Name)
 					.Text("hello world")
 				)
 			);
@@ -145,7 +147,7 @@ namespace Tests.Search.Request
 							MinWordLen = 5,
 							PrefixLen = 6,
 							SuggestMode = SuggestMode.Always,
-							Analyzer = "analyzer",
+							Analyzer = "standard",
 							Field = Field<Project>(p=>p.Name),
 							ShardSize = 7,
 							Size = 8
@@ -165,8 +167,8 @@ namespace Tests.Search.Request
 								Transpositions = true,
 								UnicodeAware = false
 							},
-							Analyzer = "analyzer",
-							Field = Field<Project>(p=>p.Name),
+							Analyzer = "standard",
+							Field = Field<Project>(p=>p.Suggest),
 							ShardSize = 7,
 							Size = 8
 						}
@@ -178,8 +180,13 @@ namespace Tests.Search.Request
 						{
 							Collate = new PhraseSuggestCollate
 							{
-								Query = new MatchAllQuery(),
-								Params = new Dictionary<string, object> { { "field_name", "title" } },
+								Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+								{
+									Params = new Dictionary<string, object>
+									{
+										{ "field_name", "title" }
+									}
+								},
 								Prune = true
 							},
 							Confidence = 10.1,
