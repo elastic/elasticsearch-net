@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 using Xunit;
 
 namespace Tests.Search.Scroll.ClearScroll
@@ -12,9 +13,11 @@ namespace Tests.Search.Scroll.ClearScroll
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		private string _scrollId;
+
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.ClearScroll("scroll-id", f),
-			fluentAsync: (c, f) => c.ClearScrollAsync("scroll-id", f),
+			fluent: (c, f) => c.ClearScroll(_scrollId, f),
+			fluentAsync: (c, f) => c.ClearScrollAsync(_scrollId, f),
 			request: (c, r) => c.ClearScroll(r),
 			requestAsync: (c, r) => c.ClearScrollAsync(r)
 		);
@@ -28,6 +31,14 @@ namespace Tests.Search.Scroll.ClearScroll
 
 		protected override Func<ClearScrollDescriptor, IClearScrollRequest> Fluent => null;
 
-		protected override ClearScrollRequest Initializer => new ClearScrollRequest("scroll-id");
+		protected override ClearScrollRequest Initializer => new ClearScrollRequest(_scrollId);
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var scroll = this.Client.Search<Project>(s => s.MatchAll().Scroll(TimeSpan.FromMinutes((1))));
+			if (!scroll.IsValid)
+				throw new Exception("Setup: Initial scroll failed.");
+			_scrollId = scroll.ScrollId;
+		}
 	}
 }
