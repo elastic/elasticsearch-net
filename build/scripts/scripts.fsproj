@@ -65,7 +65,7 @@
     <None Include="Versioning.fsx" />
     <None Include="Projects.fsx" />
     <None Include="Paths.fsx" />
-    <None Include="Profiler.fsx" />
+    <None Include="Profiling.fsx" />
     <None Include="InheritDoc.fsx" />
     <None Include="Building.fsx" />
     <None Include="Signing.fsx" />

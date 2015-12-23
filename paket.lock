@@ -1,5 +1,5 @@
 NUGET
-  remote: https://nuget.org/api/v2
+  remote: https://www.nuget.org/api/v2
   specs:
     Bogus (3.0.0.3)
       Newtonsoft.Json (>= 7.0 < 8.0) - framework: >= net40
@@ -22,6 +22,7 @@ NUGET
       System.Threading (>= 4.0.10) - framework: dnxcore50
       System.Threading.Tasks (>= 4.0.10) - framework: dnxcore50
       System.Xml.XDocument (>= 4.0.10) - framework: dnxcore50
+    Humanizer (1.37.7)
     JetBrains.Profiler.Kernel.Windows.Api (104.0.20151218.125646)
       Wave (4.0.0)
     Microsoft.CodeAnalysis.Analyzers (1.0.0)
@@ -31,6 +32,7 @@ NUGET
       System.Reflection.Metadata (>= 1.0.21)
     Microsoft.CodeAnalysis.CSharp (1.0.0)
       Microsoft.CodeAnalysis.Common (1.0.0)
+    NDesk.Options (0.2.1)
     Newtonsoft.Json (7.0.1)
     RazorMachine (2.6.1)
     Rx-Core (2.2.5)
@@ -317,7 +319,7 @@ NUGET
 
 GROUP build
 NUGET
-  remote: https://nuget.org/api/v2
+  remote: https://www.nuget.org/api/v2
   specs:
     FAKE (4.5.6)
     FSharp.Data (2.2.5)

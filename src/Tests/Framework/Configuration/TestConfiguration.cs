@@ -8,7 +8,7 @@ namespace Tests.Framework.Configuration
 	{
 		public TestMode Mode { get; } = TestMode.Unit;
 		public string ElasticsearchVersion { get; } = "2.0.0-rc1";
-		public bool ForceReseed { get; }
+		public virtual bool ForceReseed { get; }
 		public virtual bool DoNotSpawnIfAlreadyRunning { get; }
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;

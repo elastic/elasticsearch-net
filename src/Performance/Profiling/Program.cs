@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using JetBrains.Profiler.Windows.Api;
 using Nest;
 using Profiling.Async;
 using Tests.Framework;
@@ -12,7 +11,7 @@ namespace Profiling
         static void Main(string[] args)
         {
             // TODO move the tests.yml to a more general location and Add Existing Item -> Add Link?
-            TestClient.Configuration = new ProfilingTestConfiguration(@"..\..\..\Tests\tests.yml");
+            TestClient.Configuration = new ProfilingTestConfiguration();
 
             using (var cluster = new ProfilingCluster())
             {

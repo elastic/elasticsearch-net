@@ -8,8 +8,8 @@ namespace Profiling
 
         public override bool DoNotSpawnIfAlreadyRunning { get; } = true;
 
-        public ProfilingTestConfiguration(string configurationFile) 
-            : base(configurationFile)
+        public ProfilingTestConfiguration() 
+            : base(@"..\..\..\..\Tests\tests.yml")
         {
         }
     }

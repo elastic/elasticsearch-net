@@ -30,6 +30,7 @@ module Paths =
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
+    let Build(folder) = sprintf "%s/%s" BuildFolder folder
     let BinFolder(folder) = 
         let f = replace @"\" "/" folder
         sprintf "%s/%s/bin/Release" SourceFolder f
@@ -75,7 +76,7 @@ module Tooling =
         member this.Exec arguments = exec this.Path arguments
 
     let private dotTraceCommandLineTools = "JetBrains.dotTrace.CommandLineTools.10.0.20151114.191633"
-    let private buildToolsDirectory = sprintf "%s/tools" Paths.BuildFolder
+    let private buildToolsDirectory = Paths.Build("tools")
     let private dotTraceDirectory = sprintf "%s/%s" buildToolsDirectory dotTraceCommandLineTools
     
     if (Directory.Exists(dotTraceDirectory) = false)
@@ -83,7 +84,7 @@ module Tooling =
         trace (sprintf "No JetBrains DotTrace tooling found in %s. Downloading now" buildToolsDirectory) 
         let url = sprintf "https://d1opms6zj7jotq.cloudfront.net/resharper/%s.zip" dotTraceCommandLineTools      
         let zipFile = sprintf "%s/%s.zip" buildToolsDirectory dotTraceCommandLineTools
-        let webClient = new WebClient()
+        use webClient = new WebClient()
         webClient.DownloadFile(url, zipFile)
         System.IO.Compression.ZipFile.ExtractToDirectory(zipFile, dotTraceDirectory)
         File.Delete zipFile
@@ -106,14 +107,18 @@ module Tooling =
     let Fake = new NugetTooling("FAKE", "FAKE/tools/FAKE.exe")
     let private FSharpData = new NugetTooling("FSharp.Data", "Fsharp.Data/lib/net40/Fsharp.Data.dll")
 
-    let execProcess proc arguments =
+    let execProcessWithTimeout proc arguments timeout = 
         let args = arguments |> String.concat " "
         ExecProcess (fun p ->
             p.WorkingDirectory <- "."  
             p.FileName <- proc
             p.Arguments <- args
           ) 
-          (TimeSpan.FromMinutes (5.0)) |> ignore
+          (timeout) |> ignore
+
+    let execProcess proc arguments =
+        let defaultTimeout = TimeSpan.FromMinutes (5.0)
+        execProcessWithTimeout proc arguments defaultTimeout
 
     type NpmTooling(npmId, binJs) =
         let modulePath =  sprintf "%s/node_modules/%s" Paths.ToolsFolder npmId

@@ -11,7 +11,7 @@ open Fake
 #load @"Building.fsx"
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
-#load @"Profiler.fsx"
+#load @"Profiling.fsx"
 
 open Paths
 open Building
@@ -20,7 +20,7 @@ open Signing
 open Versioning
 open Documentation
 open Releasing
-open Profiler
+open Profiling
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -47,9 +47,9 @@ Target "WatchTests"  <| fun _ ->
     System.Console.ReadLine() |> ignore 
     watcher.Dispose() 
 
-Target "ProfileSnapshot" <| fun _ -> Profiler.Snapshot()
+Target "Profile" <| fun _ -> Profiler.Run()
 
-Target "ProfileReport" <| fun _ -> Profiler.Report()
+Target "Benchmark" <| fun _ -> Benchmarker.Run()
 
 Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
@@ -75,7 +75,11 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
 "Clean" 
   ==> "BuildApp"
-  ==> "ProfileSnapshot"
+  ==> "Profile"
+
+"Clean" 
+  ==> "BuildApp"
+  ==> "Benchmark"
 
 "CreateKeysIfAbsent"
   ==> "Version"
@@ -89,9 +93,6 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
 "Build"
   ==> "Release"
-
-"ProfileSnapshot"
-  ==> "ProfileReport"
 
 "BuildApp"
 "CreateKeysIfAbsent"
