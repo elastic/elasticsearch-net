@@ -2,7 +2,9 @@
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Static;
 
 namespace Tests.Indices.IndexManagement.IndicesExists
 {
@@ -11,8 +13,8 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 	{
 		public IndexExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.IndexExists(CallIsolatedValue),
-			fluentAsync: (client, f) => client.IndexExistsAsync(CallIsolatedValue),
+			fluent: (client, f) => client.IndexExists(Index<Project>()),
+			fluentAsync: (client, f) => client.IndexExistsAsync(Index<Project>()),
 			request: (client, r) => client.IndexExists(r),
 			requestAsync: (client, r) => client.IndexExistsAsync(r)
 		);
@@ -20,8 +22,8 @@ namespace Tests.Indices.IndexManagement.IndicesExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project";
 
-		protected override IndexExistsRequest Initializer => new IndexExistsRequest(CallIsolatedValue);
+		protected override IndexExistsRequest Initializer => new IndexExistsRequest(Index<Project>());
 	}
 }

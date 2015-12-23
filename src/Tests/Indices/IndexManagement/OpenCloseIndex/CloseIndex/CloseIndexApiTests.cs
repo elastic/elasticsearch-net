@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -11,6 +12,12 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 		: ApiIntegrationTestBase<IIndicesOperationResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
 	{
 		public CloseIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values) client.CreateIndex(index);
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CloseIndex(CallIsolatedValue),
 			fluentAsync: (client, f) => client.CloseIndexAsync(CallIsolatedValue),

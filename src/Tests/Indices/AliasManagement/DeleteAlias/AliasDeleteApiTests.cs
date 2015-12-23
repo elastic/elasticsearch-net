@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -10,7 +11,15 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteAliasApiTests : ApiIntegrationTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
-		private readonly static Names Names = Static.Names("alias, x", "y");
+		private Names Names => Static.Names(CallIsolatedValue + "-alias");
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values)
+				client.CreateIndex(index, c=>c
+					.Aliases(aa=>aa.Alias(index + "-alias"))
+				);
+		}
 
 		public DeleteAliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -23,7 +32,7 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/_all/_alias/alias,x,y";
+		protected override string UrlPath => $"/_all/_alias/{CallIsolatedValue + "-alias"}";
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<DeleteAliasDescriptor, IDeleteAliasRequest> Fluent => null;
