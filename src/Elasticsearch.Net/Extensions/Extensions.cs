@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -57,6 +58,58 @@ namespace Elasticsearch.Net
 		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
 		{
 			return items.GroupBy(property).Select(x => x.First());
+		}
+
+		private static readonly long _year = (long)TimeSpan.FromDays(365).TotalMilliseconds;
+		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
+		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
+		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
+		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
+		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
+
+		internal static string ToTimeUnit(this TimeSpan timeSpan)
+		{
+			var ms = timeSpan.TotalMilliseconds;
+			var interval = "ms";
+			double factor = 0;
+
+			if (ms >= _year)
+			{
+				factor = ms / _year;
+				interval = "y";
+			}
+			else if (ms >= _week)
+			{
+				factor = ms / _week;
+				interval = "w";
+			}
+			else if (ms >= _day)
+			{
+				factor = ms / _day;
+				interval = "d";
+			}
+			else if (ms >= _hour)
+			{
+				factor = ms / _hour;
+				interval = "h";
+			}
+			else if (ms >= _minute)
+			{
+				factor = ms / _minute;
+				interval = "m";
+			}
+			else if (ms >= _second)
+			{
+				factor = ms / _second;
+				interval = "s";
+			}
+			else
+			{
+				factor = ms;
+				interval = "ms";
+			}
+
+			return factor.ToString("0.##", CultureInfo.InvariantCulture) + interval;
 		}
 	}
 }

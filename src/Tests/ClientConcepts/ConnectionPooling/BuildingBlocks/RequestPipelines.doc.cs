@@ -15,7 +15,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		* 
 		*/
 
-		[U] public void RequestPipeline()
+		[U]
+		public void RequestPipeline()
 		{
 			var settings = TestClient.CreateSettings();
 
@@ -36,15 +37,16 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		}
 
 		private IRequestPipeline CreatePipeline(
-			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider= null)
+			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null)
 		{
-			var pool = setupPool(new[] {TestClient.CreateNode(), TestClient.CreateNode(9201)});
+			var pool = setupPool(new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) });
 			var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
 			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}
 
-		[U] public void FirstUsageCheck()
+		[U]
+		public void FirstUsageCheck()
 		{
 			var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First()));
 			var staticPipeline = CreatePipeline(uris => new StaticConnectionPool(uris));
@@ -63,7 +65,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
 		}
 
-		[U] public void SniffsOnConnectionFailure()
+		[U]
+		public void SniffsOnConnectionFailure()
 		{
 			var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First()));
 			var staticPipeline = CreatePipeline(uris => new StaticConnectionPool(uris));
@@ -79,7 +82,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			sniffingPipeline.SniffsOnConnectionFailure.Should().BeFalse();
 		}
 
-		[U] public void SniffsOnStaleCluster()
+		[U]
+		public void SniffsOnStaleCluster()
 		{
 			var dateTime = new TestableDateTimeProvider();
 			var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First(), dateTime), dateTimeProvider: dateTime);
@@ -89,13 +93,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			singleNodePipeline.SniffsOnStaleCluster.Should().BeFalse();
 			staticPipeline.SniffsOnStaleCluster.Should().BeFalse();
 			sniffingPipeline.SniffsOnStaleCluster.Should().BeTrue();
-		
+
 			singleNodePipeline.StaleClusterState.Should().BeFalse();
 			staticPipeline.StaleClusterState.Should().BeFalse();
 			sniffingPipeline.StaleClusterState.Should().BeFalse();
 
 			/** go one hour into the future */
-			dateTime.ChangeTime(d=>d.Add(TimeSpan.FromHours(2)));
+			dateTime.ChangeTime(d => d.Add(TimeSpan.FromHours(2)));
 
 			/**connection pools that do not support reseeding never go stale */
 			singleNodePipeline.StaleClusterState.Should().BeFalse();
@@ -104,12 +108,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			sniffingPipeline.StaleClusterState.Should().BeTrue();
 
 		}
-		
 
-		/** A request pipeline also checks whether the overall time across multiple retries exceeds the reqeust timeout
+
+		/** A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout
 		* See the maxretry documentation for more details, here we assert that our request pipeline exposes this propertly
 		*/
-		[U] public void IsTakingTooLong()
+		[U]
+		public void IsTakingTooLong()
 		{
 			var dateTime = new TestableDateTimeProvider();
 			var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First(), dateTime), dateTimeProvider: dateTime);
@@ -121,20 +126,29 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			sniffingPipeline.IsTakingTooLong.Should().BeFalse();
 
 			/** go one hour into the future */
-			dateTime.ChangeTime(d=>d.Add(TimeSpan.FromHours(2)));
+			dateTime.ChangeTime(d => d.Add(TimeSpan.FromHours(2)));
 
 			/**connection pools that do not support reseeding never go stale */
 			singleNodePipeline.IsTakingTooLong.Should().BeTrue();
 			staticPipeline.IsTakingTooLong.Should().BeTrue();
 			/** the sniffing connection pool supports reseeding so the pipeline will signal the state is out of date */
 			sniffingPipeline.IsTakingTooLong.Should().BeTrue();
-			
+
 			/** request pipeline exposes the DateTime it started, here we assert it started 2 hours in the past */
 			(dateTime.Now() - singleNodePipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
 			(dateTime.Now() - staticPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
 			(dateTime.Now() - sniffingPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
-
 		}
+
+		[U]
+		public void SetsSniffPathUsingToTimespan()
+		{
+			var dateTime = new TestableDateTimeProvider();
+			var sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
+			sniffingPipeline.SniffPath.Should().Be("_nodes/_all/settings?flat_settings&timeout=2s");
+		}
+
+
 
 
 	}
