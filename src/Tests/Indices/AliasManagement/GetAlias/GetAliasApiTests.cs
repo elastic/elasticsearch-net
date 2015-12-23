@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -14,6 +15,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		private readonly static Names Names = Static.Names("alias, x", "y");
 
 		public GetAliasApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetAlias(f),
 			fluentAsync: (client, f) => client.GetAliasAsync(f),
