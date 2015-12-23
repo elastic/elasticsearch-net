@@ -7,7 +7,8 @@ namespace Nest
 	/// Convenience class for use when indexing completion fields.
 	/// </summary>
 	[JsonObject]
-	public class CompletionField
+	public class CompletionField<TPayload>
+		where TPayload : class
 	{
 		[JsonProperty("input")]
 		public IEnumerable<string> Input { get; set; }
@@ -16,10 +17,10 @@ namespace Nest
 		public string Output { get; set; }
 
 		[JsonProperty("payload")]
-		public object Payload { get; set; }
+		public TPayload Payload { get; set; }
 
 		[JsonProperty("weight")]
-		public int Weight { get; set; }
+		public int? Weight { get; set; }
 
 		[JsonProperty("context")]
 		public IDictionary<string, IEnumerable<string>> Context { get; set; }

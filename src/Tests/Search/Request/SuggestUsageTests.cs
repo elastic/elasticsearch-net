@@ -5,6 +5,8 @@ using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
+using FluentAssertions;
+using System.Linq;
 
 namespace Tests.Search.Request
 {
@@ -17,15 +19,31 @@ namespace Tests.Search.Request
 	{
 		public SuggestUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
+			myCompletionSuggest.Should().NotBeNull();
+			var suggest = myCompletionSuggest.First();
+			suggest.Text.Should().Be(Project.Instance.Name);
+			suggest.Length.Should().BeGreaterThan(0);
+			var option = suggest.Options.First();
+			option.Text.Should().NotBeNullOrEmpty();
+			option.Score.Should().BeGreaterThan(0);
+			var payload = option.Payload<ProjectPayload>();
+			payload.Should().NotBeNull();
+			payload.Name.Should().Be(Project.Instance.Name);
+			payload.State.Should().NotBeNull();
+		}
+
 		protected override object ExpectJson =>
 			new
 			{
 				suggest = new Dictionary<string, object>{
 					{  "my-completion-suggest", new {
 					  completion = new {
-						analyzer = "standard",
+						analyzer = "simple",
 						context = new {
-						  color = "blue"
+						  color = Project.Instance.Suggest.Context.Values.SelectMany(v => v).First()
 						},
 						field = "suggest",
 						fuzzy = new {
@@ -38,7 +56,7 @@ namespace Tests.Search.Request
 						shard_size = 7,
 						size = 8
 					  },
-					  text = "hello world"
+					  text = Project.Instance.Name
 					} },
 					{  "my-phrase-suggest", new {
 					  phrase = new {
@@ -97,7 +115,7 @@ namespace Tests.Search.Request
 				)
 				.Completion("my-completion-suggest", c => c
 					.Context(ctx => ctx
-						.Add("color", "blue")
+						.Add("color", Project.Instance.Suggest.Context.Values.SelectMany(v => v).First())
 					)
 					.Fuzzy(f => f
 						.Fuzziness(Fuzziness.Auto)
@@ -106,11 +124,11 @@ namespace Tests.Search.Request
 						.Transpositions()
 						.UnicodeAware(false)
 					)
-					.Analyzer("standard")
+					.Analyzer("simple")
 					.Field(p => p.Suggest)
 					.ShardSize(7)
 					.Size(8)
-					.Text("hello world")
+					.Text(Project.Instance.Name)
 				)
 				.Phrase("my-phrase-suggest", ph => ph
 					.Collate(c => c
@@ -155,10 +173,10 @@ namespace Tests.Search.Request
 					} },
 					{ "my-completion-suggest", new SuggestBucket
 					{
-						Text = "hello world",
+						Text = Project.Instance.Name,
 						Completion = new CompletionSuggester
 						{
-							Context = new Dictionary<string, object> { { "color", "blue" } },
+							Context = new Dictionary<string, object> { { "color",  Project.Instance.Suggest.Context.Values.SelectMany(v => v).First() } },
 							Fuzzy = new FuzzySuggester
 							{
 								Fuzziness = Fuzziness.Auto,
@@ -167,7 +185,7 @@ namespace Tests.Search.Request
 								Transpositions = true,
 								UnicodeAware = false
 							},
-							Analyzer = "standard",
+							Analyzer = "simple",
 							Field = Field<Project>(p=>p.Suggest),
 							ShardSize = 7,
 							Size = 8

@@ -12,10 +12,10 @@ namespace Tests.Mapping.Types.Specialized.Completion
 			PreserveSeparators = true,
 			PreservePositionIncrements = true,
 			MaxInputLength = 20)]
-		public CompletionField Full { get; set; }
+		public CompletionField<object> Full { get; set; }
 
 		[Completion]
-		public CompletionField Minimal { get; set; }
+		public CompletionField<object> Minimal { get; set; }
 	}
 
 	public class CompletionMappingTests : TypeMappingTestBase<CompletionTest>

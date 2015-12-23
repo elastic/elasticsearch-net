@@ -130,6 +130,7 @@ namespace Tests.Framework.Integration
 							.GeoPoint(g => g.Name(p => p.Location))
 							.Completion(cm => cm
 								.Name(p => p.Suggest)
+								.Payloads()
 								.Context(cnt => cnt
 									.Category("color", cat => cat
 										.Default("red")
