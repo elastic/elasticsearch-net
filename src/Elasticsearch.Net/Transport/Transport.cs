@@ -75,20 +75,20 @@ namespace Elasticsearch.Net
 							pipeline.SniffOnConnectionFailure();
 						}
 					}
-					catch (PipelineException e) when (!e.Recoverable)
+					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						seenExceptions.Add(e);
+						seenExceptions.Add(pipelineException);
 						break;
 					}
-					catch (PipelineException e)
+					catch (PipelineException pipelineException)
 					{
 						pipeline.MarkDead(node);
-						seenExceptions.Add(e);
+						seenExceptions.Add(pipelineException);
 					}
-					catch (Exception e)
+					catch (Exception killerException)
 					{
-						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
+						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
 							Response = response,
@@ -132,20 +132,20 @@ namespace Elasticsearch.Net
 							await pipeline.SniffOnConnectionFailureAsync();
 						}
 					}
-					catch (PipelineException e) when (!e.Recoverable)
+					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
 					{
 						pipeline.MarkDead(node);
-						seenExceptions.Add(e);
+						seenExceptions.Add(pipelineException);
 						break;
 					}
-					catch (PipelineException e)
+					catch (PipelineException pipelineException)
 					{
 						pipeline.MarkDead(node);
-						seenExceptions.Add(e);
+						seenExceptions.Add(pipelineException);
 					}
-					catch (Exception e)
+					catch (Exception killerException)
 					{
-						throw new UnexpectedElasticsearchClientException(e, seenExceptions)
+						throw new UnexpectedElasticsearchClientException(killerException, seenExceptions)
 						{
 							Request = requestData,
 							Response = response,

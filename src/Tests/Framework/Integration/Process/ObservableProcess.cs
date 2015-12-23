@@ -51,6 +51,7 @@ namespace Tests.Framework.Integration
 				var processError = CreateProcessExitSubscription(this.Process, processExited, observer);
 
 				this.Process.Start();
+
 				this.Process.BeginOutputReadLine();
 				this.Process.BeginErrorReadLine();
 				this.Started = true;

@@ -13,7 +13,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 	{
 		/** == Pinging
 		* 
-		* When a node is marked dead it will only be put in the dog house for a certain amount of time. Once it comes out of the dog house, or revivided, we schedule a ping 
+		* When a node is marked dead it will only be put in the dog house for a certain amount of time. Once it comes out of the dog house, or revived, we schedule a ping 
 		* before the actual call to make sure its up and running. If its still down we put it back in the dog house a little longer. For an explanation on these timeouts see: TODO LINK
 		*/
 

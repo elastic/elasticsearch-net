@@ -16,6 +16,6 @@ namespace Nest
         public int Failed { get; internal set; }
 
         [JsonProperty("failures")]
-        public IEnumerable<ShardsFailure> Failures { get; internal set; }
+        public IEnumerable<ShardFailure> Failures { get; internal set; }
     }
 }

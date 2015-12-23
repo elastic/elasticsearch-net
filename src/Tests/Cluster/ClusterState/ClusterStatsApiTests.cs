@@ -59,9 +59,9 @@ namespace Tests.Cluster.ClusterState
 
 			var mapping = rawFieldsTemplate.Mappings["_default_"];
 			mapping.Should().NotBeNull();
-			mapping.DynamicTemplates.Should().NotBeEmpty().And.ContainKey("raw_fields");
+			mapping.DynamicTemplates.Should().NotBeEmpty().And.ContainKey("raw_field");
 
-			var rawFields = mapping.DynamicTemplates["raw_fields"];
+			var rawFields = mapping.DynamicTemplates["raw_field"];
 			rawFields.MatchMappingType.Should().Be("string");
 			rawFields.Match.Should().Be("*");
 			rawFields.Mapping.Should().NotBeNull();

@@ -14,6 +14,11 @@ nuget FluentAssertions
 nuget Bogus 
 nuget DiffPlex 
 
+// profiling / benchmarking
+nuget JetBrains.Profiler.Kernel.Windows.Api
+nuget Humanizer
+nuget NDesk.Options
+
 //Rx-Main on its does not seem to work
 nuget Rx-Core
 nuget Rx-Interfaces

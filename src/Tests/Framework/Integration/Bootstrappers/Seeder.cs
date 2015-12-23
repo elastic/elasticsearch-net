@@ -21,9 +21,7 @@ namespace Tests.Framework.Integration
 		{
 			if (TestClient.Configuration.ForceReseed)
 			{
-				this.Client.DeleteIndexTemplate("raw_fields");
-				this.Client.DeleteIndex(typeof(Project));
-				this.Client.DeleteIndex(typeof(Developer));
+				this.DeleteIndices();
 			}
 
 			var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
@@ -31,21 +29,40 @@ namespace Tests.Framework.Integration
 			//sometimes we run against an manually started elasticsearch when writing tests
 			//to cut down on cluster startup times
 			if (rawFieldsTemplateExists) return;
-			this.CreateIndicesAndMappings();
+			this.CreateIndicesAndSeedIndexData();
 
 		}
 
-		public void CreateIndicesAndMappings()
+	    public void DeleteIndices()
+	    {
+            if (this.Client.IndexTemplateExists("raw_fields").Exists)
+                this.Client.DeleteIndexTemplate("raw_fields");
+
+            if (this.Client.IndexExists(typeof(Project)).Exists)
+                this.Client.DeleteIndex(typeof(Project));
+
+            if (this.Client.IndexExists(typeof(Developer)).Exists)
+                this.Client.DeleteIndex(typeof(Developer));
+        }
+
+	    public void CreateIndices()
+	    {
+            CreateRawFieldsIndexTemplate();
+            CreateProjectIndex();
+            CreateDeveloperIndex();
+        }
+
+	    private void SeedIndexData()
+	    {
+            this.Client.IndexMany(Project.Projects);
+            this.Client.IndexMany(Developer.Developers);
+            this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
+        }
+
+	    private void CreateIndicesAndSeedIndexData()
 		{
-			CreateRawFieldsIndexTemplate();
-
-			CreateProjectIndex();
-			CreateDeveloperIndex();
-
-			this.Client.IndexMany(Project.Projects);
-			this.Client.IndexMany(Developer.Developers);
-
-			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
+            this.CreateIndices();
+            this.SeedIndexData();
 		}
 
 		private void CreateRawFieldsIndexTemplate()
@@ -77,7 +94,7 @@ namespace Tests.Framework.Integration
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
 
-		private void CreateDeveloperIndex()
+	    private void CreateDeveloperIndex()
 		{
 			var createDeveloperIndex = this.Client.CreateIndex(Index<Developer>(), c => c
 				.Mappings(map => map
@@ -90,7 +107,7 @@ namespace Tests.Framework.Integration
 			createDeveloperIndex.IsValid.Should().BeTrue();
 		}
 
-		private void CreateProjectIndex()
+	    private void CreateProjectIndex()
 		{
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
 				.Aliases(a => a
@@ -141,7 +158,7 @@ namespace Tests.Framework.Integration
 			.String(s => s.Name(p => p.Gender).NotAnalyzed())
 			.String(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
 			.Ip(s => s.Name(p => p.IPAddress))
-			//.GeoPoint(g=>g.Name(p=>p.Location))
+			.GeoPoint(g => g.Name(p => p.Location).LatLon())
 			;
 	}
 }

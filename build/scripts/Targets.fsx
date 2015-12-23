@@ -11,6 +11,8 @@ open Fake
 #load @"Building.fsx"
 #load @"Documentation.fsx"
 #load @"Releasing.fsx"
+#load @"Profiling.fsx"
+
 open Paths
 open Building
 open Testing
@@ -18,6 +20,7 @@ open Signing
 open Versioning
 open Documentation
 open Releasing
+open Profiling
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
@@ -44,6 +47,10 @@ Target "WatchTests"  <| fun _ ->
     System.Console.ReadLine() |> ignore 
     watcher.Dispose() 
 
+Target "Profile" <| fun _ -> Profiler.Run()
+
+Target "Benchmark" <| fun _ -> Benchmarker.Run()
+
 Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
 Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
@@ -58,7 +65,6 @@ Target "Nightly" <| fun _ -> trace "build nightly"
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
-
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
@@ -66,6 +72,14 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
   ==> "BuildApp"
   =?> ("Test", (not (hasBuildParam "skiptests")))
   ==> "Build"
+
+"Clean" 
+  ==> "BuildApp"
+  ==> "Profile"
+
+"Clean" 
+  ==> "BuildApp"
+  ==> "Benchmark"
 
 "CreateKeysIfAbsent"
   ==> "Version"
@@ -83,5 +97,6 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 "BuildApp"
 "CreateKeysIfAbsent"
 "Version"
+
 // start build
 RunTargetOrDefault "Build"

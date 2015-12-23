@@ -403,7 +403,7 @@
     <Compile Include="Analysis\Tokenizers\TokenizerBase.cs" />
     <Compile Include="Analysis\Tokenizers\UaxEmailUrlTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
-    <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
+    <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\DateRangeQuery .cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />

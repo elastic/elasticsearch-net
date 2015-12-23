@@ -1,0 +1,8 @@
+xunit
+Rx-Core
+Rx-Interfaces
+Rx-Linq
+Rx-Main
+Rx-PlatformServices
+Bogus
+JetBrains.Profiler.Kernel.Windows.Api

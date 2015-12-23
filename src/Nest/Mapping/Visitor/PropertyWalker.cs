@@ -114,6 +114,8 @@ namespace Nest
 						return new DateProperty();
 					case "Boolean":
 						return new BooleanProperty();
+					case "Guid":
+						return new StringProperty();
 				}
 			}
 			
