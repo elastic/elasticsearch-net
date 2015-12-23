@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	//TODO UNTESTED
-	[JsonConverter(typeof(SuggestRequest))]
+	[JsonConverter(typeof(SuggestRequestJsonConverter))]
 	public partial interface ISuggestRequest 
 	{
 		string GlobalText { get; set; }
