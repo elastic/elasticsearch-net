@@ -16,6 +16,8 @@ namespace Tests.Mapping.Types.Specialized.Completion
 
 		[Completion]
 		public CompletionField<object> Minimal { get; set; }
+
+        public CompletionField<object> Inferred { get; set; } 
 	}
 
 	public class CompletionMappingTests : TypeMappingTestBase<CompletionTest>
@@ -37,22 +39,29 @@ namespace Tests.Mapping.Types.Specialized.Completion
 				minimal = new
 				{
 					type = "completion"
-				}
-			}
+				},
+                inferred = new
+                {
+                    type = "completion"
+                }
+            }
 		};
 
-		protected override Func<PropertiesDescriptor<CompletionTest>, IPromise<IProperties>> FluentProperties => p => p
-			.Completion(s => s
-				.Name(o => o.Full)
-				.Analyzer("myanalyzer")
-				.SearchAnalyzer("mysearchanalyzer")
-				.Payloads()
-				.PreserveSeparators()
-				.PreservePositionIncrements()
-				.MaxInputLength(20)
-			)
-			.Completion(b => b
-				.Name(o => o.Minimal)
-			);
+	    protected override Func<PropertiesDescriptor<CompletionTest>, IPromise<IProperties>> FluentProperties => p => p
+	        .Completion(s => s
+	            .Name(o => o.Full)
+	            .Analyzer("myanalyzer")
+	            .SearchAnalyzer("mysearchanalyzer")
+	            .Payloads()
+	            .PreserveSeparators()
+	            .PreservePositionIncrements()
+	            .MaxInputLength(20)
+	        )
+	        .Completion(b => b
+	            .Name(o => o.Minimal)
+	        )
+	        .Completion(b => b
+	            .Name(o => o.Inferred)
+	        );
 	}
 }

@@ -21,6 +21,8 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 
 		[GeoPoint]
 		public string Minimal { get; set; }
+
+        public GeoLocation Inferred { get; set; }
 	}
 
 	public class GeoPointMappingTests : TypeMappingTestBase<GeoPointTest>
@@ -47,8 +49,12 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 				minimal = new
 				{
 					type = "geo_point"
-				}
-			}
+				},
+                inferred = new
+                {
+                    type = "geo_point"
+                }
+            }
 		};
 
 		protected override Func<PropertiesDescriptor<GeoPointTest>, IPromise<IProperties>> FluentProperties => p => p
@@ -68,6 +74,9 @@ namespace Tests.Mapping.Types.Geo.GeoPoint
 			)
 			.GeoPoint(b => b
 				.Name(o => o.Minimal)
-			);
-	}
+			)
+            .GeoPoint(b => b
+                .Name(o => o.Inferred)
+            );
+    }
 }

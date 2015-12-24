@@ -120,6 +120,12 @@ namespace Nest
 						return new StringProperty();
 				}
 			}
+
+            if (type == typeof(GeoLocation))
+                return new GeoPointProperty();
+
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
+                return new CompletionProperty();
 			
 			return new ObjectProperty();
 		}
