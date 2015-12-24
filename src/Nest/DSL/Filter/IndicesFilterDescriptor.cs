@@ -15,6 +15,9 @@ namespace Nest
 		[JsonProperty("indices")]
 		IEnumerable<string> Indices { get; set; }
 
+        [JsonProperty("index")]
+        string Index { get; set; }
+
 		[JsonProperty("filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterDescriptor<object>>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
@@ -64,6 +67,7 @@ namespace Nest
 		public IFilterContainer Filter { get; set; }
 		public IFilterContainer NoMatchFilter { get; set; }
 		public IEnumerable<string> Indices { get; set; }
+        public string Index { get; set; }
 	}
 
 	public class IndicesFilterDescriptor<T> : FilterBase, IIndicesFilter where T : class
@@ -73,6 +77,7 @@ namespace Nest
 		IFilterContainer IIndicesFilter.NoMatchFilter { get; set; }
 
 		IEnumerable<string> IIndicesFilter.Indices { get; set; }
+        public string Index { get; set; }
 
 		bool IFilter.IsConditionless
 		{

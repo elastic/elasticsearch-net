@@ -24,6 +24,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.SerializeThenDeserialize(
 				f=>f.Terms,
 				f=>f.TermsDescriptor(td=>td
+					.Name("named_query")
 					.OnField(p=>p.Name)
 					.Boost(1.2)
 					.MinimumShouldMatch(2)	
@@ -38,6 +39,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				);
 			q.Boost.Should().Be(1.2);
 			q.Field.Should().Be("name");
+			q.Name.Should().Be("named_query");
 			q.DisableCoord.Should().BeTrue();
 			q.MinimumShouldMatch.Should().Be("2");
 			q.ExternalField.Should().NotBeNull();

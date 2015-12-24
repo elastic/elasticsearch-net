@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ term: { name : { value : ""elasticsearch.pm"" } }}}";
 			Assert.True(json.JsonEquals(expected));
 		}
+
 		[Test]
 		public void TestTermWithBoostQuery()
 		{
@@ -34,5 +35,21 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ term: { name : { value : ""elasticsearch.pm"", boost: 1.2 } }}}";
 			Assert.True(json.JsonEquals(expected));
 		}
+
+		[Test]
+		public void TermWithName()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Term(t=>t.Name("named_query").OnField(p=>p.Name).Value("elasticsearch.pm"))
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ term: { name : { _name: ""named_query"", value : ""elasticsearch.pm"" } }}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
 	}
 }

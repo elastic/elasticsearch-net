@@ -12,8 +12,8 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
-        [JsonProperty(PropertyName = "boost")]
-        double? Boost { get; set; }
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 
 	}
 
@@ -24,43 +24,55 @@ namespace Nest
 			container.SpanOr = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
-        public double? Boost { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
+		private ISpanOrQuery Self { get { return this; } }
+
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
-        double? ISpanOrQuery.Boost { get; set; }
+
+		double? ISpanOrQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !((ISpanOrQuery)this).Clauses.HasAny() 
-					|| ((ISpanOrQuery)this).Clauses.Cast<IQuery>().All(q => q.IsConditionless);
+				return !Self.Clauses.HasAny()
+					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public SpanOrQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
 			var descriptors = (
-				from selector in selectors 
-				let span = new SpanQuery<T>() 
-				select selector(span) into q 
-				where !(q as IQuery).IsConditionless 
+				from selector in selectors
+				let span = new SpanQuery<T>()
+				select selector(span) into q
+				where !(q as IQuery).IsConditionless
 				select q
 			).ToList();
-			((ISpanOrQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
+			Self.Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
-        public ISpanOrQuery Boost(double boost)
-        {
-            ((ISpanOrQuery)this).Boost = boost;
-            return this;
-        }
+		public ISpanOrQuery Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
 	}
 }

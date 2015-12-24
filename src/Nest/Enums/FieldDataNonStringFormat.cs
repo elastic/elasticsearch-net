@@ -16,6 +16,8 @@ namespace Nest
 		[EnumMember(Value = "doc_values")]
 		DocValues,
 		[EnumMember(Value = "disabled")]
-		Disabled
+		Disabled,
+		[EnumMember(Value = "compressed")]
+		Compressed
 	}
 }

@@ -72,12 +72,22 @@ namespace Nest
 		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
+		[Obsolete("Typo, Scheduled to be removed in 2.0 use the correctly spelled method")]
 		public FileSystemRepositoryDescriptor SnapshortBytesPerSecondMaximum(string maximumBytesPerSecond)
 		{
 			Self.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
 			return this;
 		}
-
+		
+		/// <summary>
+		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
+		/// </summary>
+		/// <param name="maximumBytesPerSecond"></param>
+		public FileSystemRepositoryDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond)
+		{
+			Self.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
+			return this;
+		}
 
 	}
 }

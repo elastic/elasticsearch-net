@@ -29,6 +29,8 @@ namespace Nest
 			container.ConstantScore = this;
 		}
 
+		public string Name { get; set; }
+		//TODO 2.0 change to explicit IQuery implementation
 		public bool IsConditionless { get { return false; } }
 		public string Lang { get; set; }
 		public string Script { get; set; }
@@ -40,51 +42,61 @@ namespace Nest
 
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
+		private IConstantScoreQuery Self { get { return this; }}
+
 		IQueryContainer IConstantScoreQuery.Query { get; set; }
 
 		IFilterContainer IConstantScoreQuery.Filter { get; set; }
 
 		double? IConstantScoreQuery.Boost { get; set; }
+		
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (((IConstantScoreQuery)this).Query == null && ((IConstantScoreQuery)this).Filter == null)
+				if (Self.Query == null && Self.Filter == null)
 					return true;
-				if (((IConstantScoreQuery)this).Filter == null && ((IConstantScoreQuery)this).Query != null)
-					return ((IConstantScoreQuery)this).Query.IsConditionless;
-				if (((IConstantScoreQuery)this).Filter != null && ((IConstantScoreQuery)this).Query == null)
-					return ((IConstantScoreQuery)this).Filter.IsConditionless;
+				if (Self.Filter == null && Self.Query != null)
+					return Self.Query.IsConditionless;
+				if (Self.Filter != null && Self.Query == null)
+					return Self.Filter.IsConditionless;
 				return false;
 			}
+		}
+
+		public ConstantScoreQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			((IConstantScoreQuery)this).Filter = null;
+			Self.Filter = null;
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((IConstantScoreQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
 		public ConstantScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			((IConstantScoreQuery)this).Query = null;
+			Self.Query = null;
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IConstantScoreQuery)this).Filter = f;
+			Self.Filter = f;
 			return this;
 		}
 
 		public ConstantScoreQueryDescriptor<T> Boost(double boost)
 		{
-			((IConstantScoreQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 	}

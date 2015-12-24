@@ -69,8 +69,11 @@ namespace Nest
 			return this.RawDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
 				.ContinueWith<ISearchResponse<TResult>>(t =>
 				{
-					if (t.IsFaulted)
-						throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null)
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 
 					return t.Result.Success
 						? t.Result.Response
@@ -94,8 +97,11 @@ namespace Nest
 			return this.RawDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
 				.ContinueWith<ISearchResponse<TResult>>(t =>
 				{
-					if (t.IsFaulted)
-						throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null)
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 
 					return t.Result.Success
 						? t.Result.Response
@@ -106,7 +112,7 @@ namespace Nest
 		public IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
 			);
@@ -114,7 +120,7 @@ namespace Nest
 
 		public IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request)
 		{
-			return this.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
 			);
@@ -123,7 +129,7 @@ namespace Nest
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<GetSearchTemplateDescriptor, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
 			);
@@ -131,7 +137,7 @@ namespace Nest
 
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request)
 		{
-			return this.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
 			);
@@ -140,7 +146,7 @@ namespace Nest
 		public IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
 			);
@@ -148,7 +154,7 @@ namespace Nest
 
 		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request)
 		{
-			return this.Dispatch<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.PutTemplateDispatch<PutSearchTemplateResponse>(p, d)
 			);
@@ -157,7 +163,7 @@ namespace Nest
 		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<PutSearchTemplateDescriptor, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
 			);
@@ -165,7 +171,7 @@ namespace Nest
 
 		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request)
 		{
-			return this.DispatchAsync<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>(p, d)
 			);
@@ -174,7 +180,7 @@ namespace Nest
 		public IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.DeleteTemplateDispatch<DeleteSearchTemplateResponse>(p)
 			);
@@ -182,7 +188,7 @@ namespace Nest
 
 		public IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request)
 		{
-			return this.Dispatch<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
+			return this.Dispatcher.Dispatch<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.DeleteTemplateDispatch<DeleteSearchTemplateResponse>(p)
 			);
@@ -191,7 +197,7 @@ namespace Nest
 		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
 				d => selector(d.Name(name)),
 				(p, d) => this.RawDispatch.DeleteTemplateDispatchAsync<DeleteSearchTemplateResponse>(p)
 			);
@@ -199,7 +205,7 @@ namespace Nest
 
 		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request)
 		{
-			return this.DispatchAsync<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
+			return this.Dispatcher.DispatchAsync<IDeleteSearchTemplateRequest, DeleteTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
 				request,
 				(p, d) => this.RawDispatch.DeleteTemplateDispatchAsync<DeleteSearchTemplateResponse>(p)
 			);

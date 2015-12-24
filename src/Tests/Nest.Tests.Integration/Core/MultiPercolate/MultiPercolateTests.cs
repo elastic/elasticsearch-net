@@ -103,5 +103,67 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 			errorResponse.ServerError.Error.Should().NotBeNullOrWhiteSpace();
 
 		}
+
+
+		[Test]
+		public void MultiPercolate_PrecolateMany_ReturnsExpectedResults()
+		{
+
+			//lets start fresh using a new index
+			var indexName = ElasticsearchConfiguration.NewUniqueIndexName();
+			IntegrationSetup.CreateTestIndex(this.Client, indexName);
+
+			// lets register several percolators in our new index that do a term match
+			// on document name == indexname
+			// we associate some metadata with the percolator so that we can later filter
+			// the ones we want to execute easier
+			foreach (var i in Enumerable.Range(0, 10))
+			{
+				var registerPercolator = this.Client.RegisterPercolator(new RegisterPercolatorRequest(indexName, "my-percolator-" + i)
+				{
+					Query = new TermQuery
+					{
+						Field = Property.Path<ElasticsearchProject>(p => p.Name.Suffix("sort")),
+						Value = indexName
+					},
+					MetaData = new Dictionary<string, object>
+					{
+						{ "order", i}
+					}
+				});
+				registerPercolator.IsValid.Should().BeTrue();
+			}
+
+
+			// Set up 2 projects to index both with indexName as Name
+			var projects = Enumerable.Range(0, 2)
+				.Select(i => new ElasticsearchProject { Id = 1337 + i, Name = indexName })
+				.ToList();
+			this.Client.IndexMany(projects, indexName);
+
+			this.Client.Refresh(r => r.Index(indexName));
+
+
+			//Now we kick of multiple percolations
+			var multiPercolateResponse = this.Client.MultiPercolate(mp => mp
+				//provding document in the percolate request 
+				.PercolateMany(projects, (perc, proj) =>
+					perc.Index(indexName).Document(proj)
+				)
+			);
+
+			multiPercolateResponse.IsValid.Should().BeTrue();
+
+			var percolateResponses = multiPercolateResponse.Responses.ToList();
+			percolateResponses.Should().NotBeEmpty().And.HaveCount(2);
+
+			var percolateResponse1 = percolateResponses[0];
+			percolateResponse1.Total.Should().Be(10);
+			percolateResponse1.Matches.Should().HaveCount(10);
+
+			var percolateResponse2 = percolateResponses[1];
+			percolateResponse2.Total.Should().Be(10);
+			percolateResponse2.Matches.Should().HaveCount(10);
+		}
 	}
 }

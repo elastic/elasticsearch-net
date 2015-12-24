@@ -57,5 +57,27 @@ namespace Nest
 			return this;
 
 		}
+
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector)
+			where TDocument : class
+		{
+			getSelector = getSelector ?? (s => s);
+			var descriptor = getSelector(new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex));
+			this.GetOperations.Add(descriptor);
+			return this;
+		}
+
+		public MoreLikeThisQueryDocumentsDescriptor<T> Document<TDocument>(TDocument document, string index = null, string type = null)
+			where TDocument : class
+		{
+			var descriptor = new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex)
+				.Document(document);
+			if (!string.IsNullOrEmpty(index))
+				descriptor.Index(index);
+			if (!string.IsNullOrEmpty(type))
+				descriptor.Type(type);
+			this.GetOperations.Add(descriptor);
+			return this;
+		}
 	}
 }

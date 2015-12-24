@@ -23,7 +23,7 @@ namespace Nest
 		/// <summary>
 		/// A path to a words file.
 		/// </summary>
-		[JsonProperty("rules_path")]
+		[JsonProperty("keep_words_path")]
 		public string KeepWordsPath { get; set; }
 
 		/// <summary>

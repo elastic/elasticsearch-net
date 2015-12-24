@@ -139,6 +139,19 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.4.9", "File descriptors added in 1.5")]
+		public void CatNodesFileDescriptors()
+		{
+			TestCat(() => this._client.CatNodes(v => v.H("b", "fdc", "fdp", "fdm")), r => 
+				!r.Build.IsNullOrEmpty()
+				&& r.FileDescriptorCurrent.HasValue && r.FileDescriptorCurrent.Value > 0
+				&& r.FileDescriptorPercent.HasValue 
+				&& r.FileDescriptorMax.HasValue 
+
+			);
+		}
+
+		[Test]
 		public async void CatNodesAsync()
 		{
 			await TestCatAsync(() => this._client.CatNodesAsync(), r => !r.Master.IsNullOrEmpty());
@@ -211,5 +224,18 @@ namespace Nest.Tests.Integration.Core.Cat
 			await TestCatAsync(() => this._client.CatShardsAsync(), r => !r.State.IsNullOrEmpty());
 		}
 
+		[Test]
+		[SkipVersion("0 - 1.0.9", "cat segments added in 1.1")]
+		public void CatSegments()
+		{
+			TestCat(() => this._client.CatSegments(), r => !r.Index.IsNullOrEmpty() && !r.Shard.IsNullOrEmpty() && !r.PrimaryReplica.IsNullOrEmpty() && !r.Ip.IsNullOrEmpty() && !r.Segment.IsNullOrEmpty() && !r.Generation.IsNullOrEmpty() && !r.DocsCount.IsNullOrEmpty() && !r.DocsDeleted.IsNullOrEmpty() && !r.Size.IsNullOrEmpty() && !r.SizeMemory.IsNullOrEmpty() && !r.Committed.IsNullOrEmpty() && !r.Searchable.IsNullOrEmpty() && !r.Version.IsNullOrEmpty() && !r.Compound.IsNullOrEmpty());
+		}
+
+		[SkipVersion("0 - 1.0.9", "cat segments added in 1.1")]
+		[Test]
+		public async void CatSegmentsAsync()
+		{
+			await TestCatAsync(() => this._client.CatSegmentsAsync(), r => !r.Index.IsNullOrEmpty() && !r.Shard.IsNullOrEmpty() && !r.PrimaryReplica.IsNullOrEmpty() && !r.Ip.IsNullOrEmpty() && !r.Segment.IsNullOrEmpty() && !r.Generation.IsNullOrEmpty() && !r.DocsCount.IsNullOrEmpty() && !r.DocsDeleted.IsNullOrEmpty() && !r.Size.IsNullOrEmpty() && !r.SizeMemory.IsNullOrEmpty() && !r.Committed.IsNullOrEmpty() && !r.Searchable.IsNullOrEmpty() && !r.Version.IsNullOrEmpty() && !r.Compound.IsNullOrEmpty());
+		}
 	}
 }

@@ -47,8 +47,8 @@ namespace Nest
 		{
 			container.CommonTerms = this;
 		}
-
 		bool IQuery.IsConditionless { get { return false; } }
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -59,6 +59,7 @@ namespace Nest
 			this.Field = fieldName;
 		}
 
+		public string Name { get; set; }
 		public string Query { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public double? CutoffFrequency { get; set; }
@@ -72,6 +73,8 @@ namespace Nest
 
 	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
+		private ICommonTermsQuery Self { get { return this; }}
+
 		string ICommonTermsQuery.Query { get; set; }
 
 		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
@@ -90,77 +93,85 @@ namespace Nest
 		
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICommonTermsQuery)this).Field.IsConditionless() || ((ICommonTermsQuery)this).Query.IsNullOrEmpty();
+				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
 			}
 		}
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((ICommonTermsQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((ICommonTermsQuery)this).Field;
+			return Self.Field;
+		}
+
+		public CommonTermsQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public CommonTermsQueryDescriptor<T> OnField(string field)
 		{
-			((ICommonTermsQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((ICommonTermsQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public CommonTermsQueryDescriptor<T> Query(string query)
 		{
-			((ICommonTermsQuery)this).Query = query;
+			Self.Query = query;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op)
 		{
-			((ICommonTermsQuery)this).LowFrequencyOperator = op;
+			Self.LowFrequencyOperator = op;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op)
 		{
-			((ICommonTermsQuery)this).HighFrequencyOperator = op;
+			Self.HighFrequencyOperator = op;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((ICommonTermsQuery)this).Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 		
 		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency)
 		{
-			((ICommonTermsQuery)this).CutoffFrequency = cutOffFrequency;
+			Self.CutoffFrequency = cutOffFrequency;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
 		{
-			((ICommonTermsQuery)this).MinimumShouldMatch = minimumShouldMatch;
+			Self.MinimumShouldMatch = minimumShouldMatch;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch)
 		{
-			((ICommonTermsQuery)this).MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture);
+			Self.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> Boost(double boost)
 		{
-			((ICommonTermsQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true)
 		{
-			((ICommonTermsQuery)this).DisableCoord = disable;
+			Self.DisableCoord = disable;
 			return this;
 		}
 

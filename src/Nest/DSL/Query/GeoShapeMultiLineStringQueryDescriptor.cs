@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		IMultiLineStringGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapeMultiLineStringQuery : PlainQuery, IGeoShapeMultiLineStringQuery
@@ -23,6 +26,10 @@ namespace Nest
 		{
 			container.GeoShape = this;
 		}
+
+		public string Name { get; set; }
+
+		public double? Boost { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
 
@@ -43,25 +50,44 @@ namespace Nest
 
 	public class GeoShapeMultiLineStringQueryDescriptor<T> : IGeoShapeMultiLineStringQuery where T : class
 	{
+		private IGeoShapeMultiLineStringQuery Self { get { return this; } }
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
+
+		double? IGeoShapeMultiLineStringQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapeMultiLineStringQuery)this).Shape == null || !((IGeoShapeMultiLineStringQuery)this).Shape.Coordinates.HasAny();
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
-
 		}
+
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IGeoShapeQuery)this).Field;
+		}
+
+		public GeoShapeMultiLineStringQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+		
+		public GeoShapeMultiLineStringQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
 		}
 		
 		public GeoShapeMultiLineStringQueryDescriptor<T> OnField(string field)
@@ -69,6 +95,7 @@ namespace Nest
 			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
+
 		public GeoShapeMultiLineStringQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IGeoShapeQuery)this).Field = objectPath;
@@ -77,9 +104,9 @@ namespace Nest
 
 		public GeoShapeMultiLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
 		{
-			if (((IGeoShapeMultiLineStringQuery)this).Shape == null)
-				((IGeoShapeMultiLineStringQuery)this).Shape = new MultiLineStringGeoShape();
-			((IGeoShapeMultiLineStringQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new MultiLineStringGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 	}

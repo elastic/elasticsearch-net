@@ -17,6 +17,9 @@ namespace Nest
         [JsonProperty(PropertyName = "script_id")]
         string ScriptId { get; set; }
 
+		[JsonProperty("script_file")]
+		string ScriptFile { get; set; }
+
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
@@ -34,6 +37,7 @@ namespace Nest
 
 		public string Script { get; set; }
 	    public string ScriptId { get; set; }
+		public string ScriptFile { get; set; }
 	    public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 	}
@@ -44,9 +48,13 @@ namespace Nest
 	/// </summary>
 	public class ScriptFilterDescriptor : FilterBase, IScriptFilter
 	{
+		private IScriptFilter Self { get { return this; } }
+
         string IScriptFilter.Script { get; set; }
 
         string IScriptFilter.ScriptId { get; set; }
+
+		string IScriptFilter.ScriptFile { get; set; }
 
         string IScriptFilter.Lang { get; set; }
 
@@ -56,32 +64,38 @@ namespace Nest
 		{
 			get
 			{
-				return ((IScriptFilter)this).Script.IsNullOrEmpty();
+				return this.Self.Script.IsNullOrEmpty();
 			}
 		}
 
 		/// <summary>
-		/// Filter script.
+		/// Inline script to execute
 		/// </summary>
-		/// <param name="script">script</param>
-		/// <returns>this</returns>
 		public ScriptFilterDescriptor Script(string script)
 		{
-			((IScriptFilter)this).Script = script;
+			this.Self.Script = script;
 			return this;
 		}
 
         /// <summary>
-        /// Indexed script can be referenced by script id
-        /// </summary>
-        /// <param name="scriptId">Indexed script id</param>
-        /// <returns>this</returns>
+        /// Id of an indexed script to execute
+        /// </summary
 	    public ScriptFilterDescriptor ScriptId(string scriptId)
         {
             scriptId.ThrowIfNull("scriptId");
-            ((IScriptFilter)this).ScriptId = scriptId;
+            this.Self.ScriptId = scriptId;
             return this;
 	    }
+
+		/// <summary>
+		/// File name of a script to execute
+		/// </summary>
+		public ScriptFilterDescriptor ScriptFile(string scriptFile)
+		{
+			scriptFile.ThrowIfNull("scriptFile");
+			this.Self.ScriptFile = scriptFile;	
+			return this;
+		}
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.
@@ -96,7 +110,7 @@ namespace Nest
 		public ScriptFilterDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			((IScriptFilter)this).Params = paramDictionary(new FluentDictionary<string, object>());
+			this.Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -108,7 +122,7 @@ namespace Nest
 		public ScriptFilterDescriptor Lang(string lang)
 		{
 			lang.ThrowIfNull("lang");
-			((IScriptFilter)this).Lang = lang;
+			this.Self.Lang = lang;
 			return this;
 		}
 
@@ -120,7 +134,7 @@ namespace Nest
         public ScriptFilterDescriptor Lang(ScriptLang lang)
         {
             lang.ThrowIfNull("lang");
-            ((IScriptFilter)this).Lang = lang.GetStringValue();
+            this.Self.Lang = lang.GetStringValue();
             return this;
         }
 	}

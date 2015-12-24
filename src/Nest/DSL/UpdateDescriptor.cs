@@ -15,6 +15,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
 
+		[JsonProperty(PropertyName = "script_id")]
+		string ScriptId { get; set; }
+
+		[JsonProperty(PropertyName = "script_file")]
+		string ScriptFile { get; set; }
+
 		[JsonProperty(PropertyName = "lang")]
 		string Language { get; set; }
 
@@ -87,6 +93,7 @@ namespace Nest
 		
 
 		public string Script { get; set; }
+		public string ScriptFile { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public TDocument Upsert { get; set; }
@@ -104,6 +111,10 @@ namespace Nest
 		private IUpdateRequest<TDocument, TPartialDocument> Self { get { return this; } }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
+		
+		string IUpdateRequest<TDocument, TPartialDocument>.ScriptId { get; set; }
+		
+		string IUpdateRequest<TDocument, TPartialDocument>.ScriptFile { get; set; }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Language { get; set; }
 
@@ -120,6 +131,13 @@ namespace Nest
 		{
 			script.ThrowIfNull("script");
 			Self.Script = script;
+			return this;
+		}
+
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile)
+		{
+			scriptFile.ThrowIfNull("scriptFile");
+			Self.ScriptFile = scriptFile;
 			return this;
 		}
 
@@ -184,7 +202,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
+			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups.Select(e => (PropertyPathMarker)e).ToList());
 			return this;
 		}
 			

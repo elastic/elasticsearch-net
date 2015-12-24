@@ -12,6 +12,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.SerializeThenDeserialize(
 				f=>f.SpanTerm,
 				f=>f.SpanTerm(sq=>sq
+					.Name("named_query")
 					.Boost(2.3)
 					.OnField(p=>p.Name)
 					.Value("query")
@@ -20,6 +21,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Boost.Should().Be(2.3);
 			q.Field.Should().Be("name");
 			q.Value.Should().Be("query");
+			q.Name.Should().Be("named_query");
 
 		}
 	}

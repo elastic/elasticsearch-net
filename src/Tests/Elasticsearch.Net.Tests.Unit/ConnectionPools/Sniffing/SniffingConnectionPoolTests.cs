@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Autofac.Extras.FakeItEasy;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
@@ -243,7 +244,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 		}
 
 		[Test]
-		public async void HostsReturnedBySniffAreVisited_Async()
+		public async Task HostsReturnedBySniffAreVisited_Async()
 		{
 			using (var fake = new AutoFake())
 			{

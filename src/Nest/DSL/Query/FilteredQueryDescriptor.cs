@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class FilteredQuery : PlainQuery, IFilteredQuery
@@ -26,29 +29,49 @@ namespace Nest
 			container.Filtered = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get {return false;}}
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
 	{
+		private IFilteredQuery Self { get { return this; } }
+
 		IQueryContainer IFilteredQuery.Query { get; set; }
 
 		IFilterContainer IFilteredQuery.Filter { get; set; }
+
+		double? IFilteredQuery.Boost { get; set; }
+
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				if (((IFilteredQuery)this).Query == null && ((IFilteredQuery)this).Filter == null)
+				if (Self.Query == null && Self.Filter == null)
 					return true;
-				if (((IFilteredQuery)this).Filter == null && ((IFilteredQuery)this).Query != null)
-					return ((IFilteredQuery)this).Query.IsConditionless;
-				if (((IFilteredQuery)this).Filter != null && ((IFilteredQuery)this).Query == null)
-					return ((IFilteredQuery)this).Filter.IsConditionless;
-				return ((IFilteredQuery)this).Query.IsConditionless && ((IFilteredQuery)this).Filter.IsConditionless;
+				if (Self.Filter == null && Self.Query != null)
+					return Self.Query.IsConditionless;
+				if (Self.Filter != null && Self.Query == null)
+					return Self.Filter.IsConditionless;
+				return Self.Query.IsConditionless && Self.Filter.IsConditionless;
 			}
+		}
+
+		public FilteredQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public FilteredQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
 		}
 
 		public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
@@ -57,7 +80,7 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((IFilteredQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
@@ -67,7 +90,7 @@ namespace Nest
 			var filter = new FilterDescriptor<T>();
 			var f = filterSelector(filter);
 
-			((IFilteredQuery)this).Filter = f;
+			Self.Filter = f;
 			return this;
 		}
 	}

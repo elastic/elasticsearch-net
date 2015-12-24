@@ -44,11 +44,17 @@ namespace Nest.Tests.Integration.Core.TermVectors
 
 			result.IsValid.Should().BeTrue();
 
-			result.Documents.Should().NotBeNull();
-			result.Documents.Count().Should().Be(2);
+			result.Docs.Should().NotBeNull();
+			result.Docs.Count().Should().Be(2);
 
-			foreach (var document in result.Documents)
+			foreach (var document in result.Docs)
 			{
+				document.Index.Should().NotBeNullOrWhiteSpace();
+				document.Type.Should().NotBeNullOrWhiteSpace();
+				document.Id.Should().NotBeNullOrWhiteSpace();
+				document.Version.Should().BeGreaterThan(0);
+				document.Took.Should().BeGreaterThan(0);
+
 				document.TermVectors.Count().Should().Be(1);
 				document.TermVectors.First().Key.Should().Be("content");
 			}

@@ -15,9 +15,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.Nested(n=>n
 					.Score(NestedScore.Max)
 					.Path(p=>p.Followers[0])
+					.InnerHits()
 					.Query(q=>q.Term(p=>p.Followers[0].FirstName,"elasticsearch.pm"))
-					)
-				);
+				)
+			);
+			nestedFilter.InnerHits.Should().NotBeNull();
+
 			nestedFilter.Path.Should().Be("followers");
 			nestedFilter.Score.Should().Be(NestedScore.Max);
 			var query = nestedFilter.Query;

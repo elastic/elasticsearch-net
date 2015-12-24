@@ -1,6 +1,6 @@
 {
   "search": {
-    "documentation": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html",
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html",
     "methods": ["GET", "POST"],
     "url": {
       "path": "/_search",
@@ -42,6 +42,10 @@
           "type" : "list",
           "description" : "A comma-separated list of fields to return as part of a hit"
         },
+        "fielddata_fields": {
+          "type" : "list",
+          "description" : "A comma-separated list of fields to return as the field data representation of a field for each hit"
+        },
         "from": {
           "type" : "number",
           "description" : "Starting offset (default: 0)"
@@ -56,13 +60,9 @@
         },
         "expand_wildcards": {
             "type" : "enum",
-            "options" : ["open","closed"],
+            "options" : ["open","closed","none","all"],
             "default" : "open",
             "description" : "Whether to expand wildcard expression to concrete indices that are open, closed or both."
-        },
-        "indices_boost": {
-          "type" : "list",
-          "description" : "Comma-separated list of index boosts"
         },
         "lenient": {
           "type" : "boolean",
@@ -100,10 +100,6 @@
         "sort": {
           "type" : "list",
           "description" : "A comma-separated list of <field>:<direction> pairs"
-        },
-        "source": {
-          "type" : "string",
-          "description" : "The URL-encoded request definition using the Query DSL (instead of using request body)"
         },
         "_source": {
           "type" : "list",

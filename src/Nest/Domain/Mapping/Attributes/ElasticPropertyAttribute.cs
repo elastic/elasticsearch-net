@@ -30,6 +30,7 @@ namespace Nest
 		public bool OmitNorms { get; set; }
 		public bool OmitTermFrequencyAndPositions { get; set; }
 		public bool IncludeInAll { get; set; }
+		public bool IncludeInParent { get; set; }
 		public bool Store { get; set; }
 
 		/// <summary>

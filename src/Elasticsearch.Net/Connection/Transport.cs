@@ -201,9 +201,9 @@ namespace Elasticsearch.Net.Connection
 					using (response.Response)
 					{
 						return Sniffer.FromStream(
-							response, 
-							response.Response, 
-							this.Serializer, 
+							response,
+							response.Response,
+							this.Serializer,
 							this.Connection.AddressScheme
 						);
 					}
@@ -265,7 +265,7 @@ namespace Elasticsearch.Net.Connection
 			var timeout = this.Settings.MaxRetryTimeout.GetValueOrDefault(TimeSpan.FromMilliseconds(this.Settings.Timeout));
 			var startedOn = requestState.StartedOn;
 			var now = this._dateTimeProvider.Now();
-			
+
 			//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60
 			//we also abort.
 			var margin = (timeout.TotalMilliseconds / 100.0) * 98;
@@ -348,7 +348,17 @@ namespace Elasticsearch.Net.Connection
 		{
 			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
 			{
-				return this._requestHandlerAsync.RequestAsync(requestState, data);
+				return this._requestHandlerAsync.RequestAsync(requestState, data)
+					.ContinueWith<ElasticsearchResponse<T>>(t =>
+					{
+						if (t.IsFaulted && t.Exception != null)
+						{
+							t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+							return null; //won't be hit
+						}
+
+						return t.Result;
+					});
 			}
 		}
 	}

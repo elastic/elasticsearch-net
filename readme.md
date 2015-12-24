@@ -1,10 +1,11 @@
 Repository for both **Elasticsearch.Net** and **NEST**, the two official [elasticsearch](https://github.com/elasticsearch/elasticsearch) .NET clients.
 
-[![install from nuget](http://img.shields.io/nuget/v/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)[![downloads](http://img.shields.io/nuget/dt/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)    
-Bleeding edge package:    
-[![download](http://img.shields.io/myget/elasticsearch-net/v/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)[![downloads](http://img.shields.io/myget/elasticsearch-net/dt/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)    
-Builds:    
-[![teamcity](http://img.shields.io/teamcity/http/teamcity.codebetter.com/e/bt993.svg?style=flat-square)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993)[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/gallery/elasticsearch-net)
+|          |            |
+|:-----------|-------------:|
+| Nuget feed    | [![install from nuget](http://img.shields.io/nuget/v/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)[![downloads](http://img.shields.io/nuget/dt/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)|
+| Bleeding edge feed| [![download](http://img.shields.io/myget/elasticsearch-net/vpre/NEST.svg?style=flat-square&label=myget)](https://www.myget.org/gallery/elasticsearch-net)[![downloads](http://img.shields.io/myget/elasticsearch-net/dt/NEST.svg?style=flat-square&label=myget)](https://www.myget.org/gallery/elasticsearch-net) |
+| CI  | [![teamcity](http://img.shields.io/teamcity/http/teamcity.codebetter.com/e/bt993.svg?style=flat-square&label=TeamCity)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993)[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/gallery/elasticsearch-net) [![Travis mono build status](https://img.shields.io/travis/elastic/elasticsearch-net.svg?style=flat-square&label=Travis Mono)](https://travis-ci.org/elastic/elasticsearch-net)|
+| Issue stats | [![pr closed in](http://www.issuestats.com/github/elastic/elasticsearch-net/badge/pr?style=flat-square)](http://www.issuestats.com/github/elastic/elasticsearch-net)[![issues closed in](http://www.issuestats.com/github/elastic/elasticsearch-net/badge/issue?style=flat-square)](http://www.issuestats.com/github/elastic/elasticsearch-net) |
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 

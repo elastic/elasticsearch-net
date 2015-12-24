@@ -1,3 +1,11 @@
+sudo: false
 language: csharp
 solution: src/Elasticsearch.sln
 script: ./build.sh
+notifications:
+  hipchat:
+    rooms:
+      secure: Bi1/y587AU+xTXHmHj+Neu1FuxqfIXTjGOespcAyLUvbaHfRCTjYU7mEFqelZHP/tO0TQQ1uqxmnPvIsJ0yeO827Sq0pi21yS9qih6IBt1gEpX4X4/8LfkzIPSFN0OFFpkLn+3u1C8V3jPAZ5fspKAFe3UZ4fePmHx2oRaTGwC8=
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Change view</a>)'
+    format: html

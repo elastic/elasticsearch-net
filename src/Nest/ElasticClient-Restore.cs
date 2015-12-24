@@ -9,7 +9,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IRestoreResponse Restore(IRestoreRequest restoreRequest)
 		{
-			return this.Dispatch<IRestoreRequest, RestoreRequestParameters, RestoreResponse>(
+			return this.Dispatcher.Dispatch<IRestoreRequest, RestoreRequestParameters, RestoreResponse>(
 				restoreRequest,
 				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.Dispatch<RestoreDescriptor, RestoreRequestParameters, RestoreResponse>(
+			return this.Dispatcher.Dispatch<RestoreDescriptor, RestoreRequestParameters, RestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest)
 		{
-			return this.DispatchAsync<IRestoreRequest, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
+			return this.Dispatcher.DispatchAsync<IRestoreRequest, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				restoreRequest,
 				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
+			return this.Dispatcher.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
 			);

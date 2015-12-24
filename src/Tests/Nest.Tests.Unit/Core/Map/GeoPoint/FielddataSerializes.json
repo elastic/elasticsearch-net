@@ -1,0 +1,13 @@
+{
+  "elasticsearchprojects": {
+    "properties": {
+      "origin": {
+        "type": "geo_point",
+        "fielddata": {
+          "format": "compressed",
+          "precision": "1.0km"
+        }
+      }
+    }
+  }
+}

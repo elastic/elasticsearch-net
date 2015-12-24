@@ -9,6 +9,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITemplateQuery : IQuery
 	{
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
 		[JsonProperty("query")]
 		string Query { get; set; }
 
@@ -27,6 +30,10 @@ namespace Nest
 
 		public IDictionary<string, object> Params { get; set;}
 
+		public string Name { get; set; }
+
+		public double? Boost { get; set; }
+
 		public bool IsConditionless
 		{
 			get { return this.Query.IsNullOrEmpty(); }
@@ -39,9 +46,25 @@ namespace Nest
 
 		string ITemplateQuery.Query { get; set; }
 
+		double? ITemplateQuery.Boost { get; set; }
+
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return this.Self.Query.IsNullOrEmpty(); } }
+
+		public TemplateQueryDescriptor Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public TemplateQueryDescriptor Boost(double boost)
+		{
+			this.Self.Boost = boost;
+			return this;
+		}
 
 		public TemplateQueryDescriptor Query(string query)
 		{

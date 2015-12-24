@@ -36,10 +36,11 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.MatchAll(Boost: 1.2)
+					.MatchAll(Boost: 1.2, Name: "named_query")
 				);
+
 			var json = TestElasticClient.Serialize(s);
-			var expected = "{ from: 0, size: 10, query : { match_all: { boost: 1.2 }}}";
+			var expected = @"{ from: 0, size: 10, query : { match_all: { boost: 1.2, _name: ""named_query"" }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 

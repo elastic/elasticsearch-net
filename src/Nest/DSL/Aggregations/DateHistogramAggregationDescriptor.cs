@@ -43,6 +43,9 @@ namespace Nest
 		[JsonProperty("factor")]
 		int? Factor { get; set; }
 
+		[JsonProperty("offset")]
+		string Offset { get; set; }
+
 		[JsonProperty("pre_offset")]
 		string PreOffset { get; set; }
 
@@ -69,13 +72,15 @@ namespace Nest
 		public string TimeZone { get; set; }
 		public bool? PreZoneAdjustLargeInterval { get; set; }
 		public int? Factor { get; set; }
+		public string Offset { get; set; }
 		public string PreOffset { get; set; }
 		public string PostOffset { get; set; }
 		public IDictionary<string, string> Order { get; set; }
 		public IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
-	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
+	public class DateHistogramAggregationDescriptor<T> 
+		: BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
 	{
 		private IDateHistogramAggregator Self { get { return this; } }
 
@@ -100,6 +105,8 @@ namespace Nest
 		bool? IDateHistogramAggregator.PreZoneAdjustLargeInterval { get; set; }
 
 		int? IDateHistogramAggregator.Factor { get; set; }
+
+		string IDateHistogramAggregator.Offset { get; set; }
 
 		string IDateHistogramAggregator.PreOffset { get; set; }
 
@@ -195,11 +202,18 @@ namespace Nest
 			return this;
 		}
 
+		public DateHistogramAggregationDescriptor<T> Offset(string offset)
+		{
+			Self.Offset = offset;
+			return this;
+		}
+
 		public DateHistogramAggregationDescriptor<T> PreOffset(string preOffset)
 		{
 			Self.PreOffset = preOffset;
 			return this;
 		}
+
 		public DateHistogramAggregationDescriptor<T> PostOffset(string postOffset)
 		{
 			Self.PostOffset = postOffset;

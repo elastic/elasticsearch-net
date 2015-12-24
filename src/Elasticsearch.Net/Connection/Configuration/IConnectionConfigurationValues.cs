@@ -97,6 +97,12 @@ namespace Elasticsearch.Net.Connection
 		bool MetricsEnabled { get; }
 
 		/// <summary>
+		/// Forces the client to pretty format the requests send to elasticsearch
+		/// defaults to true;
+		/// </summary>
+		bool UsesPrettyRequests { get; }
+
+		/// <summary>
 		/// Forces elasticsearch to send pretty json responses over the wire
 		/// </summary>
 		bool UsesPrettyResponses { get; }

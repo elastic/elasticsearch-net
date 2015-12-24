@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.TopChildren<Person>(fz => fz
+						.Name("named_query")
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 					)
 				);
@@ -21,6 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{ top_children: { 
 				type: ""person"",
+				_name: ""named_query"",
 				query: {
 					term: {
 						firstName: {
@@ -28,7 +30,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						}
 					}
 				}
-
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}

@@ -50,7 +50,18 @@ namespace Nest
 			var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>());
 			Self.Percolations.Add(descriptor);
 			return this;
+		}
 
+		public MultiPercolateDescriptor PercolateMany<T>(IEnumerable<T> sources, Func<PercolateDescriptor<T>, T, PercolateDescriptor<T>> getSelector)
+			where T : class
+		{
+			foreach (var source in sources)
+			{
+				getSelector.ThrowIfNull("getSelector");
+				var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>(), source);
+				Self.Percolations.Add(descriptor);
+			}
+			return this;
 		}
 
 		public MultiPercolateDescriptor Count<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> getSelector) 
@@ -60,8 +71,8 @@ namespace Nest
 			var descriptor = getSelector(new PercolateCountDescriptor<T>().Index<T>().Type<T>());
 			Self.Percolations.Add(descriptor);
 			return this;
-
 		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo)
 		{
 			MultiPercolatePathInfo.Update(pathInfo, this);

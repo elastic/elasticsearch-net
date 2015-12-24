@@ -63,11 +63,15 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		IList<PropertyPathMarker> Fields { get; set; }
 
+		[JsonProperty(PropertyName = "fielddata_fields")]
+		IList<PropertyPathMarker> FielddataFields { get; set; }
+
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
+		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
@@ -81,6 +85,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
+
+		[JsonProperty(PropertyName = "inner_hits")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 
 		string Preference { get; }
 		
@@ -150,11 +158,13 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
+		public IList<PropertyPathMarker> FielddataFields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IFilterContainer Filter { get; set; }
+		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
@@ -231,8 +241,10 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IRescore Rescore { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
+		public IList<PropertyPathMarker> FielddataFields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
+		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
@@ -343,11 +355,15 @@ namespace Nest
 
 		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
 
+		IList<PropertyPathMarker> ISearchRequest.FielddataFields { get; set; }
+
 		IDictionary<string, IScriptFilter> ISearchRequest.ScriptFields { get; set; }
 
 		ISourceFilter ISearchRequest.Source { get; set; }
 
 		IDictionary<string, IAggregationContainer> ISearchRequest.Aggregations { get; set; }
+
+		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
@@ -360,7 +376,6 @@ namespace Nest
 			return this;
 		}
 
-
 		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
@@ -369,6 +384,30 @@ namespace Nest
 			return this;
 		}
 
+		public SearchDescriptor<T> InnerHits(
+			Func<
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
+			> innerHitsSelector)
+		{
+			if (innerHitsSelector == null)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
+				.Where(kv => kv.Value != null)
+				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
+				.Where(kv => kv.Value != null)
+				.ToDictionary(kv => kv.Key, kv => kv.Value);
+			if (containers == null || containers.Count == 0)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			Self.InnerHits = containers;
+			return this;
+		}
 
 		public SearchDescriptor<T> Source(bool include = true)
 		{
@@ -388,6 +427,7 @@ namespace Nest
 			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
+
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
@@ -429,6 +469,7 @@ namespace Nest
 			Self.Timeout = timeout;
 			return this;
 		}
+		
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed. 
 		/// (Use .DocumentsWithMetaData on the return results)
@@ -583,6 +624,28 @@ namespace Nest
 			return this;
 		}
 
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields)
+		{
+			if (!fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
+			return this;
+		}
+
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
+		{
+			if (!fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
+			return this;
+		}
+
 		public SearchDescriptor<T> ScriptFields(
 				Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
 				 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
@@ -680,7 +743,39 @@ namespace Nest
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
+			if (descriptor == null || descriptor.Field.IsConditionless())
+				return this;
+
 			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
+			return this;
+		}
+
+		/// <summary>
+		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> SortMulti(params Func<SortFieldDescriptor<T>, IFieldSort>[] sorts)
+		{
+			foreach (var sort in sorts)
+			{
+				this.Sort(sort);
+			}
+
+			return this;
+		}
+
+		/// <summary>
+		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> SortMulti(IEnumerable<SortFieldDescriptor<T>> sorts)
+		{
+			foreach (var sort in sorts)
+			{
+				var copy = sort;
+				this.Sort(s => copy);
+			}
+
 			return this;
 		}
 
@@ -695,6 +790,8 @@ namespace Nest
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
+			if (descriptor == null || descriptor.Field.IsConditionless())
+				return this;
 			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_geo_distance", descriptor));
 			return this;
 		}
@@ -710,6 +807,8 @@ namespace Nest
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
+			if (descriptor == null || (descriptor.Script.IsNullOrEmpty() && descriptor.File.IsNullOrEmpty()))
+				return this;
 			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", descriptor));
 			return this;
 		}

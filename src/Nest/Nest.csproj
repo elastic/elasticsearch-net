@@ -119,6 +119,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Cat\CatSegmentsRecord.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
@@ -129,9 +130,11 @@
     <Compile Include="Domain\Cat\CatRecoveryRecord.cs" />
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
+    <Compile Include="Domain\DSL\IDocument.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MurmurHashMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
@@ -151,6 +154,7 @@
     <Compile Include="Domain\Geo\MultiPolygonGeoShape.cs" />
     <Compile Include="Domain\Geo\PointGeoShape.cs" />
     <Compile Include="Domain\Geo\PolygonGeoShape.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\FieldNamesMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFrequencyFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataMapping.cs" />
@@ -159,6 +163,7 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Mapping\Types\Murmur3HashMapping.cs" />
     <Compile Include="Domain\Observers\RestoreObserver.cs" />
     <Compile Include="Domain\Observers\SnapshotObserver.cs" />
     <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />
@@ -174,6 +179,7 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\FieldStatsResponse.cs" />
     <Compile Include="Domain\Responses\GetIndexResponse.cs" />
     <Compile Include="Domain\Responses\DeleteScriptResponse.cs" />
     <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
@@ -216,6 +222,7 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="DSL\CatSegmentsDescriptor.cs" />
     <Compile Include="DSL\ClusterRerouteDescriptor.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommand.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommandDescriptor.cs" />
@@ -233,9 +240,14 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\FieldStatsDescriptor.cs" />
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
+    <Compile Include="DSL\SyncedFlushDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
+    <Compile Include="DSL\Search\IGlobalInnerHit.cs" />
+    <Compile Include="DSL\Search\IInnerHitsContainer.cs" />
+    <Compile Include="DSL\Search\InnerHitsDescriptor.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
@@ -243,6 +255,7 @@
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="ElasticClient-GetIndex.cs" />
+    <Compile Include="ElasticClient-FieldStats.cs" />
     <Compile Include="Enums\GeoOrientation.cs" />
     <Compile Include="Enums\GeoPrecisionUnit.cs" />
     <Compile Include="Enums\GetIndexFeature.cs" />
@@ -395,6 +408,7 @@
     <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\NumericResolutionUnit.cs" />
     <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
@@ -403,6 +417,8 @@
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
+    <Compile Include="IHighLevelToLowLevelDispatcher.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
@@ -866,6 +882,7 @@
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
+    <Compile Include="Resolvers\Converters\Queries\DismaxQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />
@@ -983,10 +1000,12 @@
     <Compile Include="Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\IndexNameMarkerConverter.cs" />
+    <Compile Include="Resolvers\Converters\TermsIncludeExcludeConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
+    <Compile Include="Resolvers\Converters\UpgradeStatusResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
@@ -1083,15 +1102,6 @@
   -->
   <Import Project="..\..\.paket\paket.targets" />
   <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
-      <ItemGroup>
-        <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\packages\Newtonsoft.Json\lib\netcore45\Newtonsoft.Json.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
@@ -1128,19 +1138,19 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+monotouch+monoandroid\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

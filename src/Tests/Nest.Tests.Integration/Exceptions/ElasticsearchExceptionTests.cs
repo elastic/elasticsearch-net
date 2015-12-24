@@ -48,6 +48,19 @@ namespace Nest.Tests.Integration.Exceptions
 				.ThrowOnElasticsearchServerExceptions());
 			Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
 		}
+
+		[Test]
+		public void ConnectionException_WithThrowingClient_Async_PreserveStacktrace()
+		{
+			var uri = ElasticsearchConfiguration.CreateBaseUri(9494);
+			var client = new ElasticClient(new ConnectionSettings(uri)
+				.SetTimeout(500)
+				.ThrowOnElasticsearchServerExceptions());
+			var exception = Assert.Throws<WebException>(async () => await client.RootNodeInfoAsync());
+
+			var elasticClientType = typeof (ElasticClient);
+			Assert.That(exception.StackTrace, Is.Not.StringStarting(string.Format("   at {0}.{1}", elasticClientType.Namespace, elasticClientType.Name)));
+		}
 		
 		[Test]
 		public void ServerError_Is_Set_ClientThat_DoesNotThow_AndDoesNotExposeRawResponse_Async()

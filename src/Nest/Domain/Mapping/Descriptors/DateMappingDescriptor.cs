@@ -88,5 +88,17 @@ namespace Nest
 			}
 			return this;
 		}
+
+		public DateMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
+
+		public DateMappingDescriptor<T> NumericResolution(NumericResolutionUnit unit)
+		{
+			this._Mapping.NumericResolution = unit;
+			return this;
+		}
 	}
 }

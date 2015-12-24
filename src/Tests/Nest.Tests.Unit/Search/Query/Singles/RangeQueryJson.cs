@@ -15,6 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(ff => ff
 					.Range(n => n
+						.Name("named_query")
 						.OnField(f=>f.LOC)
 						.GreaterOrEquals("10")
 						.Lower("20")
@@ -26,6 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""loc"": {
+								_name: ""named_query"",
 								gte: ""10"",
 								lt: ""20""
 							}

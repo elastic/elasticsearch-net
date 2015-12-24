@@ -19,6 +19,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.Template(t => t
+						.Name("named_query")
 						.Query("match_{{template}}")
 						.Params(p => p
 							.Add("template", "all")
@@ -30,6 +31,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10,
 				  query: {
 					template: {
+					  _name: ""named_query"",
 					  query: ""match_{{template}}"",
 					  ""params"": {
 						template: ""all""

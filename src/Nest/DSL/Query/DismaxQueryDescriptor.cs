@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters.Queries;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<DisMaxQueryDescriptor<object>>))]
+	[JsonConverter(typeof(DismaxQueryJsonConverter))]
 	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
@@ -27,6 +28,7 @@ namespace Nest
 			container.DisMax = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public double? TieBreaker { get; set; }
 		public double? Boost { get; set; }
@@ -35,9 +37,13 @@ namespace Nest
 
 	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
+		private IDisMaxQuery Self { get { return this; } }
+
 		double? IDisMaxQuery.TieBreaker { get; set; }
 
 		double? IDisMaxQuery.Boost { get; set; }
+
+		string IQuery.Name { get; set; }
 
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
@@ -45,8 +51,14 @@ namespace Nest
 		{
 			get
 			{
-				return !((IDisMaxQuery)this).Queries.HasAny() || ((IDisMaxQuery)this).Queries.All(q => q.IsConditionless);
+				return !Self.Queries.HasAny() || Self.Queries.All(q => q.IsConditionless);
 			}
+		}
+
+		public DisMaxQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, QueryContainer>[] querySelectors)
@@ -58,18 +70,32 @@ namespace Nest
 				var q = selector(query);
 				queries.Add(q);
 			}
-			((IDisMaxQuery)this).Queries = queries;
+			Self.Queries = queries;
+			return this;
+		}
+
+		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries)
+		{
+			var descriptors = new List<QueryContainer>();
+			foreach (var q in queries)
+			{
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			((IDisMaxQuery)this).Queries = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
 		public DisMaxQueryDescriptor<T> Boost(double boost)
 		{
-			((IDisMaxQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
+
 		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
-			((IDisMaxQuery)this).TieBreaker = tieBreaker;
+			Self.TieBreaker = tieBreaker;
 			return this;
 		}
 	}

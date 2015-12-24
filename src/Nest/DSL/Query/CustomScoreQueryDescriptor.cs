@@ -23,6 +23,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
+
 	}
 
 	public class CustomScoreQuery : PlainQuery, ICustomScoreQuery
@@ -32,15 +33,23 @@ namespace Nest
 			container.CustomScore = this;
 		}
 
+		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
+
 		public string Lang { get; set; }
+
 		public string Script { get; set; }
+
 		public Dictionary<string, object> Params { get; set; }
+
 		public IQueryContainer Query { get; set; }
 	}
 
 	public class CustomScoreQueryDescriptor<T> : ICustomScoreQuery where T : class
 	{
+		private ICustomScoreQuery Self { get { return this;  } }
+
 		string ICustomScoreQuery.Lang { get; set; }
 
 		string ICustomScoreQuery.Script { get; set; }
@@ -49,23 +58,31 @@ namespace Nest
 
 		IQueryContainer ICustomScoreQuery.Query { get; set; }
 
+		string IQuery.Name { get; set;  }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICustomScoreQuery)this).Query == null || ((ICustomScoreQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
+		}
+
+		public CustomScoreQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public CustomScoreQueryDescriptor<T> Lang(string lang)
 		{
-			((ICustomScoreQuery)this).Lang = lang;
+			Self.Lang = lang;
 			return this;
 		}
 
         public CustomScoreQueryDescriptor<T> Lang(ScriptLang lang)
         {
-            ((ICustomScoreQuery)this).Lang = lang.GetStringValue();
+            Self.Lang = lang.GetStringValue();
             return this;
         }
 
@@ -75,7 +92,7 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((ICustomScoreQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
@@ -86,14 +103,14 @@ namespace Nest
 		/// <returns></returns>
 		public CustomScoreQueryDescriptor<T> Script(string script)
 		{
-			((ICustomScoreQuery)this).Script = script;
+			Self.Script = script;
 			return this;
 		}
 
 		public CustomScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			((ICustomScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
+			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 	}

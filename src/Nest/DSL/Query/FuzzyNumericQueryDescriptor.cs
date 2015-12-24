@@ -21,6 +21,7 @@ namespace Nest
 		{
 			container.Fuzzy = this;
 		}
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
 		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
@@ -37,6 +38,8 @@ namespace Nest
 
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{
+		private IFuzzyNumericQuery Self { get { return this; } }
+
 		PropertyPathMarker IFuzzyQuery.Field { get; set; }
 		
 		double? IFuzzyQuery.Boost { get; set; }
@@ -53,72 +56,81 @@ namespace Nest
 
 		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IFuzzyNumericQuery)this).Field.IsConditionless() || ((IFuzzyNumericQuery)this).Value == null;
+				return Self.Field.IsConditionless() || Self.Value == null;
 			}
 		}
+
+		public FuzzyNumericQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IFuzzyQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IFuzzyQuery)this).Field;
+			return Self.Field;
 		}
 		
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)
 		{
-			((IFuzzyNumericQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IFuzzyNumericQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyNumericQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
+			Self.Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(string fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			Self.Fuzziness = fuzziness;
 			return this;
 		}
 		
 		public FuzzyNumericQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
+			Self.MaxExpansions = maxExpansions;
 			return this;
 		}
 	
 		public FuzzyNumericQueryDescriptor<T> Transpositions(bool enable = true)
 		{
-			((IFuzzyQuery)this).Transpositions = enable;
+			Self.Transpositions = enable;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> UnicodeAware(bool enable = true)
 		{
-			((IFuzzyQuery)this).UnicodeAware = enable;
+			Self.UnicodeAware = enable;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			((IFuzzyQuery)this).Rewrite = rewrite;
+			Self.Rewrite = rewrite;
 			return this;
 		}
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)
 		{
-			((IFuzzyNumericQuery)this).Value = value;
+			Self.Value = value;
 			return this;
 		}
 	}

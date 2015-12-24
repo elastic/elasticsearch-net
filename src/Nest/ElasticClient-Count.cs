@@ -12,7 +12,7 @@ namespace Nest
 			where T : class
 		{
 			countSelector = countSelector ?? (s => s);
-			return this.Dispatch<CountDescriptor<T>, CountRequestParameters, CountResponse>(
+			return this.Dispatcher.Dispatch<CountDescriptor<T>, CountRequestParameters, CountResponse>(
 				countSelector,
 				(p, d) => this.RawDispatch.CountDispatch<CountResponse>(p, d)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 		public ICountResponse Count<T>(ICountRequest countRequest) 
 			where T : class
 		{
-			return this.Dispatch<ICountRequest, CountRequestParameters, CountResponse>(
+			return this.Dispatcher.Dispatch<ICountRequest, CountRequestParameters, CountResponse>(
 				countRequest,
 				(p, d) => this.RawDispatch.CountDispatch<CountResponse>(p, d)
 			);
@@ -33,7 +33,7 @@ namespace Nest
 			where T : class
 		{
 			countSelector = countSelector ?? (s => s);
-			return this.DispatchAsync<CountDescriptor<T>, CountRequestParameters, CountResponse, ICountResponse>(
+			return this.Dispatcher.DispatchAsync<CountDescriptor<T>, CountRequestParameters, CountResponse, ICountResponse>(
 				countSelector,
 				(p, d) => this.RawDispatch.CountDispatchAsync<CountResponse>(p, d)
 			);
@@ -43,7 +43,7 @@ namespace Nest
 		public Task<ICountResponse> CountAsync<T>(ICountRequest countRequest)
 			where T : class
 		{
-			return this.DispatchAsync<ICountRequest, CountRequestParameters, CountResponse, ICountResponse>(
+			return this.Dispatcher.DispatchAsync<ICountRequest, CountRequestParameters, CountResponse, ICountResponse>(
 				countRequest,
 				(p, d) => this.RawDispatch.CountDispatchAsync<CountResponse>(p, d)
 			);

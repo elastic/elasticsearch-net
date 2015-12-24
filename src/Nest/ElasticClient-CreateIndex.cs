@@ -11,7 +11,7 @@ namespace Nest
 		public IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
-			return this.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest)
 		{
-			return this.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
 				createIndexRequest,
 				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector)
 		{
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
-			return this.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
 					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
 				);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest)
 		{
-			return this.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				createIndexRequest,
 				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
 			);

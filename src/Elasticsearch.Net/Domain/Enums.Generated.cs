@@ -72,7 +72,20 @@ namespace Elasticsearch.Net
 		  [EnumMember(Value = "open")]
 		Open,
 		[EnumMember(Value = "closed")]
-		Closed
+		Closed,
+		[EnumMember(Value = "none")]
+		None,
+		[EnumMember(Value = "all")]
+		All
+	}
+	
+	
+	public enum DefaultOperator 
+	{
+		  [EnumMember(Value = "AND")]
+		And,
+		[EnumMember(Value = "OR")]
+		Or
 	}
 	
 	
@@ -86,15 +99,6 @@ namespace Elasticsearch.Net
 		ExternalGte,
 		[EnumMember(Value = "force")]
 		Force
-	}
-	
-	
-	public enum DefaultOperator 
-	{
-		  [EnumMember(Value = "AND")]
-		And,
-		[EnumMember(Value = "OR")]
-		Or
 	}
 	
 	
@@ -174,6 +178,8 @@ namespace Elasticsearch.Net
 		Nodes,
 		[EnumMember(Value = "routing_table")]
 		RoutingTable,
+		[EnumMember(Value = "routing_nodes")]
+		RoutingNodes,
 		[EnumMember(Value = "master_node")]
 		MasterNode,
 		[EnumMember(Value = "version")]
@@ -379,6 +385,18 @@ namespace Elasticsearch.Net
 				{
 					case ExpandWildcards.Open: return "open";
 					case ExpandWildcards.Closed: return "closed";
+					case ExpandWildcards.None: return "none";
+					case ExpandWildcards.All: return "all";
+				}
+			}
+			
+			
+			if (e is DefaultOperator)
+			{
+				switch((DefaultOperator)e)
+				{
+					case DefaultOperator.And: return "AND";
+					case DefaultOperator.Or: return "OR";
 				}
 			}
 			
@@ -391,16 +409,6 @@ namespace Elasticsearch.Net
 					case VersionType.External: return "external";
 					case VersionType.ExternalGte: return "external_gte";
 					case VersionType.Force: return "force";
-				}
-			}
-			
-			
-			if (e is DefaultOperator)
-			{
-				switch((DefaultOperator)e)
-				{
-					case DefaultOperator.And: return "AND";
-					case DefaultOperator.Or: return "OR";
 				}
 			}
 			
@@ -479,6 +487,7 @@ namespace Elasticsearch.Net
 					case ClusterStateMetric.Metadata: return "metadata";
 					case ClusterStateMetric.Nodes: return "nodes";
 					case ClusterStateMetric.RoutingTable: return "routing_table";
+					case ClusterStateMetric.RoutingNodes: return "routing_nodes";
 					case ClusterStateMetric.MasterNode: return "master_node";
 					case ClusterStateMetric.Version: return "version";
 				}

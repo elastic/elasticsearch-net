@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		IPolygonGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapePolygonQuery : PlainQuery, IGeoShapePolygonQuery
@@ -23,6 +26,10 @@ namespace Nest
 		{
 			container.GeoShape = this;
 		}
+
+		public string Name { get; set; }
+
+		public double? Boost { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
 
@@ -43,34 +50,53 @@ namespace Nest
 
 	public class GeoShapePolygonQueryDescriptor<T> : IGeoShapePolygonQuery where T : class
 	{
-		IGeoShapePolygonQuery Self { get { return this; } }
+		private IGeoShapePolygonQuery Self { get { return this; } }
 
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
+		double? IGeoShapePolygonQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapePolygonQuery)this).Shape == null || !((IGeoShapePolygonQuery)this).Shape.Coordinates.HasAny();
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 
 		}
+
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IGeoShapeQuery)this).Field;
 		}
-		
+
+		public GeoShapePolygonQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public GeoShapePolygonQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 		public GeoShapePolygonQueryDescriptor<T> OnField(string field)
 		{
 			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
+
 		public GeoShapePolygonQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IGeoShapeQuery)this).Field = objectPath;
@@ -79,9 +105,9 @@ namespace Nest
 
 		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
 		{
-			if (((IGeoShapePolygonQuery)this).Shape == null)
-				((IGeoShapePolygonQuery)this).Shape = new PolygonGeoShape();
-			((IGeoShapePolygonQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new PolygonGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 	}

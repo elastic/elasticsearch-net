@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.DefaultField(p=>p.Name)
 					.OnFields(p=>p.Name, p=>p.Origin)
 					.Query("some query")
+					.MinimumShouldMatch("50%")
 					)
 				);
 			q.Analyzer.Should().Be("my-analyzer");
@@ -30,7 +31,35 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.DefaultField.Should().Be("name");
 			q.Fields.Should().BeEquivalentTo(new []{ "name", "origin"});
 			q.Query.Should().Be("some query");
+			q.MinimumShouldMatch.Should().Be("50%");
+		}
 
+		[Test]
+		public void SimpleQueryString_MinimumShouldMatch_Deserializes()
+		{
+			var q = this.SerializeThenDeserialize(
+				f => f.SimpleQueryString,
+				f => f.SimpleQueryString(sq => sq
+					  .Analyzer("my-analyzer")
+					  .DefaultOperator(Operator.And)
+					  .Flags("ASFAS")
+					  .Locale("en")
+					  .LowercaseExpendedTerms()
+					  .DefaultField(p => p.Name)
+					  .OnFields(p => p.Name, p => p.Origin)
+					  .Query("some query")
+					  .MinimumShouldMatch(50)
+					)
+				);
+			q.Analyzer.Should().Be("my-analyzer");
+			q.DefaultOperator.Should().Be(Operator.And);
+			q.Flags.Should().Be("ASFAS");
+			q.Locale.Should().Be("en");
+			q.LowercaseExpendedTerms.Should().BeTrue();
+			q.DefaultField.Should().Be("name");
+			q.Fields.Should().BeEquivalentTo(new[] { "name", "origin" });
+			q.Query.Should().Be("some query");
+			q.MinimumShouldMatch.Should().Be("50");
 		}
 	}
 }

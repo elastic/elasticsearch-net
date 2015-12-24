@@ -4,6 +4,7 @@
   "query": {
     "geo_shape": {
       "myGeoShape": {
+        "_name":  "named_query",
         "shape": {
           "coordinates": [ -45.0, 45.0 ],
           "type": "point"

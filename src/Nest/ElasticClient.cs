@@ -13,12 +13,13 @@ namespace Nest
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
 	/// </summary>
-	public partial class ElasticClient : Nest.IElasticClient
+	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
+		internal IHighLevelToLowLevelDispatcher Dispatcher { get { return this; } }
 		internal RawDispatch RawDispatch { get; set; }
-
+		
 		public IConnection Connection { get; protected set; }
 		public INestSerializer Serializer { get; protected set; }
 		public IElasticsearchClient Raw { get; protected set; }
@@ -56,31 +57,58 @@ namespace Nest
 
 		}
 
-
-		private R Dispatch<D, Q, R>(
-			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
-			)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>, new()
-			where R : BaseResponse
+		public static void Warmup()
 		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.Dispatch<D, Q, R>(descriptor, dispatch);
+			var client = new ElasticClient(connection: new InMemoryConnection());
+			var stream = new MemoryStream("{}".Utf8Bytes());
+			client.Serializer.Serialize(new SearchDescriptor<object>());
+			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
+			var connection = new HttpConnection(new ConnectionSettings());
+			client.RootNodeInfo();
+			client.Search<object>(s => s.MatchAll().Index("someindex"));
 		}
 
-		private R Dispatch<D, Q, R>(
-			D descriptor
-			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
-			)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
+		}
+
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new D());
+			return this.Dispatcher.Dispatch<D, Q, R>(descriptor, dispatch);
+		}
+
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		{
+			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			return dispatch(pathInfo, descriptor)
+				.ContinueWith<I>(r =>
+				{
+					if (r.IsFaulted && r.Exception != null)
+					{
+						var mr = r.Exception.InnerException as MaxRetryException;
+						if (mr != null)
+							mr.RethrowKeepingStackTrace();
+
+						var ae = r.Exception.Flatten();
+						if (ae.InnerException != null)
+							ae.InnerException.RethrowKeepingStackTrace();
+
+						ae.RethrowKeepingStackTrace();
+					}
+					return ResultsSelector<D, Q, R>(r.Result, descriptor);
+				});
+		}
+
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		{
+			selector.ThrowIfNull("selector");
+			var descriptor = selector(new D());
+			return this.Dispatcher.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
 		private static R ResultsSelector<D, Q, R>(
@@ -111,48 +139,6 @@ namespace Nest
 			return r;
 		}
 
-		private Task<I> DispatchAsync<D, Q, R, I>(
-			Func<D, D> selector
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
-			)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>, new()
-			where R : BaseResponse, I
-			where I : IResponse
-		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
-		}
-
-		private Task<I> DispatchAsync<D, Q, R, I>(
-			D descriptor
-			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
-			)
-			where Q : FluentRequestParameters<Q>, new()
-			where D : IRequest<Q>
-			where R : BaseResponse, I
-			where I : IResponse
-		{
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
-			return dispatch(pathInfo, descriptor)
-				.ContinueWith<I>(r =>
-				{
-					if (r.IsFaulted && r.Exception != null)
-					{
-						var mr = r.Exception.InnerException as MaxRetryException;
-						if (mr != null)
-							throw mr;
-
-						var ae = r.Exception.Flatten();
-						if (ae.InnerException != null)
-							throw ae.InnerException;
-						throw ae;
-					}
-					return ResultsSelector<D, Q, R>(r.Result, descriptor);
-				});
-		}
-
 		private TRequest ForceConfiguration<TRequest>(
 			Func<TRequest, TRequest> selector, Action<IRequestConfiguration> setter
 			)
@@ -171,17 +157,5 @@ namespace Nest
 			request.RequestConfiguration = configuration;
 			return request;
 		}
-
-		public static void Warmup()
-		{
-			var client = new ElasticClient(connection: new InMemoryConnection());
-			var stream = new MemoryStream("{}".Utf8Bytes());
-			client.Serializer.Serialize(new SearchDescriptor<object>());
-			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
-			var connection = new HttpConnection(new ConnectionSettings());
-			client.RootNodeInfo();
-			client.Search<object>(s => s.MatchAll().Index("someindex"));
-		}
-
 	}
 }

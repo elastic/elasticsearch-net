@@ -28,10 +28,12 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
+		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		bool? Cache { get; set; }
 
-		[JsonProperty(PropertyName = "_name")]
-		string Name { get; set; }
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class TopChildrenQuery : PlainQuery, ITopChildrenQuery
@@ -47,6 +49,8 @@ namespace Nest
 		public int? Factor { get; set; }
 		public int? IncrementalFactor { get; set; }
 		public IQueryContainer Query { get; set; }
+		public double? Boost { get; set; }
+		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
 	}
@@ -59,17 +63,27 @@ namespace Nest
 	/// <typeparam name="T">Type used to strongly type parts of this query</typeparam>
 	public class TopChildrenQueryDescriptor<T> : ITopChildrenQuery where T : class
 	{
+		private ITopChildrenQuery Self { get { return this; }}
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ITopChildrenQuery)this).Query == null || ((ITopChildrenQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public TopChildrenQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public TopChildrenQueryDescriptor()
 		{
-			((ITopChildrenQuery)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 			
 		}
 
@@ -83,9 +97,9 @@ namespace Nest
 
 		IQueryContainer ITopChildrenQuery.Query { get; set; }
 
-		bool? ITopChildrenQuery.Cache { get; set; }
+		double? ITopChildrenQuery.Boost { get; set; }
 
-		string ITopChildrenQuery.Name { get; set; }
+		bool? ITopChildrenQuery.Cache { get; set; }
 
 		/// <summary>
 		/// Provide a child query for the top_children query
@@ -105,6 +119,16 @@ namespace Nest
 		public TopChildrenQueryDescriptor<T> Factor(int factor)
 		{
 			((ITopChildrenQuery)this).Factor = factor;
+			return this;
+		}
+		
+		/// <summary>
+		/// How many hits are asked for in the first child query run is controlled using the factor parameter (defaults to 5).
+		/// </summary>
+		/// <param name="factor">The factor that controls how many hits are asked for</param>
+		public TopChildrenQueryDescriptor<T> Boost(double boost)
+		{
+			((ITopChildrenQuery)this).Boost = boost;
 			return this;
 		}
 		

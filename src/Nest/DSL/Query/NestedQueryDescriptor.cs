@@ -26,6 +26,12 @@ namespace Nest
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
 
+		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		IInnerHits InnerHits { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class NestedQuery : PlainQuery, INestedQuery
@@ -34,17 +40,22 @@ namespace Nest
 		{
 			container.Nested = this;
 		}
-
+		
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public NestedScore? Score { get; set; }
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
+		public IInnerHits InnerHits { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T> : INestedQuery where T : class
 	{
+		private INestedQuery Self { get { return this; } }
+
 		NestedScore? INestedQuery.Score { get; set; }
 
 		IFilterContainer INestedQuery.Filter { get; set; }
@@ -53,41 +64,75 @@ namespace Nest
 
 		PropertyPathMarker INestedQuery.Path { get; set; }
 
+		IInnerHits INestedQuery.InnerHits { get; set; }
+
+		double? INestedQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((INestedQuery)this).Query == null || ((INestedQuery)this).Query.IsConditionless;
+				return (Self.Query == null || Self.Query.IsConditionless)
+				       && (Self.Filter == null || Self.Filter.IsConditionless);
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public NestedQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
 		}
 
 		public NestedQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			var q = new FilterDescriptor<T>();
-			((INestedQuery)this).Filter = filterSelector(q);
+			Self.Filter = filterSelector(q);
 			return this;
 		}
 
 		public NestedQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((INestedQuery)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
 
 		public NestedQueryDescriptor<T> Score(NestedScore score)
 		{
-			((INestedQuery)this).Score = score;
+			Self.Score = score;
 			return this;
 		}
+
 		public NestedQueryDescriptor<T> Path(string path)
 		{
-			((INestedQuery)this).Path = path;
+			Self.Path = path;
 			return this;
 		}
+
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			((INestedQuery)this).Path = objectPath;
+			Self.Path = objectPath;
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 	}

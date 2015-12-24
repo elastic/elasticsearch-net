@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var bulkResponse = this.Client.Bulk(d => descriptor);
 
-			this.Client.CreateRepository(_repositoryName, r => r
+			var result = this.Client.CreateRepository(_repositoryName, r => r
 				.FileSystem(@"local\\path", o => o
 					.Compress()
 					.ConcurrentStreams(10)));
@@ -71,6 +71,9 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();
 			snapshotResponse.Snapshot.Should().NotBeNull();
+			if (ElasticsearchConfiguration.CurrentVersion >= new Version("1.7.0"))
+				snapshotResponse.Snapshot.VersionId.Should().BeGreaterThan(0);
+
 			snapshotResponse.Snapshot.EndTimeInMilliseconds.Should().BeGreaterThan(0);
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
@@ -80,7 +83,7 @@ namespace Nest.Tests.Integration.Core.Repository
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(_indexName)
-				.IgnoreUnavailable(true));
+			);
 
 			_restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
 			restoreResponse.IsValid.Should().BeTrue();
@@ -90,13 +93,48 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var indexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
 			indexExistsResponse.Exists.Should().BeTrue();
-
+			
 			var count = this.Client.Count<ElasticsearchProject>(descriptor => descriptor.Index(_restoredIndexName)).Count;
 
 			var indexContent = this.Client.SourceMany<ElasticsearchProject>(_indexedElements.Select(x => (long)x.Id), _restoredIndexName);
 
 			count.Should().Be(_indexedElements.Count);
 			indexContent.ShouldBeEquivalentTo(_indexedElements);
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.4.9", "Requires index_settings and ignore_index_settings parameters which have been added in ES 1.5.0")]
+		public void SnapshotRestore_IndexSettings()
+		{
+			var updateSettingsResponse = this.Client.UpdateSettings(descriptor => descriptor.BlocksWrite());
+			updateSettingsResponse.IsValid.Should().BeTrue();
+
+			var snapshotResponse = this.Client.Snapshot(_repositoryName, _snapshotName, selector: f => f
+				.Index(_indexName)
+				.WaitForCompletion(true)
+				.Partial());
+			snapshotResponse.IsValid.Should().BeTrue();
+
+			var d = ElasticsearchConfiguration.DefaultIndex;
+			var restoreResponse = this.Client.Restore(_repositoryName, _snapshotName, r => r
+				.WaitForCompletion(true)
+				.RenamePattern(d + "_(.+)")
+				.RenameReplacement(d + "_restored_$1")
+				.Index(_indexName)
+				.IndexSettings(descriptor => descriptor
+					.RefreshInterval("123s")
+				)
+				.IgnoreIndexSettings(UpdatableSettings.BlocksWrite));
+
+			restoreResponse.IsValid.Should().BeTrue();
+			_restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
+
+			var indexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
+			indexExistsResponse.Exists.Should().BeTrue();
+
+			var indexSettingsResponse = this.Client.GetIndexSettings(descriptor => descriptor.Index(_restoredIndexName));
+			indexSettingsResponse.IsValid.Should().BeTrue();
+			indexSettingsResponse.IndexSettings.Settings["refresh_interval"].Should().Be("123s");
 		}
 
 		[Test]
@@ -164,7 +202,7 @@ namespace Nest.Tests.Integration.Core.Repository
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(_indexName)
-				.IgnoreUnavailable(true));
+			);
 
 			bool restoreCompleted = false;
 			var restoreObserver = new RestoreObserver(

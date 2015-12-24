@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using FluentAssertions;
 using System.Reflection;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
@@ -199,6 +201,54 @@ namespace Nest.Tests.Unit.Search.Sorting
 		}
 
 		[Test]
+		public void TestSortMultiWithParams()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortMulti(sort => sort.OnField(f => f.Name.Suffix("sort")).Order(SortOrder.Descending),
+						   sort => sort.OnField(f => f.Content.Suffix("test")).Order(SortOrder.Ascending));
+
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                      { ""name.sort"" : { order: ""desc"" } },
+                      { ""content.test"" : { order: ""asc"" } }
+                    ]      
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
+		public void TestSortMultiWithEnumerable()
+		{
+			var sorts = new []
+						{
+							new SortFieldDescriptor<ElasticsearchProject>().OnField(f => f.Name.Suffix("sort")).Order(SortOrder.Descending),
+							new SortFieldDescriptor<ElasticsearchProject>().OnField(f => f.Content.Suffix("test")).Order(SortOrder.Ascending)
+						};
+
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.SortMulti(sorts);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"
+                {
+                  from: 0,
+                  size: 10,
+                  sort: [
+                      { ""name.sort"" : { order: ""desc"" } },
+                      { ""content.test"" : { order: ""asc"" } }
+                    ]      
+                }";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
+		[Test]
 		public void TestSortGeo()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
@@ -211,6 +261,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.PinTo(40, -70)
 					.Unit(GeoUnit.Kilometers)
 					.Mode(SortMode.Max)
+					.DistanceType(GeoDistance.Arc)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
@@ -224,7 +275,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 						 missing: ""_last"",
 						 mode: ""max"",
 						 order: ""desc"",
-						 unit: ""km""
+						 unit: ""km"",
+                         distance_type: ""arc""
 					  }
 					}
                   ]

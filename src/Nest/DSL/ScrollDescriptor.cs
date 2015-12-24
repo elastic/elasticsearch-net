@@ -9,6 +9,7 @@ namespace Nest
 	{
 		string ScrollId { get; set; }
 		string Scroll { get; set; }
+	    Func<object, Hit<object>, Type> TypeSelector { get; set; }
 	}
 
 	internal static class ScrollPathInfo
@@ -31,8 +32,9 @@ namespace Nest
 	{
 		public string ScrollId { get; set; }
 		public string Scroll { get; set; }
+        public Func<object, Hit<object>, Type> TypeSelector { get; set; }
 
-		public ScrollRequest(string scrollId, string scrollTimeout)
+        public ScrollRequest(string scrollId, string scrollTimeout)
 		{
 			this.ScrollId = scrollId;
 			this.Scroll = scrollTimeout;
@@ -57,9 +59,10 @@ namespace Nest
 
 		string IScrollRequest.ScrollId { get; set; }
 		string IScrollRequest.Scroll { get; set; }
-		
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(string scroll)
+        Func<object, Hit<object>, Type> IScrollRequest.TypeSelector { get; set; }
+
+        ///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+        public ScrollDescriptor<T> Scroll(string scroll)
 		{
 			Self.Scroll = scroll;
 			return this;
@@ -71,5 +74,11 @@ namespace Nest
 			Self.ScrollId = scrollId;
 			return this;
 		}
-	}
+
+        public ScrollDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
+        {
+            Self.TypeSelector = typeSelector;
+            return this;
+        }
+    }
 }

@@ -11,6 +11,7 @@ namespace Nest
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		PropertyPathMarker Field { get; set; }
+
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -18,6 +19,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		ICircleGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapeCircleQuery : PlainQuery, IGeoShapeCircleQuery
@@ -27,6 +31,7 @@ namespace Nest
 			container.GeoShape = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -41,11 +46,15 @@ namespace Nest
 
 		public PropertyPathMarker Field { get; set; }
 
+		public double? Boost { get; set; } 
+
 		public ICircleGeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeCircleQueryDescriptor<T> : IGeoShapeCircleQuery where T : class
 	{
+		private IGeoShapeCircleQuery Self { get { return this; } }
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
@@ -54,19 +63,31 @@ namespace Nest
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapeCircleQuery)this).Shape == null || !((IGeoShapeCircleQuery)this).Shape.Coordinates.HasAny();
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 
 		}
+
+		string IQuery.Name { get; set; }
+
+		double? IGeoShapeCircleQuery.Boost { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IGeoShapeQuery)this).Field;
 		}
-		
+
+		public GeoShapeCircleQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
 		public GeoShapeCircleQueryDescriptor<T> OnField(string field)
 		{
 			((IGeoShapeQuery)this).Field = field;
@@ -81,18 +102,25 @@ namespace Nest
 
 		public GeoShapeCircleQueryDescriptor<T> Coordinates(IEnumerable<double> coordinates)
 		{
-			if (((IGeoShapeCircleQuery)this).Shape == null)
-				((IGeoShapeCircleQuery)this).Shape = new CircleGeoShape();
-			((IGeoShapeCircleQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new CircleGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 
 		public GeoShapeCircleQueryDescriptor<T> Radius(string radius)
 		{
-			if (((IGeoShapeCircleQuery)this).Shape == null)
-				((IGeoShapeCircleQuery)this).Shape = new CircleGeoShape();
-			((IGeoShapeCircleQuery)this).Shape.Radius = radius;
+			if (Self.Shape == null)
+				Self.Shape = new CircleGeoShape();
+			Self.Shape.Radius = radius;
 			return this;
 		}
+
+		public GeoShapeCircleQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 	}
 }

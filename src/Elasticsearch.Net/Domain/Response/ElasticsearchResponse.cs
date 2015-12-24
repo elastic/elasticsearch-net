@@ -19,28 +19,10 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
-	//TODO document and possibly rename some of the properties
-
+	// TODO: Make this class internal in 2.0
 	public static class ElasticsearchResponse
 	{
-		internal static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
-		{
-			return responseTask
-				.ContinueWith(t =>
-				{
-					if (t.IsFaulted && t.Exception != null)
-						throw t.Exception.Flatten().InnerException;
-
-					return ToDynamicResponse(t.Result);
-				});
-		}
-
-		internal static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
-		{
-			return ToDynamicResponse(response);
-		}
-
-		public static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
+		internal static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
 		{
 			var response = new ElasticsearchResponse<TTo>(from.Settings)
 			{
@@ -61,13 +43,7 @@ namespace Elasticsearch.Net
 				tt.RequestInformation = response;
  			return response;
 		}
-
-		private static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
-		{
-			return CloneFrom(response, response.Response != null ? DynamicDictionary.Create(response.Response) : null);
-		}
 	}
-
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
@@ -138,20 +114,20 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected internal ElasticsearchResponse(IConnectionConfigurationValues settings)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
 			this.Serializer = settings.Serializer;
 		}
 
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e)
 			: this(settings)
 		{
 			this.Success = false;
 			this.OriginalException = e;
 		}
 
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode)
 			: this(settings)
 		{
 			this.Success = statusCode >= 200 && statusCode < 300;

@@ -4,16 +4,30 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
 using PurifyNet;
 
 namespace Elasticsearch.Net.Connection.RequestState
 {
+	internal static class TransportRequestState
+	{
+		private static long _requestId = 0;
+		public static long RequestId {
+			get
+			{
+				var r = Interlocked.Increment(ref _requestId);
+				return r;
+			}
+		} 
+	}
+
 	public class TransportRequestState<T> : IDisposable, ITransportRequestState
 	{
 		private readonly bool _traceEnabled;
 		private readonly bool _metricsEnabled;
+		private readonly long _requestId;
 
 		private Stopwatch _stopwatch;
 
@@ -87,6 +101,9 @@ namespace Elasticsearch.Net.Connection.RequestState
 			string method,
 			string path)
 		{
+			this._requestId = TransportRequestState.RequestId;
+			this.Method = method;
+			this.Path = path;
 			this.StartedOn = DateTime.UtcNow;
 			this.SeenNodes = new List<Uri>();
 			this.SeenExceptions = new List<Exception>();
@@ -95,10 +112,17 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this._traceEnabled = settings.TraceEnabled;
 			this._metricsEnabled = settings.MetricsEnabled;
 			if (this._metricsEnabled || this._traceEnabled)
-				this._stopwatch = Stopwatch.StartNew(); 
+				this._stopwatch = Stopwatch.StartNew();
 
-			this.Method = method;
-			this.Path = path;
+			if (this._traceEnabled)
+			{
+				Trace.TraceInformation("NEST start:{0} {1} {2}"
+					, this._requestId
+					, this.Method
+					, this.Path
+				);
+			}
+
 			if (this.RequestParameters != null)
 			{
 				if (this.RequestParameters.QueryString != null)
@@ -179,7 +203,8 @@ namespace Elasticsearch.Net.Connection.RequestState
 
 			if (_result.Success)
 			{
-				Trace.TraceInformation("NEST {0} {1} ({2}):\r\n{3}"
+				Trace.TraceInformation("NEST end:{0} {1} {2} ({3}):\r\n{4}"
+					, this._requestId
 					, _result.RequestMethod
 					, _result.RequestUrl
 					, _stopwatch.Elapsed
@@ -189,7 +214,8 @@ namespace Elasticsearch.Net.Connection.RequestState
 			else
 			{
 				Trace.TraceError(
-					"NEST {0} {1} ({2}):\r\n{3}"
+					"NEST end:{0} {1} {2} ({3}):\r\n{4}"
+					, this._requestId
 					, _result.RequestMethod
 					, _result.RequestUrl
 					, _stopwatch.Elapsed

@@ -22,6 +22,13 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
+		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		IInnerHits InnerHits { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class HasParentQuery : PlainQuery, IHasParentQuery
@@ -30,18 +37,29 @@ namespace Nest
 		{
 			container.HasParent = this;
 		}
+		public string Name { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IInnerHits InnerHits { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{
+		private IHasParentQuery Self { get { return this; }}
+
 		TypeNameMarker IHasParentQuery.Type { get; set; }
 
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
+
+		IInnerHits IHasParentQuery.InnerHits { get; set; }
+		
+		double? IHasParentQuery.Boost { get; set; }
+
+		string IQuery.Name { get; set; }
 
 		IQueryContainer IHasParentQuery.Query { get; set; }
 
@@ -49,31 +67,56 @@ namespace Nest
 		{
 			get
 			{
-				return ((IHasParentQuery)this).Query == null || ((IHasParentQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
 		}
 
 		public HasParentQueryDescriptor()
 		{
-			((IHasParentQuery)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 		}
-		
+
+		public HasParentQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
 
 		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasParentQuery)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
+
 		public HasParentQueryDescriptor<T> Type(string type)
 		{
-			((IHasParentQuery)this).Type = type;
+			Self.Type = type;
 			return this;
 		}
 
 		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
 		{
-			((IHasParentQuery)this).ScoreType = scoreType;
+			Self.ScoreType = scoreType;
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 

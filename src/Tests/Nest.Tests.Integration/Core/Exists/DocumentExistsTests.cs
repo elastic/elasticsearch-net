@@ -9,7 +9,7 @@ namespace Nest.Tests.Integration.Core.Exists
 	public class DocumentExistsTests : IntegrationTests
 	{
 		[Test]
-		public void TestSuggest()
+		public void DocumentExists()
 		{
 			var tempIndex = ElasticsearchConfiguration.NewUniqueIndexName();
 			var elasticsearchProject = new ElasticsearchProject

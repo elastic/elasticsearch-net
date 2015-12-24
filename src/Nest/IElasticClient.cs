@@ -20,6 +20,12 @@ namespace Nest
 			where T : class;
 
 		/// <summary>
+		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+		/// </summary>
+		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
+		IObservable<IReindexResponse<IDocument>> Reindex(Func<ReindexDescriptor<IDocument>, ReindexDescriptor<IDocument>> reindexSelector);
+
+		/// <summary>
 		/// A search request can be scrolled by specifying the scroll parameter. 
 		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
 		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
@@ -490,6 +496,25 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
+
+		/// <summary>
+		/// The Synced Flush API allows an administrator to initiate a synced flush manually. 
+		/// This can be particularly useful for a planned (rolling) cluster restart where you 
+		/// can stop indexing and don’t want to wait the default 5 minutes for idle indices to 
+		/// be sync-flushed automatically.
+		/// </summary>
+		/// <param name="selector">A descriptor that describes the parameters for the synced flush operation</param>
+		/// <returns></returns>
+		IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
+
+		/// <inheritdoc />
+		IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest);
+
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
+
+		/// <inheritdoc />
+		Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest);
 
 		/// <summary>
 		/// The get settings API allows to retrieve settings of index/indices.
@@ -1761,5 +1786,17 @@ namespace Nest
 		ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request);
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null);
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request);
+
+		/// <inheritdoc />
+		ICatResponse<CatSegmentsRecord> CatSegments(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
+		ICatResponse<CatSegmentsRecord> CatSegments(ICatSegmentsRequest request);
+		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
+		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request);
+
+		/// <inheritdoc />
+		IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
+		IFieldStatsResponse FieldStats(IFieldStatsRequest request);
+		Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
+		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
 }

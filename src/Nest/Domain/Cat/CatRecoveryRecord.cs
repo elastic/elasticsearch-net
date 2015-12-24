@@ -41,5 +41,15 @@ namespace Nest
 		[JsonProperty("bytes_percent")]
 		public string BytesPercent { get; set; }
 
+		[JsonProperty("translog")]
+		public long? Translog { get; set; }
+
+		[JsonProperty("translog_percent")]
+		public string TranslogPercent { get; set; }
+
+		[JsonProperty("total_translog")]
+		public long? TotalTranslog { get; set; }
+
+
 	}
 }

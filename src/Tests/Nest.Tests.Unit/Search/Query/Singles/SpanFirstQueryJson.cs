@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.SpanFirst(sf=>sf
+						.Name("named_query")
 						.MatchTerm(f => f.Name, "elasticsearch.pm", 1.1)
 						.End(3)
                         .Boost(2.2)
@@ -23,6 +24,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{
 				span_first: { 
+					_name: ""named_query"",
 					match: { 
 						span_term: { 
 							name: {

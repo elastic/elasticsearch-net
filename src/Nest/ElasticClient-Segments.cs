@@ -11,7 +11,7 @@ namespace Nest
 		public ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
 			segmentsSelector = segmentsSelector ?? (s => s);
-			return this.Dispatch<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse>(
+			return this.Dispatcher.Dispatch<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse>(
 				segmentsSelector,
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISegmentsResponse Segments(ISegmentsRequest segmentsRequest)
 		{
-			return this.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
+			return this.Dispatcher.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
 				segmentsRequest,
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null)
 		{
 			segmentsSelector = segmentsSelector ?? (s => s);
-			return this.DispatchAsync<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
+			return this.Dispatcher.DispatchAsync<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
 				segmentsSelector,
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest)
 		{
-			return this.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
+			return this.Dispatcher.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
 				segmentsRequest,
 				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);

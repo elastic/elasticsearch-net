@@ -43,32 +43,28 @@ namespace Elasticsearch.Net
 			return client.IndicesPutAliasAsync(index, name, selector);
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static ElasticsearchResponse<T> IndicesPutAliasForAll<T>(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAll<T>(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAllAsync<T>(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAll(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAllAsync(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
 		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
@@ -99,32 +95,83 @@ namespace Elasticsearch.Net
 			return client.IndicesPutAliasPostAsync(index, name, selector);
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAll<T>(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAllAsync<T>(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAll(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0, use the method that takes a Func of PutAliasRequestParameters")]
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
 		public static Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(this IElasticsearchClient client, string name, object body, Func<IndicesPutAliasRequestParameters, IndicesPutAliasRequestParameters> requestParameters = null)
 		{
-			var selector = Obsolete.UpCastSelector<IndicesPutAliasRequestParameters, PutAliasRequestParameters>(requestParameters);
-			return client.IndicesPutAliasForAllAsync(name, selector);
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
 		}
+
+
+		// resembles 1.5 removals, these Obsoletes will throw compiler errors
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static ElasticsearchResponse<T> IndicesPutAliasForAll<T>(this IElasticsearchClient client, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+		
+
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPostAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+		
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPostAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+		
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPostAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+		
+		[Obsolete("IndicesPutAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now", error: true)]
+		public static Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(this IElasticsearchClient client,string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null)
+		{
+			throw new NotImplementedException("IndicesPostAlias since elasticsearch 1.5 needs an explicit index name (using _all or * for all), even if your on an older es version we urge you to move over now");
+		}
+		
+		
+		
+
 	}
 }

@@ -20,6 +20,10 @@ namespace Nest
 		string Lang { get; set; }
 		
 		string Script { get; set; }
+
+		string ScriptId { get; set; }
+
+		string ScriptFile { get; set; }
 		
 		Dictionary<string, object> Params { get; set; }
 	}
@@ -75,6 +79,8 @@ namespace Nest
 			{
 				_PartialUpdate = this.Doc,
 				_Script = this.Script,
+				_ScriptId = this.ScriptId,
+				_ScriptFile = this.ScriptFile,
 				_Lang = this.Lang,
 				_Params = this.Params,
 				_Upsert = this.Upsert,
@@ -88,6 +94,8 @@ namespace Nest
 		public bool? DocAsUpsert { get; set; }
 		public string Lang { get; set; }
 		public string Script { get; set; }
+		public string ScriptId { get; set; }
+		public string ScriptFile { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 	}
 
@@ -112,6 +120,10 @@ namespace Nest
 
 		string IBulkUpdateOperation<TDocument, TPartialDocument>.Script { get; set; }
 
+		string IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptId { get; set; }
+
+		string IBulkUpdateOperation<TDocument, TPartialDocument>.ScriptFile { get; set; }
+
 		Dictionary<string, object> IBulkUpdateOperation<TDocument, TPartialDocument>.Params { get; set; }
 	
 		protected override object GetBulkOperationBody()
@@ -120,6 +132,8 @@ namespace Nest
 			{
 				_PartialUpdate = Self.Doc,
 				_Script = Self.Script,
+				_ScriptId = Self.ScriptId,
+				_ScriptFile = Self.ScriptFile,
 				_Lang = Self.Lang,
 				_Params = Self.Params,
 				_Upsert = Self.Upsert,
@@ -222,6 +236,20 @@ namespace Nest
 		{
 			script.ThrowIfNull("script");
 			Self.Script = script;
+			return this;
+		}
+
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptId(string scriptId)
+		{
+			scriptId.ThrowIfNull("scriptId");
+			Self.ScriptId = scriptId;
+			return this;
+		}
+
+		public BulkUpdateDescriptor<TDocument, TPartialDocument> ScriptFile(string scriptFile)
+		{
+			scriptFile.ThrowIfNull("scriptFile");
+			Self.ScriptFile = scriptFile;
 			return this;
 		}
 

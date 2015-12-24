@@ -456,6 +456,38 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/segments/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatSegments<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_cat/segments
+					return this.Raw.CatSegments<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatSegments() into any of the following paths: \r\n - /_cat/segments\r\n - /_cat/segments/{index}");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> CatSegmentsDispatchAsync<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /_cat/segments/{index}
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.CatSegmentsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_cat/segments
+					return this.Raw.CatSegmentsAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.CatSegments() into any of the following paths: \r\n - /_cat/segments\r\n - /_cat/segments/{index}");
+		}
+		
+		
 		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -1075,6 +1107,52 @@ namespace Nest
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Explain() into any of the following paths: \r\n - /{index}/{type}/{id}/_explain");
+		}
+		
+		
+		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_field_stats
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.FieldStatsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_field_stats
+					return this.Raw.FieldStatsGet<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_field_stats
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.FieldStats<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_field_stats
+					return this.Raw.FieldStats<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.FieldStats() into any of the following paths: \r\n - /_field_stats\r\n - /{index}/_field_stats");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_field_stats
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.FieldStatsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_field_stats
+					return this.Raw.FieldStatsGetAsync<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_field_stats
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.FieldStatsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_field_stats
+					return this.Raw.FieldStatsAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.FieldStats() into any of the following paths: \r\n - /_field_stats\r\n - /{index}/_field_stats");
 		}
 		
 		
@@ -1748,6 +1826,52 @@ namespace Nest
 		}
 		
 		
+		internal ElasticsearchResponse<T> IndicesFlushSyncedDispatch<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_flush/synced
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesFlushSynced<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_flush/synced
+					return this.Raw.IndicesFlushSyncedForAll<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_flush/synced
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesFlushSyncedGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_flush/synced
+					return this.Raw.IndicesFlushSyncedGetForAll<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlushSynced() into any of the following paths: \r\n - /_flush/synced\r\n - /{index}/_flush/synced");
+		}
+		
+		
+		internal Task<ElasticsearchResponse<T>> IndicesFlushSyncedDispatchAsync<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo )
+		{
+			switch(pathInfo.HttpMethod)
+			{
+				case PathInfoHttpMethod.POST:
+					//POST /{index}/_flush/synced
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesFlushSyncedAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//POST /_flush/synced
+					return this.Raw.IndicesFlushSyncedForAllAsync<T>(u => pathInfo.RequestParameters);
+
+				case PathInfoHttpMethod.GET:
+					//GET /{index}/_flush/synced
+					if (!pathInfo.Index.IsNullOrEmpty())
+						return this.Raw.IndicesFlushSyncedGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+					//GET /_flush/synced
+					return this.Raw.IndicesFlushSyncedGetForAllAsync<T>(u => pathInfo.RequestParameters);
+
+			}
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesFlushSynced() into any of the following paths: \r\n - /_flush/synced\r\n - /{index}/_flush/synced");
+		}
+		
+		
 		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
 		{
 			switch(pathInfo.HttpMethod)
@@ -2206,22 +2330,16 @@ namespace Nest
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutAlias<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					//PUT /_alias/{name}
-					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutAliasPost<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					//POST /_alias/{name}
-					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPostForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /{index}/_aliases/{name}");
 		}
 		
 		
@@ -2233,22 +2351,16 @@ namespace Nest
 					//PUT /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutAliasAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					//PUT /_alias/{name}
-					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
 					break;
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/_alias/{name}
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Name.IsNullOrEmpty() && body != null)
 						return this.Raw.IndicesPutAliasPostAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					//POST /_alias/{name}
-					if (!pathInfo.Name.IsNullOrEmpty() && body != null)
-						return this.Raw.IndicesPutAliasPostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
 					break;
 
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /_alias/{name}\r\n - /{index}/_aliases/{name}\r\n - /_aliases/{name}");
+			throw new DispatchException("Could not dispatch IElasticClient.IndicesPutAlias() into any of the following paths: \r\n - /{index}/_alias/{name}\r\n - /{index}/_aliases/{name}");
 		}
 		
 		

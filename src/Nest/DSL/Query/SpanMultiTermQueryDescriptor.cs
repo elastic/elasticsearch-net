@@ -11,6 +11,10 @@ namespace Nest
 	{
 		[JsonProperty("match")]
 		IQueryContainer Match { get; set; }
+
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class SpanMultiTermQuery : PlainQuery, ISpanMultiTermQuery
@@ -20,22 +24,46 @@ namespace Nest
 			container.SpanMultiTerm = this;
 		}
 
+
 		public IQueryContainer Match { get; set; }
 
+		public double? Boost { get; set; }
+
+		public string Name { get; set; }
+
+		//TODO change to explicit IQuery implenentation in 2.0?
 		public bool IsConditionless { get { return false; } }
 	}
 
 	public class SpanMultiTermQueryDescriptor<T> : ISpanMultiTermQuery
 		where T : class
 	{
+		private ISpanMultiTermQuery Self { get { return this; } }
+
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
+
+		double? ISpanMultiTermQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
 
+		string IQuery.Name { get; set; }
+
+		public SpanMultiTermQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+		
+		public SpanMultiTermQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+		
 		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((ISpanMultiTermQuery)this).Match = querySelector(q);
+			Self.Match = querySelector(q);
 			return this;
 		}
 	}

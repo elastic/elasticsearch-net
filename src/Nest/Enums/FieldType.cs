@@ -59,6 +59,16 @@ namespace Nest
 		[EnumMember(Value = "long")]
 		Long,
 		/// <summary>
+		/// Short type.
+		/// </summary>
+		[EnumMember(Value = "short")]
+		Short,
+		/// <summary>
+		/// Byte type.
+		/// </summary>
+		[EnumMember(Value = "byte")]
+		Byte,
+		/// <summary>
 		/// Float type.
 		/// </summary>
 		[EnumMember(Value = "float")]
@@ -93,6 +103,11 @@ namespace Nest
 		/// Only set this if you need to force a value type to be mapped to an elasticsearch object type.
 		/// </summary>
 		[EnumMember(Value = "object")]
-		Object
+		Object,
+		/// <summary>
+		/// Murmur hash type, for use with the cardinality aggregation.
+		/// </summary>
+		[EnumMember(Value = "murmur3")]
+		Murmur3Hash
 	}
 }

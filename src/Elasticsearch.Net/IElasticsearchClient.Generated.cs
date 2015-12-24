@@ -104,7 +104,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -141,7 +141,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -161,7 +161,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -180,7 +180,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -199,7 +199,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -219,7 +219,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -240,7 +240,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -260,7 +260,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -280,7 +280,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -301,7 +301,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -323,7 +323,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -344,7 +344,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -362,7 +362,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -381,7 +381,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -401,7 +401,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -420,7 +420,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -439,7 +439,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -459,7 +459,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -480,7 +480,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
@@ -500,7 +500,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -520,7 +520,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -541,7 +541,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -563,7 +563,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</para>	
 		///</summary>
 		///<param name="index">Default index for items which don&#39;t provide one</param>
 		///<param name="type">Default document type for items which don&#39;t provide one</param>
@@ -584,7 +584,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -601,7 +601,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -619,7 +619,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -638,7 +638,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -656,7 +656,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -674,7 +674,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -693,7 +693,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -713,7 +713,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -732,7 +732,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -749,7 +749,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -767,7 +767,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -786,7 +786,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -804,7 +804,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -822,7 +822,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -841,7 +841,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -861,7 +861,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -880,7 +880,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -897,7 +897,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -915,7 +915,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -934,7 +934,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -952,7 +952,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -970,7 +970,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -989,7 +989,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1009,7 +1009,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1028,7 +1028,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1045,7 +1045,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1063,7 +1063,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1082,7 +1082,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1100,7 +1100,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1117,7 +1117,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1135,7 +1135,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1154,7 +1154,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1172,7 +1172,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1189,7 +1189,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1207,7 +1207,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1226,7 +1226,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1244,7 +1244,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1261,7 +1261,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1279,7 +1279,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1298,7 +1298,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1316,7 +1316,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1334,7 +1334,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1353,7 +1353,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1373,7 +1373,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1392,7 +1392,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1409,7 +1409,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1427,7 +1427,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1446,7 +1446,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1464,7 +1464,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1481,7 +1481,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1499,7 +1499,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1518,7 +1518,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1536,7 +1536,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1553,7 +1553,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1571,7 +1571,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1590,7 +1590,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1608,7 +1608,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1625,7 +1625,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1643,7 +1643,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1662,7 +1662,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1680,7 +1680,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1697,7 +1697,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1715,7 +1715,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1734,7 +1734,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1752,7 +1752,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1770,7 +1770,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1789,7 +1789,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1809,7 +1809,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1824,11 +1824,159 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<string>> CatRecoveryAsync(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a GET on /_cat/segments
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> CatSegments<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<string> CatSegments(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<string>> CatSegmentsAsync(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments/{index}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names to limit the returned information</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> CatSegments<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments/{index}
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names to limit the returned information</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments/{index}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names to limit the returned information</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<string> CatSegments(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_cat/segments/{index}
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names to limit the returned information</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<string>> CatSegmentsAsync(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a GET on /_cat/shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1845,7 +1993,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1863,7 +2011,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1882,7 +2030,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1900,7 +2048,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1918,7 +2066,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1937,7 +2085,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1957,7 +2105,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">
@@ -1976,7 +2124,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -1993,7 +2141,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2011,7 +2159,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2030,7 +2178,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2048,7 +2196,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
@@ -2067,7 +2215,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
@@ -2087,7 +2235,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
@@ -2108,7 +2256,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
@@ -2128,7 +2276,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">
@@ -2146,7 +2294,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">
@@ -2165,7 +2313,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">
@@ -2185,7 +2333,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">
@@ -2204,7 +2352,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2221,7 +2369,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2239,7 +2387,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2258,7 +2406,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2276,7 +2424,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2293,7 +2441,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2311,7 +2459,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2330,7 +2478,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2348,7 +2496,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">
@@ -2366,7 +2514,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">
@@ -2385,7 +2533,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">
@@ -2405,7 +2553,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</para>	
 		///</summary>
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">
@@ -2424,7 +2572,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2441,7 +2589,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2459,7 +2607,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2478,7 +2626,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2496,7 +2644,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">
@@ -2514,7 +2662,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">
@@ -2533,7 +2681,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">
@@ -2553,7 +2701,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">
@@ -2572,7 +2720,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</para>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">
@@ -2590,7 +2738,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</para>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">
@@ -2609,7 +2757,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</para>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">
@@ -2629,7 +2777,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</para>	
 		///</summary>
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">
@@ -2648,7 +2796,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2665,7 +2813,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2683,7 +2831,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2702,7 +2850,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2720,7 +2868,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -2738,7 +2886,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -2757,7 +2905,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -2777,7 +2925,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -2796,7 +2944,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
@@ -2815,7 +2963,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
@@ -2835,7 +2983,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
@@ -2856,7 +3004,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
@@ -2876,7 +3024,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2893,7 +3041,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2911,7 +3059,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2930,7 +3078,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -2948,7 +3096,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -2966,7 +3114,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -2985,7 +3133,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -3005,7 +3153,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -3024,7 +3172,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -3042,7 +3190,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -3061,7 +3209,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -3081,7 +3229,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -3100,7 +3248,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -3119,7 +3267,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -3139,7 +3287,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -3160,7 +3308,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -3180,7 +3328,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3200,7 +3348,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3221,7 +3369,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3243,7 +3391,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3264,7 +3412,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -3281,7 +3429,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -3299,7 +3447,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -3318,7 +3466,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -3336,7 +3484,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -3354,7 +3502,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -3373,7 +3521,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -3393,7 +3541,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -3412,7 +3560,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3431,7 +3579,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3451,7 +3599,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3472,7 +3620,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -3492,7 +3640,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3511,7 +3659,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3531,7 +3679,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3552,7 +3700,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3572,7 +3720,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3592,7 +3740,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3613,7 +3761,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3635,7 +3783,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3656,7 +3804,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3676,7 +3824,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3697,7 +3845,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3719,7 +3867,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3740,7 +3888,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3761,7 +3909,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3783,7 +3931,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3806,7 +3954,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated.</param>
 		///<param name="type">The type of the document being count percolated.</param>
@@ -3828,7 +3976,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -3848,7 +3996,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -3869,7 +4017,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -3891,7 +4039,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -3912,7 +4060,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -3931,7 +4079,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -3951,7 +4099,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -3972,7 +4120,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -3992,7 +4140,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -4012,7 +4160,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -4033,7 +4181,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -4055,7 +4203,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -4076,7 +4224,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4095,7 +4243,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4115,7 +4263,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4136,7 +4284,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4156,7 +4304,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4174,7 +4322,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4193,7 +4341,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4213,7 +4361,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4232,7 +4380,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4252,7 +4400,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4273,7 +4421,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4295,7 +4443,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4316,7 +4464,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4336,7 +4484,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4357,7 +4505,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4379,7 +4527,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4400,7 +4548,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4421,7 +4569,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4443,7 +4591,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4466,7 +4614,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4484,11 +4632,307 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> ExplainAsync(string index, string type, string id, object body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a GET on /_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> FieldStatsGet<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_field_stats
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> FieldStatsGetAsync<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> FieldStatsGet(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_field_stats
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> FieldStatsGetAsync(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> FieldStatsGet<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_field_stats
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> FieldStatsGetAsync<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> FieldStatsGet(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_field_stats
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> FieldStatsGetAsync(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> FieldStats<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_field_stats
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> FieldStatsAsync<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> FieldStats(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_field_stats
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> FieldStatsAsync(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> FieldStats<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_field_stats
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> FieldStatsAsync<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_field_stats
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> FieldStats(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_field_stats
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> FieldStatsAsync(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a GET on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4508,7 +4952,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4529,7 +4973,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4551,7 +4995,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -4572,7 +5016,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4591,7 +5035,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4611,7 +5055,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4632,7 +5076,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -4652,7 +5096,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -4672,7 +5116,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -4693,7 +5137,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -4715,7 +5159,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document; use `_all` to fetch the first document matching the ID across all types</param>
@@ -4736,7 +5180,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4754,7 +5198,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4773,7 +5217,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4793,7 +5237,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">
@@ -4812,7 +5256,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4832,7 +5276,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4853,7 +5297,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4875,7 +5319,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4896,7 +5340,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4917,7 +5361,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4939,7 +5383,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4962,7 +5406,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -4984,7 +5428,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5004,7 +5448,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5025,7 +5469,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5047,7 +5491,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5068,7 +5512,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5089,7 +5533,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5111,7 +5555,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5134,7 +5578,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -5156,7 +5600,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5173,7 +5617,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5191,7 +5635,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5210,7 +5654,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5228,7 +5672,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">
@@ -5246,7 +5690,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">
@@ -5265,7 +5709,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">
@@ -5285,7 +5729,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">
@@ -5304,7 +5748,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">
@@ -5322,7 +5766,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">
@@ -5341,7 +5785,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">
@@ -5361,7 +5805,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">
@@ -5380,7 +5824,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -5399,7 +5843,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -5419,7 +5863,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -5440,7 +5884,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</para>	
 		///</summary>
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="body">The text on which the analysis should be performed</param>
@@ -5460,7 +5904,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5477,7 +5921,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5495,7 +5939,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5514,7 +5958,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5532,7 +5976,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5550,7 +5994,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5569,7 +6013,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5589,7 +6033,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5608,7 +6052,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5625,7 +6069,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5643,7 +6087,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5662,7 +6106,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -5680,7 +6124,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5698,7 +6142,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5717,7 +6161,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5737,7 +6181,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">
@@ -5756,7 +6200,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -5774,7 +6218,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -5793,7 +6237,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -5813,7 +6257,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -5832,7 +6276,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5851,7 +6295,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5871,7 +6315,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5892,7 +6336,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5912,7 +6356,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5931,7 +6375,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5951,7 +6395,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5972,7 +6416,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
@@ -5992,7 +6436,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">
@@ -6010,7 +6454,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">
@@ -6029,7 +6473,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">
@@ -6049,7 +6493,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">
@@ -6068,7 +6512,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
@@ -6087,7 +6531,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
@@ -6107,7 +6551,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
@@ -6128,7 +6572,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
@@ -6148,7 +6592,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
@@ -6167,7 +6611,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
@@ -6187,7 +6631,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
@@ -6208,7 +6652,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names (supports wildcards); use `_all` for all indices</param>
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
@@ -6228,7 +6672,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6246,7 +6690,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6265,7 +6709,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6285,7 +6729,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6304,7 +6748,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
@@ -6323,7 +6767,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
@@ -6343,7 +6787,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
@@ -6364,7 +6808,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
@@ -6384,7 +6828,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">
@@ -6402,7 +6846,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">
@@ -6421,7 +6865,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">
@@ -6441,7 +6885,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">
@@ -6460,7 +6904,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -6478,7 +6922,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -6497,7 +6941,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -6517,7 +6961,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -6536,7 +6980,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -6555,7 +6999,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -6575,7 +7019,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -6596,7 +7040,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -6616,7 +7060,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -6634,7 +7078,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -6653,7 +7097,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -6673,7 +7117,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -6692,7 +7136,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6710,7 +7154,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6729,7 +7173,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6749,7 +7193,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -6768,7 +7212,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -6787,7 +7231,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -6807,7 +7251,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -6828,7 +7272,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` to check the types across all indices</param>
 		///<param name="type">A comma-separated list of document types to check</param>
@@ -6848,7 +7292,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -6865,7 +7309,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -6883,7 +7327,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -6902,7 +7346,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -6920,7 +7364,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -6938,7 +7382,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -6957,7 +7401,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -6977,7 +7421,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -6996,7 +7440,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7013,7 +7457,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7031,7 +7475,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7050,7 +7494,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7068,7 +7512,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -7086,7 +7530,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -7105,7 +7549,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -7125,7 +7569,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">
@@ -7140,11 +7584,307 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushGetAsync(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null);
 		
+		///<summary>Represents a POST on /_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_flush/synced
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /_flush/synced
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_flush/synced
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSynced(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a POST on /{index}/_flush/synced
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_flush/synced
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGetForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /_flush/synced
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_flush/synced
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_flush/synced
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGet(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
+		///<summary>Represents a GET on /{index}/_flush/synced
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</para>	
+		///</summary>
+		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
+		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -7162,7 +7902,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -7181,7 +7921,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -7201,7 +7941,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -7220,7 +7960,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="feature">A comma-separated list of features</param>
@@ -7239,7 +7979,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="feature">A comma-separated list of features</param>
@@ -7259,7 +7999,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="feature">A comma-separated list of features</param>
@@ -7280,7 +8020,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="feature">A comma-separated list of features</param>
@@ -7300,7 +8040,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7317,7 +8057,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7335,7 +8075,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7354,7 +8094,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7372,7 +8112,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -7390,7 +8130,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -7409,7 +8149,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -7429,7 +8169,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">
@@ -7448,7 +8188,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -7467,7 +8207,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -7487,7 +8227,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -7508,7 +8248,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to return</param>
@@ -7528,7 +8268,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7546,7 +8286,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7565,7 +8305,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7585,7 +8325,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7604,7 +8344,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7621,7 +8361,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7639,7 +8379,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7658,7 +8398,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -7676,7 +8416,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7694,7 +8434,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7713,7 +8453,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7733,7 +8473,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">
@@ -7752,7 +8492,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to filter</param>
@@ -7771,7 +8511,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to filter</param>
@@ -7791,7 +8531,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to filter</param>
@@ -7812,7 +8552,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="name">A comma-separated list of alias names to filter</param>
@@ -7832,7 +8572,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">
@@ -7850,7 +8590,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">
@@ -7869,7 +8609,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">
@@ -7889,7 +8629,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">
@@ -7908,7 +8648,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">
@@ -7926,7 +8666,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">
@@ -7945,7 +8685,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">
@@ -7965,7 +8705,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">
@@ -7984,7 +8724,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8003,7 +8743,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8023,7 +8763,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8044,7 +8784,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8064,7 +8804,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8083,7 +8823,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8103,7 +8843,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8124,7 +8864,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="field">A comma-separated list of fields</param>
@@ -8144,7 +8884,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8164,7 +8904,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8185,7 +8925,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8207,7 +8947,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8228,7 +8968,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8245,7 +8985,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8263,7 +9003,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8282,7 +9022,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8300,7 +9040,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -8318,7 +9058,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -8337,7 +9077,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -8357,7 +9097,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">
@@ -8376,7 +9116,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">
@@ -8394,7 +9134,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">
@@ -8413,7 +9153,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">
@@ -8433,7 +9173,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">
@@ -8452,7 +9192,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8471,7 +9211,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8491,7 +9231,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8512,7 +9252,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
@@ -8532,7 +9272,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8549,7 +9289,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8567,7 +9307,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8586,7 +9326,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8604,7 +9344,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -8622,7 +9362,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -8641,7 +9381,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -8661,7 +9401,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -8680,7 +9420,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
@@ -8699,7 +9439,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
@@ -8719,7 +9459,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
@@ -8740,7 +9480,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="name">The name of the settings that should be included</param>
@@ -8760,7 +9500,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">
@@ -8778,7 +9518,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">
@@ -8797,7 +9537,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">
@@ -8817,7 +9557,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</para>	
 		///</summary>
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">
@@ -8836,7 +9576,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8853,7 +9593,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8871,7 +9611,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8890,7 +9630,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -8908,7 +9648,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -8926,7 +9666,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -8945,7 +9685,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -8965,7 +9705,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">
@@ -8984,7 +9724,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9001,7 +9741,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9019,7 +9759,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9038,7 +9778,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9056,7 +9796,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9074,7 +9814,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9093,7 +9833,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9113,7 +9853,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9132,7 +9872,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9149,7 +9889,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9167,7 +9907,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9186,7 +9926,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9204,7 +9944,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9222,7 +9962,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9241,7 +9981,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9261,7 +10001,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9280,7 +10020,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -9299,7 +10039,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -9319,7 +10059,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -9340,7 +10080,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
@@ -9360,7 +10100,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">
@@ -9378,7 +10118,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">
@@ -9397,7 +10137,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">
@@ -9417,7 +10157,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">
@@ -9436,7 +10176,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -9456,7 +10196,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -9477,7 +10217,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -9499,7 +10239,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -9520,7 +10260,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -9538,7 +10278,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -9557,7 +10297,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -9577,7 +10317,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -9596,7 +10336,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9613,7 +10353,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9631,7 +10371,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9650,7 +10390,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9668,7 +10408,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9686,7 +10426,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9705,7 +10445,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9725,7 +10465,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9744,7 +10484,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9761,7 +10501,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9779,7 +10519,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9798,7 +10538,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -9816,7 +10556,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9834,7 +10574,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9853,7 +10593,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9873,7 +10613,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -9892,9 +10632,9 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -9912,9 +10652,9 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -9933,9 +10673,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -9955,9 +10695,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -9972,93 +10712,13 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasAsync(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
 		
-		///<summary>Represents a PUT on /_alias/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		
-		ElasticsearchResponse<T> IndicesPutAliasForAll<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a PUT on /_alias/{name}
-		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		
-		Task<ElasticsearchResponse<T>> IndicesPutAliasForAllAsync<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a PUT on /_alias/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		
-		ElasticsearchResponse<DynamicDictionary> IndicesPutAliasForAll(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a PUT on /_alias/{name}
-		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasForAllAsync(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
 		///<summary>Represents a POST on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -10076,9 +10736,9 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -10097,9 +10757,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -10119,9 +10779,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
-		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` or omit to perform the operation on all indices.</param>
+		///<param name="index">A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</param>
 		///<param name="name">The name of the alias to be created or updated</param>
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">
@@ -10136,91 +10796,11 @@ namespace Elasticsearch.Net
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostAsync(string index, string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
 		
-		///<summary>Represents a POST on /_alias/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		
-		ElasticsearchResponse<T> IndicesPutAliasPostForAll<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a POST on /_alias/{name}
-		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
-		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
-		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///</returns>
-		
-		Task<ElasticsearchResponse<T>> IndicesPutAliasPostForAllAsync<T>(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a POST on /_alias/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		
-		ElasticsearchResponse<DynamicDictionary> IndicesPutAliasPostForAll(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
-		///<summary>Represents a POST on /_alias/{name}
-		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
-		///</summary>
-		///<param name="name">The name of the alias to be created or updated</param>
-		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
-		///<param name="requestParameters">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>
-		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
-		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
-		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
-		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///</returns>
-		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesPutAliasPostForAllAsync(string name, object body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null);
-		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10240,7 +10820,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10261,7 +10841,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10283,7 +10863,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10304,7 +10884,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10323,7 +10903,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10343,7 +10923,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10364,7 +10944,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10384,7 +10964,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10404,7 +10984,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10425,7 +11005,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10447,7 +11027,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</param>
 		///<param name="type">The name of the document type</param>
@@ -10468,7 +11048,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10487,7 +11067,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10507,7 +11087,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10528,7 +11108,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</para>	
 		///</summary>
 		///<param name="type">The name of the document type</param>
 		///<param name="body">The mapping definition</param>
@@ -10548,7 +11128,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">
@@ -10566,7 +11146,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">
@@ -10585,7 +11165,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">
@@ -10605,7 +11185,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">
@@ -10624,7 +11204,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -10643,7 +11223,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -10663,7 +11243,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -10684,7 +11264,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
@@ -10704,7 +11284,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10723,7 +11303,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10743,7 +11323,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10764,7 +11344,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10784,7 +11364,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10803,7 +11383,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10823,7 +11403,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10844,7 +11424,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</para>	
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
@@ -10864,7 +11444,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -10883,7 +11463,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -10903,7 +11483,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -10924,7 +11504,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -10944,7 +11524,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -10964,7 +11544,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -10985,7 +11565,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11007,7 +11587,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11028,7 +11608,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11049,7 +11629,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11071,7 +11651,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11094,7 +11674,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11116,7 +11696,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -11135,7 +11715,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -11155,7 +11735,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -11176,7 +11756,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="name">The name of the warmer</param>
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
@@ -11196,7 +11776,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11216,7 +11796,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11237,7 +11817,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11259,7 +11839,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="name">The name of the warmer</param>
@@ -11280,7 +11860,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11301,7 +11881,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11323,7 +11903,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11346,7 +11926,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
@@ -11368,7 +11948,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11385,7 +11965,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11403,7 +11983,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11422,7 +12002,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11440,7 +12020,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11458,7 +12038,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11477,7 +12057,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11497,7 +12077,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11516,7 +12096,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11533,7 +12113,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11551,7 +12131,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11570,7 +12150,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11588,7 +12168,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11606,7 +12186,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11625,7 +12205,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11645,7 +12225,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11664,7 +12244,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11681,7 +12261,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11699,7 +12279,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11718,7 +12298,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11736,7 +12316,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11754,7 +12334,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11773,7 +12353,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11793,7 +12373,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11812,7 +12392,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11829,7 +12409,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11847,7 +12427,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11866,7 +12446,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11884,7 +12464,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11902,7 +12482,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11921,7 +12501,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11941,7 +12521,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -11960,7 +12540,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11977,7 +12557,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -11995,7 +12575,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12014,7 +12594,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12032,7 +12612,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">
@@ -12050,7 +12630,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">
@@ -12069,7 +12649,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">
@@ -12089,7 +12669,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">
@@ -12108,7 +12688,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12126,7 +12706,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12145,7 +12725,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12165,7 +12745,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12184,7 +12764,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
@@ -12203,7 +12783,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
@@ -12223,7 +12803,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
@@ -12244,7 +12824,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="metric">Limit the information returned the specific metrics.</param>
@@ -12264,7 +12844,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12281,7 +12861,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12299,7 +12879,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12318,7 +12898,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12336,7 +12916,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12354,7 +12934,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12373,7 +12953,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12393,7 +12973,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12412,7 +12992,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">
@@ -12430,7 +13010,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">
@@ -12449,7 +13029,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">
@@ -12469,7 +13049,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</para>	
 		///</summary>
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">
@@ -12488,7 +13068,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12505,7 +13085,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12523,7 +13103,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12542,7 +13122,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12560,7 +13140,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12578,7 +13158,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12597,7 +13177,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12617,7 +13197,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12636,7 +13216,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12653,7 +13233,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12671,7 +13251,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12690,7 +13270,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -12708,7 +13288,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12726,7 +13306,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12745,7 +13325,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12765,7 +13345,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -12784,7 +13364,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -12803,7 +13383,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -12823,7 +13403,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -12844,7 +13424,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -12864,7 +13444,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">
@@ -12882,7 +13462,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">
@@ -12901,7 +13481,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">
@@ -12921,7 +13501,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">
@@ -12940,7 +13520,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
@@ -12959,7 +13539,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
@@ -12979,7 +13559,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
@@ -13000,7 +13580,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The query definition specified with the Query DSL</param>
@@ -13020,7 +13600,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -13040,7 +13620,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -13061,7 +13641,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -13083,7 +13663,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
@@ -13104,7 +13684,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13121,7 +13701,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13139,7 +13719,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13158,7 +13738,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13404,7 +13984,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13421,7 +14001,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13439,7 +14019,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13458,7 +14038,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -13476,7 +14056,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -13494,7 +14074,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -13513,7 +14093,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -13533,7 +14113,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -13552,7 +14132,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13571,7 +14151,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13591,7 +14171,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13612,7 +14192,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13632,7 +14212,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">
@@ -13650,7 +14230,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">
@@ -13669,7 +14249,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">
@@ -13689,7 +14269,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">
@@ -13708,7 +14288,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -13727,7 +14307,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -13747,7 +14327,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -13768,7 +14348,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
@@ -13788,7 +14368,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13808,7 +14388,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13829,7 +14409,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13851,7 +14431,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -13872,7 +14452,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13892,7 +14472,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13913,7 +14493,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13935,7 +14515,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13956,7 +14536,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13977,7 +14557,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -13999,7 +14579,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -14022,7 +14602,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document (use `_all` to fetch the first document matching the ID across all types)</param>
@@ -14044,7 +14624,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14061,7 +14641,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14079,7 +14659,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14098,7 +14678,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14116,7 +14696,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">
@@ -14134,7 +14714,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">
@@ -14153,7 +14733,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">
@@ -14173,7 +14753,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">
@@ -14192,7 +14772,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14211,7 +14791,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14231,7 +14811,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14252,7 +14832,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14272,7 +14852,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14290,7 +14870,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14309,7 +14889,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14329,7 +14909,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14348,7 +14928,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
@@ -14367,7 +14947,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
@@ -14387,7 +14967,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
@@ -14408,7 +14988,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
@@ -14428,7 +15008,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14448,7 +15028,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14469,7 +15049,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14491,7 +15071,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="type">The type of the document being percolated to use as default.</param>
@@ -14512,7 +15092,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14529,7 +15109,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14547,7 +15127,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14566,7 +15146,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14584,7 +15164,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">
@@ -14602,7 +15182,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">
@@ -14621,7 +15201,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">
@@ -14641,7 +15221,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">
@@ -14660,7 +15240,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14679,7 +15259,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14699,7 +15279,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14720,7 +15300,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14740,7 +15320,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14758,7 +15338,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14777,7 +15357,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14797,7 +15377,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">
@@ -14816,7 +15396,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -14835,7 +15415,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -14855,7 +15435,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -14876,7 +15456,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
@@ -14896,7 +15476,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14916,7 +15496,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14937,7 +15517,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14959,7 +15539,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="type">A comma-separated list of document types to use as default</param>
@@ -14980,7 +15560,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -14997,7 +15577,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15015,7 +15595,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15034,7 +15614,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15052,7 +15632,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">
@@ -15070,7 +15650,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">
@@ -15089,7 +15669,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">
@@ -15109,7 +15689,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">
@@ -15128,7 +15708,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -15147,7 +15727,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -15167,7 +15747,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -15188,7 +15768,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -15208,9 +15788,9 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15226,9 +15806,9 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15245,9 +15825,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15265,9 +15845,9 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15284,10 +15864,10 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15303,10 +15883,10 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15323,10 +15903,10 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15344,10 +15924,10 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15364,11 +15944,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15384,11 +15964,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15405,11 +15985,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15427,11 +16007,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define ids, documents, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
+		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -15448,7 +16028,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15465,7 +16045,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15483,7 +16063,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15502,7 +16082,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15520,7 +16100,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15538,7 +16118,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15557,7 +16137,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15577,7 +16157,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15596,7 +16176,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15613,7 +16193,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15631,7 +16211,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15650,7 +16230,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15668,7 +16248,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15686,7 +16266,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15705,7 +16285,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15725,7 +16305,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -15744,7 +16324,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">
@@ -15762,7 +16342,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">
@@ -15781,7 +16361,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">
@@ -15801,7 +16381,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">
@@ -15820,7 +16400,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
@@ -15839,7 +16419,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
@@ -15859,7 +16439,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
@@ -15880,7 +16460,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
@@ -15900,7 +16480,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15917,7 +16497,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15935,7 +16515,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15954,7 +16534,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -15972,7 +16552,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">
@@ -15990,7 +16570,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">
@@ -16009,7 +16589,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">
@@ -16029,7 +16609,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">
@@ -16048,7 +16628,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16065,7 +16645,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16083,7 +16663,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16102,7 +16682,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16120,7 +16700,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -16138,7 +16718,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -16157,7 +16737,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -16177,7 +16757,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">
@@ -16196,7 +16776,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -16214,7 +16794,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -16233,7 +16813,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -16253,7 +16833,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">
@@ -16272,7 +16852,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16291,7 +16871,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16311,7 +16891,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16332,7 +16912,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16352,7 +16932,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
@@ -16371,7 +16951,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
@@ -16391,7 +16971,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
@@ -16412,7 +16992,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
@@ -16432,7 +17012,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16452,7 +17032,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16473,7 +17053,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16495,7 +17075,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</para>	
 		///</summary>
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="metric">Limit the information returned to the specified metrics</param>
@@ -16516,7 +17096,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16535,7 +17115,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16555,7 +17135,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16576,7 +17156,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16596,7 +17176,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16616,7 +17196,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16637,7 +17217,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16659,7 +17239,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16680,7 +17260,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16700,7 +17280,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16721,7 +17301,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16743,7 +17323,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16764,7 +17344,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16785,7 +17365,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16807,7 +17387,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16830,7 +17410,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</para>	
 		///</summary>
 		///<param name="index">The index of the document being percolated.</param>
 		///<param name="type">The type of the document being percolated.</param>
@@ -16852,7 +17432,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16869,7 +17449,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16887,7 +17467,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16906,7 +17486,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/</para>	
+		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -16924,7 +17504,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -16944,7 +17524,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -16965,7 +17545,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -16987,7 +17567,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -17008,7 +17588,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -17028,7 +17608,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -17049,7 +17629,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -17071,7 +17651,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</para>	
 		///</summary>
 		///<param name="lang">Script language</param>
 		///<param name="id">Script ID</param>
@@ -17092,7 +17672,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17111,7 +17691,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17131,7 +17711,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17152,7 +17732,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17172,7 +17752,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17191,7 +17771,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17211,7 +17791,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17232,7 +17812,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</para>	
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
@@ -17252,7 +17832,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17269,7 +17849,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17287,7 +17867,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17306,7 +17886,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17324,7 +17904,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">
@@ -17342,7 +17922,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">
@@ -17361,7 +17941,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">
@@ -17381,7 +17961,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">
@@ -17400,7 +17980,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">
@@ -17418,7 +17998,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">
@@ -17437,7 +18017,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">
@@ -17457,7 +18037,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">
@@ -17476,7 +18056,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -17495,7 +18075,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -17515,7 +18095,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -17536,7 +18116,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</para>	
 		///</summary>
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
@@ -17556,7 +18136,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17573,7 +18153,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17591,7 +18171,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17610,7 +18190,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -17628,7 +18208,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -17646,7 +18226,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -17665,7 +18245,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -17685,7 +18265,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -17704,7 +18284,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17723,7 +18303,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17743,7 +18323,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17764,7 +18344,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17784,7 +18364,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">
@@ -17802,7 +18382,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">
@@ -17821,7 +18401,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">
@@ -17841,7 +18421,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">
@@ -17860,7 +18440,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -17879,7 +18459,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -17899,7 +18479,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -17920,7 +18500,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
@@ -17940,7 +18520,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17960,7 +18540,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -17981,7 +18561,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -18003,7 +18583,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -18024,7 +18604,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -18042,7 +18622,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -18061,7 +18641,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -18081,7 +18661,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">
@@ -18100,7 +18680,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -18119,7 +18699,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -18139,7 +18719,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -18160,7 +18740,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
@@ -18180,7 +18760,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18200,7 +18780,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18221,7 +18801,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18243,7 +18823,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18264,7 +18844,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18281,7 +18861,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18299,7 +18879,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18318,7 +18898,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18336,7 +18916,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -18354,7 +18934,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -18373,7 +18953,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -18393,7 +18973,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">
@@ -18412,7 +18992,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18431,7 +19011,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18451,7 +19031,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18472,7 +19052,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="type">A comma-separated list of types to restrict the results</param>
@@ -18492,7 +19072,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18509,7 +19089,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18527,7 +19107,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18546,7 +19126,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18564,7 +19144,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18582,7 +19162,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18601,7 +19181,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18621,7 +19201,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18640,7 +19220,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18659,7 +19239,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18679,7 +19259,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18700,7 +19280,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18720,7 +19300,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18737,7 +19317,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18755,7 +19335,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18774,7 +19354,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18792,7 +19372,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18810,7 +19390,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18829,7 +19409,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18849,7 +19429,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">
@@ -18868,7 +19448,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18887,7 +19467,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18907,7 +19487,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18928,7 +19508,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -18948,7 +19528,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18965,7 +19545,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -18983,7 +19563,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -19002,7 +19582,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -19020,7 +19600,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -19038,7 +19618,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -19057,7 +19637,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -19077,7 +19657,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -19096,7 +19676,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19115,7 +19695,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19135,7 +19715,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19156,7 +19736,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19176,7 +19756,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">
@@ -19194,7 +19774,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">
@@ -19213,7 +19793,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">
@@ -19233,7 +19813,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">
@@ -19252,7 +19832,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
@@ -19271,7 +19851,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
@@ -19291,7 +19871,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
@@ -19312,7 +19892,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition template and its params</param>
@@ -19332,7 +19912,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19352,7 +19932,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19373,7 +19953,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19395,7 +19975,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
@@ -19416,7 +19996,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19436,7 +20016,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19457,7 +20037,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19479,7 +20059,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19500,7 +20080,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19520,7 +20100,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19541,7 +20121,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19563,7 +20143,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19584,7 +20164,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19603,7 +20183,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19623,7 +20203,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19644,7 +20224,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19664,7 +20244,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19683,7 +20263,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19703,7 +20283,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19724,7 +20304,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="body">The repository definition</param>
@@ -19744,7 +20324,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19763,7 +20343,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19783,7 +20363,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19804,7 +20384,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -19824,7 +20404,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -19842,7 +20422,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -19861,7 +20441,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -19881,7 +20461,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -19900,7 +20480,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -19919,7 +20499,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -19939,7 +20519,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -19960,7 +20540,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -19980,7 +20560,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -19997,7 +20577,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20015,7 +20595,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20034,7 +20614,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20052,7 +20632,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -20070,7 +20650,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -20089,7 +20669,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -20109,7 +20689,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">
@@ -20128,7 +20708,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -20148,7 +20728,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -20169,7 +20749,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -20191,7 +20771,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A snapshot name</param>
@@ -20212,7 +20792,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20229,7 +20809,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20247,7 +20827,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20266,7 +20846,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20284,7 +20864,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20302,7 +20882,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20321,7 +20901,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20341,7 +20921,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20360,7 +20940,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -20379,7 +20959,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -20399,7 +20979,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -20420,7 +21000,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
@@ -20440,7 +21020,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20458,7 +21038,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20477,7 +21057,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20497,7 +21077,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</para>	
 		///</summary>
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">
@@ -20516,7 +21096,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">
@@ -20534,7 +21114,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">
@@ -20553,7 +21133,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">
@@ -20573,7 +21153,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">
@@ -20592,7 +21172,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -20611,7 +21191,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -20631,7 +21211,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -20652,7 +21232,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The request definition</param>
@@ -20672,7 +21252,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20689,7 +21269,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20707,7 +21287,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20726,7 +21306,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
@@ -20744,7 +21324,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -20762,7 +21342,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -20781,7 +21361,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -20801,7 +21381,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</para>	
 		///</summary>
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">
@@ -20820,7 +21400,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -20839,7 +21419,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -20859,7 +21439,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -20880,7 +21460,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
@@ -20900,11 +21480,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -20920,11 +21500,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -20941,11 +21521,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -20963,11 +21543,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -20984,11 +21564,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21004,11 +21584,11 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21025,11 +21605,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21047,11 +21627,11 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21068,12 +21648,12 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="id">The id of the document.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21089,12 +21669,12 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="id">The id of the document.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21111,12 +21691,12 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="id">The id of the document.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21134,12 +21714,12 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</para>	
 		///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
-		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="id">The id of the document.</param>
+		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -21156,7 +21736,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -21177,7 +21757,7 @@ namespace Elasticsearch.Net
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -21199,7 +21779,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -21222,7 +21802,7 @@ namespace Elasticsearch.Net
 		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
-		///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html</para>	
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</para>	
 		///</summary>
 		///<param name="index">The name of the index</param>
 		///<param name="type">The type of the document</param>
@@ -21239,5 +21819,6 @@ namespace Elasticsearch.Net
 		///</returns>
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> UpdateAsync(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null);
+		
 	}
 }

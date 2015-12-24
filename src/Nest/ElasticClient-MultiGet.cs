@@ -20,7 +20,7 @@ namespace Nest
 			var descriptor = multiGetSelector(new MultiGetDescriptor());
 			var converter = CreateCovariantMultiGetConverter(descriptor);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
+			return this.Dispatcher.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
@@ -31,7 +31,7 @@ namespace Nest
 		{
 			var converter = CreateCovariantMultiGetConverter(multiRequest);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
+			return this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				multiRequest,
 				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
@@ -44,7 +44,7 @@ namespace Nest
 			var descriptor = multiGetSelector(new MultiGetDescriptor());
 			var converter = CreateCovariantMultiGetConverter(descriptor);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
+			return this.Dispatcher.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
@@ -55,7 +55,7 @@ namespace Nest
 		{
 			var converter = CreateCovariantMultiGetConverter(multiGetRequest);
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
-			return this.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
+			return this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				multiGetRequest,
 				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);

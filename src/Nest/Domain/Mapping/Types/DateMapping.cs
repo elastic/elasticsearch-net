@@ -39,5 +39,10 @@ namespace Nest
 		[JsonProperty("ignore_malformed")]
 		public bool? IgnoreMalformed { get; set; }
 
+		[JsonProperty("doc_values")]
+		public bool? DocValues { get; set; }
+
+		[JsonProperty("numeric_resolution")]
+		public NumericResolutionUnit? NumericResolution { get; set; }
 	}
 }

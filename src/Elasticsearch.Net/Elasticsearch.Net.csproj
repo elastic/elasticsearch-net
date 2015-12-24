@@ -73,7 +73,9 @@
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="IElasticsearchClient.cs" />
+    <Compile Include="Obsolete\RequestParameters\FlushRequestParametersObsoleteExtensions.cs" />
     <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
     <Compile Include="Obsolete\IndicesPutAlias.cs" />
     <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Purify\Purify.cs" />
     <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
+    <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
     <Compile Include="Serialization\SimpleJson.cs" />

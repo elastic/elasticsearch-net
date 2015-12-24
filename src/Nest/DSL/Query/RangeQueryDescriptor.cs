@@ -27,13 +27,14 @@ namespace Nest
 		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
+		[Obsolete("scheduled to be removed in 2.o copy paste errror from filters")]
 		bool? Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		string Name { get; set; }
 
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
+
+		[JsonProperty("format")]
+		string Format { get; set; }
 
 		PropertyPathMarker Field { get; set; }
 	}
@@ -63,12 +64,13 @@ namespace Nest
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
 		public string TimeZone { get; set; }
+		public string Format { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
-		IRangeQuery Self { get { return this; } }
+		private IRangeQuery Self { get { return this; } }
 
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 	
@@ -81,10 +83,10 @@ namespace Nest
 		double? IRangeQuery.Boost { get; set; }
 		
 		bool? IRangeQuery.Cache { get; set; }
-		
-		string IRangeQuery.Name { get; set; }
 
 		string IRangeQuery.TimeZone { get; set; }
+
+		string IRangeQuery.Format { get; set; }
 
 		PropertyPathMarker IRangeQuery.Field { get; set; }
 		
@@ -102,6 +104,8 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			this.Self.Field = fieldName;
@@ -112,6 +116,11 @@ namespace Nest
 			return this.Self.Field;
 		}
 
+		public RangeQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
 			this.Self.Field = field;
@@ -179,25 +188,25 @@ namespace Nest
 
 		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
@@ -206,6 +215,13 @@ namespace Nest
 			this.Self.TimeZone = timeZone;
 			return this;
 		}
+
+		public RangeQueryDescriptor<T> Format(string format)
+		{
+			this.Self.Format = format;
+			return this;
+		}
+
 
 	}
 }

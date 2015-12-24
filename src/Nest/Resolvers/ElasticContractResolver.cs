@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
 using System.Collections;
+using System.Globalization;
 using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
@@ -52,7 +53,7 @@ namespace Nest.Resolvers
 				contract.Converter = new AggregationConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
-				contract.Converter = new IsoDateTimeConverter();
+				contract.Converter = new IsoDateTimeConverter() { Culture = CultureInfo.InvariantCulture };
 
 			else if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
@@ -119,7 +120,12 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
-			return defaultProperties;
+			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<IGlobalInnerHit>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
+			
+			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
 		}
 
 		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
@@ -140,7 +146,7 @@ namespace Nest.Resolvers
 				}
 				return defaultProperties;
 			}
-			return jsonProperties.Concat(defaultProperties).GroupBy(p=>p.PropertyName).Select(g=>g.First()).ToList();
+			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

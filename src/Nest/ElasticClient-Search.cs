@@ -75,8 +75,11 @@ namespace Nest
 
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
-					if (t.IsFaulted)
-						throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null)
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 					
 					return t.Result.Success
 						? t.Result.Response
@@ -101,8 +104,11 @@ namespace Nest
 			
 			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
-					if (t.IsFaulted)
-						throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null)
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 					
 					return t.Result.Success
 						? t.Result.Response

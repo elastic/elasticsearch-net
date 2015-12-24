@@ -13,6 +13,7 @@ namespace Nest.Tests.Integration.Reproduce
 	public class Reproduce994Tests : IntegrationTests
 	{
 		[Test]
+		[Ignore]
 		public void DateTimeRangeItemsAreReturnedProperly()
 		{
 			var fixedDateString = "2014-03-01T00:00:00.000Z";

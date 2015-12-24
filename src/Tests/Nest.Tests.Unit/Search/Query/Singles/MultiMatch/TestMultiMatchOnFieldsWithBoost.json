@@ -1,13 +1,14 @@
   {
-  "from": 0,
-  "size": 10,
-  "query": {
-    "multi_match": {
-      "query": "this is a query",
-      "fields": [
-        "field1^1.2",
-        "field2^0.9"
-      ]
+    "from": 0,
+    "size": 10,
+    "query": {
+      "multi_match": {
+        "_name": "named_query",
+        "query": "this is a query",
+        "fields": [
+          "field1^1.2",
+          "field2^0.9"
+        ]
+      }
     }
-  }
 }
