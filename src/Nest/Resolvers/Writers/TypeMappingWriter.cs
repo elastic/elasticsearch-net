@@ -280,27 +280,29 @@ namespace Nest.Resolvers.Writers
 				switch (propertyType.Name)
 				{
 					case "Int32":
-					case "UInt32":
+					case "UInt16":
 						return FieldType.Integer;
 					case "Int16":
-					case "UInt16":
-						return FieldType.Short;
 					case "Byte":
+						return FieldType.Short;
 					case "SByte":
 						return FieldType.Byte;
 					case "Int64":
-					case "UInt64":
+					case "UInt32":
 						return FieldType.Long;
 					case "Single":
 						return FieldType.Float;
 					case "Decimal":
 					case "Double":
+                    case "UInt64":
 						return FieldType.Double;
 					case "DateTime":
+                    case "DateTimeOffset":
 						return FieldType.Date;
 					case "Boolean":
 						return FieldType.Boolean;
-					case "Guid":
+                    case "Char":
+                    case "Guid":
 						return FieldType.String;
 				}
 			}

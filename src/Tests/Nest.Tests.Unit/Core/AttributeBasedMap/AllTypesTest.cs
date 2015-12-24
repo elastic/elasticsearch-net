@@ -18,8 +18,17 @@ namespace Nest.Tests.Unit.Core.AttributeBasedMap
 			public long LongField { get; set; }
 			public float FloatField { get; set; }
 			public double DoubleField { get; set; }
-			public DateTime DateField { get; set; }
-			public bool BoolField { get; set; }
+            public decimal DecimalField { get; set; }
+            public SByte SignedByteField { get; set; }
+            public UInt64 UnsignedLongField { get; set; }
+            public UInt16 UnsignedShortField { get; set; }
+            public UInt32 UnsignedIntegerField { get; set; }
+			public DateTime DateTimeField { get; set; }
+            public DateTimeOffset DateTimeOffsetField { get; set; }
+            public bool BoolField { get; set; }
+            public string StringField { get; set; }
+            public Guid GuidField { get; set; }
+            public char CharField { get; set; }
 		}
 
 		[Test]
