@@ -13,8 +13,11 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 	public class SnapshotCrudTests
 		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IAcknowledgedResponse>
 	{
+		private readonly static string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
+
 		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
+			//TODO move to own cluster collection with its own bootstrap
 			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
@@ -25,6 +28,8 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
+
+			var createIndex = this.Client.CreateIndex(SnapshotIndexName);
 		}
 
 		private string _repositoryLocation;
@@ -39,8 +44,15 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			requestAsync: (s, c, r) => c.SnapshotAsync(r)
 		);
 
-		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName) { WaitForCompletion = true };
-		protected ISnapshotRequest CreateFluent(string snapshotName, SnapshotDescriptor d) => d.WaitForCompletion();
+		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName)
+		{
+			WaitForCompletion = true,
+			Indices = SnapshotIndexName
+		};
+
+		protected ISnapshotRequest CreateFluent(string snapshotName, SnapshotDescriptor d) => d
+			.WaitForCompletion()
+			.Indices(SnapshotIndexName);
 
 		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, IGetSnapshotResponse>(
 			ReadInitializer,

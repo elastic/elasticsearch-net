@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -10,8 +13,7 @@ using Xunit;
 namespace Tests.Search.MultiSearch
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiSearchApiTests
-		: ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+	public class MultiSearchApiTests : ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -23,7 +25,7 @@ namespace Tests.Search.MultiSearch
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => false; //2 out of the three searches are not valid
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_msearch";
 
@@ -55,5 +57,14 @@ namespace Tests.Search.MultiSearch
 				{ "s3", new SearchRequest<Project>("otherindex", "othertype") { SearchType = SearchType.Count, Query = new QueryContainer(new MatchAllQuery()) } },
 			}
 		};
+
+		[U] public Task AssertResponse() => AssertOnAllResponses(r =>
+		{
+			r.TotalResponses.Should().Be(3);
+			var responses = r.GetResponses<Project>().ToList();
+			responses.First().IsValid.Should().BeTrue();
+			responses[1].IsValid.Should().BeFalse();
+			responses[2].IsValid.Should().BeFalse();
+		});
 	}
 }

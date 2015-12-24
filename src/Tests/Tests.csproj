@@ -493,7 +493,7 @@
     <Compile Include="Search\SearchUsageTestBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
     <Compile Include="Framework\ApiIntegrationTestBase.cs" />
-    <Compile Include="Framework\UsageTestBase.cs" />
+    <Compile Include="IndexModules\UsageTestBase.cs" />
     <Compile Include="Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />

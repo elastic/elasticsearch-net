@@ -24,13 +24,13 @@ namespace Tests.Search.Explain
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/NEST/_explain";
+		protected override string UrlPath => $"/project/project/{Project.Instance.Name}/_explain";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override ExplainDescriptor<Project> NewDescriptor() => new ExplainDescriptor<Project>(_project);
 
-		private Project _project = new Project { Name = "NEST" };
+		private Project _project = new Project { Name = Project.Instance.Name };
 
 		protected override object ExpectJson => new
 		{
@@ -40,7 +40,7 @@ namespace Tests.Search.Explain
 				{
 					name = new
 					{
-						query = "NEST"
+						query = Project.Instance.Name
 					}
 				}
 			}
@@ -50,7 +50,7 @@ namespace Tests.Search.Explain
 			.Query(q => q
 				.Match(m => m
 					.Field(p => p.Name)
-					.Query("NEST")
+					.Query(Project.Instance.Name)
 				)
 			);
 
@@ -59,7 +59,7 @@ namespace Tests.Search.Explain
 			Query = new QueryContainer(new MatchQuery
 			{
 				Field = "name",
-				Query = "NEST"
+				Query = Project.Instance.Name
 			})
 		};
 	}

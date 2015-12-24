@@ -17,7 +17,9 @@ namespace Nest
 			where TConverter : JsonConverter
 		{
 			var resolver = serializer.ContractResolver as ElasticContractResolver;
-			var realConverter = resolver?.PiggyBackState?.ActualJsonConverter as TConverter;
+			if (resolver?.PiggyBackState?.ActualJsonConverter == null) return null;
+
+			var realConverter = resolver.PiggyBackState.ActualJsonConverter as TConverter;
 			return realConverter;
 		}
 

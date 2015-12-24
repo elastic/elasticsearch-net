@@ -14,6 +14,8 @@ namespace Nest
 			this._Responses = new Dictionary<string, object>();
 		}
 
+		public override bool IsValid => base.IsValid && this._Responses.Values.OfType<BaseResponse>().All(b => b.IsValid);
+
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]	
 		internal IDictionary<string, object> _Responses { get; set; }
 

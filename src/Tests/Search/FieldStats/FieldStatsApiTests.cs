@@ -5,6 +5,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Static;
 
 namespace Tests.Search.FieldStats
 {
@@ -26,8 +27,8 @@ namespace Tests.Search.FieldStats
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/_field_stats";
 
-		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => null;
+		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d.Fields<Project>(p=>p.Name);
 
-		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project));
+		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project)) { Fields = Field<Project>(p => p.Name) };
 	}
 }

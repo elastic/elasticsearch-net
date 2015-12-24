@@ -16,7 +16,7 @@ namespace Nest
 
 		private readonly IMultiSearchRequest _request;
 
-		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponseJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
 
 		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
@@ -25,11 +25,13 @@ namespace Nest
 			_request = request;
 		}
 
+		public MultiSearchResponseJsonConverter() { }
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (this._settings == null)
 			{
-				var realConverter = serializer.GetStatefulConverter<MultiSearchJsonConverter>();
+				var realConverter = serializer.GetStatefulConverter<MultiSearchResponseJsonConverter>();
 				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
 				return mr;
 			}

@@ -40,9 +40,9 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchDeserializer(request);
+					var converter = CreateMultiSearchDeserializer(p);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
+					var json = serializer.SerializeToBytes(p).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride(creator);
 					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
@@ -62,9 +62,9 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var converter = CreateMultiSearchDeserializer(request);
+					var converter = CreateMultiSearchDeserializer(p);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
+					var json = serializer.SerializeToBytes(p).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride(creator);
 					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json);

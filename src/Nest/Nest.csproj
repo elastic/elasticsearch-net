@@ -456,6 +456,7 @@
     <Compile Include="Search\Search\Sort\SortSpecialField.cs" />
     <Compile Include="Search\Search\Sort\SortMode.cs" />
     <Compile Include="Search\Search\Sort\SortOrder.cs" />
+    <Compile Include="Search\Suggesters\ContextSuggester\SuggestContextJsonConverter.cs" />
     <Compile Include="Search\Suggesters\SuggestContainer.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
     <Compile Include="Mapping\MetaFields\IFieldMapping.cs" />
