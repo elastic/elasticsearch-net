@@ -292,6 +292,7 @@
     <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateApiTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateCrudTests.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsApiTests.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsUrlTests.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingUrlTests.cs" />

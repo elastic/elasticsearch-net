@@ -5,7 +5,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 {
-	public class DeleteTemplateUrlTests
+	public class IndexTemplateUrlTests
 	{
 		[U] public async Task Urls()
 		{

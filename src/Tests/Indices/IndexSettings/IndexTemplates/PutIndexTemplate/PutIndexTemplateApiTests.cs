@@ -9,7 +9,7 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class PutIndexTemplateApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+	public class PutIndexTemplateApiTests : ApiTestBase<IIndicesOperationResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
 	{
 		public PutIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -19,8 +19,6 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			requestAsync: (client, r) => client.PutIndexTemplateAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
 

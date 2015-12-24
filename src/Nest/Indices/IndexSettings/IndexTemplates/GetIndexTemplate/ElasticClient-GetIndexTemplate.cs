@@ -43,7 +43,6 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse>(
 				request,
-				new GetIndexTemplateConverter(DeserializeGetIndexTemplateResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetTemplateDispatch<GetIndexTemplateResponse>(p)
 			);
 		}
@@ -56,24 +55,8 @@ namespace Nest
 		public Task<IGetIndexTemplateResponse> GetIndexTemplateAsync(IGetIndexTemplateRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetIndexTemplateRequest, GetIndexTemplateRequestParameters, GetIndexTemplateResponse, IGetIndexTemplateResponse>(
 				request,
-				new GetIndexTemplateConverter(DeserializeGetIndexTemplateResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetTemplateDispatchAsync<GetIndexTemplateResponse>(p)
 			);
 
-		//TODO DictionaryResponse!
-		private GetIndexTemplateResponse DeserializeGetIndexTemplateResponse(IApiCallDetails response, Stream stream)
-		{
-			if (!response.Success) return new GetIndexTemplateResponse();
-
-			var dict = this.Serializer.Deserialize<Dictionary<string, TemplateMapping>>(stream);
-			if (dict.Count == 0)
-				throw new ElasticsearchClientException("Could not deserialize TemplateMapping");
-
-			return new GetIndexTemplateResponse
-			{
-				Name = dict.First().Key,
-				TemplateMapping = dict.First().Value
-			};
-		}
 	}
 }

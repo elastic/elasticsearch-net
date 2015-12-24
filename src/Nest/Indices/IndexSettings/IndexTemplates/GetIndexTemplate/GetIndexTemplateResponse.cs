@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IGetIndexTemplateResponse : IResponse
 	{
-		string Name { get; }
-		TemplateMapping TemplateMapping { get; }
+		IDictionary<string, TemplateMapping> TemplateMappings { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GetIndexTemplateResponse : BaseResponse, IGetIndexTemplateResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexTemplateResponse, string, TemplateMapping>))]
+	public class GetIndexTemplateResponse : DictionaryResponse<string, TemplateMapping>, IGetIndexTemplateResponse
 	{
-		public string Name { get; internal set; }
-		
-		public TemplateMapping TemplateMapping { get; internal set; }
+		[JsonIgnore]
+		public IDictionary<string, TemplateMapping> TemplateMappings => Self.BackingDictionary;
 	}
 }
