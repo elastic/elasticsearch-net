@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -56,7 +58,9 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
+				    p.DeserializationState(CreateScrollDeserializer<T, T>(d));
+
+                    return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -126,5 +130,26 @@ namespace Nest
 			}
 			return body;
 		}
-	}
+
+        private SearchResponse<TResult> FieldsScrollDeserializer<T, TResult>(IElasticsearchResponse response, Stream stream, IScrollRequest d)
+            where T : class
+            where TResult : class
+        {
+            var converter = d.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(d.TypeSelector);
+            var dict = response.Success
+                ? Serializer.DeserializeInternal<SearchResponse<TResult>>(stream, converter)
+                : null;
+            return dict;
+        }
+
+        private Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> CreateScrollDeserializer<T, TResult>(IScrollRequest request)
+            where T : class
+            where TResult : class
+        {
+
+            Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator =
+                    (r, s) => this.FieldsScrollDeserializer<T, TResult>(r, s, request);
+            return responseCreator;
+        }
+    }
 }
