@@ -55,7 +55,7 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
+			return ComparisonValue?.GetHashCode() ?? 0;	
 		}
 
 		bool IEquatable<PropertyName>.Equals(PropertyName other)

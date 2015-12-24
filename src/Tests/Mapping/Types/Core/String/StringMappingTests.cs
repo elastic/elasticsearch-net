@@ -23,6 +23,12 @@ namespace Tests.Mapping.Types.Core.String
 
 		[String]
 		public string Minimal { get; set; }
+
+        public string Inferred { get; set; }
+
+        public char Char { get; set; }
+
+        public Guid Guid { get; set; }
 	}
 
 	public class StringMappingTests : TypeMappingTestBase<StringTest>
@@ -51,6 +57,18 @@ namespace Tests.Mapping.Types.Core.String
 				minimal = new
 				{
 					type = "string"
+				},			
+                inferred = new
+				{
+					type = "string"
+				},			
+                @char = new
+				{
+					type = "string"
+				},
+                guid = new
+				{
+					type = "string"
 				}
 			}
 		};
@@ -74,6 +92,15 @@ namespace Tests.Mapping.Types.Core.String
 			)
 			.String(s => s
 				.Name(o => o.Minimal)
+			)
+            .String(s => s
+				.Name(o => o.Inferred)
+			)
+            .String(s => s
+				.Name(o => o.Char)
+			)
+            .String(s => s
+				.Name(o => o.Guid)
 			);
 	}
 }

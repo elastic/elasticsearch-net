@@ -21,6 +21,28 @@ namespace Tests.Mapping.Types.Core.Number
 
 		[Number]
 		public double Minimal { get; set; }
+
+        public byte Byte { get; set; }
+
+        public short Short { get; set; }
+
+        public int Integer { get; set; }
+
+        public long Long { get; set; }
+
+        public sbyte SignedByte { get; set; }
+
+        public ushort UnsignedShort { get; set; }
+
+        public uint UnsignedInteger { get; set; }
+
+        public ulong UnsignedLong { get; set; }
+
+        public float Float { get; set; } 
+
+        public double Double { get; set; }
+
+        public decimal Decimal { get; set; }
 	}
 
 	public class NumberMappingTests
@@ -48,27 +70,112 @@ namespace Tests.Mapping.Types.Core.Number
 				minimal = new
 				{
 					type = "double"
-				}
+				},
+                @byte = new
+                {
+                    type = "short"
+			    },
+                @short = new
+                {
+                    type = "short"
+                },
+                integer = new
+                {
+                    type = "integer"  
+                },
+                @long = new
+                {
+                    type = "long"
+                },
+                signedByte = new
+			    {
+                    type = "byte"
+			    },
+                unsignedShort = new
+                {
+                    type = "integer"
+                },
+                unsignedInteger = new
+                {
+                    type = "long"
+                },
+                unsignedLong = new
+                {
+                    type = "double"
+                },
+                @float = new
+                {
+                    type = "float"
+                },             
+                @double = new
+                {
+                    type = "double"
+                },
+                @decimal = new
+                {
+                    type = "double"
+                }
 			}
 		};
 
-		protected override Func<PropertiesDescriptor<NumberTest>, IPromise<IProperties>> FluentProperties => m => m
-			.Number(d => d
-				.Name(o => o.Full)
-				.DocValues()
-				.IndexName("myindex")
-				.Similarity(SimilarityOption.Default)
-				.Store()
-				.Index(NonStringIndexOption.No)
-				.Boost(1.5)
-				.NullValue(0.0)
-				.IncludeInAll(false)
-				.PrecisionStep(10)
-				.IgnoreMalformed()
-				.Coerce()
-			)
-			.Number(d => d
-				.Name(o => o.Minimal)
-			);
+	    protected override Func<PropertiesDescriptor<NumberTest>, IPromise<IProperties>> FluentProperties => m => m
+	        .Number(d => d
+	            .Name(o => o.Full)
+	            .DocValues()
+	            .IndexName("myindex")
+	            .Similarity(SimilarityOption.Default)
+	            .Store()
+	            .Index(NonStringIndexOption.No)
+	            .Boost(1.5)
+	            .NullValue(0.0)
+	            .IncludeInAll(false)
+	            .PrecisionStep(10)
+	            .IgnoreMalformed()
+	            .Coerce()
+	        )
+	        .Number(d => d
+	            .Name(o => o.Minimal)
+	        )
+	        .Number(d => d
+	            .Name(o => o.Byte)
+                .Type(NumberType.Short)
+	        )
+	        .Number(d => d
+	            .Name(o => o.Short)
+                .Type(NumberType.Short)
+            )
+	        .Number(d => d
+	            .Name(o => o.Integer)
+                .Type(NumberType.Integer)
+	        )
+	        .Number(d => d
+	            .Name(o => o.Long)
+                .Type(NumberType.Long)
+            )
+	        .Number(d => d
+	            .Name(o => o.SignedByte)
+                .Type(NumberType.Byte)
+            )
+	        .Number(d => d
+	            .Name(o => o.UnsignedShort)
+                .Type(NumberType.Integer)
+	        )
+	        .Number(d => d
+	            .Name(o => o.UnsignedInteger)
+                .Type(NumberType.Long)
+            )
+	        .Number(d => d
+	            .Name(o => o.UnsignedLong)
+                .Type(NumberType.Double)
+            )
+	        .Number(d => d
+	            .Name(o => o.Float)
+                .Type(NumberType.Float)
+            )
+	        .Number(d => d
+	            .Name(o => o.Double)
+	        ).Number(d => d
+	            .Name(o => o.Decimal)
+	        );
 	}
 }

@@ -32,7 +32,7 @@ namespace Nest
 
 	public abstract class Property : IProperty
 	{
-		public Property(TypeName typeName)
+	    protected Property(TypeName typeName)
 		{
 			Type = typeName;
 		}

@@ -39,10 +39,7 @@ namespace Nest
 
 		public static ElasticsearchPropertyAttribute From(MemberInfo memberInfo)
 		{
-			var attributes = memberInfo.GetCustomAttributes(typeof(ElasticsearchPropertyAttribute), true);
-			if (attributes.HasAny())
-				return ((ElasticsearchPropertyAttribute)attributes.First());
-			return null;
+			return memberInfo.GetCustomAttribute<ElasticsearchPropertyAttribute>(true);
 		}
 	}
 }
