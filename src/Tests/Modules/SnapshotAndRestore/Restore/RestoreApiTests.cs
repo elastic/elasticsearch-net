@@ -8,10 +8,8 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Restore
 {
-	// TODO HitsTheCorrectUrl is flaky here, sometimes it fails sometimes it passes
 	[Collection(IntegrationContext.Indexing)]
-	public class RestoreApiTests 
-		: ApiIntegrationTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
+	public class RestoreApiTests : ApiTestBase<IRestoreResponse, IRestoreRequest, RestoreDescriptor, RestoreRequest>
 	{
 		public RestoreApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
@@ -43,8 +41,6 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/_snapshot/{RepositoryName}/{SnapshotName}/_restore";
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
 
 		protected override object ExpectJson { get; } = new
 		{

@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using static Tests.Framework.UrlTester;
 
-namespace Tests.Indices.Monitoring.Segments
+namespace Tests.Indices.Monitoring.IndicesSegments
 {
 	public class SegmentsUrlTests
 	{
 		[U] public async Task Urls()
 		{
-			await GET($"/_segments")
+			await UrlTester.GET($"/_segments")
 				.Fluent(c => c.Segments(Nest.Indices.All))
 				.Request(c => c.Segments(new SegmentsRequest()))
 				.FluentAsync(c => c.SegmentsAsync(Nest.Indices.All))
@@ -17,7 +16,7 @@ namespace Tests.Indices.Monitoring.Segments
 				;
 
 			var index = "index1,index2";
-			await GET($"/{index}/_segments")
+			await UrlTester.GET($"/{index}/_segments")
 				.Fluent(c => c.Segments(index))
 				.Request(c => c.Segments(new SegmentsRequest(index)))
 				.FluentAsync(c => c.SegmentsAsync(index))

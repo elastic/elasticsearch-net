@@ -73,8 +73,9 @@ namespace Tests.Indices.Warmers
 		protected DeleteWarmerRequest DeleteInitializer(string name) => new DeleteWarmerRequest(typeof(Project), name);
 		protected IDeleteWarmerRequest DeleteFluent(string name, DeleteWarmerDescriptor d) => null;
 
+		// https://github.com/elastic/elasticsearch/issues/5155
 		// Getting a deleted warmer still returns a 200 status code
-		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().BeTrue());
+		protected override async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().BeTrue());
 
 		protected override void ExpectAfterCreate(IGetWarmerResponse response)
 		{

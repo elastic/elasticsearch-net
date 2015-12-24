@@ -114,7 +114,7 @@ namespace Tests.Framework
 
 		protected IElasticsearchSerializer GetSerializer() => GetClient().Serializer;
 
-		protected IElasticClient GetClient() => TestClient.GetClient(_connectionSettingsModifier);
+		protected IElasticClient GetClient() => TestClient.GetInMemoryClient(_connectionSettingsModifier);
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{

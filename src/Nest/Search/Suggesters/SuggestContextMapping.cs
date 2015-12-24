@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<NamedFiltersContainer, string, ISuggestContext>))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<SuggestContextMapping, string, ISuggestContext>))]
 	public interface ISuggestContextMapping : IIsADictionary<string, ISuggestContext>
 	{
 	}

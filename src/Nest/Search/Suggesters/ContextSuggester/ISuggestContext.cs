@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
+	[JsonConverter(typeof(SuggestContextJsonConverter))]
 	public interface ISuggestContext
 	{
 		[JsonProperty("type")]

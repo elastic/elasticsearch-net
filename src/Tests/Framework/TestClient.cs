@@ -18,9 +18,9 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
-		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
+		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, bool forceInMemory = false)
 		{
-			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
+			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory))
 				.SetDefaultIndex("default-index")
 				.PrettyJson()
 				.InferMappingFor<Project>(map => map
@@ -43,6 +43,9 @@ namespace Tests.Framework
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
+			
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port));
@@ -50,7 +53,8 @@ namespace Tests.Framework
 		public static Uri CreateNode(int? port = null) => 
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection() => Configuration.RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+		public static IConnection CreateConnection(bool forceInMemory = false) => 
+			Configuration.RunIntegrationTests && !forceInMemory ? new HttpConnection() : new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{

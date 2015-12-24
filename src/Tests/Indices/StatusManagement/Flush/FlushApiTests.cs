@@ -3,6 +3,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
 
@@ -14,8 +15,8 @@ namespace Tests.Indices.StatusManagement.Flush
 		public FlushApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Flush(AllIndices, f),
-			fluentAsync: (client, f) => client.FlushAsync(AllIndices, f),
+			fluent: (client, f) => client.Flush(Index<Project>(), f),
+			fluentAsync: (client, f) => client.FlushAsync(Index<Project>(), f),
 			request: (client, r) => client.Flush(r),
 			requestAsync: (client, r) => client.FlushAsync(r)
 		);
@@ -23,10 +24,10 @@ namespace Tests.Indices.StatusManagement.Flush
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/_flush?allow_no_indices=true";
+		protected override string UrlPath => "/project/_flush?allow_no_indices=true";
 
 		protected override Func<FlushDescriptor, IFlushRequest> Fluent => d => d.AllowNoIndices();
 
-		protected override FlushRequest Initializer => new FlushRequest(AllIndices) { AllowNoIndices = true };
+		protected override FlushRequest Initializer => new FlushRequest(Index<Project>()) { AllowNoIndices = true };
 	}
 }

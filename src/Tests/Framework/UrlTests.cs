@@ -48,7 +48,6 @@ namespace Tests.Framework
 			where TResponse : IResponse => WhenCallingAsync(call, "request async");
 
 
-
 		internal UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
 		{

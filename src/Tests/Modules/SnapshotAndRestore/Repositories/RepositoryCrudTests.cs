@@ -24,7 +24,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			fluentAsync: (s, c, f) => c.CreateRepositoryAsync(s, f),
 			request: (s, c, r) => c.CreateRepository(r),
 			requestAsync: (s, c, r) => c.CreateRepositoryAsync(r)
-        );
+		);
 
 		private string _rootRepositoryPath;
 		private string GetRepositoryPath(string name) => Path.Combine(_rootRepositoryPath, name);
@@ -34,12 +34,12 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			{
 				Repository = new FileSystemRepository(
 					new FileSystemRepositorySettings(GetRepositoryPath(name))
-						{
-							ChunkSize = "64mb",
-							Compress = true
-                        }
+					{
+						ChunkSize = "64mb",
+						Compress = true
+					}
 					)
-            };
+			};
 
 		protected ICreateRepositoryRequest CreateFluent(string name, CreateRepositoryDescriptor d) => d
 			.FileSystem(fs => fs
@@ -70,16 +70,16 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			fluentAsync: (s, c, f) => c.CreateRepositoryAsync(s, f),
 			request: (s, c, r) => c.CreateRepository(r),
 			requestAsync: (s, c, r) => c.CreateRepositoryAsync(r)
-        );
+		);
 
 		protected CreateRepositoryRequest UpdateInitializer(string name) => new CreateRepositoryRequest(name)
 		{
 			Repository = new FileSystemRepository(new FileSystemRepositorySettings(GetRepositoryPath(name))
-				{
-					ChunkSize = "64mb",
-					Compress = true,
-					ConcurrentStreams = 5
-				}
+			{
+				ChunkSize = "64mb",
+				Compress = true,
+				ConcurrentStreams = 5
+			}
 			)
 		};
 
@@ -99,14 +99,14 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			fluentAsync: (s, c, f) => c.DeleteRepositoryAsync(s),
 			request: (s, c, r) => c.DeleteRepository(r),
 			requestAsync: (s, c, r) => c.DeleteRepositoryAsync(r)
-        );
+		);
 
 		protected DeleteRepositoryRequest DeleteInitializer(string name) => new DeleteRepositoryRequest(name);
 
 		protected IDeleteRepositoryRequest DeleteFluent(string name, DeleteRepositoryDescriptor d) => null;
 
 		protected override void ExpectAfterCreate(IGetRepositoryResponse response)
-		{ 
+		{
 			response.Repositories.Should().NotBeNull().And.HaveCount(1);
 			var name = response.Repositories.Keys.First();
 			var repository = response.FileSystem(name);
@@ -115,7 +115,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			repository.Settings.Should().NotBeNull();
 			repository.Settings.ChunkSize.Should().Be("64mb");
 			repository.Settings.Compress.Should().BeTrue();
-        }
+		}
 
 		protected override void ExpectAfterUpdate(IGetRepositoryResponse response)
 		{
