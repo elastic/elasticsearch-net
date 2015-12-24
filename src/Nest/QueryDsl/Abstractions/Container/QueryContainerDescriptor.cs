@@ -264,16 +264,16 @@ namespace Nest
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
 		/// constant_score.
 		/// </summary>
-		/// <typeparam name="K">Type of the child</typeparam>
-		public QueryContainer HasChild<K>(Func<HasChildQueryDescriptor<K>, IHasChildQuery> selector) where K : class =>
+		/// <typeparam name="TChild">Type of the child</typeparam>
+		public QueryContainer HasChild<TChild>(Func<HasChildQueryDescriptor<TChild>, IHasChildQuery> selector) where TChild : class =>
 			this.Assign(selector, (query, container) => container.HasChild = query);
 
 		/// <summary>
-		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
+		/// The has_parent query works the same as the has_parent filter, by automatically wrapping the filter with a 
 		/// constant_score.
 		/// </summary>
-		/// <typeparam name="K">Type of the child</typeparam>
-		public QueryContainer HasParent<K>(Func<HasParentQueryDescriptor<K>, IHasParentQuery> selector) where K : class =>
+		/// <typeparam name="TParent">Type of the parent</typeparam>
+		public QueryContainer HasParent<TParent>(Func<HasParentQueryDescriptor<TParent>, IHasParentQuery> selector) where TParent : class =>
 			this.Assign(selector, (query, container) => container.HasParent = query);
 
 		/// <summary>
@@ -333,13 +333,12 @@ namespace Nest
 		public QueryContainer Bool(Func<BoolQueryDescriptor<T>, IBoolQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Bool = query);
 
-		/// <summary>
-		/// the boosting query can be used to effectively demote results that match a given query. 
-		/// Unlike the “NOT” clause in bool query, this still selects documents that contain
-		/// undesirable terms, but reduces their overall score.
-		/// </summary>
-		/// <param name="boostingQuery"></param>
-		public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
+        /// <summary>
+        /// the boosting query can be used to effectively demote results that match a given query. 
+        /// Unlike the "NOT" clause in bool query, this still selects documents that contain
+        /// undesirable terms, but reduces their overall score.
+        /// </summary>
+        public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Boosting = query);
 
 		/// <summary>
@@ -359,13 +358,14 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public QueryContainer Term<K>(Expression<Func<T, object>> fieldDescriptor, K value, double? Boost = null)
+		/// <typeparam name="TValue">The type of the field</typeparam>
+		public QueryContainer Term<TValue>(Expression<Func<T, TValue>> fieldDescriptor, TValue value, double? boost = null)
 		{
 			return this.Term(t =>
 			{
 				t.Field(fieldDescriptor).Value(value);
-				if (Boost.HasValue)
-					t.Boost(Boost.Value);
+				if (boost.HasValue)
+					t.Boost(boost.Value);
 				return t;
 			});
 		}
@@ -374,13 +374,13 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? Boost = null)
+		public QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null)
 		{
 			return this.Term(t =>
 			{
 				t.Field(fieldDescriptor).Value(value);
-				if (Boost.HasValue)
-					t.Boost(Boost.Value);
+				if (boost.HasValue)
+					t.Boost(boost.Value);
 				return t;
 			});
 		}
@@ -389,13 +389,13 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public QueryContainer Term(string field, object value, double? Boost = null)
+		public QueryContainer Term(string field, object value, double? boost = null)
 		{
 			return this.Term(t =>
 			{
 				t.Field(field).Value(value);
-				if (Boost.HasValue)
-					t.Boost(Boost.Value);
+				if (boost.HasValue)
+					t.Boost(boost.Value);
 				return t;
 			});
 		}
@@ -414,13 +414,13 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should 
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
 		{
 			return this.Wildcard(t =>
 			{
 				t.Field(fieldDescriptor).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
+				if (boost.HasValue) t.Boost(boost.Value);
+				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
 				return t;
 			});
 		}
@@ -432,13 +432,13 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
 		{
 			return this.Wildcard(t =>
 			{
 				t.Field(field).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
+				if (boost.HasValue) t.Boost(boost.Value);
+				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
 				return t;
 			});
 		}
@@ -457,13 +457,13 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>
-		public QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
 		{
 			return this.Prefix(t =>
 			{
 				t.Field(fieldDescriptor).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
+				if (boost.HasValue) t.Boost(boost.Value);
+				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
 				return t;
 			});
 		}
@@ -472,13 +472,13 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public QueryContainer Prefix(string field, string value, double? Boost = null, RewriteMultiTerm? Rewrite = null)
+		public QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
 		{
 			return this.Prefix(t =>
 			{
 				t.Field(field).Value(value);
-				if (Boost.HasValue) t.Boost(Boost.Value);
-				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
+				if (boost.HasValue) t.Boost(boost.Value);
+				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
 				return t;
 			});
 		}
