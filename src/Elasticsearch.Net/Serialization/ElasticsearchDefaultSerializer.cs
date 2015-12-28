@@ -7,6 +7,7 @@ namespace Elasticsearch.Net
 {
 	public class ElasticsearchDefaultSerializer : IElasticsearchSerializer
 	{
+		public static readonly ElasticsearchDefaultSerializer Instance = new ElasticsearchDefaultSerializer();
 		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
 
 		public T Deserialize<T>(Stream stream)

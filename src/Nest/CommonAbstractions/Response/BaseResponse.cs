@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,13 +11,24 @@ namespace Nest
 
 		[JsonIgnore]
 		IApiCallDetails ApiCall { get; }
+
+		[JsonIgnore]
+		ServerError ServerError { get; }
+
+		[JsonIgnore]
+		Exception OriginalException { get; }
+
 	}
 
 	public class BaseResponse : IResponse
 	{
-		public virtual bool IsValid => this.ApiCall?.Success ?? false;
+		public virtual bool IsValid => (this.ApiCall?.Success ?? false) && (this.ApiCall?.ServerError == null);
 
 		IApiCallDetails IBodyWithApiCallDetails.CallDetails { get; set; }
 		public IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
+		
+		public ServerError ServerError  => ((IBodyWithApiCallDetails)this).CallDetails?.ServerError;
+
+		public Exception OriginalException  => ((IBodyWithApiCallDetails)this).CallDetails?.OriginalException;
 	}
 }

@@ -39,6 +39,8 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : BaseResponse, ISearchResponse<T> where T : class
 	{
+		public override bool IsValid => base.IsValid;
+
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 

@@ -102,9 +102,9 @@ namespace Nest
 		)
 			where T : class
 		{
-			var hit = new SearchResponse<T>();
+			var response = new SearchResponse<T>();
 			var reader = tuple.Hit.CreateReader();
-			serializer.Populate(reader, hit);
+			serializer.Populate(reader, response);
 
 			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
 			if (errorProperty != null)
@@ -113,7 +113,7 @@ namespace Nest
 				//TODO es 1.0 will return statuscode pass that into exception
 			}
 
-			collection.Add(tuple.Descriptor.Key, hit);
+			collection.Add(tuple.Descriptor.Key, response);
 		}
 	}
 }

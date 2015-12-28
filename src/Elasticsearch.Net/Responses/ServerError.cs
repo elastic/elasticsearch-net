@@ -47,7 +47,10 @@ namespace Elasticsearch.Net
 		{
 			var error = new Error();
 			error.FillValues(dict);
-			var os = dict["root_cause"] as object[];
+			object rootCause;
+			if (!dict.TryGetValue("root_cause", out rootCause)) return error;
+
+			var os = rootCause as object[];
 			if (os == null) return error;
 			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList();
 			return error;
@@ -74,11 +77,16 @@ namespace Elasticsearch.Net
 	{
 		public static void FillValues(this IRootCause rootCause, IDictionary<string, object> dict)
 		{
-			rootCause.Index = Convert.ToString(dict["index"]);
-			rootCause.Reason = Convert.ToString(dict["reason"]);
-			rootCause.ResourceId = Convert.ToString(dict["resource.id"]);
-			rootCause.ResourceType = Convert.ToString(dict["resource.type"]);
-			rootCause.Type = Convert.ToString(dict["type"]);
+			object index;
+			if (dict.TryGetValue("index", out index)) rootCause.Index = Convert.ToString(index);
+			object reason;
+			if (dict.TryGetValue("reason", out reason)) rootCause.Reason = Convert.ToString(reason);
+			object resourceId;
+			if (dict.TryGetValue("resource.id", out resourceId)) rootCause.ResourceId = Convert.ToString(resourceId);
+			object resourceType;
+			if (dict.TryGetValue("resource.type", out resourceType)) rootCause.ResourceType = Convert.ToString(resourceType);
+			object type;
+			if (dict.TryGetValue("type", out type)) rootCause.Type = Convert.ToString(type);
 		}
 	}
 }
