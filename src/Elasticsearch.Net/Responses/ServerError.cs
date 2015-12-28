@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Elasticsearch.Net
@@ -9,19 +10,22 @@ namespace Elasticsearch.Net
 		public Error Error { get; set; }
 		public int Status { get; set; }
 
+		public static ServerError Create(Stream stream) => ElasticsearchDefaultSerializer.Instance.Deserialize<ServerError>(stream);
+
 		internal static ServerError Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
-			object status;
-			object error;
-			if (dict.TryGetValue("status", out status) && dict.TryGetValue("error", out error))
+			object status, error;
+			int statusCode = -1;
+			if (dict.TryGetValue("status", out status))
+				statusCode = Convert.ToInt32(status);
+
+			if (!dict.TryGetValue("error", out error)) return null;
+
+			return new ServerError
 			{
-				return new ServerError
-				{
-					Status = Convert.ToInt32(status),
-					Error = (Error)strategy.DeserializeObject(error, typeof(Error))
-				};
-			}
-			return null;
+				Status = statusCode,
+				Error = (Error)strategy.DeserializeObject(error, typeof(Error))
+			};
 		}
 	}
 

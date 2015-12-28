@@ -131,8 +131,7 @@ namespace Nest
 
 	public partial class SearchRequest<T>
 	{
-		private Type _clrType { get; set; }
-		Type ICovariantSearchRequest.ClrType => this._clrType;
+		Type ICovariantSearchRequest.ClrType => typeof(T);
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q") == true ? HttpMethod.GET : HttpMethod.POST;

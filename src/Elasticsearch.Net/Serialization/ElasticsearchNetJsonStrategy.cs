@@ -5,6 +5,8 @@ namespace Elasticsearch.Net
 {
 	internal class ElasticsearchNetJsonStrategy : PocoJsonSerializerStrategy
 	{
+		public static readonly ElasticsearchNetJsonStrategy Instance = new ElasticsearchNetJsonStrategy();
+
 		public override object DeserializeObject(object value, Type type)
 		{
 			if (type == typeof(DynamicResponse))

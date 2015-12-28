@@ -25,10 +25,10 @@ namespace Nest
 		public virtual bool IsValid => (this.ApiCall?.Success ?? false) && (this.ApiCall?.ServerError == null);
 
 		IApiCallDetails IBodyWithApiCallDetails.CallDetails { get; set; }
-		public IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
+		public virtual IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
 		
-		public ServerError ServerError  => ((IBodyWithApiCallDetails)this).CallDetails?.ServerError;
+		public ServerError ServerError  => this.ApiCall?.ServerError;
 
-		public Exception OriginalException  => ((IBodyWithApiCallDetails)this).CallDetails?.OriginalException;
+		public Exception OriginalException  => this.ApiCall?.OriginalException;
 	}
 }

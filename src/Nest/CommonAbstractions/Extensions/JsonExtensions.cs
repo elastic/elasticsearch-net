@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -28,6 +33,24 @@ namespace Nest
 			if (value == null) return;
 			writer.WritePropertyName(propertyName);
 			serializer.Serialize(writer, value);
+		}
+
+		public static bool TryParseServerError(this JToken jToken, JsonSerializer serializer, out ServerError error)
+		{
+			error = null;
+			if (jToken == null) return false;
+
+			var errorProperty = jToken.Children<JProperty>().FirstOrDefault(c => c.Name == "error");
+			if (errorProperty == null) return false;
+
+			using (var sw = new StringWriter())
+			using (var localWriter = new JsonTextWriter(sw))
+			{
+				serializer.Serialize(localWriter, jToken);
+				using (var ms = new MemoryStream(sw.ToString().Utf8Bytes()))
+					error = ServerError.Create(ms);
+			}
+			return true;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -35,7 +36,6 @@ namespace Nest
 				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
 				return mr;
 			}
-
 
 			var response = new MultiSearchResponse();
 			var jsonObject = JObject.Load(reader);
@@ -73,11 +73,11 @@ namespace Nest
 						};
 						foreach (var converter in settings.Converters.EmptyIfNull())
 							jsonSerializer.Converters.Add(converter);
-						generic.Invoke(null, new object[] { m, jsonSerializer, response._Responses, this._settings });
+						generic.Invoke(null, new object[] { m, jsonSerializer, response.Responses, this._settings });
 						continue;
 					}
 				}
-				generic.Invoke(null, new object[] { m, serializer, response._Responses, this._settings });
+				generic.Invoke(null, new object[] { m, serializer, response.Responses, this._settings });
 			}
 			
 			return response;
@@ -106,12 +106,9 @@ namespace Nest
 			var reader = tuple.Hit.CreateReader();
 			serializer.Populate(reader, response);
 
-			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
-			if (errorProperty != null)
-			{
-				//hit.IsValid = false;
-				//TODO es 1.0 will return statuscode pass that into exception
-			}
+			ServerError error;
+			if (tuple.Hit.TryParseServerError(serializer, out error))
+				response.MultiSearchError = error ;
 
 			collection.Add(tuple.Descriptor.Key, response);
 		}
