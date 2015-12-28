@@ -1968,10 +1968,8 @@ namespace Nest
 ///<param name="index">Optional, accepts null</param>
 		public FieldStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
-		
-		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
+
+			///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>

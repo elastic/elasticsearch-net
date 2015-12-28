@@ -16,8 +16,8 @@ namespace Tests.Search.FieldStats
 		public FieldStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.FieldStats(typeof(Project)),
-			fluentAsync: (c, f) => c.FieldStatsAsync(typeof(Project)),
+			fluent: (c, f) => c.FieldStats(typeof(Project), f),
+			fluentAsync: (c, f) => c.FieldStatsAsync(typeof(Project), f),
 			request: (c, r) => c.FieldStats(r),
 			requestAsync: (c, r) => c.FieldStatsAsync(r)
 		);
@@ -27,8 +27,47 @@ namespace Tests.Search.FieldStats
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/_field_stats";
 
-		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d.Fields<Project>(p=>p.Name);
+		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d
+			.Fields(Field<Project>(p => p.Name));
 
-		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project)) { Fields = Field<Project>(p => p.Name) };
+			// Causes a NPE on ES 2.0.0
+			//.IndexConstraints(cs => cs
+			//	.IndexConstraint(Field<Project>(p => p.StartedOn), c => c
+			//		.MinValue(min => min
+			//			.GreaterThanOrEqualTo("2014-01-01")
+			//			.Format("date_optional_time")
+			//		)
+			//		.MaxValue(max => max
+			//			.LessThan("2015-12-29")
+			//			.Format("date_optional_time")
+			//		)
+			//	)
+			//);
+
+		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project))
+		{
+			Fields = Field<Project>(p => p.Name)
+
+			// Causes a NPE on ES 2.0.0
+			//IndexConstraints = new IndexConstraints
+			//{
+			//	{
+			//		Field<Project>(p => p.StartedOn),
+			//		new IndexConstraint
+			//		{
+			//			MinValue = new IndexConstraintComparison
+			//			{
+			//				GreaterThanOrEqualTo = "2014-01-01",
+			//				Format = "date_optional_time"
+			//			},
+			//			MaxValue = new IndexConstraintComparison
+			//			{
+			//				LessThan = "2015-12-29",
+			//				Format = "date_optional_time"
+			//			}
+			//		}
+			//	}
+			//}
+		};
 	}
 }

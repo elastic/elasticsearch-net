@@ -32,10 +32,6 @@ namespace Nest
 		internal static ExplainRequestParameters _SourceInclude<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		internal static FieldStatsRequestParameters _Fields<T>(this FieldStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
-			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
-		
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		internal static GetRequestParameters _Fields<T>(this GetRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));

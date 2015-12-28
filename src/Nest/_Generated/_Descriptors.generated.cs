@@ -1316,13 +1316,6 @@ namespace Nest
 		public FieldStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-			
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
-
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public FieldStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 

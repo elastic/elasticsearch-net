@@ -412,6 +412,8 @@
     <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
     <Compile Include="QueryDsl\VariableFields.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\FieldStats\IndexConstraint.cs" />
+    <Compile Include="Search\FieldStats\IndexConstraints.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchResponseJsonConverter.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateJsonConverter.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorJsonConverter.cs" />

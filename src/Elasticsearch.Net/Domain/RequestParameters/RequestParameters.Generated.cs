@@ -1082,9 +1082,6 @@ namespace Elasticsearch.Net
 	public class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
-		
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public FieldStatsRequestParameters Level(Level level) => this.AddQueryString("level", level);
 		
