@@ -85,7 +85,7 @@ namespace Tests.Search.Percolator.PercolateCount
 			requestAsync: (c, r) => c.PercolateCountAsync(r)
 		);
 
-		private int _percId = 1;
+		private string _percId = Project.Instance.Name;
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;

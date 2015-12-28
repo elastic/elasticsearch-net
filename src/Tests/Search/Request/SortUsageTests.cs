@@ -60,7 +60,7 @@ namespace Tests.Search.Request
 								@params = new {
 									factor = 1.1
 								},
-								inline = "doc['field_name'].value * factor"
+								inline = "doc['numberOfCommits'].value * factor"
 							}
 						}
 					}
@@ -94,7 +94,7 @@ namespace Tests.Search.Request
 					.Type("number")
 					.Ascending()
 					.Script(script => script
-						.Inline("doc['field_name'].value * factor")
+						.Inline("doc['numberOfCommits'].value * factor")
 						.Params(p => p.Add("factor", 1.1))
 					)
 				)
@@ -131,7 +131,7 @@ namespace Tests.Search.Request
 					{
 						Type = "number",
 						Order = SortOrder.Ascending, 
-						Script =  new InlineScript("doc['field_name'].value * factor")
+						Script =  new InlineScript("doc['numberOfCommits'].value * factor")
 						{
 							Params = new Dictionary<string, object>
 							{

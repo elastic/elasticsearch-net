@@ -43,7 +43,7 @@ namespace Tests.Search.Request
 					  completion = new {
 						analyzer = "simple",
 						context = new {
-						  color = Project.Instance.Suggest.Context.Values.SelectMany(v => v).First()
+						  color = Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First()
 						},
 						field = "suggest",
 						fuzzy = new {
@@ -115,7 +115,7 @@ namespace Tests.Search.Request
 				)
 				.Completion("my-completion-suggest", c => c
 					.Context(ctx => ctx
-						.Add("color", Project.Instance.Suggest.Context.Values.SelectMany(v => v).First())
+						.Add("color", Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First())
 					)
 					.Fuzzy(f => f
 						.Fuzziness(Fuzziness.Auto)
@@ -176,7 +176,7 @@ namespace Tests.Search.Request
 						Text = Project.Instance.Name,
 						Completion = new CompletionSuggester
 						{
-							Context = new Dictionary<string, object> { { "color",  Project.Instance.Suggest.Context.Values.SelectMany(v => v).First() } },
+							Context = new Dictionary<string, object> { { "color",  Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First() } },
 							Fuzzy = new FuzzySuggester
 							{
 								Fuzziness = Fuzziness.Auto,
