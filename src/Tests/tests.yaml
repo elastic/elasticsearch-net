@@ -3,6 +3,6 @@ mode: m
 # the elasticsearch version that should be started
 elasticsearch_version: 2.0.0
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
-force_reseed: false
+force_reseed: true
 # do not spawn nodes as part of the test setup but rely on a manually started es node being up
 do_not_spawn: true

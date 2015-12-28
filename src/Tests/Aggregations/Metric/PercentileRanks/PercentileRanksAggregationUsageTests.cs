@@ -73,7 +73,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 			commitsOutlier.Should().NotBeNull();
 			commitsOutlier.Items.Should().NotBeNullOrEmpty();
 			foreach (var item in commitsOutlier.Items)
-				item.Value.Should().BeGreaterThan(0);
+				item.Should().NotBeNull();
 		}
 	}
 }

@@ -147,7 +147,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			{
 				var stablePercentage = item.BucketScript("stable_percentage");
 				stablePercentage.Should().NotBeNull();
-				stablePercentage.Value.Should().BeGreaterThan(0);
+				stablePercentage.Value.Should().HaveValue();
 			}
 		}
 	}
