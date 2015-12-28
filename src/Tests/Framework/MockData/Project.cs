@@ -60,9 +60,7 @@ namespace Tests.Framework.MockData
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
-			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 },
-			Suggest = Projects.First().Suggest,
-			State = Projects.First().State
+			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
 		};
 
 		public static object InstanceAnonymous = new
