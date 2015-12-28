@@ -66,18 +66,11 @@ namespace Tests.Framework.MockData
 		public static object InstanceAnonymous = new
 		{
 			name = Projects.First().Name,
-			state = Enum.GetName(typeof(StateOfBeing), Instance.State),
+			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
-			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon },
-			suggest = new
-			{
-				context = Instance.Suggest.Context,
-				input = Instance.Suggest.Input,
-				output = Instance.Suggest.Output,
-				payload = Instance.Suggest.Payload
-			}
+			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
 		};
 	}
 
