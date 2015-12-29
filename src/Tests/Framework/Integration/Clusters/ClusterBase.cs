@@ -11,7 +11,8 @@ namespace Tests.Framework.Integration
 
 		protected ClusterBase()
 		{
-			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning);
+			var name = this.GetType().Name.Replace("Cluster", "");
+			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name);
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
 				this.Boostrap();

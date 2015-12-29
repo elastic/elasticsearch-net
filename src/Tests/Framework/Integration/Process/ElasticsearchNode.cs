@@ -18,7 +18,7 @@ namespace Tests.Framework.Integration
 	public class ElasticsearchNode : IDisposable
 	{
 		private static readonly object _lock = new object();
-		// <installpath> <> <plugin folder name>
+		// <installpath> <> <plugin folder prefix>
 		private readonly Dictionary<string, string> SupportedPlugins = new Dictionary<string, string>
 		{
 			{ "delete-by-query", "delete-by-query" },
@@ -37,8 +37,9 @@ namespace Tests.Framework.Integration
 
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
-		public string ClusterName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
-		public string NodeName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
+		public string Prefix { get; set; }
+		public string ClusterName { get; }
+		public string NodeName { get; }
 		public string RepositoryPath { get; private set; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
@@ -46,11 +47,16 @@ namespace Tests.Framework.Integration
 		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
-		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpawnIfAlreadyRunning)
+		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpawnIfAlreadyRunning, string prefix)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
+			this.Prefix = prefix.ToLowerInvariant();
+			this.ClusterName = $"{this.Prefix}-cluster-{Guid.NewGuid().ToString("N").Substring(0, 6)}";
+			this.NodeName = $"{this.Prefix}-node-{Guid.NewGuid().ToString("N").Substring(0, 6)}";
+
+
 			this.BootstrapWork = _blockingSubject;
 
 			if (!runningIntegrations)
