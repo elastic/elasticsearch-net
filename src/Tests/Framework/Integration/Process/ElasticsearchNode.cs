@@ -80,7 +80,6 @@ namespace Tests.Framework.Integration
 
 		public IObservable<ElasticsearchMessage> Start()
 		{
-
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
@@ -114,8 +113,6 @@ namespace Tests.Framework.Integration
 					}
 				}
 			}
-
-			InstallPlugins();
 
 			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
@@ -182,11 +179,14 @@ namespace Tests.Framework.Integration
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
+					Console.WriteLine($"Download elasticsearch: {this.Version} ...");
 					new WebClient().DownloadFile(downloadUrl, localZip);
+					Console.WriteLine($"Downloaded elasticsearch: {this.Version}");
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
+					Console.WriteLine($"Unziping elasticsearch: {this.Version} ...");
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 
@@ -229,6 +229,7 @@ namespace Tests.Framework.Integration
 				// assume plugin already installed
 				if (Directory.Exists(pluginFolder)) continue;
 
+				Console.WriteLine($"Installing elasticsearch plugin: {localPath} ...");
 				var timeout = TimeSpan.FromSeconds(60);
 				var handle = new ManualResetEvent(false);
 				Task.Run(() =>
@@ -236,14 +237,20 @@ namespace Tests.Framework.Integration
 					using (var p = new ObservableProcess(pluginBat, "install", installPath))
 					{
 						var o = p.Start();
-						o.Subscribe(Console.WriteLine,
+						Console.WriteLine($"Calling: {pluginBat} install {installPath}");
+						o.Subscribe(e=>Console.WriteLine(e),
 							(e) =>
 							{
+								Console.WriteLine($"Failed installing elasticsearch plugin: {localPath} ");
 								handle.Set();
 								throw e;
 							},
-							() => handle.Set()
-							);
+							() => {
+								Console.WriteLine($"Finished installing elasticsearch plugin: {localPath} exit code: {p.ExitCode}");
+								handle.Set();
+							});
+						if (!handle.WaitOne(timeout, true))
+							throw new ApplicationException($"Could not install ${installPath} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
