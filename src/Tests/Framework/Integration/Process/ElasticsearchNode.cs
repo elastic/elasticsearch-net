@@ -80,36 +80,33 @@ namespace Tests.Framework.Integration
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
-			    var client = new ElasticClient();
-			    var alreadyUp = client.RootNodeInfo();
+				var client = new ElasticClient();
+				var alreadyUp = client.RootNodeInfo();
 				if (alreadyUp.IsValid)
 				{
-				    var checkPlugins = client.CatPlugins();
+					var checkPlugins = client.CatPlugins();
 
-				    if (checkPlugins.IsValid)
-				    {
-				        foreach (var supportedPlugin in  SupportedPlugins)
-				        {
-				            if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
-				                throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
-				        }
+					if (checkPlugins.IsValid)
+					{
+						foreach (var supportedPlugin in SupportedPlugins)
+						{
+							if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
+								throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
+						}
 
-				        this.Started = true;
-				        this.Port = 9200;
-				        this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
-				        this._blockingSubject.OnNext(handle);
-				        if (!handle.WaitOne(timeout, true))
-				            throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
+						this.Started = true;
+						this.Port = 9200;
+						this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
+						this._blockingSubject.OnNext(handle);
+						if (!handle.WaitOne(timeout, true))
+							throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
 
-				        return Observable.Empty<ElasticsearchMessage>();
-				    }
+						return Observable.Empty<ElasticsearchMessage>();
+					}
 				}
 			}
 
-		    lock (_lock)
-		    {
-		        InstallPlugins();
-		    }
+			InstallPlugins();
 
 			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
@@ -207,10 +204,10 @@ namespace Tests.Framework.Integration
 				var localPath = plugin.Value;
 				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", localPath);
 
-                if (!Directory.Exists(this.RoamingClusterFolder)) continue;
+				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
 
-                // assume plugin already installed
-			    if (Directory.Exists(pluginFolder)) continue;
+				// assume plugin already installed
+				if (Directory.Exists(pluginFolder)) continue;
 
 				var timeout = TimeSpan.FromSeconds(60);
 				var handle = new ManualResetEvent(false);
