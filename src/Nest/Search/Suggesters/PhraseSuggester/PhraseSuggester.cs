@@ -69,6 +69,9 @@ namespace Nest
 		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, DirectGeneratorDescriptor<T>>[] generators) =>
 			Assign(a=>a.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList());
 
+		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) => 
+			Assign(a => a.RealWordErrorLikelihood = realWordErrorLikelihood);
+
 		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, PhraseSuggestHighlightDescriptor> selector) =>
 			Assign(a=> a.Highlight = selector?.Invoke(new PhraseSuggestHighlightDescriptor()));
 

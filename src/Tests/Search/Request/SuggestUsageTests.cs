@@ -74,7 +74,8 @@ namespace Tests.Search.Request
 						  new { field = "description" }
 						},
 						field = "name",
-						gram_size = 1
+						gram_size = 1,
+						real_word_error_likelihood = 0.5
 					  },
 					  text = "hello world"
 					} },
@@ -145,6 +146,7 @@ namespace Tests.Search.Request
 					.GramSize(1)
 					.Field(p => p.Name)
 					.Text("hello world")
+					.RealWordErrorLikelihood(0.5)
 				)
 			);
 
@@ -214,6 +216,7 @@ namespace Tests.Search.Request
 							},
 							GramSize = 1,
 							Field = "name",
+							RealWordErrorLikelihood = 0.5
 						}
 					} },
 				}
