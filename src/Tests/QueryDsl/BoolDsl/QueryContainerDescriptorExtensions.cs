@@ -21,7 +21,6 @@ namespace Tests.QueryDsl.BoolDsl
 				return c;
 
 			//query is conditionless but the container is marked as strict, throw exception
-			// TODO should this be an ElasticsearchClientException { Offender = ic }?
 			if (ic != null && ic.IsStrict)
 				throw new ArgumentException("Query is conditionless but strict is turned on");
 

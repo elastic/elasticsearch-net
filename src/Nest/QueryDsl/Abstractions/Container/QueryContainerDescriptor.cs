@@ -40,7 +40,6 @@ namespace Nest
 				return container;
 
 			//query is conditionless but the container is marked as strict, throw exception
-			// TODO should this be an ElasticsearchClientException { Offender = query }?
 			if (this.IsStrict)
 				throw new ArgumentException("Query is conditionless but strict is turned on");
 
