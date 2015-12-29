@@ -54,7 +54,6 @@ namespace Nest
 
 		TDocument IPercolateCountRequest<TDocument>.Document { get; set; }
 
-		//TODO Discuss: these dictionaries seem badly typed
 		IList<ISort> IPercolateOperation.Sort { get; set; }
 		AggregationDictionary IPercolateOperation.Aggregations { get; set; }
 

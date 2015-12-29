@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 
 namespace Elasticsearch.Net
 {
-	/// TODO Discuss: TraceEnabled and MetricsEnabled no longer used
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
@@ -68,16 +67,6 @@ namespace Elasticsearch.Net
 		string ProxyUsername { get; }
 		string ProxyPassword { get; }
 		
-		/// <summary>
-		/// When set connection information is written on the trace output 
-		/// </summary>
-		bool TraceEnabled { get; }
-
-		/// <summary>
-		/// When enabled, the client will gather as many interesting metrics as it can.
-		/// </summary>
-		bool MetricsEnabled { get; }
-
 		/// <summary>
 		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
 		/// Also forces the client to send out formatted json. Defaults to false

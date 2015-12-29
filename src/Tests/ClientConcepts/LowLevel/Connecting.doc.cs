@@ -66,7 +66,6 @@ namespace Tests.ClientConcepts.LowLevel
 			//endhide
 
 			var config = new ConnectionConfiguration(connectionPool)
-				.EnableTrace()
 				.DisableDirectStreaming()
 				.SetBasicAuthentication("user", "pass")
 				.RequestTimeout(TimeSpan.FromSeconds(5));
@@ -91,14 +90,6 @@ namespace Tests.ClientConcepts.LowLevel
 				/**
 				 * Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured 
 				 * to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
-				*/
-
-				.EnableMetrics()
-				/** Enable more meta data to be returned per API call about requests (ping, sniff, failover, and general stats). */
-
-				.EnableTrace()
-				/**
-				* Will cause `Elasticsearch.Net` to write connection debug information on the TRACE output of your application.
 				*/
 
 				.DisableDirectStreaming()

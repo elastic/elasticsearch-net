@@ -10,7 +10,7 @@ namespace Elasticsearch.Net
 	{
 		private readonly SemaphoreSlim _semaphore;
 
-		//TODO Discuss: which should be public?
+		//TODO should all of these be public?
 		public TConnectionSettings Settings { get; }
 		public IDateTimeProvider DateTimeProvider { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }

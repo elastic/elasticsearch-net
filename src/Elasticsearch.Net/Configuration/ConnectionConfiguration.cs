@@ -88,9 +88,6 @@ namespace Elasticsearch.Net
 		private bool _disableDirectStreaming = false;
 		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
 
-		private bool _enableMetrics = false;
-		bool IConnectionConfigurationValues.MetricsEnabled => _enableMetrics;
-
 		private bool _disableAutomaticProxyDetection = false;
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
 
@@ -108,9 +105,6 @@ namespace Elasticsearch.Net
 
 		private bool _enableHttpCompression;
 		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
-
-		private bool _traceEnabled;
-		bool IConnectionConfigurationValues.TraceEnabled => _traceEnabled;
 
 		private bool _httpPipeliningEnabled = true;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
@@ -192,17 +186,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
-		/// <summary>
-		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
-		/// </summary>
-		public T EnableTrace(bool enabled = true) => Assign(a => this._traceEnabled = enabled);
-
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(a => a._disableAutomaticProxyDetection = disable);
-
-		/// <summary>
-		/// By enabling metrics more metadata is returned per API call about requests (ping, sniff, failover) and general stats
-		/// </summary>
-		public T EnableMetrics(bool enabled = true) => Assign(a => a._enableMetrics = enabled);
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an exception

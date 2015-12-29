@@ -5,7 +5,8 @@
 		Time Scroll { get; set; }
 	}
 	
-	//TODO Discuss: signal to codegen to not generate constructors for this one
+	//TODO signal to codegen to not generate constructors for this one
+	// Expose scroll id as a property to send via the body
 	public partial class ScrollRequest 
 	{
 		public Time Scroll { get; set; }
