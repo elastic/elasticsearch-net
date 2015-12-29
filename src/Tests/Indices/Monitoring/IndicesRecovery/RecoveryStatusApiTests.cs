@@ -13,8 +13,8 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 		public RecoveryStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.RecoveryStatus(Static.AllIndices, f),
-			fluentAsync: (client, f) => client.RecoveryStatusAsync(Static.AllIndices, f),
+			fluent: (client, f) => client.RecoveryStatus(Infer.AllIndices, f),
+			fluentAsync: (client, f) => client.RecoveryStatusAsync(Infer.AllIndices, f),
 			request: (client, r) => client.RecoveryStatus(r),
 			requestAsync: (client, r) => client.RecoveryStatusAsync(r)
 		);
@@ -26,6 +26,6 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 
 		protected override Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> Fluent => d => d;
 
-		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Static.AllIndices);
+		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Infer.AllIndices);
 	}
 }

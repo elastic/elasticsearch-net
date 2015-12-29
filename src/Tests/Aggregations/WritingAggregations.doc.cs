@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Aggregations
 {

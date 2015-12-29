@@ -5,8 +5,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	//TODO rename to Infer?
-	public static class Static
+	public static class Infer
 	{
 		public static IndexName Index(IndexName index) => index;
 		public static IndexName Index<T>() => typeof(T);

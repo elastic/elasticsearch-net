@@ -21,7 +21,7 @@ namespace Profiling.Async
 			{
 				var bulkResponse = await client.BulkAsync(b => b
 					.IndexMany(Developer.Generator.Generate(_itemsPerIteration), (bd, d) => bd
-						.Index(Static.Index<Developer>())
+						.Index(Infer.Index<Developer>())
 						.Document(d)
 					)).ConfigureAwait(false);
 

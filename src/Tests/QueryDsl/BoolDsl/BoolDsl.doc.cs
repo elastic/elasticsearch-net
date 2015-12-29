@@ -5,7 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Tests.QueryDsl.BoolDsl.Operators;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.QueryDsl.BoolDsl
 {

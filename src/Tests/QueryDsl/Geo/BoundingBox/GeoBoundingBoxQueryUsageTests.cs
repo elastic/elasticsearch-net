@@ -38,7 +38,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Static.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.Location),
 			BoundingBox = new Nest.BoundingBox
 			{
 				TopLeft = new GeoLocation(34,-34),

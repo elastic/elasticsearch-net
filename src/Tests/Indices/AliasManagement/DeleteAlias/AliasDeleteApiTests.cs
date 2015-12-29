@@ -11,7 +11,7 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteAliasApiTests : ApiIntegrationTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
-		private Names Names => Static.Names(CallIsolatedValue + "-alias");
+		private Names Names => Infer.Names(CallIsolatedValue + "-alias");
 
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
 		{
@@ -23,8 +23,8 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 
 		public DeleteAliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteAlias(Static.AllIndices, Names),
-			fluentAsync: (client, f) => client.DeleteAliasAsync(Static.AllIndices, Names),
+			fluent: (client, f) => client.DeleteAlias(Infer.AllIndices, Names),
+			fluentAsync: (client, f) => client.DeleteAliasAsync(Infer.AllIndices, Names),
 			request: (client, r) => client.DeleteAlias(r),
 			requestAsync: (client, r) => client.DeleteAliasAsync(r)
 		);
@@ -36,6 +36,6 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<DeleteAliasDescriptor, IDeleteAliasRequest> Fluent => null;
-		protected override DeleteAliasRequest Initializer => new DeleteAliasRequest(Static.AllIndices, Names);
+		protected override DeleteAliasRequest Initializer => new DeleteAliasRequest(Infer.AllIndices, Names);
 	}
 }

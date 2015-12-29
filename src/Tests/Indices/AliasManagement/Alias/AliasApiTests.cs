@@ -52,7 +52,7 @@ namespace Tests.Indices.AliasManagement.Alias
 			Actions = new List<IAliasAction>
 			{
 				new AliasAddAction { Add = new AliasAddOperation {Alias = "alias", Index = CallIsolatedValue, IndexRouting = "x", SearchRouting = "y"} },
-				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Static.Index(CallIsolatedValue) }},
+				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Infer.Index(CallIsolatedValue) }},
 			}
 		};
 	}

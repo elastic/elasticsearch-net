@@ -12,7 +12,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 	[Collection(IntegrationContext.ReadOnly)]
 	public class GetAliasApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private readonly static Names Names = Static.Names("alias, x", "y");
+		private readonly static Names Names = Infer.Names("alias, x", "y");
 
 		public GetAliasApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		
@@ -37,6 +37,6 @@ namespace Tests.Indices.AliasManagement.GetAlias
 			.AllIndices()
 			.Name(Names)
 		;
-		protected override GetAliasRequest Initializer => new GetAliasRequest(Static.AllIndices, Names);
+		protected override GetAliasRequest Initializer => new GetAliasRequest(Infer.AllIndices, Names);
 	}
 }

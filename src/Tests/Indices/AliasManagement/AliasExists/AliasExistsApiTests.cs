@@ -5,7 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.AliasManagement.AliasExists
 {

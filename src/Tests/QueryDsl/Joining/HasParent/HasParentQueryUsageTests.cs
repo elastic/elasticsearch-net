@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Type = Static.Type<Developer>(),
+			Type = Infer.Type<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			Query = new MatchAllQuery(),
 			ScoreMode = ParentScoreMode.Score
