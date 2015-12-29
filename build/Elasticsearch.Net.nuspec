@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Elasticsearch.Net</id>
-		<version>1.5.1</version>
+		<version>1.7.0-ci20151229154856</version>
 		<title>Elasticsearch.Net - official low level elasticsearch client</title>
 		<authors>Elasticsearch Inc. and contributors</authors>
 		<owners>Elasticsearch Inc.</owners>

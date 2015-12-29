@@ -58,7 +58,7 @@ namespace Tests.Search.MultiSearch
 			}
 		};
 
-		[U] public Task AssertResponse() => AssertOnAllResponses(r =>
+		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
 			r.TotalResponses.Should().Be(3);
 

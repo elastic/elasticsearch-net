@@ -30,6 +30,7 @@ module Tests =
             } )
 
     let RunAllIntegrationTests(commaSeparatedEsVersions) =
+        ActivateBuildFailureTarget "NotifyTestFailures"
         let esVersions = 
             match commaSeparatedEsVersions with
             | "" ->
@@ -48,7 +49,7 @@ module Tests =
                         TimeOut = TimeSpan.FromMinutes(30.0)
                 })
 
-    let NotifyReal = fun _ ->
+    let Notify = fun _ ->
         match fileExists xmlOutput with
         | false -> ignore
         | _ ->
@@ -79,18 +80,15 @@ module Tests =
             | 0 ->
                 let successMessage = sprintf "\"All %i tests are passing!\"" total
                 printfn "%s" successMessage
-                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
+                if isLocalBuild then
+                    Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
                 ignore
             | _ ->
                 let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
                 printfn "%s" errorMessage
-                Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
+                if isLocalBuild then
+                    Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
                 ignore
-
-    let Notify = fun _ -> 
-        match isLocalBuild with
-        | false -> ignore
-        | _ -> NotifyReal()
 
     let RunContinuous = fun _ ->
         ActivateBuildFailureTarget "NotifyTestFailures"
