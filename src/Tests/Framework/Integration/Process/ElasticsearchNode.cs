@@ -88,7 +88,7 @@ namespace Tests.Framework.Integration
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
-				var client = new ElasticClient();
+				var client = TestClient.GetClient();
 				var alreadyUp = client.RootNodeInfo();
 				if (alreadyUp.IsValid)
 				{
