@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.MockData;
@@ -109,36 +110,7 @@ namespace Tests.Framework.Integration
 					.Alias("projects-alias")
 				)
 				.Mappings(map => map
-					.Map<Project>(m => m
-						.Properties(props => props
-							.String(s => s
-								.Name(p => p.Name).NotAnalyzed()
-								.Fields(fs => fs
-									.Completion(cm => cm.Name("suggest"))
-								)
-							)
-							.Date(d => d.Name(p => p.StartedOn))
-							.String(d => d.Name(p => p.State).NotAnalyzed())
-							.Nested<Tag>(mo => mo
-								.Name(p => p.Tags)
-								.Properties(TagProperties)
-							)
-							.Object<Developer>(o => o
-								.Name(p => p.LeadDeveloper)
-								.Properties(DeveloperProperties)
-							)
-							.GeoPoint(g => g.Name(p => p.Location))
-							.Completion(cm => cm
-								.Name(p => p.Suggest)
-								.Payloads()
-								.Context(cnt => cnt
-									.Category("color", cat => cat
-										.Default("red")
-									)
-								)					
-							)
-						)
-					)
+					.Map<Project>(MapProject)
 					.Map<CommitActivity>(m => m
 						.Parent<Project>()
 						.Properties(props => props
@@ -153,6 +125,36 @@ namespace Tests.Framework.Integration
 				);
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
+
+		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
+			.Properties(props => props
+				.String(s => s
+					.Name(p => p.Name).NotAnalyzed()
+					.Fields(fs => fs
+						.Completion(cm => cm.Name("suggest"))
+					)
+				)
+				.Date(d => d.Name(p => p.StartedOn))
+				.String(d => d.Name(p => p.State).NotAnalyzed())
+				.Nested<Tag>(mo => mo
+					.Name(p => p.Tags)
+					.Properties(TagProperties)
+				)
+				.Object<Developer>(o => o
+					.Name(p => p.LeadDeveloper)
+					.Properties(DeveloperProperties)
+				)
+				.GeoPoint(g => g.Name(p => p.Location))
+				.Completion(cm => cm
+					.Name(p => p.Suggest)
+					.Payloads()
+					.Context(cnt => cnt
+						.Category("color", cat => cat
+							.Default("red")
+						)
+					)
+				)
+			);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
 			.String(s => s

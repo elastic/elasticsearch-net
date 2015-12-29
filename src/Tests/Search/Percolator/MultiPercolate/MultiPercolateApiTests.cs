@@ -11,14 +11,24 @@ using Xunit;
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(IntegrationContext.Indexing)]
 	public class MultiPercolateApiTests : ApiIntegrationTestBase<IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
-		public MultiPercolateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MultiPercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		public string Index => this.CallIsolatedValue + "-index";
+
+		protected override void OnBeforeCall(IElasticClient client)
 		{
+			var createIndex = this.Client.CreateIndex(this.Index, c=>c
+				.Mappings(mm=>mm
+					.Map<Project>(Seeder.MapProject)
+				)
+			);
+			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
+			this.Client.Index(Project.Instance, s => s.Index(this.Index));
 			var registerPercolator = this.Client.RegisterPercolator<Project>("match_all", r => r
+				.Index(this.Index)
 				.Query(q => q.MatchAll())
 			);
 		}
@@ -31,9 +41,9 @@ namespace Tests.Search.Percolator.MultiPercolate
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => false; //three out of 4 responses have an error
+		protected override bool ExpectIsValid => true; 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_mpercolate";
+		protected override string UrlPath => $"/{this.Index}/project/_mpercolate";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -46,39 +56,37 @@ namespace Tests.Search.Percolator.MultiPercolate
 		};
 
 		protected override Func<MultiPercolateDescriptor, IMultiPercolateRequest> Fluent => m => m
-			.Index(typeof(Project))
+			.Index(this.Index)
 			.Type(typeof(Project))
-			.Percolate<Project>(p => p.Document(Project.Instance))
-			.Count<Project>(p => p.Document(Project.Instance));
+			.Percolate<Project>(p => p.Document(Project.Instance).Index(this.Index))
+			.Count<Project>(p => p.Document(Project.Instance).Index(this.Index));
 
-		protected override MultiPercolateRequest Initializer => new MultiPercolateRequest(typeof(Project), typeof(Project))
+		protected override MultiPercolateRequest Initializer => new MultiPercolateRequest(this.Index, typeof(Project))
 		{
 			Percolations = new List<IPercolateOperation>
 			{
-				new PercolateRequest<Project>(Project.Instance),
-				new PercolateCountRequest<Project>(Project.Instance)
+				new PercolateRequest<Project>(Project.Instance, this.Index),
+				new PercolateCountRequest<Project>(Project.Instance, this.Index) 
 			}
 		};
 
 		protected override void ExpectResponse(IMultiPercolateResponse response)
 		{
 			var responses = response.Responses.ToList();
-			responses.Should().HaveCount(4);
-			foreach (var r in responses.Skip(1))
+			responses.Should().HaveCount(2);
+			foreach (var r in responses)
 			{
-				r.IsValid.Should().BeFalse();
-				r.ServerError.Should().NotBeNull();
-				r.ServerError.Error.Should().NotBeNull();
-
+				r.IsValid.Should().BeTrue();
+				r.Total.Should().BeGreaterThan(0);
 			}
-			responses[1].ServerError.Error.Reason.Should().Be("no such index");
-			responses[1].ServerError.Error.Type.Should().Be("index_not_found_exception");
 
-			var validResponse = responses.First();
-			validResponse.IsValid.Should().BeTrue();
-			validResponse.Matches.Should().NotBeNull().And.BeEmpty();
-			validResponse.Shards.Should().NotBeNull();
-			validResponse.Shards.Total.Should().Be(validResponse.Shards.Successful);
+			responses[0].Matches.Should().NotBeEmpty().And.HaveCount(1);
+			foreach(var m in responses[0].Matches)
+			{
+				m.Id.Should().NotBeNullOrEmpty();
+				m.Index.Should().NotBeNullOrEmpty();
+			}
+
 		}
 	}
 }

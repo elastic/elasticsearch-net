@@ -28,6 +28,13 @@ namespace Nest
 		public PercolateCountRequest() : this(typeof(TDocument), typeof(TDocument)) { }
 		public PercolateCountRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
 
+		partial void DocumentFromPath(TDocument document)
+		{
+			Self.Document = document;
+			if (Self.Document != null)
+				Self.RouteValues.Remove("id");
+		}
+
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
 			return this.RequestState.RequestParameters;

@@ -7,14 +7,16 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Static;
 
 namespace Tests.Search.Percolator.Percolate
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class PercolateApiTests
-		: ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	[Collection(IntegrationContext.Indexing)]
+	public class PercolateApiTests : ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
-		public PercolateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private string Index => this.CallIsolatedValue + "-index";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.Percolate(f),
@@ -26,12 +28,12 @@ namespace Tests.Search.Percolator.Percolate
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/project/_percolate";
+		protected override string UrlPath => $"/{this.Index}/project/_percolate";
 
-		protected override PercolateDescriptor<Project> NewDescriptor() => new PercolateDescriptor<Project>(typeof(Project), typeof(Project));
+		protected override PercolateDescriptor<Project> NewDescriptor() => new PercolateDescriptor<Project>(this.Index, typeof(Project));
 
 		protected override bool SupportsDeserialization => false;
-	
+
 		protected override object ExpectJson => new
 		{
 			doc = Project.InstanceAnonymous
@@ -39,7 +41,6 @@ namespace Tests.Search.Percolator.Percolate
 
 		protected override void ExpectResponse(IPercolateResponse response)
 		{
-			response.Took.Should().BeGreaterThan(0);
 			response.Total.Should().BeGreaterThan(0);
 			response.Matches.Should().NotBeNull();
 			response.Matches.Count().Should().BeGreaterThan(0);
@@ -52,24 +53,23 @@ namespace Tests.Search.Percolator.Percolate
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			var register = this.Client.RegisterPercolator<Project>(PercolatorId, r => r
-				.Query(q => q
-					.MatchAll()
-				)
+				.Index(this.Index)
+				.Query(q => q .MatchAll())
 			);
 		}
 
 		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => c => c
+			.Index(this.Index)
 			.Document(Project.Instance);
 
-		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>
+		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>(Index, Type<Project>())
 		{
 			Document = Project.Instance
-        };
+		};
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PercolateExistingDocApiTests
-		: ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	public class PercolateExistingDocApiTests : ApiTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
 		public PercolateExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -82,8 +82,6 @@ namespace Tests.Search.Percolator.Percolate
 
 		private string _percId = Project.Instance.Name;
 
-		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"project/project/{_percId}/_percolate";
 
