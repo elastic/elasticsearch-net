@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Reflection;
 
 namespace Purify
@@ -180,8 +181,20 @@ namespace Purify
 				var pathEnd = queryPos == -1 ? fragPos : queryPos;
 				if (pathEnd == -1)
 					pathEnd = source.Length + 1;
+
+				if (start < pathEnd - 1 && source[start] == ':')
+				{
+					var portLength = uri.Port.ToString(CultureInfo.InvariantCulture).Length;
+					start += portLength + 1;
+				}
+
 				Path = queryPos > -1 ? source.Substring(start, pathEnd - start) : source.Substring(start);
-				Query = fragPos > -1 ? source.Substring(queryPos, fragPos - queryPos) : source.Substring(queryPos);
+
+				Query = fragPos > -1
+					? source.Substring(queryPos, fragPos - queryPos)
+					: queryPos > -1
+						? source.Substring(queryPos, (source.Length - queryPos))
+						: null;
 			}
 		}
 	}
