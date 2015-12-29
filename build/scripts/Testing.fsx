@@ -30,7 +30,6 @@ module Tests =
             } )
 
     let RunAllIntegrationTests(commaSeparatedEsVersions) =
-        ActivateBuildFailureTarget "NotifyTestFailures"
         let esVersions = 
             match commaSeparatedEsVersions with
             | "" ->
