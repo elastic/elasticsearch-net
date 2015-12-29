@@ -4,8 +4,6 @@ using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	/// TODO some of these settings are not used
-	/// this indicates they are not properly tested
 	public interface IRequestConfiguration 
 	{
 		/// <summary>
@@ -66,6 +64,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		CancellationToken CancellationToken { get; set; }
 	}
+
 	public class RequestConfiguration : IRequestConfiguration
 	{
 		public TimeSpan? RequestTimeout { get; set; }

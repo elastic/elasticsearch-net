@@ -61,7 +61,6 @@ namespace Nest
 	{
 		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
 
-		//TODO constructors
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
 		/// <inheritdoc/>
@@ -101,8 +100,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 	}
-
-	//TODO why is there no typed generated descriptor
 
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class

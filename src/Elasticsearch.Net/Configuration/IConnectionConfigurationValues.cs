@@ -3,8 +3,7 @@ using System.Collections.Specialized;
 
 namespace Elasticsearch.Net
 {
-	/// TODO SOME OF THESE ARE NO LONGER USED
-	/// this either means we broke something or something no longer applies
+	/// TODO Discuss: TraceEnabled and MetricsEnabled no longer used
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>

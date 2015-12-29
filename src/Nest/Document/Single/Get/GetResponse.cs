@@ -53,7 +53,7 @@ namespace Nest
 		{
 			get
 			{
-				//TODO fix field selections
+				//TODO High Priority: Fix field selections
 				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
 				//if (_fields != null)
 				//	return _fields;

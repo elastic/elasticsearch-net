@@ -33,7 +33,7 @@ namespace Nest
 		{
 			get
 			{
-				//TODO figure out a new way to get Fields 
+				//TODO High Priority: Figure out a new way to get Fields 
 				//should probably be serialized using its own constructor take the settings from the json serializer
 				throw new NotImplementedException("responses no longer have settings");
 				//if (this.Get == null) return null;

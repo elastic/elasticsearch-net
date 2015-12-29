@@ -72,7 +72,6 @@ namespace Nest
 			if (query == null)
 				return this;
 
-			// TODO should this be an ElasticsearchClientException?
 			if (this._Strict && query.IsConditionless)
 				throw new ArgumentException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
 

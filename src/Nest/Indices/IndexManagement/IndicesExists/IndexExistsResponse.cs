@@ -11,7 +11,7 @@ namespace Nest
 	[JsonObject]
 	public class ExistsResponse : BaseResponse, IExistsResponse
 	{
-		//TODO I think .Exists should proxy IsValid or be removed completely
+		//TODO Discuss: I think .Exists should proxy IsValid or be removed completely
 		internal ExistsResponse(IApiCallDetails apiCallDetails)
 		{
 			this.Exists = apiCallDetails.Success & apiCallDetails.HttpStatusCode == 200;

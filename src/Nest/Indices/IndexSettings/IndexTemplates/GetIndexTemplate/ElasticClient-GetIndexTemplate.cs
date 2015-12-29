@@ -30,7 +30,7 @@ namespace Nest
 
 	}
 
-	//TODO discuss with @gmarz changing this and other methods that can actually return multiple to plural form e.g GetIndexTemplates/GetIndexTemplates
+	//TODO Disucss: changing this and other methods that can actually return multiple to plural form e.g GetIndexTemplates/GetIndexTemplates
 	
 	public partial class ElasticClient
 	{

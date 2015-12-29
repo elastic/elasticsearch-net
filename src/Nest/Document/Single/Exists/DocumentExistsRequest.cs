@@ -11,7 +11,6 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 		where T : class
 	{
-		//TODO constructors
 	}
 
 	[DescriptorFor("Exists")]

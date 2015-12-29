@@ -19,8 +19,6 @@ namespace Nest
 		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
 
-	//TODO pass indices along on descriptor, we promote a more scoped fieldstats from the highlevel client
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>

@@ -74,7 +74,7 @@ namespace Nest
 			where T : class
 		{
 
-			//TODO figure out a new way to get MappingsFor<T>.
+			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
 			throw new NotImplementedException("responses no longer have settings");
 			//indexName = indexName ?? Settings.Inferrer.IndexName<T>();
 			//typeName = typeName ?? Settings.Inferrer.TypeName<T>();
@@ -110,16 +110,17 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(string fieldName)
 			where T : class
 		{
-			//TODO figure out a new way to get MappingsFor<T>.
+			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
 			throw new NotImplementedException("responses no longer have settings");
 			//var indexName = Settings.Inferrer.IndexName<T>();
 			//var typeName = Settings.Inferrer.TypeName<T>();
 			//return this.MappingFor(indexName, typeName, fieldName);
 		}
+
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
 			where T : class
 		{
-			//TODO figure out a new way to get MappingsFor<T>.
+			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
 			throw new NotImplementedException("responses no longer have settings");
 			//var path = Settings.Inferrer.Field(fieldName);
 			//return this.MappingFor<T>(path);

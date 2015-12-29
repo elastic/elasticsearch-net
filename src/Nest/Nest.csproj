@@ -1087,7 +1087,6 @@
     <Compile Include="Mapping\TermVectorOption.cs" />
     <Compile Include="Mapping\FieldIndexOption.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
-    <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
     <Compile Include="Cluster\ClusterPendingTasks\ElasticClient-ClusterPendingTasks.cs" />

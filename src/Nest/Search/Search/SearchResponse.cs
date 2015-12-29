@@ -110,7 +110,7 @@ namespace Nest
 		{
 			get 
 			{
-				//TODO fix field selections
+				//TODO High Priority: fix field selections
 				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
 				//return this.Hits
 				//	.Select(h => h.Fields)
