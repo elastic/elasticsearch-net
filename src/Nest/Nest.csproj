@@ -117,6 +117,15 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
+    <Compile Include="Cluster\ClusterState\AllocationId.cs" />
+    <Compile Include="Cluster\ClusterState\BlockState.cs" />
+    <Compile Include="Cluster\ClusterState\IndexRoutingTable.cs" />
+    <Compile Include="Cluster\ClusterState\MetadataIndexState.cs" />
+    <Compile Include="Cluster\ClusterState\MetadataState.cs" />
+    <Compile Include="Cluster\ClusterState\NodeState.cs" />
+    <Compile Include="Cluster\ClusterState\RoutingNodesState.cs" />
+    <Compile Include="Cluster\ClusterState\RoutingShard.cs" />
+    <Compile Include="Cluster\ClusterState\RoutingTableState.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\PerFieldAnalyzer\PerFieldAnalyzer.cs" />
     <Compile Include="CommonAbstractions\Extensions\JsonExtensions.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
@@ -862,7 +871,6 @@
     <Compile Include="CommonAbstractions\RawJson\RawJson.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateResponse.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkUpdateResponseItem.cs" />
-    <Compile Include="Cluster\ClusterState\ClusterState.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkUpdate.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\ChildScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />

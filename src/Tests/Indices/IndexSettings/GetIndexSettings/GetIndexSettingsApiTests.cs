@@ -29,7 +29,7 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			.Name("index.*")
 			.Local();
 
-		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Static.Index<Project>(), "index.*")
+		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<Project>(), "index.*")
 		{
 			Local = true
 		};

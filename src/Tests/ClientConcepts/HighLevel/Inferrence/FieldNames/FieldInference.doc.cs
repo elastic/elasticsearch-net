@@ -5,7 +5,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
-using static Nest.Static;
+using static Nest.Infer;
 using Field = Nest.Field;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames

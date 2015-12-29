@@ -280,7 +280,6 @@ namespace Elasticsearch.Net
 
 		private void ThrowBadAuthPipelineExceptionWhenNeeded<TReturn>(ElasticsearchResponse<TReturn> response)
 		{
-			//TODO TEST
 			if (response.HttpStatusCode == 401)
 				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException);
 		}

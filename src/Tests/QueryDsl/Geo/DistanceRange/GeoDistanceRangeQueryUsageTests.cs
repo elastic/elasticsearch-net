@@ -35,7 +35,7 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Static.Field<Project>(p=>p.Location),
+			Field = Infer.Field<Project>(p=>p.Location),
 			DistanceType = GeoDistanceType.Arc,
 			Coerce = true,
 			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),

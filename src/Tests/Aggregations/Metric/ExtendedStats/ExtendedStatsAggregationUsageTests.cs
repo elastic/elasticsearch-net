@@ -3,7 +3,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.ExtendedStats
 {

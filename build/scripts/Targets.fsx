@@ -89,6 +89,9 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 "QuickCompile"
   ==> "QuickTest"
 
+"QuickCompile"
+  ==> "Integrate"
+
 "WatchTests"
 
 "Build"

@@ -28,7 +28,7 @@ namespace Tests.QueryDsl.Geo.HashCell
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Static.Field<Project>(p=>p.Location),
+			Field = Infer.Field<Project>(p=>p.Location),
 			Location = new GeoLocation(13.4080, 52.5186),
 			Neighbors = true,
 			Precision = Nest.Distance.Meters(3)

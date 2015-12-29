@@ -11,10 +11,9 @@ namespace Elasticsearch.Net
 		/// </summary>
 		bool Success { get; }
 		
-		//TODO revalidate this summary when we refactor exceptions
 		/// <summary>
 		/// If Success is false this will hold the original exception.
-		/// Can be a CLR exception or a mapped server side exception (ElasticsearchServerException)
+		/// This will be the orginating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
 

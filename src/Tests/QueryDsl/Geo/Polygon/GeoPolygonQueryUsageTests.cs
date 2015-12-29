@@ -2,7 +2,7 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.QueryDsl.FullText.GeoPolygon
 {

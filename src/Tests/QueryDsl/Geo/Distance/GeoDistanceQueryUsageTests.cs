@@ -32,7 +32,7 @@ namespace Tests.QueryDsl.Geo.Distance
 		{
 			Boost = 1.1,
 			Name = "named_query",
-			Field = Static.Field<Project>(p => p.Location),
+			Field = Infer.Field<Project>(p => p.Location),
 			DistanceType = GeoDistanceType.Arc,
 			Coerce = true,
 			Location = new GeoLocation(34,-34),

@@ -27,7 +27,7 @@ namespace Tests.QueryDsl.Joining.HasChild
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Type = Static.Type<Developer>(),
+			Type = Infer.Type<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			MaxChildren = 5,
 			MinChildren = 1,
