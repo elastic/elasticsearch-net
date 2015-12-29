@@ -58,7 +58,7 @@ namespace Nest.Tests.Unit.Extensions
 		public void ParseElasticSearchTimeUnit_Success(string value, double timeInMillis)
 		{
 			// act
-			Assert.That(value.ToTimeSpan().Value.TotalMilliseconds, Is.EqualTo(timeInMillis));
+			Assert.That(value.ToTimeSpan().Value.TotalMilliseconds, Is.EqualTo(timeInMillis), value + " was not this many milliseconds" + timeInMillis);
 		}
 
 		[TestCase(null)]

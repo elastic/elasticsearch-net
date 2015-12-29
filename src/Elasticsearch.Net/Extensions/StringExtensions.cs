@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Globalization;
 
 namespace Elasticsearch.Net
 {
@@ -27,47 +28,57 @@ namespace Elasticsearch.Net
 			return queryParameters;
 		}
 
+		internal static long ParseInvariant(string s)
+		{
+			return long.Parse(s, NumberStyles.Any, CultureInfo.InvariantCulture);
+		}
+
+		internal static double ParseInvariantDouble(string s)
+		{
+			return double.Parse(s, NumberStyles.Any, CultureInfo.InvariantCulture);
+		}
+
 		internal static TimeSpan? ToTimeSpan(this string s)
 		{
 			if (s.IsNullOrEmpty())
 				return null;
-		    try
-		    {
-		        long millis;
-		        if (s.EndsWith("S"))
-		        {
-		            millis = long.Parse(s.Substring(0, s.Length - 1));
-		        }
-		        else if (s.EndsWith("ms"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 2)));
-		        }
-		        else if (s.EndsWith("s"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*1000);
-		        }
-		        else if (s.EndsWith("m"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*60*1000);
-		        }
-		        else if (s.EndsWith("H") || s.EndsWith("h"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*60*60*1000);
-		        }
-		        else if (s.EndsWith("d"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*24*60*60*1000);
-		        }
-		        else if (s.EndsWith("w"))
-		        {
-		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*7*24*60*60*1000);
-		        }
-		        else
-		        {
-		            millis = long.Parse(s);
-		        }
-		        return TimeSpan.FromMilliseconds(millis);
-		    }
+			try
+			{
+				long millis;
+				if (s.EndsWith("S"))
+				{
+					millis = ParseInvariant(s.Substring(0, s.Length - 1));
+				}
+				else if (s.EndsWith("ms"))
+				{
+					millis = (long) ParseInvariantDouble(s.Substring(0, s.Length - 2));
+				}
+				else if (s.EndsWith("s"))
+				{
+					millis = (long) (ParseInvariantDouble(s.Substring(0, s.Length - 1)) * 1000);
+				}
+				else if (s.EndsWith("m"))
+				{
+					millis = (long) (ParseInvariantDouble(s.Substring(0, s.Length - 1)) * 60 * 1000);
+				}
+				else if (s.EndsWith("H") || s.EndsWith("h"))
+				{
+					millis = (long) (ParseInvariantDouble(s.Substring(0, s.Length - 1)) * 60 * 60 * 1000);
+				}
+				else if (s.EndsWith("d"))
+				{
+					millis = (long) (ParseInvariantDouble(s.Substring(0, s.Length - 1)) * 24 * 60 * 60 * 1000);
+				}
+				else if (s.EndsWith("w"))
+				{
+					millis = (long) (ParseInvariantDouble(s.Substring(0, s.Length - 1)) * 7 * 24 * 60 * 60 * 1000);
+				}
+				else
+				{
+					millis = long.Parse(s, NumberStyles.Any, CultureInfo.InvariantCulture);
+				}
+				return TimeSpan.FromMilliseconds(millis);
+			}
 			catch (FormatException)
 			{
 				return null;

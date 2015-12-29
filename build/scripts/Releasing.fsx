@@ -25,6 +25,7 @@ type Release() =
           {p with 
             Version = Versioning.FileVersion
             WorkingDir = "build" 
+            ToolPath = "build/tools/nuget/nuget.exe"
             OutputPath = dir
           })
           package
