@@ -38,11 +38,8 @@ namespace Nest
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
 		
-		//TODO in NEST 2.0 make the property itself double?
-		//validate whether score is alway written in ES or not
 		[JsonProperty(PropertyName = "_score")]
-		internal double? _score { get; set; }
-		public double Score { get { return _score.GetValueOrDefault(0); } }
+		public double Score { get; set; }
 
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
