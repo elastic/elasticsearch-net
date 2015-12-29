@@ -141,12 +141,26 @@ namespace Tests.ClientConcepts.LowLevel
 				 * (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx).
 				*/
 
-				//TODO document this properly once we figure out exceptions
 				.ThrowExceptions()
 				/**
-				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 
-				 * an `ElasticsearchServerException` when a call resulted in an exception on the Elasticsearch server. Reasons for 
-				 * such exceptions could be search parser errors and index missing exceptions.
+				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to throw 
+				* exceptions. 
+				*
+				* There are three category of exceptions thay may be thrown:
+				*  
+				* 1) ElasticsearchClientException: These are known exceptions, either an exception that occurred in the request pipeline
+				* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
+				* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
+				* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
+				* root causing exception.
+				*                                  
+				* 2) UnexpectedElasticsearchClientException:  These are unknown exceptions, for instance a response from Elasticsearch not
+				* properly deserialized.  These are usually bugs and should be reported.  This excpetion also inherits from ElasticsearchClientException
+				* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
+				*
+				* 3) Development time exceptions: These are CLR exceptions like ArgumentException, NullArgumentException etc... that are thrown
+				* when an API in the client is misused.  These should not be handled as you want to know about them during development.
+				*
 				*/
 
 				.PrettyJson()
