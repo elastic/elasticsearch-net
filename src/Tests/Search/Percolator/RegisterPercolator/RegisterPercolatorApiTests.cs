@@ -11,8 +11,7 @@ using Xunit;
 namespace Tests.Search.Percolator.RegisterPercolator
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class RegisterPercolatorApiTests
-		: ApiIntegrationTestBase<IRegisterPercolateResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolateResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
 		public RegisterPercolatorApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

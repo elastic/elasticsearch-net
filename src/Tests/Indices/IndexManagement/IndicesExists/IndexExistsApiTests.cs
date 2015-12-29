@@ -8,10 +8,10 @@ using static Nest.Static;
 
 namespace Tests.Indices.IndexManagement.IndicesExists
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class IndexExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
-		public IndexExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.IndexExists(Index<Project>()),
 			fluentAsync: (client, f) => client.IndexExistsAsync(Index<Project>()),
