@@ -44,14 +44,14 @@ namespace Tests.Search.Percolator.Percolate
 			response.Matches.Should().NotBeNull();
 			response.Matches.Count().Should().BeGreaterThan(0);
 			var match = response.Matches.First();
-			match.Id.Should().Be(_percolatorId);
+			match.Id.Should().Be(PercolatorId);
 		}
 
-		private string _percolatorId = RandomString();
+		private static readonly string PercolatorId = RandomString();
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var register = this.Client.RegisterPercolator<Project>(_percolatorId, r => r
+			var register = this.Client.RegisterPercolator<Project>(PercolatorId, r => r
 				.Query(q => q
 					.MatchAll()
 				)

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -79,18 +80,36 @@ namespace Tests.Framework.Integration
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
-				var alreadyUp = new ElasticClient().RootNodeInfo();
+			    var client = new ElasticClient();
+			    var alreadyUp = client.RootNodeInfo();
 				if (alreadyUp.IsValid)
 				{
-					this.Started = true;
-					this.Port = 9200;
-					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
-					this._blockingSubject.OnNext(handle);
-					if (!handle.WaitOne(timeout, true))
-						throw new ApplicationException($"Could launch tests on already running elasticsearch within {timeout}");
-					return Observable.Empty<ElasticsearchMessage>();
+				    var checkPlugins = client.CatPlugins();
+
+				    if (checkPlugins.IsValid)
+				    {
+				        foreach (var supportedPlugin in  SupportedPlugins)
+				        {
+				            if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
+				                throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
+				        }
+
+				        this.Started = true;
+				        this.Port = 9200;
+				        this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
+				        this._blockingSubject.OnNext(handle);
+				        if (!handle.WaitOne(timeout, true))
+				            throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
+
+				        return Observable.Empty<ElasticsearchMessage>();
+				    }
 				}
 			}
+
+		    lock (_lock)
+		    {
+		        InstallPlugins();
+		    }
 
 			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
@@ -177,7 +196,6 @@ namespace Tests.Framework.Integration
 				var stopwords = Path.Combine(analysFolder, "stopwords") + ".txt";
 				if (!File.Exists(stopwords)) File.WriteAllText(stopwords, "");
 			}
-
 		}
 
 		private void InstallPlugins()
@@ -187,12 +205,16 @@ namespace Tests.Framework.Integration
 			{
 				var installPath = plugin.Key;
 				var localPath = plugin.Value;
-				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "bin", "plugins", localPath);
-				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
+				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", localPath);
+
+                if (!Directory.Exists(this.RoamingClusterFolder)) continue;
+
+                // assume plugin already installed
+			    if (Directory.Exists(pluginFolder)) continue;
 
 				var timeout = TimeSpan.FromSeconds(60);
 				var handle = new ManualResetEvent(false);
-				Task.Factory.StartNew(() =>
+				Task.Run(() =>
 				{
 					using (var p = new ObservableProcess(pluginBat, "install", installPath))
 					{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -22,11 +23,19 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 			);
 			if (!createRepository.IsValid)
 				throw new Exception("Setup: failed to create snapshot repository");
-			var snapshot = this.Client.Snapshot(RepositoryName, SnapshotName, s => s
-				.WaitForCompletion()
-			);
-			if (!snapshot.IsValid)
-				throw new Exception("Setup: snapshot failed");
+
+		    var getSnapshotResponse = this.Client.GetSnapshot(RepositoryName, SnapshotName);
+
+		    if ((!getSnapshotResponse.IsValid && getSnapshotResponse.ApiCall.HttpStatusCode == 404) || 
+                !getSnapshotResponse.Snapshots.Any())
+		    {
+                    var snapshot = this.Client.Snapshot(RepositoryName, SnapshotName, s => s
+                        .WaitForCompletion()
+                    );
+
+                    if (!snapshot.IsValid)
+                        throw new Exception($"Setup: snapshot failed. {snapshot.OriginalException}. {snapshot.ServerError?.Error}");
+		    }
 		}
 
 		private static string RepositoryName { get; } = RandomString();
