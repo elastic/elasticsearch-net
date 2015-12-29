@@ -40,12 +40,13 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            !! Paths.Source("**/bin/Release/Tests.dll") 
+            !! Paths.Source("**/Tests/bin/Release/Tests.dll") 
                 |> xUnit2 (fun p -> 
                 { 
                     p with 
                         XmlOutputPath = Some <| xmlOutput 
                         HtmlOutputPath = Some <| htmlOutput 
+                        TimeOut = TimeSpan.FromMinutes(30.0)
                 })
 
     let NotifyReal = fun _ ->

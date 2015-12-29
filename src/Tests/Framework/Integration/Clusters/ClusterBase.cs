@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Specialized;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Framework.Integration
@@ -25,10 +27,6 @@ namespace Tests.Framework.Integration
 
 		public void Dispose() => this.Node?.Dispose();
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
-		{
-			var port = this.Node.Started ? this.Node.Port : 9200;
-			return TestClient.GetClient(settings, port);
-		}
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null) => this.Node.Client(settings);
 	}
 }

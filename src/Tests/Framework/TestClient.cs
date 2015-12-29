@@ -38,7 +38,10 @@ namespace Tests.Framework
 				)
 				//We try and fetch the test name during integration tests when running fiddler to send the name 
 				//as the TestMethod header, this allows us to quickly identify which test sent which request
-				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
+				.SetGlobalHeaders(new NameValueCollection
+				{
+					{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
+				});
 
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;

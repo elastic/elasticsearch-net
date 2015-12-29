@@ -11,6 +11,7 @@ namespace Nest
 		public static IndexName Index(IndexName index) => index;
 		public static IndexName Index<T>() => typeof(T);
 
+		public static Indices Indices<T>() => typeof(T);
 		public static Indices Indices(params IndexName[] indices) => indices;
 		public static Indices Indices(IEnumerable<IndexName> indices) => indices.ToArray();
 		public static Indices AllIndices = Nest.Indices.All;

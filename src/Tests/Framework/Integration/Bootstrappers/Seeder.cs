@@ -9,13 +9,10 @@ namespace Tests.Framework.Integration
 	{
 		private IElasticClient Client { get; }
 
-		public Seeder(int port)
+		public Seeder(ElasticsearchNode node)
 		{
-			var client = TestClient.GetClient(seederSettings, port);
-			this.Client = client;
+			this.Client = node.Client();
 		}
-
-		private ConnectionSettings seederSettings(ConnectionSettings settings) => settings;
 
 		public void SeedNode()
 		{
@@ -35,9 +32,12 @@ namespace Tests.Framework.Integration
 
 		public void DeleteIndicesAndTemplates()
 		{
-			this.Client.DeleteIndexTemplate("raw_fields");
-			this.Client.DeleteIndex(typeof(Project));
-			this.Client.DeleteIndex(typeof(Developer));
+			if (this.Client.IndexTemplateExists("raw_fields").Exists)
+				this.Client.DeleteIndexTemplate("raw_fields");
+			if (this.Client.IndexExists(Indices<Project>()).Exists)
+				this.Client.DeleteIndex(typeof(Project));
+			if (this.Client.IndexExists(Indices<Developer>()).Exists)
+				this.Client.DeleteIndex(typeof(Developer));
 		}
 
 		public void CreateIndices()

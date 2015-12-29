@@ -453,6 +453,7 @@
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchUrlTests.cs" />
+    <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateApiTests.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateUrlTests.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateInvalidApiTests.cs" />
     <Compile Include="Search\Percolator\PercolateCount\PercolateCountUrlTests.cs" />

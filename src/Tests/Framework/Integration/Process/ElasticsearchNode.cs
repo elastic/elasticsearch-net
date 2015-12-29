@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Reactive.Subjects;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Framework.Integration
@@ -53,8 +55,9 @@ namespace Tests.Framework.Integration
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
 			this.Prefix = prefix.ToLowerInvariant();
-			this.ClusterName = $"{this.Prefix}-cluster-{Guid.NewGuid().ToString("N").Substring(0, 6)}";
-			this.NodeName = $"{this.Prefix}-node-{Guid.NewGuid().ToString("N").Substring(0, 6)}";
+			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
+			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
+			this.NodeName = $"{this.Prefix}-node-{suffix}";
 
 
 			this.BootstrapWork = _blockingSubject;
@@ -148,8 +151,19 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				this._blockingSubject.OnNext(handle);
-				this.Started = true;
+				var healthyCluster = this.Client().ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
+				if (healthyCluster.IsValid)
+				{
+					this._blockingSubject.OnNext(handle);
+					this.Started = true;
+				}
+				else
+				{
+					this._blockingSubject.OnError(new Exception("Did not see a healthy cluster after the node started for 30 seconds"));
+					handle.Set();
+					this.Stop();
+				}
+
 			}
 			else if (s.TryGetPortNumber(out port))
 			{
@@ -237,6 +251,22 @@ namespace Tests.Framework.Integration
 			}
 		}
 
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
+		{
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+
+			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port);
+			return client;
+		}
+
+		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
+		{
+			IConnectionConfigurationValues values = settings;
+			var headers = values.Headers ?? new NameValueCollection();
+			headers.Add("ClusterName", this.ClusterName);
+			return settings;
+		}
 
 		public void Stop()
 		{
@@ -266,13 +296,13 @@ namespace Tests.Framework.Integration
 				Console.WriteLine($"attempting to delete cluster data: {dataFolder}");
 				Directory.Delete(dataFolder, true);
 			}
-			var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
-			var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
-			foreach (var f in files)
-			{
-				Console.WriteLine($"attempting to delete log file: {f}");
-				File.Delete(f);
-			}
+			//var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
+			//var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
+			//foreach (var f in files)
+			//{
+			//	Console.WriteLine($"attempting to delete log file: {f}");
+			//	File.Delete(f);
+			//}
 			if (Directory.Exists(this.RepositoryPath))
 			{
 				Console.WriteLine("attempting to delete repositories");

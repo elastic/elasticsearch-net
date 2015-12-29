@@ -41,7 +41,7 @@ namespace Tests.Framework.MockData
 						Output = f.Person.Company.Name + " - " + f.Person.Company.CatchPhrase,
 						Context = new Dictionary<string, IEnumerable<string>>
 						{
-							{ "color", new [] { "red", "blue", "green" }.Take(Gimme.Random.Number(0, 2)) }
+							{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
 						},
 						Payload = new ProjectPayload
 						{
