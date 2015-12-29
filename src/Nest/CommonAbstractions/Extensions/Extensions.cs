@@ -63,16 +63,20 @@ namespace Nest
 			}
 		}
 
-		public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
+		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
 		{
 			return items.GroupBy(property).Select(x => x.First());
 		}
 
-		//TODO Memoize?
-		public static T? ToEnum<T>(this string str) where T : struct
+		internal static Dictionary<string, object> _enumCache = new Dictionary<string, object>();
+		internal static T? ToEnum<T>(this string str) where T : struct
 		{
 			var enumType = typeof(T);
-			foreach (var name in Enum.GetNames(enumType))
+			var key = $"{enumType.Name}.{str}";
+			if (_enumCache.ContainsKey(key))
+				return (T)_enumCache[key];
+
+            foreach (var name in Enum.GetNames(enumType))
 			{
 				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
 
@@ -82,7 +86,11 @@ namespace Nest
 				if (enumMemberAttribute != null)
 				{
 					if (enumMemberAttribute.Value == str)
-						return (T)Enum.Parse(enumType, name);
+					{
+						var value = (T)Enum.Parse(enumType, name);
+						_enumCache.Add(key, value);
+						return value;
+					}
 				}
 
 				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
@@ -90,12 +98,17 @@ namespace Nest
 				if (alternativeEnumMemberAttribute != null)
 				{
 					if (alternativeEnumMemberAttribute.Value == str)
-						return (T) Enum.Parse(enumType, name);
+					{ 
+						var value = (T)Enum.Parse(enumType, name);
+						_enumCache.Add(key, value);
+						return value;
+					}
 				}
 			}
-			//throw exception or whatever handling you want or
+
 			return null;
 		}
+
 		internal static string Utf8String(this byte[] bytes)
 		{
 			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
@@ -105,22 +118,11 @@ namespace Nest
 		{
 			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
 		}
-		internal static string GetStringValue(this IEnumerable<Enum> enumValues)
-		{
-			return string.Join(",", enumValues.Select(e => e.GetStringValue()));
-		}
-		internal static bool JsonEquals(this string json, string otherjson)
-		{
-			var nJson = JObject.Parse(json).ToString();
-			var nOtherJson = JObject.Parse(otherjson).ToString();
-			return nJson == nOtherJson;
-		}
 
 		internal static bool IsNullOrEmpty(this TypeName value)
 		{
 			return value == null || value.GetHashCode() == 0;
 		}
-
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{
@@ -128,6 +130,7 @@ namespace Nest
 			if (string.IsNullOrWhiteSpace(@object))
 				throw new ArgumentException("Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
 		}
+
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
 			@object.ThrowIfNull(parameterName);
@@ -142,10 +145,12 @@ namespace Nest
 			if (other.HasAny()) l.AddRange(other);
 			return l;
 		}
+
 		internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate)
 		{
 			return list != null && list.Any(predicate);
 		}
+
 		internal static bool HasAny<T>(this IEnumerable<T> list)
 		{
 			return list != null && list.Any();
@@ -163,39 +168,16 @@ namespace Nest
 			format.ThrowIfNull(nameof(format));
 			return string.Format(c, format, args);
 		}
-		internal static string EscapedFormat(this string format, params object[] args)
-		{
-			format.ThrowIfNull(nameof(format));
-			var arguments = new List<object>();
-			foreach (var a in args)
-			{
-				var s = a as string;
-				arguments.Add(s != null ? Uri.EscapeDataString(s) : a);
-			}
-			return string.Format(format, arguments.ToArray());
-		}
+
 		internal static bool IsNullOrEmpty(this string value)
 		{
 			return string.IsNullOrWhiteSpace(value);
 		}
 
-
 		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> handler)
 		{
 			foreach (T item in enumerable) handler(item);
 		}
-
-		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
-		{
-			int idx = 0;
-			foreach (T item in enumerable)
-				handler(item, idx++);
-		}
-		
-		//TODO also filter nulls
-
-		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> xs, Func<T, bool> predicate) =>
-			!xs.HasAny(predicate) ? null : xs.ToList();
 
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
 			enumerable.HasAny() ? enumerable.ToList() : null;
@@ -212,17 +194,6 @@ namespace Nest
 			return i.GetValueOrDefault(0) > 0 ? dictionary : null;
 		}
 
-		internal static IDictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
-		{
-			var i = dictionary?.Count;
-			return i.GetValueOrDefault(0) > 0 ? dictionary : null;
-		}
-
-
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
-
 	}
-
-
-
 }
