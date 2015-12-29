@@ -17,6 +17,8 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
+					p.DeserializationState(CreateScrollDeserializer<T, T>(d));
+
 					return this.RawDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
 				}
 			);
@@ -30,6 +32,8 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
+					p.DeserializationState(CreateScrollDeserializer<T, T>(d));
+
 					return this.RawDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
 				}
 			);
@@ -44,6 +48,8 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
+					p.DeserializationState(CreateScrollDeserializer<T, T>(d));
+
 					return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
 				}
 			);
@@ -58,9 +64,9 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-				    p.DeserializationState(CreateScrollDeserializer<T, T>(d));
+					p.DeserializationState(CreateScrollDeserializer<T, T>(d));
 
-                    return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
+					return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -131,25 +137,25 @@ namespace Nest
 			return body;
 		}
 
-        private SearchResponse<TResult> FieldsScrollDeserializer<T, TResult>(IElasticsearchResponse response, Stream stream, IScrollRequest d)
-            where T : class
-            where TResult : class
-        {
-            var converter = d.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(d.TypeSelector);
-            var dict = response.Success
-                ? Serializer.DeserializeInternal<SearchResponse<TResult>>(stream, converter)
-                : null;
-            return dict;
-        }
+		private SearchResponse<TResult> FieldsScrollDeserializer<T, TResult>(IElasticsearchResponse response, Stream stream, IScrollRequest d)
+			where T : class
+			where TResult : class
+		{
+			var converter = d.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(d.TypeSelector);
+			var dict = response.Success
+				? Serializer.DeserializeInternal<SearchResponse<TResult>>(stream, converter)
+				: null;
+			return dict;
+		}
 
-        private Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> CreateScrollDeserializer<T, TResult>(IScrollRequest request)
-            where T : class
-            where TResult : class
-        {
+		private Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> CreateScrollDeserializer<T, TResult>(IScrollRequest request)
+			where T : class
+			where TResult : class
+		{
 
-            Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator =
-                    (r, s) => this.FieldsScrollDeserializer<T, TResult>(r, s, request);
-            return responseCreator;
-        }
-    }
+			Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator =
+					(r, s) => this.FieldsScrollDeserializer<T, TResult>(r, s, request);
+			return responseCreator;
+		}
+	}
 }
