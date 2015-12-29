@@ -4,31 +4,16 @@ using System.Linq;
 
 namespace Tests.Framework.Configuration
 {
-	public class TestConfiguration
+	public class YamlConfiguration : TestConfigurationBase
 	{
-		public TestMode Mode { get; } = TestMode.Unit;
-		public string ElasticsearchVersion { get; private set; } = "2.0.0";
-		public virtual bool ForceReseed { get; } = false;
-		public virtual bool DoNotSpawnIfAlreadyRunning { get; } = true;
+		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = true;
+		public override string ElasticsearchVersion { get; protected set; } = "2.0.0";
+		public override bool ForceReseed { get; protected set; } = true;
+		public override TestMode Mode { get; protected set; } = TestMode.Unit;
 
-		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
-		public bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
 
-		private static readonly string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-
-		public TestConfiguration(string configurationFile)
+		public YamlConfiguration(string configurationFile)
 		{
-			//if env var NEST_INTEGRATION_VERSION is set assume integration mode
-			//used by the build script FAKE
-			if (!string.IsNullOrWhiteSpace(ElasticVersionInEnvironment))
-			{
-				this.ElasticsearchVersion = ElasticVersionInEnvironment;
-				this.Mode = TestMode.Integration;
-				this.ForceReseed = false;
-				this.DoNotSpawnIfAlreadyRunning = false;
-				return;
-			}
-
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)

@@ -2,13 +2,13 @@
 
 namespace Benchmarking
 {
-	public class BenchmarkingTestConfiguration : TestConfiguration
+	public class BenchmarkingTestConfiguration : YamlConfiguration
 	{
-		public override bool RunIntegrationTests { get; } = true;
+		public override bool RunIntegrationTests => true;
 
-		public override bool ForceReseed { get; } = true;
+		public override bool ForceReseed { get; protected set; } = true;
 
-		public override bool DoNotSpawnIfAlreadyRunning { get; } = false;
+		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = false;
 
 		public BenchmarkingTestConfiguration()
 			: base(@"..\..\..\..\Tests\tests.yaml")

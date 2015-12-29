@@ -14,7 +14,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		public static TestConfiguration Configuration = new TestConfiguration(@"..\..\tests.yaml");
+		public static ITestConfiguration Configuration = LoadConfiguration();
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
@@ -43,17 +43,17 @@ namespace Tests.Framework
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
-			
+
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port));
 
-		public static Uri CreateNode(int? port = null) => 
+		public static Uri CreateNode(int? port = null) =>
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection(bool forceInMemory = false) => 
+		public static IConnection CreateConnection(bool forceInMemory = false) =>
 			Configuration.RunIntegrationTests && !forceInMemory ? new HttpConnection() : new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
@@ -77,18 +77,28 @@ namespace Tests.Framework
 
 			var st = new StackTrace();
 			var types = GetTypes(st);
-			return (types.Select(f=>f.FullName).LastOrDefault()  ?? "Seeder").Split('.').Last();
+			return (types.Select(f => f.FullName).LastOrDefault() ?? "Seeder").Split('.').Last();
 		}
 
 		private static List<Type> GetTypes(StackTrace st)
 		{
 			var types = (from f in st.GetFrames()
-				let method = f.GetMethod()
-				where method != null
-				let type = method.DeclaringType
-				where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
-				select type).ToList();
+						 let method = f.GetMethod()
+						 where method != null
+						 let type = method.DeclaringType
+						 where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
+						 select type).ToList();
 			return types;
+		}
+
+		private static ITestConfiguration LoadConfiguration()
+		{
+			// The build script sets a TARGET env variable, so if it exists then
+			// we must be running tests from the build script
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
+				return new EnvironmentConfiguration();
+
+			return new YamlConfiguration(@"..\..\tests.yaml");
 		}
 	}
 }

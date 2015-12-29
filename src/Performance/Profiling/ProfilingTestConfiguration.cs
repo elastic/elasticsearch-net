@@ -2,11 +2,11 @@
 
 namespace Profiling
 {
-    public class ProfilingTestConfiguration : TestConfiguration
+    public class ProfilingTestConfiguration : YamlConfiguration
     {
-        public override bool RunIntegrationTests { get; } = true;
+        public override bool RunIntegrationTests => true;
 
-        public override bool DoNotSpawnIfAlreadyRunning { get; } = true;
+        public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = true;
 
         public ProfilingTestConfiguration() 
             : base(@"..\..\..\..\Tests\tests.yaml")
