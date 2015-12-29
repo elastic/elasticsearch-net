@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			descriptor = this.GetSearchDescriptorForQuery(s => s.Query(descriptor.Query));
 			sw.Stop();
 			//deserialize/serialize descriptors should be fast for all descriptors 
-			sw.ElapsedMilliseconds.Should().BeLessOrEqualTo(20, "(de)?serializing taking a bit too long whats going on here?");
+			sw.ElapsedMilliseconds.Should().BeLessOrEqualTo(50, "(de)?serializing taking a bit too long whats going on here?");
 			query = queryBaseDescriptor(descriptor.Query);
 			query.Should().NotBeNull();
 			return query;

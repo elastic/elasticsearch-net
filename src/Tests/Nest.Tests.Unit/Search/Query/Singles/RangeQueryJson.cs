@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
@@ -150,8 +151,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 						range: {
 							""startedOn"": {
-								gte: """ + lowerBound.ToString(format) + @""",
-								lt: """ + upperBound.ToString(format) + @"""
+								gte: """ + lowerBound.ToString(format, CultureInfo.InvariantCulture) + @""",
+								lt: """ + upperBound.ToString(format, CultureInfo.InvariantCulture) + @"""
 							}
 						}
 
