@@ -27,4 +27,6 @@ Builds:
 
 [Read more here](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 
+###[Contributions Welcome!](contributing.md)
+
 
