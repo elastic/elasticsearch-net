@@ -26,7 +26,8 @@ module Tests =
             {
                 p with 
                     XmlOutputPath = Some <| xmlOutput 
-                    HtmlOutputPath = Some <| htmlOutput 
+                    HtmlOutputPath = Some <| htmlOutput
+                    Parallel = ParallelMode.All //Not really much faster since most is guarded by collections
             } )
 
     let RunAllIntegrationTests(commaSeparatedEsVersions) =

@@ -14,6 +14,7 @@ module Paths =
 
     let BuildOutput = sprintf "%s/output" BuildFolder
     let ToolsFolder = "packages/build"
+    let CheckedInToolsFolder = "build/Tools"
     let KeysFolder = sprintf "%s/keys" BuildFolder
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
@@ -27,6 +28,7 @@ module Paths =
         |> Seq.filter (fun f -> (f.EndsWith("Debug") || f.StartsWith("Release")) && not (f.Contains "CodeGeneration")) 
 
     let Tool(tool) = sprintf "%s/%s" ToolsFolder tool
+    let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
     let Source(folder) = sprintf "%s/%s" SourceFolder folder
