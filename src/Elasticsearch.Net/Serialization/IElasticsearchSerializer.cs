@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,6 +12,8 @@ namespace Elasticsearch.Net
 		Task<T> DeserializeAsync<T>(Stream responseStream, CancellationToken cancellationToken = default(CancellationToken));
 
 		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
+
+		string CreatePropertyName(MemberInfo memberInfo);
 	}
 
 	public static class ElasticsearchSerializerExtensions

@@ -99,7 +99,7 @@ namespace Nest
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? new NestSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
+				? new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

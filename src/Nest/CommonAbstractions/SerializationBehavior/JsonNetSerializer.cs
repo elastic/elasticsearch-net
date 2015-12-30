@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class NestSerializer : IElasticsearchSerializer
+	public class JsonNetSerializer : IElasticsearchSerializer
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
@@ -17,12 +18,12 @@ namespace Nest
 		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
 		private readonly JsonSerializer _defaultSerializer;
 
-		public NestSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
+		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization 
 		/// </summary>
-		public NestSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
+		public JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
 			this._settings = settings;
 
@@ -47,6 +48,12 @@ namespace Nest
 				writer.Flush();
 				jsonWriter.Flush();
 			}
+		}
+
+		public string CreatePropertyName(MemberInfo memberInfo)
+		{
+			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
+			return jsonProperty?.PropertyName;
 		}
 
 		public virtual T Deserialize<T>(Stream stream)

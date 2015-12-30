@@ -59,7 +59,7 @@ namespace Nest
 
 				if (concreteTypeSelector != null)
 				{
-					var elasticSerializer = new NestSerializer(this._settings);
+					var elasticSerializer = new JsonNetSerializer(this._settings);
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{

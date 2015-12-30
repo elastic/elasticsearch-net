@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
@@ -126,7 +127,52 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			var suffix = "unanalyzed";
 			Expect("metadata.var.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 			Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
+		}
 
+		/** Annotations 
+		* 
+		* When using NEST's property attributes you can specify a new name for the properties
+		*/
+		public class BuiltIn
+		{
+			[String(Name="naam")]
+			public string Name { get; set; }
+		}
+		[U] public void BuiltInAnnotiatons()
+		{
+			Expect("naam").WhenSerializing(Field<BuiltIn>(p=>p.Name));
+		}
+		
+		/** 
+		* Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
+		* Here we ask the default JsonNetSerializer and it takes JsonProperty into account
+		*/
+		public class SerializerSpecific
+		{
+			[JsonProperty("nameInJson")]
+			public string Name { get; set; }
+		}
+		[U] public void SerializerSpecificAnnotations()
+		{
+			Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p=>p.Name));
+		}
+
+		/** 
+		* If both are specified NEST takes precedence though 
+		*/
+		public class Both
+		{
+			[String(Name="naam")]
+			[JsonProperty("nameInJson")]
+			public string Name { get; set; }
+		}
+		[U] public void NestAttributeTakesPrecedence()
+		{
+			Expect("naam").WhenSerializing(Field<Both>(p=>p.Name));
+			Expect(new
+			{
+				naam = "Martijn Laarman"
+			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
 		}
 	}
 }
