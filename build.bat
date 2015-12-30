@@ -15,11 +15,11 @@ SET ESVERSIONS=
 
 IF NOT [%1]==[] (set TARGET="%1")
 
-IF "%1"=="release" (
+IF /I "%1"=="release" (
     IF NOT [%2]==[] ( set VERSION="%2" )
 )
 
-IF "%1%"=="integrate" (
+IF /I "%1%"=="integrate" (
     IF NOT [%2]==[] (set ESVERSIONS="%2")
 )
 
