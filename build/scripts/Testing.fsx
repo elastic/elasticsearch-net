@@ -4,6 +4,11 @@
 open System
 open Fake
 open Paths
+open System.IO
+
+// Normalizes path for different OS 
+let inline normalizePath (path : string) =  
+    path.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar) 
 
 type Tests() =
     static member RunAll() =
@@ -12,5 +17,5 @@ type Tests() =
           {p with
              ToolPath = "build/tools/Nunit.Runners/tools"
              DisableShadowCopy = true;
-             OutputFile = Paths.Output("TestResults.xml") }
+             OutputFile = normalizePath(Paths.Output("TestResults.xml")) }
          )
