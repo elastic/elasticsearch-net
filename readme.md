@@ -1,32 +1,38 @@
 Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasticsearch](https://github.com/elasticsearch/elasticsearch) .NET clients.
 
-[![install from nuget](http://img.shields.io/nuget/v/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)[![downloads](http://img.shields.io/nuget/dt/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)    
-Bleeding edge package:    
-[![download](http://img.shields.io/myget/elasticsearch-net/v/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)[![downloads](http://img.shields.io/myget/elasticsearch-net/dt/NEST.svg?style=flat-square)](https://www.myget.org/gallery/elasticsearch-net)    
-Builds:    
-[![teamcity](http://img.shields.io/teamcity/http/teamcity.codebetter.com/e/bt993.svg?style=flat-square)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt993)[![elasticsearch-net MyGet Build Status](https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a)](https://www.myget.org/gallery/elasticsearch-net)
-
 ### Compatibility Matrix
 <table>
     <tr>
-        <th><b>Elasticsearch<b></td>
-        <th><b>.NET clients<b></td>
-        <th><b>Supported<b></td>
+        <th><b>Elasticsearch<b></th>
+        <th><b>.NET clients<b></th>
+        <th><b>Supported<b></th>
+        <th><b>Build Status</b></th>
+        <th><b>Myget Feed<b></th>
+        <th><b>Nuget Feed<b></th>
     </tr>
     <tr>
-    	<td>0.x</td>
-    	<td>0.x</td>
-    	<td>No</td>
+    	<td><code>0.x</code></td>
+    	<td><code>0.x</code></td>
+    	<td>:x:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
     <tr>
-    	<td>1.x</td>
-    	<td>1.x</td>
-    	<td>Yes</td>
+    	<td><code>1.x</code></td>
+    	<td><code>1.x</code></td>
+    	<td>:white_check_mark:</td>
+    	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x_BuildAndUnitTest&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest_BuildAndUnitTest_RunBuildBat)/statusIcon.svg"></a></td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
+    	<td><a href="https://www.nuget.org/packages/NEST"><img src="http://img.shields.io/nuget/v/NEST.svg?style=flat-square"><img src="http://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>   
     </tr>
     <tr>
-    	<td>2.x</td>
-    	<td>2.x</td>
-    	<td>Yes</td>
+    	<td><code>2.x</code></td>
+    	<td><code>2.x</code></td>
+    	<td>:white_check_mark:</td>
+    	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest2x_BuildTestAndIntegrate&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:Nest2x_BuildTestAndIntegrate_Fake/statusIcon.svg"></a></td>
+    	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a"></a></td>
+    	<td>:heavy_minus_sign:</td>
     </tr>
 </table>
 
