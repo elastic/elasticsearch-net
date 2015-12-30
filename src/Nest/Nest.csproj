@@ -753,7 +753,7 @@
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingResponse.cs" />
     <Compile Include="Search\MultiSearch\IMultiSearchResponse.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkUpdateBody.cs" />
-    <Compile Include="CommonAbstractions\Response\IShardsOperationResponse.cs" />
+    <Compile Include="CommonAbstractions\Response\ShardsOperationResponse.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsResponse.cs" />
     <Compile Include="Document\Single\TermVectors\FieldStatistics.cs" />
     <Compile Include="Document\Single\TermVectors\TermVector.cs" />
@@ -1043,7 +1043,7 @@
     <Compile Include="Mapping\Types\Property.cs" />
     <Compile Include="Indices\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />
-    <Compile Include="CommonAbstractions\Response\ElasticSearchVersionInfo.cs" />
+    <Compile Include="CommonAbstractions\Response\ElasticsearchVersionInfo.cs" />
     <Compile Include="CommonAbstractions\Response\IndicesResponse.cs" />
     <Compile Include="Search\Search\SearchResponse.cs" />
     <Compile Include="IndexModules\IndexSettings\IndexState.cs" />
