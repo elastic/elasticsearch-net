@@ -64,7 +64,7 @@ namespace Nest.Tests.Unit.Core.MultiPercolate
 					.PercolateType("alternative_type")
 					.Preference("local")
 					.Routing("value")
-					.Sort(s=>s.Ascending().OnField(p=>p.LOC))
+					.Sort(s=>s.Descending().OnField("_score"))
 					.TrackScores()
 					.Version(123)
 					.VersionType(VersionType.Force)
