@@ -34,7 +34,7 @@ namespace Nest
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
-			return _settings.DefaultFieldNameInferrer(name);
+			return _settings.Serializer?.CreatePropertyName(info) ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
 		public string Resolve(Expression expression)

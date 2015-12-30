@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,7 +54,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public static string RemoveNewLinesAndTabs(string input)
+		public string CreatePropertyName(MemberInfo memberInfo) => null;
+
+		private static string RemoveNewLinesAndTabs(string input)
 		{
 			return new string(input
 				.Where(c => c != '\r' && c != '\n')

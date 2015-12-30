@@ -123,7 +123,7 @@ namespace Nest
 			where TResult : class =>
 			!response.Success
 				? null
-				: new NestSerializer(this.ConnectionSettings, new ConcreteTypeConverter<TResult>(d.TypeSelector))
+				: new JsonNetSerializer(this.ConnectionSettings, new ConcreteTypeConverter<TResult>(d.TypeSelector))
 					.Deserialize<SearchResponse<TResult>>(stream);
 
 	}
