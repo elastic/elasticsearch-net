@@ -24,10 +24,11 @@ namespace Tests.Search.Request
 	public abstract class RoyalBase<TRoyal> : IRoyal
 		where TRoyal : class, IRoyal
 	{
+		protected static int IdState = 0;
 		public string Name { get; set; }
 		public static Faker<TRoyal> Generator { get; } =
 			new Faker<TRoyal>()
-				.RuleFor(p => p.Name, f => f.Person.Company.Name);
+				.RuleFor(p => p.Name, f => f.Person.Company.Name + IdState++);
 	}
 
 	public class King : RoyalBase<King>
@@ -126,7 +127,6 @@ namespace Tests.Search.Request
 			request: (client, r) => client.Search<TRoyal>(r),
 			requestAsync: (client, r) => client.SearchAsync<TRoyal>(r)
 		);
-
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
