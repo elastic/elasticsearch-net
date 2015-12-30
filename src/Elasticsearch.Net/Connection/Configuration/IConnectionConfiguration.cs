@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -23,7 +24,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
 		/// </summary>
-		T EnableTrace(bool enabled = true);
+		T EnableTrace(bool enabled = true, TextWriter writer = null);
 		
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
