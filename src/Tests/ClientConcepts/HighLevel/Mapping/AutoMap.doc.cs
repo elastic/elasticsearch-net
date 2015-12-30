@@ -513,7 +513,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								format = "MM-dd-yy",
 								type = "date"
 							},
-							employees = new
+							empl = new
 							{
 								path = "employees",
 								properties = new
