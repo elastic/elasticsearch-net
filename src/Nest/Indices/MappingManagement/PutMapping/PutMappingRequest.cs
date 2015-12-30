@@ -153,10 +153,10 @@ namespace Nest
 		public PutMappingDescriptor<T> Dynamic(bool dynamic = true) => this.Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> SetParent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
+		public PutMappingDescriptor<T> Parent(TypeName parentType) => Assign(a => a.ParentField = new ParentField { Type = parentType });
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> SetParent<K>() where K : class => Assign(a => a.ParentField = new ParentField { Type = typeof(K) });
+		public PutMappingDescriptor<T> Parent<K>() where K : class => Assign(a => a.ParentField = new ParentField { Type = typeof(K) });
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
