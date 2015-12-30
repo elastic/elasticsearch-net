@@ -16,7 +16,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "track_scores")]
 		bool? TrackScores { get; set; }
 
-		[JsonProperty(PropertyName = "score")]
+		[JsonProperty(PropertyName = "sort")]
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]

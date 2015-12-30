@@ -18,8 +18,6 @@ namespace Nest
 	[JsonObject]
 	public class PercolateCountResponse : BaseResponse, IPercolateCountResponse
 	{
-		
-
 		[JsonProperty(PropertyName = "took")]
 		public int Took { get; internal set; }
 
@@ -48,13 +46,17 @@ namespace Nest
 
 	public class PercolatorMatch
 	{
-		[JsonProperty(PropertyName = "_index")]
-		public string Index { get; set; }
-		[JsonProperty(PropertyName = "_id")]
-		public string Id { get; set; }
 		[JsonProperty(PropertyName = "highlight")]
 		public Dictionary<string, IList<string>> Highlight { get; set; }
-		
+
+		[JsonProperty(PropertyName = "_id")]
+		public string Id { get; set; }
+
+		[JsonProperty(PropertyName = "_index")]
+		public string Index { get; set; }
+
+		[JsonProperty(PropertyName = "_score")]
+		public double Score { get; set; }
 	}
 
 }

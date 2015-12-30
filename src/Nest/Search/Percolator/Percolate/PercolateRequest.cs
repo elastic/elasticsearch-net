@@ -10,7 +10,6 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "doc")]
 		TDocument Document { get; set; }
-
 	}
 
 	public partial class PercolateRequest<TDocument>
@@ -26,8 +25,26 @@ namespace Nest
 		public AggregationDictionary Aggregations { get; set; }
 		
 		public int? Size { get; set; }
+
+		/// <summary>
+		/// Whether the _score is included for each match. The _score is based on the query and represents 
+		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated) 
+		/// matched the query. The <see cref="Query"/> option is required for this option.
+		/// </summary>
 		public bool? TrackScores { get; set; }
+
+		/// <summary>
+		/// The object to percolate
+		/// </summary>
 		public TDocument Document { get; set; }
+
+		/// <summary>
+		/// Define a sort specification like in the search API. Currently only sorting _score reverse 
+		/// (default relevancy) is supported. Other sort fields will throw an exception. 
+		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/> 
+		/// the score is based on the query and represents how the query matched to the percolate query’s metadata 
+		/// and not how the document being percolated matched to the query.
+		/// </summary>
 		public IList<ISort> Sort { get; set; }
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
@@ -63,7 +80,10 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<TDocument> Document(TDocument @object) => Assign(a => a.Document = @object);
 
-		/// Make sure we keep calculating score even if we are sorting on a field.
+		/// <summary>
+		/// Whether the _score is included for each match. The _score is based on the query and represents 
+		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated) 
+		/// matched the query. The <see cref="Query"/> option is required for this option.
 		/// </summary>
 		public PercolateDescriptor<TDocument> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
 
@@ -78,6 +98,13 @@ namespace Nest
 
 		public PercolateDescriptor<TDocument> Size(int? size) => Assign(a => a.Size = size);
 
+		/// <summary>
+		/// Define a sort specification like in the search API. Currently only sorting _score reverse 
+		/// (default relevancy) is supported. Other sort fields will throw an exception. 
+		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/> 
+		/// the score is based on the query and represents how the query matched to the percolate query’s metadata 
+		/// and not how the document being percolated matched to the query.
+		/// </summary>
 		public PercolateDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);
 
 		/// <summary>
