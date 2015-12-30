@@ -9,7 +9,7 @@ using static Nest.Infer;
 namespace Tests.Indices.StatusManagement.ClearCache
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClearCacheApiTests : ApiIntegrationTestBase<IShardsOperationResponse, IClearCacheRequest, ClearCacheDescriptor, ClearCacheRequest>
+	public class ClearCacheApiTests : ApiIntegrationTestBase<IClearCacheResponse, IClearCacheRequest, ClearCacheDescriptor, ClearCacheRequest>
 	{
 		public ClearCacheApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

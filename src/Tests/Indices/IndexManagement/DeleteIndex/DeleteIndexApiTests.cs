@@ -9,7 +9,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteIndexApiTests 
-		: ApiIntegrationTestBase<IIndicesResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+		: ApiIntegrationTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

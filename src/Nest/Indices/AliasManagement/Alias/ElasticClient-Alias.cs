@@ -15,39 +15,39 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the alias operation</param>
-		IAcknowledgedResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
+		IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse Alias(IBulkAliasRequest request);
+		IBulkAliasResponse Alias(IBulkAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
+		Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> AliasAsync(IBulkAliasRequest request);
+		Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request);
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse Alias(IBulkAliasRequest request) => 
-			this.Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, AcknowledgedResponse>(
+		public IBulkAliasResponse Alias(IBulkAliasRequest request) => 
+			this.Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse>(
 				request,
-				this.LowLevelDispatch.IndicesUpdateAliasesDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesUpdateAliasesDispatch<BulkAliasResponse>
 			);
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
+		public IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
 			this.Alias(selector?.Invoke(new BulkAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> AliasAsync(IBulkAliasRequest request) => 
-			this.Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request) => 
+			this.Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse, IBulkAliasResponse>(
 				request,
-				this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<BulkAliasResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector)=>
+		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector)=>
 			this.AliasAsync(selector?.Invoke(new BulkAliasDescriptor()));
 
 	}

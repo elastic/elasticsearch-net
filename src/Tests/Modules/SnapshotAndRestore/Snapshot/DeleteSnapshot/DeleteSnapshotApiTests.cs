@@ -8,7 +8,7 @@ using Xunit;
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.DeleteSnapshot
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteSnapshotApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteSnapshotRequest, DeleteSnapshotDescriptor, DeleteSnapshotRequest>
+	public class DeleteSnapshotApiTests : ApiTestBase<IDeleteSnapshotResponse, IDeleteSnapshotRequest, DeleteSnapshotDescriptor, DeleteSnapshotRequest>
 	{
 		public DeleteSnapshotApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

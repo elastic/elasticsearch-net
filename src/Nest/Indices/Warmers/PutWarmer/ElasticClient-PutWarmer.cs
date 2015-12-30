@@ -19,16 +19,16 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
-		IAcknowledgedResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+		IPutWarmerResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutWarmer(IPutWarmerRequest request);
+		IPutWarmerResponse PutWarmer(IPutWarmerRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+		Task<IPutWarmerResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest request);
+		Task<IPutWarmerResponse> PutWarmerAsync(IPutWarmerRequest request);
 
 	}
 
@@ -37,25 +37,25 @@ namespace Nest
 		//TODO AllIndices() seems odd here
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) =>
+		public IPutWarmerResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) =>
 			this.PutWarmer(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse PutWarmer(IPutWarmerRequest request) => 
-			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, AcknowledgedResponse>(
+		public IPutWarmerResponse PutWarmer(IPutWarmerRequest request) => 
+			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, PutWarmerResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutWarmerDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutWarmerDispatch<PutWarmerResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
+		public Task<IPutWarmerResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
 			this.PutWarmerAsync(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> PutWarmerAsync(IPutWarmerRequest request) => 
-			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IPutWarmerResponse> PutWarmerAsync(IPutWarmerRequest request) => 
+			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, PutWarmerResponse, IPutWarmerResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<PutWarmerResponse>
 			);
 	}
 }

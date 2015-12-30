@@ -8,7 +8,7 @@ using Xunit;
 namespace Tests.Modules.Scripting.PutScript
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutScriptApiTests : ApiTestBase<IAcknowledgedResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
+	public class PutScriptApiTests : ApiTestBase<IPutScriptResponse, IPutScriptRequest, PutScriptDescriptor, PutScriptRequest>
 	{
 		public PutScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

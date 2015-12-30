@@ -12,41 +12,41 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete template operation</param>
-		IAcknowledgedResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
+		IDeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request);
+		IDeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
+		Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request);
+		Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) =>
+		public IDeleteIndexTemplateResponse DeleteIndexTemplate(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) =>
 			this.DeleteIndexTemplate(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request) => 
-			this.Dispatcher.Dispatch<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, AcknowledgedResponse>(
+		public IDeleteIndexTemplateResponse DeleteIndexTemplate(IDeleteIndexTemplateRequest request) => 
+			this.Dispatcher.Dispatch<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<DeleteIndexTemplateResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) =>
+		public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Name name, Func<DeleteIndexTemplateDescriptor, IDeleteIndexTemplateRequest> selector = null) =>
 			this.DeleteIndexTemplateAsync(selector.InvokeOrDefault(new DeleteIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request) => 
-			this.Dispatcher.DispatchAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IDeleteIndexTemplateResponse> DeleteIndexTemplateAsync(IDeleteIndexTemplateRequest request) => 
+			this.Dispatcher.DispatchAsync<IDeleteIndexTemplateRequest, DeleteIndexTemplateRequestParameters, DeleteIndexTemplateResponse, IDeleteIndexTemplateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<DeleteIndexTemplateResponse>(p)
 			);
 	}
 }

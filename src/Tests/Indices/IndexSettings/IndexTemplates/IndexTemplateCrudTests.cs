@@ -10,11 +10,11 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class IndexTemplateCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetIndexTemplateResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse>
 	{
 		public IndexTemplateCrudTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Create() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
@@ -59,7 +59,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(2);
 		}
 
-		protected override LazyResponses Update() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<PutIndexTemplateDescriptor, PutIndexTemplateRequest, IPutIndexTemplateRequest, IPutIndexTemplateResponse>(
 			PutInitializer,
 			PutFluent,
 			fluent: (s, c, f) => c.PutIndexTemplate(s, f),
@@ -90,7 +90,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates
 			templateMapping.Settings.NumberOfShards.Should().Be(1);
 		}
 
-		protected override LazyResponses Delete() => Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest, IDeleteIndexTemplateRequest, IDeleteIndexTemplateResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteIndexTemplate(s, f),

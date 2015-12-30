@@ -14,40 +14,40 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
-		IShardsOperationResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
+		IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse Flush(IFlushRequest request);
+		IFlushResponse Flush(IFlushRequest request);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
+		Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> FlushAsync(IFlushRequest request);
+		Task<IFlushResponse> FlushAsync(IFlushRequest request);
 	}
 	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
+		public IFlushResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
 			this.Flush(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Flush(IFlushRequest request) => 
-			this.Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, ShardsOperationResponse>(
+		public IFlushResponse Flush(IFlushRequest request) => 
+			this.Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, FlushResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesFlushDispatch<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesFlushDispatch<FlushResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) => 
+		public Task<IFlushResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) => 
 			this.FlushAsync(selector.InvokeOrDefault(new FlushDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest request) => 
-			this.Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+		public Task<IFlushResponse> FlushAsync(IFlushRequest request) => 
+			this.Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, FlushResponse, IFlushResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesFlushDispatchAsync<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesFlushDispatchAsync<FlushResponse>(p)
 			);
 	}
 }

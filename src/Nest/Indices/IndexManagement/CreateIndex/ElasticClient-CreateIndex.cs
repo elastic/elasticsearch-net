@@ -12,40 +12,40 @@ namespace Nest
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the create index operation</param>
-		IAcknowledgedResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
+		ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse CreateIndex(ICreateIndexRequest request);
+		ICreateIndexResponse CreateIndex(ICreateIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
+		Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateIndexAsync(ICreateIndexRequest request);
+		Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) =>
+		public ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) =>
 			this.CreateIndex(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse CreateIndex(ICreateIndexRequest request) => 
-			this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, AcknowledgedResponse>(
+		public ICreateIndexResponse CreateIndex(ICreateIndexRequest request) => 
+			this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse>(
 				request,
-				this.LowLevelDispatch.IndicesCreateDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesCreateDispatch<CreateIndexResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => 
+		public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => 
 			this.CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> CreateIndexAsync(ICreateIndexRequest request) => 
-			this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request) => 
+			this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse, ICreateIndexResponse>(
 				request,
-				this.LowLevelDispatch.IndicesCreateDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesCreateDispatchAsync<CreateIndexResponse>
 			);
 	}
 }

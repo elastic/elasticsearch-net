@@ -14,40 +14,40 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the put template operation</param>
-		IAcknowledgedResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutIndexTemplate(IPutIndexTemplateRequest request);
+		IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request);
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => 
+		public IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => 
 			this.PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse PutIndexTemplate(IPutIndexTemplateRequest request) => 
-			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, AcknowledgedResponse>(
+		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) => 
+			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutTemplateDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutTemplateDispatch<PutIndexTemplateResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
 			this.PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request) => 
-			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request) => 
+			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse, IPutIndexTemplateResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<PutIndexTemplateResponse>
 			);
 	}
 }

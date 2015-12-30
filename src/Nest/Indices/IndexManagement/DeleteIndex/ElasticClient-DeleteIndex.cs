@@ -11,41 +11,41 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
-		IIndicesResponse DeleteIndex(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
+		IDeleteIndexResponse DeleteIndex(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesResponse DeleteIndex(IDeleteIndexRequest request);
+		IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
+		Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest request);
+		Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesResponse DeleteIndex(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
+		public IDeleteIndexResponse DeleteIndex(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
 			this.DeleteIndex(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesResponse DeleteIndex(IDeleteIndexRequest request) => 
-			this.Dispatcher.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse>(
+		public IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) => 
+			this.Dispatcher.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatch<DeleteIndexResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
+		public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
 			this.DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest request) => 
-			this.Dispatcher.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
+		public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request) => 
+			this.Dispatcher.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse, IDeleteIndexResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<DeleteIndexResponse>(p)
 			);
 	}
 }

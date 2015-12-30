@@ -7,36 +7,36 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
+		IPutScriptResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse PutScript(IPutScriptRequest request);
+		IPutScriptResponse PutScript(IPutScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
+		Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest request);
+		Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request);
 
 	}
 	public partial class ElasticClient
 	{
-		public IAcknowledgedResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) =>
+		public IPutScriptResponse PutScript(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) =>
 			this.PutScript(selector?.Invoke(new PutScriptDescriptor(language, id)));
 
-		public IAcknowledgedResponse PutScript(IPutScriptRequest request) => 
-			this.Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, AcknowledgedResponse>(
+		public IPutScriptResponse PutScript(IPutScriptRequest request) => 
+			this.Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse>(
 				request,
-				this.LowLevelDispatch.PutScriptDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.PutScriptDispatch<PutScriptResponse>
 			);
 
-		public Task<IAcknowledgedResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => 
+		public Task<IPutScriptResponse> PutScriptAsync(Name language, Id id, Func<PutScriptDescriptor, IPutScriptRequest> selector) => 
 			this.PutScriptAsync(selector?.Invoke(new PutScriptDescriptor(language, id)));
 
-		public Task<IAcknowledgedResponse> PutScriptAsync(IPutScriptRequest request) => 
-			this.Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest request) => 
+			this.Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
 				request,
-				this.LowLevelDispatch.PutScriptDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.PutScriptDispatchAsync<PutScriptResponse>
 			);
 	}
 }

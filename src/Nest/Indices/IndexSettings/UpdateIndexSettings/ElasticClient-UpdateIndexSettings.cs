@@ -11,40 +11,40 @@ namespace Nest
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that strongly types all the updateable settings</param>
-		IAcknowledgedResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
+		IUpdateIndexSettingsResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request);
+		IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
+		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request);
+		Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request);
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector) => 
+		public IUpdateIndexSettingsResponse UpdateIndexSettings(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector) => 
 			this.UpdateIndexSettings(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IAcknowledgedResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) => 
-			this.Dispatcher.Dispatch<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, AcknowledgedResponse>(
+		public IUpdateIndexSettingsResponse UpdateIndexSettings(IUpdateIndexSettingsRequest request) => 
+			this.Dispatcher.Dispatch<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, UpdateIndexSettingsResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutSettingsDispatch<UpdateIndexSettingsResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector)=>
+		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(Indices indices, Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> selector)=>
 			this.UpdateIndexSettingsAsync(selector.InvokeOrDefault(new UpdateIndexSettingsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request) => 
-			this.Dispatcher.DispatchAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+		public Task<IUpdateIndexSettingsResponse> UpdateIndexSettingsAsync(IUpdateIndexSettingsRequest request) => 
+			this.Dispatcher.DispatchAsync<IUpdateIndexSettingsRequest, UpdateIndexSettingsRequestParameters, UpdateIndexSettingsResponse, IUpdateIndexSettingsResponse>(
 				request,
-				this.LowLevelDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>
+				this.LowLevelDispatch.IndicesPutSettingsDispatchAsync<UpdateIndexSettingsResponse>
 			);
 	}
 }

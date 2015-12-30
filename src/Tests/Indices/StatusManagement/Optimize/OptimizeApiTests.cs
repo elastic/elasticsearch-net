@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Indices.StatusManagement.Optimize
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class OptimizeApiTests : ApiIntegrationTestBase<IShardsOperationResponse, IOptimizeRequest, OptimizeDescriptor, OptimizeRequest>
+	public class OptimizeApiTests : ApiIntegrationTestBase<IOptimizeResponse, IOptimizeRequest, OptimizeDescriptor, OptimizeRequest>
 	{
 		public OptimizeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

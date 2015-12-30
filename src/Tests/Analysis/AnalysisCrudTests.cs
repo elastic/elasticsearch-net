@@ -11,7 +11,7 @@ namespace Tests.Analysis
 
 	[Collection(IntegrationContext.Indexing)]
 	public class AnalysisCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
+		: CrudTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
 		/**
 		* # Analysis crud
@@ -27,7 +27,7 @@ namespace Tests.Analysis
 		/**
 		* We can create the analysis settings as part of the create index call
 		*/
-		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.CreateIndex(s, f),
@@ -97,7 +97,7 @@ namespace Tests.Analysis
 		/**
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
 		*/
-		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) =>

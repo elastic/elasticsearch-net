@@ -23,7 +23,7 @@ namespace Profiling.Async
 		{
 			for (int i = 0; i < _iterations; i++)
 			{
-				IAcknowledgedResponse aliasResponse;
+				IBulkAliasResponse aliasResponse;
 				if (i == 0)
 				{
 					aliasResponse = await client.AliasAsync(a => a

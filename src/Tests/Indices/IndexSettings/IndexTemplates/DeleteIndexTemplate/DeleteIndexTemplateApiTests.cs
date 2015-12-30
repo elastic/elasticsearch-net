@@ -8,7 +8,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteIndexTemplateApiTests 
-		: ApiTestBase<IAcknowledgedResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest>
+		: ApiTestBase<IDeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest>
 	{
 		public DeleteIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

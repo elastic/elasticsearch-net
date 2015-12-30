@@ -8,11 +8,11 @@ namespace Tests.Modules.Scripting
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class ScriptingCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetScriptResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
 	{
 		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 
-		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.PutScript(_lang, s, f),
@@ -38,7 +38,7 @@ namespace Tests.Modules.Scripting
 		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(_lang, id);
 		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
 
-		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) => c.PutScript(_lang, s, f),
@@ -52,7 +52,7 @@ namespace Tests.Modules.Scripting
 		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = _updatedScript};
 		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
 
-		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteScript(_lang, s, f),

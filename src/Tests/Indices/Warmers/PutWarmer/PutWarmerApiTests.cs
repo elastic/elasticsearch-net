@@ -9,7 +9,7 @@ using Xunit;
 namespace Tests.Indices.Warmers.PutWarmer
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutWarmerApiTests : ApiTestBase<IAcknowledgedResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
+	public class PutWarmerApiTests : ApiTestBase<IPutWarmerResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
 	{
 		public PutWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

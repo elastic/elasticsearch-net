@@ -10,14 +10,14 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class RepositoryCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetRepositoryResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<ICreateRepositoryResponse, IGetRepositoryResponse, ICreateRepositoryResponse, IDeleteRepositoryResponse>
 	{
 		public RepositoryCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 			_rootRepositoryPath = cluster.Node.RepositoryPath;
 		}
 
-		protected override LazyResponses Create() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Create() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.CreateRepository(s, f),
@@ -63,7 +63,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		protected IGetRepositoryRequest ReadFluent(string name, GetRepositoryDescriptor d) => d
 			.RepositoryName(name);
 
-		protected override LazyResponses Update() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, ICreateRepositoryResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) => c.CreateRepository(s, f),
@@ -92,7 +92,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 				)
 			);
 
-		protected override LazyResponses Delete() => Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, IDeleteRepositoryResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteRepository(s),

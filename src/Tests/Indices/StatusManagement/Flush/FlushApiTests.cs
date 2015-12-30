@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Indices.StatusManagement.Flush
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class FlushApiTests : ApiIntegrationTestBase<IShardsOperationResponse, IFlushRequest, FlushDescriptor, FlushRequest>
+	public class FlushApiTests : ApiIntegrationTestBase<IFlushResponse, IFlushRequest, FlushDescriptor, FlushRequest>
 	{
 		public FlushApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

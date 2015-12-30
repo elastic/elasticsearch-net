@@ -20,7 +20,7 @@ namespace Nest
 
 	}
 
-	public class BaseResponse : IResponse
+	public abstract class BaseResponse : IResponse
 	{
 		public virtual bool IsValid => (this.ApiCall?.Success ?? false) && (this.ServerError == null);
 

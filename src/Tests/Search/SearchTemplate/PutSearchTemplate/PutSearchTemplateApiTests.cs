@@ -8,7 +8,7 @@ using Xunit;
 namespace Tests.Search.SearchTemplate.PutSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutSearchTemplateApiTests : ApiTestBase<IAcknowledgedResponse, IPutSearchTemplateRequest, PutSearchTemplateDescriptor, PutSearchTemplateRequest>
+	public class PutSearchTemplateApiTests : ApiTestBase<IPutSearchTemplateResponse, IPutSearchTemplateRequest, PutSearchTemplateDescriptor, PutSearchTemplateRequest>
 	{
 		public PutSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

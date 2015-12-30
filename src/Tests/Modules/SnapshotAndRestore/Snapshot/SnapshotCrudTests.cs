@@ -11,7 +11,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class SnapshotCrudTests
-		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
 	{
 		private readonly static string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
 
@@ -66,7 +66,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected GetSnapshotRequest ReadInitializer(string snapshotName) => new GetSnapshotRequest(_repositoryName, snapshotName);
 		protected IGetSnapshotRequest ReadFluent(string snapshotName, GetSnapshotDescriptor d) => null;
 
-		protected override LazyResponses Delete() => Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IDeleteSnapshotResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),

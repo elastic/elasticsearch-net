@@ -11,11 +11,11 @@ namespace Tests.Indices.Warmers
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class WarmerCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetWarmerResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<IPutWarmerResponse, IGetWarmerResponse, IPutWarmerResponse, IDeleteWarmerResponse>
 	{
 		public WarmerCrudTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override LazyResponses Create() => Calls<PutWarmerDescriptor, PutWarmerRequest, IPutWarmerRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Create() => Calls<PutWarmerDescriptor, PutWarmerRequest, IPutWarmerRequest, IPutWarmerResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.PutWarmer(s, f),
@@ -61,7 +61,7 @@ namespace Tests.Indices.Warmers
 
 		protected override LazyResponses Update() => LazyResponses.Empty;
 
-		protected override LazyResponses Delete() => Calls<DeleteWarmerDescriptor, DeleteWarmerRequest, IDeleteWarmerRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteWarmerDescriptor, DeleteWarmerRequest, IDeleteWarmerRequest, IDeleteWarmerResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteWarmer(typeof(Project), s),

@@ -12,40 +12,40 @@ namespace Nest
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the refresh operation</param>
-		IShardsOperationResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
+		IRefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse Refresh(IRefreshRequest request);
+		IRefreshResponse Refresh(IRefreshRequest request);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
+		Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest request);
+		Task<IRefreshResponse> RefreshAsync(IRefreshRequest request);
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) =>
+		public IRefreshResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) =>
 			this.Refresh(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Refresh(IRefreshRequest request) => 
-			this.Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse>(
+		public IRefreshResponse Refresh(IRefreshRequest request) => 
+			this.Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, RefreshResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<RefreshResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) => 
+		public Task<IRefreshResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> selector = null) => 
 			this.RefreshAsync(selector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest request) => 
-			this.Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+		public Task<IRefreshResponse> RefreshAsync(IRefreshRequest request) => 
+			this.Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, RefreshResponse, IRefreshResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<RefreshResponse>(p)
 			);
 	}
 }
