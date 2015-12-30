@@ -74,7 +74,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/**
 			 * Which is all fine and dandy, and useful for some use cases. However in most cases
-			 * this is becomes too combersome of an approach, and you simply just want to map all
+			 * this is becomes too cumbersome of an approach, and you simply just want to map all
 			 * all the properties of your POCO in a single go.
 			 */
 			var expected = new
@@ -113,7 +113,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		[U]
@@ -131,7 +131,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/**
 			 * Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			 * In this example, Birthday was mapped as a date, IsManager as a boolean, Salaray as a string, Employees 
+			 * In this example, Birthday was mapped as a date, IsManager as a boolean, Salary as an integer, Employees 
 			 * as an object, and the remaining string properties as strings.
 			 */
 			var expected = new
@@ -214,7 +214,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/** 
@@ -267,7 +267,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/** It is also possible to define your mappings using attributes on your POCOS.  When you
@@ -441,7 +441,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		/**
 		 * Just as we were able to override the inferred properties in our earlier example, explicit (manual)
 		 * mappings also take precedence over attributes.  Therefore we can also override any mappings applied
-		 * via any attributes definted on the POCO
+		 * via any attributes defined on the POCO
 		 */
 		[U]
 		public void OverridingAutoMappedAttributes()
@@ -576,11 +576,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/**
-		 * If you notice in our previus Company/Employee examples, the Employee type is recursive
+		 * If you notice in our previous Company/Employee examples, the Employee type is recursive
 		 * in that itself contains a collection of type Employee.  By default, AutoMap() will only
 		 * traverse a single depth when it encounters recursive instances like this.  Hence, in the
 		 * previous examples, the second level of Employee did not get any of its properties mapped.
@@ -625,7 +625,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 			/** Now lets specify a maxRecursion of 3 */
 			var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
@@ -673,7 +673,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).WhenSerializing(withMaxRecursionDescriptor as ICreateIndexRequest);
+			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
 		/**

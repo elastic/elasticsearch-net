@@ -90,7 +90,9 @@ namespace Tests.Framework
 			return await audit.TraceElasticsearchExceptionOnResponse(callTrace, assert);
 		}
 
+#pragma warning disable 1998
 		public async Task<Auditor> TraceElasticsearchExceptionOnResponse(ClientCall callTrace, Action<ElasticsearchClientException> assert)
+#pragma warning restore 1998
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this._cluster.ClientThrows(false);
@@ -122,7 +124,9 @@ namespace Tests.Framework
 			return audit;
 		}
 
+#pragma warning disable 1998
 		public async Task<Auditor> TraceUnexpectedException(ClientCall callTrace, Action<UnexpectedElasticsearchClientException> assert)
+#pragma warning restore 1998
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);

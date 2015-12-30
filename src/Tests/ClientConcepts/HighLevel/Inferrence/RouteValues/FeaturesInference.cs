@@ -4,7 +4,7 @@ using Tests.Framework;
 using static Nest.Indices;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
+namespace Tests.ClientConcepts.HighLevel.Inferrence.RouteValues
 {
 	public class FeaturesInference
 	{
@@ -28,11 +28,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		{
 			/**
 			* Here we new an GET index elasticsearch request whichs takes Indices and Features.
-			* Notice how we can the Feature enum directly.
+			* Notice how we can use the Feature enum directly.
 			*/
 			var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);
 		} 
-
-
 	}
 }

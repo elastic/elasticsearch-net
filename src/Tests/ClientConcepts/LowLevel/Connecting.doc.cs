@@ -67,7 +67,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			var config = new ConnectionConfiguration(connectionPool)
 				.DisableDirectStreaming()
-				.SetBasicAuthentication("user", "pass")
+				.BasicAuthentication("user", "pass")
 				.RequestTimeout(TimeSpan.FromSeconds(5));
 
 		}
@@ -111,18 +111,18 @@ namespace Tests.ClientConcepts.LowLevel
 			//hide
 			config = config
 				//endhide
-				.SetConnectionStatusHandler(s => { })
+				.ConnectionStatusHandler(s => { })
 				/** 
 				* Allows you to pass a `Action&lt;IElasticsearchResponse&gt;` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
 				* this is a good place to add that in.
 				*/
 
-				.SetGlobalQueryStringParameters(new NameValueCollection())
+				.GlobalQueryStringParameters(new NameValueCollection())
 				/**
 				* Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 				*/
 
-				.SetProxy(new Uri("http://myproxy"), "username", "pass")
+				.Proxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
 				.RequestTimeout(TimeSpan.FromSeconds(4))
@@ -156,10 +156,10 @@ namespace Tests.ClientConcepts.LowLevel
 
 				.PrettyJson()
 				/**
-				* Forces all serialization to be indedented and appends `pretty=true` to all the requests so that the responses are indented as well
+				* Forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 				*/
 
-				.SetBasicAuthentication("username", "password")
+				.BasicAuthentication("username", "password")
 				/** Sets the HTTP basic authentication credentials to specify with all requests. */;
 
 			/**

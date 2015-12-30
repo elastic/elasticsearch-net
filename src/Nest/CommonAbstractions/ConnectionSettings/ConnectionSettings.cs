@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// Provides NEST's ElasticClient with configurationsettings
+	/// Provides the connection settings for NEST's <see cref="ElasticClient"/>
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
 	{
@@ -30,28 +30,28 @@ namespace Nest
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 	}
+
 	/// <summary>
-	/// Control how NEST's behaviour.
+	/// Provides the connection settings for NEST's <see cref="ElasticClient"/>
 	/// </summary>
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class ConnectionSettings<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
 		where TConnectionSettings : ConnectionSettings<TConnectionSettings>
 	{
-
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
 
-		private ElasticInferrer _inferrer;
+		private readonly ElasticInferrer _inferrer;
 		ElasticInferrer IConnectionSettingsValues.Inferrer => _inferrer;
 
 		private Func<Type, string> _defaultTypeNameInferrer;
 		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer => _defaultTypeNameInferrer;
 
-		private FluentDictionary<Type, string> _defaultIndices;
+		private readonly FluentDictionary<Type, string> _defaultIndices;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
 
-		private FluentDictionary<Type, string> _defaultTypeNames;
+		private readonly FluentDictionary<Type, string> _defaultTypeNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultTypeNames => _defaultTypeNames;
 
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -64,13 +64,11 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters => _contractConverters;
 
-		private FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 
-		private FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
+		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
-
-		ConnectionSettings<TConnectionSettings> _assign(Action<IConnectionSettingsValues> assigner) => Fluent.Assign(this, assigner);
 
 		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer)
@@ -80,11 +78,15 @@ namespace Nest
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
-			this._modifyJsonSerializerSettings = (j) => { };
+			this._modifyJsonSerializerSettings = j => { };
 			this._contractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
 			this._inferrer = new ElasticInferrer(this);
 		}
 
+		/// <summary>
+		/// The default serializer for requests and responses
+		/// </summary>
+		/// <returns></returns>
 		protected override IElasticsearchSerializer DefaultSerializer() => new NestSerializer(this);
 
 		/// <summary>
@@ -99,7 +101,7 @@ namespace Nest
 		/// <summary>
 		/// Allows you to update internal the json.net serializer settings to your liking
 		/// </summary>
-		public TConnectionSettings SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
+		public TConnectionSettings JsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
 		{
 			if (modifier == null)
 				return (TConnectionSettings)this;
@@ -117,12 +119,12 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Index to default to when no index is specified.
+		/// The default index to use when no index is specified.
 		/// </summary>
-		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
-		/// when not specifying index explicitly while indexing.
+		/// <param name="defaultIndex">When null/empty/not set might throw 
+		/// <see cref="NullReferenceException"/> later on when not specifying index explicitly while indexing.
 		/// </param>
-		public TConnectionSettings SetDefaultIndex(string defaultIndex)
+		public TConnectionSettings DefaultIndex(string defaultIndex)
 		{
 			this._defaultIndex = defaultIndex;
 			return (TConnectionSettings)this;
@@ -141,24 +143,24 @@ namespace Nest
 		/// Here you can register a function that transforms these expressions (default casing, pre- or suffixing)
 		/// </pre>
 		/// </summary>
-		public TConnectionSettings SetDefaultFieldNameInferrer(Func<string, string> FieldNameSelector)
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 		{
-			this._defaultFieldNameInferrer = FieldNameSelector;
+			this._defaultFieldNameInferrer = fieldNameInferrer;
 			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
 		/// Allows you to override how type names should be represented, the default will call .ToLowerInvariant() on the type's name.
 		/// </summary>
-		public TConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
+		public TConnectionSettings DefaultTypeNameInferrer(Func<Type, string> typeNameInferrer)
 		{
-			defaultTypeNameInferrer.ThrowIfNull(nameof(defaultTypeNameInferrer));
-			this._defaultTypeNameInferrer = defaultTypeNameInferrer;
+			typeNameInferrer.ThrowIfNull(nameof(typeNameInferrer));
+			this._defaultTypeNameInferrer = typeNameInferrer;
 			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
-		/// Map types to a index names. Takes precedence over SetDefaultIndex().
+		/// Map types to a index names. Takes precedence over DefaultIndex().
 		/// </summary>
 		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
@@ -168,7 +170,7 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 		/// <summary>
-		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
+		/// Allows you to override typenames, takes priority over the global DefaultTypeNameInferrer()
 		/// </summary>
 		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
@@ -264,8 +266,6 @@ namespace Nest
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
 			
-
-
 			return (TConnectionSettings) this;
 		}
 

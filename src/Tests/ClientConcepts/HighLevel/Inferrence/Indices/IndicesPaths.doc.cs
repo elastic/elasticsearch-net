@@ -36,7 +36,6 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 			var singleTyped = Nest.Indices.Index<Project>();
 			var singleString = Nest.Indices.Index("name1");
 			var invalidSingleString = Nest.Indices.Index("name1, name2");
-
 		}
 	}
 }

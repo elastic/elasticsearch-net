@@ -125,8 +125,6 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		/* */
-
 		private readonly IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
@@ -205,12 +203,12 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
 		/// </summary>
-		public T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(a => a._queryString.Add(queryStringParameters));
+		public T GlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(a => a._queryString.Add(queryStringParameters));
 
 		/// <summary>
 		/// a NameValueCollection that will be send as headers for each request
 		/// </summary>
-		public T SetGlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
+		public T GlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
 
 		/// <summary>
 		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
@@ -231,14 +229,14 @@ namespace Elasticsearch.Net
 		/// </summary>
 		/// <remarks>Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially</remarks>
 		/// <param name="timeout"></param>
-		public T SetDeadTimeout(TimeSpan timeout) => Assign(a => a._deadTimeout = timeout);
+		public T DeadTimeout(TimeSpan timeout) => Assign(a => a._deadTimeout = timeout);
 
 		/// <summary>
 		/// Sets the maximum time a node can be marked dead. 
 		/// Different implementations of IConnectionPool may choose a different default.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds</param>
-		public T SetMaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
+		public T MaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
 		/// <summary>
 		/// Limits the total runtime including retries separately from <see cref="RequestTimeout"/>
@@ -246,12 +244,12 @@ namespace Elasticsearch.Net
 		/// When not specified defaults to <see cref="RequestTimeout"/> which itself defaults to 60seconds
 		/// </pre>
 		/// </summary>
-		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
+		public T MaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
 
 		/// <summary>
 		/// If your connection has to go through proxy use this method to specify the proxy url
 		/// </summary>
-		public T SetProxy(Uri proxyAdress, string username, string password)
+		public T Proxy(Uri proxyAdress, string username, string password)
 		{
 			proxyAdress.ThrowIfNull(nameof(proxyAdress));
 			this._proxyAddress = proxyAdress.ToString();
@@ -268,7 +266,7 @@ namespace Elasticsearch.Net
 			this._prettyJson = b;
 			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
 			else if (b && this._queryString["pretty"] == null)
-				this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
+				this.GlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
         });
 
 		/// <summary>
@@ -277,18 +275,17 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
-
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// Calling this multiple times will register multiple listeners
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<IApiCallDetails> handler) =>
+		public T ConnectionStatusHandler(Action<IApiCallDetails> handler) =>
 			Assign(a => a._apiCallHandler += handler ?? DefaultApiCallHandler);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.
 		/// </summary>
-		public T SetBasicAuthentication(string userName, string password)
+		public T BasicAuthentication(string userName, string password)
 		{
 			this._basicAuthCredentials = new BasicAuthenticationCredentials
 			{

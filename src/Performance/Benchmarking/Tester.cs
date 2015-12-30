@@ -80,7 +80,7 @@ namespace Benchmarking
 			var connectionPool = new SniffingConnectionPool(new [] { uri });
 
 			return new ConnectionSettings(connectionPool)
-				.SetDefaultIndex(IndexName)
+				.DefaultIndex(IndexName)
 				.SniffOnStartup()
 				.ThrowExceptions();
 		}

@@ -22,9 +22,7 @@ namespace Nest
 			where TConverter : JsonConverter
 		{
 			var resolver = serializer.ContractResolver as ElasticContractResolver;
-			if (resolver?.PiggyBackState?.ActualJsonConverter == null) return null;
-
-			var realConverter = resolver.PiggyBackState.ActualJsonConverter as TConverter;
+			var realConverter = resolver?.PiggyBackState?.ActualJsonConverter as TConverter;
 			return realConverter;
 		}
 
@@ -47,8 +45,10 @@ namespace Nest
 			var j = jToken;
 			if (rootCauseProperty != null)
 			{
-				var o = new JObject();
-				o.Add("error", jToken);
+				var o = new JObject
+				{
+					{"error", jToken}
+				};
 				j = o;
 			}
 

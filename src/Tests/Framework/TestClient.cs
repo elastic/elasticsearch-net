@@ -21,7 +21,7 @@ namespace Tests.Framework
 		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, bool forceInMemory = false)
 		{
 			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory))
-				.SetDefaultIndex("default-index")
+				.DefaultIndex("default-index")
 				.PrettyJson()
 				.InferMappingFor<Project>(map => map
 					.IndexName("project")
@@ -38,7 +38,7 @@ namespace Tests.Framework
 				)
 				//We try and fetch the test name during integration tests when running fiddler to send the name 
 				//as the TestMethod header, this allows us to quickly identify which test sent which request
-				.SetGlobalHeaders(new NameValueCollection
+				.GlobalHeaders(new NameValueCollection
 				{
 					{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
 				});

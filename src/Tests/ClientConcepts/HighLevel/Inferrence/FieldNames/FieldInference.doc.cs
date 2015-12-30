@@ -68,10 +68,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		}
 		
 		/** By default NEST will camelCase all the field names to be more javascripty */
-		[U] public void SetDefaultFieldNameInferrer()
+		[U] public void DefaultFieldNameInferrer()
 		{
-			/** using SetDefaultFieldNameInferrer on ConnectionSettings you can change this behavior */
-			var setup = WithConnectionSettings(s => s.SetDefaultFieldNameInferrer(p => p.ToUpper()));
+			/** using DefaultFieldNameInferrer() on ConnectionSettings you can change this behavior */
+			var setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p.ToUpper()));
 
 			setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
 			/** if you want the same behavior for expressions simply do nothing in the default inferrer */
-			setup = WithConnectionSettings(s => s.SetDefaultFieldNameInferrer(p => p));
+			setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 			setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 		}
 

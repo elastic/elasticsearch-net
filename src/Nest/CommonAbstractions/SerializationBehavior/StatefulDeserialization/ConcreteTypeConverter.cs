@@ -64,7 +64,6 @@ namespace Nest
 
 		public ConcreteTypeConverter() {}
 
-
 		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
 		{
 			concreteTypeSelector.ThrowIfNull(nameof(concreteTypeSelector));
