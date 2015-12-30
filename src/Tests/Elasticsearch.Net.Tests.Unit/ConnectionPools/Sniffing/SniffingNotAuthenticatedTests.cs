@@ -309,7 +309,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 			}
 		}
 
-		[Test][Ignore("Flakey on myget.org, never fails locally")] 
+		[Ignore("Flakey on myget.org, never fails locally")] 
 		public void ShouldThrowAndNotRetrySniffInformationIsTooOld401()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
@@ -351,7 +351,7 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 			}
 		}
 
-		[Test][Ignore("Flakey on myget.org, never fails locally")] 
+		[Ignore("Flakey on myget.org, never fails locally")] 
 		public void ShouldThrowAndNotRetrySniffInformationIsTooOld401_Async()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
