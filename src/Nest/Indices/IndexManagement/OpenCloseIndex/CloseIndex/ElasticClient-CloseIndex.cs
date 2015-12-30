@@ -14,41 +14,41 @@ namespace Nest
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html</a>
 		/// </summary>
 		/// <param name="selector">A descriptor thata describes the close index operation</param>
-		IIndicesOperationResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
+		IAcknowledgedResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse CloseIndex(ICloseIndexRequest request);
+		IAcknowledgedResponse CloseIndex(ICloseIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
+		Task<IAcknowledgedResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest request);
+		Task<IAcknowledgedResponse> CloseIndexAsync(ICloseIndexRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
+		public IAcknowledgedResponse CloseIndex(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
 			this.CloseIndex(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CloseIndex(ICloseIndexRequest request) => 
-			this.Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, IndicesOperationResponse>(
+		public IAcknowledgedResponse CloseIndex(ICloseIndexRequest request) => 
+			this.Dispatcher.Dispatch<ICloseIndexRequest, CloseIndexRequestParameters, AcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesCloseDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesCloseDispatch<AcknowledgedResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
+		public Task<IAcknowledgedResponse> CloseIndexAsync(Indices indices, Func<CloseIndexDescriptor, ICloseIndexRequest> selector = null) =>
 			this.CloseIndexAsync(selector.InvokeOrDefault(new CloseIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest request) => 
-			this.Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+		public Task<IAcknowledgedResponse> CloseIndexAsync(ICloseIndexRequest request) => 
+			this.Dispatcher.DispatchAsync<ICloseIndexRequest, CloseIndexRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesCloseDispatchAsync<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesCloseDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}
 }

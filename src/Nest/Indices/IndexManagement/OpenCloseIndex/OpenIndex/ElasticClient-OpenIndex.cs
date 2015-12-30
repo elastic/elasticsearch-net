@@ -14,40 +14,40 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the open index operation</param>
-		IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
+		IAcknowledgedResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse OpenIndex(IOpenIndexRequest request);
+		IAcknowledgedResponse OpenIndex(IOpenIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
+		Task<IAcknowledgedResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest request);
+		Task<IAcknowledgedResponse> OpenIndexAsync(IOpenIndexRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null) =>
+		public IAcknowledgedResponse OpenIndex(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null) =>
 			this.OpenIndex(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse OpenIndex(IOpenIndexRequest request) => 
-			this.Dispatcher.Dispatch<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse>(
+		public IAcknowledgedResponse OpenIndex(IOpenIndexRequest request) => 
+			this.Dispatcher.Dispatch<IOpenIndexRequest, OpenIndexRequestParameters, AcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatch<AcknowledgedResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null)=>
+		public Task<IAcknowledgedResponse> OpenIndexAsync(Indices indices, Func<OpenIndexDescriptor, IOpenIndexRequest> selector = null)=>
 			this.OpenIndexAsync(selector.InvokeOrDefault(new OpenIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest request) => 
-			this.Dispatcher.DispatchAsync<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+		public Task<IAcknowledgedResponse> OpenIndexAsync(IOpenIndexRequest request) => 
+			this.Dispatcher.DispatchAsync<IOpenIndexRequest, OpenIndexRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}
 }

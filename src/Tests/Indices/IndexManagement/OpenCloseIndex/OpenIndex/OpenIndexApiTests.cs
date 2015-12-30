@@ -10,7 +10,7 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class OpenIndexApiTests 
-		: ApiIntegrationTestBase<IIndicesOperationResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
+		: ApiIntegrationTestBase<IAcknowledgedResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{
 		public OpenIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

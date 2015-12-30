@@ -1044,7 +1044,6 @@
     <Compile Include="Indices\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />
     <Compile Include="CommonAbstractions\Response\ElasticSearchVersionInfo.cs" />
-    <Compile Include="CommonAbstractions\Response\IndicesOperationResponse.cs" />
     <Compile Include="CommonAbstractions\Response\IndicesResponse.cs" />
     <Compile Include="Search\Search\SearchResponse.cs" />
     <Compile Include="IndexModules\IndexSettings\IndexState.cs" />

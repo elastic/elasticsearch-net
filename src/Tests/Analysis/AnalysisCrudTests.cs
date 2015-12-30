@@ -11,7 +11,7 @@ namespace Tests.Analysis
 
 	[Collection(IntegrationContext.Indexing)]
 	public class AnalysisCrudTests
-		: CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
 		* # Analysis crud
@@ -27,7 +27,7 @@ namespace Tests.Analysis
 		/**
 		* We can create the analysis settings as part of the create index call
 		*/
-		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, IIndicesOperationResponse>(
+		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, IAcknowledgedResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.CreateIndex(s, f),
