@@ -741,7 +741,7 @@
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\JsonNetSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistanceType.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\Extensions\ExceptionExtensions.cs" />

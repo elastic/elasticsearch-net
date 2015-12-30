@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Nest;
+using Newtonsoft.Json;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 
@@ -303,6 +304,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public bool IsManager { get; set; }
 
 			[Nested(Path = "employees")]
+			[JsonProperty("empl")]
 			public List<Employee> Employees { get; set; }
 		}
 
@@ -376,7 +378,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								numeric_resolution = "seconds",
 								type = "date"
 							},
-							employees = new
+							empl = new
 							{
 								path = "employees",
 								properties = new
@@ -511,7 +513,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								format = "MM-dd-yy",
 								type = "date"
 							},
-							employees = new
+							empl = new
 							{
 								path = "employees",
 								properties = new

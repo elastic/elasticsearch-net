@@ -61,7 +61,7 @@ namespace Tests.Framework
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
-			var serializer = new NestSerializer(new ConnectionSettings());
+			var serializer = new JsonNetSerializer(new ConnectionSettings());
 			byte[] fixedResult;
 			using (var ms = new MemoryStream())
 			{

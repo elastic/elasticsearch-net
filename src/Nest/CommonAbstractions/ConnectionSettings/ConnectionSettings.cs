@@ -87,7 +87,7 @@ namespace Nest
 		/// The default serializer for requests and responses
 		/// </summary>
 		/// <returns></returns>
-		protected override IElasticsearchSerializer DefaultSerializer() => new NestSerializer(this);
+		protected override IElasticsearchSerializer DefaultSerializer() => new JsonNetSerializer(this);
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90

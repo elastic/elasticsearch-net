@@ -204,14 +204,6 @@ namespace Tests.Search.Request
 
 		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
-			var rawResponse = Encoding.UTF8.GetString(r.ApiCall.ResponseBodyInBytes);
-			var rawRequest = Encoding.UTF8.GetString(r.ApiCall.RequestBodyInBytes);
-
-			rawResponse.Should().NotBeNullOrWhiteSpace();
-			rawRequest.Should().NotBeNullOrWhiteSpace();
-
-			var debugMessage = $"\r\n\r\nREQUEST:\r\n{rawRequest}\r\nRESPONSE:\r\n{rawResponse}";
-
 			r.IsValid.Should().BeTrue();
 			r.Hits.Should().NotBeEmpty();
 			foreach (var hit in r.Hits)
@@ -231,7 +223,6 @@ namespace Tests.Search.Request
 					var baronHits = earlHit.InnerHits["barons"];
 					baronHits.Should().NotBeNull();
 					var baron = baronHits.Documents<Baron>().FirstOrDefault();
-					if (baron == null) Console.WriteLine($"first baron on {earl} could not be fetched as Baron Type {debugMessage}");
 					baron.Should().NotBeNull();
 					baron.Name.Should().NotBeNullOrWhiteSpace();
 				}
