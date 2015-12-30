@@ -86,7 +86,7 @@ var tweet = new Tweet
 {
 	Id = 1,
     User = "kimchy",
-    PostData = new DateTime(2009, 11, 15),
+    PostDate = new DateTime(2009, 11, 15),
     Message = "Trying out NEST, so far so good?"
 };
 
@@ -158,7 +158,7 @@ var response = client.Raw.SearchPost("myindex","elasticsearchprojects", new
 ```
 
 #### [Read the full documentation here](http://nest.azurewebsites.net/)
-(The documentation is terribly out of date at the moment, but we're in the process of completely revamping them.  Please bare with us during the transition.)
+(The documentation is terribly out of date at the moment, but we're in the process of [completely revamping them](https://github.com/elastic/elasticsearch-net/tree/master/docs/contents/new).  Please bare with us during the transition.)
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 
@@ -196,7 +196,7 @@ Note the main difference here is that we are instantiating an `ElasticsearchClie
 
 ### Calling an API endpoint
 
-Elasticsearch.Net is generated from the the official client REST specification, and thus maps to all Elasticsearch API endpoints.
+Elasticsearch.Net is generated from the the [official REST specification](https://github.com/elastic/elasticsearch/tree/master/rest-api-spec), and thus maps to all Elasticsearch API endpoints.
 
 ```csharp
 client.GetSource("myindex","mytype","1",qs=>qs
@@ -204,7 +204,7 @@ client.GetSource("myindex","mytype","1",qs=>qs
 );
 ```
 
-will execute a GET to /myindex/mytype/1/_source?routing=routingvalue. All the methods and arguments are fully documented based on the documentation of the specification.
+will execute a `GET` to `/myindex/mytype/1/_source?routing=routingvalue`. All the methods and arguments are fully documented based on the documentation of the specification.
 
 As you can see, Elasticsearch.Net also strongly types the query string parameters that it knows exist on an endpoint with full Intellisense documentation. However, unknown query string parameters can still be added:
 
@@ -226,7 +226,7 @@ var myJson = @"{ ""hello"" : ""world"" }";
 client.Index("myindex","mytype","1", myJson);
 ```
 
-This will execute a POST to /myindex/mytype/1 with the provided string myJson passed verbatim as request body.
+This will execute a `POST` to `/myindex/mytype/1` with the provided string `myJson` passed verbatim as the request body.
 
 Alternatively, you can specify an anonymous object:
 
@@ -235,7 +235,7 @@ var myJson = new { hello = "world" };
 client.Index("myindex","mytype","1", myJson);
 ```
 
-This will execute the same request, but this time myJson will be serialized by the registered ISerializer.
+This will execute the same request, but this time `myJson` will be serialized by the registered `ISerializer`.
 
 ## Contributing
 
