@@ -73,7 +73,9 @@ namespace Elasticsearch.Net
 			}
 			else if (response.HttpStatusCode != null)
 			{
-				response.ServerError = ElasticsearchDefaultSerializer.Instance.Deserialize<ServerError>(stream);
+				ServerError serverError;
+				if (ServerError.TryCreate(stream, out serverError))
+					response.ServerError = serverError;
 			}
 		}
 
@@ -97,7 +99,7 @@ namespace Elasticsearch.Net
 			}
 			else if (response.HttpStatusCode != null)
 			{
-				response.ServerError = await ElasticsearchDefaultSerializer.Instance.DeserializeAsync<ServerError>(stream, this._requestData.CancellationToken);
+				response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken);
 			}
 		}
 

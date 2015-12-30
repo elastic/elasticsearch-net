@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Bogus;
 using Elasticsearch.Net;
@@ -113,7 +114,11 @@ namespace Tests.Search.Request
 	{
 		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected abstract IndexName Index { get; }
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values) => new RoyalSeeder(this.Client, Index).Seed();
+
+		protected override ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings
+			.DisableDirectStreaming();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -122,7 +127,6 @@ namespace Tests.Search.Request
 			requestAsync: (client, r) => client.SearchAsync<TRoyal>(r)
 		);
 
-		protected static IndexName Index { get; } = RandomString();
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
@@ -139,12 +143,19 @@ namespace Tests.Search.Request
 	{
 		public GlobalInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		private static IndexName IndexName { get; } = RandomString();
+		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
+
 		protected override object ExpectJson { get; } = new
 		{
-			inner_hits = new {
-				earls = new {
-					type = new {
-						earl = new {
+			inner_hits = new
+			{
+				earls = new
+				{
+					type = new
+					{
+						earl = new
+						{
 							fielddata_fields = new[] { "name" },
 							inner_hits = new
 							{
@@ -193,6 +204,14 @@ namespace Tests.Search.Request
 
 		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
+			var rawResponse = Encoding.UTF8.GetString(r.ApiCall.ResponseBodyInBytes);
+			var rawRequest = Encoding.UTF8.GetString(r.ApiCall.RequestBodyInBytes);
+
+			rawResponse.Should().NotBeNullOrWhiteSpace();
+			rawRequest.Should().NotBeNullOrWhiteSpace();
+
+			var debugMessage = $"\r\n\r\nREQUEST:\r\n{rawRequest}\r\nRESPONSE:\r\n{rawResponse}";
+
 			r.IsValid.Should().BeTrue();
 			r.Hits.Should().NotBeEmpty();
 			foreach (var hit in r.Hits)
@@ -202,15 +221,17 @@ namespace Tests.Search.Request
 				var earlHits = hit.InnerHits["earls"].Hits;
 				earlHits.Total.Should().BeGreaterThan(0);
 				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
-				foreach(var earlHit in earlHits.Hits)
+				foreach (var earlHit in earlHits.Hits)
 					earlHit.Fields.FieldValues<string[]>("name").Should().NotBeEmpty();
 				var earls = earlHits.Documents<Earl>();
 				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
 				foreach (var earlHit in earlHits.Hits)
 				{
+					var earl = earlHit.Source.As<Earl>().Name;
 					var baronHits = earlHit.InnerHits["barons"];
 					baronHits.Should().NotBeNull();
 					var baron = baronHits.Documents<Baron>().FirstOrDefault();
+					if (baron == null) Console.WriteLine($"first baron on {earl} could not be fetched as Baron Type {debugMessage}");
 					baron.Should().NotBeNull();
 					baron.Name.Should().NotBeNullOrWhiteSpace();
 				}
@@ -223,10 +244,15 @@ namespace Tests.Search.Request
 	{
 		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		private static IndexName IndexName { get; } = RandomString();
+		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
+
 		protected override object ExpectJson { get; } = new
 		{
-			query = new {
-				@bool = new {
+			query = new
+			{
+				@bool = new
+				{
 					should = new object[] {
 					new {
 						has_child = new {
@@ -249,13 +275,13 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
 			.Index(Index)
-			.Query(q => 
+			.Query(q =>
 				q.HasChild<Prince>(hc => hc
 					.Query(hcq => hcq.MatchAll())
 					.InnerHits(ih => ih.Name("princes"))
-				) || q.Nested(n=>n
-					.Path(p=>p.Foes)
-					.Query(nq=>nq.MatchAll())
+				) || q.Nested(n => n
+					.Path(p => p.Foes)
+					.Query(nq => nq.MatchAll())
 					.InnerHits()
 				)
 			);
@@ -266,10 +292,10 @@ namespace Tests.Search.Request
 			{
 				Type = typeof(Prince),
 				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits { Name = "princes"}
+				InnerHits = new InnerHits { Name = "princes" }
 			} || new NestedQuery
 			{
-				Path = Field<King>(p=>p.Foes),
+				Path = Field<King>(p => p.Foes),
 				Query = new MatchAllQuery(),
 				InnerHits = new InnerHits()
 			}

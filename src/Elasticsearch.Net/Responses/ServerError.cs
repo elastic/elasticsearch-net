@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
@@ -11,6 +13,30 @@ namespace Elasticsearch.Net
 		public int Status { get; set; }
 
 		public static ServerError Create(Stream stream) => ElasticsearchDefaultSerializer.Instance.Deserialize<ServerError>(stream);
+		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) => 
+			ElasticsearchDefaultSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
+
+		/// <summary>
+		/// Creating the server error might fail in cases where a proxy returns an http response which is not json at all
+		/// </summary>
+		public static bool TryCreate(Stream stream, out ServerError serverError)
+		{
+			serverError = null;
+			try { serverError = Create(stream); }
+			catch { return false; }
+			return true;
+		}
+
+		/// <summary>
+		/// Creating the server error might fail in cases where a proxy returns an http response which is not json at all
+		/// </summary>
+		public static Task<ServerError> TryCreateAsync(Stream stream, CancellationToken token)
+		{
+			try { return CreateAsync(stream, token); }
+			catch { // ignored
+			}
+			return null;
+		}
 
 		internal static ServerError Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
