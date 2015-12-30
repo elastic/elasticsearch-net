@@ -38,7 +38,23 @@ namespace Tests.Search.Percolator.Percolate
 
 		protected override object ExpectJson => new
 		{
-			doc = Project.InstanceAnonymous
+			doc = Project.InstanceAnonymous,
+			query = new
+			{
+				match_all = new { }
+			},
+			size = 10,
+			sort = new[]
+			{
+				new
+				{
+					_score = new
+					{
+						order = "desc"
+					}
+				}
+			},
+			track_scores = true
 		};
 
 		protected override void ExpectResponse(IPercolateResponse response)
