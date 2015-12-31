@@ -30,8 +30,6 @@ namespace Nest
 
 	}
 
-	//TODO High Priority: changing this and other methods that can actually return multiple to plural form e.g GetIndexTemplates/GetIndexTemplates
-	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
