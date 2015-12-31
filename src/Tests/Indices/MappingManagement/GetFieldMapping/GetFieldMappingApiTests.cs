@@ -8,13 +8,13 @@ using Xunit;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class GetFieldMappingApiTests 
 		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{
 		private static readonly Fields Fields = Infer.Fields<Project>(p => p.Name, p => p.Tags);
 
-		public GetFieldMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetFieldMapping<Project>(Fields),
 			fluentAsync: (client, f) => client.GetFieldMappingAsync<Project>(Fields),
