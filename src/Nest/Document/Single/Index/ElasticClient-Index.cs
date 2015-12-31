@@ -38,7 +38,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexResponse Index(IIndexRequest request) =>
 			this.Dispatcher.Dispatch<IIndexRequest, IndexRequestParameters, IndexResponse>(
-				request, this.LowLevelDispatch.IndexDispatch<IndexResponse>
+				request,
+				this.LowLevelDispatch.IndexDispatch<IndexResponse>
 			);
 
 		/// <inheritdoc/>
