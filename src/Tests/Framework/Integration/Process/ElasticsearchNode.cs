@@ -49,7 +49,12 @@ namespace Tests.Framework.Integration
 		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
-		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpawnIfAlreadyRunning, string prefix)
+		public ElasticsearchNode(
+			string elasticsearchVersion, 
+			bool runningIntegrations, 
+			bool doNotSpawnIfAlreadyRunning, 
+			string prefix
+			)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this.Version = elasticsearchVersion;
@@ -58,7 +63,6 @@ namespace Tests.Framework.Integration
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
 			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
 			this.NodeName = $"{this.Prefix}-node-{suffix}";
-
 
 			this.BootstrapWork = _blockingSubject;
 
@@ -78,7 +82,7 @@ namespace Tests.Framework.Integration
 			this.DownloadAndExtractElasticsearch();
 		}
 
-		public IObservable<ElasticsearchMessage> Start()
+		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
@@ -113,14 +117,17 @@ namespace Tests.Framework.Integration
 					}
 				}
 			}
-
-			this._process = new ObservableProcess(this.Binary,
+			var settings = new string[]
+			{
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}",
 				$"-Des.path.repo={this.RepositoryPath}",
 				$"-Des.script.inline=on",
 				$"-Des.script.indexed=on"
-			);
+			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
+
+			this._process = new ObservableProcess(this.Binary, settings.ToArray());
+
 			var observable = Observable.Using(() => this._process, process => process.Start())
 				.Select(consoleLine => new ElasticsearchMessage(consoleLine));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
@@ -257,12 +264,19 @@ namespace Tests.Framework.Integration
 					throw new ApplicationException($"Could not install ${installPath} within {timeout}");
 			}
 		}
+		
+		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
+		{
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port, createPool);
+			return client;
+		}
 
 		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
 		{
 			var port = this.Started ? this.Port : 9200;
 			settings = settings ?? (s => s);
-
 			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port);
 			return client;
 		}

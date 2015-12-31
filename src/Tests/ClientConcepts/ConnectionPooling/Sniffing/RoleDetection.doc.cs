@@ -1,8 +1,13 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using FluentAssertions;
+using Nest;
 using Tests.Framework;
+using Tests.Framework.Integration;
+using Xunit;
 using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
@@ -73,4 +78,70 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			await audit.TraceStartup();
 		}
 	}
+
+
+	[CollectionDefinition(IntegrationContext.SniffRoleDetection)]
+	public class SniffRoleDetectionCluster : ClusterBase, ICollectionFixture<SniffRoleDetectionCluster>
+	{
+		protected override string[] ServerSettings => new[]
+		{
+			"-Des.node.data=false",
+			"-Des.node.master=true",
+		};
+	}
+
+	[Collection(IntegrationContext.SniffRoleDetection)]
+	public class RealWorldRoleDetection
+	{
+		private readonly SniffRoleDetectionCluster _cluster;
+		private IConnectionSettingsValues _settings;
+
+		public RealWorldRoleDetection(SniffRoleDetectionCluster cluster)
+		{
+			this._cluster = cluster;
+		}
+
+		[I] public async Task SniffPicksUpRoles()
+		{
+			var node = SniffAndReturnNode();
+			node.MasterEligable.Should().BeTrue();
+			node.HoldsData.Should().BeFalse();
+
+			node = await SniffAndReturnNodeAsync();
+			node.MasterEligable.Should().BeTrue();
+			node.HoldsData.Should().BeFalse();
+		}
+
+		private Node SniffAndReturnNode()
+		{
+			var pipeline = CreatePipeline();
+			pipeline.Sniff();
+			return AssertSniffResponse();
+		}
+
+		private async Task<Node> SniffAndReturnNodeAsync()
+		{
+			var pipeline = CreatePipeline();
+			await pipeline.SniffAsync();
+			return AssertSniffResponse();
+		}
+
+		private RequestPipeline CreatePipeline()
+		{
+			this._settings =
+				this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
+				new SearchRequestParameters());
+			return pipeline;
+		}
+
+		private Node AssertSniffResponse()
+		{
+			var nodes = this._settings.ConnectionPool.Nodes;
+			nodes.Should().NotBeEmpty().And.HaveCount(1);
+			var node = nodes.First();
+			return node;
+		}
+	}
+
 }

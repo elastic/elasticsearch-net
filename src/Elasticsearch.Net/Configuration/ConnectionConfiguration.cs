@@ -20,7 +20,8 @@ namespace Elasticsearch.Net
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		public ConnectionConfiguration(Uri uri = null)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
+		{ }
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -29,19 +30,23 @@ namespace Elasticsearch.Net
 		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 			// ReSharper disable once IntroduceOptionalParameters.Global 
-			: this(connectionPool, null, null) { }
+			: this(connectionPool, null, null)
+		{ }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection)
 			// ReSharper disable once IntroduceOptionalParameters.Global
-			: this(connectionPool, connection, null) { }
+			: this(connectionPool, connection, null)
+		{ }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
-			: this(connectionPool, null, serializer) { }
+			: this(connectionPool, null, serializer)
+		{ }
 
 		// ReSharper disable once MemberCanBePrivate.Global
 		// eventhough we use don't use this we very much would like to  expose this constructor
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
-			: base(connectionPool, connection, serializer) { }
+			: base(connectionPool, connection, serializer)
+		{ }
 	}
 
 	[Browsable(false)]
@@ -73,7 +78,7 @@ namespace Elasticsearch.Net
 		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
 
-		private  string _proxyPassword;
+		private string _proxyPassword;
 		string IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
 
 		private bool _disablePings;
@@ -112,7 +117,7 @@ namespace Elasticsearch.Net
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 
-		private static void DefaultApiCallHandler(IApiCallDetails status) {}
+		private static void DefaultApiCallHandler(IApiCallDetails status) { }
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
@@ -135,7 +140,7 @@ namespace Elasticsearch.Net
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage(
-			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", 
+			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor",
 			Justification = "We want the virtual method to run on most derived")]
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 		{
@@ -262,12 +267,13 @@ namespace Elasticsearch.Net
 		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
-		public T PrettyJson(bool b = true) => Assign(a => {
+		public T PrettyJson(bool b = true) => Assign(a =>
+		{
 			this._prettyJson = b;
 			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
 			else if (b && this._queryString["pretty"] == null)
 				this.GlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
-        });
+		});
 
 		/// <summary>
 		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object

@@ -32,10 +32,10 @@ namespace Elasticsearch.Net
 		public string ip { get; set; }
 		public string version { get; set; }
 		public string build { get; set; }
-		public IDictionary<string, object> settings { get; set; }
+		public IDictionary<string, string> settings { get; set; }
 
-		internal bool MasterEligable => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && ((bool)this.settings["node.master"]) == false);
-		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && ((bool)this.settings["node.data"]) == false);
+		internal bool MasterEligable => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.master"]) == false);
+		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.data"]) == false);
 	}
 
 }

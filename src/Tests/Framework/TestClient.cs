@@ -18,31 +18,39 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
-		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, bool forceInMemory = false)
-		{
-			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory))
-				.DefaultIndex("default-index")
-				.PrettyJson()
-				.InferMappingFor<Project>(map => map
-					.IndexName("project")
-					.IdProperty(p => p.Name)
-				)
-				.InferMappingFor<CommitActivity>(map => map
-					.IndexName("project")
-					.TypeName("commits")
-				)
-				.InferMappingFor<Developer>(map => map
-					.IndexName("devs")
-					.Ignore(p => p.PrivateValue)
-					.Rename(p => p.OnlineHandle, "nickname")
-				)
-				//We try and fetch the test name during integration tests when running fiddler to send the name 
-				//as the TestMethod header, this allows us to quickly identify which test sent which request
-				.GlobalHeaders(new NameValueCollection
-				{
-					{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
-				});
+		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
+			.DefaultIndex("default-index")
+			.PrettyJson()
+			.InferMappingFor<Project>(map => map
+				.IndexName("project")
+				.IdProperty(p => p.Name)
+			)
+			.InferMappingFor<CommitActivity>(map => map
+				.IndexName("project")
+				.TypeName("commits")
+			)
+			.InferMappingFor<Developer>(map => map
+				.IndexName("devs")
+				.Ignore(p => p.PrivateValue)
+				.Rename(p => p.OnlineHandle, "nickname")
+			)
+			//We try and fetch the test name during integration tests when running fiddler to send the name 
+			//as the TestMethod header, this allows us to quickly identify which test sent which request
+			.GlobalHeaders(new NameValueCollection
+			{
+				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
+			});
 
+			
+		public static ConnectionSettings CreateSettings(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, 
+			int port = 9200, 
+			bool forceInMemory = false,
+			Func<Uri, IConnectionPool> createPool = null
+			)
+		{
+			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
+			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory)));
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
@@ -50,8 +58,9 @@ namespace Tests.Framework
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
-			new ElasticClient(CreateSettings(modifySettings, port));
+		public static IElasticClient GetClient(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
 		public static Uri CreateNode(int? port = null) =>
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
