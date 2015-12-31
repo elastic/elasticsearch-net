@@ -51,13 +51,14 @@ namespace Nest
 				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p)
 			);
+
 		//TODO DictionaryResponse!
 		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IApiCallDetails response, IGetFieldMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
 				? Serializer.Deserialize<IndexFieldMappings>(stream)
 				: null;
-			return new GetFieldMappingResponse(response, dict);
+			return new GetFieldMappingResponse(response, dict, this.ConnectionSettings.Inferrer);
 		}
 
 	}

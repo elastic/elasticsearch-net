@@ -1,4 +1,5 @@
 ﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -29,5 +30,11 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 
 		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(Fields);
+
+		protected override void ExpectResponse(IGetFieldMappingResponse response)
+		{
+			var fieldMapping = response.MappingFor<Project>("name");
+			fieldMapping.Should().NotBeNull();
+		}
 	}
 }

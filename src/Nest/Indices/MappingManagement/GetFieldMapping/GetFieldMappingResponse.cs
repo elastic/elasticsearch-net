@@ -7,18 +7,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	public class FieldMappingProperties : Dictionary<string, FieldMapping>
-	{
-
-	}
+	public class FieldMappingProperties : Dictionary<string, FieldMapping> { }
 
 	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
 		public Dictionary<string, FieldMappingProperties> Mappings { get; set; }
-
 	}
+
 	public class FieldMapping
 	{
 		[JsonProperty("full_name")]
@@ -27,13 +23,9 @@ namespace Nest
 		[JsonProperty("mapping")]
 		[JsonConverter(typeof(FieldMappingJsonConverter))]
 		public Dictionary<string, IFieldMapping> Mapping { get; set; }
-
 	}
 
-	public class IndexFieldMappings : Dictionary<string, TypeFieldMappings>
-	{
-
-	}
+	public class IndexFieldMappings : Dictionary<string, TypeFieldMappings> { }
 
 	public interface IGetFieldMappingResponse : IResponse
 	{
@@ -55,32 +47,23 @@ namespace Nest
 
 	public class GetFieldMappingResponse : BaseResponse, IGetFieldMappingResponse
 	{
+		private ElasticInferrer _inferrer { get; set; }
+
 		public GetFieldMappingResponse()
 		{
 			this.Indices = new IndexFieldMappings();
 		}
 
-		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict)
+		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict, ElasticInferrer inferrer)
 		{
 			this.Indices = dict ?? new IndexFieldMappings();
+			this._inferrer = inferrer;
 			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
 			//does status.Success not already reflect this?
 			//this.IsValid = status.Success && dict != null && dict.Count > 0;
 		}
 
 		public IndexFieldMappings Indices { get; set; }
-
-		public FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
-			where T : class
-		{
-
-			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
-			throw new NotImplementedException("responses no longer have settings");
-			//indexName = indexName ?? Settings.Inferrer.IndexName<T>();
-			//typeName = typeName ?? Settings.Inferrer.TypeName<T>();
-
-			//return this.MappingsFor(indexName, typeName);
-		}
 
 		public FieldMappingProperties MappingsFor(string indexName, string typeName)
 		{
@@ -110,21 +93,25 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(string fieldName)
 			where T : class
 		{
-			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
-			throw new NotImplementedException("responses no longer have settings");
-			//var indexName = Settings.Inferrer.IndexName<T>();
-			//var typeName = Settings.Inferrer.TypeName<T>();
-			//return this.MappingFor(indexName, typeName, fieldName);
+			var indexName = this._inferrer.IndexName<T>();
+			var typeName = this._inferrer.TypeName<T>();
+			return this.MappingFor(indexName, typeName, fieldName);
 		}
 
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
 			where T : class
 		{
-			//TODO High Priority: Figure out a new way to get MappingsFor<T>.
-			throw new NotImplementedException("responses no longer have settings");
-			//var path = Settings.Inferrer.Field(fieldName);
-			//return this.MappingFor<T>(path);
+			var path = this._inferrer.Field(fieldName);
+			return this.MappingFor<T>(path);
+		}
 
+		public FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
+			where T : class
+		{
+			indexName = indexName ?? this._inferrer.IndexName<T>();
+			typeName = typeName ?? this._inferrer.TypeName<T>();
+
+			return this.MappingsFor(indexName, typeName);
 		}
 	}
 }
