@@ -24,6 +24,14 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.MustNot.Should().BeNull();
 				b.Filter.Should().BeNull();
 			});
+			
+			ReturnsBool(Query || Query || ConditionlessQuery, q => q.Query() || q.Query() || q.ConditionlessQuery(), b =>
+			{
+				b.Should.Should().NotBeEmpty().And.HaveCount(2);
+				b.Must.Should().BeNull();
+				b.MustNot.Should().BeNull();
+				b.Filter.Should().BeNull();
+			});
 
 			ReturnsSingleQuery(Query || ConditionlessQuery, q => q.Query() || q.ConditionlessQuery(),
 				c => c.Term.Value.Should().NotBeNull());
@@ -58,8 +66,8 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				NullQuery || ConditionlessQuery || ConditionlessQuery || ConditionlessQuery,
 				q=>q.NullQuery() || q.ConditionlessQuery() || q.ConditionlessQuery() || q.ConditionlessQuery()
 			);
-
 		}
+
 		[U] public void CombiningManyUsingAggregate()
 		{
 			var lotsOfOrs = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);

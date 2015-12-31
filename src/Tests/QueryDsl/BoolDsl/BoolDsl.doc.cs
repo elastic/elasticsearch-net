@@ -252,17 +252,35 @@ namespace Tests.QueryDsl.BoolDsl
 
 		[U] public void DoNotCombineLockedBools() =>
 			Assert(
-				q => q.Bool(b=>b.Name("firstBool").Should(mq=>mq.Query())) 
-					|| q.Bool(b=>b.Name("secondBool").Should(mq=>mq.Query())),
-				new BoolQuery { Name = "firstBool", Should = new QueryContainer[] { Query } }
-				 || new BoolQuery { Name = "secondBool", Should = new QueryContainer[] { Query } },
-				c=>
-				{
-					c.Bool.Should.Should().HaveCount(2);
-					var nestedBool = c.Bool.Should.First() as IQueryContainer;
-					nestedBool.Bool.Should.Should().HaveCount(1);
-					nestedBool.Bool.Name.Should().Be("firstBool");
-				});
+				q => q.Bool(b=>b.Name("leftBool").Should(mq=>mq.Query())) 
+					|| q.Bool(b=>b.Name("rightBool").Should(mq=>mq.Query())),
+				new BoolQuery { Name = "leftBool", Should = new QueryContainer[] { Query } }
+				 || new BoolQuery { Name = "rightBool", Should = new QueryContainer[] { Query } },
+				c=>AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
+
+		[U] public void DoNotCombineRightLockedBool() =>
+			Assert(
+				q => q.Bool(b=>b.Should(mq=>mq.Query())) 
+					|| q.Bool(b=>b.Name("rightBool").Should(mq=>mq.Query())),
+				new BoolQuery { Should = new QueryContainer[] { Query } }
+				 || new BoolQuery { Name = "rightBool", Should = new QueryContainer[] { Query } },
+				c=>AssertDoesNotJoinOntoLockedBool(c, "rightBool"));
+
+		[U] public void DoNotCombineLeftLockedBool() =>
+			Assert(
+				q => q.Bool(b=>b.Name("leftBool").Should(mq=>mq.Query())) 
+					|| q.Bool(b=>b.Should(mq=>mq.Query())),
+				new BoolQuery { Name = "leftBool", Should = new QueryContainer[] { Query } }
+				 || new BoolQuery { Should = new QueryContainer[] { Query } },
+				c=>AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
+
+		private static void AssertDoesNotJoinOntoLockedBool(IQueryContainer c, string firstName)
+		{
+			c.Bool.Should.Should().HaveCount(2);
+			var nestedBool = c.Bool.Should.Cast<IQueryContainer>().First(b=>!string.IsNullOrEmpty(b.Bool?.Name));
+			nestedBool.Bool.Should.Should().HaveCount(1);
+			nestedBool.Bool.Name.Should().Be(firstName);
+		}
 
 
 		private void Assert(

@@ -31,7 +31,7 @@ namespace Nest
 
 		internal static QueryContainer CombineAsShould(this QueryContainer leftContainer, QueryContainer rightContainer)
 		{
-			if (!leftContainer.CanMergeShould() || !leftContainer.CanMergeShould())
+			if (!leftContainer.CanMergeShould() || !rightContainer.CanMergeShould())
 				return CreateShouldContainer(new List<QueryContainer> { leftContainer, rightContainer });
 
 			var lBoolQuery = leftContainer.Self().Bool;
