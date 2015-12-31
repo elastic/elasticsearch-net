@@ -4191,7 +4191,7 @@ namespace Nest
 
 		/// <summary>/{index}/_search</summary>
 ///<param name="index">Optional, accepts null</param>
-		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public SearchRequest(Indices index) : this(index, typeof(T)){}
 		
 
 		/// <summary>/{index}/{type}/_search</summary>

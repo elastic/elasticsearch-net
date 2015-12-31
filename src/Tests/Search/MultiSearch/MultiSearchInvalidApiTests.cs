@@ -65,18 +65,17 @@ namespace Tests.Search.MultiSearch
 			/** GetResponses also returns invalid requests **/
 			var responses = r.GetResponses<Project>().ToList();
 			responses.First().IsValid.Should().BeTrue();
-			this.AssertInvalidResponse(responses[1], r);
-			this.AssertInvalidResponse(responses[2], r);
+			this.AssertInvalidResponse(responses[1]);
+			this.AssertInvalidResponse(responses[2]);
 
 			/** GetInvalidResponses returns all the invalid responses as IResponse **/
 			var invalidResponses = r.GetInvalidResponses();
 			invalidResponses.Should().NotBeNull().And.HaveCount(2);
 			foreach(var response in invalidResponses)
-				this.AssertInvalidResponse(response, r);
-
+				this.AssertInvalidResponse(response);
 		});
 
-		private void AssertInvalidResponse(IResponse searchResponse, IMultiSearchResponse multiSearchResponse)
+		private void AssertInvalidResponse(IResponse searchResponse)
 		{
 			searchResponse.IsValid.Should().BeFalse();
 			searchResponse.ServerError.Should().NotBeNull();
