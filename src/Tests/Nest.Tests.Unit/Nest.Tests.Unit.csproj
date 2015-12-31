@@ -583,6 +583,7 @@
     <Compile Include="Search\Suggest\SuggestUrlTest.cs" />
     <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
+    <Compile Include="Settings\UseTraceWriterTests.cs" />
     <Compile Include="TestElasticClient.cs" />
     <Compile Include="Core\Update\UpdateTests.cs" />
   </ItemGroup>

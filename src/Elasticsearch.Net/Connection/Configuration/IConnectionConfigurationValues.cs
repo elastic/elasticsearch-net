@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Connection.Security;
+using System.IO;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -90,6 +91,11 @@ namespace Elasticsearch.Net.Connection
 		/// When set connection information is written on the trace output 
 		/// </summary>
 		bool TraceEnabled { get; }
+
+        /// <summary>
+        /// When <see cref="TraceEnabled"/> is set, connection information is written on this <see cref="TextWriter">output</see> if not null
+        /// </summary>
+        TextWriter TraceWriter { get; }
 
 		/// <summary>
 		/// When enabled, the client will gather as many interesting metrics as it can.
