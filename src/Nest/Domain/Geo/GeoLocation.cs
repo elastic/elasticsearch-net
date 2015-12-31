@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs
@@ -10,7 +7,6 @@ using System.Text;
 
 namespace Nest
 {
-
 	/// <summary>
 	/// Represents a Latitude/Longitude as a 2 dimensional point. 
 	/// </summary>
@@ -25,7 +21,7 @@ namespace Nest
 		/// <summary>
 		/// Longitude
 		/// </summary>
-		public double Longtitude { get { return _longitude; } }
+		public double Longitude { get { return _longitude; } }
 		private readonly double _longitude;
 
 		/// <summary>
