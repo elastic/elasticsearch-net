@@ -131,7 +131,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				var typedResponse = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 				if (!isValidResponse)
 				{
-					response.Error = GetErrorFromStream<T>(gotStream.Result);
+					response.Error = GetErrorFromStream<T>(gotStream.Result, streamResponse.HttpStatusCode ?? 0);
 					this.SetStringOrByteResult(typedResponse, response.Bytes);
 					if (gotStream.Result != null) gotStream.Result.Close();
 					response.Response = typedResponse;

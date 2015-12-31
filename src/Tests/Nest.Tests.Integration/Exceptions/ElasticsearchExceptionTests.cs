@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
-using System.Runtime.Remoting.Channels;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
@@ -179,7 +180,7 @@ namespace Nest.Tests.Integration.Exceptions
 		}
 	
 		[Test]
-		public async void ConnectionPool_DoesNotThrowOnServerExceptions_ThrowsMaxRetryException_OnDeadNodes_Async()
+		public async Task ConnectionPool_DoesNotThrowOnServerExceptions_ThrowsMaxRetryException_OnDeadNodes_Async()
 		{
 			var uris = new []
 			{
@@ -232,7 +233,7 @@ namespace Nest.Tests.Integration.Exceptions
 		}
 		
 		[Test]
-		public async void ConnectionPool_ThrowOnServerExceptions_ThrowsElasticsearchServerException_Async()
+		public async Task ConnectionPool_ThrowOnServerExceptions_ThrowsElasticsearchServerException_Async()
 		{
 			var uris = new []
 			{
@@ -256,6 +257,49 @@ namespace Nest.Tests.Integration.Exceptions
 			catch (ElasticsearchServerException)
 			{
 				Assert.Pass("ElasticearchServerException caught");
+			}
+			catch (Exception e)
+			{
+				Assert.Fail("Did not expect exception of type {0} to be caught", e.GetType().Name);
+			}
+		}
+
+		[Test]
+		// see https://github.com/elastic/elasticsearch/issues/9126 and https://github.com/elastic/elasticsearch-net/issues/1596
+		public void ElasticsearchServerException_With_ServiceUnavailable_On_Response_NotValid_And_HttpStatusCode_503()
+		{
+			var uris = new[]
+			{
+				ElasticsearchConfiguration.CreateBaseUri(9200),
+				ElasticsearchConfiguration.CreateBaseUri(9200),
+				ElasticsearchConfiguration.CreateBaseUri(9200),
+			};
+			var connectionPool = new StaticConnectionPool(uris);
+			var client = new ElasticClient(new ConnectionSettings(connectionPool)
+				.ThrowOnElasticsearchServerExceptions()
+				.SetTimeout(1000)
+			);
+
+			var stopWatch = Stopwatch.StartNew();
+
+			try
+			{
+				var index = ElasticsearchConfiguration.NewUniqueIndexName();
+
+				while (stopWatch.Elapsed < TimeSpan.FromSeconds(5))
+				{
+					client.CreateIndex(index);
+					client.Count(d => d.Index(index));
+					client.DeleteIndex(index);
+				}
+
+				Assert.Fail("Expected exception to be thrown");
+			}
+			catch (ElasticsearchServerException e)
+			{
+				e.Status.Should().Be(503);
+				e.ExceptionType.Should().Contain("ServiceUnavailableException");
+				e.Message.Should().Contain("Service Unavaliable. Try again later.");
 			}
 			catch (Exception e)
 			{

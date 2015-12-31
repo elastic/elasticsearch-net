@@ -109,7 +109,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				return this.StreamToTypedResponse<T>(streamResponse, requestState, bytes);
 
 			// If error read error 
-			error = GetErrorFromStream<T>(streamResponse.Response);
+			error = GetErrorFromStream<T>(streamResponse.Response, streamResponse.HttpStatusCode ?? 0);
 			var typedResponse = ElasticsearchResponse.CloneFrom<T>(streamResponse, default(T));
 			this.SetStringOrByteResult(typedResponse, bytes);
 			return typedResponse;

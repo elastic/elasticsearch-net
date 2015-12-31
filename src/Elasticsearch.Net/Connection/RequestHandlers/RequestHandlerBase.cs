@@ -217,11 +217,20 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			response.Response = rawResponse;
 		}
 
-		protected ElasticsearchServerError GetErrorFromStream<T>(Stream stream)
+		protected ElasticsearchServerError GetErrorFromStream<T>(Stream stream, int httpStatusCode = 0)
 		{
 			try
 			{
 				var e = this._serializer.Deserialize<OneToOneServerException>(stream);
+				if (e?.status == 0)
+				{
+					// Service unavailable isn't reported as a regular error, and
+					// thus won't be serialized as such. This workaround improves
+					// the error message for these errors.
+					e.status = httpStatusCode;
+					if (e.status == 503 && e.error.IsNullOrEmpty())
+						e.error = "ServiceUnavailableException[Service Unavaliable. Try again later.]";
+				}
 				return ElasticsearchServerError.Create(e);
 			}
 			// ReSharper disable once EmptyGeneralCatchClause
