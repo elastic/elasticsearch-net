@@ -98,5 +98,16 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
 		}
 
+		[U]
+		public void CombindingManyBoolFiltersUsingOrsShouldFlatten()
+		{
+			var container = new QueryContainer();
+			foreach (var i in Enumerable.Range(0, 100))
+				container |= +Query;
+			var c = container as IQueryContainer;
+		
+			c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
+		}
+
 	}
 }

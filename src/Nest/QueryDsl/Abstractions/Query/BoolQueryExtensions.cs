@@ -31,7 +31,7 @@ namespace Nest
 
 		internal static QueryContainer CombineAsShould(this QueryContainer leftContainer, QueryContainer rightContainer)
 		{
-			if (!leftContainer.CanMergeShould() || !rightContainer.CanMergeShould())
+			if ((!leftContainer.CanMergeShould() || !rightContainer.CanMergeShould()))
 				return CreateShouldContainer(new List<QueryContainer> { leftContainer, rightContainer });
 
 			var lBoolQuery = leftContainer.Self().Bool;
@@ -57,9 +57,28 @@ namespace Nest
 				&& !boolQuery.Filter.HasAny() 
 			);
 
+		private static bool HasOnlyFilterClauses(this IBoolQuery boolQuery) =>
+			boolQuery != null && !boolQuery.Conditionless && !boolQuery.Locked && (
+				!boolQuery.Should.HasAny() 
+				&& !boolQuery.Must.HasAny() 
+				&& !boolQuery.MustNot.HasAny() 
+				&& boolQuery.Filter.HasAny() 
+			);
+
+		private static bool HasOnlyMustNotClauses(this IBoolQuery boolQuery) =>
+			boolQuery != null && !boolQuery.Conditionless && !boolQuery.Locked && (
+				!boolQuery.Should.HasAny()
+				&& !boolQuery.Must.HasAny()
+				&& boolQuery.MustNot.HasAny()
+				&& !boolQuery.Filter.HasAny()
+			);
+
 		private static bool CanMergeShould(this IQueryContainer container) => container.Bool.CanMergeShould();
 
-		private static bool CanMergeShould(this IBoolQuery boolQuery) => boolQuery == null || (!boolQuery.Locked && boolQuery.HasOnlyShouldClauses());
+		private static bool CanMergeShould(this IBoolQuery boolQuery) => 
+			boolQuery == null || (!boolQuery.Locked 
+				&& (boolQuery.HasOnlyShouldClauses() || boolQuery.HasOnlyMustNotClauses() || boolQuery.HasOnlyFilterClauses())
+			);
 
 		private static IEnumerable<QueryContainer> MustClausesOrSelf(QueryContainer container)
 		{

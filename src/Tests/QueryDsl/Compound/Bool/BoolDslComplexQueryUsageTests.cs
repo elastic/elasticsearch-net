@@ -17,55 +17,57 @@ namespace Tests.QueryDsl.Compound.Bool
 
 		protected override object QueryJson => new
 		{
-		    @bool = new {
-		      should = new object[] {
-		        new {
-		          @bool = new {
-		            must = new [] {
-		              new { term = new { x = new { value = "y" } } },
-		              new { term = new { x = new { value = "y" } } }
-		            }
-		          }
-		        },
-		        new {
-		          @bool = new {
-		            must = new object[] {
-		              new {
-		                @bool = new {
-		                  should = new object [] {
-		                    new {
-		                      @bool = new {
-		                        filter = new [] {
-		                          new { term = new { x = new { value = "y" } } }
-		                        }
-		                      }
-		                    },
-		                    new {
-		                      @bool = new {
-		                        filter = new [] {
-		                          new { term = new { x = new { value = "y" } } }
-		                        }
-		                      }
-		                    },
-		                    new {
-		                      @bool = new {
-		                        must_not = new [] {
-		                          new { term = new { x = new { value = "y" } } }, 
-								  new { term = new { x = new { value = "y" } } }
-								}
-		                      }
-		                    },
-		                    new { term = new { x = new { value = "y" } } },
-		                    new { term = new { x = new { value = "y" } } },
-		                    new { term = new { x = new { value = "y" } } } }
-		                }
-		              },
-						base.QueryJson,
-		            }
-		          }
-		        }
-		      }
-		    }
+			@bool = new
+			{
+				should = new object[] {
+					new {
+						@bool = new {
+							must = new [] {
+								new { term = new { x = new { value = "y" } } },
+								new { term = new { x = new { value = "y" } } }
+							}
+						}
+					},
+					new {
+						@bool = new {
+							must = new object[] {
+								new {
+									@bool = new {
+										should = new object [] {
+											new {
+												@bool = new {
+													filter = new [] {
+														new { term = new { x = new { value = "y" } } }
+													}
+												}
+											},
+											new {
+												@bool = new {
+													filter = new [] {
+														new { term = new { x = new { value = "y" } } }
+													}
+												}
+											},
+											new {
+												@bool = new {
+													must_not = new [] {
+														new { term = new { x = new { value = "y" } } },
+														new { term = new { x = new { value = "y" } } }
+													}
+												}
+											},
+											new { term = new { x = new { value = "y" } } },
+											new { term = new { x = new { value = "y" } } },
+											new { term = new { x = new { value = "y" } } }
+										}
+									}
+								},
+								base.QueryJson,
+							}
+						}
+					}
+				}
+			}
 		};
 
 		protected override QueryContainer QueryInitializer =>
@@ -82,7 +84,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				// actual bool query
 				&& (base.QueryInitializer));
 
-		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => 
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) =>
 			//first bool
 			q.Query() && q.Query()
 			//second bool
@@ -96,7 +98,8 @@ namespace Tests.QueryDsl.Compound.Bool
 				// actual bool query
 				&& (base.QueryFluent(q)));
 
-		[U] protected void AsssertShape()
+		[U]
+		protected void AsssertShape()
 		{
 			this.AssertShape(this.QueryInitializer);
 			//this.AssertShape(this.QueryFluent(new QueryContainerDescriptor<Project>()));
@@ -132,10 +135,10 @@ namespace Tests.QueryDsl.Compound.Bool
 			complexBool.Should().NotBeNull();
 			//complex bool is 3 ors and the next simple nested or bool query also has 3 should clauses
 			//this can be rewritten to one boolquery with 6 clauses
-			complexBool.Should.Should().HaveCount(6); 
+			complexBool.Should.Should().HaveCount(5);
 
 			//inner must nots
-			var mustNotsBool = (complexBool.Should.Cast<IQueryContainer>().FirstOrDefault(q=>q.Bool != null && q.Bool.MustNot != null))?.Bool;
+			var mustNotsBool = (complexBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null))?.Bool;
 			mustNotsBool.Should().NotBeNull();
 			mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
 		}
