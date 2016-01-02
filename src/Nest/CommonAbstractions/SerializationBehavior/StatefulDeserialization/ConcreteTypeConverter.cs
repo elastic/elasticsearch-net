@@ -80,7 +80,7 @@ namespace Nest
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
-			instance.Fields = new FieldSelection<T>(serializer.GetConnectionSettings(), instance._fields);
+			instance.Fields = new FieldSelection<T>(serializer.GetConnectionSettings().Inferrer, instance._fields);
 			return instance;
 		}
 
@@ -160,7 +160,7 @@ namespace Nest
 			dynamic d = jObject;
 			var fields = jObject["fields"];
 			var fieldSelectionData = fields?.ToObject<IDictionary<string, object>>();
-			var sel = new FieldSelection<T>(settings, fieldSelectionData);
+			var sel = new FieldSelection<T>(settings.Inferrer, fieldSelectionData);
 			var hitDynamic = new Hit<dynamic>();
 			//favor manual mapping over doing Populate twice.
 			hitDynamic._fields = fieldSelectionData;

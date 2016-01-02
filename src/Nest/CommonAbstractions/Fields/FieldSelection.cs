@@ -10,13 +10,14 @@ namespace Nest
 {
 	public interface IFieldSelection<out T>
 	{
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
-		/// </summary>
-		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
-		K FieldValues<K>(string path);
-		
+		K[] FieldValues<K>(string path);
+
+		K FieldValue<K>(string path);
+
 		K[] FieldValues<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
+			where TBindTo : class;
+
+		K FieldValue<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
 			where TBindTo : class;
 
 		IDictionary<string, object> FieldValuesDictionary { get; set; }
@@ -24,29 +25,26 @@ namespace Nest
 
 	public class FieldSelection<T> : IFieldSelection<T>
 	{
-		private ElasticInferrer Infer { get; set; }
-		public FieldSelection(IConnectionSettingsValues settings, IDictionary<string, object> valuesDictionary = null)
-		{
-			this.Infer = settings.Inferrer;
-			((IFieldSelection<T>)this).FieldValuesDictionary = valuesDictionary;
-		}
+		private IFieldSelection<T> Self => this;
 
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		private ElasticInferrer Infer { get; set; }
+
 		IDictionary<string, object> IFieldSelection<T>.FieldValuesDictionary { get; set; }
 
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
-		/// </summary>
-		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
-		public K FieldValues<K>(string path)
+		public FieldSelection(ElasticInferrer inferrer, IDictionary<string, object> valuesDictionary = null)
 		{
-			return this.FieldArray<K>(path);
+			this.Infer = inferrer;
+			this.Self.FieldValuesDictionary = valuesDictionary;
 		}
 
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. 
-		/// except for internal metadata values such as routing.
-		/// </summary>
+		public K[] FieldValues<K>(string path)
+		{
+			return this.FieldArray<K[]>(path);
+		}
+
+		public K FieldValue<K>(string path) => FieldValues<K>(path).FirstOrDefault();
+
+
 		public K[] FieldValues<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
 			where TBindTo : class
 		{
@@ -54,25 +52,21 @@ namespace Nest
 			return this.FieldArray<K[]>(path);
 		}
 
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. 
-		/// except for internal metadata values such as routing.
-		/// </summary>
+		public K FieldValue<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath) 
+			where TBindTo : class => FieldValues<TBindTo, K>(objectPath).FirstOrDefault();
+
 		public K[] FieldValues<K>(Expression<Func<T, K>> objectPath)
 		{
 			var path = this.Infer.Field(objectPath);
 			return this.FieldArray<K[]>(path);
 		}
 
-		/// <summary>
-		/// As of elasticsearch fields are always returned as an array. except for internal metadata values such as routing.
-		/// </summary>
-		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
+		public K FieldValue<K>(Expression<Func<T, K>> objectPath) => FieldValues<K>(objectPath).FirstOrDefault();
+
 		private K FieldArray<K>(string path)
 		{
-			var fieldValues = ((IFieldSelection<T>)this).FieldValuesDictionary;
 			object o;
-			if (fieldValues != null && fieldValues.TryGetValue(path, out o))
+			if (this.Self.FieldValuesDictionary != null && this.Self.FieldValuesDictionary.TryGetValue(path, out o))
 			{
 				var t = typeof(K);
 				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))

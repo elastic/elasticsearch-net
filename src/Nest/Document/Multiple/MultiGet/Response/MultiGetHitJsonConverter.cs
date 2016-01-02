@@ -41,7 +41,7 @@ namespace Nest
 			serializer.Populate(reader, hit);
 
 			var settings = serializer.GetConnectionSettings();
-			var f = new FieldSelection<T>(settings);
+			var f = new FieldSelection<T>(settings.Inferrer);
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{
