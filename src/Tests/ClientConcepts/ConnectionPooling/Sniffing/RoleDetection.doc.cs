@@ -79,7 +79,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		}
 	}
 
-
 	[CollectionDefinition(IntegrationContext.SniffRoleDetection)]
 	public class SniffRoleDetectionCluster : ClusterBase, ICollectionFixture<SniffRoleDetectionCluster>
 	{

@@ -135,7 +135,7 @@ namespace Tests.QueryDsl.Compound.Bool
 			complexBool.Should().NotBeNull();
 			//complex bool is 3 ors and the next simple nested or bool query also has 3 should clauses
 			//this can be rewritten to one boolquery with 6 clauses
-			complexBool.Should.Should().HaveCount(5);
+			complexBool.Should.Should().HaveCount(6);
 
 			//inner must nots
 			var mustNotsBool = (complexBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null))?.Bool;

@@ -370,6 +370,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\BoolDsl\BoolApiTests.cs" />
     <Compile Include="QueryDsl\BoolDsl\BoolDsl.doc.cs" />
     <Compile Include="QueryDsl\BoolDsl\Operators\UnaryAddOperatorUsageTests.cs" />
     <Compile Include="QueryDsl\BoolDsl\Operators\NotOperatorUsageTests.cs" />
