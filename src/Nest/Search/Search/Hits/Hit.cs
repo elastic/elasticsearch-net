@@ -14,6 +14,8 @@ namespace Nest
 		long? Version { get; }
 		double Score { get; }
 		string Id { get; }
+		string Parent { get; }
+		string Routing { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
 		Explanation Explanation { get; }
@@ -49,6 +51,12 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
+
+		[JsonProperty(PropertyName = "_parent")]
+		public string Parent { get; internal set; }
+
+		[JsonProperty(PropertyName = "_routing")]
+		public string Routing { get; internal set; }
 
 		[JsonProperty(PropertyName = "sort")]
 		public IEnumerable<object> Sorts { get; internal set; }
