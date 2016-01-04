@@ -100,6 +100,7 @@ namespace Tests.Framework
 
 			Action call = () => { this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides); };
 			call.ShouldNotThrow();
+
 			this.Response.IsValid.Should().BeFalse();
 			var exception = this.Response.ApiCall.OriginalException as ElasticsearchClientException;
 			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
