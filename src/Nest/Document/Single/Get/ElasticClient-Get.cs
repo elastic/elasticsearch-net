@@ -37,7 +37,6 @@ namespace Nest
 		public IGetResponse<T> Get<T>(IGetRequest request) where T : class =>
 			this.Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<T>>(
 				request,
-				(r, s) => DeserializeGetResponse<T>(s),
 				(p, d) => this.LowLevelDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 
@@ -49,16 +48,7 @@ namespace Nest
 		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request) where T : class =>
 			this.Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				request,
-				(r, s) => DeserializeGetResponse<T>(s),
 				(p, d) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
-
-		private GetResponse<T> DeserializeGetResponse<T>(Stream stream)
-			where T : class
-		{
-			var response = Serializer.Deserialize<GetResponse<T>>(stream);
-			response.Inferrer = this.ConnectionSettings.Inferrer;
-			return response;
-		}
 	}
 }

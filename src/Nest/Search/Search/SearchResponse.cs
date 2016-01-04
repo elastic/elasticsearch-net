@@ -30,10 +30,10 @@ namespace Nest
 		IEnumerable<IHit<T>> Hits { get; }
 
 		/// <summary>
-		/// Will return the field selections inside the hits when the search descriptor specified .Fields.
+		/// Will return the field values inside the hits when the search descriptor specified .Fields.
 		/// Otherwise this will always be an empty collection.
 		/// </summary>
-		IEnumerable<FieldSelection<T>> FieldSelections { get; }
+		IEnumerable<FieldValues> Fields { get; }
 		HighlightDocumentDictionary Highlights { get; }
 	}
 
@@ -105,19 +105,8 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		[JsonIgnore]
-		public IEnumerable<FieldSelection<T>> FieldSelections
-		{
-			get 
-			{
-				//TODO High Priority: fix field selections
-				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
-				//return this.Hits
-				//	.Select(h => h.Fields)
-				//	.Where(f=>f != null)
-				//	.Select(f => new FieldSelection<T>(this.Settings, f.FieldValuesDictionary)); 
-			}
-		}
+		public IEnumerable<FieldValues> Fields { get; set; }
+
 
 		private HighlightDocumentDictionary _highlights = null;
 		/// <summary>
