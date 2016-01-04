@@ -2,7 +2,6 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
-using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

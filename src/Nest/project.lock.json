@@ -7,6 +7,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -610,6 +611,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -629,6 +631,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -1954,7 +1957,7 @@
     "System.Collections.Concurrent/4.0.10-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "Qf4gzt+KnbXlVBdsghbMeRuNNwA8oRURq9UB7Oza+mIeXPL5R7o8WPE7FKwQvkdxdJf0X0yk4taeiny5D4A5+g==",
+      "sha512": "fRXR5y4dg9zPovFpSQZkc6gnyMNlQJVQ8lKqPDPFSIelhqWxv2VyY87s5Vd9ViGwKrFwekDwCQFug9ny8qCHuA==",
       "files": [
         "lib/dotnet/System.Collections.Concurrent.dll",
         "lib/net46/_._",
@@ -1991,7 +1994,7 @@
     "System.Collections.NonGeneric/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "jpITOpoftIvoeGicUR4esKArK2XPcQw63cCD2s6OZ+a8mrEK8nbO5JuTWJP9pwkGhGXNM50bRqjrgLcex0jvkw==",
+      "sha512": "Z+VGG3YaL4PxuBn/Nbjul1OoaCBzvkylexTwIW6s8arj3c17XkCeJvZ1BIn66lzDpAQYMGZmv97UMT6OboRoVg==",
       "files": [
         "lib/dotnet/System.Collections.NonGeneric.dll",
         "lib/net46/System.Collections.NonGeneric.dll",
@@ -2015,7 +2018,7 @@
     "System.Collections.Specialized/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "XVzkCKLzQQitoTmIZY62zwEURn97iUHKhwyduDaDHzqZKqZq23s0t8tO0/1nZ0EMaznrS3bOn2H47F9EokMPWQ==",
+      "sha512": "sHMEvjfZcBO04aDflCBqbNSsrs7NgpkXO4gZN+yt80KMEQ3iWbeK5U8CbdtjDRePNZzoYf5K1mE1c+3RR03UGA==",
       "files": [
         "lib/dotnet/System.Collections.Specialized.dll",
         "lib/net46/System.Collections.Specialized.dll",
@@ -2039,7 +2042,7 @@
     "System.ComponentModel/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "RDdHQ/Bfc7+JhDSL6znpSG0KqOG+O61LbcoL4kEw/4P3Goa399Y+0gVIRyNaZIMsAS/resvxxsjubhFGZ3NjLA==",
+      "sha512": "JFzHUvX28tQbud0c9AP+SFeOroBG9x7tgc0OYu0Z5nQotnIiwP5nHXq9DoK3N2y0MoRUt8jy2FwkRMAYgiQuNQ==",
       "files": [
         "lib/dotnet/System.ComponentModel.dll",
         "lib/net45/_._",
@@ -2072,7 +2075,7 @@
     "System.ComponentModel.Primitives/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "ZtS49DNreOsGExICQXig1yxBvBKrSVRnikfpe1fjj320DK2TRYujvfRzObBeuJUDkiH2FhViL1PQm6IfUGuepQ==",
+      "sha512": "W4QlGNghutVgxOHvA0Snz8oLh79LlBebVowBe02gJavcZszrwRWv5wBWkJgBZopXc+XW8HQJg/wX+ZYrJAyg3A==",
       "files": [
         "lib/dotnet/System.ComponentModel.Primitives.dll",
         "lib/net46/System.ComponentModel.Primitives.dll",
@@ -2096,7 +2099,7 @@
     "System.ComponentModel.TypeConverter/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "xicc2ifUVKEd4O002naD0pVKOjUWfYlYn/btjKqhqtONcfWCFUG637uSR70I/dVGJesF2nc8cALFDoN90f1+sA==",
+      "sha512": "knpJr7XRZbn/JJZeiUzQvOvi018Jcf24XmimpGN5Za5z8WYdBBniscgdrzWNQMfRu99duPUmxFWHLThrj9Q8Bg==",
       "files": [
         "lib/dotnet/System.ComponentModel.TypeConverter.dll",
         "lib/net46/System.ComponentModel.TypeConverter.dll",
@@ -2154,7 +2157,7 @@
     "System.Diagnostics.Tracing/4.0.20-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "BPYWuI/v4Dw4Eqmtvmvbz+8BDXZRQ3PGQHvvkOlv5QqPpimdDqr6nCvkiBYeOVcPnewORc7SwtzaNaNTDWUU0w==",
+      "sha512": "sNauLSBFewFLjULHeplEr7FCmmfPbcc1jfz1Mynjy445bYiP/IW1q9X14a//oV/uQG7p82S9qHyfPxoxmt3pxQ==",
       "files": [
         "lib/DNXCore50/System.Diagnostics.Tracing.dll",
         "lib/net46/_._",
@@ -2237,7 +2240,7 @@
     "System.Globalization.Extensions/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "YO+kZA7Lb6oWj9Voas0F/xiKPDvBcOqOnaDaJfDFSO42IDX/4Y+e63AX6ri+c8CvPmc+5sQc3wavjSGTjRPklg==",
+      "sha512": "Q0BD+jsPZFtcR5DMcyERM2TggHJm9fJNGIMypTTh/6i6jET/c0B1MPnOyOUrHIbLuYrEwyiKDNJz0yw7Ps3hbg==",
       "files": [
         "lib/dotnet/System.Globalization.Extensions.dll",
         "lib/net46/System.Globalization.Extensions.dll",
@@ -2309,7 +2312,7 @@
     "System.IO.Compression/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "urU2hfmgMdfhMibJL4lznu6VyI87r2X1utOjAveHqc4kVXuXrmJXHjbshlfV//R/8QXRYoPUHGaA0YGLKP6Wgg==",
+      "sha512": "kxDCzu/6/xGkpDk1Zk/NqbxngQd7B1fv53KlWutVBKWD/TwZOtGJbfDuW2eQ13IaYJAoqubMln902wICe2yzKg==",
       "files": [
         "lib/dotnet/System.IO.Compression.dll",
         "lib/net45/_._",
@@ -2363,7 +2366,7 @@
     "System.Linq/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "crD9Hm8AnfaVF1MNj4KKWIIIiCIzVo7QJShWsVbcIhdSO2xSQhOy1OvvtCQspfD80DkqIjY9TLFtcrz66Jkd7A==",
+      "sha512": "NN0sQlEAjYDdMW5SU8p75niORiKwME2hRac30HB1QVUSuMtDs/easUBMJKGnXRHmxcrdwvHApfJOiH1tZ6eTbQ==",
       "files": [
         "lib/dotnet/System.Linq.dll",
         "lib/net45/_._",
@@ -2431,7 +2434,7 @@
     "System.Linq.Queryable/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "LwtHRyqV+JSR5vDfHdDP5V0nfw229gq0h6yHTQY5nZD2xs6NyCNGlwbTXLuZNgjqj/A2GnZUKa1kNFsBEChjww==",
+      "sha512": "Mu6nIhw5k/zAMigeCh4aqma3kwXLoyPREVD6RxVPhGu2QJjAEeih0GWumoDjtdFp0B5Q6sYeakWDAds7NmzWQg==",
       "files": [
         "lib/dotnet/System.Linq.Queryable.dll",
         "lib/net45/_._",
@@ -2585,7 +2588,7 @@
     },
     "System.Reflection.Emit.ILGeneration/4.0.0-beta-23109": {
       "type": "package",
-      "sha512": "KFCZRRdpsI51Le9ZTE5eJ34TzgwPWFrv/0lHMK3g5cIb48IBPAdvny+fxpodXdZKKm9n0kBHQnhefwEVdO4+BA==",
+      "sha512": "tJO27blFXyvYwDLbK7GvgFC94XjeY6MnRitBI4w8LHfEc/gVdRmCC8gzkE8KEmkecnIWIt9VTSJ3p4lGgafKKA==",
       "files": [
         "lib/DNXCore50/System.Reflection.Emit.ILGeneration.dll",
         "lib/net45/_._",
@@ -2611,7 +2614,7 @@
     },
     "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
       "type": "package",
-      "sha512": "oeNjAtC/JBwFT4jW8iZcc4Al94VBv2xSd6aM2ajiGeGsqHynvq2Bp34O/KNLmMP48EQ9kRVHmiLCOTWRR9nggw==",
+      "sha512": "Kbg03ijw7jZUswutleX/zmGgz6VYszTuyy4DciBn1PHFYAqAgZFZdK3cpYCsAU+cPliQ35UcOX828OsAG9NU4w==",
       "files": [
         "lib/DNXCore50/System.Reflection.Emit.Lightweight.dll",
         "lib/net45/_._",
@@ -2638,7 +2641,7 @@
     "System.Reflection.Extensions/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "MXgfrG7dHp5VM9te4keYBocM+kfgQ2Jk9JhOIkx2K0vAkYHoujSrL47zNZa/s+OZLg1JxywTxbktSY4I8gygyw==",
+      "sha512": "sXo3+qJ7TukCF/rDFYKjEog4iVb75dXJztu/lkvhMHgYnviPSbi9zg78FQUFhB6BOvntwnknrgNJhhtl3x9a7A==",
       "files": [
         "lib/DNXCore50/System.Reflection.Extensions.dll",
         "lib/net45/_._",
@@ -2686,7 +2689,7 @@
     "System.Reflection.Primitives/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "/MQUdZZiDa3Pp/cMpLHqMKvuXU4fPXjVTLqTf2x4y6Fgaawam+8rSnRQj0NlU0KdVoLFHGeSM1IzSaeWY6RhVw==",
+      "sha512": "R5oBDNgUtSV9KTPCxwHWiTyryX/9mngnPbLWwFOEF5xcNd3Qlu6/3LiauGsIzGtXV8vOpRl9tfyIFy8t4ix4Gw==",
       "files": [
         "lib/DNXCore50/System.Reflection.Primitives.dll",
         "lib/net45/_._",
@@ -2720,7 +2723,7 @@
     "System.Reflection.TypeExtensions/4.0.0-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "Il3U9dictIpcBlnLVA4oSfoDzguHv6fx5RLI2UL2TRzFC1G7nnxeG6oALQLHVTzTa2+QNYAaAQqu97aSJrGNQw==",
+      "sha512": "lTuPMxeoT/Jqb1QtsIuSomLiJpQP3Y4DqqxLPncrMvLrejwdF25QSbhXdx5twgvBDqwSVL8wYtqiOqKe02u7FA==",
       "files": [
         "lib/DNXCore50/System.Reflection.TypeExtensions.dll",
         "lib/net46/System.Reflection.TypeExtensions.dll",
@@ -2906,7 +2909,7 @@
     "System.Runtime.Serialization.Primitives/4.0.10-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "LOUPKCZE681xZXuZa1cjJr+gQMwoYtCe1eq+3WUADTCJopBpv2JXgEc82WJKvDcuxL+v1H9vmjM2HQaloPeMsg==",
+      "sha512": "Tr4N2JNBj0sM+apa0tMBXTI0yg8wlrWsiDHFtuPFQL+yiutGCgS8fyUcAYNUp4HccsD6leGT8D1N8+0/eMJQSQ==",
       "files": [
         "lib/dotnet/System.Runtime.Serialization.Primitives.dll",
         "lib/net46/_._",
@@ -3114,7 +3117,7 @@
     "System.Text.RegularExpressions/4.0.10-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "lr1yGA4pSe9crdh2L+/BtkmZqfuCYiNWUWcLVq1I/rOJw4ykJL2VAuU2e7C9DuOKyMPItFoWpKpKoFL5y6SATQ==",
+      "sha512": "F+tfzB34KhZnjS3ActdL57CQVD9oYGhAZm8AREL+KvbJTh1Y8/tlyCyI2xoH6KdJzIPcXC50yu4OkHNbpcutEw==",
       "files": [
         "lib/dotnet/System.Text.RegularExpressions.dll",
         "lib/net46/_._",
@@ -3162,7 +3165,7 @@
     "System.Threading.Tasks/4.0.10-beta-23109": {
       "type": "package",
       "serviceable": true,
-      "sha512": "Z5xH3DJoLBu+A5mBoDJ2iFUjUds0XBqhFEAU1cU0YpIN389hkT6s0j4F1W6V807EDWK6KN8YcJwLMiVOt1NHIg==",
+      "sha512": "J7lBqLLy1A85KZUgFz0fS8u6BO+pnWun2OAkrNqcUQbgCiKDC9v92u9q6a6AB9znum+GCdzH3cyEftNtIVNd1Q==",
       "files": [
         "lib/DNXCore50/System.Threading.Tasks.dll",
         "lib/net46/_._",
@@ -3187,7 +3190,7 @@
     },
     "System.Threading.Timer/4.0.0-beta-23109": {
       "type": "package",
-      "sha512": "EXHtO3sR9TFMkne9ucil9gWO9OFnRjU2KFRjGrgDWXNZo9Wy6wjwfoZJ0xP4SRH6GBdIEYQRRftHMyoOOCPExA==",
+      "sha512": "m0IORsRdO5kQqdA3C1EGLvD3NPaAj+B0FaM0KnAj0Cxg53baGGmYpNwh6mPf4sB8Pl4VBUtVaxlLN18MuyNQKQ==",
       "files": [
         "lib/DNXCore50/System.Threading.Timer.dll",
         "lib/net451/_._",

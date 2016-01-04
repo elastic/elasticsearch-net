@@ -41,7 +41,9 @@ namespace Nest
 		public T Source { get; private set; }
 
 		[JsonProperty(PropertyName = "fields")]
+#pragma warning disable 649
 		private IDictionary<string, object> _rawFields;
+#pragma warning restore 649
 
 		private FieldSelection<T> _fields = null; 
 		public FieldSelection<T> Fields

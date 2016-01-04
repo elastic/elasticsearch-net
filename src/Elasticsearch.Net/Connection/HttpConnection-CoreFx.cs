@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection
 	{
@@ -23,8 +23,8 @@ namespace Elasticsearch.Net.Connection
 
 			public bool IsBypassed(Uri host) => host.IsLoopback;
 		}
-		protected readonly IConnectionConfigurationValues _settings;
-		protected readonly HttpClient _client;
+		private readonly IConnectionConfigurationValues _settings;
+		private readonly HttpClient _client;
 
 		private string DefaultContentType => "application/json";
 
@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.Connection
 
 			this._client = new HttpClient(new InternalHttpMessageHandler(innerHandler), false)
 			{
-				Timeout = _settings.Timeout
+				Timeout = _settings.RequestTimeout
 			};
 			if (settings.EnableHttpCompression && innerHandler.SupportsAutomaticDecompression)
 			{

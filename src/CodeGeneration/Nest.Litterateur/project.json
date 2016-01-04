@@ -14,10 +14,12 @@
       "frameworkAssemblies": {
         "System.Runtime": "",
         "System.Runtime.Serialization": "",
+        "System.Threading.Tasks": "",
+        "System.Text.Encoding": ""
       },
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23225",
-        "Microsoft.CodeAnalysis": "1.1.0-beta1"
+        "Microsoft.CSharp": "4.0.1-beta-23409",
+        "Microsoft.CodeAnalysis": "1.1.1"
       }
     },
     "dotnet": {
@@ -28,6 +30,7 @@
         "System.Reflection": "4.1.0-beta-23225",
         "System.Collections.Specialized": "4.0.0-beta-23109",
         "System.Linq": "4.0.0-beta-23109",
+        "System.IO.FileSystem": "4.0.0-beta-23109",
         "System.IO.Compression": "4.0.0-beta-23109",
         "System.Runtime.Serialization.Primitives": "4.0.10-beta-23109",
         "System.Text.RegularExpressions": "4.0.10-beta-23109",
@@ -38,7 +41,8 @@
         "System.Reflection.Primitives": "4.0.0-beta-23109",
         "System.Linq.Expressions": "4.0.10-beta-23109",
         "System.Dynamic.Runtime": "4.0.11-beta-23225",
-        "Microsoft.CSharp": "4.0.1-beta-23225",
+        "Microsoft.CSharp": "4.0.1-beta-23409",
+        "Microsoft.CodeAnalysis": "1.1.1",
         "System.Security.Cryptography.Encoding": "4.0.0-beta-23225",
         "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23225",
         "System.ComponentModel.TypeConverter": "4.0.0-beta-23109",

@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Elasticsearch.Net.Connection.Configuration;
 using Purify;
 using System.IO;
 using System.Threading;

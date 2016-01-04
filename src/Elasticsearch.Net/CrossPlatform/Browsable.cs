@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace System.ComponentModel
 {
-	public class Browsable : Attribute
+	internal class Browsable : Attribute
 	{
 		public Browsable(bool browsable) { }
 	}

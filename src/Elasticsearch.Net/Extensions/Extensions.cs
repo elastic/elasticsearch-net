@@ -27,12 +27,11 @@ namespace Elasticsearch.Net
 			return da.Length > 0 ? da[0].Value : Enum.GetName(enumValue.GetType(), enumValue);
 		}
 
+#if !DOTNETCORE
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
-
-		internal static string Utf8String(this byte[] bytes)
-		{
-			return bytes == null ? null : Encoding.UTF8.GetString(bytes,0, bytes.Length);
-		}
+#else
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+#endif
 	
 		internal static byte[] Utf8Bytes(this string s)
 		{

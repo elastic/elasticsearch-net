@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -69,7 +70,7 @@ namespace Nest
 			if (this.Self.FieldValuesDictionary != null && this.Self.FieldValuesDictionary.TryGetValue(path, out o))
 			{
 				var t = typeof(K);
-				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
+				if (o is JArray && t.GetTypeInfo().ImplementedInterfaces.Contains(typeof(IEnumerable)))
 				{
 					var array = (JArray)o;
 					return array.ToObject<K>();

@@ -21,7 +21,8 @@
       "compilationOptions": { "define": [ "DOTNETCORE" ] },
       "frameworkAssemblies": {
         "System.Runtime": "",
-        "System.IO.Compression.FileSystem" :  ""
+        "System.IO.Compression.FileSystem": "",
+        "System.Threading.Tasks": ""
       },
       "dependencies": {
       }

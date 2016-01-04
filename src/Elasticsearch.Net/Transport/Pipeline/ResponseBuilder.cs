@@ -118,7 +118,7 @@ namespace Elasticsearch.Net
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
 			var bytes = ms.ToArray();
-			responseStream.Close();
+			responseStream.Dispose();
 			responseStream = ms;
 			responseStream.Position = 0;
 			return bytes;
@@ -154,7 +154,7 @@ namespace Elasticsearch.Net
 
 		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
 		{
-			response.Close();
+			response.Dispose();
 			result.Body = _void;
 		}
 	}

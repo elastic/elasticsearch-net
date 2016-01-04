@@ -13,7 +13,8 @@
     "net45": {
       "frameworkAssemblies": {
         "System.Runtime": "",
-        "System.Runtime.Serialization" :  ""
+        "System.Runtime.Serialization": "",
+        "System":  ""
       }
     },
     "dotnet": {

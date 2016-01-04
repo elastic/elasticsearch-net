@@ -28,6 +28,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -210,6 +211,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -392,6 +394,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
+          "System",
           "System.Runtime",
           "System.Runtime.Serialization"
         ]
@@ -936,7 +939,8 @@
     ],
     ".NETFramework,Version=v4.5": [
       "fx/System.Runtime ",
-      "fx/System.IO.Compression.FileSystem "
+      "fx/System.IO.Compression.FileSystem ",
+      "fx/System.Threading.Tasks "
     ]
   }
 }

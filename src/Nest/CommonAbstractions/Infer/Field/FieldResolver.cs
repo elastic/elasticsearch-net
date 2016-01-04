@@ -77,7 +77,7 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+					|| (t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
 
 				if (!isDict)
 				{
