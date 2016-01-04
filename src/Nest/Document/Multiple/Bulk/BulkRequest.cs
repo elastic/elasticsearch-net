@@ -33,8 +33,8 @@ namespace Nest
 		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(o), o))));
 
-		public BulkDescriptor Index<T>(T obj, Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class =>
-			Assign(a => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>()).Document(obj)));
+		//public BulkDescriptor Index<T>(T obj, Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class =>
+		//	Assign(a => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>()).Document(obj)));
 
 		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector) where T : class =>
 			Assign(a => AddOperation(bulkIndexSelector?.Invoke(new BulkIndexDescriptor<T>())));
