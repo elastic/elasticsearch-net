@@ -214,7 +214,7 @@ namespace Tests.Search.Request
 				earlHits.Total.Should().BeGreaterThan(0);
 				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
 				foreach (var earlHit in earlHits.Hits)
-					earlHit.Fields.Values<string>("name").Should().NotBeEmpty();
+					earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
 				var earls = earlHits.Documents<Earl>();
 				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
 				foreach (var earlHit in earlHits.Hits)

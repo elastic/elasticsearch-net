@@ -60,8 +60,8 @@ namespace Tests.Document.Single.Get
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
 			response.Fields.Should().NotBeNull();
-			response.Fields.Value<Project, string>(p => p.Name).Should().Be(ProjectId);
-			response.Fields.Value<Project, int>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+			response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(ProjectId);
+			response.Fields.ValueOf<Project, int>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
 		}
 	}
 }

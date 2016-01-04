@@ -15,26 +15,24 @@ namespace Nest
 	{
 		private ElasticInferrer _inferrer;
 
-		public FieldValues() : base() { }
-
 		public FieldValues(ElasticInferrer inferrer, IDictionary<string, object> container) 
 			: base(container)
 		{
 			_inferrer = inferrer;
 		}
 
-		public K Value<K>(Field field) => Values<K>(field).FirstOrDefault();
+		public K ValueOf<K>(Field field) => ValuesOf<K>(field).FirstOrDefault();
 
-		public K Value<T, K>(Expression<Func<T, object>> objectPath) 
-			where T : class => Values<T, K>(objectPath).FirstOrDefault();
+		public K ValueOf<T, K>(Expression<Func<T, object>> objectPath) 
+			where T : class => ValuesOf<T, K>(objectPath).FirstOrDefault();
 
-		public K[] Values<K>(Field field)
+		public K[] ValuesOf<K>(Field field)
 		{
 			var path = this._inferrer.Field(field);
 			return this.FieldArray<K[]>(path);
 		}
 
-		public K[] Values<T, K>(Expression<Func<T, object>> objectPath)
+		public K[] ValuesOf<T, K>(Expression<Func<T, object>> objectPath)
 			where T : class
 		{
 			var field = this._inferrer.Field(objectPath);
