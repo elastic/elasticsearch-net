@@ -130,6 +130,14 @@ namespace Tests.QueryDsl.BoolDsl
 				+Id(1) || +Id(2) || +Id(3) || +Id(4) && !O(E.Option1) || O(E.Option2),
 				expectedCount: 12
 			);
+
+			await Bool(
+				a => a.Option != E.Option1 && a.Id != 2 && a.Id != 3,
+				a => !a.O(E.Option1) && !a.Id(2) && !+a.Id(3),
+				!O(E.Option1) && !Id(2) && !+Id(3),
+				expectedCount: 9
+			);
+
 		}
 	}
 }
