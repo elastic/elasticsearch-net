@@ -8,52 +8,37 @@ namespace Nest
 {
 	public interface IGetResponse<T> : IResponse where T : class
 	{
-		bool Found { get; }
+		[JsonProperty(PropertyName = "_index")]
 		string Index { get; }
+
+		[JsonProperty(PropertyName = "_type")]
 		string Type { get; }
+
+		[JsonProperty(PropertyName = "_id")]
 		string Id { get; }
+
+		[JsonProperty(PropertyName = "_version")]
 		long Version { get; }
+
+		[JsonProperty(PropertyName = "found")]
+		bool Found { get; }
+
+		[JsonProperty(PropertyName = "_source")]
 		T Source { get; }
-		FieldSelection<T> Fields { get; }
+
+		[JsonProperty(PropertyName = "fields")]
+		FieldValues Fields { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GetResponse<T> : BaseResponse, IGetResponse<T> where T : class
 	{
-		internal ElasticInferrer Inferrer { get; set; }
-
-		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; private set; }
-
-		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; private set; }
-
-		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; private set; }
-
-		[JsonProperty(PropertyName = "_version")]
 		public long Version { get; private set; }
-
-		[JsonProperty(PropertyName = "found")]
 		public bool Found { get; private set; }
-
-		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; private set; }
-
-		[JsonProperty(PropertyName = "fields")]
-		private IDictionary<string, object> _rawFields;
-
-		private FieldSelection<T> _fields = null; 
-		public FieldSelection<T> Fields
-		{
-			get
-			{
-				if (_fields != null)
-					return _fields;
-
-				_fields = new FieldSelection<T>(Inferrer, _rawFields);
-				return _fields;
-			}
-		}
+		public FieldValues Fields { get; private set; }
 	}
 }

@@ -52,10 +52,10 @@ namespace Nest
 		IRescore Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IList<Field> Fields { get; set; }
+		Fields Fields { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<Field> FielddataFields { get; set; }
+		Fields FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		IScriptFields ScriptFields { get; set; }
@@ -102,8 +102,8 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<Field> Fields { get; set; }
-		public IList<Field> FielddataFields { get; set; }
+		public Fields Fields { get; set; }
+		public Fields FielddataFields { get; set; }
 		public IScriptFields ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -144,8 +144,8 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<Field> Fields { get; set; }
-		public IList<Field> FielddataFields { get; set; }
+		public Fields Fields { get; set; }
+		public Fields FielddataFields { get; set; }
 		public IScriptFields ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -207,8 +207,8 @@ namespace Nest
 		IRescore ISearchRequest.Rescore { get; set; }
 		QueryContainer ISearchRequest.Query { get; set; }
 		QueryContainer ISearchRequest.PostFilter { get; set; }
-		IList<Field> ISearchRequest.Fields { get; set; }
-		IList<Field> ISearchRequest.FielddataFields { get; set; }
+		Fields ISearchRequest.Fields { get; set; }
+		Fields ISearchRequest.FielddataFields { get; set; }
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
 		ISourceFilter ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
@@ -345,34 +345,14 @@ namespace Nest
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
-		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
-			Assign(a => a.Fields = expressions?.Select(e => (Field)e).ToListOrNullIfEmpty());
-
-		/// <summary>
-		/// Allows to selectively load specific fields for each document 
-		/// represented by a search hit. Defaults to load the internal _source field.
-		/// </summary>
-		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties) =>
-			Assign(a => a.Fields = properties?.Invoke(new FluentFieldList<T>()).ToListOrNullIfEmpty());
-
-		/// <summary>
-		/// Allows to selectively load specific fields for each document 
-		/// represented by a search hit. Defaults to load the internal _source field.
-		/// </summary>
-		public SearchDescriptor<T> Fields(params string[] fields) =>
-			Assign(a => a.Fields = fields?.Select(f => (Field)f).ToListOrNullIfEmpty());
+		public SearchDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
-		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
-
-		///<summary>
-		///A comma-separated list of fields to return as the field data representation of a field for each hit
-		///</summary>
-		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field)f).ToListOrNullIfEmpty());
+		public SearchDescriptor<T> FielddataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.FielddataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SearchDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) =>
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);

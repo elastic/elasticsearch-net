@@ -11,7 +11,7 @@ namespace Nest
 		ExplainGet<T> Get { get; }
 
 		T Source { get; }
-		FieldSelection<T> Fields { get; }
+		FieldValues Fields { get; }
 	}
 
 	[JsonObject]
@@ -29,16 +29,7 @@ namespace Nest
 
 		public T Source => this.Get?.Source;
 
-		public FieldSelection<T> Fields
-		{
-			get
-			{
-				//TODO High Priority: Figure out a new way to get Fields 
-				//should probably be serialized using its own constructor take the settings from the json serializer
-				throw new NotImplementedException("responses no longer have settings");
-				//if (this.Get == null) return null;
-				//return new FieldSelection<T>(this.Settings, this.Get._fields);
-			}
-		}
+		[JsonProperty(PropertyName = "fields")]
+		public FieldValues Fields { get; set; }
 	}
 }

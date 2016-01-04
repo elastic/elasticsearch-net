@@ -21,7 +21,7 @@ namespace Nest
 	public class MultiGetHit<T> : IMultiGetHit<T>
 		where T : class
 	{
-		public IFieldSelection<T> FieldSelection { get; internal set; }
+		public FieldValues Fields { get; internal set; }
 
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }

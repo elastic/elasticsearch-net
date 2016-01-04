@@ -47,7 +47,7 @@ namespace Nest
 		//This method is used through reflection (cached though)
 		// do not remove
 		private static void SetFields<TFieldsType>(
-			Hit<TFieldsType> hit, FieldSelection<TFieldsType> fieldSelection)
+			Hit<TFieldsType> hit, FieldValues fieldSelection)
 			where TFieldsType : class
 		{
 			hit.Fields = fieldSelection;
@@ -80,7 +80,7 @@ namespace Nest
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
-			instance.Fields = new FieldSelection<T>(serializer.GetConnectionSettings().Inferrer, instance._fields);
+			instance.Fields = new FieldValues(serializer.GetConnectionSettings().Inferrer, instance.Fields);
 			return instance;
 		}
 
@@ -159,12 +159,11 @@ namespace Nest
 			//Hit<dynamic> hitDynamic = new Hit<dynamic>();
 			dynamic d = jObject;
 			var fields = jObject["fields"];
-			var fieldSelectionData = fields?.ToObject<IDictionary<string, object>>();
-			var sel = new FieldSelection<T>(settings.Inferrer, fieldSelectionData);
+			var fieldsDictionary = fields?.ToObject<IDictionary<string, object>>();
+			var fieldValues = new FieldValues(settings.Inferrer, fieldsDictionary);
 			var hitDynamic = new Hit<dynamic>();
 			//favor manual mapping over doing Populate twice.
-			hitDynamic._fields = fieldSelectionData;
-			hitDynamic.Fields = sel;
+			hitDynamic.Fields = fieldValues;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
 			hitDynamic.Score = d._score;
@@ -174,16 +173,16 @@ namespace Nest
 			hitDynamic.Sorts = d.sort;
 			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
-			object o = d._source ?? DynamicResponse.Create(fieldSelectionData) ?? new object {};
+			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object {};
 			var concreteType = selector(o, hitDynamic);
 			
 			Type fieldSelectionType;
 			if (!ConcreteTypeConverter.TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
 			{
-				fieldSelectionType = typeof(FieldSelection<>).MakeGenericType(concreteType);
+				fieldSelectionType = typeof(FieldValues).MakeGenericType(concreteType);
 				ConcreteTypeConverter.TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
 			}
-			selection = fieldSelectionType.CreateInstance(settings, fieldSelectionData);
+			selection = fieldSelectionType.CreateInstance(settings, fieldsDictionary);
 			return concreteType;
 		}
 	}

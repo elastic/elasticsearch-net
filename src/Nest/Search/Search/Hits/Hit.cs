@@ -7,7 +7,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(DefaultHitJsonConverter))]
 	public interface IHit<out T> where T : class
 	{
-		IFieldSelection<T> Fields { get; }
+		FieldValues Fields { get; }
 		T Source { get; }
 		string Index { get; }
 		string Type { get; }
@@ -26,11 +26,11 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty(PropertyName = "fields")]
-		internal IDictionary<string, object> _fields { get; set; }
-		[JsonIgnore]
-		public IFieldSelection<T> Fields { get; internal set; }
+		public FieldValues Fields { get; internal set; }
+
 		[JsonProperty(PropertyName = "_source")]
 		public T Source { get; internal set; }
+
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
 		

@@ -15,16 +15,16 @@ namespace Tests.Search.Request
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.FielddataFields(
-				f => f.Name,
-				f => f.LeadDeveloper,
-				f => f.StartedOn
+			.FielddataFields(fs => fs
+				.Field(p => p.Name)
+				.Field(p => p.LeadDeveloper)
+				.Field(p => p.StartedOn)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				FielddataFields = new Field[] { "name", "leadDeveloper", "startedOn" }
+				FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
 			};
 	}
 }
