@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class TopHitsMetric : IMetricAggregation
+	public class TopHitsMetric : IMetric
 	{
 		private readonly IEnumerable<JObject> _hits;
 

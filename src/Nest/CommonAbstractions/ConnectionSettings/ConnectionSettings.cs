@@ -5,17 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest.CommonAbstractions.ConnectionSettings;
-using Nest.Resolvers;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
 	/// <summary>
-	/// Provides NEST's ElasticClient with configurationsettings
+	/// Provides the connection settings for NEST's <see cref="ElasticClient"/>
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
 	{
@@ -34,28 +30,28 @@ namespace Nest
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 	}
+
 	/// <summary>
-	/// Control how NEST's behaviour.
+	/// Provides the connection settings for NEST's <see cref="ElasticClient"/>
 	/// </summary>
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class ConnectionSettings<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
 		where TConnectionSettings : ConnectionSettings<TConnectionSettings>
 	{
-
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
 
-		private ElasticInferrer _inferrer;
+		private readonly ElasticInferrer _inferrer;
 		ElasticInferrer IConnectionSettingsValues.Inferrer => _inferrer;
 
 		private Func<Type, string> _defaultTypeNameInferrer;
 		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer => _defaultTypeNameInferrer;
 
-		private FluentDictionary<Type, string> _defaultIndices;
+		private readonly FluentDictionary<Type, string> _defaultIndices;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultIndices => _defaultIndices;
 
-		private FluentDictionary<Type, string> _defaultTypeNames;
+		private readonly FluentDictionary<Type, string> _defaultTypeNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultTypeNames => _defaultTypeNames;
 
 		private Func<string, string> _defaultFieldNameInferrer;
@@ -68,13 +64,11 @@ namespace Nest
 		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
 		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters => _contractConverters;
 
-		private FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
+		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 
-		private FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
+		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
-
-		ConnectionSettings<TConnectionSettings> _assign(Action<IConnectionSettingsValues> assigner) => Fluent.Assign(this, assigner);
 
 		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer)
@@ -84,12 +78,16 @@ namespace Nest
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
-			this._modifyJsonSerializerSettings = (j) => { };
+			this._modifyJsonSerializerSettings = j => { };
 			this._contractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
 			this._inferrer = new ElasticInferrer(this);
 		}
 
-		protected override IElasticsearchSerializer DefaultSerializer() => new NestSerializer(this);
+		/// <summary>
+		/// The default serializer for requests and responses
+		/// </summary>
+		/// <returns></returns>
+		protected override IElasticsearchSerializer DefaultSerializer() => new JsonNetSerializer(this);
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
@@ -103,7 +101,7 @@ namespace Nest
 		/// <summary>
 		/// Allows you to update internal the json.net serializer settings to your liking
 		/// </summary>
-		public TConnectionSettings SetJsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
+		public TConnectionSettings JsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
 		{
 			if (modifier == null)
 				return (TConnectionSettings)this;
@@ -121,12 +119,12 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Index to default to when no index is specified.
+		/// The default index to use when no index is specified.
 		/// </summary>
-		/// <param name="defaultIndex">When null/empty/not set might throw NRE later on
-		/// when not specifying index explicitly while indexing.
+		/// <param name="defaultIndex">When null/empty/not set might throw 
+		/// <see cref="NullReferenceException"/> later on when not specifying index explicitly while indexing.
 		/// </param>
-		public TConnectionSettings SetDefaultIndex(string defaultIndex)
+		public TConnectionSettings DefaultIndex(string defaultIndex)
 		{
 			this._defaultIndex = defaultIndex;
 			return (TConnectionSettings)this;
@@ -134,77 +132,81 @@ namespace Nest
 
 		private string LowerCaseAndPluralizeTypeNameInferrer(Type type)
 		{
-			type.ThrowIfNull("type");
-			return Inflector.MakePlural(type.Name).ToLowerInvariant();
+			type.ThrowIfNull(nameof(type));
+			return type.Name.MakePlural().ToLowerInvariant();
 		}
 
 		/// <summary>
-		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit FieldName 
+		/// By default NEST camelCases property name (EmailAddress => emailAddress) expressions
 		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
 		/// <pre>
-		/// Here you can register a function that transforms FieldNames (default casing, pre- or suffixing)
+		/// Here you can register a function that transforms these expressions (default casing, pre- or suffixing)
 		/// </pre>
 		/// </summary>
-		public TConnectionSettings SetDefaultFieldNameInferrer(Func<string, string> FieldNameSelector)
+		public TConnectionSettings DefaultFieldNameInferrer(Func<string, string> fieldNameInferrer)
 		{
-			this._defaultFieldNameInferrer = FieldNameSelector;
+			this._defaultFieldNameInferrer = fieldNameInferrer;
 			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
 		/// Allows you to override how type names should be represented, the default will call .ToLowerInvariant() on the type's name.
 		/// </summary>
-		public TConnectionSettings SetDefaultTypeNameInferrer(Func<Type, string> defaultTypeNameInferrer)
+		public TConnectionSettings DefaultTypeNameInferrer(Func<Type, string> typeNameInferrer)
 		{
-			defaultTypeNameInferrer.ThrowIfNull("defaultTypeNameInferrer");
-			this._defaultTypeNameInferrer = defaultTypeNameInferrer;
+			typeNameInferrer.ThrowIfNull(nameof(typeNameInferrer));
+			this._defaultTypeNameInferrer = typeNameInferrer;
 			return (TConnectionSettings)this;
 		}
 
 		/// <summary>
-		/// Map types to a index names. Takes precedence over SetDefaultIndex().
+		/// Map types to a index names. Takes precedence over DefaultIndex().
 		/// </summary>
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector.ThrowIfNull(nameof(mappingSelector));
 			mappingSelector(this._defaultIndices);
 			return (TConnectionSettings)this;
 		}
 		/// <summary>
-		/// Allows you to override typenames, takes priority over the global SetDefaultTypeNameInferrer()
+		/// Allows you to override typenames, takes priority over the global DefaultTypeNameInferrer()
 		/// </summary>
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
+			mappingSelector.ThrowIfNull(nameof(mappingSelector));
 			mappingSelector(this._defaultTypeNames);
 			return (TConnectionSettings)this;
 		}
 
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
-			objectPath.ThrowIfNull("objectPath");
+			objectPath.ThrowIfNull(nameof(objectPath));
 
 			var memberInfo = new MemberInfoResolver(this, objectPath);
-			var FieldName = memberInfo.Members.Single().Name;
+			var fieldName = memberInfo.Members.Single().Name;
 
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (this._idProperties[typeof(TDocument)].Equals(FieldName))
+				if (this._idProperties[typeof(TDocument)].Equals(fieldName))
 					return (TConnectionSettings)this;
 
 				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
-					.F(FieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+					.F(fieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
 			}
 
-			this._idProperties.Add(typeof(TDocument), FieldName);
+			this._idProperties.Add(typeof(TDocument), fieldName);
 
 			return (TConnectionSettings)this;
 		}
 
+		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{
-			propertiesSelector.ThrowIfNull("propertiesSelector");
+			propertiesSelector.ThrowIfNull(nameof(propertiesSelector));
 			var mapper = new PropertyMappingDescriptor<TDocument>();
 			propertiesSelector(mapper);
 			ApplyPropertyMappings(mapper.Mappings);
@@ -257,13 +259,13 @@ namespace Nest
 				this._defaultTypeNames.Add(inferMapping.Type, inferMapping.TypeName);
 
 			if (inferMapping.IdProperty != null)
+#pragma warning disable CS0618 // Type or member is obsolete but will be private in the future OK to call here
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
-			
+#pragma warning restore CS0618 
+
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
 			
-
-
 			return (TConnectionSettings) this;
 		}
 

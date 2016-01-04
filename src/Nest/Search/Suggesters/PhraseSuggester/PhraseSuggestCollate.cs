@@ -1,81 +1,40 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggestCollate>))]
 	public interface IPhraseSuggestCollate
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		IScript Query { get; set; }
 
-		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Filter { get; set; }
-
-		[JsonProperty(PropertyName = "params")]
-		IDictionary<string, object> Params { get; set; }
-
-		[JsonProperty(PropertyName = "preference")]
-		string Preference { get; set; }
+		[JsonProperty(PropertyName = "prune")]
+		bool? Prune { get; set; }
 	}
 
 	public class PhraseSuggestCollate : IPhraseSuggestCollate
 	{
-		public IQueryContainer Query { get; set; }
+		public IScript Query { get; set; }
 
-		public IQueryContainer Filter { get; set; }
 
-		public IDictionary<string, object> Params { get; set; }
-
-		public string Preference { get; set; }
+		public bool? Prune { get; set; }
 	}
 
-	public class PhraseSuggestCollateDescriptor<T> : IPhraseSuggestCollate
+	public class PhraseSuggestCollateDescriptor<T> : DescriptorBase<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate>, IPhraseSuggestCollate
 		where T : class
 	{
-		internal IPhraseSuggestCollate Collate = new PhraseSuggestCollate();
+		IScript IPhraseSuggestCollate.Query { get; set; }
 
-		IQueryContainer IPhraseSuggestCollate.Query { get; set; }
+		bool? IPhraseSuggestCollate.Prune { get; set; }
 
-		IQueryContainer IPhraseSuggestCollate.Filter { get; set; }
+		public PhraseSuggestCollateDescriptor<T> Query(string script) => Assign(a => a.Query = (InlineScript)script);
 
-		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
+		public PhraseSuggestCollateDescriptor<T> Query(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Query = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		string IPhraseSuggestCollate.Preference { get; set; }
-
-		public PhraseSuggestCollateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
-		{
-			this.Collate.Query = query(new QueryContainerDescriptor<T>());
-			return this;
-		}
-
-		public PhraseSuggestCollateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter)
-		{
-			this.Collate.Filter = filter(new QueryContainerDescriptor<T>());
-			return this;
-		}
-
-		public PhraseSuggestCollateDescriptor<T> Params(IDictionary<string, object> paramsDictionary)
-		{
-			this.Collate.Params = paramsDictionary;
-			return this;
-		}
-
-		public PhraseSuggestCollateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary)
-		{
-			this.Collate.Params = paramsDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		public PhraseSuggestCollateDescriptor<T> Preference(string preference)
-		{
-			this.Collate.Preference = preference;
-			return this;
-		}
+		public PhraseSuggestCollateDescriptor<T> Prune(bool? prune = true) => Assign(a => a.Prune = prune);
 	}
-
 }

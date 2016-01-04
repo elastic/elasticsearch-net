@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -11,13 +8,13 @@ using Xunit;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class GetFieldMappingApiTests 
 		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{
-		private static readonly FieldNames Fields = Static.Fields<Project>(p => p.Name, p => p.Tags);
+		private static readonly Fields Fields = Infer.Fields<Project>(p => p.Name, p => p.Tags);
 
-		public GetFieldMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetFieldMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetFieldMapping<Project>(Fields),
 			fluentAsync: (client, f) => client.GetFieldMappingAsync<Project>(Fields),
@@ -34,9 +31,10 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 
 		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(Fields);
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IGetFieldMappingResponse response)
 		{
-		});
-
+			var fieldMapping = response.MappingFor<Project>("name");
+			fieldMapping.Should().NotBeNull();
+		}
 	}
 }

@@ -1,14 +1,10 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	using Elasticsearch.Net.Connection.Configuration;
 	using PingConverter = Func<IApiCallDetails, Stream, PingResponse>;
 
 	public partial interface IElasticClient
@@ -16,40 +12,40 @@ namespace Nest
 		/// <summary>
 		/// Executes a HEAD request to the cluster to determine whether it's up or not.
 		/// </summary>
-		IPingResponse Ping(Func<PingDescriptor, IPingRequest> pingSelector = null);
+		IPingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> pingSelector = null);
+		Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null);
 
 		/// <inheritdoc/>
-		IPingResponse Ping(IPingRequest pingRequest);
+		IPingResponse Ping(IPingRequest request);
 
 		/// <inheritdoc/>
-		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
+		Task<IPingResponse> PingAsync(IPingRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IPingResponse Ping(Func<PingDescriptor, IPingRequest> pingSelector = null) =>
-			this.Ping(pingSelector.InvokeOrDefault(new PingDescriptor()));
+		public IPingResponse Ping(Func<PingDescriptor, IPingRequest> selector = null) =>
+			this.Ping(selector.InvokeOrDefault(new PingDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> pingSelector = null) =>
-			this.PingAsync(pingSelector.InvokeOrDefault(new PingDescriptor()));
+		public Task<IPingResponse> PingAsync(Func<PingDescriptor, IPingRequest> selector = null) =>
+			this.PingAsync(selector.InvokeOrDefault(new PingDescriptor()));
 
 		/// <inheritdoc/>
-		public IPingResponse Ping(IPingRequest pingRequest) => 
+		public IPingResponse Ping(IPingRequest request) => 
 			this.Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
-				SetPingTimeout(pingRequest),
+				SetPingTimeout(request),
 				new PingConverter(DeserializePingResponse),
 				(p, d) => this.LowLevelDispatch.PingDispatch<PingResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IPingResponse> PingAsync(IPingRequest pingRequest) => 
+		public Task<IPingResponse> PingAsync(IPingRequest request) => 
 			this.Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
-				SetPingTimeout(pingRequest),
+				SetPingTimeout(request),
 				new PingConverter(DeserializePingResponse),
 				(p, d) => this.LowLevelDispatch.PingDispatchAsync<PingResponse>(p)
 			);

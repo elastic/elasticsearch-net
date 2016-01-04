@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
-	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
-
 	public partial interface IElasticClient
 	{
 		/// <summary>
@@ -18,68 +12,40 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
-		IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+		IGetWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
-		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
+		IGetWarmerResponse GetWarmer(IGetWarmerRequest request);
 
 		/// <inheritdoc/>
-		Task<IWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+		Task<IGetWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
+		Task<IGetWarmerResponse> GetWarmerAsync(IGetWarmerRequest request);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) =>
+		public IGetWarmerResponse GetWarmer(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) =>
 			this.GetWarmer(selector.InvokeOrDefault(new GetWarmerDescriptor()));
 
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest) => 
-			this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
-				getWarmerRequest,
-				new GetWarmerConverter(DeserializeWarmerResponse),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(p)
+		public IGetWarmerResponse GetWarmer(IGetWarmerRequest request) => 
+			this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, GetWarmerResponse>(
+				request, 
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<GetWarmerResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
+		public Task<IGetWarmerResponse> GetWarmerAsync(Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
 			this.GetWarmerAsync(selector.InvokeOrDefault(new GetWarmerDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest) => 
-			this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
-				getWarmerRequest,
-				new GetWarmerConverter(DeserializeWarmerResponse),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(p)
+		public Task<IGetWarmerResponse> GetWarmerAsync(IGetWarmerRequest request) => 
+			this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, GetWarmerResponse, IGetWarmerResponse>(
+				request, (p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<GetWarmerResponse>(p)
 			);
-
-		/// <inheritdoc/>
-		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
-		{
-			//TODO Broke this rething this, DictionaryResponse?
-			throw new NotImplementedException();
-			//if (!apiCallDetails.Success) return new WarmerResponse ();
-
-			//var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
-			//var indices = new Dictionary<string, IWarmers>();
-			//foreach (var kv in dict)
-			//{
-			//	var indexDict = kv.Value;
-			//	IWarmers warmers;
-			//	if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
-			//		continue;
-			//	foreach (var kvW in warmers)
-			//	{
-			//		kvW.Value.Name = kvW.Key;
-			//	}
-			//	indices.Add(kv.Key, warmers);
-			//}
-
-			//return new WarmerResponse { Indices = indices };
-		}
 	}
 }

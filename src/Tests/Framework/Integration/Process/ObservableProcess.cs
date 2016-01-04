@@ -30,6 +30,8 @@ namespace Tests.Framework.Integration
 
 		private bool Started { get; set; }
 
+		public int? ExitCode { get; set; }
+
 		public string Binary { get; private set; }
 
 		public Process Process { get; private set; }
@@ -50,7 +52,9 @@ namespace Tests.Framework.Integration
 				var processExited = Observable.FromEventPattern(h => this.Process.Exited += h, h => this.Process.Exited -= h);
 				var processError = CreateProcessExitSubscription(this.Process, processExited, observer);
 
-				this.Process.Start();
+				if (!this.Process.Start())
+					throw new ApplicationException($"Failed to start observable process: {this.Binary}");
+
 				this.Process.BeginOutputReadLine();
 				this.Process.BeginErrorReadLine();
 				this.Started = true;
@@ -65,6 +69,7 @@ namespace Tests.Framework.Integration
 			{
 				try
 				{
+					this.ExitCode = process?.ExitCode;
 					if (process?.ExitCode > 0)
 					{
 						observer.OnError(new Exception(

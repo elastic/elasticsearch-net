@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 /*
@@ -13,7 +10,7 @@ namespace Nest
 {
 
 	/// <summary>
-	/// Represents a Latitude/Longitude as a 2 dimensional point. 
+	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as { lat, lon }
 	/// </summary>
 	public class GeoLocation : IEquatable<GeoLocation>, IFormattable
 	{
@@ -21,14 +18,14 @@ namespace Nest
 		/// Latitude
 		/// </summary>
 		[JsonProperty("lat")]
-		public double Latitude { get { return _latitude; } }
+		public double Latitude => _latitude;
 		private readonly double _latitude;
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
 		[JsonProperty("lon")]
-		public double Longtitude { get { return _longitude; } }
+		public double Longitude => _longitude;
 		private readonly double _longitude;
 
 		/// <summary>
@@ -105,15 +102,50 @@ namespace Nest
 				return true;
 			if (obj.GetType() != this.GetType())
 				return false;
-			return Equals((GeoLocation) obj);
+			return Equals((GeoLocation)obj);
 		}
 
 		public override int GetHashCode() =>
-			unchecked((_latitude.GetHashCode()*397) ^ _longitude.GetHashCode());
+			unchecked((_latitude.GetHashCode() * 397) ^ _longitude.GetHashCode());
 
-		public string ToString(string format, IFormatProvider formatProvider)
+		public string ToString(string format, IFormatProvider formatProvider) => ToString();
+
+		public static implicit operator GeoLocation(string latLon)
 		{
-			return ToString();
+			var parts = latLon.Split(',');
+			if (parts.Length != 2) throw new ArgumentException("Invalid format: string must be in the form of lat,lon");
+			double lat;
+			if (!double.TryParse(parts[0], NumberStyles.Any, CultureInfo.InvariantCulture, out lat))
+				throw new ArgumentException("Invalid latitude value");
+			double lon;
+			if (!double.TryParse(parts[1], NumberStyles.Any, CultureInfo.InvariantCulture, out lon))
+				throw new ArgumentException("Invalid longitude value");
+			return new GeoLocation(lat, lon);
+		}
+
+		public static implicit operator GeoLocation(double[] lonLat)
+		{
+			if (lonLat.Length != 2) throw new ArgumentException("Invalid lon,lat array, must have a length of 2");
+			return new GeoLocation(lonLat[1], lonLat[0]);
+		}
+	}
+
+	/// <summary>
+	/// Represents a Latitude/Longitude as a 2 dimensional point that gets serialized as new [] { lon, lat }
+	/// </summary>
+	[JsonConverter(typeof(GeoCoordinateJsonConverter))]
+	public class GeoCoordinate : GeoLocation
+	{
+		public GeoCoordinate(double latitude, double longitude) : base(latitude, longitude)
+		{
+		}
+
+		public static implicit operator GeoCoordinate(double[] coordinates)
+		{
+			if (coordinates == null || coordinates.Length != 2)
+				throw new ArgumentOutOfRangeException(nameof(coordinates), "Can not create a GeoCoordinate from an array that does not have two doubles");
+
+			return new GeoCoordinate(coordinates[0], coordinates[1]);
 		}
 	}
 }

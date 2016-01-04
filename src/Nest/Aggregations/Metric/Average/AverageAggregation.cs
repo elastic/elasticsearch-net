@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<AverageAggregator>))]
-	public interface IAverageAggregator : IMetricAggregator { }
+	[ContractJsonConverter(typeof(AggregationJsonConverter<AverageAggregation>))]
+	public interface IAverageAggregation : IMetricAggregation { }
 
-	public class AverageAggregator : MetricAggregator, IAverageAggregator { }
-
-	public class AverageAgg : MetricAgg, IAverageAggregator
+	public class AverageAggregation : MetricAggregationBase, IAverageAggregation
 	{
-		public AverageAgg(string name, FieldName field) : base(name, field) { }
+		internal AverageAggregation() { }
+
+		public AverageAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Average = this;
 	}
 
-	public class AverageAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<AverageAggregatorDescriptor<T>, IAverageAggregator, T>
-			, IAverageAggregator 
+	public class AverageAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<AverageAggregationDescriptor<T>, IAverageAggregation, T>
+			, IAverageAggregation 
 		where T : class { }
 }

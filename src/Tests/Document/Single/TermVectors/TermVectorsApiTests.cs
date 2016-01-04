@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Document.Single.TermVectors
 {
@@ -40,9 +37,5 @@ namespace Tests.Document.Single.TermVectors
 		{
 			Offsets = true,
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

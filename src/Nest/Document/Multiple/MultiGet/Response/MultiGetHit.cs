@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-using Nest.Domain;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -25,7 +21,6 @@ namespace Nest
 	public class MultiGetHit<T> : IMultiGetHit<T>
 		where T : class
 	{
-		//[JsonProperty(PropertyName = "fields")]
 		public IFieldSelection<T> FieldSelection { get; internal set; }
 
 		[JsonProperty(PropertyName = "_source")]

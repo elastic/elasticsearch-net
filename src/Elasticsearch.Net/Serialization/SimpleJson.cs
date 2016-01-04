@@ -62,7 +62,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation
@@ -1453,7 +1453,7 @@ namespace Elasticsearch.Net.Serialization
 		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeUnknownTypes(object input, out object output)
 		{
-			if (input == null) throw new ArgumentNullException("input");
+			if (input == null) throw new ArgumentNullException(nameof(input));
 			output = null;
 			Type type = input.GetType();
 			if (type.FullName == null)

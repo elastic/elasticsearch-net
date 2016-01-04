@@ -1,7 +1,14 @@
+using Newtonsoft.Json;
+
 namespace Nest
 {
-	//TODO is this empty on purpose? if so add documentation
-	public class PercentageScoreHeuristic
-	{
-	}
+	[JsonObject]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentageScoreHeuristic>))]
+	public interface IPercentageScoreHeuristic { }
+
+	public class PercentageScoreHeuristic { }
+
+	public class PercentageScoreHeuristicDescriptor 
+		: DescriptorBase<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic>, IPercentageScoreHeuristic
+	{ }
 }

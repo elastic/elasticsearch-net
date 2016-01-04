@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MaxAggregator>))]
-	public interface IMaxAggregator : IMetricAggregator { }
+	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxAggregation>))]
+	public interface IMaxAggregation : IMetricAggregation { }
 
-	public class MaxAggregator : MetricAggregator, IMaxAggregator { }
-
-	public class MaxAgg : MetricAgg, IMaxAggregator
+	public class MaxAggregation : MetricAggregationBase, IMaxAggregation
 	{
-		public MaxAgg(string name, FieldName field) : base(name, field) { }
+		internal MaxAggregation() { }
+
+		public MaxAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;
 	}
 
-	public class MaxAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<MaxAggregatorDescriptor<T>, IMaxAggregator, T>
-			, IMaxAggregator 
+	public class MaxAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
+			, IMaxAggregation 
 		where T : class { }
 }

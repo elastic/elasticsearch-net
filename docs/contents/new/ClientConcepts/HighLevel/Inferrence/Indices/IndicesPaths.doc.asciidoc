@@ -16,7 +16,7 @@ singleIndexFromString.Match(
 				many => many.Indices.Should().HaveCount(1).And.Contain("name")
 			);
 ----
-to ease creating FieldName's from expressions there is a static Property class you can use 
+to ease creating Field's from expressions there is a static Property class you can use 
 
 
 

@@ -1,9 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using Nest.Domain;
+﻿using System;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 
 namespace Nest
 {
@@ -31,20 +27,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "get")]
 		public ExplainGet<T> Get { get; internal set; }
 
-		public T Source
-		{
-			get
-			{
-				if (this.Get == null) return null;
-				return this.Get.Source;
-			}
-		}
+		public T Source => this.Get?.Source;
 
 		public FieldSelection<T> Fields
 		{
 			get
 			{
-				//TODO figure out a new way to get Fields 
+				//TODO High Priority: Figure out a new way to get Fields 
 				//should probably be serialized using its own constructor take the settings from the json serializer
 				throw new NotImplementedException("responses no longer have settings");
 				//if (this.Get == null) return null;

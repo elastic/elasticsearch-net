@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -41,6 +39,29 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
 		};
 
+		protected override void ExpectResponse(IBulkResponse response)
+		{
+			response.Took.Should().BeGreaterThan(0);
+			response.Errors.Should().BeFalse();
+			response.ItemsWithErrors.Should().NotBeNull().And.BeEmpty();
+			response.Items.Should().NotBeEmpty();
+			foreach (var item in response.Items)
+			{
+				item.Index.Should().Be(CallIsolatedValue);
+				item.Type.Should().Be("project");
+				item.Status.Should().BeGreaterThan(100);
+				item.Version.Should().BeGreaterThan(0);
+				item.Id.Should().NotBeNullOrWhiteSpace();
+				item.IsValid.Should().BeTrue();
+				item.Shards.Should().NotBeNull();
+				item.Shards.Total.Should().BeGreaterThan(0);
+				item.Shards.Successful.Should().BeGreaterThan(0);
+			}
+
+			var p1 = this.Client.Source<Project>(Project.Instance.Name, p=>p.Index(CallIsolatedValue));
+			p1.LeadDeveloper.FirstName.Should().Be("martijn");
+		}
+
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(b => b.Document(Project.Instance))
@@ -65,27 +86,5 @@ namespace Tests.Document.Multiple.Bulk
 				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
 			}
 		};
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-			r.Took.Should().BeGreaterThan(0);
-			r.Errors.Should().BeFalse();
-			r.ItemsWithErrors.Should().NotBeNull().And.BeEmpty();
-			r.Items.Should().NotBeEmpty();
-			foreach (var item in r.Items)
-			{
-				item.Index.Should().Be(CallIsolatedValue);
-				item.Type.Should().Be("project");
-				item.Status.Should().BeGreaterThan(100);
-				item.Version.Should().BeGreaterThan(0);
-				item.Id.Should().NotBeNullOrWhiteSpace();
-				item.IsValid.Should().BeTrue();
-				item.Shards.Should().NotBeNull();
-				item.Shards.Total.Should().Be(2);
-				item.Shards.Successful.Should().BeGreaterThan(0);
-			}
-
-			var p1 = this.Client.Source<Project>(Project.Instance.Name, p=>p.Index(CallIsolatedValue));
-			p1.LeadDeveloper.FirstName.Should().Be("martijn");
-		});
 	}
 }

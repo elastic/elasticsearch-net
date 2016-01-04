@@ -1,0 +1,14 @@
+[source, csharp]
+----
+d => d
+.Index<Project>()
+.Name("index.*")
+.Local()
+----
+[source, csharp]
+----
+new GetIndexSettingsRequest(Static.Index<Project>(), "index.*")
+		{
+Local = true
+		}
+----

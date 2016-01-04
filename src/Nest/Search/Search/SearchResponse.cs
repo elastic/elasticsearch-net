@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Nest.Domain;
-using Newtonsoft.Json;
-using System.Linq.Expressions;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -41,6 +40,9 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : BaseResponse, ISearchResponse<T> where T : class
 	{
+		internal ServerError MultiSearchError { get; set; }
+		public override IApiCallDetails ApiCall => MultiSearchError != null ? new ApiCallDetailsOverride(base.ApiCall, MultiSearchError) : base.ApiCall;
+
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 
@@ -108,7 +110,7 @@ namespace Nest
 		{
 			get 
 			{
-				//TODO fix field selections
+				//TODO High Priority: fix field selections
 				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
 				//return this.Hits
 				//	.Select(h => h.Fields)

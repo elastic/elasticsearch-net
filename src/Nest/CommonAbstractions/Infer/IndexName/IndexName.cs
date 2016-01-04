@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
-using Newtonsoft.Json;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 
-	[JsonConverter(typeof(IndexNameJsonConverter))]
+	[ContractJsonConverter(typeof(IndexNameJsonConverter))]
 	public class IndexName : IEquatable<IndexName>, IUrlParameter
 	{
 		public string Name { get; set; }

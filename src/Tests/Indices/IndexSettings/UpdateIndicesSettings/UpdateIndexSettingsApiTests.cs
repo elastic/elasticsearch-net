@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<IAcknowledgedResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
+	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -34,15 +31,16 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		};
 
 		protected override Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> Fluent => d => d
-			.BlocksWrite(false);
+			.IndexSettings(i => i
+				.BlocksWrite(false)
+			);
 
 		protected override UpdateIndexSettingsRequest Initializer => new UpdateIndexSettingsRequest
 		{
-			BlocksWrite = false
+			IndexSettings = new Nest.IndexSettings
+			{
+				BlocksWrite = false
+			}
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

@@ -1,7 +1,6 @@
 [source, csharp]
 ----
 var repos = "repos1";
-var snapshot = "snap";
 await POST($"/_snapshot/repos1/_verify")
 				.Fluent(c => c.VerifyRepository(repos))
 				.Request(c => c.VerifyRepository(new VerifyRepositoryRequest(repos)))

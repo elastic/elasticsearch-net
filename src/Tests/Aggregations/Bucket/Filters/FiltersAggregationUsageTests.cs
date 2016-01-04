@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
-using static Tests.Framework.RoundTripper;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filters
 {
@@ -65,7 +61,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new FiltersAgg("projects_by_state")
+				Aggregations = new FiltersAggregation("projects_by_state")
 				{
 					Filters = new NamedFiltersContainer
 					{
@@ -74,35 +70,34 @@ namespace Tests.Aggregations.Bucket.Filters
 							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
-	{
-		response.IsValid.Should().BeTrue();
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
 
-		/**
-		* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-		* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-		*/
-		var filterAgg = response.Aggs.Filters("projects_by_state");
-		filterAgg.Should().NotBeNull();
+			/**
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			*/
+			var filterAgg = response.Aggs.Filters("projects_by_state");
+			filterAgg.Should().NotBeNull();
 
-		var namedResult = filterAgg.NamedBucket("belly_up");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			var namedResult = filterAgg.NamedBucket("belly_up");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-		namedResult = filterAgg.NamedBucket("stable");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			namedResult = filterAgg.NamedBucket("stable");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-		namedResult = filterAgg.NamedBucket("very_active");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			namedResult = filterAgg.NamedBucket("very_active");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-	});
+		}
 	}
 
 	/** == Anonymous filters **/
@@ -150,21 +145,20 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new FiltersAgg("projects_by_state")
+				Aggregations = new FiltersAggregation("projects_by_state")
 				{
-					Filters = new List<IQueryContainer>
+					Filters = new List<QueryContainer>
 					{
 							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
 							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
 							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 
@@ -180,6 +174,6 @@ namespace Tests.Aggregations.Bucket.Filters
 			{
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
-		});
+		}
 	}
 }

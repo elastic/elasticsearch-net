@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Elasticsearch.Net;
-using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -62,15 +59,14 @@ namespace Nest
 		internal readonly Type _baseType;
 		internal readonly Func<dynamic, Hit<dynamic>, Type> _concreteTypeSelector;
 
-		public override bool CanWrite { get { return false; } }
-		public override bool CanRead { get { return true; } }
+		public override bool CanWrite => false;
+		public override bool CanRead => true;
 
 		public ConcreteTypeConverter() {}
 
-
 		public ConcreteTypeConverter(Func<dynamic, Hit<dynamic>, Type> concreteTypeSelector)
 		{
-			concreteTypeSelector.ThrowIfNull("concreteTypeSelector");
+			concreteTypeSelector.ThrowIfNull(nameof(concreteTypeSelector));
 
 			this._baseType = typeof(T);
 			this._concreteTypeSelector = concreteTypeSelector;
@@ -78,18 +74,13 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
-			if (elasticContractResolver != null && elasticContractResolver.PiggyBackState != null
-				&& elasticContractResolver.PiggyBackState.ActualJsonConverter != null)
-			{
-				var realConcreteConverter = elasticContractResolver.PiggyBackState.ActualJsonConverter as ConcreteTypeConverter<T>;
-				if (realConcreteConverter != null)
-					return ConcreteTypeConverter.GetUsingConcreteTypeConverter<T>(reader, serializer, realConcreteConverter);
-			}
+			var realConverter = serializer.GetStatefulConverter<ConcreteTypeConverter<T>>();
+			if (realConverter != null)
+				return ConcreteTypeConverter.GetUsingConcreteTypeConverter<T>(reader, serializer, realConverter);
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
-			instance.Fields = new FieldSelection<T>(elasticContractResolver.ConnectionSettings, instance._fields);
+			instance.Fields = new FieldSelection<T>(serializer.GetConnectionSettings().Inferrer, instance._fields);
 			return instance;
 		}
 
@@ -161,22 +152,22 @@ namespace Nest
 			JObject jObject, out object selection)
 			where T: class
 		{
-			var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
+			var settings = serializer.GetConnectionSettings();
 			var baseType = realConcreteConverter._baseType;
 			var selector = realConcreteConverter._concreteTypeSelector;
 
 			//Hit<dynamic> hitDynamic = new Hit<dynamic>();
 			dynamic d = jObject;
 			var fields = jObject["fields"];
-			var fieldSelectionData = fields != null ? fields.ToObject<IDictionary<string, object>>() : null;
-			var sel = new FieldSelection<T>(elasticContractResolver.ConnectionSettings, fieldSelectionData);
+			var fieldSelectionData = fields?.ToObject<IDictionary<string, object>>();
+			var sel = new FieldSelection<T>(settings.Inferrer, fieldSelectionData);
 			var hitDynamic = new Hit<dynamic>();
 			//favor manual mapping over doing Populate twice.
 			hitDynamic._fields = fieldSelectionData;
 			hitDynamic.Fields = sel;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
-			hitDynamic._score = (d._score is double) ? d._score : default(double);
+			hitDynamic.Score = d._score;
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
@@ -192,7 +183,7 @@ namespace Nest
 				fieldSelectionType = typeof(FieldSelection<>).MakeGenericType(concreteType);
 				ConcreteTypeConverter.TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
 			}
-			selection = fieldSelectionType.CreateInstance(elasticContractResolver.ConnectionSettings, fieldSelectionData);
+			selection = fieldSelectionType.CreateInstance(settings, fieldSelectionData);
 			return concreteType;
 		}
 	}

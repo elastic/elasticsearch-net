@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -21,9 +19,8 @@ namespace Tests.Document.Single.Source
 			p.Should().NotBeNull("Test setup failure, project instance not found in projects indexed into readonly cluster");
 
 			project.Name.Should().Be(p.Name);
-			project.CuratedTags.Should().Equal(p.CuratedTags);
+			project.CuratedTags.Should().HaveCount(p.CuratedTags.Count());
 			project.LastActivity.Should().Be(p.LastActivity);
-			project.Metadata.Should().Equal(p.Metadata);
 			project.StartedOn.Should().Be(p.StartedOn);
 		}
 	}

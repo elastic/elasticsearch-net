@@ -1,31 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
+	// ReSharper disable once UnusedMember.Global
 	public class NodesHotThreadsDescriptorOverrides : IDescriptorOverrides
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public IEnumerable<string> SkipQueryStringParams => new []
 		{
-			get
-			{
-				return new string[]
-				{
-					"fielddata"
-				};
-			}
-		}
-		public IDictionary<string, string> RenameQueryStringParams
+			"fielddata"
+		};
+
+		public IDictionary<string, string> RenameQueryStringParams => new Dictionary<string, string>
 		{
-			get
-			{
-				return new Dictionary<string, string>
-				{
-					{ "type", "thread_type"}
-				};
-			}
-		}
+			{ "type", "thread_type"}
+		};
 	}
 }

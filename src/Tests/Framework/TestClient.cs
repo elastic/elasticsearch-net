@@ -2,72 +2,80 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using Elasticsearch.Net.Connection;
-using Nest;
-using Tests.Framework.MockData;
-using Elasticsearch.Net.ConnectionPool;
 using System.IO;
+using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
+using Nest;
 using Tests.Framework.Configuration;
+using Tests.Framework.MockData;
 
 namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.config");
-
-		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
-
-		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion.Trim() : null);
-
-		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static ITestConfiguration Configuration = LoadConfiguration();
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
-		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
-		{
-			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
-				.SetDefaultIndex("default-index")
-				.PrettyJson()
-				.InferMappingFor<Project>(map => map
-					.IndexName("project")
-					.IdProperty(p => p.Name)
-				)
-				.InferMappingFor<CommitActivity>(map => map
-					.IndexName("project")
-					.TypeName("commits")
-				)
-				.InferMappingFor<Developer>(map => map
-					.IndexName("devs")
-					.Ignore(p => p.PrivateValue)
-					.Rename(p => p.OnlineHandle, "nickname")
-				)
-				//We try and fetch the test name during integration tests when running fiddler to send the name 
-				//as the TestMethod header, this allows us to quickly identify which test sent which request
-				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
+		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
+			.DefaultIndex("default-index")
+			.PrettyJson()
+			.InferMappingFor<Project>(map => map
+				.IndexName("project")
+				.IdProperty(p => p.Name)
+			)
+			.InferMappingFor<CommitActivity>(map => map
+				.IndexName("project")
+				.TypeName("commits")
+			)
+			.InferMappingFor<Developer>(map => map
+				.IndexName("devs")
+				.Ignore(p => p.PrivateValue)
+				.Rename(p => p.OnlineHandle, "nickname")
+			)
+			//We try and fetch the test name during integration tests when running fiddler to send the name 
+			//as the TestMethod header, this allows us to quickly identify which test sent which request
+			.GlobalHeaders(new NameValueCollection
+			{
+				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
+			});
 
+			
+		public static ConnectionSettings CreateSettings(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, 
+			int port = 9200, 
+			bool forceInMemory = false,
+			Func<Uri, IConnectionPool> createPool = null
+			)
+		{
+			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
+			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory)));
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
-			new ElasticClient(CreateSettings(modifySettings, port));
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
-		public static Uri CreateNode(int? port = null) => 
+		public static IElasticClient GetClient(
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>
+			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
+
+		public static Uri CreateNode(int? port = null) =>
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+		public static IConnection CreateConnection(bool forceInMemory = false) =>
+			Configuration.RunIntegrationTests && !forceInMemory ? new HttpConnection() : new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
-			var serializer = new NestSerializer(new ConnectionSettings());
-			string fixedResult = string.Empty;
+			var serializer = new JsonNetSerializer(new ConnectionSettings());
+			byte[] fixedResult;
 			using (var ms = new MemoryStream())
 			{
 				serializer.Serialize(responseJson, ms);
-				fixedResult =Encoding.UTF8.GetString(ms.ToArray());
+				fixedResult = ms.ToArray();
 			}
 			var connection = new InMemoryConnection(fixedResult);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
@@ -75,27 +83,34 @@ namespace Tests.Framework
 			return new ElasticClient(settings);
 		}
 
-
-
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
-			if (!(RunningFiddler && RunIntegrationTests)) return "ignore";
+			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
 			var st = new StackTrace();
 			var types = GetTypes(st);
-			return (types.Select(f=>f.FullName).LastOrDefault()  ?? "Seeder").Split('.').Last();
+			return (types.Select(f => f.FullName).LastOrDefault() ?? "Seeder").Split('.').Last();
 		}
 
 		private static List<Type> GetTypes(StackTrace st)
 		{
 			var types = (from f in st.GetFrames()
-				let method = f.GetMethod()
-				where method != null
-				let type = method.DeclaringType
-				where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
-				select type).ToList();
+						 let method = f.GetMethod()
+						 where method != null
+						 let type = method.DeclaringType
+						 where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
+						 select type).ToList();
 			return types;
 		}
 
+		private static ITestConfiguration LoadConfiguration()
+		{
+			// The build script sets a TARGET env variable, so if it exists then
+			// we must be running tests from the build script
+			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
+				return new EnvironmentConfiguration();
+
+			return new YamlConfiguration(@"..\..\tests.yaml");
 		}
+	}
 }

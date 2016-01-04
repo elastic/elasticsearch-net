@@ -1,29 +1,24 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+// ReSharper disable UnusedMember.Global
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ChildrenAggregator>))]
-	public interface IChildrenAggregator : IBucketAggregator
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ChildrenAggregation>))]
+	public interface IChildrenAggregation : IBucketAggregation
 	{
 		[JsonProperty("type")]
 		TypeName Type { get; set; }
 	}
 
-	public class ChildrenAggregator : BucketAggregator, IChildrenAggregator
-	{
-		public TypeName Type { get; set; }
-	}
-
-	public class ChildrenAgg : BucketAgg, IChildrenAggregator
+	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
 		public TypeName Type { get; set; }
 
-		public ChildrenAgg(string name, TypeName type) : base(name)
+		internal ChildrenAggregation() { }
+
+		public ChildrenAggregation(string name, TypeName type) : base(name)
 		{
 			this.Type = type;
 		}
@@ -31,16 +26,16 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}
 
-	public class ChildrenAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<ChildrenAggregatorDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
+	public class ChildrenAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
 	{
-		TypeName IChildrenAggregator.Type { get; set; } = typeof(T);
+		TypeName IChildrenAggregation.Type { get; set; } = typeof(T);
 
-		public ChildrenAggregatorDescriptor<T> Type(TypeName type) =>
+		public ChildrenAggregationDescriptor<T> Type(TypeName type) =>
 			Assign(a => a.Type = type);
 
-		public ChildrenAggregatorDescriptor<T> Type<TChildType>() where TChildType : class =>
+		public ChildrenAggregationDescriptor<T> Type<TChildType>() where TChildType : class =>
 			Assign(a => a.Type = typeof(TChildType));
 	}
 }

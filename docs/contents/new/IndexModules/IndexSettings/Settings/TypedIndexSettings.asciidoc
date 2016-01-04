@@ -25,7 +25,7 @@ s => s
 
 [source, csharp]
 ----
-new IndexSettings(new Dictionary<string, object>
+new Nest.IndexSettings(new Dictionary<string, object>
 {
 	{ "any.setting", "can be set" },
 	{ "doubles", 1.1 },

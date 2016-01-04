@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.MockData;
-using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.Translog
 {
 	public class TranlogSettings
 	{
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -32,7 +26,7 @@ namespace Tests.Aggregations
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Translog(slowlog => slowlog
 					.Flush(f => f
 						.ThresholdOps(2)
@@ -47,8 +41,8 @@ namespace Tests.Aggregations
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings
 				{
 					Translog = new TranslogSettings
 					{

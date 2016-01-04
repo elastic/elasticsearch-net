@@ -9,13 +9,12 @@ namespace Nest
 	internal class DynamicTemplatesJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
+		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, DynamicTemplate>);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var dict = value  as Dictionary<string, DynamicTemplate>;
-			if (dict == null || !dict.HasAny())
-				return;
-
+			var dict = value as DynamicTemplateContainer;
+			if (dict == null || !dict.HasAny()) return;
 			writer.WriteStartArray();
 			foreach (var p in dict)
 			{
@@ -26,23 +25,19 @@ namespace Nest
 				}
 				writer.WriteEndObject();
 			}
-
 			writer.WriteEndArray();
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-											JsonSerializer serializer)
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = new Dictionary<string, DynamicTemplate>();
-
+			var dict = new DynamicTemplateContainer();
 			JArray o = JArray.Load(reader);
-
 			foreach (JObject p in o)
 			{
 				var prop = p.Properties().First();
 				var po = prop.Value as JObject;
 				var name = prop.Name;
-				if (po ==null)
+				if (po == null)
 					continue;
 
 				var template = serializer.Deserialize(po.CreateReader(), typeof(DynamicTemplate)) as DynamicTemplate;
@@ -53,7 +48,5 @@ namespace Nest
 			}
 			return dict;
 		}
-
-		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, DynamicTemplate>);
 	}
 }

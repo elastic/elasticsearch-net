@@ -1,11 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest.Resolvers;
-using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -31,14 +25,10 @@ namespace Nest
 			}
 			if (id.Document != null)
 			{
-				var contract = serializer.ContractResolver as SettingsContractResolver;
-				if (contract != null && contract.ConnectionSettings != null)
-				{
-					var indexName = contract.Infer.Id(id.Document.GetType(), id.Document);
-					writer.WriteValue(indexName);
-				}
-				else throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
-            }
+				var settings = serializer.GetConnectionSettings();
+				var indexName = settings.Inferrer.Id(id.Document.GetType(), id.Document);
+				writer.WriteValue(indexName);
+			}
 			else writer.WriteValue(id.Value);
 		}
 	}

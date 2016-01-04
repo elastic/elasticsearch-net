@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -12,9 +9,9 @@ using Xunit;
 namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetScriptResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetResponse<Project>, IUpdateResponse, IDeleteResponse>
 	{
-		public DocumentCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public DocumentCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool SupportsDeletes => true;
 
@@ -27,61 +24,58 @@ namespace Tests.Document.Single
 			requestAsync: (s, c, r) => c.IndexAsync(r)
 		);
 
-		private string _lang = "groovy";
-
-		protected IndexRequest<Project> CreateInitializer(string index) =>
-			new IndexRequest<Project>(Project.Instance, index) {};
+		protected IndexRequest<Project> CreateInitializer(string id) => new IndexRequest<Project>(Project.Instance, id: id) { };
 
 		protected IIndexRequest<Project> CreateFluent(string id, IndexDescriptor<Project> d) => d.Id(id);
 
-		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
+		protected override LazyResponses Read() => Calls<GetDescriptor<Project>, GetRequest<Project>, IGetRequest, IGetResponse<Project>>(
 			ReadInitializer,
 			ReadFluent,
-			fluent: (s, c, f) => c.GetScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.GetScriptAsync(_lang, s, f),
-			request: (s, c, r) => c.GetScript(r),
-			requestAsync: (s, c, r) => c.GetScriptAsync(r)
-        );
+			fluent: (s, c, f) => c.Get<Project>(s, f),
+			fluentAsync: (s, c, f) => c.GetAsync<Project>(s, f),
+			request: (s, c, r) => c.Get<Project>(r),
+			requestAsync: (s, c, r) => c.GetAsync<Project>(r)
+		);
 
-		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(_lang, id);
+		protected GetRequest<Project> ReadInitializer(string id) => new GetRequest<Project>(id);
+		protected IGetRequest ReadFluent(string id, GetDescriptor<Project> d) => d;
 
-		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
-
-		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>, IUpdateRequest<Project, Project>, IUpdateResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			fluent: (s, c, f) => c.PutScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.PutScriptAsync(_lang, s, f),
-			request: (s, c, r) => c.PutScript(r),
-			requestAsync: (s, c, r) => c.PutScriptAsync(r)
+			fluent: (s, c, f) => c.Update<Project, Project>(s, f),
+			fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
+			request: (s, c, r) => c.Update<Project, Project>(r),
+			requestAsync: (s, c, r) => c.UpdateAsync<Project, Project>(r)
 		);
 
-		private string _updatedScript = "2+2";
+		protected UpdateRequest<Project, Project> UpdateInitializer(string id) =>
+			new UpdateRequest<Project, Project>(id) { Doc = new Project { Description = id + " updated" } };
 
-		protected PutScriptRequest UpdateInitializer(string id) =>
-			new PutScriptRequest(_lang, id) { Script = _updatedScript};
+		protected IUpdateRequest<Project, Project> UpdateFluent(string id, UpdateDescriptor<Project, Project> d) => d
+			.Doc(new Project { Description = id + " updated"} );
 
-		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
-
-		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteDescriptor<Project>, DeleteRequest<Project>, IDeleteRequest, IDeleteResponse>(
 			DeleteInitializer,
 			DeleteFluent,
-			fluent: (s, c, f) => c.DeleteScript(_lang, s, f),
-			fluentAsync: (s, c, f) => c.DeleteScriptAsync(_lang, s, f),
-			request: (s, c, r) => c.DeleteScript(r),
-			requestAsync: (s, c, r) => c.DeleteScriptAsync(r)
+			fluent: (s, c, f) => c.Delete<Project>(s, f),
+			fluentAsync: (s, c, f) => c.DeleteAsync<Project>(s, f),
+			request: (s, c, r) => c.Delete(r),
+			requestAsync: (s, c, r) => c.DeleteAsync(r)
 		);
 
-		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(_lang, id);
+		protected DeleteRequest<Project> DeleteInitializer(string id) => new DeleteRequest<Project>(id);
 
-		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
+		protected IDeleteRequest DeleteFluent(string id, DeleteDescriptor<Project> d) => d;
 
-		[I] protected async Task ScriptIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
-			r.Script.Should().Be(_updatedScript)
+		[I] protected async Task DocumentIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
+			r.Source.Description.Should().EndWith("updated")
 		);
 
-		[I] protected async Task ScriptIsDeleted() => await this.AssertOnGetAfterDelete(r =>
-			r.IsValid.Should().BeFalse()
-		);
+		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r =>
+		{
+			//r.IsValid.Should().BeFalse();
+			r.Found.Should().BeFalse();
+		});
 	}
 }

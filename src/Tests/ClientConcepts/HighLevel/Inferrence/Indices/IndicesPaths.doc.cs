@@ -1,14 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using FluentAssertions;
-using Nest;
-using Newtonsoft.Json.Linq;
+﻿using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using Xunit.Sdk;
-using static Tests.Framework.RoundTripper;
-using static Nest.Static;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 {
@@ -34,7 +26,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 			);
 		}
 
-		/** to ease creating FieldName's from expressions there is a static Property class you can use */
+		/** to ease creating Field's from expressions there is a static Property class you can use */
 		[U] public void UsingStaticPropertyField()
 		{
 			/** */
@@ -44,7 +36,6 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 			var singleTyped = Nest.Indices.Index<Project>();
 			var singleString = Nest.Indices.Index("name1");
 			var invalidSingleString = Nest.Indices.Index("name1, name2");
-
 		}
 	}
 }

@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndicesJsonConverter))]
+	[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
 	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
 		public class AllIndicesMarker { internal AllIndicesMarker() { } }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.Count
 {
@@ -49,7 +45,7 @@ namespace Tests.Search.Count
 		protected override Func<CountDescriptor<Project>, ICountRequest> Fluent => c => c
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query("NEST")
 				)
 			);

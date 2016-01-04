@@ -1,24 +1,23 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ValueCountAggregator>))]
-	public interface IValueCountAggregator : IMetricAggregator { }
-	
-	public class ValueCountAggregator : MetricAggregator, IValueCountAggregator { }
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ValueCountAggregation>))]
+	public interface IValueCountAggregation : IMetricAggregation { }
 
-	public class ValueCountAgg : MetricAgg, IValueCountAggregator
+	public class ValueCountAggregation : MetricAggregationBase, IValueCountAggregation
 	{
-		public ValueCountAgg(string name, FieldName field) : base(name, field) { }
+		internal ValueCountAggregation() { }
+
+		public ValueCountAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ValueCount = this;
 	}
 
-	public class ValueCountAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<ValueCountAggregatorDescriptor<T>, IValueCountAggregator, T>
-			, IValueCountAggregator 
+	public class ValueCountAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<ValueCountAggregationDescriptor<T>, IValueCountAggregation, T>
+			, IValueCountAggregation 
 		where T : class { }
 }

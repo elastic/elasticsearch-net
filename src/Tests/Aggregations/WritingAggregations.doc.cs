@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
@@ -66,27 +61,11 @@ namespace Tests.Aggregations
 			protected override SearchRequest<Project> Initializer => 
 				new SearchRequest<Project>
 				{
-					Aggregations = new Dictionary<string, IAggregationContainer>
+					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 					{
-						{"name_of_child_agg", new AggregationContainer
-						{
-							Children = new ChildrenAggregator
-							{
-								Type = typeof(CommitActivity)
-							},
-							Aggregations = new Dictionary<string, IAggregationContainer>
-							{
-								{"average_per_child", new AggregationContainer
-								{
-									Average = new AverageAggregator { Field = "confidenceFactor"}
-								} },
-								{"max_per_child", new AggregationContainer
-								{
-									Max = new MaxAggregator { Field = "confidenceFactor"}
-								} }
-							}
-						}
-						}
+						Aggregations = 
+							new AverageAggregation("average_per_child", "confidenceFactor") &&
+							new MaxAggregation("max_per_child", "confidenceFactor")
 					}
 				};
 		}
@@ -103,11 +82,11 @@ namespace Tests.Aggregations
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new ChildrenAgg("name_of_child_agg", typeof(CommitActivity))
+					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 					{
 						Aggregations = 
-							new AverageAgg("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
-							&& new MaxAgg("max_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+							new AverageAggregation("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+							&& new MaxAggregation("max_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
 					}
 				};
 		}

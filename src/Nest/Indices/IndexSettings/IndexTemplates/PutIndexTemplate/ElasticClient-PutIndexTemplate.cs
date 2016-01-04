@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -16,41 +13,41 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
-		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
-		IIndicesOperationResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> putTemplateSelector);
+		/// <param name="selector">An optional selector specifying additional parameters for the put template operation</param>
+		IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest putTemplateRequest);
+		IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> putTemplateSelector);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest putTemplateRequest);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request);
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> putTemplateSelector) => 
-			this.PutIndexTemplate(putTemplateSelector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
+		public IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => 
+			this.PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest putTemplateRequest) => 
-			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse>(
-				putTemplateRequest,
-				this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>
+		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) => 
+			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse>(
+				request,
+				this.LowLevelDispatch.IndicesPutTemplateDispatch<PutIndexTemplateResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> putTemplateSelector) =>
-			this.PutIndexTemplateAsync(putTemplateSelector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
+			this.PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest putTemplateRequest) => 
-			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				putTemplateRequest,
-				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request) => 
+			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse, IPutIndexTemplateResponse>(
+				request,
+				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<PutIndexTemplateResponse>
 			);
 	}
 }

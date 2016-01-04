@@ -1,6 +1,6 @@
 {
   "indices.stats": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html",
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-stats.html",
     "methods": ["GET"],
     "url": {
       "path": "/_stats",
@@ -53,8 +53,8 @@
           "type" : "list",
           "description" : "A comma-separated list of document types for the `indexing` index metric"
         }
-      },
-      "body": null
-    }
+      }
+    },
+    "body": null
   }
 }

@@ -1,14 +1,11 @@
-﻿using Elasticsearch.Net.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
-using Elasticsearch.Net.Connection;
 using System.Reflection;
+using Elasticsearch.Net;
 
 namespace Nest
 {
+	[ContractJsonConverter(typeof(PropertyNameJsonConverter))]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
 		public string Name { get; set; }
@@ -58,7 +55,7 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
+			return ComparisonValue?.GetHashCode() ?? 0;	
 		}
 
 		bool IEquatable<PropertyName>.Equals(PropertyName other)

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -14,46 +12,46 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
-		IShardsOperationResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		IClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
-		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
+		IClearCacheResponse ClearCache(IClearCacheRequest request);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
+		Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse>(
+		public IClearCacheResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => 
+			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse>(
 				selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)),
-				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ClearCacheResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest) => 
-			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse>(
-				clearCacheRequest,
-				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
+		public IClearCacheResponse ClearCache(IClearCacheRequest request) => 
+			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse>(
+				request,
+				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ClearCacheResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+		public Task<IClearCacheResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse, IClearCacheResponse>(
 				selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)),
-				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ClearCacheResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest) => 
-			this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				clearCacheRequest,
-				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
+		public Task<IClearCacheResponse> ClearCacheAsync(IClearCacheRequest request) => 
+			this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ClearCacheResponse, IClearCacheResponse>(
+				request,
+				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ClearCacheResponse>(p)
 			);
 	}
 }

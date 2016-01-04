@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	internal class PropertyNameJsonConverter : JsonConverter
 	{
-		private readonly ElasticInferrer _infer;
-		public PropertyNameJsonConverter(IConnectionSettingsValues connectionSettings)
-		{
-			_infer = new ElasticInferrer(connectionSettings);
-		}
-
 		public override bool CanRead => false;
 
 		public override bool CanWrite => true;
@@ -27,7 +19,7 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			writer.WriteValue(this._infer.PropertyName(property));
+			writer.WriteValue(new ElasticInferrer(serializer.GetConnectionSettings()).PropertyName(property));
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

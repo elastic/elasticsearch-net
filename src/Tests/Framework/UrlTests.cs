@@ -1,15 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DiffPlex;
-using DiffPlex.DiffBuilder;
-using DiffPlex.DiffBuilder.Model;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 
 namespace Tests.Framework
 {
@@ -53,7 +46,6 @@ namespace Tests.Framework
 
 		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) 
 			where TResponse : IResponse => WhenCallingAsync(call, "request async");
-
 
 
 		internal UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)

@@ -5,7 +5,6 @@ using System.Reflection;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
@@ -92,10 +91,14 @@ namespace Nest
 		{
 			TFirst first;
 			TSecond second;
-			Union<TFirst, TSecond> r = null;
-			if (this.TryRead<TFirst>(reader, serializer, out first)) r=first;
-			else if (this.TryRead<TSecond>(reader, serializer, out second)) r=second;
-			return r;
+			Union<TFirst, TSecond> u = null;
+
+			using (var r = JToken.Load(reader).CreateReader())
+			{
+				if (this.TryRead<TFirst>(r, serializer, out first)) u = first;
+				else if (this.TryRead<TSecond>(r, serializer, out second)) u = second;
+			}
+			return u;
 		}
 
 	}

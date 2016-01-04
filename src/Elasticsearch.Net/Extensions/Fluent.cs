@@ -10,7 +10,6 @@ namespace Elasticsearch.Net
 			assign(self);
 			return self;
 		}
-
 	}
 
 }

@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Refresh
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class RefreshApiTests : ApiIntegrationTestBase<IShardsOperationResponse, IRefreshRequest, RefreshDescriptor, RefreshRequest>
+	public class RefreshApiTests : ApiIntegrationTestBase<IRefreshResponse, IRefreshRequest, RefreshDescriptor, RefreshRequest>
 	{
 		public RefreshApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -31,9 +28,5 @@ namespace Tests.Indices.StatusManagement.Refresh
 		protected override Func<RefreshDescriptor, IRefreshRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override RefreshRequest Initializer => new RefreshRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

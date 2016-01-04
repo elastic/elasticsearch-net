@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -9,38 +6,43 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <inheritdoc/>
-		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector);
+		/// <summary>
+		/// The multi percolate API allows to bundle multiple percolate requests into a single request, 
+		/// similar to what the multi search API does to search requests.
+		/// <para> </para><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html#_multi_percolate_api">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html#_multi_percolate_api</a>
+		/// </summary>
+		/// <param name="selector">A descriptor to describe the multi percolate operation</param>
+		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector);
 
 		/// <inheritdoc/>
-		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
+		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest request);
 
 		/// <inheritdoc/>
-		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector);
+		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
+		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request);
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector) =>
-			this.MultiPercolate(multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()));
+		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector) =>
+			this.MultiPercolate(selector?.Invoke(new MultiPercolateDescriptor()));
 
 		/// <inheritdoc/>
-		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest) => 
+		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest request) => 
 			this.Dispatcher.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
-				multiRequest, this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>
+				request, this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector) => 
-			this.MultiPercolateAsync(multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()));
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector) => 
+			this.MultiPercolateAsync(selector?.Invoke(new MultiPercolateDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest) => 
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request) => 
 			this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
-				multiPercolateRequest, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
+				request, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
 			);
 	}
 }

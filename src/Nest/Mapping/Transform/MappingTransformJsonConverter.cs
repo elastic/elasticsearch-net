@@ -1,15 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
 	internal class MappingTransformCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanWrite { get { return false; } }
+		public override bool CanWrite => false;
 
 		public override bool CanConvert(Type objectType) => objectType == typeof(IMappingTransform);
 

@@ -1,39 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.Percolator.UnregisterPercolator
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class UnregisterPercolatorApiTests
-		: ApiIntegrationTestBase<IUnregisterPercolateResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
+	[Collection(IntegrationContext.Indexing)]
+	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolateResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
-		public UnregisterPercolatorApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UnregisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		
+		}
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var createIndex = this.Client.CreateIndex(this.CallIsolatedValue + "-index");
+			if (!createIndex.IsValid)
+				throw new Exception($"Setup: failed to first register percolator {this.CallIsolatedValue}");
+			var register = this.Client.RegisterPercolator<Project>(this.CallIsolatedValue, r => r.Query(q => q.MatchAll()).Index(this.CallIsolatedValue + "-index"));
+			if (!register.IsValid)
+				throw new Exception($"Setup: failed to first register percolator {this.CallIsolatedValue}");
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.UnregisterPercolator<Project>(_name),
-			fluentAsync: (c, f) => c.UnregisterPercolatorAsync<Project>(_name),
+			fluent: (c, f) => c.UnregisterPercolator<Project>(this.CallIsolatedValue, f),
+			fluentAsync: (c, f) => c.UnregisterPercolatorAsync<Project>(this.CallIsolatedValue, f),
 			request: (c, r) => c.UnregisterPercolator(r),
 			requestAsync: (c, r) => c.UnregisterPercolatorAsync(r)
 		);
 
-		private string _name = "name-of-perc";
-
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/.percolator/{_name}";
+		protected override string UrlPath => $"/{this.CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
 
-		protected override Func<UnregisterPercolatorDescriptor<Project>, IUnregisterPercolatorRequest> Fluent => null;
+		protected override void ExpectResponse(IUnregisterPercolateResponse response)
+		{
+			response.Found.Should().BeTrue();
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+			response.Version.Should().BeGreaterThan(0);
+			response.Id.Should().NotBeNullOrEmpty();
+		}
 
-		protected override UnregisterPercolatorRequest Initializer => new UnregisterPercolatorRequest(typeof(Project), _name);
+		protected override UnregisterPercolatorDescriptor<Project> NewDescriptor() => new UnregisterPercolatorDescriptor<Project>(this.CallIsolatedValue);
+
+		protected override Func<UnregisterPercolatorDescriptor<Project>, IUnregisterPercolatorRequest> Fluent => d=> d.Index(this.CallIsolatedValue + "-index");
+
+		protected override UnregisterPercolatorRequest Initializer => new UnregisterPercolatorRequest(this.CallIsolatedValue + "-index", this.CallIsolatedValue);
 	}
 }

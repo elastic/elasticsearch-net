@@ -15,20 +15,20 @@ namespace Nest
 		/// <para> </para><para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html</para>
 		/// </summary>
 		/// <typeparam name="T">The type that represents the result hits</typeparam>
-		/// <param name="scrollRequest">A descriptor that describes the scroll operation</param>
-		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
+		/// <param name="request">A descriptor that describes the scroll operation</param>
+		/// <returns>A query response holding <typeparamref name="T"/> hits as well as the ScrollId for the next scroll operation</returns>
+		ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class;
 
 		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) 
+		ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest)
+		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request)
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
 			where T : class;
 
 	}
@@ -48,8 +48,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class =>
-			this.Scroll<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
+		public ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class =>
+			this.Scroll<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class => 
@@ -65,7 +65,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class => 
-			this.ScrollAsync<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
+		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
+			this.ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 	}
 }

@@ -18,17 +18,22 @@ namespace Nest
 	[JsonObject]
 	public class PercolateCountResponse : BaseResponse, IPercolateCountResponse
 	{
-
 		[JsonProperty(PropertyName = "took")]
 		public int Took { get; internal set; }
+
 		[JsonProperty(PropertyName = "total")]
 		public long Total { get; internal set; }
+		
+		[JsonProperty(PropertyName = "_shards")]
+		public ShardsMetaData Shards { get; internal set; }
 		
 		/// <summary>
 		/// The individual error for separate requests on the _mpercolate API
 		/// </summary>
 		[JsonProperty(PropertyName = "error")]
-		internal string Error { get; set; }
+		internal ServerError Error { get; set; }
+
+		public override ServerError ServerError => this.Error ?? base.ServerError;
 	}
 
 	[JsonObject]
@@ -41,13 +46,17 @@ namespace Nest
 
 	public class PercolatorMatch
 	{
-		[JsonProperty(PropertyName = "_index")]
-		public string Index { get; set; }
-		[JsonProperty(PropertyName = "_id")]
-		public string Id { get; set; }
 		[JsonProperty(PropertyName = "highlight")]
 		public Dictionary<string, IList<string>> Highlight { get; set; }
-		
+
+		[JsonProperty(PropertyName = "_id")]
+		public string Id { get; set; }
+
+		[JsonProperty(PropertyName = "_index")]
+		public string Index { get; set; }
+
+		[JsonProperty(PropertyName = "_score")]
+		public double Score { get; set; }
 	}
 
 }

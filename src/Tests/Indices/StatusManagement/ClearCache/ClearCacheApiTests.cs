@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.ClearCache
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClearCacheApiTests : ApiIntegrationTestBase<IShardsOperationResponse, IClearCacheRequest, ClearCacheDescriptor, ClearCacheRequest>
+	public class ClearCacheApiTests : ApiIntegrationTestBase<IClearCacheResponse, IClearCacheRequest, ClearCacheDescriptor, ClearCacheRequest>
 	{
 		public ClearCacheApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -31,9 +28,5 @@ namespace Tests.Indices.StatusManagement.ClearCache
 		protected override Func<ClearCacheDescriptor, IClearCacheRequest> Fluent => d => d.Recycler();
 
 		protected override ClearCacheRequest Initializer => new ClearCacheRequest(AllIndices) { Recycler = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

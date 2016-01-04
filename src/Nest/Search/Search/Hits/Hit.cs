@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Nest.Domain;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	//[JsonConverter(typeof(ConcreteTypeConverter))]
+	[ContractJsonConverter(typeof(DefaultHitJsonConverter))]
 	public interface IHit<out T> where T : class
 	{
 		IFieldSelection<T> Fields { get; }
@@ -14,6 +12,7 @@ namespace Nest
 		string Index { get; }
 		string Type { get; }
 		long? Version { get; }
+		double Score { get; }
 		string Id { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
@@ -39,11 +38,8 @@ namespace Nest
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
 		
-		//TODO in NEST 2.0 make the property itself double?
-		//validate whether score is alway written in ES or not
 		[JsonProperty(PropertyName = "_score")]
-		internal double? _score { get; set; }
-		public double Score { get { return _score.GetValueOrDefault(0); } }
+		public double Score { get; set; }
 
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }

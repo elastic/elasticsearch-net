@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.MockData;
-using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.Settings
 {
 	public class TypedIndexSettings
 	{
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -42,7 +36,7 @@ namespace Tests.Aggregations
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Setting("any.setting", "can be set")
 				.Setting("doubles", 1.1)
 				.Setting("bools", false)
@@ -63,8 +57,8 @@ namespace Tests.Aggregations
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings(new Dictionary<string, object>
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings(new Dictionary<string, object>
 				{
 					{ "any.setting", "can be set" },
 					{ "doubles", 1.1 },

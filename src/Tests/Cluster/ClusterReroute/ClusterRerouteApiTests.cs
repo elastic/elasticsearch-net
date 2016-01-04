@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -87,8 +85,13 @@ namespace Tests.Cluster.ClusterReroute
 
 		protected override void ExpectResponse(IClusterRerouteResponse response)
 		{
-			//TODO we expect all three to fail and see it on the response
-			//and exception
+			response.IsValid.Should().BeFalse();
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(400);
+			response.ServerError.Error.Should().NotBeNull();
+			response.ServerError.Error.Reason.Should().Contain("failed to resolve");
+			response.ServerError.Error.Type.Should().Contain("illegal_argument_exception");
+
 		}
 	}
 

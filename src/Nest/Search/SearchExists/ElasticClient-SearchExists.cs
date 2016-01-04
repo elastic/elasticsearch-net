@@ -13,13 +13,13 @@ namespace Nest
 		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector) where T : class;
 
 		/// <inheritdoc/>
-		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
+		IExistsResponse SearchExists(ISearchExistsRequest request);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector) where T : class;
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
+		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -30,9 +30,9 @@ namespace Nest
 			this.SearchExists(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IExistsResponse SearchExists(ISearchExistsRequest indexRequest) => 
+		public IExistsResponse SearchExists(ISearchExistsRequest request) => 
 			this.Dispatcher.Dispatch<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse>(
-				indexRequest,
+				request,
 				new SearchExistConverter(DeserializeExistsResponse),
 				this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>
 			);
@@ -43,9 +43,9 @@ namespace Nest
 			this.SearchExistsAsync(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest) => 
+		public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest request) => 
 			this.Dispatcher.DispatchAsync<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				indexRequest, 
+				request, 
 				new SearchExistConverter(DeserializeExistsResponse),
 				this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>
 			);

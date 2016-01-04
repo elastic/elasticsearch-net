@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -17,41 +14,41 @@ namespace Nest
 		/// automatically be applied when searching, and routing values.</para>
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
-		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
-		IIndicesOperationResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> aliasSelector);
+		/// <param name="selector">A descriptor that describes the parameters for the alias operation</param>
+		IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse Alias(IBulkAliasRequest aliasRequest);
+		IBulkAliasResponse Alias(IBulkAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> aliasSelector);
+		Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest aliasRequest);
+		Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request);
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse Alias(IBulkAliasRequest aliasRequest) => 
-			this.Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, IndicesOperationResponse>(
-				aliasRequest,
-				this.LowLevelDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>
+		public IBulkAliasResponse Alias(IBulkAliasRequest request) => 
+			this.Dispatcher.Dispatch<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse>(
+				request,
+				this.LowLevelDispatch.IndicesUpdateAliasesDispatch<BulkAliasResponse>
 			);
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> aliasSelector) =>
-			this.Alias(aliasSelector?.Invoke(new BulkAliasDescriptor()));
+		public IBulkAliasResponse Alias(Func<BulkAliasDescriptor, IBulkAliasRequest> selector) =>
+			this.Alias(selector?.Invoke(new BulkAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest aliasRequest) => 
-			this.Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				aliasRequest,
-				this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>
+		public Task<IBulkAliasResponse> AliasAsync(IBulkAliasRequest request) => 
+			this.Dispatcher.DispatchAsync<IBulkAliasRequest, BulkAliasRequestParameters, BulkAliasResponse, IBulkAliasResponse>(
+				request,
+				this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<BulkAliasResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> aliasSelector)=>
-			this.AliasAsync(aliasSelector?.Invoke(new BulkAliasDescriptor()));
+		public Task<IBulkAliasResponse> AliasAsync(Func<BulkAliasDescriptor, IBulkAliasRequest> selector)=>
+			this.AliasAsync(selector?.Invoke(new BulkAliasDescriptor()));
 
 	}
 }

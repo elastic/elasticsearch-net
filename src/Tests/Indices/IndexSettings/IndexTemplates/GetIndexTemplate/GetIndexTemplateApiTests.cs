@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -10,7 +8,7 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class GetIndexTemplateApiTests : ApiIntegrationTestBase<IGetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor, GetIndexTemplateRequest>
+	public class GetIndexTemplateApiTests : ApiTestBase<IGetIndexTemplateResponse, IGetIndexTemplateRequest, GetIndexTemplateDescriptor, GetIndexTemplateRequest>
 	{
 		public GetIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -20,8 +18,6 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.GetIndexTemplate
 			requestAsync: (client, r) => client.GetIndexTemplateAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
 

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Elasticsearch.Net;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -20,8 +20,8 @@ namespace Nest
 
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			snapshotRequest.ThrowIfNull("snapshotRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			snapshotRequest.ThrowIfNull(nameof(snapshotRequest));
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
@@ -33,15 +33,15 @@ namespace Nest
 		public SnapshotObservable(IElasticClient elasticClient, ISnapshotRequest snapshotRequest, TimeSpan interval)
 			: this(elasticClient, snapshotRequest)
 		{
-			interval.ThrowIfNull("interval");
-			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException("interval");
+			interval.ThrowIfNull(nameof(interval));
+			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException(nameof(interval));
 
 			_interval = interval;
 		}
 
 		public IDisposable Subscribe(IObserver<ISnapshotStatusResponse> observer)
 		{
-			observer.ThrowIfNull("observer");
+			observer.ThrowIfNull(nameof(observer));
 
 			try
 			{
@@ -49,7 +49,7 @@ namespace Nest
 				var snapshotResponse = this._elasticClient.Snapshot(_snapshotRequest);
 
 				if (!snapshotResponse.IsValid)
-					throw new SnapshotException(snapshotResponse.ApiCall, "Can't create snapshot");
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to create snapshot.", snapshotResponse.ApiCall);
 
 				EventHandler<SnapshotNextEventArgs> onNext = (sender, args) => observer.OnNext(args.SnapshotStatusResponse);
 				EventHandler<SnapshotCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -171,8 +171,8 @@ namespace Nest
 
 		public SnapshotStatusHumbleObject(IElasticClient elasticClient, ISnapshotRequest snapshotRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			snapshotRequest.ThrowIfNull("snapshotRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			snapshotRequest.ThrowIfNull(nameof(snapshotRequest));
 
 			_elasticClient = elasticClient;
 			_snapshotRequest = snapshotRequest;
@@ -187,7 +187,7 @@ namespace Nest
 						_snapshotRequest.Snapshot));
 
 				if (!snapshotStatusResponse.IsValid)
-					throw new SnapshotException(snapshotStatusResponse.ApiCall, "Can't check snapshot status");
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to get snapshot status.", snapshotStatusResponse.ApiCall);
 
 				if (snapshotStatusResponse.Snapshots.All(s => s.ShardsStats.Done == s.ShardsStats.Total))
 				{

@@ -1,0 +1,10 @@
+[source, csharp]
+----
+d=>d
+.AllIndices()
+.Name(Names)
+----
+[source, csharp]
+----
+new GetAliasesRequest(Static.AllIndices, Names)
+----

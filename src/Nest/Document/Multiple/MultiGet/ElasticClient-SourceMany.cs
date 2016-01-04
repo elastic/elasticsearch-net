@@ -75,11 +75,11 @@ namespace Nest
 		/// <param name="ids">A list of ids as string</param>
 		/// <param name="index">Optionally override the default inferred indexname for T</param>
 		/// <param name="type">Optionally override the default inferred indexname for T</param>
-		public static Task<IEnumerable<T>> SourceManyAsync<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
+		public static async Task<IEnumerable<T>> SourceManyAsync<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
-			return client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)))
-				.ContinueWith(t => t.Result.SourceMany<T>(ids));
+			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)));
+			return response.SourceMany<T>(ids);
 		}
 
 		/// <summary>

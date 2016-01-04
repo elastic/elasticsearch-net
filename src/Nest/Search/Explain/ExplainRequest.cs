@@ -7,7 +7,7 @@ namespace Nest
 	public partial interface IExplainRequest<TDocument> where TDocument : class
 	{
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
 
 	public partial class ExplainRequest<TDocument> : IExplainRequest<TDocument>
@@ -16,7 +16,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Explain")]
@@ -26,9 +26,9 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
-		IQueryContainer IExplainRequest<TDocument>.Query { get; set; }
+		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) => 
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
+			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
 	}
 }

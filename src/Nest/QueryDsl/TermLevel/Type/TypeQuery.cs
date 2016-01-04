@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -15,10 +12,10 @@ namespace Nest
 
 	public class TypeQuery : QueryBase, ITypeQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public TypeName Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Type = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Type = this;
 		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
 	
@@ -26,13 +23,13 @@ namespace Nest
 		: QueryDescriptorBase<TypeQueryDescriptor, ITypeQuery>
 		, ITypeQuery
 	{
-		bool IQuery.Conditionless => TypeQuery.IsConditionless(this);
+		protected override bool Conditionless => TypeQuery.IsConditionless(this);
 
 		[JsonProperty(PropertyName = "value")]
 		TypeName ITypeQuery.Value { get; set; }
 
 		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));
 
-		public TypeQueryDescriptor Value(string type) => Assign(a => a.Value = type);
+		public TypeQueryDescriptor Value(TypeName type) => Assign(a => a.Value = type);
 	}
 }

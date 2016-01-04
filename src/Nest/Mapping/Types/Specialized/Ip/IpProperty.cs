@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
-using System;
-using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IIpProperty : IProperty
 	{
 		[JsonProperty("index")]
@@ -23,20 +21,9 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class IpProperty : Property, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
-
-		internal IpProperty(IpAttribute attribute)
-			: base("ip", attribute)
-		{
-			Boost = attribute.Boost;
-			IncludeInAll = attribute.IncludeInAll;
-			Index = attribute.Index;
-			NullValue = attribute.NullValue;
-			PrecisionStep = attribute.PrecisionStep;
-		}
 
 		public double? Boost { get; set; }
 		public bool? IncludeInAll { get; set; }

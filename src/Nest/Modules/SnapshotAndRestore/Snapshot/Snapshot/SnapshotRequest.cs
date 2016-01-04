@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	public partial interface ISnapshotRequest 
 	{
 		[JsonProperty("indices")]
+		[JsonConverter(typeof(IndicesMultiSyntaxJsonConverter))]
 		Indices Indices { get; set; }
 
 		[JsonProperty("ignore_unavailable")]

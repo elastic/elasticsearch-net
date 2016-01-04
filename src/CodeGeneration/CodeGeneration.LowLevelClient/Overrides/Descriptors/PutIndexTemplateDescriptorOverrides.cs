@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
+	// ReSharper disable once UnusedMember.Global
 	public class PutIndexTemplateDescriptorOverrides : IDescriptorOverrides
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public IEnumerable<string> SkipQueryStringParams => new []
 		{
-			get
-			{
-				return new string[]
-				{
-					"order" 
-				};
-			}
-		}
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
+			"order" 
+		};
+
+		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

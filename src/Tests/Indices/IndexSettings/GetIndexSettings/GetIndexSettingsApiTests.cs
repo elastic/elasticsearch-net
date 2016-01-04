@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -32,13 +29,9 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			.Name("index.*")
 			.Local();
 
-		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Static.Index<Project>(), "index.*")
+		protected override GetIndexSettingsRequest Initializer => new GetIndexSettingsRequest(Infer.Index<Project>(), "index.*")
 		{
 			Local = true
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Elasticsearch.Net;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -21,8 +21,8 @@ namespace Nest
 
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			restoreRequest.ThrowIfNull("restoreRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			restoreRequest.ThrowIfNull(nameof(restoreRequest));
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
@@ -35,15 +35,15 @@ namespace Nest
 		public RestoreObservable(IElasticClient elasticClient, IRestoreRequest restoreRequest, TimeSpan interval)
 			: this(elasticClient, restoreRequest)
 		{
-			interval.ThrowIfNull("interval");
-			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException("interval");
+			interval.ThrowIfNull(nameof(interval));
+			if (interval.Ticks < 0) throw new ArgumentOutOfRangeException(nameof(interval));
 
 			_interval = interval;
 		}
 
 		public IDisposable Subscribe(IObserver<IRecoveryStatusResponse> observer)
 		{
-			observer.ThrowIfNull("observer");
+			observer.ThrowIfNull(nameof(observer));
 
 			try
 			{
@@ -51,7 +51,7 @@ namespace Nest
 				var restoreResponse = this._elasticClient.Restore(_restoreRequest);
 
 				if (!restoreResponse.IsValid)
-					throw new RestoreException(restoreResponse.ApiCall);
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
 
 				EventHandler<RestoreNextEventArgs> onNext = (sender, args) => observer.OnNext(args.RecoveryStatusResponse);
 				EventHandler<RestoreCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
@@ -79,7 +79,7 @@ namespace Nest
 		{
 			var observer = state as IObserver<IRecoveryStatusResponse>;
 
-			if (observer == null) throw new ArgumentException("state");
+			if (observer == null) throw new ArgumentException($"must be an {nameof(IObserver<IRecoveryStatusResponse>)}", nameof(state));
 
 			try
 			{
@@ -163,8 +163,8 @@ namespace Nest
 	{
 		private readonly IElasticClient _elasticClient;
 		private readonly IRestoreRequest _restoreRequest;
-		private string _renamePattern;
-		private string _renameReplacement;
+		private readonly string _renamePattern;
+		private readonly string _renameReplacement;
 
 		public event EventHandler<RestoreCompletedEventArgs> Completed;
 		public event EventHandler<RestoreErrorEventArgs> Error;
@@ -172,8 +172,8 @@ namespace Nest
 
 		public RestoreStatusHumbleObject(IElasticClient elasticClient, IRestoreRequest restoreRequest)
 		{
-			elasticClient.ThrowIfNull("elasticClient");
-			restoreRequest.ThrowIfNull("restoreRequest");
+			elasticClient.ThrowIfNull(nameof(elasticClient));
+			restoreRequest.ThrowIfNull(nameof(restoreRequest));
 
 			_elasticClient = elasticClient;
 			_restoreRequest = restoreRequest;
@@ -201,7 +201,7 @@ namespace Nest
 				});
 
 				if (!recoveryStatus.IsValid)
-					throw new RestoreException(recoveryStatus.ApiCall);
+					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed getting recovery status.", recoveryStatus.ApiCall);
 
 				if (recoveryStatus.Indices.All(x => x.Value.Shards.All(s => s.Index.Files.Recovered == s.Index.Files.Total)))
 				{

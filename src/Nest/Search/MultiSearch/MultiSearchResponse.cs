@@ -1,33 +1,45 @@
-﻿using System.Linq;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
+	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
 	public class MultiSearchResponse : BaseResponse, IMultiSearchResponse
 	{
 		public MultiSearchResponse()
 		{
-			this._Responses = new Dictionary<string, object>();
+			this.Responses = new Dictionary<string, object>();
 		}
+
+		public override bool IsValid => base.IsValid && this.AllResponses.All(b => b.IsValid);
 
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]	
-		internal IDictionary<string, object> _Responses { get; set; }
+		internal IDictionary<string, object> Responses { get; set; }
 
-		public int TotalResponses { get { return this._Responses.HasAny() ? this._Responses.Count() : 0 ; } }
+		public int TotalResponses => this.Responses.HasAny() ? this.Responses.Count() : 0;
 
-		public IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class
+		private IEnumerable<T> _allResponses<T>() where T : class, IResponse, IBodyWithApiCallDetails
 		{
-			foreach (var r in this._Responses.Values.OfType<IBodyWithApiCallDetails>())
+			foreach (var r in this.Responses.Values.OfType<T>())
+			{
 				r.CallDetails = this.ApiCall;
-			return this._Responses.Values.OfType<SearchResponse<T>>();
+				yield return r;
+			}
 		}
+
+		public IEnumerable<IResponse> AllResponses => this._allResponses<IResponse>();
+
+		public IEnumerable<IResponse> GetInvalidResponses() => this._allResponses<IResponse>().Where(r => !r.IsValid);
+
+		public IEnumerable<SearchResponse<T>> GetResponses<T>() where T : class => this._allResponses<SearchResponse<T>>();
+
 		public SearchResponse<T> GetResponse<T>(string name) where T : class
 		{
 			object response;
-			this._Responses.TryGetValue(name, out response);
+			this.Responses.TryGetValue(name, out response);
 			var r = response as IBodyWithApiCallDetails;
 			if (r != null)
 				r.CallDetails = this.ApiCall;

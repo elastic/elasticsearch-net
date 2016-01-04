@@ -1,8 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -26,7 +23,7 @@ namespace Nest
 				case 1:
 					second(Item2);
 					break;
-				default: throw new Exception("Unrecognized tag value: " + _tag);
+				default: throw new Exception($"Unrecognized tag value: {_tag}");
 			}
 		}
 		public T Match<T>(Func<TFirst, T> first, Func<TSecond, T> second)
@@ -35,7 +32,7 @@ namespace Nest
 			{
 				case 0: return first(Item1);
 				case 1: return second(Item2);
-				default: throw new Exception("Unrecognized tag value: " + _tag);
+				default: throw new Exception($"Unrecognized tag value: {_tag}");
 			}
 		}
 

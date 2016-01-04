@@ -45,7 +45,7 @@ namespace Nest
 		
 		private static BulkRequest CreateIndexBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
-			@objects.ThrowIfEmpty("objects");
+			@objects.ThrowIfEmpty(nameof(objects));
 			var bulkRequest = new BulkRequest(index, type);
 			var indexOps = @objects
 				.Select(o => new BulkIndexOperation<T>(o))

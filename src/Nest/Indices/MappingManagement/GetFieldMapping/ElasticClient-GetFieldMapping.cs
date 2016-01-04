@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -12,54 +10,55 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
+		IGetFieldMappingResponse GetFieldMapping<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
+		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
+		public IGetFieldMappingResponse GetFieldMapping<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class => 
 			this.GetFieldMapping(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
-		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest) => 
+		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest request) => 
 			this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
-				getFieldMappingRequest,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				request,
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Fields fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class =>
 			this.GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest) => 
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
-				getFieldMappingRequest,
-				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				request,
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p)
 			);
+
 		//TODO DictionaryResponse!
 		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IApiCallDetails response, IGetFieldMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
 				? Serializer.Deserialize<IndexFieldMappings>(stream)
 				: null;
-			return new GetFieldMappingResponse(response, dict);
+			return new GetFieldMappingResponse(response, dict, this.ConnectionSettings.Inferrer);
 		}
 
 	}

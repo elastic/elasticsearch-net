@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Nest
 {
-	public class SingleMappingDescriptor<T> 
-		: IPropertiesDescriptor<T, IProperty>
+	public class SingleMappingDescriptor<T> :
+		DescriptorBase<SingleMappingDescriptor<T>, IPropertiesDescriptor<T, IProperty>>, IPropertiesDescriptor<T, IProperty>
 		where T : class
 	{
 		public IProperty String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>

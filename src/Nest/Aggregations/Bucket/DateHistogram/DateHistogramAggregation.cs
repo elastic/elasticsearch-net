@@ -6,20 +6,20 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateHistogramAggregator>))]
-	public interface IDateHistogramAggregator : IBucketAggregator
+	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
+	public interface IDateHistogramAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("script")]
-		string Script { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
 
 		[JsonProperty("interval")]
-		Union<DateInterval, TimeUnitExpression> Interval { get; set; }
+		Union<DateInterval, Time> Interval { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -41,14 +41,17 @@ namespace Nest
 
 		[JsonProperty("extended_bounds")]
 		ExtendedBounds<DateTime> ExtendedBounds { get; set; }
-	}
 
-	public class DateHistogramAggregator : BucketAggregator, IDateHistogramAggregator
+		[JsonProperty("missing")]
+		DateTime? Missing { get; set; }
+    }
+
+	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
-		public FieldName Field { get; set; }
-		public string Script { get; set; }
+		public Field Field { get; set; }
+		public IScript Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
-		public Union<DateInterval, TimeUnitExpression>  Interval { get; set; }
+		public Union<DateInterval, Time> Interval { get; set; }
 		public string Format { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public string TimeZone { get; set; }
@@ -56,89 +59,80 @@ namespace Nest
 		public string Offset { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
-	}
+		public DateTime? Missing { get; set; }
 
-	public class DateHistogramAgg : BucketAgg, IDateHistogramAggregator
-	{
-		public FieldName Field { get; set; }
-		public string Script { get; set; }
-		public IDictionary<string, object> Params { get; set; }
-		public Union<DateInterval, TimeUnitExpression> Interval { get; set; }
-		public string Format { get; set; }
-		public int? MinimumDocumentCount { get; set; }
-		public string TimeZone { get; set; }
-		public int? Factor { get; set; }
-		public string Offset { get; set; }
-		public HistogramOrder Order { get; set; }
-		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
+		internal DateHistogramAggregation() { }
 
-		public DateHistogramAgg(string name) : base(name) { }
+		public DateHistogramAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.DateHistogram = this;
 	}
 
-	public class DateHistogramAggregatorDescriptor<T>
-		: BucketAggregatorBaseDescriptor<DateHistogramAggregatorDescriptor<T>, IDateHistogramAggregator, T>
-			, IDateHistogramAggregator
+	public class DateHistogramAggregationDescriptor<T>
+		: BucketAggregationDescriptorBase<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregation, T>
+			, IDateHistogramAggregation
 		where T : class
 	{
-		FieldName IDateHistogramAggregator.Field { get; set; }
+		Field IDateHistogramAggregation.Field { get; set; }
 
-		string IDateHistogramAggregator.Script { get; set; }
+		IScript IDateHistogramAggregation.Script { get; set; }
 
-		IDictionary<string, object> IDateHistogramAggregator.Params { get; set; }
+		IDictionary<string, object> IDateHistogramAggregation.Params { get; set; }
 
-		Union<DateInterval, TimeUnitExpression> IDateHistogramAggregator.Interval { get; set; }
+		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
 
-		string IDateHistogramAggregator.Format { get; set; }
+		string IDateHistogramAggregation.Format { get; set; }
 
-		int? IDateHistogramAggregator.MinimumDocumentCount { get; set; }
+		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
 
-		string IDateHistogramAggregator.TimeZone { get; set; }
+		string IDateHistogramAggregation.TimeZone { get; set; }
 
-		int? IDateHistogramAggregator.Factor { get; set; }
+		int? IDateHistogramAggregation.Factor { get; set; }
 
-		string IDateHistogramAggregator.Offset { get; set; }
+		string IDateHistogramAggregation.Offset { get; set; }
 
-		HistogramOrder IDateHistogramAggregator.Order { get; set; }
+		HistogramOrder IDateHistogramAggregation.Order { get; set; }
 
-		ExtendedBounds<DateTime> IDateHistogramAggregator.ExtendedBounds { get; set; }
+		ExtendedBounds<DateTime> IDateHistogramAggregation.ExtendedBounds { get; set; }
 
-		public DateHistogramAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		DateTime? IDateHistogramAggregation.Missing { get; set; }
 
-		public DateHistogramAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public DateHistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public DateHistogramAggregatorDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public DateHistogramAggregatorDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()).NullIfNoKeys());
+		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public DateHistogramAggregatorDescriptor<T> Interval(TimeUnitExpression interval) => Assign(a => a.Interval = interval);
+		public DateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public DateHistogramAggregatorDescriptor<T> Interval(DateInterval interval) =>
+		public DateHistogramAggregationDescriptor<T> Interval(Time interval) => Assign(a => a.Interval = interval);
+
+		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval) =>
 			Assign(a => a.Interval = interval);
 
-		public DateHistogramAggregatorDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		public DateHistogramAggregatorDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public DateHistogramAggregatorDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
 
-		public DateHistogramAggregatorDescriptor<T> Interval(int factor) => Assign(a => a.Factor = factor);
+		public DateHistogramAggregationDescriptor<T> Interval(int factor) => Assign(a => a.Factor = factor);
 
-		public DateHistogramAggregatorDescriptor<T> Offset(string offset) => Assign(a => a.Offset = offset);
+		public DateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(a => a.Offset = offset);
 
-		public DateHistogramAggregatorDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
+		public DateHistogramAggregationDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
 
-		public DateHistogramAggregatorDescriptor<T> OrderAscending(string key) =>
+		public DateHistogramAggregationDescriptor<T> OrderAscending(string key) =>
 			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
 
-		public DateHistogramAggregatorDescriptor<T> OrderDescending(string key) =>
+		public DateHistogramAggregationDescriptor<T> OrderDescending(string key) =>
 			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
 
-		public DateHistogramAggregatorDescriptor<T> ExtendedBounds(DateTime min, DateTime max) =>
+		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateTime min, DateTime max) =>
 			Assign(a=>a.ExtendedBounds = new ExtendedBounds<DateTime> { Minimum = min, Maximum = max });
 
+		public DateHistogramAggregationDescriptor<T> Missing(DateTime missing) => Assign(a => a.Missing = missing);
 	}
 }

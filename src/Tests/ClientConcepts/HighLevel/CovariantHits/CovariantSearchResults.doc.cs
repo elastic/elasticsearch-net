@@ -1,17 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq;
 using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Framework;
-using Tests.Framework.MockData;
-using Xunit.Sdk;
-using static Tests.Framework.RoundTripper;
-using static Nest.Static;
-using Elasticsearch.Net.Connection;
-using System.IO;
-using System.Text;
 
 namespace Tests.ClientConcepts.HighLevel.CovariantHits
 {
@@ -29,6 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 	{
 		string Name { get; set; }
 	} 
+
 	/**
 	* We have three implementations of `ISearchResult` namely `A`, `B` and `C`
 	*/

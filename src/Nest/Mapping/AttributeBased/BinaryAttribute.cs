@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class BinaryAttribute : ElasticsearchPropertyAttribute
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public class BinaryAttribute : ElasticsearchPropertyAttribute, IBinaryProperty
 	{
-		public override IProperty ToProperty() => new BinaryProperty(this);
+		public BinaryAttribute() : base("binary") { }
 	}	
 }

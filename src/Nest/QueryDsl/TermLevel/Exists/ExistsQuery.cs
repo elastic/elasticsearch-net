@@ -1,29 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExistsQuery : IFieldNameQuery
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
+	public interface IExistsQuery : IQuery
 	{
+		[JsonProperty("field")]
+		Field Field { get; set; }
 	}
 
-	public class ExistsQuery : FieldNameQueryBase, IExistsQuery
+	public class ExistsQuery : QueryBase, IExistsQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		public Field Field { get; set; }
+		protected override bool Conditionless => IsConditionless(this);
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Exists = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Exists = this;
 		internal static bool IsConditionless(IExistsQuery q) => q.Field.IsConditionless();
 	}
 
 	public class ExistsQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery, T>
+		: QueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery>
 		, IExistsQuery where T : class
 	{
-		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
+		protected override bool Conditionless => ExistsQuery.IsConditionless(this);
+
+		Field IExistsQuery.Field { get; set; }
+
+		public ExistsQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public ExistsQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+
 	}
 }

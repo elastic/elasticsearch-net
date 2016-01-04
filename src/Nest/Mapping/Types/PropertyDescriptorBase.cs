@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Nest
 {
@@ -18,10 +15,10 @@ namespace Nest
 		bool? IProperty.Store { get; set; }
 		bool? IProperty.DocValues { get; set; }
 		SimilarityOption? IProperty.Similarity { get; set; }
-		IEnumerable<FieldName> IProperty.CopyTo { get; set; }
+		Fields IProperty.CopyTo { get; set; }
 		IProperties IProperty.Fields { get; set; }
 
-		public PropertyDescriptorBase(string type) { ((IProperty)this).Type = type; }
+		protected PropertyDescriptorBase(string type) { Self.Type = type; }
 
 		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
 
@@ -33,10 +30,10 @@ namespace Nest
 
 		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);
 
-		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IProperties> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>()));
+		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>())?.Value);
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 
-		public TDescriptor CopyTo(IEnumerable<FieldName> copyTo) => Assign(a => a.CopyTo = copyTo);
+		public TDescriptor CopyTo(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => Assign(a => a.CopyTo = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 	}
 }

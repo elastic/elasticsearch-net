@@ -19,9 +19,10 @@ namespace Nest
 		public void Add(string name, ICharFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class CharFiltersDescriptor 
-		: IsADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>, ICharFilters
+	public class CharFiltersDescriptor : IsADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>
 	{
+		public CharFiltersDescriptor() : base(new CharFilters()) { }
+
 		public CharFiltersDescriptor UserDefined(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
 		/// <summary>

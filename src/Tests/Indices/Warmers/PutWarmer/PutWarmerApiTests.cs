@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
 
 namespace Tests.Indices.Warmers.PutWarmer
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutWarmerApiTests : ApiTestBase<IIndicesOperationResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
+	public class PutWarmerApiTests : ApiTestBase<IPutWarmerResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
 	{
 		public PutWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

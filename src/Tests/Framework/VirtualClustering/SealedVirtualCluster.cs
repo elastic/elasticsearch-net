@@ -1,13 +1,6 @@
 using System;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net.Serialization;
-using System.IO;
+using Nest;
 
 namespace Tests.Framework
 {

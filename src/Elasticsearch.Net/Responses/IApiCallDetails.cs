@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
@@ -14,10 +13,15 @@ namespace Elasticsearch.Net
 		
 		/// <summary>
 		/// If Success is false this will hold the original exception.
-		/// Can be a CLR exception or a mapped server side exception (ElasticsearchServerException)
+		/// This will be the orginating CLR exception in most cases.
 		/// </summary>
 		Exception OriginalException { get; }
-		
+
+		/// <summary>
+		/// The error returned by Elasticsearch
+		/// </summary>
+		ServerError ServerError { get; }
+
 		/// <summary>
 		/// The HTTP method used by the request
 		/// </summary>
@@ -36,10 +40,10 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
 		/// </summary>
-		[DebuggerDisplay("{ResponseRaw != null ? System.Text.Encoding.UTF8.GetString(ResponseRaw) : null,nq}")]
+		[DebuggerDisplay("{ResponseBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(ResponseBodyInBytes) : null,nq}")]
 		byte[] ResponseBodyInBytes { get; }
 
-		[DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
+		[DebuggerDisplay("{RequestBodyInBytes != null ? System.Text.Encoding.UTF8.GetString(RequestBodyInBytes) : null,nq}")]
 		byte[] RequestBodyInBytes { get; }
 
 		List<Audit> AuditTrail { get; }

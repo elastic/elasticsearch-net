@@ -41,19 +41,6 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'IntegrationTests|AnyCPU'">
-    <OutputPath>bin\IntegrationTests\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,14 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\IRequestConfiguration.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
-    <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
-    <Compile Include="Connection\ElasticsearchException.cs" />
+    <Compile Include="Exceptions\UnexpectedElasticsearchClientException.cs" />
+    <Compile Include="Transport\Pipeline\PipelineException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
-    <Compile Include="Auditting\Audit.cs" />
-    <Compile Include="Auditting\Auditable.cs" />
-    <Compile Include="Auditting\AuditEvent.cs" />
+    <Compile Include="Auditing\Audit.cs" />
+    <Compile Include="Auditing\Auditable.cs" />
+    <Compile Include="Auditing\AuditEvent.cs" />
+    <Compile Include="Responses\ServerError.cs" />
+    <Compile Include="Exceptions\ElasticsearchClientException.cs" />
     <Compile Include="CrossPlatform\Browsable.cs" />
     <Compile Include="CrossPlatform\GenerateCode.cs" />
     <Compile Include="CrossPlatform\SuppressMessage.cs" />
@@ -81,9 +69,10 @@
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
     <Compile Include="Transport\Pipeline\RequestData.cs" />
     <Compile Include="Transport\Pipeline\IRequestPipeline.cs" />
-    <Compile Include="Transport\PipelineFailure.cs" />
+    <Compile Include="Transport\Pipeline\PipelineFailure.cs" />
     <Compile Include="ConnectionPool\Node.cs" />
     <Compile Include="Configuration\Security\BasicAuthorizationCredentials.cs" />
+    <Compile Include="Transport\Pipeline\ResponseBuilder.cs" />
     <Compile Include="Transport\Sniff\SniffResponse.cs" />
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />
@@ -91,16 +80,12 @@
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Responses\VoidResponse.cs" />
-    <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
-    <Compile Include="Exceptions\OneToOneServerException.cs" />
-    <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\Fluent.cs" />
     <Compile Include="Extensions\FormattableString.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Exceptions\ElasticsearchServerException.cs" />
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
@@ -117,12 +102,8 @@
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Responses\DynamicResponse.cs" />
     <Compile Include="Responses\ElasticsearchDynamicValue.cs" />
-    <Compile Include="Exceptions\MaxRetryException.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="ElasticsearchClient.cs" />
     <Compile Include="IElasticsearchClient.Generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Response\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

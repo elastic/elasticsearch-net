@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -27,11 +23,10 @@ namespace Tests.Cat.CatAllocation
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/allocation";
 
-		[I] public async Task HasAllocation() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatAllocationRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Node));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Node));
+		}
 	}
 
 }

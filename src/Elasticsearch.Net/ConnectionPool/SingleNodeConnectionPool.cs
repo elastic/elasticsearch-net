@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Providers;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
-		private readonly Node _node;
-
 		public int MaxRetries => 0;
 
 		public bool SupportsReseeding => false;
@@ -22,21 +18,16 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public IReadOnlyCollection<Node> Nodes { get; }
 
-		public DateTime LastUpdate { get; set; }
+		public DateTime LastUpdate { get; }
 
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
-			this._node = new Node(uri);
+			var node = new Node(uri);
 			this.UsingSsl = this._node.Uri.Scheme == "https";
-			this.Nodes = new List<Node> { this._node };
-			this.LastUpdate = (dateTimeProvider ?? new DateTimeProvider()).Now();
+			this.Nodes = new List<Node> { node };
+			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
-		public IEnumerable<Node> CreateView()
-		{
-			return this.Nodes;
-		}
-
-
+		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 	}
 }

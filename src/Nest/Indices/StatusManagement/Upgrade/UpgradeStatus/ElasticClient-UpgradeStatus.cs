@@ -1,50 +1,46 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest);
+		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request);
 
 		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest);
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request);
 
 		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest) => 
+		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest request) => 
 			this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
-				upgradeStatusRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) =>
-			this.UpgradeStatus(upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()));
+		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) =>
+			this.UpgradeStatus(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest) => 
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest request) => 
 			this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
-				upgradeStatusRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) => 
-			this.UpgradeStatusAsync(upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()));
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> selector = null) => 
+			this.UpgradeStatusAsync(selector.InvokeOrDefault(new UpgradeStatusDescriptor()));
 	}
 }

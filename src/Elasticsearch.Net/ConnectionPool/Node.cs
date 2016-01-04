@@ -1,8 +1,7 @@
 ﻿using System;
 using Purify;
-using Elasticsearch.Net.Providers;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public class Node : IEquatable<Node>
 	{
@@ -76,8 +75,10 @@ namespace Elasticsearch.Net.Connection
 			};
 
 
+		// ReSharper disable once PossibleNullReferenceException
 		public static bool operator ==(Node left, Node right) => left.Equals(right);
 
+		// ReSharper disable once PossibleNullReferenceException
 		public static bool operator !=(Node left, Node right) => !left.Equals(right);
 
 		public static implicit operator Node(Uri uri) => new Node(uri);

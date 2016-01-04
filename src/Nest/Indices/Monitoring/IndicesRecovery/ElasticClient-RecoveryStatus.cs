@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -12,16 +11,16 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IRecoveryStatusResponse RecoveryStatus(Indices infices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc/>
-		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
+		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request);
 
 		/// <inheritdoc/>
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request);
 	}
 
 	public partial class ElasticClient
@@ -31,9 +30,9 @@ namespace Nest
 			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest) => 
+		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) => 
 			this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
-				statusRequest,
+				request,
 				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
 				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(p)
 			);
@@ -43,9 +42,9 @@ namespace Nest
 			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest) => 
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request) => 
 			this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
-				statusRequest,
+				request,
 				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
 				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p)
 			);

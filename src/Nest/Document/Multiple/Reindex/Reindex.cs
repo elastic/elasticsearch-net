@@ -1,5 +1,4 @@
 ﻿using System;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -7,8 +6,7 @@ namespace Nest
 	{
 		IndexName To { get; set; }
 		IndexName From { get; set; }
-		//TODO TimeUnitExpression, needs to propagate to generated querystring methods
-		string Scroll { get; set; }
+		Time Scroll { get; set; }
 		int? Size { get; set; }
 		
 		QueryContainer Query { get; set; }
@@ -21,7 +19,7 @@ namespace Nest
 	{
 		public IndexName To { get; set; }
 		public IndexName From { get; set; }
-		public string Scroll { get; set; }
+		public Time Scroll { get; set; }
 		public int? Size { get; set; }
 		public QueryContainer Query { get; set; }
 		public ICreateIndexRequest CreateIndexRequest { get; set; }
@@ -33,13 +31,11 @@ namespace Nest
 		}
 	}
 
-	public class ReindexDescriptor<T> : IReindexRequest where T : class
+	public class ReindexDescriptor<T> : DescriptorBase<ReindexDescriptor<T>, IReindexRequest>, IReindexRequest where T : class
 	{
-		ReindexDescriptor<T> Assign(Action<IReindexRequest> assign)  => Fluent.Assign(this, assign);
-
 		IndexName IReindexRequest.To { get; set; }
 		IndexName IReindexRequest.From { get; set; }
-		string IReindexRequest.Scroll { get; set; }
+		Time IReindexRequest.Scroll { get; set; }
 		int? IReindexRequest.Size { get; set; }
 		QueryContainer IReindexRequest.Query { get; set; }
 		ICreateIndexRequest IReindexRequest.CreateIndexRequest { get; set; }
@@ -55,7 +51,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="scrollTime">The scroll parameter is a time value parameter (for example: scroll=5m)</param>
 		/// <returns></returns>
-		public ReindexDescriptor<T> Scroll(string scrollTime) => Assign(a => a.Scroll = scrollTime);
+		public ReindexDescriptor<T> Scroll(Time scrollTime) => Assign(a => a.Scroll = scrollTime);
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 100. When using scroll search type,
@@ -72,7 +68,7 @@ namespace Nest
 		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
 		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  

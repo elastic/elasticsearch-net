@@ -1,11 +1,7 @@
-﻿using Elasticsearch.Net;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -21,13 +17,13 @@ namespace Nest
 		INodesStatsResponse NodesStats(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		INodesStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest);
+		INodesStatsResponse NodesStats(INodesStatsRequest request);
 
 		/// <inheritdoc/>
 		Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest);
+		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -37,9 +33,9 @@ namespace Nest
 			this.NodesStats(selector.InvokeOrDefault(new NodesStatsDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest) => 
+		public INodesStatsResponse NodesStats(INodesStatsRequest request) => 
 			this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsRsponse>(
-				nodesStatsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.NodesStatsDispatch<NodesStatsRsponse>(p)
 			);
 
@@ -48,9 +44,9 @@ namespace Nest
 			this.NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest) => 
+		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request) => 
 			this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsRsponse, INodesStatsResponse>(
-				nodesStatsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsRsponse>(p)
 			);
 	}

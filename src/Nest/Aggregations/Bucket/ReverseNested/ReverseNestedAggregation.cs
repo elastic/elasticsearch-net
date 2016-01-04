@@ -1,42 +1,35 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ReverseNestedAggregator>))]
-	public interface IReverseNestedAggregator : IBucketAggregator
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ReverseNestedAggregation>))]
+	public interface IReverseNestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 	}
 
-	public class ReverseNestedAggregator : BucketAggregator, IReverseNestedAggregator
+	public class ReverseNestedAggregation : BucketAggregationBase, IReverseNestedAggregation
 	{
 		[JsonProperty("path")]
-		public FieldName Path { get; set; }
-	}
+		public Field Path { get; set; }
 
-	public class ReverseNestedAgg : BucketAgg, IReverseNestedAggregator
-	{
-		[JsonProperty("path")]
-		public FieldName Path { get; set; }
+		internal ReverseNestedAggregation() { }
 
-		public ReverseNestedAgg(string name) : base(name) { }
+		public ReverseNestedAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;
 	}
 
 	public class ReverseNestedAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregator, T>
-			, IReverseNestedAggregator 
+		: BucketAggregationDescriptorBase<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregation, T>
+			, IReverseNestedAggregation 
 		where T : class
 	{
-		FieldName IReverseNestedAggregator.Path { get; set; }
+		Field IReverseNestedAggregation.Path { get; set; }
 
 		public ReverseNestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 

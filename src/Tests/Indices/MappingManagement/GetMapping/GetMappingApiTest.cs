@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.GetMapping
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class GetMappingApiTests : ApiIntegrationTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
 	{
-		public GetMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetMappingApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.GetMapping<Project>(f),
@@ -36,9 +33,5 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			IgnoreUnavailable = true
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

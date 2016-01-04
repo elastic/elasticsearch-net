@@ -1,27 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IPolygonGeoShape : IGeoShape
 	{
 		[JsonProperty("coordinates")]
-		IEnumerable<IEnumerable<IEnumerable<double>>> Coordinates { get; set; }
+		IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}
 
 	public class PolygonGeoShape : GeoShape, IPolygonGeoShape
 	{
 		public PolygonGeoShape() : this(null) { }
 
-		public PolygonGeoShape(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates) 
+		public PolygonGeoShape(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) 
 			: base("polygon") 
 		{
-			this.Coordinates = coordinates ?? new List<List<List<double>>>();
+			this.Coordinates = coordinates;
 		}
 
-		public IEnumerable<IEnumerable<IEnumerable<double>>> Coordinates { get; set; }
+		public IEnumerable<IEnumerable<GeoCoordinate>> Coordinates { get; set; }
 	}
 }

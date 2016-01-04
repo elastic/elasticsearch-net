@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using System.Linq;
-using FluentAssertions;
-using Tests.Framework;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using static Tests.Framework.RoundTripper;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
+using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel
 {

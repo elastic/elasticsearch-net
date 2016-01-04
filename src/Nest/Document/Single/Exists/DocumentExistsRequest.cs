@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
-using Newtonsoft.Json;
+﻿using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -15,7 +11,6 @@ namespace Nest
 	public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 		where T : class
 	{
-		//TODO constructors
 	}
 
 	[DescriptorFor("Exists")]

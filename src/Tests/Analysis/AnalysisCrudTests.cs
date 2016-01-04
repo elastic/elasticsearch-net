@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Net;
-using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Nest;
-using System.Text;
-using Elasticsearch.Net.Providers;
+﻿using System.Linq;
 using FluentAssertions;
+using Nest;
 using Tests.Framework;
-using System.Linq;
-using System.Collections.Generic;
-using Tests.Framework.MockData;
-using System.Threading.Tasks;
 using Tests.Framework.Integration;
 using Xunit;
+using static Tests.Framework.Promisify;
 
 namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrudTests 
-		: CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
+	public class AnalysisCrudTests
+		: CrudTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
 		/**
 		* # Analysis crud
@@ -37,7 +27,7 @@ namespace Tests.Analysis
 		/**
 		* We can create the analysis settings as part of the create index call
 		*/
-		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, IIndicesOperationResponse>(
+		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, ICreateIndexResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.CreateIndex(s, f),
@@ -63,10 +53,10 @@ namespace Tests.Analysis
 		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => Analyzers.AnalyzerUsageTests.FluentExample(s).Analysis.Analyzers)
-					.CharFilters(t => CharFilters.CharFilterUsageTests.FluentExample(s).Analysis.CharFilters)
-					.Tokenizers(t => Tokenizers.TokenizerUsageTests.FluentExample(s).Analysis.Tokenizers)
-					.TokenFilters(t => TokenFilters.TokenFilterUsageTests.FluentExample(s).Analysis.TokenFilters)
+					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
+					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.Tokenizers(t => Promise(Tokenizers.TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
+					.TokenFilters(t => Promise(TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
 				)
 			);
 
@@ -107,7 +97,7 @@ namespace Tests.Analysis
 		/**
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
 		*/
-		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IUpdateIndexSettingsResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) =>
@@ -144,20 +134,24 @@ namespace Tests.Analysis
 		/**
 		* Here we add a new `HtmlStripCharFilter` called `differentHtml`
 		*/
+
 		protected UpdateIndexSettingsRequest UpdateInitializer(string indexName) => new UpdateIndexSettingsRequest(indexName)
 		{
-			Analysis = new Nest.Analysis
+			IndexSettings = new IndexSettings
 			{
-				CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+				Analysis = new Nest.Analysis
+				{
+					CharFilters = new Nest.CharFilters {{"differentHtml", new HtmlStripCharFilter {}}}
+				}
 			}
 		};
 
-
 		protected IUpdateIndexSettingsRequest UpdateFluent(string indexName, UpdateIndexSettingsDescriptor u) => u
-			//.Index(indexName)
-			.Analysis(a => a
-				.CharFilters(c => c
-					.HtmlStrip("differentHtml")
+			.IndexSettings(s => s
+				.Analysis(a => a
+					.CharFilters(c => c
+						.HtmlStrip("differentHtml")
+					)
 				)
 			);
 

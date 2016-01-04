@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
-using static Tests.Framework.RoundTripper;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateRange
 {
@@ -66,7 +61,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new DateRangeAgg("projects_date_ranges")
+				Aggregations = new DateRangeAggregation("projects_date_ranges")
 				{
 					Field = Field<Project>(p => p.StartedOn),
 					Ranges = new List<DateRangeExpression>
@@ -76,12 +71,11 @@ namespace Tests.Aggregations.Bucket.DateRange
 							{new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 
@@ -99,6 +93,6 @@ namespace Tests.Aggregations.Bucket.DateRange
 			{
 				item.DocCount.Should().BeGreaterThan(0);
 			}
-		});
+		}
 	}
 }

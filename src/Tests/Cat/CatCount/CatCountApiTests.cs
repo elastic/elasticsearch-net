@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -28,11 +24,10 @@ namespace Tests.Cat.CatCount
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/count";
 
-		[I] public async Task HasCount() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatCountRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
+		}
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
@@ -51,10 +46,9 @@ namespace Tests.Cat.CatCount
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/count/project";
 
-		[I] public async Task HasCount() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatCountRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => a.Count != "0" && !string.IsNullOrEmpty(a.Count));
+		}
 	}
 }

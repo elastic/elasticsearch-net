@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
+﻿using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 using Xunit;
+using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.GetIndex
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class GetIndexApiTests : ApiIntegrationTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
-		public GetIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GetIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.GetIndex(CallIsolatedValue),
-			fluentAsync: (client, f) => client.GetIndexAsync(CallIsolatedValue),
+			fluent: (client, f) => client.GetIndex(typeof(Project)),
+			fluentAsync: (client, f) => client.GetIndexAsync(typeof(Project)),
 			request: (client, r) => client.GetIndex(r),
 			requestAsync: (client, r) => client.GetIndexAsync(r)
 		);
@@ -23,8 +22,8 @@ namespace Tests.Indices.IndexManagement.GetIndex
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/{CallIsolatedValue}";
+		protected override string UrlPath => $"/project";
 
-		protected override GetIndexRequest Initializer => new GetIndexRequest(CallIsolatedValue);
+		protected override GetIndexRequest Initializer => new GetIndexRequest(Index<Project>());
 	}
 }

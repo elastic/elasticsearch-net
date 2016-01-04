@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -11,9 +9,15 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteIndexApiTests 
-		: ApiIntegrationTestBase<IIndicesResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+		: ApiIntegrationTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values) client.CreateIndex(index);
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteIndex(CallIsolatedValue),
 			fluentAsync: (client, f) => client.DeleteIndexAsync(CallIsolatedValue),

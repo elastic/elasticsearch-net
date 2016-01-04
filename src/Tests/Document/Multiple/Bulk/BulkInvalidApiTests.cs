@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -37,6 +36,29 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
 		};
 
+		protected override void ExpectResponse(IBulkResponse response)
+		{
+			response.Took.Should().BeGreaterThan(0);
+			response.Errors.Should().BeTrue();
+
+			//a delete not found is not an error (also in elasticsearch)
+			//if you do a single bulk delete on an unknown id .Errors will be false
+			response.ItemsWithErrors.Should().NotBeNull().And.HaveCount(1);
+			response.Items.Should().NotBeEmpty();
+
+			var failedUpdate = response.Items.First() as BulkUpdateResponseItem;
+			failedUpdate.Should().NotBeNull();
+			failedUpdate.Index.Should().Be(CallIsolatedValue);
+			failedUpdate.Status.Should().Be(404);
+			failedUpdate.Error.Should().NotBeNull();
+			failedUpdate.Error.Type.Should().Be("document_missing_exception");
+			failedUpdate.IsValid.Should().BeFalse();
+
+			var failedDelete = response.Items.Last() as BulkDeleteResponseItem;
+			failedDelete.Found.Should().BeFalse();
+			failedDelete.IsValid.Should().BeTrue();
+		}
+
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
@@ -54,28 +76,5 @@ namespace Tests.Document.Multiple.Bulk
 				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
 			}
 		};
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-			r.Took.Should().BeGreaterThan(0);
-			r.Errors.Should().BeTrue();
-
-			//a delete not found is not an error (also in elasticsearch)
-			//if you do a single bulk delete on an unknown id .Errors will be false
-			r.ItemsWithErrors.Should().NotBeNull().And.HaveCount(1);
-			r.Items.Should().NotBeEmpty();
-
-			var failedUpdate = r.Items.First() as BulkUpdateResponseItem;
-			failedUpdate.Should().NotBeNull();
-			failedUpdate.Index.Should().Be(CallIsolatedValue);
-			failedUpdate.Status.Should().Be(404);
-			failedUpdate.Error.Should().NotBeNull();
-			failedUpdate.Error.Type.Should().Be("document_missing_exception");
-			failedUpdate.IsValid.Should().BeFalse();
-
-			var failedDelete = r.Items.Last() as BulkDeleteResponseItem;
-			failedDelete.Found.Should().BeFalse();
-			failedDelete.IsValid.Should().BeTrue();
-
-		});
 	}
 }

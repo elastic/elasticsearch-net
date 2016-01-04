@@ -62,8 +62,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
 
 		private string MetricPrefix => this.RequestType.Replace("Request", "");
-		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase) 
-			?  this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
+		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase)
+			? this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
 
 		public IEnumerable<Constructor> RequestConstructors()
 		{
@@ -88,6 +88,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				}
 
 				if (cp.Any())
+				{
 					routing = "r=>r." + string.Join(".", cp
 						.Select(p => new
 						{
@@ -100,19 +101,30 @@ namespace CodeGeneration.LowLevelClient.Domain
 									: p.Key
 						})
 						.Select(p => $"{p.call}(\"{p.route}\", {p.v})")
-					);
+						);
+				}
+
 				var doc = $@"/// <summary>{url}</summary>";
 				if (cp.Any())
 				{
 					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
 				}
-				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+				var generated = $"public {m}({par}) : base({routing}){{}}";
+
+				// special case SearchRequest<T> to pass the type of T as the type, when only the index is specified.
+				if (m == "SearchRequest" && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				{
+					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
+					generated = $"public {m}({par}) : this({cp.First().Key}, typeof({generic})){{}}";
+                }
+
+				var c = new Constructor { Generated = generated, Description = doc };
 				ctors.Add(c);
 			}
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
@@ -129,7 +141,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			var generic = this.RequestTypeGeneric?.Replace("<", "").Replace(">", "");
 			var doc = $@"/// <summary>{this.Url.Path}</summary>";
-			doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+			doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 			var c = new Constructor { Generated = $"public {m}() {{}}", Description = doc, };
 			if (!string.IsNullOrEmpty(generic))
 				c = new Constructor { Generated = $"public {m}() : this(typeof({generic}), typeof({generic})) {{}}", Description = doc, };
@@ -181,7 +193,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
@@ -230,7 +242,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-				if ((paramName == "index" || paramName == "type"))
+				if (paramName == "index" || paramName == "type")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
 					code += $"=> Assign(a=>a.RouteValues.Optional(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
@@ -252,10 +264,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 				if (paramName == "fields" && p.Type == "list")
 				{
 					code = $"public {returnType} Fields<T>(params Expression<Func<T, object>>[] fields) ";
-					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (FieldNames)fields));";
+					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (Fields)fields));";
 					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-                }
+				}
 			}
 			return setters;
 		}

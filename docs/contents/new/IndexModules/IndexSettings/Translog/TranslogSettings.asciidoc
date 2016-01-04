@@ -19,7 +19,7 @@ s => s
 
 [source, csharp]
 ----
-new IndexSettings
+new Nest.IndexSettings
 {
 	Translog = new TranslogSettings
 	{

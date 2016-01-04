@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -59,7 +57,7 @@ namespace Nest
 		/// </summary>
 		public SearchExistsDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
-			query.ThrowIfNull("query");
+			query.ThrowIfNull(nameof(query));
 			var q = new QueryContainerDescriptor<T>();
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
@@ -75,7 +73,7 @@ namespace Nest
 				return this;
 
 			if (this._Strict && query.IsConditionless)
-				throw new DslException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
+				throw new ArgumentException("Query resulted in a conditionless query:\n{0}".F(JsonConvert.SerializeObject(query, Formatting.Indented)));
 
 			else if (query.IsConditionless)
 				return this;

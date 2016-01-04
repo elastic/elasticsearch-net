@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -9,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiGet
 {
@@ -38,6 +37,18 @@ namespace Tests.Document.Multiple.MultiGet
 			ids = this._ids
 		};
 
+		protected override void ExpectResponse(IMultiGetResponse response)
+		{
+			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var hit in response.Documents)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Type.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+			}
+		}
+
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
 			.Index<Developer>()
 			.Type<Developer>()
@@ -49,18 +60,6 @@ namespace Tests.Document.Multiple.MultiGet
 			Documents = this._ids
 				.Select(n=>new MultiGetOperation<Developer>(n))
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-			r.Documents.Should().NotBeEmpty().And.HaveCount(10);
-			foreach (var hit in r.Documents)
-			{
-				hit.Index.Should().NotBeNullOrWhiteSpace();
-				hit.Type.Should().NotBeNullOrWhiteSpace();
-				hit.Id.Should().NotBeNullOrWhiteSpace();
-				hit.Found.Should().BeTrue();
-			}
-		});
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
@@ -98,16 +97,16 @@ namespace Tests.Document.Multiple.MultiGet
 				.Select(n=>new MultiGetOperation<Developer>(n) { Routing = n.ToString(), Source = false })
 		};
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IMultiGetResponse response)
 		{
-			r.Documents.Should().NotBeEmpty().And.HaveCount(10);
-			foreach (var hit in r.Documents)
+			response.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var hit in response.Documents)
 			{
 				hit.Index.Should().NotBeNullOrWhiteSpace();
 				hit.Type.Should().NotBeNullOrWhiteSpace();
 				hit.Id.Should().NotBeNullOrWhiteSpace();
 				hit.Found.Should().BeTrue();
 			}
-		});
+		}
 	}
 }

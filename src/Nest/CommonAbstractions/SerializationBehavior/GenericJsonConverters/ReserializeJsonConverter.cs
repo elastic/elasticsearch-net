@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	internal class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
-		where TReadAs : class, TInterface, new()
+		where TReadAs : class, TInterface
 		where TInterface : class
 	{
 		protected ReadAsTypeJsonConverter<TReadAs> Reader { get; } = new ReadAsTypeJsonConverter<TReadAs>();
@@ -31,23 +31,9 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var custom = value as ICustomJson;
-			if (custom != null)
-			{
-				var json = custom.GetCustomJson();
-				var rawJson = json as RawJson;
-				if (rawJson != null)
-				{
-					writer.WriteRawValue(rawJson.Data);
-					return;
-				}
-			}
-
 			var v = value as TInterface;
-			if (v != null)
-			{
-				this.SerializeJson(writer, value, v, serializer);
-			}
+			if (v == null) return;
+			this.SerializeJson(writer, value, v, serializer);
 		}
 
 		protected virtual void SerializeJson(JsonWriter writer, object value, TInterface castValue, JsonSerializer serializer)
@@ -55,11 +41,12 @@ namespace Nest
 			this.Reserialize(writer, value, serializer);
 		}
 
-		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer)
+		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer, Action<JsonWriter> inlineWriter = null)
 		{
 			var properties = value.GetType().GetCachedObjectProperties();
 			if (properties.Count == 0) return;
 			writer.WriteStartObject();
+			inlineWriter?.Invoke(writer);
 			foreach (var p in properties)
 			{
 				if (p.Ignored) continue;

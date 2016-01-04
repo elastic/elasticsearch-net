@@ -17,7 +17,7 @@ namespace Tests.Document.Single.Index
 		private Project Document => new Project
 		{
 			State = StateOfBeing.Stable,
-			Name = "SomeProject",
+			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } }
@@ -34,12 +34,14 @@ namespace Tests.Document.Single.Index
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
+		protected override string UrlPath => $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
+
+		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson =>
 			new
 			{
-				name = "SomeProject",
+				name = CallIsolatedValue,
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
@@ -48,7 +50,7 @@ namespace Tests.Document.Single.Index
 
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
-			.Consistency(Consistency.All)
+			.Consistency(Consistency.Quorum)
 			.OpType(OpType.Index)
 			.Refresh()
 			.Routing("route");
@@ -58,7 +60,7 @@ namespace Tests.Document.Single.Index
 			{
 				Refresh = true,
 				OpType = OpType.Index,
-				Consistency = Consistency.All,
+				Consistency = Consistency.Quorum,
 				Routing = "route"
 			};
 

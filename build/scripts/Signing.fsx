@@ -8,7 +8,7 @@ open Paths
 open Projects
 
 type Sign() = 
-    static let sn = if isMono then "sn" else Paths.Tool("sn/sn.exe")
+    static let sn = if isMono then "sn" else Paths.CheckedInTool("sn/sn.exe")
     static let keyFile =  Paths.Keys("keypair.snk");
     static let oficialToken = "96c599bbe3e70f5d"
 

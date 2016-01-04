@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -28,14 +24,6 @@ namespace Nest
 	{
 		public BooleanProperty() : base("boolean") { }
 
-		internal BooleanProperty(BooleanAttribute attribute) 
-			: base("boolean", attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-		}
-		
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public bool? NullValue { get; set; }

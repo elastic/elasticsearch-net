@@ -5,8 +5,10 @@ namespace Tests.Framework.Integration
 		public const string ReadOnly = "ReadOnly Cluster";
 		public const string Indexing = "Indexing Cluster";
 
-
-		public const string DeleteByQuery = "DeleteByQuery Cluster";
+		
+		public const string OwnIndex = "OwnIndex Cluster";
 		public const string Reindex = "Reindex Cluster";
+		public const string SniffRoleDetection = "SniffRoleDetection";
+		public const string Bool = "Bool Cluster";
 	}
 }

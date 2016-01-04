@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -36,6 +33,9 @@ namespace Nest
 		public BulkDescriptor CreateMany<T>(IEnumerable<T> @objects, Func<BulkCreateDescriptor<T>, T, BulkCreateDescriptor<T>> bulkCreateSelector = null) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkCreateSelector.InvokeOrDefault(new BulkCreateDescriptor<T>().Document(o), o))));
 
+		public BulkDescriptor Index<T>(T obj, Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class =>
+			Assign(a => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>()).Document(obj)));
+
 		public BulkDescriptor Index<T>(Func<BulkIndexDescriptor<T>, BulkIndexDescriptor<T>> bulkIndexSelector) where T : class =>
 			Assign(a => AddOperation(bulkIndexSelector?.Invoke(new BulkIndexDescriptor<T>())));
 
@@ -46,6 +46,9 @@ namespace Nest
 		/// <param name="bulkIndexSelector">A func called on each object to describe the individual index operation</param>
 		public BulkDescriptor IndexMany<T>(IEnumerable<T> @objects, Func<BulkIndexDescriptor<T>, T, BulkIndexDescriptor<T>> bulkIndexSelector = null) where T : class =>
 			Assign(a => @objects.ForEach(o => AddOperation(bulkIndexSelector.InvokeOrDefault(new BulkIndexDescriptor<T>().Document(o), o))));
+
+		public BulkDescriptor Delete<T>(T obj, Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class =>
+			Assign(a => AddOperation(bulkDeleteSelector.InvokeOrDefault(new BulkDeleteDescriptor<T>().Document(obj))));
 
 		public BulkDescriptor Delete<T>(Func<BulkDeleteDescriptor<T>, BulkDeleteDescriptor<T>> bulkDeleteSelector) where T : class =>
 			Assign(a => AddOperation(bulkDeleteSelector?.Invoke(new BulkDeleteDescriptor<T>())));

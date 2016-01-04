@@ -10,7 +10,7 @@ s => s
 		.ThresholdInfo("5s")
 		.ThresholdDebug(TimeSpan.FromSeconds(2))
 		.ThresholdTrace(TimeSpan.FromMilliseconds(500))
-		.LogLevel(SlowLogLevel.Debug)
+		.LogLevel(LogLevel.Debug)
 		.Source(100)
 	)
 	.Search(search => search
@@ -26,20 +26,20 @@ s => s
 			.ThresholdDebug(TimeSpan.FromMilliseconds(500))
 			.ThresholdTrace(TimeSpan.FromMilliseconds(200))
 		)
-		.LogLevel(SlowLogLevel.Info)
+		.LogLevel(LogLevel.Info)
 	)
 )
 ----
 
 [source, csharp]
 ----
-new IndexSettings
+new Nest.IndexSettings
 {
-	SlowLog = new SlowLog
+	SlowLog = new Nest.SlowLog
 	{
 		Indexing = new SlowLogIndexing
 		{
-			LogLevel = SlowLogLevel.Debug,
+			LogLevel = LogLevel.Debug,
 			Source = 100,
 			ThresholdInfo = TimeSpan.FromSeconds(5),
 			ThresholdDebug = "2s",
@@ -48,7 +48,7 @@ new IndexSettings
 		},
 		Search = new SlowLogSearch
 		{
-			LogLevel = SlowLogLevel.Info,
+			LogLevel = LogLevel.Info,
 			Fetch = new SlowLogSearchFetch
 			{
 

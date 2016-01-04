@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using Tests.Framework.MockData;
 
 namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteSearchTemplateApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
+	public class DeleteSearchTemplateApiTests : ApiTestBase<IDeleteSearchTemplateResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
 	{
 		public DeleteSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

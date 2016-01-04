@@ -1,20 +1,16 @@
-﻿using Nest.Resolvers;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Collections;
 
 namespace Nest
 {
 	public class PropertyWalker
 	{
-		private Type _type;
-		private IPropertyVisitor _visitor;
-		private int _maxRecursion;
-		private ConcurrentDictionary<Type, int> _seenTypes;
+		private readonly Type _type;
+		private readonly IPropertyVisitor _visitor;
+		private readonly int _maxRecursion;
+		private readonly ConcurrentDictionary<Type, int> _seenTypes;
 
 		public PropertyWalker(Type type, int maxRecursion = 0) : this(type, null, maxRecursion) { }
 
@@ -65,9 +61,9 @@ namespace Nest
 				return null;
 
 			if (attribute != null)
-				property = attribute.ToProperty();
-
-			property = InferProperty(propertyInfo.PropertyType);
+				property = attribute;
+			else
+				property = InferProperty(propertyInfo.PropertyType);
 
 			var objectProperty = property as IObjectProperty;
 			if (objectProperty != null)
@@ -99,28 +95,38 @@ namespace Nest
 				switch (type.Name)
 				{
 					case "Int32":
-					case "UInt32":
+                    case "UInt16":
 						return new NumberProperty(NumberType.Integer);
 					case "Int16":
-					case "UInt16":
-						return new NumberProperty(NumberType.Short);
-					case "Byte":
+                    case "Byte":
+                        return new NumberProperty(NumberType.Short);
 					case "SByte":
 						return new NumberProperty(NumberType.Byte);
 					case "Int64":
-					case "UInt64":
+                    case "UInt32":
 						return new NumberProperty(NumberType.Long);
 					case "Single":
 						return new NumberProperty(NumberType.Float);
 					case "Decimal":
 					case "Double":
-						return new NumberProperty(NumberType.Double);
+                    case "UInt64":
+                        return new NumberProperty(NumberType.Double);
 					case "DateTime":
-						return new DateProperty();
+                    case "DateTimeOffset":
+                        return new DateProperty();
 					case "Boolean":
 						return new BooleanProperty();
+                    case "Char":
+					case "Guid":
+						return new StringProperty();
 				}
 			}
+
+            if (type == typeof(GeoLocation))
+                return new GeoPointProperty();
+
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
+                return new CompletionProperty();
 			
 			return new ObjectProperty();
 		}

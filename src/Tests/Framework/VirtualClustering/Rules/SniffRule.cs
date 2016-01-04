@@ -1,3 +1,4 @@
+using System;
 using Nest;
 
 namespace Tests.Framework
@@ -12,10 +13,11 @@ namespace Tests.Framework
 		private ISniffRule Self => this;
 		VirtualCluster ISniffRule.NewClusterState { get; set; }
 
-		public SniffRule Fails(Union<TimesHelper.AllTimes, int> times)
+		public SniffRule Fails(Union<TimesHelper.AllTimes, int> times, Union<Exception, int> errorState = null)
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
+			Self.Return = errorState;
 			return this;
 		}
 
@@ -24,9 +26,10 @@ namespace Tests.Framework
 			Self.Times = times;
 			Self.Succeeds = true;
 			Self.NewClusterState = cluster;
+			Self.Return = 200;
 			return this;
 		}
 		public SniffRule SucceedAlways(VirtualCluster cluster = null) => this.Succeeds(TimesHelper.Always, cluster);
-		public SniffRule FailAlways() => this.Fails(TimesHelper.Always);
+		public SniffRule FailAlways(Union<Exception, int> errorState = null) => this.Fails(TimesHelper.Always, errorState);
 	}
 }

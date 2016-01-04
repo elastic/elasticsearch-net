@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Nest.Resolvers;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -18,10 +12,10 @@ namespace Nest
 
 	public class GeoShapeMultiPolygonQuery : FieldNameQueryBase, IGeoShapeMultiPolygonQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public IMultiPolygonGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 		internal static bool IsConditionless(IGeoShapeMultiPolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
@@ -29,10 +23,10 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
 		, IGeoShapeMultiPolygonQuery where T : class
 	{
-		bool IQuery.Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);
+		protected override bool Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
 
-		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>> coordinates) =>
+		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) =>
 			Assign(a => a.Shape = new MultiPolygonGeoShape { Coordinates = coordinates });
 	}
 }

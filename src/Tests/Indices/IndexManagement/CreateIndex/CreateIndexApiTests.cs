@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -10,7 +9,7 @@ using Xunit;
 namespace Tests.Indices.IndexManagement.CreateIndex
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class CreateIndexApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexApiTests : ApiIntegrationTestBase<ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

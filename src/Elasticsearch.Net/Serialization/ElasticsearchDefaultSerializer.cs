@@ -1,15 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 	public class ElasticsearchDefaultSerializer : IElasticsearchSerializer
 	{
+		public static readonly ElasticsearchDefaultSerializer Instance = new ElasticsearchDefaultSerializer();
 		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
 
 		public T Deserialize<T>(Stream stream)
@@ -55,7 +54,9 @@ namespace Elasticsearch.Net.Serialization
 			}
 		}
 
-		public static string RemoveNewLinesAndTabs(string input)
+		public string CreatePropertyName(MemberInfo memberInfo) => null;
+
+		private static string RemoveNewLinesAndTabs(string input)
 		{
 			return new string(input
 				.Where(c => c != '\r' && c != '\n')

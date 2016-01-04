@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -68,7 +67,7 @@ namespace Nest
 
 		public LanguageAnalyzerDescriptor Language(Language language)
 		{
-			language.ThrowIfNull("language");
+			language.ThrowIfNull(nameof(language));
 			var langName = language.GetStringValue().ToLowerInvariant();
 			_type = langName;
 			return this;

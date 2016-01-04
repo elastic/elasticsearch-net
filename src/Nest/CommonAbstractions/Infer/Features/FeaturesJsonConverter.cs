@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Nest.Resolvers;
-using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
@@ -19,10 +16,8 @@ namespace Nest
 				writer.WriteNull();
 				return;
 			}
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract?.ConnectionSettings == null)
-				throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
-			var s = ((IUrlParameter)marker).GetString(contract.ConnectionSettings);
+			var settings = serializer.GetConnectionSettings();
+			var s = ((IUrlParameter)marker).GetString(settings);
 			writer.WriteValue(s);
 		}
 

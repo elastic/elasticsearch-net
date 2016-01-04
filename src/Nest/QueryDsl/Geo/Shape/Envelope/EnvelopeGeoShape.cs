@@ -1,27 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IEnvelopeGeoShape : IGeoShape
 	{
 		[JsonProperty("coordinates")]
-		IEnumerable<IEnumerable<double>> Coordinates { get; set; }
+		IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 
 	public class EnvelopeGeoShape : GeoShape, IEnvelopeGeoShape
 	{
 		public EnvelopeGeoShape() : this(null) { }
 
-		public EnvelopeGeoShape(IEnumerable<IEnumerable<double>> coordinates) 
+		public EnvelopeGeoShape(IEnumerable<GeoCoordinate> coordinates) 
 			: base("envelope") 
 		{
-			this.Coordinates = coordinates ?? new List<List<double>>();
+			this.Coordinates = coordinates;
 		}
 
-		public IEnumerable<IEnumerable<double>> Coordinates { get; set; }
+		public IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 }

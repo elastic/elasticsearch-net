@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Threading;
-using static Tests.Framework.Integration.ClientCall;
+using static Tests.Framework.Integration.ClientMethod;
 
 namespace Tests.Framework.Integration
 {
@@ -11,12 +10,12 @@ namespace Tests.Framework.Integration
 		private readonly object _lock = new object();
 		private readonly ConcurrentDictionary<int, LazyResponses> _usages = new ConcurrentDictionary<int, LazyResponses>();
 
-		public IDictionary<ClientCall, string> CallUniqueValues { get; } 		
+		public IDictionary<ClientMethod, string> CallUniqueValues { get; } 		
 		private string UniqueValue => "nest-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		public EndpointUsage()
 		{
-			this.CallUniqueValues = new Dictionary<ClientCall,string>
+			this.CallUniqueValues = new Dictionary<ClientMethod,string>
 			{ 
 				{ Fluent, this.UniqueValue },
 				{ FluentAsync, this.UniqueValue },
@@ -40,7 +39,7 @@ namespace Tests.Framework.Integration
 		}
 	}
 
-	public enum ClientCall
+	public enum ClientMethod
 	{
 		Fluent,
 		FluentAsync,

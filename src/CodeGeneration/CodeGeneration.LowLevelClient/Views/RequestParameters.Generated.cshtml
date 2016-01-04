@@ -26,22 +26,25 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.@method.HttpMethod;
 	  @foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-	  {
-		  var mm = kv.Key;
-		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
-		  var setter = mm;
-		  var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
-		  if (isFields && fieldType.Contains("string"))
-		  {
-			  fieldType = "IEnumerable<object>";
-			  setter = mm + ".Select(f=>(object)f)";
-		  }
-		  else if (mm.Contains("field") && fieldType.Contains("string"))
-		  {
-			  fieldType = "object";
-		  }
+      {
+          var mm = kv.Key;
+          var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
+          var setter = mm;
+          var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
+          if (isFields && fieldType.Contains("string"))
+          {
+              fieldType = "IEnumerable<object>";
+          }
+          else if (mm.Contains("field") && fieldType.Contains("string"))
+          {
+              fieldType = "object";
+          }
+          if (fieldType == "TimeSpan")
+          {
+			  setter = mm + ".ToTimeUnit()";
+          }
 		<text>///<summary>@kv.Value.Description</summary>
-		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm) => this.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm);
+		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm) => this.AddQueryString("@kv.Value.OriginalQueryStringParamName", @setter);
 		</text>
 	  }
 	}</text>

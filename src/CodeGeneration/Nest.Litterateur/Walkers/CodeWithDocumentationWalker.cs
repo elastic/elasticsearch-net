@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Nest.Litterateur.Walkers
 {
@@ -20,12 +19,13 @@ namespace Nest.Litterateur.Walkers
 		private string _code;
 		public int ClassDepth { get; }
 		private readonly int? _lineNumberOverride;
-		
+
 		/// <summary>
 		/// We want to support inlining /** */ documentations because its super handy 
 		/// to document fluent code, what ensues is total hackery
 		/// </summary>
 		/// <param name="classDepth"></param>
+		/// <param name="lineNumber">line number used for sorting</param>
 		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null) : base(SyntaxWalkerDepth.StructuredTrivia) 
 		{
 			ClassDepth = classDepth;

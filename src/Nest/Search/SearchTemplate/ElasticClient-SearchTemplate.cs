@@ -1,11 +1,8 @@
-﻿using Elasticsearch.Net;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -102,7 +99,7 @@ namespace Nest
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? new NestSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
+				? new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

@@ -2,8 +2,6 @@
 using System.Collections.Specialized;
 using System.Net;
 using Elasticsearch.Net;
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
 using Nest;
 
 namespace Tests.ClientConcepts.LowLevel
@@ -68,10 +66,9 @@ namespace Tests.ClientConcepts.LowLevel
 			//endhide
 
 			var config = new ConnectionConfiguration(connectionPool)
-				.EnableTrace()
 				.DisableDirectStreaming()
-				.SetBasicAuthentication("user", "pass")
-				.SetTimeout(TimeSpan.FromSeconds(5));
+				.BasicAuthentication("user", "pass")
+				.RequestTimeout(TimeSpan.FromSeconds(5));
 
 		}
 		/**
@@ -95,14 +92,6 @@ namespace Tests.ClientConcepts.LowLevel
 				 * to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
 				*/
 
-				.EnableMetrics()
-				/** Enable more meta data to be returned per API call about requests (ping, sniff, failover, and general stats). */
-
-				.EnableTrace()
-				/**
-				* Will cause `Elasticsearch.Net` to write connection debug information on the TRACE output of your application.
-				*/
-
 				.DisableDirectStreaming()
 				/**
 				 * By default responses are deserialized off stream to the object you tell it to.
@@ -122,40 +111,55 @@ namespace Tests.ClientConcepts.LowLevel
 			//hide
 			config = config
 				//endhide
-				.SetConnectionStatusHandler(s => { })
+				.ConnectionStatusHandler(s => { })
 				/** 
 				* Allows you to pass a `Action&lt;IElasticsearchResponse&gt;` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
 				* this is a good place to add that in.
 				*/
 
-				.SetGlobalQueryStringParameters(new NameValueCollection())
+				.GlobalQueryStringParameters(new NameValueCollection())
 				/**
 				* Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 				*/
 
-				.SetProxy(new Uri("http://myproxy"), "username", "pass")
+				.Proxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
-				.SetTimeout(TimeSpan.FromSeconds(4))
+				.RequestTimeout(TimeSpan.FromSeconds(4))
 				/**
 				* Sets the global maximum time a connection may take.
 				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 
 				 * (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx).
 				*/
 
-				.ThrowOnElasticsearchServerExceptions()
+				.ThrowExceptions()
 				/**
-				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 
-				 * an `ElasticsearchServerException` when a call resulted in an exception on the Elasticsearch server. Reasons for 
-				 * such exceptions could be search parser errors and index missing exceptions.
+				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to throw 
+				* exceptions. 
+				*
+				* There are three category of exceptions thay may be thrown:
+				*  
+				* 1) ElasticsearchClientException: These are known exceptions, either an exception that occurred in the request pipeline
+				* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
+				* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
+				* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
+				* root causing exception.
+				*                                  
+				* 2) UnexpectedElasticsearchClientException:  These are unknown exceptions, for instance a response from Elasticsearch not
+				* properly deserialized.  These are usually bugs and should be reported.  This excpetion also inherits from ElasticsearchClientException
+				* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
+				*
+				* 3) Development time exceptions: These are CLR exceptions like ArgumentException, NullArgumentException etc... that are thrown
+				* when an API in the client is misused.  These should not be handled as you want to know about them during development.
+				*
 				*/
 
 				.PrettyJson()
 				/**
-				* Forces all serialization to be indedented and appends `pretty=true` to all the requests so that the responses are indented as well
+				* Forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 				*/
 
-				.SetBasicAuthentication("username", "password")
+				.BasicAuthentication("username", "password")
 				/** Sets the HTTP basic authentication credentials to specify with all requests. */;
 
 			/**

@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.Search
 {
@@ -60,6 +58,14 @@ namespace Tests.Search.Search
 			}
 		};
 
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Aggregations.Count.Should().BeGreaterThan(0);
+			var startDates = response.Aggs.Terms("startDates");
+			startDates.Should().NotBeNull();
+		}
+
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.From(10)
 			.Size(20)
@@ -80,7 +86,7 @@ namespace Tests.Search.Search
 			From = 10,
 			Size =20,
 			Query = new QueryContainer(new MatchAllQuery()),
-			Aggregations = new TermsAgg("startDates")
+			Aggregations = new TermsAggregation("startDates")
 			{
 				Field = "startedOn"
 			},
@@ -90,14 +96,5 @@ namespace Tests.Search.Search
 				Value = "Stable"
 			})
 		};
-
-		[I] public async Task HasHits() => await this.AssertOnAllResponses(r => r.Hits.Count().Should().BeGreaterThan(0));
-
-		[I] public async Task HasAggregations() => await this.AssertOnAllResponses(r =>
-		{
-			r.Aggregations.Count.Should().BeGreaterThan(0);
-			var startDates = r.Aggs.Terms("startDates");
-			startDates.Should().NotBeNull();
-		});
 	}
 }

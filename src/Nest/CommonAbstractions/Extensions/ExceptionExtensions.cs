@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Nest;
 using System.Runtime.ExceptionServices;
 
 namespace Nest
@@ -30,7 +29,7 @@ namespace Nest
 		{
 			var x = predicate?.Invoke(@object);
 			if (x.GetValueOrDefault(false))
-				throw new DslException(exceptionMessage);
+				throw new ArgumentException(exceptionMessage);
 
 			return @object;
 		}

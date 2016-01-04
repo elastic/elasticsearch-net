@@ -12,7 +12,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var methodArgs = CsharpMethod.Parts
-					.Select(p => (p.Name != "body") ? "p.RouteValues." + p.Name.ToPascalCase() : "body")
+					.Select(p => p.Name != "body" ? "p.RouteValues." + p.Name.ToPascalCase() : "body")
 					.Concat(new[] {"u => p.RequestParameters"});
 				return methodArgs;
 			}
@@ -26,25 +26,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
 				if (!parts.Any()) return string.Empty;
 				return $"AllSet({string.Join(", ", parts)})";
-			}
-		}
-
-		public IEnumerable<string> IfChecks
-		{
-			get
-			{
-				return this.CsharpMethod.Parts.Select(p =>
-				{
-					var name = (p.Name == "body") ? "body" : "p.RouteValues." + p.Name.ToPascalCase();
-					switch (p.Type)
-					{
-						case "string":
-						case "list":
-							return "!" + name + ".IsNullOrEmpty()";
-						default:
-							return name + " != null";
-					}
-				}).ToList();
 			}
 		}
 	}
@@ -113,7 +94,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					var methodName = this.CsharpMethodName + this.OptionallyAppendHttpMethod(this.Methods, method);
 					//the distinctby here catches aliases routes i.e
 					//  /_cluster/nodes/{node_id}/hotthreads vs  /_cluster/nodes/{node_id}/hot_threads
-					foreach (var path in Extensions.DistinctBy(this.Url.Paths, p => p.Replace("_", "")))
+					foreach (var path in this.Url.Paths.DistinctBy(p => p.Replace("_", "")))
 					{
 						var parts = (this.Url.Parts ?? new Dictionary<string, ApiUrlPart>())
 							.Where(p => path.Contains("{" + p.Key + "}"))
@@ -225,7 +206,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = string.Format("ElasticsearchResponse<{0}>", defaultBoundGeneric),
+							ReturnType = $"ElasticsearchResponse<{defaultBoundGeneric}>",
 							ReturnTypeGeneric = null,
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,
@@ -246,7 +227,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
-							ReturnType = string.Format("Task<ElasticsearchResponse<{0}>>", defaultBoundGeneric),
+							ReturnType = $"Task<ElasticsearchResponse<{defaultBoundGeneric}>>",
 							ReturnTypeGeneric = null,
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IAllocationAttributes : IHasADictionary
+	public interface IAllocationAttributes : IIsADictionary<string, IList<string>>
 	{
 		IDictionary<string, IList<string>> Attributes { get; } 
 	}
@@ -20,11 +16,8 @@ namespace Nest
 		public void Add(string attribute, IEnumerable<string> values) => this.BackingDictionary.Add(attribute, values.ToList());
 	}
 
-	public class AllocationAttributesDescriptor : IsADictionaryDescriptor<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>, IAllocationAttributes
+	public class AllocationAttributesDescriptor : IsADictionaryDescriptor<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>
 	{
-		IDictionary<string, IList<string>> IAllocationAttributes.Attributes => this.BackingDictionary;
-
-		public void Add(string attribute, params string[] values) => this.BackingDictionary.Add(attribute, values.ToList());
-		public void Add(string attribute, IEnumerable<string> values) => this.BackingDictionary.Add(attribute, values.ToList());
+		public AllocationAttributesDescriptor() : base(new AllocationAttributes()) { }
 	}
 }

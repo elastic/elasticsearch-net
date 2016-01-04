@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System;
-using System.Linq.Expressions;
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -40,23 +37,6 @@ namespace Nest
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }
 		protected NumberProperty(string type) : base(type) { }
 
-		internal NumberProperty(NumberAttribute attribute)
-			: base(attribute.Type.GetStringValue(), attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-			IncludeInAll = attribute.IncludeInAll;
-			PrecisionStep = attribute.PrecisionStep;
-			IgnoreMalformed = attribute.IgnoreMalformed;
-		}
-
-		internal NumberProperty(string typeName, NumberAttribute attribute)
-			: this(attribute)
-		{
-			Type = typeName;
-		}
-
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
@@ -67,11 +47,15 @@ namespace Nest
 		public INumericFielddata Fielddata { get; set; }
 	}
 
-	public class NumberPropertyDescriptor<T> 
-		: PropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
+	public abstract class NumberPropertyDescriptorBase<TDescriptor, TInterface, T>
+		: PropertyDescriptorBase<TDescriptor, TInterface, T>, INumberProperty
+		where TDescriptor : NumberPropertyDescriptorBase<TDescriptor, TInterface, T>, TInterface
+		where TInterface : class, INumberProperty
 		where T : class
 	{
-		public NumberPropertyDescriptor() : base("double") { }
+		public NumberPropertyDescriptorBase() : base("double") { }
+
+		protected NumberPropertyDescriptorBase(string type) : base(type) { }
 
 		NonStringIndexOption? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
@@ -82,21 +66,29 @@ namespace Nest
 		bool? INumberProperty.Coerce { get; set; }
 		INumericFielddata INumberProperty.Fielddata { get; set; }
 
-		public NumberPropertyDescriptor<T> Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
+		public TDescriptor Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
 
-		public NumberPropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+		public TDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
 
-		public NumberPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
 
-		public NumberPropertyDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
+		public TDescriptor NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
 
-		public NumberPropertyDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
+		public TDescriptor IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
-		public NumberPropertyDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
+		public TDescriptor PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
-		public NumberPropertyDescriptor<T> Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
+		public TDescriptor IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 
-		public NumberPropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
+		public TDescriptor Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
+
+		public TDescriptor Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
+	}
+
+	public class NumberPropertyDescriptor<T> 
+		: NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
+		where T : class
+	{
 	}
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -19,11 +15,11 @@ namespace Nest
 	{
 		public string NormField { get;  set; }
 
-		bool IQuery.Conditionless => false;
+		protected override bool Conditionless => false;
 
-		protected override void WrapInContainer(IQueryContainer container)
+		internal override void WrapInContainer(IQueryContainer container)
 		{
-			container.MatchAllQuery = this;
+			container.MatchAll = this;
 		}
 	}
 
@@ -31,7 +27,7 @@ namespace Nest
 		: QueryDescriptorBase<MatchAllQueryDescriptor, IMatchAllQuery>
 		, IMatchAllQuery 
 	{
-		bool IQuery.Conditionless => false;
+		protected override bool Conditionless => false;
 
 		string IMatchAllQuery.NormField { get; set; }
 

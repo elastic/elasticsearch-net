@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
-using Tests.Framework.MockData;
 using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 
 namespace Tests.Search.Request
 {
@@ -39,19 +36,19 @@ namespace Tests.Search.Request
 			.Highlight(h => h
 				.PreTags("<tag1>")
 				.PostTags("</tag1>")
-				.OnFields(
+				.Fields(
 					fs => fs
-						.OnField(p => p.Name)
+						.Field(p => p.Name)
 						.Type(HighlighterType.Plain)
 						.ForceSource()
 						.FragmentSize(150)
 						.NumberOfFragments(3)
 						.NoMatchSize(150),
 					fs => fs
-						.OnField(p => p.LeadDeveloper)
+						.Field(p => p.LeadDeveloper)
 						.Type(HighlighterType.Fvh),
 					fs => fs
-						.OnField(p => p.Tags)
+						.Field(p => p.Tags)
 						.Type(HighlighterType.Postings)
 				)
 			);
@@ -59,11 +56,11 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Highlight = new HighlightRequest
+				Highlight = new Highlight
 				{
 					PreTags = new[] { "<tag1>" },
 					PostTags = new[] { "</tag1>" },
-					Fields = new Dictionary<FieldName, IHighlightField>
+					Fields = new Dictionary<Field, IHighlightField>
 					{
 							{ "name", new HighlightField
 								{

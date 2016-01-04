@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d.RepositoryName(_name)
+----
+[source, csharp]
+----
+new GetRepositoryRequest(_name)
+----

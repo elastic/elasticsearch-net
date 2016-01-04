@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Nest.Resolvers;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -18,10 +12,10 @@ namespace Nest
 
 	public class GeoShapeMultiLineStringQuery : FieldNameQueryBase, IGeoShapeMultiLineStringQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public IMultiLineStringGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 		internal static bool IsConditionless(IGeoShapeMultiLineStringQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
@@ -29,10 +23,10 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery, T>
 		, IGeoShapeMultiLineStringQuery where T : class
 	{
-		bool IQuery.Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);
+		protected override bool Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 
-		public GeoShapeMultiLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates) => Assign(a =>
+		public GeoShapeMultiLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<GeoCoordinate>> coordinates) => Assign(a =>
 		{
 			a.Shape = a.Shape ?? new MultiLineStringGeoShape();
 			a.Shape.Coordinates = coordinates;

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class ValueMetric : IMetricAggregation
+	public class ValueMetric : IMetric
 	{
 		public double? Value { get; set; }
 	}

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Nest.Domain;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -22,6 +21,8 @@ namespace Nest
 	}
 
 	[JsonObject]
+	//TODO validate this, ported over from ElasticContractResolver but it seems out of place
+	[ContractJsonConverter(typeof(MultiGetHitJsonConverter))]
 	public class MultiGetResponse : BaseResponse, IMultiGetResponse
 	{
 		public MultiGetResponse()

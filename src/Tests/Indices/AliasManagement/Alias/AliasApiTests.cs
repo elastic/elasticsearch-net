@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -11,9 +9,16 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.Alias
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class AliasApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
+	public class AliasApiTests : ApiIntegrationTestBase<IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values)
+				client.CreateIndex(index);
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Alias(f),
 			fluentAsync: (client, f) => client.AliasAsync(f),
@@ -47,12 +52,8 @@ namespace Tests.Indices.AliasManagement.Alias
 			Actions = new List<IAliasAction>
 			{
 				new AliasAddAction { Add = new AliasAddOperation {Alias = "alias", Index = CallIsolatedValue, IndexRouting = "x", SearchRouting = "y"} },
-				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Static.Index(CallIsolatedValue) }},
+				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Infer.Index(CallIsolatedValue) }},
 			}
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

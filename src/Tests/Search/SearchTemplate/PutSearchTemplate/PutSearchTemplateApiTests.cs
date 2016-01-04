@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
-using Tests.Framework.MockData;
 
 namespace Tests.Search.SearchTemplate.PutSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutSearchTemplateApiTests : ApiTestBase<IAcknowledgedResponse, IPutSearchTemplateRequest, PutSearchTemplateDescriptor, PutSearchTemplateRequest>
+	public class PutSearchTemplateApiTests : ApiTestBase<IPutSearchTemplateResponse, IPutSearchTemplateRequest, PutSearchTemplateDescriptor, PutSearchTemplateRequest>
 	{
 		public PutSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

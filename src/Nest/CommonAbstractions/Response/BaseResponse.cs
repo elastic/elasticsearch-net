@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -14,33 +13,22 @@ namespace Nest
 		IApiCallDetails ApiCall { get; }
 
 		[JsonIgnore]
-		ElasticsearchServerError ServerError { get; }
+		ServerError ServerError { get; }
+
+		[JsonIgnore]
+		Exception OriginalException { get; }
+
 	}
 
-	public class BaseResponse : IResponse
+	public abstract class BaseResponse : IResponse
 	{
-		public virtual bool IsValid => this.ApiCall?.Success ?? false;
+		public virtual bool IsValid => (this.ApiCall?.Success ?? false) && (this.ServerError == null);
 
 		IApiCallDetails IBodyWithApiCallDetails.CallDetails { get; set; }
-		public IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
+		public virtual IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
+		
+		public virtual ServerError ServerError  => this.ApiCall?.ServerError;
 
-		public virtual ElasticsearchServerError ServerError
-		{
-			get
-			{
-				if (this.IsValid || this.ApiCall == null || this.ApiCall.OriginalException == null)
-					return null;
-				var e = this.ApiCall.OriginalException as ElasticsearchServerException;
-				if (e == null)
-					return null;
-				return new ElasticsearchServerError
-				{
-					Status = e.Status,
-					Error = e.Message,
-					ExceptionType = e.ExceptionType
-				};
-			}
-		}
-
+		public Exception OriginalException  => this.ApiCall?.OriginalException;
 	}
 }

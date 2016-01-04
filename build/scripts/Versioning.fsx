@@ -33,8 +33,8 @@ type Versioning() =
             let v = regex_replace "-ci.+$" "" f
             let prerelease = regex_replace "^.+-(ci.+)$" "$1" f
             let version = SemVerHelper.parse v
-            sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease
-        | _ -> fileVersion
+            (sprintf "%d.%d.0-%s" version.Major (version.Minor + 1) prerelease).Trim()
+        | _ -> fileVersion.Trim()
 
     static member AssemblyVersion = 
         let fileVersion = Versioning.FileVersion

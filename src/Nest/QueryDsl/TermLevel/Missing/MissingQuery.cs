@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MissingQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMissingQuery : IFieldNameQuery
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MissingQuery>))]
+	public interface IMissingQuery : IQuery
 	{
+		[JsonProperty(PropertyName = "field")]
+		Field Field { get; set; }
 
 		[JsonProperty(PropertyName = "existence")]
 		bool? Existence { get; set; }
@@ -18,25 +18,30 @@ namespace Nest
 		bool? NullValue { get; set; }
 	}
 
-	public class MissingQuery : FieldNameQueryBase, IMissingQuery
+	public class MissingQuery : QueryBase, IMissingQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
-		protected override void WrapInContainer(IQueryContainer container) => container.Missing = this;
+		public Field Field { get; set; }
+		internal override void WrapInContainer(IQueryContainer container) => container.Missing = this;
 		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 
 	public class MissingQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery, T>
+		: QueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery>
 		, IMissingQuery where T : class
 	{
-		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
+		protected override bool Conditionless => MissingQuery.IsConditionless(this);
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
+		Field IMissingQuery.Field { get; set; }
 
-		public MissingQueryDescriptor<T> Existence(bool existence = true) => Assign(a => a.Existence = existence);
+		public MissingQueryDescriptor<T> Existence(bool? existence = true) => Assign(a => a.Existence = existence);
 
-		public MissingQueryDescriptor<T> NullValue(bool nullValue = true) => Assign(a => a.NullValue = nullValue);
+		public MissingQueryDescriptor<T> NullValue(bool? nullValue = true) => Assign(a => a.NullValue = nullValue);
+
+		public MissingQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public MissingQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 	}
 }

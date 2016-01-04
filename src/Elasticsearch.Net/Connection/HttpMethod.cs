@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
+// ReSharper disable InconsistentNaming
+
 namespace Elasticsearch.Net
 {
 	public enum HttpMethod

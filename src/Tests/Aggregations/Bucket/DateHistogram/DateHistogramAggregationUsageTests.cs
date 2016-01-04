@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
-using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Static;
-using static Tests.Framework.RoundTripper;
+using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateHistogram
 {
@@ -41,6 +35,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 							min = FixedDate.AddYears(-1),
 							max = FixedDate.AddYears(1)
 						},
+						missing = FixedDate
 					},
 					aggs = new
 					{
@@ -58,6 +53,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					.MinimumDocumentCount(2)
 					.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 					.Order(HistogramOrder.CountAscending)
+					.Missing(FixedDate)
 					.Aggregations(childAggs => childAggs
 						.Terms("project_tags", avg => avg.Field(p => p.Tags))
 					)
@@ -67,7 +63,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new DateHistogramAgg("projects_started_per_month")
+				Aggregations = new DateHistogramAggregation("projects_started_per_month")
 				{
 					Field = Field<Project>(p => p.StartedOn),
 					Interval = DateInterval.Month,
@@ -78,31 +74,21 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						Maximum = FixedDate.AddYears(1),
 					},
 					Order = HistogramOrder.CountAscending,
+					Missing = FixedDate,
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 				}
 			};
 
-		[I]
-		public void HandlingResponses()
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			var response = this.Client.Search<Project>(s => s
-				.Aggregations(aggs => aggs
-					.DateHistogram("date_hist", dh => dh
-						.Field(p => p.StartedOn)
-						.Interval("2d")
-						.MinimumDocumentCount(1)
-					)
-				)
-			);
-
 			response.IsValid.Should().BeTrue();
 
 			/**
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
-			var dateHistogram = response.Aggs.DateHistogram("date_hist");
+			var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Items.Should().NotBeNull();
 			dateHistogram.Items.Count.Should().BeGreaterThan(10);

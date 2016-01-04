@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -26,12 +27,11 @@ namespace Tests.Search.Request
 			new SearchRequest<Project> { Explain = true };
 
 		[I]
-		protected async void ExplanationIsSetOnHits() => await this.AssertOnAllResponses(r =>
+		protected async Task ExplanationIsSetOnHits() => await this.AssertOnAllResponses(r =>
 		{
 			r.Hits.Should().NotBeEmpty();
 			r.Hits.Should().NotContain(hit => hit.Explanation == null);
-				//each hit has 
-				foreach (var explanation in r.Hits.Select(h => h.Explanation))
+			foreach (var explanation in r.Hits.Select(h => h.Explanation))
 			{
 				explanation.Description.Should().NotBeNullOrEmpty();
 				explanation.Value.Should().BeGreaterThan(0);

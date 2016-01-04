@@ -7,14 +7,13 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiSearchApiTests
-		: ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
+	public class MultiSearchApiTests : ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -26,7 +25,7 @@ namespace Tests.Search.MultiSearch
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true;
+		protected override bool ExpectIsValid => true; 
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_msearch";
 
@@ -34,29 +33,60 @@ namespace Tests.Search.MultiSearch
 	
 		protected override object ExpectJson => new object[]
 		{
-			new { },
-			new { query = new { match_all = new { } }, from = 0, size = 10 },
-			new { index = "otherindex" },
-			new { query = new { match = new { name = new { query = "nest" } } } },
-			new { index = "otherindex", type = "othertype", search_type = "count" },
-			new { query = new { match_all = new { } } }
+			new {},
+			new { from = 0, size = 10, query = new { match_all = new {} } },
+			new { search_type = "count" },
+			new {},
+			new { index = "devs", type = "developer" },
+			new { from = 0, size = 5, query = new { match_all = new {} } },
+			new { index = "devs", type = "developer" },
+			new { from = 0, size = 5, query = new { match_all = new {} } }
 		};
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
 			.Index(typeof(Project))
 			.Type(typeof(Project))
-			.Search<Project>(s => s.Query(q => q.MatchAll()).From(0).Size(10))
-			.Search<Project>(s => s.Index("otherindex").Query(q => q.Match(m => m.OnField(p => p.Name).Query("nest"))))
-			.Search<Project>(s => s.Index("otherindex").Type("othertype").SearchType(SearchType.Count).MatchAll());
+			.Search<Project>("10projects",s => s.Query(q => q.MatchAll()).From(0).Size(10))
+			.Search<Project>("count_project", s => s.SearchType(SearchType.Count))
+			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
+			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll());
 
 		protected override MultiSearchRequest Initializer => new MultiSearchRequest(typeof(Project), typeof(Project))
 		{
 			Operations = new Dictionary<string, ISearchRequest>
 			{
-				{ "s1", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
-				{ "s2", new SearchRequest<Project>("otherindex", typeof(Project)) { Query = new QueryContainer(new MatchQuery { Field = "name", Query = "nest" }) } },
-				{ "s3", new SearchRequest<Project>("otherindex", "othertype") { SearchType = SearchType.Count, Query = new QueryContainer(new MatchAllQuery()) } },
+				{ "10projects", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
+				{ "count_project", new SearchRequest<Project> { SearchType = SearchType.Count } },
+				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
+				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 			}
 		};
+
+		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
+		{
+			r.TotalResponses.Should().Be(4);
+
+			var invalidResponses = r.GetInvalidResponses();
+			invalidResponses.Should().BeEmpty();
+
+			var allResponses = r.AllResponses.ToList();
+			allResponses.Should().NotBeEmpty().And.HaveCount(4).And.OnlyContain(rr => rr.IsValid);
+
+			var projects= r.GetResponse<Project>("10projects");
+			projects.IsValid.Should().BeTrue();
+			projects.Documents.Should().HaveCount(10);
+
+			var projectsCount = r.GetResponse<Project>("count_project");
+			projectsCount.IsValid.Should().BeTrue();
+			projectsCount.Documents.Should().HaveCount(0);
+
+			var developers = r.GetResponse<Developer>("5developers");
+			developers.IsValid.Should().BeTrue();
+			developers.Documents.Should().HaveCount(5);
+
+			var inferredTypeName = r.GetResponse<Developer>("infer_type_name");
+			inferredTypeName.IsValid.Should().BeTrue();
+			inferredTypeName.Documents.Should().HaveCount(5);
+		});
 	}
 }

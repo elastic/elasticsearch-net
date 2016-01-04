@@ -1,5 +1,3 @@
-using System;
-
 namespace Nest
 {
 	public interface IMergeSchedulerSettings

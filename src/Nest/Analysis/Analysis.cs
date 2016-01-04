@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -32,17 +31,17 @@ namespace Nest
 		ITokenFilters IAnalysis.TokenFilters { get; set; }
 		ITokenizers IAnalysis.Tokenizers { get; set; }
 
-		public AnalysisDescriptor Analyzers(Func<AnalyzersDescriptor, IAnalyzers> selector) =>
-			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor()));
+		public AnalysisDescriptor Analyzers(Func<AnalyzersDescriptor, IPromise<IAnalyzers>> selector) =>
+			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor())?.Value);
 
-		public AnalysisDescriptor CharFilters(Func<CharFiltersDescriptor, ICharFilters> selector) =>
-			Assign(a => a.CharFilters = selector?.Invoke(new CharFiltersDescriptor()));
+		public AnalysisDescriptor CharFilters(Func<CharFiltersDescriptor, IPromise<ICharFilters>> selector) =>
+			Assign(a => a.CharFilters = selector?.Invoke(new CharFiltersDescriptor())?.Value);
 
-		public AnalysisDescriptor TokenFilters(Func<TokenFiltersDescriptor, ITokenFilters> selector) =>
-			Assign(a => a.TokenFilters = selector?.Invoke(new TokenFiltersDescriptor()));
+		public AnalysisDescriptor TokenFilters(Func<TokenFiltersDescriptor, IPromise<ITokenFilters>> selector) =>
+			Assign(a => a.TokenFilters = selector?.Invoke(new TokenFiltersDescriptor())?.Value);
 
-		public AnalysisDescriptor Tokenizers(Func<TokenizersDescriptor, ITokenizers> selector) =>
-			Assign(a => a.Tokenizers = selector?.Invoke(new TokenizersDescriptor()));
+		public AnalysisDescriptor Tokenizers(Func<TokenizersDescriptor, IPromise<ITokenizers>> selector) =>
+			Assign(a => a.Tokenizers = selector?.Invoke(new TokenizersDescriptor())?.Value);
 
 	}
 }

@@ -8,6 +8,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
+	internal class AggregationJsonConverter<TReadAs> : ReadAsTypeJsonConverter<TReadAs>
+		where TReadAs : class
+	{
+
+	}
+
 	internal class AggregationJsonConverter : JsonConverter
 	{
 		private static Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
@@ -151,7 +157,7 @@ namespace Nest
 				)
 			{
 				var b = this.GetBucketAggregation(reader, serializer) as Bucket;
-				return new BucketWithDocCount()
+				return new DocCountBucket()
 				{
 					DocCount = docCount,
 					Items = b.Items
@@ -282,7 +288,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeAggregation(reader, serializer, key);
 
-			var keyItem = new KeyItem();
+			var keyItem = new KeyedBucket();
 			keyItem.Key = key;
 
 			if (property == "key_as_string")
@@ -308,7 +314,7 @@ namespace Nest
 
 		}
 
-		private IAggregation GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyItem keyItem)
+		private IAggregation GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyedBucket keyItem)
 		{
 			reader.Read();
 			var score = reader.Value as double?;
@@ -336,10 +342,10 @@ namespace Nest
 			var currentDepth = reader.Depth;
 			do
 			{
-				var FieldName = reader.Value as string;
+				var fieldName = reader.Value as string;
 				reader.Read();
 				var agg = this.ReadAggregation(reader, serializer);
-				nestedAggs.Add(FieldName, agg);
+				nestedAggs.Add(fieldName, agg);
 				reader.Read();
 				if (reader.Depth == currentDepth && reader.TokenType == JsonToken.EndObject || reader.Depth < currentDepth)
 					break;
@@ -420,8 +426,29 @@ namespace Nest
 				reader.Read();
 				if (reader.TokenType != JsonToken.EndObject)
 				{
-					reader.Read();
-					reader.Read();
+					if (reader.TokenType == JsonToken.PropertyName && (reader.Value as string) == "keys")
+					{
+						var keyedValueMetric = new KeyedValueMetric
+						{
+							Value = valueMetric.Value
+						};
+						var keys = new List<string>();
+						reader.Read();
+						reader.Read();
+						while (reader.TokenType != JsonToken.EndArray)
+						{
+							keys.Add(reader.Value.ToString());
+							reader.Read();
+						}
+						reader.Read();
+						keyedValueMetric.Keys = keys;
+						return keyedValueMetric;
+					}
+					else
+					{
+						reader.Read();
+						reader.Read();
+					}
 				}
 				return valueMetric;
 			}

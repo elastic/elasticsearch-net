@@ -8,40 +8,40 @@ namespace Nest
 	{
 
 		/// <inheritdoc/>
-		IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null);
+		IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
 
 		/// <inheritdoc/>
-		IGetScriptResponse GetScript(IGetScriptRequest getScriptRequest);
+		IGetScriptResponse GetScript(IGetScriptRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null);
+		Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest getScriptRequest);
+		Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request);
 	}
 
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null) =>
-			this.GetScript(getScriptSelector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
+		public IGetScriptResponse GetScript(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) =>
+			this.GetScript(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
-		public IGetScriptResponse GetScript(IGetScriptRequest getScriptRequest) => 
+		public IGetScriptResponse GetScript(IGetScriptRequest request) => 
 			this.Dispatcher.Dispatch<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse>(
-				getScriptRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.GetScriptDispatch<GetScriptResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector = null) => 
-			this.GetScriptAsync(getScriptSelector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
+		public Task<IGetScriptResponse> GetScriptAsync(Name language, Id id, Func<GetScriptDescriptor, IGetScriptRequest> selector = null) => 
+			this.GetScriptAsync(selector.InvokeOrDefault(new GetScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
-		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest getScriptRequest) => 
+		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
-				getScriptRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.GetScriptDispatchAsync<GetScriptResponse>(p)
 			);
 	}

@@ -1,7 +1,6 @@
 [source, csharp]
 ----
 var repository = "repos";
-var snapshot = "snap";
 await DELETE($"/_snapshot/{repository}")
 				.Fluent(c => c.DeleteRepository(repository))
 				.Request(c => c.DeleteRepository(new DeleteRepositoryRequest(repository)))

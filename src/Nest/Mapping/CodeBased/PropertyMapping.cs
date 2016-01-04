@@ -1,29 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Reflection.Emit;
-using Nest.CommonAbstractions.ConnectionSettings;
-using Nest.Resolvers;
 
 namespace Nest
 {
 	
-	public class PropertyMappingDescriptor<TDocument>  where TDocument : class
+	public class PropertyMappingDescriptor<TDocument> : DescriptorBase<PropertyMappingDescriptor<TDocument>, IDescriptor>
+		where TDocument : class
 	{
 		internal IList<IClrTypePropertyMapping<TDocument>> Mappings { get; } = new List<IClrTypePropertyMapping<TDocument>>();
 
-		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string FieldName)
+		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string field)
 		{
-			property.ThrowIfNull("property");
-			FieldName.ThrowIfNullOrEmpty("FieldName");
-			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, FieldName));
+			property.ThrowIfNull(nameof(property));
+			field.ThrowIfNullOrEmpty(nameof(field));
+			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, field));
 			return this;
 		}
 
 		public PropertyMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property)
 		{
-			property.ThrowIfNull("property");
+			property.ThrowIfNull(nameof(property));
 			this.Mappings.Add(new IgnorePropertyMapping<TDocument>(property));
 			return this;
 		}
@@ -73,9 +70,9 @@ namespace Nest
 			set { this.Ignore = value; }
 		}
 		
-		public static implicit operator PropertyMapping(string FieldName)
+		public static implicit operator PropertyMapping(string field)
 		{
-			return FieldName == null ? null : new PropertyMapping() { Name = FieldName };
+			return field == null ? null : new PropertyMapping() { Name = field };
 		}
 	}
 }

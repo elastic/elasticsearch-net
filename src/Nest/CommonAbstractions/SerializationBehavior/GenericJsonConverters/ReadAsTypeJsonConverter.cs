@@ -1,10 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -20,11 +15,7 @@ namespace Nest
 		{
 		}
 
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			var t = (T)typeof(T).CreateInstance();
-			serializer.Populate(reader, t);
-			return t;
-		}
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => 
+			FromJson.ReadAs<T>(reader, objectType, existingValue, serializer);
 	}
 }

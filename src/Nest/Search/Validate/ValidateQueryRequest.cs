@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,7 +6,7 @@ namespace Nest
 	public partial interface IValidateQueryRequest 
 	{
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -18,20 +16,20 @@ namespace Nest
 
 	public partial class ValidateQueryRequest 
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 	}
 
 	public partial class ValidateQueryRequest<T> 
 		where T : class
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("IndicesValidateQuery")]
 	public partial class ValidateQueryDescriptor<T> where T : class
 	{
-		IQueryContainer IValidateQueryRequest.Query { get; set; }
+		QueryContainer IValidateQueryRequest.Query { get; set; }
 
-		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

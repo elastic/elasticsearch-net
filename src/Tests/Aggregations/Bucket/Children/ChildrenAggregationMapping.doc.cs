@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
+﻿using Tests.Framework;
 using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Bucket.Children
@@ -20,7 +15,7 @@ namespace Tests.Aggregations.Bucket.Children
 				.Mappings(map=>map
 					.Map<Project>(m=>m.AutoMap())
 					.Map<CommitActivity>(m=>m
-						.SetParent<Project>()
+						.Parent<Project>()
 					)
 				)
 			);

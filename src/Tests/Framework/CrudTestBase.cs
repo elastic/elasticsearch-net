@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
-using Xunit;
 
 namespace Tests.Framework
 {
@@ -75,11 +74,11 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<ClientCall, IResponse>();
-				dict.Add(ClientCall.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
-				dict.Add(ClientCall.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
-				dict.Add(ClientCall.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
-				dict.Add(ClientCall.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
+				var dict = new Dictionary<Integration.ClientMethod, IResponse>();
+				dict.Add(Integration.ClientMethod.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
+				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
+				dict.Add(Integration.ClientMethod.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
+				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
 				return dict;
 			});
 		}
@@ -148,19 +147,19 @@ namespace Tests.Framework
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
 		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
 
-		[I] protected async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
+		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
 			r.IsValid.Should().Be(true);
 			ExpectAfterCreate(r);
 		});
 
-		[I] protected async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
+		[I] protected virtual async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
 			r.IsValid.Should().Be(true);
 			ExpectAfterUpdate(r);
 		});
 
-		[I] protected async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));
+		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));
 	}
 }

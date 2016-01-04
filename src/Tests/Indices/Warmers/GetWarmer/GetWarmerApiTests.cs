@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Indices.Warmers.GetWarmer
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetWarmerApiTests : ApiTestBase<IWarmerResponse, IGetWarmerRequest, GetWarmerDescriptor, GetWarmerRequest>
+	public class GetWarmerApiTests : ApiTestBase<IGetWarmerResponse, IGetWarmerRequest, GetWarmerDescriptor, GetWarmerRequest>
 	{
 		public GetWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

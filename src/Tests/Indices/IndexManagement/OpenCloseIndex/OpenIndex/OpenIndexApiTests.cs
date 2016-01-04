@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -11,9 +10,20 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class OpenIndexApiTests 
-		: ApiIntegrationTestBase<IIndicesOperationResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
+		: ApiIntegrationTestBase<IOpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{
 		public OpenIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		{
+			foreach (var index in values.Values)
+			{
+				client.CreateIndex(index);
+				client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
+				client.CloseIndex(index);
+			}
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.OpenIndex(CallIsolatedValue, f),
 			fluentAsync: (client, f) => client.OpenIndexAsync(CallIsolatedValue, f),
@@ -35,5 +45,5 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 		{
 			IgnoreUnavailable = true
 		};
-}
+	}
 }

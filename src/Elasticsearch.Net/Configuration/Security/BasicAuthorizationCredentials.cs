@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Elasticsearch.Net.Connection.Security
+﻿namespace Elasticsearch.Net
 {
-	// TODO: Rename to BasicAuthenticationCredentials in 2.0
 	public class BasicAuthenticationCredentials
 	{
 		public string UserName { get; set; }

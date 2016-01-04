@@ -5,8 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public interface IWarmers : IHasADictionary { }
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Warmers, TypeName, IWarmer>))]
+	public interface IWarmers : IIsADictionary<TypeName, IWarmer> { }
+
 	public class Warmers : IsADictionary<TypeName, IWarmer>, IWarmers
 	{
 		public Warmers() : base() { }
@@ -15,19 +16,14 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		/// <summary>
-		/// Add any setting to the index
-		/// </summary>
 		public void Add(TypeName type, IWarmer mapping) => BackingDictionary.Add(type, mapping);
 	}
 	
-	public class WarmersDescriptor : IsADictionaryDescriptor<WarmersDescriptor, IWarmers, TypeName, IWarmer>, IWarmers
+	public class WarmersDescriptor : IsADictionaryDescriptor<WarmersDescriptor, IWarmers, TypeName, IWarmer>
 	{
-		public WarmersDescriptor Warm<T>(string warmerName, Func<WarmerDescriptor<T>, IWarmer> selector) where T : class
-		{
-			this.BackingDictionary.Add(warmerName, selector?.Invoke(new WarmerDescriptor<T>()));
-			return this;
-		}
-	}
+		public WarmersDescriptor() : base(new Warmers()) { }
 
+		public WarmersDescriptor Warm<T>(string warmerName, Func<WarmerDescriptor<T>, IWarmer> selector) where T : class =>
+			Assign(warmerName, selector?.Invoke(new WarmerDescriptor<T>()));
+	}
 }

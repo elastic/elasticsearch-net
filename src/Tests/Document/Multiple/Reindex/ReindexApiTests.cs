@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
+using static Nest.Infer;
 
 namespace Tests.Document.Multiple.Reindex
 {
@@ -24,24 +19,26 @@ namespace Tests.Document.Multiple.Reindex
 		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexResult;
 		private readonly IElasticClient _client;
 
+		private static string NewIndexName { get; } = $"dev-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
+
 		public ReindexApiTests(ReindexCluster cluster, EndpointUsage usage)
 		{
 			this._client = cluster.Client();
 			var indexResult = this._client.IndexMany(Developer.Developers);
 			this._client.Refresh(Index<Developer>());
-			this._reindexResult = this._client.Reindex<ILazyDocument>(Index<Developer>(), "dev-copy", r=>r);
+			this._reindexResult = this._client.Reindex<ILazyDocument>(Index<Developer>(), NewIndexName, r=>r);
 		}
 
-		[I] public void ResponseTests()
+		[I] public void ReturnsExpectedResponse()
 		{
 			var handle = new ManualResetEvent(false);
 			var observer = new ReindexObserver<ILazyDocument>(
 					onError: (e) => { throw e; },
 					completed: () =>
 					{
-						var refresh = this._client.Refresh("dev-copy");
+						var refresh = this._client.Refresh(NewIndexName);
 						var originalIndexCount = this._client.Count<Developer>();
-						var newIndexCount = this._client.Count<Developer>(c => c.Index("dev-copy"));
+						var newIndexCount = this._client.Count<Developer>(c => c.Index(NewIndexName));
 
 						originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
 

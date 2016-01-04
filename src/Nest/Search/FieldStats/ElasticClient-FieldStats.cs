@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -19,8 +18,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
-
-	//TODO pass indices along on descriptor, we promote a more scoped fieldstats from the highlevel client
 
 	public partial class ElasticClient
 	{

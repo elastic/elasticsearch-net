@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System;
-using System.Linq.Expressions;
-using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -40,19 +37,6 @@ namespace Nest
 	public class DateProperty : Property, IDateProperty
 	{
 		public DateProperty() : base("date") { }
-
-		internal DateProperty(DateAttribute attribute)
-			: base("date", attribute)
-		{
-			Index = attribute.Index;
-			Boost = attribute.Boost;
-			NullValue = attribute.NullValue;
-			IncludeInAll = attribute.IncludeInAll;
-			PrecisionStep = attribute.PrecisionStep;
-			IgnoreMalformed = attribute.IgnoreMalformed;
-			Format = attribute.Format;
-			NumericResolution = attribute.NumericResolution;
-		}
 
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }

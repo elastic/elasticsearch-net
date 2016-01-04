@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -50,19 +45,19 @@ namespace Nest
 			a.Aliases = indexSettings.Aliases;
 		});
 
-		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> selector) =>
-			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor()));
+		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> selector) =>
+			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IMappings> selector) =>
-			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
+		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor())?.Value);
 
-		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IWarmers> selector) =>
-			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor()));
+		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> selector) =>
+			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor())?.Value);
 
-		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IAliases> selector) =>
-			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor()));
+		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
+			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);
 
-		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, ISimilarities> selector) =>
-			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor()));
+		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, IPromise<ISimilarities>> selector) =>
+			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor())?.Value);
 	}
 }

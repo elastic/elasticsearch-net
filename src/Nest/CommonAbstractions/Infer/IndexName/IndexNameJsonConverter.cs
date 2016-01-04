@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
-using Nest.Resolvers;
 
 namespace Nest
 {
@@ -19,13 +16,9 @@ namespace Nest
 				return;
 			}
 
-			var contract = serializer.ContractResolver as SettingsContractResolver;
-			if (contract != null && contract.ConnectionSettings != null)
-			{
-				var indexName = contract.Infer.IndexName(marker);
-				writer.WriteValue(indexName);
-			}
-			else throw new Exception("If you use a custom contract resolver be sure to subclass from ElasticResolver");
+			var settings = serializer.GetConnectionSettings();
+			var indexName = settings.Inferrer.IndexName(marker);
+			writer.WriteValue(indexName);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

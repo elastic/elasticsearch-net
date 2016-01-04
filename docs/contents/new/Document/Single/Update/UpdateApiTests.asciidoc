@@ -1,0 +1,14 @@
+[source, csharp]
+----
+d=>d
+.Doc(Project.Instance)
+.DocAsUpsert()
+----
+[source, csharp]
+----
+new UpdateRequest<Project, Project>(Project.Instance.Name)
+		{
+Doc = Project.Instance,
+DocAsUpsert = true
+		}
+----

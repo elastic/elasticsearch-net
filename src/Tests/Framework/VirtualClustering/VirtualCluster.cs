@@ -1,8 +1,7 @@
-using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Elasticsearch.Net;
 
 namespace Tests.Framework
 {

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection.Sniff
+namespace Elasticsearch.Net
 {
 	internal class SniffResponse
 	{
@@ -26,6 +22,7 @@ namespace Elasticsearch.Net.Connection.Sniff
 		}
 
 	}
+
 	internal class SniffNode
 	{
 		public string name { get; set; }
@@ -35,10 +32,10 @@ namespace Elasticsearch.Net.Connection.Sniff
 		public string ip { get; set; }
 		public string version { get; set; }
 		public string build { get; set; }
-		public IDictionary<string, object> settings { get; set; }
+		public IDictionary<string, string> settings { get; set; }
 
-		internal bool MasterEligable => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && ((bool)this.settings["node.master"]) == false);
-		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && ((bool)this.settings["node.data"]) == false);
+		internal bool MasterEligable => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.master"]) == false);
+		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.data"]) == false);
 	}
 
 }

@@ -14,7 +14,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class Warmer
+	public class Warmer : IWarmer
 	{
 		public IEnumerable<TypeName> Types { get; set; }
 

@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Nest.Litterateur
 {
-	class Program
+	public static class Program
 	{
 		static void Main(string[] args) =>
 			LitUp.Go();
 
 		public static class LitUp
 		{
-			private readonly static string TestFolder = @"..\..\..\..\..\src\Tests";
-			private readonly static string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
+			private static readonly string TestFolder = @"..\..\..\..\..\src\Tests";
+			private static readonly string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
 
 			public static IEnumerable<DocumentationFile> FindAll(string extension) =>
 				from f in Directory.GetFiles(TestFolder, $"*.{extension}", SearchOption.AllDirectories)

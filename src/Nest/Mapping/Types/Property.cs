@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[ContractJsonConverter(typeof(PropertyJsonConverter))]
 	public interface IProperty : IFieldMapping
 	{
 		PropertyName Name { get; set; }
@@ -29,28 +27,19 @@ namespace Nest
 		SimilarityOption? Similarity { get; set; }
 
 		[JsonProperty("copy_to")]
-		IEnumerable<FieldName> CopyTo { get; set; }
+		Fields CopyTo { get; set; }
 	}
 
 	public abstract class Property : IProperty
 	{
-		public Property(TypeName typeName)
+	    protected Property(TypeName typeName)
 		{
 			Type = typeName;
 		}
 
-		internal Property(TypeName typeName, ElasticsearchPropertyAttribute attribute)
-			: this(typeName)
-		{
-			DocValues = attribute.DocValues;
-			IndexName = attribute.IndexName;
-			Similarity = attribute.Similarity;
-			Store = attribute.Store;
-		}
-
 		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
-		public IEnumerable<FieldName> CopyTo { get; set; }
+		public Fields CopyTo { get; set; }
 		public bool? DocValues { get; set; }
 		public IProperties Fields { get; set; }
 		public string IndexName { get; set; }

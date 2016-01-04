@@ -24,7 +24,7 @@ r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new DateRangeAgg("projects_date_ranges")
+	Aggregations = new DateRangeAggregation("projects_date_ranges")
 	{
 		Field = Field<Project>(p => p.StartedOn),
 		Ranges = new List<DateRangeExpression>
@@ -34,7 +34,33 @@ new SearchRequest<Project>
 	{new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
 		},
 		Aggregations =
-new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 	}
 }
+----
+[source, csharp]
+----
+response.IsValid.Should().BeTrue();
+----
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+
+[source, csharp]
+----
+var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
+----
+[source, csharp]
+----
+dateHistogram.Should().NotBeNull();
+dateHistogram.Items.Should().NotBeNull();
+----
+We specified three ranges so we expect to three of them in the response 
+
+[source, csharp]
+----
+dateHistogram.Items.Count.Should().Be(3);
+----
+[source, csharp]
+----
+item.DocCount.Should().BeGreaterThan(0);
 ----

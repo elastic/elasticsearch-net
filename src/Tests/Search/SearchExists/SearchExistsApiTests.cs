@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.SearchExists
 {
@@ -61,7 +58,7 @@ namespace Tests.Search.SearchExists
 			requestAsync: (c, r) => c.SearchExistsAsync(r)
 		);
 
-		protected override int ExpectStatusCode => 200;
+		protected override int ExpectStatusCode => 404;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/project/project/_search/exists";
@@ -81,11 +78,17 @@ namespace Tests.Search.SearchExists
 				}
 			}
 		};
-		
+
+		protected override void ExpectResponse(IExistsResponse response)
+		{
+			response.IsValid.Should().BeTrue();
+			response.Exists.Should().BeFalse();
+		}
+
 		protected override Func<SearchExistsDescriptor<Project>, ISearchExistsRequest> Fluent => s => s
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query(_query)
 				)
 			);
@@ -98,7 +101,5 @@ namespace Tests.Search.SearchExists
 				Query = _query
 			})
 		};
-
-		[I] public async Task ExistsIsFalse() => await this.AssertOnAllResponses(r => r.Exists.Should().BeFalse());
 	}
 }

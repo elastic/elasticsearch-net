@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexSettingsConverter))]
+	[ContractJsonConverter(typeof(IndexSettingsConverter))]
 	public interface IIndexSettings : IDynamicIndexSettings
 	{
 		/// <summary>
@@ -41,12 +38,9 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptor<IndexSettingsDescriptor>, IIndexSettings
+	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptor<IndexSettingsDescriptor, IndexSettings>
 	{
-		IndexSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
-
-		int? IIndexSettings.NumberOfShards { get; set; }
-		FileSystemStorageImplementation? IIndexSettings.FileSystemStorageImplementation { get; set; }
+		public IndexSettingsDescriptor() : base(new IndexSettings()) { }
 
 		/// <inheritdoc />
 		public IndexSettingsDescriptor NumberOfShards(int? numberOfShards) =>

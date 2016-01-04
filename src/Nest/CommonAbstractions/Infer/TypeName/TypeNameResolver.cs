@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	public class TypeNameResolver
 	{
@@ -10,7 +8,7 @@ namespace Nest.Resolvers
 
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
-			connectionSettings.ThrowIfNull("connectionSettings");
+			connectionSettings.ThrowIfNull(nameof(connectionSettings));
 			this._connectionSettings = connectionSettings;
 		}
 

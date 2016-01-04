@@ -2,18 +2,14 @@
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
+	// ReSharper disable once UnusedMember.Global
 	public class IndicesStatsDescriptorOverrides : IDescriptorOverrides
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public IEnumerable<string> SkipQueryStringParams => new []
 		{
-			get
-			{
-				return new string[]
-				{
-					"types" 
-				};
-			}
-		}
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
+			"types" 
+		};
+
+		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

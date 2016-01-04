@@ -12,7 +12,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	
-	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
+	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
 	{ 
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -44,7 +44,7 @@ namespace Nest
 		public BulkDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public BulkDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public BulkDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
 		public BulkDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -61,7 +61,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
+	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{ 
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -77,7 +77,7 @@ namespace Nest
 		public CatAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatAliasesDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatAliasesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -96,7 +96,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
+	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{ 
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -115,7 +115,7 @@ namespace Nest
 		public CatAllocationDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAllocationDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatAllocationDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatAllocationDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -134,7 +134,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
+	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{ 
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -156,7 +156,7 @@ namespace Nest
 		public CatCountDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatCountDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatCountDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -175,19 +175,19 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
+	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
-		FieldNames ICatFielddataRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_cat/fielddata</summary>
 		public CatFielddataDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields(FieldNames fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
+		public CatFielddataDescriptor Fields(Fields fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
 
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (FieldNames)fields));
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
 
 	
 		///<summary>The unit in which to display byte values</summary>
@@ -197,7 +197,7 @@ namespace Nest
 		public CatFielddataDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatFielddataDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatFielddataDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -216,7 +216,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
+	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor  : RequestDescriptorBase<CatHealthDescriptor,CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{ 
 			
@@ -224,7 +224,7 @@ namespace Nest
 		public CatHealthDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatHealthDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatHealthDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -246,7 +246,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
+	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat.html</pre></summary>
 	public partial class CatHelpDescriptor  : RequestDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
 	{ 
 			
@@ -264,7 +264,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
+	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{ 
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -289,7 +289,7 @@ namespace Nest
 		public CatIndicesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatIndicesDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatIndicesDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatIndicesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -311,7 +311,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
+	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor  : RequestDescriptorBase<CatMasterDescriptor,CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{ 
 			
@@ -319,7 +319,7 @@ namespace Nest
 		public CatMasterDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatMasterDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatMasterDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatMasterDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -338,7 +338,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeattrsDescriptor  : RequestDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters, ICatNodeattrsRequest>, ICatNodeattrsRequest
 	{ 
 			
@@ -346,7 +346,7 @@ namespace Nest
 		public CatNodeattrsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeattrsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatNodeattrsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatNodeattrsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -368,7 +368,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
+	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor  : RequestDescriptorBase<CatNodesDescriptor,CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{ 
 			
@@ -376,7 +376,7 @@ namespace Nest
 		public CatNodesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodesDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatNodesDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatNodesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -395,7 +395,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
+	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor  : RequestDescriptorBase<CatPendingTasksDescriptor,CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{ 
 			
@@ -403,7 +403,7 @@ namespace Nest
 		public CatPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPendingTasksDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatPendingTasksDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatPendingTasksDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -422,7 +422,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
+	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor  : RequestDescriptorBase<CatPluginsDescriptor,CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{ 
 			
@@ -430,7 +430,7 @@ namespace Nest
 		public CatPluginsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPluginsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatPluginsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatPluginsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -449,7 +449,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
+	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{ 
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -471,7 +471,7 @@ namespace Nest
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatRecoveryDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatRecoveryDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -490,7 +490,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
+	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{ 
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -525,7 +525,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
+	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{ 
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -547,7 +547,7 @@ namespace Nest
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatShardsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatShardsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatShardsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -566,7 +566,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
+	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
 			
@@ -574,7 +574,7 @@ namespace Nest
 		public CatThreadPoolDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatThreadPoolDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CatThreadPoolDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatThreadPoolDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -596,7 +596,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
+	///<summary>descriptor for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{ 
 		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
@@ -616,7 +616,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{ 
 			
@@ -624,10 +624,10 @@ namespace Nest
 		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterGetSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterGetSettingsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterGetSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterGetSettingsDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterGetSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -637,7 +637,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
+	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
 		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -662,10 +662,10 @@ namespace Nest
 		public ClusterHealthDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterHealthDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterHealthDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterHealthDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Wait until the specified number of shards is active</summary>
 		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards) => AssignParam(p=>p.WaitForActiveShards(wait_for_active_shards));
@@ -687,7 +687,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
+	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor  : RequestDescriptorBase<ClusterPendingTasksDescriptor,ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
 	{ 
 			
@@ -695,7 +695,7 @@ namespace Nest
 		public ClusterPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterPendingTasksDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterPendingTasksDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterPendingTasksDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -705,7 +705,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-update-settings.html</pre></summary>
 	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
 			
@@ -713,10 +713,10 @@ namespace Nest
 		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterPutSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterPutSettingsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterPutSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterPutSettingsDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -726,7 +726,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{ 
 			
@@ -740,10 +740,10 @@ namespace Nest
 		public ClusterRerouteDescriptor Metric(params string[] metric) => AssignParam(p=>p.Metric(metric));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterRerouteDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterRerouteDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterRerouteDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterRerouteDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterRerouteDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -753,7 +753,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
+	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor  : RequestDescriptorBase<ClusterStateDescriptor,ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{ 
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -779,7 +779,7 @@ namespace Nest
 		public ClusterStateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterStateDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -801,7 +801,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
+	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{ 
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -820,7 +820,7 @@ namespace Nest
 		public ClusterStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterStatsDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -830,7 +830,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-count.html</pre></summary>
 	public partial class CountDescriptor<T>  : RequestDescriptorBase<CountDescriptor<T>,CountRequestParameters, ICountRequest>, ICountRequest
 	{ 
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -905,7 +905,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html</pre></summary>
 	public partial class PercolateCountDescriptor<TDocument>  : RequestDescriptorBase<PercolateCountDescriptor<TDocument>,PercolateCountRequestParameters, IPercolateCountRequest<TDocument>>, IPercolateCountRequest<TDocument>
 	{ 
 		IndexName IPercolateCountRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
@@ -974,7 +974,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
+	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<T>  : RequestDescriptorBase<DeleteDescriptor<T>,DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
 	{ 
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1019,7 +1019,7 @@ namespace Nest
 		public DeleteDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteDescriptor<T> Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
@@ -1092,14 +1092,14 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteByQueryDescriptor<T> Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1125,7 +1125,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>descriptor for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html</pre></summary>
 	public partial class DeleteSearchTemplateDescriptor  : RequestDescriptorBase<DeleteSearchTemplateDescriptor,DeleteSearchTemplateRequestParameters, IDeleteSearchTemplateRequest>, IDeleteSearchTemplateRequest
 	{ 
 		Id IDeleteSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1149,7 +1149,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T>  : RequestDescriptorBase<DocumentExistsDescriptor<T>,DocumentExistsRequestParameters, IDocumentExistsRequest>, IDocumentExistsRequest
 	{ 
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1204,7 +1204,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
+	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{ 
 		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -1298,7 +1298,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
+	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-field-stats.html</pre></summary>
 	public partial class FieldStatsDescriptor  : RequestDescriptorBase<FieldStatsDescriptor,FieldStatsRequestParameters, IFieldStatsRequest>, IFieldStatsRequest
 	{ 
 		Indices IFieldStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1316,13 +1316,6 @@ namespace Nest
 		public FieldStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-			
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
-
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public FieldStatsDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
 
@@ -1343,7 +1336,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T>  : RequestDescriptorBase<GetDescriptor<T>,GetRequestParameters, IGetRequest>, IGetRequest
 	{ 
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1428,7 +1421,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{ 
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1454,7 +1447,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
+	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
 	{ 
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1532,7 +1525,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html</pre></summary>
 	public partial class GetSearchTemplateDescriptor  : RequestDescriptorBase<GetSearchTemplateDescriptor,GetSearchTemplateRequestParameters, IGetSearchTemplateRequest>, IGetSearchTemplateRequest
 	{ 
 		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -1556,7 +1549,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
+	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<TDocument>  : RequestDescriptorBase<IndexDescriptor<TDocument>,IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{ 
 		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -1606,13 +1599,13 @@ namespace Nest
 		public IndexDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public IndexDescriptor<TDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public IndexDescriptor<TDocument> Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndexDescriptor<TDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public IndexDescriptor<TDocument> Timestamp(TimeSpan timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public IndexDescriptor<TDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public IndexDescriptor<TDocument> Ttl(TimeSpan ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public IndexDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
@@ -1628,7 +1621,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
+	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{ 
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -1679,7 +1672,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
+	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{ 
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1733,7 +1726,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{ 
 		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1753,10 +1746,10 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public CloseIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public CloseIndexDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public CloseIndexDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CloseIndexDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CloseIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1775,7 +1768,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
+	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor  : RequestDescriptorBase<CreateIndexDescriptor,CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{ 
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -1792,10 +1785,10 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public CreateIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public CreateIndexDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public CreateIndexDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CreateIndexDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
 		public CreateIndexDescriptor UpdateAllTypes(bool update_all_types = true) => AssignParam(p=>p.UpdateAllTypes(update_all_types));
@@ -1808,7 +1801,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
+	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{ 
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1828,10 +1821,10 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteIndexDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteIndexDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1841,7 +1834,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasDescriptor  : RequestDescriptorBase<DeleteAliasDescriptor,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{ 
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1863,10 +1856,10 @@ namespace Nest
 
 	
 		///<summary>Explicit timestamp for the document</summary>
-		public DeleteAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteAliasDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteAliasDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1876,7 +1869,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html</pre></summary>
 	public partial class DeleteIndexTemplateDescriptor  : RequestDescriptorBase<DeleteIndexTemplateDescriptor,DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{ 
 		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -1887,10 +1880,10 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteIndexTemplateDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteIndexTemplateDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1900,7 +1893,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
+	///<summary>descriptor for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html</pre></summary>
 	public partial class DeleteWarmerDescriptor  : RequestDescriptorBase<DeleteWarmerDescriptor,DeleteWarmerRequestParameters, IDeleteWarmerRequest>, IDeleteWarmerRequest
 	{ 
 		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1922,7 +1915,7 @@ namespace Nest
 
 	
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteWarmerDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteWarmerDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1932,7 +1925,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
+	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor  : RequestDescriptorBase<IndexExistsDescriptor,IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{ 
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1971,7 +1964,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{ 
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2013,7 +2006,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html</pre></summary>
 	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{ 
 		Name IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2024,7 +2017,7 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IndexTemplateExistsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public IndexTemplateExistsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public IndexTemplateExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -2037,7 +2030,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
+	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor  : RequestDescriptorBase<TypeExistsDescriptor,TypeExistsRequestParameters, ITypeExistsRequest>, ITypeExistsRequest
 	{ 
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2087,7 +2080,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
+	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{ 
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2128,7 +2121,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
+	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{ 
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2163,7 +2156,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
+	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2212,7 +2205,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
 	{ 
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2254,7 +2247,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class GetAliasesDescriptor  : RequestDescriptorBase<GetAliasesDescriptor,GetAliasesRequestParameters, IGetAliasesRequest>, IGetAliasesRequest
 	{ 
 		Indices IGetAliasesRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2277,7 +2270,7 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public GetAliasesDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public GetAliasesDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -2290,15 +2283,15 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
+	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T>  : RequestDescriptorBase<GetFieldMappingDescriptor<T>,GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{ 
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		FieldNames IGetFieldMappingRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_mapping/field/{fields}</summary>
 ///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(FieldNames fields) : base(r=>r.Required("fields", fields)){}
+		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -2343,7 +2336,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
+	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T>  : RequestDescriptorBase<GetMappingDescriptor<T>,GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{ 
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2391,7 +2384,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
+	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor  : RequestDescriptorBase<GetIndexSettingsDescriptor,GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{ 
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2439,7 +2432,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{ 
 		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -2455,7 +2448,7 @@ namespace Nest
 		public GetIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public GetIndexTemplateDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexTemplateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -2468,7 +2461,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
+	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{ 
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2506,7 +2499,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
+	///<summary>descriptor for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html</pre></summary>
 	public partial class GetWarmerDescriptor  : RequestDescriptorBase<GetWarmerDescriptor,GetWarmerRequestParameters, IGetWarmerRequest>, IGetWarmerRequest
 	{ 
 		Indices IGetWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2558,7 +2551,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
+	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
 		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2578,10 +2571,10 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public OpenIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public OpenIndexDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public OpenIndexDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public OpenIndexDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public OpenIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2600,7 +2593,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
+	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-optimize.html</pre></summary>
 	public partial class OptimizeDescriptor  : RequestDescriptorBase<OptimizeDescriptor,OptimizeRequestParameters, IOptimizeRequest>, IOptimizeRequest
 	{ 
 		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2650,7 +2643,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class PutAliasDescriptor  : RequestDescriptorBase<PutAliasDescriptor,PutAliasRequestParameters, IPutAliasRequest>, IPutAliasRequest
 	{ 
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2672,10 +2665,10 @@ namespace Nest
 
 	
 		///<summary>Explicit timestamp for the document</summary>
-		public PutAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public PutAliasDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutAliasDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutAliasDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public PutAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -2685,7 +2678,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
+	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{ 
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2712,10 +2705,10 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout</summary>
-		public PutMappingDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public PutMappingDescriptor<T> Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor<T> MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutMappingDescriptor<T> MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2737,7 +2730,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
+	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-update-settings.html</pre></summary>
 	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{ 
 		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2756,7 +2749,7 @@ namespace Nest
 
 	
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateIndexSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public UpdateIndexSettingsDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2778,7 +2771,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-templates.html</pre></summary>
 	public partial class PutIndexTemplateDescriptor  : RequestDescriptorBase<PutIndexTemplateDescriptor,PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{ 
 		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
@@ -2792,10 +2785,10 @@ namespace Nest
 		public PutIndexTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
 
 		///<summary>Explicit operation timeout</summary>
-		public PutIndexTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public PutIndexTemplateDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutIndexTemplateDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return settings in flat format (default: false)</summary>
 		public PutIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -2808,7 +2801,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
+	///<summary>descriptor for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-warmers.html</pre></summary>
 	public partial class PutWarmerDescriptor  : RequestDescriptorBase<PutWarmerDescriptor,PutWarmerRequestParameters, IPutWarmerRequest>, IPutWarmerRequest
 	{ 
 		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2839,7 +2832,7 @@ namespace Nest
 
 	
 		///<summary>Specify timeout for connection to master</summary>
-		public PutWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutWarmerDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
 		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2861,7 +2854,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
+	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{ 
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2896,7 +2889,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
+	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{ 
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2937,7 +2930,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
+	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{ 
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -2970,6 +2963,9 @@ namespace Nest
 		///<summary>TODO: ?</summary>
 		public SegmentsDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
+		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public SegmentsDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
+
 		///<summary>The URL-encoded request definition</summary>
 		public SegmentsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -2978,7 +2974,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{ 
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3022,7 +3018,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
+	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor  : RequestDescriptorBase<IndicesStatsDescriptor,IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{ 
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3082,15 +3078,15 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
+	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-aliases.html</pre></summary>
 	public partial class BulkAliasDescriptor  : RequestDescriptorBase<BulkAliasDescriptor,BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
 	{ 
 			
 		///<summary>Request timeout</summary>
-		public BulkAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public BulkAliasDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public BulkAliasDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public BulkAliasDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public BulkAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3100,7 +3096,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
+	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
 	{ 
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3141,7 +3137,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T>  : RequestDescriptorBase<ValidateQueryDescriptor<T>,ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest
 	{ 
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3228,7 +3224,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
+	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor  : RequestDescriptorBase<MultiGetDescriptor,MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{ 
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -3291,7 +3287,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html</pre></summary>
 	public partial class MultiPercolateDescriptor  : RequestDescriptorBase<MultiPercolateDescriptor,MultiPercolateRequestParameters, IMultiPercolateRequest>, IMultiPercolateRequest
 	{ 
 		IndexName IMultiPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -3330,7 +3326,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
+	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{ 
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3369,7 +3365,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
+	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{ 
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -3439,7 +3435,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{ 
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -3452,7 +3448,7 @@ namespace Nest
 
 	
 		///<summary>The interval for the second sampling of threads</summary>
-		public NodesHotThreadsDescriptor Interval(string interval) => AssignParam(p=>p.Interval(interval));
+		public NodesHotThreadsDescriptor Interval(TimeSpan interval) => AssignParam(p=>p.Interval(interval));
 
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
 		public NodesHotThreadsDescriptor Snapshots(long snapshots) => AssignParam(p=>p.Snapshots(snapshots));
@@ -3467,7 +3463,7 @@ namespace Nest
 		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => AssignParam(p=>p.ThreadType(thread_type));
 
 		///<summary>Explicit operation timeout</summary>
-		public NodesHotThreadsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public NodesHotThreadsDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3477,7 +3473,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
+	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor  : RequestDescriptorBase<NodesInfoDescriptor,NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{ 
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
@@ -3500,7 +3496,7 @@ namespace Nest
 		public NodesInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
 		///<summary>Explicit operation timeout</summary>
-		public NodesInfoDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public NodesInfoDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3510,7 +3506,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
+	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{ 
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
@@ -3564,7 +3560,7 @@ namespace Nest
 		public NodesStatsDescriptor Types(params string[] types) => AssignParam(p=>p.Types(types));
 
 		///<summary>Explicit operation timeout</summary>
-		public NodesStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public NodesStatsDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3574,7 +3570,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-percolate.html</pre></summary>
 	public partial class PercolateDescriptor<TDocument>  : RequestDescriptorBase<PercolateDescriptor<TDocument>,PercolateRequestParameters, IPercolateRequest<TDocument>>, IPercolateRequest<TDocument>
 	{ 
 		IndexName IPercolateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
@@ -3664,7 +3660,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
+	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3693,7 +3689,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>descriptor for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-template.html</pre></summary>
 	public partial class PutSearchTemplateDescriptor  : RequestDescriptorBase<PutSearchTemplateDescriptor,PutSearchTemplateRequestParameters, IPutSearchTemplateRequest>, IPutSearchTemplateRequest
 	{ 
 		Id IPutSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3720,7 +3716,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/2.0/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3743,7 +3739,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
+	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
 		ScrollId IScrollRequest.ScrollId => Self.RouteValues.Get<ScrollId>("scroll_id");
@@ -3763,7 +3759,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
+	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
 	{ 
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3825,7 +3821,7 @@ namespace Nest
 		public SearchDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchDescriptor<T> Scroll(string scroll) => AssignParam(p=>p.Scroll(scroll));
+		public SearchDescriptor<T> Scroll(TimeSpan scroll) => AssignParam(p=>p.Scroll(scroll));
 
 		///<summary>Search operation type</summary>
 		public SearchDescriptor<T> SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
@@ -3857,7 +3853,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
+	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-exists.html</pre></summary>
 	public partial class SearchExistsDescriptor<T>  : RequestDescriptorBase<SearchExistsDescriptor<T>,SearchExistsRequestParameters, ISearchExistsRequest>, ISearchExistsRequest
 	{ 
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3932,7 +3928,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4030,7 +4026,7 @@ namespace Nest
 		public SearchTemplateDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateDescriptor<T> Scroll(string scroll) => AssignParam(p=>p.Scroll(scroll));
+		public SearchTemplateDescriptor<T> Scroll(TimeSpan scroll) => AssignParam(p=>p.Scroll(scroll));
 
 		///<summary>Search operation type</summary>
 		public SearchTemplateDescriptor<T> SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
@@ -4043,7 +4039,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor  : RequestDescriptorBase<SnapshotDescriptor,SnapshotRequestParameters, ISnapshotRequest>, ISnapshotRequest
 	{ 
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4056,7 +4052,7 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public SnapshotDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
@@ -4069,7 +4065,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryDescriptor  : RequestDescriptorBase<CreateRepositoryDescriptor,CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
 	{ 
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4080,10 +4076,10 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CreateRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public CreateRepositoryDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public CreateRepositoryDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public CreateRepositoryDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Whether to verify the repository after creation</summary>
 		public CreateRepositoryDescriptor Verify(bool verify = true) => AssignParam(p=>p.Verify(verify));
@@ -4096,7 +4092,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor  : RequestDescriptorBase<DeleteSnapshotDescriptor,DeleteSnapshotRequestParameters, IDeleteSnapshotRequest>, IDeleteSnapshotRequest
 	{ 
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4109,7 +4105,7 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteSnapshotDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4119,7 +4115,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryDescriptor  : RequestDescriptorBase<DeleteRepositoryDescriptor,DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
 	{ 
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
@@ -4130,10 +4126,10 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteRepositoryDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteRepositoryDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteRepositoryDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4143,7 +4139,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor  : RequestDescriptorBase<GetSnapshotDescriptor,GetSnapshotRequestParameters, IGetSnapshotRequest>, IGetSnapshotRequest
 	{ 
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4156,7 +4152,7 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public GetSnapshotDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public GetSnapshotDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4166,7 +4162,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{ 
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
@@ -4179,7 +4175,7 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public GetRepositoryDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetRepositoryDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -4192,7 +4188,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class RestoreDescriptor  : RequestDescriptorBase<RestoreDescriptor,RestoreRequestParameters, IRestoreRequest>, IRestoreRequest
 	{ 
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4205,7 +4201,7 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RestoreDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public RestoreDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
 		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
@@ -4218,7 +4214,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor  : RequestDescriptorBase<SnapshotStatusDescriptor,SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{ 
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4235,7 +4231,7 @@ namespace Nest
 
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotStatusDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public SnapshotStatusDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public SnapshotStatusDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4245,7 +4241,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
+	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryDescriptor  : RequestDescriptorBase<VerifyRepositoryDescriptor,VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
 	{ 
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
@@ -4256,10 +4252,10 @@ namespace Nest
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public VerifyRepositoryDescriptor MasterTimeout(TimeSpan master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public VerifyRepositoryDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public VerifyRepositoryDescriptor Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public VerifyRepositoryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4269,7 +4265,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
+	///<summary>descriptor for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-suggesters.html</pre></summary>
 	public partial class SuggestDescriptor<T>  : RequestDescriptorBase<SuggestDescriptor<T>,SuggestRequestParameters, ISuggestRequest>, ISuggestRequest
 	{ 
 		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4310,7 +4306,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
 		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
@@ -4395,7 +4391,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
+	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{ 
 		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
@@ -4455,13 +4451,13 @@ namespace Nest
 		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(TimeSpan timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public UpdateDescriptor<TDocument, TPartialDocument> Timestamp(TimeSpan timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public UpdateDescriptor<TDocument, TPartialDocument> Ttl(TimeSpan ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Version(long version) => AssignParam(p=>p.Version(version));

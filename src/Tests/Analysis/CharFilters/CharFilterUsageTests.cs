@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.Integration;
-using Tests.Framework.MockData;
-using static Nest.Static;
 
 namespace Tests.Analysis.CharFilters
 {
-	public class CharFilterUsageTests : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class CharFilterUsageTests : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{
@@ -39,8 +32,8 @@ namespace Tests.Analysis.CharFilters
 		/**
 		 * 
 		 */
-		protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => FluentExample;
-		public static Func<IndexSettingsDescriptor, IIndexSettings> FluentExample => s => s
+		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
+		public static Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> FluentExample => s => s
 			.Analysis(a => a
 				.CharFilters(charfilters => charfilters
 					.HtmlStrip("stripMe")

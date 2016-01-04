@@ -1,11 +1,9 @@
-using Elasticsearch.Net.Connection;
-using System;
 using System.IO;
-using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 	public interface IElasticsearchSerializer
 	{
@@ -14,6 +12,8 @@ namespace Elasticsearch.Net.Serialization
 		Task<T> DeserializeAsync<T>(Stream responseStream, CancellationToken cancellationToken = default(CancellationToken));
 
 		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
+
+		string CreatePropertyName(MemberInfo memberInfo);
 	}
 
 	public static class ElasticsearchSerializerExtensions
@@ -25,6 +25,10 @@ namespace Elasticsearch.Net.Serialization
 				serializer.Serialize(data, ms, formatting);
 				return ms.ToArray();
 			}
+		}
+		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		{
+			return serializer.SerializeToBytes(data, formatting).Utf8String();
 		}
 
 	}

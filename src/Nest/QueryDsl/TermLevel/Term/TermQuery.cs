@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -14,10 +12,10 @@ namespace Nest
 
 	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
-		bool IQuery.Conditionless => IsConditionless(this);
+		protected override bool Conditionless => IsConditionless(this);
 		public object Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.Term = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.Term = this;
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
@@ -27,7 +25,7 @@ namespace Nest
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class
 	{
-		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
+		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		object ITermQuery.Value { get; set; }
 
 		public TDescriptor Value(object value)

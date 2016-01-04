@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
 namespace Nest
 {
 	///<inheritdoc/>
@@ -11,6 +7,6 @@ namespace Nest
 		public string CacheSize { get; internal set; }
 
 		///<inheritdoc/>
-		public TimeUnitExpression CacheExpire { get; internal set; }
+		public Time CacheExpire { get; internal set; }
 	}
 }

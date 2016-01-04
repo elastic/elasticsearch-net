@@ -6,42 +6,39 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<FiltersAggregator>))]
-	public interface IFiltersAggregator : IBucketAggregator
+	[ContractJsonConverter(typeof(AggregationJsonConverter<FiltersAggregation>))]
+	public interface IFiltersAggregation : IBucketAggregation
 	{
 		[JsonProperty("filters")]
-		Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
+		Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
 	}
 
-	public class FiltersAggregator : BucketAggregator, IFiltersAggregator
+	public class FiltersAggregation : BucketAggregationBase, IFiltersAggregation
 	{
-		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
-	}
+		public Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
 
-	public class FiltersAgg : BucketAgg, IFiltersAggregator
-	{
-		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
+		internal FiltersAggregation() { }
 
-		public FiltersAgg(string name) : base(name) { }
+		public FiltersAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Filters = this;
 	}
 
-	public class FiltersAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<FiltersAggregatorDescriptor<T>, IFiltersAggregator, T>
-		, IFiltersAggregator
+	public class FiltersAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<FiltersAggregationDescriptor<T>, IFiltersAggregation, T>
+		, IFiltersAggregation
 		where T : class
 	{
-		Union<INamedFiltersContainer, List<IQueryContainer>> IFiltersAggregator.Filters { get; set; }
+		Union<INamedFiltersContainer, List<QueryContainer>> IFiltersAggregation.Filters { get; set; }
 
-		public FiltersAggregatorDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, NamedFiltersContainerBase> selector) =>
-			Assign(a => a.Filters = selector?.Invoke(new NamedFiltersContainerDescriptor<T>()));
+		public FiltersAggregationDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>
+			Assign(a => a.Filters = new Union<INamedFiltersContainer, List<QueryContainer>>(selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
-		public FiltersAggregatorDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, IQueryContainer>[] selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
 
-		public FiltersAggregatorDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, IQueryContainer>> selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+		public FiltersAggregationDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
 
 	}
 }

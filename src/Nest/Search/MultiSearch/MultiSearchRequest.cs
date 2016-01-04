@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -30,8 +28,8 @@ namespace Nest
 
 		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
 		{
-			name.ThrowIfNull("name");
-			searchSelector.ThrowIfNull("searchSelector");
+			name.ThrowIfNull(nameof(name));
+			searchSelector.ThrowIfNull(nameof(searchSelector));
 			var descriptor = searchSelector(new SearchDescriptor<T>());
 			if (descriptor == null)
 				return this;

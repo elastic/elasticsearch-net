@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public interface IConnectionPool
 	{
@@ -27,7 +25,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		bool SupportsPinging { get; }
 
-		DateTime LastUpdate { get; set; }
+		DateTime LastUpdate { get; }
 
 		/// <summary>
 		/// Whether or not SSL is being using
@@ -44,7 +42,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
 		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
-		IEnumerable<Node> CreateView();
+		IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null);
 
 		/// <summary>
 		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion

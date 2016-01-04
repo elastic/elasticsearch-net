@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
-using System.Reactive;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Reactive.Threading.Tasks;
-using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Framework.Integration
@@ -21,7 +20,7 @@ namespace Tests.Framework.Integration
 	public class ElasticsearchNode : IDisposable
 	{
 		private static readonly object _lock = new object();
-		// <installpath> <> <plugin folder name>
+		// <installpath> <> <plugin folder prefix>
 		private readonly Dictionary<string, string> SupportedPlugins = new Dictionary<string, string>
 		{
 			{ "delete-by-query", "delete-by-query" },
@@ -40,8 +39,9 @@ namespace Tests.Framework.Integration
 
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
-		public string ClusterName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
-		public string NodeName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
+		public string Prefix { get; set; }
+		public string ClusterName { get; }
+		public string NodeName { get; }
 		public string RepositoryPath { get; private set; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
@@ -49,11 +49,21 @@ namespace Tests.Framework.Integration
 		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
-		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpawnIfAlreadyRunning)
+		public ElasticsearchNode(
+			string elasticsearchVersion, 
+			bool runningIntegrations, 
+			bool doNotSpawnIfAlreadyRunning, 
+			string prefix
+			)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
+			this.Prefix = prefix.ToLowerInvariant();
+			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
+			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
+			this.NodeName = $"{this.Prefix}-node-{suffix}";
+
 			this.BootstrapWork = _blockingSubject;
 
 			if (!runningIntegrations)
@@ -72,9 +82,8 @@ namespace Tests.Framework.Integration
 			this.DownloadAndExtractElasticsearch();
 		}
 
-		public IObservable<ElasticsearchMessage> Start()
+		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
 		{
-
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
@@ -83,24 +92,42 @@ namespace Tests.Framework.Integration
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
-				var alreadyUp = new ElasticClient().RootNodeInfo();
+				var client = TestClient.GetClient();
+				var alreadyUp = client.RootNodeInfo();
 				if (alreadyUp.IsValid)
 				{
-					this.Started = true;
-					this.Port = 9200;
-					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, "0", alreadyUp.Version.LuceneVersion);
-					this._blockingSubject.OnNext(handle);
-					if (!handle.WaitOne(timeout, true))
-						throw new ApplicationException($"Could launch tests on already running elasticsearch within {timeout}");
-					return Observable.Empty<ElasticsearchMessage>();
+					var checkPlugins = client.CatPlugins();
+
+					if (checkPlugins.IsValid)
+					{
+						foreach (var supportedPlugin in SupportedPlugins)
+						{
+							if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
+								throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
+						}
+
+						this.Started = true;
+						this.Port = 9200;
+						this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
+						this._blockingSubject.OnNext(handle);
+						if (!handle.WaitOne(timeout, true))
+							throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
+
+						return Observable.Empty<ElasticsearchMessage>();
+					}
 				}
 			}
-
-			this._process = new ObservableProcess(this.Binary,
+			var settings = new string[]
+			{
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}",
-				$"-Des.path.repo={this.RepositoryPath}"
-			);
+				$"-Des.path.repo={this.RepositoryPath}",
+				$"-Des.script.inline=on",
+				$"-Des.script.indexed=on"
+			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
+
+			this._process = new ObservableProcess(this.Binary, settings.ToArray());
+
 			var observable = Observable.Using(() => this._process, process => process.Start())
 				.Select(consoleLine => new ElasticsearchMessage(consoleLine));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
@@ -128,8 +155,19 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				this._blockingSubject.OnNext(handle);
-				this.Started = true;
+				var healthyCluster = this.Client().ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
+				if (healthyCluster.IsValid)
+				{
+					this._blockingSubject.OnNext(handle);
+					this.Started = true;
+				}
+				else
+				{
+					this._blockingSubject.OnError(new Exception("Did not see a healthy cluster after the node started for 30 seconds"));
+					handle.Set();
+					this.Stop();
+				}
+
 			}
 			else if (s.TryGetPortNumber(out port))
 			{
@@ -148,11 +186,14 @@ namespace Tests.Framework.Integration
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
+					Console.WriteLine($"Download elasticsearch: {this.Version} ...");
 					new WebClient().DownloadFile(downloadUrl, localZip);
+					Console.WriteLine($"Downloaded elasticsearch: {this.Version}");
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
+					Console.WriteLine($"Unziping elasticsearch: {this.Version} ...");
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 
@@ -179,7 +220,6 @@ namespace Tests.Framework.Integration
 				var stopwords = Path.Combine(analysFolder, "stopwords") + ".txt";
 				if (!File.Exists(stopwords)) File.WriteAllText(stopwords, "");
 			}
-
 		}
 
 		private void InstallPlugins()
@@ -189,31 +229,65 @@ namespace Tests.Framework.Integration
 			{
 				var installPath = plugin.Key;
 				var localPath = plugin.Value;
-				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "bin", "plugins", localPath);
+				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", localPath);
+
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
 
+				// assume plugin already installed
+				if (Directory.Exists(pluginFolder)) continue;
+
+				Console.WriteLine($"Installing elasticsearch plugin: {localPath} ...");
 				var timeout = TimeSpan.FromSeconds(60);
 				var handle = new ManualResetEvent(false);
-				Task.Factory.StartNew(() =>
+				Task.Run(() =>
 				{
 					using (var p = new ObservableProcess(pluginBat, "install", installPath))
 					{
 						var o = p.Start();
-						o.Subscribe(Console.WriteLine,
+						Console.WriteLine($"Calling: {pluginBat} install {installPath}");
+						o.Subscribe(e=>Console.WriteLine(e),
 							(e) =>
 							{
+								Console.WriteLine($"Failed installing elasticsearch plugin: {localPath} ");
 								handle.Set();
 								throw e;
 							},
-							() => handle.Set()
-							);
+							() => {
+								Console.WriteLine($"Finished installing elasticsearch plugin: {localPath} exit code: {p.ExitCode}");
+								handle.Set();
+							});
+						if (!handle.WaitOne(timeout, true))
+							throw new ApplicationException($"Could not install ${installPath} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
 					throw new ApplicationException($"Could not install ${installPath} within {timeout}");
 			}
 		}
+		
+		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
+		{
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port, createPool);
+			return client;
+		}
 
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
+		{
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port);
+			return client;
+		}
+
+		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
+		{
+			IConnectionConfigurationValues values = settings;
+			var headers = values.Headers ?? new NameValueCollection();
+			headers.Add("ClusterName", this.ClusterName);
+			return settings;
+		}
 
 		public void Stop()
 		{
@@ -227,9 +301,9 @@ namespace Tests.Framework.Integration
 			this._process?.Dispose();
 			this._processListener?.Dispose();
 
-			if (this.Info != null)
+			if (this.Info != null && this.Info.Pid.HasValue)
 			{
-				var esProcess = Process.GetProcessById(this.Info.Pid);
+				var esProcess = Process.GetProcessById(this.Info.Pid.Value);
 				Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");
 				esProcess.Kill();
 				esProcess.WaitForExit(5000);
@@ -243,13 +317,13 @@ namespace Tests.Framework.Integration
 				Console.WriteLine($"attempting to delete cluster data: {dataFolder}");
 				Directory.Delete(dataFolder, true);
 			}
-			var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
-			var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
-			foreach (var f in files)
-			{
-				Console.WriteLine($"attempting to delete log file: {f}");
-				File.Delete(f);
-			}
+			//var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
+			//var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
+			//foreach (var f in files)
+			//{
+			//	Console.WriteLine($"attempting to delete log file: {f}");
+			//	File.Delete(f);
+			//}
 			if (Directory.Exists(this.RepositoryPath))
 			{
 				Console.WriteLine("attempting to delete repositories");
@@ -347,13 +421,14 @@ namespace Tests.Framework.Integration
 	public class ElasticsearchNodeInfo
 	{
 		public string Version { get; }
-		public int Pid { get; }
+		public int? Pid { get; }
 		public string Build { get; }
 
 		public ElasticsearchNodeInfo(string version, string pid, string build)
 		{
 			this.Version = version;
-			Pid = int.Parse(pid);
+			if (!string.IsNullOrEmpty(pid))
+				Pid = int.Parse(pid);
 			Build = build;
 		}
 

@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
-using Nest;
-using Xunit;
-using Tests.Framework.Integration;
 using System.IO;
+using System.Linq;
 using FluentAssertions;
+using Nest;
+using Tests.Framework;
+using Tests.Framework.Integration;
+using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class SnapshotCrudTests
-		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IAcknowledgedResponse>
+		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
 	{
+		private readonly static string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
+
 		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
+			//TODO move to own cluster collection with its own bootstrap
 			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
@@ -28,6 +28,8 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 			if (!create.IsValid || !create.Acknowledged)
 				throw new Exception("Setup: failed to create snapshot repository");
+
+			var createIndex = this.Client.CreateIndex(SnapshotIndexName);
 		}
 
 		private string _repositoryLocation;
@@ -42,8 +44,15 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			requestAsync: (s, c, r) => c.SnapshotAsync(r)
 		);
 
-		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName) { WaitForCompletion = true };
-		protected ISnapshotRequest CreateFluent(string snapshotName, SnapshotDescriptor d) => d.WaitForCompletion();
+		protected SnapshotRequest CreateInitializer(string snapshotName) => new SnapshotRequest(_repositoryName, snapshotName)
+		{
+			WaitForCompletion = true,
+			Indices = SnapshotIndexName
+		};
+
+		protected ISnapshotRequest CreateFluent(string snapshotName, SnapshotDescriptor d) => d
+			.WaitForCompletion()
+			.Indices(SnapshotIndexName);
 
 		protected override LazyResponses Read() => Calls<GetSnapshotDescriptor, GetSnapshotRequest, IGetSnapshotRequest, IGetSnapshotResponse>(
 			ReadInitializer,
@@ -57,7 +66,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 		protected GetSnapshotRequest ReadInitializer(string snapshotName) => new GetSnapshotRequest(_repositoryName, snapshotName);
 		protected IGetSnapshotRequest ReadFluent(string snapshotName, GetSnapshotDescriptor d) => null;
 
-		protected override LazyResponses Delete() => Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteSnapshotDescriptor, DeleteSnapshotRequest, IDeleteSnapshotRequest, IDeleteSnapshotResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteSnapshot(_repositoryName, s, f),

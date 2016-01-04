@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -16,8 +13,8 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 		public SegmentsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Segments(Static.AllIndices, f),
-			fluentAsync: (client, f) => client.SegmentsAsync(Static.AllIndices, f),
+			fluent: (client, f) => client.Segments(Infer.AllIndices, f),
+			fluentAsync: (client, f) => client.SegmentsAsync(Infer.AllIndices, f),
 			request: (client, r) => client.Segments(r),
 			requestAsync: (client, r) => client.SegmentsAsync(r)
 		);
@@ -29,10 +26,6 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 
 		protected override Func<SegmentsDescriptor, ISegmentsRequest> Fluent => d => d;
 
-		protected override SegmentsRequest Initializer => new SegmentsRequest(Static.AllIndices);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
+		protected override SegmentsRequest Initializer => new SegmentsRequest(Infer.AllIndices);
 	}
 }

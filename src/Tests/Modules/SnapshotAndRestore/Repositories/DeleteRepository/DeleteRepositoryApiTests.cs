@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -10,7 +8,7 @@ using Xunit;
 namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteRepositoryApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteRepositoryRequest, DeleteRepositoryDescriptor, DeleteRepositoryRequest>
+	public class DeleteRepositoryApiTests : ApiTestBase<IDeleteRepositoryResponse, IDeleteRepositoryRequest, DeleteRepositoryDescriptor, DeleteRepositoryRequest>
 	{
 		public DeleteRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

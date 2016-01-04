@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nest
+﻿namespace Nest
 {
-	public class GeoBoundsMetric : IMetricAggregation
+	public class GeoBoundsMetric : IMetric
 	{
 		public GeoBoundsMetric()
 		{

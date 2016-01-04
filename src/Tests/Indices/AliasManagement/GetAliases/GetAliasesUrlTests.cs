@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.AliasManagement.GetAliases
@@ -17,6 +12,7 @@ namespace Tests.Indices.AliasManagement.GetAliases
 			Name name = "hardcoded";
 			IndexName index = "index";
 			await GET($"/_aliases")
+#pragma warning disable 618 //Testing an obsolete method
 				.Fluent(c=>c.GetAliases())
 				.Request(c=>c.GetAliases(new GetAliasesRequest()))
 				.FluentAsync(c=>c.GetAliasesAsync())
@@ -41,6 +37,7 @@ namespace Tests.Indices.AliasManagement.GetAliases
 				.FluentAsync(c=>c.GetAliasesAsync(b=>b.Index(index).Name(name)))
 				.RequestAsync(c=>c.GetAliasesAsync(new GetAliasesRequest(index, name)))
 				;
+#pragma warning restore 618
 
 		}
 	}

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -9,7 +8,7 @@ namespace Nest
 	public partial interface ICountRequest 
 	{
 		[JsonProperty("query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
 	public partial interface ICountRequest<T> : ICountRequest
 		where T :class
@@ -23,7 +22,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 	}
 
 	public partial class CountRequest<T>
@@ -32,7 +31,7 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Count")]
@@ -42,9 +41,9 @@ namespace Nest
 		protected override HttpMethod HttpMethod =>
 			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 		
-		IQueryContainer ICountRequest.Query { get; set; }
+		QueryContainer ICountRequest.Query { get; set; }
 
 		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

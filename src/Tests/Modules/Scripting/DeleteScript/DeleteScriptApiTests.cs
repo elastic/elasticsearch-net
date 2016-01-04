@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -10,7 +8,7 @@ using Xunit;
 namespace Tests.Modules.Scripting.DeleteScript
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteScriptApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>
+	public class DeleteScriptApiTests : ApiTestBase<IDeleteScriptResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>
 	{
 		public DeleteScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

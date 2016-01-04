@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Nest;
 using Tests.Framework;
-using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
@@ -15,7 +10,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 		[U] public async Task Urls()
 		{
 			var repositories = "repos1, repos2";
-			var snapshot = "snap";
 
 			await GET($"/_snapshot/repos1,repos2")
 				.Fluent(c => c.GetRepository(s=>s.RepositoryName(repositories)))

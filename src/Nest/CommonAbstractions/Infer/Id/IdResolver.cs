@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace Nest.Resolvers
+namespace Nest
 {
 	public class IdResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
-		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+		private readonly ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
+		private static readonly MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
 			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
@@ -23,22 +21,22 @@ namespace Nest.Resolvers
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
-			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
+			Func<T, string> idSelector = this.GetIdFor;
 			return idSelector;
 		}
 
 		internal static Func<object, object> MakeDelegate<T, U>(MethodInfo @get)
 		{
-			var f = (Func<T, U>)@get.CreateDelegate(typeof(Func<T, U>));
+			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
 			return t => f((T)t);
 		}
 
 		public string GetIdFor(Type type, object @object)
 		{
 			Func<object, string> cachedLookup;
-			string FieldName;
+			string field;
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out field);
 
 			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);
@@ -51,29 +49,29 @@ namespace Nest.Resolvers
 			{
 				return null;
 			}
-				var getMethod = idProperty.GetGetMethod();
-				var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
+			var getMethod = idProperty.GetGetMethod();
+			var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
 			var func = (Func<object, object>)generic.Invoke(null, new[] { getMethod });
-				cachedLookup = o =>
-				{
+			cachedLookup = o =>
+			{
 				var v = func(o);
-					return v != null ? v.ToString() : null;
-				};
+				return v?.ToString();
+			};
 			if (preferLocal)
-					LocalIdDelegates.TryAdd(type, cachedLookup);
+				LocalIdDelegates.TryAdd(type, cachedLookup);
 			else
-					IdDelegates.TryAdd(type, cachedLookup);
-				return cachedLookup(@object);
-			}
+				IdDelegates.TryAdd(type, cachedLookup);
+			return cachedLookup(@object);
+		}
 
 		public string GetIdFor<T>(T @object)
-			{
+		{
 			if (@object == null)
 				return null;
 
 			//var type = typeof(T);
 			return GetIdFor(@object.GetType(), @object);
-			}
+		}
 
 		private PropertyInfo GetInferredId(Type type)
 		{

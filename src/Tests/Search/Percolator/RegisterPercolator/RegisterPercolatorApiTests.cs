@@ -1,59 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.Percolator.RegisterPercolator
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class RegisterPercolatorApiTests
-		: ApiIntegrationTestBase<IRegisterPercolateResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	[Collection(IntegrationContext.Indexing)]
+	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolateResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
-		public RegisterPercolatorApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RegisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var createIndex = this.Client.CreateIndex(this.CallIsolatedValue + "-index", c=>c
+				.Mappings(mm=>mm
+					.Map<Project>(m=>m.AutoMap())
+				)
+			);
+			if (!createIndex.IsValid)
+				throw new Exception($"Setup: failed to first register percolator {this.CallIsolatedValue}");
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.RegisterPercolator(_name, f),
-			fluentAsync: (c, f) => c.RegisterPercolatorAsync(_name, f),
+			fluent: (c, f) => c.RegisterPercolator(this.CallIsolatedValue, f),
+			fluentAsync: (c, f) => c.RegisterPercolatorAsync(this.CallIsolatedValue, f),
 			request: (c, r) => c.RegisterPercolator(r),
 			requestAsync: (c, r) => c.RegisterPercolatorAsync(r)
 		);
 
-		private string _name = "name-of-perc";
-
 		protected override int ExpectStatusCode => 201;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/.percolator/{_name}";
+		protected override string UrlPath => $"/{CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
 
-		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(_name);
+		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(this.CallIsolatedValue);
 		
 		protected override object ExpectJson => new
 		{
 			query = new
 			{
-				match = new
-				{
-					name = new
-					{
-						query = "nest"
-					}
-				}
+				match = new { name = new { query = "nest" } }
 			},
 			language = "c#",
 			commits = 5000
 		};
 
+		protected override void ExpectResponse(IRegisterPercolateResponse response)
+		{
+			response.Created.Should().BeTrue();
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+			response.Id.Should().NotBeNullOrEmpty();
+			response.Version.Should().BeGreaterThan(0);
+		}
+
 		protected override Func<RegisterPercolatorDescriptor<Project>, IRegisterPercolatorRequest> Fluent => r => r
+			.Index(this.CallIsolatedValue + "-index")
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query("nest")
 				)
 			)
@@ -62,7 +72,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 				.Add("commits", 5000)
 			);
 
-		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(typeof(Project), _name)
+		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(this.CallIsolatedValue + "-index", this.CallIsolatedValue)
 		{
 			Query = new QueryContainer(new MatchQuery
 			{

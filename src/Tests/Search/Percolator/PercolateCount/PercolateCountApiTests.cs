@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Xunit;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Search.Percolator.PercolateCount
 {
@@ -33,7 +30,7 @@ namespace Tests.Search.Percolator.PercolateCount
 		protected override PercolateCountDescriptor<Project> NewDescriptor() => new PercolateCountDescriptor<Project>(typeof(Project), typeof(Project));
 
 		protected override bool SupportsDeserialization => false;
-	
+
 		protected override object ExpectJson => new
 		{
 			doc = Project.InstanceAnonymous,
@@ -49,24 +46,30 @@ namespace Tests.Search.Percolator.PercolateCount
 			}
 		};
 
+		protected override void ExpectResponse(IPercolateCountResponse response)
+		{
+			response.Took.Should().BeGreaterThan(0);
+			response.Took.Should().BeGreaterThan(0);
+		}
+
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => c => c
 			.Document(Project.Instance)
 			.Query(q => q
-				.Range(r => r
-					.OnField(p => p.StartedOn)
-					.Greater(new DateTime(2014, 1, 1), "yyyy/MM/dd")
+				.DateRange(r => r
+					.Field(p => p.StartedOn)
+					.GreaterThan("2014/01/01")
 				)
 			);
 
 		protected override PercolateCountRequest<Project> Initializer => new PercolateCountRequest<Project>
 		{
 			Document = Project.Instance,
-			Query = new QueryContainer(new RangeQuery
+			Query = new QueryContainer(new DateRangeQuery
 			{
 				Field = "startedOn",
 				GreaterThan = "2014/01/01"
 			})
-        };
+		};
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
@@ -82,7 +85,7 @@ namespace Tests.Search.Percolator.PercolateCount
 			requestAsync: (c, r) => c.PercolateCountAsync(r)
 		);
 
-		private int _percId = 1;
+		private string _percId = Project.Instance.Name;
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;

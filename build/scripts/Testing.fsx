@@ -26,7 +26,8 @@ module Tests =
             {
                 p with 
                     XmlOutputPath = Some <| xmlOutput 
-                    HtmlOutputPath = Some <| htmlOutput 
+                    HtmlOutputPath = Some <| htmlOutput
+                    Parallel = ParallelMode.All //Not really much faster since most is guarded by collections
             } )
 
     let RunAllIntegrationTests(commaSeparatedEsVersions) =
@@ -40,15 +41,16 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            !! Paths.Source("**/bin/Release/Tests.dll") 
+            !! Paths.Source("**/Tests/bin/Release/Tests.dll") 
                 |> xUnit2 (fun p -> 
                 { 
                     p with 
                         XmlOutputPath = Some <| xmlOutput 
                         HtmlOutputPath = Some <| htmlOutput 
+                        TimeOut = TimeSpan.FromMinutes(30.0)
                 })
 
-    let Notify = fun _ -> 
+    let Notify = fun _ ->
         match fileExists xmlOutput with
         | false -> ignore
         | _ ->
@@ -79,12 +81,14 @@ module Tests =
             | 0 ->
                 let successMessage = sprintf "\"All %i tests are passing!\"" total
                 printfn "%s" successMessage
-                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
+                if isLocalBuild then
+                    Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
                 ignore
             | _ ->
                 let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
                 printfn "%s" errorMessage
-                Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
+                if isLocalBuild then
+                    Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
                 ignore
 
     let RunContinuous = fun _ ->

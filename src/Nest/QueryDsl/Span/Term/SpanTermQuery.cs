@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(SpanTermQueryJsonConverter))]
+	[JsonConverter(typeof(FieldNameQueryJsonConverter<SpanTermQuery>))]
 	public interface ISpanTermQuery : ITermQuery, ISpanSubQuery
 	{
 	}
 	
 	public class SpanTermQuery : FieldNameQueryBase, ISpanTermQuery
 	{
-		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
+		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer c) => c.SpanTerm = this;
+		internal override void WrapInContainer(IQueryContainer c) => c.SpanTerm = this;
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -19,13 +16,6 @@ namespace Nest
 	{
 		public NestedProperty() : base("nested") { }
 
-		public NestedProperty(NestedAttribute attribute)
-			: base("nested", attribute)
-		{
-			IncludeInParent = attribute.IncludeInParent;
-			IncludeInRoot = attribute.IncludeInRoot;
-		}
-
 		public bool? IncludeInParent { get; set; }
 		public bool? IncludeInRoot { get; set; }
 	}
@@ -38,6 +28,8 @@ namespace Nest
 	{
 		bool? INestedProperty.IncludeInParent { get; set; }
 		bool? INestedProperty.IncludeInRoot { get; set; }
+
+		public NestedPropertyDescriptor() : base("nested") { }
 
 		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool includeInParent = true) =>
 			Assign(a => a.IncludeInParent = includeInParent);

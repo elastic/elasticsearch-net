@@ -1,0 +1,19 @@
+[source, csharp]
+----
+d => d
+.Search<Project>(s=>s
+	.Query(q=>q
+		.MatchAll()
+	)
+)
+----
+[source, csharp]
+----
+new PutWarmerRequest(CallIsolatedValue)
+		{
+Search = new SearchRequest<Project>
+{
+	Query = new MatchAllQuery()
+}
+		}
+----

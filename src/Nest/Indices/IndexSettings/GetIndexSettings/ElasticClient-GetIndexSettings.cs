@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -15,13 +14,13 @@ namespace Nest
 		IGetIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
+		IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest request);
 
 		/// <inheritdoc/>
 		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
+		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request);
 	}
 
 	public partial class ElasticClient
@@ -31,9 +30,9 @@ namespace Nest
 			this.GetIndexSettings(selector?.Invoke(new GetIndexSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest) => 
+		public IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest request) => 
 			this.Dispatcher.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse>(
-				getIndexSettingsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatch<GetIndexSettingsResponse>(p)
 			);
 
@@ -42,9 +41,9 @@ namespace Nest
 			this.GetIndexSettingsAsync(selector?.Invoke(new GetIndexSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest) => 
+		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse, IGetIndexSettingsResponse>(
-				getIndexSettingsRequest,
+				request,
 				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatchAsync<GetIndexSettingsResponse>(p)
 			);
 	}

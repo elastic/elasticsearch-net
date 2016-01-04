@@ -1,59 +1,58 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.MockData;
-using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Static;
+using static Nest.Infer;
+using Field = Nest.Field;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
-	public class FieldNameInferrence
+	public class FieldInferrence
 	{
 		/** # Strongly typed field access 
 		 * 
 		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
 		 * NEST allows you to use C# expressions to strongly type these field path strings. 
 		 *
-		 * These expressions are assigned to a type called `FieldName` and there are several ways to create a instance of that type
+		 * These expressions are assigned to a type called `Field` and there are several ways to create a instance of that type
 		 */
 
 		/** Using the constructor directly is possible but rather involved */
 		[U] public void UsingConstructors()
 		{
-			var fieldString = new FieldName {Name = "name"};
+			var fieldString = new Field {Name = "name"};
 
 			/** especially when using C# expressions since these can not be simply new'ed*/
 			Expression<Func<Project, object>> expression = p => p.Name;
-			var fieldExpression = FieldName.Create(expression);
+			var fieldExpression = Field.Create(expression);
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)
 				.WhenSerializing(fieldString);
 		}
 		
-		/** Therefor you can also implicitly convert strings and expressions to FieldName's */
+		/** Therefor you can also implicitly convert strings and expressions to Field's */
 		[U] public void ImplicitConversion()
 		{
-			FieldName fieldString = "name";
+			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
 			Expression<Func<Project, object>> expression = p => p.Name;
-			FieldName fieldExpression = expression;
+			Field fieldExpression = expression;
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)
 				.WhenSerializing(fieldString);
 		}
 
-		/** to ease creating FieldName's from expressions there is a static Property class you can use */
+		/** to ease creating Field's from expressions there is a static Property class you can use */
 		[U] public void UsingStaticPropertyField()
 		{
-			FieldName fieldString = "name";
+			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
 			var fieldExpression = Field<Project>(p=>p.Name);
@@ -70,18 +69,18 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		}
 		
 		/** By default NEST will camelCase all the field names to be more javascripty */
-		[U] public void SetDefaultFieldNameInferrer()
+		[U] public void DefaultFieldNameInferrer()
 		{
-			/** using SetDefaultFieldNameInferrer on ConnectionSettings you can change this behavior */
-			var setup = WithConnectionSettings(s => s.SetDefaultFieldNameInferrer(p => p.ToUpper()));
+			/** using DefaultFieldNameInferrer() on ConnectionSettings you can change this behavior */
+			var setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p.ToUpper()));
 
 			setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
 			/** However string are *always* passed along verbatim */
-			setup.Expect("NaMe").WhenSerializing<FieldName>("NaMe");
+			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
 			/** if you want the same behavior for expressions simply do nothing in the default inferrer */
-			setup = WithConnectionSettings(s => s.SetDefaultFieldNameInferrer(p => p));
+			setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 			setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 		}
 
@@ -128,7 +127,52 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			var suffix = "unanalyzed";
 			Expect("metadata.var.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 			Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
+		}
 
+		/** Annotations 
+		* 
+		* When using NEST's property attributes you can specify a new name for the properties
+		*/
+		public class BuiltIn
+		{
+			[String(Name="naam")]
+			public string Name { get; set; }
+		}
+		[U] public void BuiltInAnnotiatons()
+		{
+			Expect("naam").WhenSerializing(Field<BuiltIn>(p=>p.Name));
+		}
+		
+		/** 
+		* Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
+		* Here we ask the default JsonNetSerializer and it takes JsonProperty into account
+		*/
+		public class SerializerSpecific
+		{
+			[JsonProperty("nameInJson")]
+			public string Name { get; set; }
+		}
+		[U] public void SerializerSpecificAnnotations()
+		{
+			Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p=>p.Name));
+		}
+
+		/** 
+		* If both are specified NEST takes precedence though 
+		*/
+		public class Both
+		{
+			[String(Name="naam")]
+			[JsonProperty("nameInJson")]
+			public string Name { get; set; }
+		}
+		[U] public void NestAttributeTakesPrecedence()
+		{
+			Expect("naam").WhenSerializing(Field<Both>(p=>p.Name));
+			Expect(new
+			{
+				naam = "Martijn Laarman"
+			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
 		}
 	}
 }

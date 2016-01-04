@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.Connection
+namespace Elasticsearch.Net
 {
 	public interface IRequestPipeline : IDisposable
 	{
@@ -12,6 +12,8 @@ namespace Elasticsearch.Net.Connection
 		bool SniffsOnStaleCluster { get; }
 		bool StaleClusterState { get; }
 		
+		List<Audit> AuditTrail { get; }
+
 		DateTime StartedOn { get; }
 		bool IsTakingTooLong { get; }
 
@@ -38,7 +40,10 @@ namespace Elasticsearch.Net.Connection
 		void SniffOnStaleCluster();
 		Task SniffOnStaleClusterAsync();
 
-		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<ElasticsearchException> seenExceptions)
+		void SniffOnConnectionFailure();
+		Task SniffOnConnectionFailureAsync();
+
+		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<PipelineException> seenExceptions)
 			where TReturn : class;
 	}
 }

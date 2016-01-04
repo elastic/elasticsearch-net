@@ -1,10 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateRangeExpression>))]
-	public interface IDateRangeExpression : INestSerializable
+	public interface IDateRangeExpression 
 	{
 		[JsonProperty(PropertyName = "from")]
 		DateMath From { get; set; }

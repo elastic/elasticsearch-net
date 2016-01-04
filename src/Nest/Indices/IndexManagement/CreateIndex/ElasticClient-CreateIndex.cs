@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
@@ -10,43 +9,43 @@ namespace Nest
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
+		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html</a>
 		/// </summary>
-		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
-		IIndicesOperationResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
+		/// <param name="selector">A descriptor that describes the parameters for the create index operation</param>
+		ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
+		ICreateIndexResponse CreateIndex(ICreateIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
+		Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);
+		Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) =>
-			this.CreateIndex(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(index)));
+		public ICreateIndexResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) =>
+			this.CreateIndex(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest) => 
-			this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
-				createIndexRequest,
-				this.LowLevelDispatch.IndicesCreateDispatch<IndicesOperationResponse>
+		public ICreateIndexResponse CreateIndex(ICreateIndexRequest request) => 
+			this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse>(
+				request,
+				this.LowLevelDispatch.IndicesCreateDispatch<CreateIndexResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) => 
-			this.CreateIndexAsync(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(index)));
+		public Task<ICreateIndexResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> selector = null) => 
+			this.CreateIndexAsync(selector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest) => 
-			this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				createIndexRequest,
-				this.LowLevelDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>
+		public Task<ICreateIndexResponse> CreateIndexAsync(ICreateIndexRequest request) => 
+			this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, CreateIndexResponse, ICreateIndexResponse>(
+				request,
+				this.LowLevelDispatch.IndicesCreateDispatchAsync<CreateIndexResponse>
 			);
 	}
 }
