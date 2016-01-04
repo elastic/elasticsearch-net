@@ -171,6 +171,8 @@ namespace Nest
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
+			hitDynamic.Parent = d._parent;
+			hitDynamic.Routing = d._routing;
 			hitDynamic.Sorts = d.sort;
 			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
