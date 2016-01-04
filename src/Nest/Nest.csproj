@@ -677,7 +677,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
-    <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
