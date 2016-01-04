@@ -113,21 +113,16 @@ namespace Nest
 			where T : class
 		{
 			var jObject = CreateIntermediateJObject(reader);
-			object fieldSelection;
-			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject, out fieldSelection);
+			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject);
 			var hit = GetHitTypeInstance(concreteType);
 			PopulateHit(serializer, jObject.CreateReader(), hit);
 
 			Action<object, object> cachedLookup;
 			if (ConcreteTypeConverter.FieldDelegates.TryGetValue(concreteType, out cachedLookup))
-			{
-				cachedLookup(hit, fieldSelection);
 				return hit;
-			}
 			
 			var generic = ConcreteTypeConverter.MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
 			cachedLookup = (h, f) => generic.Invoke(null, new[] { h, f });
-			cachedLookup(hit, fieldSelection);
 			ConcreteTypeConverter.FieldDelegates.TryAdd(concreteType, cachedLookup);
 			return hit;
 		}
@@ -149,7 +144,7 @@ namespace Nest
 		internal static Type GetConcreteTypeUsingSelector<T>(
 			JsonSerializer serializer, 
 			ConcreteTypeConverter<T> realConcreteConverter, 
-			JObject jObject, out object selection)
+			JObject jObject)
 			where T: class
 		{
 			var settings = serializer.GetConnectionSettings();
@@ -175,14 +170,6 @@ namespace Nest
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
 			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object {};
 			var concreteType = selector(o, hitDynamic);
-			
-			Type fieldSelectionType;
-			if (!ConcreteTypeConverter.TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
-			{
-				fieldSelectionType = typeof(FieldValues).MakeGenericType(concreteType);
-				ConcreteTypeConverter.TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
-			}
-			selection = fieldSelectionType.CreateInstance(settings, fieldsDictionary);
 			return concreteType;
 		}
 	}

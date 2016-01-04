@@ -99,7 +99,7 @@ namespace Tests.Framework
 			var expectedUri = new UriBuilder("http", "localhost", Port, path, "?" + query).Uri;
 
 			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
-			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
+			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true&", "").Replace("pretty=true", "")).Uri;
 
 			var queries = new[] { u.Query, expectedUri.Query };
 			if (queries.All(string.IsNullOrWhiteSpace)) return;

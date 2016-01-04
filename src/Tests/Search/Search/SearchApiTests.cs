@@ -105,6 +105,38 @@ namespace Tests.Search.Search
 	{
 		public SearchApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override object ExpectJson => new
+		{
+			from = 10,
+			size = 20,
+			query = new
+			{
+				match_all = new { }
+			},
+			aggs = new
+			{
+				startDates = new
+				{
+					terms = new
+					{
+						field = "startedOn"
+					}
+				}
+			},
+			post_filter = new
+			{
+				term = new
+				{
+					state = new
+					{
+						value = "Stable"
+					}
+
+				}
+			},
+			fields = new[] { "name", "numberOfCommits" }
+		};
+
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 		.From(10)
 		.Size(20)
