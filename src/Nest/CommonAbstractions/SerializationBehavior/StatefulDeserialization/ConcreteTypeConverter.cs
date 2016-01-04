@@ -13,19 +13,9 @@ namespace Nest
 	{
 		private static readonly ConcurrentDictionary<Type, JsonConverter> _hitTypes = new ConcurrentDictionary<Type, JsonConverter>();
 
-		public override bool CanWrite { get { return false; } }
-		public override bool CanRead { get { return true; } }
-
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
+		public override bool CanWrite => false;
+		public override bool CanRead => true;
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -40,17 +30,9 @@ namespace Nest
 			return converter.ReadJson(reader, objectType, existingValue, serializer);
 		}
 
-	}
-
-	internal class FieldsSetter
-	{
-		//This method is used through reflection (cached though)
-		// do not remove
-		private static void SetFields<TFieldsType>(
-			Hit<TFieldsType> hit, FieldValues fieldSelection)
-			where TFieldsType : class
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			hit.Fields = fieldSelection;
+			throw new NotSupportedException();
 		}
 	}
 
@@ -61,6 +43,7 @@ namespace Nest
 
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanConvert(Type objectType) => typeof(IHit<object>).IsAssignableFrom(objectType);
 
 		public ConcreteTypeConverter() {}
 
@@ -83,31 +66,15 @@ namespace Nest
 			instance.Fields = new FieldValues(serializer.GetConnectionSettings().Inferrer, instance.Fields);
 			return instance;
 		}
-
-
 	
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IHit<object>).IsAssignableFrom(objectType);
+			throw new NotSupportedException();
 		}
 	}
 
 	internal static class ConcreteTypeConverter 
 	{
-		internal static ConcurrentDictionary<Type, Action<object, object>> 
-			FieldDelegates = new ConcurrentDictionary<Type, Action<object, object>>();
-
-		internal static ConcurrentDictionary<Type, Type> TypeToFieldTypes = 
-			new ConcurrentDictionary<Type, Type>();
-
-		internal static MethodInfo MakeDelegateMethodInfo = 
-			typeof(FieldsSetter).GetMethod("SetFields", BindingFlags.Static | BindingFlags.NonPublic);
-
 		internal static object GetUsingConcreteTypeConverter<T>(
 			JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
 			where T : class
@@ -116,19 +83,13 @@ namespace Nest
 			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject);
 			var hit = GetHitTypeInstance(concreteType);
 			PopulateHit(serializer, jObject.CreateReader(), hit);
-
-			Action<object, object> cachedLookup;
-			if (ConcreteTypeConverter.FieldDelegates.TryGetValue(concreteType, out cachedLookup))
-				return hit;
-			
-			var generic = ConcreteTypeConverter.MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
-			cachedLookup = (h, f) => generic.Invoke(null, new[] { h, f });
-			ConcreteTypeConverter.FieldDelegates.TryAdd(concreteType, cachedLookup);
 			return hit;
 		}
+
 		private static void PopulateHit(JsonSerializer serializer, JsonReader reader, object hit) {
 			serializer.Populate(reader, hit);
 		}
+
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
 			JObject jObject = JObject.Load(reader);
