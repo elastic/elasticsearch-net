@@ -6,9 +6,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 	// ReSharper disable once ClassNeverInstantiated.Global
 	public class ApiUrl
 	{
-		//these are aliases we much rather pass along inside the querystring
+		//these are aliases we much rather pass along inside the querystring (or body)
 		//allowing these will cause too many overloads being generated which helps noone
-		public static readonly string[] BlackListRouteValues = { "{search_groups}", "{indexing_types}", "{body}"};
+		public static readonly string[] BlackListRouteValues = { "{search_groups}", "{indexing_types}", "{body}", "{scroll_id}" };
 		private IEnumerable<string> _paths;
 
 		public string Path { get; set; }
