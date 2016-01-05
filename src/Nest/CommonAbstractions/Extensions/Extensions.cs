@@ -34,11 +34,13 @@ namespace Nest
 
 			//query is conditionless but the container is marked as strict, throw exception
 			if (c != null && c.IsStrict) 
-				throw new ArgumentException("Query is conditionless but strict is turned on"); 
+				throw new ArgumentException("Query is conditionless but strict is turned on");
 
 			//query is conditionless return an empty container that can later be rewritten
 			return null;
 		}
+
+		internal static bool IsNullOrConditionless(this QueryContainer c) => c == null || c.IsConditionless;
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
