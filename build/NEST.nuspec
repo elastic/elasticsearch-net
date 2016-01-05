@@ -3,15 +3,15 @@
 	<metadata>
 		<id>NEST</id>
 		<version>2.0.0-alpha1</version>
-		<title>NEST - Elasticsearch Client</title>
-		<authors>Elasticsearch Inc. and contributors</authors>
-		<owners>Elasticsearch Inc.</owners>
+		<title>NEST - Elasticsearch .NET client</title>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-		<summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of request and responses. Uses and exposes Elasticsearch.Net</summary>
+		<summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</summary>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of request and responses. Uses and exposes Elasticsearch.Net</description>
+		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</description>
 		<dependencies>
 			<dependency id="Elasticsearch.Net" version="2.0.0-alpha1"/>
 			<dependency id="Newtonsoft.Json" version="[7,8)" />
