@@ -21,6 +21,12 @@ namespace Nest
 		/// <summary>
 		/// Longitude
 		/// </summary>
+		[Obsolete("Use the Longitude property")]
+		public double Longtitude { get { return Longitude; } }
+
+		/// <summary>
+		/// Longitude
+		/// </summary>
 		public double Longitude { get { return _longitude; } }
 		private readonly double _longitude;
 
