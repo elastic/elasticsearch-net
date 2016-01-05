@@ -42,7 +42,8 @@ namespace Nest
 		public decimal? MaxTermFrequency { get; set; }
 	}
 
-	public class TermSuggesterDescriptor<T> : SuggesterBaseDescriptor<TermSuggesterDescriptor<T>, ITermSuggester, T>, ITermSuggester 
+	public class TermSuggesterDescriptor<T> 
+		: SuggestDescriptorBase<TermSuggesterDescriptor<T>, ITermSuggester, T>, ITermSuggester 
 		where T : class
 	{
 		int? ITermSuggester.PrefixLen { get; set; }

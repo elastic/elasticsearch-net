@@ -21,7 +21,7 @@ namespace Nest
 		public IDictionary<string, object> Context { get; set; }
 	}
 
-	public class CompletionSuggesterDescriptor<T> : SuggesterBaseDescriptor<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester 
+	public class CompletionSuggesterDescriptor<T> : SuggestDescriptorBase<CompletionSuggesterDescriptor<T>, ICompletionSuggester, T>, ICompletionSuggester 
 		where T : class
 	{
 		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
