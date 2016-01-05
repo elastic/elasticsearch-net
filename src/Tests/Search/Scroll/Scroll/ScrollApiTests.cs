@@ -25,7 +25,7 @@ namespace Tests.Search.Scroll.Scroll
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_search/scroll?scroll=1m";
+		protected override string UrlPath => $"/_search/scroll";
 
 		protected override ScrollDescriptor<Project> NewDescriptor() => new ScrollDescriptor<Project>();
 
@@ -43,7 +43,7 @@ namespace Tests.Search.Scroll.Scroll
 
 		protected override void OnAfterCall(IElasticClient client)
 		{
-			client.ClearScroll(_scrollId);
+			client.ClearScroll(cs => cs.ScrollId(_scrollId));
 		}
 	}
 }

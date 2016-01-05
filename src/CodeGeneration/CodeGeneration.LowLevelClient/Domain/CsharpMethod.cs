@@ -59,7 +59,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			};
 		}
 
-		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
+		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any(); 
 
 		private string MetricPrefix => this.RequestType.Replace("Request", "");
 		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase)

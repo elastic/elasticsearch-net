@@ -837,36 +837,6 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain"));
 		
-		///<summary>Represents a DELETE on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClearScroll<T>(string scroll_id, PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
-		
-		///<summary>Represents a DELETE on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">A comma-separated list of scroll IDs to clear</param>
-		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(string scroll_id, PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
-		
 		///<summary>Represents a DELETE on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
@@ -6553,34 +6523,6 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_search/scroll"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">The scroll ID</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ScrollGet<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">The scroll ID</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), null, _params(requestParameters));
-		
 		///<summary>Represents a POST on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
@@ -6608,36 +6550,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_search/scroll"), body, _params(requestParameters));
-		
-		///<summary>Represents a POST on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">The scroll ID</param>
-		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Scroll<T>(string scroll_id, PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
-		
-		///<summary>Represents a POST on /_search/scroll/{scroll_id} 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</para>	
-	    ///</summary>
-		///<param name="scroll_id">The scroll ID</param>
-		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(string scroll_id, PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

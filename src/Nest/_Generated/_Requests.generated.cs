@@ -828,19 +828,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters> 
 	{
-		ScrollIds ScrollId { get; }
 	 } 
 	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest  : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
-			/// <summary>/_search/scroll/{scroll_id}</summary>
-///<param name="scroll_id">Optional, accepts null</param>
-		public ClearScrollRequest(ScrollIds scroll_id) : base(r=>r.Optional("scroll_id", scroll_id)){}
-		
-
-		/// <summary>/_search/scroll</summary>
+			/// <summary>/_search/scroll</summary>
 		public ClearScrollRequest() : base(){}
 		
 
@@ -4002,20 +3995,13 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IScrollRequest : IRequest<ScrollRequestParameters> 
 	{
-		ScrollId ScrollId { get; }
 	 } 
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest  : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-		ScrollId IScrollRequest.ScrollId => Self.RouteValues.Get<ScrollId>("scroll_id");
 			/// <summary>/_search/scroll</summary>
 		public ScrollRequest() : base(){}
-		
-
-		/// <summary>/_search/scroll/{scroll_id}</summary>
-///<param name="scroll_id">Optional, accepts null</param>
-		public ScrollRequest(ScrollId scroll_id) : base(r=>r.Optional("scroll_id", scroll_id)){}
 		
 
 			///<summary>The URL-encoded request definition</summary>

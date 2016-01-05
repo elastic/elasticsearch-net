@@ -16,8 +16,8 @@ namespace Tests.Search.Scroll.ClearScroll
 		private string _scrollId = "default-for-unit-tests";
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.ClearScroll(_scrollId, f),
-			fluentAsync: (c, f) => c.ClearScrollAsync(_scrollId, f),
+			fluent: (c, f) => c.ClearScroll(f),
+			fluentAsync: (c, f) => c.ClearScrollAsync(f),
 			request: (c, r) => c.ClearScroll(r),
 			requestAsync: (c, r) => c.ClearScrollAsync(r)
 		);
@@ -29,7 +29,7 @@ namespace Tests.Search.Scroll.ClearScroll
 
 		protected override ClearScrollDescriptor NewDescriptor() => new ClearScrollDescriptor();
 
-		protected override Func<ClearScrollDescriptor, IClearScrollRequest> Fluent => null;
+		protected override Func<ClearScrollDescriptor, IClearScrollRequest> Fluent => cs => cs.ScrollId(_scrollId);
 
 		protected override ClearScrollRequest Initializer => new ClearScrollRequest(_scrollId);
 
