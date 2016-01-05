@@ -22,10 +22,20 @@ namespace Tests.Search.Scroll.ClearScroll
 			requestAsync: (c, r) => c.ClearScrollAsync(r)
 		);
 
+		protected override object ExpectJson => new
+		{
+			scroll_id = new []
+			{
+				_scrollId
+			}
+		};
+
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/_search/scroll";
+		protected override bool SupportsDeserialization => false;
+		
 
 		protected override ClearScrollDescriptor NewDescriptor() => new ClearScrollDescriptor();
 
