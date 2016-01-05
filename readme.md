@@ -1,4 +1,4 @@
-Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasticsearch](https://github.com/elasticsearch/elasticsearch) .NET clients.
+Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasticsearch](https://github.com/elastic/elasticsearch) .NET clients.
 
 ### Compatibility Matrix
 <table>
@@ -24,7 +24,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
     	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x_BuildAndUnitTest&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest_BuildAndUnitTest_RunBuildBat)/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST"><img src="http://img.shields.io/nuget/v/NEST.svg?style=flat-square"><img src="http://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>   
+    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/v/NEST.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>   
     </tr>
     <tr>
     	<td><code>2.x</code></td>
@@ -248,7 +248,7 @@ This will execute the same request, but this time `myJson` will be serialized by
 [Pull requests](https://github.com/elastic/elasticsearch-net/pulls) and [issues](https://github.com/elastic/elasticsearch-net/issues) are very much welcomed and appreciated.  If you'd like to report a bug or submit a feature/bug fix then please read our [contributing guide](contributing.md) first!
 
 #### Many thanks to:
-* [Q42](http://www.q42.nl) for supporting the development of NEST
+* [Q42](https://q42.nl/) for supporting the development of NEST
 * [redgate](http://www.red-gate.com) for supplying @Mpdreamz with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses
 * [jetBrains](http://www.jetbrains.com) for supplying @Mpdreamz with a dotTrace profiler and Resharper license
 * [CodeBetter](http://codebetter.com) for hosting the continuous integration for NEST
