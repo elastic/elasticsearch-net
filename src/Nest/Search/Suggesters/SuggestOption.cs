@@ -28,6 +28,9 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 
+		[JsonProperty("highlighted")]
+		public string Highlighted { get; internal set; }
+
 		public T Payload<T>(JsonSerializer serializer = null) 
 			where T : class
 		{
