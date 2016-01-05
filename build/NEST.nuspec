@@ -6,12 +6,12 @@
 		<title>NEST - Elasticsearch Client</title>
 		<authors>Elasticsearch Inc. and contributors</authors>
 		<owners>Elasticsearch Inc.</owners>
-		<iconUrl>http://nest.azurewebsites.net/images/nest-nuget-icon.png</iconUrl>
+		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-		<summary>Strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</summary>
+		<summary>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of request and responses. Uses and exposes Elasticsearch.Net</summary>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
+		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of request and responses. Uses and exposes Elasticsearch.Net</description>
 		<dependencies>
 			<dependency id="Elasticsearch.Net" version="2.0.0-alpha1"/>
 			<dependency id="Newtonsoft.Json" version="[7,8)" />
