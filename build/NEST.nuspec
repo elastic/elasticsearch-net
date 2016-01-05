@@ -4,8 +4,8 @@
 		<id>NEST</id>
 		<version>2.0.0-alpha1</version>
 		<title>NEST - Elasticsearch Client</title>
-		<authors>Elasticsearch Inc. and contributors</authors>
-		<owners>Elasticsearch Inc.</owners>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>

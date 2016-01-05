@@ -5,7 +5,7 @@
 		<version>2.0.0-alpha1</version>
 		<title>Elasticsearch.Net - official low level elasticsearch client</title>
 		<authors>Elastic and contributors</authors>
-		<owners>Elasticsearch Inc.</owners>
+		<owners>Elastic</owners>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
