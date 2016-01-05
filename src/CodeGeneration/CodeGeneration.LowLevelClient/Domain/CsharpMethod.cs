@@ -59,8 +59,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 			};
 		}
 
-		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any(); 
-
 		private string MetricPrefix => this.RequestType.Replace("Request", "");
 		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase)
 			? this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
@@ -68,7 +66,13 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public IEnumerable<Constructor> RequestConstructors()
 		{
 			var ctors = new List<Constructor>();
+
 			if (IsPartless) return ctors;
+
+			// Do not generate ctors for scroll apis
+			// Scroll ids should always be passed as part of the request body and enforced via manual ctors
+			if (IsScroll) return ctors;
+
 			var m = this.RequestType;
 			foreach (var url in this.Url.Paths)
 			{
@@ -272,6 +276,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 			return setters;
 		}
 
+
+		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
+		private bool IsScroll => this.Url.Parts.All(p => p.Key == "scroll_id");
 		public bool IndicesAndTypes => AllParts.Count() == 2 && AllParts.All(p => p.Type == "list") && AllParts.All(p => new[] { "index", "type" }.Contains(p.Name));
 		public bool IsDocumentPath => AllParts.Count() == 3 && AllParts.All(p => p.Type != "list") && AllParts.All(p => new[] { "index", "type", "id" }.Contains(p.Name));
 		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));

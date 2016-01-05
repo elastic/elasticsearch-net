@@ -833,11 +833,7 @@ namespace Nest
 	public partial class ClearScrollRequest  : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		protected IClearScrollRequest Self => this;
-			/// <summary>/_search/scroll</summary>
-		public ClearScrollRequest() : base(){}
-		
-
-			///<summary>The URL-encoded request definition</summary>
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -4000,11 +3996,7 @@ namespace Nest
 	public partial class ScrollRequest  : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		protected IScrollRequest Self => this;
-			/// <summary>/_search/scroll</summary>
-		public ScrollRequest() : base(){}
-		
-
-			///<summary>The URL-encoded request definition</summary>
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
