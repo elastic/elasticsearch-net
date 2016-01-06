@@ -121,7 +121,9 @@ namespace Nest
 			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
 				return propertyDictionary;
 
-			return  _jsonContract.PropertiesOfAll(t, memberSerialization);
+			var properties = _jsonContract.PropertiesOfAll(t, memberSerialization);
+			_cachedTypeProperties.TryAdd(t, properties);
+			return properties;
 		}
 
 	}
