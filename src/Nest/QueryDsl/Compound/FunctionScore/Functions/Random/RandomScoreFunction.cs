@@ -7,20 +7,21 @@ namespace Nest
 	public interface IRandomScoreFunction : IScoreFunction
 	{
 		[JsonProperty(PropertyName = "seed")]
-		int? Seed { get; set; }
+		Union<long, string> Seed { get; set; }
 	}
 
 	public class RandomScoreFunction: FunctionScoreFunctionBase, IRandomScoreFunction
 	{
-		public int? Seed { get; set; }
+		public Union<long, string> Seed { get; set; }
 	}
 
 	public class RandomScoreFunctionDescriptor<T> : FunctionScoreFunctionBaseDescriptor<RandomScoreFunctionDescriptor<T>, IRandomScoreFunction,T>, IRandomScoreFunction
 		where T : class
 	{
-		int? IRandomScoreFunction.Seed { get; set; }
+		Union<long, string> IRandomScoreFunction.Seed { get; set; }
 
-		public RandomScoreFunctionDescriptor<T> Seed(int? seed) => Assign(a => a.Seed = seed);
+		public RandomScoreFunctionDescriptor<T> Seed(long? seed) => Assign(a => a.Seed = seed);
+		public RandomScoreFunctionDescriptor<T> Seed(string seed) => Assign(a => a.Seed = seed);
 
 	}
 }

@@ -84,6 +84,7 @@ namespace Nest
 
 		bool? IgnoreUnavalable { get; }
 	}
+
 	public partial interface ISearchRequest<T> : ISearchRequest { }
 
 	public partial class SearchRequest
