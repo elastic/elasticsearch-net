@@ -12,6 +12,7 @@ namespace Nest
 {
 	public class ElasticContractResolver : DefaultContractResolver
 	{
+		private readonly IList<Func<Type, JsonConverter>> _contractConverters;
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
 
 
@@ -25,8 +26,9 @@ namespace Nest
 		/// </summary>
 		internal JsonConverterPiggyBackState PiggyBackState { get; set; }
 
-		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
+		public ElasticContractResolver(IConnectionSettingsValues connectionSettings, IList<Func<Type, JsonConverter>> contractConverters)
 		{
+			this._contractConverters = contractConverters;
 			this.ConnectionSettings = connectionSettings;
 		}
 
@@ -48,9 +50,9 @@ namespace Nest
 			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
 			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
 
-			if (this.ConnectionSettings.ContractConverters.HasAny())
+			if (this._contractConverters.HasAny())
 			{
-				foreach (var c in this.ConnectionSettings.ContractConverters)
+				foreach (var c in this._contractConverters)
 				{
 					var converter = c(objectType);
 					if (converter == null)
