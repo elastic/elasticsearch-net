@@ -111,8 +111,8 @@ namespace Elasticsearch.Net
 		private bool _enableHttpCompression;
 		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
 
-		private bool _httpPipeliningEnabled = true;
-		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
+		private bool _enableHttpPipelining = true;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _enableHttpPipelining;
 
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
@@ -305,7 +305,7 @@ namespace Elasticsearch.Net
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
-		public T HttpPipeliningEnabled(bool enabled = true) => Assign(a => a._httpPipeliningEnabled = enabled);
+		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
 	}
 }
 

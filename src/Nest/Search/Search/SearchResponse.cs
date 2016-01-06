@@ -13,7 +13,7 @@ namespace Nest
 		IDictionary<string, IAggregation> Aggregations { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
-		int ElapsedMilliseconds { get; }
+		int Took { get; }
 		bool TimedOut { get; }
 		bool TerminatedEarly { get; }
 		string ScrollId { get; }
@@ -64,7 +64,7 @@ namespace Nest
 		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 
 		[JsonProperty(PropertyName = "took")]
-		public int ElapsedMilliseconds { get; internal set; }
+		public int Took { get; internal set; }
 
 		[JsonProperty("timed_out")]
 		public bool TimedOut { get; internal set; }
