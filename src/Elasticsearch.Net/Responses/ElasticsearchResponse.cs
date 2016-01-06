@@ -9,7 +9,7 @@ namespace Elasticsearch.Net
 	{
 		public static readonly string PrintFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
 		public static readonly string ErrorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
-		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
+		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
 	}
 
 	public class ElasticsearchResponse<T> : IApiCallDetails
