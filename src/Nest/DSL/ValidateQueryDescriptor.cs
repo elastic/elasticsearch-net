@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,6 +10,7 @@ namespace Nest
     public interface IValidateQueryRequest : IQueryPath<ValidateQueryRequestParameters>
     {
         [JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
         IQueryContainer Query { get; set; }
     }
 

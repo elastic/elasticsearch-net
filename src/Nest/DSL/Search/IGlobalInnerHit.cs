@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
 	public interface IGlobalInnerHit : IInnerHits
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]

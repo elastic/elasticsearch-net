@@ -18,8 +18,16 @@ namespace Nest.Resolvers.Converters.Aggregations
 		{
 			var f = value as IFilterAggregator;
 			if (f == null || f.Filter == null) return;
+			var custom = f.Filter as ICustomJson;
+			if (custom == null)
+				return;
 
-			serializer.Serialize(writer, f.Filter);
+			var json = custom.GetCustomJson();
+			var rawJson = json as RawJson;
+			if (rawJson != null)
+				writer.WriteRawValue(rawJson.Data);
+			else 
+				serializer.Serialize(writer, json);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

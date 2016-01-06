@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Nest
 	public interface ISpanMultiTermQuery : ISpanSubQuery
 	{
 		[JsonProperty("match")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Match { get; set; }
 
 		[JsonProperty("boost")]

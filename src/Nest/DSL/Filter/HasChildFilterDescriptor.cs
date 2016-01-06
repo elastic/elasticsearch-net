@@ -20,6 +20,7 @@ namespace Nest
 		int? MaxChildren { get; set; }
 
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("filter")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
@@ -10,6 +11,7 @@ namespace Nest
 	public interface IDeleteByQueryRequest : IQueryPath<DeleteByQueryRequestParameters>
 	{
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 	}
 

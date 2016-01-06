@@ -11,6 +11,7 @@ namespace Nest
 	public interface IPhraseSuggestCollate
 	{
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]

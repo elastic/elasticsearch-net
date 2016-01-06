@@ -9,6 +9,7 @@ namespace Nest
 	public interface IRescoreQuery
 	{
 		[JsonProperty("rescore_query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("query_weight")]

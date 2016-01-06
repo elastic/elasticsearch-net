@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
@@ -10,6 +11,7 @@ namespace Nest
 	{
 		
 		[JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 	}
 	public interface ICountRequest<T> : ICountRequest

@@ -1,4 +1,5 @@
 using System;
+using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json;
 
@@ -8,6 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(FilterAggregatorConverter))]
 	public interface IFilterAggregator : IBucketAggregator
 	{
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 	}
 

@@ -47,6 +47,7 @@ namespace Nest
 		ScriptedHeuristic Script { get; set; }
 
 		[JsonProperty("background_filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer BackgroundFilter { get; set; }
 
 	}

@@ -1,5 +1,6 @@
 ﻿using System;
 using Elasticsearch.Net;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,6 +9,7 @@ namespace Nest
     public interface IExplainRequest : IDocumentOptionalPath<ExplainRequestParameters>
     {
         [JsonProperty("query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
         IQueryContainer Query { get; set; }
     }
 	

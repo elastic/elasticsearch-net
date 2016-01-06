@@ -104,7 +104,6 @@ namespace Nest
 		}
 	}
 
-
 	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, T>
 		where T : class
 	{

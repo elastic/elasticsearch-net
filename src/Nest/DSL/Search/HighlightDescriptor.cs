@@ -48,6 +48,7 @@ namespace Nest
 		string BoundaryChars { get; set; }
 
 		[JsonProperty("highlight_query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer HighlightQuery { get; set; }
 	}
 

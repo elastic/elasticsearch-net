@@ -45,6 +45,7 @@ namespace Nest
 		IGeoDistanceFacetRequest GeoDistance { get; set; }
 
 		[JsonProperty(PropertyName = "facet_filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer FacetFilter { get; set; }
 	}
 
@@ -69,6 +70,7 @@ namespace Nest
 		public IDateHistogramFacetRequest DateHistogram { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		public IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
@@ -85,6 +87,7 @@ namespace Nest
 		public IGeoDistanceFacetRequest GeoDistance { get; set; }
 
 		[JsonProperty(PropertyName = "facet_filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		public IFilterContainer FacetFilter { get; set; }
 	}
 }
