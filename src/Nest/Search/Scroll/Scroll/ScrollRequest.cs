@@ -1,19 +1,26 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
 	public partial interface IScrollRequest 
 	{
+		[JsonProperty("scroll")]
 		Time Scroll { get; set; }
+
+		[JsonProperty("scroll_id")]
+		string ScrollId { get; set; }
 	}
 	
-	//TODO signal to codegen to not generate constructors for this one
-	// Expose scroll id as a property to send via the body
 	public partial class ScrollRequest 
 	{
 		public Time Scroll { get; set; }
 
-		public ScrollRequest(ScrollId scrollId, Time scrollTimeout) : this(scrollId)
+		public string ScrollId { get; set; }
+
+		public ScrollRequest(string scrollId, Time scroll)
 		{
-			this.Scroll = scrollTimeout;
+			this.Scroll = scroll;
+			this.ScrollId = scrollId;
 		}
 	}
 
@@ -21,7 +28,11 @@
 	{
 		Time IScrollRequest.Scroll { get; set; }
 
+		string IScrollRequest.ScrollId { get; set; }
+
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public ScrollDescriptor<T> Scroll(Time scroll) => Assign(a => a.Scroll = scroll);
+
+		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
 	}
 }

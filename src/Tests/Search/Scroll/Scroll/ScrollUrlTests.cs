@@ -11,7 +11,7 @@ namespace Tests.Search.Scroll.Scroll
 	{
 		[U] public async Task Urls()
 		{
-			await POST("/_search/scroll?scroll=1m")
+			await POST("/_search/scroll")
 				.Fluent(c=>c.Scroll<CommitActivity>("1m", "scroll_id"))
 				.Request(c=>c.Scroll<CommitActivity>(new ScrollRequest("scroll_id", TimeSpan.FromMinutes(1))))
 				.FluentAsync(c=>c.ScrollAsync<CommitActivity>("1m", "scroll_id"))

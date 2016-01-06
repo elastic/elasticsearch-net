@@ -8,10 +8,13 @@ namespace Nest
 	{
 		[JsonProperty("text")]
 		string Text { get; set; }
+
 		[JsonProperty("term")]
 		ITermSuggester Term { get; set; }
+
 		[JsonProperty("phrase")]
 		IPhraseSuggester Phrase { get; set; }
+
 		[JsonProperty("completion")]
 		ICompletionSuggester Completion { get; set; }
 	}

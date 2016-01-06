@@ -20,7 +20,7 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class;
 
 		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
+		ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
 			where T : class;
 
 		///<inheritdoc/>
@@ -28,7 +28,7 @@ namespace Nest
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
 			where T : class;
 
 	}
@@ -38,34 +38,22 @@ namespace Nest
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class => 
 			this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
 				request,
-				(p, d) =>
-				{
-					var id = p.ScrollId.GetString(this.ConnectionSettings);
-					p.RouteValues.Remove("scroll_id");
-					p.RequestParameters.AddQueryString("scroll", p.Scroll);
-					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, id);
-				}
+				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, d)
 			);
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class =>
+		public ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class =>
 			this.Scroll<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class => 
 			this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				request,
-				(p, d) =>
-				{
-					var id = p.ScrollId.GetString(this.ConnectionSettings);
-					p.RouteValues.Remove("scroll_id");
-					p.RequestParameters.AddQueryString("scroll", p.Scroll);
-					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, id);
-				}
+				(p, d) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, d)
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
+		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
 			this.ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 	}
 }
