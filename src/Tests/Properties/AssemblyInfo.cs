@@ -2,7 +2,7 @@
 using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Tests")]
-[assembly: AssemblyCopyrightAttribute("Elasticsearch 2015")]
+[assembly: AssemblyCopyrightAttribute("Elasticsearch 2016")]
 [assembly: AssemblyDescriptionAttribute("")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
