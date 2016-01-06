@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -88,7 +89,6 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 		}
 
-
 		[U] public void UsingConcreteTypeSelector()
 		{
 			/**
@@ -97,6 +97,91 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			var result = this._client.Search<ISearchResult>(s => s
 				.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
 				.Size(100)
+			);
+
+			/**
+			* here for each hit we'll call the delegate with `d` which a dynamic representation of the `_source`
+			* and a typed `h` which represents the encapsulating hit.
+			*/
+			
+			/**
+			* Here we assume our response is valid and that we received the 100 documents
+			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			*/
+			result.IsValid.Should().BeTrue();
+			result.Documents.Count().Should().Be(100);
+			
+			/**
+			* To prove the returned result set is covariant we filter the documents based on their 
+			* actual type and assert the returned subsets are the expected sizes
+			*/
+			var aDocuments = result.Documents.OfType<A>();
+			var bDocuments = result.Documents.OfType<B>();
+			var cDocuments = result.Documents.OfType<C>();
+
+			aDocuments.Count().Should().Be(25);
+			bDocuments.Count().Should().Be(25);
+			cDocuments.Count().Should().Be(50);
+
+			/**
+			* and assume that properties that only exist on the subclass itself are properly filled
+			*/
+			aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
+			bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
+			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
+		}
+
+		/** Scroll also supports CovariantSearchResponses
+		*/
+
+		[U] public void UsingCovariantTypesOnScroll()
+		{
+			/**
+			* Scroll() is a continuation of a previous Search() so Types() are lost. 
+			* You can hint the type types again using CovariantTypes()
+			*/
+			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
+				.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
+			);
+			/**
+			* Nest will translate this to a search over /index/a,b,c/_search. 
+			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
+			*/
+			
+			/**
+			* Here we assume our response is valid and that we received the 100 documents
+			* we are expecting. Remember `result.Documents` is an `IEnumerable&lt;ISearchResult&gt;`
+			*/
+			result.IsValid.Should().BeTrue();
+			result.Documents.Count().Should().Be(100);
+			
+			/**
+			* To prove the returned result set is covariant we filter the documents based on their 
+			* actual type and assert the returned subsets are the expected sizes
+			*/
+			var aDocuments = result.Documents.OfType<A>();
+			var bDocuments = result.Documents.OfType<B>();
+			var cDocuments = result.Documents.OfType<C>();
+
+			aDocuments.Count().Should().Be(25);
+			bDocuments.Count().Should().Be(25);
+			cDocuments.Count().Should().Be(50);
+
+			/**
+			* and assume that properties that only exist on the subclass itself are properly filled
+			*/
+			aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
+			bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
+			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
+		}
+
+		[U] public void UsingConcreteTypeSelectorOnScroll()
+		{
+			/**
+			* The more low level concrete type selector can also be specified on scroll
+			*/
+			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(1), "scrollid", s => s
+				.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
 			);
 
 			/**

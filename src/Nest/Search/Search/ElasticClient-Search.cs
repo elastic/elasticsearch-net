@@ -71,7 +71,7 @@ namespace Nest
 			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
+					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d
 					)
 				);
 
@@ -97,34 +97,9 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
+					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d
 					)
 				);
-
-		private ISearchRequest AttachCustomConverterWhenNeeded<T, TResult>(RouteValues p, ISearchRequest d)
-			where T : class
-			where TResult : class
-		{
-			d.RequestParameters.DeserializationOverride(this.CreateSearchDeserializer<T, TResult>(d));
-			return d;
-		}
-
-		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchRequest request)
-			where T : class
-			where TResult : class
-		{
-			CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, request);
-			if (request.TypeSelector == null) return null;
-			return (r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
-		}
-
-		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IApiCallDetails response, Stream stream, ISearchRequest d)
-			where T : class
-			where TResult : class =>
-			!response.Success
-				? null
-				: new JsonNetSerializer(this.ConnectionSettings, new ConcreteTypeConverter<TResult>(d.TypeSelector))
-					.Deserialize<SearchResponse<TResult>>(stream);
 
 	}
 }

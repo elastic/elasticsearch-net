@@ -30,15 +30,17 @@ namespace Nest
 		///<inheritdoc/>
 		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
 			where T : class;
-
 	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class => 
 			this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
 				request,
-				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(
+					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d
+				)
 			);
 
 		/// <inheritdoc/>
@@ -49,7 +51,9 @@ namespace Nest
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class => 
 			this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				request,
-				(p, d) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(
+					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d
+				)
 			);
 
 		/// <inheritdoc/>

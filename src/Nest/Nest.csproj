@@ -450,6 +450,7 @@
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateResponse.cs" />
+    <Compile Include="Search\Search\ElasticClient-ResponseCovariance.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
