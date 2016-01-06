@@ -205,11 +205,14 @@ namespace Elasticsearch.Net.Connection.RequestState
 			this._result = result;
 
 		}
-
+			
+		public bool IsDisposed { get; private set; }
 		public void Dispose()
 		{
-			if (!_traceEnabled || this._result == null)
+			if (IsDisposed || !_traceEnabled || this._result == null)
 				return;
+
+			this.IsDisposed = true;
 
             string traceMessage = string.Format(
                 "NEST end:{0} {1} {2} ({3}):\r\n{4}"

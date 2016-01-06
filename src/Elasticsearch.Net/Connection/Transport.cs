@@ -346,20 +346,18 @@ namespace Elasticsearch.Net.Connection
 
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
-			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
-			{
-				return this._requestHandlerAsync.RequestAsync(requestState, data)
-					.ContinueWith<ElasticsearchResponse<T>>(t =>
+			var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path);
+			return this._requestHandlerAsync.RequestAsync(requestState, data)
+				.ContinueWith<ElasticsearchResponse<T>>(t =>
+				{
+					requestState.Dispose();
+					if (t.IsFaulted && t.Exception != null)
 					{
-						if (t.IsFaulted && t.Exception != null)
-						{
-							t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
-							return null; //won't be hit
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
 						}
-
-						return t.Result;
-					});
-			}
+					return t.Result;
+				});
 		}
 	}
 }
