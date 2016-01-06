@@ -120,11 +120,9 @@ namespace Nest
 			IList<JsonProperty> propertyDictionary;
 			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
 				return propertyDictionary;
-
-			var properties = _jsonContract.PropertiesOfAll(t, memberSerialization);
-			_cachedTypeProperties.TryAdd(t, properties);
-			return properties;
+			propertyDictionary = _jsonContract.PropertiesOfAll(t, memberSerialization);
+			_cachedTypeProperties.TryAdd(t, propertyDictionary);
+			return propertyDictionary;
 		}
-
 	}
 }
