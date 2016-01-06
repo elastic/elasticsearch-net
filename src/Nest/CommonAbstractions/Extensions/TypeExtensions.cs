@@ -23,7 +23,7 @@ namespace Nest
 
 		//this contract is only used to resolve properties in class WE OWN.
 		//these are not subject to change depending on what the user passes as connectionsettings
-		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings());
+		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
 
 		public delegate T ObjectActivator<out T>(params object[] args);
 

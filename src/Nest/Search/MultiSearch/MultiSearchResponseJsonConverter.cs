@@ -59,21 +59,12 @@ namespace Nest
 
 				if (concreteTypeSelector != null)
 				{
-					var elasticSerializer = new JsonNetSerializer(this._settings);
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{
-						var settings = elasticSerializer.CreateSettings(SerializationFormatting.None, piggyBackJsonConverter: state);
+						var elasticSerializer = new JsonNetSerializer(this._settings, state);
 
-						var jsonSerializer = new JsonSerializer()
-						{
-							NullValueHandling = settings.NullValueHandling,
-							DefaultValueHandling = settings.DefaultValueHandling,
-							ContractResolver = settings.ContractResolver,
-						};
-						foreach (var converter in settings.Converters.EmptyIfNull())
-							jsonSerializer.Converters.Add(converter);
-						generic.Invoke(null, new object[] { m, jsonSerializer, response.Responses, this._settings });
+						generic.Invoke(null, new object[] { m, elasticSerializer.Serializer, response.Responses, this._settings });
 						continue;
 					}
 				}

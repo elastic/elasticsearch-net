@@ -16,7 +16,5 @@ namespace Nest
 		string DefaultIndex { get; }
 		Func<string, string> DefaultFieldNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }
-		Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
-		ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }
 	}
 }

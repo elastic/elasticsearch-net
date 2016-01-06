@@ -24,11 +24,11 @@ namespace Nest
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection)
 			: this(connectionPool, connection, null) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
-			: this(connectionPool, null, serializer) { }
+		public ConnectionSettings(IConnectionPool connectionPool, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+			: this(connectionPool, null, serializerFactory) { }
 
-		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
-			: base(connectionPool, connection, serializer) { }
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+			: base(connectionPool, connection, serializerFactory) { }
 	}
 
 	/// <summary>
@@ -57,29 +57,20 @@ namespace Nest
 		private Func<string, string> _defaultFieldNameInferrer;
 		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 
-		//Serializer settings
-		private Action<JsonSerializerSettings> _modifyJsonSerializerSettings;
-		Action<JsonSerializerSettings> IConnectionSettingsValues.ModifyJsonSerializerSettings => _modifyJsonSerializerSettings;
-
-		private ReadOnlyCollection<Func<Type, JsonConverter>> _contractConverters;
-		ReadOnlyCollection<Func<Type, JsonConverter>> IConnectionSettingsValues.ContractConverters => _contractConverters;
-
 		private readonly FluentDictionary<Type, string> _idProperties = new FluentDictionary<Type, string>();
 		FluentDictionary<Type, string> IConnectionSettingsValues.IdProperties => _idProperties;
 
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
-			: base(connectionPool, connection, serializer)
+		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<TConnectionSettings, IElasticsearchSerializer> serializerFactory)
+			: base(connectionPool, connection, serializerFactory)
 		{
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
-			this._modifyJsonSerializerSettings = j => { };
-			this._contractConverters = Enumerable.Empty<Func<Type, JsonConverter>>().ToList().AsReadOnly();
 			this._inferrer = new ElasticInferrer(this);
 		}
 
@@ -87,7 +78,7 @@ namespace Nest
 		/// The default serializer for requests and responses
 		/// </summary>
 		/// <returns></returns>
-		protected override IElasticsearchSerializer DefaultSerializer() => new JsonNetSerializer(this);
+		protected override IElasticsearchSerializer DefaultSerializer(TConnectionSettings settings) => new JsonNetSerializer(settings);
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
@@ -95,26 +86,6 @@ namespace Nest
 		public TConnectionSettings PluralizeTypeNames()
 		{
 			this._defaultTypeNameInferrer = this.LowerCaseAndPluralizeTypeNameInferrer;
-			return (TConnectionSettings)this;
-		}
-
-		/// <summary>
-		/// Allows you to update internal the json.net serializer settings to your liking
-		/// </summary>
-		public TConnectionSettings JsonSerializerSettingsModifier(Action<JsonSerializerSettings> modifier)
-		{
-			if (modifier == null)
-				return (TConnectionSettings)this;
-			this._modifyJsonSerializerSettings = modifier;
-			return (TConnectionSettings)this;
-
-		}
-		/// <summary>
-		/// Add a custom JsonConverter to the build in json serialization by passing in a predicate for a type.
-		/// </summary>
-		public TConnectionSettings AddContractJsonConverters(params Func<Type, JsonConverter>[] contractSelectors)
-		{
-			this._contractConverters = contractSelectors.ToList().AsReadOnly();
 			return (TConnectionSettings)this;
 		}
 

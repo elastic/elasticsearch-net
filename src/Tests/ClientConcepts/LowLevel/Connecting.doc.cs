@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Newtonsoft.Json;
+using Tests.Framework;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -191,6 +195,28 @@ namespace Tests.ClientConcepts.LowLevel
 			 * However, this will accept all requests from the AppDomain to untrusted SSL sites, 
 			 * therefore we recommend doing some minimal introspection on the passed in certificate.
 			 */
+		}
+
+		public class MyJsonNetSerializer : JsonNetSerializer
+		{
+			public int X { get; set; } = 0;
+			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+
+			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+			{
+				++X;
+			}
+		}
+
+		[U] public void IsCalled()
+		{
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(),s => new MyJsonNetSerializer(s));
+			var client = new ElasticClient(settings);
+			client.RootNodeInfo();
+			client.RootNodeInfo();
+			var serializer = ((IConnectionSettingsValues)settings).Serializer as MyJsonNetSerializer;
+			serializer.X.Should().BeGreaterThan(0);
 		}
 	}
 }
