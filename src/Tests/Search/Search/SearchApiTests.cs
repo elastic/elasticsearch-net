@@ -64,6 +64,7 @@ namespace Tests.Search.Search
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Source.Should().NotBeNull();
 			response.Aggregations.Count.Should().BeGreaterThan(0);
+			response.Took.Should().BeGreaterThan(0);
 			var startDates = response.Aggs.Terms("startDates");
 			startDates.Should().NotBeNull();
 		}
