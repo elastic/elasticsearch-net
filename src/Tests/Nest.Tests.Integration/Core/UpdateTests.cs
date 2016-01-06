@@ -21,7 +21,6 @@ namespace Nest.Tests.Integration.Core
 				.Script("ctx._source.loc += 10")
 				.Fields("_source", "loc")
 				.RetryOnConflict(5)
-				.DetectNoop()
 				.Refresh()
 			);
 			update.IsValid.Should().BeTrue();
@@ -80,7 +79,8 @@ namespace Nest.Tests.Integration.Core
 					LOC = project.LOC + 10
 				})
 				.DocAsUpsert()
-				.Refresh()
+                .DetectNoop()
+                .Refresh()
 			);
 			project = this.Client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.AreEqual(project.LOC, loc + 10);
