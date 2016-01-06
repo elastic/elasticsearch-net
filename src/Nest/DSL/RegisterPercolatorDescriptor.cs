@@ -44,7 +44,7 @@ namespace Nest
 		public object GetCustomJson()
 		{
 			return new FluentDictionary<string, object>(this.MetaData)
-				.Add("query", this.Query);
+				.Add("query", this.Query == null ? null : this.Query.GetCustomJson());
 		}
 
 	}
@@ -84,7 +84,7 @@ namespace Nest
 		public object GetCustomJson()
 		{
 			return new FluentDictionary<string, object>(Self.MetaData)
-				.Add("query", Self.Query);
+				.Add("query", Self.Query != null ? Self.Query.GetCustomJson() : null);
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
