@@ -179,12 +179,12 @@ namespace Nest
 				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
 		}
 
-		public Bucket<HistogramItem> DateHistogram(string key)
+		public Bucket<DateHistogramItem> DateHistogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
 			return bucket == null 
 				? null 
-				: new Bucket<HistogramItem> {Items = bucket.Items.OfType<HistogramItem>().ToList()};
+				: new Bucket<DateHistogramItem> {Items = bucket.Items.OfType<DateHistogramItem>().ToList()};
 		}
 	}
 }
