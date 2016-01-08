@@ -40,6 +40,17 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
 
+		[Obsolete("random_score should be specified as a function within the functions of a function_score query", true)]
+		IRandomScoreFunction RandomScore { get; set; }
+
+		[Obsolete("script_score should be specified as a function within the functions of a function_score query", true)]
+		IScriptFilter ScriptScore { get; set; }
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		long? Weight { get; set; }
+		
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		double? WeightAsDouble { get; set; }
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
@@ -59,11 +70,30 @@ namespace Nest
 		public float? MaxBoost { get; set; }
 		public double? Boost { get; set; }
 		public float? MinScore { get; set; }
+
+		[Obsolete("random_score should be specified as a function within the functions of a function_score query", true)]
+		public IRandomScoreFunction RandomScore { get; set; }
+
+		[Obsolete("script_score should be specified as a function within the functions of a function_score query", true)]
+		public IScriptFilter ScriptScore { get; set; }
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		public long? Weight		
+		{		
+			get { return Convert.ToInt64(this.WeightAsDouble ); }		
+			set { this.WeightAsDouble = value; }		
+		}
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		public double? WeightAsDouble { get; set; }
 	}
 
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
 	{
-		private IFunctionScoreQuery Self { get { return this; }}
+		private bool _forcedConditionless = false;
+		private double? _weightAsDouble;
+
+		private IFunctionScoreQuery Self { get { return this; } }
 
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 
@@ -83,7 +113,25 @@ namespace Nest
 
 		string IQuery.Name { get; set; }
 
-		private bool _forcedConditionless = false;
+		[Obsolete("random_score should be specified as a function within the functions of a function_score query", true)]
+		IRandomScoreFunction IFunctionScoreQuery.RandomScore { get; set; }
+
+		[Obsolete("script_score should be specified as a function within the functions of a function_score query", true)]
+		IScriptFilter IFunctionScoreQuery.ScriptScore { get; set; }
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		long? IFunctionScoreQuery.Weight
+		{
+			get { return Convert.ToInt64(_weightAsDouble); }
+			set { _weightAsDouble = value; }
+		}
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		double? IFunctionScoreQuery.WeightAsDouble
+		{
+			get { return _weightAsDouble; }
+			set { _weightAsDouble = value; }
+		}
 
 		bool IQuery.IsConditionless
 		{
@@ -91,7 +139,7 @@ namespace Nest
 			{
 				return _forcedConditionless
 				       || ((Self.Query == null || Self.Query.IsConditionless) && (Self.Filter == null || Self.Filter.IsConditionless)
-				            && !Self.Functions.HasAny());
+							&& !Self.Functions.HasAny());
 			}
 		}
 
@@ -129,7 +177,7 @@ namespace Nest
 			var f = filterSelector(filter);
 			Self.Filter = f.IsConditionless ? null : f;
 			return this;
-		} 
+		}
 
 		public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions)
 		{
@@ -172,6 +220,30 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> MinScore(float minScore)
 		{
 			Self.MinScore = minScore;
+			return this;
+		}
+
+		[Obsolete("random_score should be specified as a function within the functions of a function_score query", true)]
+		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null)
+		{
+			return this;
+		}
+
+		[Obsolete("script_score should be specified as a function within the functions of a function_score query", true)]
+		public FunctionScoreQueryDescriptor<T> ScriptScore(Action<ScriptFilterDescriptor> scriptSelector)
+		{
+			return this;
+		}
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		public FunctionScoreQueryDescriptor<T> Weight(double weight)
+		{
+			return this;
+		}
+
+		[Obsolete("weight should be specified as a function within the functions of a function_score query", true)]
+		public FunctionScoreQueryDescriptor<T> Weight(long weight)
+		{
 			return this;
 		}
 	}
