@@ -6,6 +6,21 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	public class RandomScoreFunction<T> : FunctionScoreFunction<T> where T : class
+	{
+		[JsonProperty(PropertyName = "random_score")]
+		internal RandomScoreFunction _RandomScore { get; set; }
+
+		public RandomScoreFunction(int? seed = null)
+		{
+			var randomScore = seed.HasValue 
+				? new RandomScoreFunction(seed.Value) 
+				: new RandomScoreFunction();
+			
+			this._RandomScore = randomScore;
+		}
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<RandomScoreFunction>))]
 	public interface IRandomScoreFunction

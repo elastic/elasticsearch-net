@@ -200,6 +200,7 @@
     <Compile Include="Search\Filter\RangeFilterTests.cs" />
     <Compile Include="Search\Query\BoolQueryResults.cs" />
     <Compile Include="Search\Query\FilteredQueryTests.cs" />
+    <Compile Include="Search\Query\FunctionScoreQueryTest.cs" />
     <Compile Include="Search\Query\SpanQueryTests.cs" />
     <Compile Include="Search\Query\TemplateQueryTests.cs" />
     <Compile Include="Search\Query\TermToString.cs" />

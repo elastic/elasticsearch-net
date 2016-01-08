@@ -13,7 +13,13 @@ namespace Nest.Tests.Unit.Search.Sorting
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q.FunctionScore(
-						fs => fs.RandomScore()
+						fs => fs.Functions(ff => ff
+							.RandomScore()
+							.Filter(f => f
+								.Term("term1", "termValue")
+							)
+							.Weight(1)
+						)
 					)
 				)
 				.Take(2);
@@ -23,7 +29,17 @@ namespace Nest.Tests.Unit.Search.Sorting
                     size: 2,
                       query: {
                         function_score: {
-                          random_score: {}
+						  functions: [
+                            { 
+						      random_score: {},
+							  filter: {
+								term : {
+								  ""term1"" : ""termValue""
+								}
+							  },
+							  weight: 1.0
+                            } 
+						  ]
                         }
                       }
                     }";
@@ -36,7 +52,13 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var seed = 222222;
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q.FunctionScore(
-						fs => fs.RandomScore(seed)
+						fs => fs.Functions(ff => ff
+							.RandomScore(seed)
+							.Filter(f => f
+								.Term("term1", "termValue")
+							)
+							.Weight(1)
+						)
 					)
 				)
 				.Take(2);
@@ -46,9 +68,19 @@ namespace Nest.Tests.Unit.Search.Sorting
                     size: 2,
                       query: {
                         function_score: {
-                          random_score: {
-                            seed: " + seed + @"
-                          }
+						  functions: [
+							{ 
+							  random_score: {
+							    seed: " + seed + @"
+							  },
+							  filter: {
+								term : {
+								  ""term1"" : ""termValue""
+								}
+							  },
+							  weight: 1.0 
+                            }
+						  ]
                         }
                       }
                     }";
@@ -110,7 +142,6 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.FunctionScore(fs => fs
-						.Weight(2.0)
 						.Functions(
 							f => f
 								.BoostFactor(2)
@@ -136,8 +167,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                     },
                                     weight: 0.5
                                 }
-                              ],
-                              weight: 2.0
+                              ]
                             }
                           }
                         }";
@@ -151,7 +181,6 @@ namespace Nest.Tests.Unit.Search.Sorting
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.Query(q => q
 					.FunctionScore(fs => fs
-						.Weight(3)
 						.Functions(
 							f => f
 								.BoostFactor(2)
@@ -177,8 +206,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                     },
                                     weight: 2.0
                                 }
-                              ],
-                              weight: 3.0
+                              ]
                             }
                           }
                         }";
@@ -194,7 +222,6 @@ namespace Nest.Tests.Unit.Search.Sorting
 			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
 			QueryContainer q = new FunctionScoreQuery()
 			{
-				WeightAsDouble = 1.0,
 				Functions = new[] {boost}
 
 			};
@@ -211,8 +238,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                     },
                                     weight: 0.5
                                 }
-                              ],
-                              weight: 1.0
+                              ]
                             }
                         }";
 
@@ -227,9 +253,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
 			QueryContainer q = new FunctionScoreQuery()
 			{
-				Weight = 4,
 				Functions = new[] {boost}
-
 			};
 			var json = TestElasticClient.Serialize(q);
 			var expected = @"{
@@ -244,8 +268,7 @@ namespace Nest.Tests.Unit.Search.Sorting
                                     },
                                     weight: 1.0
                                 }
-                              ],
-                              weight: 4.0
+                              ]
                             }
                         }";
 

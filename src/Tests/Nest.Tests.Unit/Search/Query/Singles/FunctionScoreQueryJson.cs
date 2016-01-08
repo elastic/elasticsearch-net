@@ -26,6 +26,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 								.Modifier(FieldValueFactorModifier.SquareRoot)
 								.Missing(1.0)
 								.Default(0.0)
+							),
+							f => f.RandomScore(1337),
+							f => f.ScriptScore(ss => ss
+								.Script("My complex script")
+								.Params(p => p.Add("param", "paramvalue"))
+								.Lang("mvel")
 							)
 						)
 						.ScoreMode(FunctionScoreMode.Sum)
@@ -46,7 +52,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                             {linear: { floatValue : { scale: '0.3'}}},
                             {exp:    { doubleValue: { scale: '0.5'}}}, 
                             {boost_factor: 2.0 },
-							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt', missing: 1.0, default: 0.0}}
+							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt', missing: 1.0, default: 0.0}},
+							{random_score: { seed: 1337 }},
+							{script_score: { script: 'My complex script', params: { param : 'paramvalue' }, lang: 'mvel' }}
                         ],				
 						query : { match_all : {} },
                         score_mode: 'sum',
@@ -64,7 +72,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Query(q => q
 					.FunctionScore(fs => fs
 						.Query(qq => qq.MatchAll())
-						.Weight(2)
 					)
 				);
 
@@ -73,8 +80,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                 from: 0, size: 10, 
 				query : {
                     function_score : { 		
-						query : { match_all : {} },
-						weight : 2.0
+						query : { match_all : {} }
 					}
 				}
 			}";

@@ -86,6 +86,13 @@ namespace Nest
 			return fn;
 		}
 
+		public FunctionScoreFunction<T> RandomScore(int? seed = null)
+		{
+			var fn = new RandomScoreFunction<T>(seed);
+			this._Functions.Add(fn);
+			return fn;
+		} 
+
 		public IEnumerator<FunctionScoreFunction<T>> GetEnumerator()
 		{
 			return _Functions.GetEnumerator();
