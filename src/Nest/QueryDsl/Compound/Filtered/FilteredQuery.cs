@@ -32,7 +32,7 @@ namespace Nest
 				return q.Query.IsConditionless;
 			if (q.Filter != null && q.Query == null)
 				return q.Filter.IsConditionless;
-			return q.Query.IsConditionless && q.Filter.IsConditionless;
+			return q.Query.IsConditionless() && q.Filter.IsConditionless();
 		}
 	}
 

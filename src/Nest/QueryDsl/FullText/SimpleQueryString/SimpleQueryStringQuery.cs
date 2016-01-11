@@ -53,8 +53,7 @@ namespace Nest
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
-		internal static bool IsConditionless(ISimpleQueryStringQuery q) => 
-			q.Fields == null || q.Query.IsNullOrEmpty();
+		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
 	public class SimpleQueryStringQueryDescriptor<T> 
