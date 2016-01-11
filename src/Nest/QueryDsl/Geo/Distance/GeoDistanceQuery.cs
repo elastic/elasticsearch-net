@@ -43,7 +43,8 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
 
-		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location == null || q.Distance == null || q.Field.IsConditionless();
+		internal static bool IsConditionless(IGeoDistanceQuery q) => 
+			q.Location == null || q.Distance == null || q.Field.IsConditionless();
 	}
 
 	public class GeoDistanceQueryDescriptor<T> 

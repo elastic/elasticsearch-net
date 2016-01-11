@@ -39,10 +39,8 @@ namespace Nest
 
 		internal override void WrapInContainer(IQueryContainer c) => c.FunctionScore = this;
 
-		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false)
-		{
-			return force || !q.Functions.HasAny();
-		}
+		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false) => 
+			force || !q.Functions.HasAny();
 	}
 
 	public class FunctionScoreQueryDescriptor<T> 

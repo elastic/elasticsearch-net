@@ -64,7 +64,6 @@ namespace Tests.QueryDsl.FullText.SimpleQueryString
 		{
 			q => q.Query = null,
 			q => q.Query = string.Empty,
-			q =>  q.Fields = null
 		};
 	}
 }
