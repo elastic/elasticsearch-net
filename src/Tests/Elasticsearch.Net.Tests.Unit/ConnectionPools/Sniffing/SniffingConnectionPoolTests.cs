@@ -535,7 +535,39 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 				sniffException.Should().NotBeNull();
 			}
 		}
-		
 
+	    [Test]
+	    public void ShouldBeDisposable()
+	    {
+            var uris = new[]
+            {
+                new Uri("http://localhost:9200"),
+                new Uri("http://localhost:9201"),
+                new Uri("http://localhost:9202")
+            };
+            var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+
+            Assert.That(connectionPool, Is.InstanceOf<IDisposable>());
+        }
+
+	    [Test]
+	    public void ShouldNotBeUsableAfterDispose()
+	    {
+            var uris = new[]
+            {
+                new Uri("http://localhost:9200"),
+                new Uri("http://localhost:9201"),
+                new Uri("http://localhost:9202")
+            };
+            var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+	        connectionPool.Dispose();
+
+	        Assert.Throws<ObjectDisposedException>(() => connectionPool.MarkAlive(uris.First()));
+            Assert.Throws<ObjectDisposedException>(() => connectionPool.MarkDead(uris.First(), null, null));
+            Assert.Throws<ObjectDisposedException>(() => connectionPool.UpdateNodeList(uris));
+	        int seed;
+	        bool shouldPingHint;
+            Assert.Throws<ObjectDisposedException>(() => connectionPool.GetNext(null, out seed, out shouldPingHint));
+        }
 	}
 }
