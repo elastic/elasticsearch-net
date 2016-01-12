@@ -100,7 +100,6 @@ namespace Elasticsearch.Net.ConnectionPool
 	            if (disposing)
 	            {
 	                _readerWriter.Dispose();
-	                _isDisposed = true;
 	            }
 	            _isDisposed = true;
 	        }
