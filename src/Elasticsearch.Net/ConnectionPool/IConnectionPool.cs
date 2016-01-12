@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net
 {
-	public interface IConnectionPool : IDisposable
+	public interface IConnectionPool
 	{
 		/// <summary>
 		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g 

@@ -29,9 +29,5 @@ namespace Elasticsearch.Net
 		}
 
 		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
-
-		public void Dispose()
-		{
-		}
 	}
 }

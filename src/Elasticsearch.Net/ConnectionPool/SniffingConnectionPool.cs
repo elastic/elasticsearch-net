@@ -73,10 +73,5 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public override void Dispose()
-		{
-			this._readerWriter?.Dispose();
-			base.Dispose();
-		}
 	}
 }
