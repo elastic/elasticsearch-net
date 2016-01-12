@@ -89,11 +89,22 @@ namespace Elasticsearch.Net.ConnectionPool
 
 	    public void Dispose()
 	    {
-            CheckDisposed();
-            
-            _readerWriter.Dispose();
-            _isDisposed = true;
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+	    protected virtual void Dispose(bool disposing)
+	    {
+	        if (!_isDisposed)
+	        {
+	            if (disposing)
+	            {
+	                _readerWriter.Dispose();
+	                _isDisposed = true;
+	            }
+	            _isDisposed = true;
+	        }
+	    }
 
 	    private void CheckDisposed()
 	    {
