@@ -1,4 +1,11 @@
 {
+  "projectUrl": "https://github.com/elastic/elasticsearch-net",
+  "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
+  "summary": "Official high level Elasticsearch client",
+  "description": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
+  "title": "NEST - Elasticsearch .NET client",
+  "tags": [ "elasticsearch", "elastic", "search", "lucene", "nest" ],
+  "copyright": "2014-2015 Elasticsearch BV",
   "version": "1.0.0-*",
   "compilationOptions": {
     "warningsAsErrors": false
@@ -14,9 +21,8 @@
     "net45": {
       "frameworkAssemblies": {
         "System.Runtime": "",
-        "System.Runtime.Serialization" :  "",
-        "System.ServiceModel" :  ""
-
+        "System.Runtime.Serialization": "",
+        "System.ServiceModel": ""
       }
     },
     "dotnet": {
