@@ -97,5 +97,8 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public virtual void Dispose()
+		{
+		}
 	}
 }
