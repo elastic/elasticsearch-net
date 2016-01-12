@@ -46,7 +46,7 @@ namespace Nest
 		public IPhraseSuggestCollate Collate { get; set; }
 	}
 
-	public class PhraseSuggesterDescriptor<T> : SuggesterBaseDescriptor<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
+	public class PhraseSuggesterDescriptor<T> : SuggestDescriptorBase<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
 		where T : class
 	{
 		int? IPhraseSuggester.GramSize { get; set; }

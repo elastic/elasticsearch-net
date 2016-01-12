@@ -41,12 +41,11 @@ namespace Nest
 			serializer.Populate(reader, hit);
 
 			var settings = serializer.GetConnectionSettings();
-			var f = new FieldSelection<T>(settings.Inferrer);
 			var source = tuple.Hit["fields"];
 			if (source != null)
 			{
-				((IFieldSelection<T>)f).FieldValuesDictionary = serializer.Deserialize<Dictionary<string, object>>(source.CreateReader());
-				hit.FieldSelection = f;
+				var fieldsDictionary = serializer.Deserialize<Dictionary<string, object>>(source.CreateReader());
+				hit.Fields = new FieldValues(settings.Inferrer, fieldsDictionary);
 			}
 
 			collection.Add(hit);

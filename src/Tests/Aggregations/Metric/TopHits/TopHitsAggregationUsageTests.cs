@@ -167,9 +167,9 @@ namespace Tests.Aggregations.Metric.TopHits
 				hits.All(h => h.Explanation != null).Should().BeTrue();
 				hits.All(h => h.Version.HasValue).Should().BeTrue();
 				//hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
-				hits.All(h => h.Fields.FieldValues<StateOfBeing[]>("state").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.FieldValues<int[]>("numberOfCommits").Any()).Should().BeTrue();
-				hits.All(h => h.Fields.FieldValues<int[]>("commit_factor").Any()).Should().BeTrue();
+				hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
+				hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
+				hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
 				topStateHits.Documents<Project>().Should().NotBeEmpty();
 			}
 		}

@@ -41,7 +41,6 @@ namespace Tests.QueryDsl.TermLevel.Ids
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IIdsQuery>(a => a.Ids)
 		{
-			q => q.Types = null,
 			q => q.Values = null,
 			q => q.Values = Enumerable.Empty<Id>()
 		};

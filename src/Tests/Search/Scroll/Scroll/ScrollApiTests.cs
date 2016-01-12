@@ -22,14 +22,19 @@ namespace Tests.Search.Scroll.Scroll
 			requestAsync: (c, r) => c.ScrollAsync<Project>(r)
 		);
 
+		protected override object ExpectJson => new
+		{
+			scroll = "1m",
+			scroll_id = _scrollId
+		};
+		
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/_search/scroll?scroll=1m";
+		protected override string UrlPath => $"/_search/scroll";
+		protected override bool SupportsDeserialization => false;
 
-		protected override ScrollDescriptor<Project> NewDescriptor() => new ScrollDescriptor<Project>();
-
-		protected override Func<ScrollDescriptor<Project>, IScrollRequest> Fluent => null;
+		protected override Func<ScrollDescriptor<Project>, IScrollRequest> Fluent => s => s.Scroll("1m").ScrollId(_scrollId);
 
 		protected override ScrollRequest Initializer => new ScrollRequest(_scrollId, "1m");
 
@@ -43,7 +48,7 @@ namespace Tests.Search.Scroll.Scroll
 
 		protected override void OnAfterCall(IElasticClient client)
 		{
-			client.ClearScroll(_scrollId);
+			client.ClearScroll(cs => cs.ScrollId(_scrollId));
 		}
 	}
 }

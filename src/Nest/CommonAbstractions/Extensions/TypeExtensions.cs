@@ -23,7 +23,7 @@ namespace Nest
 
 		//this contract is only used to resolve properties in class WE OWN.
 		//these are not subject to change depending on what the user passes as connectionsettings
-		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings());
+		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings(), null);
 
 		public delegate T ObjectActivator<out T>(params object[] args);
 
@@ -120,8 +120,9 @@ namespace Nest
 			IList<JsonProperty> propertyDictionary;
 			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
 				return propertyDictionary;
-
-			return  _jsonContract.PropertiesOfAll(t, memberSerialization);
+			propertyDictionary = _jsonContract.PropertiesOfAll(t, memberSerialization);
+			_cachedTypeProperties.TryAdd(t, propertyDictionary);
+			return propertyDictionary;
 		}
 
 #if DOTNETCORE
@@ -133,7 +134,7 @@ namespace Nest
 #if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
 #else
-		return type.IsGenericType;
+			return type.IsGenericType;
 #endif
 		}
 
@@ -142,7 +143,7 @@ namespace Nest
 #if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
 #else
-		return type.IsValueType;
+			return type.IsValueType;
 #endif
 		}
 
@@ -151,8 +152,15 @@ namespace Nest
 #if DOTNETCORE
 			return type.GetTypeInfo().IsEnum;
 #else
-		return type.IsEnum;
+			return type.IsEnum;
 #endif
 		}
+
+#if DOTNETCORE
+		internal static IEnumerable<Type> GetInterfaces(this Type type)
+		{
+			return type.GetTypeInfo().ImplementedInterfaces;
+		}
+#endif
 	}
 }

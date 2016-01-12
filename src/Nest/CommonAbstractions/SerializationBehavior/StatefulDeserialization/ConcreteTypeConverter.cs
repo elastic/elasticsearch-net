@@ -13,19 +13,9 @@ namespace Nest
 	{
 		private static readonly ConcurrentDictionary<Type, JsonConverter> _hitTypes = new ConcurrentDictionary<Type, JsonConverter>();
 
-		public override bool CanWrite { get { return false; } }
-		public override bool CanRead { get { return true; } }
-
-
-		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return true;
-		}
+		public override bool CanWrite => false;
+		public override bool CanRead => true;
+		public override bool CanConvert(Type objectType) => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -40,17 +30,9 @@ namespace Nest
 			return converter.ReadJson(reader, objectType, existingValue, serializer);
 		}
 
-	}
-
-	internal class FieldsSetter
-	{
-		//This method is used through reflection (cached though)
-		// do not remove
-		private static void SetFields<TFieldsType>(
-			Hit<TFieldsType> hit, FieldSelection<TFieldsType> fieldSelection)
-			where TFieldsType : class
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			hit.Fields = fieldSelection;
+			throw new NotSupportedException();
 		}
 	}
 
@@ -61,6 +43,7 @@ namespace Nest
 
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
+		public override bool CanConvert(Type objectType) => typeof(IHit<object>).IsAssignableFrom(objectType);
 
 		public ConcreteTypeConverter() {}
 
@@ -80,60 +63,33 @@ namespace Nest
 
 			var instance = (Hit<T>)(typeof(Hit<T>).CreateInstance());
 			serializer.Populate(reader, instance);
-			instance.Fields = new FieldSelection<T>(serializer.GetConnectionSettings().Inferrer, instance._fields);
+			instance.Fields = new FieldValues(serializer.GetConnectionSettings().Inferrer, instance.Fields);
 			return instance;
 		}
-
-
 	
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			throw new NotImplementedException();
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IHit<object>).IsAssignableFrom(objectType);
+			throw new NotSupportedException();
 		}
 	}
 
 	internal static class ConcreteTypeConverter 
 	{
-		internal static ConcurrentDictionary<Type, Action<object, object>> 
-			FieldDelegates = new ConcurrentDictionary<Type, Action<object, object>>();
-
-		internal static ConcurrentDictionary<Type, Type> TypeToFieldTypes = 
-			new ConcurrentDictionary<Type, Type>();
-
-		internal static MethodInfo MakeDelegateMethodInfo = 
-			typeof(FieldsSetter).GetMethod("SetFields", BindingFlags.Static | BindingFlags.NonPublic);
-
 		internal static object GetUsingConcreteTypeConverter<T>(
 			JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
 			where T : class
 		{
 			var jObject = CreateIntermediateJObject(reader);
-			object fieldSelection;
-			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject, out fieldSelection);
+			var concreteType = GetConcreteTypeUsingSelector(serializer, realConcreteConverter, jObject);
 			var hit = GetHitTypeInstance(concreteType);
 			PopulateHit(serializer, jObject.CreateReader(), hit);
-
-			Action<object, object> cachedLookup;
-			if (ConcreteTypeConverter.FieldDelegates.TryGetValue(concreteType, out cachedLookup))
-			{
-				cachedLookup(hit, fieldSelection);
-				return hit;
-			}
-			
-			var generic = ConcreteTypeConverter.MakeDelegateMethodInfo.MakeGenericMethod(concreteType);
-			cachedLookup = (h, f) => generic.Invoke(null, new[] { h, f });
-			cachedLookup(hit, fieldSelection);
-			ConcreteTypeConverter.FieldDelegates.TryAdd(concreteType, cachedLookup);
 			return hit;
 		}
+
 		private static void PopulateHit(JsonSerializer serializer, JsonReader reader, object hit) {
 			serializer.Populate(reader, hit);
 		}
+
 		private static JObject CreateIntermediateJObject(JsonReader reader)
 		{
 			JObject jObject = JObject.Load(reader);
@@ -149,7 +105,7 @@ namespace Nest
 		internal static Type GetConcreteTypeUsingSelector<T>(
 			JsonSerializer serializer, 
 			ConcreteTypeConverter<T> realConcreteConverter, 
-			JObject jObject, out object selection)
+			JObject jObject)
 			where T: class
 		{
 			var settings = serializer.GetConnectionSettings();
@@ -159,31 +115,24 @@ namespace Nest
 			//Hit<dynamic> hitDynamic = new Hit<dynamic>();
 			dynamic d = jObject;
 			var fields = jObject["fields"];
-			var fieldSelectionData = fields?.ToObject<IDictionary<string, object>>();
-			var sel = new FieldSelection<T>(settings.Inferrer, fieldSelectionData);
+			var fieldsDictionary = fields?.ToObject<IDictionary<string, object>>();
+			var fieldValues = new FieldValues(settings.Inferrer, fieldsDictionary);
 			var hitDynamic = new Hit<dynamic>();
 			//favor manual mapping over doing Populate twice.
-			hitDynamic._fields = fieldSelectionData;
-			hitDynamic.Fields = sel;
+			hitDynamic.Fields = fieldValues;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
 			hitDynamic.Score = d._score;
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
+			hitDynamic.Parent = d._parent;
+			hitDynamic.Routing = d._routing;
 			hitDynamic.Sorts = d.sort;
 			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
-			object o = d._source ?? DynamicResponse.Create(fieldSelectionData) ?? new object {};
+			object o = d._source ?? DynamicResponse.Create(fieldsDictionary) ?? new object {};
 			var concreteType = selector(o, hitDynamic);
-			
-			Type fieldSelectionType;
-			if (!ConcreteTypeConverter.TypeToFieldTypes.TryGetValue(concreteType, out fieldSelectionType))
-			{
-				fieldSelectionType = typeof(FieldSelection<>).MakeGenericType(concreteType);
-				ConcreteTypeConverter.TypeToFieldTypes.TryAdd(concreteType, fieldSelectionType);
-			}
-			selection = fieldSelectionType.CreateInstance(settings, fieldSelectionData);
 			return concreteType;
 		}
 	}

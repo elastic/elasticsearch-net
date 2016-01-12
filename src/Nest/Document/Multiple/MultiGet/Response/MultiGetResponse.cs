@@ -12,8 +12,8 @@ namespace Nest
 		MultiGetHit<T> Get<T>(long id) where T : class;
 		T Source<T>(string id) where T : class;
 		T Source<T>(long id) where T : class;
-		IFieldSelection<T> GetFieldSelection<T>(string id) where T : class;
-		IFieldSelection<T> GetFieldSelection<T>(long id) where T : class;
+		FieldValues GetFieldValues<T>(string id) where T : class;
+		FieldValues GetFieldSelection<T>(long id) where T : class;
 		IEnumerable<T> SourceMany<T>(IEnumerable<string> ids) where T : class;
 		IEnumerable<T> SourceMany<T>(IEnumerable<long> ids) where T : class;
 		IEnumerable<IMultiGetHit<T>> GetMany<T>(IEnumerable<string> ids) where T : class;
@@ -78,16 +78,16 @@ namespace Nest
 		{
 			return this.GetMany<T>(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)));
 		}
-		public IFieldSelection<T> GetFieldSelection<T>(string id) where T : class
+		public FieldValues GetFieldValues<T>(string id) where T : class
 		{
 			var multiHit = this.Get<T>(id);
 			if (multiHit == null)
 				return null;
-			return multiHit.FieldSelection;
+			return multiHit.Fields;
 		}
-		public IFieldSelection<T> GetFieldSelection<T>(long id) where T : class
+		public FieldValues GetFieldSelection<T>(long id) where T : class
 		{
-			return this.GetFieldSelection<T>(id.ToString(CultureInfo.InvariantCulture));
+			return this.GetFieldValues<T>(id.ToString(CultureInfo.InvariantCulture));
 		}
 	}
 }

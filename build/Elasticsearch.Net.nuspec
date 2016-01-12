@@ -4,17 +4,17 @@
 		<id>Elasticsearch.Net</id>
 		<version>2.0.0-alpha1</version>
 		<title>Elasticsearch.Net - official low level elasticsearch client</title>
-		<authors>Elasticsearch Inc. and contributors</authors>
-		<owners>Elasticsearch Inc.</owners>
-		<iconUrl>http://nest.azurewebsites.net/images/elasticsearch-net-nuget-icon.png</iconUrl>
+		<authors>Elastic and contributors</authors>
+		<owners>Elastic</owners>
+		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
 		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
 		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
 		<summary>
-			Exposes all the api endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
+			Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
 		</summary>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
-			Exposes all the api endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
+			Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
 		</description>
 		<tags>elasticsearch elastic search lucene nest</tags>
 	</metadata>

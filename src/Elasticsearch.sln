@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.gitignore = ..\.gitignore
 		..\build.bat = ..\build.bat
 		..\build.sh = ..\build.sh
-		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 		..\paket.dependencies = ..\paket.dependencies

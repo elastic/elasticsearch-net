@@ -436,11 +436,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.ClearScroll<T>(p.RouteValues.ScrollId,body,u => p.RequestParameters);
 					return _lowLevel.ClearScroll<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
+			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(IRequest<ClearScrollRequestParameters> p , PostData<object> body) where T : class
@@ -448,11 +447,10 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.ClearScrollAsync<T>(p.RouteValues.ScrollId,body,u => p.RequestParameters);
 					return _lowLevel.ClearScrollAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
+			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll");
 		}
 		
 		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(IRequest<ClusterGetSettingsRequestParameters> p ) where T : class
@@ -2476,15 +2474,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.ScrollGet<T>(p.RouteValues.ScrollId,u => p.RequestParameters);
 					return _lowLevel.ScrollGet<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.Scroll<T>(p.RouteValues.ScrollId,body,u => p.RequestParameters);
 					return _lowLevel.Scroll<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
+			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(IRequest<ScrollRequestParameters> p , PostData<object> body) where T : class
@@ -2492,15 +2488,13 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.ScrollGetAsync<T>(p.RouteValues.ScrollId,u => p.RequestParameters);
 					return _lowLevel.ScrollGetAsync<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.RouteValues.ScrollId)) return _lowLevel.ScrollAsync<T>(p.RouteValues.ScrollId,body,u => p.RequestParameters);
 					return _lowLevel.ScrollAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
+			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll");
 		}
 		
 		internal ElasticsearchResponse<T> SearchDispatch<T>(IRequest<SearchRequestParameters> p , PostData<object> body) where T : class

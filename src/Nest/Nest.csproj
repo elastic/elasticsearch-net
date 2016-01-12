@@ -128,6 +128,8 @@
     <Compile Include="Cluster\ClusterState\RoutingTableState.cs" />
     <Compile Include="CommonAbstractions\DictionaryLike\PerFieldAnalyzer\PerFieldAnalyzer.cs" />
     <Compile Include="CommonAbstractions\Extensions\JsonExtensions.cs" />
+    <Compile Include="CommonAbstractions\Fields\FieldValues.cs" />
+    <Compile Include="CommonAbstractions\Fields\FieldValuesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Fluent\Promise\DescriptorPromiseBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
@@ -148,8 +150,6 @@
     <Compile Include="CommonAbstractions\Infer\Name\Name.cs" />
     <Compile Include="CommonAbstractions\Infer\Name\Names.cs" />
     <Compile Include="CommonAbstractions\Infer\NodeId\NodeIds.cs" />
-    <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
-    <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
@@ -450,6 +450,7 @@
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateResponse.cs" />
+    <Compile Include="Search\Search\ElasticClient-ResponseCovariance.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
@@ -675,7 +676,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
-    <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
@@ -967,7 +967,6 @@
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetResponse.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetRequest.cs" />
     <Compile Include="Document\Single\Get\ElasticClient-Get.cs" />
-    <Compile Include="CommonAbstractions\Fields\FieldSelection.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponse.cs" />
     <Compile Include="Document\Single\Get\GetResponse.cs" />
     <Compile Include="Document\Single\Delete\DeleteResponse.cs" />

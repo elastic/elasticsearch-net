@@ -46,6 +46,8 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override string UrlPath => $"/project/project/{this.ProjectId}?fields=name%2CnumberOfCommits";
+
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.Fields(
 				p => p.Name, 
@@ -60,8 +62,10 @@ namespace Tests.Document.Single.Get
 		protected override void ExpectResponse(IGetResponse<Project> response)
 		{
 			response.Fields.Should().NotBeNull();
-			response.Fields.FieldValue(p => p.Name).Should().Be(ProjectId);
-			response.Fields.FieldValue(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+			response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(ProjectId);
+			response.Fields.ValueOf<Project, int>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
 		}
+
+		protected override GetDescriptor<Project> NewDescriptor() => new GetDescriptor<Project>(ProjectId);
 	}
 }

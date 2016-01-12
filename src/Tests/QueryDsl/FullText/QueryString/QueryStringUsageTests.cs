@@ -109,10 +109,6 @@ namespace Tests.QueryDsl.FullText.QueryString
 		{
 			q => q.Query = null,
 			q => q.Query = string.Empty,
-			q => {
-				q.Fields = null;
-				q.DefaultField = null;
-			}
 		};
 	}
 }

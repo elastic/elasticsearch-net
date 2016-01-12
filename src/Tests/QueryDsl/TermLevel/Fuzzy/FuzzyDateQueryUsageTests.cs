@@ -59,7 +59,6 @@ namespace Tests.QueryDsl.TermLevel.Fuzzy
 		)
 		{
 			q => q.Field = null,
-			q => q.Fuzziness = null,
 			q => q.Value = null
 		};
 	}

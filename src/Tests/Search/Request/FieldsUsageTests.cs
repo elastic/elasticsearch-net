@@ -2,6 +2,7 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
@@ -15,15 +16,15 @@ namespace Tests.Search.Request
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-			.Fields(
-				f => f.Name,
-				f => f.StartedOn
+			.Fields(fs => fs
+				.Field(p => p.Name)
+				.Field(p => p.StartedOn)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = new Field[] { "name", "startedOn" }
+				Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
 			};
 	}
 }

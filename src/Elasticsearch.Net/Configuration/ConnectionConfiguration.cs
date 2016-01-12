@@ -39,14 +39,14 @@ namespace Elasticsearch.Net
 			: this(connectionPool, connection, null)
 		{ }
 
-		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
-			: this(connectionPool, null, serializer)
+		public ConnectionConfiguration(IConnectionPool connectionPool, Func<ConnectionConfiguration, IElasticsearchSerializer> serializerFactory)
+			: this(connectionPool, null, serializerFactory)
 		{ }
 
 		// ReSharper disable once MemberCanBePrivate.Global
 		// eventhough we use don't use this we very much would like to  expose this constructor
-		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
-			: base(connectionPool, connection, serializer)
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<ConnectionConfiguration, IElasticsearchSerializer> serializerFactory)
+			: base(connectionPool, connection, serializerFactory)
 		{ }
 	}
 
@@ -112,8 +112,8 @@ namespace Elasticsearch.Net
 		private bool _enableHttpCompression;
 		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
 
-		private bool _httpPipeliningEnabled = true;
-		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
+		private bool _enableHttpPipelining = true;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _enableHttpPipelining;
 
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
@@ -131,10 +131,11 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		private readonly IElasticsearchSerializer _serializer;
+		protected IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
+		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
@@ -143,12 +144,13 @@ namespace Elasticsearch.Net
 		[SuppressMessage(
 			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor",
 			Justification = "We want the virtual method to run on most derived")]
-		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
+		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<T, IElasticsearchSerializer> serializerFactory)
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
+			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = serializer ?? this.DefaultSerializer();
+			this._serializer = this._serializerFactory((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
@@ -158,7 +160,7 @@ namespace Elasticsearch.Net
 
 		T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
 
-		protected virtual IElasticsearchSerializer DefaultSerializer() => new ElasticsearchDefaultSerializer();
+		protected virtual IElasticsearchSerializer DefaultSerializer(T settings) => new ElasticsearchDefaultSerializer();
 
 		public T EnableTcpKeepAlive(TimeSpan keepAliveTime, TimeSpan keepAliveInterval) =>
 			Assign(a => { this._keepAliveTime = keepAliveTime; this._keepAliveInterval = keepAliveInterval; });
@@ -306,7 +308,7 @@ namespace Elasticsearch.Net
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
-		public T HttpPipeliningEnabled(bool enabled = true) => Assign(a => a._httpPipeliningEnabled = enabled);
+		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
 	}
 }
 

@@ -17,20 +17,28 @@ namespace Nest
 		private readonly IConnectionSettingsValues _settings;
 		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
 		private readonly JsonSerializer _defaultSerializer;
+		internal JsonSerializer Serializer => _defaultSerializer;
+		private ElasticContractResolver _contractResolver;
+
+		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings) { }
+		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
 		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization 
 		/// </summary>
-		public JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
+		internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
 			this._settings = settings;
+			var piggyBackState = stateFullConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = stateFullConverter };
+			// ReSharper disable once VirtualMemberCallInContructor
+			this._contractResolver = new ElasticContractResolver(this._settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
-			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None, stateFullConverter));
-			this._defaultSerializer.Formatting = Formatting.None; 
-			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented, stateFullConverter));
-			indentedSerializer.Formatting = Formatting.Indented; 
+			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
+			//this._defaultSerializer.Formatting = Formatting.None; 
+			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
+			//indentedSerializer.Formatting = Formatting.Indented; 
 			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
 			{
 				{ SerializationFormatting.None, this._defaultSerializer },
@@ -74,22 +82,20 @@ namespace Nest
 			return Task.FromResult<T>(result);
 		}
 
-		internal JsonSerializerSettings CreateSettings(SerializationFormatting formatting, JsonConverter piggyBackJsonConverter = null)
+		private JsonSerializerSettings CreateSettings(SerializationFormatting formatting)
 		{
-			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
-				ContractResolver = new ElasticContractResolver(this._settings),
+				ContractResolver = this._contractResolver,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
-			_settings.ModifyJsonSerializerSettings?.Invoke(settings);
+			this.ModifyJsonSerializerSettings(settings);
 
 			var contract = settings.ContractResolver as ElasticContractResolver;
 			if (contract == null) throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
-			contract.PiggyBackState = piggyBackState;
 
 			return settings;
 		}

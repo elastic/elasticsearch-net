@@ -120,8 +120,7 @@ namespace Nest
 		public int? MaximumDeterminizedStates { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.QueryString = this;
-		internal static bool IsConditionless(IQueryStringQuery q) => 
-			(q.Fields == null && q.DefaultField == null) || q.Query.IsNullOrEmpty();
+		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

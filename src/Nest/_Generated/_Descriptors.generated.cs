@@ -599,15 +599,11 @@ namespace Nest
 	///<summary>descriptor for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{ 
-		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
-			/// <summary>/_search/scroll/{scroll_id}</summary>
+			/// <summary>/_search/scroll</summary>
 		public ClearScrollDescriptor() : base(){}
 		
 
-			///<summary>A comma-separated list of scroll IDs to clear</summary>
-		public ClearScrollDescriptor ScrollId(ScrollIds scrollId) => Assign(a=>a.RouteValues.Optional("scroll_id", scrollId));
-
-	
+		
 		///<summary>The URL-encoded request definition</summary>
 		public ClearScrollDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -3742,15 +3738,11 @@ namespace Nest
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
-		ScrollId IScrollRequest.ScrollId => Self.RouteValues.Get<ScrollId>("scroll_id");
 			/// <summary>/_search/scroll</summary>
 		public ScrollDescriptor() : base(){}
 		
 
-			///<summary>The scroll ID</summary>
-		public ScrollDescriptor<T> ScrollId(ScrollId scrollId) => Assign(a=>a.RouteValues.Optional("scroll_id", scrollId));
-
-	
+		
 		///<summary>The URL-encoded request definition</summary>
 		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 

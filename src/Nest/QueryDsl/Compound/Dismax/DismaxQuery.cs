@@ -36,12 +36,12 @@ namespace Nest
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
 		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors) => 
-			Assign(a => a.Queries = querySelectors.Select(q=>q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+			Assign(a => a.Queries = querySelectors.Select(q=>q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
 
 		public DisMaxQueryDescriptor<T> Queries(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> querySelectors) => 
-			Assign(a => a.Queries = querySelectors.Select(q=>q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+			Assign(a => a.Queries = querySelectors.Select(q=>q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
 
-		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries) => Assign(a => a.Queries = queries.Where(q => !q.IsConditionless).ToListOrNullIfEmpty());
+		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries) => Assign(a => a.Queries = queries.Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
 
 		public DisMaxQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 	}

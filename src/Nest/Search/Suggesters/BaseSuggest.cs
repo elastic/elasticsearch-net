@@ -31,8 +31,8 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public abstract class SuggesterBaseDescriptor<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISuggester
-		where TDescriptor : SuggesterBaseDescriptor<TDescriptor, TInterface, T>, TInterface, ISuggester
+	public abstract class SuggestDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISuggester
+		where TDescriptor : SuggestDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISuggester
 		where TInterface : class, ISuggester
 	{
 		string ISuggester.Text { get; set; }

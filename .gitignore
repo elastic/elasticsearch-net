@@ -50,6 +50,7 @@ build/tools/*
 !build/*.fsx
 !build/*.ps1
 !build/*.nuspec
+!build/*.png
 !build/scripts
 
 
