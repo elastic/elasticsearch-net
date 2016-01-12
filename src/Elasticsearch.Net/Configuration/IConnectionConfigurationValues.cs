@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 
 namespace Elasticsearch.Net
 {
-	public interface IConnectionConfigurationValues
+	public interface IConnectionConfigurationValues : IDisposable
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }

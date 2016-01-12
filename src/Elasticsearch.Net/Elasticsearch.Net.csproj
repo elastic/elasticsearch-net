@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Configuration\RequestConfiguration.cs" />
     <Compile Include="Exceptions\UnexpectedElasticsearchClientException.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Transport\Pipeline\PipelineException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Auditing\Audit.cs" />

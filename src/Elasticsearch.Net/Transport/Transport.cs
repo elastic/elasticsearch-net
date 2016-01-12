@@ -5,7 +5,7 @@ using System;
 
 namespace Elasticsearch.Net
 {
-	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
+	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>, IDisposable
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
 		private readonly SemaphoreSlim _semaphore;
@@ -38,6 +38,7 @@ namespace Elasticsearch.Net
 			IMemoryStreamFactory memoryStreamFactory
 			)
 		{
+
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
@@ -190,5 +191,9 @@ namespace Elasticsearch.Net
 			}
 		}
 
+		public void Dispose()
+		{
+			this._semaphore?.Dispose();
+		}
 	}
 }

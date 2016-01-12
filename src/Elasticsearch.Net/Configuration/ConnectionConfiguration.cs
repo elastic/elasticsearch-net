@@ -10,9 +10,9 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
-		public static TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
-		public static TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
+		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
+		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
+		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -47,6 +47,10 @@ namespace Elasticsearch.Net
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<ConnectionConfiguration, IElasticsearchSerializer> serializerFactory)
 			: base(connectionPool, connection, serializerFactory)
 		{ }
+
+		public void Dispose()
+		{
+		}
 	}
 
 	[Browsable(false)]
@@ -308,6 +312,11 @@ namespace Elasticsearch.Net
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
+
+		public void Dispose()
+		{
+			this._connectionPool?.Dispose();
+		}
 	}
 }
 
