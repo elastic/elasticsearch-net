@@ -30,7 +30,7 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 
 
-		[U] public void DisposingClientDoesNotDisposeMovingParts()
+		[U] public void InitialDisposeState()
 		{
 			var connection = new AConnection();
 			var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
