@@ -114,6 +114,7 @@ namespace Nest
 			
 			return this.IdResolver.GetIdFor(objType, obj);
 		}
+
 		public string TypeName<T>() where T : class
 		{
 			return this.TypeName(typeof(T));

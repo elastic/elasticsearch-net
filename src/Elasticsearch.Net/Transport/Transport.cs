@@ -5,7 +5,7 @@ using System;
 
 namespace Elasticsearch.Net
 {
-	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>, IDisposable
+	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
 		//TODO should all of these be public?
@@ -187,8 +187,5 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		void IDisposable.Dispose() => this.DisposeManagedResources();
-
-		protected virtual void DisposeManagedResources() { }
 	}
 }

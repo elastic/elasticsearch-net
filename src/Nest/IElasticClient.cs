@@ -3,7 +3,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial interface IElasticClient : IDisposable
+	public partial interface IElasticClient 
 	{
 		IConnectionSettingsValues ConnectionSettings { get; }
 		IElasticsearchSerializer Serializer { get; }

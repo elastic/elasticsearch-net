@@ -98,12 +98,5 @@ namespace Nest
 			return request;
 		}
 
-		void IDisposable.Dispose() => this.DisposeManagedResources();
-
-		protected virtual void DisposeManagedResources()
-		{
-			IDisposable transport = this.Transport;
-			transport?.Dispose();
-		}
 	}
 }

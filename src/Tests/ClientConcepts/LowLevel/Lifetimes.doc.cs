@@ -27,7 +27,6 @@ namespace Tests.ClientConcepts.LowLevel
 		* In some applications it could make perfect sense to have multiple singleton IElasticClient's registered with different
 		* connectionsettings. e.g if you have 2 functionally isolated Elasticsearch clusters.
 		
-		* Disposing a client won't dispose the ConnectionSettings that are passed to its constructor
 		*/
 
 
@@ -36,29 +35,6 @@ namespace Tests.ClientConcepts.LowLevel
 			var connection = new AConnection();
 			var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new AConnectionSettings(connectionPool, connection);
-			var transport = new ATransport(settings);
-			var client = new AnElasticClient(transport);
-			using (client) { }
-			client.IsDisposed.Should().BeTrue();
-			transport.IsDisposed.Should().BeTrue();
-			settings.IsDisposed.Should().BeFalse();
-			connectionPool.IsDisposed.Should().BeFalse();
-			connection.IsDisposed.Should().BeFalse();
-		}
-
-		/**
-		* Disposing the client will only dispose the resources it uses itself and the underlying ITransport.
-		* The ConnectionSettings that are passed to the client should be safe to share between multiple instances.
-		*/
-
-		[U] public void DisposingTransportDoesNotDisposeMovingParts()
-		{
-			var connection = new AConnection();
-			var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new AConnectionSettings(connectionPool, connection);
-			var transport = new ATransport(settings);
-			using (transport) { }
-			transport.IsDisposed.Should().BeTrue();
 			settings.IsDisposed.Should().BeFalse();
 			connectionPool.IsDisposed.Should().BeFalse();
 			connection.IsDisposed.Should().BeFalse();
@@ -105,29 +81,6 @@ namespace Tests.ClientConcepts.LowLevel
 
 		class AConnection : InMemoryConnection
 		{
-			public bool IsDisposed { get; private set; }
-			protected override void DisposeManagedResources()
-			{
-				this.IsDisposed = true;
-				base.DisposeManagedResources();
-			}
-		}
-
-		class ATransport : Transport<AConnectionSettings>
-		{
-			public ATransport(AConnectionSettings configurationValues) : base(configurationValues) { }
-
-			public bool IsDisposed { get; private set; }
-			protected override void DisposeManagedResources()
-			{
-				this.IsDisposed = true;
-				base.DisposeManagedResources();
-			}
-		}
-
-		class AnElasticClient : ElasticClient
-		{
-			public AnElasticClient(ITransport<IConnectionSettingsValues> transport) : base (transport){ }
 			public bool IsDisposed { get; private set; }
 			protected override void DisposeManagedResources()
 			{
