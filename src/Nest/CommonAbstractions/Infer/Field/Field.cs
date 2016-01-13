@@ -13,7 +13,7 @@ namespace Nest
 		public PropertyInfo Property { get; set; }
 		public double? Boost { get; set; }
 
-		private string ComparisonValue { get; set; }
+		private object ComparisonValue { get; set; }
 
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
@@ -57,7 +57,7 @@ namespace Nest
 			if (memberExpression == null)
 				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
 			
-			return new Field { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
+			return new Field { Expression = expression, ComparisonValue = memberExpression}; 
 		}
 
 		public static implicit operator Field(PropertyInfo property)
@@ -65,7 +65,7 @@ namespace Nest
 			return property == null ? null : new Field
 			{
 				Property = property,
-				ComparisonValue = property.Name
+				ComparisonValue = property
 			};
 		}
 

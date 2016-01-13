@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
@@ -173,6 +175,60 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			{
 				naam = "Martijn Laarman"
 			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+		}
+	
+		class A { public C C { get; set; } }
+		class B { public C C { get; set; } }
+		class C
+		{
+			public string Name { get; set; }
+		}
+		
+		/**
+		* Resolving field names is cached but this is per connection settings
+		*/
+
+		[U] public void ExpressionsAreCachedButSeeDifferentTypes()
+		{
+			var connectionSettings = TestClient.CreateSettings(forceInMemory: true);
+			var client = new ElasticClient(connectionSettings);
+
+			var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+			var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+			
+			/**
+			* Here we have to similary shaped expressions on coming from A and on from B
+			* that will resolve to the same field name, as expected
+			*/
+
+			fieldNameOnA.Should().Be("c.name");
+			fieldNameOnB.Should().Be("c.name");
+
+			/**
+			* now we create a new connectionsettings with a remap for C on class A to `d`
+			* now when we resolve the field path for A will be different
+			*/
+			var newConnectionSettings = TestClient.CreateSettings(forceInMemory: true, modifySettings: s => s
+				.InferMappingFor<A>(m => m
+					.Rename(p => p.C, "d")
+				)
+			);
+			var newClient = new ElasticClient(newConnectionSettings);
+
+			fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
+			fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
+
+			fieldNameOnA.Should().Be("d.name");
+			fieldNameOnB.Should().Be("c.name");
+
+			/** however we didn't break inferrence on the first client instance using its separate connectionsettings */
+			fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+			fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+
+			fieldNameOnA.Should().Be("c.name");
+			fieldNameOnB.Should().Be("c.name");
+
+
 		}
 	}
 }

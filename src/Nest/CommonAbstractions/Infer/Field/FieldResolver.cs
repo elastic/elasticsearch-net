@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -17,27 +18,48 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _settings;
 
+		private readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
+		private readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
 			settings.ThrowIfNull(nameof(settings));
 			this._settings = settings;
 		}
 
-		public string Resolve(Field field) =>
-			field.IsConditionless() ? null : Resolve(field.Name, field.Expression, field.Property);
-
-		internal string Resolve(PropertyName property) => 
-			property.IsConditionless() ? null : Resolve(property.Name, property.Expression, property.Property);
-
-		private string Resolve(string verbatim, Expression expression, MemberInfo member)
+		public string Resolve(Field field)
 		{
-			var name = !verbatim.IsNullOrEmpty()
-				? verbatim
-				: expression != null
-					? this.ResolveExpression(expression)
-					: member != null
-						? this.ResolveMemberInfo(member)
-						: null;
+			if (field.IsConditionless()) return null;
+			if (!field.Name.IsNullOrEmpty()) return field.Name;
+			string f;
+			if (this.Fields.TryGetValue(field, out f))
+				return f;
+			f = this.Resolve(field.Expression, field.Property);
+			this.Fields.TryAdd(field, f);
+			return f;
+		}
+
+		internal string Resolve(PropertyName property)
+		{
+
+			if (property.IsConditionless()) return null;
+			if (!property.Name.IsNullOrEmpty())
+				return property.Name;
+			string f;
+			if (this.Properties.TryGetValue(property, out f))
+				return f;
+			f = this.Resolve(property.Expression, property.Property);
+			this.Properties.TryAdd(property, f);
+			return f;
+		}
+
+		private string Resolve(Expression expression, MemberInfo member)
+		{
+			var name = expression != null
+				? this.ResolveExpression(expression)
+				: member != null
+					? this.ResolveMemberInfo(member)
+					: null;
 
 			if (name == null)
 				throw new ArgumentException("Could not resolve a property name");
@@ -51,6 +73,10 @@ namespace Nest
 				return null;
 
 			var name = info.Name;
+
+			IPropertyMapping propertyMapping = null;
+			if (this._settings.PropertyMappings.TryGetValue(info, out propertyMapping))
+				return propertyMapping.Name;
 
 			var att = ElasticsearchPropertyAttribute.From(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
