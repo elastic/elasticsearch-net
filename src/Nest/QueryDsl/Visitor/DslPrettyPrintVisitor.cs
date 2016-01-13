@@ -9,7 +9,7 @@ namespace Nest
 	{
 		private readonly StringBuilder _sb;
 		private string _final;
-		private readonly ElasticInferrer _infer;
+		private readonly Inferrer _infer;
 
 		public string PrettyPrint
 		{

@@ -12,7 +12,7 @@ namespace Nest
 		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
 		/// create a TypeSelector based on the hits _type property.
 		/// </summary>
-		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ICovariantSearchRequest self)
+		public static void CloseOverAutomagicCovariantResultSelector(Inferrer infer, ICovariantSearchRequest self)
 		{
 			if (infer == null || self == null) return;
 			var returnType = self.ClrType;

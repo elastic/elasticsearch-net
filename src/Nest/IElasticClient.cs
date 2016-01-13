@@ -8,6 +8,6 @@ namespace Nest
 		IConnectionSettingsValues ConnectionSettings { get; }
 		IElasticsearchSerializer Serializer { get; }
 		IElasticsearchClient Raw { get; }
-		ElasticInferrer Infer { get; }
+		Inferrer Infer { get; }
 	}
 }

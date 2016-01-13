@@ -86,7 +86,7 @@ namespace Nest
 			var nestSettings = settings as IConnectionSettingsValues;
 			if (nestSettings == null)
 				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
-			var infer = new ElasticInferrer(nestSettings);
+			var infer = new Inferrer(nestSettings);
 			return infer.Field(this);
 		}
 	}

@@ -17,7 +17,7 @@ namespace Nest
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
 		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
-		public ElasticInferrer Infer => this.Transport.Settings.Inferrer;
+		public Inferrer Infer => this.Transport.Settings.Inferrer;
 		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
 
 		public IElasticsearchClient Raw { get; }

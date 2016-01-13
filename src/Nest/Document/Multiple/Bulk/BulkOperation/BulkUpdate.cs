@@ -64,7 +64,7 @@ namespace Nest
 
 		protected override Type ClrType => typeof(TDocument);
 
-		protected override Id GetIdForOperation(ElasticInferrer inferrer) => this.Id ?? new Id(new[] { this.InferFrom, this.Upsert }.FirstOrDefault(o=>o != null));
+		protected override Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(new[] { this.InferFrom, this.Upsert }.FirstOrDefault(o=>o != null));
 
 		protected override object GetBody() => 
 			new BulkUpdateBody<TDocument, TPartialDocument>
@@ -130,7 +130,7 @@ namespace Nest
 				_DocAsUpsert = Self.DocAsUpsert
 			};
 
-		protected override Id GetIdForOperation(ElasticInferrer inferrer) => Self.Id ?? new Id(new[] { Self.InferFrom, Self.Upsert }.FirstOrDefault(o=>o != null));
+		protected override Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(new[] { Self.InferFrom, Self.Upsert }.FirstOrDefault(o=>o != null));
 
 		/// <summary>
 		/// The object to update, if id is not manually set it will be inferred from the object.
