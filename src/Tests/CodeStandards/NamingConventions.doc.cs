@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
@@ -14,8 +15,8 @@ namespace Tests.CodeStandards
 		//[U]
 		public void AbstractClassNamesEndWithBase()
 		{
-			var abstractClasses = Assembly.Load("Nest").GetTypes()
-				.Where(t => t.IsClass && t.IsAbstract && !t.IsSealed)
+			var abstractClasses = typeof(IRequest).Assembly().GetTypes()
+				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed())
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
@@ -29,7 +30,7 @@ namespace Tests.CodeStandards
 		//[U]
 		public void RequestClassNamesEndWithRequest()
 		{
-			var types = Assembly.Load("Nest").GetTypes();
+			var types = typeof(IRequest).Assembly().GetTypes();
 			var requests = types
 				.Where(t => typeof(IRequest).IsAssignableFrom(t))
 				.Select(t => t.Name.Split('`')[0])
@@ -44,7 +45,7 @@ namespace Tests.CodeStandards
 		//[U]
 		public void ResponseClassNamesEndWithResponse()
 		{
-			var types = Assembly.Load("Nest").GetTypes();
+			var types = typeof(IRequest).Assembly().GetTypes();
 			var responses = types
 				.Where(t => typeof(IResponse).IsAssignableFrom(t))
 				.Select(t => t.Name.Split('`')[0])
@@ -60,15 +61,15 @@ namespace Tests.CodeStandards
 		//[U]
 		public void ParityBetweenRequestsAndResponses()
 		{
-			var types = Assembly.Load("Nest").GetTypes();
+			var types = typeof(IRequest).Assembly().GetTypes();
 
 			var requests = new HashSet<string>(types
-				.Where(t => t.IsClass && !t.IsAbstract && typeof(IRequest).IsAssignableFrom(t) && !(t.Name.EndsWith("Descriptor")))
+				.Where(t => t.IsClass() && !t.IsAbstract() && typeof(IRequest).IsAssignableFrom(t) && !(t.Name.EndsWith("Descriptor")))
 				.Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 			);
 
 			var responses = types
-				.Where(t => t.IsClass && !t.IsAbstract && typeof(IResponse).IsAssignableFrom(t))
+				.Where(t => t.IsClass() && !t.IsAbstract() && typeof(IResponse).IsAssignableFrom(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 
 			// Add any exceptions to the rule here

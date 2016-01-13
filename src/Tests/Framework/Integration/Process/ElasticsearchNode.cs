@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.RegularExpressions;
@@ -14,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Framework;
 
 namespace Tests.Framework.Integration
 {
@@ -72,7 +74,11 @@ namespace Tests.Framework.Integration
 				return;
 			}
 
+#if DOTNETCORE
+			var appdata = Environment.GetEnvironmentVariable("APPDATA");
+#else
 			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#endif
 			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
@@ -103,7 +109,7 @@ namespace Tests.Framework.Integration
 						foreach (var supportedPlugin in SupportedPlugins)
 						{
 							if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
-								throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
+								throw new Exception($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
 						}
 
 						this.Started = true;
@@ -111,7 +117,7 @@ namespace Tests.Framework.Integration
 						this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
 						this._blockingSubject.OnNext(handle);
 						if (!handle.WaitOne(timeout, true))
-							throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
+							throw new Exception($"Could not launch tests on already running elasticsearch within {timeout}");
 
 						return Observable.Empty<ElasticsearchMessage>();
 					}
@@ -135,7 +141,7 @@ namespace Tests.Framework.Integration
 			if (!handle.WaitOne(timeout, true))
 			{
 				this.Stop();
-				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
+				throw new Exception($"Could not start elasticsearch within {timeout}");
 			}
 
 			return observable;
@@ -257,11 +263,11 @@ namespace Tests.Framework.Integration
 								handle.Set();
 							});
 						if (!handle.WaitOne(timeout, true))
-							throw new ApplicationException($"Could not install ${installPath} within {timeout}");
+							throw new Exception($"Could not install ${installPath} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
-					throw new ApplicationException($"Could not install ${installPath} within {timeout}");
+					throw new Exception($"Could not install ${installPath} within {timeout}");
 			}
 		}
 		

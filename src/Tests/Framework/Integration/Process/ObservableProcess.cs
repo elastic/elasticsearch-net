@@ -53,7 +53,7 @@ namespace Tests.Framework.Integration
 				var processError = CreateProcessExitSubscription(this.Process, processExited, observer);
 
 				if (!this.Process.Start())
-					throw new ApplicationException($"Failed to start observable process: {this.Binary}");
+					throw new Exception($"Failed to start observable process: {this.Binary}");
 
 				this.Process.BeginOutputReadLine();
 				this.Process.BeginErrorReadLine();

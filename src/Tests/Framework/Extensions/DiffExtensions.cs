@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using DiffPlex;
 using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
+using Nest;
 
 namespace Tests.Framework
 {

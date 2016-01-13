@@ -54,7 +54,7 @@ namespace Tests.QueryDsl.BoolDsl
 				)
 			);
 			var bulkResponse = client.Bulk(b => b.IndexMany(A.Documents));
-			if (!bulkResponse.IsValid) throw new ApplicationException("Could not bootstrap bool cluster, bulk was invalid");
+			if (!bulkResponse.IsValid) throw new Exception("Could not bootstrap bool cluster, bulk was invalid");
 			client.Refresh(Indices<A>());
 		}
 	}

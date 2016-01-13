@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using System.Reflection;
 
 namespace Tests.CodeStandards
 {
@@ -16,8 +17,8 @@ namespace Tests.CodeStandards
 		{
 			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
 
-			var descriptors = from t in typeof(DescriptorBase<,>).Assembly.Types()
-							  where t.IsClass 
+			var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
+							  where t.IsClass() 
 								&& t.Name.Contains("Descriptor") 
 								&& !notDescriptors.Contains(t.Name)
 								&& !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
@@ -32,8 +33,8 @@ namespace Tests.CodeStandards
 		public void SelectorsReturnInterface()
 		{
 			var descriptors =
-				from t in typeof(DescriptorBase<,>).Assembly.Types()
-				where t.IsClass
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass()
 				select t;
 			var selectorMethods =
 				from d in descriptors
@@ -41,11 +42,11 @@ namespace Tests.CodeStandards
 				let parameters = m.GetParameters()
 				from p in parameters
 				let type = p.ParameterType
-				let isGeneric = type.IsGenericType
+				let isGeneric = type.IsGeneric()
 				where isGeneric
 				let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
 				where isFunc
-				let lastArgIsNotInterface = !type.GetGenericArguments().Last().IsInterface
+				let lastArgIsNotInterface = !type.GetGenericArguments().Last().IsInterface()
 				where lastArgIsNotInterface
 				select $"{m.Name} on {m.DeclaringType.Name}";
 

@@ -87,11 +87,16 @@ namespace Tests.Framework
 		{
 			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
+#if DOTNETCORE
+			return "TODO: Work out how to get test name";
+#else
 			var st = new StackTrace();
 			var types = GetTypes(st);
 			return (types.Select(f => f.FullName).LastOrDefault() ?? "Seeder").Split('.').Last();
+#endif
 		}
 
+#if !DOTNETCORE
 		private static List<Type> GetTypes(StackTrace st)
 		{
 			var types = (from f in st.GetFrames()
@@ -102,6 +107,7 @@ namespace Tests.Framework
 						 select type).ToList();
 			return types;
 		}
+#endif
 
 		private static ITestConfiguration LoadConfiguration()
 		{

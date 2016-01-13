@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Common;
 using Nest;
 using Tests.Framework;
+using System.Reflection;
 
 namespace Tests.CodeStandards
 {
@@ -20,7 +20,7 @@ namespace Tests.CodeStandards
 			var fluentParametersNotNamedSelector =
 				from m in typeof (IElasticClient).GetMethods()
 				from p in m.GetParameters()
-				where p.ParameterType.BaseType == typeof (MulticastDelegate)
+				where p.ParameterType.BaseType() == typeof (MulticastDelegate)
 				where !p.Name.Equals("selector")
 				select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' but has a name of '{p.Name}'";
 
@@ -103,7 +103,7 @@ namespace Tests.CodeStandards
                 from methodInfo in typeof(IElasticClient).GetMethods()
                 where
                     typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
-                    (methodInfo.ReturnType.IsGenericType
+                    (methodInfo.ReturnType.IsGeneric()
                      && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
                      && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
                 let method = new MethodWithRequestParameter(methodInfo)
@@ -153,7 +153,7 @@ namespace Tests.CodeStandards
 	                ? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)
 	                : methodInfo.Name;
 
-	            IsAsync = methodInfo.ReturnType.IsGenericType &&
+	            IsAsync = methodInfo.ReturnType.IsGeneric() &&
 	                      methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
 
                 MethodInfo = methodInfo;
@@ -169,7 +169,7 @@ namespace Tests.CodeStandards
 	            else
 	            {
 	                Parameter = methodInfo.GetParameters()
-	                    .First(p => p.ParameterType.BaseType == typeof(MulticastDelegate));
+	                    .First(p => p.ParameterType.BaseType() == typeof(MulticastDelegate));
                     MethodType = ClientMethodType.Fluent;
 	            }
 	        }

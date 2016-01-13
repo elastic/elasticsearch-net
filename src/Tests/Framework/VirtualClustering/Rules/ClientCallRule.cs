@@ -16,7 +16,13 @@ namespace Tests.Framework
 		{
 			Self.Times = times;
 			Self.Succeeds = false;
-			Self.Return = errorState ?? new WebException();
+			Self.Return = errorState ??
+#if DOTNETCORE
+			// TODO: Figure out what kind of exception to throw
+			new Exception();
+#else
+			new WebException();
+#endif
 			return this;
 		}
 
