@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading;
 
 namespace Elasticsearch.Net
 {
@@ -56,6 +57,9 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
+		private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => this._semaphore;
+
 		private TimeSpan _requestTimeout;
 		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 
@@ -316,6 +320,7 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool?.Dispose();
 			this._connection?.Dispose();
+			this._semaphore?.Dispose();
 		}
 	}
 }

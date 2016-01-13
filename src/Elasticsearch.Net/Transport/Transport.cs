@@ -8,8 +8,6 @@ namespace Elasticsearch.Net
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>, IDisposable
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		private readonly SemaphoreSlim _semaphore;
-
 		//TODO should all of these be public?
 		public TConnectionSettings Settings { get; }
 		public IDateTimeProvider DateTimeProvider { get; }
@@ -38,7 +36,6 @@ namespace Elasticsearch.Net
 			IMemoryStreamFactory memoryStreamFactory
 			)
 		{
-
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
 			configurationValues.Connection.ThrowIfNull(nameof(configurationValues.Connection));
@@ -48,7 +45,6 @@ namespace Elasticsearch.Net
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
 			this.DateTimeProvider = dateTimeProvider ?? Net.DateTimeProvider.Default;
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
-			this._semaphore = new SemaphoreSlim(1, 1);
 		}
 
 		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
@@ -56,7 +52,7 @@ namespace Elasticsearch.Net
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				pipeline.FirstPoolUsage(this._semaphore);
+				pipeline.FirstPoolUsage(this.Settings.BootstrapLock);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
@@ -113,7 +109,7 @@ namespace Elasticsearch.Net
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				await pipeline.FirstPoolUsageAsync(this._semaphore);
+				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
@@ -193,9 +189,6 @@ namespace Elasticsearch.Net
 
 		void IDisposable.Dispose() => this.DisposeManagedResources();
 
-		protected virtual void DisposeManagedResources()
-		{
-			this._semaphore?.Dispose();
-		}
+		protected virtual void DisposeManagedResources() { }
 	}
 }
