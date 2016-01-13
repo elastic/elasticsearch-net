@@ -55,6 +55,7 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramItem.cs" />
     <Compile Include="Aggregations\Bucket\DocCountBucket.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationExecutionHint.cs" />
