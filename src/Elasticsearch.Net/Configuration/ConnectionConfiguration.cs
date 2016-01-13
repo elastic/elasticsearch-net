@@ -19,6 +19,7 @@ namespace Elasticsearch.Net
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{ }
@@ -48,9 +49,6 @@ namespace Elasticsearch.Net
 			: base(connectionPool, connection, serializerFactory)
 		{ }
 
-		public void Dispose()
-		{
-		}
 	}
 
 	[Browsable(false)]
@@ -134,11 +132,10 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		protected IElasticsearchSerializer _serializer;
+		private readonly IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
-		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
@@ -151,9 +148,9 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
+			serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = this._serializerFactory((T)this);
+			this._serializer = serializerFactory((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
@@ -313,9 +310,12 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
 
-		public void Dispose()
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources()
 		{
 			this._connectionPool?.Dispose();
+			this._connection?.Dispose();
 		}
 	}
 }

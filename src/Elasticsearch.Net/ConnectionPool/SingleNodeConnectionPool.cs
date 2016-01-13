@@ -30,8 +30,8 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 
-		public void Dispose()
-		{
-		}
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources() { }
 	}
 }

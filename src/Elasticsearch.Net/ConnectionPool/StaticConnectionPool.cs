@@ -97,8 +97,8 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public virtual void Dispose()
-		{
-		}
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources() { }
 	}
 }

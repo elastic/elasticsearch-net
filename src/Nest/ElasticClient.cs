@@ -97,5 +97,13 @@ namespace Nest
 			request.RequestParameters.RequestConfiguration = configuration;
 			return request;
 		}
+
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources()
+		{
+			IDisposable transport = this.Transport;
+			transport?.Dispose();
+		}
 	}
 }

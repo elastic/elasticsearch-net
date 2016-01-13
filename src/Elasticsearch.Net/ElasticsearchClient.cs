@@ -16,9 +16,11 @@ namespace Elasticsearch.Net
 		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
 
 		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticsearchClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
 
 		/// <summary>Instantiate a new low level elasticsearch client using the specified settings</summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ElasticsearchClient(IConnectionConfigurationValues settings) : this(new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
