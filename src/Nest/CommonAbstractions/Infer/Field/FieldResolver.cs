@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -18,12 +19,33 @@ namespace Nest
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
-			if (settings == null)
-				throw new ArgumentNullException("settings");
-			_settings = settings;
+			settings.ThrowIfNull(nameof(settings));
+			this._settings = settings;
 		}
 
-		public string Resolve(MemberInfo info)
+		public string Resolve(Field field) =>
+			field.IsConditionless() ? null : Resolve(field.Name, field.Expression, field.Property);
+
+		internal string Resolve(PropertyName property) => 
+			property.IsConditionless() ? null : Resolve(property.Name, property.Expression, property.Property);
+
+		private string Resolve(string verbatim, Expression expression, MemberInfo member)
+		{
+			var name = !verbatim.IsNullOrEmpty()
+				? verbatim
+				: expression != null
+					? this.ResolveExpression(expression)
+					: member != null
+						? this.ResolveMemberInfo(member)
+						: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a property name");
+
+			return name;
+		}
+
+		private string ResolveMemberInfo(MemberInfo info)
 		{
 			if (info == null)
 				return null;
@@ -37,7 +59,7 @@ namespace Nest
 			return _settings.Serializer?.CreatePropertyName(info) ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
-		public string Resolve(Expression expression)
+		private string ResolveExpression(Expression expression)
 		{
 			var stack = new Stack<string>();
 			var properties = new Stack<ElasticsearchPropertyAttribute>();
@@ -52,11 +74,9 @@ namespace Nest
 
 		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
 		{
-			if (stack != null)
-			{
-				var resolvedName = this.Resolve(expression.Member);
-				stack.Push(resolvedName);
-			}
+			if (stack == null) return base.VisitMemberAccess(expression, stack, properties);
+			var resolvedName = this.ResolveMemberInfo(expression.Member);
+			stack.Push(resolvedName);
 			return base.VisitMemberAccess(expression, stack, properties);
 		}
 

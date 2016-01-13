@@ -877,7 +877,7 @@
     <Compile Include="Mapping\DynamicMapping.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggester.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQuery.cs" />
-    <Compile Include="CommonAbstractions\Infer\ElasticInferrer.cs" />
+    <Compile Include="CommonAbstractions\Infer\Inferrer.cs" />
     <Compile Include="Document\Multiple\Reindex\IReindexResponse.cs" />
     <Compile Include="Search\Suggesters\Suggest.cs" />
     <Compile Include="Search\Suggesters\SuggestOption.cs" />

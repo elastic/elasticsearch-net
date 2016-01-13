@@ -21,7 +21,7 @@ namespace Nest
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
-			Func<T, string> idSelector = this.GetIdFor;
+			Func<T, string> idSelector = this.Resolve;
 			return idSelector;
 		}
 
@@ -31,8 +31,12 @@ namespace Nest
 			return t => f((T)t);
 		}
 
-		public string GetIdFor(Type type, object @object)
+		public string Resolve<T>(T @object) => @object == null ? null : Resolve(@object.GetType(), @object);
+
+		public string Resolve(Type type, object @object)
 		{
+			if (type == null || @object == null) return null;
+
 			Func<object, string> cachedLookup;
 			string field;
 
@@ -64,14 +68,6 @@ namespace Nest
 			return cachedLookup(@object);
 		}
 
-		public string GetIdFor<T>(T @object)
-		{
-			if (@object == null)
-				return null;
-
-			//var type = typeof(T);
-			return GetIdFor(@object.GetType(), @object);
-		}
 
 		private PropertyInfo GetInferredId(Type type)
 		{
