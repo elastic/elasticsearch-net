@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading;
 
 namespace Elasticsearch.Net
 {
@@ -10,15 +11,16 @@ namespace Elasticsearch.Net
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
-		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
-		public static TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
-		public static TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
+		public static readonly TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
+		public static readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
+		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
 		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{ }
@@ -47,6 +49,7 @@ namespace Elasticsearch.Net
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<ConnectionConfiguration, IElasticsearchSerializer> serializerFactory)
 			: base(connectionPool, connection, serializerFactory)
 		{ }
+
 	}
 
 	[Browsable(false)]
@@ -54,6 +57,9 @@ namespace Elasticsearch.Net
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
+		private SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
+		SemaphoreSlim IConnectionConfigurationValues.BootstrapLock => this._semaphore;
+
 		private TimeSpan _requestTimeout;
 		TimeSpan IConnectionConfigurationValues.RequestTimeout => _requestTimeout;
 
@@ -130,11 +136,10 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		protected IElasticsearchSerializer _serializer;
+		private readonly IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
-		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
@@ -147,9 +152,9 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
+			serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = this._serializerFactory((T)this);
+			this._serializer = serializerFactory((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;
@@ -308,6 +313,15 @@ namespace Elasticsearch.Net
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		public T EnableHttpPipelining(bool enabled = true) => Assign(a => a._enableHttpPipelining = enabled);
+
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources()
+		{
+			this._connectionPool?.Dispose();
+			this._connection?.Dispose();
+			this._semaphore?.Dispose();
+		}
 	}
 }
 

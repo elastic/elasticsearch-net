@@ -97,5 +97,6 @@ namespace Nest
 			request.RequestParameters.RequestConfiguration = configuration;
 			return request;
 		}
+
 	}
 }

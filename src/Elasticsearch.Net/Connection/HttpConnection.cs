@@ -194,5 +194,9 @@ namespace Elasticsearch.Net
 				builder.Stream = response.GetResponseStream();
 			}
 		}
+
+		void IDisposable.Dispose() => this.DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources() { }
 	}
 }

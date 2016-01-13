@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	public interface IConnectionConfigurationValues
+	public interface IConnectionConfigurationValues : IDisposable
 	{
+		/// <summary> Provides a semaphoreslim to transport implementations that need to limit access to a resource</summary>
+		SemaphoreSlim BootstrapLock { get; }
+
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }
 		

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -197,18 +198,37 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 		}
 
+		/**
+		* ## Overriding default Json.NET behavior
+		*
+		* Please be advised that this is an expert behavior but if you need to get to the nitty gritty this can be really useful
+		*
+		* Create a subclass of the `JsonNetSerializer` 
+		 
+		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
-			public int X { get; set; } = 0;
 			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+			
 
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
-			{
-				++X;
-			}
+			/** 
+			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+			*/
+			public int X { get; set; } = 0;
+			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++X;
+
+			/**
+			* You can inject contract resolved converters by implementing the ContractConverters property
+			* This can be much faster then registering them on JsonSerializerSettings.Converters
+			*/
+			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>();
 		}
-
-		[U] public void IsCalled()
+		
+		/**
+		* You can then register a factory on ConnectionSettings to create an instance of your subclass instead. 
+		* This is called once per instance of ConnectionSettings.
+		*/
+		[U] public void ModifyJsonSerializerSettingsIsCalled()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(),s => new MyJsonNetSerializer(s));

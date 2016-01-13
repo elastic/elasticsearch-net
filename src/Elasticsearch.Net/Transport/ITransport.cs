@@ -1,8 +1,10 @@
+using System;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public interface ITransport<out TConnectionSettings> where TConnectionSettings : IConnectionConfigurationValues
+	public interface ITransport<out TConnectionSettings> 
+		where TConnectionSettings : IConnectionConfigurationValues
 	{
 		TConnectionSettings Settings { get; }
 

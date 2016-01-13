@@ -12,11 +12,6 @@ namespace Nest
 			this._connectionSettings = connectionSettings;
 		}
 
-		public string GetIndexForType<T>()
-		{
-			return this.GetIndexForType(typeof(T));
-		}
-
 		public string GetIndexForType(Type type)
 		{
 			var defaultIndices = this._connectionSettings.DefaultIndices;

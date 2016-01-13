@@ -64,7 +64,6 @@ namespace Tests.QueryDsl.BoolDsl
 	{
 
 		private readonly BoolCluster _cluster;
-		private IConnectionSettingsValues _settings;
 
 		public BoolsInPractice(BoolCluster cluster)
 		{
