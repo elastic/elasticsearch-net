@@ -120,8 +120,6 @@ namespace Nest
 				Milliseconds = (long)this.Factor;
 		}
 
-		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
-
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
@@ -141,6 +139,8 @@ namespace Nest
 
 		public static bool operator !=(Time left, Time right) =>
 			!object.ReferenceEquals(left, null) && !object.ReferenceEquals(right, null) && !left.Equals(right);
+
+		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
 
 		public override string ToString()
 		{

@@ -42,11 +42,12 @@ namespace Nest
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
-            if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
-            {
-				continue;
-            }
-		var t = @kv.Value.CsharpType(kv.Key);
+        if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        {
+			continue;
+        }
+		var t = @kv.Value.HighLevelType(kv.Key);
+		var tMethod = t == "Time" ? ".ToTimeSpan()" : "";
 		var tSuffix = (t == "bool") ? " = true" : "";
 		var m = kv.Key.ToPascalCase();
 		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
@@ -60,7 +61,7 @@ namespace Nest
 		{<text>
 		[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]
 		</text>}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => AssignParam(p=>p.@(m)(@kv.Key));</text>
+		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => AssignParam(p=>p.@(m)(@kv.Key@tMethod));</text>
 		if (fieldMethod)
 		{
 			<text>
