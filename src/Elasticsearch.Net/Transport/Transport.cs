@@ -100,6 +100,9 @@ namespace Elasticsearch.Net
 				}
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
+
+				this.Settings.OnRequestCompleted?.Invoke(response);
+
 				return response;
 			}
 		}
@@ -157,6 +160,9 @@ namespace Elasticsearch.Net
 				}
 				if (response == null || !response.Success)
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
+
+				this.Settings.OnRequestCompleted?.Invoke(response);
+
 				return response;
 			}
 		}
