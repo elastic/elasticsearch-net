@@ -102,5 +102,29 @@ namespace Tests.Mapping.Types.Core.String
             .String(s => s
 				.Name(o => o.Guid)
 			);
+
+		protected override object ExpectJsonFluentOnly => new
+		{
+			properties = new
+			{
+				full = new
+				{
+					type = "string",
+					norms = new
+					{
+						enabled = true,
+						loading = "lazy"
+					}
+				}
+			}
+		};
+		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
+			.String(s => s
+				.Name(o => o.Full)
+				.Norms(n => n
+					.Enabled()
+					.Loading(NormsLoading.Lazy)
+				)
+			);
 	}
 }

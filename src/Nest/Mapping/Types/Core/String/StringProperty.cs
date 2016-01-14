@@ -19,7 +19,7 @@ namespace Nest
 		string NullValue { get; set; }
 
 		[JsonProperty("norms")]
-		NormsMapping Norms { get; set; }
+		INorms Norms { get; set; }
 
 		[JsonProperty("index_options")]
 		IndexOptions? IndexOptions { get; set; }
@@ -51,7 +51,7 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 		public double? Boost { get; set; }
 		public string NullValue { get; set; }
-		public NormsMapping Norms { get; set; }
+		public INorms Norms { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
@@ -69,7 +69,7 @@ namespace Nest
 		TermVectorOption? IStringProperty.TermVector { get; set; }
 		double? IStringProperty.Boost { get; set; }
 		string IStringProperty.NullValue { get; set; }
-		NormsMapping IStringProperty.Norms { get; set; }
+		INorms IStringProperty.Norms { get; set; }
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
@@ -99,7 +99,7 @@ namespace Nest
 
 		public StringPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
-		public StringPropertyDescriptor<T> Norms(NormsMapping normsMapping) => Assign(a => a.Norms = normsMapping);
+		public StringPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector) => Assign(a => a.Norms = selector?.Invoke(new NormsDescriptor()));
 
 		public StringPropertyDescriptor<T> IgnoreAbove(int ignoreAbove) => Assign(a => a.IgnoreAbove = ignoreAbove);
 
@@ -108,6 +108,6 @@ namespace Nest
 		public StringPropertyDescriptor<T> PositionOffsetGap(int positionOffsetGap) => Assign(a => a.PositionOffsetGap = positionOffsetGap);
 
 		public StringPropertyDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
-			Assign(a => selector(new StringFielddataDescriptor()));
+			Assign(a => a.Fielddata = selector?.Invoke(new StringFielddataDescriptor()));
 	}
 }
