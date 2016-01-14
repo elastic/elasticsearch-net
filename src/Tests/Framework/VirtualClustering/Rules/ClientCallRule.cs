@@ -18,8 +18,7 @@ namespace Tests.Framework
 			Self.Succeeds = false;
 			Self.Return = errorState ??
 #if DOTNETCORE
-			// TODO: Figure out what kind of exception to throw
-			new Exception();
+			new System.Net.Http.HttpRequestException();
 #else
 			new WebException();
 #endif

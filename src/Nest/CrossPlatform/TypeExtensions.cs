@@ -8,7 +8,6 @@ namespace Elasticsearch.Net
 {
 	internal static class DotNetCoreTypeExtensions
 	{
-
 		internal static bool IsGeneric(this Type type)
 		{
 #if DOTNETCORE

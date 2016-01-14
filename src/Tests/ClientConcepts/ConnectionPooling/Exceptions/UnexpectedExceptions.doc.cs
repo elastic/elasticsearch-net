@@ -59,8 +59,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 #if DOTNETCORE
-				// TODO: Figure out what type of exception to throw here
-				.ClientCalls(r => r.OnPort(9200).FailAlways(new Exception("recover")))
+				.ClientCalls(r => r.OnPort(9200).FailAlways(new System.Net.Http.HttpRequestException("recover")))
 #else
 				.ClientCalls(r => r.OnPort(9200).FailAlways(new WebException("recover")))
 #endif 

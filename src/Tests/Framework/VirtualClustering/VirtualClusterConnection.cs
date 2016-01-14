@@ -77,8 +77,7 @@ namespace Tests.Framework
 				);
 			}
 #if DOTNETCORE
-			// TODO: Figure out what kind of exception to catch
-			catch (Exception e)
+			catch (System.Net.Http.HttpRequestException e)
 #else
 			catch (WebException e)
 #endif
@@ -132,8 +131,7 @@ namespace Tests.Framework
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
 #if DOTNETCORE
-					// TODO: Figure out what kind of exception to throw
-					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new System.Net.Http.HttpRequestException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 #else
 					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 #endif
@@ -154,8 +152,7 @@ namespace Tests.Framework
 				this._dateTimeProvider.ChangeTime(d=> d.Add(time));
 				if (rule.Takes.Value > requestData.RequestTimeout)
 #if DOTNETCORE
-					// TODO: Work out what type of exception to throw
-					throw new Exception($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
+					throw new System.Net.Http.HttpRequestException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 #else
 					throw new WebException($"Request timed out after {time} : call configured to take {rule.Takes.Value} while requestTimeout was: {timeout}");
 #endif
@@ -178,8 +175,7 @@ namespace Tests.Framework
 			var failed = Interlocked.Increment(ref state.Failures);
 			if (rule.Return == null)
 #if DOTNETCORE
-				// TODO: figure out what type of exception to throw here
-				throw new Exception();
+				throw new System.Net.Http.HttpRequestException();
 #else
 				throw new WebException();
 #endif

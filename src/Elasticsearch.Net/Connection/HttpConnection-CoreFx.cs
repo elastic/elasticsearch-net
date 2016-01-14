@@ -1,6 +1,6 @@
-﻿using System;
+﻿#if DOTNETCORE
+using System;
 using System.IO.Compression;
-#if DOTNETCORE
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,6 +23,7 @@ namespace Elasticsearch.Net
 
 			public bool IsBypassed(Uri host) => host.IsLoopback;
 		}
+
 		private readonly IConnectionConfigurationValues _settings;
 		private readonly HttpClient _client;
 
@@ -60,13 +61,111 @@ namespace Elasticsearch.Net
 		}
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
-			throw new NotImplementedException();
+			var builder = new ResponseBuilder<TReturn>(requestData);
+			try
+			{
+				var requestMessage = CreateHttpRequestMessage(requestData);
+				var data = requestData.PostData;
+
+				if (data != null)
+				{
+					using (var stream = requestData.MemoryStreamFactory.Create())
+					{
+						if (requestData.HttpCompression)
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								data.Write(zipStream, requestData.ConnectionSettings);
+						else
+							data.Write(stream, requestData.ConnectionSettings);
+
+						requestMessage.Content = new StreamContent(stream);
+					}
+				}
+
+				var response = this._client.SendAsync(requestMessage).Result;
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.Content.ReadAsStreamAsync().Result;
+			}
+			catch (HttpRequestException e)
+			{
+				HandleException(builder, e);
+			}
+
+			return builder.ToResponse();
 		}
 
-		public virtual Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			throw new NotImplementedException();
+			var builder = new ResponseBuilder<TReturn>(requestData);
+			try
+			{
+				var requestMessage = CreateHttpRequestMessage(requestData);
+				var data = requestData.PostData;
+
+				if (data != null)
+				{
+					using (var stream = requestData.MemoryStreamFactory.Create())
+					{
+						if (requestData.HttpCompression)
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								data.Write(zipStream, requestData.ConnectionSettings);
+						else
+							data.Write(stream, requestData.ConnectionSettings);
+
+						requestMessage.Content = new StreamContent(stream);
+					}
+				}
+
+				var response = await this._client.SendAsync(requestMessage);
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = await response.Content.ReadAsStreamAsync();
+			}
+			catch (HttpRequestException e)
+			{
+				HandleException(builder, e);
+			}
+
+			return builder.ToResponse();
 		}
+
+		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, HttpRequestException exception)
+			where TReturn : class
+		{
+			builder.Exception = exception;
+
+			// TODO: Figure out what to do here
+			//var response = exception. as HttpWebResponse;
+			//if (response != null)
+			//{
+			//	builder.StatusCode = (int)response.StatusCode;
+			//	builder.Stream = response.GetResponseStream();
+			//}
+		}
+
+		private static HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
+		{
+			var method = ConvertHttpMethod(requestData.Method);
+			return new HttpRequestMessage(method, requestData.Uri);
+		}
+
+		private static System.Net.Http.HttpMethod ConvertHttpMethod(HttpMethod httpMethod)
+		{
+			switch (httpMethod)
+			{
+				case HttpMethod.GET:
+					return System.Net.Http.HttpMethod.Get;
+				case HttpMethod.POST:
+					return System.Net.Http.HttpMethod.Post;
+				case HttpMethod.PUT:
+					return System.Net.Http.HttpMethod.Put;
+				case HttpMethod.DELETE:
+					return System.Net.Http.HttpMethod.Delete;
+				case HttpMethod.HEAD:
+					return System.Net.Http.HttpMethod.Head;
+				default:
+					throw new ArgumentException("Invalid value for HttpMethod", nameof(httpMethod));
+			}
+		}
+
 		/// <summary>
 		/// Internal Message Handler that is used by the HttpClientConnection. This class cannot be inherited.
 		/// </summary>
@@ -79,7 +178,6 @@ namespace Elasticsearch.Net
 			public InternalHttpMessageHandler(HttpClientHandler innerHandler)
 				: base(innerHandler ?? new HttpClientHandler())
 			{
-
 			}
 
 			/// <summary>

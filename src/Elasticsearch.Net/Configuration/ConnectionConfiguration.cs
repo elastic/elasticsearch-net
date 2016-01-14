@@ -131,7 +131,7 @@ namespace Elasticsearch.Net
 		BasicAuthenticationCredentials _basicAuthCredentials;
 		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
-		protected IElasticsearchSerializer _serializer;
+		private IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
