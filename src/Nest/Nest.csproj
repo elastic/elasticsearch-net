@@ -509,7 +509,7 @@
     <Compile Include="QueryDsl\Geo\Shape\Polygon\PolygonGeoShape.cs" />
     <Compile Include="Mapping\MetaFields\FieldNames\FieldNamesField.cs" />
     <Compile Include="Modules\Indices\Fielddata\FielddataBase.cs" />
-    <Compile Include="Mapping\Norms\NormsMapping.cs" />
+    <Compile Include="Mapping\Norms\Norms.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryResponse.cs" />
     <Compile Include="Mapping\Transform\MappingTransform.cs" />
     <Compile Include="Mapping\Types\Specialized\Murmur3Hash\Murmur3HashProperty.cs" />

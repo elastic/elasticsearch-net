@@ -8,7 +8,7 @@
         TermVectorOption? IStringProperty.TermVector { get; set; }
         double? IStringProperty.Boost { get; set; }
         string IStringProperty.NullValue { get; set; }
-		NormsMapping IStringProperty.Norms { get; set; }
+		INorms IStringProperty.Norms { get; set; }
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
         string IStringProperty.Analyzer { get; set; }
         string IStringProperty.SearchAnalyzer { get; set; }
