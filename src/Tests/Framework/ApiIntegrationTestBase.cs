@@ -39,7 +39,7 @@ namespace Tests.Framework
 			return base.AssertOnAllResponses((r) =>
 			{
 				if (TestClient.Configuration.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null
-					&& r.CallDetails.OriginalException.GetType() != typeof(WebException))
+					&& IsNotWebExceptionType(r.CallDetails.OriginalException.GetType()))
 				{
 					ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
 					return;
@@ -47,6 +47,16 @@ namespace Tests.Framework
 
 				assert(r);
 			});
+		}
+
+		private static bool IsNotWebExceptionType(Type exceptionType)
+		{
+#if DOTNETCORE
+			// TODO: Figure out what exception type is thrown here
+			return exceptionType != typeof(Exception);
+#else
+			return exceptionType != typeof (WebException);
+#endif
 		}
 	}
 }

@@ -11,7 +11,8 @@
     "FluentAssertions": "4.0.0",
     "xunit": "2.1.0-rc1-build3168",
     "DiffPlex": "2.0.0-beta",
-    "Rx-Main": "2.3.0-beta2"
+    "Rx-Main": "2.3.0-beta2",
+    "xunit.runner.dnx": "2.1.0-rc1-build204"
   },
   "commands": {
     "test": "xunit.runner.dnx"
@@ -33,8 +34,7 @@
         "System.Runtime": "4.0.21-beta-23225",
         "System.Collections": "4.0.11-beta-23225",
         "System.Reflection": "4.1.0-beta-23225",
-        "System.Net.Http": "4.0.1-beta-23225",
-        "xunit.runner.dnx": "2.1.0-rc1-build204",
+        "System.Net.Http": "4.0.1-beta-23225",       
         "System.Diagnostics.Tools": "4.0.0"
       }
     }

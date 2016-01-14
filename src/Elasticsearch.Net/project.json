@@ -49,7 +49,7 @@
         "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23225",
         "System.ComponentModel.TypeConverter": "4.0.0-beta-23109",
         "System.Net.Http": "4.0.1-beta-23225",
-        "System.Diagnostics.Tools": "4.0.0"
+        "System.Diagnostics.Tools": "4.0.1-beta-23225"
       }
     }
   }

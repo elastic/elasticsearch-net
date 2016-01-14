@@ -8,9 +8,8 @@ namespace Tests.Framework
 	public static class TypeExtensions
 	{
 #if DOTNETCORE
-		//internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
-
-		//internal static IEnumerable<MethodInfo> GetMethods(this Type t) => t.GetTypeInfo().DeclaredMethods;
+		internal static InterfaceMapping GetInterfaceMap(this Type t, Type interfaceType) =>
+			t.GetTypeInfo().GetRuntimeInterfaceMap(interfaceType);
 #endif
 
 		internal static bool IsInterface(this Type t)

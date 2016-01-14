@@ -8,13 +8,12 @@ namespace Elasticsearch.Net
 {
 	internal static class DotNetCoreTypeExtensions
 	{
-
 		internal static bool IsGeneric(this Type type)
 		{
 #if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
 #else
-		return type.IsGenericType;
+			return type.IsGenericType;
 #endif
 		}
 
@@ -23,7 +22,7 @@ namespace Elasticsearch.Net
 #if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;
 #else
-		return type.IsValueType;
+			return type.IsValueType;
 #endif
 		}
 
