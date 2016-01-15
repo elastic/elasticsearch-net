@@ -26,24 +26,20 @@ namespace Tests.CommonOptions.TimeUnit
 			var unitComposed = new Time(2, Nest.TimeUnit.Day);
 			var unitTimeSpan = new Time(TimeSpan.FromDays(2));
 			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
-			
+
 			/**
-			* When serializing Time constructed from a string, composition of factor and interval, or a `TimeSpan`
-			* the expression will be serialized as time unit string
+			* When serializing Time constructed from a string, milliseconds, composition of factor and 
+			* interval, or a `TimeSpan` the expression will be serialized as time unit string
 			*/
 			Expect("2d")
 				.WhenSerializing(unitString)
 				.WhenSerializing(unitComposed)
-				.WhenSerializing(unitTimeSpan);
-			/**
-			* When constructed from a long representing milliseconds, a long will be serialized
-			*/
-			Expect(172800000).WhenSerializing(unitMilliseconds);
+				.WhenSerializing(unitTimeSpan)
+				.WhenSerializing(unitMilliseconds);
 
 			/**
 			* Milliseconds are always calculated even when not using the constructor that takes a long
 			*/
-
 			unitMilliseconds.Milliseconds.Should().Be(1000*60*60*24*2);
 			unitComposed.Milliseconds.Should().Be(1000*60*60*24*2);
 			unitTimeSpan.Milliseconds.Should().Be(1000*60*60*24*2);
@@ -51,7 +47,7 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 		/**
 		* ### Implicit conversion
-		* Alternatively `string`, `TimeSpan` and `long` can be implicitly assigned to `Time` properties and variables 
+		* Alternatively `string`, `TimeSpan` and `double` can be implicitly assigned to `Time` properties and variables 
 		*/
 
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
@@ -63,7 +59,7 @@ namespace Tests.CommonOptions.TimeUnit
 
 			Expect("1.5y").WhenSerializing(oneAndHalfYear);
 			Expect("2w").WhenSerializing(twoWeeks);
-			Expect(172800000).WhenSerializing(twoDays);
+			Expect("2d").WhenSerializing(twoDays);
 		}
 
 

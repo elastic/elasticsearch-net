@@ -60,7 +60,7 @@ namespace Nest
 					.Size(size)
 					.Query(q=>this._reindexRequest.Query)
 					.SearchType(SearchType.Scan)
-					.Scroll(scroll.ToTimeSpan())
+					.Scroll(scroll)
 				);
 			if (searchResult.Total <= 0)
 				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);

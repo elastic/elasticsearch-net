@@ -37,5 +37,16 @@ namespace CodeGeneration.LowLevelClient.Domain
 			}
 		}
 		
+		public string HighLevelType(string paramName)
+		{
+			var csharpType = this.CsharpType(paramName);
+			switch (csharpType)
+			{
+				case "TimeSpan":
+					return "Time";
+				default:
+					return csharpType;
+			}
+		}
 	}
 }
