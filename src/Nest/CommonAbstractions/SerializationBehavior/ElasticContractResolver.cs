@@ -71,6 +71,7 @@ namespace Nest
 			contract.Converter = attribute.Converter;
 			return true;
 		}
+
 		private bool ApplyContractJsonAttribute(Type objectType, JsonContract contract)
 		{
 			foreach (var t in this.TypeWithInterfaces(objectType))
@@ -168,11 +169,16 @@ namespace Nest
 				var jsonIgnoreAttribute = member.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
 				if (jsonIgnoreAttribute.HasAny())
 					property.Ignored = true;
+
+				var propertyName = this.ConnectionSettings.Serializer?.CreatePropertyName(member);
+				if (!propertyName.IsNullOrEmpty())
+					property.PropertyName = propertyName;
 				return property;
 			}
 
 			if (!propertyMapping.Name.IsNullOrEmpty())
 				property.PropertyName = propertyMapping.Name;
+
 			property.Ignored = propertyMapping.Ignore;
 
 			return property;

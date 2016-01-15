@@ -46,7 +46,7 @@ namespace Nest
 			};
 		}
 
-		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
+		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
 			var serializer = _defaultSerializers[formatting];
 			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, 8096, leaveOpen: true))
@@ -58,7 +58,7 @@ namespace Nest
 			}
 		}
 
-		public string CreatePropertyName(MemberInfo memberInfo)
+		public virtual string CreatePropertyName(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
 			return jsonProperty?.PropertyName;
@@ -75,7 +75,7 @@ namespace Nest
 			}
 		}
 
-		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
+		public virtual Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			//Json.NET does not support reading a stream asynchronously :(
 			var result = this.Deserialize<T>(stream);

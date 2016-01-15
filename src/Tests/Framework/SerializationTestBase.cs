@@ -17,6 +17,7 @@ namespace Tests.Framework
 		protected string _expectedJsonString;
 		protected JToken _expectedJsonJObject;
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
+		protected Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
 
 		protected SerializationTestBase()
 		{
@@ -114,7 +115,7 @@ namespace Tests.Framework
 
 		protected IElasticsearchSerializer GetSerializer() => GetClient().Serializer;
 
-		protected IElasticClient GetClient() => TestClient.GetInMemoryClient(_connectionSettingsModifier);
+		protected IElasticClient GetClient() => TestClient.GetInMemoryClient(_connectionSettingsModifier, _serializerFactory);
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{

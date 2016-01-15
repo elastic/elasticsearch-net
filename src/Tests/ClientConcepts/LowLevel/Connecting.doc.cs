@@ -222,6 +222,7 @@ namespace Tests.ClientConcepts.LowLevel
 			* This can be much faster then registering them on JsonSerializerSettings.Converters
 			*/
 			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>();
+
 		}
 		
 		/**
