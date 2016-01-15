@@ -271,7 +271,8 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			[JsonProperty("jsonProp")]
 			public string JsonProperty { get; set; }
 
-			/** This property we are going to special case in a custom serializer to resolve to `ask` */
+			/** This property we are going to special case in our custom serializer to resolve to `ask` */
+			[JsonProperty("dontaskme")]
 			public string AskSerializer { get; set; }
 
 			/** We are going to register a DefaultFieldNameInferrer on ConnectionSettings 
