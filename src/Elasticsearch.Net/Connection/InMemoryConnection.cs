@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class InMemoryConnection : HttpConnection
+	public class InMemoryConnection : IConnection
 	{
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
@@ -24,10 +24,10 @@ namespace Elasticsearch.Net
 			_statusCode = statusCode;
 		}
 
-		public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) =>
+		public virtual Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class =>
 			Task.FromResult(this.ReturnConnectionStatus<TReturn>(requestData));
 
-		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) => 
+		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class => 
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
 		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)

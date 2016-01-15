@@ -9,81 +9,40 @@ using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
-	public class HttpConnection : IConnection
+	internal class WebProxy : IWebProxy
 	{
-		private class WebProxy : IWebProxy
-		{
-			private readonly Uri _uri;
+		private readonly Uri _uri;
 
-			public WebProxy(Uri uri) { _uri = uri; }
+		public WebProxy(Uri uri) { _uri = uri; }
 
-			public ICredentials Credentials { get; set; }
+		public ICredentials Credentials { get; set; }
 
-			public Uri GetProxy(Uri destination) => _uri;
+		public Uri GetProxy(Uri destination) => _uri;
 
-			public bool IsBypassed(Uri host) => host.IsLoopback;
-		}
+		public bool IsBypassed(Uri host) => host.IsLoopback;
+	}
 
-		private readonly IConnectionConfigurationValues _settings;
+	public class HttpConnection : IConnection
+	{ 
 		private readonly HttpClient _client;
-
 		private string DefaultContentType => "application/json";
 
-		public HttpConnection() { }
-
-		public HttpConnection(IConnectionConfigurationValues settings, HttpClientHandler handler = null)
+		public HttpConnection(HttpClient client)
 		{
-			_settings = settings;
-
-			var innerHandler = handler ?? new HttpClientHandler();
-
-			if (innerHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_settings.ProxyAddress))
-			{
-				var proxy = new Uri(_settings.ProxyAddress);
-				innerHandler.Proxy = new WebProxy(proxy)
-				{
-					Credentials = new NetworkCredential(_settings.ProxyUsername, _settings.ProxyPassword)
-				};
-				innerHandler.UseProxy = true;
-			}
-
-			this._client = new HttpClient(new InternalHttpMessageHandler(innerHandler), false)
-			{
-				Timeout = _settings.RequestTimeout
-			};
-			if (settings.EnableHttpCompression && innerHandler.SupportsAutomaticDecompression)
-			{
-				innerHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-				this._client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-				this._client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
-			}
-
+			this._client = client;
 		}
+
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
 			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var data = requestData.PostData;
-
-				if (data != null)
-				{
-					using (var stream = requestData.MemoryStreamFactory.Create())
-					{
-						if (requestData.HttpCompression)
-							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-								data.Write(zipStream, requestData.ConnectionSettings);
-						else
-							data.Write(stream, requestData.ConnectionSettings);
-
-						requestMessage.Content = new StreamContent(stream);
-					}
-				}
-
-				var response = this._client.SendAsync(requestMessage).Result;
+				var response = this._client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
 				builder.StatusCode = (int)response.StatusCode;
-				builder.Stream = response.Content.ReadAsStreamAsync().Result;
+
+				if (response.Content != null)
+					builder.Stream = response.Content.ReadAsStreamAsync().GetAwaiter().GetResult();
 			}
 			catch (HttpRequestException e)
 			{
@@ -99,32 +58,18 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var data = requestData.PostData;
-
-				if (data != null)
-				{
-					using (var stream = requestData.MemoryStreamFactory.Create())
-					{
-						if (requestData.HttpCompression)
-							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-								data.Write(zipStream, requestData.ConnectionSettings);
-						else
-							data.Write(stream, requestData.ConnectionSettings);
-
-						requestMessage.Content = new StreamContent(stream);
-					}
-				}
-
-				var response = await this._client.SendAsync(requestMessage);
+				var response = await this._client.SendAsync(requestMessage, requestData.CancellationToken);
 				builder.StatusCode = (int)response.StatusCode;
-				builder.Stream = await response.Content.ReadAsStreamAsync();
+
+				if (response.Content != null)
+					builder.Stream = await response.Content.ReadAsStreamAsync();
 			}
 			catch (HttpRequestException e)
 			{
 				HandleException(builder, e);
 			}
 
-			return builder.ToResponse();
+			return await builder.ToResponseAsync();
 		}
 
 		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, HttpRequestException exception)
@@ -144,7 +89,51 @@ namespace Elasticsearch.Net
 		private static HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
 		{
 			var method = ConvertHttpMethod(requestData.Method);
-			return new HttpRequestMessage(method, requestData.Uri);
+			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
+
+			foreach(string key in requestData.Headers)
+			{
+				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
+			}
+
+			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.ContentType));
+
+			var data = requestData.PostData;
+
+			if (data != null)
+			{
+				var stream = requestData.MemoryStreamFactory.Create();
+
+				if (requestData.HttpCompression)
+				{
+					using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+						data.Write(zipStream, requestData.ConnectionSettings);
+
+					requestMessage.Headers.Add("Content-Encoding", "gzip");
+					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
+				}
+				else
+					data.Write(stream, requestData.ConnectionSettings);
+
+				stream.Position = 0;
+				requestMessage.Content = new StreamContent(stream);
+			}
+			else
+			{
+				// Set content in order to set a Content-Type header
+				requestMessage.Content = new ByteArrayContent(new byte[0]);
+			}
+
+			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
+
+			if (!string.IsNullOrWhiteSpace(requestData.Uri.UserInfo))
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(requestMessage.RequestUri.UserInfo));
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+			}
+
+			return requestMessage;
 		}
 
 		private static System.Net.Http.HttpMethod ConvertHttpMethod(HttpMethod httpMethod)
@@ -165,38 +154,6 @@ namespace Elasticsearch.Net
 					throw new ArgumentException("Invalid value for HttpMethod", nameof(httpMethod));
 			}
 		}
-
-		/// <summary>
-		/// Internal Message Handler that is used by the HttpClientConnection. This class cannot be inherited.
-		/// </summary>
-		internal sealed class InternalHttpMessageHandler : DelegatingHandler
-		{
-			/// <summary>
-			/// Creates a new instance of the <see cref="T:System.Net.Http.DelegatingHandler" /> class with a specific inner handler.
-			/// </summary>
-			/// <param name="innerHandler">The inner handler which is responsible for processing the HTTP response messages.</param>
-			public InternalHttpMessageHandler(HttpClientHandler innerHandler)
-				: base(innerHandler ?? new HttpClientHandler())
-			{
-			}
-
-			/// <summary>
-			/// Sends an HTTP request to the inner handler to send to the server as an asynchronous operation.
-			/// </summary>
-			/// <param name="request">The HTTP request message to send to the server.</param>
-			/// <param name="cancellationToken">A cancellation token to cancel operation.</param>
-			/// <returns>Returns <see cref="T:System.Threading.Tasks.Task`1" />. The task object representing the asynchronous operation.</returns>
-			protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
-			{
-				if (request != null && request.RequestUri != null && !string.IsNullOrWhiteSpace(request.RequestUri.UserInfo))
-				{
-					request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(request.RequestUri.UserInfo)));
-				}
-
-				return base.SendAsync(request, cancellationToken);
-			}
-		}
-
 	}
 }
 #endif

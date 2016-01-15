@@ -47,8 +47,49 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
+#if DOTNETCORE
+		// Investigate  problem with ManualResetEvent on CoreClr
+		// Maybe due to .WaitOne() not taking exitContext? 
+		public class Signal
+		{
+			private readonly object _lock = new object();
+			private bool _notified;
+
+			public Signal(bool initialState)
+			{
+				_notified = initialState;
+			}
+
+			public void Set()
+			{
+				lock (_lock)
+				{
+					if (!_notified)
+					{
+						_notified = true;
+						Monitor.Pulse(_lock);
+					}
+				}
+			}
+
+			public bool WaitOne(TimeSpan timeout, bool exitContext)
+			{
+				lock (_lock)
+				{
+					bool exit = true;
+					if (!_notified)
+						exit = Monitor.Wait(_lock, timeout);
+					return exit;
+				}
+			}
+		}
+
+		private readonly Subject<Signal> _blockingSubject = new Subject<Signal>();
+		public IObservable<Signal> BootstrapWork { get; }
+#else
 		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
+#endif
 
 		public ElasticsearchNode(
 			string elasticsearchVersion, 
@@ -73,12 +114,8 @@ namespace Tests.Framework.Integration
 				return;
 			}
 
-#if DOTNETCORE
-			var appdata = Environment.GetEnvironmentVariable("APPDATA");
-#else
-			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-#endif
-			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
+			var appData = GetApplicationDataDirectory();
+			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
@@ -87,13 +124,27 @@ namespace Tests.Framework.Integration
 			this.DownloadAndExtractElasticsearch();
 		}
 
+		public string GetApplicationDataDirectory()
+		{
+#if DOTNETCORE
+			return Environment.GetEnvironmentVariable("APPDATA");
+#else
+			return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#endif
+		}
+
 		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
 			var timeout = TimeSpan.FromSeconds(60);
+
+#if DOTNETCORE
+			var handle = new Signal(false);
+#else
 			var handle = new ManualResetEvent(false);
+#endif
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
@@ -146,7 +197,11 @@ namespace Tests.Framework.Integration
 			return observable;
 		}
 
+#if DOTNETCORE
+		private void HandleConsoleMessage(ElasticsearchMessage s, Signal handle)
+#else
 		private void HandleConsoleMessage(ElasticsearchMessage s, ManualResetEvent handle)
+#endif
 		{
 			//no need to snoop for metadata if we already started
 			if (!this.RunningIntegrations || this.Started) return;

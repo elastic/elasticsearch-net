@@ -13,7 +13,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 	public class SnapshotCrudTests
 		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
 	{
-		private readonly static string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
+		private static readonly string SnapshotIndexName = Guid.NewGuid().ToString("N").Substring(8);
 
 		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
