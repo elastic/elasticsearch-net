@@ -44,22 +44,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -83,34 +83,34 @@ namespace Nest
 		
 
 			///<summary>The name of the analyzer to use</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public  string[] CharFilters { get { return Q< string[]>("char_filters"); } set { Q< string[]>("char_filters", value); } }
+		public  string[] CharFilters { get { return Q< string[]>("char_filters"); } set { Q("char_filters", value); } }
 		
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public Field Field { get { return Q<Field>("field"); } set { Q<Field>("field", value); } }
+		public Field Field { get { return Q<Field>("field"); } set { Q("field", value); } }
 		
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public  string[] Filters { get { return Q< string[]>("filters"); } set { Q< string[]>("filters", value); } }
+		public  string[] Filters { get { return Q< string[]>("filters"); } set { Q("filters", value); } }
 		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q<bool>("prefer_local", value); } }
+		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
 		
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public  string[] Text { get { return Q< string[]>("text"); } set { Q< string[]>("text", value); } }
+		public  string[] Text { get { return Q< string[]>("text"); } set { Q("text", value); } }
 		
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public string Tokenizer { get { return Q<string>("tokenizer"); } set { Q<string>("tokenizer", value); } }
+		public string Tokenizer { get { return Q<string>("tokenizer"); } set { Q("tokenizer", value); } }
 		
 		///<summary>Format of the output</summary>
-		public Format Format { get { return Q<Format>("format"); } set { Q<Format>("format", value); } }
+		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -123,16 +123,16 @@ namespace Nest
 	{
 		protected IBulkAliasRequest Self => this;
 				///<summary>Request timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -164,25 +164,25 @@ namespace Nest
 		
 
 			///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q<Consistency>("consistency", value); } }
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -206,25 +206,25 @@ namespace Nest
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -248,28 +248,28 @@ namespace Nest
 		
 
 			///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q<Bytes>("bytes", value); } }
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -293,25 +293,25 @@ namespace Nest
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -335,28 +335,28 @@ namespace Nest
 		
 
 			///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q<Bytes>("bytes", value); } }
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -369,28 +369,28 @@ namespace Nest
 	{
 		protected ICatHealthRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Set to false to disable timestamping</summary>
-		public bool Ts { get { return Q<bool>("ts"); } set { Q<bool>("ts", value); } }
+		public bool Ts { get { return Q<bool>("ts"); } set { Q("ts", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -403,13 +403,13 @@ namespace Nest
 	{
 		protected ICatHelpRequest Self => this;
 				///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		//TODO THIS METHOD IS UNMAPPED!
 	
@@ -435,31 +435,31 @@ namespace Nest
 		
 
 			///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q<Bytes>("bytes", value); } }
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Set to true to return stats only for primary shards</summary>
-		public bool Pri { get { return Q<bool>("pri"); } set { Q<bool>("pri", value); } }
+		public bool Pri { get { return Q<bool>("pri"); } set { Q("pri", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -472,25 +472,25 @@ namespace Nest
 	{
 		protected ICatMasterRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -503,25 +503,25 @@ namespace Nest
 	{
 		protected ICatNodeattrsRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		//TODO THIS METHOD IS UNMAPPED!
 	
@@ -536,25 +536,25 @@ namespace Nest
 	{
 		protected ICatNodesRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -567,25 +567,25 @@ namespace Nest
 	{
 		protected ICatPendingTasksRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -598,25 +598,25 @@ namespace Nest
 	{
 		protected ICatPluginsRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -640,25 +640,25 @@ namespace Nest
 		
 
 			///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q<Bytes>("bytes", value); } }
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -682,19 +682,19 @@ namespace Nest
 		
 
 			///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -718,25 +718,25 @@ namespace Nest
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -749,28 +749,28 @@ namespace Nest
 	{
 		protected ICatThreadPoolRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H { get { return Q< string[]>("h"); } set { Q< string[]>("h", value); } }
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help { get { return Q<bool>("help"); } set { Q<bool>("help", value); } }
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V { get { return Q<bool>("v"); } set { Q<bool>("v", value); } }
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>Enables displaying the complete node ids</summary>
-		public bool FullId { get { return Q<bool>("full_id"); } set { Q<bool>("full_id", value); } }
+		public bool FullId { get { return Q<bool>("full_id"); } set { Q("full_id", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -794,34 +794,34 @@ namespace Nest
 		
 
 			///<summary>Clear field data</summary>
-		public bool FieldData { get { return Q<bool>("field_data"); } set { Q<bool>("field_data", value); } }
+		public bool FieldData { get { return Q<bool>("field_data"); } set { Q("field_data", value); } }
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Clear query caches</summary>
-		public bool Query { get { return Q<bool>("query"); } set { Q<bool>("query", value); } }
+		public bool Query { get { return Q<bool>("query"); } set { Q("query", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Clear the recycler cache</summary>
-		public bool Recycler { get { return Q<bool>("recycler"); } set { Q<bool>("recycler", value); } }
+		public bool Recycler { get { return Q<bool>("recycler"); } set { Q("recycler", value); } }
 		
 		///<summary>Clear request cache</summary>
-		public bool Request { get { return Q<bool>("request"); } set { Q<bool>("request", value); } }
+		public bool Request { get { return Q<bool>("request"); } set { Q("request", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -834,10 +834,10 @@ namespace Nest
 	{
 		protected IClearScrollRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -857,25 +857,25 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -888,19 +888,19 @@ namespace Nest
 	{
 		protected IClusterGetSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -924,34 +924,34 @@ namespace Nest
 		
 
 			///<summary>Specify the level of detail for returned information</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q<Level>("level", value); } }
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Wait until the specified number of shards is active</summary>
-		public long WaitForActiveShards { get { return Q<long>("wait_for_active_shards"); } set { Q<long>("wait_for_active_shards", value); } }
+		public long WaitForActiveShards { get { return Q<long>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q<string>("wait_for_nodes", value); } }
+		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q("wait_for_nodes", value); } }
 		
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public long WaitForRelocatingShards { get { return Q<long>("wait_for_relocating_shards"); } set { Q<long>("wait_for_relocating_shards", value); } }
+		public long WaitForRelocatingShards { get { return Q<long>("wait_for_relocating_shards"); } set { Q("wait_for_relocating_shards", value); } }
 		
 		///<summary>Wait until cluster is in a specific state</summary>
-		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q<WaitForStatus>("wait_for_status", value); } }
+		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -964,16 +964,16 @@ namespace Nest
 	{
 		protected IClusterPendingTasksRequest Self => this;
 				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -986,19 +986,19 @@ namespace Nest
 	{
 		protected IClusterPutSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1011,25 +1011,25 @@ namespace Nest
 	{
 		protected IClusterRerouteRequest Self => this;
 				///<summary>Simulate the operation only and return the resulting state</summary>
-		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q<bool>("dry_run", value); } }
+		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
 		
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q<bool>("explain", value); } }
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q< string[]>("metric", value); } }
+		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1061,28 +1061,28 @@ namespace Nest
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1106,19 +1106,19 @@ namespace Nest
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1152,49 +1152,49 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q<double>("min_score", value); } }
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-count.html</pre></summary>
@@ -1221,49 +1221,49 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q<double>("min_score", value); } }
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1283,19 +1283,19 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q<bool>("update_all_types", value); } }
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1315,19 +1315,19 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Whether to verify the repository after creation</summary>
-		public bool Verify { get { return Q<bool>("verify"); } set { Q<bool>("verify", value); } }
+		public bool Verify { get { return Q<bool>("verify"); } set { Q("verify", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1350,16 +1350,16 @@ namespace Nest
 		
 
 			///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1387,37 +1387,37 @@ namespace Nest
 		
 
 			///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
@@ -1438,37 +1438,37 @@ namespace Nest
 		
 
 			///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1488,16 +1488,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1517,16 +1517,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1546,16 +1546,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1587,31 +1587,31 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q<Consistency>("consistency", value); } }
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-delete.html</pre></summary>
@@ -1629,31 +1629,31 @@ namespace Nest
 		
 
 			///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q<Consistency>("consistency", value); } }
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1676,16 +1676,16 @@ namespace Nest
 		
 
 			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1705,16 +1705,16 @@ namespace Nest
 		
 
 			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1737,13 +1737,13 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1766,13 +1766,13 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1804,25 +1804,25 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
@@ -1840,25 +1840,25 @@ namespace Nest
 		
 
 			///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1890,52 +1890,52 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The analyzer for the query string query</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The default field for query string query (default: _all)</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1959,22 +1959,22 @@ namespace Nest
 		
 
 			///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q<Level>("level", value); } }
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -1998,25 +1998,25 @@ namespace Nest
 		
 
 			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
-		public bool Force { get { return Q<bool>("force"); } set { Q<bool>("force", value); } }
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
-		public bool WaitIfOngoing { get { return Q<bool>("wait_if_ongoing"); } set { Q<bool>("wait_if_ongoing", value); } }
+		public bool WaitIfOngoing { get { return Q<bool>("wait_if_ongoing"); } set { Q("wait_if_ongoing", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2053,16 +2053,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2099,22 +2099,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2157,25 +2157,25 @@ namespace Nest
 		
 
 			///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q<bool>("include_defaults", value); } }
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2203,28 +2203,28 @@ namespace Nest
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2261,28 +2261,28 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2306,19 +2306,19 @@ namespace Nest
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2357,22 +2357,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2396,16 +2396,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2437,43 +2437,43 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
@@ -2491,43 +2491,43 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2550,16 +2550,16 @@ namespace Nest
 		
 
 			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2579,16 +2579,16 @@ namespace Nest
 		
 
 			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2611,13 +2611,13 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2663,22 +2663,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2698,22 +2698,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2751,40 +2751,40 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q<Consistency>("consistency", value); } }
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Explicit operation type</summary>
-		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q<OpType>("op_type", value); } }
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public Time Timestamp { get { return Q<Time>("timestamp"); } set { Q<Time>("timestamp", value.ToTimeSpan()); } }
+		public Time Timestamp { get { return Q<Time>("timestamp"); } set { Q("timestamp", value.ToString()); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public Time Ttl { get { return Q<Time>("ttl"); } set { Q<Time>("ttl", value.ToTimeSpan()); } }
+		public Time Ttl { get { return Q<Time>("ttl"); } set { Q("ttl", value.ToString()); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2804,16 +2804,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2837,25 +2837,25 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
-		public  string[] Status { get { return Q< string[]>("status"); } set { Q< string[]>("status", value); } }
+		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		//TODO THIS METHOD IS UNMAPPED!
 	
@@ -2894,28 +2894,28 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q<Fields>("completion_fields", value); } }
+		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q<Fields>("fielddata_fields", value); } }
+		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public  string[] Groups { get { return Q< string[]>("groups"); } set { Q< string[]>("groups", value); } }
+		public  string[] Groups { get { return Q< string[]>("groups"); } set { Q("groups", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q<Level>("level", value); } }
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -2947,31 +2947,31 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3003,19 +3003,19 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3049,13 +3049,13 @@ namespace Nest
 		
 
 			///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q<SearchType>("search_type", value); } }
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3087,46 +3087,46 @@ namespace Nest
 		
 
 			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q<bool>("term_statistics", value); } }
+		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q<bool>("field_statistics", value); } }
+		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Offsets { get { return Q<bool>("offsets"); } set { Q<bool>("offsets", value); } }
+		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Positions { get { return Q<bool>("positions"); } set { Q<bool>("positions", value); } }
+		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Payloads { get { return Q<bool>("payloads"); } set { Q<bool>("payloads", value); } }
+		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3150,28 +3150,28 @@ namespace Nest
 		
 
 			///<summary>The interval for the second sampling of threads</summary>
-		public Time Interval { get { return Q<Time>("interval"); } set { Q<Time>("interval", value.ToTimeSpan()); } }
+		public Time Interval { get { return Q<Time>("interval"); } set { Q("interval", value.ToString()); } }
 		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public long Snapshots { get { return Q<long>("snapshots"); } set { Q<long>("snapshots", value); } }
+		public long Snapshots { get { return Q<long>("snapshots"); } set { Q("snapshots", value); } }
 		
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public long Threads { get { return Q<long>("threads"); } set { Q<long>("threads", value); } }
+		public long Threads { get { return Q<long>("threads"); } set { Q("threads", value); } }
 		
 		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public bool IgnoreIdleThreads { get { return Q<bool>("ignore_idle_threads"); } set { Q<bool>("ignore_idle_threads", value); } }
+		public bool IgnoreIdleThreads { get { return Q<bool>("ignore_idle_threads"); } set { Q("ignore_idle_threads", value); } }
 		
 		///<summary>The type to sample (default: cpu)</summary>
-		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q<ThreadType>("type", value); } }
+		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q("type", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3208,19 +3208,19 @@ namespace Nest
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3272,34 +3272,34 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q<Fields>("completion_fields", value); } }
+		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q<Fields>("fielddata_fields", value); } }
+		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public bool Groups { get { return Q<bool>("groups"); } set { Q<bool>("groups", value); } }
+		public bool Groups { get { return Q<bool>("groups"); } set { Q("groups", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public Level Level { get { return Q<Level>("level"); } set { Q<Level>("level", value); } }
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public  string[] Types { get { return Q< string[]>("types"); } set { Q< string[]>("types", value); } }
+		public  string[] Types { get { return Q< string[]>("types"); } set { Q("types", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3319,25 +3319,25 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3361,34 +3361,34 @@ namespace Nest
 		
 
 			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool Flush { get { return Q<bool>("flush"); } set { Q<bool>("flush", value); } }
+		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q<long>("max_num_segments", value); } }
+		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q("max_num_segments", value); } }
 		
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q<bool>("only_expunge_deletes", value); } }
+		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q<bool>("wait_for_merge", value); } }
+		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3426,37 +3426,37 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q< string[]>("routing", value); } }
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q<string>("percolate_index", value); } }
+		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
 		
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q<string>("percolate_type", value); } }
+		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3494,46 +3494,46 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q< string[]>("routing", value); } }
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q<string>("percolate_index", value); } }
+		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
 		
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q<string>("percolate_type", value); } }
+		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
 		
 		///<summary>The routing value to use when percolating the existing document.</summary>
-		public string PercolateRouting { get { return Q<string>("percolate_routing"); } set { Q<string>("percolate_routing", value); } }
+		public string PercolateRouting { get { return Q<string>("percolate_routing"); } set { Q("percolate_routing", value); } }
 		
 		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public string PercolatePreference { get { return Q<string>("percolate_preference"); } set { Q<string>("percolate_preference", value); } }
+		public string PercolatePreference { get { return Q<string>("percolate_preference"); } set { Q("percolate_preference", value); } }
 		
 		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q<PercolateFormat>("percolate_format", value); } }
+		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q("percolate_format", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3546,10 +3546,10 @@ namespace Nest
 	{
 		protected IPingRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3572,16 +3572,16 @@ namespace Nest
 		
 
 			///<summary>Explicit timestamp for the document</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3601,22 +3601,22 @@ namespace Nest
 		
 
 			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool Create { get { return Q<bool>("create"); } set { Q<bool>("create", value); } }
+		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3644,28 +3644,28 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q<bool>("update_all_types", value); } }
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-put-mapping.html</pre></summary>
@@ -3686,28 +3686,28 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q<bool>("update_all_types", value); } }
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3730,19 +3730,19 @@ namespace Nest
 		
 
 			///<summary>Explicit operation type</summary>
-		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q<OpType>("op_type", value); } }
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3762,19 +3762,19 @@ namespace Nest
 		
 
 			///<summary>Explicit operation type</summary>
-		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q<OpType>("op_type", value); } }
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3811,25 +3811,25 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q<bool>("request_cache", value); } }
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3853,19 +3853,19 @@ namespace Nest
 		
 
 			///<summary>Whether to display detailed information about shard recovery</summary>
-		public bool Detailed { get { return Q<bool>("detailed"); } set { Q<bool>("detailed", value); } }
+		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
 		
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public bool ActiveOnly { get { return Q<bool>("active_only"); } set { Q<bool>("active_only", value); } }
+		public bool ActiveOnly { get { return Q<bool>("active_only"); } set { Q("active_only", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3889,25 +3889,25 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Force a refresh even if not required</summary>
-		public bool Force { get { return Q<bool>("force"); } set { Q<bool>("force", value); } }
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3931,10 +3931,10 @@ namespace Nest
 		
 
 			///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		//TODO THIS METHOD IS UNMAPPED!
 	
@@ -3959,16 +3959,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q<bool>("wait_for_completion", value); } }
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3981,10 +3981,10 @@ namespace Nest
 	{
 		protected IRootNodeInfoRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -3997,10 +3997,10 @@ namespace Nest
 	{
 		protected IScrollRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4034,49 +4034,49 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q<double>("min_score", value); } }
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-exists.html</pre></summary>
@@ -4103,49 +4103,49 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q<double>("min_score", value); } }
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4179,64 +4179,64 @@ namespace Nest
 		
 
 			///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q< string[]>("routing", value); } }
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get { return Q<Time>("scroll"); } set { Q<Time>("scroll", value.ToTimeSpan()); } }
+		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q<SearchType>("search_type", value); } }
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q< string[]>("stats", value); } }
+		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q<Field>("suggest_field", value); } }
+		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
 		
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q<SuggestMode>("suggest_mode", value); } }
+		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
 		
 		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q<long>("suggest_size", value); } }
+		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
 		
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q<string>("suggest_text", value); } }
+		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q<bool>("request_cache", value); } }
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-search.html</pre></summary>
@@ -4263,64 +4263,64 @@ namespace Nest
 		
 
 			///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q< string[]>("routing", value); } }
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get { return Q<Time>("scroll"); } set { Q<Time>("scroll", value.ToTimeSpan()); } }
+		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q<SearchType>("search_type", value); } }
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q< string[]>("stats", value); } }
+		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q<Field>("suggest_field", value); } }
+		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
 		
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q<SuggestMode>("suggest_mode", value); } }
+		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
 		
 		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q<long>("suggest_size", value); } }
+		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
 		
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q<string>("suggest_text", value); } }
+		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q<bool>("request_cache", value); } }
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4354,28 +4354,28 @@ namespace Nest
 		
 
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-shards.html</pre></summary>
@@ -4402,28 +4402,28 @@ namespace Nest
 		
 
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4457,31 +4457,31 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q< string[]>("routing", value); } }
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Time Scroll { get { return Q<Time>("scroll"); } set { Q<Time>("scroll", value.ToTimeSpan()); } }
+		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q<SearchType>("search_type", value); } }
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4505,28 +4505,28 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Includes detailed memory usage by Lucene.</summary>
-		public bool Verbose { get { return Q<bool>("verbose"); } set { Q<bool>("verbose", value); } }
+		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4549,16 +4549,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q<bool>("wait_for_completion", value); } }
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4590,13 +4590,13 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4628,40 +4628,40 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/docs-get.html</pre></summary>
@@ -4679,40 +4679,40 @@ namespace Nest
 		
 
 			///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q< string[]>("_source", value); } }
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q<Fields>("_source_exclude", value); } }
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q<Fields>("_source_include", value); } }
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4736,25 +4736,25 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4778,19 +4778,19 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4828,49 +4828,49 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q<bool>("term_statistics", value); } }
+		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q<bool>("field_statistics", value); } }
+		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public bool Dfs { get { return Q<bool>("dfs"); } set { Q<bool>("dfs", value); } }
+		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public Fields Fields { get { return Q<Fields>("fields"); } set { Q<Fields>("fields", value); } }
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public bool Offsets { get { return Q<bool>("offsets"); } set { Q<bool>("offsets", value); } }
+		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
 		///<summary>Specifies if term positions should be returned.</summary>
-		public bool Positions { get { return Q<bool>("positions"); } set { Q<bool>("positions", value); } }
+		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public bool Payloads { get { return Q<bool>("payloads"); } set { Q<bool>("payloads", value); } }
+		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q<string>("preference", value); } }
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q<bool>("realtime", value); } }
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4893,22 +4893,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q<bool>("local", value); } }
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4932,25 +4932,25 @@ namespace Nest
 		
 
 			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q<bool>("flat_settings", value); } }
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -4982,55 +4982,55 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q<Consistency>("consistency", value); } }
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The script language (default: groovy)</summary>
-		public string Lang { get { return Q<string>("lang"); } set { Q<string>("lang", value); } }
+		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
 		
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q<string>("parent", value); } }
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh { get { return Q<bool>("refresh"); } set { Q<bool>("refresh", value); } }
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public long RetryOnConflict { get { return Q<long>("retry_on_conflict"); } set { Q<long>("retry_on_conflict", value); } }
+		public long RetryOnConflict { get { return Q<long>("retry_on_conflict"); } set { Q("retry_on_conflict", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q<string>("routing", value); } }
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public string ScriptQueryString { get { return Q<string>("script"); } set { Q<string>("script", value); } }
+		public string ScriptQueryString { get { return Q<string>("script"); } set { Q("script", value); } }
 		
 		///<summary>The id of a stored script</summary>
-		public string ScriptId { get { return Q<string>("script_id"); } set { Q<string>("script_id", value); } }
+		public string ScriptId { get { return Q<string>("script_id"); } set { Q("script_id", value); } }
 		
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public bool ScriptedUpsert { get { return Q<bool>("scripted_upsert"); } set { Q<bool>("scripted_upsert", value); } }
+		public bool ScriptedUpsert { get { return Q<bool>("scripted_upsert"); } set { Q("scripted_upsert", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public Time Timestamp { get { return Q<Time>("timestamp"); } set { Q<Time>("timestamp", value.ToTimeSpan()); } }
+		public Time Timestamp { get { return Q<Time>("timestamp"); } set { Q("timestamp", value.ToString()); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public Time Ttl { get { return Q<Time>("ttl"); } set { Q<Time>("ttl", value.ToTimeSpan()); } }
+		public Time Ttl { get { return Q<Time>("ttl"); } set { Q("ttl", value.ToString()); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q<long>("version", value); } }
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q<VersionType>("version_type", value); } }
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
-		public bool DetectNoop { get { return Q<bool>("detect_noop"); } set { Q<bool>("detect_noop", value); } }
+		public bool DetectNoop { get { return Q<bool>("detect_noop"); } set { Q("detect_noop", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5054,25 +5054,25 @@ namespace Nest
 		
 
 			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
-		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q<bool>("wait_for_completion", value); } }
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool OnlyAncientSegments { get { return Q<bool>("only_ancient_segments"); } set { Q<bool>("only_ancient_segments", value); } }
+		public bool OnlyAncientSegments { get { return Q<bool>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5096,22 +5096,22 @@ namespace Nest
 		
 
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q<bool>("human", value); } }
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5145,49 +5145,49 @@ namespace Nest
 		
 
 			///<summary>Return detailed information about the error</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q<bool>("explain", value); } }
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q<bool>("rewrite", value); } }
+		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/2.0/search-validate.html</pre></summary>
@@ -5214,49 +5214,49 @@ namespace Nest
 		
 
 			///<summary>Return detailed information about the error</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q<bool>("explain", value); } }
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q<bool>("ignore_unavailable", value); } }
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q<bool>("allow_no_indices", value); } }
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q<ExpandWildcards>("expand_wildcards", value); } }
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q<string>("operation_threading", value); } }
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q<string>("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q<string>("analyzer", value); } }
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q<bool>("analyze_wildcard", value); } }
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q<DefaultOperator>("default_operator", value); } }
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q<string>("df", value); } }
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q<bool>("lenient", value); } }
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q<bool>("lowercase_expanded_terms", value); } }
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q<bool>("rewrite", value); } }
+		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 	
@@ -5276,16 +5276,16 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q<Time>("master_timeout", value.ToTimeSpan()); } }
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q<Time>("timeout", value.ToTimeSpan()); } }
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q<string>("source", value); } }
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q<string>("filter_path", value); } }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
 }

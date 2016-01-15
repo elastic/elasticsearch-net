@@ -79,14 +79,14 @@ namespace Nest
 		var setter = "value";
 		if (fieldType == "Time")
 		{
-			setter += ".ToTimeSpan()";
+			setter += ".ToString()";
 		}
 		<text>///<summary>@kv.Value.Description</summary>
 		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
 		{
 		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
-		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q@(Raw("<" + fieldType + ">"))("@original", @setter); } }
+		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q("@original", @setter); } }
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)

@@ -10,19 +10,19 @@ namespace Nest
 	{
 		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
-		private static readonly long _year = (long)TimeSpan.FromDays(365).TotalMilliseconds;
-		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
-		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
-		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
-		private static readonly long _minute = (long)TimeSpan.FromMinutes(1).TotalMilliseconds;
-		private static readonly long _second = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
+		private static readonly double _year = TimeSpan.FromDays(365).TotalMilliseconds;
+		private static readonly double _week = TimeSpan.FromDays(7).TotalMilliseconds;
+		private static readonly double _day = TimeSpan.FromDays(1).TotalMilliseconds;
+		private static readonly double _hour = TimeSpan.FromHours(1).TotalMilliseconds;
+		private static readonly double _minute = TimeSpan.FromMinutes(1).TotalMilliseconds;
+		private static readonly double _second = TimeSpan.FromSeconds(1).TotalMilliseconds;
 
-		public double? Factor { get; }
-		public TimeUnit? Interval { get; }
-		public long Milliseconds { get; }
+		public double? Factor { get; private set; }
+		public TimeUnit? Interval { get; private set; }
+		public double Milliseconds { get; private set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
-		public static implicit operator Time(long milliseconds) => new Time(milliseconds);
+		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
 		public static implicit operator Time(string expression) => new Time(expression);
 
 		public Time(double factor, TimeUnit interval)
@@ -48,49 +48,12 @@ namespace Nest
 
 		public Time(TimeSpan timeSpan)
 		{
-			var ms = timeSpan.TotalMilliseconds;
-			this.Milliseconds = (long)ms;
-
-			if (ms >= _year)
-			{
-				Factor = ms / _year;
-				Interval = TimeUnit.Year;
-			}
-			else if (ms >= _week)
-			{
-				Factor = ms / _week;
-				Interval = TimeUnit.Week;
-			}
-			else if (ms >= _day)
-			{
-				Factor = ms / _day;
-				Interval = TimeUnit.Day;
-			}
-			else if (ms >= _hour)
-			{
-				Factor = ms / _hour;
-				Interval = TimeUnit.Hour;
-			}
-			else if (ms >= _minute)
-			{
-				Factor = ms / _minute;
-				Interval = TimeUnit.Minute;
-			}
-			else if (ms >= _second)
-			{
-				Factor = ms / _second;
-				Interval = TimeUnit.Second;
-			}
-			else
-			{
-				Factor = ms;
-				Interval = TimeUnit.Millisecond;
-			}
+			Reduce(timeSpan.TotalMilliseconds);
 		}
 
-		public Time(long milliseconds)
+		public Time(double milliseconds)
 		{
-			this.Milliseconds = milliseconds;
+			Reduce(milliseconds);
 		}
 
 		public Time(string timeUnit)
@@ -134,7 +97,7 @@ namespace Nest
 		public static bool operator >(Time left, Time right) => left.CompareTo(right) > 0;
 		public static bool operator >=(Time left, Time right) => left.CompareTo(right) > 0 || left.Equals(right);
 
-		public static bool operator ==(Time left, Time right) => 
+		public static bool operator ==(Time left, Time right) =>
 			object.ReferenceEquals(left, null) ? object.ReferenceEquals(right, null) : left.Equals(right);
 
 		public static bool operator !=(Time left, Time right) =>
@@ -144,9 +107,8 @@ namespace Nest
 
 		public override string ToString()
 		{
-			if (this.Factor == null) return this.Milliseconds.ToString(CultureInfo.InvariantCulture);
-			return this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture) +
-				   this.Interval.GetValueOrDefault().GetStringValue();
+			var factor = this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture);
+			return (this.Interval.HasValue) ? factor + this.Interval.Value.GetStringValue() : factor;
 		}
 
 		public bool Equals(Time other)
@@ -166,5 +128,48 @@ namespace Nest
 
 		public override int GetHashCode() => this.Milliseconds.GetHashCode();
 
+		private void Reduce(double ms)
+		{
+			this.Milliseconds = ms;
+
+			if (ms >= _year)
+			{
+				Factor = ms / _year;
+				Interval = TimeUnit.Year;
+			}
+			else if (ms >= _week)
+			{
+				Factor = ms / _week;
+				Interval = TimeUnit.Week;
+			}
+			else if (ms >= _day)
+			{
+				Factor = ms / _day;
+				Interval = TimeUnit.Day;
+			}
+			else if (ms >= _hour)
+			{
+				Factor = ms / _hour;
+				Interval = TimeUnit.Hour;
+			}
+			else if (ms >= _minute)
+			{
+				Factor = ms / _minute;
+				Interval = TimeUnit.Minute;
+			}
+			else if (ms >= _second)
+			{
+				Factor = ms / _second;
+				Interval = TimeUnit.Second;
+			}
+			else
+			{
+				Factor = ms;
+				// If milliseconds is < 0 then don't set an interval.
+				// This is used when setting things like index.refresh_interval = -1 (the only case where a unit isn't required)
+				if (ms > 0)
+					Interval = TimeUnit.Millisecond;
+			}
+		}
 	}
 }

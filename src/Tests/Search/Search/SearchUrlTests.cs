@@ -56,8 +56,8 @@ namespace Tests.Search.Search
 				;
 
 			await POST("/_search?scroll=1m")
-				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices().Scroll(TimeSpan.FromMinutes(1))))
-				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = new Time(1, TimeUnit.Minute) }))
+				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices().Scroll(60000)))
+				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
 				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All).Scroll("1m")))
 				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = 60000 } ))
 				;
