@@ -131,7 +131,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Allows you to register a callback every time a an API call is returned
 		/// </summary>
-		Action<IApiCallDetails> ApiCallHandler { get; }
+		Action<IApiCallDetails> OnRequestCompleted { get; }
 
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.

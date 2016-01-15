@@ -123,9 +123,9 @@ namespace Elasticsearch.Net
 		private bool _throwExceptions;
 		bool IConnectionConfigurationValues.ThrowExceptions => _throwExceptions;
 
-		private static void DefaultApiCallHandler(IApiCallDetails status) { }
-		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
-		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
+		private static void DefaultCompletedRequestHandler(IApiCallDetails response) { }
+		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
+		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
@@ -290,10 +290,10 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
-		/// Calling this multiple times will register multiple listeners
+		/// Calling this multiple times will register multiple listeners.
 		/// </summary>
-		public T ConnectionStatusHandler(Action<IApiCallDetails> handler) =>
-			Assign(a => a._apiCallHandler += handler ?? DefaultApiCallHandler);
+		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
+			Assign(a => a._completedRequestHandler += handler ?? DefaultCompletedRequestHandler);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.

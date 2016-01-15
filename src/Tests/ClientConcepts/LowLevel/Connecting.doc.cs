@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var config = new ConnectionConfiguration(connectionPool);
 			var client = new ElasticsearchClient(config);
 		}
-		
+
 		/** 
 		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
 		 * Be sure to read more about [Connection Pooling and Cluster Failover here](/elasticsearch-net/cluster-failover.html)
@@ -98,10 +98,10 @@ namespace Tests.ClientConcepts.LowLevel
 				*/
 
 				.DisableDirectStreaming()
-				/**
-				 * By default responses are deserialized off stream to the object you tell it to.
-				 * For debugging purposes it can be very useful to keep a copy of the raw response on the result object. 
-				 */;
+				 /**
+				  * By default responses are deserialized off stream to the object you tell it to.
+				  * For debugging purposes it can be very useful to keep a copy of the raw response on the result object. 
+				  */;
 
 			var result = client.Search<SearchResponse<object>>(new { size = 12 });
 			var raw = result.ResponseBodyInBytes;
@@ -116,12 +116,6 @@ namespace Tests.ClientConcepts.LowLevel
 			//hide
 			config = config
 				//endhide
-				.ConnectionStatusHandler(s => { })
-				/** 
-				* Allows you to pass a `Action&lt;IElasticsearchResponse&gt;` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
-				* this is a good place to add that in.
-				*/
-
 				.GlobalQueryStringParameters(new NameValueCollection())
 				/**
 				* Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
@@ -179,6 +173,23 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 		}
 
+		/** 
+	     * You can pass a callback of type `Action&lt;IApiCallDetails&gt;` that can eaves drop every time a response (good or bad) is created. 
+		 * If you have complex logging needs this is a good place to add that in.
+		*/
+		[U]public void OnRequestCompletedIsCalled()
+		{
+			var counter = 0;
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
+				.OnRequestCompleted(r => counter++);
+			var client = new ElasticClient(settings);
+			client.RootNodeInfo();
+			counter.Should().Be(1);
+			client.RootNodeInfoAsync();
+			counter.Should().Be(2);
+		}
+
 		public void ConfiguringSSL()
 		{
 			/**
@@ -209,7 +220,7 @@ namespace Tests.ClientConcepts.LowLevel
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-			
+
 
 			/** 
 			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
@@ -224,15 +235,16 @@ namespace Tests.ClientConcepts.LowLevel
 			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>();
 
 		}
-		
+
 		/**
 		* You can then register a factory on ConnectionSettings to create an instance of your subclass instead. 
 		* This is called once per instance of ConnectionSettings.
 		*/
-		[U] public void ModifyJsonSerializerSettingsIsCalled()
+		[U]
+		public void ModifyJsonSerializerSettingsIsCalled()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(),s => new MyJsonNetSerializer(s));
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
 			var client = new ElasticClient(settings);
 			client.RootNodeInfo();
 			client.RootNodeInfo();
