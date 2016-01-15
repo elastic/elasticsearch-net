@@ -11,7 +11,7 @@ nuget RazorMachine 2.6.1
 //tests
 nuget xunit 
 nuget FluentAssertions 
-nuget Bogus 
+nuget Bogus prerelease
 nuget DiffPlex 
 
 // profiling / benchmarking
