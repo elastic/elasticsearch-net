@@ -6,13 +6,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest\Nest.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D5575-2347-4D3C-BF8C-3E38410C46CA}"
 	ProjectSection(SolutionItems) = preProject
+		..\.deployment = ..\.deployment
 		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
+		..\.travis.yml = ..\.travis.yml
 		..\build.bat = ..\build.bat
 		..\build.sh = ..\build.sh
+		..\contributing.md = ..\contributing.md
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
+		..\license.txt = ..\license.txt
+		..\myget.bat = ..\myget.bat
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
+		..\paket.bat = ..\paket.bat
 		..\paket.dependencies = ..\paket.dependencies
+		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Generation", "Code Generation", "{93331BEE-0AA0-47B7-B1D2-BD5BD31634D1}"

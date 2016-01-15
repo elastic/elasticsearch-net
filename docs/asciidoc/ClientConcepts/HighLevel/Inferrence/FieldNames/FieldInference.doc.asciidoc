@@ -1,0 +1,255 @@
+# Strongly typed field access 
+
+Several places in the elasticsearch API expect the path to a field from your original source document as a string.
+NEST allows you to use C# expressions to strongly type these field path strings. 
+These expressions are assigned to a type called `Field` and there are several ways to create a instance of that type
+
+Using the constructor directly is possible but rather involved 
+
+[source, csharp]
+----
+var fieldString = new Field {Name = "name"};
+----
+especially when using C# expressions since these can not be simply new'ed
+
+[source, csharp]
+----
+Expression<Func<Project, object>> expression = p => p.Name;
+----
+[source, csharp]
+----
+var fieldExpression = Field.Create(expression);
+Expect("name")
+				.WhenSerializing(fieldExpression)
+				.WhenSerializing(fieldString);
+----
+Therefor you can also implicitly convert strings and expressions to Field's 
+
+[source, csharp]
+----
+Field fieldString = "name";
+----
+but for expressions this is still rather involved 
+
+[source, csharp]
+----
+Expression<Func<Project, object>> expression = p => p.Name;
+----
+[source, csharp]
+----
+Field fieldExpression = expression;
+Expect("name")
+				.WhenSerializing(fieldExpression)
+				.WhenSerializing(fieldString);
+----
+to ease creating Field's from expressions there is a static Property class you can use 
+
+[source, csharp]
+----
+Field fieldString = "name";
+----
+but for expressions this is still rather involved 
+
+[source, csharp]
+----
+var fieldExpression = Field<Project>(p=>p.Name);
+----
+Using static imports in c# 6 this can be even shortened:
+using static Nest.Static; 
+
+[source, csharp]
+----
+fieldExpression = Field<Project>(p=>p.Name);
+----
+Now this is much much terser then our first example using the constructor! 
+
+[source, csharp]
+----
+Expect("name")
+	.WhenSerializing(fieldString)
+	.WhenSerializing(fieldExpression);
+----
+By default NEST will camelCase all the field names to be more javascripty 
+
+using DefaultFieldNameInferrer() on ConnectionSettings you can change this behavior 
+
+[source, csharp]
+----
+var setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p.ToUpper()));
+----
+[source, csharp]
+----
+setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
+----
+However string are *always* passed along verbatim 
+
+[source, csharp]
+----
+setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
+----
+if you want the same behavior for expressions simply do nothing in the default inferrer 
+
+[source, csharp]
+----
+setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
+----
+[source, csharp]
+----
+setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
+----
+Complex field name expressions 
+
+You can follow your property expression to any depth, here we are traversing to the LeadDeveloper's (Person) FirstName 
+
+[source, csharp]
+----
+Expect("leadDeveloper.firstName").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName));
+----
+When dealing with collection index access is ingnored allowing you to traverse into properties of collections 
+
+[source, csharp]
+----
+Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags[0]));
+----
+Similarly .First() also works, remember these are expressions and not actual code that will be executed 
+
+[source, csharp]
+----
+Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
+----
+[source, csharp]
+----
+Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
+Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
+----
+When we see an indexer on a dictionary we assume they describe property names 
+
+[source, csharp]
+----
+Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
+----
+[source, csharp]
+----
+Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
+----
+A cool feature here is that we'll evaluate variables passed to these indexers 
+
+[source, csharp]
+----
+var variable = "var";
+----
+[source, csharp]
+----
+Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable]));
+Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
+----
+If you are using elasticearch's multifield mapping (you really should!) these "virtual" sub fields 
+do not always map back on to your POCO, by calling .Suffix() you describe the sub fields that do not live in your c# objects
+
+[source, csharp]
+----
+Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
+----
+[source, csharp]
+----
+Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
+Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Suffix("raw")));
+Expect("curatedTags.added.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added.Suffix("raw")));
+Expect("metadata.hardcoded.raw").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Suffix("raw")));
+Expect("metadata.hardcoded.created.raw").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created.Suffix("raw")));
+----
+You can even chain them to any depth!
+
+[source, csharp]
+----
+Expect("curatedTags.name.raw.evendeeper").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name.Suffix("raw").Suffix("evendeeper")));
+----
+Variables passed to suffix will be evaluated as well 
+
+[source, csharp]
+----
+var suffix = "unanalyzed";
+----
+[source, csharp]
+----
+Expect("metadata.var.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
+Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
+----
+Annotations 
+
+When using NEST's property attributes you can specify a new name for the properties
+
+[source, csharp]
+----
+Expect("naam").WhenSerializing(Field<BuiltIn>(p=>p.Name));
+----
+
+Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
+Here we ask the default JsonNetSerializer and it takes JsonProperty into account
+
+[source, csharp]
+----
+Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p=>p.Name));
+----
+
+If both are specified NEST takes precedence though 
+
+[source, csharp]
+----
+Expect("naam").WhenSerializing(Field<Both>(p=>p.Name));
+Expect(new
+			{
+				naam = "Martijn Laarman"
+			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+----
+Resolving field names is cached but this is per connection settings
+
+[source, csharp]
+----
+var connectionSettings = TestClient.CreateSettings(forceInMemory: true);
+var client = new ElasticClient(connectionSettings);
+var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+----
+Here we have to similary shaped expressions on coming from A and on from B
+that will resolve to the same field name, as expected
+
+[source, csharp]
+----
+fieldNameOnA.Should().Be("c.name");
+----
+[source, csharp]
+----
+fieldNameOnB.Should().Be("c.name");
+----
+now we create a new connectionsettings with a remap for C on class A to `d`
+now when we resolve the field path for A will be different
+
+[source, csharp]
+----
+var newConnectionSettings = TestClient.CreateSettings(forceInMemory: true, modifySettings: s => s
+	.InferMappingFor<A>(m => m
+		.Rename(p => p.C, "d")
+	)
+);
+----
+[source, csharp]
+----
+var newClient = new ElasticClient(newConnectionSettings);
+fieldNameOnA = newClient.Infer.Field(Field<A>(p => p.C.Name));
+fieldNameOnB = newClient.Infer.Field(Field<B>(p => p.C.Name));
+fieldNameOnA.Should().Be("d.name");
+fieldNameOnB.Should().Be("c.name");
+----
+however we didn't break inferrence on the first client instance using its separate connectionsettings 
+
+[source, csharp]
+----
+fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
+----
+[source, csharp]
+----
+fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
+fieldNameOnA.Should().Be("c.name");
+fieldNameOnB.Should().Be("c.name");
+----

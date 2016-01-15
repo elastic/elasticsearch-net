@@ -47,6 +47,7 @@
     <Compile Include="Documentation\Files\RawDocumentationFile.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Linker\Linker.cs" />
+    <Compile Include="LitUp.cs" />
     <Compile Include="Walkers\CodeWithDocumentationWalker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
