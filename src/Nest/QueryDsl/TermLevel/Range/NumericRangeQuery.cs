@@ -15,7 +15,6 @@ namespace Nest
 
 		[JsonProperty("lt")]
 		double? LessThan { get; set; }
-
 	}
 
 	public class NumericRangeQuery : FieldNameQueryBase, INumericRangeQuery
@@ -56,6 +55,5 @@ namespace Nest
 		public NumericRangeQueryDescriptor<T> LessThan(double? to) => Assign(a => a.LessThan = to);
 
 		public NumericRangeQueryDescriptor<T> LessThanOrEquals(double? to) => Assign(a => a.LessThanOrEqualTo = to);
-
 	}
 }

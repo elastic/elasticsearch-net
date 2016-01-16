@@ -439,6 +439,7 @@
     <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\DateRangeQuery .cs" />
+    <Compile Include="QueryDsl\TermLevel\Range\TermRangeQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\NumericRangeQuery.cs" />
     <Compile Include="QueryDsl\VariableFields.cs" />

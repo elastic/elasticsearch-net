@@ -92,6 +92,8 @@ namespace Nest
 
 		public void Visit(INumericRangeQuery query) => Write("numeric_range");
 
+        public void Visit(ITermRangeQuery query) => Write("term_range");
+
 		public virtual void Visit(IFunctionScoreQuery query) => Write("function_core");
 
 		public virtual void Visit(IFuzzyQuery query) => Write("fuzzy", query.Field);

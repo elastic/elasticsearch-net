@@ -161,10 +161,16 @@ namespace Nest
 		public QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Range = query);
 
-		/// <summary>
-		/// More like this query find documents that are “like” provided text by running it against one or more fields.
-		/// </summary>
-		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
+        /// <summary>
+        /// Matches documents with fields that have terms within a certain term range. 
+        /// </summary>
+        public QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
+            this.Assign(selector, (query, container) => container.Range = query);
+
+        /// <summary>
+        /// More like this query find documents that are “like” provided text by running it against one or more fields.
+        /// </summary>
+        public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			this.Assign(selector, (query, container) => container.MoreLikeThis = query);
 
 		/// <summary>
