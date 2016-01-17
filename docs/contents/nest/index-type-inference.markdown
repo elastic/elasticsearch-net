@@ -106,7 +106,7 @@ This can be configured by setting
 
 This will leave property names untouched.
 
-Properties marked with `[ElasticAttibute(Name="")]` or `[JsonProperty(Name="")]` will pass the configured name verbatim.
+Properties marked with `[ElasticProperty(Name="")]` or `[JsonProperty(PropertyName="")]` will pass the configured name verbatim.
 
 ## Id Inference
 

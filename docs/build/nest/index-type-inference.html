@@ -69,7 +69,7 @@ public class Car {}
 <p>This can be configured by setting </p>
 <pre><code>settings.SetDefaultPropertyNameInferrer(p=&gt;p);
 </code></pre><p>This will leave property names untouched.</p>
-<p>Properties marked with <code>[ElasticAttibute(Name=&quot;&quot;)]</code> or <code>[JsonProperty(Name=&quot;&quot;)]</code> will pass the configured name verbatim.</p>
+<p>Properties marked with <code>[ElasticProperty(Name=&quot;&quot;)]</code> or <code>[JsonProperty(PropertyName=&quot;&quot;)]</code> will pass the configured name verbatim.</p>
 <h2 id="id-inference">Id Inference</h2>
 <p>Whenever an object is passed that needs to specify an id (i.e index, bulk operations) the object is inspected to see if it has an <code>Id</code> property and if so, that value will be used.</p>
 <p>This inspection happens once per type. The result of the function call that returns the id for an object of type T is cached; therfore, it is only called once per object of type T throughout the applications lifetime.</p>
