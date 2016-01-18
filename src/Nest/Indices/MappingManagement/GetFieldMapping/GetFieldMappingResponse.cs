@@ -47,14 +47,14 @@ namespace Nest
 
 	public class GetFieldMappingResponse : BaseResponse, IGetFieldMappingResponse
 	{
-		private ElasticInferrer _inferrer { get; set; }
+		private Inferrer _inferrer { get; set; }
 
 		public GetFieldMappingResponse()
 		{
 			this.Indices = new IndexFieldMappings();
 		}
 
-		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict, ElasticInferrer inferrer)
+		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict, Inferrer inferrer)
 		{
 			this.Indices = dict ?? new IndexFieldMappings();
 			this._inferrer = inferrer;

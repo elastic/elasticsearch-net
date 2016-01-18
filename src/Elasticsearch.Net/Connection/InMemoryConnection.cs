@@ -42,5 +42,9 @@ namespace Elasticsearch.Net
 			var cs = builder.ToResponse();
 			return cs;
 		}
+
+		void IDisposable.Dispose() => DisposeManagedResources();
+
+		protected virtual void DisposeManagedResources() {}
 	}
 }

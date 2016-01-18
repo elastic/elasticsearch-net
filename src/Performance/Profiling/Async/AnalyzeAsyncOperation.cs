@@ -26,7 +26,7 @@ namespace Profiling.Async
 			{
 				var analyzeResponse = await client.AnalyzeAsync(a => a
 					.Analyzer("standard")
-					.Text(_sentenceGenerator.Sentance())
+					.Text(_sentenceGenerator.Sentence())
 				).ConfigureAwait(false);
 
 				if (!analyzeResponse.IsValid)

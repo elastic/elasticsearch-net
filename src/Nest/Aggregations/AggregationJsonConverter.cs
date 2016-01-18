@@ -274,7 +274,7 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
 
-			var dateHistogram = new HistogramItem() { Key = key, KeyAsString = keyAsString, DocCount = docCount };
+			var dateHistogram = new DateHistogramItem() { Key = key, KeyAsString = keyAsString, DocCount = docCount };
 			dateHistogram.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return dateHistogram;
 

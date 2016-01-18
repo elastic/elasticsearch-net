@@ -3,6 +3,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
+using System;
 
 namespace Tests.Search.Search
 {
@@ -52,6 +53,13 @@ namespace Tests.Search.Search
 				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All)))
 				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All)))
 				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest()))
+				;
+
+			await POST("/_search?scroll=1m")
+				.Fluent(c=>c.Search<Project>(s=>s.AllTypes().AllIndices().Scroll(60000)))
+				.Request(c=>c.Search<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = TimeSpan.FromMinutes(1) }))
+				.FluentAsync(c=>c.SearchAsync<Project>(s=>s.AllIndices().Type(Types.All).Scroll("1m")))
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>(Nest.Indices.All, Types.All) { Scroll = 60000 } ))
 				;
 		}
 	}

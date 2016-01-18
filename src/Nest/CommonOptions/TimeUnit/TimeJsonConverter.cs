@@ -8,9 +8,9 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var v = value as Time;
-			if (v.Factor.HasValue)
+			if (v.Factor.HasValue && v.Interval.HasValue)
 				writer.WriteValue(v.ToString());
-			else writer.WriteValue(v.Milliseconds); 
+			else writer.WriteValue((long)v.Milliseconds); 
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

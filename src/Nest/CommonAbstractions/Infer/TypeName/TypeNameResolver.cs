@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace Nest
 {
 	public class TypeNameResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
+		private readonly ConcurrentDictionary<Type, string> TypeNames = new ConcurrentDictionary<Type, string>();
 
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
@@ -12,33 +14,32 @@ namespace Nest
 			this._connectionSettings = connectionSettings;
 		}
 
-		public string GetTypeNameFor<T>()
-		{
-			return this.GetTypeNameFor(typeof(T));
-		}
+		public string Resolve<T>() where T : class => this.Resolve(typeof(T));
 
-		public string GetTypeNameFor(Type type)
+		public string Resolve(TypeName t) => t?.Name ?? this.ResolveType(t?.Type);
+
+		private string ResolveType(Type type)
 		{
 			if (type == null) return null;
 			string typeName;
 
-			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
+			if (TypeNames.TryGetValue(type, out typeName))
 				return typeName;
+
+			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
+			{
+				TypeNames.TryAdd(type, typeName);
+				return typeName;
+			}
 
 			var att = ElasticsearchTypeAttribute.From(type);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else
 				typeName = _connectionSettings.DefaultTypeNameInferrer(type);
+			TypeNames.TryAdd(type, typeName);
 			return typeName;
 		}
 
-
-		internal string GetTypeNameFor(TypeName t)
-		{
-			if (t == null) return null;
-
-			return t.Name ?? this.GetTypeNameFor(t.Type);
-		}
 	}
 }

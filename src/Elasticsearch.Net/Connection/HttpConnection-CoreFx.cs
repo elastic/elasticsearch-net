@@ -154,6 +154,14 @@ namespace Elasticsearch.Net
 					throw new ArgumentException("Invalid value for HttpMethod", nameof(httpMethod));
 			}
 		}
+
+		void IDisposable.Dispose()
+		{
+			_client.Dispose();
+			this.DisposeManagedResources();
+		}
+
+		protected virtual void DisposeManagedResources() {}
 	}
 }
 #endif

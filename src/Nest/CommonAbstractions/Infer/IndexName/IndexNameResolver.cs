@@ -11,13 +11,15 @@ namespace Nest
 			connectionSettings.ThrowIfNull(nameof(connectionSettings));
 			this._connectionSettings = connectionSettings;
 		}
+		public string Resolve<T>() where T : class => this.Resolve(typeof(T));
 
-		public string GetIndexForType<T>()
+		public string Resolve(IndexName i)
 		{
-			return this.GetIndexForType(typeof(T));
+			if (i == null) return this.Resolve((Type)null);
+			return i.Name ?? this.Resolve(i.Type);
 		}
 
-		public string GetIndexForType(Type type)
+		public string Resolve(Type type)
 		{
 			var defaultIndices = this._connectionSettings.DefaultIndices;
 
@@ -34,11 +36,5 @@ namespace Nest
 		}
 
 
-		internal string GetIndexForType(IndexName i)
-		{
-			if (i == null) return this.GetIndexForType((Type)null);
-
-			return i.Name ?? this.GetIndexForType(i.Type);
-		}
 	}
 }

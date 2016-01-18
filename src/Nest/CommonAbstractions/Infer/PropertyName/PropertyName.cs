@@ -12,19 +12,7 @@ namespace Nest
 		public Expression Expression { get; set; }
 		public PropertyInfo Property { get; set; }
 
-		private string ComparisonValue;
-
-		public static PropertyName Create(string name, double? boost = null)
-		{
-			PropertyName propertyName = name;
-			return propertyName;
-		}
-
-		public static PropertyName Create(Expression expression, double? boost = null)
-		{
-			PropertyName propertyName = expression;
-			return propertyName;
-		}
+		private object ComparisonValue;
 
 		public static implicit operator PropertyName(string name)
 		{
@@ -49,7 +37,7 @@ namespace Nest
 			return property == null ? null : new PropertyName
 			{
 				Property = property,
-				ComparisonValue = property.Name
+				ComparisonValue = property
 			};
 		}
 
@@ -76,7 +64,7 @@ namespace Nest
 			var nestSettings = settings as IConnectionSettingsValues;
 			if (nestSettings == null)
 				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
-			var infer = new ElasticInferrer(nestSettings);
+			var infer = new Inferrer(nestSettings);
 			return infer.PropertyName(this);
 		}
 	}

@@ -25,8 +25,8 @@ namespace Nest
 		object IBulkOperation.GetBody() => this.GetBody();
 		protected abstract object GetBody();
 
-		Id IBulkOperation.GetIdForOperation(ElasticInferrer inferrer) => this.GetIdForOperation(inferrer);
-		protected virtual Id GetIdForOperation(ElasticInferrer inferrer) => this.Id ?? new Id(this.GetBody());
+		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => this.GetIdForOperation(inferrer);
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.GetBody());
 	}
 
 	public abstract class BulkOperationDescriptorBase<TDescriptor, TInterface>
@@ -48,9 +48,9 @@ namespace Nest
 		/// <returns></returns>
 		object IBulkOperation.GetBody() => this.GetBulkOperationBody();
 
-		Id IBulkOperation.GetIdForOperation(ElasticInferrer inferrer) => this.GetIdForOperation(inferrer);
+		Id IBulkOperation.GetIdForOperation(Inferrer inferrer) => this.GetIdForOperation(inferrer);
 
-		protected virtual Id GetIdForOperation(ElasticInferrer inferrer) => Self.Id ?? new Id(this.GetBulkOperationBody());
+		protected virtual Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(this.GetBulkOperationBody());
 
 		IndexName IBulkOperation.Index { get; set; }
 		TypeName IBulkOperation.Type { get; set; }
@@ -67,12 +67,14 @@ namespace Nest
 		/// Manually set the index, default to the default index or the fixed index set on the bulk operation
 		/// </summary>
 		public TDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+		public TDescriptor Index<T>() => Assign(a => a.Index = typeof(T));
 
 		/// <summary>
 		/// Manualy set the type to get the object from, default to whatever
 		/// T will be inferred to if not passed or the fixed type set on the parent bulk operation
 		/// </summary>
 		public TDescriptor Type(TypeName type) => Assign(a => a.Type = type);
+		public TDescriptor Type<T>() => Assign(a => a.Type = typeof(T));
 
 		/// <summary>
 		/// Manually set the id for the newly created object

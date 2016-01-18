@@ -13,9 +13,9 @@ namespace Nest
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
 	public class FieldValues : IsADictionary<string, object>
 	{
-		private ElasticInferrer _inferrer;
+		private Inferrer _inferrer;
 
-		public FieldValues(ElasticInferrer inferrer, IDictionary<string, object> container) 
+		public FieldValues(Inferrer inferrer, IDictionary<string, object> container) 
 			: base(container)
 		{
 			_inferrer = inferrer;

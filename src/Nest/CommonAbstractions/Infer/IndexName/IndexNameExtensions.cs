@@ -11,7 +11,7 @@
 
 			if (marker.Type == null)
 				return marker.Name;
-			return new IndexNameResolver(connectionSettings).GetIndexForType(marker.Type);
+			return new IndexNameResolver(connectionSettings).Resolve(marker.Type);
 		}
 	}
 }

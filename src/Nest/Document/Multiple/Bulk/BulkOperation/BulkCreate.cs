@@ -24,7 +24,7 @@ namespace Nest
 
 		protected override object GetBody() => this.Document;
 
-		protected override Id GetIdForOperation(ElasticInferrer inferrer) => this.Id ?? new Id(this.Document);
+		protected override Id GetIdForOperation(Inferrer inferrer) => this.Id ?? new Id(this.Document);
 	}
 
 
@@ -36,7 +36,7 @@ namespace Nest
 
 		protected override object GetBulkOperationBody() => Self.Document;
 
-		protected override Id GetIdForOperation(ElasticInferrer inferrer) => Self.Id ?? new Id(Self.Document);
+		protected override Id GetIdForOperation(Inferrer inferrer) => Self.Id ?? new Id(Self.Document);
 
 		T IBulkCreateOperation<T>.Document { get; set; }
 

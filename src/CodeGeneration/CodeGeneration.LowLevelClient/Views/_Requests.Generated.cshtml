@@ -66,7 +66,7 @@ namespace Nest
 		var original = kv.Value.OriginalQueryStringParamName;
 		var cased = kv.Key.ToPascalCase();
 		var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";
-		var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
+		var fieldType = kv.Value.HighLevelType(kv.Key).Replace("params", "");
 		var isFields = (original.Contains("fields") || original.Contains("source_include") || original.Contains("source_exclude"));
 		if (isFields && fieldType.Contains("string"))
 		{
@@ -76,12 +76,17 @@ namespace Nest
 		{
 			fieldType = "Field";
 		}
+		var setter = "value";
+		if (fieldType == "Time")
+		{
+			setter += ".ToString()";
+		}
 		<text>///<summary>@kv.Value.Description</summary>
 		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
 		{
 		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
-		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q("@original", value); } }
+		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q("@original", @setter); } }
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)

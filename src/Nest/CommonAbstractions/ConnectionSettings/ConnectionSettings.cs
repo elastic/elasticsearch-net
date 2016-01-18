@@ -42,8 +42,8 @@ namespace Nest
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
 
-		private readonly ElasticInferrer _inferrer;
-		ElasticInferrer IConnectionSettingsValues.Inferrer => _inferrer;
+		private readonly Inferrer _inferrer;
+		Inferrer IConnectionSettingsValues.Inferrer => _inferrer;
 
 		private Func<Type, string> _defaultTypeNameInferrer;
 		Func<Type, string> IConnectionSettingsValues.DefaultTypeNameInferrer => _defaultTypeNameInferrer;
@@ -71,7 +71,7 @@ namespace Nest
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
-			this._inferrer = new ElasticInferrer(this);
+			this._inferrer = new Inferrer(this);
 		}
 
 		/// <summary>

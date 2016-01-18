@@ -22,7 +22,6 @@ namespace Elasticsearch.Net
 		private IRequestParameters RequestParameters { get; }
 		private IRequestConfiguration RequestConfiguration { get; }
 
-
 		public DateTime StartedOn { get; }
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
@@ -465,8 +464,8 @@ namespace Elasticsearch.Net
 			response.AuditTrail = this.AuditTrail;
 		}
 
-		public void Dispose()
-		{
-		}
+		void IDisposable.Dispose() => this.Dispose();
+
+		protected virtual void Dispose() { }
 	}
 }

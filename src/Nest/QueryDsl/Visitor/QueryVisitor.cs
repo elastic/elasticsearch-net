@@ -62,6 +62,7 @@
 		void Visit(IExistsQuery filter);
 		void Visit(IDateRangeQuery query);
 		void Visit(INumericRangeQuery query);
+		void Visit(ITermRangeQuery query);
 		void Visit(ITemplateQuery query);
 
 		void Visit(ILimitQuery query);
@@ -138,6 +139,8 @@
 		public virtual void Visit(IDateRangeQuery query) { }
 
 		public virtual void Visit(INumericRangeQuery query) { }
+
+        public virtual void Visit(ITermRangeQuery query) { }
 #pragma warning restore 618
 
 		public virtual void Visit(IFunctionScoreQuery query) { }

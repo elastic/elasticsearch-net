@@ -9,7 +9,7 @@ namespace Nest
 	{
 		private readonly StringBuilder _sb;
 		private string _final;
-		private readonly ElasticInferrer _infer;
+		private readonly Inferrer _infer;
 
 		public string PrettyPrint
 		{
@@ -91,6 +91,8 @@ namespace Nest
 		public void Visit(IDateRangeQuery query) => Write("date_range");
 
 		public void Visit(INumericRangeQuery query) => Write("numeric_range");
+
+        public void Visit(ITermRangeQuery query) => Write("term_range");
 
 		public virtual void Visit(IFunctionScoreQuery query) => Write("function_core");
 

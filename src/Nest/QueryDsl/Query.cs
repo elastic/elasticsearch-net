@@ -171,6 +171,9 @@ namespace Nest
         public static QueryContainer Term<TValue>(string field, TValue value, double? boost = null) =>
             new QueryContainerDescriptor<T>().Term(field, value, boost);
 
+        public static QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
+            new QueryContainerDescriptor<T>().TermRange(selector);
+
         public static QueryContainer Terms<TValue>(Func<TermsQueryDescriptor<T, TValue>, ITermsQuery> selector) =>
             new QueryContainerDescriptor<T>().Terms(selector);
 

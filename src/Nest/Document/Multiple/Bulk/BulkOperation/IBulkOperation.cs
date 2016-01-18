@@ -44,6 +44,6 @@ namespace Nest
 
 		object GetBody();
 
-		Id GetIdForOperation(ElasticInferrer inferrer);
+		Id GetIdForOperation(Inferrer inferrer);
 	}
 }

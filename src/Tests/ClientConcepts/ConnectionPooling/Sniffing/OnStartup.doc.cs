@@ -38,6 +38,35 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		}
 
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task ASniffOnStartupHappensOnce()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Sniff(s => s.Fails(Always))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always))
+				.SniffingConnectionPool()
+				.AllDefaults()
+			);
+
+			 await audit.TraceCalls(
+				 new ClientCall
+				 {
+					{ SniffOnStartup},
+					{ SniffFailure, 9200},
+					{ SniffFailure, 9201},
+					{ SniffSuccess, 9202},
+					{ PingSuccess , 9200},
+					{ HealthyResponse, 9200}
+				},
+				new ClientCall
+				{
+					{ PingSuccess, 9201},
+					{ HealthyResponse, 9201}
+				}
+			);
+		}
+
+		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartUpTakesNewClusterState()
 		{
 			var audit = new Auditor(() => Framework.Cluster

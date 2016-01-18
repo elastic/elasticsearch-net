@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
@@ -9,8 +13,13 @@ namespace Tests.Framework
 	{
 		protected override object ExpectJson { get; }
 
-		internal RoundTripper(object expected, Func<ConnectionSettings, ConnectionSettings> settings = null) 
+		internal RoundTripper(
+			object expected, 
+			Func<ConnectionSettings, ConnectionSettings> settings = null,
+			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
+			) 
 		{
+			this._serializerFactory = serializerFactory;
 			this.ExpectJson = expected;
 			this._connectionSettingsModifier = settings;
 
@@ -28,21 +37,48 @@ namespace Tests.Framework
 			this.GetClient().Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
+		public RoundTripper ForField(Field field) 
+		{
+			this.GetClient().Infer.Field(field).Should().Be((string)this.ExpectJson);
+			return this;
+		}
+		
+		public RoundTripper AsPropertiesOf<T>(T document) where T : class
+		{
+			var jo = JObject.Parse(this.Serialize(document));
+			var serializedProperties = jo.Properties().Select(p => p.Name);
+			var sut = this.ExpectJson as IEnumerable<string>;
+			if (sut == null) throw new ArgumentException("Can not call AsPropertiesOf if sut is not IEnumerable<string>");
+
+			sut.Should().BeEquivalentTo(serializedProperties);
+			return this;
+		}
+
 
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
 
 		public static RoundTripper Expect(object expected) =>  new RoundTripper(expected);
+
 	}
 
 	public class IntermediateChangedSettings
 	{
 		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
+		private Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
 
 		internal IntermediateChangedSettings(Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			this._connectionSettingsModifier = settings;
 		}
-		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier);
+		public IntermediateChangedSettings WithSerializer(Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+		{
+			var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			this._serializerFactory = serializerFactory;
+			return this;
+		}
+			
+
+		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, _serializerFactory);
 	}
 
 	public class RoundTripper<T> : RoundTripper

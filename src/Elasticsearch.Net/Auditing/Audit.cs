@@ -11,16 +11,16 @@ namespace Elasticsearch.Net
 		public string Path { get; internal set; }
 		public Exception Exception { get; internal set; }
 
-		public Audit(AuditEvent type, DateTime occured)
+		public Audit(AuditEvent type, DateTime started)
 		{
 			this.Event = type;
-			this.Started = occured;
+			this.Started = started;
 		}
 
 		public override string ToString()
 		{
 			var took = Started - Ended;
-			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took.ToString()}";
+			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took}";
 		}
 	}
 }

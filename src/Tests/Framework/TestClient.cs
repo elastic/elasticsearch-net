@@ -46,17 +46,21 @@ namespace Tests.Framework
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, 
 			int port = 9200, 
 			bool forceInMemory = false,
-			Func<Uri, IConnectionPool> createPool = null
+			Func<Uri, IConnectionPool> createPool = null, 
+			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
 			)
 		{
 			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
-			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory)));
+			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateNode(port)), CreateConnection(forceInMemory: forceInMemory), serializerFactory));
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
 
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
+
+		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory) =>
+			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: _serializerFactory));
 
 		public static IElasticClient GetClient(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>

@@ -1,13 +1,13 @@
-﻿using Elasticsearch.Net;
+﻿using System;
+using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial interface IElasticClient
+	public partial interface IElasticClient 
 	{
 		IConnectionSettingsValues ConnectionSettings { get; }
 		IElasticsearchSerializer Serializer { get; }
 		IElasticsearchClient Raw { get; }
-		ElasticInferrer Infer { get; }
-
+		Inferrer Infer { get; }
 	}
 }
