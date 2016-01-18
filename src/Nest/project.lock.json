@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v4.5": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -23,7 +23,7 @@
       }
     },
     ".NETPlatform,Version=v5.0": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -617,7 +617,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x86": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -637,7 +637,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x64": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -657,7 +657,7 @@
       }
     },
     ".NETPlatform,Version=v5.0/win7-x86": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -1280,7 +1280,7 @@
       }
     },
     ".NETPlatform,Version=v5.0/win7-x64": {
-      "Elasticsearch.Net/1.0.0": {
+      "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -1904,7 +1904,7 @@
     }
   },
   "libraries": {
-    "Elasticsearch.Net/1.0.0": {
+    "Elasticsearch.Net/2.12.0-ci20160118112215": {
       "type": "project",
       "path": "../Elasticsearch.Net/project.json"
     },
