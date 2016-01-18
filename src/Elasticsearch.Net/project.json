@@ -1,22 +1,51 @@
 {
-  "authors": [ "" ],
-  "owners": [ "" ],
+  "authors": [
+    "Elastic and contributors"
+  ],
+  "owners": [
+    "Elastic"
+  ],
   "projectUrl": "https://github.com/elastic/elasticsearch-net",
   "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
-  "summary": "Official low level Elasticsearch client",
-  "description": "Exposes all the api endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
+  "requireLicenseAcceptance": false,
+  "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
+  "summary": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
+  "description": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
   "title": "Elasticsearch.NET - Official low level Elasticsearch client",
-  "tags": [ "elasticsearch", "elastic", "search", "lucene", "nest" ],
-  "copyright": "2014-2015 Elasticsearch BV",
-  "version": "1.0.0-*",
+  "tags": [
+    "elasticsearch",
+    "elastic",
+    "search",
+    "lucene",
+    "nest"
+  ],
+  "copyright": "2014-2016 Elasticsearch BV",
+  "version": "2.12.0-ci20160118112215",
   "compilationOptions": {
     "warningsAsErrors": false
   },
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": [
+          "DEBUG",
+          "TRACE"
+        ]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": [
+          "RELEASE",
+          "TRACE"
+        ],
+        "optimize": true
+      }
+    }
+  },
   "dependencies": {
-
   },
   "commands": {
-
   },
   "frameworks": {
     "net45": {
@@ -27,7 +56,11 @@
       }
     },
     "dotnet": {
-      "compilationOptions": { "define": [ "DOTNETCORE" ] },
+      "compilationOptions": {
+        "define": [
+          "DOTNETCORE"
+        ]
+      },
       "dependencies": {
         "System.Runtime": "4.0.21-beta-23225",
         "System.Collections": "4.0.11-beta-23225",

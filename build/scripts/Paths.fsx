@@ -4,9 +4,11 @@
 open Fake
 
 open System
+open System.Collections.Generic
 open System.IO
 open System.Diagnostics
 open System.Net
+open System.Linq
 
 module Paths =
 
@@ -36,6 +38,7 @@ module Paths =
     let BinFolder(folder) = 
         let f = replace @"\" "/" folder
         sprintf "%s/%s/bin/Release" SourceFolder f
+    let Quote(path) = sprintf "\"%s\"" path
 
 module Tooling = 
     let private fileDoesNotExist path = path |> Path.GetFullPath |> File.Exists |> not
@@ -72,6 +75,21 @@ module Tooling =
         ()
 
     let private exec = execAt Environment.CurrentDirectory
+
+    let execProcessWithTimeout proc arguments timeout = 
+        let args = arguments |> String.concat " "
+        let code = 
+            ExecProcessAndReturnMessages (fun info ->
+                info.FileName <- proc
+                info.WorkingDirectory <- "."
+                info.Arguments <- args
+            ) timeout
+    
+        code
+
+    let execProcess proc arguments =
+        let defaultTimeout = TimeSpan.FromMinutes (5.0)
+        execProcessWithTimeout proc arguments defaultTimeout
 
     type NugetTooling(nugetId, path) =
         member this.Path = Paths.Tool(path)
@@ -117,20 +135,6 @@ module Tooling =
 
     //only used to boostrap fake itself
     let Fake = new NugetTooling("FAKE", "FAKE/tools/FAKE.exe")
-    let private FSharpData = new NugetTooling("FSharp.Data", "Fsharp.Data/lib/net40/Fsharp.Data.dll")
-
-    let execProcessWithTimeout proc arguments timeout = 
-        let args = arguments |> String.concat " "
-        ExecProcess (fun p ->
-            p.WorkingDirectory <- "."  
-            p.FileName <- proc
-            p.Arguments <- args
-          ) 
-          (timeout) |> ignore
-
-    let execProcess proc arguments =
-        let defaultTimeout = TimeSpan.FromMinutes (5.0)
-        execProcessWithTimeout proc arguments defaultTimeout
 
     type NpmTooling(npmId, binJs) =
         let modulePath =  sprintf "%s/node_modules/%s" Paths.ToolsFolder npmId
@@ -140,16 +144,89 @@ module Tooling =
             if doesNotExist modulePath then
                 traceFAKE "npm module %s not found installing in %s" npmId modulePath
                 if (isMono) then
-                    execProcess "npm" ["install"; npmId; "--prefix"; "./packages/build" ]
+                    execProcess "npm" ["install"; npmId; "--prefix"; "./packages/build" ] |> ignore
                 else 
                 Node.Exec [npm; "install"; npmId; "--prefix"; "./packages/build" ]
         member this.Path = binPath
 
         member this.Exec arguments =
                 if (isMono) then
-                    execProcess "node" <| binPath :: arguments
+                    (execProcess "node" <| binPath :: arguments) |> ignore
                 else
                     exec Node.Path <| binPath :: arguments
 
     let Notifier = new NpmTooling("node-notifier", "bin.js")
+
+    let private userProfileDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+
+    type DnvmVersion(str:string) =
+        let p = str.Split([|' '|], StringSplitOptions.RemoveEmptyEntries)
+        let parts = 
+            match p.Length with
+            | 6 -> List.ofArray p
+            | 5 -> 
+                match p.[0] with
+                | "*" -> (List.ofArray p) @ [""]
+                | _ -> "" :: List.ofArray p
+            | 4 -> "" :: (List.ofArray p) @ [""]
+            | _ -> raise(BuildException("Invalid number of arguments to dnvm version: " + p.Length.ToString(), List.ofArray p)) 
+ 
+        member this.Active = isNotNullOrEmpty parts.[0] 
+        member this.Version = parts.[1]          
+        member this.Runtime = parts.[2] 
+        member this.Architecture = parts.[3] 
+        member this.OperatingSystem = parts.[4] 
+        member this.Alias = parts.[5]
+
+        member this.Location = 
+            sprintf "%s/.dnx/runtimes/dnx-%s-%s-%s.%s" 
+                userProfileDir
+                this.Runtime 
+                this.OperatingSystem 
+                this.Architecture 
+                this.Version
+
+    type DnvmTooling() = 
+        let dnvm = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
+        let mutable dnvmVersion = "[unknown]"
+
+        member this.Exec arguments =
+            execProcessWithTimeout dnvm arguments (TimeSpan.FromSeconds 30.)
+
+        member this.UpdateSelf() =
+            this.Exec ["update-self"] |> ignore
+
+        member this.List() =
+            this.Exec ["list"]
+
+        member this.Active() = 
+            let getActiveVersion () = 
+                let result = this.List()
+                match result.OK with
+                | true ->
+                    let activeDnvm = result.Messages
+                                    |> Seq.skip 3
+                                    |> Seq.filter isNotNullOrEmpty
+                                    |> Seq.map DnvmVersion
+                                    |> Seq.find (fun d -> d.Active = true)
+
+                    dnvmVersion <- activeDnvm.Location
+                    dnvmVersion
+                | _ -> raise(BuildException("No dnvm versions found on the machine. Please install dnx", []))
+
+            match dnvmVersion with
+            | "[unknown]" -> getActiveVersion()
+            | _ -> dnvmVersion
+
+    let Dnvm = new DnvmTooling()
+
+    type DnxTooling(exe) =
+          member this.Exec failedF workingDirectory arguments =
+            let dnvm = Dnvm.Active()
+            let proc = (sprintf "%s/bin/%s" dnvm exe)
+            let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+            if not result.OK then failedF result.Errors
+
+    let Dnu = new DnxTooling("dnu.cmd")
+    let Dnx = new DnxTooling("dnx.exe")
 

@@ -1,13 +1,22 @@
 ﻿#I @"../../packages/build/FAKE/tools"
+#I @"../../packages/build/FSharp.Data/lib/net40"
 #r @"FakeLib.dll"
+#r @"FSharp.Data.dll"
 #load @"Paths.fsx"
 #load @"Projects.fsx"
 #load @"Versioning.fsx"
+#load @"Building.fsx"
 open System
+open System.IO
 open Fake 
 open Paths
 open Projects
 open Versioning
+open Building
+open FSharp.Data
+
+// TODO: Use a complete project.json skeleton
+type ProjectJson = JsonProvider<"../../src/Nest/project.json">
 
 type Release() = 
     static let nugetPack = fun (projectName: ProjectName) ->
@@ -31,7 +40,53 @@ type Release() =
         traceFAKE "%s" dir
         MoveFile Paths.NugetOutput nugetOutFile
 
+    static let updateVersion project =
+        CreateDir Paths.NugetOutput
+        use file = File.Open (project, FileMode.Open)
+        let doc = ProjectJson.Load file
+
+        let newDoc = ProjectJson.Root(
+                        doc.Authors, 
+                        doc.Owners, 
+                        doc.ProjectUrl, 
+                        doc.LicenseUrl,
+                        doc.RequireLicenseAcceptance, 
+                        doc.IconUrl, 
+                        doc.Summary, 
+                        doc.Description, 
+                        doc.Title, 
+                        doc.Tags,
+                        doc.Copyright,
+                        Versioning.FileVersion,
+                        doc.CompilationOptions,
+                        doc.Configurations,
+                        doc.Dependencies,
+                        doc.Commands,
+                        doc.Frameworks)
+        
+        file.Close ()
+        File.Delete project
+        use writer = new StreamWriter(File.Open (project, FileMode.Create))
+        newDoc.JsonValue.WriteTo(writer, JsonSaveOptions.None)
+
     static member PackAll() =
-        DotNetProject.All
-        |> Seq.map (fun p -> p.ProjectName)
-        |> Seq.iter(fun p -> nugetPack p)
+        let projects = !! "src/Nest/project.json" 
+                       ++ "src/Elasticsearch.Net/project.json"
+
+        // update versions
+        projects |> Seq.iter updateVersion
+
+        // build nuget packages
+        projects
+        |> Seq.map DirectoryName
+        |> Seq.iter(fun project -> 
+            Tooling.Dnu.Exec Build.BuildFailure project ["pack"; (Paths.Quote project); "--configuration Release"; "--quiet"])
+
+        // move to nuget output
+        projects
+        |> Seq.iter(fun project ->
+            let projectName = (project |> DirectoryName |> directoryInfo).Name
+            let srcFolder = Paths.BinFolder(projectName)
+            let package = sprintf "%s/%s.%s.nupkg" srcFolder projectName Versioning.FileVersion
+            MoveFile Paths.NugetOutput package
+        )

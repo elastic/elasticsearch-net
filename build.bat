@@ -12,6 +12,7 @@ if errorlevel 1 (
 SET TARGET="build"
 SET VERSION=
 SET ESVERSIONS=
+SET DNXVERSION="default"
 
 IF NOT [%1]==[] (set TARGET="%1")
 
@@ -23,7 +24,11 @@ IF /I "%1%"=="integrate" (
     IF NOT [%2]==[] (set ESVERSIONS="%2")
 )
 
+IF /I "%1%"=="use" (
+    IF NOT [%2]==[] (set DNXVERSION="%2")
+)
+
 shift
 shift
 
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" esversions=%ESVERSIONS%
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" dnxversion=%DNXVERSION%

@@ -67,6 +67,28 @@ type Build() =
          }
         build setParams "src/Elasticsearch.sln" |> ignore
 
+    static member BuildFailure errors =
+        raise (BuildException("The project build failed.", errors |> List.ofSeq))
+
+    static member CompileDnx() =
+        let projects = !! Paths.Source("*/project.json") 
+                       |> Seq.map DirectoryName
+
+        projects
+        |> Seq.iter(fun project -> 
+            Tooling.Dnu.Exec Build.BuildFailure project ["build"; (Paths.Quote project); "--configuration Release"; "--quiet"]
+           )
+
+        projects
+        |> Seq.iter(fun project ->
+            let projectName = (project |> directoryInfo).Name
+            let outputFolder = Paths.Output(projectName)
+            let srcFolder = Paths.BinFolder(projectName)
+            CopyDir outputFolder srcFolder allFiles
+        )
+
+
+
 
 
 

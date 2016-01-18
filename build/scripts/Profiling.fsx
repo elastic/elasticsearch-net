@@ -26,4 +26,4 @@ module Benchmarker =
    let private benchmarkingApp = sprintf "%s/%s" (Paths.BinFolder("Performance/Benchmarking")) "Benchmarking.exe" 
 
    let Run() =
-        Tooling.execProcessWithTimeout benchmarkingApp ["-i false"; "-t 5"] (TimeSpan.FromMinutes 10.)
+        Tooling.execProcessWithTimeout benchmarkingApp ["-i false"; "-t 5"] (TimeSpan.FromMinutes 10.) |> ignore
