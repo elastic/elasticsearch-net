@@ -112,7 +112,7 @@ module Tests =
         !! Paths.Source("Tests/project.json") 
         |> Seq.map DirectoryName
         |> Seq.map Paths.Quote
-        |> Seq.iter(fun project -> Tooling.Dnx.Exec TestFailure "." ["--project"; project; "test"])
+        |> Seq.iter(fun project -> Tooling.Dnx.Exec Tooling.DotNetRuntime.Both TestFailure "." ["--project"; project; "test"])
 
     let RunDnxIntegration commaSeparatedEsVersions =
         ActivateBuildFailureTarget "NotifyTestFailures"

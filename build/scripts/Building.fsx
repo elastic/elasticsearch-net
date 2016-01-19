@@ -76,7 +76,8 @@ type Build() =
 
         projects
         |> Seq.iter(fun project -> 
-            Tooling.Dnu.Exec Build.BuildFailure project ["build"; (Paths.Quote project); "--configuration Release"; "--quiet"]
+            //eventhough this says desktop it still builds all the tfm's it just hints wich installed dnx version to use
+            Tooling.Dnu.Exec Tooling.DotNetRuntime.Desktop Build.BuildFailure project ["build"; (Paths.Quote project); "--configuration Release"; "--quiet"]
            )
 
         projects

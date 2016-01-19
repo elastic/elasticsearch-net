@@ -1,6 +1,8 @@
 ﻿#I @"../../packages/build/FAKE/tools"
+#I @"../../packages/build/FSharp.Data/lib/net40"
 #r @"FakeLib.dll"
 #r @"System.IO.Compression.FileSystem.dll"
+#r @"FSharp.Data.dll"
 open Fake
 
 open System
@@ -9,6 +11,8 @@ open System.IO
 open System.Diagnostics
 open System.Net
 open System.Linq
+open FSharp.Data
+open FSharp.Data.JsonExtensions
 
 module Paths =
 
@@ -186,10 +190,10 @@ module Tooling =
                 this.Architecture 
                 this.Version
 
+
     type DnvmTooling() = 
         let dnvm = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
-        let mutable dnvmVersion = "[unknown]"
-
+        
         member this.Exec arguments =
             execProcessWithTimeout dnvm arguments (TimeSpan.FromSeconds 30.)
 
@@ -199,33 +203,49 @@ module Tooling =
         member this.List() =
             this.Exec ["list"]
 
-        member this.Active() = 
-            let getActiveVersion () = 
-                let result = this.List()
-                match result.OK with
-                | true ->
-                    let activeDnvm = result.Messages
-                                    |> Seq.skip 3
-                                    |> Seq.filter isNotNullOrEmpty
-                                    |> Seq.map DnvmVersion
-                                    |> Seq.find (fun d -> d.Active = true)
-
-                    dnvmVersion <- activeDnvm.Location
-                    dnvmVersion
-                | _ -> raise(BuildException("No dnvm versions found on the machine. Please install dnx", []))
-
-            match dnvmVersion with
-            | "[unknown]" -> getActiveVersion()
-            | _ -> dnvmVersion
-
     let Dnvm = new DnvmTooling()
+    let dnxVersions = 
+        let result = Dnvm.List()
+        match result.OK with
+        | true ->
+            result.Messages
+            |> Seq.skip 3
+            |> Seq.filter isNotNullOrEmpty
+            |> Seq.map DnvmVersion
+        | _ -> raise(BuildException("No dnvm versions found on the machine. Please install dnx", []))
 
+    type GlobalJson = JsonProvider<"../../src/global.json">
+    let desiredDnxVersion = GlobalJson.GetSample().Sdk.Version
+    printfn "Expect %s to be installed (both clr and coreclr and runtimes)" desiredDnxVersion
+    let hasClr = dnxVersions |> Seq.tryFind (fun v -> v.Version = desiredDnxVersion && v.Runtime = "clr")
+    let hasCoreClr = dnxVersions |> Seq.tryFind (fun v -> v.Version = desiredDnxVersion && v.Runtime = "coreclr")
+
+    match (hasClr, hasCoreClr) with
+    | (None, None) -> failwithf "%s is not installed, both clr and coreclr versions are missing" desiredDnxVersion
+    | (Some _, None) -> failwithf "%s is installed but is missing the coreclr runtime version" desiredDnxVersion
+    | (None, Some _) -> failwithf "%s is installed but is missing the clr (desktop) runtime version" desiredDnxVersion
+    | _ -> ignore
+    
+    type DotNetRuntime = | Desktop | Core | Both
     type DnxTooling(exe) =
-          member this.Exec failedF workingDirectory arguments =
-            let dnvm = Dnvm.Active()
-            let proc = (sprintf "%s/bin/%s" dnvm exe)
-            let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
-            if not result.OK then failedF result.Errors
+        member this.Exec runtime failedF workingDirectory arguments =
+            match (runtime, hasClr, hasCoreClr) with
+            | (Core, _, Some c) ->
+                let proc = (sprintf "%s/bin/%s" c.Location exe)
+                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                if not result.OK then failedF result.Errors
+            | (Desktop, Some d, _) ->
+                let proc = (sprintf "%s/bin/%s" d.Location exe)
+                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                if not result.OK then failedF result.Errors
+            | (Both, Some d, Some c) ->
+                let proc = (sprintf "%s/bin/%s" d.Location exe)
+                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                if not result.OK then failedF result.Errors
+                let proc = (sprintf "%s/bin/%s" c.Location exe)
+                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                if not result.OK then failedF result.Errors
+            | _ -> failwith "Tried to run dnx tooling in unknown state"
 
     let Dnu = new DnxTooling("dnu.cmd")
     let Dnx = new DnxTooling("dnx.exe")

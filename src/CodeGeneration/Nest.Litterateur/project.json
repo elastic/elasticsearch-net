@@ -35,7 +35,7 @@
         "Microsoft.CodeAnalysis": "1.1.1"
       }
     },
-    "dotnet": {
+    "dotnet5.1": {
       "compilationOptions": { "define": [ "DOTNETCORE" ] },
       "dependencies": {
         "System.Runtime": "4.0.21-beta-23225",

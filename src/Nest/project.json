@@ -60,7 +60,7 @@
         "System.Dynamic.Runtime": ""
       }
     },
-    "dotnet": {
+    "dotnet5.1": {
       "compilationOptions": {
         "define": [
           "DOTNETCORE"

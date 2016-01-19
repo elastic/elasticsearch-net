@@ -304,7 +304,7 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0": {
+    ".NETPlatform,Version=v5.1": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -1570,7 +1570,7 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0/win7-x86": {
+    ".NETPlatform,Version=v5.1/win7-x86": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -2261,7 +2261,7 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0/win7-x64": {
+    ".NETPlatform,Version=v5.1/win7-x64": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -4913,7 +4913,7 @@
       "fx/System.Threading.Tasks ",
       "fx/System.Text.Encoding "
     ],
-    ".NETPlatform,Version=v5.0": [
+    ".NETPlatform,Version=v5.1": [
       "System.Runtime >= 4.0.21-beta-23225",
       "System.Collections >= 4.0.11-beta-23225",
       "System.Reflection >= 4.1.0-beta-23225",

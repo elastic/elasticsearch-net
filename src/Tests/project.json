@@ -33,6 +33,7 @@
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
+        "System.Runtime" :  "",
         "System.Reflection": "",
         "System.IO.Compression.FileSystem": "",
         "System.Threading.Tasks": "",

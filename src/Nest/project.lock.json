@@ -22,10 +22,10 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0": {
+    ".NETPlatform,Version=v5.1": {
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -656,10 +656,10 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0/win7-x86": {
+    ".NETPlatform,Version=v5.1/win7-x86": {
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -1279,10 +1279,10 @@
         }
       }
     },
-    ".NETPlatform,Version=v5.0/win7-x64": {
+    ".NETPlatform,Version=v5.1/win7-x64": {
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -3284,7 +3284,7 @@
       "fx/System.ServiceModel ",
       "fx/System.Dynamic.Runtime "
     ],
-    ".NETPlatform,Version=v5.0": [
+    ".NETPlatform,Version=v5.1": [
       "System.Runtime >= 4.0.21-beta-23225",
       "System.Linq >= 4.0.0-beta-23109",
       "System.Linq.Queryable >= 4.0.0-beta-23109",

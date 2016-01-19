@@ -407,7 +407,7 @@
       },
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -631,7 +631,7 @@
       },
       "Nest/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
           "Newtonsoft.Json": "7.0.1",
@@ -2540,7 +2540,7 @@
       },
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -2782,7 +2782,7 @@
       },
       "Nest/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
           "Newtonsoft.Json": "7.0.1",
@@ -4209,7 +4209,7 @@
       },
       "Elasticsearch.Net/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23225",
           "System.Collections": "4.0.11-beta-23225",
@@ -4451,7 +4451,7 @@
       },
       "Nest/2.12.0-ci20160118112215": {
         "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
           "Newtonsoft.Json": "7.0.1",
@@ -9076,6 +9076,7 @@
       "xunit.runner.dnx >= 2.1.0-rc1-build204"
     ],
     "DNX,Version=v4.5.1": [
+      "fx/System.Runtime ",
       "fx/System.Reflection ",
       "fx/System.IO.Compression.FileSystem ",
       "fx/System.Threading.Tasks ",
