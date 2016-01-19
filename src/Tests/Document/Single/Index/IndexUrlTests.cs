@@ -22,6 +22,16 @@ namespace Tests.Document.Single.Index
 				}))
 				;
 
+			await POST("/project/project")
+				.Fluent(c => c.Index(new { }, i => i.Index(typeof(Project)).Type(typeof(Project))))
+				.Request(c => c.Index(new IndexRequest<object>("project", "project") { Document = new { } }))
+				.FluentAsync(c => c.IndexAsync(new { }, i => i.Index(typeof(Project)).Type(typeof(Project))))
+				.RequestAsync(c => c.IndexAsync(new IndexRequest<object>(typeof(Project), TypeName.From<Project>())
+                {
+					Document = new { }
+				}))
+				;
+
 			await PUT("/project/project/NEST")
 				.Fluent(c => c.Index(project))
 				.Request(c => c.Index(new IndexRequest<Project>("project", "project", "NEST") { Document = project }))
