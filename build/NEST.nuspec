@@ -14,7 +14,7 @@
 		<description>Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net</description>
 		<dependencies>
 			<dependency id="Elasticsearch.Net" version="2.0.0-alpha1"/>
-			<dependency id="Newtonsoft.Json" version="[7,9)" />
+			<dependency id="Newtonsoft.Json" version="[8,9)" />
 		</dependencies>
 		<tags>elasticsearch elastic search lucene nest</tags>
 	</metadata>
