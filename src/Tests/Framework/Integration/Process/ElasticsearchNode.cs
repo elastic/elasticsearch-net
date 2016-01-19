@@ -87,7 +87,7 @@ namespace Tests.Framework.Integration
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
-			var timeout = TimeSpan.FromSeconds(60);
+			var timeout = TimeSpan.FromMinutes(1);
 			var handle = new ManualResetEvent(false);
 
 			if (_doNotSpawnIfAlreadyRunning)

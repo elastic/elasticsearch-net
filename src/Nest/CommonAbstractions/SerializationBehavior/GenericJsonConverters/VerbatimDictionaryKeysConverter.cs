@@ -44,15 +44,28 @@ namespace Nest
 				else if (fieldName != null)
 					key = settings.Inferrer.Field(fieldName);
 				else if (propertyName != null)
+				{
+					if (propertyName.Property != null)
+					{
+						IPropertyMapping mapping;
+						if (settings.PropertyMappings.TryGetValue(propertyName.Property, out mapping) && mapping.Ignore)
+						{
+							continue;
+						}
+					}
+
 					key = settings.Inferrer.PropertyName(propertyName);
+				}
 				else if (indexName != null)
 					key = settings.Inferrer.IndexName(indexName);
 				else if (typeName != null)
 					key = settings.Inferrer.TypeName(typeName);
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
+
 				writer.WritePropertyName(key);
 				serializer.Serialize(writer, entry.Value);
+
 			}
 
 			writer.WriteEndObject();

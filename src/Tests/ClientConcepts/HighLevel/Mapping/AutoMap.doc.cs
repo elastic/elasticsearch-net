@@ -581,6 +581,61 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
+		[ElasticsearchType(Name = "company")]
+		public class CompanyWithAttributesAndPropertiesToIgnore
+		{
+			public string Name { get; set; }
+
+			[String(Ignore = true)]
+			public string PropertyToIgnore { get; set; }
+
+			public string AnotherPropertyToIgnore { get; set; }
+		}
+
+		/**
+		 * Properties on a POCO can be ignored in a couple of ways:
+		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that cshoule be ignored on the POCO
+		 * - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
+		 * This example demonstrates both ways, using the attribute way to ignore the property `PropertyToIgnore` and the infer mapping way to ignore the 
+		 * property `AnotherPropertyToIgnore`
+		 */
+		[U]
+		public void IgnoringProperties()
+		{
+			var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+						.AutoMap()
+					)
+				);
+
+			/** Thus we do not map properties on the second occurrence of our Child property */
+			var expected = new
+			{
+				mappings = new
+				{
+					company = new
+					{
+						properties = new
+						{
+							name = new
+							{
+								type = "string"
+							}
+						}
+					}
+				}
+			};
+
+			var settings = WithConnectionSettings(s => s
+				.InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
+					.Ignore(p => p.AnotherPropertyToIgnore)
+				)
+			);
+
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+		}
+
 		/**
 		 * If you notice in our previous Company/Employee examples, the Employee type is recursive
 		 * in that itself contains a collection of type Employee.  By default, AutoMap() will only
