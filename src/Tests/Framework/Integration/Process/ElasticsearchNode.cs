@@ -124,7 +124,7 @@ namespace Tests.Framework.Integration
 			this.DownloadAndExtractElasticsearch();
 		}
 
-		public string GetApplicationDataDirectory()
+		private string GetApplicationDataDirectory()
 		{
 #if DOTNETCORE
 			return Environment.GetEnvironmentVariable("APPDATA");
@@ -138,7 +138,7 @@ namespace Tests.Framework.Integration
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
-			var timeout = TimeSpan.FromSeconds(60);
+			var timeout = TimeSpan.FromMinutes(1);
 
 #if DOTNETCORE
 			var handle = new Signal(false);

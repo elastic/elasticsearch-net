@@ -148,7 +148,7 @@ namespace Tests.Analysis.TokenFilters
 					snow = new
 					{
 						type = "snowball",
-						language = "dutch"
+						language = "Dutch"
 					},
 					standard = new
 					{

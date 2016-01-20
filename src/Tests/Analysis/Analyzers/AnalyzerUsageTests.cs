@@ -39,7 +39,7 @@ namespace Tests.Analysis.Analyzers
 					mySnow = new
 					{
 						type = "snowball",
-						language = "dutch"
+						language = "Dutch"
 					},
 					myStandard = new
 					{

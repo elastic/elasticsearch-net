@@ -30,7 +30,7 @@ namespace Nest
 		{
 			if (this.Document != null)
 			{
-				return nestSettings.Inferrer.Id(this.Document);
+				Value = nestSettings.Inferrer.Id(this.Document);
 			}
 
 			var s = Value as string;

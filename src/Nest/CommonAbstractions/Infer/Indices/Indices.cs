@@ -57,7 +57,8 @@ namespace Nest
 					var nestSettings = settings as IConnectionSettingsValues;
 					if (nestSettings == null)
 						throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
-					var infer = new Inferrer(nestSettings);
+
+					var infer = nestSettings.Inferrer;
 					var indices = many.Indices.Select(i => infer.IndexName(i)).Distinct();
 					return string.Join(",", indices);
 				}
@@ -81,7 +82,7 @@ namespace Nest
 		{
 			return this.Match(
 				all => "_all".GetHashCode(),
-				many => string.Concat(many.Indices).GetHashCode()
+				many => string.Concat(many.Indices.OrderBy(i => i.ToString())).GetHashCode()
 			);
 		}
 	}

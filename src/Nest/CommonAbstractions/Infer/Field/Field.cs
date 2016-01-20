@@ -78,7 +78,7 @@ namespace Nest
 			var other = obj as Field;
 			if (other == null)
 				return false;
-			return ComparisonValue == other.ComparisonValue;
+			return ComparisonValue.Equals(other.ComparisonValue);
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
