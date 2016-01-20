@@ -67,13 +67,13 @@ Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
 
 Target "Release" <| fun _ -> 
     Release.PackAll()
-    //Sign.ValidateNugetDllAreSignedCorrectly()
+    Sign.ValidateNugetDllAreSignedCorrectly()
 
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
-Target "Use" (fun _ -> Tooling.Dnvm.Exec ["use " + (getBuildParamOrDefault "dnxversion" "default")] |> ignore)
+Target "Use" <| fun _ -> Tooling.Dnvm.Exec ["use " + (getBuildParamOrDefault "dnxversion" "default")] |> ignore
 
 // Dependencies
 "Clean" 

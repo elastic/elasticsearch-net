@@ -17,18 +17,20 @@ namespace Nest
 	public partial class IndexRequest<TDocument> 
 		where TDocument : class
 	{
-		protected override HttpMethod HttpMethod => ((IIndexRequest<TDocument>)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => GetHttpMethod(this);
 
 		partial void DocumentFromPath(TDocument doc) => this.Document = doc;
 
 		object IIndexRequest.UntypedDocument => this.Document;
 
 		public TDocument Document { get; set; }
+
+		internal static HttpMethod GetHttpMethod(IIndexRequest<TDocument> r) => (r.Id != null && r.Id.Value != null) ? HttpMethod.PUT : HttpMethod.POST;
 	}
 
 	public partial class IndexDescriptor<TDocument>  where TDocument : class
 	{
-		protected override HttpMethod HttpMethod => Self.Id == null ? HttpMethod.POST : HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => IndexRequest<TDocument>.GetHttpMethod(this);
 		partial void DocumentFromPath(TDocument doc) => Assign(a => a.Document = doc); 
 		object IIndexRequest.UntypedDocument => Self.Document;
 

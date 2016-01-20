@@ -10,49 +10,49 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum SnowballLanguage
 	{
-		[EnumMember(Value="armenian")]
+		[EnumMember(Value="Armenian")]
 		Armenian,
-		[EnumMember(Value="basque")]
+		[EnumMember(Value="Basque")]
 		Basque,
-		[EnumMember(Value="catalan")]
+		[EnumMember(Value="Catalan")]
 		Catalan,
-		[EnumMember(Value="danish")]
+		[EnumMember(Value="Danish")]
 		Danish,
-		[EnumMember(Value="dutch")]
+		[EnumMember(Value="Dutch")]
 		Dutch,
-		[EnumMember(Value="english")]
+		[EnumMember(Value="English")]
 		English,
-		[EnumMember(Value="finnish")]
+		[EnumMember(Value="Finnish")]
 		Finnish,
-		[EnumMember(Value="french")]
+		[EnumMember(Value="French")]
 		French,
-		[EnumMember(Value="german")]
+		[EnumMember(Value="Ferman")]
 		German,
-		[EnumMember(Value="german2")]
+		[EnumMember(Value="German2")]
 		German2,
-		[EnumMember(Value="hungarian")]
+		[EnumMember(Value="Hungarian")]
 		Hungarian,
-		[EnumMember(Value="italian")]
+		[EnumMember(Value="Italian")]
 		Italian,
-		[EnumMember(Value="kp")]
+		[EnumMember(Value="Kp")]
 		Kp,
-		[EnumMember(Value="lovins")]
+		[EnumMember(Value="Lovins")]
 		Lovins,
-		[EnumMember(Value="norwegian")]
+		[EnumMember(Value="Norwegian")]
 		Norwegian,
-		[EnumMember(Value="porter")]
+		[EnumMember(Value="Porter")]
 		Porter,
-		[EnumMember(Value="portuguese")]
+		[EnumMember(Value="Portuguese")]
 		Portuguese,
-		[EnumMember(Value="romanian")]
+		[EnumMember(Value="Romanian")]
 		Romanian,
-		[EnumMember(Value="russian")]
+		[EnumMember(Value="Russian")]
 		Russian,
-		[EnumMember(Value="spanish")]
+		[EnumMember(Value="Spanish")]
 		Spanish,
-		[EnumMember(Value="swedish")]
+		[EnumMember(Value="Swedish")]
 		Swedish,
-		[EnumMember(Value="turkish")]
+		[EnumMember(Value="Turkish")]
 		Turkish
 	}
 }

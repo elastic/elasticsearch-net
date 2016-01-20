@@ -20,7 +20,7 @@
     "nest"
   ],
   "copyright": "2014-2016 Elasticsearch BV",
-  "version": "2.12.0-ci20160118112215",
+  "version": "2.0.0-alpha2",
   "compilationOptions": {
     "warningsAsErrors": false
   },
@@ -39,7 +39,8 @@
           "RELEASE",
           "TRACE"
         ],
-        "optimize": true
+        "optimize": true,
+        "keyFile": "../../build/keys/keypair.snk"
       }
     }
   },
