@@ -22,13 +22,13 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
-				var indices = operation.Index != null
+				var indices = request.Index == null || !request.Index.Equals(operation.Index)
 					? operation.Index
-					: request.Index;
+					: null;
 
-				var types = operation.Type != null
+				var types = request.Type == null || !request.Type.Equals(operation.Type)
 					? operation.Type
-					: request.Type;
+					: null;
 
 				var searchType = operation.RequestParameters.GetQueryStringValue<SearchType>("search_type").GetStringValue();
 				if (searchType == "query_then_fetch")
