@@ -294,6 +294,17 @@
           "ref/dotnet/System.Net.Primitives.dll": {}
         }
       },
+      "System.Net.Requests/4.0.11-beta-23516": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Net.Primitives": "3.9.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet5.1/System.Net.Requests.dll": {}
+        }
+      },
       "System.ObjectModel/4.0.10": {
         "type": "package",
         "dependencies": {
@@ -564,6 +575,12 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
+      "runtime.win7.System.Net.Requests/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
       "System.Collections/4.0.11-beta-23225": {
         "type": "package",
         "dependencies": {
@@ -831,6 +848,17 @@
         },
         "compile": {
           "ref/dotnet/System.Net.Primitives.dll": {}
+        }
+      },
+      "System.Net.Requests/4.0.11-beta-23516": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Net.Primitives": "3.9.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet5.1/System.Net.Requests.dll": {}
         }
       },
       "System.ObjectModel/4.0.10": {
@@ -1124,6 +1152,12 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
+      "runtime.win7.System.Net.Requests/4.0.11-beta-23516": {
+        "type": "package",
+        "compile": {
+          "ref/dotnet/_._": {}
+        }
+      },
       "System.Collections/4.0.11-beta-23225": {
         "type": "package",
         "dependencies": {
@@ -1391,6 +1425,17 @@
         },
         "compile": {
           "ref/dotnet/System.Net.Primitives.dll": {}
+        }
+      },
+      "System.Net.Requests/4.0.11-beta-23516": {
+        "type": "package",
+        "dependencies": {
+          "System.IO": "4.0.0",
+          "System.Net.Primitives": "3.9.0",
+          "System.Runtime": "4.0.0"
+        },
+        "compile": {
+          "ref/dotnet5.1/System.Net.Requests.dll": {}
         }
       },
       "System.ObjectModel/4.0.10": {
@@ -1686,6 +1731,19 @@
         "ref/wpa81/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "runtime.win7.System.Net.Requests/4.0.11-beta-23516": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "mqWBQUhXhzkiwb+zVUuKg+wswJUsnQtZkFtz6eISw8vWNXA9i2jkzYjU3pjjIVmtdopnhle9YaS4a/w4OuWGLw==",
+      "files": [
+        "ref/dotnet/_._",
+        "runtime.win7.System.Net.Requests.4.0.11-beta-23516.nupkg",
+        "runtime.win7.System.Net.Requests.4.0.11-beta-23516.nupkg.sha512",
+        "runtime.win7.System.Net.Requests.nuspec",
+        "runtimes/win7/lib/dotnet5.4/System.Net.Requests.dll",
+        "runtimes/win7/lib/net/_._"
       ]
     },
     "System.Collections/4.0.11-beta-23225": {
@@ -2268,6 +2326,77 @@
         "System.Net.Primitives.4.0.0.nupkg",
         "System.Net.Primitives.4.0.0.nupkg.sha512",
         "System.Net.Primitives.nuspec"
+      ]
+    },
+    "System.Net.Requests/4.0.11-beta-23516": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "zbUdLNiGM7m0JgHcADonPXuz5DJq/WkK6NoHyQNkRt9dbBrYQ0CSg3PQX1qTLQyAuOKKhWOXuZ5gMyOA0t0AzA==",
+      "files": [
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet5.1/de/System.Net.Requests.xml",
+        "ref/dotnet5.1/es/System.Net.Requests.xml",
+        "ref/dotnet5.1/fr/System.Net.Requests.xml",
+        "ref/dotnet5.1/it/System.Net.Requests.xml",
+        "ref/dotnet5.1/ja/System.Net.Requests.xml",
+        "ref/dotnet5.1/ko/System.Net.Requests.xml",
+        "ref/dotnet5.1/ru/System.Net.Requests.xml",
+        "ref/dotnet5.1/System.Net.Requests.dll",
+        "ref/dotnet5.1/System.Net.Requests.xml",
+        "ref/dotnet5.1/zh-hans/System.Net.Requests.xml",
+        "ref/dotnet5.1/zh-hant/System.Net.Requests.xml",
+        "ref/dotnet5.2/de/System.Net.Requests.xml",
+        "ref/dotnet5.2/es/System.Net.Requests.xml",
+        "ref/dotnet5.2/fr/System.Net.Requests.xml",
+        "ref/dotnet5.2/it/System.Net.Requests.xml",
+        "ref/dotnet5.2/ja/System.Net.Requests.xml",
+        "ref/dotnet5.2/ko/System.Net.Requests.xml",
+        "ref/dotnet5.2/ru/System.Net.Requests.xml",
+        "ref/dotnet5.2/System.Net.Requests.dll",
+        "ref/dotnet5.2/System.Net.Requests.xml",
+        "ref/dotnet5.2/zh-hans/System.Net.Requests.xml",
+        "ref/dotnet5.2/zh-hant/System.Net.Requests.xml",
+        "ref/dotnet5.4/de/System.Net.Requests.xml",
+        "ref/dotnet5.4/es/System.Net.Requests.xml",
+        "ref/dotnet5.4/fr/System.Net.Requests.xml",
+        "ref/dotnet5.4/it/System.Net.Requests.xml",
+        "ref/dotnet5.4/ja/System.Net.Requests.xml",
+        "ref/dotnet5.4/ko/System.Net.Requests.xml",
+        "ref/dotnet5.4/ru/System.Net.Requests.xml",
+        "ref/dotnet5.4/System.Net.Requests.dll",
+        "ref/dotnet5.4/System.Net.Requests.xml",
+        "ref/dotnet5.4/zh-hans/System.Net.Requests.xml",
+        "ref/dotnet5.4/zh-hant/System.Net.Requests.xml",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/de/System.Net.Requests.xml",
+        "ref/netcore50/es/System.Net.Requests.xml",
+        "ref/netcore50/fr/System.Net.Requests.xml",
+        "ref/netcore50/it/System.Net.Requests.xml",
+        "ref/netcore50/ja/System.Net.Requests.xml",
+        "ref/netcore50/ko/System.Net.Requests.xml",
+        "ref/netcore50/ru/System.Net.Requests.xml",
+        "ref/netcore50/System.Net.Requests.dll",
+        "ref/netcore50/System.Net.Requests.xml",
+        "ref/netcore50/zh-hans/System.Net.Requests.xml",
+        "ref/netcore50/zh-hant/System.Net.Requests.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "runtime.json",
+        "System.Net.Requests.4.0.11-beta-23516.nupkg",
+        "System.Net.Requests.4.0.11-beta-23516.nupkg.sha512",
+        "System.Net.Requests.nuspec"
       ]
     },
     "System.ObjectModel/4.0.10": {
@@ -2967,6 +3096,7 @@
       "System.Security.Cryptography.X509Certificates >= 4.0.0-beta-23225",
       "System.ComponentModel.TypeConverter >= 4.0.0-beta-23109",
       "System.Net.Http >= 4.0.1-beta-23225",
+      "System.Net.Requests >= 4.0.11-beta-23516",
       "System.Diagnostics.Tools >= 4.0.1-beta-23225"
     ]
   }

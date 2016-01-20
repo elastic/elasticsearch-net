@@ -1,11 +1,14 @@
 ﻿#if DOTNETCORE
 using System;
+using System.Collections.Concurrent;
 using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.DecompressionMethods;
 
 namespace Elasticsearch.Net
 {
@@ -23,22 +26,42 @@ namespace Elasticsearch.Net
 	}
 
 	public class HttpConnection : IConnection
-	{ 
-		private readonly HttpClient _client;
+	{
+		private readonly object _lock = new object();
+		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
 		private string DefaultContentType => "application/json";
 
-		public HttpConnection(HttpClient client)
+		public HttpConnection() { }
+		
+		private HttpClient GetClient(RequestData requestData)
 		{
-			this._client = client;
+			var hashCode = requestData.GetHashCode();
+			HttpClient client;
+			if (this._clients.TryGetValue(hashCode, out client)) return client;
+			lock(_lock)
+			{
+				if (this._clients.TryGetValue(hashCode, out client)) return client;
+
+				var handler = new HttpClientHandler();
+				handler.AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None; 
+				client = new HttpClient(handler, false);
+				client.Timeout = requestData.RequestTimeout;
+				//TODO add headers
+				//client.DefaultRequestHeaders = 
+				this._clients.TryAdd(hashCode, client);
+				return client;
+			}
+
 		}
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
+			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = this._client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
+				var response = client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)
@@ -54,11 +77,12 @@ namespace Elasticsearch.Net
 
 		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
+			var client = this.GetClient(requestData);
 			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = await this._client.SendAsync(requestMessage, requestData.CancellationToken);
+				var response = await client.SendAsync(requestMessage, requestData.CancellationToken);
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)
@@ -140,28 +164,23 @@ namespace Elasticsearch.Net
 		{
 			switch (httpMethod)
 			{
-				case HttpMethod.GET:
-					return System.Net.Http.HttpMethod.Get;
-				case HttpMethod.POST:
-					return System.Net.Http.HttpMethod.Post;
-				case HttpMethod.PUT:
-					return System.Net.Http.HttpMethod.Put;
-				case HttpMethod.DELETE:
-					return System.Net.Http.HttpMethod.Delete;
-				case HttpMethod.HEAD:
-					return System.Net.Http.HttpMethod.Head;
+				case HttpMethod.GET: return System.Net.Http.HttpMethod.Get;
+				case HttpMethod.POST: return System.Net.Http.HttpMethod.Post;
+				case HttpMethod.PUT: return System.Net.Http.HttpMethod.Put;
+				case HttpMethod.DELETE: return System.Net.Http.HttpMethod.Delete;
+				case HttpMethod.HEAD: return System.Net.Http.HttpMethod.Head;
 				default:
 					throw new ArgumentException("Invalid value for HttpMethod", nameof(httpMethod));
 			}
 		}
 
-		void IDisposable.Dispose()
-		{
-			_client.Dispose();
-			this.DisposeManagedResources();
-		}
+		void IDisposable.Dispose() => this.DisposeManagedResources();
 
-		protected virtual void DisposeManagedResources() {}
+		protected virtual void DisposeManagedResources()
+		{
+			foreach(var c in _clients)
+				c.Value.Dispose();
+		}
 	}
 }
 #endif

@@ -71,11 +71,7 @@ namespace Tests.Framework
 
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
 			Configuration.RunIntegrationTests && !forceInMemory
-#if DOTNETCORE
-				? ((IConnection)new HttpConnection(new System.Net.Http.HttpClient(new System.Net.Http.HttpClientHandler(), false)))
-#else
 				? ((IConnection)new HttpConnection())
-#endif
 				: new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)

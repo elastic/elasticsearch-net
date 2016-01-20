@@ -163,20 +163,7 @@ namespace Elasticsearch.Net
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<T, IElasticsearchSerializer> serializerFactory)
 		{
 			this._connectionPool = connectionPool;
-#if DOTNETCORE
-			if (connection != null)
-			{
-				this._connection = connection;
-			}
-			else
-			{
-				this._connectionHandler = new HttpClientHandler();
-				this._client = new HttpClient(_connectionHandler, false);
-				this._connection = new HttpConnection(_client);
-			}
-#else
 			this._connection = connection ?? new HttpConnection();
-#endif
 			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
 			this._serializer = _serializerFactory((T)this);
@@ -219,20 +206,7 @@ namespace Elasticsearch.Net
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"</para>
 		/// </summary>
-		public T EnableHttpCompression(bool enabled = true)
-		{
-#if DOTNETCORE
-			if (this._connectionHandler != null && this._connectionHandler.SupportsAutomaticDecompression)
-			{
-				if (enabled)
-					this._connectionHandler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-				else
-					this._connectionHandler.AutomaticDecompression = DecompressionMethods.None;
-			}
-#endif
-
-			return Assign(a => a._enableHttpCompression = enabled);
-		}
+		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
 		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(a => a._disableAutomaticProxyDetection = disable);
 
@@ -265,17 +239,7 @@ namespace Elasticsearch.Net
 		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		public T RequestTimeout(TimeSpan timeout)
-		{
-#if DOTNETCORE
-			if (this._client != null)
-			{
-				this._client.Timeout = timeout;
-			}
-#endif
-
-			return Assign(a => a._requestTimeout = timeout);
-		}
+		public T RequestTimeout(TimeSpan timeout) => Assign(a => a._requestTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default ping timeout in milliseconds for ping requests, which are used
