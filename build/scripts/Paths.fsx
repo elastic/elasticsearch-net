@@ -91,8 +91,9 @@ module Tooling =
     
         code
 
+    let private defaultTimeout = TimeSpan.FromMinutes (5.0)
+
     let execProcess proc arguments =
-        let defaultTimeout = TimeSpan.FromMinutes (5.0)
         execProcessWithTimeout proc arguments defaultTimeout
 
     type NugetTooling(nugetId, path) =
@@ -173,7 +174,7 @@ module Tooling =
                 | "*" -> (List.ofArray p) @ [""]
                 | _ -> "" :: List.ofArray p
             | 4 -> "" :: (List.ofArray p) @ [""]
-            | _ -> raise(BuildException("Invalid number of arguments to dnvm version: " + p.Length.ToString(), List.ofArray p)) 
+            | _ -> raise(BuildException(sprintf "Invalid number of arguments to dnvm version: %i" p.Length, List.ofArray p)) 
  
         member this.Active = isNotNullOrEmpty parts.[0] 
         member this.Version = parts.[1]          
@@ -190,6 +191,8 @@ module Tooling =
                 this.Architecture 
                 this.Version
 
+        member this.Process proc =
+            sprintf "%s/bin/%s" this.Location proc
 
     type DnvmTooling() = 
         let dnvm = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
@@ -227,23 +230,24 @@ module Tooling =
     | _ -> ignore
     
     type DotNetRuntime = | Desktop | Core | Both
+
     type DnxTooling(exe) =
         member this.Exec runtime failedF workingDirectory arguments =
             match (runtime, hasClr, hasCoreClr) with
             | (Core, _, Some c) ->
-                let proc = (sprintf "%s/bin/%s" c.Location exe)
-                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                let proc = c.Process exe
+                let result = execProcess proc arguments
                 if not result.OK then failedF result.Errors
             | (Desktop, Some d, _) ->
-                let proc = (sprintf "%s/bin/%s" d.Location exe)
-                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                let proc = d.Process exe
+                let result = execProcess proc arguments
                 if not result.OK then failedF result.Errors
             | (Both, Some d, Some c) ->
-                let proc = (sprintf "%s/bin/%s" d.Location exe)
-                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                let proc = d.Process exe
+                let result = execProcess proc arguments
                 if not result.OK then failedF result.Errors
-                let proc = (sprintf "%s/bin/%s" c.Location exe)
-                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 5.)
+                let proc = c.Process exe
+                let result = execProcess proc arguments
                 if not result.OK then failedF result.Errors
             | _ -> failwith "Tried to run dnx tooling in unknown state"
 
