@@ -46,8 +46,8 @@ namespace Elasticsearch.Net
 				case PostType.ByteArray: 
 					ms = new MemoryStream(WrittenBytes);
 					break;
-				case PostType.LiteralString: 
-					ms = new MemoryStream(_literalString?.Utf8Bytes());
+				case PostType.LiteralString:
+					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString?.Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfString: 
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;

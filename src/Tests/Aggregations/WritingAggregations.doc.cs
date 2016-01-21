@@ -16,7 +16,6 @@ namespace Tests.Aggregations
 		 * Three different ways, yikes thats a lot to take in! Lets go over them one by one and explain when you might
 		 * want to use which one.
 		 */
-
 		public class Usage : UsageTestBase<ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 		{
 			protected override object ExpectJson => new
@@ -40,7 +39,7 @@ namespace Tests.Aggregations
 				}
 			};
 			/**
-			 * The fluent lambda syntax is the most terse way to write arggragations.
+			 * The fluent lambda syntax is the most terse way to write aggregations.
 			 * It benefits from types that are carried over to sub aggregations
 			 */
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -56,7 +55,7 @@ namespace Tests.Aggregations
 			/**
 			 * The object initializer syntax (OIS) is a one-to-one mapping with how aggregations 
 			 * have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one 
-			 * mapping, it being dictionary based in C# it can grow exponentially in complexity rather fast.
+			 * mapping, being dictionary based in C# means it can grow exponentially in complexity rather quickly.
 			 */
 			protected override SearchRequest<Project> Initializer => 
 				new SearchRequest<Project>

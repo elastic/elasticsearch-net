@@ -6,7 +6,7 @@ a more terse object initializer aggregation DSL.
 Three different ways, yikes thats a lot to take in! Lets go over them one by one and explain when you might
 want to use which one.
 
-The fluent lambda syntax is the most terse way to write arggragations.
+The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
 
 [source, csharp]
@@ -23,7 +23,7 @@ s => s
 ----
 The object initializer syntax (OIS) is a one-to-one mapping with how aggregations 
 have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one 
-mapping, it being dictionary based in C# it can grow exponentially in complexity rather fast.
+mapping, being dictionary based in C# means it can grow exponentially in complexity rather quickly.
 
 [source, csharp]
 ----

@@ -58,7 +58,7 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 			
-			//passing a PostData<obkect> object to a method taking PostData<object> should not wrap
+			//passing a PostData<object> object to a method taking PostData<object> should not wrap
 
 			fromString = ImplicitlyConvertsFrom(fromString);
 			fromByteArray = ImplicitlyConvertsFrom(fromByteArray);

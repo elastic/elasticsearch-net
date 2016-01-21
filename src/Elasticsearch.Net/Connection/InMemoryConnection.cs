@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,8 +12,6 @@ namespace Elasticsearch.Net
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 
-		public List<Tuple<string, Uri, PostData<object>>> Requests = new List<Tuple<string, Uri, PostData<object>>>(); 
-		
 		public InMemoryConnection() 
 		{
 			_statusCode = 200;
@@ -34,7 +33,20 @@ namespace Elasticsearch.Net
 			where TReturn : class
 		{
 			var body = responseBody ?? _responseBody;
-			var builder = new ResponseBuilder<TReturn>(requestData)
+            var data = requestData.PostData;
+            if (data != null)
+            {
+                using (var stream = new MemoryStream())
+                {
+                    if (requestData.HttpCompression)
+                        using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+                            data.Write(zipStream, requestData.ConnectionSettings);
+                    else
+                        data.Write(stream, requestData.ConnectionSettings);
+                }
+            }
+
+            var builder = new ResponseBuilder<TReturn>(requestData)
 			{
 				StatusCode = statusCode ?? this._statusCode,
 				Stream = (body != null) ? new MemoryStream(body) : null

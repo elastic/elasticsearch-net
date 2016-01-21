@@ -5,6 +5,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface ITokenCountProperty : INumberProperty
 	{
+        [JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 	}
 

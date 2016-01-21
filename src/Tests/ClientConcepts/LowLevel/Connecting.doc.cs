@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -173,22 +174,90 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 		}
 
-		/** 
-	     * You can pass a callback of type `Action&lt;IApiCallDetails&gt;` that can eaves drop every time a response (good or bad) is created. 
-		 * If you have complex logging needs this is a good place to add that in.
+        /** 
+         * You can pass a callback of type `Action&lt;IApiCallDetails&gt;` that can eaves drop every time a response (good or bad) is created. 
+         * If you have complex logging needs this is a good place to add that in.
+        */
+        [U]
+        public void OnRequestCompletedIsCalled()
+        {
+            var counter = 0;
+            var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+            var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
+                .OnRequestCompleted(r => counter++);
+            var client = new ElasticClient(settings);
+            client.RootNodeInfo();
+            counter.Should().Be(1);
+            client.RootNodeInfoAsync();
+            counter.Should().Be(2);
+        }
+
+        /** 
+	     * An example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
+         * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
+         * to `true`
 		*/
-		[U]public void OnRequestCompletedIsCalled()
+        [U]public async Task UsingOnRequestCompletedForLogging()
 		{
-			var counter = 0;
+		    var list = new List<string>();
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
-				.OnRequestCompleted(r => counter++);
+                .DisableDirectStreaming()
+				.OnRequestCompleted(response =>
+				{
+                    // log out the request
+                    if (response.RequestBodyInBytes != null)
+                    {
+                        list.Add(
+                            $"{response.HttpMethod} {response.Uri} \n" +
+                            $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
+                    }
+                    else
+                    {
+                        list.Add($"{response.HttpMethod} {response.Uri}");
+                    }
+
+                    // log out the response
+                    if (response.ResponseBodyInBytes != null)
+                    {
+                        list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
+                                 $"{new string('-', 30)}\n");
+                    }
+                    else
+                    {
+                        list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{new string('-', 30)}\n");
+                    }
+                });
+
 			var client = new ElasticClient(settings);
-			client.RootNodeInfo();
-			counter.Should().Be(1);
-			client.RootNodeInfoAsync();
-			counter.Should().Be(2);
-		}
+
+            var syncResponse = client.Search<object>(s => s
+                .Scroll("2m")
+                .Sort(ss => ss
+                    .Ascending(SortSpecialField.DocumentIndexOrder)
+                )
+            );
+
+            list.Count.Should().Be(2);
+
+            var asyncResponse = await client.SearchAsync<object>(s => s
+                .Scroll("2m")
+                .Sort(ss => ss
+                    .Ascending(SortSpecialField.DocumentIndexOrder)
+                )
+            );
+
+            list.Count.Should().Be(4);
+            list.ShouldAllBeEquivalentTo(new []
+            {
+                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+                "Status: 200\n------------------------------\n",
+                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+                "Status: 200\n------------------------------\n"
+            });
+        }
 
 		public void ConfiguringSSL()
 		{
