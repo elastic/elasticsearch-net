@@ -96,17 +96,7 @@ If you need a `string` or `byte[]` response simply call:
 ----
 config = config
 	//endhide
-	.ConnectionStatusHandler(s => { })
-----
-
-Allows you to pass a `Action
-IElasticsearchResponse
-` that can eaves drop every time a response (good or bad) is created. If you have complex logging needs 
-this is a good place to add that in.
-
-[source, csharp]
-----
-.GlobalQueryStringParameters(new NameValueCollection())
+	.GlobalQueryStringParameters(new NameValueCollection())
 ----
 Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 
@@ -168,6 +158,94 @@ var settings = new ConnectionConfiguration(uri);
 ----
 ...but may become tedious when using connection pooling with multiple nodes.
 
+
+You can pass a callback of type `Action
+IApiCallDetails
+` that can eaves drop every time a response (good or bad) is created. 
+If you have complex logging needs this is a good place to add that in.
+
+[source, csharp]
+----
+var counter = 0;
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
+                .OnRequestCompleted(r => counter++);
+var client = new ElasticClient(settings);
+client.RootNodeInfo();
+counter.Should().Be(1);
+client.RootNodeInfoAsync();
+counter.Should().Be(2);
+----
+
+An example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
+to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
+to `true`
+
+[source, csharp]
+----
+var list = new List<string>();
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
+                .DisableDirectStreaming()
+				.OnRequestCompleted(response =>
+				{
+                    // log out the request
+                    if (response.RequestBodyInBytes != null)
+                    {
+                        list.Add(
+                            $"{response.HttpMethod} {response.Uri} \n" +
+                            $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
+                    }
+                    else
+                    {
+                        list.Add($"{response.HttpMethod} {response.Uri}");
+                    }
+
+                    // log out the response
+                    if (response.ResponseBodyInBytes != null)
+                    {
+                        list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
+                                 $"{new string('-', 30)}\n");
+                    }
+                    else
+                    {
+                        list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{new string('-', 30)}\n");
+                    }
+                });
+list.Add(
+                            $"{response.HttpMethod} {response.Uri} \n" +
+                            $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
+list.Add($"{response.HttpMethod} {response.Uri}");
+list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
+                                 $"{new string('-', 30)}\n");
+list.Add($"Status: {response.HttpStatusCode}\n" +
+                                 $"{new string('-', 30)}\n");
+var client = new ElasticClient(settings);
+var syncResponse = client.Search<object>(s => s
+                .Scroll("2m")
+                .Sort(ss => ss
+                    .Ascending(SortSpecialField.DocumentIndexOrder)
+                )
+            );
+list.Count.Should().Be(2);
+var asyncResponse = await client.SearchAsync<object>(s => s
+                .Scroll("2m")
+                .Sort(ss => ss
+                    .Ascending(SortSpecialField.DocumentIndexOrder)
+                )
+            );
+list.Count.Should().Be(4);
+list.ShouldAllBeEquivalentTo(new []
+            {
+                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+                "Status: 200\n------------------------------\n",
+                "POST http://localhost:9200/_search?scroll=2m \n{\"sort\":[{\"_doc\":{\"order\":\"asc\"}}]}",
+                "Status: 200\n------------------------------\n"
+            });
+----
 ## Configuring SSL
 SSL must be configured outside of the client using .NET's 
 [ServicePointManager](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx)
@@ -193,7 +271,7 @@ This is called once per instance of ConnectionSettings.
 [source, csharp]
 ----
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(),s => new MyJsonNetSerializer(s));
+var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
 var client = new ElasticClient(settings);
 client.RootNodeInfo();
 client.RootNodeInfo();

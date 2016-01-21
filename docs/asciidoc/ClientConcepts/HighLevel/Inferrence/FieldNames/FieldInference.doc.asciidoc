@@ -8,7 +8,7 @@ Using the constructor directly is possible but rather involved
 
 [source, csharp]
 ----
-var fieldString = new Field {Name = "name"};
+var fieldString = new Field { Name = "name" };
 ----
 especially when using C# expressions since these can not be simply new'ed
 
@@ -52,14 +52,14 @@ but for expressions this is still rather involved
 
 [source, csharp]
 ----
-var fieldExpression = Field<Project>(p=>p.Name);
+var fieldExpression = Field<Project>(p => p.Name);
 ----
 Using static imports in c# 6 this can be even shortened:
 using static Nest.Static; 
 
 [source, csharp]
 ----
-fieldExpression = Field<Project>(p=>p.Name);
+fieldExpression = Field<Project>(p => p.Name);
 ----
 Now this is much much terser then our first example using the constructor! 
 
@@ -181,7 +181,7 @@ When using NEST's property attributes you can specify a new name for the propert
 
 [source, csharp]
 ----
-Expect("naam").WhenSerializing(Field<BuiltIn>(p=>p.Name));
+Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
 
 Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
@@ -189,14 +189,14 @@ Here we ask the default JsonNetSerializer and it takes JsonProperty into account
 
 [source, csharp]
 ----
-Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p=>p.Name));
+Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 ----
 
 If both are specified NEST takes precedence though 
 
 [source, csharp]
 ----
-Expect("naam").WhenSerializing(Field<Both>(p=>p.Name));
+Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
 Expect(new
 			{
 				naam = "Martijn Laarman"
@@ -253,3 +253,61 @@ fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 fieldNameOnA.Should().Be("c.name");
 fieldNameOnB.Should().Be("c.name");
 ----
+To wrap up lets showcase the precedence that field names are inferred
+1. A hard rename of the property on connection settings using Rename()
+2. A NEST property mapping
+3. Ask the serializer if the property has a verbatim value e.g it has an explicit JsonPropery attribute.
+4. Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
+In the following example we have a class where each case wins
+
+
+Here we create a custom converter that renames any property named `AskSerializer` to `ask`
+
+[source, csharp]
+----
+var usingSettings = WithConnectionSettings(s => s
+----
+here we provide an explicit rename of a property on connectionsettings 
+
+[source, csharp]
+----
+.InferMappingFor<Precedence>(m => m
+		.Rename(p => p.RenamedOnConnectionSettings, "renamed")
+	)
+----
+All properties that are not mapped verbatim should be uppercased
+
+[source, csharp]
+----
+.DefaultFieldNameInferrer(p => p.ToUpperInvariant())
+).WithSerializer(s => new CustomSerializer(s));
+----
+[source, csharp]
+----
+usingSettings.Expect("renamed").ForField(Field<Precedence>(p => p.RenamedOnConnectionSettings));
+usingSettings.Expect("nestAtt").ForField(Field<Precedence>(p => p.NestAttribute));
+usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
+usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
+usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
+----
+The same rules apply when indexing an object 
+
+[source, csharp]
+----
+usingSettings.Expect(new [] 
+{
+	"ask",
+	"DEFAULTFIELDNAMEINFERRER",
+	"jsonProp",
+	"nestAtt",
+	"renamed"
+}).AsPropertiesOf(new Precedence
+{
+	RenamedOnConnectionSettings = "renamed on connection settings",
+	NestAttribute = "using a nest attribute",
+	JsonProperty = "the default serializer resolves json property attributes",
+	AskSerializer = "serializer fiddled with this one",
+	DefaultFieldNameInferrer = "shouting much?"
+});
+----
+

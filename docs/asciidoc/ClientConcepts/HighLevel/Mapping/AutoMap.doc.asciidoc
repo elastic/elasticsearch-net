@@ -397,6 +397,10 @@ var descriptor = new CreateIndexDescriptor("myindex")
 										.Name("firstNameRaw")
 										.Index(FieldIndexOption.NotAnalyzed)
 									)
+                                    .TokenCount(t => t
+                                        .Name("length")
+                                        .Analyzer("standard")
+                                    )
 								)
 							)
 							.Number(n => n
@@ -482,8 +486,13 @@ var expected = new
 									{
 										index = "not_analyzed",
 										type = "string"
-									}
-								},
+									},
+                                    length = new
+                                    {
+                                        type = "token_count",
+                                        analyzer = "standard"
+                                    },
+                                },
 								type = "string"
 							},
 							isManager = new
@@ -506,6 +515,57 @@ var expected = new
 				}
 			};
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+----
+Properties on a POCO can be ignored in a couple of ways:
+- Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that cshoule be ignored on the POCO
+- Using the `.InferMappingFor
+
+(Func
+
+, IClrTypeMapping
+
+> selector)` on the connection settings
+This example demonstrates both ways, using the attribute way to ignore the property `PropertyToIgnore` and the infer mapping way to ignore the 
+property `AnotherPropertyToIgnore`
+
+[source, csharp]
+----
+var descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
+						.AutoMap()
+					)
+				);
+----
+Thus we do not map properties on the second occurrence of our Child property 
+
+[source, csharp]
+----
+var expected = new
+{
+	mappings = new
+	{
+		company = new
+		{
+properties = new
+{
+	name = new
+	{
+		type = "string"
+	}
+}
+		}
+	}
+};
+----
+[source, csharp]
+----
+var settings = WithConnectionSettings(s => s
+				.InferMappingFor<CompanyWithAttributesAndPropertiesToIgnore>(i => i
+					.Ignore(p => p.AnotherPropertyToIgnore)
+				)
+			);
+settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 If you notice in our previous Company/Employee examples, the Employee type is recursive
 in that itself contains a collection of type Employee.  By default, AutoMap() will only
