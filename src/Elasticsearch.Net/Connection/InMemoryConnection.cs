@@ -49,7 +49,7 @@ namespace Elasticsearch.Net
             var builder = new ResponseBuilder<TReturn>(requestData)
 			{
 				StatusCode = statusCode ?? this._statusCode,
-				Stream = (body != null) ? new MemoryStream(body) : null,
+				Stream = (body != null) ? new MemoryStream(body) : null
 			};
 			var cs = builder.ToResponse();
 			return cs;

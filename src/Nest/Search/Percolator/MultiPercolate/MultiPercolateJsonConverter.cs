@@ -14,6 +14,7 @@ namespace Nest
 		{
 			var request = value as IMultiPercolateRequest;
 			if (request == null) return;
+			if (request.Percolations == null) return;
 
 			var settings = serializer.GetConnectionSettings();
 			var elasticsearchSerializer = settings.Serializer;
