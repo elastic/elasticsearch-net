@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <ResolveNuGetPackages>false</ResolveNuGetPackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,8 +65,6 @@
     <Compile Include="Responses\ServerError.cs" />
     <Compile Include="Exceptions\ElasticsearchClientException.cs" />
     <Compile Include="CrossPlatform\Browsable.cs" />
-    <Compile Include="CrossPlatform\GenerateCode.cs" />
-    <Compile Include="CrossPlatform\SuppressMessage.cs" />
     <Compile Include="CrossPlatform\TypeExtensions.cs" />
     <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
