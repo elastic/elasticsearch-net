@@ -82,19 +82,30 @@ module Tooling =
 
     let execProcessWithTimeout proc arguments timeout = 
         let args = arguments |> String.concat " "
+        ExecProcess (fun info ->
+            info.FileName <- proc
+            info.WorkingDirectory <- "."
+            info.Arguments <- args
+        ) timeout
+
+    let execProcessWithTimeoutAndReturnMessages proc arguments timeout = 
+        let args = arguments |> String.concat " "
         let code = 
             ExecProcessAndReturnMessages (fun info ->
-                info.FileName <- proc
-                info.WorkingDirectory <- "."
-                info.Arguments <- args
+            info.FileName <- proc
+            info.WorkingDirectory <- "."
+            info.Arguments <- args
             ) timeout
-    
+
         code
 
     let private defaultTimeout = TimeSpan.FromMinutes (5.0)
 
     let execProcess proc arguments =
         execProcessWithTimeout proc arguments defaultTimeout
+
+    let execProcessAndReturnMessages proc arguments =
+        execProcessWithTimeoutAndReturnMessages proc arguments defaultTimeout
 
     type NugetTooling(nugetId, path) =
         member this.Path = Paths.Tool(path)
@@ -198,7 +209,7 @@ module Tooling =
         let dnvm = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
         
         member this.Exec arguments =
-            execProcessWithTimeout dnvm arguments (TimeSpan.FromSeconds 30.)
+            execProcessWithTimeoutAndReturnMessages dnvm arguments (TimeSpan.FromSeconds 30.)
 
         member this.UpdateSelf() =
             this.Exec ["update-self"] |> ignore
@@ -206,7 +217,18 @@ module Tooling =
         member this.List() =
             this.Exec ["list"]
 
+        member this.Install version runtime arch os =
+            match (arch, os) with
+            | (Some a, Some o) -> this.Exec ["install"; "-Version"; version; "-r"; runtime; "-a"; a; "-os"; o]
+            | (Some a, None) -> this.Exec ["install"; "-Version"; version; "-r"; runtime; "-a"; a]
+            | (None, Some o) -> this.Exec ["install"; "-Version"; version; "-r"; runtime; "-os"; o]
+            | (None, None) -> this.Exec ["install"; "-Version"; version; "-r"; runtime]
+            
     let Dnvm = new DnvmTooling()
+
+    // update dnvm in %USERPROFILE%/.dnx/bin first
+    Dnvm.UpdateSelf()
+
     let dnxVersions = 
         let result = Dnvm.List()
         match result.OK with
@@ -223,11 +245,22 @@ module Tooling =
     let hasClr = dnxVersions |> Seq.tryFind (fun v -> v.Version = desiredDnxVersion && v.Runtime = "clr")
     let hasCoreClr = dnxVersions |> Seq.tryFind (fun v -> v.Version = desiredDnxVersion && v.Runtime = "coreclr")
 
+    let failure errors =
+        raise (BuildException("The project build failed.", errors |> List.ofSeq))
+
     match (hasClr, hasCoreClr) with
-    | (None, None) -> failwithf "%s is not installed, both clr and coreclr versions are missing" desiredDnxVersion
-    | (Some _, None) -> failwithf "%s is installed but is missing the coreclr runtime version" desiredDnxVersion
-    | (None, Some _) -> failwithf "%s is installed but is missing the clr (desktop) runtime version" desiredDnxVersion
-    | _ -> ignore
+    | (None, None) -> 
+        let installClr = Dnvm.Install desiredDnxVersion "clr" None None
+        if not installClr.OK then failure installClr.Errors
+        let installCoreClr = Dnvm.Install desiredDnxVersion "coreclr" None None
+        if not installCoreClr.OK then failure installCoreClr.Errors
+    | (Some _, None) -> 
+        let installCoreClr = Dnvm.Install desiredDnxVersion "coreclr" None None
+        if not installCoreClr.OK then failure installCoreClr.Errors
+    | (None, Some _) -> 
+        let installClr = Dnvm.Install desiredDnxVersion "clr" None None
+        if not installClr.OK then failure installClr.Errors
+    | _ -> ()
     
     type DotNetRuntime = | Desktop | Core | Both
 
@@ -236,20 +269,18 @@ module Tooling =
             match (runtime, hasClr, hasCoreClr) with
             | (Core, _, Some c) ->
                 let proc = c.Process exe
-                let result = execProcess proc arguments
-                if not result.OK then failedF result.Errors
+                execProcess proc arguments
             | (Desktop, Some d, _) ->
                 let proc = d.Process exe
-                let result = execProcess proc arguments
-                if not result.OK then failedF result.Errors
+                execProcess proc arguments
             | (Both, Some d, Some c) ->
                 let proc = d.Process exe
-                let result = execProcess proc arguments
-                if not result.OK then failedF result.Errors
+                let result = execProcess proc arguments 
+                if result <> 0 then failwith (sprintf "Failed to run dnx tooling for %s args: %A" proc arguments)
                 let proc = c.Process exe
-                let result = execProcess proc arguments
-                if not result.OK then failedF result.Errors
+                execProcess proc arguments 
             | _ -> failwith "Tried to run dnx tooling in unknown state"
+            |> ignore
 
     let Dnu = new DnxTooling("dnu.cmd")
     let Dnx = new DnxTooling("dnx.exe")
