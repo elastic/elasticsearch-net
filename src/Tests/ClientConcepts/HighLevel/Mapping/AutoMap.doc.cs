@@ -468,6 +468,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										.Name("firstNameRaw")
 										.Index(FieldIndexOption.NotAnalyzed)
 									)
+                                    .TokenCount(t => t
+                                        .Name("length")
+                                        .Analyzer("standard")
+                                    )
 								)
 							)
 							.Number(n => n
@@ -554,8 +558,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									{
 										index = "not_analyzed",
 										type = "string"
-									}
-								},
+									},
+                                    length = new
+                                    {
+                                        type = "token_count",
+                                        analyzer = "standard"
+                                    },
+                                },
 								type = "string"
 							},
 							isManager = new
