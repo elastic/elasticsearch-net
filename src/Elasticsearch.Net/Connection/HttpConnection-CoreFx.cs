@@ -1,12 +1,12 @@
 ﻿#if DOTNETCORE
 using System;
 using System.Collections.Concurrent;
+using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using static System.Net.DecompressionMethods;
 
@@ -100,14 +100,13 @@ namespace Elasticsearch.Net
 			where TReturn : class
 		{
 			builder.Exception = exception;
-
-			// TODO: Figure out what to do here
-			//var response = exception. as HttpWebResponse;
-			//if (response != null)
-			//{
-			//	builder.StatusCode = (int)response.StatusCode;
-			//	builder.Stream = response.GetResponseStream();
-			//}
+			var webException = exception.InnerException as WebException;
+			var response = webException?.Response as HttpWebResponse;
+			if (response != null)
+			{
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
+			}
 		}
 
 		private static HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
