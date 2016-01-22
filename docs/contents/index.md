@@ -33,6 +33,8 @@ using NEST.
 Also checkout the [searchbox.io guys](https://searchbox.io/) rocking NEST [on AppHarbor](http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on) 
 with their [demo project](https://github.com/searchbox-io/.net-sample)
 
+Another detailed post about using [ElasticSearch with ServiceStack (.NET)](http://buildclassifieds.com/2016/01/22/elasticsearch-and-servicestack/) in helping build a Classifieds Site.
+
 ## Questions, bugs, comments, requests
 
 All of these are more then welcome on the github issues pages! We try to to at least reply within the same day.
