@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Nest.Litterateur\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -29,7 +29,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Nest.Litterateur\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,23 +39,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Documentation\Blocks\CodeBlock.cs" />
-    <Compile Include="Documentation\Blocks\CombinedBlock.cs" />
-    <Compile Include="Documentation\Blocks\IDocumentationBlock.cs" />
-    <Compile Include="Documentation\Blocks\TextBlock.cs" />
-    <Compile Include="Documentation\Files\CSharpDocumentationFile.cs" />
-    <Compile Include="Documentation\Files\DocumentationFile.cs" />
-    <Compile Include="Documentation\Files\RawDocumentationFile.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
-    <Compile Include="Linker\Linker.cs" />
-    <Compile Include="LitUp.cs" />
-    <Compile Include="Walkers\CodeWithDocumentationWalker.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Walkers\DocumentationFileWalker.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="..\Nest.Litterateur\**\*.cs">
+		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+	</Compile>
+    <None Include="..\Nest.Litterateur\App.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
