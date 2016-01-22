@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\CodeGeneration.LowLevelClient\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,14 +28,14 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\CodeGeneration.LowLevelClient\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="razormachine.readme.txt">
+    <Content Include="..\CodeGeneration.LowLevelClient\razormachine.readme.txt">
       <Paket>True</Paket>
     </Content>
     <Reference Include="System" />
@@ -47,43 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\ApiBody.cs" />
-    <Compile Include="Domain\ApiEndpoint.cs" />
-    <Compile Include="ApiGenerator.cs" />
-    <Compile Include="Domain\ApiQueryParameters.cs" />
-    <Compile Include="Domain\ApiUrl.cs" />
-    <Compile Include="Domain\Constructor.cs" />
-    <Compile Include="Domain\ApiUrlPart.cs" />
-    <Compile Include="Domain\CsharpMethod.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
-    <Compile Include="Overrides\Descriptors\FieldStatsDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\IndicesStatsDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\ScrollDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\PutIndexTemplateDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\UpdateDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Global\GlobalQueryParameters.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Domain\RestApiSpec.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="..\CodeGeneration.LowLevelClient\**\*.cs">
+		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+	</Compile>
+    <None Include="..\CodeGeneration.LowLevelClient\App.config" />
     <None Include="paket.references" />
-    <None Include="Views\_Requests.Generated.cshtml" />
-    <None Include="Views\_RequestParametersExtensions.Generated.cshtml" />
-    <None Include="Views\_Descriptors.Generated.cshtml" />
-    <None Include="Views\_LowLevelDispatch.Generated.cshtml" />
-    <None Include="Views\ElasticsearchClient.Generated.cshtml" />
-    <None Include="Views\Enums.Generated.cshtml" />
-    <None Include="Views\RequestParameters.Generated.cshtml" />
-    <None Include="Views\IElasticsearchClient.Generated.cshtml" />
+    <None Include="..\CodeGeneration.LowLevelClient\**\*.cshtml">
+		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+	</None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
