@@ -35,7 +35,7 @@
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="..\CodeGeneration.LowLevelClient\razormachine.readme.txt">
+    <Content Include="razormachine.readme.txt">
       <Paket>True</Paket>
     </Content>
     <Reference Include="System" />
@@ -48,13 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CodeGeneration.LowLevelClient\**\*.cs">
-		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
-	</Compile>
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Compile>
     <None Include="..\CodeGeneration.LowLevelClient\App.config" />
     <None Include="paket.references" />
     <None Include="..\CodeGeneration.LowLevelClient\**\*.cshtml">
-		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
-	</None>
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

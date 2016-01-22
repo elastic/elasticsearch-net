@@ -122,7 +122,17 @@ namespace Tests.Framework
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
 				return new EnvironmentConfiguration();
 
-			return new YamlConfiguration(@"..\..\tests.yaml");
+			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+			// If running the classic .NET solution, tests run from bin/{config} directory,
+			// but when running DNX solution, tests run from the test project root
+			var yamlConfigurationPath = directoryInfo.Name == "Tests" && 
+										directoryInfo.Parent != null && 
+										directoryInfo.Parent.Name == "src"
+				? "tests.yaml"
+				: @"..\..\tests.yaml";
+
+			return new YamlConfiguration(yamlConfigurationPath);
 		}
 	}
 }
