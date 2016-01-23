@@ -69,7 +69,6 @@ namespace Nest
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
-				var typedResponse = new NodesHotThreadsResponse();
 				var plainTextResponse = sr.ReadToEnd();
 
 				// If the response doesn't start with :::, which is the pattern that delimits
@@ -77,7 +76,7 @@ namespace Nest
 				// Just return an empty response object. This is especially useful when unit
 				// testing against an in-memory connection where you won't get a real response.
 				if (!plainTextResponse.StartsWith(":::", StringComparison.Ordinal))
-					return typedResponse;
+					return new NodesHotThreadsResponse();
 
 				var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
 				var info =

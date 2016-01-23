@@ -72,7 +72,7 @@
         "System.Linq": "4.0.0-beta-23109",
         "System.Linq.Queryable": "4.0.0-beta-23109",
         "System.Collections": "4.0.11-beta-23225",
-        "System.Dynamic.Runtime": "4.0.11-beta-23225",
+        "System.Dynamic.Runtime": "4.0.11-beta-23516",
         "System.Threading": "4.0.11-beta-23225",
         "System.Threading.Timer": "4.0.0-beta-23109",
         "System.Diagnostics.Tools": "4.0.1-beta-23225"

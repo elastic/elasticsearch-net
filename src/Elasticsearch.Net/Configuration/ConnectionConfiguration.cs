@@ -151,10 +151,6 @@ namespace Elasticsearch.Net
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
-#if DOTNETCORE
-		private readonly HttpClientHandler _connectionHandler;
-		private readonly HttpClient _client;
-#endif
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
 		[SuppressMessage(
@@ -279,19 +275,6 @@ namespace Elasticsearch.Net
 			this._proxyAddress = proxyAdress.ToString();
 			this._proxyUsername = username;
 			this._proxyPassword = password;
-
-#if DOTNETCORE
-			if (this._connectionHandler != null && this._connectionHandler.SupportsProxy && !string.IsNullOrWhiteSpace(_proxyAddress))
-			{
-				var proxy = new Uri(_proxyAddress);
-				this._connectionHandler.Proxy = new WebProxy(proxy)
-				{
-					Credentials = new NetworkCredential(_proxyUsername, _proxyPassword)
-				};
-				this._connectionHandler.UseProxy = true;
-			}
-#endif
-
 			return (T)this;
 		}
 
