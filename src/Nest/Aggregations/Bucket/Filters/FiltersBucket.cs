@@ -20,8 +20,8 @@ namespace Nest
 
 		public IList<SingleBucket> AnonymousBuckets() => this.Items?.OfType<SingleBucket>().ToList();
 
-		private AggregationsHelper Aggregations { get; set; }
+		public AggregationsHelper Aggregations { get; set; }
 
-		private IEnumerable<IAggregation> Items { get; set; }
+		public IEnumerable<IAggregation> Items { get; set; }
 	}
 }
