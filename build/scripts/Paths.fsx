@@ -207,7 +207,7 @@ module Tooling =
 
     type DnvmTooling() =
         let dnvmUserLocation = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
-        let dnvmProgramFilesLocation = sprintf "%s/Microsoft DNX/Dnvm/dnvm.cmd" ProgramFiles
+        let dnvmProgramFilesLocation = "C:/Program Files/Microsoft DNX/Dnvm/dnvm.cmd"
         let dnvm = 
             match fileExists dnvmUserLocation with
             | true -> dnvmUserLocation
