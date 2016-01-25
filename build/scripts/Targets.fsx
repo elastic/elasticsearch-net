@@ -63,24 +63,26 @@ Target "QuickCompile"  <| fun _ -> Build.CompileDnx()
 
 Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
 
-Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
+Target "Version" <| fun _ -> 
+    Versioning.PatchAssemblyInfos()
+    Versioning.PatchProjectJsons()
 
 Target "Release" <| fun _ -> 
     Release.PackAllDnx()
     Sign.ValidateNugetDllAreSignedCorrectly()
+    Versioning.ValidateArtifacts()
 
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
-Target "Use" <| fun _ -> Tooling.Dnvm.Exec ["use " + (getBuildParamOrDefault "dnxversion" "default")] |> ignore
 
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
-  =?> ("Test", (not (hasBuildParam "skiptests")))
+  =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
   ==> "Build"
 
 "Clean" 
