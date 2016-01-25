@@ -205,9 +205,14 @@ module Tooling =
         member this.Process proc =
             sprintf "%s/bin/%s" this.Location proc
 
-    type DnvmTooling() = 
-        let dnvm = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
-        
+    type DnvmTooling() =
+        let dnvmUserLocation = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
+        let dnvmProgramFilesLocation = sprintf "%s/Microsoft DNX/Dnvm/dnvm.cmd" ProgramFiles
+        let dnvm = 
+            match fileExists dnvmUserLocation with
+            | true -> dnvmUserLocation
+            | false -> dnvmProgramFilesLocation
+
         member this.Exec arguments =
             execProcessWithTimeoutAndReturnMessages dnvm arguments (TimeSpan.FromSeconds 30.)
 
@@ -226,7 +231,7 @@ module Tooling =
             
     let Dnvm = new DnvmTooling()
 
-    // update dnvm in %USERPROFILE%/.dnx/bin first
+    // update dnvm first
     Dnvm.UpdateSelf()
 
     let dnxVersions = 
