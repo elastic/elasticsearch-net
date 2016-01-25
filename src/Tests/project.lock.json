@@ -882,7 +882,7 @@
           "lib/DNXCore50/System.Diagnostics.TextWriterTraceListener.dll": {}
         }
       },
-      "System.Diagnostics.Tools/4.0.0": {
+      "System.Diagnostics.Tools/4.0.1-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -3261,7 +3261,7 @@
           "lib/DNXCore50/System.Diagnostics.TextWriterTraceListener.dll": {}
         }
       },
-      "System.Diagnostics.Tools/4.0.0": {
+      "System.Diagnostics.Tools/4.0.1-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -4980,7 +4980,7 @@
           "lib/DNXCore50/System.Diagnostics.TextWriterTraceListener.dll": {}
         }
       },
-      "System.Diagnostics.Tools/4.0.0": {
+      "System.Diagnostics.Tools/4.0.1-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0"
@@ -7028,10 +7028,10 @@
         "System.Diagnostics.TextWriterTraceListener.nuspec"
       ]
     },
-    "System.Diagnostics.Tools/4.0.0": {
+    "System.Diagnostics.Tools/4.0.1-beta-23225": {
       "type": "package",
       "serviceable": true,
-      "sha512": "uw5Qi2u5Cgtv4xv3+8DeB63iaprPcaEHfpeJqlJiLjIVy6v0La4ahJ6VW9oPbJNIjcavd24LKq0ctT9ssuQXsw==",
+      "sha512": "j/6iYxVLRNtCsSYZMBC5sZ4Uy9I2JhfiKt8QOmZZ3Vbh/lfcOhM4soACWpZ5rhca8MIHagkV4ExlPA6F2Ef+Ag==",
       "files": [
         "lib/DNXCore50/System.Diagnostics.Tools.dll",
         "lib/net45/_._",
@@ -7039,26 +7039,15 @@
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/de/System.Diagnostics.Tools.xml",
-        "ref/dotnet/es/System.Diagnostics.Tools.xml",
-        "ref/dotnet/fr/System.Diagnostics.Tools.xml",
-        "ref/dotnet/it/System.Diagnostics.Tools.xml",
-        "ref/dotnet/ja/System.Diagnostics.Tools.xml",
-        "ref/dotnet/ko/System.Diagnostics.Tools.xml",
-        "ref/dotnet/ru/System.Diagnostics.Tools.xml",
         "ref/dotnet/System.Diagnostics.Tools.dll",
-        "ref/dotnet/System.Diagnostics.Tools.xml",
-        "ref/dotnet/zh-hans/System.Diagnostics.Tools.xml",
-        "ref/dotnet/zh-hant/System.Diagnostics.Tools.xml",
         "ref/net45/_._",
         "ref/netcore50/System.Diagnostics.Tools.dll",
-        "ref/netcore50/System.Diagnostics.Tools.xml",
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
         "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Tools.dll",
-        "System.Diagnostics.Tools.4.0.0.nupkg",
-        "System.Diagnostics.Tools.4.0.0.nupkg.sha512",
+        "System.Diagnostics.Tools.4.0.1-beta-23225.nupkg",
+        "System.Diagnostics.Tools.4.0.1-beta-23225.nupkg.sha512",
         "System.Diagnostics.Tools.nuspec"
       ]
     },
@@ -9308,7 +9297,7 @@
       "System.Collections >= 4.0.11-beta-23225",
       "System.Reflection >= 4.1.0-beta-23225",
       "System.Net.Http >= 4.0.1-beta-23225",
-      "System.Diagnostics.Tools >= 4.0.0"
+      "System.Diagnostics.Tools >= 4.0.1-beta-23225"
     ]
   }
 }

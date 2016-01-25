@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Benchmarking;
 using Elasticsearch.Net;
 using Nest;
-using Metrics = Nest.Metrics;
 
 namespace Benchmarking
 {
-	public abstract class Tester
+    public abstract class Tester
 	{
 		public static string IndexPrefix = "benchmark-test-";
 
@@ -90,7 +93,7 @@ namespace Benchmarking
 			var result = this.Client.RootNodeInfo();
 			if (result.IsValid) return;
 			var status = result.ApiCall;
-			throw new ApplicationException($"Could not connect to {status.Uri}:\r\n{status}");
+			throw new Exception($"Could not connect to {status.Uri}:\r\n{status}");
 		}
 
 		protected class IndexResults
@@ -109,7 +112,6 @@ namespace Benchmarking
 					.NumberOfShards(6)
 					.NumberOfReplicas(0)
 					.RefreshInterval("30s")
-					.Setting("refresh_interval", "30s")
 					.Setting("index.store.type", "mmapfs")
 					.Setting("index.store.throttle.type", "none")
 					.Setting("indices.store.throttle.type", "none")
@@ -162,7 +164,7 @@ namespace Benchmarking
 					.ContinueWith(ta =>
 					{
 						if (!ta.Result.IsValid)
-							throw new ApplicationException(ta.Result.ApiCall.ToString());
+							throw new Exception(ta.Result.ApiCall.ToString());
 					});
 
 				tasks.Add(t);

@@ -50,21 +50,21 @@
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Elasticsearch.Net_Net45\Elasticsearch.Net.csproj">
+    <ProjectReference Include="..\Elasticsearch.Net_Net45\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Nest_Net45\Nest.csproj">
+    <ProjectReference Include="..\Nest_Net45\Nest.csproj">
       <Project>{072ba7da-7b60-407d-8b6e-95e3186be70c}</Project>
       <Name>Nest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tests_Net45\Tests.csproj">
+    <ProjectReference Include="..\Tests_Net45\Tests.csproj">
       <Project>{37164c11-88ef-4428-803a-9aa24fb8b44d}</Project>
       <Name>Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\..\.paket\paket.targets" />
+  <Import Project="..\..\.paket\paket.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -76,7 +76,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="Bogus">
-          <HintPath>..\..\..\packages\Bogus\lib\net40\Bogus.dll</HintPath>
+          <HintPath>..\..\packages\Bogus\lib\net40\Bogus.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -90,7 +90,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v3.5'">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net35\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\net35\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -99,7 +99,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v2.0' Or $(TargetFrameworkVersion) == 'v3.0')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net20\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\net20\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -108,7 +108,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -117,7 +117,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -126,7 +126,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -135,7 +135,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile92') Or ($(TargetFrameworkProfile) == 'Profile102') Or ($(TargetFrameworkProfile) == 'Profile136') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile158') Or ($(TargetFrameworkProfile) == 'Profile225') Or ($(TargetFrameworkProfile) == 'Profile240') Or ($(TargetFrameworkProfile) == 'Profile255') Or ($(TargetFrameworkProfile) == 'Profile328') Or ($(TargetFrameworkProfile) == 'Profile336') Or ($(TargetFrameworkProfile) == 'Profile344')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
-          <HintPath>..\..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+          <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -146,7 +146,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\windows8\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\windows8\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -155,7 +155,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\net40\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\net40\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -164,7 +164,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\net45\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\net45\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -173,7 +173,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\sl5\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\sl5\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -182,7 +182,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\windowsphone71\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\windowsphone71\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -191,7 +191,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\windowsphone8\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\windowsphone8\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -200,7 +200,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -209,7 +209,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\portable-win81+wpa81\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\portable-win81+wpa81\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -218,7 +218,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\portable-net40+sl5+win8+wp8\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\portable-net40+sl5+win8+wp8\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -227,7 +227,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="System.Reactive.Core">
-          <HintPath>..\..\..\packages\Rx-Core\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Core.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Core\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -238,7 +238,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\windows8\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windows8\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -247,7 +247,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\net40\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\net40\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -256,7 +256,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\net45\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -265,7 +265,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\sl5\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\sl5\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -274,7 +274,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\windowsphone71\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windowsphone71\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -283,7 +283,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\windowsphone8\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\windowsphone8\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -292,7 +292,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -301,7 +301,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\portable-win81+wpa81\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-win81+wpa81\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -310,7 +310,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\portable-net40+sl5+win8+wp8\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-net40+sl5+win8+wp8\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -319,7 +319,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="System.Reactive.Interfaces">
-          <HintPath>..\..\..\packages\Rx-Interfaces\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Interfaces.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Interfaces\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Interfaces.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -330,7 +330,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\windows8\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\windows8\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -339,7 +339,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\net40\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\net40\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -348,7 +348,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\net45\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\net45\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -357,7 +357,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\sl5\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\sl5\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -366,7 +366,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\windowsphone71\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\windowsphone71\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -375,7 +375,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\windowsphone8\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\windowsphone8\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -384,7 +384,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -393,7 +393,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\portable-win81+wpa81\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-win81+wpa81\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -402,7 +402,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\portable-net40+sl5+win8+wp8\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-net40+sl5+win8+wp8\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -411,7 +411,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="System.Reactive.Linq">
-          <HintPath>..\..\..\packages\Rx-Linq\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Linq.dll</HintPath>
+          <HintPath>..\..\packages\Rx-Linq\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.Linq.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -422,7 +422,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\windows8\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windows8\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -431,7 +431,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\net40\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\net40\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -440,7 +440,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -449,7 +449,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0'">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\sl5\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\sl5\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -458,7 +458,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v7.1'">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\windowsphone71\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windowsphone71\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -467,7 +467,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\windowsphone8\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\windowsphone8\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -476,7 +476,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -485,7 +485,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkProfile) == 'Profile32')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\portable-win81+wpa81\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-win81+wpa81\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -494,7 +494,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile5') Or ($(TargetFrameworkProfile) == 'Profile6') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24') Or ($(TargetFrameworkProfile) == 'Profile37') Or ($(TargetFrameworkProfile) == 'Profile42') Or ($(TargetFrameworkProfile) == 'Profile47') Or ($(TargetFrameworkProfile) == 'Profile147') Or ($(TargetFrameworkProfile) == 'Profile158')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\portable-net40+sl5+win8+wp8\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-net40+sl5+win8+wp8\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -503,7 +503,7 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="System.Reactive.PlatformServices">
-          <HintPath>..\..\..\packages\Rx-PlatformServices\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.PlatformServices.dll</HintPath>
+          <HintPath>..\..\packages\Rx-PlatformServices\lib\portable-net45+winrt45+wp8+wpa81\System.Reactive.PlatformServices.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -514,7 +514,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="xunit.abstractions">
-          <HintPath>..\..\..\packages\xunit.abstractions\lib\net35\xunit.abstractions.dll</HintPath>
+          <HintPath>..\..\packages\xunit.abstractions\lib\net35\xunit.abstractions.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -523,7 +523,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.abstractions">
-          <HintPath>..\..\..\packages\xunit.abstractions\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
+          <HintPath>..\..\packages\xunit.abstractions\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -534,7 +534,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')) Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And ($(TargetFrameworkVersion) == 'v8.0' Or $(TargetFrameworkVersion) == 'v8.1')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.assert">
-          <HintPath>..\..\..\packages\xunit.assert\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
+          <HintPath>..\..\packages\xunit.assert\lib\portable-net45+win8+wp8+wpa81\xunit.assert.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -562,7 +562,7 @@
     <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.core">
-          <HintPath>..\..\..\packages\xunit.extensibility.core\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.core\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -573,7 +573,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\win8\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\win8\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -582,7 +582,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
       <ItemGroup>
         <Reference Include="xunit.execution.desktop">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\net45\xunit.execution.desktop.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\net45\xunit.execution.desktop.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -591,7 +591,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoAndroid'">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\monoandroid\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monoandroid\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -600,7 +600,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'MonoTouch'">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\monotouch\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\monotouch\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -609,7 +609,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0'">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\wp8\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\wp8\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -618,7 +618,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == 'Xamarin.iOS'">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\xamarinios\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\xamarinios\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -627,13 +627,13 @@
     <When Condition="($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
-          <HintPath>..\..\..\packages\xunit.extensibility.execution\lib\portable-net45+win8+wp8+wpa81\xunit.execution.dotnet.dll</HintPath>
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\portable-net45+win8+wp8+wpa81\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
       </ItemGroup>
     </When>
   </Choose>
-  <Import Project="..\..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
-  <Import Project="..\..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets" Condition="Exists('..\..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets')" Label="Paket" />
+  <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
+  <Import Project="..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets" Condition="Exists('..\..\packages\JetBrains.Profiler.Kernel.Windows.Api\build\JetBrains.Profiler.Kernel.Windows.Api.Targets')" Label="Paket" />
 </Project>

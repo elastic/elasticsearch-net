@@ -29,7 +29,8 @@ namespace Elasticsearch.Net
 	{
 		private readonly object _lock = new object();
 		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
-		private string DefaultContentType => "application/json";
+
+	    private string DefaultContentType => "application/json";
 
 		public HttpConnection() { }
 		
@@ -42,13 +43,33 @@ namespace Elasticsearch.Net
 			{
 				if (this._clients.TryGetValue(hashCode, out client)) return client;
 
-				var handler = new HttpClientHandler();
-				handler.AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None; 
-				client = new HttpClient(handler, false);
-				client.Timeout = requestData.RequestTimeout;
-				//TODO add headers
-				//client.DefaultRequestHeaders = 
-				this._clients.TryAdd(hashCode, client);
+			    var handler = new HttpClientHandler
+			    {
+			        AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
+			    };
+
+                if (!requestData.ProxyAddress.IsNullOrEmpty())
+                {
+                    var uri = new Uri(requestData.ProxyAddress);
+                    var proxy = new WebProxy(uri);
+                    var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+                    proxy.Credentials = credentials;
+                    handler.Proxy = proxy;
+                }
+
+                if (requestData.DisableAutomaticProxyDetection)
+                    handler.Proxy = null;
+
+                client = new HttpClient(handler, false)
+			    {
+			        Timeout = requestData.RequestTimeout
+			    };
+
+			    client.DefaultRequestHeaders.ExpectContinue = false;
+
+                //TODO add headers
+                //client.DefaultRequestHeaders = 
+                this._clients.TryAdd(hashCode, client);
 				return client;
 			}
 
@@ -144,7 +165,8 @@ namespace Elasticsearch.Net
 			}
 			else
 			{
-				// Set content in order to set a Content-Type header
+				// Set content in order to set a Content-Type header.
+                // Content gets diposed so can't be shared instance
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
 

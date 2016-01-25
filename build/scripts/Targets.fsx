@@ -57,7 +57,7 @@ Target "WatchTests"  <| fun _ ->
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
-Target "Benchmark" <| fun _ -> Benchmarker.Run()
+Target "Benchmark" <| fun _ -> Benchmarker.RunDnx()
 
 Target "QuickCompile"  <| fun _ -> Build.CompileDnx()
 

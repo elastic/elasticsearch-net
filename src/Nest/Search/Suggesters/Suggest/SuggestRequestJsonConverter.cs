@@ -30,7 +30,7 @@ namespace Nest
 
 			if (suggestRequest.Suggest != null)
 			{
-				foreach (var kv in suggestRequest.Suggest)
+				foreach (var kv in (IEnumerable<KeyValuePair<string, ISuggestBucket>>)suggestRequest.Suggest)
 				{
 					writer.WritePropertyName(kv.Key);
 					serializer.Serialize(writer, kv.Value);
