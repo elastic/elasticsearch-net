@@ -66,7 +66,7 @@ Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
 Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
 
 Target "Release" <| fun _ -> 
-    Release.PackAll()
+    Release.PackAllDnx()
     Sign.ValidateNugetDllAreSignedCorrectly()
 
 Target "Nightly" <| fun _ -> trace "build nightly" 

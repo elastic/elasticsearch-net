@@ -56,6 +56,7 @@ type Release() =
                         doc.Description, 
                         doc.Title, 
                         doc.Tags,
+                        doc.Repository,
                         doc.Copyright,
                         Versioning.FileVersion,
                         doc.CompilationOptions,
@@ -70,6 +71,11 @@ type Release() =
         newDoc.JsonValue.WriteTo(writer, JsonSaveOptions.None)
 
     static member PackAll() =
+        DotNetProject.All
+        |> Seq.map (fun p -> p.ProjectName)
+        |> Seq.iter(fun p -> nugetPack p)
+
+    static member PackAllDnx() =
         let projects = !! "src/Nest/project.json" 
                        ++ "src/Elasticsearch.Net/project.json"
 
@@ -80,8 +86,8 @@ type Release() =
         projects
         |> Seq.map DirectoryName
         |> Seq.iter(fun project -> 
-            //eventhough this says desktop it still packs all the tfm's it just hints wich installed dnx version to use
-            Tooling.Dnu.Exec Tooling.DotNetRuntime.Desktop Build.BuildFailure project ["pack"; (Paths.Quote project); "--configuration Release"; "--quiet"])
+            //even though this says desktop it still packs all the tfm's it just hints wich installed dnx version to use
+            Tooling.Dnu.Exec Tooling.DotNetRuntime.Desktop Build.BuildFailure project ["pack"; (Paths.Quote project); "--configuration Release";])
 
         // move to nuget output
         projects

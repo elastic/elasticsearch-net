@@ -6,7 +6,7 @@
   "dependencies": {
     "Nest": { "target": "project" },
     "Elasticsearch.Net": { "target": "project" },
-    "Newtonsoft.Json": "7.0.1",
+    "Newtonsoft.Json": "8.0.2",
     "Bogus": "3.0.5-beta-2",
     "FluentAssertions": "4.0.0",
     "xunit": "2.1.0-rc1-build3168",
