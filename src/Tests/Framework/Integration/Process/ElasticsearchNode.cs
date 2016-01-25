@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
+using Tests.Framework;
 
 namespace Tests.Framework.Integration
 {
@@ -46,8 +47,49 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
+#if DOTNETCORE
+		// Investigate  problem with ManualResetEvent on CoreClr
+		// Maybe due to .WaitOne() not taking exitContext? 
+		public class Signal
+		{
+			private readonly object _lock = new object();
+			private bool _notified;
+
+			public Signal(bool initialState)
+			{
+				_notified = initialState;
+			}
+
+			public void Set()
+			{
+				lock (_lock)
+				{
+					if (!_notified)
+					{
+						_notified = true;
+						Monitor.Pulse(_lock);
+					}
+				}
+			}
+
+			public bool WaitOne(TimeSpan timeout, bool exitContext)
+			{
+				lock (_lock)
+				{
+					bool exit = true;
+					if (!_notified)
+						exit = Monitor.Wait(_lock, timeout);
+					return exit;
+				}
+			}
+		}
+
+		private readonly Subject<Signal> _blockingSubject = new Subject<Signal>();
+		public IObservable<Signal> BootstrapWork { get; }
+#else
 		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
+#endif
 
 		public ElasticsearchNode(
 			string elasticsearchVersion, 
@@ -72,8 +114,8 @@ namespace Tests.Framework.Integration
 				return;
 			}
 
-			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
+			var appData = GetApplicationDataDirectory();
+			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
@@ -82,13 +124,27 @@ namespace Tests.Framework.Integration
 			this.DownloadAndExtractElasticsearch();
 		}
 
+		private string GetApplicationDataDirectory()
+		{
+#if DOTNETCORE
+			return Environment.GetEnvironmentVariable("APPDATA");
+#else
+			return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#endif
+		}
+
 		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
 			var timeout = TimeSpan.FromMinutes(1);
+
+#if DOTNETCORE
+			var handle = new Signal(false);
+#else
 			var handle = new ManualResetEvent(false);
+#endif
 
 			if (_doNotSpawnIfAlreadyRunning)
 			{
@@ -103,7 +159,7 @@ namespace Tests.Framework.Integration
 						foreach (var supportedPlugin in SupportedPlugins)
 						{
 							if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
-								throw new ApplicationException($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
+								throw new Exception($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
 						}
 
 						this.Started = true;
@@ -111,7 +167,7 @@ namespace Tests.Framework.Integration
 						this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
 						this._blockingSubject.OnNext(handle);
 						if (!handle.WaitOne(timeout, true))
-							throw new ApplicationException($"Could not launch tests on already running elasticsearch within {timeout}");
+							throw new Exception($"Could not launch tests on already running elasticsearch within {timeout}");
 
 						return Observable.Empty<ElasticsearchMessage>();
 					}
@@ -135,13 +191,17 @@ namespace Tests.Framework.Integration
 			if (!handle.WaitOne(timeout, true))
 			{
 				this.Stop();
-				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
+				throw new Exception($"Could not start elasticsearch within {timeout}");
 			}
 
 			return observable;
 		}
 
+#if DOTNETCORE
+		private void HandleConsoleMessage(ElasticsearchMessage s, Signal handle)
+#else
 		private void HandleConsoleMessage(ElasticsearchMessage s, ManualResetEvent handle)
+#endif
 		{
 			//no need to snoop for metadata if we already started
 			if (!this.RunningIntegrations || this.Started) return;
@@ -257,11 +317,11 @@ namespace Tests.Framework.Integration
 								handle.Set();
 							});
 						if (!handle.WaitOne(timeout, true))
-							throw new ApplicationException($"Could not install ${installPath} within {timeout}");
+							throw new Exception($"Could not install ${installPath} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
-					throw new ApplicationException($"Could not install ${installPath} within {timeout}");
+					throw new Exception($"Could not install ${installPath} within {timeout}");
 			}
 		}
 		

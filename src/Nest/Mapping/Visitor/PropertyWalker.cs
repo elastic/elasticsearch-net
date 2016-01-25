@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Reflection;
+using System.Collections;
 
 namespace Nest
 {
@@ -38,7 +39,7 @@ namespace Nest
 			if (seenTypes != null && seenTypes.TryGetValue(_type, out seen) && seen > maxRecursion)
 				return properties;
 
-			foreach(var propertyInfo in _type.GetProperties())
+			foreach (var propertyInfo in _type.GetProperties())
 			{
 				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);
 				if (attribute != null && attribute.Ignore)
@@ -86,47 +87,47 @@ namespace Nest
 			if (type == typeof(string))
 				return new StringProperty();
 
-			if (type.IsEnum)
+			if (type.IsEnumType())
 				return new NumberProperty(NumberType.Integer);
 
-			if (type.IsValueType)
+			if (type.IsValue())
 			{
 				switch (type.Name)
 				{
 					case "Int32":
-                    case "UInt16":
+					case "UInt16":
 						return new NumberProperty(NumberType.Integer);
 					case "Int16":
-                    case "Byte":
-                        return new NumberProperty(NumberType.Short);
+					case "Byte":
+						return new NumberProperty(NumberType.Short);
 					case "SByte":
 						return new NumberProperty(NumberType.Byte);
 					case "Int64":
-                    case "UInt32":
+					case "UInt32":
 						return new NumberProperty(NumberType.Long);
 					case "Single":
 						return new NumberProperty(NumberType.Float);
 					case "Decimal":
 					case "Double":
-                    case "UInt64":
-                        return new NumberProperty(NumberType.Double);
+					case "UInt64":
+						return new NumberProperty(NumberType.Double);
 					case "DateTime":
-                    case "DateTimeOffset":
-                        return new DateProperty();
+					case "DateTimeOffset":
+						return new DateProperty();
 					case "Boolean":
 						return new BooleanProperty();
-                    case "Char":
+					case "Char":
 					case "Guid":
 						return new StringProperty();
 				}
 			}
 
-            if (type == typeof(GeoLocation))
-                return new GeoPointProperty();
+			if (type == typeof(GeoLocation))
+				return new GeoPointProperty();
 
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
-                return new CompletionProperty();
-			
+			if (type.IsGeneric() && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
+				return new CompletionProperty();
+
 			return new ObjectProperty();
 		}
 
@@ -135,7 +136,9 @@ namespace Nest
 			if (type.IsArray)
 				return type.GetElementType();
 
-			if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
+			var typeInfo = type.GetTypeInfo();
+			if (typeInfo.IsGenericType && type.GetGenericArguments().Length == 1
+				&& (typeInfo.ImplementedInterfaces.HasAny(t => t == typeof(IEnumerable)) || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;

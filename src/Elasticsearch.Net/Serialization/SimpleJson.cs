@@ -46,7 +46,7 @@
 
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#if NETFX_CORE
+#if NETFX_CORE || DOTNETCORE
 #define SIMPLE_JSON_TYPEINFO
 #endif
 using System;
@@ -1568,10 +1568,10 @@ namespace Elasticsearch.Net
 		public delegate TValue ThreadSafeDictionaryValueFactory<TKey, TValue>(TKey key);
 
 #if SIMPLE_JSON_TYPEINFO
-            public static TypeInfo GetTypeInfo(Type type)
-            {
-                return type.GetTypeInfo();
-            }
+        public static TypeInfo GetTypeInfo(Type type)
+        {
+            return type.GetTypeInfo();
+        }
 #else
 		public static Type GetTypeInfo(Type type)
 		{
@@ -1733,7 +1733,7 @@ namespace Elasticsearch.Net
 		public static IEnumerable<PropertyInfo> GetProperties(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return type.GetTypeInfo().DeclaredProperties;
+            return type.GetTypeInfo().DeclaredProperties;
 #else
 			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1742,7 +1742,7 @@ namespace Elasticsearch.Net
 		public static IEnumerable<FieldInfo> GetFields(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return type.GetTypeInfo().DeclaredFields;
+            return type.GetTypeInfo().DeclaredFields;
 #else
 			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1751,7 +1751,7 @@ namespace Elasticsearch.Net
 		public static MethodInfo GetGetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return propertyInfo.GetMethod;
+            return propertyInfo.GetGetMethod(true);
 #else
 			return propertyInfo.GetGetMethod(true);
 #endif
@@ -1760,7 +1760,7 @@ namespace Elasticsearch.Net
 		public static MethodInfo GetSetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return propertyInfo.SetMethod;
+            return propertyInfo.GetSetMethod(true);
 #else
 			return propertyInfo.GetSetMethod(true);
 #endif
@@ -1912,7 +1912,9 @@ namespace Elasticsearch.Net
 			ParameterExpression value = Expression.Parameter(typeof(object), "value");
 			UnaryExpression instanceCast = (!IsValueType(propertyInfo.DeclaringType)) ? Expression.TypeAs(instance, propertyInfo.DeclaringType) : Expression.Convert(instance, propertyInfo.DeclaringType);
 			UnaryExpression valueCast = (!IsValueType(propertyInfo.PropertyType)) ? Expression.TypeAs(value, propertyInfo.PropertyType) : Expression.Convert(value, propertyInfo.PropertyType);
-			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(Expression.Call(instanceCast, setMethodInfo, valueCast), new ParameterExpression[] { instance, value }).Compile();
+			MethodCallExpression callExpression = Expression.Call(instanceCast, setMethodInfo, valueCast);
+			var parameterExpressions = new ParameterExpression[] { instance, value };
+			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(callExpression, parameterExpressions).Compile();
 			return delegate(object source, object val) { compiled(source, val); };
 		}
 

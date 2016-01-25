@@ -111,10 +111,11 @@ namespace Nest
 			return null;
 		}
 
-		internal static string Utf8String(this byte[] bytes)
-		{
-			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
-		}
+#if !DOTNETCORE
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
+#else
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+#endif
 
 		internal static byte[] Utf8Bytes(this string s)
 		{

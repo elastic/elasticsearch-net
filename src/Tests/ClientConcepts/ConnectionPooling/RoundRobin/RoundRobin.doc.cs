@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -61,9 +62,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			* We'll validate that each thread sees all the nodes and they they wrap over e.g after node 9209 
 			* comes 9200 again
 			*/
-			startingPositions = new List<int>();
+			var threadedStartPositions = new ConcurrentBag<int>();
 			var threads = Enumerable.Range(0, 20)
-				.Select(i => CreateThreadCallingGetNext(pool, startingPositions))
+				.Select(i => CreateThreadCallingGetNext(pool, threadedStartPositions))
 				.ToList();
 
 			foreach (var t in threads) t.Start();
@@ -73,12 +74,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			* Each thread reported the first node it started off lets make sure we see each node twice as the first node
 			* because we started `NumberOfNodes * 2` threads
 			*/
-			var grouped = startingPositions.GroupBy(p => p);
+			var grouped = threadedStartPositions.GroupBy(p => p).ToList();
 			grouped.Count().Should().Be(NumberOfNodes);
 			grouped.Select(p => p.Count()).Should().OnlyContain(p => p == 2);
 		}
 
-		public Thread CreateThreadCallingGetNext(IConnectionPool pool, List<int> startingPositions) => new Thread(() =>
+		public Thread CreateThreadCallingGetNext(IConnectionPool pool, ConcurrentBag<int> startingPositions) => new Thread(() =>
 		{
 			/** CallGetNext is a generator that calls GetNext() indefinitely using a local cursor */
 			var seenPorts = CallGetNext(pool).Take(NumberOfNodes * 10).ToList();

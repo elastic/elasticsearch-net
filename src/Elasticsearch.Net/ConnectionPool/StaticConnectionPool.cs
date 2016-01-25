@@ -44,7 +44,7 @@ namespace Elasticsearch.Net
 			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
 				throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
 
-			this.UsingSsl = uris.Any(uri => uri.Scheme == Uri.UriSchemeHttps);
+			this.UsingSsl = uris.Any(uri => uri.Scheme == "https");
 
 			this.InternalNodes = nn
 				.OrderBy(item => randomize ? this.Random.Next() : 1)

@@ -52,11 +52,11 @@ type Sign() =
         for p in DotNetProject.All do
             let name = p.ProjectName.Nuget
             let outputFolder = Paths.Output(name)
-            let net40dll = sprintf "%s/net40/%s.dll" outputFolder name
+            let dotnet51 = sprintf "%s/dotnet5.1/%s.dll" outputFolder name
             let net45dll = sprintf "%s/net45/%s.dll" outputFolder name
             match p with
-            | DotNet45Project net45 -> 
-                //validate net40dll name
+            | Project p -> 
+                validate dotnet51 name
                 validate net45dll name
 
     static member CreateKeysIfAbsent() =

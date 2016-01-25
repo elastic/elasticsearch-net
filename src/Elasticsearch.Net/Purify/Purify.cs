@@ -5,6 +5,12 @@ using System.Reflection;
 namespace Purify
 {
 
+#if DOTNETCORE
+	public static class Purifier
+	{
+		public static Uri Purify(this Uri uri) => uri;
+	}
+#else
 	/// <summary>
 	/// The Uri classes in .NET prior to 4.5 and Mono scrub through your Uris and modify them in order to prevent vulnerabilities, for 
 	/// example escaped slashes are unescaped. This scrubbing however prevents Uris that are inline with RFC 3986. Beyond that it prevents 
@@ -198,4 +204,5 @@ namespace Purify
 			}
 		}
 	}
+	#endif
 }

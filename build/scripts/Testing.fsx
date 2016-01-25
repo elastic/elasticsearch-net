@@ -35,7 +35,7 @@ module Tests =
         let esVersions = 
             match commaSeparatedEsVersions with
             | "" ->
-                failwith "when running integrate you have to pass a commaseperated list of elasticsearch versions to test"
+                failwith "when running integrate you have to pass a comma separated list of elasticsearch versions to test"
             | _ ->
                 commaSeparatedEsVersions.Split ',' |> Array.toList 
         
@@ -50,7 +50,7 @@ module Tests =
                         TimeOut = TimeSpan.FromMinutes(30.0)
                 })
 
-    let Notify = fun _ ->
+    let Notify () =
         match fileExists xmlOutput with
         | false -> ignore
         | _ ->
@@ -104,3 +104,24 @@ module Tests =
         })
         //finally
         Notify() |> ignore
+
+    let private TestFailure errors =
+        raise (BuildException("The project tests failed.", errors |> List.ofSeq))
+
+    let RunDnx() =
+        !! Paths.Source("Tests/project.json") 
+        |> Seq.map DirectoryName
+        |> Seq.map Paths.Quote
+        |> Seq.iter(fun project -> 
+                Tooling.Dnx.Exec Tooling.DotNetRuntime.Both TestFailure "." ["--project"; project; "test"; "-parallel none -xml"; xmlOutput])
+
+    let RunDnxIntegration commaSeparatedEsVersions =
+        ActivateBuildFailureTarget "NotifyTestFailures"
+        let esVersions = 
+            match commaSeparatedEsVersions with
+            | "" -> failwith "when running integrate you have to pass a comma separated list of elasticsearch versions to test"
+            | _ -> commaSeparatedEsVersions.Split ',' |> Array.toList 
+        
+        for esVersion in esVersions do
+            setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
+            RunDnx()

@@ -69,8 +69,10 @@ namespace Tests.Framework
 		public static Uri CreateNode(int? port = null) =>
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
-		public static IConnection CreateConnection(bool forceInMemory = false) =>
-			Configuration.RunIntegrationTests && !forceInMemory ? new HttpConnection() : new InMemoryConnection();
+		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
+			Configuration.RunIntegrationTests && !forceInMemory
+				? ((IConnection)new HttpConnection())
+				: new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(object responseJson)
 		{
@@ -91,21 +93,27 @@ namespace Tests.Framework
 		{
 			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 
+#if DOTNETCORE
+			return "TODO: Work out how to get test name. Maybe Environment.StackTrace?";
+#else
 			var st = new StackTrace();
 			var types = GetTypes(st);
 			return (types.Select(f => f.FullName).LastOrDefault() ?? "Seeder").Split('.').Last();
+#endif
 		}
 
+#if !DOTNETCORE
 		private static List<Type> GetTypes(StackTrace st)
 		{
 			var types = (from f in st.GetFrames()
 						 let method = f.GetMethod()
 						 where method != null
 						 let type = method.DeclaringType
-						 where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
+						 where type != null && type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
 						 select type).ToList();
 			return types;
 		}
+#endif
 
 		private static ITestConfiguration LoadConfiguration()
 		{
@@ -114,7 +122,17 @@ namespace Tests.Framework
 			if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TARGET")))
 				return new EnvironmentConfiguration();
 
-			return new YamlConfiguration(@"..\..\tests.yaml");
+			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+			// If running the classic .NET solution, tests run from bin/{config} directory,
+			// but when running DNX solution, tests run from the test project root
+			var yamlConfigurationPath = directoryInfo.Name == "Tests" && 
+										directoryInfo.Parent != null && 
+										directoryInfo.Parent.Name == "src"
+				? "tests.yaml"
+				: @"..\..\tests.yaml";
+
+			return new YamlConfiguration(yamlConfigurationPath);
 		}
 	}
 }

@@ -21,19 +21,27 @@ open Versioning
 open Documentation
 open Releasing
 open Profiling
+open System
+open System.IO
+
+let private buildFailed errors =
+    raise (BuildException("The project build failed.", errors |> List.ofSeq))
+    
+let private testsFailed errors =
+    raise (BuildException("The project tests failed.", errors |> List.ofSeq))
 
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" <| fun _ -> CleanDir Paths.BuildOutput
 
-Target "BuildApp" <| fun _ -> Build.CompileAll()
+Target "BuildApp" <| fun _ -> Build.CompileDnx()
 
-Target "Test"  <| fun _ -> Tests.RunAllUnitTests()
+Target "Test"  <| fun _ -> Tests.RunDnx()
+    
+Target "QuickTest"  <| fun _ -> Tests.RunDnx()
 
-Target "QuickTest"  <| fun _ -> Tests.RunAllUnitTests()
-
-Target "Integrate"  <| fun _ -> Tests.RunAllIntegrationTests(getBuildParamOrDefault "esversions" "")
+Target "Integrate"  <| fun _ -> Tests.RunDnxIntegration (getBuildParamOrDefault "esversions" "")
 
 Target "WatchTests"  <| fun _ -> 
     traceFAKE "Starting quick test (incremental compile then test)"
@@ -49,28 +57,32 @@ Target "WatchTests"  <| fun _ ->
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
-Target "Benchmark" <| fun _ -> Benchmarker.Run()
+Target "Benchmark" <| fun _ -> Benchmarker.RunDnx()
 
-Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
+Target "QuickCompile"  <| fun _ -> Build.CompileDnx()
 
 Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
 
-Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
+Target "Version" <| fun _ -> 
+    Versioning.PatchAssemblyInfos()
+    Versioning.PatchProjectJsons()
 
 Target "Release" <| fun _ -> 
-    Release.PackAll()
+    Release.PackAllDnx()
     Sign.ValidateNugetDllAreSignedCorrectly()
+    Versioning.ValidateArtifacts()
 
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
+
 
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
-  =?> ("Test", (not (hasBuildParam "skiptests")))
+  =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
   ==> "Build"
 
 "Clean" 

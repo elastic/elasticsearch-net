@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Linq;
+using System.Reflection;
 
 namespace Nest
 {
@@ -19,7 +20,7 @@ namespace Nest
 			if (CachedTypeLookups.TryGetValue(type, out attr))
 				return attr;
 
-			var attributes = type.GetCustomAttributes(typeof(ElasticsearchTypeAttribute), true);
+			var attributes = type.GetTypeInfo().GetCustomAttributes(typeof(ElasticsearchTypeAttribute), true);
 			if (attributes.HasAny())
 				attr = ((ElasticsearchTypeAttribute)attributes.First());
 			CachedTypeLookups.TryAdd(type, attr);

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Reflection;
 
 namespace Elasticsearch.Net
 {
@@ -16,15 +17,41 @@ namespace Elasticsearch.Net
 
 			//TODO measure performance and cache 
 			var type = enumValue.GetType();
+#if DOTNETCORE
+			var info = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
+#else
 			var info = type.GetField(enumValue.ToString());
+#endif
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
 
 			return da.Length > 0 ? da[0].Value : Enum.GetName(enumValue.GetType(), enumValue);
 		}
 
+#if !DOTNETCORE
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes);
+#else
+		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+#endif
+	
+		internal static byte[] Utf8Bytes(this string s)
+		{
+			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+		}
 
-		internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
+		internal static string ToCamelCase(this string s)
+		{
+			if (string.IsNullOrEmpty(s))
+				return s;
+
+			if (!char.IsUpper(s[0]))
+				return s;
+
+			string camelCase = char.ToLowerInvariant(s[0]).ToString();
+			if (s.Length > 1)
+				camelCase += s.Substring(1);
+
+			return camelCase;
+		}
 
 		internal static string NotNull(this string @object, string parameterName)
 		{

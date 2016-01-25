@@ -1,0 +1,86 @@
+{
+  "authors": [
+    "Elastic and contributors"
+  ],
+  "owners": [
+    "Elastic"
+  ],
+  "projectUrl": "https://github.com/elastic/elasticsearch-net",
+  "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
+  "requireLicenseAcceptance": false,
+  "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
+  "summary": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
+  "description": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
+  "title": "NEST - Elasticsearch .NET client",
+  "tags": [
+    "elasticsearch",
+    "elastic",
+    "search",
+    "lucene",
+    "nest"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elastic/elasticsearch-net"
+  },
+  "copyright": "2014-2016 Elasticsearch BV",
+  "version": "2.0.0-alpha2",
+  "compilationOptions": {
+    "warningsAsErrors": false
+  },
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": [
+          "DEBUG",
+          "TRACE"
+        ]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": [
+          "RELEASE",
+          "TRACE"
+        ],
+        "optimize": true,
+        "keyFile": "../../build/keys/keypair.snk"
+      }
+    }
+  },
+  "dependencies": {
+    "Elasticsearch.Net": {
+      "target": "project"
+    },
+    "Newtonsoft.Json": "8.0.2"
+  },
+  "commands": {
+  },
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Runtime": "",
+        "System.Runtime.Serialization": "",
+        "System.ServiceModel": "",
+        "System.Dynamic.Runtime": ""
+      }
+    },
+    "dotnet5.1": {
+      "compilationOptions": {
+        "define": [
+          "DOTNETCORE"
+        ]
+      },
+      "dependencies": {
+        "System.Runtime": "4.0.21-beta-23225",
+        "System.Linq": "4.0.0-beta-23109",
+        "System.Linq.Queryable": "4.0.0-beta-23109",
+        "System.Collections": "4.0.11-beta-23225",
+        "System.Dynamic.Runtime": "4.0.11-beta-23516",
+        "System.Threading": "4.0.11-beta-23225",
+        "System.Threading.Timer": "4.0.0-beta-23109",
+        "System.Diagnostics.Tools": "4.0.1-beta-23225"
+      }
+    }
+  }
+}

@@ -66,7 +66,8 @@ namespace Nest
 
 		private bool ApplyExactContractJsonAttribute(Type objectType, JsonContract contract)
 		{
-			var attribute = objectType.GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault() as ExactContractJsonConverterAttribute;
+
+			var attribute = objectType.GetTypeInfo().GetCustomAttributes(typeof(ExactContractJsonConverterAttribute)).FirstOrDefault() as ExactContractJsonConverterAttribute;
 			if (attribute?.Converter == null) return false;
 			contract.Converter = attribute.Converter;
 			return true;
@@ -76,7 +77,7 @@ namespace Nest
 		{
 			foreach (var t in this.TypeWithInterfaces(objectType))
 			{
-				var attribute = t.GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault() as ContractJsonConverterAttribute;
+				var attribute = t.GetTypeInfo().GetCustomAttributes(typeof(ContractJsonConverterAttribute), true).FirstOrDefault() as ContractJsonConverterAttribute;
 				if (attribute?.Converter == null) continue;
 				contract.Converter = attribute.Converter;
 				return true;

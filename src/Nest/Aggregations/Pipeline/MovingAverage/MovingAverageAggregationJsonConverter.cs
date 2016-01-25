@@ -14,9 +14,8 @@ namespace Nest
 		{
 			var o = JObject.Load(reader);
 			var ps = o.Properties().ToDictionary(p => p.Name, p => p.Value);
-			return new MovingAverageAggregation
+			var aggregation = new MovingAverageAggregation
 			{
-				BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps),
 				Format = GetOrDefault<string>("format", ps),
 				GapPolicy = GetGapPolicy(ps),
 				Minimize = GetOrDefault<bool?>("minimize", ps),
@@ -24,6 +23,22 @@ namespace Nest
 				Window = GetOrDefault<int?>("window", ps),
 				Model = GetModel(ps)
 			};
+
+#if DOTNETCORE
+			JToken value;
+			if (ps.TryGetValue("buckets_path", out value) && value != null)
+			{
+				aggregation.BucketsPath = new SingleBucketsPath((string)value);
+			}
+			else
+			{
+				aggregation.BucketsPath = default(SingleBucketsPath);
+			}
+			
+#else
+			aggregation.BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps);
+#endif
+			return aggregation;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -71,7 +86,11 @@ namespace Nest
 		private T GetOrDefault<T>(string key, Dictionary<string, JToken> properties)
 		{
 			if (!properties.ContainsKey(key)) return default(T);
+#if DOTNETCORE
+			return properties[key].ToObject<T>();
+#else
 			return (T)Convert.ChangeType(properties[key], typeof(T));
+#endif
 		}
 
 		private GapPolicy? GetGapPolicy(Dictionary<string, JToken> properties)
@@ -79,8 +98,8 @@ namespace Nest
 			var value = GetOrDefault<string>("gap_policy", properties);
 			if (value.IsNullOrEmpty()) return null;
 			if (value == "insert_zeros") return GapPolicy.InsertZeros;
-			else if (value == "skip") return GapPolicy.Skip;
-			else return null;
+			if (value == "skip") return GapPolicy.Skip;
+			return null;
 		}
 
 		private IMovingAverageModel GetModel(Dictionary<string, JToken> properties)

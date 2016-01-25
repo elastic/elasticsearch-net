@@ -1,12 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Nest
 {
 	internal class SimilarityJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => typeof(ISimilarity).IsAssignableFrom(objectType);
+		public override bool CanConvert(Type objectType) => typeof(ISimilarity).GetTypeInfo().IsAssignableFrom(objectType.GetTypeInfo());
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // ReSharper disable VirtualMemberNeverOverriden.Global
-
+#if !DOTNETCORE
 namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection
@@ -200,3 +200,4 @@ namespace Elasticsearch.Net
 		protected virtual void DisposeManagedResources() { }
 	}
 }
+#endif

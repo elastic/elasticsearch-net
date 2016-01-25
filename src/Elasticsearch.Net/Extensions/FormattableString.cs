@@ -1,8 +1,9 @@
 ﻿//TODO needs IFDEF?
 
+#if !DOTNETCORE
 namespace System.Runtime.CompilerServices
 {
-	public class FormattableStringFactory
+	internal class FormattableStringFactory
 	{
 		public static FormattableString Create(string messageFormat, params object[] args)
 		{
@@ -21,7 +22,7 @@ namespace System.Runtime.CompilerServices
 
 namespace System
 {
-	public class FormattableString
+	internal class FormattableString
 	{
 		private readonly string _messageFormat;
 		private readonly object[] _args;
@@ -36,3 +37,4 @@ namespace System
 		public string ToString(IFormatProvider formatProvider) => string.Format(formatProvider, _messageFormat, _args);
 	}
 }
+#endif

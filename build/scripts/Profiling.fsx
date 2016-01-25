@@ -10,7 +10,7 @@ open System.Diagnostics
 open Paths
 
 module Profiler =
-    let private profiledApp = sprintf "%s/%s" (Paths.BinFolder("Performance/Profiling")) "Profiling.exe"
+    let private profiledApp = sprintf "%s/%s" (Paths.BinFolder("Profiling")) "Profiling.exe"
     let private snapShotOutput = Paths.Output("ProfilingSnapshot.dtp")
     let private snapShotStatsOutput = Paths.Output("ProfilingSnapshotStats.html")
     let private profileOutput = Paths.Output("ProfilingReport.xml")
@@ -23,7 +23,17 @@ module Profiler =
         Tooling.DotTraceReporter.Exec [@"/reporting"; snapShotOutput; patternInput; profileOutput]
     
 module Benchmarker =
-   let private benchmarkingApp = sprintf "%s/%s" (Paths.BinFolder("Performance/Benchmarking")) "Benchmarking.exe" 
+   let private benchmarkingApp = sprintf "%s/%s" (Paths.BinFolder("Benchmarking")) "Benchmarking.exe" 
+
+   let private failure errors =
+        raise (BuildException("The project benchmarking failed.", errors |> List.ofSeq))
 
    let Run() =
-        Tooling.execProcessWithTimeout benchmarkingApp ["-i false"; "-t 5"] (TimeSpan.FromMinutes 10.)
+        Tooling.execProcessWithTimeout benchmarkingApp ["-i false"; "-t 5"] (TimeSpan.FromMinutes 10.) |> ignore
+
+   let RunDnx() =
+        !! Paths.Source("Benchmarking/project.json") 
+        |> Seq.map DirectoryName
+        |> Seq.map Paths.Quote
+        |> Seq.iter(fun project -> 
+                Tooling.Dnx.Exec Tooling.DotNetRuntime.Both failure "." ["--project"; project; "run"; "-i false"; "-t 5"])

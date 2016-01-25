@@ -271,7 +271,9 @@ namespace Tests.ClientConcepts.LowLevel
 			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
 			 */
 
+#if !DOTNETCORE
 			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+#endif
 			/**
 			 * However, this will accept all requests from the AppDomain to untrusted SSL sites, 
 			 * therefore we recommend doing some minimal introspection on the passed in certificate.

@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
+
+#if DOTNETCORE
+using System.Net;
+using System.Net.Http;
+#endif
+
 
 namespace Elasticsearch.Net
 {
@@ -140,21 +147,22 @@ namespace Elasticsearch.Net
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
+		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage(
+		[SuppressMessage(
 			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor",
 			Justification = "We want the virtual method to run on most derived")]
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, Func<T, IElasticsearchSerializer> serializerFactory)
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
+			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = serializerFactory((T)this);
+			this._serializer = _serializerFactory((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;

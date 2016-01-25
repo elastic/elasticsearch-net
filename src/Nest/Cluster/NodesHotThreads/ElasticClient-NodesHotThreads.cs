@@ -69,7 +69,6 @@ namespace Nest
 			using (stream)
 			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
-				var typedResponse = new NodesHotThreadsResponse();
 				var plainTextResponse = sr.ReadToEnd();
 
 				// If the response doesn't start with :::, which is the pattern that delimits
@@ -77,12 +76,12 @@ namespace Nest
 				// Just return an empty response object. This is especially useful when unit
 				// testing against an in-memory connection where you won't get a real response.
 				if (!plainTextResponse.StartsWith(":::", StringComparison.Ordinal))
-					return typedResponse;
+					return new NodesHotThreadsResponse();
 
 				var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
 				var info =
 					from section in sections
-					select section.Split(new string[] {"\n   \n"}, StringSplitOptions.None)
+					select section.Split(new string[] { "\n   \n" }, StringSplitOptions.None)
 					into sectionLines
 					where sectionLines.Length > 0
 					let nodeLine = sectionLines.FirstOrDefault()
@@ -91,7 +90,7 @@ namespace Nest
 					where matches.Success
 					let node = matches.Groups["name"].Value
 					let nodeId = matches.Groups["id"].Value
-					let hosts = matches.Groups["hosts"].Value.Split(new[] {'{', '}'}, StringSplitOptions.RemoveEmptyEntries)
+					let hosts = matches.Groups["hosts"].Value.Split(new[] { '{', '}' }, StringSplitOptions.RemoveEmptyEntries)
 					let threads = sectionLines.Skip(1).Take(sectionLines.Length - 1).ToList()
 					select new HotThreadInformation
 					{
@@ -102,7 +101,6 @@ namespace Nest
 					};
 				return new NodesHotThreadsResponse(info.ToList());
 			}
-
 		}
 
 	}

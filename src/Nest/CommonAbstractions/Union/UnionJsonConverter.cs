@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,7 +21,7 @@ namespace Nest
 			if (KnownTypes.TryGetValue(t, out conversion))
 				return conversion;
 
-			var genericArguments = t.GetGenericArguments();
+			var genericArguments = t.GetTypeInfo().GenericTypeArguments;
 			switch (genericArguments.Length)
 			{
 				case 2:

@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
 			var node = new Node(uri);
-			this.UsingSsl = node.Uri.Scheme == Uri.UriSchemeHttps;
+			this.UsingSsl = node.Uri.Scheme == "https";
 			this.Nodes = new List<Node> { node };
 			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}

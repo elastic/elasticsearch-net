@@ -123,7 +123,7 @@ namespace Nest
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+					|| (t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
 
 				if (!isDict)
 				{
@@ -159,7 +159,9 @@ namespace Nest
 		{
 			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))
 				return false;
-			return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
+
+			return method.GetCustomAttribute<ExtensionAttribute>() != null;
+			//return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
 		}
 	}
 }
