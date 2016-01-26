@@ -3649,13 +3649,13 @@
           "lib/DNXCore50/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
-      "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+      "System.Reflection.Emit.Lightweight/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Reflection": "4.0.0-beta-23109",
-          "System.Reflection.Emit.ILGeneration": "4.0.0-beta-23109",
-          "System.Reflection.Primitives": "4.0.0-beta-23109",
-          "System.Runtime": "4.0.0-beta-23109"
+          "System.Reflection": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Runtime": "4.0.0"
         },
         "compile": {
           "ref/dotnet/System.Reflection.Emit.Lightweight.dll": {}
@@ -5368,13 +5368,13 @@
           "lib/DNXCore50/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
-      "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+      "System.Reflection.Emit.Lightweight/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Reflection": "4.0.0-beta-23109",
-          "System.Reflection.Emit.ILGeneration": "4.0.0-beta-23109",
-          "System.Reflection.Primitives": "4.0.0-beta-23109",
-          "System.Runtime": "4.0.0-beta-23109"
+          "System.Reflection": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Runtime": "4.0.0"
         },
         "compile": {
           "ref/dotnet/System.Reflection.Emit.Lightweight.dll": {}
@@ -7997,9 +7997,9 @@
         "System.Reflection.Emit.ILGeneration.nuspec"
       ]
     },
-    "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+    "System.Reflection.Emit.Lightweight/4.0.0": {
       "type": "package",
-      "sha512": "Kbg03ijw7jZUswutleX/zmGgz6VYszTuyy4DciBn1PHFYAqAgZFZdK3cpYCsAU+cPliQ35UcOX828OsAG9NU4w==",
+      "sha512": "DJZhHiOdkN08xJgsJfDjkuOreLLmMcU8qkEEqEHqyhkPUZMMQs0lE8R+6+68BAFWgcdzxtNu0YmIOtEug8j00w==",
       "files": [
         "lib/DNXCore50/System.Reflection.Emit.Lightweight.dll",
         "lib/net45/_._",
@@ -8018,8 +8018,8 @@
         "ref/dotnet/zh-hant/System.Reflection.Emit.Lightweight.xml",
         "ref/net45/_._",
         "ref/wp80/_._",
-        "System.Reflection.Emit.Lightweight.4.0.0-beta-23109.nupkg",
-        "System.Reflection.Emit.Lightweight.4.0.0-beta-23109.nupkg.sha512",
+        "System.Reflection.Emit.Lightweight.4.0.0.nupkg",
+        "System.Reflection.Emit.Lightweight.4.0.0.nupkg.sha512",
         "System.Reflection.Emit.Lightweight.nuspec"
       ]
     },
@@ -9293,11 +9293,11 @@
       "fx/System.Diagnostics.Tools "
     ],
     "DNXCore,Version=v5.0": [
-      "System.Runtime >= 4.0.21-beta-23225",
       "System.Collections >= 4.0.11-beta-23225",
-      "System.Reflection >= 4.1.0-beta-23225",
+      "System.Diagnostics.Tools >= 4.0.1-beta-23225",
       "System.Net.Http >= 4.0.1-beta-23225",
-      "System.Diagnostics.Tools >= 4.0.1-beta-23225"
+      "System.Reflection >= 4.1.0-beta-23225",
+      "System.Runtime >= 4.0.21-beta-23225"
     ]
   }
 }

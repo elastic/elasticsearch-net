@@ -49,9 +49,7 @@
     }
   },
   "dependencies": {
-    "Elasticsearch.Net": {
-      "target": "project"
-    },
+    "Elasticsearch.Net": { "target": "project" },
     "Newtonsoft.Json": "8.0.2"
   },
   "commands": {
@@ -59,10 +57,10 @@
   "frameworks": {
     "net45": {
       "frameworkAssemblies": {
+        "System.Dynamic.Runtime": "",
         "System.Runtime": "",
         "System.Runtime.Serialization": "",
-        "System.ServiceModel": "",
-        "System.Dynamic.Runtime": ""
+        "System.ServiceModel": ""
       }
     },
     "dotnet5.1": {
@@ -72,14 +70,14 @@
         ]
       },
       "dependencies": {
-        "System.Runtime": "4.0.21-beta-23225",
+        "System.Collections": "4.0.11-beta-23225",
+        "System.Diagnostics.Tools": "4.0.1-beta-23225",
+        "System.Dynamic.Runtime": "4.0.11-beta-23516",
         "System.Linq": "4.0.0-beta-23109",
         "System.Linq.Queryable": "4.0.0-beta-23109",
-        "System.Collections": "4.0.11-beta-23225",
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
+        "System.Runtime": "4.0.21-beta-23225",
         "System.Threading": "4.0.11-beta-23225",
-        "System.Threading.Timer": "4.0.0-beta-23109",
-        "System.Diagnostics.Tools": "4.0.1-beta-23225"
+        "System.Threading.Timer": "4.0.0-beta-23109"
       }
     }
   }

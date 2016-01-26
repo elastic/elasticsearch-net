@@ -1,15 +1,15 @@
 {
   "version": "1.0.0-*",
-    "compilationOptions": {
-        "warningsAsErrors": false,
-        "define": [ "LINQ", "NDESK_OPTIONS" ],
-        "emitEntryPoint": true
-    },
+  "compilationOptions": {
+    "warningsAsErrors": false,
+    "define": [ "LINQ", "NDESK_OPTIONS" ],
+    "emitEntryPoint": true
+  },
   "dependencies": {
     "Nest": { "target": "project" },
     "Elasticsearch.Net": { "target": "project" },
-    "Tests" :  { "target": "project" },
-    "Humanizer":  "2.0.0-beta0001"
+    "Tests": { "target": "project" },
+    "Humanizer": "2.0.0-beta0001"
   },
   "configurations": {
     "Debug": {
@@ -24,35 +24,35 @@
       }
     }
   },
-    "commands": {
-        "Benchmarking": "Benchmarking"
-    },
+  "commands": {
+    "Benchmarking": "Benchmarking"
+  },
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
-        "System.Runtime" :  "",
-        "System.Reflection": "",
+        "System.Diagnostics.Tools": "",
         "System.IO.Compression.FileSystem": "",
-        "System.Threading.Tasks": "",
-        "System.Diagnostics.Tools": ""
+        "System.Reflection": "",
+        "System.Runtime": "",
+        "System.Threading.Tasks": ""
       },
       "dependencies": {
       }
     },
     "dnxcore50": {
       "compilationOptions": { "define": [ "DOTNETCORE" ] },
-        "dependencies": {
-            "System.Reflection": "4.1.0-beta-23225",
-            "System.Net.Http": "4.0.1-beta-23225",
-            "System.Runtime": "4.0.21-beta-23225",
-            "System.Linq": "4.0.0-beta-23109",
-            "System.Linq.Queryable": "4.0.0-beta-23109",
-            "System.Collections": "4.0.11-beta-23225",
-            "System.Dynamic.Runtime": "4.0.11-beta-23516",
-            "System.Threading": "4.0.11-beta-23225",
-            "System.Threading.Timer": "4.0.0-beta-23109",
-            "System.Diagnostics.Tools": "4.0.1-beta-23225"
-        }
+      "dependencies": {
+        "System.Collections": "4.0.11-beta-23225",
+        "System.Diagnostics.Tools": "4.0.1-beta-23225",
+        "System.Dynamic.Runtime": "4.0.11-beta-23516",
+        "System.Linq": "4.0.0-beta-23109",
+        "System.Linq.Queryable": "4.0.0-beta-23109",
+        "System.Net.Http": "4.0.1-beta-23225",
+        "System.Reflection": "4.1.0-beta-23225",
+        "System.Runtime": "4.0.21-beta-23225",
+        "System.Threading": "4.0.11-beta-23225",
+        "System.Threading.Timer": "4.0.0-beta-23109"
+      }
     }
   }
 }
