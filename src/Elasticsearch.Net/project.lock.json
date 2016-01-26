@@ -1736,7 +1736,7 @@
     "runtime.win7.System.Net.Requests/4.0.11-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "mqWBQUhXhzkiwb+zVUuKg+wswJUsnQtZkFtz6eISw8vWNXA9i2jkzYjU3pjjIVmtdopnhle9YaS4a/w4OuWGLw==",
+      "sha512": "HI99nCEekL4SNvkLmpqkOE0PuEF5B6xyDcnJesdjo06BrGYH3QCvqJt2VmzBVe6hDSo6FnGOlhMvLdCUpDXiXA==",
       "files": [
         "ref/dotnet/_._",
         "runtime.win7.System.Net.Requests.4.0.11-beta-23516.nupkg",
@@ -2022,7 +2022,7 @@
     "System.Dynamic.Runtime/4.0.11-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "C2GXB20I5vMcO4wemZr5pEjwwEb6H6zVkwF12JSUhripKBIKgI0YKpfp9glyDSL903cYgIXAztMQDajwCR0PmA==",
+      "sha512": "ypkxS0e+yUw7F6JEwuB22u0qqruMeZFOmtcImh2efDHpTAuhF2FOqCDJ7f4qLf9yomVvB4kjkZ6xGunbIQryxQ==",
       "files": [
         "lib/DNXCore50/System.Dynamic.Runtime.dll",
         "lib/MonoAndroid10/_._",
