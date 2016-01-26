@@ -11,7 +11,7 @@ let gitLink = fun f ->
     let exe = Paths.Tool("gitlink/lib/net45/GitLink.exe")
     ExecProcess(fun p ->
       p.FileName <- exe
-      p.Arguments <- sprintf @". -u %s -b develop" Paths.Repository
+      p.Arguments <- sprintf @". -u %s" Paths.Repository
     ) (TimeSpan.FromMinutes 5.0) |> ignore
 
 type Build() = 
@@ -89,6 +89,8 @@ type Build() =
             let srcFolder = Paths.BinFolder(projectName)
             CopyDir outputFolder srcFolder allFiles
         )
+
+        if not isMono then gitLink()
 
 
 

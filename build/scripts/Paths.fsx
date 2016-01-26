@@ -25,7 +25,7 @@ module Paths =
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
     
-    let Repository = "https://github.com/elasticsearch/elasticsearch-net"
+    let Repository = "https://github.com/elastic/elasticsearch-net"
 
     let MsBuildOutput =
         !! "src/**/bin/**"
