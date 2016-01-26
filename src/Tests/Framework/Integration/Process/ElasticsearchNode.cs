@@ -246,8 +246,8 @@ namespace Tests.Framework.Integration
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
-					Console.WriteLine($"Download elasticsearch: {this.Version} ...");
-					new WebClient().DownloadFile(downloadUrl, localZip);
+					Console.WriteLine($"Download elasticsearch: {this.Version} from {downloadUrl}");
+                    new WebClient().DownloadFile(downloadUrl, localZip);
 					Console.WriteLine($"Downloaded elasticsearch: {this.Version}");
 				}
 

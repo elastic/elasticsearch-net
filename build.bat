@@ -36,13 +36,13 @@ IF /I "%1"=="version" (
 	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
 )
 IF /I "%1"=="release" (
-    IF NOT [%2]==[] (set VERSION="%2" )
+    IF NOT [%2]==[] (set VERSION="%2")
 	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
 	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
 )
 
 IF /I "%1%"=="integrate" (
-    IF NOT [%2]==[] ( set ESVERSIONS="%2" )
+    IF NOT [%2]==[] (set ESVERSIONS="%2")
 	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
 	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
 )
