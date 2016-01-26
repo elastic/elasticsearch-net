@@ -126,14 +126,14 @@ module Tooling =
         File.Delete zipFile
         trace "JetBrains DotTrace tooling downloaded"
 
-    let nugetFile = "build/tools/nuget/nuget.exe"
-    if (File.Exists(nugetFile) = false)
+    let NugetFile = "build/tools/nuget/nuget.exe"
+    if (File.Exists(NugetFile) = false)
     then
         trace "Nuget not found %s. Downloading now"
         let url = "http://nuget.org/nuget.exe" 
         Directory.CreateDirectory("build/tools/nuget") |> ignore
         use webClient = new WebClient()
-        webClient.DownloadFile(url, nugetFile)
+        webClient.DownloadFile(url, NugetFile)
         trace "nuget downloaded"
 
     type ProfilerTooling(path) =

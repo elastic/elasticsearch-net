@@ -61,8 +61,6 @@ Target "Benchmark" <| fun _ -> Benchmarker.RunDnx()
 
 Target "QuickCompile"  <| fun _ -> Build.CompileDnx()
 
-Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
-
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
     Versioning.PatchProjectJsons()
@@ -72,14 +70,15 @@ Target "Release" <| fun _ ->
     Sign.ValidateNugetDllAreSignedCorrectly()
     Versioning.ValidateArtifacts()
 
-Target "Nightly" <| fun _ -> trace "build nightly" 
+Target "Canary" <| fun _ -> 
+    trace "Running canary build" 
+    Release.PublishCanaryBuild (getBuildParam "apikey")
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
 
 // Dependencies
 "Clean" 
-  ==> "CreateKeysIfAbsent"
   =?> ("Version", hasBuildParam "version")
   ==> "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
@@ -93,10 +92,9 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
   ==> "BuildApp"
   ==> "Benchmark"
 
-"CreateKeysIfAbsent"
-  ==> "Version"
+"Version"
   ==> "Release"
-  ==> "Nightly"
+  ==> "Canary"
 
 "QuickCompile"
   ==> "QuickTest"

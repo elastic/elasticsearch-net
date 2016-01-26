@@ -24,6 +24,7 @@ SET VERSION=
 SET ESVERSIONS=
 SET DNXVERSION="default"
 SET SKIPTESTS=0
+SET APIKEY=
 
 
 IF /I "%1"=="skiptests" (set SKIPTESTS="1")
@@ -47,4 +48,14 @@ IF /I "%1%"=="integrate" (
 	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
 )
 
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%"
+IF /I "%1%"=="canary" (
+    IF NOT [%2]==[] (set APIKEY="%2")
+	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
+	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
+	IF [%2]==[] (
+		ECHO When running build canary APIKEY the apikey is mandatory
+		EXIT /B 1
+	)
+)
+
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%"

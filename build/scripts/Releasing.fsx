@@ -97,3 +97,12 @@ type Release() =
             let package = sprintf "%s/%s.%s.nupkg" srcFolder projectName Versioning.FileVersion
             MoveFile Paths.NugetOutput package
         )
+
+    static member PublishCanaryBuild accessKey = 
+        !! "build/output/_packages/*-ci*.nupkg"
+        |> Seq.iter(fun f -> 
+            let success = Tooling.execProcess Tooling.NugetFile ["push"; f; accessKey; "-source"; "https://www.myget.org/F/elasticsearch-net/api/v2/package"] 
+            match success with
+            | 0 -> traceFAKE "publish to myget succeeded" |> ignore
+            | _ -> failwith "publish to myget failed" |> ignore
+        )
