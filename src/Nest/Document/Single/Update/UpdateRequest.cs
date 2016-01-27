@@ -47,6 +47,12 @@ namespace Nest
 		public TDocument Upsert { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
+
+		public Fields Fields
+		{
+			get { return Self.RequestParameters.GetQueryStringValue<Fields>("fields"); }
+			set { Self.RequestParameters.AddQueryString("fields", value); }
+		}
 	}
 
 	public partial class UpdateDescriptor<TDocument, TPartialDocument>
@@ -91,12 +97,14 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
 
-		///<summary>A comma-separated list of fields to return in the response</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
+
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
+			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));
 
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) =>
-			Assign(a => a.RequestParameters.AddQueryString("fields", typedPathLookups));
 	}
 }

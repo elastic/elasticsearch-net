@@ -9,7 +9,7 @@ using Xunit;
 namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetResponse<Project>, IUpdateResponse, IDeleteResponse>
+	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetResponse<Project>, IUpdateResponse<Project>, IDeleteResponse>
 	{
 		public DocumentCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -40,14 +40,19 @@ namespace Tests.Document.Single
 		protected GetRequest<Project> ReadInitializer(string id) => new GetRequest<Project>(id);
 		protected IGetRequest ReadFluent(string id, GetDescriptor<Project> d) => d;
 
-		protected override LazyResponses Update() => Calls<UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>, IUpdateRequest<Project, Project>, IUpdateResponse>(
-			UpdateInitializer,
-			UpdateFluent,
-			fluent: (s, c, f) => c.Update<Project, Project>(s, f),
-			fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
-			request: (s, c, r) => c.Update<Project, Project>(r),
-			requestAsync: (s, c, r) => c.UpdateAsync<Project, Project>(r)
-		);
+		protected override LazyResponses Update() => Calls<
+			UpdateDescriptor<Project, Project>, 
+			UpdateRequest<Project, Project>, 
+			IUpdateRequest<Project, Project>, 
+			IUpdateResponse<Project>
+			>(
+				UpdateInitializer,
+				UpdateFluent,
+				fluent: (s, c, f) => c.Update<Project, Project>(s, f),
+				fluentAsync: (s, c, f) => c.UpdateAsync<Project, Project>(s, f),
+				request: (s, c, r) => c.Update<Project, Project>(r),
+				requestAsync: (s, c, r) => c.UpdateAsync<Project, Project>(r)
+			);
 
 		protected UpdateRequest<Project, Project> UpdateInitializer(string id) =>
 			new UpdateRequest<Project, Project>(id) { Doc = new Project { Description = id + " updated" } };

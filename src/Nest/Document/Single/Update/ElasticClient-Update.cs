@@ -16,34 +16,34 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="TDocument">The type to describe the document to be updated</typeparam>
 		/// <param name="selector">a descriptor that describes the update operation</param>
-		IUpdateResponse Update<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class;
+		IUpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class;
 
 		/// <inheritdoc/>
-		IUpdateResponse Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
+		IUpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
 
 		/// <inheritdoc/>
-		IUpdateResponse Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
+		IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class
 			where TPartialDocument : class;
 
 		/// <inheritdoc/>
-		IUpdateResponse Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class;
 
 		/// <inheritdoc/>
-		Task<IUpdateResponse> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class;
+		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class;
 
 		/// <inheritdoc/>
-		Task<IUpdateResponse> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
+		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class;
 
 		/// <inheritdoc/>
-		Task<IUpdateResponse> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
+		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class
 			where TPartialDocument : class;
 
 		/// <inheritdoc/>
-		Task<IUpdateResponse> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class;
 	}
@@ -52,51 +52,51 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IUpdateResponse Update<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class => 
+		public IUpdateResponse<TDocument> Update<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector) where TDocument : class => 
 			this.Update<TDocument, TDocument>(documentPath, selector);
 
 		/// <inheritdoc/>
-		public IUpdateResponse Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class => 
+		public IUpdateResponse<TDocument> Update<TDocument>(IUpdateRequest<TDocument, TDocument> request) where TDocument : class => 
 			this.Update<TDocument, TDocument>(request);
 
 		/// <inheritdoc/>
-		public IUpdateResponse Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
+		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class
 			where TPartialDocument : class => 
 			this.Update(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(documentPath)));
 
 		/// <inheritdoc/>
-		public IUpdateResponse Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		public IUpdateResponse<TDocument> Update<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class => 
-			this.Dispatcher.Dispatch<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse>(
+			this.Dispatcher.Dispatch<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>>(
 				request,
-				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse<TDocument>>(p, d)
 			);
 
 		/// <inheritdoc/>
-		public Task<IUpdateResponse> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)
+		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TDocument>, IUpdateRequest<TDocument, TDocument>> selector)
 			where TDocument : class => 
 			this.UpdateAsync<TDocument, TDocument>(documentPath, selector);
 
 		/// <inheritdoc/>
-		public Task<IUpdateResponse> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request)
+		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument>(IUpdateRequest<TDocument, TDocument> request)
 			where TDocument : class => 
 			this.UpdateAsync<TDocument, TDocument>(request);
 
 		/// <inheritdoc/>
-		public Task<IUpdateResponse> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
+		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(DocumentPath<TDocument> documentPath, Func<UpdateDescriptor<TDocument, TPartialDocument>, IUpdateRequest<TDocument, TPartialDocument>> selector)
 			where TDocument : class
 			where TPartialDocument : class => 
 			this.UpdateAsync(selector?.Invoke(new UpdateDescriptor<TDocument, TPartialDocument>(documentPath)));
 
 		/// <inheritdoc/>
-		public Task<IUpdateResponse> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
+		public Task<IUpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(IUpdateRequest<TDocument, TPartialDocument> request)
 			where TDocument : class
 			where TPartialDocument : class => 
-			this.Dispatcher.DispatchAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
+			this.Dispatcher.DispatchAsync<IUpdateRequest<TDocument, TPartialDocument>, UpdateRequestParameters, UpdateResponse<TDocument>, IUpdateResponse<TDocument>>(
 				request,
-				this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse>
+				this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse<TDocument>>
 			);
 	}
 }
