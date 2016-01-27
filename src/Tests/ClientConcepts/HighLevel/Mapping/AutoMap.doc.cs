@@ -121,9 +121,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingAutoMap()
 		{
 			/**
-			 * This is exactly where AutoMap() becomes useful. Instead of manually mapping each property, 
-			 * explicitly, we can instead call AutoMap() for each of our mappings and let NEST do all the work
-			 */
+			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
+			* explicitly, we can instead call AutoMap() for each of our mappings and let NEST do all the work
+			*/
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<Company>(m => m.AutoMap())
@@ -131,10 +131,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/**
-			 * Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			 * In this example, Birthday was mapped as a date, IsManager as a boolean, Salary as an integer, Employees 
-			 * as an object, and the remaining string properties as strings.
-			 */
+			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
+			* In this example, Birthday was mapped as a date, IsManager as a boolean, Salary as an integer, Employees 
+			* as an object, and the remaining string properties as strings.
+			*/
 			var expected = new
 			{
 				mappings = new
@@ -219,18 +219,17 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/** 
-		 * In most cases, you'll want to map more than just the vanilla datatypes and also provide
-		 * various options on your properties (analyzer, doc_values, etc...).  In that case, it's
-		 * possible to use AutoMap() in conjuction with explicitly mapped properties.  
-		 */
-
+		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
+		* various options on your properties (analyzer, doc_values, etc...).  In that case, it's
+		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
+		*/
 		[U] public void OverridingAutoMappedProperties()
 		{
 			/**
-			 * Here we are using AutoMap() to automatically map our company type, but then we're
-			 * overriding our employee property and making it a `nested` type, since by default,
-			 * AutoMap() will infer objects as `object`.
-			 */
+			* Here we are using AutoMap() to automatically map our company type, but then we're
+			* overriding our employee property and making it a `nested` type, since by default,
+			* AutoMap() will infer objects as `object`.
+			*/
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<Company>(m => m
@@ -460,6 +459,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					)
 					.Map<EmployeeWithAttributes>(m => m
 						.AutoMap()
+						.TtlField(ttl => ttl
+							.Enable()
+							.Default("10m")
+						)							
 						.Properties(ps => ps
 							.String(s => s
 								.Name(e => e.FirstName)
@@ -468,10 +471,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										.Name("firstNameRaw")
 										.Index(FieldIndexOption.NotAnalyzed)
 									)
-                                    .TokenCount(t => t
-                                        .Name("length")
-                                        .Analyzer("standard")
-                                    )
+									.TokenCount(t => t
+										.Name("length")
+										.Analyzer("standard")
+									)
 								)
 							)
 							.Number(n => n
@@ -510,6 +513,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					},
 					employee = new
 					{
+						_ttl = new
+						{
+							enabled = true,
+							@default = "10m"
+						},
 						properties = new
 						{
 							birthday = new
@@ -559,12 +567,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										index = "not_analyzed",
 										type = "string"
 									},
-                                    length = new
-                                    {
-                                        type = "token_count",
-                                        analyzer = "standard"
-                                    },
-                                },
+									length = new
+									{
+										type = "token_count",
+										analyzer = "standard"
+									}
+								},
 								type = "string"
 							},
 							isManager = new
@@ -602,9 +610,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/**
-		 * Properties on a POCO can be ignored in a couple of ways:
-		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that cshoule be ignored on the POCO
-		 * - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
+		 * Properties on a POCO can be ignored in a couple of ways:  
+		 */
+		/**
+		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
+		 */
+		/**
+		 * - Using the `.InferMappingFor&lt;TDocument&gt;(Func&lt;ClrTypeMappingDescriptor&lt;TDocument&gt;, IClrTypeMapping&lt;TDocument&gt;&gt; selector)` on the connection settings
+		 */
+		/**
 		 * This example demonstrates both ways, using the attribute way to ignore the property `PropertyToIgnore` and the infer mapping way to ignore the 
 		 * property `AnotherPropertyToIgnore`
 		 */

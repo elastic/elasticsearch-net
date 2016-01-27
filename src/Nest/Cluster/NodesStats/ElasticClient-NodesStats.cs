@@ -34,9 +34,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public INodesStatsResponse NodesStats(INodesStatsRequest request) => 
-			this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsRsponse>(
+			this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.NodesStatsDispatch<NodesStatsRsponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesStatsDispatch<NodesStatsResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -45,9 +45,9 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request) => 
-			this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsRsponse, INodesStatsResponse>(
+			this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse, INodesStatsResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsRsponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsResponse>(p)
 			);
 	}
 }

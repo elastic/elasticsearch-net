@@ -87,7 +87,7 @@ salary = new
 ----
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
-This is exactly where AutoMap() becomes useful. Instead of manually mapping each property, 
+This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
 explicitly, we can instead call AutoMap() for each of our mappings and let NEST do all the work
 
 [source, csharp]
@@ -389,6 +389,10 @@ var descriptor = new CreateIndexDescriptor("myindex")
 					)
 					.Map<EmployeeWithAttributes>(m => m
 						.AutoMap()
+						.TtlField(ttl => ttl
+							.Enable()
+							.Default("10m")
+						)							
 						.Properties(ps => ps
 							.String(s => s
 								.Name(e => e.FirstName)
@@ -397,10 +401,10 @@ var descriptor = new CreateIndexDescriptor("myindex")
 										.Name("firstNameRaw")
 										.Index(FieldIndexOption.NotAnalyzed)
 									)
-                                    .TokenCount(t => t
-                                        .Name("length")
-                                        .Analyzer("standard")
-                                    )
+									.TokenCount(t => t
+										.Name("length")
+										.Analyzer("standard")
+									)
 								)
 							)
 							.Number(n => n
@@ -438,6 +442,11 @@ var expected = new
 					},
 					employee = new
 					{
+						_ttl = new
+						{
+							enabled = true,
+							@default = "10m"
+						},
 						properties = new
 						{
 							birthday = new
@@ -487,12 +496,12 @@ var expected = new
 										index = "not_analyzed",
 										type = "string"
 									},
-                                    length = new
-                                    {
-                                        type = "token_count",
-                                        analyzer = "standard"
-                                    },
-                                },
+									length = new
+									{
+										type = "token_count",
+										analyzer = "standard"
+									}
+								},
 								type = "string"
 							},
 							isManager = new
@@ -516,15 +525,19 @@ var expected = new
 			};
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
-Properties on a POCO can be ignored in a couple of ways:
-- Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that cshoule be ignored on the POCO
+Properties on a POCO can be ignored in a couple of ways:  
+
+- Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
+
 - Using the `.InferMappingFor
-
+TDocument
 (Func
-
+ClrTypeMappingDescriptor
+TDocument
 , IClrTypeMapping
+TDocument
+selector)` on the connection settings
 
-> selector)` on the connection settings
 This example demonstrates both ways, using the attribute way to ignore the property `PropertyToIgnore` and the infer mapping way to ignore the 
 property `AnotherPropertyToIgnore`
 
