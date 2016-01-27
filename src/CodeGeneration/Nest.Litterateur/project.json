@@ -7,9 +7,9 @@
   "dependencies": {
 
   },
-    "commands": {
-        "Nest.Litterateur": "Nest.Litterateur"
-    },
+  "commands": {
+    "Nest.Litterateur": "Nest.Litterateur"
+  },
   "configurations": {
     "Debug": {
       "compilationOptions": {
@@ -24,7 +24,7 @@
     }
   },
     "frameworks": {
-        "net45": {
+        "dnx451": {
             "frameworkAssemblies": {
                 "System.Runtime": "",
                 "System.Runtime.Serialization": "",

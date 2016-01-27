@@ -2,7 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.5": {
+    "DNX,Version=v4.5.1": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -966,7 +966,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.5/win7-x86": {
+    "DNX,Version=v4.5.1/win7-x86": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -1268,7 +1268,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.5/win7-x64": {
+    "DNX,Version=v4.5.1/win7-x64": {
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -4129,7 +4129,7 @@
     "System.Reflection.Metadata/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "RLIE4sSt2zngMLuqM6YmxBH99mTumtT4DNZE4+msfEaInUP5iCLQT+BHPl+2cjSAP1pdALyAjLB8RtCB+WGGWQ==",
+      "sha512": "a8VsRm/B0Ik1o5FumSMWmpwbG7cvIIajAYhzTTy9VB9XItByJDQHGZkQTIAdsvVJ6MI5O3uH/lb0izgQDlDIWA==",
       "files": [
         "lib/dotnet5.2/System.Reflection.Metadata.dll",
         "lib/dotnet5.2/System.Reflection.Metadata.xml",
@@ -4863,7 +4863,7 @@
   },
   "projectFileDependencyGroups": {
     "": [],
-    ".NETFramework,Version=v4.5": [
+    "DNX,Version=v4.5.1": [
       "Microsoft.CSharp >= 4.0.1-beta-23409",
       "Microsoft.CodeAnalysis >= 1.1.1",
       "fx/System.Runtime ",
