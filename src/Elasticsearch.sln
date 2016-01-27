@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest", "Nest_Net45\Nest.csproj", "{072BA7DA-7B60-407D-8B6E-95E3186BE70C}"
 EndProject
@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\contributing.md = ..\contributing.md
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 		..\license.txt = ..\license.txt
-		..\myget.bat = ..\myget.bat
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
 		..\paket.bat = ..\paket.bat
 		..\paket.dependencies = ..\paket.dependencies

@@ -25,7 +25,7 @@ module Paths =
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
     
-    let Repository = "https://github.com/elasticsearch/elasticsearch-net"
+    let Repository = "https://github.com/elastic/elasticsearch-net"
 
     let MsBuildOutput =
         !! "src/**/bin/**"
@@ -43,6 +43,14 @@ module Paths =
         let f = replace @"\" "/" folder
         sprintf "%s/%s/bin/Release" SourceFolder f
     let Quote(path) = sprintf "\"%s\"" path
+
+    let Net45BinFolder(projectName) =
+        let binFolder = BinFolder projectName
+        sprintf "%s/net45" binFolder
+
+    let DotNet51BinFolder(projectName) =
+        let binFolder = BinFolder(projectName)
+        sprintf "%s/dotnet5.1" binFolder
 
 module Tooling = 
     let private fileDoesNotExist path = path |> Path.GetFullPath |> File.Exists |> not

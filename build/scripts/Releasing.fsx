@@ -89,12 +89,36 @@ type Release() =
             //even though this says desktop it still packs all the tfm's it just hints wich installed dnx version to use
             Tooling.Dnu.Exec Tooling.DotNetRuntime.Desktop Build.BuildFailure project ["pack"; (Paths.Quote project); "--configuration Release";])
 
-        // move to nuget output
         projects
         |> Seq.iter(fun project ->
             let projectName = (project |> DirectoryName |> directoryInfo).Name
             let srcFolder = Paths.BinFolder(projectName)
             let package = sprintf "%s/%s.%s.nupkg" srcFolder projectName Versioning.FileVersion
+
+            // unzip package
+            let unzippedDir = sprintf "%s/%s" srcFolder projectName
+            ZipHelper.Unzip unzippedDir package
+                        
+            // rename NEST package id
+            if (projectName.Equals("Nest", StringComparison.InvariantCultureIgnoreCase) = true)
+            then
+                let nuspec = sprintf "%s/Nest.nuspec" unzippedDir
+                FileHelper.RegexReplaceInFileWithEncoding "<id>Nest</id>" "<id>NEST</id>" System.Text.Encoding.UTF8 nuspec
+
+            // Include PDB for each target framework
+            let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()
+            for frameworkDir in frameworkDirs do
+                let frameworkPdbDir = sprintf "%s/%s" srcFolder frameworkDir.Name
+                gitLink frameworkPdbDir
+                let pdb = sprintf "%s.pdb" projectName
+                let frameworkPdbFile = sprintf "%s/%s" frameworkPdbDir pdb
+                if fileExists frameworkPdbFile
+                then CopyFile (sprintf "%s/%s" frameworkDir.FullName pdb) frameworkPdbFile
+
+            // re-zip package
+            ZipHelper.Zip unzippedDir package !!(sprintf "%s/**/*.*" unzippedDir)
+
+            // move to nuget output
             MoveFile Paths.NugetOutput package
         )
 

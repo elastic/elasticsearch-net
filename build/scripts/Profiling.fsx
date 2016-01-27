@@ -29,9 +29,6 @@ module Benchmarker =
         raise (BuildException("The project benchmarking failed.", errors |> List.ofSeq))
 
    let Run() =
-        Tooling.execProcessWithTimeout benchmarkingApp ["-i false"; "-t 5"] (TimeSpan.FromMinutes 10.) |> ignore
-
-   let RunDnx() =
         !! Paths.Source("Benchmarking/project.json") 
         |> Seq.map DirectoryName
         |> Seq.map Paths.Quote

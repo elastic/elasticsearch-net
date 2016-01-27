@@ -35,13 +35,13 @@ Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 
 Target "Clean" <| fun _ -> CleanDir Paths.BuildOutput
 
-Target "BuildApp" <| fun _ -> Build.CompileDnx()
+Target "BuildApp" <| fun _ -> Build.Compile()
 
-Target "Test"  <| fun _ -> Tests.RunDnx()
+Target "Test"  <| fun _ -> Tests.RunUnitTests()
     
-Target "QuickTest"  <| fun _ -> Tests.RunDnx()
+Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
 
-Target "Integrate"  <| fun _ -> Tests.RunDnxIntegration (getBuildParamOrDefault "esversions" "")
+Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "")
 
 Target "WatchTests"  <| fun _ -> 
     traceFAKE "Starting quick test (incremental compile then test)"
@@ -57,9 +57,9 @@ Target "WatchTests"  <| fun _ ->
 
 Target "Profile" <| fun _ -> Profiler.Run()
 
-Target "Benchmark" <| fun _ -> Benchmarker.RunDnx()
+Target "Benchmark" <| fun _ -> Benchmarker.Run()
 
-Target "QuickCompile"  <| fun _ -> Build.CompileDnx()
+Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
