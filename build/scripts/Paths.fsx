@@ -44,6 +44,14 @@ module Paths =
         sprintf "%s/%s/bin/Release" SourceFolder f
     let Quote(path) = sprintf "\"%s\"" path
 
+    let Net45BinFolder(projectName) =
+        let binFolder = BinFolder projectName
+        sprintf "%s/net45" binFolder
+
+    let DotNet51BinFolder(projectName) =
+        let binFolder = BinFolder(projectName)
+        sprintf "%s/dotnet5.1" binFolder
+
 module Tooling = 
     let private fileDoesNotExist path = path |> Path.GetFullPath |> File.Exists |> not
     let private dirDoesNotExist path = path |> Path.GetFullPath |> Directory.Exists |> not

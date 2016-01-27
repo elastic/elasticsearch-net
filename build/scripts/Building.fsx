@@ -7,11 +7,11 @@ open Fake
 open Paths
 open Projects
 
-let gitLink = fun f ->
+let gitLink pdbDir =
     let exe = Paths.Tool("gitlink/lib/net45/GitLink.exe")
     ExecProcess(fun p ->
       p.FileName <- exe
-      p.Arguments <- sprintf @". -u %s" Paths.Repository
+      p.Arguments <- sprintf @". -u %s -d %s" Paths.Repository pdbDir
     ) (TimeSpan.FromMinutes 5.0) |> ignore
 
 type Build() = 
@@ -52,15 +52,15 @@ type Build() =
         |> Seq.iter(fun project ->
             let projectName = (project |> directoryInfo).Name
             let outputFolder = Paths.Output(projectName)
-            let srcFolder = Paths.BinFolder(projectName)
-            CopyDir outputFolder srcFolder allFiles
+            let binFolder = Paths.BinFolder(projectName)
+            if not isMono then
+                match projectName with
+                | "Nest" | "Elasticsearch.Net" ->
+                    gitLink(Paths.Net45BinFolder projectName)
+                    gitLink(Paths.DotNet51BinFolder projectName)
+                | _  -> ()
+            CopyDir outputFolder binFolder allFiles
         )
-
-        if not isMono then gitLink()
-
-
-
-
 
 
 
