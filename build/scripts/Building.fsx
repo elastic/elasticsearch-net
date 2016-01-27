@@ -55,7 +55,8 @@ type Build() =
             let binFolder = Paths.BinFolder(projectName)
             if not isMono then
                 match projectName with
-                | "Nest" | "Elasticsearch.Net" ->
+                | "Nest" 
+                | "Elasticsearch.Net" ->
                     gitLink(Paths.Net45BinFolder projectName)
                     gitLink(Paths.DotNet51BinFolder projectName)
                 | _  -> ()

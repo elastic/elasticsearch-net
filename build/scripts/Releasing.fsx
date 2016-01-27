@@ -108,9 +108,10 @@ type Release() =
             // Include PDB for each target framework
             let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()
             for frameworkDir in frameworkDirs do
-                // TODO: Assumes this pdb has been GitLink'ed already
+                let frameworkPdbDir = sprintf "%s/%s" srcFolder frameworkDir.Name
+                gitLink frameworkPdbDir
                 let pdb = sprintf "%s.pdb" projectName
-                let frameworkPdbFile = sprintf "%s/%s/%s" srcFolder frameworkDir.Name pdb
+                let frameworkPdbFile = sprintf "%s/%s" frameworkPdbDir pdb
                 if fileExists frameworkPdbFile
                 then CopyFile (sprintf "%s/%s" frameworkDir.FullName pdb) frameworkPdbFile
 
