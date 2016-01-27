@@ -7,12 +7,14 @@ using Tests.Framework.Integration;
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using static Nest.Infer;
+using Xunit;
 
 namespace Tests.Mapping.Metafields
 {
+	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class MetafieldsMappingApiTestsBase : ApiTestBase<IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		public MetafieldsMappingApiTestsBase(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MetafieldsMappingApiTestsBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Map(f),

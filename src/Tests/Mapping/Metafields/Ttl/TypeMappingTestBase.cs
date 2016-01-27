@@ -12,29 +12,22 @@ namespace Tests.Mapping.Metafields.Ttl
 {
 	public class TtlMetafieldApiTest : MetafieldsMappingApiTestsBase
 	{
-		public TtlMetafieldApiTest(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public TtlMetafieldApiTest(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson { get; } = new
 		{
-			properties = new
-			{
-				name = new
-				{
-					type = "string",
-					index = "not_analyzed"
-				}
-			}
+			_ttl = new { @default = "30m", enabled = true }
 		};
 
-		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
-			.Index(CallIsolatedValue)
+		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d.Index(CallIsolatedValue)
 			.TtlField(ttl => ttl
 				.Default("30m")
+				.Enable()
 			);
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
-			TtlField = new TtlField {  Default = "30m" } 
+			TtlField = new TtlField {  Default = TimeSpan.FromMinutes(30), Enabled = true } 
 		};
 	}
 }
