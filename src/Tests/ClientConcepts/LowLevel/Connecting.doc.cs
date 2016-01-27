@@ -9,6 +9,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
+using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -296,14 +297,21 @@ namespace Tests.ClientConcepts.LowLevel
 			/** 
 			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
 			*/
-			public int X { get; set; } = 0;
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++X;
+			public int CallToModify { get; set; } = 0;
+			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify;
 
 			/**
 			* You can inject contract resolved converters by implementing the ContractConverters property
 			* This can be much faster then registering them on JsonSerializerSettings.Converters
 			*/
-			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>();
+			public int CallToContractConverter { get; set; } = 0;
+			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>()
+			{
+				{ t => {
+					CallToContractConverter++;
+					return null;
+				} }
+			};
 
 		}
 
@@ -320,7 +328,10 @@ namespace Tests.ClientConcepts.LowLevel
 			client.RootNodeInfo();
 			client.RootNodeInfo();
 			var serializer = ((IConnectionSettingsValues)settings).Serializer as MyJsonNetSerializer;
-			serializer.X.Should().BeGreaterThan(0);
+			serializer.CallToModify.Should().BeGreaterThan(0);
+
+			serializer.SerializeToString(new Project { });
+			serializer.CallToContractConverter.Should().BeGreaterThan(0);
 		}
 	}
 }

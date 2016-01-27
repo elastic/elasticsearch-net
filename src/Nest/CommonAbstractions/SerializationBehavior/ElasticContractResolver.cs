@@ -32,7 +32,6 @@ namespace Nest
 			this.ConnectionSettings = connectionSettings;
 		}
 
-
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
@@ -45,10 +44,6 @@ namespace Nest
 				contract.Converter = new ServerErrorJsonConverter();
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
-			else if (!objectType.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
-
-			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
-			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
 
 			if (this._contractConverters.HasAny())
 			{
@@ -61,6 +56,11 @@ namespace Nest
 					break;
 				}
 			}
+			if (!objectType.FullName.StartsWith("Nest.", StringComparison.OrdinalIgnoreCase)) return contract;
+
+			else if (ApplyExactContractJsonAttribute(objectType, contract)) return contract;
+			else if (ApplyContractJsonAttribute(objectType, contract)) return contract;
+
 			return contract;
 		}
 
