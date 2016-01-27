@@ -39,16 +39,19 @@ namespace Nest
 			return f;
 		}
 
-		internal string Resolve(PropertyName property)
+		public string Resolve(PropertyName property)
 		{
-
 			if (property.IsConditionless()) return null;
 			if (!property.Name.IsNullOrEmpty())
+			{
+				if (property.Name.Contains("."))
+					throw new ArgumentException("Property names cannot contain dots.");
 				return property.Name;
+			}
 			string f;
 			if (this.Properties.TryGetValue(property, out f))
 				return f;
-			f = this.Resolve(property.Expression, property.Property);
+			f = this.ResolveToLastToken(property.Expression, property.Property);
 			this.Properties.TryAdd(property, f);
 			return f;
 		}
@@ -56,18 +59,32 @@ namespace Nest
 		private string Resolve(Expression expression, MemberInfo member)
 		{
 			var name = expression != null
-				? this.ResolveExpression(expression)
+				? this.Resolve(expression)
 				: member != null
-					? this.ResolveMemberInfo(member)
+					? this.Resolve(member)
 					: null;
 
 			if (name == null)
-				throw new ArgumentException("Could not resolve a property name");
+				throw new ArgumentException("Could not resolve a name from the given Expression or MemberInfo.");
 
 			return name;
 		}
 
-		private string ResolveMemberInfo(MemberInfo info)
+		private string ResolveToLastToken(Expression expression, MemberInfo member)
+		{
+			var name = expression != null
+				? this.ResolveToLastToken(expression)
+				: member != null
+					? this.Resolve(member)
+					: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a name from the given Expression or MemberInfo.");
+
+			return name;
+		}
+
+		private string Resolve(MemberInfo info)
 		{
 			if (info == null)
 				return null;
@@ -85,7 +102,7 @@ namespace Nest
 			return _settings.Serializer?.CreatePropertyName(info) ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
-		private string ResolveExpression(Expression expression)
+		private string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
 			var properties = new Stack<ElasticsearchPropertyAttribute>();
@@ -98,10 +115,18 @@ namespace Nest
 				.ToString();
 		}
 
+		private string ResolveToLastToken(Expression expression)
+		{
+			var stack = new Stack<string>();
+			var properties = new Stack<ElasticsearchPropertyAttribute>();
+			Visit(expression, stack, properties);
+			return stack.Last();
+		}
+
 		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
 		{
 			if (stack == null) return base.VisitMemberAccess(expression, stack, properties);
-			var resolvedName = this.ResolveMemberInfo(expression.Member);
+			var resolvedName = this.Resolve(expression.Member);
 			stack.Push(resolvedName);
 			return base.VisitMemberAccess(expression, stack, properties);
 		}
