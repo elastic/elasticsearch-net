@@ -20,36 +20,6 @@ module Tests =
     let xmlOutput = Paths.Output("TestResults.xml")
     let htmlOutput = Paths.Output("TestResults.html")
 
-    let RunAllUnitTests() =
-        !! Paths.Source("Tests/bin/Release/Tests.dll") 
-            |> xUnit2 (fun p -> 
-            {
-                p with 
-                    XmlOutputPath = Some <| xmlOutput 
-                    HtmlOutputPath = Some <| htmlOutput
-                    Parallel = ParallelMode.All //Not really much faster since most is guarded by collections
-            } )
-
-    let RunAllIntegrationTests(commaSeparatedEsVersions) =
-        ActivateBuildFailureTarget "NotifyTestFailures"
-        let esVersions = 
-            match commaSeparatedEsVersions with
-            | "" ->
-                failwith "when running integrate you have to pass a comma separated list of elasticsearch versions to test"
-            | _ ->
-                commaSeparatedEsVersions.Split ',' |> Array.toList 
-        
-        for esVersion in esVersions do
-            setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            !! Paths.Source("**/Tests/bin/Release/Tests.dll") 
-                |> xUnit2 (fun p -> 
-                { 
-                    p with 
-                        XmlOutputPath = Some <| xmlOutput 
-                        HtmlOutputPath = Some <| htmlOutput 
-                        TimeOut = TimeSpan.FromMinutes(30.0)
-                })
-
     let Notify () =
         match fileExists xmlOutput with
         | false -> ignore
@@ -91,31 +61,23 @@ module Tests =
                     Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage; "-o " + o]
                 ignore
 
-    let RunContinuous = fun _ ->
-        ActivateBuildFailureTarget "NotifyTestFailures"
-        Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]
-        //try 
-        !! Paths.Source("Tests/bin/Release/Tests.dll") 
-        |> xUnit2 (fun p -> 
-        { 
-            p with 
-                XmlOutputPath = Some <| xmlOutput 
-                HtmlOutputPath = Some <| htmlOutput 
-        })
-        //finally
-        Notify() |> ignore
-
     let private TestFailure errors =
         raise (BuildException("The project tests failed.", errors |> List.ofSeq))
 
-    let RunDnx() =
+    let Test runtime parallelization =
+       !! Paths.Source("Tests/project.json") 
+            |> Seq.map DirectoryName
+            |> Seq.map Paths.Quote
+            |> Seq.iter(fun project -> 
+                Tooling.Dnx.Exec runtime TestFailure "." ["--project"; project; "test -parallel"; parallelization; " -xml"; xmlOutput]) 
+
+    let RunUnitTests() =
         !! Paths.Source("Tests/project.json") 
         |> Seq.map DirectoryName
         |> Seq.map Paths.Quote
-        |> Seq.iter(fun project -> 
-                Tooling.Dnx.Exec Tooling.DotNetRuntime.Both TestFailure "." ["--project"; project; "test"; "-parallel none -xml"; xmlOutput])
+        |> Seq.iter(fun project -> Test Tooling.DotNetRuntime.Both "all")
 
-    let RunDnxIntegration commaSeparatedEsVersions =
+    let RunIntegrationTests() commaSeparatedEsVersions =
         ActivateBuildFailureTarget "NotifyTestFailures"
         let esVersions = 
             match commaSeparatedEsVersions with
@@ -124,4 +86,12 @@ module Tests =
         
         for esVersion in esVersions do
             setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
-            RunDnx()
+            !! Paths.Source("Tests/project.json") 
+            |> Seq.map DirectoryName
+            |> Seq.map Paths.Quote
+            |> Seq.iter(fun project -> Test Tooling.DotNetRuntime.Both "none")
+
+    let RunContinuous = fun _ ->
+        ActivateBuildFailureTarget "NotifyTestFailures"
+        Test Tooling.DotNetRuntime.Core "all"
+        Notify() |> ignore

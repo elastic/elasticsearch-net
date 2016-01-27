@@ -33,7 +33,7 @@ type Versioning() =
         let fv = if isNullOrEmpty fileVersion then timestampedVersion else fileVersion
         fv
     
-    //CI builds need to be one minor ahead of the whatever we find in our develop branch
+    //CI builds need to be one minor ahead of the whatever we find in master
     static member FileVersion = 
         //only increment minor when the current assembly informational version is not already -ci 
         let i = if currentInformationalVersion.Contains("-ci") then 0 else 1
