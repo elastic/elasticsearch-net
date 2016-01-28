@@ -7,14 +7,13 @@ namespace Nest
 	/// <summary>
 	/// Resolves member infos in an expression, instance may NOT be shared.
 	/// </summary>
-	public class MemberInfoResolver : FieldResolver
+	public class MemberInfoResolver : ExpressionVisitor
 	{
 		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
 		public IList<MemberInfo> Members { get { return _members; } }
 
-		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
+		public MemberInfoResolver(Expression expression)
 		{
-			Stack = new Stack<string>();
 			base.Visit(expression);
 		}
 
