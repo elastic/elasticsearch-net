@@ -113,6 +113,9 @@ namespace Tests.Framework.Integration
 					.Map<Project>(MapProject)
 					.Map<CommitActivity>(m => m
 						.Parent<Project>()
+						.TimestampField(t => t
+							.Enabled()
+						)
 						.Properties(props => props
 							.Object<Developer>(o => o
 								.Name(p => p.Committer)

@@ -3441,20 +3441,20 @@
       "Newtonsoft.Json >= 8.0.2"
     ],
     ".NETFramework,Version=v4.5": [
+      "fx/System.Dynamic.Runtime ",
       "fx/System.Runtime ",
       "fx/System.Runtime.Serialization ",
-      "fx/System.ServiceModel ",
-      "fx/System.Dynamic.Runtime "
+      "fx/System.ServiceModel "
     ],
     ".NETPlatform,Version=v5.1": [
-      "System.Runtime >= 4.0.21-beta-23225",
+      "System.Collections >= 4.0.11-beta-23225",
+      "System.Diagnostics.Tools >= 4.0.1-beta-23225",
+      "System.Dynamic.Runtime >= 4.0.11-beta-23516",
       "System.Linq >= 4.0.0-beta-23109",
       "System.Linq.Queryable >= 4.0.0-beta-23109",
-      "System.Collections >= 4.0.11-beta-23225",
-      "System.Dynamic.Runtime >= 4.0.11-beta-23516",
+      "System.Runtime >= 4.0.21-beta-23225",
       "System.Threading >= 4.0.11-beta-23225",
-      "System.Threading.Timer >= 4.0.0-beta-23109",
-      "System.Diagnostics.Tools >= 4.0.1-beta-23225"
+      "System.Threading.Timer >= 4.0.0-beta-23109"
     ]
   }
 }

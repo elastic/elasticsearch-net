@@ -508,6 +508,7 @@
         "frameworkAssemblies": [
           "System.Diagnostics.Tools",
           "System.IO.Compression.FileSystem",
+          "System.Linq",
           "System.Reflection",
           "System.Runtime",
           "System.Threading.Tasks"
@@ -2716,6 +2717,7 @@
         "frameworkAssemblies": [
           "System.Diagnostics.Tools",
           "System.IO.Compression.FileSystem",
+          "System.Linq",
           "System.Reflection",
           "System.Runtime",
           "System.Threading.Tasks"
@@ -3337,6 +3339,7 @@
         "frameworkAssemblies": [
           "System.Diagnostics.Tools",
           "System.IO.Compression.FileSystem",
+          "System.Linq",
           "System.Reflection",
           "System.Runtime",
           "System.Threading.Tasks"

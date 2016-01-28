@@ -3109,9 +3109,9 @@
   "projectFileDependencyGroups": {
     "": [],
     ".NETFramework,Version=v4.5": [
+      "fx/System ",
       "fx/System.Runtime ",
-      "fx/System.Runtime.Serialization ",
-      "fx/System "
+      "fx/System.Runtime.Serialization "
     ],
     ".NETPlatform,Version=v5.1": [
       "Microsoft.CSharp >= 4.0.1-beta-23225",

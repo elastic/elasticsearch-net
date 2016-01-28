@@ -89,7 +89,7 @@ namespace Nest
 
 		public TDescriptor Parent(Id parent) => Assign(a => a.Parent = parent);
 
-		public TDescriptor Timestamp(long timestamp) => Assign(a => a.Timestamp = timestamp);
+		public TDescriptor Timestamp(long? timestamp) => Assign(a => a.Timestamp = timestamp);
 
 		public TDescriptor Ttl(Time ttl) => Assign(a => a.Ttl = ttl);
 	}

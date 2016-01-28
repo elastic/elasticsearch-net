@@ -29,7 +29,6 @@ namespace Nest
 				observer.OnError(e);
 			}
 			return this;
-
 		}
 
 		private void Reindex(IObserver<IReindexResponse<T>> observer)
@@ -44,7 +43,7 @@ namespace Nest
 			var resolvedTo = toIndex.Resolve(this._connectionSettings);
 			resolvedTo.ThrowIfNullOrEmpty(nameof(toIndex));
 
-			var indexSettings = this._client.GetIndexSettings(i=>i.Index(fromIndex));
+			var indexSettings = this._client.GetIndex(fromIndex);
 			Func<CreateIndexDescriptor, ICreateIndexRequest> settings =  (ci) => this._reindexRequest.CreateIndexRequest ?? ci;
 			var createIndexResponse = this._client.CreateIndex(
 				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[resolvedFrom])));
@@ -88,7 +87,22 @@ namespace Nest
 			foreach (var d in searchResult.Hits)
 			{
 				IHit<T> d1 = d;
-				bb.Index<T>(bi => bi.Document(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
+				bb.Index<T>(bi =>
+				{
+					var bid = bi
+						.Document(d1.Source)
+						.Type(d1.Type)
+						.Index(toIndex)
+						.Id(d1.Id)
+						.Routing(d1.Routing)
+						.Timestamp(d1.Timestamp);
+
+					if (d1.Parent != null)
+					{
+						bid.Parent(d1.Parent);
+					}
+					return bid;
+				});
 			}
 
 			var indexResult = this._client.Bulk(b=>bb);
@@ -103,7 +117,6 @@ namespace Nest
 			});
 			return indexResult;
 		}
-
 
 		public void Dispose()
 		{
