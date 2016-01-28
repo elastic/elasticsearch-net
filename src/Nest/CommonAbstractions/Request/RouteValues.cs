@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 
 namespace Nest
@@ -47,7 +48,8 @@ namespace Nest
 		{
 			foreach (var kv in _routeValues)
 			{
-				this._resolved[kv.Key] = kv.Value.GetString(settings);
+				var key = kv.Value.GetString(settings);
+				this._resolved[kv.Key] = key.IsNullOrEmpty() ?key : Uri.EscapeDataString(key);
 			}
 		}
 
