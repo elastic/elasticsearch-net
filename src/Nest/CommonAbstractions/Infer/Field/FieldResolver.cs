@@ -19,13 +19,7 @@ namespace Nest
 		private readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
 		private readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
 
-		private object _lock = new object();
-		private Stack<string> _stack;
-		protected Stack<string> Stack
-		{
-			get { lock(_lock) { return _stack; } }
-			set { lock(_lock) { _stack = value; } }
-		}
+		protected Stack<string> Stack { get; set;}
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
