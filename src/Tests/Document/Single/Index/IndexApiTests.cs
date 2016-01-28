@@ -4,6 +4,7 @@ using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -69,16 +70,19 @@ namespace Tests.Document.Single.Index
 	[Collection(IntegrationContext.Indexing)]
 	public class IndexIntegrationTests : SimpleIntegration
 	{
-		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster) { }
+		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster)
+		{
+		}
 
-		[I] public void OpTypeCreate()
+		[I]
+		public void OpTypeCreate()
 		{
 			var indexName = this.RandomString();
 			var project = Project.Generator.Generate(1).First();
 			var indexResult = this.Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)
-			);
+				);
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
@@ -89,18 +93,19 @@ namespace Tests.Document.Single.Index
 			indexResult = this.Client.Index(project, f => f
 				.Index(indexName)
 				.OpType(OpType.Create)
-			);
+				);
 
 			indexResult.IsValid.Should().BeFalse();
 			indexResult.Created.Should().BeFalse();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(409);
 		}
 
-		[I] public void Index()
+		[I]
+		public void Index()
 		{
 			var indexName = this.RandomString();
 			var project = Project.Generator.Generate(1).First();
-			var indexResult = this.Client.Index(project, f => f .Index(indexName));
+			var indexResult = this.Client.Index(project, f => f.Index(indexName));
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
@@ -109,7 +114,7 @@ namespace Tests.Document.Single.Index
 			indexResult.Id.Should().Be(project.Name);
 			indexResult.Version.Should().Be(1);
 
-			indexResult = this.Client.Index(project, f => f .Index(indexName));
+			indexResult = this.Client.Index(project, f => f.Index(indexName));
 
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.Created.Should().BeFalse();
@@ -117,5 +122,60 @@ namespace Tests.Document.Single.Index
 			indexResult.Version.Should().Be(2);
 		}
 
+		[Collection(IntegrationContext.Indexing)]
+		public class IndexJObjectIntegrationTests : SimpleIntegration
+		{
+			public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster){}
+
+			[I]
+			public void Index()
+			{
+				var indexName = this.RandomString();
+
+				var jObjects = Enumerable.Range(1, 1000)
+					.Select(i =>
+						new JObject
+						{
+							{ "id", i },
+							{"name", $"name {i}"},
+							{"value", Math.Pow(i,2) },
+							{"date", new DateTime(2016, 1, 1)},
+							{"child", new JObject
+								{
+									{ "child_name", $"child_name {i}{i}" },
+									{ "child_value", 3 }
+								}
+							}
+						});
+
+				var jObject = jObjects.First();
+
+				var indexResult = this.Client.Index(jObject, f => f
+					.Index(indexName)
+					.Type("example")
+					.Id(jObject["id"].Value<int>())
+				);
+
+				indexResult.IsValid.Should().BeTrue();
+				indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+				indexResult.Created.Should().BeTrue();
+				indexResult.Index.Should().Be(indexName);
+
+				var bulkResponse = this.Client.Bulk(b => b
+					.IndexMany(jObjects.Skip(1), (bi, d) => bi
+						.Document(d)
+						.Id(d["id"].Value<int>())
+						.Index(indexName)
+						.Type("example")
+					)
+				);
+
+				foreach (var response in bulkResponse.Items)
+				{
+					response.IsValid.Should().BeTrue();
+					response.Status.Should().Be(201);
+				}
+			}
+		}
 	}
 }
