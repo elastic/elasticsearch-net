@@ -87,22 +87,7 @@ namespace Nest
 			foreach (var d in searchResult.Hits)
 			{
 				IHit<T> d1 = d;
-				bb.Index<T>(bi =>
-				{
-					var bid = bi
-						.Document(d1.Source)
-						.Type(d1.Type)
-						.Index(toIndex)
-						.Id(d1.Id)
-						.Routing(d1.Routing)
-						.Timestamp(d1.Timestamp);
-
-					if (d1.Parent != null)
-					{
-						bid.Parent(d1.Parent);
-					}
-					return bid;
-				});
+				bb.Index<T>(bi => Index(bi, d1, toIndex));
 			}
 
 			var indexResult = this._client.Bulk(b=>bb);
@@ -118,9 +103,27 @@ namespace Nest
 			return indexResult;
 		}
 
+		private static BulkIndexDescriptor<T> Index(BulkIndexDescriptor<T> descriptor, IHit<T> hit, IndexName toIndex)
+		{
+			descriptor
+				.Document(hit.Source)
+				.Type(hit.Type)
+				.Index(toIndex)
+				.Id(hit.Id)
+				.Routing(hit.Routing)
+				.Timestamp(hit.Timestamp);
+
+			if (hit.Parent != null)
+				descriptor.Parent(hit.Parent);
+
+			if (hit.Ttl.HasValue)
+				descriptor.Ttl(hit.Ttl.Value);
+
+			return descriptor;
+		}
+	
 		public void Dispose()
 		{
-
 		}
 	}
 }

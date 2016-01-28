@@ -17,6 +17,7 @@ namespace Nest
 		string Parent { get; }
 		string Routing { get; }
 		long? Timestamp { get; }
+		long? Ttl { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
 		Explanation Explanation { get; }
@@ -61,6 +62,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_timestamp")]
 		public long? Timestamp { get; internal set; }
+
+		[JsonProperty(PropertyName = "_ttl")]
+		public long? Ttl { get; internal set; }
 
 		[JsonProperty(PropertyName = "sort")]
 		public IEnumerable<object> Sorts { get; internal set; }
