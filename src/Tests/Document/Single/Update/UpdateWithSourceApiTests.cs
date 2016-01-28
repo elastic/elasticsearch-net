@@ -66,7 +66,7 @@ namespace Tests.Document.Single.Update
 			var name = Project.Projects.First().Name;
 			r.Get.Source.Name.Should().Be(name);
 			r.Get.Fields.Should().NotBeEmpty().And.ContainKey("name");
-			r.Get.Fields.ValueOf<string>("name").Should().Be(name);
+			r.Get.Fields.Value<string>("name").Should().Be(name);
 		});
 	}
 }

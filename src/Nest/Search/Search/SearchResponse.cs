@@ -55,11 +55,8 @@ namespace Nest
 		
 		private AggregationsHelper _agg = null;
 		[JsonIgnore]
-		public AggregationsHelper Aggs
-		{
-			get { return _agg ?? (_agg = new AggregationsHelper(this.Aggregations)); }
-		}
-		
+		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
+
 		[JsonProperty(PropertyName = "suggest")]
 		public IDictionary<string, Suggest[]> Suggest { get; internal set; }
 
@@ -79,33 +76,28 @@ namespace Nest
 		public string ScrollId { get; internal set; }
 
 		[JsonIgnore]
-		public long Total { get { return this.HitsMetaData == null ? 0 : this.HitsMetaData.Total; } }
+		public long Total => this.HitsMetaData?.Total ?? 0;
 
 		[JsonIgnore]
-		public double MaxScore { get { return this.HitsMetaData == null ? 0 : this.HitsMetaData.MaxScore; } }
+		public double MaxScore => this.HitsMetaData?.MaxScore ?? 0;
 
 		private IList<T> _documents; 
 		/// <inheritdoc/>
 		[JsonIgnore]
-		public IEnumerable<T> Documents
-		{
-			get
-			{
-				return this._documents ?? (this._documents = this.Hits
-					.Select(h => h.Source)
-					.Where(d => d != null)
-					.ToList());
-			}
-		}
-		
-		[JsonIgnore]
-		public IEnumerable<IHit<T>> Hits
-		{
-			get { return this.HitsMetaData != null ? (IEnumerable<IHit<T>>) this.HitsMetaData.Hits : new List<Hit<T>>(); }
-		}
+		public IEnumerable<T> Documents => 
+			this._documents ?? (this._documents = this.Hits
+				.Select(h => h.Source)
+				.ToList());
 
+		[JsonIgnore]
+		public IEnumerable<IHit<T>> Hits => this.HitsMetaData?.Hits ?? Enumerable.Empty<IHit<T>>();
+
+		private IList<FieldValues> _fields; 
 		/// <inheritdoc/>
-		public IEnumerable<FieldValues> Fields { get; set; }
+		public IEnumerable<FieldValues> Fields => 
+				this._fields ?? (this._fields = this.Hits
+					.Select(h => h.Fields)
+					.ToList());
 
 
 		private HighlightDocumentDictionary _highlights = null;

@@ -21,10 +21,10 @@ namespace Nest
 			_inferrer = inferrer;
 		}
 
-		public K ValueOf<K>(Field field) => ValuesOf<K>(field).FirstOrDefault();
+		public K Value<K>(Field field) => ValuesOf<K>(field).FirstOrDefault();
 
-		public K ValueOf<T, K>(Expression<Func<T, object>> objectPath) 
-			where T : class => ValuesOf<T, K>(objectPath).FirstOrDefault();
+		public K ValueOf<T, K>(Expression<Func<T, K>> objectPath) 
+			where T : class => Values<T, K>(objectPath).FirstOrDefault();
 
 		public K[] ValuesOf<K>(Field field)
 		{
@@ -32,7 +32,7 @@ namespace Nest
 			return this.FieldArray<K[]>(path);
 		}
 
-		public K[] ValuesOf<T, K>(Expression<Func<T, object>> objectPath)
+		public K[] Values<T, K>(Expression<Func<T, K>> objectPath)
 			where T : class
 		{
 			var field = this._inferrer.Field(objectPath);

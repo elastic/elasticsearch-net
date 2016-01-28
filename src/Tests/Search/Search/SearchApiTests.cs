@@ -179,7 +179,7 @@ namespace Tests.Search.Search
 			response.Hits.Count().Should().BeGreaterThan(0);
 			response.Hits.First().Should().NotBeNull();
 			response.Hits.First().Fields.ValueOf<Project, string>(p => p.Name).Should().NotBeNullOrEmpty();
-			response.Hits.First().Fields.ValueOf<Project, int>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+			response.Hits.First().Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
 			response.Aggregations.Count.Should().BeGreaterThan(0);
 			var startDates = response.Aggs.Terms("startDates");
 			startDates.Should().NotBeNull();
