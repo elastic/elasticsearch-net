@@ -14,15 +14,14 @@ namespace Nest
 
 		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
 		{
-			var stack = new Stack<string>();
-			var properties = new Stack<ElasticsearchPropertyAttribute>();
-			base.Visit(expression, stack, properties);
+			Stack = new Stack<string>();
+			base.Visit(expression);
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
+		protected override Expression VisitMember(MemberExpression expression)
 		{
 			this._members.Add(expression.Member);
-			return base.VisitMemberAccess(expression, stack, properties);
+			return base.VisitMember(expression);
 		}
 	}
 }

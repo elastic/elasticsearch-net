@@ -12,14 +12,14 @@ using System.Text;
 
 namespace Nest
 {
-	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
-	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.	
 	public class FieldResolver : ExpressionVisitor
 	{
 		private readonly IConnectionSettingsValues _settings;
 
 		private readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
 		private readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+
+		protected Stack<string> Stack { get; set;}
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
@@ -104,10 +104,9 @@ namespace Nest
 
 		private string Resolve(Expression expression)
 		{
-			var stack = new Stack<string>();
-			var properties = new Stack<ElasticsearchPropertyAttribute>();
-			Visit(expression, stack, properties);
-			return stack
+			Stack = new Stack<string>();
+			Visit(expression);
+			return Stack
 				.Aggregate(
 					new StringBuilder(),
 					(sb, name) =>
@@ -117,34 +116,33 @@ namespace Nest
 
 		private string ResolveToLastToken(Expression expression)
 		{
-			var stack = new Stack<string>();
-			var properties = new Stack<ElasticsearchPropertyAttribute>();
-			Visit(expression, stack, properties);
-			return stack.Last();
+			Stack = new Stack<string>();
+			Visit(expression);
+			return Stack.Last();
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
+		protected override Expression VisitMember(MemberExpression expression)
 		{
-			if (stack == null) return base.VisitMemberAccess(expression, stack, properties);
+			if (Stack == null) return base.VisitMember(expression);
 			var resolvedName = this.Resolve(expression.Member);
-			stack.Push(resolvedName);
-			return base.VisitMemberAccess(expression, stack, properties);
+			Stack.Push(resolvedName);
+			return base.VisitMember(expression);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
+		protected override Expression VisitMethodCall(MethodCallExpression methodCall)
 		{
-			if (m.Method.Name == "Suffix" && m.Arguments.Any())
+			if (methodCall.Method.Name == "Suffix" && methodCall.Arguments.Any())
 			{
-				VisitConstantOrVariable(m, stack);
+				VisitConstantOrVariable(methodCall, Stack);
 				var callingMember = new ReadOnlyCollection<Expression>(
-					new List<Expression> { { m.Arguments.First() } }
+					new List<Expression> { { methodCall.Arguments.First() } }
 				);
-				base.VisitExpressionList(callingMember, stack, properties);
-				return m;
+				base.Visit(callingMember);
+				return methodCall;
 			}
-			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
+			else if (methodCall.Method.Name == "get_Item" && methodCall.Arguments.Any())
 			{
-				var t = m.Object.Type;
+				var t = methodCall.Object.Type;
 				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
@@ -152,27 +150,27 @@ namespace Nest
 
 				if (!isDict)
 				{
-					return base.VisitMethodCall(m, stack, properties);
+					return base.VisitMethodCall(methodCall);
 				}
-				VisitConstantOrVariable(m, stack);
-				Visit(m.Object, stack, properties);
-				return m;
+				VisitConstantOrVariable(methodCall, Stack);
+				Visit(methodCall.Object);
+				return methodCall;
 			}
-			else if (IsLinqOperator(m.Method))
+			else if (IsLinqOperator(methodCall.Method))
 			{
-				for (int i = 1; i < m.Arguments.Count; i++)
+				for (int i = 1; i < methodCall.Arguments.Count; i++)
 				{
-					Visit(m.Arguments[i], stack, properties);
+					Visit(methodCall.Arguments[i]);
 				}
-				Visit(m.Arguments[0], stack, properties);
-				return m;
+				Visit(methodCall.Arguments[0]);
+				return methodCall;
 			}
-			return base.VisitMethodCall(m, stack, properties);
+			return base.VisitMethodCall(methodCall);
 		}
 
-		private static void VisitConstantOrVariable(MethodCallExpression m, Stack<string> stack)
+		private static void VisitConstantOrVariable(MethodCallExpression methodCall, Stack<string> stack)
 		{
-			var lastArg = m.Arguments.Last();
+			var lastArg = methodCall.Arguments.Last();
 			var constantExpression = lastArg as ConstantExpression;
 			var value = constantExpression != null
 				? constantExpression.Value.ToString()
@@ -180,13 +178,12 @@ namespace Nest
 			stack.Push(value);
 		}
 
-		private static bool IsLinqOperator(MethodInfo method)
+		private static bool IsLinqOperator(MethodInfo methodInfo)
 		{
-			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))
+			if (methodInfo.DeclaringType != typeof(Queryable) && methodInfo.DeclaringType != typeof(Enumerable))
 				return false;
 
-			return method.GetCustomAttribute<ExtensionAttribute>() != null;
-			//return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
+			return methodInfo.GetCustomAttribute<ExtensionAttribute>() != null;
 		}
 	}
 }
