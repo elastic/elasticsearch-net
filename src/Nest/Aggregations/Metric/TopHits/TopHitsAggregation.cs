@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<TopHitsAggregation>))]
+	[ContractJsonConverter(typeof(AggregationResultJsonConverter<TopHitsAggregation>))]
 	public interface ITopHitsAggregation : IMetricAggregation
 	{
 		[JsonProperty("from")]

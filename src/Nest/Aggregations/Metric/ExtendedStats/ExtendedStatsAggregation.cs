@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsAggregation>))]
+	[ContractJsonConverter(typeof(AggregationResultJsonConverter<ExtendedStatsAggregation>))]
 	public interface IExtendedStatsAggregation : IMetricAggregation { }
 
 	public class ExtendedStatsAggregation : MetricAggregationBase, IExtendedStatsAggregation

@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<RangeAggregation>))]
+	[ContractJsonConverter(typeof(AggregationResultJsonConverter<RangeAggregation>))]
 	public interface IRangeAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

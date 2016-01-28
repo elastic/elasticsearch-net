@@ -3,11 +3,6 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	[ExactContractJsonConverter(typeof(AggregationJsonConverter))]
-	public interface IAggregationResult
-	{
-	}
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAggregation 
 	{
