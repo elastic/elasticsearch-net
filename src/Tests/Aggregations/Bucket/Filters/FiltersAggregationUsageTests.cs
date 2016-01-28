@@ -11,7 +11,8 @@ namespace Tests.Aggregations.Bucket.Filters
 {
 	/**
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
-	 * Each bucket will collect all documents that match its associated filter.
+	 * Each bucket will collect all documents that match its associated filter. For documents
+	 * that do not match any filter, these will be collected in the other bucket.
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
 	*/
@@ -29,6 +30,8 @@ namespace Tests.Aggregations.Bucket.Filters
 				{
 					filters = new
 					{
+						other_bucket = true,
+						other_bucket_key = "other_states_of_being",
 						filters = new
 						{
 							belly_up = new { term = new { state = new { value = "BellyUp" } } },
@@ -47,6 +50,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
+					.OtherBucket()
+					.OtherBucketKey("other_states_of_being")
 					.NamedFilters(filters => filters
 						.Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
 						.Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
@@ -63,6 +68,8 @@ namespace Tests.Aggregations.Bucket.Filters
 			{
 				Aggregations = new FiltersAggregation("projects_by_state")
 				{
+					OtherBucket = true,
+					OtherBucketKey = "other_states_of_being",
 					Filters = new NamedFiltersContainer
 					{
 							{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
@@ -97,6 +104,9 @@ namespace Tests.Aggregations.Bucket.Filters
 			namedResult.Should().NotBeNull();
 			namedResult.DocCount.Should().BeGreaterThan(0);
 
+			namedResult = filterAgg.NamedBucket("other_states_of_being");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().Be(0);
 		}
 	}
 
@@ -114,6 +124,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				{
 					filters = new
 					{
+						other_bucket = true,
 						filters = new[] {
 								new { term = new { state = new { value = "BellyUp" } }},
 								new { term = new { state = new { value = "Stable" } }},
@@ -131,6 +142,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
+					.OtherBucket()
 					.AnonymousFilters(
 						f => f.Term(p => p.State, StateOfBeing.BellyUp),
 						f => f.Term(p => p.State, StateOfBeing.Stable),
@@ -147,6 +159,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			{
 				Aggregations = new FiltersAggregation("projects_by_state")
 				{
+					OtherBucket = true,
 					Filters = new List<QueryContainer>
 					{
 							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
@@ -169,11 +182,14 @@ namespace Tests.Aggregations.Bucket.Filters
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 			var results = filterAgg.AnonymousBuckets();
-			results.Count.Should().Be(3);
-			foreach (var singleBucket in results)
+			results.Count.Should().Be(4);
+
+			foreach (var singleBucket in results.Take(3))
 			{
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
+
+			results.Last().DocCount.Should().Be(0);
 		}
 	}
 }
