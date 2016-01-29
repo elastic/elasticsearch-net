@@ -5,7 +5,7 @@ namespace Nest
 	public class SignificantTermItem : BucketBase, IBucketItem
 	{
 		public SignificantTermItem() { }
-		public SignificantTermItem(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+		public SignificantTermItem(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public string Key { get; set; }
 		public long BgCount { get; set; }

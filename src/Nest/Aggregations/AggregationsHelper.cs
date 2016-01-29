@@ -5,19 +5,19 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregation> Aggregations { get; internal protected set; }
+		public IDictionary<string, IAggregationResult> Aggregations { get; internal protected set; }
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregation> aggregations)
+		public AggregationsHelper(IDictionary<string, IAggregationResult> aggregations)
 		{
 			this.Aggregations = aggregations;
 		}
 
 		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregation
+			where TAggregation : class, IAggregationResult
 		{
-			IAggregation agg;
+			IAggregationResult agg;
 			return this.Aggregations.TryGetValue(key, out agg) 
 				? agg as TAggregation 
 				: null;

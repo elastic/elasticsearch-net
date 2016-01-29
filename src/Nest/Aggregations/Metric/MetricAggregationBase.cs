@@ -43,6 +43,8 @@ namespace Nest
 
 		double? IMetricAggregation.Missing { get; set; }
 
+		string IAggregation.Name { get; set; }
+
 		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
 
 		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);

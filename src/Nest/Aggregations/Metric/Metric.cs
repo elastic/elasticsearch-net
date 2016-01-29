@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public interface IMetric : IAggregation
+	public interface IMetric : IAggregationResult
 	{
 	}
 }

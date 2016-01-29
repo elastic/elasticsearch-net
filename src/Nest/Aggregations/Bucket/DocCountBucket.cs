@@ -11,16 +11,16 @@ namespace Nest
 		where TBucketItem : IBucketItem
 	{
 		public DocCountBucket() { }
-		public DocCountBucket(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+		public DocCountBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public IList<TBucketItem> Items { get; set; }
 
 		public long DocCount { get; internal set; }
 	}
 
-	public class DocCountBucket : IAggregation
+	public class DocCountBucket : IAggregationResult
 	{
 		public long DocCount { get; set; }
-		public IEnumerable<IAggregation> Items { get; set; }
+		public IEnumerable<IAggregationResult> Items { get; set; }
 	}
 }

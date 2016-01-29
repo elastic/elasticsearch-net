@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -38,6 +39,8 @@ namespace Nest
 		IBucketsPath IPipelineAggregation.BucketsPath { get; set; }
 		string IPipelineAggregation.Format { get; set; }
 		GapPolicy? IPipelineAggregation.GapPolicy { get; set; }
+
+		string IAggregation.Name { get; set; }
 
 		public TPipelineAggregation Format(string format) => Assign(a => a.Format = format);
 

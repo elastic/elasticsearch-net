@@ -30,6 +30,8 @@ namespace Nest
 
 		protected TBucketAggregationInterface Self => (TBucketAggregation)this;
 
+		string IAggregation.Name { get; set; }
+
 		public TBucketAggregation Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
 			Assign(a => a.Aggregations = selector?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
 	}

@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Nest
 {
-	public class FiltersBucket : IAggregation
+	public class FiltersBucket : IAggregationResult
 	{
-		public FiltersBucket(IEnumerable<IAggregation> items)
+		public FiltersBucket(IEnumerable<IAggregationResult> items)
 		{
 			Items = items;
 		}
@@ -22,6 +22,6 @@ namespace Nest
 
 		public AggregationsHelper Aggregations { get; set; }
 
-		public IEnumerable<IAggregation> Items { get; set; }
+		public IEnumerable<IAggregationResult> Items { get; set; }
 	}
 }

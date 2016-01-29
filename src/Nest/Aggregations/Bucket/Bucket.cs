@@ -2,18 +2,18 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public interface IBucket : IAggregation
+	public interface IBucket : IAggregationResult
 	{
-		IDictionary<string, IAggregation> Aggregations { get; }
+		IDictionary<string, IAggregationResult> Aggregations { get; }
 	}
 
-	public interface IBucketItem : IAggregation
+	public interface IBucketItem : IAggregationResult
 	{
 	}
 
-	public class Bucket : IAggregation
+	public class Bucket : IAggregationResult
 	{
-		public IEnumerable<IAggregation> Items { get; set; }
+		public IEnumerable<IAggregationResult> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
 	}
@@ -22,7 +22,7 @@ namespace Nest
 		where TBucketItem : IBucketItem
 	{
 		public Bucket() { }
-		public Bucket(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+		public Bucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public IList<TBucketItem> Items { get; set; }
 	}
@@ -30,6 +30,6 @@ namespace Nest
 	public abstract class BucketBase : AggregationsHelper, IBucket
 	{
 		protected BucketBase() { }
-		protected BucketBase(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+		protected BucketBase(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 	}
 }
