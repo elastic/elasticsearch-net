@@ -68,7 +68,9 @@
         "System.Runtime": {
           "type": "build"
         },
-        "System.Runtime.Serialization": "",
+        "System.Runtime.Serialization": {
+          "type": "build"
+        },
         "System.ServiceModel": ""
       }
     },
