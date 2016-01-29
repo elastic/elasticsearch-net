@@ -9,10 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	internal class AggregationResultJsonConverter<TReadAs> : ReadAsTypeJsonConverter<TReadAs>
-		where TReadAs : class
-	{
-
-	}
+		where TReadAs : class { }
 
 	internal class AggregationResultJsonConverter : JsonConverter
 	{
@@ -44,10 +41,10 @@ namespace Nest
 			if (_numeric.IsMatch(property))
 				result = GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
 
-			Dictionary<string, object> meta = null;
-			if (property == "meta")
-				meta = GetMetadata(reader);
+			var meta = (property == "meta") ? GetMetadata(reader) : null;
+
 			property = reader.Value as string;
+
 			switch (property)
 			{
 				case "values":

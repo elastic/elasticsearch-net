@@ -99,7 +99,8 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
-			states.Meta.Should().NotBeNull();
+			states.Meta.Should().NotBeNull().And.HaveCount(1);
+			states.Meta["foo"].Should().Be("bar");
 		}
 	}
 }

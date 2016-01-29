@@ -14,15 +14,6 @@ namespace Nest
 			this.Aggregations = aggregations;
 		}
 
-		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregationResult
-		{
-			IAggregationResult agg;
-			return this.Aggregations.TryGetValue(key, out agg) 
-				? agg as TAggregation 
-				: null;
-		}
-
 		public ValueMetric Min(string key) => this.TryGet<ValueMetric>(key);
 
 		public ValueMetric Max(string key) => this.TryGet<ValueMetric>(key);
@@ -56,7 +47,7 @@ namespace Nest
 			var valueMetric = this.TryGet<ValueMetric>(key);
 
 			return valueMetric != null 
-				? new ScriptedValueMetric { _Value = valueMetric.Value } 
+				? new ScriptedValueMetric { _Value = valueMetric.Value, Meta = valueMetric.Meta } 
 				: this.TryGet<ScriptedValueMetric>(key);
 		}
 
@@ -79,7 +70,7 @@ namespace Nest
 				return named;
 
 			var anonymous = this.TryGet<Bucket>(key);
-			return anonymous != null ? new FiltersBucket(anonymous.Items) : null;
+			return anonymous != null ? new FiltersBucket(anonymous.Items) { Meta = anonymous.Meta } : null;
 		}
 
 		public SingleBucket Global(string key) => this.TryGet<SingleBucket>(key);
@@ -104,17 +95,12 @@ namespace Nest
 				: new DocCountBucket<SignificantTermItem>
 				{
 					DocCount = bucket.DocCount,
-					Items = bucket.Items.OfType<SignificantTermItem>().ToList()
+					Items = bucket.Items.OfType<SignificantTermItem>().ToList(),
+					Meta = bucket.Meta
 				};
 		}
 
-		public Bucket<KeyedBucket> Terms(string key)
-		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<KeyedBucket> {Items = bucket.Items.OfType<KeyedBucket>().ToList()};
-		}
+		public Bucket<KeyedBucket> Terms(string key) => GetBucket<KeyedBucket>(key);
 
 		public Bucket<HistogramItem> Histogram(string key)
 		{
@@ -124,7 +110,7 @@ namespace Nest
 				: new Bucket<HistogramItem>
 				{
 					Items = bucket.Items.OfType<HistogramItem>()
-						.Concat<HistogramItem>(bucket.Items.OfType<KeyedBucket>()
+						.Concat(bucket.Items.OfType<KeyedBucket>()
 							.Select(x =>
 								new HistogramItem
 								{
@@ -135,56 +121,40 @@ namespace Nest
 								}
 							)
 						)
-						.ToList()
+						.ToList(),
+					Meta = bucket.Meta
 				};
 		}
 
-		public Bucket<KeyedBucket> GeoHash(string key)
+		public Bucket<KeyedBucket> GeoHash(string key) => GetBucket<KeyedBucket>(key);
+
+		public Bucket<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
+
+		public Bucket<RangeItem> DateRange(string key) => GetBucket<RangeItem>(key);
+
+		public Bucket<RangeItem> IpRange(string key) => GetBucket<RangeItem>(key);
+
+		public Bucket<RangeItem> GeoDistance(string key) => GetBucket<RangeItem>(key);
+
+		public Bucket<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
+
+		private TAggregation TryGet<TAggregation>(string key)
+			where TAggregation : class, IAggregationResult
 		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<KeyedBucket> {Items = bucket.Items.OfType<KeyedBucket>().ToList()};
+			IAggregationResult agg;
+			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
 		}
 
-		public Bucket<RangeItem> Range(string key)
+		private Bucket<TBucketItem> GetBucket<TBucketItem>(string key)
+			where TBucketItem : IBucketItem
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
-		}
-
-		public Bucket<RangeItem> DateRange(string key)
-		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
-		}
-
-		public Bucket<RangeItem> IpRange(string key)
-		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
-		}
-
-		public Bucket<RangeItem> GeoDistance(string key)
-		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
-		}
-
-		public Bucket<DateHistogramItem> DateHistogram(string key)
-		{
-			var bucket = this.TryGet<Bucket>(key);
-			return bucket == null 
-				? null 
-				: new Bucket<DateHistogramItem> {Items = bucket.Items.OfType<DateHistogramItem>().ToList()};
+			if (bucket == null) return null;
+			return new Bucket<TBucketItem>
+			{
+				Items = bucket.Items.OfType<TBucketItem>().ToList(),
+				Meta = bucket.Meta
+			};
 		}
 	}
 }

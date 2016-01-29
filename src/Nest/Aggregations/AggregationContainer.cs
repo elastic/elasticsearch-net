@@ -265,6 +265,7 @@ namespace Nest
 			aggregator.WrapInContainer(container);
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
+			container.Meta = aggregator.Meta;
 			return container;
 		}
 
