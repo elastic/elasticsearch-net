@@ -24,7 +24,7 @@ namespace Nest
 			Action<TQueryInterface, IQueryContainer> assign
 			)
 			where TQuery : class, TQueryInterface, IQuery, new()
-			where TQueryInterface : class,IQuery
+			where TQueryInterface : class, IQuery
 		{
 			var container = new QueryContainerDescriptor<T>();
 			IQueryContainer c = container;
@@ -161,16 +161,16 @@ namespace Nest
 		public QueryContainer DateRange(Func<DateRangeQueryDescriptor<T>, IDateRangeQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Range = query);
 
-        /// <summary>
-        /// Matches documents with fields that have terms within a certain term range. 
-        /// </summary>
-        public QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
-            this.Assign(selector, (query, container) => container.Range = query);
+		/// <summary>
+		/// Matches documents with fields that have terms within a certain term range. 
+		/// </summary>
+		public QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
+			this.Assign(selector, (query, container) => container.Range = query);
 
-        /// <summary>
-        /// More like this query find documents that are “like” provided text by running it against one or more fields.
-        /// </summary>
-        public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
+		/// <summary>
+		/// More like this query find documents that are “like” provided text by running it against one or more fields.
+		/// </summary>
+		public QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) =>
 			this.Assign(selector, (query, container) => container.MoreLikeThis = query);
 
 		/// <summary>
@@ -338,12 +338,12 @@ namespace Nest
 		public QueryContainer Bool(Func<BoolQueryDescriptor<T>, IBoolQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Bool = query);
 
-        /// <summary>
-        /// the boosting query can be used to effectively demote results that match a given query. 
-        /// Unlike the "NOT" clause in bool query, this still selects documents that contain
-        /// undesirable terms, but reduces their overall score.
-        /// </summary>
-        public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
+		/// <summary>
+		/// the boosting query can be used to effectively demote results that match a given query. 
+		/// Unlike the "NOT" clause in bool query, this still selects documents that contain
+		/// undesirable terms, but reduces their overall score.
+		/// </summary>
+		public QueryContainer Boosting(Func<BoostingQueryDescriptor<T>, IBoostingQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Boosting = query);
 
 		/// <summary>
