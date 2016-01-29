@@ -64,7 +64,9 @@
         "System.Runtime": {
           "type": "build"
         },
-        "System.Runtime.Serialization": ""
+        "System.Runtime.Serialization": {
+          "type": "build"
+        }
       }
     },
     "net45": {
@@ -78,7 +80,9 @@
         "System.Runtime": {
           "type": "build"
         },
-        "System.Runtime.Serialization": ""
+        "System.Runtime.Serialization": {
+          "type": "build"
+        }
       }
     },
     "dotnet5.1": {
