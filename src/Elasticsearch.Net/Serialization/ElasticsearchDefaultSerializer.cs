@@ -54,7 +54,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public string CreatePropertyName(MemberInfo memberInfo) => null;
+		public IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo) => null;
 
 		private static string RemoveNewLinesAndTabs(string input)
 		{

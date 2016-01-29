@@ -13,7 +13,7 @@ namespace Elasticsearch.Net
 
 		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
 
-		string CreatePropertyName(MemberInfo memberInfo);
+		IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo);
 	}
 
 	public static class ElasticsearchSerializerExtensions
@@ -26,11 +26,8 @@ namespace Elasticsearch.Net
 				return ms.ToArray();
 			}
 		}
-		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented)
-		{
-			return serializer.SerializeToBytes(data, formatting).Utf8String();
-		}
-
+		public static string SerializeToString(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented) => 
+			serializer.SerializeToBytes(data, formatting).Utf8String();
 	}
 
 }

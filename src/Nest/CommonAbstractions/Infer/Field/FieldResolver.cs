@@ -9,6 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -99,7 +100,7 @@ namespace Nest
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
-			return _settings.Serializer?.CreatePropertyName(info) ?? _settings.DefaultFieldNameInferrer(name);
+			return _settings.Serializer?.CreatePropertyMapping(info)?.Name ?? _settings.DefaultFieldNameInferrer(name);
 		}
 
 		private string Resolve(Expression expression)

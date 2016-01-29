@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -58,10 +59,23 @@ namespace Nest
 			}
 		}
 
-		public virtual string CreatePropertyName(MemberInfo memberInfo)
+		protected readonly ConcurrentDictionary<int, IPropertyMapping> Properties = new ConcurrentDictionary<int, IPropertyMapping>();
+
+		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
+		{
+			IPropertyMapping mapping;
+			if (Properties.TryGetValue(memberInfo.GetHashCode(), out mapping)) return mapping;
+			mapping =  PropertyMappingFromAtrributes(memberInfo);
+			this.Properties.TryAdd(memberInfo.GetHashCode(), mapping);
+			return mapping;
+		}
+
+		private static IPropertyMapping PropertyMappingFromAtrributes(MemberInfo memberInfo)
 		{
 			var jsonProperty = memberInfo.GetCustomAttribute<JsonPropertyAttribute>(true);
-			return jsonProperty?.PropertyName;
+			var ignoreProperty = memberInfo.GetCustomAttribute<JsonIgnoreAttribute>(true);
+			if (jsonProperty == null && ignoreProperty == null) return null;
+			return new PropertyMapping {Name = jsonProperty?.PropertyName, Ignore = ignoreProperty != null};
 		}
 
 		public virtual T Deserialize<T>(Stream stream)

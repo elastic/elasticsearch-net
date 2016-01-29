@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest

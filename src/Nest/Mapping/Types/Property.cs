@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Reflection;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -28,11 +29,17 @@ namespace Nest
 
 		[JsonProperty("copy_to")]
 		Fields CopyTo { get; set; }
+
 	}
 
-	public abstract class Property : IProperty
+	public interface IPropertyWithClrOrigin
 	{
-	    protected Property(TypeName typeName)
+		PropertyInfo CLrOrigin { get; set; }
+	}
+
+	public abstract class Property : IProperty, IPropertyWithClrOrigin
+	{
+		protected Property(TypeName typeName)
 		{
 			Type = typeName;
 		}
@@ -45,5 +52,6 @@ namespace Nest
 		public string IndexName { get; set; }
 		public SimilarityOption? Similarity { get; set; }
 		public bool? Store { get; set; }
+		PropertyInfo IPropertyWithClrOrigin.CLrOrigin { get; set; }
 	}
 }

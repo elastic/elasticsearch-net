@@ -607,6 +607,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public string PropertyToIgnore { get; set; }
 
 			public string AnotherPropertyToIgnore { get; set; }
+
+			[JsonIgnore]
+			public string JsonIgnoredProperty { get; set; }
 		}
 
 		/**

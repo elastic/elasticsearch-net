@@ -290,10 +290,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		{
 			public CustomSerializer(IConnectionSettingsValues settings) : base(settings) { }
 
-			public override string CreatePropertyName(MemberInfo memberInfo)
+			public override IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 			{
-				if (memberInfo.Name == "AskSerializer") return "ask";
-				return base.CreatePropertyName(memberInfo);
+				if (memberInfo.Name == "AskSerializer") return new PropertyMapping { Name = "ask" };
+				return base.CreatePropertyMapping(memberInfo);
 			}
 		}
 
