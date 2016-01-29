@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	public interface IRepository
+	public interface ISnapshotRepository
 	{
 		[JsonProperty("type")]
 		string Type { get; }
 	}
 
-	public interface IRepository<TSettings> : IRepository
+	public interface IRepository<TSettings> : ISnapshotRepository
 		where TSettings : class, IRepositorySettings
 	{
 		[JsonProperty("settings")]

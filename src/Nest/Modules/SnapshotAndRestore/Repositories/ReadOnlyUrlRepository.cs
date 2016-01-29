@@ -61,7 +61,7 @@ namespace Nest
 	public class ReadOnlyUrlRepositoryDescriptor 
 		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
 	{
-		string IRepository.Type { get { return "url"; } }
+		string ISnapshotRepository.Type { get { return "url"; } }
 		IReadOnlyUrlRepositorySettings IRepository<IReadOnlyUrlRepositorySettings>.Settings { get; set; }
 
 		public ReadOnlyUrlRepositoryDescriptor Settings(string location, Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null) =>

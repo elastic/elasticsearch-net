@@ -7,18 +7,18 @@ namespace Nest
 	[JsonConverter(typeof(CreateRepositoryJsonConverter))]
 	public partial interface ICreateRepositoryRequest 
 	{
-		IRepository Repository { get; set; }
+		ISnapshotRepository Repository { get; set; }
 	}
 
 	public partial class CreateRepositoryRequest 
 	{
-		public IRepository Repository { get; set; }
+		public ISnapshotRepository Repository { get; set; }
 	}
 
 	[DescriptorFor("SnapshotCreateRepository")]
 	public partial class CreateRepositoryDescriptor
 	{
-		IRepository ICreateRepositoryRequest.Repository { get; set; }
+		ISnapshotRepository ICreateRepositoryRequest.Repository { get; set; }
 
 		/// <summary>
 		///	The shared file system repository ("type": "fs") is using shared file system to store snapshot. 
@@ -65,6 +65,6 @@ namespace Nest
 		/// <summary>
 		/// Register a custom repository
 		/// </summary>
-		public CreateRepositoryDescriptor Custom(IRepository repository) => Assign(a => a.Repository = repository);
+		public CreateRepositoryDescriptor Custom(ISnapshotRepository repository) => Assign(a => a.Repository = repository);
 	}
 }

@@ -21,7 +21,7 @@ namespace Nest
 				.ToDictionary(p => p.Name, p => p.Value);
 			if (!repositories.HasAny())
 				return response;
-			response.Repositories = new Dictionary<string, IRepository>();
+			response.Repositories = new Dictionary<string, ISnapshotRepository>();
 			foreach (var kv in repositories)
 			{
 				var repository = JObject.FromObject(kv.Value);
@@ -59,7 +59,7 @@ namespace Nest
 		}
 
 		private TRepository GetRepository<TRepository, TSettings>(JObject settings)
-			where TRepository : IRepository
+			where TRepository : ISnapshotRepository
 			where TSettings : IRepositorySettings
 		{
 			if (settings == null)
