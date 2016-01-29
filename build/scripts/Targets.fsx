@@ -72,7 +72,8 @@ Target "Release" <| fun _ ->
 
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
-    Release.PublishCanaryBuild (getBuildParam "apikey")
+    let apiKey = (getBuildParam "apikey");
+    if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 
