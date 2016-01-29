@@ -7,9 +7,6 @@ namespace Nest
 	public interface IAggregation 
 	{
 		string Name { get; set; }
-
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		[JsonProperty("meta")]
 		IDictionary<string, object> Meta { get; set; }
 	}
 
