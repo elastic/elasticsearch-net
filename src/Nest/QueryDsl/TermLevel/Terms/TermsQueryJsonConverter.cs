@@ -57,7 +57,7 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var filter = new TermsQueryDescriptor<object, object>();
+			var filter = new TermsQueryDescriptor<object>();
 			ITermsQuery f = filter;
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;

@@ -32,14 +32,13 @@ namespace Nest
 		internal override void WrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
 
-	public class WildcardQueryDescriptor<T> : 
-		TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, 
+	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, 
 		IWildcardQuery 
 		where T : class
 	{
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
 
-		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
+		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewrite)
 		{
 			((IWildcardQuery)this).Rewrite = rewrite;
 			return this;

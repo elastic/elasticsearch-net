@@ -19,8 +19,7 @@ namespace Nest
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
-	public class TermQueryDescriptorBase<TDescriptor, T> 
-		: FieldNameQueryDescriptorBase<TermQueryDescriptorBase<TDescriptor, T>, ITermQuery, T>
+	public abstract class TermQueryDescriptorBase<TDescriptor, T> : FieldNameQueryDescriptorBase<TDescriptor, ITermQuery, T>
 		, ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -72,13 +73,7 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer Terms<TValue>(Func<TermsQueryDescriptor<T, TValue>, ITermsQuery> selector) =>
-			this.Assign(selector, (query, container) => container.Terms = query);
-
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms(Func<TermsQueryDescriptor<T, string>, ITermsQuery> selector) =>
+		public QueryContainer Terms(Func<TermsQueryDescriptor<T>, ITermsQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Terms = query);
 
 		/// <summary>
@@ -363,47 +358,15 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		/// <typeparam name="TValue">The type of the field</typeparam>
-		public QueryContainer Term<TValue>(Expression<Func<T, TValue>> fieldDescriptor, TValue value, double? boost = null)
-		{
-			return this.Term(t =>
-			{
-				t.Field(fieldDescriptor).Value(value);
-				if (boost.HasValue)
-					t.Boost(boost.Value);
-				return t;
-			});
-		}
+		public QueryContainer Term(Expression<Func<T, object>> field, object value, double? boost = null, string name = null) =>
+			this.Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null)
-		{
-			return this.Term(t =>
-			{
-				t.Field(fieldDescriptor).Value(value);
-				if (boost.HasValue)
-					t.Boost(boost.Value);
-				return t;
-			});
-		}
-
-		/// <summary>
-		/// Matches documents that have fields that contain a term (not analyzed). 
-		/// The term query maps to Lucene TermQuery. 
-		/// </summary>
-		public QueryContainer Term(string field, object value, double? boost = null)
-		{
-			return this.Term(t =>
-			{
-				t.Field(field).Value(value);
-				if (boost.HasValue)
-					t.Boost(boost.Value);
-				return t;
-			});
-		}
+		public QueryContainer Term(string field, object value, double? boost = null, string name = null) => 
+			this.Term(t => t.Field(field).Value(value).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
@@ -419,16 +382,8 @@ namespace Nest
 		/// over many terms. In order to prevent extremely slow wildcard queries, a wildcard term should 
 		/// not start with one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
-		{
-			return this.Wildcard(t =>
-			{
-				t.Field(fieldDescriptor).Value(value);
-				if (boost.HasValue) t.Boost(boost.Value);
-				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
-				return t;
-			});
-		}
+		public QueryContainer Wildcard(Expression<Func<T, object>> field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) => 
+			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
@@ -437,16 +392,8 @@ namespace Nest
 		/// In order to prevent extremely slow wildcard queries, a wildcard term should not start with 
 		/// one of the wildcards * or ?. The wildcard query maps to Lucene WildcardQuery.
 		/// </summary>
-		public QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
-		{
-			return this.Wildcard(t =>
-			{
-				t.Field(field).Value(value);
-				if (boost.HasValue) t.Boost(boost.Value);
-				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
-				return t;
-			});
-		}
+		public QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			this.Wildcard(t => t.Field(field).Value(value).Rewrite(rewrite).Boost(boost).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
@@ -462,31 +409,15 @@ namespace Nest
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>
-		public QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
-		{
-			return this.Prefix(t =>
-			{
-				t.Field(fieldDescriptor).Value(value);
-				if (boost.HasValue) t.Boost(boost.Value);
-				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
-				return t;
-			});
-		}
+		public QueryContainer Prefix(Expression<Func<T, object>> field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) => 
+			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
 		/// </summary>	
-		public QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null)
-		{
-			return this.Prefix(t =>
-			{
-				t.Field(field).Value(value);
-				if (boost.HasValue) t.Boost(boost.Value);
-				if (rewrite.HasValue) t.Rewrite(rewrite.Value);
-				return t;
-			});
-		}
+		public QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			this.Prefix(t => t.Field(field).Value(value).Boost(boost).Rewrite(rewrite).Name(name));
 
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
