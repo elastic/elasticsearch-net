@@ -3,6 +3,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Nest.Infer;
+using System.Collections.Generic;
 
 namespace Tests.Aggregations
 {
@@ -69,23 +70,105 @@ namespace Tests.Aggregations
 				};
 		}
 
-		public class AggregationDslUsage : Usage
+		public class MetaUsage : Usage
 		{
-			/**
-			 * For this reason the OIS syntax can be shortened dramatically by using `*Agg` related family,
-			 * These allow you to forego introducing intermediary Dictionaries to represent the aggregation DSL.
-			 * It also allows you to combine multiple aggregations using bitwise AND (`&&`) operator. 
-			 * 
-			 * Compare the following example with the previous vanilla OIS syntax
-			 */
+			protected override object ExpectJson => new
+			{
+				aggs = new
+				{
+					my_terms_agg = new
+					{
+						terms = new
+						{
+							field = "name",
+							meta = new
+							{
+								foo = "bar",
+								count = 1
+							}
+						}
+					},
+					my_avg_agg = new
+					{
+						avg = new
+						{
+							field = "numberOfCommits",
+							meta = new
+							{
+								foo = "bar",
+								count = 1
+							}
+						}
+					},
+					my_derivative_agg = new
+					{
+						derivative = new
+						{
+							buckets_path = "my_avg_agg",
+							meta = new
+							{
+								foo = "bar",
+								count = 1
+							}
+						}
+					}
+				}
+			};
+
+
+			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+				.Aggregations(aggs => aggs
+					.Terms("my_terms_agg", t => t
+						.Field(p => p.Name)
+						.Meta(meta => meta
+							.Add("foo", "bar")
+							.Add("count", 1)
+						)
+					)
+					.Average("my_avg_agg", avg => avg
+						.Field(p => p.NumberOfCommits)
+						.Meta(meta => meta
+							.Add("foo", "bar")
+							.Add("count", 1)
+						)
+					)
+					.Derivative("my_derivative_agg", dv => dv
+						.BucketsPath("my_avg_agg")
+						.Meta(meta => meta
+							.Add("foo", "bar")
+							.Add("count", 1)
+						)
+					)
+				);
+
+
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+					Aggregations = new TermsAggregation("my_terms_agg")
 					{
-						Aggregations = 
-							new AverageAggregation("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
-							&& new MaxAggregation("max_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+						Field = "name",
+						Meta = new Dictionary<string, object>
+						{
+							{ "foo", "bar" },
+							{ "count", 1 }
+						}
+					} 
+					&& new AverageAggregation("my_avg_agg", "numberOfCommits")
+					{
+						Meta = new Dictionary<string, object>
+						{
+							{ "foo", "bar" },
+							{ "count", 1 }
+						}
+					}
+					&& new DerivativeAggregation("my_derivative_agg", "my_avg_agg")
+					{
+						Meta = new Dictionary<string, object>
+						{
+							{ "foo", "bar" },
+							{ "count", 1 }
+						}
 					}
 				};
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -42,10 +43,15 @@ namespace Nest
 
 		string IAggregation.Name { get; set; }
 
+		IDictionary<string, object> IAggregation.Meta { get; set; }
+
 		public TPipelineAggregation Format(string format) => Assign(a => a.Format = format);
 
 		public TPipelineAggregation GapPolicy(GapPolicy gapPolicy) => Assign(a => a.GapPolicy = gapPolicy);
 
 		public TPipelineAggregation BucketsPath(TBucketsPath bucketsPath) => Assign(a => a.BucketsPath = bucketsPath);
+
+		public TPipelineAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

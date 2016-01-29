@@ -8,9 +8,14 @@ namespace Nest
 	{
 	}
 
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAggregation 
 	{
 		string Name { get; set; }
+
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		[JsonProperty("meta")]
+		IDictionary<string, object> Meta { get; set; }
 	}
 
 	public abstract class AggregationBase : IAggregation
