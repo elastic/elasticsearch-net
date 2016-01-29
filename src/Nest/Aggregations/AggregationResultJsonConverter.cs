@@ -181,18 +181,17 @@ namespace Nest
 		{
 			reader.Read();
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
-			var bucket = new SingleBucket() { DocCount = docCount };
+			var bucket = new SingleBucket { DocCount = docCount };
 			reader.Read();
 			if (reader.TokenType == JsonToken.PropertyName
 				&& ((string)reader.Value) == "buckets"
 				)
 			{
 				var b = this.GetBucketAggregation(reader, serializer) as Bucket;
-				return new DocCountBucket()
+				return new Bucket
 				{
 					DocCount = docCount,
 					Items = b.Items
-
 				};
 			}
 

@@ -7,21 +7,12 @@ namespace Nest
 		long DocCount { get; }
 	}
 
-	public class DocCountBucket<TBucketItem> : BucketBase, IDocCountBucket
+	public class DocCountBucket<TBucketItem> : Bucket<TBucketItem>, IDocCountBucket
 		where TBucketItem : IBucketItem
 	{
 		public DocCountBucket() { }
 		public DocCountBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
-		public IList<TBucketItem> Items { get; set; }
-
 		public long DocCount { get; internal set; }
-	}
-
-	public class DocCountBucket : BucketBase, IAggregationResult
-	{
-		public long DocCount { get; set; }
-		public IEnumerable<IAggregationResult> Items { get; set; }
-
 	}
 }

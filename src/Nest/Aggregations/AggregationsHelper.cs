@@ -89,7 +89,7 @@ namespace Nest
 
 		public DocCountBucket<SignificantTermItem> SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<DocCountBucket>(key);
+			var bucket = this.TryGet<Bucket>(key);
 			return bucket == null
 				? null
 				: new DocCountBucket<SignificantTermItem>
