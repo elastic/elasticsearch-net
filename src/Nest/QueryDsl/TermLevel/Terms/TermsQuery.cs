@@ -65,9 +65,9 @@ namespace Nest
 
 		public TermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 
-		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
-		public TermsQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
 	}
 }

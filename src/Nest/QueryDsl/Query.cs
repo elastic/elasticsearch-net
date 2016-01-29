@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace Nest
@@ -114,17 +116,17 @@ namespace Nest
 		public static QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Nested(selector);
 
-        public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
+		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);
 
-        public static QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
+		public static QueryContainer Prefix(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Prefix(field, value, boost, rewrite, name);
 
-        public static QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
-            new QueryContainerDescriptor<T>().Prefix(selector);
+		public static QueryContainer Prefix(Func<PrefixQueryDescriptor<T>, IPrefixQuery> selector) =>
+			new QueryContainerDescriptor<T>().Prefix(selector);
 
-        public static QueryContainer QueryString(Func<QueryStringQueryDescriptor<T>, IQueryStringQuery> selector) =>
-            new QueryContainerDescriptor<T>().QueryString(selector);
+		public static QueryContainer QueryString(Func<QueryStringQueryDescriptor<T>, IQueryStringQuery> selector) =>
+			new QueryContainerDescriptor<T>().QueryString(selector);
 
 		public static QueryContainer Range(Func<NumericRangeQueryDescriptor<T>, INumericRangeQuery> selector) =>
 			new QueryContainerDescriptor<T>().Range(selector);
@@ -168,22 +170,19 @@ namespace Nest
 		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Template(selector);
 
-        public static QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, boost, name);
+		public static QueryContainer Term(Expression<Func<T, object>> fieldDescriptor, object value, double? boost = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, boost, name);
 
-        public static QueryContainer Term(string field, object value, double? boost = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Term(field, value, boost, name);
+		public static QueryContainer Term(string field, object value, double? boost = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Term(field, value, boost, name);
 
-        public static QueryContainer Term(Func<TermQueryDescriptor<T>, ITermQuery> selector) =>
-            new QueryContainerDescriptor<T>().Term(selector);
+		public static QueryContainer Term(Func<TermQueryDescriptor<T>, ITermQuery> selector) =>
+			new QueryContainerDescriptor<T>().Term(selector);
 
-        public static QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
-            new QueryContainerDescriptor<T>().TermRange(selector);
+		public static QueryContainer TermRange(Func<TermRangeQueryDescriptor<T>, ITermRangeQuery> selector) =>
+			new QueryContainerDescriptor<T>().TermRange(selector);
 
-        public static QueryContainer Terms(Func<TermsQueryDescriptor<T>, ITermsQuery> selector) =>
-            new QueryContainerDescriptor<T>().Terms(selector);
-
-		public static QueryContainer Terms(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) =>
+		public static QueryContainer Terms(Func<TermsQueryDescriptor<T>, ITermsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Terms(selector);
 
 		public static QueryContainer Type(Func<TypeQueryDescriptor, ITypeQuery> selector) =>
@@ -191,15 +190,14 @@ namespace Nest
 
 		public static QueryContainer Type<TOther>() => Type(q => q.Value<TOther>());
 
-        public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
+		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Wildcard(fieldDescriptor, value, boost, rewrite, name);
 
-        public static QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
-            new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
+		public static QueryContainer Wildcard(string field, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
+			new QueryContainerDescriptor<T>().Wildcard(field, value, boost, rewrite, name);
 
-        public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
-            new QueryContainerDescriptor<T>().Wildcard(selector);
-
+		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
+			new QueryContainerDescriptor<T>().Wildcard(selector);
 
 #pragma warning disable 618
 		[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
