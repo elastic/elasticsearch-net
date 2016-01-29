@@ -9,7 +9,7 @@
 		public TDescriptor Name(string name) => Assign(a => a.Name = name);
 
 		double? IQuery.Boost { get; set; }
-		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
+		public TDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
 
 		bool IQuery.Conditionless => this.Conditionless;
 		protected abstract bool Conditionless { get; }

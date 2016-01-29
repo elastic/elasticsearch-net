@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
@@ -35,12 +36,24 @@ namespace Nest
 
 		public IdsQueryDescriptor Types(params TypeName[] types) => Assign(a=>a.Types = types);
 
-		public IdsQueryDescriptor Types(IEnumerable<TypeName> values) => Types(values.ToArray());
+		public IdsQueryDescriptor Types(IEnumerable<TypeName> values) => Types(values?.ToArray());
 		
 		public IdsQueryDescriptor Types(Types types) => Assign(a=>a.Types = types);
 
 		public IdsQueryDescriptor Values(params Id[] values) => Assign(a => a.Values = values);
 
-		public IdsQueryDescriptor Values(IEnumerable<Id> values) => Values(values.ToArray());
+		public IdsQueryDescriptor Values(IEnumerable<Id> values) => Values(values?.ToArray());
+
+		public IdsQueryDescriptor Values(params string[] values) => Assign(a => a.Values = values?.Select(v=>(Id)v));
+
+		public IdsQueryDescriptor Values(IEnumerable<string> values) => Values(values.ToArray());
+
+		public IdsQueryDescriptor Values(params long[] values) => Assign(a => a.Values = values?.Select(v=>(Id)v));
+
+		public IdsQueryDescriptor Values(IEnumerable<long> values) => Values(values.ToArray());
+
+		public IdsQueryDescriptor Values(params Guid[] values) => Assign(a => a.Values = values?.Select(v=>(Id)v));
+
+		public IdsQueryDescriptor Values(IEnumerable<Guid> values) => Values(values.ToArray());
 	}
 }

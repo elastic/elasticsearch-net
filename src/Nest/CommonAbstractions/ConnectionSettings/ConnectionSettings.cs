@@ -133,7 +133,6 @@ namespace Nest
 		/// <summary>
 		/// Map types to a index names. Takes precedence over DefaultIndex().
 		/// </summary>
-		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeIndices(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -143,7 +142,6 @@ namespace Nest
 		/// <summary>
 		/// Allows you to override typenames, takes priority over the global DefaultTypeNameInferrer()
 		/// </summary>
-		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapDefaultTypeNames(Action<FluentDictionary<Type, string>> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull(nameof(mappingSelector));
@@ -151,7 +149,6 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapIdPropertyFor<TDocument>(Expression<Func<TDocument, object>> objectPath)
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
@@ -173,7 +170,6 @@ namespace Nest
 			return (TConnectionSettings)this;
 		}
 
-		[Obsolete("Will be removed in NEST 3.0, please move to InferMappingFor<T>()")]
 		public TConnectionSettings MapPropertiesFor<TDocument>(Action<PropertyMappingDescriptor<TDocument>> propertiesSelector)
 			where TDocument : class
 		{

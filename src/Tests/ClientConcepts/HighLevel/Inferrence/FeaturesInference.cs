@@ -4,7 +4,7 @@ using Tests.Framework;
 using static Nest.Indices;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.RouteValues
+namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FeaturesInference
 	{

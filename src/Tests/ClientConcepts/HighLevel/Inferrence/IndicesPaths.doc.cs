@@ -2,7 +2,7 @@
 using Tests.Framework;
 using Tests.Framework.MockData;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
+namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class IndicesPaths
 	{
@@ -23,6 +23,18 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 			singleIndexFromString.Match(
 				all => all.Should().BeNull(),
 				many => many.Indices.Should().HaveCount(1).And.Contain("name")
+			);
+			multipleIndicesFromString.Match(
+				all => all.Should().BeNull(),
+				many => many.Indices.Should().HaveCount(2).And.Contain("name2")
+			);
+			allFromString.Match(
+				all => all.Should().NotBeNull(),
+				many => many.Indices.Should().BeNull()
+			);
+			allWithOthersFromString.Match(
+				all => all.Should().NotBeNull(),
+				many => many.Indices.Should().BeNull()
 			);
 		}
 

@@ -133,7 +133,7 @@ namespace Nest
 	public class S3RepositoryDescriptor 
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
-		string IRepository.Type { get; } = "s3";
+		string ISnapshotRepository.Type { get; } = "s3";
 		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
 
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>

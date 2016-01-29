@@ -3,7 +3,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.DocumentPaths
+namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class DocumentPaths
 	{
