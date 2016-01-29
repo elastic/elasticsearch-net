@@ -8,6 +8,6 @@ namespace Nest
 	[ExactContractJsonConverter(typeof(AggregationResultJsonConverter))]
 	public interface IAggregationResult
 	{
-		Dictionary<string, object> Meta { get; }
+		Dictionary<string, object> Meta { get; set; }
 	}
 }

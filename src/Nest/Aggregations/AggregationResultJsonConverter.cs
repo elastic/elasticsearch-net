@@ -38,40 +38,74 @@ namespace Nest
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
+			IAggregationResult result = null;
+
 			var property = reader.Value as string;
 			if (_numeric.IsMatch(property))
-				return GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
+				result = GetPercentilesMetricAggregation(reader, serializer, oldFormat: true);
 
+			Dictionary<string, object> meta = null;
+			if (property == "meta")
+				meta = GetMetadata(reader);
+			property = reader.Value as string;
 			switch (property)
 			{
 				case "values":
 					reader.Read();
 					reader.Read();
-					return GetPercentilesMetricAggregation(reader, serializer);
+					result = GetPercentilesMetricAggregation(reader, serializer);
+					break;
 				case "value":
-					return GetValueMetricOrAggregation(reader, serializer);
+					result = GetValueMetricOrAggregation(reader, serializer);
+					break;
 				case "buckets":
 				case "doc_count_error_upper_bound":
-					return GetBucketAggregation(reader, serializer);
+					result = GetBucketAggregation(reader, serializer);
+					break;
 				case "key":
-					return GetKeyedBucketItem(reader, serializer);
+					result = GetKeyedBucketItem(reader, serializer);
+					break;
 				case "from":
 				case "to":
-					return GetRangeAggregation(reader, serializer);
+					result = GetRangeAggregation(reader, serializer);
+					break;
 				case "key_as_string":
-					return GetDateHistogramAggregation(reader, serializer);
+					result = GetDateHistogramAggregation(reader, serializer);
+					break;
 				case "count":
-					return GetStatsAggregation(reader, serializer);
+					result = GetStatsAggregation(reader, serializer);
+					break;
 				case "doc_count":
-					return GetSingleBucketAggregation(reader, serializer);
+					result = GetSingleBucketAggregation(reader, serializer);
+					break;
 				case "bounds":
-					return GetGeoBoundsMetricAggregation(reader, serializer);
+					result = GetGeoBoundsMetricAggregation(reader, serializer);
+					break;
 				case "hits":
-					return GetHitsAggregation(reader, serializer);
+					result = GetHitsAggregation(reader, serializer);
+					break;
 				default:
 					return null;
-
 			}
+			result.Meta = meta;
+			return result;
+		}
+
+		private Dictionary<string, object> GetMetadata(JsonReader reader)
+		{
+			var meta = new Dictionary<string, object>();
+			reader.Read();
+			reader.Read();
+			while (reader.TokenType != JsonToken.EndObject)
+			{
+				var key = reader.Value as string;
+				reader.Read();
+				var value = reader.Value;
+				meta.Add(key, value);
+				reader.Read();
+			}
+			reader.Read();
+			return meta;
 		}
 
 		private IAggregationResult GetHitsAggregation(JsonReader reader, JsonSerializer serializer)
@@ -222,7 +256,7 @@ namespace Nest
 
 			reader.Read();
 			extendedStatsMetric.SumOfSquares = (reader.Value as double?);
-			reader.Read(); 
+			reader.Read();
 			reader.Read();
 			extendedStatsMetric.Variance = (reader.Value as double?);
 			reader.Read(); reader.Read();

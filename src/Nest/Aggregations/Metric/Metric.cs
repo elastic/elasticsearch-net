@@ -9,6 +9,6 @@ namespace Nest
 
 	public abstract class MetricBase : IMetric
 	{
-		public Dictionary<string, object> Meta { get; internal set; }
+		public Dictionary<string, object> Meta { get; set; }
 	}
 }
