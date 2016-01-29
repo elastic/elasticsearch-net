@@ -527,7 +527,7 @@ namespace Nest
 			where TAggregatorInterface : IAggregation
 		{
 			var aggregator = selector(new TAggregator());
-
+			
 			//create new isolated container for new aggregator and assign to the right property
 			var container = new AggregationContainer();
 			assignToProperty(container, aggregator);

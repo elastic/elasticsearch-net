@@ -18,6 +18,10 @@ namespace Tests.Aggregations.Bucket.Terms
 			{
 				states = new
 				{
+					meta = new
+					{
+						foo = "bar"
+					},
 					terms = new
 					{
 						field = Field<Project>(p => p.State),
@@ -54,6 +58,9 @@ namespace Tests.Aggregations.Bucket.Terms
 					.Script("'State of Being: '+_value")
 					.Order(TermsOrder.TermAscending)
 					.Order(TermsOrder.CountDescending)
+					.Meta(m => m
+						.Add("foo", "bar")
+					)
 				)
 			);
 
@@ -74,6 +81,10 @@ namespace Tests.Aggregations.Bucket.Terms
 					{
 						TermsOrder.TermAscending,
 						TermsOrder.CountDescending
+					},
+					Meta = new Dictionary<string, object>
+					{
+						{ "foo", "bar" }
 					}
 				}
 			};
@@ -88,6 +99,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterOrEqualTo(1);
 			}
+			states.Meta.Should().NotBeNull();
 		}
 	}
 }

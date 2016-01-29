@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class TopHitsMetric : IMetric
+	public class TopHitsMetric : MetricBase
 	{
 		private readonly IEnumerable<JObject> _hits;
 

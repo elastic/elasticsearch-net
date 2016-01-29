@@ -18,9 +18,10 @@ namespace Nest
 		public long DocCount { get; internal set; }
 	}
 
-	public class DocCountBucket : IAggregationResult
+	public class DocCountBucket : BucketBase, IAggregationResult
 	{
 		public long DocCount { get; set; }
 		public IEnumerable<IAggregationResult> Items { get; set; }
+
 	}
 }

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class GeoBoundsMetric : IMetric
+	public class GeoBoundsMetric : MetricBase
 	{
 		public GeoBoundsMetric()
 		{

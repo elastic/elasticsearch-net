@@ -376,19 +376,18 @@ namespace Nest
 			if (reader.TokenType == JsonToken.StartObject)
 			{
 				reader.Read();
-				var temp = new Dictionary<string, IAggregationResult>();
+				var aggs = new Dictionary<string, IAggregationResult>();
 				do
 				{
 					var name = reader.Value.ToString();
 					reader.Read();
 					var innerAgg = this.ReadAggregation(reader, serializer);
-					temp.Add(name, innerAgg);
+					aggs.Add(name, innerAgg);
 					reader.Read();
 				} while (reader.TokenType != JsonToken.EndObject);
 
-				var agg = new AggregationsHelper(temp);
 				reader.Read();
-				return new FiltersBucket(agg);
+				return new FiltersBucket(aggs);
 			}
 
 			if (reader.TokenType != JsonToken.StartArray)

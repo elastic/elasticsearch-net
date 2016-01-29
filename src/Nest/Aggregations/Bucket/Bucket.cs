@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Nest
@@ -7,15 +8,14 @@ namespace Nest
 		IDictionary<string, IAggregationResult> Aggregations { get; }
 	}
 
-	public interface IBucketItem : IAggregationResult
-	{
-	}
+	public interface IBucketItem { }
 
 	public class Bucket : IAggregationResult
 	{
 		public IEnumerable<IAggregationResult> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
+		public Dictionary<string, object> Meta { get; set; }
 	}
 
 	public class Bucket<TBucketItem> : BucketBase
@@ -31,5 +31,7 @@ namespace Nest
 	{
 		protected BucketBase() { }
 		protected BucketBase(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+
+		public Dictionary<string, object> Meta { get; set; }
 	}
 }

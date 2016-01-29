@@ -26,7 +26,8 @@ namespace Tests.Aggregations
 					name_of_child_agg = new
 					{
 						children = new { type = "commits" },
-						aggs = new {
+						aggs = new
+						{
 							average_per_child = new
 							{
 								avg = new { field = "confidenceFactor" }
@@ -44,26 +45,26 @@ namespace Tests.Aggregations
 			 * It benefits from types that are carried over to sub aggregations
 			 */
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-				.Aggregations(aggs=>aggs
+				.Aggregations(aggs => aggs
 					.Children<CommitActivity>("name_of_child_agg", child => child
-						.Aggregations(childAggs=>childAggs
-							.Average("average_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
-							.Max("max_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
+						.Aggregations(childAggs => childAggs
+							.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+							.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 						)
 					)
 				);
-			
+
 			/**
 			 * The object initializer syntax (OIS) is a one-to-one mapping with how aggregations 
 			 * have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one 
 			 * mapping, being dictionary based in C# means it can grow exponentially in complexity rather quickly.
 			 */
-			protected override SearchRequest<Project> Initializer => 
+			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
 					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 					{
-						Aggregations = 
+						Aggregations =
 							new AverageAggregation("average_per_child", "confidenceFactor") &&
 							new MaxAggregation("max_per_child", "confidenceFactor")
 					}
@@ -78,38 +79,39 @@ namespace Tests.Aggregations
 				{
 					my_terms_agg = new
 					{
+						meta = new
+						{
+							foo = "bar",
+							count = 1
+						},
 						terms = new
 						{
-							field = "name",
-							meta = new
-							{
-								foo = "bar",
-								count = 1
-							}
+							field = "name"
+
 						}
 					},
 					my_avg_agg = new
 					{
+						meta = new
+						{
+							foo = "bar",
+							count = 1
+						},
 						avg = new
 						{
-							field = "numberOfCommits",
-							meta = new
-							{
-								foo = "bar",
-								count = 1
-							}
+							field = "numberOfCommits"
 						}
 					},
 					my_derivative_agg = new
 					{
+						meta = new
+						{
+							foo = "bar",
+							count = 1
+						},
 						derivative = new
 						{
-							buckets_path = "my_avg_agg",
-							meta = new
-							{
-								foo = "bar",
-								count = 1
-							}
+							buckets_path = "my_avg_agg"
 						}
 					}
 				}
@@ -153,7 +155,7 @@ namespace Tests.Aggregations
 							{ "foo", "bar" },
 							{ "count", 1 }
 						}
-					} 
+					}
 					&& new AverageAggregation("my_avg_agg", "numberOfCommits")
 					{
 						Meta = new Dictionary<string, object>
