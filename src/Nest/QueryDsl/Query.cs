@@ -195,15 +195,19 @@ namespace Nest
 			new QueryContainerDescriptor<T>().Wildcard(field, value, boost);
 
 #pragma warning disable 618
+		[Obsolete("Use the bool query instead with a must clause for the query and a filter clause for the filter.")]
 		public static QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) =>
 			new QueryContainerDescriptor<T>().Filtered(selector);
 
+		[Obsolete("Use the bool query instead")]
 		public static QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
 			new QueryContainerDescriptor<T>().Or(selector);
 
+		[Obsolete("Use the should clause on the bool query instead, note that this bool query should not have other clauses to be semantically correct")]
 		public static QueryContainer And(Func<AndQueryDescriptor<T>, IAndQuery> selector) =>
 			new QueryContainerDescriptor<T>().And(selector);
 
+		[Obsolete("Use the bool query with must_not clause instead..")]
 		public static QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
 			new QueryContainerDescriptor<T>().Not(selector);
 #pragma warning restore 618

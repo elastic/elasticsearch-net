@@ -298,7 +298,7 @@ namespace Nest
 		/// <summary>
 		/// A query that matches documents using the OR boolean operator on other queries
 		/// </summary>
-		[Obsolete("Use the bool query instead")]
+		[Obsolete("Use the should clause on the bool query instead, note that this bool query should not have other clauses to be semantically correct")]
 		public QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
 			this.Assign(selector, (query, container) => container.Or = query);
 
