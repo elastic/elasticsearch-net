@@ -28,7 +28,10 @@ namespace Nest
 		{
 			return q.Field.IsConditionless() 
 				|| (
-				(!q.Terms.HasAny() || q.Terms.All(t=>t == null || ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false))
+				(q.Terms == null 
+					|| !q.Terms.HasAny() 
+					|| q.Terms.All(t=>t == null 
+					|| ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false))
 				)
 				&& 
 				(q.TermsLookup == null
@@ -63,9 +66,9 @@ namespace Nest
 
 		public TermsQueryDescriptor<T, TValue> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 
-		public TermsQueryDescriptor<T, TValue> Terms(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T, TValue> Terms(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
-		public TermsQueryDescriptor<T, TValue> Terms(params TValue[] terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T, TValue> Terms(params TValue[] terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
 	}
 }

@@ -32,7 +32,7 @@ namespace Nest
 		public static DateMathExpression Anchored(DateTime anchor) => new DateMathExpression(anchor);
 		public static DateMathExpression Anchored(string dateAnchor) => new DateMathExpression(dateAnchor);
 
-		private static Regex _dateMathRe =
+		private static readonly Regex _dateMathRe =
 			new Regex(@"^(?<anchor>now|.+(?:\|\||$))(?<ranges>(?:(?:\+|\-)[^\/]*))?(?<rounding>\/(?:y|M|w|d|h|m|s))?$");
 
 		public static implicit operator DateMath(DateTime dateTime) => DateMath.Anchored(dateTime);
@@ -40,8 +40,10 @@ namespace Nest
 
 		public static DateMath FromString(string dateMath)
 		{
+			if (dateMath == null) return null;
+
 			var match = _dateMathRe.Match(dateMath);
-			if (!match.Success) throw new ArgumentException($"Can not create a DateMathExpression out of '{dateMath}'");
+			if (!match.Success) throw new ArgumentException($"Cannot create a DateMathExpression out of '{dateMath}'");
 
 			var math = new DateMathExpression(match.Groups["anchor"].Value);
 

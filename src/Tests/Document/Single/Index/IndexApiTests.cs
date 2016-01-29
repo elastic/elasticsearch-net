@@ -194,7 +194,6 @@ namespace Tests.Document.Single.Index
 		{
 			var anonymousType = new
 			{
-				id = "id",
 				name = "name",
 				value = 3,
 				date = new DateTime(2016, 1, 1),
@@ -206,7 +205,7 @@ namespace Tests.Document.Single.Index
 			};
 
 			var indexResult = this.Client.Index(anonymousType, f => f
-				.Id(anonymousType.id)
+				.Id(anonymousType.name)
 			);
 
 			indexResult.IsValid.Should().BeTrue();
