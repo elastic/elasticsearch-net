@@ -24,7 +24,7 @@
     "url": "https://github.com/elastic/elasticsearch-net"
   },
   "copyright": "2014-2016 Elasticsearch BV",
-  "version": "2.1.0-ci20160129160552",
+  "version": "2.1.0-ci20160129221525",
   "compilationOptions": {
     "warningsAsErrors": false
   },
@@ -65,7 +65,9 @@
       },
       "frameworkAssemblies": {
         "System.Dynamic.Runtime": "",
-        "System.Runtime": "",
+        "System.Runtime": {
+          "type": "build"
+        },
         "System.Runtime.Serialization": "",
         "System.ServiceModel": ""
       }
@@ -78,7 +80,9 @@
       },
       "frameworkAssemblies": {
         "System.Dynamic.Runtime": "",
-        "System.Runtime": "",
+        "System.Runtime": {
+          "type": "build"
+        },
         "System.Runtime.Serialization": "",
         "System.ServiceModel": ""
       }
