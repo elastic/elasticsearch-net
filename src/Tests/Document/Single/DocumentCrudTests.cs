@@ -77,10 +77,8 @@ namespace Tests.Document.Single
 			r.Source.Description.Should().EndWith("updated")
 		);
 
-		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r =>
-		{
-			//r.IsValid.Should().BeFalse();
-			r.Found.Should().BeFalse();
-		});
+		[I] protected async Task DocumentIsDeleted() => await this.AssertOnGetAfterDelete(r => 
+			r.Found.Should().BeFalse()
+		);
 	}
 }

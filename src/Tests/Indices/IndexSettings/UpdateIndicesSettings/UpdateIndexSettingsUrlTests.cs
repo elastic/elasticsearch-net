@@ -12,7 +12,7 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		{
 			var index = "index1,index2";
 			Nest.Indices indices = index;
-			await PUT($"/{index}/_settings")
+			await PUT($"/index1%2Cindex2/_settings")
 				.Fluent(c => c.UpdateIndexSettings(indices, s=>s))
 				.Request(c => c.UpdateIndexSettings(new UpdateIndexSettingsRequest(index)))
 				.FluentAsync(c => c.UpdateIndexSettingsAsync(indices, s=>s))

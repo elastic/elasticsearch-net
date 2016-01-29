@@ -22,7 +22,7 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/_settings/index.*?local=true";
+		protected override string UrlPath => $"/project/_settings/index.%2A?local=true";
 
 		protected override Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> Fluent => d => d
 			.Index<Project>()

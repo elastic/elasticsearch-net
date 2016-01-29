@@ -25,7 +25,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_mapping/field/name,tags";
+		protected override string UrlPath => $"/_mapping/field/name%2Ctags";
 
 		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 

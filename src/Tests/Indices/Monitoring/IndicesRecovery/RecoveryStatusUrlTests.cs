@@ -16,7 +16,7 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 				;
 
 			var index = "index1,index2";
-			await UrlTester.GET($"/{index}/_recovery")
+			await UrlTester.GET($"/index1%2Cindex2/_recovery")
 				.Fluent(c => c.RecoveryStatus(index))
 				.Request(c => c.RecoveryStatus(new RecoveryStatusRequest(index)))
 				.FluentAsync(c => c.RecoveryStatusAsync(index))

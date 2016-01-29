@@ -18,7 +18,7 @@ namespace Tests.Indices.StatusManagement.Flush
 				;
 
 			var index = "index1,index2";
-			await POST($"/{index}/_flush")
+			await POST($"/index1%2Cindex2/_flush")
 				.Fluent(c => c.Flush(index))
 				.Request(c => c.Flush(new FlushRequest(index)))
 				.FluentAsync(c => c.FlushAsync(index))

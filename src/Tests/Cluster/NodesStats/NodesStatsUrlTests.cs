@@ -25,14 +25,14 @@ namespace Tests.Cluster.NodesStats
 				;
 
 			var metrics = NodesStatsMetric.Fs | NodesStatsMetric.Jvm;
-			await GET("/_nodes/stats/fs,jvm")
+			await GET("/_nodes/stats/fs%2Cjvm")
 				.Fluent(c => c.NodesStats(p=>p.Metric(metrics)))
 				.Request(c => c.NodesStats(new NodesStatsRequest(metrics)))
 				.FluentAsync(c => c.NodesStatsAsync(p=>p.Metric(metrics)))
 				.RequestAsync(c => c.NodesStatsAsync(new NodesStatsRequest(metrics)))
 				;
 
-			await GET("/_nodes/foo/stats/fs,jvm")
+			await GET("/_nodes/foo/stats/fs%2Cjvm")
 				.Fluent(c => c.NodesStats(p=>p.NodeId("foo").Metric(metrics)))
 				.Request(c => c.NodesStats(new NodesStatsRequest("foo", metrics)))
 				.FluentAsync(c => c.NodesStatsAsync(p=>p.NodeId("foo").Metric(metrics)))
@@ -40,14 +40,14 @@ namespace Tests.Cluster.NodesStats
 				;
 
 			var indexMetrics = NodesStatsIndexMetric.Fielddata | NodesStatsIndexMetric.Merge;
-			await GET("/_nodes/stats/fs,jvm/fielddata,merge")
+			await GET("/_nodes/stats/fs%2Cjvm/fielddata%2Cmerge")
 				.Fluent(c => c.NodesStats(p=>p.Metric(metrics).IndexMetric(indexMetrics)))
 				.Request(c => c.NodesStats(new NodesStatsRequest(metrics, indexMetrics)))
 				.FluentAsync(c => c.NodesStatsAsync(p=>p.Metric(metrics).IndexMetric(indexMetrics)))
 				.RequestAsync(c => c.NodesStatsAsync(new NodesStatsRequest(metrics, indexMetrics)))
 				;
 
-			await GET("/_nodes/foo/stats/fs,jvm/fielddata,merge")
+			await GET("/_nodes/foo/stats/fs%2Cjvm/fielddata%2Cmerge")
 				.Fluent(c => c.NodesStats(p=>p.NodeId("foo").Metric(metrics).IndexMetric(indexMetrics)))
 				.Request(c => c.NodesStats(new NodesStatsRequest("foo", metrics, indexMetrics)))
 				.FluentAsync(c => c.NodesStatsAsync(p=>p.NodeId("foo").Metric(metrics).IndexMetric(indexMetrics)))

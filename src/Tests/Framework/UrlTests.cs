@@ -82,7 +82,7 @@ namespace Tests.Framework
 
 	public class IntermediateUrlTester
 	{
-		private Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
+		private readonly Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier;
 
 		internal IntermediateUrlTester(Func<ConnectionSettings, ConnectionSettings> settings)
 		{

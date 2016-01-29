@@ -22,7 +22,7 @@ namespace Tests.Indices.Warmers.DeleteWarmer
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => "/project/_warmer/warmer1,warmer2";
+		protected override string UrlPath => "/project/_warmer/warmer1%2Cwarmer2";
 
 		protected override DeleteWarmerDescriptor NewDescriptor() => new DeleteWarmerDescriptor(Index<Project>(), "warmer1,warmer2");
 

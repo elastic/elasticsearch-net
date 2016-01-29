@@ -23,7 +23,7 @@ namespace Tests.Indices.IndexManagement.TypesExists
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.HEAD;
-		protected override string UrlPath => $"/project/project,commits?ignore_unavailable=true";
+		protected override string UrlPath => $"/project/project%2Ccommits?ignore_unavailable=true";
 
 		protected override TypeExistsDescriptor NewDescriptor() => new TypeExistsDescriptor(Index<Project>(), Type<Project>().And<CommitActivity>());
 

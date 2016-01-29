@@ -18,7 +18,7 @@ namespace Tests.Indices.StatusManagement.Refresh
 				;
 
 			var index = "index1,index2";
-			await POST($"/{index}/_refresh")
+			await POST($"/index1%2Cindex2/_refresh")
 				.Fluent(c => c.Refresh(index))
 				.Request(c => c.Refresh(new RefreshRequest(index)))
 				.FluentAsync(c => c.RefreshAsync(index))

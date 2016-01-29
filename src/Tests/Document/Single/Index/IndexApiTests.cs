@@ -13,7 +13,8 @@ using Xunit;
 namespace Tests.Document.Single.Index
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexApiTests : ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexApiTests :
+		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private Project Document => new Project
 		{
@@ -21,21 +22,26 @@ namespace Tests.Document.Single.Index
 			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
-			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } }
+			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}}
 		};
 
-		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Index<Project>(this.Document, f),
 			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
 			request: (client, r) => client.Index(r),
 			requestAsync: (client, r) => client.IndexAsync(r)
-		);
+			);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 201;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
+
+		protected override string UrlPath
+			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -46,10 +52,11 @@ namespace Tests.Document.Single.Index
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
-				curatedTags = new[] { new { name = "x", added = FixedDate } },
+				curatedTags = new[] {new {name = "x", added = FixedDate}},
 			};
 
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
+
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.Consistency(Consistency.Quorum)
 			.OpType(OpType.Index)
@@ -121,61 +128,92 @@ namespace Tests.Document.Single.Index
 			indexResult.ApiCall.HttpStatusCode.Should().Be(200);
 			indexResult.Version.Should().Be(2);
 		}
+	}
 
-		[Collection(IntegrationContext.Indexing)]
-		public class IndexJObjectIntegrationTests : SimpleIntegration
+	[Collection(IntegrationContext.Indexing)]
+	public class IndexJObjectIntegrationTests : SimpleIntegration
+	{
+		public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster)
 		{
-			public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster){}
+		}
 
-			[I]
-			public void Index()
-			{
-				var indexName = this.RandomString();
-
-				var jObjects = Enumerable.Range(1, 1000)
-					.Select(i =>
-						new JObject
+		[I]
+		public void Index()
+		{
+			var jObjects = Enumerable.Range(1, 1000)
+				.Select(i =>
+					new JObject
+					{
+						{"id", i},
+						{"name", $"name {i}"},
+						{"value", Math.Pow(i, 2)},
+						{"date", new DateTime(2016, 1, 1)},
 						{
-							{ "id", i },
-							{"name", $"name {i}"},
-							{"value", Math.Pow(i,2) },
-							{"date", new DateTime(2016, 1, 1)},
-							{"child", new JObject
-								{
-									{ "child_name", $"child_name {i}{i}" },
-									{ "child_value", 3 }
-								}
+							"child", new JObject
+							{
+								{"child_name", $"child_name {i}{i}"},
+								{"child_value", 3}
 							}
-						});
+						}
+					});
 
-				var jObject = jObjects.First();
+			var jObject = jObjects.First();
 
-				var indexResult = this.Client.Index(jObject, f => f
-					.Index(indexName)
-					.Type("example")
-					.Id(jObject["id"].Value<int>())
+			var indexResult = this.Client.Index(jObject, f => f
+				.Id(jObject["id"].Value<int>())
 				);
 
-				indexResult.IsValid.Should().BeTrue();
-				indexResult.ApiCall.HttpStatusCode.Should().Be(201);
-				indexResult.Created.Should().BeTrue();
-				indexResult.Index.Should().Be(indexName);
+			indexResult.IsValid.Should().BeTrue();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+			indexResult.Created.Should().BeTrue();
+			indexResult.Index.Should().Be(Client.ConnectionSettings.DefaultIndex);
+			indexResult.Type.Should().Be("jobject");
 
-				var bulkResponse = this.Client.Bulk(b => b
-					.IndexMany(jObjects.Skip(1), (bi, d) => bi
-						.Document(d)
-						.Id(d["id"].Value<int>())
-						.Index(indexName)
-						.Type("example")
-					)
+			var bulkResponse = this.Client.Bulk(b => b
+				.IndexMany(jObjects.Skip(1), (bi, d) => bi
+					.Document(d)
+					.Id(d["id"].Value<int>())
+				)
 				);
 
-				foreach (var response in bulkResponse.Items)
-				{
-					response.IsValid.Should().BeTrue();
-					response.Status.Should().Be(201);
-				}
+			foreach (var response in bulkResponse.Items)
+			{
+				response.IsValid.Should().BeTrue();
+				response.Status.Should().Be(201);
 			}
+		}
+	}
+
+	[Collection(IntegrationContext.Indexing)]
+	public class IndexAnonymousTypesIntegrationTests : SimpleIntegration
+	{
+		public IndexAnonymousTypesIntegrationTests(IndexingCluster cluster) : base(cluster) { }
+
+		[I]
+		public void Index()
+		{
+			var anonymousType = new
+			{
+				id = "id",
+				name = "name",
+				value = 3,
+				date = new DateTime(2016, 1, 1),
+				child = new
+				{
+					child_name = "child_name",
+					child_value = 3
+				}
+			};
+
+			var indexResult = this.Client.Index(anonymousType, f => f
+				.Id(anonymousType.id)
+			);
+
+			indexResult.IsValid.Should().BeTrue();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+			indexResult.Created.Should().BeTrue();
+			indexResult.Index.Should().Be(Client.ConnectionSettings.DefaultIndex);
+			indexResult.Type.Should().StartWith("<>");
 		}
 	}
 }

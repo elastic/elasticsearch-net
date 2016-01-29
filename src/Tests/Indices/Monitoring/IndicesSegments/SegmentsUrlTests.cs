@@ -16,7 +16,7 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 				;
 
 			var index = "index1,index2";
-			await UrlTester.GET($"/{index}/_segments")
+			await UrlTester.GET($"/index1%2Cindex2/_segments")
 				.Fluent(c => c.Segments(index))
 				.Request(c => c.Segments(new SegmentsRequest(index)))
 				.FluentAsync(c => c.SegmentsAsync(index))

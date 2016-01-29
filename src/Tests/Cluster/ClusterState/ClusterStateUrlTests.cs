@@ -18,7 +18,7 @@ namespace Tests.Cluster.ClusterState
 				;
 
 			var metrics = ClusterStateMetric.MasterNode | ClusterStateMetric.Metadata;
-			await GET("/_cluster/state/metadata,master_node")
+			await GET("/_cluster/state/metadata%2Cmaster_node")
 				.Fluent(c => c.ClusterState(p=>p.Metric(metrics)))
 				.Request(c => c.ClusterState(new ClusterStateRequest(metrics)))
 				.FluentAsync(c => c.ClusterStateAsync(p=>p.Metric(metrics)))

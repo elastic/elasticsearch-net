@@ -9,9 +9,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.GetRepository
 	{
 		[U] public async Task Urls()
 		{
-			var repositories = "repos1, repos2";
+			var repositories = "repos1,repos2";
 
-			await GET($"/_snapshot/repos1,repos2")
+			await GET($"/_snapshot/repos1%2Crepos2")
 				.Fluent(c => c.GetRepository(s=>s.RepositoryName(repositories)))
 				.Request(c => c.GetRepository(new GetRepositoryRequest(repositories)))
 				.FluentAsync(c => c.GetRepositoryAsync(s=>s.RepositoryName(repositories)))
