@@ -3,11 +3,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class Bucket : BucketBase
+	public class SingleBucket : BucketBase
 	{
-		public Bucket() { }
+		public SingleBucket() { }
 
-		public Bucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+		public SingleBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public long DocCount { get; set; }
 	}
