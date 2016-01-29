@@ -55,7 +55,25 @@
   "commands": {
   },
   "frameworks": {
+    "net46": {
+      "compilationOptions": {
+        "define": [
+          "NET46"
+        ]
+      },
+      "frameworkAssemblies": {
+        "System.Dynamic.Runtime": "",
+        "System.Runtime": "",
+        "System.Runtime.Serialization": "",
+        "System.ServiceModel": ""
+      }
+    },
     "net45": {
+      "compilationOptions": {
+        "define": [
+          "NET45"
+        ]
+      },
       "frameworkAssemblies": {
         "System.Dynamic.Runtime": "",
         "System.Runtime": "",

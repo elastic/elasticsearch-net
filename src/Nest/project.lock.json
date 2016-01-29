@@ -2,6 +2,26 @@
   "locked": false,
   "version": 2,
   "targets": {
+    ".NETFramework,Version=v4.6": {
+      "Elasticsearch.Net/2.0.0-alpha2": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "frameworkAssemblies": [
+          "System",
+          "System.Runtime",
+          "System.Runtime.Serialization"
+        ]
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
     ".NETFramework,Version=v4.5": {
       "Elasticsearch.Net/2.0.0-alpha2": {
         "type": "project",
@@ -625,6 +645,46 @@
         },
         "compile": {
           "ref/dotnet/System.Threading.Timer.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x86": {
+      "Elasticsearch.Net/2.0.0-alpha2": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "frameworkAssemblies": [
+          "System",
+          "System.Runtime",
+          "System.Runtime.Serialization"
+        ]
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x64": {
+      "Elasticsearch.Net/2.0.0-alpha2": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6",
+        "frameworkAssemblies": [
+          "System",
+          "System.Runtime",
+          "System.Runtime.Serialization"
+        ]
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       }
     },
@@ -2297,7 +2357,7 @@
     "System.Dynamic.Runtime/4.0.11-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "C2GXB20I5vMcO4wemZr5pEjwwEb6H6zVkwF12JSUhripKBIKgI0YKpfp9glyDSL903cYgIXAztMQDajwCR0PmA==",
+      "sha512": "ypkxS0e+yUw7F6JEwuB22u0qqruMeZFOmtcImh2efDHpTAuhF2FOqCDJ7f4qLf9yomVvB4kjkZ6xGunbIQryxQ==",
       "files": [
         "lib/DNXCore50/System.Dynamic.Runtime.dll",
         "lib/MonoAndroid10/_._",
@@ -3439,6 +3499,12 @@
     "": [
       "Elasticsearch.Net ",
       "Newtonsoft.Json >= 8.0.2"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "fx/System.Dynamic.Runtime ",
+      "fx/System.Runtime ",
+      "fx/System.Runtime.Serialization ",
+      "fx/System.ServiceModel "
     ],
     ".NETFramework,Version=v4.5": [
       "fx/System.Dynamic.Runtime ",

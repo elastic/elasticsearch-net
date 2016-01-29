@@ -53,7 +53,24 @@
   "commands": {
   },
   "frameworks": {
+    "net46": {
+      "compilationOptions": {
+        "define": [
+          "NET46"
+        ]
+      },
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Runtime": "",
+        "System.Runtime.Serialization": ""
+      }
+    },
     "net45": {
+      "compilationOptions": {
+        "define": [
+          "NET45"
+        ]
+      },
       "frameworkAssemblies": {
         "System": "",
         "System.Runtime": "",
