@@ -153,7 +153,7 @@ namespace Nest
 		{
 			objectPath.ThrowIfNull(nameof(objectPath));
 
-			var memberInfo = new MemberInfoResolver(this, objectPath);
+			var memberInfo = new MemberInfoResolver(objectPath);
 			var fieldName = memberInfo.Members.Single().Name;
 
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
@@ -186,7 +186,7 @@ namespace Nest
 			foreach (var mapping in mappings)
 			{
 				var e = mapping.Property;
-				var memberInfoResolver = new MemberInfoResolver(this, e);
+				var memberInfoResolver = new MemberInfoResolver(e);
 				if (memberInfoResolver.Members.Count > 1)
 					throw new ArgumentException("MapFieldNameFor can only map direct properties");
 
