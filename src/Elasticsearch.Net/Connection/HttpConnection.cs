@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Providers;
-using PurifyNet;
+using Purify;
 
 namespace Elasticsearch.Net.Connection
 {

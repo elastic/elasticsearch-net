@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.ConnectionPool;
-using PurifyNet;
+using Purify;
 
 namespace Elasticsearch.Net.Connection.RequestState
 {

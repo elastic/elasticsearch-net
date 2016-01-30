@@ -16,7 +16,7 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Serialization;
-using PurifyNet;
+using Purify;
 
 namespace Elasticsearch.Net.Connection
 {

@@ -123,11 +123,7 @@
     <Compile Include="Domain\RequestParameters\FluentRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
     <Compile Include="Properties\ClsCompliancy.cs" />
-    <Compile Include="Purify\IPurify.cs" />
-    <Compile Include="Purify\PurifierDotNet.cs" />
-    <Compile Include="Purify\PurifierMono.cs" />
     <Compile Include="Purify\Purify.cs" />
-    <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
