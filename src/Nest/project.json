@@ -64,14 +64,18 @@
         ]
       },
       "frameworkAssemblies": {
-        "System.Dynamic.Runtime": "",
+        "System.Dynamic.Runtime": {
+          "type": "build"
+        },
         "System.Runtime": {
           "type": "build"
         },
         "System.Runtime.Serialization": {
           "type": "build"
         },
-        "System.ServiceModel": ""
+        "System.ServiceModel": {
+          "type": "build"
+        }
       }
     },
     "net45": {
@@ -81,14 +85,18 @@
         ]
       },
       "frameworkAssemblies": {
-        "System.Dynamic.Runtime": "",
+        "System.Dynamic.Runtime": {
+          "type": "build"
+        },
         "System.Runtime": {
           "type": "build"
         },
         "System.Runtime.Serialization": {
           "type": "build"
         },
-        "System.ServiceModel": ""
+        "System.ServiceModel": {
+          "type": "build"
+        }
       }
     },
     "dotnet5.1": {

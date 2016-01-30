@@ -60,7 +60,9 @@
         ]
       },
       "frameworkAssemblies": {
-        "System": "",
+        "System": {
+          "type": "build"
+        },
         "System.Runtime": {
           "type": "build"
         },
@@ -76,7 +78,9 @@
         ]
       },
       "frameworkAssemblies": {
-        "System": "",
+        "System": {
+          "type": "build"
+        },
         "System.Runtime": {
           "type": "build"
         },
