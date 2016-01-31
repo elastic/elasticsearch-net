@@ -15,11 +15,14 @@ namespace Nest
 	{
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
-		private readonly IConnectionSettingsValues _settings;
+		protected IConnectionSettingsValues Settings { get; }
+		protected ElasticContractResolver ContractResolver { get; }
+
+		//todo this internal smells
+		internal JsonSerializer Serializer => _defaultSerializer;
+
 		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
 		private readonly JsonSerializer _defaultSerializer;
-		internal JsonSerializer Serializer => _defaultSerializer;
-		private ElasticContractResolver _contractResolver;
 
 		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings) { }
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
@@ -31,10 +34,10 @@ namespace Nest
 		/// </summary>
 		internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
-			this._settings = settings;
+			this.Settings = settings;
 			var piggyBackState = stateFullConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = stateFullConverter };
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._contractResolver = new ElasticContractResolver(this._settings, this.ContractConverters) { PiggyBackState = piggyBackState };
+			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
 			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
 			//this._defaultSerializer.Formatting = Formatting.None; 
@@ -101,7 +104,7 @@ namespace Nest
 			var settings = new JsonSerializerSettings()
 			{
 				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
-				ContractResolver = this._contractResolver,
+				ContractResolver = this.ContractResolver,
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
 			};
