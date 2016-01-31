@@ -24,8 +24,8 @@ namespace Nest
 
 		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; } = new List<IAliasAction>();
 
-		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
+		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, IAliasAddAction> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 
-		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
+		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, IAliasRemoveAction> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
 	}
 }
