@@ -29,8 +29,6 @@ namespace Nest
 		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request);
 	}
 
-	//TODO assume 404 is allowed on head requests I removed this code:
-	// d => selector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
