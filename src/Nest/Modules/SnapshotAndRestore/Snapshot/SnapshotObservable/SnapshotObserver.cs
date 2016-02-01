@@ -2,7 +2,7 @@ using System;
 
 namespace Nest
 {
-	public class SnapshotObserver : CoordinatedRequestObserver<ISnapshotStatusResponse>
+	public class SnapshotObserver : CoordinatedRequestObserverBase<ISnapshotStatusResponse>
 	{
 		public SnapshotObserver(
 			Action<ISnapshotStatusResponse> onNext = null, 

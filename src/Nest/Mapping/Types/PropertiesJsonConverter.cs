@@ -22,13 +22,13 @@ namespace Nest
 			foreach (var kv in dict)
 			{
 				var v = kv.Value as IPropertyWithClrOrigin;
-				if (v?.CLrOrigin == null)
+				if (v?.ClrOrigin == null)
 				{
 					props.Add(kv.Key, kv.Value);
 					continue;
 				}
 				//We do not have to take .Name into account from serializer PropertyName (kv.Key) already handles this
-				var serializerMapping = settings.Serializer?.CreatePropertyMapping(v.CLrOrigin);
+				var serializerMapping = settings.Serializer?.CreatePropertyMapping(v.ClrOrigin);
 				if (serializerMapping == null || !serializerMapping.Ignore) 
 					props.Add(kv.Key, kv.Value);
 			}

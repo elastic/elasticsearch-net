@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class ReindexObserver<T> : CoordinatedRequestObserver<IReindexResponse<T>> where T : class
+	public class ReindexObserver<T> : CoordinatedRequestObserverBase<IReindexResponse<T>> where T : class
 	{
 		public ReindexObserver(
 			Action<IReindexResponse<T>> onNext = null, 

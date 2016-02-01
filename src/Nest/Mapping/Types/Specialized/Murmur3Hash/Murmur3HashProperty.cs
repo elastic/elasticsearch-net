@@ -8,7 +8,7 @@ namespace Nest
 	{
 	}
 
-	public class Murmur3HashProperty : Property, IMurmur3HashProperty
+	public class Murmur3HashProperty : PropertyBase, IMurmur3HashProperty
 	{
 		public Murmur3HashProperty() : base("murmur3") { }
 	}

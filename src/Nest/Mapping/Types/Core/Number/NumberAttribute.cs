@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class NumberAttribute : ElasticsearchPropertyAttribute, INumberProperty
+	public class NumberAttribute : ElasticsearchPropertyAttributeBase, INumberProperty
 	{
 		INumberProperty Self => this;
 

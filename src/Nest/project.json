@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "Elasticsearch.Net": { "target": "project" },
-    "Newtonsoft.Json": "[8, 9)"
+    "Newtonsoft.Json": "8.0.2"
   },
   "commands": {
   },

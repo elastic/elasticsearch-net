@@ -15,7 +15,7 @@ namespace Nest
 		IDictionary<string, object> Transient { get; set; }
 	}
 
-	public class ClusterPutSettingsResponse : BaseResponse, IClusterPutSettingsResponse
+	public class ClusterPutSettingsResponse : ResponseBase, IClusterPutSettingsResponse
 	{
 		public bool Acknowledged { get; internal set; }
 		public IDictionary<string, object> Persistent { get; set; }

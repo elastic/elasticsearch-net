@@ -2,7 +2,7 @@ namespace Nest
 {
 	public interface IDictionaryDecompounderTokenFilter : ICompoundWordTokenFilter { }
 	/// <inheritdoc/>
-	public class DictionaryDecompounderTokenFilter : CompoundWordTokenFilter, IDictionaryDecompounderTokenFilter
+	public class DictionaryDecompounderTokenFilter : CompoundWordTokenFilterBase, IDictionaryDecompounderTokenFilter
 	{
 		public DictionaryDecompounderTokenFilter() : base("dictionary_decompounder") { }
 	}

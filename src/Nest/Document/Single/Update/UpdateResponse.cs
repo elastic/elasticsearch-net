@@ -25,7 +25,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class UpdateResponse<T> : BaseResponse, IUpdateResponse<T>
+	public class UpdateResponse<T> : ResponseBase, IUpdateResponse<T>
 		where T : class
 	{
 		public ShardsMetaData ShardsHit { get; private set; }

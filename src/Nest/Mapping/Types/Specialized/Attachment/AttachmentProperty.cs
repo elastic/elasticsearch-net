@@ -18,7 +18,7 @@ namespace Nest
 		IStringProperty LanguageField { get; set; }
 	}
 
-	public class AttachmentProperty : Property, IAttachmentProperty
+	public class AttachmentProperty : PropertyBase, IAttachmentProperty
 	{
 		public AttachmentProperty() : base("attachment") { }
 

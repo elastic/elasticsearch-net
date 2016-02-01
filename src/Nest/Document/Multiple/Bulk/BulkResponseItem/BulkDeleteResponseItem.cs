@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject]
 	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
-	public class BulkDeleteResponseItem : BulkResponseItem
+	public class BulkDeleteResponseItem : BulkResponseItemBase
 	{
 		public override string Operation { get; internal set; }
 		[JsonProperty("found")]

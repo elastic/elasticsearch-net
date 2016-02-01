@@ -66,13 +66,13 @@ namespace Nest
 
 		public PhraseSuggesterDescriptor<T> Separator(char? separator) => Assign(a => a.Separator = separator);
 
-		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, DirectGeneratorDescriptor<T>>[] generators) =>
+		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, IDirectGenerator>[] generators) =>
 			Assign(a=>a.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList());
 
 		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) => 
 			Assign(a => a.RealWordErrorLikelihood = realWordErrorLikelihood);
 
-		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, PhraseSuggestHighlightDescriptor> selector) =>
+		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight> selector) =>
 			Assign(a=> a.Highlight = selector?.Invoke(new PhraseSuggestHighlightDescriptor()));
 
 		public PhraseSuggesterDescriptor<T> Collate(Func<PhraseSuggestCollateDescriptor<T>, IPhraseSuggestCollate> selector) =>

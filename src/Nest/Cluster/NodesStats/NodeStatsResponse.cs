@@ -13,7 +13,7 @@ namespace Nest
 		Dictionary<string, NodeStats> Nodes { get; }
 	}
 
-	public class NodesStatsResponse : BaseResponse, INodesStatsResponse
+	public class NodesStatsResponse : ResponseBase, INodesStatsResponse
 	{
 		public string ClusterName { get; internal set; }
 

@@ -28,7 +28,7 @@ namespace Nest
 		public GeoLocation Default { get; set; }
 	}
 
-	public class GeoLocationSuggestContextDescriptor<T> : SuggestContextBaseDescriptor<GeoLocationSuggestContextDescriptor<T>, IGeoLocationSuggestContext, T>, IGeoLocationSuggestContext
+	public class GeoLocationSuggestContextDescriptor<T> : SuggestContextDescriptorBase<GeoLocationSuggestContextDescriptor<T>, IGeoLocationSuggestContext, T>, IGeoLocationSuggestContext
 		where T : class
 	{
 		protected override string Type => "geo";

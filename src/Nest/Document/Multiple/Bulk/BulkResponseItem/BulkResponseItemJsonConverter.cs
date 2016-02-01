@@ -56,7 +56,7 @@ namespace Nest
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(BulkResponseItem);
+			return objectType == typeof(BulkResponseItemBase);
 		}
 	}
 }

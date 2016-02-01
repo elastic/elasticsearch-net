@@ -52,9 +52,9 @@ namespace Nest
 		public MultiValueMode? MultiValueMode { get; set; }
 	}
 
-	public abstract class DecayFunctionBaseDescriptor<TDescriptor, TOrigin, TScale, T>
-		: FunctionScoreFunctionBaseDescriptor<TDescriptor, IDecayFunction<TOrigin, TScale>, T>, IDecayFunction<TOrigin, TScale>
-		where TDescriptor : DecayFunctionBaseDescriptor<TDescriptor, TOrigin, TScale, T>, IDecayFunction<TOrigin, TScale>
+	public abstract class DecayFunctionDescriptorBase<TDescriptor, TOrigin, TScale, T>
+		: FunctionScoreFunctionDescriptorBase<TDescriptor, IDecayFunction<TOrigin, TScale>, T>, IDecayFunction<TOrigin, TScale>
+		where TDescriptor : DecayFunctionDescriptorBase<TDescriptor, TOrigin, TScale, T>, IDecayFunction<TOrigin, TScale>
 		where T : class
 	{
 		protected abstract string DecayType { get; }

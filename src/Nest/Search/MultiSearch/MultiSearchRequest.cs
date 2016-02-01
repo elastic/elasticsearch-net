@@ -26,7 +26,7 @@ namespace Nest
 			set { _operations = value; }
 		}
 
-		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
+		public MultiSearchDescriptor Search<T>(string name, Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
 		{
 			name.ThrowIfNull(nameof(name));
 			searchSelector.ThrowIfNull(nameof(searchSelector));
@@ -37,7 +37,7 @@ namespace Nest
 			return this;
 		}
 
-		public MultiSearchDescriptor Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
+		public MultiSearchDescriptor Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector) where T : class
 		{
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}

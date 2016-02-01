@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public abstract class AcknowledgedResponse : BaseResponse, IAcknowledgedResponse
+	public abstract class AcknowledgedResponseBase : ResponseBase, IAcknowledgedResponse
 	{
 		[JsonProperty(PropertyName = "acknowledged")]
 		public bool Acknowledged { get; internal set; }

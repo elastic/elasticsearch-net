@@ -10,12 +10,12 @@ using Tests.Framework.Integration;
 namespace Tests.Framework
 {
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
-		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
+		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponseBase>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 	{
-		public CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    protected CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 	}
 
@@ -35,7 +35,7 @@ namespace Tests.Framework
 		readonly IIntegrationCluster _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		public CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage)
+		protected CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;

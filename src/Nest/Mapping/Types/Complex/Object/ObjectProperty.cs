@@ -23,7 +23,7 @@ namespace Nest
 		IProperties Properties { get; set; }
 	}
 
-	public class ObjectProperty : Property, IObjectProperty
+	public class ObjectProperty : PropertyBase, IObjectProperty
 	{
 		public ObjectProperty() : base("object") { }
 

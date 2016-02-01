@@ -2,9 +2,9 @@
 
 namespace Nest
 {
-	public interface IUnregisterPercolateResponse : IResponse
+	public interface IRegisterPercolatorResponse : IResponse
 	{
-		bool Found { get; }
+		bool Created { get; }
 		string Index { get; }
 		string Type { get; }
 		string Id { get; }
@@ -12,10 +12,10 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class UnregisterPercolateResponse : BaseResponse, IUnregisterPercolateResponse
+	public class RegisterPercolatorResponse : ResponseBase, IRegisterPercolatorResponse
 	{
-		[JsonProperty(PropertyName = "found")]
-		public bool Found { get; internal set; }
+		[JsonProperty(PropertyName = "created")]
+		public bool Created { get; internal set; }
 
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }

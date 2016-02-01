@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetSnapshotResponse : BaseResponse, IGetSnapshotResponse
+	public class GetSnapshotResponse : ResponseBase, IGetSnapshotResponse
 	{
 
 		[JsonProperty("snapshots")]

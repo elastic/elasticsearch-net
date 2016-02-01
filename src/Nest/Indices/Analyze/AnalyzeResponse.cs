@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class AnalyzeResponse : BaseResponse, IAnalyzeResponse
+	public class AnalyzeResponse : ResponseBase, IAnalyzeResponse
 	{
 		[JsonProperty(PropertyName = "tokens")]
 		public IEnumerable<AnalyzeToken> Tokens { get; internal set; }

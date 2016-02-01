@@ -21,10 +21,10 @@ namespace Tests.Framework
 			this._nodes = nodes.ToList();
 		}
 
-		public VirtualCluster MasterEligable(params int[] ports)
+		public VirtualCluster MasterEligible(params int[] ports)
 		{
 			foreach (var node in this._nodes.Where(n => !ports.Contains(n.Uri.Port)))
-				node.MasterEligable = false;
+				node.MasterEligible = false;
 			return this;
 		}
 

@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class RootNodeInfoResponse : BaseResponse, IRootNodeInfoResponse
+	public class RootNodeInfoResponse : ResponseBase, IRootNodeInfoResponse
 	{
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; internal set; }

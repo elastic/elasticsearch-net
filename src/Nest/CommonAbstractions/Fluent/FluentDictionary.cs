@@ -2,13 +2,13 @@
 
 namespace Nest
 {
-	public class FluentDictionary<K, V> : Dictionary<K, V>
+	public class FluentDictionary<TKey, TValue> : Dictionary<TKey, TValue>
 	{
 		public FluentDictionary()
 		{
 		}
 
-		public FluentDictionary(IDictionary<K, V> copy)
+		public FluentDictionary(IDictionary<TKey, TValue> copy)
 		{
 			if (copy == null)
 				return;
@@ -17,14 +17,15 @@ namespace Nest
 				this[kv.Key] = kv.Value;
 		}
 
-		public new FluentDictionary<K, V> Add(K k, V v)
+		public new FluentDictionary<TKey, TValue> Add(TKey key, TValue value)
 		{
-			base.Add(k, v);
+			base.Add(key, value);
 			return this;
 		}
-		public new FluentDictionary<K, V> Remove(K k)
+
+		public new FluentDictionary<TKey, TValue> Remove(TKey key)
 		{
-			base.Remove(k);
+			base.Remove(key);
 			return this;
 		}
 	}

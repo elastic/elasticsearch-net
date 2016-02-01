@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class TermVectorsResponse : BaseResponse, ITermVectorsResponse
+	public class TermVectorsResponse : ResponseBase, ITermVectorsResponse
 	{
 		[JsonProperty("found")]
 		public bool Found { get; internal set; }

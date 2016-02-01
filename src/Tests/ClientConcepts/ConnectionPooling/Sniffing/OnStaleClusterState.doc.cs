@@ -24,15 +24,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
-				.MasterEligable(9202, 9203, 9204)
+				.MasterEligible(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
 				.Sniff(s => s.SucceedAlways(Framework.Cluster
 					.Nodes(100)
-					.MasterEligable(9202, 9203, 9204)
+					.MasterEligible(9202, 9203, 9204)
 					.ClientCalls(r => r.SucceedAlways())
 					.Sniff(ss => ss.SucceedAlways(Framework.Cluster
 						.Nodes(10)
-						.MasterEligable(9202, 9203, 9204)
+						.MasterEligible(9202, 9203, 9204)
 						.ClientCalls(r => r.SucceedAlways())
 					))
 				))

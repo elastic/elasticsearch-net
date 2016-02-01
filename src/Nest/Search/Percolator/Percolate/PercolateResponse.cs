@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class PercolateCountResponse : BaseResponse, IPercolateCountResponse
+	public class PercolateCountResponse : ResponseBase, IPercolateCountResponse
 	{
 		[JsonProperty(PropertyName = "took")]
 		public int Took { get; internal set; }

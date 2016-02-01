@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class CompletionAttribute : ElasticsearchPropertyAttribute, ICompletionProperty
+	public class CompletionAttribute : ElasticsearchPropertyAttributeBase, ICompletionProperty
 	{
 		ICompletionProperty Self => this;
 

@@ -7,7 +7,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class PingResponse : BaseResponse, IPingResponse
+	public class PingResponse : ResponseBase, IPingResponse
 	{
 	}
 }

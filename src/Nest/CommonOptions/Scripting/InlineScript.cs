@@ -9,7 +9,7 @@ namespace Nest
 		string Inline { get; set; }
 	}
 
-	public class InlineScript : Script, IInlineScript
+	public class InlineScript : ScriptBase, IInlineScript
 	{
 		public InlineScript(string script)
 		{

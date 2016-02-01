@@ -103,7 +103,20 @@ type Release() =
             if (projectName.Equals("Nest", StringComparison.InvariantCultureIgnoreCase) = true)
             then
                 let nuspec = sprintf "%s/Nest.nuspec" unzippedDir
-                FileHelper.RegexReplaceInFileWithEncoding "<id>Nest</id>" "<id>NEST</id>" System.Text.Encoding.UTF8 nuspec
+                FileHelper.RegexReplaceInFileWithEncoding 
+                    "<id>Nest</id>" 
+                    "<id>NEST</id>" 
+                    System.Text.Encoding.UTF8 
+                    nuspec
+
+                // TODO: Make this more generic in limiting to major version based
+                // on the major version of the version specified.
+                FileHelper.RegexReplaceInFileWithEncoding 
+                    "<dependency id=\"Newtonsoft.Json\" version=\".*\" />" 
+                    "<dependency id=\"Newtonsoft.Json\" version=\"[8,9)\" />"  
+                    System.Text.Encoding.UTF8 
+                    nuspec
+
 
             // Include PDB for each target framework
             let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()

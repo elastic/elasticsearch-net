@@ -5,7 +5,7 @@ namespace Nest
 	/// </summary>
 	public interface IHyphenationDecompounderTokenFilter : ICompoundWordTokenFilter { }
 	/// <inheritdoc/>
-	public class HyphenationDecompounderTokenFilter : CompoundWordTokenFilter, IHyphenationDecompounderTokenFilter
+	public class HyphenationDecompounderTokenFilter : CompoundWordTokenFilterBase, IHyphenationDecompounderTokenFilter
 	{
 		public HyphenationDecompounderTokenFilter() : base("hyphenation_decompounder") { }
 	}

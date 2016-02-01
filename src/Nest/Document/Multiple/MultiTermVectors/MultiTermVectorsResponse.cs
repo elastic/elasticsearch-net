@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class MultiTermVectorsResponse : BaseResponse, IMultiTermVectorsResponse
+	public class MultiTermVectorsResponse : ResponseBase, IMultiTermVectorsResponse
 	{
 		[JsonProperty("docs")]
 		public IEnumerable<TermVectorsResponse> Documents { get; internal set; }= new List<TermVectorsResponse>();

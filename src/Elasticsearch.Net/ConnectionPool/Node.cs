@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 			this.Uri = uri.Purify();
 			this.IsAlive = true;
 			this.HoldsData = true;
-			this.MasterEligable = true;
+			this.MasterEligible = true;
 			this.IsResurrected = true;
 		}
 
@@ -26,8 +26,8 @@ namespace Elasticsearch.Net
 		/// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
 		public bool HoldsData { get; set; }
 
-		/// <summary>Indicates whether this node is master eligable, defaults to true when unknown/unspecified</summary>
-		public bool MasterEligable { get; set; }
+		/// <summary>Indicates whether this node is master eligible, defaults to true when unknown/unspecified</summary>
+		public bool MasterEligible { get; set; }
 
 		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
 		public string Id { get; set; } 
@@ -68,7 +68,7 @@ namespace Elasticsearch.Net
 				Id = this.Id,
 				Name = this.Name,
 				HoldsData = this.HoldsData,
-				MasterEligable = this.MasterEligable,
+				MasterEligible = this.MasterEligible,
 				FailedAttempts = this.FailedAttempts,
 				DeadUntil = this.DeadUntil,
 				IsAlive = this.IsAlive

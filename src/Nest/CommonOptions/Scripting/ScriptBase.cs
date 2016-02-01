@@ -17,13 +17,13 @@ namespace Nest
 
 	}
 
-	public abstract class Script : IScript
+	public abstract class ScriptBase : IScript
 	{
 		public Dictionary<string, object> Params { get; set; }
 
 		public string Lang { get; set; }
 
-		public static implicit operator Script(string inline) => new InlineScript(inline);
+		public static implicit operator ScriptBase(string inline) => new InlineScript(inline);
 	}
 
 	public class ScriptDescriptorBase<TDescriptor, TInterface> : DescriptorBase<TDescriptor, TInterface>, IScript

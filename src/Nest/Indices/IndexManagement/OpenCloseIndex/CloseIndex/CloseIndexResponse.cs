@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface ICloseIndexResponse : IAcknowledgedResponse { }
 
-	public class CloseIndexResponse : AcknowledgedResponse, ICloseIndexResponse { }
+	public class CloseIndexResponse : AcknowledgedResponseBase, ICloseIndexResponse { }
 }

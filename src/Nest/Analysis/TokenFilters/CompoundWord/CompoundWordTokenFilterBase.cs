@@ -51,9 +51,9 @@ namespace Nest
 		bool? OnlyLongestMatch { get; set; }
 	}
 
-	public abstract class CompoundWordTokenFilter : TokenFilterBase, ICompoundWordTokenFilter
+	public abstract class CompoundWordTokenFilterBase : TokenFilterBase, ICompoundWordTokenFilter
 	{
-		protected CompoundWordTokenFilter(string type) : base(type) { }
+		protected CompoundWordTokenFilterBase(string type) : base(type) { }
 
 		/// <inheritdoc/>
 		public IEnumerable<string> WordList { get; set; }

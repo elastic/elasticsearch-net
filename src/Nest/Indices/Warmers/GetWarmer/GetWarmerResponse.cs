@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetWarmerResponse : BaseResponse, IGetWarmerResponse
+	public class GetWarmerResponse : ResponseBase, IGetWarmerResponse
 	{
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, Warmers> Indices { get; internal set; }
