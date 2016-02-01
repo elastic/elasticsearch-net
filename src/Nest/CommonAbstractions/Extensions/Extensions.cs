@@ -60,7 +60,7 @@ namespace Nest
 		{
 			using (var writer = new JTokenWriter())
 			{
-				dateConverter.WriteJson(writer, date, new JsonSerializer());
+				dateConverter.WriteJson(writer, date, serializer);
 				return writer.Token.ToString();
 			}
 		}

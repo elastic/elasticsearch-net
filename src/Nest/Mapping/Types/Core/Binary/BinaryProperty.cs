@@ -7,7 +7,7 @@ namespace Nest
 	{
 	}
 
-	public class BinaryProperty : Property, IBinaryProperty
+	public class BinaryProperty : PropertyBase, IBinaryProperty
 	{
 		public BinaryProperty() : base("binary") { }
 	}

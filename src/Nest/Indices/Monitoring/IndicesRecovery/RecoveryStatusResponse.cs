@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class RecoveryStatusResponse : BaseResponse, IRecoveryStatusResponse
+	public class RecoveryStatusResponse : ResponseBase, IRecoveryStatusResponse
 	{
 
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]

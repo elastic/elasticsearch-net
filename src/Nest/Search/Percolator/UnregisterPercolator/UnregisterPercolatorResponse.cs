@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class UnregisterPercolatorResponse : BaseResponse, IUnregisterPercolatorResponse
+	public class UnregisterPercolatorResponse : ResponseBase, IUnregisterPercolatorResponse
 	{
 		[JsonProperty(PropertyName = "found")]
 		public bool Found { get; internal set; }

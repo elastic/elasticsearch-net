@@ -34,7 +34,7 @@ namespace Nest
 		BlockState Blocks { get; }
 	}
 
-	public class ClusterStateResponse : BaseResponse, IClusterStateResponse
+	public class ClusterStateResponse : ResponseBase, IClusterStateResponse
 	{
 		public string ClusterName { get; internal set; }
 

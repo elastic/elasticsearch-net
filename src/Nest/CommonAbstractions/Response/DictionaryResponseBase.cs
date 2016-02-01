@@ -9,7 +9,7 @@ namespace Nest
 		IDictionary<TKey, TValue> BackingDictionary { get; set; }
 	}
 
-	public abstract class DictionaryResponse<TKey, TValue> : BaseResponse, IDictionaryResponse<TKey, TValue>
+	public abstract class DictionaryResponseBase<TKey, TValue> : ResponseBase, IDictionaryResponse<TKey, TValue>
 	{
 		protected IDictionaryResponse<TKey, TValue> Self => this;
 		IDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }

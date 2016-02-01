@@ -20,7 +20,7 @@ namespace Nest
 		ClusterNodesStats Nodes { get; set; }
 	}
 
-	public class ClusterStatsResponse : BaseResponse, IClusterStatsResponse
+	public class ClusterStatsResponse : ResponseBase, IClusterStatsResponse
 	{
 		public string ClusterName { get; set; }
 

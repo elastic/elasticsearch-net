@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TokenFilters, string, ITokenFilter>))]
 	public interface ITokenFilters : IIsADictionary<string, ITokenFilter> { }
 
-	public class TokenFilters : IsADictionary<string, ITokenFilter>, ITokenFilters
+	public class TokenFilters : IsADictionaryBase<string, ITokenFilter>, ITokenFilters
 	{
 		public TokenFilters() : base() { }
 		public TokenFilters(IDictionary<string, ITokenFilter> container) : base(container) { }
@@ -19,7 +19,7 @@ namespace Nest
 		public void Add(string name, ITokenFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenFiltersDescriptor : IsADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>
+	public class TokenFiltersDescriptor : IsADictionaryDescriptorBase<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>
 	{
 		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
 

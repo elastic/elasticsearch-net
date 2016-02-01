@@ -10,7 +10,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization.OptIn)]
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexTemplateResponse, string, TemplateMapping>))]
-	public class GetIndexTemplateResponse : DictionaryResponse<string, TemplateMapping>, IGetIndexTemplateResponse
+	public class GetIndexTemplateResponse : DictionaryResponseBase<string, TemplateMapping>, IGetIndexTemplateResponse
 	{
 		[JsonIgnore]
 		public IDictionary<string, TemplateMapping> TemplateMappings => Self.BackingDictionary;

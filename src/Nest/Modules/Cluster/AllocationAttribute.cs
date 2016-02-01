@@ -8,7 +8,7 @@ namespace Nest
 		IDictionary<string, IList<string>> Attributes { get; } 
 	}
 
-	public class AllocationAttributes : IsADictionary<string, IList<string>>, IAllocationAttributes
+	public class AllocationAttributes : IsADictionaryBase<string, IList<string>>, IAllocationAttributes
 	{
 		IDictionary<string, IList<string>> IAllocationAttributes.Attributes => this.BackingDictionary;
 
@@ -16,7 +16,7 @@ namespace Nest
 		public void Add(string attribute, IEnumerable<string> values) => this.BackingDictionary.Add(attribute, values.ToList());
 	}
 
-	public class AllocationAttributesDescriptor : IsADictionaryDescriptor<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>
+	public class AllocationAttributesDescriptor : IsADictionaryDescriptorBase<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>
 	{
 		public AllocationAttributesDescriptor() : base(new AllocationAttributes()) { }
 	}

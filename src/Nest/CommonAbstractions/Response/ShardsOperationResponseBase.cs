@@ -7,7 +7,7 @@ namespace Nest
 		ShardsMetaData Shards { get; }
 	}
 
-	public abstract class ShardsOperationResponse : BaseResponse, IShardsOperationResponse
+	public abstract class ShardsOperationResponseBase : ResponseBase, IShardsOperationResponse
 	{
 		[JsonProperty("_shards")]
 		public ShardsMetaData Shards { get; internal set; }

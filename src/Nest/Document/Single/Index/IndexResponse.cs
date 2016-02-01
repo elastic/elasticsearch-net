@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class IndexResponse : BaseResponse, IIndexResponse
+	public class IndexResponse : ResponseBase, IIndexResponse
 	{
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }

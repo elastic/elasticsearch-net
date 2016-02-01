@@ -102,7 +102,7 @@ namespace Nest
 			return sb.ToString();
 		}
 
-		private class Json : Json<DateMath>
+		private class Json : JsonConverterBase<DateMath>
 		{
 			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
 				writer.WriteValue(value.ToString());

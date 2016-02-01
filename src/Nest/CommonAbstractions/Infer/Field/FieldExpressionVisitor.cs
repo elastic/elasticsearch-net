@@ -46,7 +46,7 @@ namespace Nest
 			if (this._settings.PropertyMappings.TryGetValue(info, out propertyMapping))
 				return propertyMapping.Name;
 
-			var att = ElasticsearchPropertyAttribute.From(info);
+			var att = ElasticsearchPropertyAttributeBase.From(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 

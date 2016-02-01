@@ -7,7 +7,7 @@ namespace Nest
 {
 	[JsonObject]
 	[ContractJsonConverter(typeof(MultiSearchResponseJsonConverter))]
-	public class MultiSearchResponse : BaseResponse, IMultiSearchResponse
+	public class MultiSearchResponse : ResponseBase, IMultiSearchResponse
 	{
 		public MultiSearchResponse()
 		{

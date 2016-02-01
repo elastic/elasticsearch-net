@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IFlushResponse : IShardsOperationResponse { }
 	
-	public class FlushResponse : ShardsOperationResponse, IFlushResponse { }
+	public class FlushResponse : ShardsOperationResponseBase, IFlushResponse { }
 }

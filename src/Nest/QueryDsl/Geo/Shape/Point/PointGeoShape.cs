@@ -8,7 +8,7 @@ namespace Nest
 		GeoCoordinate Coordinates { get; set; }
 	}
 
-	public class PointGeoShape : GeoShape, IPointGeoShape
+	public class PointGeoShape : GeoShapeBase, IPointGeoShape
 	{
 		public PointGeoShape() : this(null) { }
 

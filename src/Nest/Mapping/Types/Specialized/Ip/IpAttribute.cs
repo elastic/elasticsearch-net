@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class IpAttribute : ElasticsearchPropertyAttribute, IIpProperty
+	public class IpAttribute : ElasticsearchPropertyAttributeBase, IIpProperty
 	{
 		IIpProperty Self => this;
 

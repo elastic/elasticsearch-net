@@ -8,7 +8,7 @@ namespace Nest
 		ShardsMetaData Shards { get; set; }
 	}
 
-	public class UpgradeResponse : BaseResponse, IUpgradeResponse
+	public class UpgradeResponse : ResponseBase, IUpgradeResponse
 	{
 		public ShardsMetaData Shards { get; set; }
 	}

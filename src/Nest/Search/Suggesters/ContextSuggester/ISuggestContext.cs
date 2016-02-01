@@ -21,8 +21,8 @@ namespace Nest
 		public Field Path { get; set; }
 	}
 
-	public abstract class SuggestContextBaseDescriptor<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISuggestContext
-		where TDescriptor : SuggestContextBaseDescriptor<TDescriptor, TInterface, T>, TInterface, ISuggestContext
+	public abstract class SuggestContextDescriptorBase<TDescriptor, TInterface, T> : DescriptorBase<TDescriptor, TInterface>, ISuggestContext
+		where TDescriptor : SuggestContextDescriptorBase<TDescriptor, TInterface, T>, TInterface, ISuggestContext
 		where TInterface : class, ISuggestContext
 	{
 		protected abstract string Type { get; }
@@ -33,6 +33,4 @@ namespace Nest
 
 		public TDescriptor Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 	}
-
-
 }

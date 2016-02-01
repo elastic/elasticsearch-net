@@ -18,7 +18,7 @@ namespace Nest
 	{
 	}
 
-	public class GetMappingResponse : BaseResponse, IGetMappingResponse
+	public class GetMappingResponse : ResponseBase, IGetMappingResponse
 	{
 		public override bool IsValid => base.IsValid && this.Mapping != null;
 

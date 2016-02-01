@@ -5,14 +5,14 @@ using System.ComponentModel;
 
 namespace Nest
 {
-	public abstract class IsADictionary<TKey, TValue> : IIsADictionary<TKey, TValue>
+	public abstract class IsADictionaryBase<TKey, TValue> : IIsADictionary<TKey, TValue>
 	{
 		protected Dictionary<TKey, TValue> BackingDictionary { get; }
 		private IDictionary Self => BackingDictionary;
 
-		protected IsADictionary() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
-		protected IsADictionary(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
-		protected IsADictionary(IDictionary<TKey, TValue> backingDictionary)
+		protected IsADictionaryBase() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
+		//protected IsADictionaryBase(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
+		protected IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
 		{
 			this.BackingDictionary = backingDictionary != null 
 				? new Dictionary<TKey, TValue>(backingDictionary) 

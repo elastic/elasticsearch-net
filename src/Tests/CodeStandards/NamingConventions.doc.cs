@@ -12,59 +12,114 @@ namespace Tests.CodeStandards
 		/**
 		* Abstract class names should end with a `Base` suffix
 		*/
-		//[U]
+		[U]
 		public void AbstractClassNamesEndWithBase()
 		{
+		    var exceptions = new[]
+		    {
+		        typeof(DateMath)
+		    };
+
 			var abstractClasses = typeof(IRequest).Assembly().GetTypes()
-				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed())
-				.Select(t => t.Name.Split('`')[0])
+				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
+                .Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
+                .Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			foreach (var abstractClass in abstractClasses)
-				abstractClass.Should().EndWith("Base");
+		    abstractClasses.Should().BeEmpty();
 		}
 
 		/**
 		* Request class names should end with "Request"
 		*/
-		//[U]
+		[U]
 		public void RequestClassNamesEndWithRequest()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
 			var requests = types
-				.Where(t => typeof(IRequest).IsAssignableFrom(t))
-				.Select(t => t.Name.Split('`')[0])
+				.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
+                .Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
+				.Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
+                .Select(t => t.Name.Split('`')[0])
 				.ToList();
-			foreach (var request in requests)
-				request.Should().EndWith("Request");
+
+		    requests.Should().BeEmpty();
 		}
 
 		/**
 		* Response class names should end with "Response"
 		**/
-		//[U]
+		[U]
 		public void ResponseClassNamesEndWithResponse()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
 			var responses = types
-				.Where(t => typeof(IResponse).IsAssignableFrom(t))
-				.Select(t => t.Name.Split('`')[0])
+				.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
+                .Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
+                .Select(t => t.Name.Split('`')[0])
 				.ToList();
-			foreach (var response in responses)
-				response.Should().EndWith("Response");
+
+		    responses.Should().BeEmpty();
 		}
 
 		/**
 		* Request and Response class names should be one to one in *most* cases.
 		* e.g. ValidateRequest => ValidateResponse, and not ValidateQueryRequest => ValidateResponse
 		*/
-		//[U]
+		[U]
 		public void ParityBetweenRequestsAndResponses()
 		{
-			var types = typeof(IRequest).Assembly().GetTypes();
+            // Add any exceptions to the rule here
+            var exceptions = new []
+            {
+                typeof(CatAliasesRequest),
+                typeof(CatAllocationRequest),
+                typeof(CatCountRequest),
+                typeof(CatFielddataRequest),
+                typeof(CatHealthRequest),
+                typeof(CatHelpRequest),
+                typeof(CatIndicesRequest),
+                typeof(CatMasterRequest),
+                typeof(CatNodesRequest),
+                typeof(CatPendingTasksRequest),
+                typeof(CatPluginsRequest),
+                typeof(CatRecoveryRequest),
+                typeof(CatSegmentsRequest),
+                typeof(CatShardsRequest),
+                typeof(CatThreadPoolRequest),
+                typeof(DocumentExistsRequest),
+                typeof(DocumentExistsRequest<>),
+                typeof(AliasExistsRequest),
+                typeof(IndexExistsRequest),
+                typeof(TypeExistsRequest),
+                typeof(IndexTemplateExistsRequest),
+                typeof(SearchExistsRequest),
+                typeof(SearchExistsRequest<>),
+                typeof(SearchTemplateRequest),
+                typeof(SearchTemplateRequest<>),
+                typeof(ScrollRequest),
+                typeof(SourceRequest),
+                typeof(SourceRequest<>),
+
+                // TODO: Remove when https://github.com/elastic/elasticsearch-net/issues/1778 is resolved
+                typeof(ValidateQueryRequest),
+                typeof(ValidateQueryRequest<>),
+
+                typeof(GetAliasRequest),
+                typeof(CatNodeattrsRequest),
+                typeof(IndicesShardStoresRequest),
+                typeof(RenderSearchTemplateRequest)
+            };
+
+            var types = typeof(IRequest).Assembly().GetTypes();
 
 			var requests = new HashSet<string>(types
-				.Where(t => t.IsClass() && !t.IsAbstract() && typeof(IRequest).IsAssignableFrom(t) && !(t.Name.EndsWith("Descriptor")))
+				.Where(t => 
+                    t.IsClass() && 
+                    !t.IsAbstract() && 
+                    typeof(IRequest).IsAssignableFrom(t) && 
+                    !typeof(IDescriptor).IsAssignableFrom(t)
+                    && !exceptions.Contains(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 			);
 
@@ -72,13 +127,7 @@ namespace Tests.CodeStandards
 				.Where(t => t.IsClass() && !t.IsAbstract() && typeof(IResponse).IsAssignableFrom(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 
-			// Add any exceptions to the rule here
-			var exceptions = new string[] { "Cat" };
-
-			responses = responses.Where(r => !exceptions.Contains(r)).ToList();
-
-			foreach (var response in responses)
-				requests.Should().Contain(response);
+            requests.Except(responses).Should().BeEmpty();
 		}
 	}
 }

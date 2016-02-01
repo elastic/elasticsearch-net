@@ -21,7 +21,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
-	public class IpProperty : Property, IIpProperty
+	public class IpProperty : PropertyBase, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
 

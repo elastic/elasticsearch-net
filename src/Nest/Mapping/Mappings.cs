@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Mappings, TypeName, ITypeMapping>))]
 	public interface IMappings : IIsADictionary<TypeName, ITypeMapping> { }
 
-	public class Mappings : IsADictionary<TypeName, ITypeMapping>, IMappings
+	public class Mappings : IsADictionaryBase<TypeName, ITypeMapping>, IMappings
 	{
 		public Mappings() : base() { }
 		public Mappings(IDictionary<TypeName, ITypeMapping> container) : base(container) { }
@@ -19,7 +19,7 @@ namespace Nest
 		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
 	}
 	
-	public class MappingsDescriptor : IsADictionaryDescriptor<MappingsDescriptor,IMappings, TypeName, ITypeMapping>
+	public class MappingsDescriptor : IsADictionaryDescriptorBase<MappingsDescriptor,IMappings, TypeName, ITypeMapping>
 	{
 		public MappingsDescriptor() : base(new Mappings()) { }
 

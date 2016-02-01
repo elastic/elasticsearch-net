@@ -34,7 +34,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class DateProperty : Property, IDateProperty
+	public class DateProperty : PropertyBase, IDateProperty
 	{
 		public DateProperty() : base("date") { }
 

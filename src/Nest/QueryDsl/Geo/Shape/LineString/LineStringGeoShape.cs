@@ -9,7 +9,7 @@ namespace Nest
 		IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 
-	public class LineStringGeoShape : GeoShape, ILineStringGeoShape
+	public class LineStringGeoShape : GeoShapeBase, ILineStringGeoShape
 	{
 		public LineStringGeoShape() : this(null) { }
 

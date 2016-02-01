@@ -8,9 +8,9 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public abstract class GeoShape
+	public abstract class GeoShapeBase
 	{
-		public GeoShape(string type)
+	    protected GeoShapeBase(string type)
 		{
 			this.Type = type;
 		}

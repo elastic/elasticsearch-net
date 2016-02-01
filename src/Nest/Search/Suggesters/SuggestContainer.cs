@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<SuggestContainer, string, ISuggestBucket>))]
 	public interface ISuggestContainer : IIsADictionary<string, ISuggestBucket> { }
 
-	public class SuggestContainer : IsADictionary<string, ISuggestBucket>, ISuggestContainer
+	public class SuggestContainer : IsADictionaryBase<string, ISuggestBucket>, ISuggestContainer
 	{
 		public SuggestContainer() : base() { }
 		public SuggestContainer(IDictionary<string, ISuggestBucket> container) : base(container) { }
@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	public class SuggestContainerDescriptor<T>
-		: IsADictionaryDescriptor<SuggestContainerDescriptor<T>, ISuggestContainer, string, ISuggestBucket>
+		: IsADictionaryDescriptorBase<SuggestContainerDescriptor<T>, ISuggestContainer, string, ISuggestBucket>
 		where T : class
 	{
 		public SuggestContainerDescriptor() : base(new SuggestContainer()) { }

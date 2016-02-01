@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetIndexResponse : BaseResponse, IGetIndexResponse
+	public class GetIndexResponse : ResponseBase, IGetIndexResponse
 	{
 		public IDictionary<string, IndexState> Indices { get; set; } = new Dictionary<string, IndexState>();
 	}

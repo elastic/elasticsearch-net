@@ -22,7 +22,7 @@ namespace Nest
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, Segment> Segments { get; internal set; }
 
-		internal class Json : Json<ShardsSegment>
+		internal class Json : JsonConverterBase<ShardsSegment>
 		{
 			public override void WriteJson(JsonWriter writer, ShardsSegment value, JsonSerializer serializer) { }
 

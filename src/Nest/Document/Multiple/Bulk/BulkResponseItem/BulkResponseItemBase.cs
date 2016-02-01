@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject]
 	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
-	public abstract class BulkResponseItem
+	public abstract class BulkResponseItemBase
 	{
 		public abstract string Operation { get; internal set; }
 

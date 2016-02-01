@@ -13,7 +13,7 @@ namespace Nest
 	/// <summary>
 	/// Provides the connection settings for NEST's <see cref="ElasticClient"/>
 	/// </summary>
-	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
+	public class ConnectionSettings : ConnectionSettingsBase<ConnectionSettings>
 	{
 		public ConnectionSettings(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
@@ -36,8 +36,8 @@ namespace Nest
 	/// </summary>
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public abstract class ConnectionSettings<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
-		where TConnectionSettings : ConnectionSettings<TConnectionSettings>
+	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
+		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>
 	{
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
@@ -63,7 +63,7 @@ namespace Nest
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<TConnectionSettings, IElasticsearchSerializer> serializerFactory)
+		protected ConnectionSettingsBase(IConnectionPool connectionPool, IConnection connection, Func<TConnectionSettings, IElasticsearchSerializer> serializerFactory)
 			: base(connectionPool, connection, serializerFactory)
 		{
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
