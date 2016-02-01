@@ -16,7 +16,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	{
 		/** == Sniffing role detection
 		* 
-		* When we sniff the custer state we detect the role of the node whether its master eligable and holds data
+		* When we sniff the custer state we detect the role of the node whether its master eligible and holds data
 		* We use this information when selecting a node to perform an API call on.
 		*/
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
@@ -26,7 +26,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
+					.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -36,13 +36,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				{
 					pool.Should().NotBeNull();
 					pool.Nodes.Should().HaveCount(10);
-					pool.Nodes.Where(n => n.MasterEligable).Should().HaveCount(10);
+					pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(10);
 				},
 				AssertPoolAfterCall = (pool) =>
 				{
 					pool.Should().NotBeNull();
 					pool.Nodes.Should().HaveCount(8);
-					pool.Nodes.Where(n => n.MasterEligable).Should().HaveCount(3);
+					pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
 				}
 			};
 			await audit.TraceStartup();
@@ -103,11 +103,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[I] public async Task SniffPicksUpRoles()
 		{
 			var node = SniffAndReturnNode();
-			node.MasterEligable.Should().BeTrue();
+			node.MasterEligible.Should().BeTrue();
 			node.HoldsData.Should().BeFalse();
 
 			node = await SniffAndReturnNodeAsync();
-			node.MasterEligable.Should().BeTrue();
+			node.MasterEligible.Should().BeTrue();
 			node.HoldsData.Should().BeFalse();
 		}
 

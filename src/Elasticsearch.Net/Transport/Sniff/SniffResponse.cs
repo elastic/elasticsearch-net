@@ -16,7 +16,7 @@ namespace Elasticsearch.Net
 				{
 					Name = kv.Value.name,
 					Id = kv.Key,
-					MasterEligable = kv.Value.MasterEligable,
+					MasterEligible = kv.Value.MasterEligible,
 					HoldsData = kv.Value.HoldsData,
 				};
 		}
@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 		public string build { get; set; }
 		public IDictionary<string, string> settings { get; set; }
 
-		internal bool MasterEligable => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.master"]) == false);
+		internal bool MasterEligible => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.master"]) == false);
 		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.data"]) == false);
 	}
 
