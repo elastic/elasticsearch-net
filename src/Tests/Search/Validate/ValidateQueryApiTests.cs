@@ -1,24 +1,24 @@
-﻿using Elasticsearch.Net;
-using FluentAssertions;
-using Nest;
-using Tests.Framework;
+﻿using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using Nest;
+using Elasticsearch.Net;
+using FluentAssertions;
 
 namespace Tests.Search.Validate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ValidateApiTests 
-		: ApiIntegrationTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+	public class ValidateQueryApiTests 
+		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
-		public ValidateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ValidateQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Validate<Project>(v => v.Query(q => q.MatchAll())),
-			fluentAsync: (c, f) => c.ValidateAsync<Project>(v => v.Query(q => q.MatchAll())),
-			request: (c, r) => c.Validate(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) }),
-			requestAsync: (c, r) => c.ValidateAsync(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) })
+			fluent: (c, f) => c.ValidateQuery<Project>(v => v.Query(q => q.MatchAll())),
+			fluentAsync: (c, f) => c.ValidateQueryAsync<Project>(v => v.Query(q => q.MatchAll())),
+			request: (c, r) => c.ValidateQuery(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) }),
+			requestAsync: (c, r) => c.ValidateQueryAsync(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) })
 		);
 
 		protected override bool ExpectIsValid => true;
@@ -29,15 +29,15 @@ namespace Tests.Search.Validate
 
 	[Collection(IntegrationContext.ReadOnly)]
 	public class ValidateInvalidQueryApiTests 
-		: ApiIntegrationTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
 		public ValidateInvalidQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Validate<Project>(v => _descriptor),
-			fluentAsync: (c, f) => c.ValidateAsync<Project>(v => _descriptor),
-			request: (c, r) => c.Validate(_request),
-			requestAsync: (c, r) => c.ValidateAsync(_request)
+			fluent: (c, f) => c.ValidateQuery<Project>(v => _descriptor),
+			fluentAsync: (c, f) => c.ValidateQueryAsync<Project>(v => _descriptor),
+			request: (c, r) => c.ValidateQuery(_request),
+			requestAsync: (c, r) => c.ValidateQueryAsync(_request)
 		);
 
 		private ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
@@ -64,7 +64,7 @@ namespace Tests.Search.Validate
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_validate/query";
 
-		protected override void ExpectResponse(IValidateResponse response)
+		protected override void ExpectResponse(IValidateQueryResponse response)
 		{
 			response.Valid.Should().BeFalse();
 		}
