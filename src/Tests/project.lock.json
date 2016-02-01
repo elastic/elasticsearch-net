@@ -187,7 +187,7 @@
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)"
+          "Newtonsoft.Json": "8.0.2"
         },
         "frameworkAssemblies": [
           "System.Dynamic.Runtime",
@@ -635,7 +635,7 @@
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23225",
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
@@ -1981,7 +1981,7 @@
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)"
+          "Newtonsoft.Json": "8.0.2"
         },
         "frameworkAssemblies": [
           "System.Dynamic.Runtime",
@@ -2350,7 +2350,7 @@
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)"
+          "Newtonsoft.Json": "8.0.2"
         },
         "frameworkAssemblies": [
           "System.Dynamic.Runtime",
@@ -2816,7 +2816,7 @@
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23225",
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
@@ -4536,7 +4536,7 @@
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
           "Elasticsearch.Net": null,
-          "Newtonsoft.Json": "[8.0.0, 9.0.0)",
+          "Newtonsoft.Json": "8.0.2",
           "System.Collections": "4.0.11-beta-23225",
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",

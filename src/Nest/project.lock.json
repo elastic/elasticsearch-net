@@ -12,7 +12,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -32,7 +32,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -98,7 +98,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -658,7 +658,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -678,7 +678,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -698,7 +698,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -718,7 +718,7 @@
           "System.Runtime.Serialization"
         ]
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -784,7 +784,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -1408,7 +1408,7 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.1-beta1": {
+      "Newtonsoft.Json/8.0.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -2012,9 +2012,9 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Newtonsoft.Json/8.0.1-beta1": {
+    "Newtonsoft.Json/8.0.2": {
       "type": "package",
-      "sha512": "2SKuwiPQLrHLy0IbGVpj3KFmQereEKmfa+FGyulXUR9x6o+bWYjMfK0K5nqFbe4s/TGy/CPbuF7UfYdsrMhfYQ==",
+      "sha512": "e5yWmEfu68rmtG431zl9N/7PlNKQDIuiDW5MHlEFAZcecakcxrIGnKqrPAtWNILzK2oNanRB5cD150MYhECK3g==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -2028,8 +2028,8 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.8.0.1-beta1.nupkg",
-        "Newtonsoft.Json.8.0.1-beta1.nupkg.sha512",
+        "Newtonsoft.Json.8.0.2.nupkg",
+        "Newtonsoft.Json.8.0.2.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
@@ -3467,7 +3467,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Elasticsearch.Net ",
-      "Newtonsoft.Json >= 8.0.0 < 9.0.0"
+      "Newtonsoft.Json >= 8.0.2"
     ],
     ".NETFramework,Version=v4.6": [
       "fx/System.Dynamic.Runtime ",
