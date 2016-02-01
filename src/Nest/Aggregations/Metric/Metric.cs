@@ -3,11 +3,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public interface IMetric : IAggregationResult
-	{
-	}
-
-	public abstract class MetricBase : IMetric
+	public abstract class MetricBase : IAggregationResult
 	{
 		public IDictionary<string, object> Meta { get; set; }
 	}

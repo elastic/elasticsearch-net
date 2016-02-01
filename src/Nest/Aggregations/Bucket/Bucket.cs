@@ -3,34 +3,45 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public interface IBucketItem { }
 
-	public interface IBucket : IAggregationResult
+	public class Bucket : AggregationsHelper, IAggregationResult
 	{
-		IDictionary<string, IAggregationResult> Aggregations { get; }
-	}
-
-	public abstract class BucketBase : AggregationsHelper, IBucket
-	{
-		protected BucketBase() { }
-		protected BucketBase(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+		public Bucket() { }
+		public Bucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
 
 		public IDictionary<string, object> Meta { get; set; }
 	}
 
-	public class Bucket<TBucketItem> : BucketBase
+	public class Bucket<TBucketItem> : Bucket
 		where TBucketItem : IBucketItem
 	{
 		public Bucket() { }
-		public Bucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+		public Bucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+
+		public IList<TBucketItem> Items { get; set; }
+	}
+
+	public class DocCountBucket : Bucket
+	{
+		public DocCountBucket() { }
+		public DocCountBucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+
+		public long DocCount { get; internal set; }
+	}
+
+	public class DocCountBucket<TBucketItem> : DocCountBucket
+		where TBucketItem : IBucketItem
+	{
+		public DocCountBucket() { }
+		public DocCountBucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
 
 		public IList<TBucketItem> Items { get; set; }
 	}
 
 	// Intermediate object used for deserialization
-	internal class Bucket : IAggregationResult
+	internal class BucketDto : IAggregationResult
 	{
-		public IEnumerable<IAggregationResult> Items { get; set; }
+		public IEnumerable<IAggregationItem> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
 		public IDictionary<string, object> Meta { get; set; }

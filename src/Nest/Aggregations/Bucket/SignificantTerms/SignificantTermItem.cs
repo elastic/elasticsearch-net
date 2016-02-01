@@ -2,10 +2,10 @@
 
 namespace Nest
 {
-	public class SignificantTermItem : BucketBase, IBucketItem
+	public class SignificantTermItem : BucketItemBase, IBucketItem
 	{
 		public SignificantTermItem() { }
-		public SignificantTermItem(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+		public SignificantTermItem(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
 
 		public string Key { get; set; }
 		public long BgCount { get; set; }

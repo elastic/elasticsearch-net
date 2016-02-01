@@ -5,11 +5,11 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregationResult> Aggregations { get; internal protected set; }
+		public IDictionary<string, IAggregationItem> Aggregations { get; internal protected set; }
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregationResult> aggregations)
+		public AggregationsHelper(IDictionary<string, IAggregationItem> aggregations)
 		{
 			this.Aggregations = aggregations;
 		}
@@ -69,27 +69,27 @@ namespace Nest
 			if (named != null)
 				return named;
 
-			var anonymous = this.TryGet<Bucket>(key);
+			var anonymous = this.TryGet<BucketDto>(key);
 			return anonymous != null ? new FiltersBucket(anonymous.Items) { Meta = anonymous.Meta } : null;
 		}
 
-		public SingleBucket Global(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Global(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket Filter(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Filter(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket Missing(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Missing(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket Nested(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Nested(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket ReverseNested(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket ReverseNested(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket Children(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Children(string key) => this.TryGet<DocCountBucket>(key);
 
-		public SingleBucket Sampler(string key) => this.TryGet<SingleBucket>(key);
+		public DocCountBucket Sampler(string key) => this.TryGet<DocCountBucket>(key);
 
 		public DocCountBucket<SignificantTermItem> SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<Bucket>(key);
+			var bucket = this.TryGet<BucketDto>(key);
 			return bucket == null
 				? null
 				: new DocCountBucket<SignificantTermItem>
@@ -100,23 +100,23 @@ namespace Nest
 				};
 		}
 
-		public Bucket<KeyedBucket> Terms(string key) => GetBucket<KeyedBucket>(key);
+		public Bucket<KeyedBucketItem> Terms(string key) => GetBucket<KeyedBucketItem>(key);
 
 		public Bucket<HistogramItem> Histogram(string key)
 		{
-			var bucket = this.TryGet<Bucket>(key);
+			var bucket = this.TryGet<BucketDto>(key);
 			return bucket == null
 				? null
 				: new Bucket<HistogramItem>
 				{
 					Items = bucket.Items.OfType<HistogramItem>()
-						.Concat(bucket.Items.OfType<KeyedBucket>()
+						.Concat(bucket.Items.OfType<KeyedBucketItem>()
 							.Select(x =>
 								new HistogramItem
 								{
 									Key = long.Parse(x.Key),
 									KeyAsString = x.Key,
-									DocCount = x.DocCount,
+									DocCount = x.DocCount.GetValueOrDefault(0),
 									Aggregations = x.Aggregations
 								}
 							)
@@ -126,7 +126,7 @@ namespace Nest
 				};
 		}
 
-		public Bucket<KeyedBucket> GeoHash(string key) => GetBucket<KeyedBucket>(key);
+		public Bucket<KeyedBucketItem> GeoHash(string key) => GetBucket<KeyedBucketItem>(key);
 
 		public Bucket<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
 
@@ -139,16 +139,16 @@ namespace Nest
 		public Bucket<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
 
 		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregationResult
+			where TAggregation : class, IAggregationItem
 		{
-			IAggregationResult agg;
+			IAggregationItem agg;
 			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
 		}
 
 		private Bucket<TBucketItem> GetBucket<TBucketItem>(string key)
 			where TBucketItem : IBucketItem
 		{
-			var bucket = this.TryGet<Bucket>(key);
+			var bucket = this.TryGet<BucketDto>(key);
 			if (bucket == null) return null;
 			return new Bucket<TBucketItem>
 			{

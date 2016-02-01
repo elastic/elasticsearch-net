@@ -4,19 +4,19 @@ using System.Linq;
 
 namespace Nest
 {
-	public class FiltersBucket : BucketBase, IAggregationResult
+	public class FiltersBucket : Bucket, IAggregationItem
 	{
-		public FiltersBucket(IEnumerable<IAggregationResult> items)
+		public FiltersBucket(IEnumerable<IAggregationItem> items)
 		{
 			Items = items;
 		}
 
-		public FiltersBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
+		public FiltersBucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
 
-		public SingleBucket NamedBucket(string key) => this.Global(key);
+		public DocCountBucket NamedBucket(string key) => this.Global(key);
 
-		public IList<SingleBucket> AnonymousBuckets() => this.Items?.OfType<SingleBucket>().ToList();
+		public IList<DocCountBucket> AnonymousBuckets() => this.Items?.OfType<DocCountBucket>().ToList();
 
-		public IEnumerable<IAggregationResult> Items { get; set; }
+		public IEnumerable<IAggregationItem> Items { get; set; }
 	}
 }
