@@ -100,7 +100,19 @@ namespace Nest
 				};
 		}
 
-		public Bucket<KeyedBucketItem> Terms(string key) => GetBucket<KeyedBucketItem>(key);
+		public TermsBucket Terms(string key)
+		{
+			var bucket = this.TryGet<BucketDto>(key);
+			return bucket == null
+				? null
+				: new TermsBucket
+				{
+					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
+					SumOtherDocCount = bucket.SumOtherDocCount,
+					Items = bucket.Items.OfType<KeyedBucketItem>().ToList(),
+					Meta = bucket.Meta
+				};
+		}
 
 		public Bucket<HistogramItem> Histogram(string key)
 		{

@@ -94,6 +94,8 @@ namespace Tests.Aggregations.Bucket.Terms
 			response.IsValid.Should().BeTrue();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
+			states.DocCountErrorUpperBound.Should().HaveValue();
+			states.SumOtherDocCount.Should().HaveValue();
 			foreach (var item in states.Items)
 			{
 				item.Key.Should().NotBeNullOrEmpty();
