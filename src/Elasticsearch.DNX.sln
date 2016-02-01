@@ -6,9 +6,19 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Elasticsearch.Net", "Elasti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87237912-4EFF-49B1-AE76-CD46D97A8DA1}"
 	ProjectSection(SolutionItems) = preProject
+		..\.deployment = ..\.deployment
+		..\.editorconfig = ..\.editorconfig
+		..\.gitignore = ..\.gitignore
+		..\.travis.yml = ..\.travis.yml
 		..\build.bat = ..\build.bat
+		..\build.sh = ..\build.sh
+		..\contributing.md = ..\contributing.md
 		global.json = global.json
+		..\license.txt = ..\license.txt
 		..\nuget.config = ..\nuget.config
+		..\paket.bat = ..\paket.bat
+		..\paket.dependencies = ..\paket.dependencies
+		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nest", "Nest\Nest.xproj", "{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}"
