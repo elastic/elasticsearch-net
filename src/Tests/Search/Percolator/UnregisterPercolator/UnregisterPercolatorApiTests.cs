@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Search.Percolator.UnregisterPercolator
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolateResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
+	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
 		public UnregisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
@@ -39,7 +39,7 @@ namespace Tests.Search.Percolator.UnregisterPercolator
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/{this.CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
 
-		protected override void ExpectResponse(IUnregisterPercolateResponse response)
+		protected override void ExpectResponse(IUnregisterPercolatorResponse response)
 		{
 			response.Found.Should().BeTrue();
 			response.Index.Should().NotBeNullOrEmpty();
