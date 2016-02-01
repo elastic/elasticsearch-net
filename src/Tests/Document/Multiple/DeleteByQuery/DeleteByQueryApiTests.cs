@@ -26,8 +26,8 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteByQuery(this.Indices, f),
-			fluentAsync: (client, f) => client.DeleteByQueryAsync(this.Indices, f),
+			fluent: (client, f) => client.DeleteByQuery(this.Indices, Types.All, f),
+			fluentAsync: (client, f) => client.DeleteByQueryAsync(this.Indices, Types.All, f),
 			request: (client, r) => client.DeleteByQuery(r),
 			requestAsync: (client, r) => client.DeleteByQueryAsync(r)
 		);
@@ -39,7 +39,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/{CallIsolatedValue},{SecondIndex}/_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_query?ignore_unavailable=true";
 
 		protected override bool SupportsDeserialization => false;
 

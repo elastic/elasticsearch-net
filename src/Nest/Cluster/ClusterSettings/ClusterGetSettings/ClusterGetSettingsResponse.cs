@@ -12,7 +12,7 @@ namespace Nest
 		IDictionary<string, object> Transient { get; set; }
 	}
 
-	public class ClusterGetSettingsResponse : BaseResponse, IClusterGetSettingsResponse
+	public class ClusterGetSettingsResponse : ResponseBase, IClusterGetSettingsResponse
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 		public IDictionary<string, object> Transient { get; set; }

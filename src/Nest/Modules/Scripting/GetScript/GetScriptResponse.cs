@@ -8,7 +8,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GetScriptResponse : BaseResponse, IGetScriptResponse
+	public class GetScriptResponse : ResponseBase, IGetScriptResponse
 	{
 		[JsonProperty("script")]
 		public string Script { get; set; }

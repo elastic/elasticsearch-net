@@ -131,7 +131,7 @@ namespace Nest
 	public class HdfsRepositoryDescriptor 
 		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
 	{
-		string IRepository.Type { get { return "hdfs"; } } 
+		string ISnapshotRepository.Type { get { return "hdfs"; } } 
 
 		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
 

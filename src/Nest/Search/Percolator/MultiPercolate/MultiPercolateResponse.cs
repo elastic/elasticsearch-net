@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class MultiPercolateResponse : BaseResponse, IMultiPercolateResponse
+	public class MultiPercolateResponse : ResponseBase, IMultiPercolateResponse
 	{
 		public override bool IsValid => base.IsValid && this.Responses.All(r => r.IsValid);
 

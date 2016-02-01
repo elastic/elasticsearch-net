@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class IndicesStatsResponse : BaseResponse, IIndicesStatsResponse
+	public class IndicesStatsResponse : ResponseBase, IIndicesStatsResponse
 	{
 
 		[JsonProperty(PropertyName = "_shards")]

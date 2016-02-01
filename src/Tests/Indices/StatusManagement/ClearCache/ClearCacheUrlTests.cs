@@ -17,7 +17,7 @@ namespace Tests.Indices.StatusManagement.ClearCache
 				;
 
 			var index = "index1,index2";
-			await POST($"/{index}/_cache/clear")
+			await POST($"/index1%2Cindex2/_cache/clear")
 				.Fluent(c => c.ClearCache(index))
 				.Request(c => c.ClearCache(new ClearCacheRequest(index)))
 				.FluentAsync(c => c.ClearCacheAsync(index))

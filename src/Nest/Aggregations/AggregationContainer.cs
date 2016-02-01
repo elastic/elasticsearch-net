@@ -7,7 +7,7 @@ using Nest.Aggregations.Visitor;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public class AggregationDictionary : IsADictionary<string, IAggregationContainer>
+	public class AggregationDictionary : IsADictionaryBase<string, IAggregationContainer>
 	{
 		public AggregationDictionary() : base() { }
 		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }

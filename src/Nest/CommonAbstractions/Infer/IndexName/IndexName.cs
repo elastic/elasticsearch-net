@@ -12,9 +12,9 @@ namespace Nest
 
 		public static implicit operator IndexName(string typeName)
 		{
-			if (typeName == null)
+			if (typeName.IsNullOrEmpty())
 				return null;
-			return new IndexName { Name = typeName };
+			return new IndexName { Name = typeName.Trim() };
 		}
 		public static implicit operator IndexName(Type type)
 		{
@@ -50,7 +50,7 @@ namespace Nest
 		{
 			if (!this.Name.IsNullOrEmpty())
 				return this.Name;
-            if (this.Type != null)
+			if (this.Type != null)
 				return this.Type.Name;
 			return string.Empty;
 		}
@@ -73,7 +73,7 @@ namespace Nest
 
 		public static IndexName From<T>() => typeof(T);
 
-		public Indices And<T>() => new Indices(new IndexName[] { this, typeof(T)});
-		public Indices And(IndexName index) => new Indices(new IndexName[] { this, index});
+		public Indices And<T>() => new Indices(new IndexName[] { this, typeof(T) });
+		public Indices And(IndexName index) => new Indices(new IndexName[] { this, index });
 	}
 }

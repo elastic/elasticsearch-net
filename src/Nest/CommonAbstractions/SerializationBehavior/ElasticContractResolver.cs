@@ -94,7 +94,7 @@ namespace Nest
 		protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
 		{
 			// Only serialize explicitly implemented IProperty properties on attribute types
-			if (typeof(ElasticsearchPropertyAttribute).IsAssignableFrom(type))
+			if (typeof(ElasticsearchPropertyAttributeBase).IsAssignableFrom(type))
 				return PropertiesOfInterface<IProperty>(type, memberSerialization);
 
 			// Descriptors implement properties explicitly, these are not picked up by default
@@ -163,24 +163,16 @@ namespace Nest
 
 			IPropertyMapping propertyMapping = null;
 			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
-				propertyMapping = ElasticsearchPropertyAttribute.From(member);
+				propertyMapping = ElasticsearchPropertyAttributeBase.From(member);
 
-			if (propertyMapping == null)
-			{
-				var jsonIgnoreAttribute = member.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
-				if (jsonIgnoreAttribute.HasAny())
-					property.Ignored = true;
+			var serializerMapping = this.ConnectionSettings.Serializer?.CreatePropertyMapping(member);
 
-				var propertyName = this.ConnectionSettings.Serializer?.CreatePropertyName(member);
-				if (!propertyName.IsNullOrEmpty())
-					property.PropertyName = propertyName;
-				return property;
-			}
+			var nameOverride = propertyMapping?.Name ?? serializerMapping?.Name;
+			if (!nameOverride.IsNullOrEmpty()) property.PropertyName = nameOverride;
 
-			if (!propertyMapping.Name.IsNullOrEmpty())
-				property.PropertyName = propertyMapping.Name;
-
-			property.Ignored = propertyMapping.Ignore;
+			var overrideIgnore = propertyMapping?.Ignore ?? serializerMapping?.Ignore;
+			if (overrideIgnore.HasValue)
+				property.Ignored = overrideIgnore.Value;
 
 			return property;
 		}

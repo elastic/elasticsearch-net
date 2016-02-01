@@ -7,7 +7,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ClearScrollResponse : BaseResponse, IClearScrollResponse
+	public class ClearScrollResponse : ResponseBase, IClearScrollResponse
 	{
 	}
 }

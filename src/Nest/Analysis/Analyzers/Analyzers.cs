@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Analyzers, string, IAnalyzer>))]
 	public interface IAnalyzers : IIsADictionary<string, IAnalyzer> { }
 
-	public class Analyzers : IsADictionary<string, IAnalyzer>, IAnalyzers
+	public class Analyzers : IsADictionaryBase<string, IAnalyzer>, IAnalyzers
 	{
 		public Analyzers() : base() { }
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
@@ -19,7 +19,7 @@ namespace Nest
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>
+	public class AnalyzersDescriptor : IsADictionaryDescriptorBase<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>
 	{
 		public AnalyzersDescriptor() : base(new Analyzers()) { }
 

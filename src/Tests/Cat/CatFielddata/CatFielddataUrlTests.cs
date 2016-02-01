@@ -19,7 +19,7 @@ namespace Tests.Cat.CatFielddata
 
 			var fields = new[] { "name", "startedOn" };
 
-			await GET("/_cat/fielddata/name,startedOn")
+			await GET("/_cat/fielddata/name%2CstartedOn")
 				.Fluent(c => c.CatFielddata(f => f.Fields<Project>(p => p.Name, p => p.StartedOn)))
 				.Request(c => c.CatFielddata(new CatFielddataRequest(fields)))
 				.FluentAsync(c => c.CatFielddataAsync(f => f.Fields<Project>(p => p.Name, p => p.StartedOn)))

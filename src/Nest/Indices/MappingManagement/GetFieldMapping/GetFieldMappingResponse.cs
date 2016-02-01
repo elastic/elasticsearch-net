@@ -45,7 +45,7 @@ namespace Nest
 		FieldMappingProperties MappingsFor(string indexName, string typeName);
 	}
 
-	public class GetFieldMappingResponse : BaseResponse, IGetFieldMappingResponse
+	public class GetFieldMappingResponse : ResponseBase, IGetFieldMappingResponse
 	{
 		private Inferrer _inferrer { get; set; }
 

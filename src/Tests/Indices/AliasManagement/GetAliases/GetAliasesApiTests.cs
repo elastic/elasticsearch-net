@@ -10,7 +10,7 @@ namespace Tests.Indices.AliasManagement.GetAliases
 	[Collection(IntegrationContext.ReadOnly)]
 	public class GetAliasesApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasesRequest, GetAliasesDescriptor, GetAliasesRequest>
 	{
-		private readonly static Names Names = Infer.Names("alias, x", "y");
+		private static readonly Names Names = Infer.Names("alias, x", "y");
 
 		public GetAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 #pragma warning disable 618 //testing an obsolete message
@@ -25,7 +25,7 @@ namespace Tests.Indices.AliasManagement.GetAliases
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_all/_aliases/alias,x,y";
+		protected override string UrlPath => $"/_all/_aliases/alias%2Cx%2Cy";
 
 		protected override bool SupportsDeserialization => false;
 

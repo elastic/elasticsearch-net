@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IBulkAliasResponse : IAcknowledgedResponse { }
 
-	public class BulkAliasResponse : AcknowledgedResponse, IBulkAliasResponse { }
+	public class BulkAliasResponse : AcknowledgedResponseBase, IBulkAliasResponse { }
 }

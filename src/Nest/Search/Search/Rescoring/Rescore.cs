@@ -26,7 +26,7 @@ namespace Nest
 		int? IRescore.WindowSize { get; set; }
 		IRescoreQuery IRescore.Query { get; set; }
 
-		public virtual RescoreDescriptor<T> RescoreQuery(Func<RescoreQueryDescriptor<T>, RescoreQueryDescriptor<T>> rescoreQuerySelector) =>
+		public virtual RescoreDescriptor<T> RescoreQuery(Func<RescoreQueryDescriptor<T>, IRescoreQuery> rescoreQuerySelector) =>
 			Assign(a=>a.Query = rescoreQuerySelector?.Invoke(new RescoreQueryDescriptor<T>()));
 
 		public virtual RescoreDescriptor<T> WindowSize(int? windowSize) => Assign(a => a.WindowSize = windowSize);

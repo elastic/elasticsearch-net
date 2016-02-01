@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ClusterPendingTasksResponse : BaseResponse, IClusterPendingTasksResponse
+	public class ClusterPendingTasksResponse : ResponseBase, IClusterPendingTasksResponse
 	{
 		[JsonProperty("tasks")]
 		public IEnumerable<PendingTask> Tasks { get; set; }

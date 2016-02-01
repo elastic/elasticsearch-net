@@ -7,7 +7,7 @@ namespace Nest
 	[JsonConverter(typeof(GetRepositoryResponseJsonConverter))]
 	public interface IGetRepositoryResponse : IResponse
 	{
-		IDictionary<string, IRepository> Repositories { get; set; }
+		IDictionary<string, ISnapshotRepository> Repositories { get; set; }
 
 		AzureRepository Azure(string name);
 		FileSystemRepository FileSystem(string name);
@@ -17,14 +17,14 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetRepositoryResponse : BaseResponse, IGetRepositoryResponse
+	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
 		public GetRepositoryResponse()
 		{
-			this.Repositories = new Dictionary<string, IRepository>();
+			this.Repositories = new Dictionary<string, ISnapshotRepository>();
 		}
 
-		public IDictionary<string, IRepository> Repositories { get; set; }
+		public IDictionary<string, ISnapshotRepository> Repositories { get; set; }
 
 		public AzureRepository Azure(string name) => Get<AzureRepository>(name);
 		public FileSystemRepository FileSystem(string name) => Get<FileSystemRepository>(name);
@@ -33,7 +33,7 @@ namespace Nest
 		public S3Repository S3(string name) => Get<S3Repository>(name);
 
 		private TRepository Get<TRepository>(string name)
-			where TRepository : class, IRepository
+			where TRepository : class, ISnapshotRepository
 		{
 			if (this.Repositories == null) return null;
 			if (!this.Repositories.ContainsKey(name)) return null;

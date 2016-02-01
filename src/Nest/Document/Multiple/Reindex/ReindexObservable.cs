@@ -90,7 +90,7 @@ namespace Nest
 				bb.Index<T>(bi => Index(bi, d1, toIndex));
 			}
 
-			var indexResult = this._client.Bulk(b=>bb);
+			var indexResult = this._client.Bulk(bb);
 			if (!indexResult.IsValid)
 				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed indexing page {page}.", indexResult.ApiCall);
 

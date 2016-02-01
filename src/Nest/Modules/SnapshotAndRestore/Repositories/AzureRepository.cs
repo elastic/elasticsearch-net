@@ -82,7 +82,7 @@ namespace Nest
 		: DescriptorBase<AzureRepositoryDescriptor, IAzureRepository>, IAzureRepository
 	{
 		IAzureRepositorySettings IRepository<IAzureRepositorySettings>.Settings { get; set; }
-		string IRepository.Type { get; } = "azure";
+		string ISnapshotRepository.Type { get; } = "azure";
 
 		public AzureRepositoryDescriptor Settings(Func<AzureRepositorySettingsDescriptor, IAzureRepositorySettings> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new AzureRepositorySettingsDescriptor()));

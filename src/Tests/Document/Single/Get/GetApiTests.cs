@@ -15,6 +15,8 @@ namespace Tests.Document.Single.Get
 	{
 		protected string ProjectId => Project.Projects.First().Name;
 
+		protected string ProjectIdForUrl => Uri.EscapeDataString(this.ProjectId);
+
 		public GetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Get<Project>(this.ProjectId, f),
@@ -26,7 +28,7 @@ namespace Tests.Document.Single.Get
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/project/{this.ProjectId}";
+		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -46,7 +48,7 @@ namespace Tests.Document.Single.Get
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override string UrlPath => $"/project/project/{this.ProjectId}?fields=name%2CnumberOfCommits";
+		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?fields=name%2CnumberOfCommits";
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.Fields(

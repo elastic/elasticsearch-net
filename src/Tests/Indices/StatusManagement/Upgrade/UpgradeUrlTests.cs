@@ -18,7 +18,7 @@ namespace Tests.Indices.StatusManagement.Upgrade
 				;
 
 			var index = "index1,index2";
-			await POST($"/{index}/_upgrade")
+			await POST($"/index1%2Cindex2/_upgrade")
 				.Fluent(c => c.Upgrade(index))
 				.Request(c => c.Upgrade(new UpgradeRequest(index)))
 				.FluentAsync(c => c.UpgradeAsync(index))

@@ -31,7 +31,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class NumberProperty : Property, INumberProperty
+	public class NumberProperty : PropertyBase, INumberProperty
 	{
 		public NumberProperty() : base(NumberType.Double.GetStringValue()) { }
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }

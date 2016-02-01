@@ -18,8 +18,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			node.Uri.Should().NotBeNull();
 			node.Uri.Port.Should().Be(9200);
 
-			/** By default master eligable and holds data is presumed to be true **/
-			node.MasterEligable.Should().BeTrue();
+			/** By default master eligible and holds data is presumed to be true **/
+			node.MasterEligible.Should().BeTrue();
 			node.HoldsData.Should().BeTrue();
 			/** Is resurrected is true on first usage, hints to the transport that a ping might be useful */
 			node.IsResurrected.Should().BeTrue();
@@ -69,8 +69,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U] public void Equality()
 		{
 			/** Nodes are considered equal if they have the same endpoint no matter what other metadata is associated */
-			var node = new Node(new Uri("http://localhost:9200")) { MasterEligable = false };
-			var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligable = true };
+			var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
+			var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligible = true };
 			(node == nodeAsMaster).Should().BeTrue();
 			(node != nodeAsMaster).Should().BeFalse();
 			var uri = new Uri("http://localhost:9200");

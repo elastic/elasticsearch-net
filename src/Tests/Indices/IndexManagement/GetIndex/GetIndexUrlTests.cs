@@ -19,7 +19,7 @@ namespace Tests.Indices.IndexManagement.GetIndex
 				;
 
 			var features = Feature.Settings | Feature.Mappings;
-			await GET($"/{index}/_settings,_mappings")
+			await GET($"/{index}/_settings%2C_mappings")
 				.Fluent(c => c.GetIndex(index, s=>s.Feature(features)))
 				.Request(c => c.GetIndex(new GetIndexRequest(index, features)))
 				.FluentAsync(c => c.GetIndexAsync(index, s=>s.Feature(features)))

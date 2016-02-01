@@ -28,7 +28,10 @@ namespace Nest
 		{
 			return q.Field.IsConditionless() 
 				|| (
-				(!q.Terms.HasAny() || q.Terms.All(t=>t == null || ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false))
+				(q.Terms == null 
+					|| !q.Terms.HasAny() 
+					|| q.Terms.All(t=>t == null 
+					|| ((t as string)?.IsNullOrEmpty()).GetValueOrDefault(false))
 				)
 				&& 
 				(q.TermsLookup == null
@@ -45,9 +48,8 @@ namespace Nest
 	/// This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 	/// </summary>
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
-	/// <typeparam name="TValue">The type of the field that we want to specfify terms for</typeparam>
-	public class TermsQueryDescriptor<T, TValue> 
-		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T, TValue>, ITermsQuery, T>
+	public class TermsQueryDescriptor<T> 
+		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T>, ITermsQuery, T>
 		, ITermsQuery where T : class
 	{
 		protected override bool Conditionless => TermsQuery.IsConditionless(this);
@@ -56,16 +58,16 @@ namespace Nest
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
 		IFieldLookup ITermsQuery.TermsLookup { get; set; }
 
-		public TermsQueryDescriptor<T, TValue> TermsLookup<TOther>(Func<FieldLookupDescriptor<TOther>, IFieldLookup> selector)
+		public TermsQueryDescriptor<T> TermsLookup<TOther>(Func<FieldLookupDescriptor<TOther>, IFieldLookup> selector)
 			where TOther : class => Assign(a => a.TermsLookup = selector(new FieldLookupDescriptor<TOther>()));
 
-		public TermsQueryDescriptor<T, TValue> MinimumShouldMatch(MinimumShouldMatch minMatch) => Assign(a => a.MinimumShouldMatch = minMatch);
+		public TermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minMatch) => Assign(a => a.MinimumShouldMatch = minMatch);
 
-		public TermsQueryDescriptor<T, TValue> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
+		public TermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 
-		public TermsQueryDescriptor<T, TValue> Terms(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
-		public TermsQueryDescriptor<T, TValue> Terms(params TValue[] terms) => Assign(a => a.Terms = terms.Cast<object>());
+		public TermsQueryDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a => a.Terms = terms?.Cast<object>());
 
 	}
 }

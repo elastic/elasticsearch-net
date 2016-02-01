@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class SnapshotResponse : BaseResponse, ISnapshotResponse
+	public class SnapshotResponse : ResponseBase, ISnapshotResponse
 	{
 		private bool _accepted = false;
 		[JsonProperty("accepted")]

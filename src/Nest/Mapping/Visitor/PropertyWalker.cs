@@ -12,8 +12,6 @@ namespace Nest
 		private readonly int _maxRecursion;
 		private readonly ConcurrentDictionary<Type, int> _seenTypes;
 
-		public PropertyWalker(Type type, int maxRecursion = 0) : this(type, null, maxRecursion) { }
-
 		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
 		{
 			_type = GetUnderlyingType(type);
@@ -23,7 +21,7 @@ namespace Nest
 			_seenTypes.TryAdd(_type, 0);
 		}
 
-		internal PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		private PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
 		{
 			_type = type;
 			_visitor = visitor;
@@ -41,17 +39,21 @@ namespace Nest
 
 			foreach (var propertyInfo in _type.GetProperties())
 			{
-				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);
+				var attribute = ElasticsearchPropertyAttributeBase.From(propertyInfo);
 				if (attribute != null && attribute.Ignore)
 					continue;
+
 				var property = GetProperty(propertyInfo, attribute);
+				var withCLrOrigin = property as IPropertyWithClrOrigin;
+				if (withCLrOrigin != null)
+					withCLrOrigin.ClrOrigin = propertyInfo;
 				properties.Add(propertyInfo, property);
 			}
 
 			return properties;
 		}
 
-		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 			var property = _visitor.Visit(propertyInfo, attribute);
 			if (property != null)

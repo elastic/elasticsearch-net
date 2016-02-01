@@ -288,7 +288,7 @@ namespace Elasticsearch.Net
 		public IEnumerable<Node> SniffNodes => this._connectionPool
 			.CreateView((e, n)=> { using (new Auditable(e, this.AuditTrail, this._dateTimeProvider) { Node = n }) {} })
 			.ToList()
-			.OrderBy(n => n.MasterEligable ? n.Uri.Port : int.MaxValue);
+			.OrderBy(n => n.MasterEligible ? n.Uri.Port : int.MaxValue);
 
 		public void SniffOnConnectionFailure()
 		{

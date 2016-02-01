@@ -37,7 +37,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -322,7 +322,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -491,7 +491,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -658,7 +658,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -1023,7 +1023,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -1033,6 +1033,7 @@
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.Linq": "4.0.0-beta-23109",
+          "System.Linq.Expressions": "4.0.11-beta-23516",
           "System.Linq.Queryable": "4.0.0-beta-23109",
           "System.Runtime": "4.0.21-beta-23225",
           "System.Threading": "4.0.11-beta-23225",
@@ -2028,7 +2029,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2246,7 +2247,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -2531,7 +2532,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -2700,7 +2701,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -2868,7 +2869,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -3153,7 +3154,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -3322,7 +3323,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -3489,7 +3490,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -3872,7 +3873,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -3882,6 +3883,7 @@
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.Linq": "4.0.0-beta-23109",
+          "System.Linq.Expressions": "4.0.11-beta-23516",
           "System.Linq.Queryable": "4.0.0-beta-23109",
           "System.Runtime": "4.0.21-beta-23225",
           "System.Threading": "4.0.11-beta-23225",
@@ -3895,6 +3897,34 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
+      "runtime.any.System.Linq.Expressions/4.0.11-beta-23516": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.Linq": "4.0.0",
+          "System.ObjectModel": "4.0.10",
+          "System.Reflection": "4.0.10",
+          "System.Reflection.Emit": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Emit.Lightweight": "4.0.0",
+          "System.Reflection.Extensions": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Reflection.TypeExtensions": "4.0.0",
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Threading": "4.0.10"
+        },
+        "compile": {
+          "ref/dotnet/_._": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Linq.Expressions.dll": {}
         }
       },
       "runtime.win7.System.Console/4.0.0-beta-23516": {
@@ -4702,13 +4732,13 @@
           "lib/DNXCore50/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
-      "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+      "System.Reflection.Emit.Lightweight/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Reflection": "4.0.0-beta-23109",
-          "System.Reflection.Emit.ILGeneration": "4.0.0-beta-23109",
-          "System.Reflection.Primitives": "4.0.0-beta-23109",
-          "System.Runtime": "4.0.0-beta-23109"
+          "System.Reflection": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Runtime": "4.0.0"
         },
         "compile": {
           "ref/dotnet/System.Reflection.Emit.Lightweight.dll": {}
@@ -5145,7 +5175,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -5362,7 +5392,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.0.0-alpha2": {
+      "Elasticsearch.Net/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -5745,7 +5775,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Nest/2.0.0-alpha2": {
+      "Nest/2.1.0-ci20160129221525": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -5755,6 +5785,7 @@
           "System.Diagnostics.Tools": "4.0.1-beta-23225",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.Linq": "4.0.0-beta-23109",
+          "System.Linq.Expressions": "4.0.11-beta-23516",
           "System.Linq.Queryable": "4.0.0-beta-23109",
           "System.Runtime": "4.0.21-beta-23225",
           "System.Threading": "4.0.11-beta-23225",
@@ -5768,6 +5799,34 @@
         },
         "runtime": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
+      "runtime.any.System.Linq.Expressions/4.0.11-beta-23516": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.Linq": "4.0.0",
+          "System.ObjectModel": "4.0.10",
+          "System.Reflection": "4.0.10",
+          "System.Reflection.Emit": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Emit.Lightweight": "4.0.0",
+          "System.Reflection.Extensions": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Reflection.TypeExtensions": "4.0.0",
+          "System.Resources.ResourceManager": "4.0.0",
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Threading": "4.0.10"
+        },
+        "compile": {
+          "ref/dotnet/_._": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Linq.Expressions.dll": {}
         }
       },
       "runtime.win7.System.Console/4.0.0-beta-23516": {
@@ -6575,13 +6634,13 @@
           "lib/DNXCore50/System.Reflection.Emit.ILGeneration.dll": {}
         }
       },
-      "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+      "System.Reflection.Emit.Lightweight/4.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Reflection": "4.0.0-beta-23109",
-          "System.Reflection.Emit.ILGeneration": "4.0.0-beta-23109",
-          "System.Reflection.Primitives": "4.0.0-beta-23109",
-          "System.Runtime": "4.0.0-beta-23109"
+          "System.Reflection": "4.0.0",
+          "System.Reflection.Emit.ILGeneration": "4.0.0",
+          "System.Reflection.Primitives": "4.0.0",
+          "System.Runtime": "4.0.0"
         },
         "compile": {
           "ref/dotnet/System.Reflection.Emit.Lightweight.dll": {}
@@ -7018,7 +7077,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/1.0.0": {
+      "Tests/2.0.0-ci20160129160552": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -7203,15 +7262,15 @@
     }
   },
   "libraries": {
-    "Elasticsearch.Net/2.0.0-alpha2": {
+    "Elasticsearch.Net/2.1.0-ci20160129221525": {
       "type": "project",
       "path": "../Elasticsearch.Net/project.json"
     },
-    "Nest/2.0.0-alpha2": {
+    "Nest/2.1.0-ci20160129221525": {
       "type": "project",
       "path": "../Nest/project.json"
     },
-    "Tests/1.0.0": {
+    "Tests/2.0.0-ci20160129160552": {
       "type": "project",
       "path": "../Tests/project.json"
     },
@@ -7634,6 +7693,28 @@
         "Newtonsoft.Json.8.0.2.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
+      ]
+    },
+    "runtime.any.System.Linq.Expressions/4.0.11-beta-23516": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "P5nzo1Ye0GxB4BYdWian6Y427eTrhn1JS3jLWZq5bMWVn8hS/OIfyylASN0A/qqeLn4rGA0fOzmJSYqFSKvxgQ==",
+      "files": [
+        "lib/DNXCore50/System.Linq.Expressions.dll",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Linq.Expressions.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "ref/dotnet/_._",
+        "runtime.any.System.Linq.Expressions.4.0.11-beta-23516.nupkg",
+        "runtime.any.System.Linq.Expressions.4.0.11-beta-23516.nupkg.sha512",
+        "runtime.any.System.Linq.Expressions.nuspec",
+        "runtimes/aot/lib/netcore50/_._"
       ]
     },
     "runtime.win7.System.Console/4.0.0-beta-23516": {
@@ -9526,9 +9607,9 @@
         "System.Reflection.Emit.ILGeneration.nuspec"
       ]
     },
-    "System.Reflection.Emit.Lightweight/4.0.0-beta-23109": {
+    "System.Reflection.Emit.Lightweight/4.0.0": {
       "type": "package",
-      "sha512": "Kbg03ijw7jZUswutleX/zmGgz6VYszTuyy4DciBn1PHFYAqAgZFZdK3cpYCsAU+cPliQ35UcOX828OsAG9NU4w==",
+      "sha512": "DJZhHiOdkN08xJgsJfDjkuOreLLmMcU8qkEEqEHqyhkPUZMMQs0lE8R+6+68BAFWgcdzxtNu0YmIOtEug8j00w==",
       "files": [
         "lib/DNXCore50/System.Reflection.Emit.Lightweight.dll",
         "lib/net45/_._",
@@ -9547,8 +9628,8 @@
         "ref/dotnet/zh-hant/System.Reflection.Emit.Lightweight.xml",
         "ref/net45/_._",
         "ref/wp80/_._",
-        "System.Reflection.Emit.Lightweight.4.0.0-beta-23109.nupkg",
-        "System.Reflection.Emit.Lightweight.4.0.0-beta-23109.nupkg.sha512",
+        "System.Reflection.Emit.Lightweight.4.0.0.nupkg",
+        "System.Reflection.Emit.Lightweight.4.0.0.nupkg.sha512",
         "System.Reflection.Emit.Lightweight.nuspec"
       ]
     },

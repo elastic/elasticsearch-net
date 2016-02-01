@@ -22,7 +22,7 @@ namespace Tests.Indices.Warmers.GetWarmer
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => "/project/_warmer/warmer1,warmer2";
+		protected override string UrlPath => "/project/_warmer/warmer1%2Cwarmer2";
 
 		protected override Func<GetWarmerDescriptor, IGetWarmerRequest> Fluent => d => d
 			.Index<Project>()

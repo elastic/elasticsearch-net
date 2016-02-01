@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
-	public class FieldValues : IsADictionary<string, object>
+	public class FieldValues : IsADictionaryBase<string, object>
 	{
 		private Inferrer _inferrer;
 

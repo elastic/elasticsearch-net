@@ -113,7 +113,7 @@ namespace Nest
 		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
 	{
 		IFileSystemRepositorySettings IRepository<IFileSystemRepositorySettings>.Settings { get; set; }
-		string IRepository.Type { get; } = "fs";
+		string ISnapshotRepository.Type { get; } = "fs";
 
 		public FileSystemRepositoryDescriptor Settings(string location, Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)));

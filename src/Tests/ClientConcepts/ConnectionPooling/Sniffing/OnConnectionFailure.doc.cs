@@ -21,12 +21,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			/**
 			* Here we seed our connection with 5 known nodes 9200-9204 of which we think
-			* 9202, 9203, 9204 are master eligable nodes. Our virtualized cluster will throw once when doing 
+			* 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing 
 			* a search on 9201. This should a sniff to be kicked off.
 			*/
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(5)
-				.MasterEligable(9202, 9203, 9204)
+				.MasterEligible(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9201).Fails(Once))
 				/**
@@ -36,7 +36,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				*/
 				.Sniff(p => p.SucceedAlways(Framework.Cluster
 					.Nodes(3)
-					.MasterEligable(9200, 9202)
+					.MasterEligible(9200, 9202)
 					.ClientCalls(r => r.OnPort(9201).Fails(Once))
 					/**
 					* After this second failure on 9201 another sniff will be returned a cluster that no 
@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					*/
 					.Sniff(s => s.SucceedAlways(Framework.Cluster
 						.Nodes(3, 9210)
-						.MasterEligable(9210, 9212)
+						.MasterEligible(9210, 9212)
 						.ClientCalls(r => r.SucceedAlways())
 						.Sniff(r => r.SucceedAlways())
 					))
@@ -95,15 +95,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			*/
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(5)
-				.MasterEligable(9202, 9203, 9204)
+				.MasterEligible(9202, 9203, 9204)
 				.Ping(r => r.OnPort(9201).Fails(Once))
 				.Sniff(p => p.SucceedAlways(Framework.Cluster
 					.Nodes(3)
-					.MasterEligable(9200, 9202)
+					.MasterEligible(9200, 9202)
 					.Ping(r => r.OnPort(9201).Fails(Once))
 					.Sniff(s => s.SucceedAlways(Framework.Cluster
 						.Nodes(3, 9210)
-						.MasterEligable(9210, 9211)
+						.MasterEligible(9210, 9211)
 						.Ping(r => r.SucceedAlways())
 						.Sniff(r => r.SucceedAlways())
 					))

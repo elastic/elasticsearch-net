@@ -37,7 +37,7 @@ namespace Nest
 	}
 
 	public class FieldValueFactorFunctionDescriptor<T> 
-		: FunctionScoreFunctionBaseDescriptor<FieldValueFactorFunctionDescriptor<T>, IFieldValueFactorFunction, T >, IFieldValueFactorFunction
+		: FunctionScoreFunctionDescriptorBase<FieldValueFactorFunctionDescriptor<T>, IFieldValueFactorFunction, T >, IFieldValueFactorFunction
 		where T : class
 	{
 		Field IFieldValueFactorFunction.Field { get; set; }

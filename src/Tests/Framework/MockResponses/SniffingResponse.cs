@@ -46,7 +46,7 @@ namespace Tests.Framework.MockResponses
 					{ "name", name },
 				}
 			};
-			if (!node.MasterEligable) nodeResponse.settings.Add("node.master", false);
+			if (!node.MasterEligible) nodeResponse.settings.Add("node.master", false);
 			if (!node.HoldsData) nodeResponse.settings.Add("node.data", false);
 			return nodeResponse;
 		}

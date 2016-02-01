@@ -31,7 +31,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class GetResponse<T> : BaseResponse, IGetResponse<T> where T : class
+	public class GetResponse<T> : ResponseBase, IGetResponse<T> where T : class
 	{
 		public string Index { get; private set; }
 		public string Type { get; private set; }

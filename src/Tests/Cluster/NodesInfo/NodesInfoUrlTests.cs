@@ -25,14 +25,14 @@ namespace Tests.Cluster.NodesInfo
 				;
 
 			var metrics = NodesInfoMetric.Http | NodesInfoMetric.Jvm;
-			await GET("/_nodes/jvm,http")
+			await GET("/_nodes/jvm%2Chttp")
 				.Fluent(c => c.NodesInfo(p=>p.Metric(metrics)))
 				.Request(c => c.NodesInfo(new NodesInfoRequest(metrics)))
 				.FluentAsync(c => c.NodesInfoAsync(p=>p.Metric(metrics)))
 				.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest(metrics)))
 				;
 
-			await GET("/_nodes/foo/jvm,http")
+			await GET("/_nodes/foo/jvm%2Chttp")
 				.Fluent(c => c.NodesInfo(n => n.NodeId("foo").Metric(metrics)))
 				.Request(c => c.NodesInfo(new NodesInfoRequest("foo", metrics)))
 				.FluentAsync(c => c.NodesInfoAsync(n => n.NodeId("foo").Metric(metrics)))

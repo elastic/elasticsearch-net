@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class DateAttribute : ElasticsearchPropertyAttribute, IDateProperty
+	public class DateAttribute : ElasticsearchPropertyAttributeBase, IDateProperty
 	{
 		IDateProperty Self => this;
 

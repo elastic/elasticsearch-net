@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	public interface ICreateIndexResponse : IAcknowledgedResponse { }
-	public class CreateIndexResponse : AcknowledgedResponse, ICreateIndexResponse { }
+	public class CreateIndexResponse : AcknowledgedResponseBase, ICreateIndexResponse { }
 }

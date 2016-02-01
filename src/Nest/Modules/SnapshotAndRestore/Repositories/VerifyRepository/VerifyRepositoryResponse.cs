@@ -16,7 +16,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class VerifyRepositoryResponse : BaseResponse, IVerifyRepositoryResponse
+	public class VerifyRepositoryResponse : ResponseBase, IVerifyRepositoryResponse
 	{
 
 		/// <summary>

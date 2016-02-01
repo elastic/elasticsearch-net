@@ -12,7 +12,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 	[Collection(IntegrationContext.ReadOnly)]
 	public class GetAliasApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
-		private readonly static Names Names = Infer.Names("alias, x", "y");
+		private static readonly Names Names = Infer.Names("alias, x", "y");
 
 		public GetAliasApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		
@@ -26,7 +26,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/_all/_alias/alias,x,y";
+		protected override string UrlPath => $"/_all/_alias/alias%2Cx%2Cy";
 		protected override void ExpectResponse(IGetAliasesResponse response)
 		{
 			response.Indices.Should().NotBeNull();

@@ -4,7 +4,7 @@
 	{
 	}
 
-	public class PutAliasResponse : BaseResponse, IPutAliasResponse
+	public class PutAliasResponse : ResponseBase, IPutAliasResponse
 	{
 	}
 }

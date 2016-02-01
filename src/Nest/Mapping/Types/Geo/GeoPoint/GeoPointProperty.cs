@@ -43,7 +43,7 @@ namespace Nest
 		IGeoPointFielddata Fielddata { get; set; }
 	}
 
-	public class GeoPointProperty : Property, IGeoPointProperty
+	public class GeoPointProperty : PropertyBase, IGeoPointProperty
 	{
 		public GeoPointProperty() : base("geo_point") { }
 

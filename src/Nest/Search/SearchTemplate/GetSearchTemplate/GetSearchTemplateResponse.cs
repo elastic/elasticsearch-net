@@ -8,7 +8,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetSearchTemplateResponse : BaseResponse, IGetSearchTemplateResponse
+	public class GetSearchTemplateResponse : ResponseBase, IGetSearchTemplateResponse
 	{
 		[JsonProperty("template")]
 		public string Template { get; set; }

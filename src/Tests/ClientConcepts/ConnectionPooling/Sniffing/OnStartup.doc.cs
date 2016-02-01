@@ -120,9 +120,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
-					new Node(new Uri("http://localhost:9200")) { MasterEligable = false },
-					new Node(new Uri("http://localhost:9201")) { MasterEligable = false },
-					new Node(new Uri("http://localhost:9202")) { MasterEligable = true },
+					new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
+					new Node(new Uri("http://localhost:9201")) { MasterEligible = false },
+					new Node(new Uri("http://localhost:9202")) { MasterEligible = true },
 				})
 				.Sniff(s => s.Succeeds(Always))
 				.SniffingConnectionPool()
@@ -142,9 +142,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
-					new Node(new Uri("http://localhost:9200")) { MasterEligable = true },
-					new Node(new Uri("http://localhost:9201")) { MasterEligable = true },
-					new Node(new Uri("http://localhost:9202")) { MasterEligable = false },
+					new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
+					new Node(new Uri("http://localhost:9201")) { MasterEligible = true },
+					new Node(new Uri("http://localhost:9202")) { MasterEligible = false },
 				})
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))

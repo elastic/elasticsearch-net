@@ -2,6 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
+    ".NETFramework,Version=v4.6": {},
     ".NETFramework,Version=v4.5": {},
     ".NETPlatform,Version=v5.1": {
       "Microsoft.CSharp/4.0.1-beta-23225": {
@@ -545,6 +546,8 @@
         }
       }
     },
+    ".NETFramework,Version=v4.6/win7-x86": {},
+    ".NETFramework,Version=v4.6/win7-x64": {},
     ".NETFramework,Version=v4.5/win7-x86": {},
     ".NETFramework,Version=v4.5/win7-x64": {},
     ".NETPlatform,Version=v5.1/win7-x86": {
@@ -3108,6 +3111,11 @@
   },
   "projectFileDependencyGroups": {
     "": [],
+    ".NETFramework,Version=v4.6": [
+      "fx/System ",
+      "fx/System.Runtime ",
+      "fx/System.Runtime.Serialization "
+    ],
     ".NETFramework,Version=v4.5": [
       "fx/System ",
       "fx/System.Runtime ",

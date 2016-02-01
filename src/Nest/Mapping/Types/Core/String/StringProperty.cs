@@ -43,7 +43,7 @@ namespace Nest
 		IStringFielddata Fielddata { get; set; }
 	}
 
-	public class StringProperty : Property, IStringProperty
+	public class StringProperty : PropertyBase, IStringProperty
 	{
 		public StringProperty() : base("string") { }
 

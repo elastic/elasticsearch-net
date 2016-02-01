@@ -13,7 +13,7 @@ namespace Nest
 		IDictionary<string, SearchNode> Nodes { get; }
 	}
 
-	public class SearchShardsResponse : BaseResponse, ISearchShardsResponse
+	public class SearchShardsResponse : ResponseBase, ISearchShardsResponse
 	{
 		public IEnumerable<IEnumerable<SearchShard>> Shards { get; internal set; }
 

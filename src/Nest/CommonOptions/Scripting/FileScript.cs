@@ -9,7 +9,7 @@ namespace Nest
 		string File { get; set; }
 	}
 
-	public class FileScript : Script, IFileScript
+	public class FileScript : ScriptBase, IFileScript
 	{
 		public FileScript(string file)
 		{

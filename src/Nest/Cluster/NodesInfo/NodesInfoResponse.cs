@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class NodesInfoResponse : BaseResponse, INodesInfoResponse
+	public class NodesInfoResponse : ResponseBase, INodesInfoResponse
 	{
 		[JsonProperty(PropertyName = "cluster_name")]
 		public string ClusterName { get; internal set; }

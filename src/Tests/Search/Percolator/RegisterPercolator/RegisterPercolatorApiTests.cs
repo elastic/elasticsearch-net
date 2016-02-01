@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Search.Percolator.RegisterPercolator
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolateResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
 		public RegisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -50,7 +50,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			commits = 5000
 		};
 
-		protected override void ExpectResponse(IRegisterPercolateResponse response)
+		protected override void ExpectResponse(IRegisterPercolatorResponse response)
 		{
 			response.Created.Should().BeTrue();
 			response.Index.Should().NotBeNullOrEmpty();

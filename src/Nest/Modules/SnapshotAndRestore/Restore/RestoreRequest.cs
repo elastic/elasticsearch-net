@@ -62,7 +62,7 @@ namespace Nest
 
 		public RestoreDescriptor RenameReplacement(string renameReplacement) => Assign(a => a.RenameReplacement = renameReplacement);
 
-		public RestoreDescriptor IndexSettings(Func<UpdateIndexSettingsDescriptor, UpdateIndexSettingsDescriptor> settingsSelector) =>
+		public RestoreDescriptor IndexSettings(Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> settingsSelector) =>
 				Assign(a => a.IndexSettings = settingsSelector?.Invoke(new UpdateIndexSettingsDescriptor()));
 
 		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings) => Assign(a => a.IgnoreIndexSettings = ignoreIndexSettings);

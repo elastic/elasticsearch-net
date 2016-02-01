@@ -14,14 +14,14 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 			Nest.Indices indices = index;
 			var name = "name";
 			Name n = name;
-			await GET($"/{index}/_settings/{name}")
+			await GET($"/index1%2Cindex2/_settings/{name}")
 				.Fluent(c => c.GetIndexSettings(m=>m.Index(index).Name(name)))
 				.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(index, name)))
 				.FluentAsync(c => c.GetIndexSettingsAsync(m=>m.Index(index).Name(name)))
 				.RequestAsync(c => c.GetIndexSettingsAsync(new GetIndexSettingsRequest(index, name)))
 				;
 			
-			await GET($"/{index}/_settings")
+			await GET($"/index1%2Cindex2/_settings")
 				.Fluent(c => c.GetIndexSettings(m=>m.Index(index)))
 				.Request(c => c.GetIndexSettings(new GetIndexSettingsRequest(indices)))
 				.FluentAsync(c => c.GetIndexSettingsAsync(m=>m.Index(index)))

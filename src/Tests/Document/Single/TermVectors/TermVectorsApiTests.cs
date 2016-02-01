@@ -23,7 +23,7 @@ namespace Tests.Document.Single.TermVectors
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/project/project/{Project.Instance.Name}/_termvectors?offsets=true";
+		protected override string UrlPath => $"/project/project/{Uri.EscapeDataString(Project.Instance.Name)}/_termvectors?offsets=true";
 
 		protected override bool SupportsDeserialization => false;
 

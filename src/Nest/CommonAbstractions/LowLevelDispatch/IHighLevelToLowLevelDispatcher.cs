@@ -13,7 +13,7 @@ namespace Nest
 		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
-			where TResponse : BaseResponse;
+			where TResponse : ResponseBase;
 
 		TResponse Dispatch<TRequest, TQueryString, TResponse>(
 			TRequest descriptor, 
@@ -22,7 +22,7 @@ namespace Nest
 			)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
-			where TResponse : BaseResponse;
+			where TResponse : ResponseBase;
 
 		Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
 			TRequest descriptor, 
@@ -30,7 +30,7 @@ namespace Nest
 			)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
-			where TResponse : BaseResponse, TResponseInterface
+			where TResponse : ResponseBase, TResponseInterface
 			where TResponseInterface : IResponse;
 
 		Task<TResponseInterface> DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
@@ -40,7 +40,7 @@ namespace Nest
 		)
 			where TQueryString : FluentRequestParameters<TQueryString>, new()
 			where TRequest : IRequest<TQueryString>
-			where TResponse : BaseResponse, TResponseInterface
+			where TResponse : ResponseBase, TResponseInterface
 			where TResponseInterface : IResponse;
 	}
 }

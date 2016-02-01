@@ -18,7 +18,7 @@ namespace Tests.Indices.StatusManagement.Optimize
 				;
 
 			var index = "index1,index2";
-			await POST($"/{index}/_optimize")
+			await POST($"/index1%2Cindex2/_optimize")
 				.Fluent(c => c.Optimize(index))
 				.Request(c => c.Optimize(new OptimizeRequest(index)))
 				.FluentAsync(c => c.OptimizeAsync(index))

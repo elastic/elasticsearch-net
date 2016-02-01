@@ -1,6 +1,6 @@
 ﻿//TODO needs IFDEF?
 
-#if !DOTNETCORE
+#if NET45
 namespace System.Runtime.CompilerServices
 {
 	internal class FormattableStringFactory

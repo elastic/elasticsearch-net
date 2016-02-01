@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IPutMappingResponse : IIndicesResponse { }
 
-	public class PutMappingResponse : IndicesResponse, IPutMappingResponse { }
+	public class PutMappingResponse : IndicesResponseBase, IPutMappingResponse { }
 }
