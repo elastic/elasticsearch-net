@@ -29,7 +29,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class CompletionProperty : Property, ICompletionProperty
+	public class CompletionProperty : PropertyBase, ICompletionProperty
 	{
 		public CompletionProperty() : base("completion") { }
 

@@ -4,7 +4,7 @@
 	{
 	}
 
-	public class DeleteAliasResponse : BaseResponse, IDeleteAliasResponse
+	public class DeleteAliasResponse : ResponseBase, IDeleteAliasResponse
 	{
 	}
 }

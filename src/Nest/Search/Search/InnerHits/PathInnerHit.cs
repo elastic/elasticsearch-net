@@ -9,7 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<PathInnerHit, Field, IGlobalInnerHit>))]
 	public interface IPathInnerHit : IIsADictionary<Field, IGlobalInnerHit> { }
 
-	public class PathInnerHit : IsADictionary<Field, IGlobalInnerHit>, IPathInnerHit
+	public class PathInnerHit : IsADictionaryBase<Field, IGlobalInnerHit>, IPathInnerHit
 	{
 		public PathInnerHit() {}
 		public PathInnerHit(IDictionary<Field, IGlobalInnerHit> container) : base(container) { }
@@ -34,7 +34,7 @@ namespace Nest
 	}
 
 	public class PathInnerHitDescriptor<T>
-		: IsADictionaryDescriptor<PathInnerHitDescriptor<T>, IPathInnerHit, Field, IGlobalInnerHit>
+		: IsADictionaryDescriptorBase<PathInnerHitDescriptor<T>, IPathInnerHit, Field, IGlobalInnerHit>
 		where T : class
 	{
 		public PathInnerHitDescriptor() : base(new PathInnerHit()) { }

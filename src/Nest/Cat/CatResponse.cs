@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class CatResponse<TCatRecord> : BaseResponse, ICatResponse<TCatRecord>
+	public class CatResponse<TCatRecord> : ResponseBase, ICatResponse<TCatRecord>
 		where TCatRecord : ICatRecord
 	{
 		public IEnumerable<TCatRecord> Records { get; internal set; }

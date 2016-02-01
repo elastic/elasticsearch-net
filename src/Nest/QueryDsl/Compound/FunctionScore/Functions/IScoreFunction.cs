@@ -21,12 +21,12 @@ namespace Nest
 		public double? Weight { get; set; }
 	}
 
-	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionBaseDescriptor<FunctionScoreFunctionDescriptor<T>, IScoreFunction, T>
+	public class FunctionScoreFunctionDescriptor<T> : FunctionScoreFunctionDescriptorBase<FunctionScoreFunctionDescriptor<T>, IScoreFunction, T>
 		where T : class { } 
 
-	public abstract class FunctionScoreFunctionBaseDescriptor<TDescriptor, TInterface, T> : 
+	public abstract class FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T> : 
 		DescriptorBase<TDescriptor, TInterface>, IScoreFunction
-		where TDescriptor : FunctionScoreFunctionBaseDescriptor<TDescriptor, TInterface, T>, TInterface, IScoreFunction
+		where TDescriptor : FunctionScoreFunctionDescriptorBase<TDescriptor, TInterface, T>, TInterface, IScoreFunction
 		where TInterface : class, IScoreFunction
 		where T : class
 	{

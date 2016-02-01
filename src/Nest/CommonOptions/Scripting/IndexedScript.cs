@@ -9,7 +9,7 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public class IndexedScript : Script, IIndexedScript
+	public class IndexedScript : ScriptBase, IIndexedScript
 	{
 		public IndexedScript(string id)
 		{

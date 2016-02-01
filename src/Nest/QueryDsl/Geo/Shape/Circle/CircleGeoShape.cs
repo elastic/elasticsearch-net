@@ -11,7 +11,7 @@ namespace Nest
 		string Radius { get; set; }
 	}
 
-	public class CircleGeoShape : GeoShape, ICircleGeoShape
+	public class CircleGeoShape : GeoShapeBase, ICircleGeoShape
 	{
 		public CircleGeoShape() : this(null) { }
 

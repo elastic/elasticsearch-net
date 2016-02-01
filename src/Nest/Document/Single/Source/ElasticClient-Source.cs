@@ -11,6 +11,7 @@ namespace Nest
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source</a>
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
+		/// <param name="document">The document path</param>
 		/// <param name="selector">A descriptor that describes which document's source to fetch</param>
 		T Source<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector = null) where T : class;
 

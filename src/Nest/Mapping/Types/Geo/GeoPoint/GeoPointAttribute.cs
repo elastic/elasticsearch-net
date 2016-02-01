@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class GeoPointAttribute : ElasticsearchPropertyAttribute, IGeoPointProperty
+	public class GeoPointAttribute : ElasticsearchPropertyAttributeBase, IGeoPointProperty
 	{
 		IGeoPointProperty Self => this;
 

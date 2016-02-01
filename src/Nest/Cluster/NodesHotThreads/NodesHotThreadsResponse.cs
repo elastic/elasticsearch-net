@@ -16,7 +16,7 @@ namespace Nest
 		IEnumerable<HotThreadInformation> HotThreads { get; }
 	}
 
-	public class NodesHotThreadsResponse : BaseResponse, INodesHotThreadsResponse
+	public class NodesHotThreadsResponse : ResponseBase, INodesHotThreadsResponse
 	{
 		public NodesHotThreadsResponse() { }
 

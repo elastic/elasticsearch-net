@@ -14,7 +14,7 @@ namespace Nest
 
 	}
 
-	public class UpgradeStatusResponse : BaseResponse, IUpgradeStatusResponse
+	public class UpgradeStatusResponse : ResponseBase, IUpgradeStatusResponse
 	{
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, UpgradeStatus> Upgrades { get; set; }

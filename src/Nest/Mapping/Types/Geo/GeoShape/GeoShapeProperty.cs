@@ -24,7 +24,7 @@ namespace Nest
 		bool? PointsOnly { get; set; }
 	}
 
-	public class GeoShapeProperty : Property, IGeoShapeProperty
+	public class GeoShapeProperty : PropertyBase, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
 

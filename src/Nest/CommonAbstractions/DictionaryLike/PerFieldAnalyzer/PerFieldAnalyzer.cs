@@ -9,7 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<PerFieldAnalyzer, Field, string>))]
 	public interface IPerFieldAnalyzer : IIsADictionary<Field, string> { }
 
-	public class PerFieldAnalyzer : IsADictionary<Field, string>, IPerFieldAnalyzer
+	public class PerFieldAnalyzer : IsADictionaryBase<Field, string>, IPerFieldAnalyzer
 	{
 		public PerFieldAnalyzer() : base() { }
 		public PerFieldAnalyzer(IDictionary<Field, string> container) : base(container) { }
@@ -25,7 +25,7 @@ namespace Nest
 		public void Add(Expression<Func<T, object>>  field, string analyzer) => BackingDictionary.Add(field, analyzer);
 	}
 
-	public class PerFieldAnalyzerDescriptor<T> : IsADictionaryDescriptor<PerFieldAnalyzerDescriptor<T>, IPerFieldAnalyzer, Field, string>
+	public class PerFieldAnalyzerDescriptor<T> : IsADictionaryDescriptorBase<PerFieldAnalyzerDescriptor<T>, IPerFieldAnalyzer, Field, string>
 		where T : class
 	{
 		public PerFieldAnalyzerDescriptor() : base(new PerFieldAnalyzer()) { }

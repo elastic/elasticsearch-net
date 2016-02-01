@@ -34,12 +34,12 @@ namespace Nest
 
 	public interface IPropertyWithClrOrigin
 	{
-		PropertyInfo CLrOrigin { get; set; }
+		PropertyInfo ClrOrigin { get; set; }
 	}
 
-	public abstract class Property : IProperty, IPropertyWithClrOrigin
+	public abstract class PropertyBase : IProperty, IPropertyWithClrOrigin
 	{
-		protected Property(TypeName typeName)
+		protected PropertyBase(TypeName typeName)
 		{
 			Type = typeName;
 		}
@@ -52,6 +52,6 @@ namespace Nest
 		public string IndexName { get; set; }
 		public SimilarityOption? Similarity { get; set; }
 		public bool? Store { get; set; }
-		PropertyInfo IPropertyWithClrOrigin.CLrOrigin { get; set; }
+		PropertyInfo IPropertyWithClrOrigin.ClrOrigin { get; set; }
 	}
 }

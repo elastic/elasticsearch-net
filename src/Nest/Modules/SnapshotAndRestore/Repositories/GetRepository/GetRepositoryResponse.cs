@@ -17,7 +17,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GetRepositoryResponse : BaseResponse, IGetRepositoryResponse
+	public class GetRepositoryResponse : ResponseBase, IGetRepositoryResponse
 	{
 		public GetRepositoryResponse()
 		{

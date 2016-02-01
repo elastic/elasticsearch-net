@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class BooleanAttribute : ElasticsearchPropertyAttribute, IBooleanProperty
+	public class BooleanAttribute : ElasticsearchPropertyAttributeBase, IBooleanProperty
 	{
 		IBooleanProperty Self => this;
 

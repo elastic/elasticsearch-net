@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IDeleteRepositoryResponse : IAcknowledgedResponse { }
 
-	public class DeleteRepositoryResponse : AcknowledgedResponse, IDeleteRepositoryResponse { }
+	public class DeleteRepositoryResponse : AcknowledgedResponseBase, IDeleteRepositoryResponse { }
 }

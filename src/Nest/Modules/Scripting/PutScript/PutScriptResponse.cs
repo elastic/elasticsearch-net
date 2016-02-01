@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IPutScriptResponse : IAcknowledgedResponse { }
 
-	public class PutScriptResponse : AcknowledgedResponse, IPutScriptResponse { }
+	public class PutScriptResponse : AcknowledgedResponseBase, IPutScriptResponse { }
 }

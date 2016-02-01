@@ -20,7 +20,7 @@ namespace Nest
 
 	}
 
-	public class DeleteByQueryResponse : BaseResponse, IDeleteByQueryResponse
+	public class DeleteByQueryResponse : ResponseBase, IDeleteByQueryResponse
 	{
 		public IDictionary<string, DeleteByQueryIndicesResult> Indices { get; set; }
 		public long Took { get; internal set; }

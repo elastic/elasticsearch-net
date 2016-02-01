@@ -38,7 +38,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc />
-	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptor<IndexSettingsDescriptor, IndexSettings>
+	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptorBase<IndexSettingsDescriptor, IndexSettings>
 	{
 		public IndexSettingsDescriptor() : base(new IndexSettings()) { }
 

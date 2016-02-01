@@ -101,7 +101,7 @@ namespace Nest
 		IAnalysis Analysis { get; set; }
 	}
 
-	public class DynamicIndexSettings : IsADictionary<string, object>, IDynamicIndexSettings
+	public class DynamicIndexSettings : IsADictionaryBase<string, object>, IDynamicIndexSettings
 	{
 		public DynamicIndexSettings() : base() { }
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -168,16 +168,16 @@ namespace Nest
 	}
 
 	public class DynamicIndexSettingsDescriptor :
-		DynamicIndexSettingsDescriptor<DynamicIndexSettingsDescriptor, DynamicIndexSettings>
+		DynamicIndexSettingsDescriptorBase<DynamicIndexSettingsDescriptor, DynamicIndexSettings>
 	{
 		public DynamicIndexSettingsDescriptor() : base(new DynamicIndexSettings()) { }
 	}
 
-	public abstract class DynamicIndexSettingsDescriptor<TDescriptor, TIndexSettings> : IsADictionaryDescriptor<TDescriptor, TIndexSettings, string, object>
-		where TDescriptor : DynamicIndexSettingsDescriptor<TDescriptor, TIndexSettings>
+	public abstract class DynamicIndexSettingsDescriptorBase<TDescriptor, TIndexSettings> : IsADictionaryDescriptorBase<TDescriptor, TIndexSettings, string, object>
+		where TDescriptor : DynamicIndexSettingsDescriptorBase<TDescriptor, TIndexSettings>
 		where TIndexSettings : class, IDynamicIndexSettings
 	{
-		protected DynamicIndexSettingsDescriptor(TIndexSettings instance) : base(instance) { }
+		protected DynamicIndexSettingsDescriptorBase(TIndexSettings instance) : base(instance) { }
 
 		/// <summary>
 		/// Add any setting to the index

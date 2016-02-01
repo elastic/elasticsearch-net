@@ -20,7 +20,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 	
-	public class BooleanProperty : Property, IBooleanProperty
+	public class BooleanProperty : PropertyBase, IBooleanProperty
 	{
 		public BooleanProperty() : base("boolean") { }
 

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class AttachmentAttribute : ElasticsearchPropertyAttribute, IAttachmentProperty
+	public class AttachmentAttribute : ElasticsearchPropertyAttributeBase, IAttachmentProperty
 	{
 		IStringProperty IAttachmentProperty.AuthorField { get; set; }
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }

@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Property)]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public abstract class ElasticsearchPropertyAttribute : Attribute, IProperty, IPropertyMapping
+	public abstract class ElasticsearchPropertyAttributeBase : Attribute, IProperty, IPropertyMapping
 	{
-		IProperty Self => this;
+		private IProperty Self => this;
 
 		PropertyName IProperty.Name { get; set; }
 		TypeName IProperty.Type { get; set; }
@@ -28,19 +28,19 @@ namespace Nest
 		public SimilarityOption Similarity { get { return Self.Similarity.GetValueOrDefault(); } set { Self.Similarity = value; } }
 		public bool Store { get { return Self.Store.GetValueOrDefault(); } set { Self.Store = value; } }
 
-		protected ElasticsearchPropertyAttribute(string typeName)
+		protected ElasticsearchPropertyAttributeBase(string typeName)
 		{
 			Self.Type = typeName;
 		}
 
-		protected ElasticsearchPropertyAttribute(Type type)
+		protected ElasticsearchPropertyAttributeBase(Type type)
 		{
 			Self.Type = type;
 		}
 
-		public static ElasticsearchPropertyAttribute From(MemberInfo memberInfo)
+		public static ElasticsearchPropertyAttributeBase From(MemberInfo memberInfo)
 		{
-			return memberInfo.GetCustomAttribute<ElasticsearchPropertyAttribute>(true);
+			return memberInfo.GetCustomAttribute<ElasticsearchPropertyAttributeBase>(true);
 		}
 	}
 }

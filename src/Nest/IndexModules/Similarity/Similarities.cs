@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Similarities, string, ISimilarity>))]
 	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
 
-	public class Similarities : IsADictionary<string, ISimilarity>, ISimilarities
+	public class Similarities : IsADictionaryBase<string, ISimilarity>, ISimilarities
 	{
 		public Similarities() : base() { }
 		public Similarities(IDictionary<string, ISimilarity> container) : base(container) { }
@@ -23,7 +23,7 @@ namespace Nest
 
 	}
 	
-	public class SimilaritiesDescriptor : IsADictionaryDescriptor<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>
+	public class SimilaritiesDescriptor : IsADictionaryDescriptorBase<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>
 	{
 		public SimilaritiesDescriptor() : base(new Similarities()) { }
 

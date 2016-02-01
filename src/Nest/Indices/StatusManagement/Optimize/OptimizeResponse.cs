@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IOptimizeResponse : IShardsOperationResponse { }
 
-	public class OptimizeResponse : ShardsOperationResponse, IOptimizeResponse { }
+	public class OptimizeResponse : ShardsOperationResponseBase, IOptimizeResponse { }
 }

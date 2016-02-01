@@ -771,13 +771,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 		{
 			/** Override the Visit method on INumberProperty and set DocValues = false */
-			public override void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+			public override void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 			{
 				type.DocValues = false;
 			}
 
 			/** Similarily, override the Visit method on IBooleanProperty and set DocValues = false */
-			public override void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+			public override void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 			{
 				type.DocValues = false;
 			}
@@ -843,7 +843,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{
-			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute) => new StringProperty();
+			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new StringProperty();
 		}
 
 		[U]

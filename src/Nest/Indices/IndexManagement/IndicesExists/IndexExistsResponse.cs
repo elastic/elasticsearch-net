@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ExistsResponse : BaseResponse, IExistsResponse
+	public class ExistsResponse : ResponseBase, IExistsResponse
 	{
 		internal ExistsResponse(IApiCallDetails apiCallDetails)
 		{

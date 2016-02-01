@@ -11,7 +11,7 @@ namespace Nest
 	{
 	}
 
-	public class NamedFiltersContainer: IsADictionary<string, IQueryContainer>, INamedFiltersContainer
+	public class NamedFiltersContainer: IsADictionaryBase<string, IQueryContainer>, INamedFiltersContainer
 	{
 		public NamedFiltersContainer() : base() { }
 		public NamedFiltersContainer(IDictionary<string, IQueryContainer> container) : base(container) { }
@@ -23,7 +23,7 @@ namespace Nest
 		public void Add(string name, QueryContainer filter) => BackingDictionary.Add(name, filter);
 	}
 
-	public class NamedFiltersContainerDescriptor<T> : IsADictionaryDescriptor<NamedFiltersContainerDescriptor<T>, INamedFiltersContainer, string, IQueryContainer>
+	public class NamedFiltersContainerDescriptor<T> : IsADictionaryDescriptorBase<NamedFiltersContainerDescriptor<T>, INamedFiltersContainer, string, IQueryContainer>
 		where T : class
 	{
 		public NamedFiltersContainerDescriptor() : base(new NamedFiltersContainer()) { }

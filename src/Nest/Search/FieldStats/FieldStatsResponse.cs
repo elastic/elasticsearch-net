@@ -13,7 +13,7 @@ namespace Nest
 		Dictionary<string, FieldStats> Indices { get; set; }
 	}
 
-	public class FieldStatsResponse : BaseResponse, IFieldStatsResponse
+	public class FieldStatsResponse : ResponseBase, IFieldStatsResponse
 	{
 		public ShardsMetaData Shards { get; set; }
 		public Dictionary<string, FieldStats> Indices { get; set; }

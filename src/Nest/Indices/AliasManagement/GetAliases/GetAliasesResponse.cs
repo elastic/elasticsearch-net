@@ -7,7 +7,7 @@ namespace Nest
 		IDictionary<string, IList<AliasDefinition>> Indices { get; }
 	}
 
-	public class GetAliasesResponse : BaseResponse, IGetAliasesResponse
+	public class GetAliasesResponse : ResponseBase, IGetAliasesResponse
 	{
 		public IDictionary<string, IList<AliasDefinition>> Indices { get; internal set; } = new Dictionary<string, IList<AliasDefinition>>();
 	}

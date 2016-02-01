@@ -10,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class SegmentsResponse : BaseResponse, ISegmentsResponse
+	public class SegmentsResponse : ResponseBase, ISegmentsResponse
 	{
 
 		[JsonProperty(PropertyName = "_shards")]

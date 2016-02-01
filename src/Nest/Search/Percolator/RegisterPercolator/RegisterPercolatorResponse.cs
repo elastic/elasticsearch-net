@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class RegisterPercolatorResponse : BaseResponse, IRegisterPercolatorResponse
+	public class RegisterPercolatorResponse : ResponseBase, IRegisterPercolatorResponse
 	{
 		[JsonProperty(PropertyName = "created")]
 		public bool Created { get; internal set; }

@@ -77,11 +77,11 @@ namespace Nest
 		}
 
 		private static TResponse ResultsSelector<TResponse>(ElasticsearchResponse<TResponse> c)
-			where TResponse : BaseResponse =>
+			where TResponse : ResponseBase =>
 			c.Body ?? CreateInvalidInstance<TResponse>(c);
 
 		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response) 
-			where TResponse : BaseResponse
+			where TResponse : ResponseBase
 		{
 			var r = typeof(TResponse).CreateInstance<TResponse>();
 			((IBodyWithApiCallDetails)r).CallDetails = response;

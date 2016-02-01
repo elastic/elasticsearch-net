@@ -12,7 +12,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ExplainResponse<T> : BaseResponse, IExplainResponse<T>
+	public class ExplainResponse<T> : ResponseBase, IExplainResponse<T>
 		where T : class
 	{
 		[JsonProperty(PropertyName = "matched")]

@@ -9,7 +9,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<NamedInnerHits, string, IInnerHitsContainer>))]
 	public interface INamedInnerHits : IIsADictionary<string, IInnerHitsContainer> { }
 
-	public class NamedInnerHits : IsADictionary<string, IInnerHitsContainer>, INamedInnerHits
+	public class NamedInnerHits : IsADictionaryBase<string, IInnerHitsContainer>, INamedInnerHits
 	{
 		public NamedInnerHits() : base() { }
 		public NamedInnerHits(IDictionary<string, IInnerHitsContainer> container) : base(container) { }
@@ -25,7 +25,7 @@ namespace Nest
 	}
 
 	public class NamedInnerHitsDescriptor<T>
-		: IsADictionaryDescriptor<NamedInnerHitsDescriptor<T>, INamedInnerHits, string, IInnerHitsContainer>
+		: IsADictionaryDescriptorBase<NamedInnerHitsDescriptor<T>, INamedInnerHits, string, IInnerHitsContainer>
 		where T : class
 	{
 		public NamedInnerHitsDescriptor() : base(new NamedInnerHits()) { }

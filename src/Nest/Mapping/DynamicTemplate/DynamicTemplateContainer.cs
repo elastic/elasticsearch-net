@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
 	public interface IDynamicTemplateContainer : IIsADictionary<string, IDynamicTemplate> { }
 
-	public class DynamicTemplateContainer : IsADictionary<string, IDynamicTemplate>, IDynamicTemplateContainer
+	public class DynamicTemplateContainer : IsADictionaryBase<string, IDynamicTemplate>, IDynamicTemplateContainer
 	{
 		public DynamicTemplateContainer() : base() { }
 		public DynamicTemplateContainer(IDictionary<string, IDynamicTemplate> container) : base(container) { }
@@ -22,7 +22,7 @@ namespace Nest
 		public void Add(string name, IDynamicTemplate dynamicTemplate) => BackingDictionary.Add(name, dynamicTemplate);
 	}
 
-	public class DynamicTemplateContainerDescriptor<T> : IsADictionaryDescriptor<DynamicTemplateContainerDescriptor<T>, IDynamicTemplateContainer, string, IDynamicTemplate>
+	public class DynamicTemplateContainerDescriptor<T> : IsADictionaryDescriptorBase<DynamicTemplateContainerDescriptor<T>, IDynamicTemplateContainer, string, IDynamicTemplate>
 		where T : class
 	{
 		public DynamicTemplateContainerDescriptor() : base(new DynamicTemplateContainer()) { }

@@ -10,7 +10,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<IndexConstraints, Field, IIndexConstraint>))]
 	public interface IIndexConstraints : IIsADictionary<Field, IIndexConstraint> { }
 
-	public class IndexConstraints : IsADictionary<Field, IIndexConstraint>, IIndexConstraints
+	public class IndexConstraints : IsADictionaryBase<Field, IIndexConstraint>, IIndexConstraints
 	{
 		public IndexConstraints() : base() { }
 		public IndexConstraints(IDictionary<Field, IIndexConstraint> container) : base(container) { }
@@ -21,7 +21,7 @@ namespace Nest
 		public void Add(Field field, IndexConstraint constraint) => BackingDictionary.Add(field, constraint);
 	}
 
-	public class IndexConstraintsDescriptor : IsADictionaryDescriptor<IndexConstraintsDescriptor, IIndexConstraints, Field, IIndexConstraint>
+	public class IndexConstraintsDescriptor : IsADictionaryDescriptorBase<IndexConstraintsDescriptor, IIndexConstraints, Field, IIndexConstraint>
 	{
 		public IndexConstraintsDescriptor() : base(new IndexConstraints()) { }
 

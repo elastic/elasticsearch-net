@@ -10,7 +10,7 @@ namespace Nest
 	{
 	}
 
-	public class SuggestContextMapping: IsADictionary<string, ISuggestContext>, ISuggestContextMapping
+	public class SuggestContextMapping: IsADictionaryBase<string, ISuggestContext>, ISuggestContextMapping
 	{
 		public SuggestContextMapping() : base() { }
 		public SuggestContextMapping(IDictionary<string, ISuggestContext> container) : base(container) { }
@@ -19,7 +19,7 @@ namespace Nest
 	}
 
 
-	public class SuggestContextMappingDescriptor<T> : IsADictionaryDescriptor<SuggestContextMappingDescriptor<T>, ISuggestContextMapping, string, ISuggestContext>
+	public class SuggestContextMappingDescriptor<T> : IsADictionaryDescriptorBase<SuggestContextMappingDescriptor<T>, ISuggestContextMapping, string, ISuggestContext>
 		where T : class
 	{
 		public SuggestContextMappingDescriptor() : base(new SuggestContextMapping()) { }

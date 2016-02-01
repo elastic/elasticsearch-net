@@ -30,7 +30,7 @@ namespace Nest
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<ScriptFields, string, IScriptField>))]
 	public interface IScriptFields : IIsADictionary<string, IScriptField> { }
 
-	public class ScriptFields : IsADictionary<string, IScriptField>, IScriptFields
+	public class ScriptFields : IsADictionaryBase<string, IScriptField>, IScriptFields
 	{
 		public ScriptFields() : base() { }
 		public ScriptFields(IDictionary<string, IScriptField> container) : base(container) { }
@@ -42,7 +42,7 @@ namespace Nest
 		public void Add(string name, IScript script) => this.BackingDictionary.Add(name, new ScriptField { Script = script });
 	}
 
-	public class ScriptFieldsDescriptor : IsADictionaryDescriptor<ScriptFieldsDescriptor, IScriptFields, string, IScriptField>
+	public class ScriptFieldsDescriptor : IsADictionaryDescriptorBase<ScriptFieldsDescriptor, IScriptFields, string, IScriptField>
 	{
 		public ScriptFieldsDescriptor() : base(new ScriptFields()) { }
 

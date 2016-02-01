@@ -39,21 +39,21 @@ namespace Nest
 
 			foreach (var propertyInfo in _type.GetProperties())
 			{
-				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);
+				var attribute = ElasticsearchPropertyAttributeBase.From(propertyInfo);
 				if (attribute != null && attribute.Ignore)
 					continue;
 
 				var property = GetProperty(propertyInfo, attribute);
 				var withCLrOrigin = property as IPropertyWithClrOrigin;
 				if (withCLrOrigin != null)
-					withCLrOrigin.CLrOrigin = propertyInfo;
+					withCLrOrigin.ClrOrigin = propertyInfo;
 				properties.Add(propertyInfo, property);
 			}
 
 			return properties;
 		}
 
-		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 			var property = _visitor.Visit(propertyInfo, attribute);
 			if (property != null)

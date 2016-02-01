@@ -8,5 +8,5 @@ namespace Nest
 {
 	public interface IPutWarmerResponse : IAcknowledgedResponse { }
 
-	public class PutWarmerResponse : AcknowledgedResponse, IPutWarmerResponse { }
+	public class PutWarmerResponse : AcknowledgedResponseBase, IPutWarmerResponse { }
 }

@@ -9,7 +9,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexSettingsResponse, string, IIndexState>))]
-	public class GetIndexSettingsResponse : DictionaryResponse<string, IIndexState>, IGetIndexSettingsResponse
+	public class GetIndexSettingsResponse : DictionaryResponseBase<string, IIndexState>, IGetIndexSettingsResponse
 	{
 		[JsonIgnore]
 		public IDictionary<string, IIndexState> Indices => Self.BackingDictionary;

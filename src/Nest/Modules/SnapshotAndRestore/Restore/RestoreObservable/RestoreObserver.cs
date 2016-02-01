@@ -2,7 +2,7 @@ using System;
 
 namespace Nest
 {
-	public class RestoreObserver : CoordinatedRequestObserver<IRecoveryStatusResponse>
+	public class RestoreObserver : CoordinatedRequestObserverBase<IRecoveryStatusResponse>
 	{
 		public RestoreObserver(
 			Action<IRecoveryStatusResponse> onNext = null, 

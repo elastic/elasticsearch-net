@@ -9,7 +9,7 @@ namespace Nest
 		IEnumerable<GeoCoordinate> Coordinates { get; set; }
 	}
 
-	public class MultiPointGeoShape : GeoShape, IMultiPointGeoShape
+	public class MultiPointGeoShape : GeoShapeBase, IMultiPointGeoShape
 	{
 		public MultiPointGeoShape() : this(null) { }
 

@@ -33,7 +33,7 @@ namespace Nest
 
 
 	[JsonObject]
-	public class DeleteResponse : BaseResponse, IDeleteResponse
+	public class DeleteResponse : ResponseBase, IDeleteResponse
 	{
 		[JsonProperty("_index")]
 		public string Index { get; internal set; }

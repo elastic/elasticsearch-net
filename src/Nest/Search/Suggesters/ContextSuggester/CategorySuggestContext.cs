@@ -16,7 +16,7 @@ namespace Nest
 		public IEnumerable<string> Default { get; set; }
 	}
 
-	public class CategorySuggestContextDescriptor<T> : SuggestContextBaseDescriptor<CategorySuggestContextDescriptor<T>, ICategorySuggestContext, T>, ICategorySuggestContext
+	public class CategorySuggestContextDescriptor<T> : SuggestContextDescriptorBase<CategorySuggestContextDescriptor<T>, ICategorySuggestContext, T>, ICategorySuggestContext
 		where T : class
 	{
 		protected override string Type => "category";

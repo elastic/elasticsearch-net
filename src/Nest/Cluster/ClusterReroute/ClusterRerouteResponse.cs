@@ -12,7 +12,7 @@ namespace Nest
 		IEnumerable<ClusterRerouteExplanation> Explanations { get; set; }
 	}
 
-	public class ClusterRerouteResponse : BaseResponse, IClusterRerouteResponse
+	public class ClusterRerouteResponse : ResponseBase, IClusterRerouteResponse
 	{
 		public int Version { get; set; }
 		public ClusterRerouteState State { get; set; }
