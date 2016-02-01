@@ -4,27 +4,44 @@ namespace Nest
 {
 	public partial interface IElasticClient
 	{
-		/// <summary>
-		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
-		/// </summary>
-		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
-		IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector = null)
+        /// <summary>
+        /// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+        /// </summary>
+        /// <param name="from">the index that documents should be reindexed from</param>
+        /// <param name="to">the index that documents should be reindexed to</param>
+        /// <param name="selector">the descriptor to describe the reindex operation</param>
+        /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+        IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector = null)
 			where T : class;
 
-		/// <inheritdoc/>
-		IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest reindexRequest) where T : class;
+        /// <summary>
+        /// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+        /// </summary>
+        /// <param name="request">a request object to describe the reindex operation</param>
+        /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+        IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest request) where T : class;
 	}
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector = null)
+        /// <summary>
+        /// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+        /// </summary>
+        /// <param name="from">the index that documents should be reindexed from</param>
+        /// <param name="to">the index that documents should be reindexed to</param>
+        /// <param name="selector">the descriptor to describe the reindex operation</param>
+        /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+        public IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector = null)
 			where T : class => 
 			this.Reindex<T>(selector.InvokeOrDefault(new ReindexDescriptor<T>(from, to)));
 
-		/// <inheritdoc/>
-		public IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest reindexRequest)
+        /// <summary>
+        /// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+        /// </summary>
+        /// <param name="request">a request object to describe the reindex operation</param>
+        /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
+        public IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest request)
 			where T : class => 
-			new ReindexObservable<T>(this, ConnectionSettings, reindexRequest);
+			new ReindexObservable<T>(this, ConnectionSettings, request);
 	}
 }
