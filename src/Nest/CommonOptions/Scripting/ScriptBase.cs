@@ -26,7 +26,7 @@ namespace Nest
 		public static implicit operator ScriptBase(string inline) => new InlineScript(inline);
 	}
 
-	public class ScriptDescriptorBase<TDescriptor, TInterface> : DescriptorBase<TDescriptor, TInterface>, IScript
+	public abstract class ScriptDescriptorBase<TDescriptor, TInterface> : DescriptorBase<TDescriptor, TInterface>, IScript
 		where TDescriptor : ScriptDescriptorBase<TDescriptor, TInterface>, TInterface, IScript
 		where TInterface : class, IScript
 	{

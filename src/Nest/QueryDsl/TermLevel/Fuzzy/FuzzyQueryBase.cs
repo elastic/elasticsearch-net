@@ -53,7 +53,7 @@ namespace Nest
 
 	}
 
-	public class FuzzyQueryDescriptorBase<TDescriptor, T, TValue, TFuzziness> 
+	public abstract class FuzzyQueryDescriptorBase<TDescriptor, T, TValue, TFuzziness> 
 		: FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T> , IFuzzyQuery<TValue, TFuzziness>
 		where T : class
 		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, IFuzzyQuery<TValue, TFuzziness>, T>, IFuzzyQuery<TValue, TFuzziness>
