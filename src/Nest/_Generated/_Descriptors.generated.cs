@@ -4457,9 +4457,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
-		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
-		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detect_noop = true) => AssignParam(p=>p.DetectNoop(detect_noop));
-
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
