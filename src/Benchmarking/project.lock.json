@@ -37,7 +37,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -322,7 +322,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -491,7 +491,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -658,7 +658,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -1023,7 +1023,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -2029,7 +2029,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2247,7 +2247,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -2532,7 +2532,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -2701,7 +2701,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -2869,7 +2869,7 @@
           "lib/dnx451/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -3154,7 +3154,7 @@
           "lib/net451/Microsoft.Extensions.PlatformAbstractions.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -3323,7 +3323,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -3490,7 +3490,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -3873,7 +3873,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -5175,7 +5175,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -5392,7 +5392,7 @@
           "lib/dotnet/DiffPlex.dll": {}
         }
       },
-      "Elasticsearch.Net/2.1.0-ci20160129221525": {
+      "Elasticsearch.Net/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -5775,7 +5775,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Nest/2.1.0-ci20160129221525": {
+      "Nest/2.0.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.1",
         "dependencies": {
@@ -7077,7 +7077,7 @@
           "lib/dotnet5.4/System.Xml.XDocument.dll": {}
         }
       },
-      "Tests/2.0.0-ci20160129160552": {
+      "Tests/2.0.0-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -7262,15 +7262,15 @@
     }
   },
   "libraries": {
-    "Elasticsearch.Net/2.1.0-ci20160129221525": {
+    "Elasticsearch.Net/2.0.0-rc1": {
       "type": "project",
       "path": "../Elasticsearch.Net/project.json"
     },
-    "Nest/2.1.0-ci20160129221525": {
+    "Nest/2.0.0-rc1": {
       "type": "project",
       "path": "../Nest/project.json"
     },
-    "Tests/2.0.0-ci20160129160552": {
+    "Tests/2.0.0-rc1": {
       "type": "project",
       "path": "../Tests/project.json"
     },

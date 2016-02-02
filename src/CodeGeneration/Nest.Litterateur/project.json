@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-ci20160129160552",
+  "version": "2.0.0-rc1",
   "compilationOptions": {
     "warningsAsErrors": false,
     "emitEntryPoint": true
