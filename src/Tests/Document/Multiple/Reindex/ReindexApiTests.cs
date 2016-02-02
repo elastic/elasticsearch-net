@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -8,7 +9,6 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
-using Elasticsearch.Net;
 
 namespace Tests.Document.Multiple.Reindex
 {
@@ -26,10 +26,13 @@ namespace Tests.Document.Multiple.Reindex
 	[Collection(IntegrationContext.Reindex)]
 	public class ReindexApiTests : SerializationTestBase
 	{
-		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexResult;
+		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;
+		private readonly IObservable<IReindexResponse<Project>> _reindexSingleTypeResult;
 		private readonly IElasticClient _client;
 
-		private static string NewIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
+		private static string NewManyTypesIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
+
+		private static string NewSingleTypeIndexName { get; } = $"project-copy-{Guid.NewGuid().ToString("N").Substring(8)}";
 
 		private static string IndexName { get; } = "project";
 
@@ -64,27 +67,33 @@ namespace Tests.Document.Multiple.Reindex
 			bulkResult.IsValid.Should().BeTrue();
 
 			this._client.Refresh(IndexName);
-			this._reindexResult = this._client.Reindex<ILazyDocument>(IndexName, NewIndexName, r=>r);
+
+			this._reindexManyTypesResult = this._client.Reindex<ILazyDocument>(IndexName, NewManyTypesIndexName, r => r.AllTypes());
+			this._reindexSingleTypeResult = this._client.Reindex<Project>(IndexName, NewSingleTypeIndexName);
 		}
 
 		[I] public void ReturnsExpectedResponse()
 		{
-			var handle = new ManualResetEvent(false);
-			var observer = new ReindexObserver<ILazyDocument>(
+			var handles = new[]
+			{
+				new ManualResetEvent(false),
+				new ManualResetEvent(false)
+			};
+
+			var manyTypesObserver = new ReindexObserver<ILazyDocument>(
 					onError: (e) => { throw e; },
 					completed: () =>
 					{
-						var refresh = this._client.Refresh(NewIndexName);
-
+						var refresh = this._client.Refresh(NewManyTypesIndexName);
 						var originalIndexCount = this._client.Count<CommitActivity>(c => c.Index(IndexName));
-						var newIndexCount = this._client.Count<CommitActivity>(c => c.Index(NewIndexName));
+						var newIndexCount = this._client.Count<CommitActivity>(c => c.Index(NewManyTypesIndexName));
 
 						originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
 
 						var scroll = "20s";
 
 						var searchResult = this._client.Search<CommitActivity>(s => s
-							.Index(NewIndexName)
+							.Index(NewManyTypesIndexName)
 							.From(0)
 							.Size(100)
 							.Query(q => q.MatchAll())
@@ -103,12 +112,31 @@ namespace Tests.Document.Multiple.Reindex
 								hit.Routing.Should().NotBeNullOrEmpty();
 							}
 						} while (searchResult.IsValid && searchResult.Documents.Any());
-						handle.Set();
+						handles[0].Set();
 					}
 				);
 
-			this._reindexResult.Subscribe(observer);
-			handle.WaitOne(TimeSpan.FromMinutes(3));
+			this._reindexManyTypesResult.Subscribe(manyTypesObserver);
+
+			var singleTypeObserver = new ReindexObserver<Project>(
+					onError: (e) => { throw e; },
+					completed: () =>
+					{
+						var refresh = this._client.Refresh(NewSingleTypeIndexName);
+						var originalIndexCount = this._client.Count<Project>(c => c.Index(IndexName));
+
+						// new index should only contain project document types
+						var newIndexCount = this._client.Count<Project>(c => c.Index(NewSingleTypeIndexName).AllTypes());
+
+						originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
+
+						handles[1].Set();
+					}
+				);
+
+			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
+
+			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
 		}
 	}
 }
