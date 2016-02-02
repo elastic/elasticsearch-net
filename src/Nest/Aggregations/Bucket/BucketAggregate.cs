@@ -5,8 +5,8 @@ namespace Nest
 {
 	public abstract class BucketAggregateBase : AggregationsHelper, IAggregate
 	{
-		public BucketAggregateBase() { }
-		public BucketAggregateBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		protected BucketAggregateBase() { }
+		protected BucketAggregateBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
 		public IDictionary<string, object> Meta { get; set; }
 	}

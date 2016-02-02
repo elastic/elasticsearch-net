@@ -5,7 +5,7 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregate> Aggregations { get; internal protected set; }
+		public IDictionary<string, IAggregate> Aggregations { get; protected internal set; }
 
 		public AggregationsHelper() { }
 

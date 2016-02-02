@@ -10,7 +10,7 @@ namespace Nest
 {
 	internal class AggregateJsonConverter : JsonConverter
 	{
-		private static Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
+		private static readonly Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
 
 		public override bool CanWrite => false;
 
@@ -39,6 +39,12 @@ namespace Nest
 				result = GetPercentilesMetric(reader, serializer, oldFormat: true);
 
 			var meta = (property == "meta") ? GetMetadata(reader) : null;
+
+			if (result != null)
+			{
+				result.Meta = meta;
+				return result;
+			}
 
 			property = reader.Value as string;
 
@@ -148,16 +154,15 @@ namespace Nest
 				return null;
 			var geoBoundsMetric = new GeoBoundsAggregate();
 			JToken topLeftToken;
-			o.TryGetValue("top_left", out topLeftToken);
-			if (topLeftToken != null)
+			if (o.TryGetValue("top_left", out topLeftToken) && topLeftToken != null)
 			{
 				var topLeft = topLeftToken.ToObject<LatLon>();
 				if (topLeft != null)
 					geoBoundsMetric.Bounds.TopLeft = topLeft;
 			}
+
 			JToken bottomRightToken;
-			o.TryGetValue("bottom_right", out bottomRightToken);
-			if (bottomRightToken != null)
+			if (o.TryGetValue("bottom_right", out bottomRightToken) && bottomRightToken != null)
 			{
 				var bottomRight = bottomRightToken.ToObject<LatLon>();
 				if (bottomRight != null)
@@ -204,9 +209,7 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			var bucket = new SingleBucketAggregate { DocCount = docCount };
 			reader.Read();
-			if (reader.TokenType == JsonToken.PropertyName
-				&& ((string)reader.Value) == "buckets"
-				)
+			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "buckets")
 			{
 				var b = this.GetBucket(reader, serializer) as BucketAggregateData;
 				return new BucketAggregateData
@@ -489,6 +492,7 @@ namespace Nest
 						break;
 				}
 			}
+
 			var bucket = new RangeItem
 			{
 				Key = key,
@@ -496,10 +500,10 @@ namespace Nest
 				To = toDouble,
 				DocCount = docCount.GetValueOrDefault(),
 				FromAsString = fromAsString,
-				ToAsString = toAsString
+				ToAsString = toAsString,
+				Aggregations = this.GetNestedAggregations(reader, serializer)
 			};
 
-			bucket.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return bucket;
 		}
 
@@ -526,8 +530,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeItem(reader, serializer, key);
 
-			var keyItem = new KeyedBucketItem();
-			keyItem.Key = key;
+			var keyItem = new KeyedBucketItem {Key = key};
 
 			if (property == "key_as_string")
 			{
@@ -574,8 +577,10 @@ namespace Nest
 		private IBucketItem GetFiltersBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var filtersBucketItem = new FiltersBucketItem();
-			filtersBucketItem.DocCount = (reader.Value as long?).GetValueOrDefault(0);
+			var filtersBucketItem = new FiltersBucketItem
+			{
+				DocCount = (reader.Value as long?).GetValueOrDefault(0)
+			};
 			reader.Read();
 			filtersBucketItem.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return filtersBucketItem;
