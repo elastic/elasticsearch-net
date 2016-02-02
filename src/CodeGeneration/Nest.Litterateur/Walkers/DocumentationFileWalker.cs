@@ -55,6 +55,17 @@ namespace Nest.Litterateur.Walkers
 			this.Blocks.AddRange(walker.Blocks);
 		}
 
+		public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
+		{
+			if (!this.InsideFluentOrInitializerExample) return;
+			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
+			if (syntaxNode == null) return;
+			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+			var walker = new CodeWithDocumentationWalker(ClassDepth, line);
+			walker.Visit(syntaxNode);
+			this.Blocks.AddRange(walker.Blocks);
+		}
+
 		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
 		{
 			if (this.ClassDepth == 1) this.InsideAutoIncludeMethodBlock = true;

@@ -114,8 +114,6 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest),
 				typeof(SourceRequest<>),
 
-                // TODO: Remove when https://github.com/elastic/elasticsearch-net/issues/1778 is resolved
-                typeof(ValidateQueryRequest),
 				typeof(ValidateQueryRequest<>),
 
 				typeof(GetAliasRequest),

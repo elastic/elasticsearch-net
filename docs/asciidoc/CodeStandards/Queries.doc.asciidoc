@@ -16,8 +16,8 @@ var fluentMethods = from p in typeof(QueryContainerDescriptor<>).GetMethods()
 var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name);
 fluentMethods.Distinct().Should().Contain(placeHolders.Distinct());
 var skipQueryImplementations = new[] { typeof(IFieldNameQuery), typeof(IFuzzyQuery<,>), typeof(IConditionlessQuery) };
-var queries = typeof(IQuery).Assembly.ExportedTypes
-				.Where(t => t.IsInterface && typeof(IQuery).IsAssignableFrom(t))
+var queries = typeof(IQuery).Assembly().ExportedTypes
+				.Where(t => t.IsInterface() && typeof(IQuery).IsAssignableFrom(t))
 				.Where(t => !skipQueryImplementations.Contains(t))
 				.ToList();
 queries.Should().NotBeEmpty();

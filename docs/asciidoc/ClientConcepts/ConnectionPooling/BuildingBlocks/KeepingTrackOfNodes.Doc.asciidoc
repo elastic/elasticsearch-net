@@ -7,11 +7,11 @@ var node = new Node(new Uri("http://localhost:9200"));
 node.Uri.Should().NotBeNull();
 node.Uri.Port.Should().Be(9200);
 ----
-By default master eligable and holds data is presumed to be true *
+By default master eligible and holds data is presumed to be true *
 
 [source, csharp]
 ----
-node.MasterEligable.Should().BeTrue();
+node.MasterEligible.Should().BeTrue();
 ----
 [source, csharp]
 ----
@@ -88,11 +88,11 @@ Nodes are considered equal if they have the same endpoint no matter what other m
 
 [source, csharp]
 ----
-var node = new Node(new Uri("http://localhost:9200")) { MasterEligable = false };
+var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
 ----
 [source, csharp]
 ----
-var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligable = true };
+var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligible = true };
 (node == nodeAsMaster).Should().BeTrue();
 (node != nodeAsMaster).Should().BeFalse();
 var uri = new Uri("http://localhost:9200");

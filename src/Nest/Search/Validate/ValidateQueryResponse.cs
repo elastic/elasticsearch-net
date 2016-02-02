@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IValidateResponse : IResponse
+	public interface IValidateQueryResponse : IResponse
 	{
 		bool Valid { get; }
 		ShardsMetaData Shards { get; }
@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ValidateResponse : ResponseBase, IValidateResponse
+	public class ValidateQueryResponse : ResponseBase, IValidateQueryResponse
 	{
 		[JsonProperty(PropertyName = "valid")]
 		public bool Valid { get; internal set; }

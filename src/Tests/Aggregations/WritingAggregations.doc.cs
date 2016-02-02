@@ -4,6 +4,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tests.Aggregations
 {
@@ -26,8 +27,7 @@ namespace Tests.Aggregations
 					name_of_child_agg = new
 					{
 						children = new { type = "commits" },
-						aggs = new
-						{
+						aggs = new {
 							average_per_child = new
 							{
 								avg = new { field = "confidenceFactor" }
@@ -65,114 +65,61 @@ namespace Tests.Aggregations
 					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 					{
 						Aggregations =
-							new AverageAggregation("average_per_child", "confidenceFactor") &&
-							new MaxAggregation("max_per_child", "confidenceFactor")
+							new AverageAggregation("average_per_child", "confidenceFactor") 
+							&& new MaxAggregation("max_per_child", "confidenceFactor")
 					}
 				};
 		}
 
-		public class MetaUsage : Usage
+		public class AggregationDslUsage : Usage
 		{
-			protected override object ExpectJson => new
-			{
-				aggs = new
-				{
-					my_terms_agg = new
-					{
-						meta = new
-						{
-							foo = "bar",
-							count = 1
-						},
-						terms = new
-						{
-							field = "name"
-
-						}
-					},
-					my_avg_agg = new
-					{
-						meta = new
-						{
-							foo = "bar",
-							count = 1
-						},
-						avg = new
-						{
-							field = "numberOfCommits"
-						}
-					},
-					my_derivative_agg = new
-					{
-						meta = new
-						{
-							foo = "bar",
-							count = 1
-						},
-						derivative = new
-						{
-							buckets_path = "my_avg_agg"
-						}
-					}
-				}
-			};
-
-
-			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
-				.Aggregations(aggs => aggs
-					.Terms("my_terms_agg", t => t
-						.Field(p => p.Name)
-						.Meta(meta => meta
-							.Add("foo", "bar")
-							.Add("count", 1)
-						)
-					)
-					.Average("my_avg_agg", avg => avg
-						.Field(p => p.NumberOfCommits)
-						.Meta(meta => meta
-							.Add("foo", "bar")
-							.Add("count", 1)
-						)
-					)
-					.Derivative("my_derivative_agg", dv => dv
-						.BucketsPath("my_avg_agg")
-						.Meta(meta => meta
-							.Add("foo", "bar")
-							.Add("count", 1)
-						)
-					)
-				);
-
-
+			/**
+			 * For this reason the OIS syntax can be shortened dramatically by using `*Agg` related family,
+			 * These allow you to forego introducing intermediary Dictionaries to represent the aggregation DSL.
+			 * It also allows you to combine multiple aggregations using bitwise AND (`&&`) operator. 
+			 * 
+			 * Compare the following example with the previous vanilla OIS syntax
+			 */
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new TermsAggregation("my_terms_agg")
+					Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 					{
-						Field = "name",
-						Meta = new Dictionary<string, object>
-						{
-							{ "foo", "bar" },
-							{ "count", 1 }
-						}
-					}
-					&& new AverageAggregation("my_avg_agg", "numberOfCommits")
-					{
-						Meta = new Dictionary<string, object>
-						{
-							{ "foo", "bar" },
-							{ "count", 1 }
-						}
-					}
-					&& new DerivativeAggregation("my_derivative_agg", "my_avg_agg")
-					{
-						Meta = new Dictionary<string, object>
-						{
-							{ "foo", "bar" },
-							{ "count", 1 }
-						}
+						Aggregations =
+							new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+							&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 					}
 				};
+		}
+
+		public class AdvancedAggregationDslUsage : Usage
+		{
+			/**
+			 * An advanced scenario may involve an existing collection of aggregation functions that should be set as aggregations 
+			 * on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
+			 * (`childAggs` below) in turn, returning the descriptor after each function application.
+			 *
+			 */
+			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent
+			{   
+				get
+				{
+					var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>>
+					{
+						a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+						a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					};
+
+					return s => s
+						.Aggregations(aggs => aggs
+							.Children<CommitActivity>("name_of_child_agg", child => child
+								.Aggregations(childAggs =>
+									aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; })
+								)
+							)
+						);
+				}
+			}
 		}
 	}
 }

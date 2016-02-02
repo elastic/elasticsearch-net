@@ -38,6 +38,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public DateTime Birthday { get; set; }
 			public bool IsManager { get; set; }
 			public List<Employee> Employees { get; set; }
+			public TimeSpan Hours { get; set;}
 		}
 
 		[U]
@@ -132,8 +133,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/**
 			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			* In this example, Birthday was mapped as a date, IsManager as a boolean, Salary as an integer, Employees 
-			* as an object, and the remaining string properties as strings.
+			* In this example, Birthday was mapped as a date, hours as a long (ticks), IsManager as a boolean, 
+			* Salary as an integer, Employees as an object, and the remaining string properties as strings.
 			*/
 			var expected = new
 			{
@@ -159,6 +160,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									firstName = new
 									{
 										type = "string"
+									},
+									hours = new
+									{
+										type = "long" 
 									},
 									isManager = new
 									{
@@ -197,6 +202,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							firstName = new
 							{
 								type = "string"
+							},
+							hours = new
+							{
+								type = "long"
 							},
 							isManager = new
 							{
@@ -342,6 +351,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									{
 										type = "string"
 									},
+									hours = new
+									{
+										type = "long"
+									},
 									isManager = new
 									{
 										type = "boolean"
@@ -394,6 +407,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									firstName = new
 									{
 										type = "string"
+									},
+									hours = new
+									{
+										type = "long"
 									},
 									isManager = new
 									{
@@ -542,6 +559,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									firstName = new
 									{
 										type = "string"
+									},
+									hours = new
+									{
+										type = "long"
 									},
 									isManager = new
 									{

@@ -99,8 +99,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
 	);
 ----
 Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-In this example, Birthday was mapped as a date, IsManager as a boolean, Salary as an integer, Employees 
-as an object, and the remaining string properties as strings.
+In this example, Birthday was mapped as a date, hours as a long (ticks), IsManager as a boolean, 
+Salary as an integer, Employees as an object, and the remaining string properties as strings.
 
 [source, csharp]
 ----
@@ -128,6 +128,10 @@ employees = new
 firstName = new
 {
 	type = "string"
+},
+hours = new
+{
+	type = "long" 
 },
 isManager = new
 {
@@ -166,6 +170,10 @@ properties = new
 	firstName = new
 	{
 		type = "string"
+	},
+	hours = new
+	{
+		type = "long"
 	},
 	isManager = new
 	{
@@ -276,6 +284,10 @@ var expected = new
 									{
 										type = "string"
 									},
+									hours = new
+									{
+										type = "long"
+									},
 									isManager = new
 									{
 										type = "boolean"
@@ -328,6 +340,10 @@ var expected = new
 									firstName = new
 									{
 										type = "string"
+									},
+									hours = new
+									{
+										type = "long"
 									},
 									isManager = new
 									{
@@ -471,6 +487,10 @@ var expected = new
 									firstName = new
 									{
 										type = "string"
+									},
+									hours = new
+									{
+										type = "long"
 									},
 									isManager = new
 									{
