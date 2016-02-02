@@ -43,6 +43,8 @@ namespace Tests.Mapping.Types.Core.Number
         public double Double { get; set; }
 
         public decimal Decimal { get; set; }
+
+		public TimeSpan TimeSpan { get; set; }
 	}
 
 	public class NumberMappingTests
@@ -114,7 +116,11 @@ namespace Tests.Mapping.Types.Core.Number
                 @decimal = new
                 {
                     type = "double"
-                }
+                },
+				timeSpan = new
+				{
+					type = "long"
+				}
 			}
 		};
 
@@ -174,8 +180,13 @@ namespace Tests.Mapping.Types.Core.Number
             )
 	        .Number(d => d
 	            .Name(o => o.Double)
-	        ).Number(d => d
+	        )
+			.Number(d => d
 	            .Name(o => o.Decimal)
-	        );
+	        )
+			.Number(d => d
+	            .Name(o => o.TimeSpan)
+				.Type(NumberType.Long)
+			);
 	}
 }

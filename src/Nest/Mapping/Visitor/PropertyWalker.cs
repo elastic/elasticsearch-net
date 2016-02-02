@@ -106,6 +106,7 @@ namespace Nest
 						return new NumberProperty(NumberType.Byte);
 					case "Int64":
 					case "UInt32":
+					case "TimeSpan":
 						return new NumberProperty(NumberType.Long);
 					case "Single":
 						return new NumberProperty(NumberType.Float);

@@ -11,6 +11,7 @@ namespace Tests.Framework.MockData
 		public long SizeInBytes { get; set; }
 		public double ConfidenceFactor { get; set; }
 		public Developer Committer { get; set; }
+		public TimeSpan? Duration { get; set; }
 
 		public static Faker<CommitActivity> Generator { get; } =
 			new Faker<CommitActivity>()
@@ -20,6 +21,16 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Message, p => p.Lorem.Paragraph(Gimme.Random.Number(1, 3)))
 				.RuleFor(p => p.SizeInBytes, p => p.Random.Number(0, 100000))
 				.RuleFor(p => p.ConfidenceFactor, p => p.Random.Double())
+				.RuleFor(p => p.Duration, p => p.Random.ArrayElement(new TimeSpan?[]
+				{
+					TimeSpan.MinValue,
+					TimeSpan.MaxValue, 
+					null,
+					TimeSpan.Zero, 
+					TimeSpan.FromMinutes(7.5),
+					TimeSpan.FromHours(4.23),
+					TimeSpan.FromDays(5),
+				}))
 			;
 	}
 }

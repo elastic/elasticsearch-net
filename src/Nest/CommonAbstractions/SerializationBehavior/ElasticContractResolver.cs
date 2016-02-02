@@ -42,8 +42,14 @@ namespace Nest
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 			else if (objectType == typeof(ServerError))
 				contract.Converter = new ServerErrorJsonConverter();
-			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
+			else if (objectType == typeof(DateTime) || 
+					 objectType == typeof(DateTime?) ||
+					 objectType == typeof(DateTimeOffset) ||
+					 objectType == typeof(DateTimeOffset?))
 				contract.Converter = new IsoDateTimeConverter();
+			else if (objectType == typeof(TimeSpan) ||
+					 objectType == typeof(TimeSpan?))
+				contract.Converter = new TimeSpanConverter();
 
 			if (this._contractConverters.HasAny())
 			{
