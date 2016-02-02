@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IBucketItem : IAggregationItem { }
+	public interface IBucketItem { }
 
 	public abstract class BucketItemBase : AggregationsHelper, IBucketItem
 	{
 		protected BucketItemBase() { }
-		protected BucketItemBase(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		protected BucketItemBase(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 	}
 
 	public class KeyedBucketItem : BucketItemBase
 	{
 		public KeyedBucketItem() { }
-		public KeyedBucketItem(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		public KeyedBucketItem(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public string Key { get; set; }
 		public string KeyAsString { get; set; }

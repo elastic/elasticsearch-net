@@ -5,11 +5,11 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregationItem> Aggregations { get; internal protected set; }
+		public IDictionary<string, IAggregationResult> Aggregations { get; internal protected set; }
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregationItem> aggregations)
+		public AggregationsHelper(IDictionary<string, IAggregationResult> aggregations)
 		{
 			this.Aggregations = aggregations;
 		}
@@ -46,8 +46,8 @@ namespace Nest
 		{
 			var valueMetric = this.TryGet<ValueMetric>(key);
 
-			return valueMetric != null 
-				? new ScriptedValueMetric { _Value = valueMetric.Value, Meta = valueMetric.Meta } 
+			return valueMetric != null
+				? new ScriptedValueMetric { _Value = valueMetric.Value, Meta = valueMetric.Meta }
 				: this.TryGet<ScriptedValueMetric>(key);
 		}
 
@@ -70,7 +70,9 @@ namespace Nest
 				return named;
 
 			var anonymous = this.TryGet<BucketDto>(key);
-			return anonymous != null ? new FiltersBucket(anonymous.Items) { Meta = anonymous.Meta } : null;
+			return anonymous != null 
+				? new FiltersBucket { Items = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
+				: null;
 		}
 
 		public DocCountBucket Global(string key) => this.TryGet<DocCountBucket>(key);
@@ -151,9 +153,9 @@ namespace Nest
 		public Bucket<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
 
 		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregationItem
+			where TAggregation : class, IAggregationResult
 		{
-			IAggregationItem agg;
+			IAggregationResult agg;
 			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
 		}
 

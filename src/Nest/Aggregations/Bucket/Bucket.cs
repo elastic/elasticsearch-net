@@ -7,7 +7,7 @@ namespace Nest
 	public class Bucket : AggregationsHelper, IAggregationResult
 	{
 		public Bucket() { }
-		public Bucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		public Bucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public IDictionary<string, object> Meta { get; set; }
 	}
@@ -16,7 +16,7 @@ namespace Nest
 		where TBucketItem : IBucketItem
 	{
 		public Bucket() { }
-		public Bucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		public Bucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public IList<TBucketItem> Items { get; set; }
 	}
@@ -24,7 +24,7 @@ namespace Nest
 	public class DocCountBucket : Bucket
 	{
 		public DocCountBucket() { }
-		public DocCountBucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		public DocCountBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public long DocCount { get; internal set; }
 	}
@@ -33,7 +33,7 @@ namespace Nest
 		where TBucketItem : IBucketItem
 	{
 		public DocCountBucket() { }
-		public DocCountBucket(IDictionary<string, IAggregationItem> aggregations) : base(aggregations) { }
+		public DocCountBucket(IDictionary<string, IAggregationResult> aggregations) : base(aggregations) { }
 
 		public IList<TBucketItem> Items { get; set; }
 	}
@@ -41,7 +41,7 @@ namespace Nest
 	// Intermediate object used for deserialization
 	internal class BucketDto : IAggregationResult
 	{
-		public IEnumerable<IAggregationItem> Items { get; set; }
+		public IEnumerable<IBucketItem> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }
 		public long? SumOtherDocCount { get; set; }
 		public IDictionary<string, object> Meta { get; set; }

@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[ExactContractJsonConverter(typeof(AggregationResultJsonConverter))]
-	public interface IAggregationItem
-	{
-	}
-
-	public interface IAggregationResult : IAggregationItem
+	public interface IAggregationResult
 	{
 		IDictionary<string, object> Meta { get; set; }
 	}
