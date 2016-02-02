@@ -10,7 +10,7 @@ namespace Nest
 	{
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> HitsMetaData { get; }
-		IDictionary<string, IAggregation> Aggregations { get; }
+		IDictionary<string, IAggregate> Aggregations { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int Took { get; }
@@ -51,7 +51,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "aggregations")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public IDictionary<string, IAggregation> Aggregations { get; internal set; } = new Dictionary<string, IAggregation>();
+		public IDictionary<string, IAggregate> Aggregations { get; internal set; } = new Dictionary<string, IAggregate>();
 		
 		private AggregationsHelper _agg = null;
 		[JsonIgnore]

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class KeyedValueMetric : ValueMetric
+	public class KeyedValueAggregate : ValueAggregate
 	{
 		public IList<string> Keys { get; set; }
 	}

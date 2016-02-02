@@ -154,8 +154,8 @@ namespace Tests.Aggregations.Metric.TopHits
 			response.IsValid.Should().BeTrue();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
-			states.Items.Should().NotBeNullOrEmpty();
-			foreach(var state in states.Items)
+			states.Buckets.Should().NotBeNullOrEmpty();
+			foreach(var state in states.Buckets)
 			{
 				state.Key.Should().NotBeNullOrEmpty();
 				state.DocCount.Should().BeGreaterThan(0);

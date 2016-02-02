@@ -1,8 +1,8 @@
 ﻿namespace Nest
 {
-	public class GeoBoundsMetric : IMetric
+	public class GeoBoundsAggregate : MetricAggregateBase
 	{
-		public GeoBoundsMetric()
+		public GeoBoundsAggregate()
 		{
 			Bounds = new GeoBounds();
 		}

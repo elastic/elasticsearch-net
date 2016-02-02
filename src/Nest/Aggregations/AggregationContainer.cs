@@ -23,7 +23,7 @@ namespace Nest
 
 		public static implicit operator AggregationDictionary(AggregationBase aggregator)
 		{
-			IAggregationBase b;
+			IAggregation b;
 			var combinator = aggregator as AggregationCombinator;
 			if (combinator != null)
 			{
@@ -50,6 +50,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationContainer>))]
 	public interface IAggregationContainer
 	{
+		[JsonProperty("meta")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		IDictionary<string, object> Meta { get; set; }
+
 		[JsonProperty("avg")]
 		IAverageAggregation Average { get; set; }
 
@@ -178,6 +182,7 @@ namespace Nest
 
 	public class AggregationContainer : IAggregationContainer
 	{
+		public IDictionary<string, object> Meta { get; set; }
 		public IAverageAggregation Average { get; set; }
 		public IValueCountAggregation ValueCount { get; set; }
 		public IMaxAggregation Max { get; set; }
@@ -260,6 +265,7 @@ namespace Nest
 			aggregator.WrapInContainer(container);
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
+			container.Meta = aggregator.Meta;
 			return container;
 		}
 
@@ -273,6 +279,8 @@ namespace Nest
 	public class AggregationContainerDescriptor<T> : DescriptorBase<AggregationContainerDescriptor<T>, IAggregationContainer>, IAggregationContainer
 		where T : class
 	{
+		IDictionary<string, object> IAggregationContainer.Meta { get; set; }
+
 		AggregationDictionary IAggregationContainer.Aggregations { get; set; }
 
 		IAverageAggregation IAggregationContainer.Average { get; set; }
@@ -529,7 +537,8 @@ namespace Nest
 			var aggregator = selector(new TAggregator());
 
 			//create new isolated container for new aggregator and assign to the right property
-			var container = new AggregationContainer();
+			var container = new AggregationContainer() { Meta = aggregator.Meta };
+
 			assignToProperty(container, aggregator);
 
 			//create aggregations dictionary on `this` if it does not exist already

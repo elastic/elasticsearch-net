@@ -61,9 +61,9 @@ namespace Tests.Aggregations.Bucket.IpRange
 			response.IsValid.Should().BeTrue();
 			var ipRanges = response.Aggs.IpRange("ip_ranges");
 			ipRanges.Should().NotBeNull();
-			ipRanges.Items.Should().NotBeNull();
-			ipRanges.Items.Count.Should().BeGreaterThan(0);
-			foreach (var range in ipRanges.Items)
+			ipRanges.Buckets.Should().NotBeNull();
+			ipRanges.Buckets.Count.Should().BeGreaterThan(0);
+			foreach (var range in ipRanges.Buckets)
 				range.DocCount.Should().BeGreaterThan(0);
 		}
 	}

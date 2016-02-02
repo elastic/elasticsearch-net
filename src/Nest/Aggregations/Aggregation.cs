@@ -1,32 +1,29 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
 	/// <summary>
-	/// Describes an aggregation at request time when its being build
+	/// Represents an aggregation on the request
 	/// </summary>
-	[ExactContractJsonConverter(typeof(AggregationJsonConverter))]
-	public interface IAggregation
-	{
-	}
-
-	/// <summary>
-	/// Base for the OIS Aggregation DSL
-	/// </summary>
-	public interface IAggregationBase : IAggregation
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IAggregation 
 	{
 		string Name { get; set; }
+		IDictionary<string, object> Meta { get; set; }
 	}
 
-	public abstract class AggregationBase : IAggregationBase
+	public abstract class AggregationBase : IAggregation
 	{
-		string IAggregationBase.Name { get; set; }
+		string IAggregation.Name { get; set; }
 		
+		public IDictionary<string, object> Meta { get; set; }
+
 		internal AggregationBase() { }
 
 		protected AggregationBase(string name)
 		{
-			((IAggregationBase) this).Name = name;
+			((IAggregation)this).Name = name;
 		}
 
 		internal abstract void WrapInContainer(AggregationContainer container);
@@ -43,10 +40,8 @@ namespace Nest
 		}
 	}
 
-	internal class AggregationCombinator : AggregationBase, IAggregationBase
+	internal class AggregationCombinator : AggregationBase, IAggregation
 	{
-		string IAggregationBase.Name { get; set; }
-
 		internal List<AggregationBase> Aggregations { get; } = new List<AggregationBase>();
 
 		internal override void WrapInContainer(AggregationContainer container) { }

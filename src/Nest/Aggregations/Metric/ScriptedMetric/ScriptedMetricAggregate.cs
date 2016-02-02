@@ -4,7 +4,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class ScriptedValueMetric : IMetric
+	public class ScriptedMetricAggregate : MetricAggregateBase
 	{
 		internal object _Value { get; set; }
 

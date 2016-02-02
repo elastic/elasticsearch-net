@@ -50,11 +50,11 @@ namespace Tests.Aggregations.Pipeline.Derivative
 
 			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
-			projectsPerMonth.Items.Should().NotBeNull();
-			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
+			projectsPerMonth.Buckets.Should().NotBeNull();
+			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
 			// derivative not calculated for the first bucket
-			foreach (var item in projectsPerMonth.Items.Skip(1))
+			foreach (var item in projectsPerMonth.Buckets.Skip(1))
 			{
 				var commitsDerivative = item.Derivative("commits_derivative");
 				commitsDerivative.Should().NotBeNull();
