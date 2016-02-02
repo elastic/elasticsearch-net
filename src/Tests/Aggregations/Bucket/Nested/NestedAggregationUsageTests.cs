@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Bucket.Nested
 			tags.Should().NotBeNull();
 			var tagNames = tags.Terms("tag_names");
 			tagNames.Should().NotBeNull();
-			foreach(var item in tagNames.Items)
+			foreach(var item in tagNames.Buckets)
 			{
 				item.Key.Should().NotBeNullOrEmpty();
 				item.DocCount.Should().BeGreaterThan(0);

@@ -5,125 +5,125 @@ namespace Nest
 {
 	public class AggregationsHelper
 	{
-		public IDictionary<string, IAggregationResult> Aggregations { get; internal protected set; }
+		public IDictionary<string, IAggregate> Aggregations { get; internal protected set; }
 
 		public AggregationsHelper() { }
 
-		public AggregationsHelper(IDictionary<string, IAggregationResult> aggregations)
+		public AggregationsHelper(IDictionary<string, IAggregate> aggregations)
 		{
 			this.Aggregations = aggregations;
 		}
 
-		public ValueMetric Min(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Min(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric Max(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Max(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric Sum(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Sum(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric Cardinality(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Cardinality(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric Average(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Average(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric ValueCount(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate ValueCount(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric AverageBucket(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate AverageBucket(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric Derivative(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate Derivative(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric SumBucket(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate SumBucket(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric MovingAverage(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate MovingAverage(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric CumulativeSum(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate CumulativeSum(string key) => this.TryGet<ValueAggregate>(key);
 
-		public ValueMetric BucketScript(string key) => this.TryGet<ValueMetric>(key);
+		public ValueAggregate BucketScript(string key) => this.TryGet<ValueAggregate>(key);
 
-		public KeyedValueMetric MaxBucket(string key) => this.TryGet<KeyedValueMetric>(key);
+		public KeyedValueAggregate MaxBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
 
-		public KeyedValueMetric MinBucket(string key) => this.TryGet<KeyedValueMetric>(key);
+		public KeyedValueAggregate MinBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
 
-		public ScriptedValueMetric ScriptedMetric(string key)
+		public ScriptedMetricAggregate ScriptedMetric(string key)
 		{
-			var valueMetric = this.TryGet<ValueMetric>(key);
+			var valueMetric = this.TryGet<ValueAggregate>(key);
 
 			return valueMetric != null
-				? new ScriptedValueMetric { _Value = valueMetric.Value, Meta = valueMetric.Meta }
-				: this.TryGet<ScriptedValueMetric>(key);
+				? new ScriptedMetricAggregate { _Value = valueMetric.Value, Meta = valueMetric.Meta }
+				: this.TryGet<ScriptedMetricAggregate>(key);
 		}
 
-		public StatsMetric Stats(string key) => this.TryGet<StatsMetric>(key);
+		public StatsAggregate Stats(string key) => this.TryGet<StatsAggregate>(key);
 
-		public ExtendedStatsMetric ExtendedStats(string key) => this.TryGet<ExtendedStatsMetric>(key);
+		public ExtendedStatsAggregate ExtendedStats(string key) => this.TryGet<ExtendedStatsAggregate>(key);
 
-		public GeoBoundsMetric GeoBounds(string key) => this.TryGet<GeoBoundsMetric>(key);
+		public GeoBoundsAggregate GeoBounds(string key) => this.TryGet<GeoBoundsAggregate>(key);
 
-		public PercentilesMetric Percentiles(string key) => this.TryGet<PercentilesMetric>(key);
+		public PercentilesAggregate Percentiles(string key) => this.TryGet<PercentilesAggregate>(key);
 
-		public PercentilesMetric PercentileRanks(string key) => this.TryGet<PercentilesMetric>(key);
+		public PercentilesAggregate PercentileRanks(string key) => this.TryGet<PercentilesAggregate>(key);
 
-		public TopHitsMetric TopHits(string key) => this.TryGet<TopHitsMetric>(key);
+		public TopHitsAggregate TopHits(string key) => this.TryGet<TopHitsAggregate>(key);
 
-		public FiltersBucket Filters(string key)
+		public FiltersAggregate Filters(string key)
 		{
-			var named = this.TryGet<FiltersBucket>(key);
+			var named = this.TryGet<FiltersAggregate>(key);
 			if (named != null)
 				return named;
 
-			var anonymous = this.TryGet<BucketDto>(key);
+			var anonymous = this.TryGet<BucketAggregateData>(key);
 			return anonymous != null 
-				? new FiltersBucket { Items = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
+				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
 				: null;
 		}
 
-		public DocCountBucket Global(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Global(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket Filter(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Filter(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket Missing(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Missing(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket Nested(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Nested(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket ReverseNested(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate ReverseNested(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket Children(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Children(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket Sampler(string key) => this.TryGet<DocCountBucket>(key);
+		public SingleBucketAggregate Sampler(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public DocCountBucket<SignificantTermItem> SignificantTerms(string key)
+		public SignificantTermsAggregate SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<BucketDto>(key);
+			var bucket = this.TryGet<BucketAggregateData>(key);
 			return bucket == null
 				? null
-				: new DocCountBucket<SignificantTermItem>
+				: new SignificantTermsAggregate
 				{
 					DocCount = bucket.DocCount,
-					Items = bucket.Items.OfType<SignificantTermItem>().ToList(),
+					Buckets = bucket.Items.OfType<SignificantTermsItem>().ToList(),
 					Meta = bucket.Meta
 				};
 		}
 
-		public TermsBucket Terms(string key)
+		public TermsAggregate Terms(string key)
 		{
-			var bucket = this.TryGet<BucketDto>(key);
+			var bucket = this.TryGet<BucketAggregateData>(key);
 			return bucket == null
 				? null
-				: new TermsBucket
+				: new TermsAggregate
 				{
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
 					SumOtherDocCount = bucket.SumOtherDocCount,
-					Items = bucket.Items.OfType<KeyedBucketItem>().ToList(),
+					Buckets = bucket.Items.OfType<KeyedBucketItem>().ToList(),
 					Meta = bucket.Meta
 				};
 		}
 
-		public Bucket<HistogramItem> Histogram(string key)
+		public MultiBucketAggregate<HistogramItem> Histogram(string key)
 		{
-			var bucket = this.TryGet<BucketDto>(key);
+			var bucket = this.TryGet<BucketAggregateData>(key);
 			return bucket == null
 				? null
-				: new Bucket<HistogramItem>
+				: new MultiBucketAggregate<HistogramItem>
 				{
-					Items = bucket.Items.OfType<HistogramItem>()
+					Buckets = bucket.Items.OfType<HistogramItem>()
 						.Concat(bucket.Items.OfType<KeyedBucketItem>()
 							.Select(x =>
 								new HistogramItem
@@ -140,33 +140,33 @@ namespace Nest
 				};
 		}
 
-		public Bucket<KeyedBucketItem> GeoHash(string key) => GetBucket<KeyedBucketItem>(key);
+		public MultiBucketAggregate<KeyedBucketItem> GeoHash(string key) => GetBucket<KeyedBucketItem>(key);
 
-		public Bucket<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
 
-		public Bucket<RangeItem> DateRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeItem> DateRange(string key) => GetBucket<RangeItem>(key);
 
-		public Bucket<RangeItem> IpRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeItem> IpRange(string key) => GetBucket<RangeItem>(key);
 
-		public Bucket<RangeItem> GeoDistance(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeItem> GeoDistance(string key) => GetBucket<RangeItem>(key);
 
-		public Bucket<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
+		public MultiBucketAggregate<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
 
 		private TAggregation TryGet<TAggregation>(string key)
-			where TAggregation : class, IAggregationResult
+			where TAggregation : class, IAggregate
 		{
-			IAggregationResult agg;
+			IAggregate agg;
 			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
 		}
 
-		private Bucket<TBucketItem> GetBucket<TBucketItem>(string key)
+		private MultiBucketAggregate<TBucketItem> GetBucket<TBucketItem>(string key)
 			where TBucketItem : IBucketItem
 		{
-			var bucket = this.TryGet<BucketDto>(key);
+			var bucket = this.TryGet<BucketAggregateData>(key);
 			if (bucket == null) return null;
-			return new Bucket<TBucketItem>
+			return new MultiBucketAggregate<TBucketItem>
 			{
-				Items = bucket.Items.OfType<TBucketItem>().ToList(),
+				Buckets = bucket.Items.OfType<TBucketItem>().ToList(),
 				Meta = bucket.Meta
 			};
 		}

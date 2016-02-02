@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<CardinalityAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<CardinalityAggregation>))]
 	public interface ICardinalityAggregation : IMetricAggregation
 	{
 		[JsonProperty("precision_threshold")]

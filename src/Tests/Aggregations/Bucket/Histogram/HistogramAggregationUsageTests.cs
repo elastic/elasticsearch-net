@@ -58,7 +58,7 @@ namespace Tests.Aggregations.Bucket.Histogram
 			response.IsValid.Should().BeTrue();
 			var commits = response.Aggs.Histogram("commits");
 			commits.Should().NotBeNull();
-			foreach (var item in commits.Items)
+			foreach (var item in commits.Buckets)
 				item.DocCount.Should().BeGreaterThan(0);
 		}
 	}

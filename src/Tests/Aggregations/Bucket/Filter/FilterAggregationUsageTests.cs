@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			filterAgg.DocCount.Should().BeGreaterThan(0);
 			var tags = filterAgg.Terms("project_tags");
 			tags.Should().NotBeNull();
-			tags.Items.Should().NotBeEmpty();
+			tags.Buckets.Should().NotBeEmpty();
 		}
 	}
 }

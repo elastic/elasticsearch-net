@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<SerialDifferencingAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<SerialDifferencingAggregation>))]
 	public interface ISerialDifferencingAggregation : IPipelineAggregation
 	{
 		[JsonProperty("lag")]

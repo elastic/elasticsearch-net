@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<BucketScriptAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketScriptAggregation>))]
 	public interface IBucketScriptAggregation : IPipelineAggregation
 	{
 		[JsonProperty("script")]

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<DerivativeAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<DerivativeAggregation>))]
 	public interface IDerivativeAggregation : IPipelineAggregation { }
 
 	public class DerivativeAggregation : PipelineAggregationBase, IDerivativeAggregation

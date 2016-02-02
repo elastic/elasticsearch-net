@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<ScriptedMetricAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<ScriptedMetricAggregation>))]
 	public interface IScriptedMetricAggregation : IMetricAggregation
 	{
 		[JsonProperty("init_script")]

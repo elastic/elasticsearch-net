@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<GeoBoundsAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoBoundsAggregation>))]
 	public interface IGeoBoundsAggregation : IMetricAggregation
 	{
 		[JsonProperty("wrap_longitude")]

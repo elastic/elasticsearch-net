@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Nest
 {
+	/// <summary>
+	/// Represents an aggregation on the request
+	/// </summary>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IAggregation 
 	{

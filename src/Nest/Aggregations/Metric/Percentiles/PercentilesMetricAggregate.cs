@@ -9,7 +9,7 @@ namespace Nest
 		public double Value { get; internal set; }
 	}
 
-	public class PercentilesMetric : MetricBase
+	public class PercentilesAggregate : MetricAggregateBase
 	{
 		public IList<PercentileItem> Items { get; internal set; } = new List<PercentileItem>();
 	}

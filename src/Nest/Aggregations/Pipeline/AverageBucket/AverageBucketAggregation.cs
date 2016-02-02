@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<AverageBucketAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<AverageBucketAggregation>))]
 	public interface IAverageBucketAggregation : IPipelineAggregation { }
 
 	public class AverageBucketAggregation

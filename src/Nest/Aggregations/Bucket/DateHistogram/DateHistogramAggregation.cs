@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<DateHistogramAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
 	public interface IDateHistogramAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<MaxAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxAggregation>))]
 	public interface IMaxAggregation : IMetricAggregation { }
 
 	public class MaxAggregation : MetricAggregationBase, IMaxAggregation

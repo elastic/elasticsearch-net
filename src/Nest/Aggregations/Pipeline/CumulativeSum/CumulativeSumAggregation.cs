@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<CumulativeSumAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<CumulativeSumAggregation>))]
 	public interface ICumulativeSumAggregation : IPipelineAggregation { }
 
 	public class CumulativeSumAggregation

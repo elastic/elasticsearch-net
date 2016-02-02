@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<SamplerAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<SamplerAggregation>))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
 		[JsonProperty("shard_size")]

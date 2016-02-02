@@ -8,11 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class AggregationResultJsonConverter<TReadAs> : ReadAsTypeJsonConverter<TReadAs>
-		where TReadAs : class
-	{ }
-
-	internal class AggregationResultJsonConverter : JsonConverter
+	internal class AggregateJsonConverter : JsonConverter
 	{
 		private static Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
 
@@ -20,14 +16,14 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) => this.ReadAggregation(reader, serializer);
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(IAggregationResult);
+		public override bool CanConvert(Type objectType) => objectType == typeof(IAggregate);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
 		}
 
-		private IAggregationResult ReadAggregation(JsonReader reader, JsonSerializer serializer)
+		private IAggregate ReadAggregation(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;
@@ -36,7 +32,7 @@ namespace Nest
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
-			IAggregationResult result = null;
+			IAggregate result = null;
 
 			var property = reader.Value as string;
 			if (_numeric.IsMatch(property))
@@ -130,7 +126,7 @@ namespace Nest
 			return meta;
 		}
 
-		private IAggregationResult GetTopHitsMetric(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetTopHitsMetric(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			var o = JObject.Load(reader);
@@ -141,16 +137,16 @@ namespace Nest
 			var maxScore = o["max_score"].ToObject<double?>();
 			var hits = o["hits"].Children().OfType<JObject>().Select(s => s);
 			reader.Read();
-			return new TopHitsMetric(hits, serializer) { Total = total, MaxScore = maxScore };
+			return new TopHitsAggregate(hits, serializer) { Total = total, MaxScore = maxScore };
 		}
 
-		private IAggregationResult GetGeoBoundsMetric(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetGeoBoundsMetric(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			var o = JObject.Load(reader);
 			if (o == null)
 				return null;
-			var geoBoundsMetric = new GeoBoundsMetric();
+			var geoBoundsMetric = new GeoBoundsAggregate();
 			JToken topLeftToken;
 			o.TryGetValue("top_left", out topLeftToken);
 			if (topLeftToken != null)
@@ -171,9 +167,9 @@ namespace Nest
 			return geoBoundsMetric;
 		}
 
-		private IAggregationResult GetPercentilesMetric(JsonReader reader, JsonSerializer serializer, bool oldFormat = false)
+		private IAggregate GetPercentilesMetric(JsonReader reader, JsonSerializer serializer, bool oldFormat = false)
 		{
-			var metric = new PercentilesMetric();
+			var metric = new PercentilesAggregate();
 			var percentileItems = new List<PercentileItem>();
 			if (reader.TokenType == JsonToken.StartObject)
 				reader.Read();
@@ -202,18 +198,18 @@ namespace Nest
 			return metric;
 		}
 
-		private IAggregationResult GetDocCountBucket(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetDocCountBucket(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
-			var bucket = new DocCountBucket { DocCount = docCount };
+			var bucket = new SingleBucketAggregate { DocCount = docCount };
 			reader.Read();
 			if (reader.TokenType == JsonToken.PropertyName
 				&& ((string)reader.Value) == "buckets"
 				)
 			{
-				var b = this.GetBucket(reader, serializer) as BucketDto;
-				return new BucketDto
+				var b = this.GetBucket(reader, serializer) as BucketAggregateData;
+				return new BucketAggregateData
 				{
 					DocCount = docCount,
 					Items = b.Items
@@ -225,7 +221,7 @@ namespace Nest
 			return bucket;
 		}
 
-		private IAggregationResult GetStatsMetric(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetStatsMetric(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			var count = (reader.Value as long?).GetValueOrDefault(0);
@@ -238,7 +234,7 @@ namespace Nest
 			reader.Read(); reader.Read();
 			var sum = (reader.Value as double?);
 
-			var statsMetric = new StatsMetric()
+			var statsMetric = new StatsAggregate()
 			{
 				Average = average,
 				Count = count,
@@ -264,9 +260,9 @@ namespace Nest
 			return GetExtendedStatsAggregation(statsMetric, reader);
 		}
 
-		private IAggregationResult GetExtendedStatsAggregation(StatsMetric statsMetric, JsonReader reader)
+		private IAggregate GetExtendedStatsAggregation(StatsAggregate statsMetric, JsonReader reader)
 		{
-			var extendedStatsMetric = new ExtendedStatsMetric()
+			var extendedStatsMetric = new ExtendedStatsAggregate()
 			{
 				Average = statsMetric.Average,
 				Count = statsMetric.Count,
@@ -320,12 +316,12 @@ namespace Nest
 			return extendedStatsMetric;
 		}
 
-		private IDictionary<string, IAggregationResult> GetNestedAggregations(JsonReader reader, JsonSerializer serializer)
+		private IDictionary<string, IAggregate> GetNestedAggregations(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
-			var nestedAggs = new Dictionary<string, IAggregationResult>();
+			var nestedAggs = new Dictionary<string, IAggregate>();
 			var currentDepth = reader.Depth;
 			do
 			{
@@ -340,9 +336,9 @@ namespace Nest
 			return nestedAggs;
 		}
 
-		private IAggregationResult GetBucket(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetBucket(JsonReader reader, JsonSerializer serializer)
 		{
-			var bucket = new BucketDto();
+			var bucket = new BucketAggregateData();
 			var property = reader.Value as string;
 			if (property == "doc_count_error_upper_bound")
 			{
@@ -363,7 +359,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.StartObject)
 			{
 				reader.Read();
-				var aggs = new Dictionary<string, IAggregationResult>();
+				var aggs = new Dictionary<string, IAggregate>();
 				do
 				{
 					var name = reader.Value.ToString();
@@ -374,7 +370,7 @@ namespace Nest
 				} while (reader.TokenType != JsonToken.EndObject);
 
 				reader.Read();
-				return new FiltersBucket(aggs);
+				return new FiltersAggregate(aggs);
 			}
 
 			if (reader.TokenType != JsonToken.StartArray)
@@ -397,10 +393,10 @@ namespace Nest
 			return bucket;
 		}
 
-		private IAggregationResult GetValueMetric(JsonReader reader, JsonSerializer serializer)
+		private IAggregate GetValueMetric(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
-			var valueMetric = new ValueMetric()
+			var valueMetric = new ValueAggregate()
 			{
 				Value = (reader.Value as double?)
 			};
@@ -414,7 +410,7 @@ namespace Nest
 				{
 					if (reader.TokenType == JsonToken.PropertyName && (reader.Value as string) == "keys")
 					{
-						var keyedValueMetric = new KeyedValueMetric
+						var keyedValueMetric = new KeyedValueAggregate
 						{
 							Value = valueMetric.Value
 						};
@@ -442,7 +438,7 @@ namespace Nest
 			var scriptedMetric = serializer.Deserialize(reader);
 
 			if (scriptedMetric != null)
-				return new ScriptedValueMetric { _Value = scriptedMetric };
+				return new ScriptedMetricAggregate { _Value = scriptedMetric };
 
 			reader.Read();
 			return valueMetric;
@@ -563,7 +559,7 @@ namespace Nest
 			reader.Read();
 			reader.Read();
 			var bgCount = reader.Value as long?;
-			var significantTermItem = new SignificantTermItem()
+			var significantTermItem = new SignificantTermsItem()
 			{
 				Key = keyItem.Key,
 				DocCount = keyItem.DocCount.GetValueOrDefault(0),

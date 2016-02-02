@@ -85,11 +85,11 @@ namespace Tests.Aggregations.Bucket.DateRange
 			*/
 			var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
 			dateHistogram.Should().NotBeNull();
-			dateHistogram.Items.Should().NotBeNull();
+			dateHistogram.Buckets.Should().NotBeNull();
 
 			/** We specified three ranges so we expect to three of them in the response */
-			dateHistogram.Items.Count.Should().Be(3);
-			foreach (var item in dateHistogram.Items)
+			dateHistogram.Buckets.Count.Should().Be(3);
+			foreach (var item in dateHistogram.Buckets)
 			{
 				item.DocCount.Should().BeGreaterThan(0);
 			}

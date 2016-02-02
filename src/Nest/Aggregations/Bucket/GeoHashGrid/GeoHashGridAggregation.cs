@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationResultJsonConverter<GeoHashGridAggregation>))]
+	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoHashGridAggregation>))]
 	public interface IGeoHashGridAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
