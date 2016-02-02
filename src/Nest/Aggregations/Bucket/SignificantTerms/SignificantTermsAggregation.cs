@@ -110,6 +110,14 @@ namespace Nest
 
 		public SignificantTermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
+		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(a => a.ExecutionHint = hint);
+
+		public SignificantTermsAggregationDescriptor<T> Include(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> include) => 
+			Assign(a => a.Include = include?.Invoke(new FluentDictionary<string, string>()));
+
+		public SignificantTermsAggregationDescriptor<T> Exclude(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> exclude) => 
+			Assign(a => a.Exclude = exclude?.Invoke(new FluentDictionary<string, string>()));
+
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
 		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
