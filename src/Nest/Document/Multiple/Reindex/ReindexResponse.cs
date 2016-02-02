@@ -39,13 +39,8 @@ namespace Nest
 
 		public int Scroll { get; internal set; }
 
-		public bool IsValid
-		{
-			get
-			{
-				return (this.BulkResponse != null && this.BulkResponse.IsValid
-					&& this.SearchResponse != null && this.SearchResponse.IsValid);
-			}
-		}
+		public bool IsValid => 
+			this.BulkResponse != null && this.BulkResponse.IsValid
+			&& this.SearchResponse != null && this.SearchResponse.IsValid;
 	}
 }
