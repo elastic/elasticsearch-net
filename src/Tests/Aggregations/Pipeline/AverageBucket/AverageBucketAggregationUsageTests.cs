@@ -83,8 +83,8 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 
 			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
 			projectsPerMonth.Should().NotBeNull();
-			projectsPerMonth.Items.Should().NotBeNull();
-			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
+			projectsPerMonth.Buckets.Should().NotBeNull();
+			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
 
 			var averageCommits = response.Aggs.AverageBucket("average_commits_per_month");
 			averageCommits.Should().NotBeNull();

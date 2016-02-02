@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
 
@@ -43,6 +44,10 @@ namespace Nest
 
 		double? IMetricAggregation.Missing { get; set; }
 
+		string IAggregation.Name { get; set; }
+
+		IDictionary<string, object> IAggregation.Meta { get; set; }
+
 		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
 
 		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
@@ -53,5 +58,8 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public TMetricAggregation Missing(double missing) => Assign(a => a.Missing = missing);
+
+		public TMetricAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

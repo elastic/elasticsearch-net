@@ -90,9 +90,9 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			*/
 			var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
-			dateHistogram.Items.Should().NotBeNull();
-			dateHistogram.Items.Count.Should().BeGreaterThan(10);
-			foreach (var item in dateHistogram.Items)
+			dateHistogram.Buckets.Should().NotBeNull();
+			dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
+			foreach (var item in dateHistogram.Buckets)
 			{
 				item.Date.Should().NotBe(default(DateTime));
 				item.DocCount.Should().BeGreaterThan(0);

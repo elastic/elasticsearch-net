@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class TopHitsMetric : IMetric
+	public class TopHitsAggregate : MetricAggregateBase
 	{
 		private readonly IEnumerable<JObject> _hits;
 
@@ -15,14 +15,14 @@ namespace Nest
 
 		public double? MaxScore { get; set; }
 
-		public TopHitsMetric() { }
+		public TopHitsAggregate() { }
 		
-		internal TopHitsMetric(IEnumerable<JObject> hits)
+		internal TopHitsAggregate(IEnumerable<JObject> hits)
 		{
 			_hits = hits;
 		}
 
-		internal TopHitsMetric(IEnumerable<JObject> hits, JsonSerializer serializer)
+		internal TopHitsAggregate(IEnumerable<JObject> hits, JsonSerializer serializer)
 		{
 			_hits = hits;
 			_defaultSerializer = serializer;
