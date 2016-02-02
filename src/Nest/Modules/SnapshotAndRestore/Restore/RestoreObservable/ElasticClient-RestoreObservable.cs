@@ -24,6 +24,5 @@ namespace Nest
 		/// <inheritdoc/>
 		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest request)=>
 			new RestoreObservable(this, request, interval);
-
 	}
 }

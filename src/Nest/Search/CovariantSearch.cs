@@ -9,7 +9,7 @@ namespace Nest
 		/// Based on the type information present in this descriptor create method that takes
 		/// the returned _source and hit and returns the ClrType it should deserialize too.
 		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
-		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
+		/// If you specify types using .Type(typeof(B), typeof(C)) then NEST can automagically
 		/// create a TypeSelector based on the hits _type property.
 		/// </summary>
 		public static void CloseOverAutomagicCovariantResultSelector(Inferrer infer, ICovariantSearchRequest self)
@@ -33,12 +33,11 @@ namespace Nest
 			};
 		}
 	}
+
 	public interface ICovariantSearchRequest
 	{
 		Type ClrType { get; }
 		Types ElasticsearchTypes { get; }
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 	}
-
-
 }

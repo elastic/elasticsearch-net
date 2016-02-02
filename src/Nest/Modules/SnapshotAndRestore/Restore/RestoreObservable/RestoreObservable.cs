@@ -1,9 +1,9 @@
-﻿using Elasticsearch.Net;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -109,7 +109,8 @@ namespace Nest
 		protected virtual void Dispose(bool disposing)
 		{
 			if (_disposed) return;
-			if (_timer != null) _timer.Dispose();
+			_timer?.Dispose();
+
 			if (_restoreStatusHumbleObject != null)
 			{
 				_restoreStatusHumbleObject.Next -= _nextEventHandlers;
@@ -131,7 +132,7 @@ namespace Nest
 
 	public class RestoreNextEventArgs : EventArgs
 	{
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; private set; }
+		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
 
 		public RestoreNextEventArgs(IRecoveryStatusResponse recoveryStatusResponse)
 		{
@@ -141,7 +142,7 @@ namespace Nest
 
 	public class RestoreCompletedEventArgs : EventArgs
 	{
-		public IRecoveryStatusResponse RecoveryStatusResponse { get; private set; }
+		public IRecoveryStatusResponse RecoveryStatusResponse { get; }
 
 		public RestoreCompletedEventArgs(IRecoveryStatusResponse recoveryStatusResponse)
 		{
@@ -151,7 +152,7 @@ namespace Nest
 
 	public class RestoreErrorEventArgs : EventArgs
 	{
-		public Exception Exception { get; private set; }
+		public Exception Exception { get; }
 
 		public RestoreErrorEventArgs(Exception exception)
 		{
@@ -220,19 +221,19 @@ namespace Nest
 		protected virtual void OnNext(RestoreNextEventArgs nextEventArgs)
 		{
 			var handler = Next;
-			if (handler != null) handler(this, nextEventArgs);
+			handler?.Invoke(this, nextEventArgs);
 		}
 
 		protected virtual void OnCompleted(RestoreCompletedEventArgs completedEventArgs)
 		{
 			var handler = Completed;
-			if (handler != null) handler(this, completedEventArgs);
+			handler?.Invoke(this, completedEventArgs);
 		}
 
 		protected virtual void OnError(RestoreErrorEventArgs errorEventArgs)
 		{
 			var handler = Error;
-			if (handler != null) handler(this, errorEventArgs);
+			handler?.Invoke(this, errorEventArgs);
 		}
 	}
 }
