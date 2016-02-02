@@ -3,7 +3,7 @@
 var fluentParametersNotNamedSelector =
 				from m in typeof (IElasticClient).GetMethods()
 				from p in m.GetParameters()
-				where p.ParameterType.BaseType == typeof (MulticastDelegate)
+				where p.ParameterType.BaseType() == typeof (MulticastDelegate)
 				where !p.Name.Equals("selector")
 				select $"method '{nameof(IElasticClient)}.{m.Name}' should have parameter name of 'selector' but has a name of '{p.Name}'";
 fluentParametersNotNamedSelector.Should().BeEmpty();
@@ -36,7 +36,7 @@ var methodGroups =
                 from methodInfo in typeof(IElasticClient).GetMethods()
                 where
                     typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
-                    (methodInfo.ReturnType.IsGenericType
+                    (methodInfo.ReturnType.IsGeneric()
                      && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
                      && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
                 let method = new MethodWithRequestParameter(methodInfo)

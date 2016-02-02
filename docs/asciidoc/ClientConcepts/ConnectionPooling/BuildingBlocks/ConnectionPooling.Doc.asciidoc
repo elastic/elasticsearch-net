@@ -121,8 +121,8 @@ var pool = new SniffingConnectionPool(uris);
 ----
 Or using an enumerable of `Node`
 A major benefit here is you can include known node roles when seeding 
-NEST can use this information to favour sniffing on master eligable nodes first
-and take master only nodes out of rotation for issueing client calls on.
+NEST can use this information to favour sniffing on master eligible nodes first
+and take master only nodes out of rotation for issuing client calls on.
 
 [source, csharp]
 ----
@@ -132,7 +132,7 @@ var nodes = uris.Select(u=>new Node(u));
 ----
 pool = new SniffingConnectionPool(nodes);
 ----
-This type of pool is hardwirted to optout out sniffing
+This type of pool is hardwired to opt out of sniffing
 
 [source, csharp]
 ----

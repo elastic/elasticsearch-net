@@ -45,12 +45,12 @@ comes 9200 again
 
 [source, csharp]
 ----
-startingPositions = new List<int>();
+var threadedStartPositions = new ConcurrentBag<int>();
 ----
 [source, csharp]
 ----
 var threads = Enumerable.Range(0, 20)
-				.Select(i => CreateThreadCallingGetNext(pool, startingPositions))
+				.Select(i => CreateThreadCallingGetNext(pool, threadedStartPositions))
 				.ToList();
 t.Start();
 t.Join();
@@ -60,7 +60,7 @@ because we started `NumberOfNodes * 2` threads
 
 [source, csharp]
 ----
-var grouped = startingPositions.GroupBy(p => p);
+var grouped = threadedStartPositions.GroupBy(p => p).ToList();
 ----
 [source, csharp]
 ----

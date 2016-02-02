@@ -12,11 +12,11 @@ It benefits from types that are carried over to sub aggregations
 [source, csharp]
 ----
 s => s
-.Aggregations(aggs=>aggs
+.Aggregations(aggs => aggs
 	.Children<CommitActivity>("name_of_child_agg", child => child
-		.Aggregations(childAggs=>childAggs
-			.Average("average_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
-			.Max("max_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
+		.Aggregations(childAggs => childAggs
+			.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+			.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 		)
 	)
 )
@@ -31,9 +31,9 @@ new SearchRequest<Project>
 {
 	Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 	{
-		Aggregations = 
-			new AverageAggregation("average_per_child", "confidenceFactor") &&
-			new MaxAggregation("max_per_child", "confidenceFactor")
+		Aggregations =
+			new AverageAggregation("average_per_child", "confidenceFactor") 
+			&& new MaxAggregation("max_per_child", "confidenceFactor")
 	}
 }
 ----
@@ -50,9 +50,13 @@ new SearchRequest<Project>
 {
 	Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 	{
-		Aggregations = 
-			new AverageAggregation("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
-			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+		Aggregations =
+			new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 	}
 }
 ----
+An advanced scenario may involve an existing collection of aggregation functions that should be set as aggregations 
+on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
+(`childAggs` below) in turn, returning the descriptor after each function application.
+

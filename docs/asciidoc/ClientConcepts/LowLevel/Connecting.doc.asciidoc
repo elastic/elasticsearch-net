@@ -276,5 +276,7 @@ var client = new ElasticClient(settings);
 client.RootNodeInfo();
 client.RootNodeInfo();
 var serializer = ((IConnectionSettingsValues)settings).Serializer as MyJsonNetSerializer;
-serializer.X.Should().BeGreaterThan(0);
+serializer.CallToModify.Should().BeGreaterThan(0);
+serializer.SerializeToString(new Project { });
+serializer.CallToContractConverter.Should().BeGreaterThan(0);
 ----
