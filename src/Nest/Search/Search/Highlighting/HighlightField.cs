@@ -55,6 +55,9 @@ namespace Nest
 
 		[JsonProperty("matched_fields")]
 		Fields MatchedFields { get; set; }
+
+		[JsonProperty("highlight_query")]
+		QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
@@ -75,6 +78,7 @@ namespace Nest
 		public HighlighterType? Type { get; set; }
 		public bool? ForceSource { get; set; }
 		public Fields MatchedFields { get; set; }
+		public QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : DescriptorBase<HighlightFieldDescriptor<T>,IHighlightField>, IHighlightField
@@ -111,6 +115,8 @@ namespace Nest
 		bool? IHighlightField.ForceSource { get; set; }
 
 		Fields IHighlightField.MatchedFields { get; set; }
+
+		QueryContainer IHighlightField.HighlightQuery { get; set; }
 
 		public HighlightFieldDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 		public HighlightFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
@@ -151,5 +157,8 @@ namespace Nest
 		
 		public HighlightFieldDescriptor<T> MatchedFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.MatchedFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public HighlightFieldDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.HighlightQuery = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

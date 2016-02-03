@@ -45,9 +45,6 @@ namespace Nest
 
 		[JsonProperty("boundary_chars")]
 		string BoundaryChars { get; set; }
-
-		[JsonProperty("highlight_query")]
-		QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class Highlight : IHighlight
@@ -64,7 +61,6 @@ namespace Nest
 		public Dictionary<Field, IHighlightField> Fields { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
-		public QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class HighlightDescriptor<T> : DescriptorBase<HighlightDescriptor<T> ,IHighlight>, IHighlight
@@ -83,7 +79,6 @@ namespace Nest
 		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
 		bool? IHighlight.RequireFieldMatch { get; set; }
 		string IHighlight.BoundaryChars { get; set; }
-		QueryContainer IHighlight.HighlightQuery { get; set; }
 
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			Assign(a => a.Fields = fieldHighlighters?
@@ -120,8 +115,5 @@ namespace Nest
 		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => Assign(a => a.BoundaryChars = boundaryCharacters);
 
 		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => Assign(a => a.BoundaryMaxSize = boundaryMaxSize);
-
-		public HighlightDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.HighlightQuery = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 	}
 }

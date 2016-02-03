@@ -132,13 +132,21 @@ namespace Tests.Framework.Integration
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
 			.Properties(props => props
 				.String(s => s
-					.Name(p => p.Name).NotAnalyzed()
+					.Name(p => p.Name)
+					.NotAnalyzed()
 					.Fields(fs => fs
+						.String(ss => ss.Name("standard").Analyzer("standard"))
 						.Completion(cm => cm.Name("suggest"))
 					)
 				)
 				.Date(d => d.Name(p => p.StartedOn))
-				.String(d => d.Name(p => p.State).NotAnalyzed())
+				.String(d => d
+					.Name(p => p.State)
+					.NotAnalyzed()
+					.Fields(fs => fs
+						.String(st => st.Name("offsets").IndexOptions(IndexOptions.Offsets))
+					)
+				)
 				.Nested<Tag>(mo => mo
 					.Name(p => p.Tags)
 					.Properties(TagProperties)
