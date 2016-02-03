@@ -17,5 +17,6 @@ namespace Nest
 		[JsonProperty("reason")]
 		public string Reason { get; internal set; }
 
+		public override string ToString() => $"Type: {Type} Reason: \"{Reason}\"";
 	}
 }

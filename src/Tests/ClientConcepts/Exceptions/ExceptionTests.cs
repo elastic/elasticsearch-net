@@ -10,10 +10,10 @@ namespace Tests.ClientConcepts.Exceptions
 {
 	public class ExceptionTests
 	{
-		//[I]
+		[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
-			var settings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"))
+			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:9200"))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
@@ -23,7 +23,7 @@ namespace Tests.ClientConcepts.Exceptions
 			exception.Response.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
-		//[I]
+		[I]
 		public void ClientTestWhenThrowExceptionsEnabled()
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"))
@@ -34,10 +34,10 @@ namespace Tests.ClientConcepts.Exceptions
 			inner.Should().NotBeNull();
 		}
 
-		//[I]
+		[I]
 		public void ServerTestWhenThrowExceptionsDisabled()
 		{
-			var settings = new ConnectionSettings(new Uri("http://ipv4.fiddler:9200"));
+			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:9200"));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
 			response.CallDetails.OriginalException.Should().NotBeNull();
@@ -45,7 +45,7 @@ namespace Tests.ClientConcepts.Exceptions
 			response.CallDetails.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
-		//[I]
+		[I]
 		public void ClientTestWhenThrowExceptionsDisabled()
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));

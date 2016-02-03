@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -16,6 +17,11 @@ namespace Nest
 	public class BulkResponse : ResponseBase, IBulkResponse
 	{
 		public override bool IsValid => base.IsValid && !this.Errors && !this.ItemsWithErrors.HasAny();
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			foreach(var i in Items.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
+				sb.AppendLine($"operation[{i.i}]: {i.item}");
+		}
 
 		[JsonProperty("took")]
 		public int Took { get; internal set; }

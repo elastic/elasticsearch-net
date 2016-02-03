@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,6 +54,15 @@ namespace Elasticsearch.Net
 				Error = (Error)strategy.DeserializeObject(error, typeof(Error))
 			};
 		}
+
+		public override string ToString() 
+		{
+			var sb = new StringBuilder();
+			sb.Append($"ServerError: {Status}");
+			if (Error != null)
+				sb.Append(Error);
+			return sb.ToString();
+		}
 	}
 
 	public interface IRootCause
@@ -85,6 +95,8 @@ namespace Elasticsearch.Net
 			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList();
 			return error;
 		}
+
+		public override string ToString() => $"Type: {this.Type} Reason: \"{this.Reason}\"";
 	}
 
 	public class RootCause : IRootCause
@@ -101,6 +113,8 @@ namespace Elasticsearch.Net
 			rootCause.FillValues(dict);
 			return rootCause;
 		}
+
+		public override string ToString() => $"Type: {this.Type} Reason: \"{this.Reason}\"";
 	}
 
 	internal static class RootCauseExtensions

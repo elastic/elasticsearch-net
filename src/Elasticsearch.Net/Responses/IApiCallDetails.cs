@@ -47,5 +47,7 @@ namespace Elasticsearch.Net
 		byte[] RequestBodyInBytes { get; }
 
 		List<Audit> AuditTrail { get; }
+
+		string DebugInformation { get; }
 	}
 }

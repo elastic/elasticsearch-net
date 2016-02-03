@@ -67,7 +67,9 @@ namespace Tests.Framework
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
 
 		public static Uri CreateNode(int? port = null) =>
-			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
+			new UriBuilder("http", Host, port.GetValueOrDefault(9200)).Uri;
+
+		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
 
 		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
 			Configuration.RunIntegrationTests && !forceInMemory

@@ -23,6 +23,7 @@ namespace Nest
 		public byte[] ResponseBodyInBytes => this._original.ResponseBodyInBytes;
 		public byte[] RequestBodyInBytes => this._original.RequestBodyInBytes;
 		public List<Audit> AuditTrail => this._original.AuditTrail;
+		public string DebugInformation => this._original.DebugInformation;
 
 		public ApiCallDetailsOverride(IApiCallDetails original, bool isValid)
 		{
