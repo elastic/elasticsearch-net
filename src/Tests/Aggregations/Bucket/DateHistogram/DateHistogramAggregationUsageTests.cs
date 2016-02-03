@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
@@ -20,6 +21,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 		protected override object ExpectJson => new
 		{
+			size = 0,
 			aggs = new
 			{
 				projects_started_per_month = new
@@ -39,13 +41,27 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "tags" } }
+						project_tags = new
+						{
+							nested = new
+							{
+								path = "tags"
+							},
+							aggs = new
+							{
+								tags = new
+								{
+									terms = new { field = "tags.name" }
+								}
+							}
+						}
 					}
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(0)
 			.Aggregations(aggs => aggs
 				.DateHistogram("projects_started_per_month", date => date
 					.Field(p => p.StartedOn)
@@ -55,7 +71,12 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					.Order(HistogramOrder.CountAscending)
 					.Missing(FixedDate)
 					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.Tags))
+						.Nested("project_tags", n => n
+							.Path(p => p.Tags)
+							.Aggregations(nestedAggs => nestedAggs
+								.Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+							)
+						)
 					)
 				)
 			);
@@ -63,6 +84,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Size = 0,
 				Aggregations = new DateHistogramAggregation("projects_started_per_month")
 				{
 					Field = Field<Project>(p => p.StartedOn),
@@ -75,8 +97,14 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					},
 					Order = HistogramOrder.CountAscending,
 					Missing = FixedDate,
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
+					Aggregations = new NestedAggregation("project_tags")
+					{
+						Path = Field<Project>(p => p.Tags),
+						Aggregations = new TermsAggregation("tags")
+						{
+							Field = Field<Project>(p => p.Tags.First().Name)
+						}
+					}
 				}
 			};
 
@@ -96,6 +124,12 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			{
 				item.Date.Should().NotBe(default(DateTime));
 				item.DocCount.Should().BeGreaterThan(0);
+
+				var nested = item.Nested("project_tags");
+				nested.Should().NotBeNull();
+
+				var nestedTerms = nested.Terms("tags");
+				nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
 			}
 		}
 	}
