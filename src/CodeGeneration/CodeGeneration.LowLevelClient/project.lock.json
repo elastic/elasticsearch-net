@@ -194,7 +194,9 @@
     ],
     "DNX,Version=v4.5.1": [
       "fx/System.Runtime ",
-      "fx/System.Runtime.Serialization "
+      "fx/System.Runtime.Serialization ",
+      "fx/System.Linq ",
+      "fx/System.Collections "
     ]
   }
 }

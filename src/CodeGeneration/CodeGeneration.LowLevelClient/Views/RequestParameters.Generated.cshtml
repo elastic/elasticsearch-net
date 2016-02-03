@@ -43,7 +43,8 @@ namespace Elasticsearch.Net
           {
 			  setter = mm + ".ToTimeUnit()";
           }
-		<text>///<summary>@kv.Value.Description</summary>
+		<text>
+		///<summary>@kv.Value.Description</summary>
 		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm) => this.AddQueryString("@kv.Value.OriginalQueryStringParamName", @setter);
 		</text>
 	  }

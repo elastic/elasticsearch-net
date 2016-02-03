@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace CodeGeneration.LowLevelClient
@@ -9,27 +10,30 @@ namespace CodeGeneration.LowLevelClient
 		static void Main(string[] args)
 		{
 			var useCache = args.Length > 0 && args[0] == "cache";
+			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+			var generator = new ApiGenerator();
 
 			if (!useCache)
-				ApiGenerator.GenerateEndpointFiles();
+				generator.GenerateEndpointFiles();
 
-			var spec = ApiGenerator.GetRestApiSpec();
+			var spec = generator.GetRestApiSpec();
 
-			ApiGenerator.GenerateClientInterface(spec);
+			generator.GenerateClientInterface(spec);
 
-			ApiGenerator.GenerateRequestParameters(spec);
+			generator.GenerateRequestParameters(spec);
 
-			ApiGenerator.GenerateRequestParametersExtensions(spec);
+			generator.GenerateRequestParametersExtensions(spec);
 
-			ApiGenerator.GenerateDescriptors(spec);
+			generator.GenerateDescriptors(spec);
 
-			ApiGenerator.GenerateRequests(spec);
+			generator.GenerateRequests(spec);
 
-			ApiGenerator.GenerateEnums(spec);
+			generator.GenerateEnums(spec);
 
-			ApiGenerator.GenerateRawClient(spec);
+			generator.GenerateRawClient(spec);
 
-			ApiGenerator.GenerateRawDispatch(spec);
+			generator.GenerateRawDispatch(spec);
 
 			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count);
 		}

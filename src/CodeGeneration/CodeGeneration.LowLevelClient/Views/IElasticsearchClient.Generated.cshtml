@@ -32,13 +32,13 @@ namespace Elasticsearch.Net
 			{
 		<text>///<summary>Represents a @method.HttpMethod on @method.Path
 		///<para></para>Returns: @Raw(method.ReturnDescription)
-		///<para>See also: @method.Documentation</para>	
-		///</summary>
-			@foreach (var part in method.Parts)
-			{
+		///<para>See also: @method.Documentation </para>	
+		///</summary></text>
+		foreach (var part in method.Parts)
+		{
 		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
-			}
-		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
+		}
+		<text>@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
 		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments)) where @method.CallTypeGeneric : class;
 		</text>
 			}

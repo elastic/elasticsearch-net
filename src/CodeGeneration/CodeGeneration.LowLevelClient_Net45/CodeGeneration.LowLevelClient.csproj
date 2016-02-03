@@ -50,6 +50,9 @@
     <Compile Include="..\CodeGeneration.LowLevelClient\**\*.cs">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>
+	<Content Include="..\CodeGeneration.LowLevelClient\**\*.json" Exclude="..\CodeGeneration.LowLevelClient\project.json;..\CodeGeneration.LowLevelClient\project.lock.json;">
+		<Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+	</Content>
     <None Include="..\CodeGeneration.LowLevelClient\App.config" />
     <None Include="paket.references" />
     <None Include="..\CodeGeneration.LowLevelClient\**\*.cshtml">
