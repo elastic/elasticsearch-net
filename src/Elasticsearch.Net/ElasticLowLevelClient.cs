@@ -6,7 +6,7 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// Low level client that exposes all of elasticsearch API endpoints but leaves you in charge of building request and handling the response
 	/// </summary>
-	public partial class ElasticsearchClient : IElasticsearchClient
+	public partial class ElasticLowLevelClient : IElasticLowLevelClient
 	{
 		private readonly UrlFormatProvider _formatter;
 
@@ -17,16 +17,16 @@ namespace Elasticsearch.Net
 
 		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public ElasticsearchClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
+		public ElasticLowLevelClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
 
 		/// <summary>Instantiate a new low level elasticsearch client using the specified settings</summary>
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-		public ElasticsearchClient(IConnectionConfigurationValues settings) : this(new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
+		public ElasticLowLevelClient(IConnectionConfigurationValues settings) : this(new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
 		/// Instantiate a new low level elasticsearch client explicitly specifying a custom transport setup
 		/// </summary>
-		public ElasticsearchClient(ITransport<IConnectionConfigurationValues> transport)
+		public ElasticLowLevelClient(ITransport<IConnectionConfigurationValues> transport)
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));

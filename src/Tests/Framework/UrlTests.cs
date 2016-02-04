@@ -47,7 +47,7 @@ namespace Tests.Framework
 		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) 
 			where TResponse : IResponse => WhenCallingAsync(call, "request async");
 
-		public UrlTester LowLevel(Func<IElasticsearchClient, IApiCallDetails> call)
+		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
 			var callDetails = call(this.GetClient().Raw);
 			return Assert("lowleve", callDetails);

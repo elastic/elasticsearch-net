@@ -20,7 +20,7 @@ namespace Nest
 		public Inferrer Infer => this.Transport.Settings.Inferrer;
 		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
 
-		public IElasticsearchClient Raw { get; }
+		public IElasticLowLevelClient Raw { get; }
 
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
@@ -35,7 +35,7 @@ namespace Nest
 			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
 			this.Transport = transport;
-			this.Raw = new ElasticsearchClient(this.Transport);
+			this.Raw = new ElasticLowLevelClient(this.Transport);
 			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
 		}
 

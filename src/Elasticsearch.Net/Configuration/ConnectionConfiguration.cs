@@ -13,7 +13,7 @@ using System.Net.Http;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+	/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
 	/// to elasticsearch
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
@@ -33,7 +33,7 @@ namespace Elasticsearch.Net
 		{ }
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
+		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
