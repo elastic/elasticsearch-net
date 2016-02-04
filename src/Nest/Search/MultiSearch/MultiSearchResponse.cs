@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -15,6 +16,13 @@ namespace Nest
 		}
 
 		public override bool IsValid => base.IsValid && this.AllResponses.All(b => b.IsValid);
+
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			sb.AppendLine($"# Invalid searches (inspect individual response.DebugInformation for more detail):");
+			foreach(var i in AllResponses.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
+				sb.AppendLine($"  search[{i.i}]: {i.item}");
+		}
 
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]	
 		internal IDictionary<string, object> Responses { get; set; }

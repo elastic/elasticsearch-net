@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
@@ -15,6 +16,13 @@ namespace Nest
 	public class MultiPercolateResponse : ResponseBase, IMultiPercolateResponse
 	{
 		public override bool IsValid => base.IsValid && this.Responses.All(r => r.IsValid);
+
+		protected override void DebugIsValid(StringBuilder sb)
+		{
+			sb.AppendLine($"# Invalid percolations (inspect individual response.DebugInformation for more detail):");
+			foreach(var i in AllResponses.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
+				sb.AppendLine($"  search[{i.i}]: {i.item}");
+		}
 
 		[JsonProperty("responses")]
 		internal IEnumerable<PercolateResponse> AllResponses { get; set; }

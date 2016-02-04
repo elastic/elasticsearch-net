@@ -65,25 +65,25 @@ namespace Tests.Framework
 			{
 				this.BeforeAllCalls(client, UniqueValues);
 
-				var dict = new Dictionary<Integration.ClientMethod, IResponse>();
-				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.Fluent];
+				var dict = new Dictionary<ClientMethod, IResponse>();
+				this.CallIsolatedValue = UniqueValues[ClientMethod.Fluent];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientMethod.Fluent, fluent(client, this.Fluent));
+				dict.Add(ClientMethod.Fluent, fluent(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.FluentAsync];
+				this.CallIsolatedValue = UniqueValues[ClientMethod.FluentAsync];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(client, this.Fluent));
+				dict.Add(ClientMethod.FluentAsync, await fluentAsync(client, this.Fluent));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.Initializer];
+				this.CallIsolatedValue = UniqueValues[ClientMethod.Initializer];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientMethod.Initializer, request(client, this.Initializer));
+				dict.Add(ClientMethod.Initializer, request(client, this.Initializer));
 				OnAfterCall(client);
 
-				this.CallIsolatedValue = UniqueValues[Integration.ClientMethod.InitializerAsync];
+				this.CallIsolatedValue = UniqueValues[ClientMethod.InitializerAsync];
 				OnBeforeCall(client);
-				dict.Add(Integration.ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
+				dict.Add(ClientMethod.InitializerAsync, await requestAsync(client, this.Initializer));
 				OnAfterCall(client);
 				return dict;
 			});

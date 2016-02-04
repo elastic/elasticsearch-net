@@ -3,14 +3,49 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace Elasticsearch.Net
 {
-	internal static class ResponseStatics
+	public static class ResponseStatics
 	{
-		public static readonly string PrintFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
-		public static readonly string ErrorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
-		public static readonly string AlreadyCaptured = "<Response stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
+		private static readonly string ResponseAlreadyCaptured = "<Response stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
+		private static readonly string RequestAlreadyCaptured = "<Request stream not captured or already read to completion by serializer. Set DisableDirectStreaming() on ConnectionSettings to force it to be set on the response.>";
+		public static string DebugInformationBuilder(IApiCallDetails r, StringBuilder sb)
+		{
+			sb.AppendLine($"# Audit trail of this API call:");
+			var auditTrail = (r.AuditTrail ?? Enumerable.Empty<Audit>()).ToList();
+			DebugAuditTrail(auditTrail, sb);
+			if (r.ServerError != null) sb.AppendLine($"# ServerError: {r.ServerError}");
+			if (r.OriginalException != null) sb.AppendLine($"# OriginalException: {r.OriginalException}");
+			DebugAuditTrailExceptions(auditTrail, sb);
+
+			var response = r.ResponseBodyInBytes?.Utf8String() ?? ResponseStatics.ResponseAlreadyCaptured;
+			var request = r.RequestBodyInBytes?.Utf8String() ?? ResponseStatics.RequestAlreadyCaptured;
+			sb.AppendLine($"# Request:\r\n{request}");
+			sb.AppendLine($"# Response:\r\n{response}");
+
+			return sb.ToString();
+		}
+
+		public static void DebugAuditTrailExceptions(List<Audit> auditTrail, StringBuilder sb)
+		{
+			var auditExceptions = auditTrail.Select((audit, i) => new {audit, i}).Where(a => a.audit.Exception != null);
+			foreach (var a in auditExceptions)
+				sb.AppendLine($"# Audit exception in step {a.i} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
+		}
+
+		public static void DebugAuditTrail(List<Audit> auditTrail, StringBuilder sb)
+		{
+			if (auditTrail == null) return;
+			foreach (var audit in auditTrail)
+			{
+				sb.Append($" - {audit.Event.GetStringValue()}:");
+				if (audit.Node?.Uri != null) sb.Append($" Node: {audit.Node.Uri}");
+				if (audit.Exception != null) sb.Append($" Exception: {audit.Exception.GetType().Name}");
+				sb.AppendLine($" Took: {(audit.Ended - audit.Started)}");
+			}
+		}
 	}
 
 	public class ElasticsearchResponse<T> : IApiCallDetails
@@ -59,25 +94,16 @@ namespace Elasticsearch.Net
 			this.HttpStatusCode = statusCode;
 		}
 
-		public override string ToString()
+		public string DebugInformation
 		{
-			var r = this;
-			var e = r.OriginalException;
-			var response = this.ResponseBodyInBytes?.Utf8String() ?? ResponseStatics.AlreadyCaptured;
-
-			var requestJson = r.RequestBodyInBytes?.Utf8String();
-
-			var print = string.Format(ResponseStatics.PrintFormat,
-				Environment.NewLine,
-				r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
-				r.HttpMethod,
-				r.Uri,
-				requestJson,
-				response
-			);
-			if (!this.Success && e != null)
-				print += string.Format(ResponseStatics.ErrorFormat,Environment.NewLine, e.Message, e.StackTrace);
-			return print;
+			get
+			{
+				var sb = new StringBuilder();
+				sb.AppendLine(this.ToString());
+				return ResponseStatics.DebugInformationBuilder(this, sb);
+			}
 		}
+
+		public override string ToString() =>  $"{(Success ? "S" : "Uns")}uccesful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}
 }
