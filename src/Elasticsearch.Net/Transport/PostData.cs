@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Purify;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,19 +39,19 @@ namespace Elasticsearch.Net
 		public PostData(T item)
 		{
 			var boxedType = item.GetType();
-			if (typeof(byte[]).IsAssignableFrom(boxedType))
+			if (typeof(byte[]).AssignableFrom(boxedType))
 			{
 				WrittenBytes = item as byte[]; Type = PostType.ByteArray;
 			}
-			else if (typeof(string).IsAssignableFrom(boxedType))
+			else if (typeof(string).AssignableFrom(boxedType))
 			{
 				_literalString = item as string; Type = PostType.LiteralString;
 			}
-			else if (typeof(IEnumerable<string>).IsAssignableFrom(boxedType))
+			else if (typeof(IEnumerable<string>).AssignableFrom(boxedType))
 			{
 				_enumurabeOfStrings = (IEnumerable<string>)item; Type = PostType.EnumerableOfString;
 			}
-			else if (typeof(IEnumerable<object>).IsAssignableFrom(boxedType))
+			else if (typeof(IEnumerable<object>).AssignableFrom(boxedType))
 			{
 				_enumerableOfObject = (IEnumerable<object>)item; Type = PostType.EnumerableOfObject;
 			}
