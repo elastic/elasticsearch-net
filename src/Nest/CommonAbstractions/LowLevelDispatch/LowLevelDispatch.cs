@@ -5,9 +5,9 @@ namespace Nest
 {
 	internal partial class LowLevelDispatch
 	{
-		protected IElasticsearchClient _lowLevel;
+		protected IElasticLowLevelClient _lowLevel;
 
-		public LowLevelDispatch(IElasticsearchClient rawElasticClient)
+		public LowLevelDispatch(IElasticLowLevelClient rawElasticClient)
 		{
 			this._lowLevel = rawElasticClient;
 		}

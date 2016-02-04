@@ -19,12 +19,12 @@ namespace Tests.ClientConcepts.LowLevel
 		 * Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 		 * 
 		 * # Choosing the right connection strategy
-		 * If you simply new an `ElasticsearchClient`, it will be a non-failover connection to `http://localhost:9200`
+		 * If you simply new an `ElasticLowLevelClient`, it will be a non-failover connection to `http://localhost:9200`
 		 */
 
 		public void InstantiateUsingAllDefaults()
 		{
-			var client = new ElasticsearchClient();
+			var client = new ElasticLowLevelClient();
 			var tokenizers = new TokenizersDescriptor();
 
 		}
@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var config = new ConnectionConfiguration(node);
-			var client = new ElasticsearchClient(config);
+			var client = new ElasticLowLevelClient(config);
 		}
 
 		/** 
@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var connectionPool = new SniffingConnectionPool(new[] { node });
 			var config = new ConnectionConfiguration(connectionPool);
-			var client = new ElasticsearchClient(config);
+			var client = new ElasticLowLevelClient(config);
 		}
 
 		/** 
@@ -85,7 +85,7 @@ namespace Tests.ClientConcepts.LowLevel
 		public void AvailableOptions()
 		{
 			//hide
-			var client = new ElasticsearchClient();
+			var client = new ElasticLowLevelClient();
 			//endhide
 
 			var config = new ConnectionConfiguration()

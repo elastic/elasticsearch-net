@@ -2,7 +2,7 @@
 
 namespace Elasticsearch.Net
 {
-	public partial interface IElasticsearchClient
+	public partial interface IElasticLowLevelClient
 	{	
 		/// <summary>
 		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
