@@ -152,5 +152,6 @@ namespace Tests.ClientConcepts.LowLevel
 			return string.IsNullOrEmpty(s) ? null : Encoding.UTF8.GetBytes(s);
 		}
 		private PostData<object> ImplicitlyConvertsFrom(PostData<object> postData) => postData;
+
 	}
 }

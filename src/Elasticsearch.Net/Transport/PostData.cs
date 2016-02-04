@@ -35,7 +35,30 @@ namespace Elasticsearch.Net
 		public PostData(string item) { _literalString = item; Type = PostType.LiteralString; }
 		public PostData(IEnumerable<string> item) { _enumurabeOfStrings = item; Type = PostType.EnumerableOfString; }
 		public PostData(IEnumerable<object> item) { _enumerableOfObject = item; Type = PostType.EnumerableOfObject; }
-		public PostData(T item) { _serializable = item; Type = PostType.Serializable; }
+		public PostData(T item)
+		{
+			var boxedType = item.GetType();
+			if (typeof(byte[]).IsAssignableFrom(boxedType))
+			{
+				WrittenBytes = item as byte[]; Type = PostType.ByteArray;
+			}
+			else if (typeof(string).IsAssignableFrom(boxedType))
+			{
+				_literalString = item as string; Type = PostType.LiteralString;
+			}
+			else if (typeof(IEnumerable<string>).IsAssignableFrom(boxedType))
+			{
+				_enumurabeOfStrings = (IEnumerable<string>)item; Type = PostType.EnumerableOfString;
+			}
+			else if (typeof(IEnumerable<object>).IsAssignableFrom(boxedType))
+			{
+				_enumerableOfObject = (IEnumerable<object>)item; Type = PostType.EnumerableOfObject;
+			}
+			else
+			{
+				_serializable = item; Type = PostType.Serializable;
+			}
+		}
 
 		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
@@ -63,7 +86,7 @@ namespace Elasticsearch.Net
 					else stream = writableStream;
 					foreach (var o in _enumerableOfObject)
 					{
-						settings.Serializer.Serialize(o, stream, indent);
+						settings.Serializer.Serialize(o, stream, SerializationFormatting.None);
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
