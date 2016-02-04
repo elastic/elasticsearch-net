@@ -48,7 +48,7 @@ namespace Nest
 		public async Task<T> SourceAsync<T>(ISourceRequest request) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request);
+			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request).ConfigureAwait(false);
 			return response.Body;
 		}
 

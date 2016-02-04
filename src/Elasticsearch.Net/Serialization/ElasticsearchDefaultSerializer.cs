@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 			using (var ms = new MemoryStream())
 			using (stream)
 			{
-				await stream.CopyToAsync(ms, 8096, cancellationToken);
+				await stream.CopyToAsync(ms, 8096, cancellationToken).ConfigureAwait(false);
 				var buffer = ms.ToArray();
 				if (buffer.Length <= 1)
 					return default(T);

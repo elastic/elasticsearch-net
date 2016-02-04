@@ -59,7 +59,7 @@ namespace Nest
 		public static async Task<IEnumerable<IMultiGetHit<T>>> GetManyAsync<T>(this IElasticClient client, IEnumerable<string> ids, string index = null, string type = null)
 			where T : class
 		{
-			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type)));
+			var response = await client.MultiGetAsync(s => s.GetMany<T>(ids, (gs, i) => gs.Index(index).Type(type))).ConfigureAwait(false);
 			return response.GetMany<T>(ids);
 		}
 

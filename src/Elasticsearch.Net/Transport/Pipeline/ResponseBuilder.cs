@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 		{
 			var response = Initialize(this.StatusCode, this.Exception);
 			if (this.Stream != null)
-				await SetBodyAsync(response, this.Stream);
+				await SetBodyAsync(response, this.Stream).ConfigureAwait(false);
 			Finalize(response);
 			return response;
 		}
@@ -87,19 +87,19 @@ namespace Elasticsearch.Net
 				if (NeedsToEagerReadStream())
 				{
 					var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-					await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken);
+					await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken).ConfigureAwait(false);
 					bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 				}
 
 				if (!SetSpecialTypes(stream, response, bytes))
 				{
 					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-					else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._requestData.CancellationToken);
+					else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._requestData.CancellationToken).ConfigureAwait(false);
 				}
 			}
 			else if (response.HttpStatusCode != null)
 			{
-				response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken);
+				response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
 			}
 		}
 

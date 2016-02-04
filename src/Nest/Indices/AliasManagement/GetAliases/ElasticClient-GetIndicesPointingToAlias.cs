@@ -26,7 +26,7 @@ namespace Nest
 		/// <param name="aliasName">The exact alias name</param>
 		public static async Task<IList<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
 		{
-			var response = await client.GetAliasAsync(a => a.Index(aliasName));
+			var response = await client.GetAliasAsync(a => a.Index(aliasName)).ConfigureAwait(false);
 			return IndicesPointingToAlias(aliasName, response);
 		}
 

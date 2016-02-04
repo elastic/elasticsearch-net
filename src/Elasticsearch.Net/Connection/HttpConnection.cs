@@ -157,13 +157,13 @@ namespace Elasticsearch.Net
 
 				if (data != null)
 				{
-					using (var stream = await request.GetRequestStreamAsync())
+					using (var stream = await request.GetRequestStreamAsync().ConfigureAwait(false))
 					{
 						if (requestData.HttpCompression)
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-								await data.WriteAsync(zipStream, requestData.ConnectionSettings);
+								await data.WriteAsync(zipStream, requestData.ConnectionSettings).ConfigureAwait(false);
 						else
-							await data.WriteAsync(stream, requestData.ConnectionSettings);
+							await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
 					}
 				}
 
@@ -171,7 +171,7 @@ namespace Elasticsearch.Net
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var response = (HttpWebResponse)(await request.GetResponseAsync());
+				var response = (HttpWebResponse)(await request.GetResponseAsync().ConfigureAwait(false));
 				builder.StatusCode = (int)response.StatusCode;
 				builder.Stream = response.GetResponseStream();
 			}
@@ -180,7 +180,7 @@ namespace Elasticsearch.Net
 				HandleException(builder, e);
 			}
 
-			return await builder.ToResponseAsync();
+			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
 		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)

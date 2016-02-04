@@ -72,7 +72,7 @@ namespace Nest
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 
 			request.RequestParameters.DeserializationOverride(responseGenerator);
-			var response = await dispatch(request, request);
+			var response = await dispatch(request, request).ConfigureAwait(false);
 			return ResultsSelector(response);
 		}
 

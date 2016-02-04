@@ -144,7 +144,7 @@ namespace Elasticsearch.Net
 		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
-			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, this._cancellationToken);
+			var success = await semaphore.WaitAsync(this._settings.RequestTimeout, this._cancellationToken).ConfigureAwait(false);
 			if (!success)
 				throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
@@ -153,7 +153,7 @@ namespace Elasticsearch.Net
 			{
 				using (this.Audit(SniffOnStartup))
 				{
-					await this.SniffAsync();
+					await this.SniffAsync().ConfigureAwait(false);
 					this._connectionPool.SniffedOnStartup = true;
 				}
 			}
@@ -178,7 +178,7 @@ namespace Elasticsearch.Net
 			if (!StaleClusterState) return;
 			using (this.Audit(AuditEvent.SniffOnStaleCluster))
 			{
-				await this.SniffAsync();
+				await this.SniffAsync().ConfigureAwait(false);
 				this._connectionPool.SniffedOnStartup = true;
 			}
 		}
@@ -263,7 +263,7 @@ namespace Elasticsearch.Net
 				try
 				{
 					var pingData = CreatePingRequestData(node, audit);
-					var response = await this._connection.RequestAsync<VoidResponse>(pingData);
+					var response = await this._connection.RequestAsync<VoidResponse>(pingData).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
 					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
@@ -301,7 +301,7 @@ namespace Elasticsearch.Net
 		{
 			if (!this.SniffsOnConnectionFailure) return;
 			using (this.Audit(SniffOnFail))
-				await this.SniffAsync();
+				await this.SniffAsync().ConfigureAwait(false);
 		}
 
 		public void Sniff()
@@ -349,7 +349,7 @@ namespace Elasticsearch.Net
 					try
 					{
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
-						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
+						var response = await this._connection.RequestAsync<SniffResponse>(requestData).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
 						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
@@ -406,7 +406,7 @@ namespace Elasticsearch.Net
 				ElasticsearchResponse<TReturn> response = null;
 				try
 				{
-					response = await this._connection.RequestAsync<TReturn>(requestData);
+					response = await this._connection.RequestAsync<TReturn>(requestData).ConfigureAwait(false);
 					response.AuditTrail = this.AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					if (!response.Success) audit.Event = AuditEvent.BadResponse;

@@ -103,18 +103,18 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = await client.SendAsync(requestMessage, requestData.CancellationToken);
+				var response = await client.SendAsync(requestMessage, requestData.CancellationToken).ConfigureAwait(false);
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)
-					builder.Stream = await response.Content.ReadAsStreamAsync();
+					builder.Stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 			}
 			catch (HttpRequestException e)
 			{
 				HandleException(builder, e);
 			}
 
-			return await builder.ToResponseAsync();
+			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
 		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, HttpRequestException exception)

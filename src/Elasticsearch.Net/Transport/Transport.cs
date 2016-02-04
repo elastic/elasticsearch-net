@@ -64,7 +64,7 @@ namespace Elasticsearch.Net
 					try
 					{
 						pipeline.SniffOnStaleCluster();
-						Ping(pipeline, node, seenExceptions);
+						Ping(pipeline, node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 						if (!response.SuccessOrKnownError)
 						{
@@ -112,7 +112,7 @@ namespace Elasticsearch.Net
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock);
+				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock).ConfigureAwait(false);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
@@ -123,13 +123,13 @@ namespace Elasticsearch.Net
 					requestData.Node = node;
 					try
 					{
-						await pipeline.SniffOnStaleClusterAsync();
-						await PingAsync(pipeline, node, seenExceptions);
-						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
+						await pipeline.SniffOnStaleClusterAsync().ConfigureAwait(false);
+						await PingAsync(pipeline, node).ConfigureAwait(false);
+						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData).ConfigureAwait(false);
 						if (!response.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
-							await pipeline.SniffOnConnectionFailureAsync();
+							await pipeline.SniffOnConnectionFailureAsync().ConfigureAwait(false);
 						}
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
@@ -167,7 +167,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static void Ping(IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
+		private static void Ping(IRequestPipeline pipeline, Node node)
 		{
 			try
 			{
@@ -180,15 +180,15 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static async Task PingAsync(IRequestPipeline pipeline, Node node, List<PipelineException> seenExceptions)
+		private static async Task PingAsync(IRequestPipeline pipeline, Node node)
 		{
 			try
 			{
-				await pipeline.PingAsync(node);
+				await pipeline.PingAsync(node).ConfigureAwait(false);
 			}
 			catch (PipelineException e) when (e.Recoverable)
 			{
-				await pipeline.SniffOnConnectionFailureAsync();
+				await pipeline.SniffOnConnectionFailureAsync().ConfigureAwait(false);
 				e.RethrowKeepingStackTrace();
 			}
 		}
