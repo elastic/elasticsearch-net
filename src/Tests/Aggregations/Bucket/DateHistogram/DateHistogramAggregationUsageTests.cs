@@ -14,8 +14,8 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
 	 * When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
-	 * the serialized DateTimes extended_bounds correctly, the date_optional_time format should
-	 * also be specified as an additional format.
+	 * the serialized DateTimes of extended_bounds correctly, the date_optional_time format is included
+	 * as part of the format value.
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 	*/
@@ -72,7 +72,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					.Field(p => p.StartedOn)
 					.Interval(DateInterval.Month)
 					.MinimumDocumentCount(2)
-					.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
+					.Format("yyyy-MM-dd'T'HH:mm:ss")
 					.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 					.Order(HistogramOrder.CountAscending)
 					.Missing(FixedDate)
@@ -96,7 +96,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					Field = Field<Project>(p => p.StartedOn),
 					Interval = DateInterval.Month,
 					MinimumDocumentCount = 2,
-					Format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+					Format = "yyyy-MM-dd'T'HH:mm:ss",
 					ExtendedBounds = new ExtendedBounds<DateTime>
 					{
 						Minimum = FixedDate.AddYears(-1),
