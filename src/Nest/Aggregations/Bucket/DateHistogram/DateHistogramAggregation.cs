@@ -48,11 +48,25 @@ namespace Nest
 
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
+		private string _format;
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public Union<DateInterval, Time> Interval { get; set; }
-		public string Format { get; set; }
+
+		public string Format
+		{
+			get
+			{
+				return !string.IsNullOrEmpty(_format) && 
+					!_format.Contains("date_optional_time") &&
+					ExtendedBounds != null
+					? _format + "||date_optional_time"
+					: _format;
+			}
+			set { _format = value; }
+		}
+
 		public int? MinimumDocumentCount { get; set; }
 		public string TimeZone { get; set; }
 		public int? Factor { get; set; }
@@ -73,6 +87,7 @@ namespace Nest
 			, IDateHistogramAggregation
 		where T : class
 	{
+		private string _format;
 		Field IDateHistogramAggregation.Field { get; set; }
 
 		IScript IDateHistogramAggregation.Script { get; set; }
@@ -81,7 +96,18 @@ namespace Nest
 
 		Union<DateInterval, Time> IDateHistogramAggregation.Interval { get; set; }
 
-		string IDateHistogramAggregation.Format { get; set; }
+		string IDateHistogramAggregation.Format
+		{
+			get
+			{
+				return !string.IsNullOrEmpty(_format) &&
+					!_format.Contains("date_optional_time") &&
+					Self.ExtendedBounds != null
+					? _format + "||date_optional_time"
+					: _format;
+			}
+			set { _format = value; }
+		}
 
 		int? IDateHistogramAggregation.MinimumDocumentCount { get; set; }
 
