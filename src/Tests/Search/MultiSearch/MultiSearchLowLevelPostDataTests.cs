@@ -39,9 +39,9 @@ namespace Tests.Search.MultiSearch
 
 		[I] public void PostEnumerableOfObjects()
 		{
-			var response = this._client.Raw.Msearch<dynamic>("project", "project", this.Search);
+			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", this.Search);
 			AssertResponse(response);
-			response = this._client.Raw.Msearch<dynamic>("project", "project", (object)this.Search);
+			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)this.Search);
 			AssertResponse(response);
 		}
 
@@ -51,9 +51,9 @@ namespace Tests.Search.MultiSearch
 				.Select(s => this._client.Serializer.SerializeToString(s, SerializationFormatting.None))
 				.ToList();
 
-			var response = this._client.Raw.Msearch<dynamic>("project", "project", listOfStrings);
+			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", listOfStrings);
 			AssertResponse(response);
-			response = this._client.Raw.Msearch<dynamic>("project", "project", (object)listOfStrings);
+			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)listOfStrings);
 			AssertResponse(response);
 		}
 
@@ -64,9 +64,9 @@ namespace Tests.Search.MultiSearch
 				.ToList()
 				.Aggregate(new StringBuilder(), (sb, s) => sb.Append(s + "\n"), sb => sb.ToString());
 
-			var response = this._client.Raw.Msearch<dynamic>("project", "project", str);
+			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", str);
 			AssertResponse(response);
-			response = this._client.Raw.Msearch<dynamic>("project", "project", (object)str);
+			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)str);
 			AssertResponse(response);
 		}
 
@@ -79,9 +79,9 @@ namespace Tests.Search.MultiSearch
 
 			var bytes = Encoding.UTF8.GetBytes(str);
 
-			var response = this._client.Raw.Msearch<dynamic>("project", "project", bytes);
+			var response = this._client.LowLevel.Msearch<dynamic>("project", "project", bytes);
 			AssertResponse(response);
-			response = this._client.Raw.Msearch<dynamic>("project", "project", (object)bytes);
+			response = this._client.LowLevel.Msearch<dynamic>("project", "project", (object)bytes);
 			AssertResponse(response);
 		}
 

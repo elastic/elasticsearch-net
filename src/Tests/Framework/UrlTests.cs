@@ -49,7 +49,7 @@ namespace Tests.Framework
 
 		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
-			var callDetails = call(this.GetClient().Raw);
+			var callDetails = call(this.GetClient().LowLevel);
 			return Assert("lowleve", callDetails);
 		}
 

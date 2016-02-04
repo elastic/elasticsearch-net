@@ -7,7 +7,7 @@ namespace Nest
 	{
 		IConnectionSettingsValues ConnectionSettings { get; }
 		IElasticsearchSerializer Serializer { get; }
-		IElasticLowLevelClient Raw { get; }
+		IElasticLowLevelClient LowLevel { get; }
 		Inferrer Infer { get; }
 	}
 }
