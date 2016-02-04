@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxAggregation>))]
 	public interface IMaxAggregation : IMetricAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MaxAggregation : MetricAggregationBase, IMaxAggregation
 	{
 		internal MaxAggregation() { }
@@ -15,6 +16,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MaxAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
 			, IMaxAggregation 

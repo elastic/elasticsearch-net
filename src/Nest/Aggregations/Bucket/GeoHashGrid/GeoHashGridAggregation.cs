@@ -21,6 +21,7 @@ namespace Nest
 		GeoHashPrecision? Precision { get; set; }
 	}
 
+	[AggregateType(typeof(MultiBucketAggregate<KeyedBucketItem>))]
 	public class GeoHashGridAggregation : BucketAggregationBase, IGeoHashGridAggregation
 	{
 		public Field Field { get; set; }
@@ -35,6 +36,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoHash = this;
 	}
 
+	[AggregateType(typeof(MultiBucketAggregate<KeyedBucketItem>))]
 	public class GeoHashGridAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<GeoHashGridAggregationDescriptor<T>, IGeoHashGridAggregation, T>
 			, IGeoHashGridAggregation 

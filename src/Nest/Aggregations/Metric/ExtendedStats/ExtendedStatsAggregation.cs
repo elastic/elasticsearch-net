@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsAggregation>))]
 	public interface IExtendedStatsAggregation : IMetricAggregation { }
 
+	[AggregateType(typeof(ExtendedStatsAggregate))]
 	public class ExtendedStatsAggregation : MetricAggregationBase, IExtendedStatsAggregation
 	{
 		internal ExtendedStatsAggregation() { }
@@ -15,6 +16,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.ExtendedStats = this;
 	}
 
+	[AggregateType(typeof(ExtendedStatsAggregate))]
 	public class ExtendedStatsAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregation, T>
 			, IExtendedStatsAggregation 

@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<DerivativeAggregation>))]
 	public interface IDerivativeAggregation : IPipelineAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class DerivativeAggregation : PipelineAggregationBase, IDerivativeAggregation
 	{
 		internal DerivativeAggregation() { }
@@ -16,6 +17,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Derivative = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class DerivativeAggregationDescriptor
 		: PipelineAggregationDescriptorBase<DerivativeAggregationDescriptor, IDerivativeAggregation, SingleBucketsPath>
 		, IDerivativeAggregation { }

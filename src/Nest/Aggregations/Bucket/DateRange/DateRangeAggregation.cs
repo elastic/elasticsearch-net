@@ -20,6 +20,7 @@ namespace Nest
 		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 	}
 
+	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
 	public class DateRangeAggregation : BucketAggregationBase, IDateRangeAggregation
 	{
 		public Field Field { get; set; }
@@ -33,6 +34,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.DateRange = this;
 	}
 
+	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
 	public class DateRangeAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<DateRangeAggregationDescriptor<T>, IDateRangeAggregation, T>
 			, IDateRangeAggregation 

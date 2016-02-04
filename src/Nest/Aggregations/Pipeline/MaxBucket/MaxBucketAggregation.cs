@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxBucketAggregation>))]
 	public interface IMaxBucketAggregation : IPipelineAggregation { }
 
+	[AggregateType(typeof(KeyedValueAggregate))]
 	public class MaxBucketAggregation
 		: PipelineAggregationBase, IMaxBucketAggregation
 	{
@@ -17,6 +18,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.MaxBucket = this;
 	}
 
+	[AggregateType(typeof(KeyedValueAggregate))]
 	public class MaxBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MaxBucketAggregationDescriptor, IMaxBucketAggregation, SingleBucketsPath>
 		, IMaxBucketAggregation

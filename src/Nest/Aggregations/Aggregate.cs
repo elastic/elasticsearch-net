@@ -13,4 +13,21 @@ namespace Nest
 	{
 		IDictionary<string, object> Meta { get; set; }
 	}
+
+	[AttributeUsage(
+		AttributeTargets.Class | AttributeTargets.Interface, 
+		AllowMultiple = false, 
+		Inherited = true)
+	]
+	public class AggregateTypeAttribute : Attribute
+	{
+		public string Name { get; private set; }
+
+		public AggregateTypeAttribute(Type aggregateType)
+		{
+			if (!typeof(IAggregate).IsAssignableFrom(aggregateType))
+				throw new ArgumentException("Type is not an IAggregate");
+			Name = aggregateType.FullName;
+		}
+	}
 }

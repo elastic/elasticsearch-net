@@ -7,6 +7,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<GlobalAggregation>))]
 	public interface IGlobalAggregation : IBucketAggregation { }
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class GlobalAggregation : BucketAggregationBase, IGlobalAggregation
 	{
 		internal GlobalAggregation() { }
@@ -16,6 +17,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Global = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class GlobalAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<GlobalAggregationDescriptor<T>, IGlobalAggregation, T>
 			, IGlobalAggregation

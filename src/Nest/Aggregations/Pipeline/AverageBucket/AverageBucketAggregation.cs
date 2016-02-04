@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<AverageBucketAggregation>))]
 	public interface IAverageBucketAggregation : IPipelineAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class AverageBucketAggregation
 		: PipelineAggregationBase, IAverageBucketAggregation
 	{
@@ -17,6 +18,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.AverageBucket = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class AverageBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<AverageBucketAggregationDescriptor, IAverageBucketAggregation, SingleBucketsPath>
 		, IAverageBucketAggregation

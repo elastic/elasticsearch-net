@@ -11,6 +11,7 @@ namespace Nest
 		IPercentilesMethod Method { get; set; }
 	}
 
+	[AggregateType(typeof(PercentilesAggregate))]
 	public class PercentilesAggregation : MetricAggregationBase, IPercentilesAggregation
 	{
 		public IEnumerable<double> Percents { get; set; }
@@ -23,6 +24,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Percentiles = this;
 	}
 
+	[AggregateType(typeof(PercentilesAggregate))]
 	public class PercentilesAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<PercentilesAggregationDescriptor<T>, IPercentilesAggregation, T>
 			, IPercentilesAggregation 

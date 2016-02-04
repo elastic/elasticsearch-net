@@ -11,6 +11,7 @@ namespace Nest
 		IScript Script { get; set; }
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class BucketScriptAggregation
 		: PipelineAggregationBase, IBucketScriptAggregation
 	{
@@ -24,6 +25,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.BucketScript = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class BucketScriptAggregationDescriptor
 		: PipelineAggregationDescriptorBase<BucketScriptAggregationDescriptor, IBucketScriptAggregation, MultiBucketsPath>
 		, IBucketScriptAggregation

@@ -12,6 +12,7 @@ namespace Nest
 		Field Path { get; set; }
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class ReverseNestedAggregation : BucketAggregationBase, IReverseNestedAggregation
 	{
 		[JsonProperty("path")]
@@ -24,6 +25,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class ReverseNestedAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregation, T>
 			, IReverseNestedAggregation 

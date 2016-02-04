@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<AverageAggregation>))]
 	public interface IAverageAggregation : IMetricAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class AverageAggregation : MetricAggregationBase, IAverageAggregation
 	{
 		internal AverageAggregation() { }
@@ -15,6 +16,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Average = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class AverageAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<AverageAggregationDescriptor<T>, IAverageAggregation, T>
 			, IAverageAggregation 

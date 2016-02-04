@@ -12,6 +12,7 @@ namespace Nest
 		TypeName Type { get; set; }
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
 		public TypeName Type { get; set; }
@@ -26,6 +27,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class ChildrenAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
