@@ -44,6 +44,33 @@ namespace Tests.Document.Single.Get
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
+	public class GetApiLowLevelTests : GetApiTests
+	{
+		public GetApiLowLevelTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override string UrlPath => $"/project/project/{ProjectIdForUrl}?fields=name%2CnumberOfCommits";
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Raw.Get<GetResponse<Project>>("project", "project", this.ProjectId, RequestParameter).Body,
+			fluentAsync: (client, f) => client.Raw.GetAsync<GetResponse<Project>>("project", "project", this.ProjectId, RequestParameter)
+				.ContinueWith<IGetResponse<Project>>(t=>t.Result.Body),
+			request: (client, f) => client.Raw.Get<GetResponse<Project>>("project", "project", this.ProjectId, RequestParameter).Body,
+			requestAsync: (client, f) => client.Raw.GetAsync<GetResponse<Project>>("project", "project", this.ProjectId, RequestParameter)
+				.ContinueWith<IGetResponse<Project>>(t=>t.Result.Body)
+		);
+
+		private GetRequestParameters RequestParameter(GetRequestParameters r) => r
+			.Fields("name", "numberOfCommits");
+
+		protected override void ExpectResponse(IGetResponse<Project> response)
+		{
+			response.Fields.Should().NotBeNull();
+			response.Fields.ValueOf<Project, string>(p => p.Name).Should().Be(ProjectId);
+			response.Fields.ValueOf<Project, int?>(p => p.NumberOfCommits).Should().BeGreaterThan(0);
+		}
+	}
+
+	[Collection(IntegrationContext.ReadOnly)]
 	public class GetApiFieldsTests : GetApiTests
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

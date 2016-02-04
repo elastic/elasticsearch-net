@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 				throw new ArgumentNullException();
 			if (format == "r")
 				return arg.ToString();
-			return this.GetStringValue(arg);
+			return Uri.EscapeDataString(this.GetStringValue(arg));
 		}
 
 		public string GetStringValue(object valueType)

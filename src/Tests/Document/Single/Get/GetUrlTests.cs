@@ -44,6 +44,10 @@ namespace Tests.Document.Single.Get
 				.FluentAsync(c => c.GetAsync<Project>(urlId, s=>s.Routing(urlId)))
 				.RequestAsync(c => c.GetAsync<Project>(new GetRequest<Project>(urlId) { Routing = urlId }))
 				;
+
+			GET($"/project/project/{escaped}?routing={escaped}")
+				.LowLevel(c => c.Get<dynamic>("project", "project", urlId, s=>s.Routing(urlId)))
+				;
 		}
 	}
 }

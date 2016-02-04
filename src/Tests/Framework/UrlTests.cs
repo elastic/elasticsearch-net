@@ -47,12 +47,17 @@ namespace Tests.Framework
 		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) 
 			where TResponse : IResponse => WhenCallingAsync(call, "request async");
 
+		public UrlTester LowLevel(Func<IElasticsearchClient, IApiCallDetails> call)
+		{
+			var callDetails = call(this.GetClient().Raw);
+			return Assert("lowleve", callDetails);
+		}
 
 		internal UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
 			where TResponse : IResponse
 		{
-			var callDetails = call(this.GetClient()).CallDetails;
-			return Assert(typeOfCall, callDetails);
+			var callDetails = call(this.GetClient());
+			return Assert(typeOfCall, callDetails.CallDetails);
 		}
 
 		internal async Task<UrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)

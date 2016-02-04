@@ -49,7 +49,7 @@ namespace Nest
 			foreach (var kv in _routeValues)
 			{
 				var key = kv.Value.GetString(settings);
-				this._resolved[kv.Key] = key.IsNullOrEmpty() ?key : Uri.EscapeDataString(key);
+				this._resolved[kv.Key] = key.IsNullOrEmpty() ? key : key;
 			}
 		}
 
