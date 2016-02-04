@@ -22,16 +22,16 @@ namespace Elasticsearch.Net
 
 			var response = r.ResponseBodyInBytes?.Utf8String() ?? ResponseStatics.ResponseAlreadyCaptured;
 			var request = r.RequestBodyInBytes?.Utf8String() ?? ResponseStatics.RequestAlreadyCaptured;
-			sb.AppendLine($"# Request :\r\n{request}");
-			sb.AppendLine($"# Response :\r\n{response}");
+			sb.AppendLine($"# Request:\r\n{request}");
+			sb.AppendLine($"# Response:\r\n{response}");
 
 			return sb.ToString();
 		}
 
 		public static void DebugAuditTrailExceptions(List<Audit> auditTrail, StringBuilder sb)
 		{
-			var auditExceptions = auditTrail.Where(a => a.Exception != null);
-			foreach (var a in auditExceptions.Select((audit, i) => new {audit, i}))
+			var auditExceptions = auditTrail.Select((audit, i) => new {audit, i}).Where(a => a.audit.Exception != null);
+			foreach (var a in auditExceptions)
 				sb.AppendLine($"# Audit exception in step {a.i} {a.audit.Event.GetStringValue()}:\r\n{a.audit.Exception}");
 		}
 
