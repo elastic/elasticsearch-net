@@ -32,6 +32,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 	public class ApiEndpoint
 	{
+		public ApiGenerator Generator { get; set; }
 		public string CsharpMethodName { get; set; }
 		public string Documentation { get; set; }
 		public IEnumerable<string> Methods { get; set; }
@@ -140,11 +141,11 @@ namespace CodeGeneration.LowLevelClient.Domain
 						queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
 						var explanationOfT =
-							paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to /para>"
-							+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed</para>"
-							+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility</para>"
-							+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed</para>"
-							+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth"
+							paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to </para>"
+							+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed </para>"
+							+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility </para>"
+							+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed </para>"
+							+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>"
 							;
 						var apiMethod = new CsharpMethod
 						{
@@ -162,7 +163,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						ApiGenerator.PatchMethod(apiMethod);
+						Generator.PatchMethod(apiMethod);
 
 						args = args.Concat(new[] 
 						{ 
@@ -188,18 +189,18 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						ApiGenerator.PatchMethod(apiMethod);
+						Generator.PatchMethod(apiMethod);
 						yield return apiMethod;
 						
 						//No need for deserialization state when returning dynamicdictionary
 
 						var explanationOfDynamic =
 							paraIndent + 
-								"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>"
+								"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely </para>"
 							+ paraIndent + 
-								"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"]</para>"
+								"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"] </para>"
 							+ paraIndent + 
-								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>";
+								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist </para>";
 
 						var defaultBoundGeneric = Url.Path.Contains("_cat") ? "string" : "DynamicDictionary";
 
@@ -221,7 +222,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						ApiGenerator.PatchMethod(apiMethod);
+						Generator.PatchMethod(apiMethod);
 						yield return apiMethod;
 						
 						apiMethod = new CsharpMethod
@@ -242,7 +243,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						ApiGenerator.PatchMethod(apiMethod);
+						Generator.PatchMethod(apiMethod);
 						yield return apiMethod;
 					}
 				}

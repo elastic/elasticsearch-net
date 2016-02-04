@@ -34,6 +34,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "doc")]
 		TPartialDocument Doc { get; set; }
+
+		[JsonProperty(PropertyName = "detect_noop")]
+		bool? DetectNoop { get; set; }
 	}
 
 	public partial class UpdateRequest<TDocument, TPartialDocument>
@@ -47,6 +50,7 @@ namespace Nest
 		public TDocument Upsert { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
+		public bool? DetectNoop { get; set; }
 
 		public Fields Fields
 		{
@@ -75,6 +79,7 @@ namespace Nest
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script) => Assign(a => a.Script = script);
 
@@ -95,7 +100,9 @@ namespace Nest
 		/// </summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Doc(TPartialDocument @object) => Assign(a => a.Doc = @object);
 
-		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool? docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
+		public UpdateDescriptor<TDocument, TPartialDocument> DocAsUpsert(bool docAsUpsert = true) => Assign(a => a.DocAsUpsert = docAsUpsert);
+
+		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true) => Assign(a => a.DetectNoop = detectNoop);
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Fields(Fields fields) =>
 			Assign(a => a.RequestParameters.AddQueryString("fields", fields));

@@ -19,7 +19,7 @@ namespace Nest
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
-			sb.AppendLine($"Recieved a request marked as {provided.HttpMethod.GetStringValue()}");
+			sb.AppendLine($"Received a request marked as {provided.HttpMethod.GetStringValue()}");
 			sb.AppendLine($"This endpoint accepts {string.Join(",", methods.Select(p=>p.GetStringValue()))}");
 			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
 			foreach (var endpoint in endpoints)

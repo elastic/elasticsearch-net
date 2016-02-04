@@ -32,7 +32,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
     	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest2x_BuildTestAndIntegrate&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:Nest2x_BuildTestAndIntegrate_Fake/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a"></a></td>
-    	<td>:heavy_minus_sign:</td>
+    	<td><a href="https://www.nuget.org/packages/NEST/2.0.0-rc1"><img src="https://img.shields.io/badge/nuget-2.0.0--rc1-blue.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>  
     </tr>
 </table>
 

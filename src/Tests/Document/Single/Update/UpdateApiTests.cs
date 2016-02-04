@@ -37,19 +37,22 @@ namespace Tests.Document.Single.Update
 		protected override object ExpectJson { get; } = new
 		{
 			doc = Project.InstanceAnonymous,
-			doc_as_upsert = true
+			doc_as_upsert = true,
+			detect_noop = true
 		};
 
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(DocumentPath<Project>.Id(CallIsolatedValue));
 
-		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
-			.Doc(Project.Instance)
-			.DocAsUpsert();
+		protected override Func<UpdateDescriptor<Project, Project>, IUpdateRequest<Project, Project>> Fluent => d => d
+			 .Doc(Project.Instance)
+			 .DocAsUpsert()
+			 .DetectNoop();
 
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(CallIsolatedValue)
 		{
 			Doc = Project.Instance,
-			DocAsUpsert = true
+			DocAsUpsert = true,
+			DetectNoop = true
 		};
 	}
 }

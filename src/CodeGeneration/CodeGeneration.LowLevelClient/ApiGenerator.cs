@@ -17,14 +17,13 @@ using CodeGeneration.LowLevelClient.Overrides.Global;
 
 namespace CodeGeneration.LowLevelClient
 {
-	public static class ApiGenerator
+	public class ApiGenerator
 	{
-		private static readonly string NestFolder = @"..\..\..\..\..\src\Nest\";
-		private static readonly string EsNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
-		private static readonly string ViewFolder = @"..\..\Views\";
-		private static readonly string ApiEndpointsFolder = @"..\..\ApiEndpoints\";
+		private static string NestFolder;
+		private static string EsNetFolder;
+		private static string ViewFolder;
+		private static string ApiEndpointsFolder;
 		private static readonly RazorMachine RazorHelper;
-
 		private static readonly string Version = "2.0";
 		private static readonly List<string> ApiListings = new List<string>
 		{
@@ -38,20 +37,42 @@ namespace CodeGeneration.LowLevelClient
 		{
 			RazorHelper = new RazorMachine();
 			Assembly = typeof(ApiGenerator).Assembly;
+
+			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+			if (directoryInfo.Name == "CodeGeneration.LowLevelClient" &&
+				directoryInfo.Parent != null &&
+				directoryInfo.Parent.Name == "CodeGeneration")
+			{
+				// running as a dnx project
+				NestFolder = @"..\..\..\src\Nest\";
+				EsNetFolder = @"..\..\..\src\Elasticsearch.Net\";
+				ViewFolder = @"Views\";
+				ApiEndpointsFolder = @"ApiEndpoints\";
+			}
+			else
+			{
+				NestFolder = @"..\..\..\..\..\src\Nest\";
+				EsNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
+				ViewFolder = @"..\..\Views\";
+				ApiEndpointsFolder = @"..\..\ApiEndpoints\";
+			}
 		}
+
 		public static string PascalCase(string s)
 		{
 			var textInfo = new CultureInfo("en-US").TextInfo;
 			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
 		}
-		public static void GenerateEndpointFiles()
+
+		public void GenerateEndpointFiles()
 		{
 			Console.WriteLine("Getting a listing of all the api endpoints from the elasticsearch-rest-api-spec repos");
 			foreach(var listing in ApiListings.Select(l=>l.Replace("{version}", Version)))
 				DownloadJsonDefinitions(listing);
 		}
 
-		private static void DownloadJsonDefinitions(string listingUrl)
+		private void DownloadJsonDefinitions(string listingUrl)
 		{
 			using (var client = new WebClient())
 			{
@@ -60,7 +81,7 @@ namespace CodeGeneration.LowLevelClient
 			}
 		}
 
-		private static void FindJsonFilesOnListing(string listingUrl, string html)
+		private void FindJsonFilesOnListing(string listingUrl, string html)
 		{
 			var dom = CQ.Create(html);
 
@@ -73,7 +94,9 @@ namespace CodeGeneration.LowLevelClient
 
 			endpoints.ForEach(s => WriteEndpointFile(listingUrl, s));
 		}
-		private static void WriteEndpointFile(string listingUrl, string s)
+
+
+		private void WriteEndpointFile(string listingUrl, string s)
 		{
 			using (var client = new WebClient())
 			{
@@ -86,7 +109,7 @@ namespace CodeGeneration.LowLevelClient
 		}
 
 
-		public static RestApiSpec GetRestApiSpec()
+		public RestApiSpec GetRestApiSpec()
 		{
 			var spec = new RestApiSpec
 			{
@@ -100,10 +123,11 @@ namespace CodeGeneration.LowLevelClient
 			return spec;
 		}
 
-		private static KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
+		private KeyValuePair<string, ApiEndpoint> CreateApiEndpoint(string jsonFile)
 		{
 			var json = File.ReadAllText(jsonFile);
 			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
+			endpoint.Value.Generator = this;
 			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
 		}
@@ -116,7 +140,7 @@ namespace CodeGeneration.LowLevelClient
 			return fileUri;
 		}
 
-		private static readonly Dictionary<string, string> MethodNameOverrides =
+		private readonly Dictionary<string, string> MethodNameOverrides =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
@@ -125,7 +149,7 @@ namespace CodeGeneration.LowLevelClient
 			.DistinctBy(v => v.Key)
 			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
 
-		private static readonly Dictionary<string, string> KnownDescriptors =
+		private readonly Dictionary<string, string> KnownDescriptors =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
@@ -134,7 +158,7 @@ namespace CodeGeneration.LowLevelClient
 			.OrderBy(v=>v.Key)
 			.ToDictionary(k => k.Key, v => v.Value);
 
-		private static readonly Dictionary<string, string> KnownRequests =
+		private readonly Dictionary<string, string> KnownRequests =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+Request(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
@@ -146,7 +170,7 @@ namespace CodeGeneration.LowLevelClient
 
 		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
 		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
-		public static void PatchMethod(CsharpMethod method)
+		public void PatchMethod(CsharpMethod method)
 		{
 			Func<string, bool> ms = s => method.FullName.StartsWith(s);
 			Func<string, bool> pc = s => method.Path.Contains(s);
@@ -260,7 +284,7 @@ namespace CodeGeneration.LowLevelClient
 			return PascalCase(apiEnpointKey);
 		}
 
-		public static void GenerateClientInterface(RestApiSpec model)
+		public void GenerateClientInterface(RestApiSpec model)
 		{
 			var targetFile = EsNetFolder + @"IElasticsearchClient.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"IElasticsearchClient.Generated.cshtml"), model).ToString();
@@ -268,54 +292,54 @@ namespace CodeGeneration.LowLevelClient
 		}
 
 
-		public static void GenerateRawDispatch(RestApiSpec model)
+		public void GenerateRawDispatch(RestApiSpec model)
 		{
 			var targetFile = NestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"_LowLevelDispatch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
-		public static void GenerateRawClient(RestApiSpec model)
+		public void GenerateRawClient(RestApiSpec model)
 		{
 			var targetFile = EsNetFolder + @"ElasticsearchClient.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"ElasticsearchClient.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateDescriptors(RestApiSpec model)
+		public void GenerateDescriptors(RestApiSpec model)
 		{
 			var targetFile = NestFolder + @"_Generated\_Descriptors.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateRequests(RestApiSpec model)
+		public void GenerateRequests(RestApiSpec model)
 		{
 			var targetFile = NestFolder + @"_Generated\_Requests.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"_Requests.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateRequestParameters(RestApiSpec model)
+		public void GenerateRequestParameters(RestApiSpec model)
 		{
 			var targetFile = EsNetFolder + @"Domain\RequestParameters\RequestParameters.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"RequestParameters.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		public static void GenerateRequestParametersExtensions(RestApiSpec model)
+		public void GenerateRequestParametersExtensions(RestApiSpec model)
 		{
 			var targetFile = NestFolder + @"_Generated\_RequestParametersExtensions.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"_RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
-		public static void GenerateEnums(RestApiSpec model)
+		public void GenerateEnums(RestApiSpec model)
 		{
 			var targetFile = EsNetFolder + @"Domain\Enums.Generated.cs";
 			var source = RazorHelper.Execute(File.ReadAllText(ViewFolder + @"Enums.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
-		private static void WriteToEndpointsFolder(string filename, string contents)
+		private void WriteToEndpointsFolder(string filename, string contents)
 		{
 			if (!Directory.Exists(ApiEndpointsFolder))
 				Directory.CreateDirectory(ApiEndpointsFolder);

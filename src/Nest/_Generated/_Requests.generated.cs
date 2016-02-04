@@ -5023,9 +5023,6 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
-		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
-		public bool DetectNoop { get { return Q<bool>("detect_noop"); } set { Q("detect_noop", value); } }
-		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		

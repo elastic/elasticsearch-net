@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
@@ -12,6 +13,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
+	 * When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
+	 * the serialized DateTimes extended_bounds correctly, the date_optional_time format should
+	 * also be specified as an additional format.
+	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 	*/
 	public class DateHistogramAggregationUsageTests : AggregationUsageTestBase
@@ -20,6 +25,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 		protected override object ExpectJson => new
 		{
+			size = 0,
 			aggs = new
 			{
 				projects_started_per_month = new
@@ -29,6 +35,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						field = "startedOn",
 						interval = "month",
 						min_doc_count = 2,
+						format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 						order = new { _count = "asc" },
 						extended_bounds = new
 						{
@@ -39,23 +46,43 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "tags" } }
+						project_tags = new
+						{
+							nested = new
+							{
+								path = "tags"
+							},
+							aggs = new
+							{
+								tags = new
+								{
+									terms = new { field = "tags.name" }
+								}
+							}
+						}
 					}
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Size(0)
 			.Aggregations(aggs => aggs
 				.DateHistogram("projects_started_per_month", date => date
 					.Field(p => p.StartedOn)
 					.Interval(DateInterval.Month)
 					.MinimumDocumentCount(2)
+					.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 					.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 					.Order(HistogramOrder.CountAscending)
 					.Missing(FixedDate)
 					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.Tags))
+						.Nested("project_tags", n => n
+							.Path(p => p.Tags)
+							.Aggregations(nestedAggs => nestedAggs
+								.Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+							)
+						)
 					)
 				)
 			);
@@ -63,11 +90,13 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
+				Size = 0,
 				Aggregations = new DateHistogramAggregation("projects_started_per_month")
 				{
 					Field = Field<Project>(p => p.StartedOn),
 					Interval = DateInterval.Month,
 					MinimumDocumentCount = 2,
+					Format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 					ExtendedBounds = new ExtendedBounds<DateTime>
 					{
 						Minimum = FixedDate.AddYears(-1),
@@ -75,8 +104,14 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					},
 					Order = HistogramOrder.CountAscending,
 					Missing = FixedDate,
-					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
+					Aggregations = new NestedAggregation("project_tags")
+					{
+						Path = Field<Project>(p => p.Tags),
+						Aggregations = new TermsAggregation("tags")
+						{
+							Field = Field<Project>(p => p.Tags.First().Name)
+						}
+					}
 				}
 			};
 
@@ -96,6 +131,12 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			{
 				item.Date.Should().NotBe(default(DateTime));
 				item.DocCount.Should().BeGreaterThan(0);
+
+				var nested = item.Nested("project_tags");
+				nested.Should().NotBeNull();
+
+				var nestedTerms = nested.Terms("tags");
+				nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
 			}
 		}
 	}
