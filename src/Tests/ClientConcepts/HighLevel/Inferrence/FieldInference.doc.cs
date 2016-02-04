@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -41,7 +42,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 				.WhenSerializing(fieldString);
 		}
 
-		/** Therefor you can also implicitly convert strings and expressions to Field's */
+		/** Therefore you can also implicitly convert strings and expressions to Field's */
 		[U]
 		public void ImplicitConversion()
 		{
@@ -63,7 +64,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
-			var fieldExpression = Field<Project>(p => p.Name);
+			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
 			/** Using static imports in c# 6 this can be even shortened:
 				using static Nest.Static; 
@@ -137,6 +138,32 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			var suffix = "unanalyzed";
 			Expect("metadata.var.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
 			Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
+		}
+
+		/** 
+		* Suffixes can be appended to expressions. This is useful in cases where you want to apply the same suffix
+		* to a list of fields 
+		*/
+		[U]
+		public void AppendingSuffixToExpressions()
+		{
+			/**  */
+			var expressions = new List<Expression<Func<Project, object>>>
+			{
+				p => p.Name,
+				p => p.Description,
+				p => p.CuratedTags.First().Name,
+				p => p.LeadDeveloper.FirstName
+			};
+
+			/** append the suffix "raw" to each expression */
+			var fieldExpressions = 
+				expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
+
+			Expect("name.raw").WhenSerializing(fieldExpressions[0]);
+			Expect("description.raw").WhenSerializing(fieldExpressions[1]);
+			Expect("curatedTags.name.raw").WhenSerializing(fieldExpressions[2]);
+			Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
 		}
 
 		/** Annotations 
