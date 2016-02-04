@@ -13,6 +13,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
+	 * When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
+	 * the serialized DateTimes extended_bounds correctly, the date_optional_time format should
+	 * also be specified as an additional format.
+	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 	*/
 	public class DateHistogramAggregationUsageTests : AggregationUsageTestBase
@@ -31,6 +35,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						field = "startedOn",
 						interval = "month",
 						min_doc_count = 2,
+						format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 						order = new { _count = "asc" },
 						extended_bounds = new
 						{
@@ -67,6 +72,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					.Field(p => p.StartedOn)
 					.Interval(DateInterval.Month)
 					.MinimumDocumentCount(2)
+					.Format("yyyy-MM-dd'T'HH:mm:ss||date_optional_time")
 					.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
 					.Order(HistogramOrder.CountAscending)
 					.Missing(FixedDate)
@@ -90,6 +96,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					Field = Field<Project>(p => p.StartedOn),
 					Interval = DateInterval.Month,
 					MinimumDocumentCount = 2,
+					Format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
 					ExtendedBounds = new ExtendedBounds<DateTime>
 					{
 						Minimum = FixedDate.AddYears(-1),
