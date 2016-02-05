@@ -56,17 +56,27 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			var s = data as string;
 			if (s != null) return s.Utf8Bytes();
 
-			var ss = data as IEnumerable<string>;
-			if (ss != null) return (string.Join("\n", ss) + "\n").Utf8Bytes();
+			var dataType = data.GetType();
 
-			var so = data as IEnumerable<object>;
+			if (typeof(IEnumerable<string>).IsAssignableFrom(dataType))
+			{
+				var ss = (IEnumerable<string>)data;
+				return (string.Join("\n", ss) + "\n").Utf8Bytes();
+			}
+
+			if (typeof(IEnumerable<object>).IsAssignableFrom(dataType))
+			{
+				var so = (IEnumerable<object>)data;
+				var joined = string.Join("\n", so
+					.Select(soo => this._serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
+				return joined.Utf8Bytes();
+			}
+
 			var indent = this._settings.UsesPrettyRequests
 				? SerializationFormatting.Indented
 				: SerializationFormatting.None;
-			if (so == null) return this._serializer.Serialize(data, indent);
-			var joined = string.Join("\n", so
-				.Select(soo => this._serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
-			return joined.Utf8Bytes();
+
+			return this._serializer.Serialize(data, indent);
 		}
 
 		protected static bool IsValidResponse(ITransportRequestState requestState, IElasticsearchResponse streamResponse)
