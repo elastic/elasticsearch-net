@@ -353,10 +353,10 @@ GROUP build
 NUGET
   remote: https://www.nuget.org/api/v2
   specs:
-    FAKE (4.14.5)
+    FAKE (4.19.0)
     FSharp.Data (2.2.5)
       Zlib.Portable (>= 1.10.0) - framework: portable-net40+sl50+wp80+win80
-    gitlink (2.2.0)
+    gitlink (2.3.0-unstable0022)
     Node.js (5.3.0)
     NoGit (0.1.0)
       Node.js (>= 0.12.0)

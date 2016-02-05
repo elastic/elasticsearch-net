@@ -17,8 +17,6 @@ if errorlevel 1 (
   exit /b %errorlevel%
 )
 
-
-
 SET TARGET="build"
 SET VERSION=
 SET ESVERSIONS=
@@ -27,7 +25,10 @@ SET SKIPTESTS=0
 SET APIKEY=
 
 
-IF /I "%1"=="skiptests" (set SKIPTESTS="1")
+IF /I "%1"=="skiptests" (
+	set SKIPTESTS="1"
+	SHIFT
+)
 
 IF NOT [%1]==[] (set TARGET="%1")
 
