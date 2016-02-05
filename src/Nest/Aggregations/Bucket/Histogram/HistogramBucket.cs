@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class HistogramItem : BucketItemBase, IBucketItem
+	public class HistogramBucket : BucketBase, IBucket
 	{
-		public HistogramItem() { }
-		public HistogramItem(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		public HistogramBucket() { }
+		public HistogramBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
 
 		public long Key { get; set; }
 		public string KeyAsString { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
-	public class FiltersBucketItem : BucketItemBase
+	public class FiltersBucketItem : BucketBase
 	{
 		public FiltersBucketItem() { }
 		public FiltersBucketItem(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }

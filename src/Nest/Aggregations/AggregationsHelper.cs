@@ -97,7 +97,7 @@ namespace Nest
 				: new SignificantTermsAggregate
 				{
 					DocCount = bucket.DocCount,
-					Buckets = bucket.Items.OfType<SignificantTermsItem>().ToList(),
+					Buckets = bucket.Items.OfType<SignificantTermsBucket>().ToList(),
 					Meta = bucket.Meta
 				};
 		}
@@ -111,22 +111,22 @@ namespace Nest
 				{
 					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
 					SumOtherDocCount = bucket.SumOtherDocCount,
-					Buckets = bucket.Items.OfType<KeyedBucketItem>().ToList(),
+					Buckets = bucket.Items.OfType<KeyedBucket>().ToList(),
 					Meta = bucket.Meta
 				};
 		}
 
-		public MultiBucketAggregate<HistogramItem> Histogram(string key)
+		public MultiBucketAggregate<HistogramBucket> Histogram(string key)
 		{
 			var bucket = this.TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
-				: new MultiBucketAggregate<HistogramItem>
+				: new MultiBucketAggregate<HistogramBucket>
 				{
-					Buckets = bucket.Items.OfType<HistogramItem>()
-						.Concat(bucket.Items.OfType<KeyedBucketItem>()
+					Buckets = bucket.Items.OfType<HistogramBucket>()
+						.Concat(bucket.Items.OfType<KeyedBucket>()
 							.Select(x =>
-								new HistogramItem
+								new HistogramBucket
 								{
 									Key = long.Parse(x.Key),
 									KeyAsString = x.Key,
@@ -140,17 +140,17 @@ namespace Nest
 				};
 		}
 
-		public MultiBucketAggregate<KeyedBucketItem> GeoHash(string key) => GetBucket<KeyedBucketItem>(key);
+		public MultiBucketAggregate<KeyedBucket> GeoHash(string key) => GetBucket<KeyedBucket>(key);
 
-		public MultiBucketAggregate<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> Range(string key) => GetBucket<RangeBucket>(key);
 
-		public MultiBucketAggregate<RangeItem> DateRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> DateRange(string key) => GetBucket<RangeBucket>(key);
 
-		public MultiBucketAggregate<RangeItem> IpRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> IpRange(string key) => GetBucket<RangeBucket>(key);
 
-		public MultiBucketAggregate<RangeItem> GeoDistance(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> GeoDistance(string key) => GetBucket<RangeBucket>(key);
 
-		public MultiBucketAggregate<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
+		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => GetBucket<DateHistogramBucket>(key);
 
 		private TAggregation TryGet<TAggregation>(string key)
 			where TAggregation : class, IAggregate
@@ -159,14 +159,14 @@ namespace Nest
 			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
 		}
 
-		private MultiBucketAggregate<TBucketItem> GetBucket<TBucketItem>(string key)
-			where TBucketItem : IBucketItem
+		private MultiBucketAggregate<TBucket> GetBucket<TBucket>(string key)
+			where TBucket : IBucket
 		{
 			var bucket = this.TryGet<BucketAggregate>(key);
 			if (bucket == null) return null;
-			return new MultiBucketAggregate<TBucketItem>
+			return new MultiBucketAggregate<TBucket>
 			{
-				Buckets = bucket.Items.OfType<TBucketItem>().ToList(),
+				Buckets = bucket.Items.OfType<TBucket>().ToList(),
 				Meta = bucket.Meta
 			};
 		}

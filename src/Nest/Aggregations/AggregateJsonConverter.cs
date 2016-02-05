@@ -81,7 +81,7 @@ namespace Nest
 			return result;
 		}
 
-		private IBucketItem ReadBucketItem(JsonReader reader, JsonSerializer serializer)
+		private IBucket ReadBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject)
 				return null;
@@ -90,7 +90,7 @@ namespace Nest
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
-			IBucketItem item = null;
+			IBucket item = null;
 
 			var property = reader.Value as string;
 
@@ -356,7 +356,7 @@ namespace Nest
 				bucket.SumOtherDocCount = reader.Value as long?;
 				reader.Read();
 			}
-			var items = new List<IBucketItem>();
+			var items = new List<IBucket>();
 			reader.Read();
 
 			if (reader.TokenType == JsonToken.StartObject)
@@ -382,7 +382,7 @@ namespace Nest
 			if (reader.TokenType == JsonToken.EndArray)
 			{
 				reader.Read();
-				bucket.Items = Enumerable.Empty<IBucketItem>();
+				bucket.Items = Enumerable.Empty<IBucket>();
 				return bucket;
 			}
 			do
@@ -447,7 +447,7 @@ namespace Nest
 			return valueMetric;
 		}
 
-		public IBucketItem GetRangeItem(JsonReader reader, JsonSerializer serializer, string key = null)
+		public IBucket GetRangeItem(JsonReader reader, JsonSerializer serializer, string key = null)
 		{
 			string fromAsString = null, toAsString = null;
 			long? docCount = null;
@@ -493,7 +493,7 @@ namespace Nest
 				}
 			}
 
-			var bucket = new RangeItem
+			var bucket = new RangeBucket
 			{
 				Key = key,
 				From = fromDouble,
@@ -507,7 +507,7 @@ namespace Nest
 			return bucket;
 		}
 
-		private IBucketItem GetDateHistrogramItem(JsonReader reader, JsonSerializer serializer)
+		private IBucket GetDateHistrogramItem(JsonReader reader, JsonSerializer serializer)
 		{
 			var keyAsString = reader.ReadAsString();
 			reader.Read(); reader.Read();
@@ -516,13 +516,13 @@ namespace Nest
 			var docCount = (reader.Value as long?).GetValueOrDefault(0);
 			reader.Read();
 
-			var dateHistogram = new DateHistogramItem() { Key = key, KeyAsString = keyAsString, DocCount = docCount };
+			var dateHistogram = new DateHistogramBucket() { Key = key, KeyAsString = keyAsString, DocCount = docCount };
 			dateHistogram.Aggregations = this.GetNestedAggregations(reader, serializer);
 			return dateHistogram;
 
 		}
 
-		private IBucketItem GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
+		private IBucket GetKeyedBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
 			var key = reader.ReadAsString();
 			reader.Read();
@@ -530,7 +530,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeItem(reader, serializer, key);
 
-			var keyItem = new KeyedBucketItem {Key = key};
+			var keyItem = new KeyedBucket {Key = key};
 
 			if (property == "key_as_string")
 			{
@@ -555,14 +555,14 @@ namespace Nest
 
 		}
 
-		private IBucketItem GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyedBucketItem keyItem)
+		private IBucket GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyedBucket keyItem)
 		{
 			reader.Read();
 			var score = reader.Value as double?;
 			reader.Read();
 			reader.Read();
 			var bgCount = reader.Value as long?;
-			var significantTermItem = new SignificantTermsItem()
+			var significantTermItem = new SignificantTermsBucket()
 			{
 				Key = keyItem.Key,
 				DocCount = keyItem.DocCount.GetValueOrDefault(0),
@@ -574,7 +574,7 @@ namespace Nest
 			return significantTermItem;
 		}
 
-		private IBucketItem GetFiltersBucketItem(JsonReader reader, JsonSerializer serializer)
+		private IBucket GetFiltersBucketItem(JsonReader reader, JsonSerializer serializer)
 		{
 			reader.Read();
 			var filtersBucketItem = new FiltersBucketItem
