@@ -24,6 +24,7 @@ namespace Nest
 		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class SamplerAggregation : BucketAggregationBase, ISamplerAggregation
 	{
 		public SamplerAggregationExecutionHint? ExecutionHint { get; set; }
@@ -39,6 +40,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Sampler = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class SamplerAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<SamplerAggregationDescriptor<T>, ISamplerAggregation, T>, ISamplerAggregation
 		where T : class

@@ -1,21 +1,28 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
-	public class ExtendedStatsAggregate : MetricAggregateBase
+	public class ExtendedStatsAggregate : StatsAggregate
 	{
-		public long Count { get; set; }
-		public double? Min { get; set; }
-		public double? Max { get; set; }
-		public double? Average { get; set; }
-		public double? Sum { get; set; }
+		[JsonProperty("sum_of_squares")]
 		public double? SumOfSquares { get; set; }
+
+		[JsonProperty("variance")]
 		public double? Variance { get; set; }
+
+		[JsonProperty("std_deviation")]
 		public double? StdDeviation { get; set; }
+
+		[JsonProperty("std_deviation_bounds")]
 		public StandardDeviationBounds StdDeviationBounds { get; set; }
 	}
 
 	public class StandardDeviationBounds
 	{
+		[JsonProperty("upper")]
 		public double? Upper { get; set; }
+		
+		[JsonProperty("lower")]
 		public double? Lower { get; set; }
 	}
 }

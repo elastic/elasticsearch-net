@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<SumAggregation>))]
 	public interface ISumAggregation : IMetricAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class SumAggregation : MetricAggregationBase, ISumAggregation
 	{
 		internal SumAggregation() { }
@@ -15,6 +16,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Sum = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class SumAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<SumAggregationDescriptor<T>, ISumAggregation, T>
 			, ISumAggregation 

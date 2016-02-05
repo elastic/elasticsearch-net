@@ -13,6 +13,7 @@ namespace Nest
 		bool? Rehash { get; set; }
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class CardinalityAggregation : MetricAggregationBase, ICardinalityAggregation
 	{
 		public int? PrecisionThreshold { get; set; }
@@ -25,6 +26,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class CardinalityAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<CardinalityAggregationDescriptor<T>, ICardinalityAggregation, T>
 			, ICardinalityAggregation 

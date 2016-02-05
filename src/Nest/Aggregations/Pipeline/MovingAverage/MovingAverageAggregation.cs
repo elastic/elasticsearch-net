@@ -19,6 +19,7 @@ namespace Nest
 		int? Predict { get; set; }
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MovingAverageAggregation : PipelineAggregationBase, IMovingAverageAggregation
 	{
 		public bool? Minimize { get; set; }
@@ -35,6 +36,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.MovingAverage = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MovingAverageAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MovingAverageAggregationDescriptor, IMovingAverageAggregation, SingleBucketsPath>
 		, IMovingAverageAggregation

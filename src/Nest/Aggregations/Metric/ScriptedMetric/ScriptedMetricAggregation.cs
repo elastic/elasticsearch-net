@@ -24,6 +24,7 @@ namespace Nest
 		IDictionary<string, object> Params { get; set; }
 	}
 
+	[AggregateType(typeof(ScriptedMetricAggregate))]
 	public class ScriptedMetricAggregation : MetricAggregationBase, IScriptedMetricAggregation
 	{
 		public IScript InitScript { get; set; }
@@ -38,6 +39,8 @@ namespace Nest
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ScriptedMetric = this;
 	}
+
+	[AggregateType(typeof(ScriptedMetricAggregate))]
 	public class ScriptedMetricAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<ScriptedMetricAggregationDescriptor<T>, IScriptedMetricAggregation, T>
 		, IScriptedMetricAggregation

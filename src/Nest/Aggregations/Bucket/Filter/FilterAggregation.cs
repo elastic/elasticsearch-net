@@ -10,6 +10,7 @@ namespace Nest
 		QueryContainer Filter { get; set; }
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class FilterAggregation : BucketAggregationBase, IFilterAggregation
 	{
 		public QueryContainer Filter { get; set; }
@@ -21,6 +22,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Filter = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class FilterAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<FilterAggregationDescriptor<T>,IFilterAggregation, T> 
 			, IFilterAggregation 

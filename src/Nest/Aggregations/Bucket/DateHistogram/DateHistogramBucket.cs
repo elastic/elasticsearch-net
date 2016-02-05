@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public class DateHistogramItem : HistogramItem
+	public class DateHistogramBucket : HistogramBucket
 	{
 		// Get a DateTime form of the returned key
 		public DateTime Date => new DateTime(1970, 1, 1).AddMilliseconds(0 + this.Key);

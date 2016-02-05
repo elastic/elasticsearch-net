@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using Nest.Aggregations.Visitor;
+using System.Collections.Concurrent;
+
 
 namespace Nest
 {
@@ -265,6 +268,7 @@ namespace Nest
 			aggregator.WrapInContainer(container);
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
+			InjectDeserializationState(aggregator);
 			container.Meta = aggregator.Meta;
 			return container;
 		}
@@ -273,6 +277,33 @@ namespace Nest
 		{
 			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
 			new AggregationWalker().Walk(this, visitor);
+		}
+
+		internal static ConcurrentDictionary<Type, string> _cachedAggregateTypes = new ConcurrentDictionary<Type, string>();
+
+		internal static string GetAggregateTypeFor(IAggregation aggregation)
+		{
+			var aggregationType = aggregation.GetType();
+			string aggregateType;
+			if (_cachedAggregateTypes.TryGetValue(aggregationType, out aggregateType))
+				return aggregateType;
+			aggregateType = (aggregation.GetType()
+				.GetTypeInfo().GetCustomAttributes(typeof(AggregateTypeAttribute), true)
+				.FirstOrDefault() as AggregateTypeAttribute)?.Name;
+			_cachedAggregateTypes.TryAdd(aggregationType, aggregateType);
+			return aggregateType;
+		}
+
+		internal static void InjectDeserializationState(IAggregation aggregation)
+		{
+			const string key = "aggregate_type";
+			if (aggregation.Meta == null)
+				aggregation.Meta = new Dictionary<string, object>();
+			if (aggregation.Meta.ContainsKey(key))
+				throw new ArgumentException($"{key} is a NEST reserved meta key.");
+			var aggregateType = GetAggregateTypeFor(aggregation);
+			if (aggregateType != null)
+				aggregation.Meta.Add(key, aggregateType);
 		}
 	}
 
@@ -526,27 +557,29 @@ namespace Nest
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
 		/// </summary>
-		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregator, TAggregatorInterface>(
+		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregation, TAggregationInterface>(
 			string key,
-			Func<TAggregator, TAggregatorInterface> selector
-			, Action<IAggregationContainer, TAggregatorInterface> assignToProperty
+			Func<TAggregation, TAggregationInterface> selector
+			, Action<IAggregationContainer, TAggregationInterface> assignToProperty
 		)
-			where TAggregator : IAggregation, TAggregatorInterface, new()
-			where TAggregatorInterface : IAggregation
+			where TAggregation : IAggregation, TAggregationInterface, new()
+			where TAggregationInterface : IAggregation
 		{
-			var aggregator = selector(new TAggregator());
+			var aggregation = selector(new TAggregation());
+
+			AggregationContainer.InjectDeserializationState(aggregation);
 
 			//create new isolated container for new aggregator and assign to the right property
-			var container = new AggregationContainer() { Meta = aggregator.Meta };
-
-			assignToProperty(container, aggregator);
+			var container = new AggregationContainer { Meta = aggregation.Meta };
+		
+			assignToProperty(container, aggregation);
 
 			//create aggregations dictionary on `this` if it does not exist already
 			IAggregationContainer self = this;
 			if (self.Aggregations == null) self.Aggregations = new Dictionary<string, IAggregationContainer>();
 
 			//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
-			var bucket = aggregator as IBucketAggregation;
+			var bucket = aggregation as IBucketAggregation;
 			if (bucket != null && bucket.Aggregations.HasAny())
 			{
 				//make sure we copy those aggregations to the isolated container's

@@ -11,7 +11,8 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 	}
-
+	
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class MissingAggregation : BucketAggregationBase, IMissingAggregation
 	{
 		public Field Field { get; set; }
@@ -23,6 +24,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Missing = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class MissingAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<MissingAggregationDescriptor<T>,IMissingAggregation, T>
 			, IMissingAggregation 

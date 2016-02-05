@@ -1,25 +1,27 @@
 ﻿
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class FiltersBucketItem : BucketItemBase
+	public class FiltersBucket : BucketBase
 	{
-		public FiltersBucketItem() { }
-		public FiltersBucketItem(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
-
+		[JsonProperty("doc_count")]
 		public long DocCount { get; set; }
+
+		internal override bool Matches(JToken source)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
-	public class FiltersAggregate : MultiBucketAggregate<FiltersBucketItem>
+	public class FiltersAggregate : MultiBucketAggregate<FiltersBucket>
 	{
-		public FiltersAggregate() { }
-
-		public FiltersAggregate(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
-
 		public SingleBucketAggregate NamedBucket(string key) => this.Global(key);
 
-		public IList<FiltersBucketItem> AnonymousBuckets() => this.Buckets?.OfType<FiltersBucketItem>().ToList();
+		public List<FiltersBucket> AnonymousBuckets() => this.Buckets?.OfType<FiltersBucket>().ToList();
 	}
 }

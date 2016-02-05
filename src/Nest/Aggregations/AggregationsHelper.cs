@@ -42,14 +42,7 @@ namespace Nest
 
 		public KeyedValueAggregate MinBucket(string key) => this.TryGet<KeyedValueAggregate>(key);
 
-		public ScriptedMetricAggregate ScriptedMetric(string key)
-		{
-			var valueMetric = this.TryGet<ValueAggregate>(key);
-
-			return valueMetric != null
-				? new ScriptedMetricAggregate { _Value = valueMetric.Value, Meta = valueMetric.Meta }
-				: this.TryGet<ScriptedMetricAggregate>(key);
-		}
+		public ScriptedMetricAggregate ScriptedMetric(string key) => this.TryGet<ScriptedMetricAggregate>(key);
 
 		public StatsAggregate Stats(string key) => this.TryGet<StatsAggregate>(key);
 
@@ -63,17 +56,7 @@ namespace Nest
 
 		public TopHitsAggregate TopHits(string key) => this.TryGet<TopHitsAggregate>(key);
 
-		public FiltersAggregate Filters(string key)
-		{
-			var named = this.TryGet<FiltersAggregate>(key);
-			if (named != null)
-				return named;
-
-			var anonymous = this.TryGet<BucketAggregateData>(key);
-			return anonymous != null 
-				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
-				: null;
-		}
+		public FiltersAggregate Filters(string key) => this.TryGet<FiltersAggregate>(key);
 
 		public SingleBucketAggregate Global(string key) => this.TryGet<SingleBucketAggregate>(key);
 
@@ -89,86 +72,29 @@ namespace Nest
 
 		public SingleBucketAggregate Sampler(string key) => this.TryGet<SingleBucketAggregate>(key);
 
-		public SignificantTermsAggregate SignificantTerms(string key)
-		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
-			return bucket == null
-				? null
-				: new SignificantTermsAggregate
-				{
-					DocCount = bucket.DocCount,
-					Buckets = bucket.Items.OfType<SignificantTermsItem>().ToList(),
-					Meta = bucket.Meta
-				};
-		}
+		public SignificantTermsAggregate SignificantTerms(string key) => this.TryGet<SignificantTermsAggregate>(key);
 
-		public TermsAggregate Terms(string key)
-		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
-			return bucket == null
-				? null
-				: new TermsAggregate
-				{
-					DocCountErrorUpperBound = bucket.DocCountErrorUpperBound,
-					SumOtherDocCount = bucket.SumOtherDocCount,
-					Buckets = bucket.Items.OfType<KeyedBucketItem>().ToList(),
-					Meta = bucket.Meta
-				};
-		}
+		public TermsAggregate Terms(string key) => this.TryGet<TermsAggregate>(key);
 
-		public MultiBucketAggregate<HistogramItem> Histogram(string key)
-		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
-			return bucket == null
-				? null
-				: new MultiBucketAggregate<HistogramItem>
-				{
-					Buckets = bucket.Items.OfType<HistogramItem>()
-						.Concat(bucket.Items.OfType<KeyedBucketItem>()
-							.Select(x =>
-								new HistogramItem
-								{
-									Key = long.Parse(x.Key),
-									KeyAsString = x.Key,
-									DocCount = x.DocCount.GetValueOrDefault(0),
-									Aggregations = x.Aggregations
-								}
-							)
-						)
-						.ToList(),
-					Meta = bucket.Meta
-				};
-		}
+		public MultiBucketAggregate<HistogramBucket> Histogram(string key) => this.TryGet<MultiBucketAggregate<HistogramBucket>>(key);
 
-		public MultiBucketAggregate<KeyedBucketItem> GeoHash(string key) => GetBucket<KeyedBucketItem>(key);
+		public MultiBucketAggregate<KeyedBucket> GeoHash(string key) => this.TryGet<MultiBucketAggregate<KeyedBucket>>(key);
 
-		public MultiBucketAggregate<RangeItem> Range(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> Range(string key) => this.TryGet<MultiBucketAggregate<RangeBucket>>(key);
 
-		public MultiBucketAggregate<RangeItem> DateRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> DateRange(string key) => this.TryGet<MultiBucketAggregate<RangeBucket>>(key);
 
-		public MultiBucketAggregate<RangeItem> IpRange(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> IpRange(string key) => this.TryGet<MultiBucketAggregate<RangeBucket>>(key);
 
-		public MultiBucketAggregate<RangeItem> GeoDistance(string key) => GetBucket<RangeItem>(key);
+		public MultiBucketAggregate<RangeBucket> GeoDistance(string key) => this.TryGet<MultiBucketAggregate<RangeBucket>>(key);
 
-		public MultiBucketAggregate<DateHistogramItem> DateHistogram(string key) => GetBucket<DateHistogramItem>(key);
+		public MultiBucketAggregate<DateHistogramBucket> DateHistogram(string key) => this.TryGet<MultiBucketAggregate<DateHistogramBucket>>(key);
 
 		private TAggregation TryGet<TAggregation>(string key)
 			where TAggregation : class, IAggregate
 		{
 			IAggregate agg;
 			return this.Aggregations.TryGetValue(key, out agg) ? agg as TAggregation : null;
-		}
-
-		private MultiBucketAggregate<TBucketItem> GetBucket<TBucketItem>(string key)
-			where TBucketItem : IBucketItem
-		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
-			if (bucket == null) return null;
-			return new MultiBucketAggregate<TBucketItem>
-			{
-				Buckets = bucket.Items.OfType<TBucketItem>().ToList(),
-				Meta = bucket.Meta
-			};
 		}
 	}
 }

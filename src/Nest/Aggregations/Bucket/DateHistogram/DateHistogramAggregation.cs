@@ -46,6 +46,7 @@ namespace Nest
 		DateTime? Missing { get; set; }
     }
 
+	[AggregateType(typeof(MultiBucketAggregate<DateHistogramBucket>))]
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
 		private string _format;
@@ -82,6 +83,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.DateHistogram = this;
 	}
 
+	[AggregateType(typeof(MultiBucketAggregate<DateHistogramBucket>))]
 	public class DateHistogramAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregation, T>
 			, IDateHistogramAggregation

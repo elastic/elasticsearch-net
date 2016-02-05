@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MinAggregation>))]
 	public interface IMinAggregation : IMetricAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MinAggregation : MetricAggregationBase, IMinAggregation
 	{
 		internal MinAggregation() { }
@@ -15,6 +16,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Min = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class MinAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<MinAggregationDescriptor<T>, IMinAggregation, T>
 			, IMinAggregation 

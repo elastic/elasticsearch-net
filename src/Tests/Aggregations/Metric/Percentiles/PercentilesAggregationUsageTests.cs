@@ -70,8 +70,8 @@ namespace Tests.Aggregations.Metric.Percentiles
 			response.IsValid.Should().BeTrue();
 			var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
-			commitsOutlier.Items.Should().NotBeNullOrEmpty();
-			foreach (var item in commitsOutlier.Items)
+			commitsOutlier.Values.Should().NotBeEmpty();
+			foreach (var item in commitsOutlier.Values)
 				item.Value.Should().BeGreaterThan(0);
 		}
 	}

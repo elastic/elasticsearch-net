@@ -12,6 +12,7 @@ namespace Nest
 		Field Path { get; set;}
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class NestedAggregation : BucketAggregationBase, INestedAggregation
 	{
 		public Field Path { get; set; }
@@ -23,6 +24,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Nested = this;
 	}
 
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public class NestedAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<NestedAggregationDescriptor<T>, INestedAggregation, T>
 			, INestedAggregation 

@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<CumulativeSumAggregation>))]
 	public interface ICumulativeSumAggregation : IPipelineAggregation { }
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class CumulativeSumAggregation
 		: PipelineAggregationBase, ICumulativeSumAggregation
 	{
@@ -17,6 +18,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.CumulativeSum = this;
 	}
 
+	[AggregateType(typeof(ValueAggregate))]
 	public class CumulativeSumAggregationDescriptor
 		: PipelineAggregationDescriptorBase<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation, SingleBucketsPath>
 		, ICumulativeSumAggregation

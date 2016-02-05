@@ -6,6 +6,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MinBucketAggregation>))]
 	public interface IMinBucketAggregation : IPipelineAggregation { }
 
+	[AggregateType(typeof(KeyedValueAggregate))]
 	public class MinBucketAggregation
 		: PipelineAggregationBase, IMinBucketAggregation
 	{
@@ -17,6 +18,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.MinBucket = this;
 	}
 
+	[AggregateType(typeof(KeyedValueAggregate))]
 	public class MinBucketAggregationDescriptor
 		: PipelineAggregationDescriptorBase<MinBucketAggregationDescriptor, IMinBucketAggregation, SingleBucketsPath>
 		, IMinBucketAggregation

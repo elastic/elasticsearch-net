@@ -19,6 +19,7 @@ namespace Nest
 		string OtherBucketKey { get; set; } 
 	}
 
+	[AggregateType(typeof(FiltersAggregate))]
 	public class FiltersAggregation : BucketAggregationBase, IFiltersAggregation
 	{
 		public Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
@@ -47,6 +48,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Filters = this;
 	}
 
+	[AggregateType(typeof(FiltersAggregate))]
 	public class FiltersAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<FiltersAggregationDescriptor<T>, IFiltersAggregation, T>
 		, IFiltersAggregation

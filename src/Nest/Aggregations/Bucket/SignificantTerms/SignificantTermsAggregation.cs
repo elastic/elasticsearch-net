@@ -50,6 +50,7 @@ namespace Nest
 
 	}
 
+	[AggregateType(typeof(SignificantTermsAggregate))]
 	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
 	{
 		public Field Field { get; set; }
@@ -73,6 +74,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.SignificantTerms = this;
 	}
 
+	[AggregateType(typeof(SignificantTermsAggregate))]
 	public class SignificantTermsAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregation, T>
 			, ISignificantTermsAggregation

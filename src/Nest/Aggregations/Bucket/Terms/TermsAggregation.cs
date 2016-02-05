@@ -46,6 +46,7 @@ namespace Nest
 		string Missing { get; set; }
 	}
 
+	[AggregateType(typeof(TermsAggregate))]
 	public class TermsAggregation : BucketAggregationBase, ITermsAggregation
 	{
 		public Field Field { get; set; }
@@ -68,6 +69,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
 	}
 
+	[AggregateType(typeof(TermsAggregate))]
 	public class TermsAggregationDescriptor<T> 
 		: BucketAggregationDescriptorBase<TermsAggregationDescriptor<T>, ITermsAggregation, T>
 			, ITermsAggregation 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Nest
 	/// <summary>
 	/// Represents the result of an aggregation on the response
 	/// </summary>
+	[JsonObject(MemberSerialization.OptIn)]
 	[ExactContractJsonConverter(typeof(AggregateJsonConverter))]
 	public interface IAggregate
 	{

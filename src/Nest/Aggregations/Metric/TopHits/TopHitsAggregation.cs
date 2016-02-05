@@ -37,6 +37,7 @@ namespace Nest
 		bool? Version { get; set; }
 	}
 
+	[AggregateType(typeof(TopHitsAggregate))]
 	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
 	{
 		public int? From { get; set; }
@@ -56,6 +57,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.TopHits = this;
 	}
 
+	[AggregateType(typeof(TopHitsAggregate))]
 	public class TopHitsAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<TopHitsAggregationDescriptor<T>, ITopHitsAggregation, T>
 			, ITopHitsAggregation

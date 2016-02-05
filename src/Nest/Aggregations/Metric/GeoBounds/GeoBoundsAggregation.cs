@@ -10,6 +10,7 @@ namespace Nest
 		bool? WrapLongitude { get; set; }
 	}
 
+	[AggregateType(typeof(GeoBoundsAggregate))]
 	public class GeoBoundsAggregation : MetricAggregationBase, IGeoBoundsAggregation
 	{
 		public bool? WrapLongitude { get; set; }
@@ -21,6 +22,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoBounds = this;
 	}
 
+	[AggregateType(typeof(GeoBoundsAggregate))]
 	public class GeoBoundsAggregationDescriptor<T> 
 		: MetricAggregationDescriptorBase<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation, T>
 			, IGeoBoundsAggregation
