@@ -29,8 +29,7 @@ namespace Nest
 	}
 
 	// Intermediate object used for deserialization
-	// TODO we should get rid of this and refactor AggregateJsonConverter
-	internal class BucketAggregateData : IAggregate
+	public class BucketAggregate : IAggregate
 	{
 		public IEnumerable<IBucketItem> Items { get; set; }
 		public long? DocCountErrorUpperBound { get; set; }

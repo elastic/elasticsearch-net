@@ -69,7 +69,7 @@ namespace Nest
 			if (named != null)
 				return named;
 
-			var anonymous = this.TryGet<BucketAggregateData>(key);
+			var anonymous = this.TryGet<BucketAggregate>(key);
 			return anonymous != null 
 				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
 				: null;
@@ -91,7 +91,7 @@ namespace Nest
 
 		public SignificantTermsAggregate SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
+			var bucket = this.TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
 				: new SignificantTermsAggregate
@@ -104,7 +104,7 @@ namespace Nest
 
 		public TermsAggregate Terms(string key)
 		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
+			var bucket = this.TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
 				: new TermsAggregate
@@ -118,7 +118,7 @@ namespace Nest
 
 		public MultiBucketAggregate<HistogramItem> Histogram(string key)
 		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
+			var bucket = this.TryGet<BucketAggregate>(key);
 			return bucket == null
 				? null
 				: new MultiBucketAggregate<HistogramItem>
@@ -162,7 +162,7 @@ namespace Nest
 		private MultiBucketAggregate<TBucketItem> GetBucket<TBucketItem>(string key)
 			where TBucketItem : IBucketItem
 		{
-			var bucket = this.TryGet<BucketAggregateData>(key);
+			var bucket = this.TryGet<BucketAggregate>(key);
 			if (bucket == null) return null;
 			return new MultiBucketAggregate<TBucketItem>
 			{

@@ -211,8 +211,8 @@ namespace Nest
 			reader.Read();
 			if (reader.TokenType == JsonToken.PropertyName && (string)reader.Value == "buckets")
 			{
-				var b = this.GetBucket(reader, serializer) as BucketAggregateData;
-				return new BucketAggregateData
+				var b = this.GetBucket(reader, serializer) as BucketAggregate;
+				return new BucketAggregate
 				{
 					DocCount = docCount,
 					Items = b.Items
@@ -341,7 +341,7 @@ namespace Nest
 
 		private IAggregate GetBucket(JsonReader reader, JsonSerializer serializer)
 		{
-			var bucket = new BucketAggregateData();
+			var bucket = new BucketAggregate();
 			var property = reader.Value as string;
 			if (property == "doc_count_error_upper_bound")
 			{
