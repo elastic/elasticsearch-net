@@ -26,7 +26,7 @@ namespace Nest
 		IEnumerable<IRange> Ranges { get; set; }
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
 	public class GeoDistanceAggregation : BucketAggregationBase, IGeoDistanceAggregation
 	{
 		public Field Field { get; set; }
@@ -46,7 +46,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoDistance = this;
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
 	public class GeoDistanceAggregationDescriptor<T> :
 		BucketAggregationDescriptorBase<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregation, T>
 			, IGeoDistanceAggregation

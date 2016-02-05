@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json;
 using Nest.Aggregations.Visitor;
-using Elasticsearch.Net;
 using System.Collections.Concurrent;
+
 
 namespace Nest
 {
@@ -286,8 +287,8 @@ namespace Nest
 			string aggregateType;
 			if (_cachedAggregateTypes.TryGetValue(aggregationType, out aggregateType))
 				return aggregateType;
-			aggregateType = (aggregation
-				.GetType().GetCustomAttributes(typeof(AggregateTypeAttribute), true)
+			aggregateType = (aggregation.GetType()
+				.GetTypeInfo().GetCustomAttributes(typeof(AggregateTypeAttribute), true)
 				.FirstOrDefault() as AggregateTypeAttribute)?.Name;
 			_cachedAggregateTypes.TryAdd(aggregationType, aggregateType);
 			return aggregateType;

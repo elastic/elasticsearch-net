@@ -11,8 +11,10 @@ namespace Nest
 
 		private readonly JsonSerializer _defaultSerializer;
 
+		[JsonProperty("total")]
 		public long Total { get; set; }
 
+		[JsonProperty("max_score")]
 		public double? MaxScore { get; set; }
 
 		public TopHitsAggregate() { }

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Nest
 {
 	public class KeyedValueAggregate : ValueAggregate
 	{
-		public IList<string> Keys { get; set; }
+		[JsonProperty("keys")]
+		public List<string> Keys { get; set; }
 	}
 }

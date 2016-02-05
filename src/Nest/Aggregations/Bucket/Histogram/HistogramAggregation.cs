@@ -36,7 +36,7 @@ namespace Nest
 		double? Missing { get; set; }
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<HistogramItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<HistogramBucket>))]
 	public class HistogramAggregation : BucketAggregationBase, IHistogramAggregation
 	{
 		public Field Field { get; set; }
@@ -56,7 +56,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Histogram = this;
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<HistogramItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<HistogramBucket>))]
 	public class HistogramAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<HistogramAggregationDescriptor<T>, IHistogramAggregation, T>, IHistogramAggregation
 		where T : class

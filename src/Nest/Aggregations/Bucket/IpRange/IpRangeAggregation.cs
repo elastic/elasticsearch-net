@@ -17,7 +17,7 @@ namespace Nest
 		IEnumerable<IIpRange> Ranges { get; set; }
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
 	public class IpRangeAggregation : BucketAggregationBase, IIpRangeAggregation
 	{
 		public Field Field { get; set; }
@@ -30,7 +30,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.IpRange = this;
 	}
 
-	[AggregateType(typeof(MultiBucketAggregate<RangeItem>))]
+	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
 	public class IpRangeAggregationDescriptor<T> : 
 		BucketAggregationDescriptorBase<IpRangeAggregationDescriptor<T>,IIpRangeAggregation, T>
 			, IIpRangeAggregation 

@@ -39,6 +39,16 @@ namespace Tests.Aggregations.Bucket.Terms
 						{
 							new { _term = "asc" },
 							new { _count = "desc" }
+						},
+						aggs = new
+						{
+							commit_stats = new
+							{
+								extended_stats = new
+								{
+									field = "numberOfCommits"
+								}
+							}
 						}
 					}
 				}
@@ -60,6 +70,11 @@ namespace Tests.Aggregations.Bucket.Terms
 					.Order(TermsOrder.CountDescending)
 					.Meta(m => m
 						.Add("foo", "bar")
+					)
+					.Aggregations(aa => aa
+						.ExtendedStats("commit_stats", es => es
+							.Field(p => p.NumberOfCommits)
+						)
 					)
 				)
 			);
@@ -85,7 +100,8 @@ namespace Tests.Aggregations.Bucket.Terms
 					Meta = new Dictionary<string, object>
 					{
 						{ "foo", "bar" }
-					}
+					},
+					Aggregations = new ExtendedStatsAggregation("commit_stats", "numberOfCommits")
 				}
 			};
 
@@ -94,15 +110,15 @@ namespace Tests.Aggregations.Bucket.Terms
 			response.IsValid.Should().BeTrue();
 			var states = response.Aggs.Terms("states");
 			states.Should().NotBeNull();
-			states.DocCountErrorUpperBound.Should().HaveValue();
-			states.SumOtherDocCount.Should().HaveValue();
-			foreach (var item in states.Buckets)
-			{
-				item.Key.Should().NotBeNullOrEmpty();
-				item.DocCount.Should().BeGreaterOrEqualTo(1);
-			}
 			states.Meta.Should().NotBeNull().And.HaveCount(1);
 			states.Meta["foo"].Should().Be("bar");
+			foreach (var bucket in states.Buckets)
+			{
+				bucket.Key.Should().NotBeNullOrEmpty();
+				bucket.DocCount.Should().BeGreaterOrEqualTo(1);
+				var commitStats = bucket.ExtendedStats("commit_stats");
+				commitStats.Should().NotBeNull();
+			}
 		}
 	}
 }
