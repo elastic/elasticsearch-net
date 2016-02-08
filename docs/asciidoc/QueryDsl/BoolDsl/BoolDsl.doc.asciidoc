@@ -1,4 +1,4 @@
-Writing boolean queries can grow rather verbose rather quickly using the querydsl e.g 
+Writing boolean queries can grow rather verbose rather quickly using the querydsl e.g
 
 [source, csharp]
 ----
@@ -13,12 +13,12 @@ var searchResults = this.Client.Search<Project>(s => s
 				)
 			);
 ----
-now this is just a single bool with only two clauses, imagine multiple nested bools this quickly becomes an excersise in 
+now this is just a single bool with only two clauses, imagine multiple nested bools this quickly becomes an excersise in
 hadouken indenting
 [[indent]]
 .hadouken indenting example
-image::http://i.imgur.com/BtjZedW.jpg[dead indent]	
-For this reason NEST introduces operator overloading so complex bool queries become easier to write, the previous example will become. 
+image::http://i.imgur.com/BtjZedW.jpg[dead indent]
+For this reason NEST introduces operator overloading so complex bool queries become easier to write, the previous example will become.
 
 [source, csharp]
 ----
@@ -36,10 +36,8 @@ searchResults = this.Client.Search<Project>(new SearchRequest<Project>
 		|| new TermQuery { Field = Field<Project>(p=>p.Name), Value = "y" }
 });
 ----
-A naive implementation of operator overloading would rewrite 
-`term 
-term 
-term` to 
+A naive implementation of operator overloading would rewrite
+`term&&term&&term` to
 bool
 must
 term
@@ -47,23 +45,23 @@ bool
 must
 term
 term
-As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and 
+As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and
 join them together to become a single bool query
 bool
-must 
+must
 term
 term
 term
 
-The bool DSL offers also a short hand notation to mark a query as a must_not using ! 
+The bool DSL offers also a short hand notation to mark a query as a must_not using !
 
-And to mark a query as a filter using + 
+And to mark a query as a filter using +
 
-Both of these can be combined with ands to a single bool query  
+Both of these can be combined with ands to a single bool query
 
 When combining multiple queries some or all possibly marked as must_not or filter NEST still combines to a single bool query
 bool
-must 
+must
 term
 term
 term
@@ -83,14 +81,9 @@ Assert(
 c.Bool.Must.Should().HaveCount(3);
 c.Bool.MustNot.Should().HaveCount(1);
 ----
-Even more involved `term 
-term 
-term 
-!term 
-+term 
-+term` still only results in a single bool query:
+Even more involved `term&&term&&term&&!term&&+term&&+term` still only results in a single bool query:
 bool
-must 
+must
 term
 term
 term
@@ -101,9 +94,8 @@ term
 term
 
 You can still mix and match actual bool queries with the bool dsl e.g
-`bool(must=term, term, term) 
-!term`
-it would still merge into a single bool query. 
+`bool(must=term, term, term)&&!term`
+it would still merge into a single bool query.
 
 [source, csharp]
 ----

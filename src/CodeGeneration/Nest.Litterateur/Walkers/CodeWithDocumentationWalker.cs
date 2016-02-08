@@ -7,6 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis.Formatting;
+#if !DOTNETCORE
+using Microsoft.CodeAnalysis.MSBuild;
+#endif
+using Microsoft.CodeAnalysis.Text;
 using Nest.Litterateur.Documentation.Blocks;
 
 namespace Nest.Litterateur.Walkers
@@ -40,7 +45,7 @@ namespace Nest.Litterateur.Walkers
 				_firstVisit = false;
 				var leadingTabs = new String('\t', 2 + ClassDepth);
 				_code = node.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString()
-					.Replace(leadingTabs, "");
+					.Replace(leadingTabs, string.Empty);
 
 				var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 
@@ -62,6 +67,35 @@ namespace Nest.Litterateur.Walkers
 			}
 
 			base.Visit(node);
+		}
+
+		public override void VisitBlock(BlockSyntax node)
+		{
+			if (_firstVisit)
+			{
+				_firstVisit = false;
+				foreach (var statement in node.Statements)
+				{
+					var leadingTabs = new string('\t', 3 + ClassDepth);
+					SyntaxNode formattedStatement = statement;
+
+					_code = formattedStatement.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString().Replace(leadingTabs, string.Empty);
+
+					var nodeLine = formattedStatement.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+
+					var line = _lineNumberOverride ?? nodeLine;
+
+					var codeBlocks = Regex.Split(_code, @"\/\*\*.*?\*\/", RegexOptions.Singleline)
+						.Select(b => b.TrimStart('\r', '\n').TrimEnd('\r', '\n', '\t'))
+						.Where(b => !string.IsNullOrEmpty(b) && b != ";")
+						.Select(b => new CodeBlock(b, line))
+						.ToList();
+
+					this.Blocks.AddRange(codeBlocks);
+				}
+
+				base.Visit(node);
+			}
 		}
 
 		public override void VisitXmlText(XmlTextSyntax node)

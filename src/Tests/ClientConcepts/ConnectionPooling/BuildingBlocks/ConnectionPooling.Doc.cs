@@ -27,12 +27,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var node = pool.Nodes.First();
 			node.Uri.Port.Should().Be(9201);
 
-			/** This type of pool is hardwired to optout out sniffing*/
+			/** This type of pool is hardwired to opt out of sniffing*/
 			pool.SupportsReseeding.Should().BeFalse();
 			/** and pinging */
 			pool.SupportsPinging.Should().BeFalse();
 
-			/** When you use the low ceremony ElasticClient constructor that takes a single Uri
+			/** When you use the low ceremony ElasticClient constructor that takes a single Uri,
 			* We default to this SingleNodeConnectionPool */
 			var client = new ElasticClient(uri);
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
@@ -54,14 +54,14 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		{
 			var uris = Enumerable.Range(9200, 5).Select(p => new Uri("http://localhost:" + p));
 
-			/** a connection pool can be seeded using an enumerable of `Uri` */
+			/** a connection pool can be seeded using an enumerable of `Uri`s */
 			var pool = new StaticConnectionPool(uris);
 
 			/** Or using an enumerable of `Node` */
 			var nodes = uris.Select(u=>new Node(u));
 			pool = new StaticConnectionPool(nodes);
 
-			/** This type of pool is hardwirted to optout out sniffing*/
+			/** This type of pool is hardwired to opt out of sniffing*/
 			pool.SupportsReseeding.Should().BeFalse();
 
 			/** but supports pinging when enabled */
@@ -76,7 +76,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 		/** == SniffingConnectionPool 
 		* A subclass of StaticConnectionPool that allows itself to be reseeded at run time.
-		* It comes with a very minor overhead of a ReaderWriterLock to ensure thread safety.
+		* It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 		*/
 		[U] public void Sniffing()
 		{
@@ -93,19 +93,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var nodes = uris.Select(u=>new Node(u));
 			pool = new SniffingConnectionPool(nodes);
 
-			/** This type of pool is hardwired to opt out of sniffing*/
+			/** This type of pool is hardwired to opt in to sniffing*/
 			pool.SupportsReseeding.Should().BeTrue();
 
-			/** but supports pinging when enabled */
+			/** and pinging */
 			pool.SupportsPinging.Should().BeTrue();
 
-			/** To create a client using this siffing connection pool pass 
+			/** To create a client using the sniffing connection pool pass 
 			* the connection pool to the connectionsettings you pass to ElasticClient
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SniffingConnectionPool>();
 		}
-
-
 	}
 }

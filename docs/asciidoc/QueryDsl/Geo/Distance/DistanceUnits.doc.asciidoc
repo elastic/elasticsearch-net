@@ -1,6 +1,6 @@
 #  Distance Units
-Whenever distances need to be specified, e.g. for a geo distance query, the distance unit can be specified 
-as a double number representing distance in meters, as a new instance of a `Distance`, or as a string 
+Whenever distances need to be specified, e.g. for a geo distance query, the distance unit can be specified
+as a double number representing distance in meters, as a new instance of a `Distance`, or as a string
 of the form number and distance unit e.g. `"2.72km"`
 
 ## Using Distance units in NEST
@@ -22,7 +22,7 @@ Expect("25.0m")
 	.WhenSerializing(unitComposedWithUnits);
 ----
 ### Implicit conversion
-Alternatively a distance unit `string` can be assigned to a `Distance`, resulting in an implicit conversion to a new `Distance` instance. 
+Alternatively a distance unit `string` can be assigned to a `Distance`, resulting in an implicit conversion to a new `Distance` instance.
 If no `DistanceUnit` is specified, the default distance unit is meters
 
 [source, csharp]

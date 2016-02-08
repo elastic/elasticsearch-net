@@ -1,4 +1,4 @@
-= 
+= Keeping track of nodes
 
 
 [source, csharp]
@@ -23,8 +23,8 @@ Is resurrected is true on first usage, hints to the transport that a ping might 
 ----
 node.IsResurrected.Should().BeTrue();
 ----
-When instantiating your connection pool you could switch these to false to initialize the client to 
-a known cluster topology.  
+When instantiating your connection pool you could switch these to false to initialize the client to
+a known cluster topology.
 
 passing a node with a path should be preserved. Sometimes an elasticsearch node lives behind a proxy 
 

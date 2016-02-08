@@ -1,10 +1,10 @@
-# Strongly typed field access 
+# Strongly typed field access
 
 Several places in the elasticsearch API expect the path to a field from your original source document as a string.
-NEST allows you to use C# expressions to strongly type these field path strings. 
+NEST allows you to use C# expressions to strongly type these field path strings.
 These expressions are assigned to a type called `Field` and there are several ways to create a instance of that type
 
-Using the constructor directly is possible but rather involved 
+Using the constructor directly is possible but rather involved
 
 [source, csharp]
 ----
@@ -23,7 +23,7 @@ Expect("name")
 				.WhenSerializing(fieldExpression)
 				.WhenSerializing(fieldString);
 ----
-Therefore you can also implicitly convert strings and expressions to Field's 
+Therefore you can also implicitly convert strings and expressions to Field's
 
 [source, csharp]
 ----
@@ -42,7 +42,7 @@ Expect("name")
 				.WhenSerializing(fieldExpression)
 				.WhenSerializing(fieldString);
 ----
-to ease creating Field's from expressions there is a static Property class you can use 
+to ease creating Field's from expressions there is a static Property class you can use
 
 [source, csharp]
 ----
@@ -69,7 +69,7 @@ Expect("name")
 	.WhenSerializing(fieldString)
 	.WhenSerializing(fieldExpression);
 ----
-By default NEST will camelCase all the field names to be more javascripty 
+By default NEST will camelCase all the field names to be more javascripty
 
 using DefaultFieldNameInferrer() on ConnectionSettings you can change this behavior 
 
@@ -97,7 +97,7 @@ setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 ----
 setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 ----
-Complex field name expressions 
+Complex field name expressions
 
 You can follow your property expression to any depth, here we are traversing to the LeadDeveloper's (Person) FirstName 
 
@@ -177,7 +177,7 @@ Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.
 ----
 
 Suffixes can be appended to expressions. This is useful in cases where you want to apply the same suffix
-to a list of fields 
+to a list of fields
 
 
 
@@ -211,12 +211,28 @@ When using NEST's property attributes you can specify a new name for the propert
 
 [source, csharp]
 ----
+public class BuiltIn
+{
+	[String(Name = "naam")]
+	public string Name { get; set; }
+}
+----
+[source, csharp]
+----
 Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
 
 Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
 Here we ask the default JsonNetSerializer and it takes JsonProperty into account
 
+[source, csharp]
+----
+public class SerializerSpecific
+{
+	[JsonProperty("nameInJson")]
+	public string Name { get; set; }
+}
+----
 [source, csharp]
 ----
 Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
@@ -226,11 +242,35 @@ If both are specified NEST takes precedence though
 
 [source, csharp]
 ----
+public class Both
+{
+	[String(Name = "naam")]
+	[JsonProperty("nameInJson")]
+	public string Name { get; set; }
+}
+----
+[source, csharp]
+----
 Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
 Expect(new
 			{
 				naam = "Martijn Laarman"
 			}).WhenSerializing(new Both { Name = "Martijn Laarman" });
+----
+[source, csharp]
+----
+class A { public C C { get; set; } }
+----
+[source, csharp]
+----
+class B { public C C { get; set; } }
+----
+[source, csharp]
+----
+class C
+{
+	public string Name { get; set; }
+}
 ----
 Resolving field names is cached but this is per connection settings
 
@@ -290,9 +330,51 @@ To wrap up lets showcase the precedence that field names are inferred
 4. Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
 In the following example we have a class where each case wins
 
+[source, csharp]
+----
+class Precedence
+{
+----
+Eventhough this property has a NEST property mapping and a JsonProperty attribute
+We are going to provide a hard rename for it on ConnectionSettings later that should win.
 
-Here we create a custom converter that renames any property named `AskSerializer` to `ask`
+[source, csharp]
+----
+[String(Name = "renamedIgnoresNest")]
+	[JsonProperty("renamedIgnoresJsonProperty")]
+	public string RenamedOnConnectionSettings { get; set; }
+----
+This property has both a NEST attribute and a JsonProperty, NEST should win.
 
+[source, csharp]
+----
+[String(Name = "nestAtt")]
+	[JsonProperty("jsonProp")]
+	public string NestAttribute { get; set; }
+----
+We should take the json property into account by itself 
+
+[source, csharp]
+----
+[JsonProperty("jsonProp")]
+	public string JsonProperty { get; set; }
+----
+This property we are going to special case in our custom serializer to resolve to `ask` 
+
+[source, csharp]
+----
+[JsonProperty("dontaskme")]
+	public string AskSerializer { get; set; }
+----
+We are going to register a DefaultFieldNameInferrer on ConnectionSettings 
+that will uppercase all properties. 
+
+[source, csharp]
+----
+public string DefaultFieldNameInferrer { get; set; }
+
+}
+----
 [source, csharp]
 ----
 var usingSettings = WithConnectionSettings(s => s

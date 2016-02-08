@@ -1,5 +1,5 @@
-== Request pipeline
-Every request is executed in the context of `RequestPipeline` when you are using the default `ITransport` implementation.
+= Request pipeline
+Every request is executed in the context of `RequestPipeline` when using the default `ITransport` implementation.
 
 
 [source, csharp]
@@ -34,7 +34,7 @@ which can be passed to the transport when instantiating a client
 ----
 var transport = new Transport<ConnectionSettings>(settings, requestPipelineFactory, DateTimeProvider.Default, new MemoryStreamFactory());
 ----
-this allows you to have requests executed on your own custom request pipeline 
+this allows you to have requests executed on your own custom request pipeline
 
 [source, csharp]
 ----

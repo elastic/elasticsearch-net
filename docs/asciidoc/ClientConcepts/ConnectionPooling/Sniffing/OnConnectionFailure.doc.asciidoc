@@ -1,5 +1,5 @@
-== Sniffing on connection failure 
-Sniffing on connection is enabled by default when using a connection pool that allows reseeding. 
+== Sniffing on connection failure
+Sniffing on connection is enabled by default when using a connection pool that allows reseeding.
 The only IConnectionPool we ship that allows this is the SniffingConnectionPool.
 This can be very handy to force a refresh of the pools known healthy node by inspecting elasticsearch itself.
 A sniff tries to get the nodes by asking each currently known node until one response.
