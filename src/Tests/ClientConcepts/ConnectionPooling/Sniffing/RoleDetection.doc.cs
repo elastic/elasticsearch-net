@@ -77,6 +77,36 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			};
 			await audit.TraceStartup();
 		}
+		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task DetectsFqdn()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Sniff(s => s.SucceedAlways()
+					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
+				)
+				.SniffingConnectionPool()
+				.AllDefaults()
+			)
+			{
+				AssertPoolBeforeCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(10);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+					pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
+				},
+
+				AssertPoolAfterCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(8);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+					pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
+				}
+			};
+			await audit.TraceStartup();
+		}
 	}
 
 	[CollectionDefinition(IntegrationContext.SniffRoleDetection)]

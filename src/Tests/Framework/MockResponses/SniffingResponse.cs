@@ -10,12 +10,12 @@ namespace Tests.Framework.MockResponses
 	{
 		private static string ClusterName => "elasticsearch-test-cluster";
 
-		public static byte[] Create(IEnumerable<Node> nodes)
+		public static byte[] Create(IEnumerable<Node> nodes, bool randomFqdn = false)
 		{
 			var response = new
 			{
 				cluster_name = ClusterName,
-				nodes = SniffResponseNodes(nodes)
+				nodes = SniffResponseNodes(nodes, randomFqdn)
 			};
 			using (var ms = new MemoryStream())
 			{
@@ -23,20 +23,21 @@ namespace Tests.Framework.MockResponses
 				return ms.ToArray();
 			}
 		}
-		private static IDictionary<string, object> SniffResponseNodes(IEnumerable<Node> nodes) =>
+		private static IDictionary<string, object> SniffResponseNodes(IEnumerable<Node> nodes, bool randomFqdn) =>
 			(from node in nodes
 			let id = string.IsNullOrEmpty(node.Id) ? Guid.NewGuid().ToString("N").Substring(0, 8) : node.Id
 			let name = string.IsNullOrEmpty(node.Name) ? Guid.NewGuid().ToString("N").Substring(0, 8) : node.Name
 			select new { id, name, node })
-			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name));
+			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, randomFqdn));
 
-		private static object CreateNodeResponse(Node node, string name)
+		private static object CreateNodeResponse(Node node, string name, bool randomFqdn)
 		{
+			var fqdn = randomFqdn ? $"fqdn{node.Uri.Port}/" : "";
 			var nodeResponse = new
 			{
 				name = name,
 				transport_address = $"127.0.0.1:{node.Uri.Port + 1000}]",
-				http_address = $"127.0.0.1:{node.Uri.Port}",
+				http_address = $"{fqdn}127.0.0.1:{node.Uri.Port}",
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
 				version = TestClient.Configuration.ElasticsearchVersion,

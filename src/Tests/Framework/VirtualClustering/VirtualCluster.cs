@@ -14,11 +14,21 @@ namespace Tests.Framework
 		public List<IClientCallRule> ClientCallRules { get; } = new List<IClientCallRule>();
 		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
 
+		private bool _sniffReturnsFqdn = false;
+		public bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
+			
+
 		public IReadOnlyList<Node> Nodes => _nodes;
 
 		public VirtualCluster(IEnumerable<Node> nodes)
 		{
 			this._nodes = nodes.ToList();
+		}
+
+		public VirtualCluster SniffShouldReturnFqdn()
+		{
+			_sniffReturnsFqdn = true;
+			return this;
 		}
 
 		public VirtualCluster MasterEligible(params int[] ports)

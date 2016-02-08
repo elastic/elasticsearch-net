@@ -53,7 +53,7 @@ namespace Tests.Framework
 						this._cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => this.UpdateCluster(r.NewClusterState),
-						() => SniffResponse.Create(this._cluster.Nodes)
+						() => SniffResponse.Create(this._cluster.Nodes, this._cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
