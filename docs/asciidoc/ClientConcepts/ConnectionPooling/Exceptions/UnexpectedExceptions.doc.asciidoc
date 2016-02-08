@@ -1,7 +1,7 @@
-== Unexpected exceptions 
+== Unexpected exceptions
 When a client call throws an exception that the IConnction can not handle, this exception will bubble
 out the client as an UnexpectedElasticsearchClientException, regardless whether the client is configured to throw or not.
-An IConnection is in charge of knowning what exceptions it can recover from or not. The default IConnection that is based on WebRequest can and 
+An IConnection is in charge of knowning what exceptions it can recover from or not. The default IConnection that is based on WebRequest can and
 will recover from WebExceptions but others will be grounds for immediately exiting the pipeline.
 
 [source, csharp]
@@ -33,10 +33,10 @@ e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 e.InnerException.Should().NotBeNull();
 e.InnerException.Message.Should().Be("boom!");
 ----
-Sometimes an unexpected exception happens further down in the pipeline, this is why we 
-wrap them inside an UnexpectedElasticsearchClientException so that information about where 
+Sometimes an unexpected exception happens further down in the pipeline, this is why we
+wrap them inside an UnexpectedElasticsearchClientException so that information about where
 in the pipeline the unexpected exception is not lost, here a call to 9200 fails using a webexception.
-It then falls over to 9201 which throws an hard exception from within IConnection. We assert that we 
+It then falls over to 9201 which throws an hard exception from within IConnection. We assert that we
 can still see the audit trail for the whole coordinated request.
 
 [source, csharp]
@@ -94,28 +94,12 @@ audit = await audit.TraceUnexpectedException(
 	(e) =>
 	{
 		e.FailureReason.Should().Be(PipelineFailure.Unexpected);
-----
-InnerException is the exception that brought the request down 
-
-[source, csharp]
-----
 e.InnerException.Should().NotBeNull();
 		e.InnerException.Message.Should().Be("boom!");
-----
-The hard exception that happened on ping is still available though 
-
-[source, csharp]
-----
 e.SeenExceptions.Should().NotBeEmpty();
 		var pipelineException = e.SeenExceptions.First();
 		pipelineException.FailureReason.Should().Be(PipelineFailure.PingFailure);
 		pipelineException.InnerException.Message.Should().Be("ping exception");
-----
-Seen exception is hard to relate back to a point in time, the exception is also 
-available on the audit trail
-
-[source, csharp]
-----
 var pingException = e.AuditTrail.First(a => a.Event == AuditEvent.PingFailure).Exception;
 		pingException.Should().NotBeNull();
 		pingException.Message.Should().Be("ping exception");

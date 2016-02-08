@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Formatting;
 using Nest.Litterateur.Documentation.Blocks;
 using Nest.Litterateur.Walkers;
 
@@ -19,7 +20,7 @@ namespace Nest.Litterateur.Documentation.Files
 			{
 				if (block is TextBlock)
 				{
-					sb.AppendLine(block.Value);
+					sb.AppendLine(block.Value.Replace("&lt;", "<").Replace("&gt;", ">"));
 				}
 				else if (block is CodeBlock)
 				{
@@ -30,13 +31,13 @@ namespace Nest.Litterateur.Documentation.Files
 				}
 				else if (block is CombinedBlock)
 				{
-					RenderBlocksToDocumentation(MergeAdjecentCodeBlocks(((CombinedBlock)block).Blocks), sb);
+					RenderBlocksToDocumentation(MergeAdjacentCodeBlocks(((CombinedBlock)block).Blocks), sb);
 				}
 			}
 			return sb.ToString();
 		}
 
-		private List<IDocumentationBlock> MergeAdjecentCodeBlocks(IEnumerable<IDocumentationBlock> unmergedBlocks)
+		private List<IDocumentationBlock> MergeAdjacentCodeBlocks(IEnumerable<IDocumentationBlock> unmergedBlocks)
 		{
 			var blocks = new List<IDocumentationBlock>();
 			List<string> collapseCodeBlocks = null;
@@ -79,7 +80,7 @@ namespace Nest.Litterateur.Documentation.Files
 			var blocks = walker.Blocks.OrderBy(b => b.LineNumber).ToList();
 			if (blocks.Count <= 0) return;
 
-			var mergedBlocks = MergeAdjecentCodeBlocks(blocks);
+			var mergedBlocks = MergeAdjacentCodeBlocks(blocks);
 			var body = this.RenderBlocksToDocumentation(mergedBlocks);
 
 			var docFileName = this.CreateDocumentationLocation();

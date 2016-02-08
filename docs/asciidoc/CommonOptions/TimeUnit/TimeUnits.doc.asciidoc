@@ -1,6 +1,6 @@
 #  Time units
-Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
-as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
+Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
+as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
 
 ## Using Time units in NEST
 NEST uses `Time` to strongly type this and there are several ways to construct one.
@@ -38,7 +38,7 @@ unitTimeSpan.Milliseconds.Should().Be(1000*60*60*24*2);
 unitString.Milliseconds.Should().Be(1000*60*60*24*2);
 ----
 ### Implicit conversion
-Alternatively `string`, `TimeSpan` and `double` can be implicitly assigned to `Time` properties and variables 
+Alternatively `string`, `TimeSpan` and `double` can be implicitly assigned to `Time` properties and variables
 
 [source, csharp]
 ----

@@ -1,9 +1,9 @@
 ## Lifetimes
-If you are using an IOC container its always useful to know the best practices around the lifetime of your objects 
+If you are using an IOC container its always useful to know the best practices around the lifetime of your objects
 In general we advise folks to register their ElasticClient instances as singleton. The client is thread safe
-so sharing this instance over threads is ok. 
+so sharing this instance over threads is ok.
 Zooming in however the actual moving part that benefits the most of being static for most of the duration of your
-application is ConnectionSettings. Caches are per ConnectionSettings. 
+application is ConnectionSettings. Caches are per ConnectionSettings.
 In some applications it could make perfect sense to have multiple singleton IElasticClient's registered with different
 connectionsettings. e.g if you have 2 functionally isolated Elasticsearch clusters.
 

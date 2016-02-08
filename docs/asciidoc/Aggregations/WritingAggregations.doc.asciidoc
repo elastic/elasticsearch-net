@@ -62,20 +62,17 @@ on the request. Using LINQ's `.Aggregate()` method, each function can be applied
 
 [source, csharp]
 ----
+var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>>
 {
-	var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>>
-	{
-		a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-		a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-	};
-
-	return s => s
-		.Aggregations(aggs => aggs
-			.Children<CommitActivity>("name_of_child_agg", child => child
-.Aggregations(childAggs =>
-	aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; })
-)
+	a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+	a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+};
+return s => s
+	.Aggregations(aggs => aggs
+		.Children<CommitActivity>("name_of_child_agg", child => child
+			.Aggregations(childAggs =>
+				aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; })
 			)
-		);
-}
+		)
+	);
 ----

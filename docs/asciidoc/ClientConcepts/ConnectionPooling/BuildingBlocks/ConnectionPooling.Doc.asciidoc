@@ -2,10 +2,10 @@
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 we can use to issue client calls on.
 
-== SingleNodeConnectionPool 
+== SingleNodeConnectionPool
 The simplest of all connection pools, this takes a single `Uri` and uses that to connect to elasticsearch for all the calls
 It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
-ready to go. 
+ready to go.
 
 [source, csharp]
 ----
@@ -15,7 +15,7 @@ pool.Nodes.Should().HaveCount(1);
 var node = pool.Nodes.First();
 node.Uri.Port.Should().Be(9201);
 ----
-This type of pool is hardwired to optout out sniffing
+This type of pool is hardwired to opt out of sniffing
 
 [source, csharp]
 ----
@@ -27,7 +27,7 @@ and pinging
 ----
 pool.SupportsPinging.Should().BeFalse();
 ----
-When you use the low ceremony ElasticClient constructor that takes a single Uri
+When you use the low ceremony ElasticClient constructor that takes a single Uri,
 We default to this SingleNodeConnectionPool 
 
 [source, csharp]
@@ -58,15 +58,15 @@ client = new ElasticClient(new ConnectionSettings(pool));
 ----
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 ----
-== StaticConnectionPool 
-The static connection pool is great if you have a known small sized cluster and do no want to enable 
+== StaticConnectionPool
+The static connection pool is great if you have a known small sized cluster and do no want to enable
 sniffing to find out the cluster topology.
 
 [source, csharp]
 ----
 var uris = Enumerable.Range(9200, 5).Select(p => new Uri("http://localhost:" + p));
 ----
-a connection pool can be seeded using an enumerable of `Uri` 
+a connection pool can be seeded using an enumerable of `Uri`s 
 
 [source, csharp]
 ----
@@ -82,7 +82,7 @@ var nodes = uris.Select(u=>new Node(u));
 ----
 pool = new StaticConnectionPool(nodes);
 ----
-This type of pool is hardwirted to optout out sniffing
+This type of pool is hardwired to opt out of sniffing
 
 [source, csharp]
 ----
@@ -105,9 +105,9 @@ var client = new ElasticClient(new ConnectionSettings(pool));
 ----
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 ----
-== SniffingConnectionPool 
+== SniffingConnectionPool
 A subclass of StaticConnectionPool that allows itself to be reseeded at run time.
-It comes with a very minor overhead of a ReaderWriterLock to ensure thread safety.
+It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 
 [source, csharp]
 ----
@@ -132,19 +132,19 @@ var nodes = uris.Select(u=>new Node(u));
 ----
 pool = new SniffingConnectionPool(nodes);
 ----
-This type of pool is hardwired to opt out of sniffing
+This type of pool is hardwired to opt in to sniffing
 
 [source, csharp]
 ----
 pool.SupportsReseeding.Should().BeTrue();
 ----
-but supports pinging when enabled 
+and pinging 
 
 [source, csharp]
 ----
 pool.SupportsPinging.Should().BeTrue();
 ----
-To create a client using this siffing connection pool pass 
+To create a client using the sniffing connection pool pass 
 the connection pool to the connectionsettings you pass to ElasticClient
 
 [source, csharp]

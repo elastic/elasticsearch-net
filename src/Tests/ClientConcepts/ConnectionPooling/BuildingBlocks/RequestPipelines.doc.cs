@@ -10,8 +10,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class RequestPipelines
 	{
-		/** == Request pipeline
-		* Every request is executed in the context of `RequestPipeline` when you are using the default `ITransport` implementation.
+		/** = Request pipeline
+		* Every request is executed in the context of `RequestPipeline` when using the default `ITransport` implementation.
 		* 
 		*/
 
@@ -147,9 +147,5 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			var sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
 			sniffingPipeline.SniffPath.Should().Be("_nodes/_all/settings?flat_settings&timeout=2s");
 		}
-
-
-
-
 	}
 }

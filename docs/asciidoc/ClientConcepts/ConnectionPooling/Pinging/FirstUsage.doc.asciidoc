@@ -1,7 +1,6 @@
 == Pinging
 
-Pinging is enabled by default for the Static 
-Sniffing connection pool. 
+Pinging is enabled by default for the Static&Sniffing connection pool.
 This means that the first time a node is used or resurrected we issue a ping with a smaller (configurable) timeout.
 This allows us to fail and fallover to a healthy node faster
 

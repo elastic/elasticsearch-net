@@ -23,7 +23,18 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
 		{
 			++ClassDepth;
-			base.VisitClassDeclaration(node);
+			if (ClassDepth == 1)
+			{
+				base.VisitClassDeclaration(node);
+			}
+			// are we dealing with a simple nested POCO?
+			else if (node.ChildNodes().All(childNode => childNode is PropertyDeclarationSyntax || childNode is AttributeListSyntax))
+			{ 
+				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+				var walker = new CodeWithDocumentationWalker(ClassDepth - 2, line);
+				walker.Visit(node);
+				this.Blocks.AddRange(walker.Blocks);
+			}
 			--ClassDepth;
 		}
 
@@ -58,11 +69,11 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
 		{
 			if (!this.InsideFluentOrInitializerExample) return;
-			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
+			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations() as BlockSyntax;
 			if (syntaxNode == null) return;
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 			var walker = new CodeWithDocumentationWalker(ClassDepth, line);
-			walker.Visit(syntaxNode);
+			walker.VisitBlock(syntaxNode);
 			this.Blocks.AddRange(walker.Blocks);
 		}
 
@@ -113,13 +124,28 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitXmlText(XmlTextSyntax node)
 		{
-			var text = node.TextTokens
-				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
-				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
+			var tokens = node.TextTokens
+				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken || n.Kind() == SyntaxKind.XmlEntityLiteralToken)
+				.ToList();
 
+			var builder = new StringBuilder();
+			for (int index = 0; index < tokens.Count; index++)
+			{
+				var token = tokens[index];
+				if (token.Kind() == SyntaxKind.XmlEntityLiteralToken ||
+				    (index + 1 < tokens.Count && tokens[index + 1].Kind() == SyntaxKind.XmlEntityLiteralToken))
+				{
+					builder.Append(token.Text.Trim());
+				}
+				else
+				{
+					builder.AppendLine(token.Text.Trim());
+				}
+			}
+
+			var text = builder.ToString();
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 			this.Blocks.Add(new TextBlock(text, line));
-
 			base.VisitXmlText(node);
 		}
 

@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void MappingManually()
 		{
-			/**
+			/** ## Manual mapping
 			 * To create a mapping for our Company type, we can use the fluent API
 			 * and map each property explicitly
 			 */
@@ -76,8 +76,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/**
 			 * Which is all fine and dandy, and useful for some use cases. However in most cases
-			 * this is becomes too cumbersome of an approach, and you simply just want to map all
-			 * all the properties of your POCO in a single go.
+			 * this is becomes too cumbersome of an approach, and you simply just want to map *all*
+			 * the properties of your POCO in a single go.
 			 */
 			var expected = new
 			{
@@ -121,9 +121,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingAutoMap()
 		{
-			/**
+			/** ## Simple Automapping
 			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
-			* explicitly, we can instead call AutoMap() for each of our mappings and let NEST do all the work
+			* explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
 			*/
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
@@ -133,8 +133,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/**
 			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			* In this example, Birthday was mapped as a date, hours as a long (ticks), IsManager as a boolean, 
-			* Salary as an integer, Employees as an object, and the remaining string properties as strings.
+			* In this example, 
+			* - Birthday was mapped as a date, 
+			* - Hours was mapped as a long (ticks)
+			* - IsManager was mapped as a boolean, 
+			* - Salary as an integer 
+			* - Employees as an object
+			* and the remaining string properties as strings.
 			*/
 			var expected = new
 			{
@@ -227,7 +232,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** 
+		/** ## Automapping with overrides
 		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
 		* various options on your properties (analyzer, doc_values, etc...).  In that case, it's
 		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
@@ -279,7 +284,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** It is also possible to define your mappings using attributes on your POCOS.  When you
+		/** ## Automap with attributes
+		 * It is also possible to define your mappings using attributes on your POCOS.  When you
 		 * use attributes, you MUST use AutoMap() in order for the attributes to be applied.
 		 * Here we define the same two types but this time using attributes.
 		 */
@@ -633,8 +639,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public string JsonIgnoredProperty { get; set; }
 		}
 
-		/**
-		 * Properties on a POCO can be ignored in a couple of ways:  
+		/** == Ignoring Properties
+		 * Properties on a POCO can be ignored in a few ways:  
 		 */
 		/**
 		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
@@ -643,8 +649,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * - Using the `.InferMappingFor&lt;TDocument&gt;(Func&lt;ClrTypeMappingDescriptor&lt;TDocument&gt;, IClrTypeMapping&lt;TDocument&gt;&gt; selector)` on the connection settings
 		 */
 		/**
-		 * This example demonstrates both ways, using the attribute way to ignore the property `PropertyToIgnore` and the infer mapping way to ignore the 
-		 * property `AnotherPropertyToIgnore`
+		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used and inspected inside of `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
+		*/
+		/**
+		 * This example demonstrates all ways, using the attribute way to ignore the property `PropertyToIgnore`, the infer mapping way to ignore the 
+		 * property `AnotherPropertyToIgnore` and the json serializer specific attribute way to ignore the property `JsonIgnoredProperty`
 		 */
 		[U]
 		public void IgnoringProperties()
@@ -656,7 +665,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					)
 				);
 
-			/** Thus we do not map properties on the second occurrence of our Child property */
 			var expected = new
 			{
 				mappings = new
@@ -685,11 +693,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		/**
 		 * If you notice in our previous Company/Employee examples, the Employee type is recursive
-		 * in that itself contains a collection of type Employee.  By default, AutoMap() will only
+		 * in that itself contains a collection of type `Employee`.  By default, `.AutoMap()` will only
 		 * traverse a single depth when it encounters recursive instances like this.  Hence, in the
 		 * previous examples, the second level of Employee did not get any of its properties mapped.
 		 * This is done as a safe-guard to prevent stack overflows and all the fun that comes with
-		 * infinite recursion.  Also, in most cases, when it comes to Elasticsearch mappings, it is
+		 * infinite recursion.  Additionally, in most cases, when it comes to Elasticsearch mappings, it is
 		 * often an edge case to have deeply nested mappings like this.  However, you may still have
 		 * the need to do this, so you can control the recursion depth of AutoMap().
 		 *
@@ -780,7 +788,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
-		/**
+		/** Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
 		 * AutoMap internally implements the visitor pattern.  The default visitor `NoopPropertyVisitor` does 
