@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 			}
 			catch (HttpRequestException e)
 			{
-				HandleException(builder, e);
+				builder.Exception = e;
 			}
 
 			return builder.ToResponse();
@@ -111,23 +111,10 @@ namespace Elasticsearch.Net
 			}
 			catch (HttpRequestException e)
 			{
-				HandleException(builder, e);
+				builder.Exception = e;
 			}
 
 			return await builder.ToResponseAsync().ConfigureAwait(false);
-		}
-
-		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, HttpRequestException exception)
-			where TReturn : class
-		{
-			builder.Exception = exception;
-			var webException = exception.InnerException as WebException;
-			var response = webException?.Response as HttpWebResponse;
-			if (response != null)
-			{
-				builder.StatusCode = (int)response.StatusCode;
-				builder.Stream = response.GetResponseStream();
-			}
 		}
 
 		private static HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
