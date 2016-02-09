@@ -6,7 +6,8 @@ namespace Elasticsearch.Net
 {
 	internal class SniffResponse
 	{
-		private static Regex AddressRe { get; } = new Regex(@"^(?<fqdn>[^/]+)?/?(?<ip>[^:]+):(?<port>\d+)$");
+
+		private static Regex AddressRe { get; } = new Regex(@"^((?<fqdn>[^/]+)/)?(?<ip>[^:]+):(?<port>\d+)$");
 
 		public string cluster_name { get; set; }
 		public Dictionary<string, SniffNode> nodes { get; set; }
