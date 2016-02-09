@@ -22,7 +22,8 @@ namespace Tests.Document.Single.Index
 			Name = CallIsolatedValue,
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
-			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}}
+			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+			
 		};
 
 		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -111,17 +112,17 @@ namespace Tests.Document.Single.Index
 		public void Index()
 		{
 			var indexName = this.RandomString();
-			var project = Project.Generator.Generate(1).First();
-			var indexResult = this.Client.Index(project, f => f.Index(indexName));
+			var commitActivity = CommitActivity.Generator.Generate(1).First();
+			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
 			indexResult.Created.Should().BeTrue();
 			indexResult.Index.Should().Be(indexName);
-			indexResult.Type.Should().Be(this.Client.Infer.TypeName<Project>());
-			indexResult.Id.Should().Be(project.Name);
+			indexResult.Type.Should().Be(this.Client.Infer.TypeName<CommitActivity>());
+			indexResult.Id.Should().Be(commitActivity.Id);
 			indexResult.Version.Should().Be(1);
 
-			indexResult = this.Client.Index(project, f => f.Index(indexName));
+			indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.Created.Should().BeFalse();
