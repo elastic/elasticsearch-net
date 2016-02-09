@@ -107,9 +107,65 @@ This happens in more places e.g index settings and mappings.
 If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
 
 
-# BITS FROM RELEASE NOTES HERE
+# Attribute-based mapping
 
-Mapping
+The single `ElasticPropertyAttribute` has been broken up into individual attributes per property type.
+
+For instance, the following:
+
+```csharp
+[ElasticType(Name = "othername", IdProperty = "MyId")]
+public class Foo
+{
+  [ElasticProperty(Type = FieldType.String)]
+  public Guid MyId { get; set; }
+
+  [ElasticProperty(Type = FieldType.String)]
+  public string Name { get; set; }
+
+  [ElasticProperty(Type = FieldType.String, Analyzer = "myanalyzer", TermVector = TermVectorOption.WithOffsets)]
+  public string Description { get; set; }
+
+  [ElasticProperty(Type = FieldType.Date, Format = "mmmddyyyy")]
+  public DateTime Date { get; set; }
+
+  [ElasticProperty(Type = FieldType.Integer, Coerce = true)]
+  public int Number { get; set; }
+
+  [ElasticProperty(Type = FieldType.Nested, IncludeInParent = true)]
+  public List<Bar> Bars { get; set; }
+}
+```
+
+becomes
+
+```csharp
+[ElasticsearchType(Name = "othername", IdProperty = "MyId")]
+public class Foo
+{
+  [String]
+  public Guid MyId { get; set; }
+
+  [String]
+  public string Name { get; set; }
+
+  [String(Analyzer = "myanalyzer", TermVector = TermVectorOption.WithOffsets)]
+  public string Description { get; set; }
+
+  [Date(Format = "mmddyyyy")]
+  public DateTime Date { get; set; }
+
+  [Number(NumberType.Integer, Coerce = true, DocValues = true)]
+  public int Number { get; set; }
+
+  [Nested(IncludeInParent = true)]
+  public List<Bar> Bars { get; set; }
+}
+```
+
+Aside from a simpler and cleaner API, this allows each attribute to only reflect the options that are available for the particular type instead of exposing options that may not be relevant (as `ElasticPropertyAttribute` did).
+
+`MapFromAttributes()` has also been renamed to `AutoMap()` to better reflect that it doesn't only depend on properties being marked with attributes.  It will also infer the type based on the CLR type if no attribute is present.
 
 #Renamed Types
 
