@@ -24,7 +24,8 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
     	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x_BuildAndUnitTest&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest_BuildAndUnitTest_RunBuildBat)/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/v/NEST.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>   
+    	<td>
+    	<a href="https://www.nuget.org/packages/NEST/2.0.0-rc1"><img src="https://img.shields.io/badge/nuget-1.7.1-blue.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a></td>
     </tr>
     <tr>
     	<td><code>2.x</code></td>
@@ -32,7 +33,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td>:white_check_mark:</td>
     	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest2x_BuildTestAndIntegrate&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:Nest2x_BuildTestAndIntegrate_Fake/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net?identifier=624cebb3-a461-466f-9bac-7026c8ba615a"></a></td>
-    	<td><a href="https://www.nuget.org/packages/NEST/2.0.0-rc1"><img src="https://img.shields.io/badge/nuget-2.0.0--rc1-blue.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a>  
+    	<td><a href="https://www.nuget.org/packages/NEST"><img src="https://img.shields.io/nuget/v/NEST.svg?style=flat-square"><img src="https://img.shields.io/nuget/dt/NEST.svg?style=flat-square"></a> </td>  
     </tr>
 </table>
 

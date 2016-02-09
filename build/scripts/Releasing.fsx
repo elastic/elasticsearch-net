@@ -122,7 +122,7 @@ type Release() =
             let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()
             for frameworkDir in frameworkDirs do
                 let frameworkPdbDir = sprintf "%s/%s" srcFolder frameworkDir.Name
-                gitLink frameworkPdbDir
+                gitLink frameworkPdbDir projectName
                 let pdb = sprintf "%s.pdb" projectName
                 let frameworkPdbFile = sprintf "%s/%s" frameworkPdbDir pdb
                 if fileExists frameworkPdbFile
@@ -130,6 +130,7 @@ type Release() =
 
             // re-zip package
             ZipHelper.Zip unzippedDir package !!(sprintf "%s/**/*.*" unzippedDir)
+            DeleteDir unzippedDir
 
             // move to nuget output
             MoveFile Paths.NugetOutput package

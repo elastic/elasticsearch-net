@@ -295,6 +295,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[String(Analyzer = "keyword", NullValue = "null", Similarity = SimilarityOption.BM25)]
 			public string Name { get; set; }
 
+			[String]
+			public TimeSpan? HeadOfficeHours { get; set; }
+
 			[Object(Path = "employees", Store = false)]
 			public List<Employee> Employees { get; set; }
 		}
@@ -382,6 +385,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								analyzer = "keyword",
 								null_value = "null",
 								similarity = "BM25",
+								type = "string"
+							},
+							headOfficeHours = new
+							{
 								type = "string"
 							}
 						}
@@ -530,6 +537,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								analyzer = "keyword",
 								null_value = "null",
 								similarity = "BM25",
+								type = "string"
+							},
+							headOfficeHours = new
+							{
 								type = "string"
 							}
 						}

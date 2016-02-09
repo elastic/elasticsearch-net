@@ -24,7 +24,7 @@
     "url": "https://github.com/elastic/elasticsearch-net"
   },
   "copyright": "2014-2016 Elasticsearch BV",
-  "version": "2.0.0-rc1",
+  "version": "2.0.0",
   "compilationOptions": {
     "warningsAsErrors": false
   },
@@ -49,7 +49,9 @@
     }
   },
   "dependencies": {
-    "Elasticsearch.Net": { "target": "project" },
+    "Elasticsearch.Net": {
+      "target": "project"
+    },
     "Newtonsoft.Json": "8.0.2"
   },
   "commands": {

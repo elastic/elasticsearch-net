@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -25,14 +27,18 @@ namespace Nest
 
 				return null;
 			}
+			if (reader.TokenType == JsonToken.String)
+			{
+				return TimeSpan.Parse((string) reader.Value);
+			}
+			if (reader.TokenType == JsonToken.Integer)
+			{
+				return new TimeSpan((long) reader.Value);
+			}
 
-			if (reader.TokenType != JsonToken.Integer)
-				throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
-
-			return new TimeSpan((long)reader.Value);
+			throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
 		}
 
-		public override bool CanConvert(Type objectType) => 
-			objectType == typeof (TimeSpan) || objectType == typeof (TimeSpan?);
+		public override bool CanConvert(Type objectType) => objectType == typeof (TimeSpan) || objectType == typeof (TimeSpan?);
 	}
 }
