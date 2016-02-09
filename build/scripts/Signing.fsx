@@ -52,12 +52,14 @@ type Sign() =
         for p in DotNetProject.All do
             let name = p.ProjectName.Nuget
             let outputFolder = Paths.Output(name)
-            let dotnet51 = sprintf "%s/dotnet5.1/%s.dll" outputFolder name
-            let net45dll = sprintf "%s/net45/%s.dll" outputFolder name
             match p with
             | Project p -> 
-                validate dotnet51 name
-                validate net45dll name
+                (outputFolder |> directoryInfo).GetDirectories()
+                |> Seq.iter(fun frameworkDir ->
+                    let frameworkName = frameworkDir.Name
+                    let dll = sprintf "%s/%s/%s.dll" outputFolder frameworkName name
+                    if fileExists dll then validate dll name
+                )
 
     static member CreateKeysIfAbsent() =
         if not (directoryExists Paths.KeysFolder) then CreateDir Paths.KeysFolder

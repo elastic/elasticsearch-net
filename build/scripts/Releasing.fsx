@@ -130,6 +130,7 @@ type Release() =
 
             // re-zip package
             ZipHelper.Zip unzippedDir package !!(sprintf "%s/**/*.*" unzippedDir)
+            DeleteDir unzippedDir
 
             // move to nuget output
             MoveFile Paths.NugetOutput package
