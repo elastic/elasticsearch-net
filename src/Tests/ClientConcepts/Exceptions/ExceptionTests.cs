@@ -3,13 +3,17 @@ using FluentAssertions;
 using Nest;
 using System;
 using Tests.Framework;
+using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions
 {
+	[Collection(IntegrationContext.Indexing)]
 	public class ExceptionTests
 	{
+		public ExceptionTests(IndexingCluster cluster, EndpointUsage usage) { }
+
 		[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
