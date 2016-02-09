@@ -82,7 +82,7 @@ namespace Nest
 
 		public override string ToString()
 		{
-            return _latitude.ToString("#0.0#####") + "," + _longitude.ToString("#0.0#####");
+            return _latitude.ToString("#0.0#######") + "," + _longitude.ToString("#0.0#######");
 		}
 
 		public bool Equals(GeoLocation other)
