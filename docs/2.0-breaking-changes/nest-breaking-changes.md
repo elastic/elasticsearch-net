@@ -102,7 +102,7 @@ In `NEST 2.0` this discrepency is gone.
 
 This happens in more places e.g index settings and mappings.
 
-# Aggregetor
+# Aggregator
 
 If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
 
