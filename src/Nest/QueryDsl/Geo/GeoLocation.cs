@@ -82,7 +82,7 @@ namespace Nest
 
 		public override string ToString()
 		{
-			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", _latitude, _longitude);
+            return _latitude.ToString("#0.0#####") + "," + _longitude.ToString("#0.0#####");
 		}
 
 		public bool Equals(GeoLocation other)
@@ -112,6 +112,9 @@ namespace Nest
 
 		public static implicit operator GeoLocation(string latLon)
 		{
+            if (string.IsNullOrEmpty(latLon))
+                throw new ArgumentNullException(nameof(latLon));
+
 			var parts = latLon.Split(',');
 			if (parts.Length != 2) throw new ArgumentException("Invalid format: string must be in the form of lat,lon");
 			double lat;
