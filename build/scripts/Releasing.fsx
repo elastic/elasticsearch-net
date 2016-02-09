@@ -122,7 +122,7 @@ type Release() =
             let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()
             for frameworkDir in frameworkDirs do
                 let frameworkPdbDir = sprintf "%s/%s" srcFolder frameworkDir.Name
-                gitLink frameworkPdbDir
+                gitLink frameworkPdbDir projectName
                 let pdb = sprintf "%s.pdb" projectName
                 let frameworkPdbFile = sprintf "%s/%s" frameworkPdbDir pdb
                 if fileExists frameworkPdbFile

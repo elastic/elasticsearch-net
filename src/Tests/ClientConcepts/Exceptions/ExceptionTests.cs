@@ -12,12 +12,17 @@ namespace Tests.ClientConcepts.Exceptions
 	[Collection(IntegrationContext.Indexing)]
 	public class ExceptionTests
 	{
-		public ExceptionTests(IndexingCluster cluster, EndpointUsage usage) { }
+		private int _port;
+
+		public ExceptionTests(IndexingCluster cluster, EndpointUsage usage)
+		{
+			_port = cluster.Node.Port;
+		}
 
 		[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
-			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:9200"))
+			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
@@ -46,7 +51,7 @@ namespace Tests.ClientConcepts.Exceptions
 		[I]
 		public void ServerTestWhenThrowExceptionsDisabled()
 		{
-			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:9200"));
+			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
 #if DOTNETCORE 
