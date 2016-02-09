@@ -98,11 +98,11 @@ client.Search<Project>(s=>s
 
 This isolates all the sort options properly and adheres stricter to the 1 to 1 mapping. `NEST 1.x` also had this full descriptor but the mix and matching
 of the convenience methods of the parent means some fluent methods were additive whilst others always overwrite what was previously set.
-In `NEST 2.0` this discrapency is gone.
+In `NEST 2.0` this discrepency is gone.
 
 This happens in more places e.g index settings and mappings.
 
-# Aggregotor
+# Aggregetor
 
 If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
 
