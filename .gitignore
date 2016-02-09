@@ -66,3 +66,5 @@ YamlCache
 
 *.DS_Store
 *.sln.ide
+
+launchSettings.json
