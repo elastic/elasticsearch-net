@@ -138,7 +138,7 @@ namespace Nest
 		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) => Assign(a =>
 		{
 			a.Properties = a.Properties ?? new Properties();
-			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
+			var autoProperties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties();
 			foreach (var autoProperty in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)autoProperties)
 				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
