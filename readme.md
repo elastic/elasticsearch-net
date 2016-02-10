@@ -147,8 +147,8 @@ var response = client.Search<Tweet>(request);
 NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/develop/src/Elasticsearch.Net) client that you can fall back to incase anything is missing:
 
 ```csharp
-//.Raw is of type IRawElasticClient
-var response = client.Raw.SearchPost("myindex","elasticsearchprojects", new
+//.LowLevel is of type IElasticLowLevelClient
+var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 {
 	from = 0,
 	size = 10,
