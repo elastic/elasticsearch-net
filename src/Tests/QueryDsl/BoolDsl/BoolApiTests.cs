@@ -18,12 +18,12 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.BoolDsl
 {
-
 	internal static class BoolDslTestExtensions
 	{
 		public static QueryContainer Id(this QueryContainerDescriptor<A> q, int id) => q.Term(p => p.Id, id);
 		public static QueryContainer O(this QueryContainerDescriptor<A> q, E option) => q.Term(p => p.Option, option);
 	}
+
 	[CollectionDefinition(IntegrationContext.Bool)]
 	public class BoolCluster : ClusterBase, ICollectionFixture<BoolCluster>
 	{

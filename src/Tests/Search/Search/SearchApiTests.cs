@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -183,6 +184,81 @@ namespace Tests.Search.Search
 			response.Aggregations.Count.Should().BeGreaterThan(0);
 			var startDates = response.Aggs.Terms("startDates");
 			startDates.Should().NotBeNull();
+		}
+	}
+
+	[Collection(IntegrationContext.ReadOnly)]
+	public class SearchApiConditionlessQueryContainerTests : SearchApiTests
+	{
+		public SearchApiConditionlessQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			query = new
+			{
+				@bool = new {
+					must = new object[] { new { query_string = new { query = "query" } } },
+					should = new object[] { new { query_string = new { query = "query" } } },
+					must_not = new object[] { new { query_string = new { query = "query" } } }
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Query(q => q
+				.Bool(b => b
+					.Must(
+						m => m.QueryString(qs => qs.Query("query")),
+						m => m.QueryString(qs => qs.Query(string.Empty)),
+						m => m.QueryString(qs => qs.Query(null)),
+						m => new QueryContainer()
+					)
+					.Should(
+						m => m.QueryString(qs => qs.Query("query")),
+						m => m.QueryString(qs => qs.Query(string.Empty)),
+						m => m.QueryString(qs => qs.Query(null)),
+						m => new QueryContainer()
+					)
+					.MustNot(
+						m => m.QueryString(qs => qs.Query("query")),
+						m => m.QueryString(qs => qs.Query(string.Empty)),
+						m => m.QueryString(qs => qs.Query(null)),
+						m => new QueryContainer()
+					)
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
+		{
+			Query = new BoolQuery
+			{
+				Must = new List<QueryContainer>
+				{
+					new QueryStringQuery{ Query = "query" },
+					new QueryStringQuery{ Query = string.Empty },
+					new QueryStringQuery{ Query =  null },
+					new QueryContainer()
+				},
+				Should = new List<QueryContainer>
+				{
+					new QueryStringQuery{ Query = "query" },
+					new QueryStringQuery{ Query = string.Empty },
+					new QueryStringQuery{ Query =  null },
+					new QueryContainer()
+				},
+				MustNot = new List<QueryContainer>
+				{
+					new QueryStringQuery{ Query = "query" },
+					new QueryStringQuery{ Query = string.Empty },
+					new QueryStringQuery{ Query =  null },
+					new QueryContainer()
+				}
+			}
+		};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
 		}
 	}
 }

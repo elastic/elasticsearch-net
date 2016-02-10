@@ -85,10 +85,10 @@ namespace Nest
 			Assign(a => a.Filters = new Union<INamedFiltersContainer, List<QueryContainer>>(selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToList());
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToList());
 
 	}
 }

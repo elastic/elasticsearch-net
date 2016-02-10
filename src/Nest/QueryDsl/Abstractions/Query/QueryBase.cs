@@ -52,7 +52,7 @@ namespace Nest
 
 			IQueryContainer container = combine(leftQuery, rightQuery);
 			var query = container.Bool;
-			return new BoolQuery()
+			return new BoolQuery
 			{
 				Must = query.Must,
 				MustNot = query.MustNot,
@@ -69,7 +69,8 @@ namespace Nest
 			return any;
 		}
 
-		public static implicit operator QueryContainer(QueryBase query) => query == null || query.Conditionless ? null : new QueryContainer(query);
+		public static implicit operator QueryContainer(QueryBase query) => 
+			query == null || query.Conditionless ? null : new QueryContainer(query);
 
 		internal abstract void WrapInContainer(IQueryContainer container);
 	}

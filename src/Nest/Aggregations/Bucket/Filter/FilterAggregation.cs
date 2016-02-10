@@ -7,6 +7,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(FilterAggregationJsonConverter))]
 	public interface IFilterAggregation : IBucketAggregation
 	{
+		[JsonProperty("filter")]
 		QueryContainer Filter { get; set; }
 	}
 

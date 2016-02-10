@@ -40,6 +40,8 @@ namespace Nest
 
 			if (typeof(IDictionary).IsAssignableFrom(objectType) && !typeof(IIsADictionary).IsAssignableFrom(objectType))
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
+			if (typeof (IEnumerable<QueryContainer>).IsAssignableFrom(objectType))
+				contract.Converter = new QueryContainerCollectionJsonConverter();
 			else if (objectType == typeof(ServerError))
 				contract.Converter = new ServerErrorJsonConverter();
 			else if (objectType == typeof(DateTime) || 
@@ -162,7 +164,11 @@ namespace Nest
 				Predicate<object> shouldSerialize = obj =>
 				{
 					var collection = property.ValueProvider.GetValue(obj) as ICollection;
-					return collection == null || collection.Count != 0;
+					if (collection == null)
+					{
+						return true;
+					}
+					return collection.Count != 0 && collection.Cast<object>().Any(item => item != null);
 				};
 				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
 			}

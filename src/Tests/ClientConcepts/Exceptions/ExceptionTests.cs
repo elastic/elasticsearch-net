@@ -12,7 +12,7 @@ namespace Tests.ClientConcepts.Exceptions
 	[Collection(IntegrationContext.Indexing)]
 	public class ExceptionTests
 	{
-		private int _port;
+		private readonly int _port;
 
 		public ExceptionTests(IndexingCluster cluster, EndpointUsage usage)
 		{

@@ -16,7 +16,8 @@ namespace Nest
 			var f = value as IFilterAggregation;
 			if (f == null || f.Filter == null)
 			{
-				writer.WriteNull();
+				writer.WriteStartObject();
+				writer.WriteEndObject();
 				return;
 			};
 

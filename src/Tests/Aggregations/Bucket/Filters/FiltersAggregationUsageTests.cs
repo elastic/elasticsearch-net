@@ -192,4 +192,91 @@ namespace Tests.Aggregations.Bucket.Filters
 			results.Last().DocCount.Should().Be(0);
 		}
 	}
+
+	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
+	{
+		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			aggs = new
+			{
+				empty_filters = new
+				{
+					filters = new
+					{
+						filters = new object[] {}
+					}
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Aggregations(aggs => aggs
+				.Filters("empty_filters", agg => agg
+					.AnonymousFilters()
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Aggregations = new FiltersAggregation("empty_filters")
+				{
+					Filters = new List<QueryContainer>()
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
+			response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
+		}
+	}
+
+	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
+	{
+		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object ExpectJson => new
+		{
+			aggs = new
+			{
+				conditionless_filters = new
+				{
+					filters = new
+					{
+						filters = new object[] {}
+					}
+				}
+			}
+		};
+
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.Aggregations(aggs => aggs
+				.Filters("conditionless_filters", agg => agg
+					.AnonymousFilters(
+						q => new QueryContainer()
+					)
+				)
+			);
+
+		protected override SearchRequest<Project> Initializer =>
+			new SearchRequest<Project>
+			{
+				Aggregations = new FiltersAggregation("conditionless_filters")
+				{
+					Filters = new List<QueryContainer>
+					{
+						new QueryContainer()
+					}
+				}
+			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
+			response.Aggs.Filters("conditionless_filters").Buckets.Should().BeEmpty();
+		}
+	}
 }
