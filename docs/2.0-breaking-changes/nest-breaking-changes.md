@@ -55,7 +55,7 @@ Our implementation of `ITransport` can be injected with a custom `IRequestPipeli
 
 Each individual moving part is further explained in the documentation
 
-# Infered types
+# Inferred types
 
 Many places that only took a string now take a more strongly typed object, `Id`, `Field`, `Fields`, `Index`, `Indices`, `Type`, `Types`, `DocumentPath<T>`.
 Its good to know that in most cases you can still implicitly convert to them from `string`, `long`, `Guid` where it makes sense.
@@ -102,10 +102,9 @@ In `NEST 2.0` this discrapency is gone.
 
 This happens in more places e.g index settings and mappings.
 
-# Aggregotor
+# Aggregator
 
 If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
-
 
 # Attribute-based mapping
 
@@ -166,6 +165,46 @@ public class Foo
 Aside from a simpler and cleaner API, this allows each attribute to only reflect the options that are available for the particular type instead of exposing options that may not be relevant (as `ElasticPropertyAttribute` did).
 
 `MapFromAttributes()` has also been renamed to `AutoMap()` to better reflect that it doesn't only depend on properties being marked with attributes.  It will also infer the type based on the CLR type if no attribute is present.
+
+## `TimeSpan` automapped as `long` (ticks)
+
+`System.TimeSpan` is now automatically mapped as a `long` representing the number of ticks within the timeSpan, allowing for range  in addition to term queries. NEst 1.x automatically mapped `TimeSpan` as a string and whilst NEST 2.0 is able to deserialize strings into `TimeSpan` instances as before, it will not automatically serialize `TimeSpan` ***into*** strings when indexing. In order to achieve this, you will need to register a json converter, either by deriving from `JsonNetSerializer` and overriding `ContractConverters` or by attributing the property with `[JsonConverter(typeof(ConverterTypeName))]`. A example of a converter for serializing/deserializing string values for `TimeSpan` is
+
+```c#
+public class StringTimeSpanConverter : JsonConverter
+{
+	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+	{
+		if (value == null)
+			writer.WriteNull();
+		else
+		{
+			var timeSpan = (TimeSpan)value;
+			writer.WriteValue(timeSpan.ToString());
+		}
+	}
+
+	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+	{
+		if (reader.TokenType == JsonToken.Null)
+		{
+			if (!objectType.IsGenericType || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
+				throw new JsonSerializationException($"Cannot convert null value to {objectType}.");
+
+			return null;
+		}
+		if (reader.TokenType == JsonToken.String)
+		{
+			return TimeSpan.Parse((string)reader.Value);
+		}
+
+		throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
+	}
+
+	public override bool CanConvert(Type objectType) => objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
+}
+```
+
 
 #Renamed Types
 
