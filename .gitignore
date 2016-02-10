@@ -68,3 +68,4 @@ YamlCache
 *.sln.ide
 
 launchSettings.json
+project.lock.json
