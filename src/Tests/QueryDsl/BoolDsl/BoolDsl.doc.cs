@@ -13,8 +13,7 @@ namespace Tests.QueryDsl.BoolDsl
 	{
 		protected readonly IElasticClient Client = TestClient.GetFixedReturnClient(new { });
 		
-		/** Writing boolean queries can grow rather verbose rather quickly using the querydsl e.g */
-
+		/** Writing boolean queries can grow rather verbose rather quickly using the query DSL e.g */
 		public void VerboseWay()
 		{
 			var searchResults = this.Client.Search<Project>(s => s
@@ -28,7 +27,7 @@ namespace Tests.QueryDsl.BoolDsl
 				)
 			);
 		}
-		/** now this is just a single bool with only two clauses, imagine multiple nested bools this quickly becomes an excersise in 
+		/** now this is just a single bool with only two clauses, imagine multiple nested bools this quickly becomes an exercise in 
 			hadouken indenting
 		*
 		*[[indent]]
@@ -36,7 +35,7 @@ namespace Tests.QueryDsl.BoolDsl
 		*image::http://i.imgur.com/BtjZedW.jpg[dead indent]	
 		*
 
-		* For this reason NEST introduces operator overloading so complex bool queries become easier to write, the previous example will become. */
+		* For this reason, NEST introduces operator overloading so complex bool queries become easier to write, the previous example will become. */
 
 		public void UsingOperator()
 		{
@@ -55,22 +54,22 @@ namespace Tests.QueryDsl.BoolDsl
 
 		* `term && term && term` to 
 
-		*     bool
-		*         must
-		*             term
-		*             bool
-		*                 must
-		*                     term
-		*                     term
+		*>    bool
+		*>    |___must
+		*>        |___term
+		*>            |___bool
+		*>                |___must
+		*>                    |___term
+		*>                    |___term
 
 		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and 
 		* join them together to become a single bool query
 
-		*     bool
-		*         must 
-		*             term
-		*             term
-		*             term
+		*>    bool
+		*>    |___must 
+		*>        |___term
+		*>        |___term
+		*>        |___term
 		
 		*/
 
@@ -96,13 +95,14 @@ namespace Tests.QueryDsl.BoolDsl
 
 		/** When combining multiple queries some or all possibly marked as must_not or filter NEST still combines to a single bool query
 
-		*     bool
-		*         must 
-		*             term
-		*             term
-		*             term
-		*         must_not
-		*             term
+		*>    bool
+		*>    |___must 
+		*>    |   |___term
+		*>    |   |___term
+		*>    |   |___term
+		 >    |
+		*>    |___must_not
+		*>        |___term
 		*/
 
 		[U] public void JoinsMustWithMustNot()
@@ -120,16 +120,18 @@ namespace Tests.QueryDsl.BoolDsl
 
 		/** Even more involved `term && term && term && !term && +term && +term` still only results in a single bool query:
 
-		*     bool
-		*         must 
-		*             term
-		*             term
-		*             term
-		*         must_not
-		*             term
-		*         filter
-		*             term
-		*             term
+		*>    bool
+		*>    |___must 
+		*>    |   |___term
+		*>    |   |___term
+		*>    |   |___term
+		*>    |
+		*>    |___must_not
+		*>    |   |___term
+		*>    |   
+		*>    |___filter
+		*>        |___term
+		*>        |___term
 		*/
 
 		[U] public void JoinsMustWithMustNotAndFilter() =>
@@ -168,23 +170,24 @@ namespace Tests.QueryDsl.BoolDsl
 
 		* becomes
 
-		*     bool
-		*         should
-		*             term
-		*             term
-		*             term
+		*>    bool
+		*>    |___should
+		*>        |___term
+		*>        |___term
+		*>        |___term
 
 		* but 
 
 		* `term1 && (term2 || term3 || term4)` will NOT become
 
-		*     bool
-		*         must 
-		*             term1
-		*         should
-		*             term2
-		*             term3
-		*             term4
+		*>    bool
+		*>    |___must 
+		*>    |   |___term1
+		*>    |
+		*>    |___should
+		*>        |___term2
+		*>        |___term3
+		*>        |___term4
 		
 		* This is because when a bool query has **only** should clauses atleast 1 of them has to match. When that bool query also has a must clause the should clauses start acting as a boost factor
 		* and none of them have to match, drastically altering its meaning.
@@ -193,14 +196,14 @@ namespace Tests.QueryDsl.BoolDsl
 
 		* NEST therefor rewrites this query to 
 
-		*     bool 
-		*         must 
-		*             term1
-		*             bool
-		*                 should
-		*                     term2
-		*                     term3
-		*                     term4
+		*>    bool 
+		*>    |___must 
+		*>        |___term1
+		*>        |___bool
+		*>            |___should
+		*>                |___term2
+		*>                |___term3
+		*>                |___term4
 
 		*/
 

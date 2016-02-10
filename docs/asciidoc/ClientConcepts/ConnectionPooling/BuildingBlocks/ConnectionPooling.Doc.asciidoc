@@ -2,10 +2,12 @@
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 we can use to issue client calls on.
 
+
 == SingleNodeConnectionPool
 The simplest of all connection pools, this takes a single `Uri` and uses that to connect to elasticsearch for all the calls
 It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
 ready to go.
+
 
 [source, csharp]
 ----
@@ -62,6 +64,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionP
 The static connection pool is great if you have a known small sized cluster and do no want to enable
 sniffing to find out the cluster topology.
 
+
 [source, csharp]
 ----
 var uris = Enumerable.Range(9200, 5).Select(p => new Uri("http://localhost:" + p));
@@ -108,6 +111,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>
 == SniffingConnectionPool
 A subclass of StaticConnectionPool that allows itself to be reseeded at run time.
 It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
+
 
 [source, csharp]
 ----

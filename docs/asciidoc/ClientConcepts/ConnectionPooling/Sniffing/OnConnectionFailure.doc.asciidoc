@@ -1,8 +1,10 @@
 == Sniffing on connection failure
 Sniffing on connection is enabled by default when using a connection pool that allows reseeding.
 The only IConnectionPool we ship that allows this is the SniffingConnectionPool.
+
 This can be very handy to force a refresh of the pools known healthy node by inspecting elasticsearch itself.
 A sniff tries to get the nodes by asking each currently known node until one response.
+
 
 Here we seed our connection with 5 known nodes 9200-9204 of which we think
 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing 
@@ -33,10 +35,10 @@ longer fails but looks completely different (9210-9212) we should be able to han
 [source, csharp]
 ----
 .Sniff(s => s.SucceedAlways(Framework.Cluster
-.Nodes(3, 9210)
-.MasterEligible(9210, 9212)
-.ClientCalls(r => r.SucceedAlways())
-.Sniff(r => r.SucceedAlways())
+			.Nodes(3, 9210)
+			.MasterEligible(9210, 9212)
+			.ClientCalls(r => r.SucceedAlways())
+			.Sniff(r => r.SucceedAlways())
 		))
 	))
 	.SniffingConnectionPool()
@@ -109,10 +111,10 @@ var audit = new Auditor(() => Framework.Cluster
 		.MasterEligible(9200, 9202)
 		.Ping(r => r.OnPort(9201).Fails(Once))
 		.Sniff(s => s.SucceedAlways(Framework.Cluster
-.Nodes(3, 9210)
-.MasterEligible(9210, 9211)
-.Ping(r => r.SucceedAlways())
-.Sniff(r => r.SucceedAlways())
+			.Nodes(3, 9210)
+			.MasterEligible(9210, 9211)
+			.Ping(r => r.SucceedAlways())
+			.Sniff(r => r.SucceedAlways())
 		))
 	))
 	.SniffingConnectionPool()

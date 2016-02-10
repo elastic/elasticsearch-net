@@ -4,15 +4,18 @@ Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a f
 # Choosing the right connection strategy
 If you simply new an `ElasticLowLevelClient`, it will be a non-failover connection to `http://localhost:9200`
 
+
 [source, csharp]
 ----
 var client = new ElasticLowLevelClient();
 var tokenizers = new TokenizersDescriptor();
 ----
+
 If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then
 you will need to pass in some instance of `IConnectionConfigurationValues`.
 
 The easiest way to do this is:
+
 
 [source, csharp]
 ----
@@ -24,6 +27,7 @@ var client = new ElasticLowLevelClient(config);
 This however is still a non-failover connection. Meaning if that `node` goes down the operation will not be retried on any other nodes in the cluster.
 
 To get a failover connection we have to pass an `IConnectionPool` instance instead of a `Uri`.
+
 
 [source, csharp]
 ----
@@ -40,6 +44,7 @@ Be sure to read more about [Connection Pooling and Cluster Failover here](/elast
 
 Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
 
+
 [source, csharp]
 ----
 var node = new Uri("http://mynode.example.com:8082/apiKey");
@@ -49,7 +54,9 @@ var config = new ConnectionConfiguration(connectionPool)
 				.BasicAuthentication("user", "pass")
 				.RequestTimeout(TimeSpan.FromSeconds(5));
 ----
+
 The following is a list of available connection configuration options:
+
 
 [source, csharp]
 ----
@@ -156,11 +163,14 @@ var uri = new Uri("http://username:password@localhost:9200");
 ----
 var settings = new ConnectionConfiguration(uri);
 ----
+
 ...but may become tedious when using connection pooling with multiple nodes.
+
 
 
 You can pass a callback of type `Action<IApiCallDetails>` that can eaves drop every time a response (good or bad) is created.
 If you have complex logging needs this is a good place to add that in.
+
 
 [source, csharp]
 ----
@@ -178,6 +188,7 @@ counter.Should().Be(2);
 An example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
 to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
 to `true`
+
 
 [source, csharp]
 ----
@@ -256,11 +267,15 @@ The bare minimum to make .NET accept self-signed SSL certs that are not in the W
 ----
 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 ----
+
 However, this will accept all requests from the AppDomain to untrusted SSL sites,
 therefore we recommend doing some minimal introspection on the passed in certificate.
 
+
+
 You can then register a factory on ConnectionSettings to create an instance of your subclass instead.
 This is called once per instance of ConnectionSettings.
+
 
 [source, csharp]
 ----

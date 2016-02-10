@@ -3,6 +3,7 @@ Many API's in elasticsearch describe a path to a document. In NEST besides gener
 and Index, Type and Id seperately we also generate a constructor taking a DocumentPath that allows you to describe the path
 to your document more succintly
 
+
 Manually newing
 
 here we create a new document path based on Project with the id 1 

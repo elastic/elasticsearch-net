@@ -4,6 +4,7 @@ Not typically something you'll have to pass to the client but all calls to `Syst
 in the client have been abstracted by `IDateTimeProvider`. This allows us to unit test timeouts and clusterfailover
 in run time not being bound to wall clock time.
 
+
 [source, csharp]
 ----
 var dateTimeProvider = DateTimeProvider.Default;
@@ -14,9 +15,11 @@ dates are always returned in UTC
 ----
 dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
 ----
+
 Another responsibility of this interface is to calculate the time a node has to be taken out of rotation
 based on the number of attempts to revive it. For very advanced use cases, this might be something of interest
 to provide a custom implementation for.
+
 
 [source, csharp]
 ----

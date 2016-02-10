@@ -1,7 +1,9 @@
 = Transports
+
 The `ITransport` interface can be seen as the motor block of the client. It's interface is deceitfully simple.
 It's ultimately responsible from translating a client call to a response. If for some reason you do not agree with the way we wrote
 the internals of the client, by implementing a custom `ITransport`, you can circumvent all of it and introduce your own.
+
 
 
 Transport is generically typed to a type that implements IConnectionConfigurationValues 

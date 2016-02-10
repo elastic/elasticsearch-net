@@ -2,6 +2,7 @@
 
 Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 
+
 [source, csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster

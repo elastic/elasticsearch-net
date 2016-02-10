@@ -2,6 +2,7 @@
 The low level allows you to post a string, byte[] array directly. On top of this if you pass a list of strings or objects
 they will be serialized in Elasticsearch's special bulk/multi format.
 
+
 Even though the argument for postData on the low level client takes a PostData
 You can rely on C# implicit conversion to abstract the notion of PostData completely.
 You can implicitly convert from the following types.

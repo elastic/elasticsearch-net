@@ -4,6 +4,7 @@ out the client as an UnexpectedElasticsearchClientException, regardless whether 
 An IConnection is in charge of knowning what exceptions it can recover from or not. The default IConnection that is based on WebRequest can and
 will recover from WebExceptions but others will be grounds for immediately exiting the pipeline.
 
+
 [source, csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
@@ -33,11 +34,13 @@ e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 e.InnerException.Should().NotBeNull();
 e.InnerException.Message.Should().Be("boom!");
 ----
+
 Sometimes an unexpected exception happens further down in the pipeline, this is why we
 wrap them inside an UnexpectedElasticsearchClientException so that information about where
 in the pipeline the unexpected exception is not lost, here a call to 9200 fails using a webexception.
 It then falls over to 9201 which throws an hard exception from within IConnection. We assert that we
 can still see the audit trail for the whole coordinated request.
+
 
 [source, csharp]
 ----
@@ -68,9 +71,11 @@ e.FailureReason.Should().Be(PipelineFailure.Unexpected);
 e.InnerException.Should().NotBeNull();
 e.InnerException.Message.Should().Be("boom!");
 ----
+
 An unexpected hard exception on ping and sniff is something we *do* try to revover from and failover.
 Here pinging nodes on first use is enabled and 9200 throws on ping, we still fallover to 9201's ping succeeds.
 However the client call on 9201 throws a hard exception we can not recover from
+
 
 [source, csharp]
 ----

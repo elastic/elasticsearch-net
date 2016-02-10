@@ -6,6 +6,8 @@ Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, 
 you're using attributes to map your properties, then calling AutoMap() is required
 in order for your attributes to be applied.  We'll look at examples of both.
 
+
+
 For these examples, we'll define two POCOS.  A Company, which has a name
 and a collection of Employees.  And Employee, which has various properties of 
 different types, and itself has a collection of Employees. 
@@ -40,26 +42,26 @@ and map each property explicitly
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
 		.Map<Company>(m => m
-.Properties(ps => ps
-	.String(s => s
-		.Name(c => c.Name)
-	)
-	.Object<Employee>(o => o
-		.Name(c => c.Employees)
-		.Properties(eps => eps
-.String(s => s
-	.Name(e => e.FirstName)
-)
-.String(s => s
-	.Name(e => e.LastName)
-)
-.Number(n => n
-	.Name(e => e.Salary)
-	.Type(NumberType.Integer)
-)
-		)
-	)
-)
+			.Properties(ps => ps
+				.String(s => s
+					.Name(c => c.Name)
+				)
+				.Object<Employee>(o => o
+					.Name(c => c.Employees)
+					.Properties(eps => eps
+						.String(s => s
+							.Name(e => e.FirstName)
+						)
+						.String(s => s
+							.Name(e => e.LastName)
+						)
+						.Number(n => n
+							.Name(e => e.Salary)
+							.Type(NumberType.Integer)
+						)
+					)
+				)
+			)
 		)
 	);
 ----
@@ -75,32 +77,32 @@ var expected = new
 	{
 		company = new
 		{
-properties = new
-{
-	name = new
-	{
-		type = "string"
-	},
-	employees = new
-	{
-		type = "object",
-		properties = new
-		{
-firstName = new
-{
-	type = "string"
-},
-lastName = new
-{
-	type = "string"
-},
-salary = new
-{
-	type = "integer"
-}
-		}
-	}
-}
+			properties = new
+			{
+				name = new
+				{
+					type = "string"
+				},
+				employees = new
+				{
+					type = "object",
+					properties = new
+					{
+						firstName = new
+						{
+							type = "string"
+						},
+						lastName = new
+						{
+							type = "string"
+						},
+						salary = new
+						{
+							type = "integer"
+						}
+					}
+				}
+			}
 		}
 	}
 };
@@ -138,84 +140,84 @@ var expected = new
 	{
 		company = new
 		{
-properties = new
-{
-	employees = new
-	{
-		properties = new
-		{
-birthday = new
-{
-	type = "date"
-},
-employees = new
-{
-	properties = new { },
-	type = "object"
-},
-firstName = new
-{
-	type = "string"
-},
-hours = new
-{
-	type = "long" 
-},
-isManager = new
-{
-	type = "boolean"
-},
-lastName = new
-{
-	type = "string"
-},
-salary = new
-{
-	type = "integer"
-}
-		},
-		type = "object"
-	},
-	name = new
-	{
-		type = "string"
-	}
-}
+			properties = new
+			{
+				employees = new
+				{
+					properties = new
+					{
+						birthday = new
+						{
+							type = "date"
+						},
+						employees = new
+						{
+							properties = new { },
+							type = "object"
+						},
+						firstName = new
+						{
+							type = "string"
+						},
+						hours = new
+						{
+							type = "long" 
+						},
+						isManager = new
+						{
+							type = "boolean"
+						},
+						lastName = new
+						{
+							type = "string"
+						},
+						salary = new
+						{
+							type = "integer"
+						}
+					},
+					type = "object"
+				},
+				name = new
+				{
+					type = "string"
+				}
+			}
 		},
 		employee = new
 		{
-properties = new
-{
-	birthday = new
-	{
-		type = "date"
-	},
-	employees = new
-	{
-		properties = new { },
-		type = "object"
-	},
-	firstName = new
-	{
-		type = "string"
-	},
-	hours = new
-	{
-		type = "long"
-	},
-	isManager = new
-	{
-		type = "boolean"
-	},
-	lastName = new
-	{
-		type = "string"
-	},
-	salary = new
-	{
-		type = "integer"
-	}
-}
+			properties = new
+			{
+				birthday = new
+				{
+					type = "date"
+				},
+				employees = new
+				{
+					properties = new { },
+					type = "object"
+				},
+				firstName = new
+				{
+					type = "string"
+				},
+				hours = new
+				{
+					type = "long"
+				},
+				isManager = new
+				{
+					type = "boolean"
+				},
+				lastName = new
+				{
+					type = "string"
+				},
+				salary = new
+				{
+					type = "integer"
+				}
+			}
 		}
 	}
 };
@@ -229,6 +231,7 @@ In most cases, you'll want to map more than just the vanilla datatypes and also 
 various options on your properties (analyzer, doc_values, etc...).  In that case, it's
 possible to use AutoMap() in conjuction with explicitly mapped properties.
 
+
 Here we are using AutoMap() to automatically map our company type, but then we're
 overriding our employee property and making it a `nested` type, since by default,
 AutoMap() will infer objects as `object`.
@@ -238,15 +241,15 @@ AutoMap() will infer objects as `object`.
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
 		.Map<Company>(m => m
-.AutoMap()
-.Properties(ps => ps
-	.Nested<Employee>(n => n
-		.Name(c => c.Employees)
-		.Properties(eps => eps
-// snip
-		)
-	)
-)
+			.AutoMap()
+			.Properties(ps => ps
+				.Nested<Employee>(n => n
+					.Name(c => c.Employees)
+					.Properties(eps => eps
+						// snip
+					)
+				)
+			)
 		)
 	);
 ----
@@ -287,6 +290,9 @@ public class CompanyWithAttributes
 {
 	[String(Analyzer = "keyword", NullValue = "null", Similarity = SimilarityOption.BM25)]
 	public string Name { get; set; }
+
+	[String]
+	public TimeSpan? HeadOfficeHours { get; set; }
 
 	[Object(Path = "employees", Store = false)]
 	public List<Employee> Employees { get; set; }
@@ -376,6 +382,10 @@ var expected = new
 								null_value = "null",
 								similarity = "BM25",
 								type = "string"
+							},
+							headOfficeHours = new
+							{
+								type = "string"
 							}
 						}
 					},
@@ -453,9 +463,11 @@ var expected = new
 			};
 Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
 ----
+
 Just as we were able to override the inferred properties in our earlier example, explicit (manual)
 mappings also take precedence over attributes.  Therefore we can also override any mappings applied
 via any attributes defined on the POCO
+
 
 [source, csharp]
 ----
@@ -518,6 +530,10 @@ var expected = new
 								analyzer = "keyword",
 								null_value = "null",
 								similarity = "BM25",
+								type = "string"
+							},
+							headOfficeHours = new
+							{
 								type = "string"
 							}
 						}
@@ -630,14 +646,23 @@ public class CompanyWithAttributesAndPropertiesToIgnore
 == Ignoring Properties
 Properties on a POCO can be ignored in a few ways:
 
+
+
 - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
 
-- Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>>selector)` on the connection settings
+
+
+- Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
+
+
 
 - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used and inspected inside of `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
 
+
+
 This example demonstrates all ways, using the attribute way to ignore the property `PropertyToIgnore`, the infer mapping way to ignore the
 property `AnotherPropertyToIgnore` and the json serializer specific attribute way to ignore the property `JsonIgnoredProperty`
+
 
 [source, csharp]
 ----
@@ -707,14 +732,14 @@ var expected = new
 	{
 		a = new
 		{
-properties = new
-{
-	child = new
-	{
-		properties = new { },
-		type = "object"
-	}
-}
+			properties = new
+			{
+				child = new
+				{
+					properties = new { },
+					type = "object"
+				}
+			}
 		}
 	}
 };
@@ -742,35 +767,35 @@ var expectedWithMaxRecursion = new
 	{
 		a = new
 		{
-properties = new
-{
-	child = new
-	{
-		type = "object",
-		properties = new
-		{
-child = new
-{
-	type = "object",
-	properties = new
-	{
-		child = new
-		{
-type = "object",
-properties = new
-{
-	child = new
-	{
-		type = "object",
-		properties = new { }
-	}
-}
-		}
-	}
-}
-		}
-	}
-}
+			properties = new
+			{
+				child = new
+				{
+					type = "object",
+					properties = new
+					{
+						child = new
+						{
+							type = "object",
+							properties = new
+							{
+								child = new
+								{
+									type = "object",
+									properties = new
+									{
+										child = new
+										{
+											type = "object",
+											properties = new { }
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 };
@@ -800,36 +825,36 @@ var expected = new
 	{
 		employee = new
 		{
-properties = new
-{
-	birthday = new
-	{
-		type = "date"
-	},
-	employees = new
-	{
-		properties = new { },
-		type = "object"
-	},
-	firstName = new
-	{
-		type = "string"
-	},
-	isManager = new
-	{
-		doc_values = false,
-		type = "boolean"
-	},
-	lastName = new
-	{
-		type = "string"
-	},
-	salary = new
-	{
-		doc_values = false,
-		type = "integer"
-	}
-}
+			properties = new
+			{
+				birthday = new
+				{
+					type = "date"
+				},
+				employees = new
+				{
+					properties = new { },
+					type = "object"
+				},
+				firstName = new
+				{
+					type = "string"
+				},
+				isManager = new
+				{
+					doc_values = false,
+					type = "boolean"
+				},
+				lastName = new
+				{
+					type = "string"
+				},
+				salary = new
+				{
+					doc_values = false,
+					type = "integer"
+				}
+			}
 		}
 	}
 };

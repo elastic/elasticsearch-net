@@ -5,6 +5,7 @@ In addition to sniffing on startup and sniffing on failures, sniffing periodical
 clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
 but without sniffing periodically it will never find the nodes that have been added to help out with load
 
+
 [source, csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster

@@ -2,6 +2,7 @@
 When using connection pooling and the pool has sufficient nodes a request will be retried if
 the call to a node throws an exception or returns a 502 or 503
 
+
 [source, csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
@@ -20,6 +21,7 @@ audit = await audit.TraceCall(
 ----
 502 Bad Gateway
 Will be treated as an error that requires retrying
+
 
 [source, csharp]
 ----
@@ -40,6 +42,7 @@ audit = await audit.TraceCall(
 503 Service Unavailable
 Will be treated as an error that requires retrying
 
+
 [source, csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
@@ -56,7 +59,9 @@ audit = await audit.TraceCall(
 				}
 			);
 ----
+
 If a call returns a valid http status code other then 502/503 the request won't be retried.
+
 
 [source, csharp]
 ----

@@ -1,12 +1,15 @@
 # Date Expressions
 The date type supports using date math expression when using it in a query/filter
 Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
+
 The expression starts with an "anchor" date, which can be either now or a date string (in the applicable format) ending with ||.
 It can then follow by a math expression, supporting +, - and / (rounding).
 The units supported are y (year), M (month), w (week), d (day), h (hour), m (minute), and s (second).
 as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
 
 Be sure to read the elasticsearch documentation {ref}/mapping-date-format.html#date-math[on this subject here]
+
+
 
 You can create simple expressions using any of the static methods on  `DateMath` 
 
@@ -40,8 +43,8 @@ the resulting date math will assume the whole string is the anchor
 ----
 .Result(dateMath => ((IDateMath)dateMath)
 		.Anchor.Match(
-d => d.Should().NotBe(default(DateTime)), 
-s => s.Should().Be(nonsense)
+			d => d.Should().NotBe(default(DateTime)), 
+			s => s.Should().Be(nonsense)
 		)
 	);
 ----
@@ -61,8 +64,8 @@ the anchor will be an actual DateTime, even after a serialization - deserializat
 ----
 .Result(dateMath => ((IDateMath)dateMath)
 	.	Anchor.Match(
-d => d.Should().Be(date), 
-s => s.Should().BeNull()
+			d => d.Should().Be(date), 
+			s => s.Should().BeNull()
 		)
 	);
 ----

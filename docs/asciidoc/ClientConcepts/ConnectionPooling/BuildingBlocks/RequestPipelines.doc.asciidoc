@@ -2,6 +2,7 @@
 Every request is executed in the context of `RequestPipeline` when using the default `ITransport` implementation.
 
 
+
 [source, csharp]
 ----
 var settings = TestClient.CreateSettings();
@@ -118,6 +119,7 @@ sniffingPipeline.StaleClusterState.Should().BeTrue();
 ----
 A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout
 See the maxretry documentation for more details, here we assert that our request pipeline exposes this propertly
+
 
 [source, csharp]
 ----

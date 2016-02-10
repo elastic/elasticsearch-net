@@ -122,33 +122,6 @@ namespace Nest.Litterateur.Walkers
 			base.VisitLocalDeclarationStatement(node);
 		}
 
-		public override void VisitXmlText(XmlTextSyntax node)
-		{
-			var tokens = node.TextTokens
-				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken || n.Kind() == SyntaxKind.XmlEntityLiteralToken)
-				.ToList();
-
-			var builder = new StringBuilder();
-			for (int index = 0; index < tokens.Count; index++)
-			{
-				var token = tokens[index];
-				if (token.Kind() == SyntaxKind.XmlEntityLiteralToken ||
-				    (index + 1 < tokens.Count && tokens[index + 1].Kind() == SyntaxKind.XmlEntityLiteralToken))
-				{
-					builder.Append(token.Text.Trim());
-				}
-				else
-				{
-					builder.AppendLine(token.Text.Trim());
-				}
-			}
-
-			var text = builder.ToString();
-			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-			this.Blocks.Add(new TextBlock(text, line));
-			base.VisitXmlText(node);
-		}
-
 		public override void VisitTrivia(SyntaxTrivia trivia)
 		{
 			if (trivia.Kind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
@@ -158,8 +131,23 @@ namespace Nest.Litterateur.Walkers
 			}
 
 			this.InsideMultiLineDocumentation = true;
-			base.VisitTrivia(trivia);
+			this.CreateTextBlocksFromTrivia(trivia);
 			this.InsideMultiLineDocumentation = false;
+		}
+
+		private void CreateTextBlocksFromTrivia(SyntaxTrivia trivia)
+		{
+			var tokens = trivia.ToFullString().TrimStart('/', '*').TrimEnd('*', '/').Split('\n');
+			var builder = new StringBuilder();
+			foreach (var token in tokens)
+			{
+				var decodedToken = System.Net.WebUtility.HtmlDecode(token.Trim().Trim('*').Trim());
+				builder.AppendLine(decodedToken);
+			}
+
+			var text = builder.ToString();
+			var line = trivia.SyntaxTree.GetLineSpan(trivia.Span).StartLinePosition.Line;
+			this.Blocks.Add(new TextBlock(text, line));
 		}
 	}
 }

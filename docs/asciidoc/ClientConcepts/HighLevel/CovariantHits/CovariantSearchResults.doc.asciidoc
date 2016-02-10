@@ -1,11 +1,17 @@
 # Covariant Search Results
+
 NEST directly supports returning covariant result sets.
 Meaning a result can be typed to an interface or baseclass
 but the actual instance type of the result can be that of the subclass directly
+
 Let look at an example, imagine we want to search over multiple types that all implement
 `ISearchResult`
 
+
+
+
 We have three implementations of `ISearchResult` namely `A`, `B` and `C`
+
 
 The most straightforward way to search over multiple types is to
 type the response to the parent interface or base class
@@ -112,6 +118,7 @@ bDocuments.Should().OnlyContain(a => a.PropertyOnB > 0);
 cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 ----
 Scroll also supports CovariantSearchResponses
+
 
 Scroll() is a continuation of a previous Search() so Types() are lost. 
 You can hint the type types again using CovariantTypes()

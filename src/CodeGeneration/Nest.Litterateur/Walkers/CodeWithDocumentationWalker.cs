@@ -43,9 +43,12 @@ namespace Nest.Litterateur.Walkers
 			if (_firstVisit)
 			{
 				_firstVisit = false;
-				var leadingTabs = new String('\t', 2 + ClassDepth);
-				_code = node.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString()
-					.Replace(leadingTabs, string.Empty);
+
+				var repeatedTabs = 2 + ClassDepth;
+				_code = node.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString();
+
+				// find x or more repeated tabs and trim x number of tabs from the start
+				_code = Regex.Replace(_code, $"\t{{{repeatedTabs},}}", match => match.Value.Substring(repeatedTabs));
 
 				var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 

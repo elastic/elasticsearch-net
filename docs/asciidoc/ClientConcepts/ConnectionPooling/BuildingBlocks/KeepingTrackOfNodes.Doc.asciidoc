@@ -1,6 +1,7 @@
 = Keeping track of nodes
 
 
+
 [source, csharp]
 ----
 var node = new Node(new Uri("http://localhost:9200"));
@@ -25,6 +26,7 @@ node.IsResurrected.Should().BeTrue();
 ----
 When instantiating your connection pool you could switch these to false to initialize the client to
 a known cluster topology.
+
 
 passing a node with a path should be preserved. Sometimes an elasticsearch node lives behind a proxy 
 
@@ -63,6 +65,7 @@ node.IsAlive.Should().BeTrue();
 
 every time a node is marked dead the number of attempts should increase
 and the passed datetime should be exposed.
+
 
 [source, csharp]
 ----

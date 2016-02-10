@@ -657,7 +657,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
 		 */
 		/**
-		 * - Using the `.InferMappingFor&lt;TDocument&gt;(Func&lt;ClrTypeMappingDescriptor&lt;TDocument&gt;, IClrTypeMapping&lt;TDocument&gt;&gt; selector)` on the connection settings
+		 * - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
 		 */
 		/**
 		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used and inspected inside of `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
@@ -799,7 +799,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
-		/** Applying conventions through the Visitor pattern
+		/** # Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
 		 * AutoMap internally implements the visitor pattern.  The default visitor `NoopPropertyVisitor` does 

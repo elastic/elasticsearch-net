@@ -7,9 +7,14 @@ using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
+	/** # Naming Conventions
+	* 
+	* NEST uses the following naming conventions (with _some_ exceptions).
+	*/
 	public class NamingConventions
 	{
-		/**
+		/** ## Class Names
+		*
 		* Abstract class names should end with a `Base` suffix
 		*/
 		[U] public void AbstractClassNamesEndWithBase()
@@ -28,6 +33,9 @@ namespace Tests.CodeStandards
 			abstractClasses.Should().BeEmpty();
 		}
 
+		/**
+		* Class names that end with `Base` suffix are abstract
+		*/
 		[U] public void ClassNameContainsBaseShouldBeAbstract()
 		{
 			var exceptions = new[] { typeof(DateMath) };
@@ -42,8 +50,9 @@ namespace Tests.CodeStandards
 			baseClassesNotAbstract.Should().BeEmpty();
 		}
 
-		/**
-		* Request class names should end with "Request"
+		/** ## Requests and Responses
+		*
+		* Request class names should end with `Request`
 		*/
 		[U]
 		public void RequestClassNamesEndWithRequest()
@@ -60,7 +69,7 @@ namespace Tests.CodeStandards
 		}
 
 		/**
-		* Response class names should end with "Response"
+		* Response class names should end with `Response`
 		**/
 		[U]
 		public void ResponseClassNamesEndWithResponse()
@@ -77,12 +86,14 @@ namespace Tests.CodeStandards
 
 		/**
 		* Request and Response class names should be one to one in *most* cases.
-		* e.g. ValidateRequest => ValidateResponse, and not ValidateQueryRequest => ValidateResponse
+		* e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
+		* There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
+		* `Exists` requests.
 		*/
 		[U]
 		public void ParityBetweenRequestsAndResponses()
 		{
-			// Add any exceptions to the rule here
+			// Add any exceptions to the rule here.
 			var exceptions = new[]
 			{
 				typeof(CatAliasesRequest),
@@ -113,9 +124,7 @@ namespace Tests.CodeStandards
 				typeof(ScrollRequest),
 				typeof(SourceRequest),
 				typeof(SourceRequest<>),
-
 				typeof(ValidateQueryRequest<>),
-
 				typeof(GetAliasRequest),
 				typeof(CatNodeattrsRequest),
 				typeof(IndicesShardStoresRequest),

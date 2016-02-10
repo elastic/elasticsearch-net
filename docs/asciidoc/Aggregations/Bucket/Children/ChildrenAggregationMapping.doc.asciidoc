@@ -9,7 +9,7 @@ var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c =
 	.Mappings(map=>map
 		.Map<Project>(m=>m.AutoMap())
 		.Map<CommitActivity>(m=>m
-.Parent<Project>()
+			.Parent<Project>()
 		)
 	)
 );

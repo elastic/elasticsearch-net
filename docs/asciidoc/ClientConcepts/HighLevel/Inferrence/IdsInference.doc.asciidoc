@@ -2,7 +2,8 @@
 
 Several places in the elasticsearch API expect an Id object to be passed. This is a special box type that you can implicitly convert to and from many value types.
 
-Methods that take an Id can be passed longs, ints, strings&Guids and they will implicitly converted to Ids
+
+Methods that take an Id can be passed longs, ints, strings & Guids and they will implicitly converted to Ids
 
 [source, csharp]
 ----

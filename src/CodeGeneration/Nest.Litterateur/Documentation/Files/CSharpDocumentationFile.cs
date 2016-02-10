@@ -20,7 +20,7 @@ namespace Nest.Litterateur.Documentation.Files
 			{
 				if (block is TextBlock)
 				{
-					sb.AppendLine(block.Value.Replace("&lt;", "<").Replace("&gt;", ">"));
+					sb.AppendLine(block.Value);
 				}
 				else if (block is CodeBlock)
 				{
