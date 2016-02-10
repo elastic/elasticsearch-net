@@ -169,7 +169,7 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 
-A low level, dependency free, client that has no opinions how you build and represent your requests and responses.
+A low-level, dependency free, client that has no opinions how you build and represent your requests and responses.
 
 * Low-level client that provides a one-to-one mapping with the Elasticsearch REST API
 * No dependencies
@@ -178,8 +178,6 @@ A low level, dependency free, client that has no opinions how you build and repr
 * Has no opinions on how you create or consume requests and responses
 * Load balancing and cluster failover support
 * All calls have async variants
-
-## Getting Started
 
 ### Installing
 
@@ -196,10 +194,10 @@ Connecting using the low-level client is very similar to how you would connect u
 ```csharp
 var node = new Uri("http://myserver:9200");
 var config = new ConnectionConfiguration(node);
-var client = new ElasticsearchClient(config);
+var client = new ElasticLowLevelClient(config);
 ```
 
-Note the main difference here is that we are instantiating an `ElasticsearchClient` rather than `ElasticClient`, and `ConnectionConfiguration` instead of `ConnectionSettings`.
+Note the main difference here is that we are instantiating an `ElasticLowLevelClient` rather than `ElasticClient`, and `ConnectionConfiguration` instead of `ConnectionSettings`.
 
 ### Calling an API endpoint
 
