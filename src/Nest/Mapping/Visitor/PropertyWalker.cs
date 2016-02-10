@@ -12,7 +12,7 @@ namespace Nest
 		private readonly int _maxRecursion;
 		private readonly ConcurrentDictionary<Type, int> _seenTypes;
 
-		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion)
+		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
 		{
 			_type = GetUnderlyingType(type);
 			_visitor = visitor ?? new NoopPropertyVisitor();
