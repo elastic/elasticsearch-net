@@ -1,0 +1,148 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[sniffing-role-detection]]
+== Sniffing role detection
+
+When we sniff the cluster state, we detect the role of the node, whether it's master eligible and holds data.
+We use this information when selecting a node to perform an API call on.
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202)
+        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
+)
+{
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+    },
+
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+    }
+};
+
+await audit.TraceStartup();
+----
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Sniff(s => s.SucceedAlways()
+        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
+)
+{
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+        pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
+    },
+
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+        pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
+    }
+};
+
+await audit.TraceStartup();
+----
+
+[source,csharp]
+----
+var node = SniffAndReturnNode();
+
+node.MasterEligible.Should().BeTrue();
+
+node.HoldsData.Should().BeFalse();
+
+node = await SniffAndReturnNodeAsync();
+
+node.MasterEligible.Should().BeTrue();
+
+node.HoldsData.Should().BeFalse();
+----
+
+[source,csharp]
+----
+var pipeline = CreatePipeline();
+
+pipeline.Sniff();
+----
+
+[source,csharp]
+----
+var pipeline = CreatePipeline();
+
+await pipeline.SniffAsync();
+----
+
+[source,csharp]
+----
+this._settings =
+    this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+
+var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
+    new SearchRequestParameters());
+----
+
+[source,csharp]
+----
+var nodes = this._settings.ConnectionPool.Nodes;
+
+nodes.Should().NotBeEmpty().And.HaveCount(1);
+
+var node = nodes.First();
+----
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202)
+        .Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
+)
+{
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(10);
+    },
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
+    }
+};
+await audit.TraceStartup();
+----
+

@@ -1,0 +1,48 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[char-filter-usage]]
+== Char Filter Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+InitializerExample
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "analysis": {
+    "char_filter": {
+      "stripMe": {
+        "type": "html_strip"
+      },
+      "patterned": {
+        "pattern": "x",
+        "replacement": "y",
+        "type": "pattern_replace"
+      },
+      "mapped": {
+        "mappings": [
+          "a=>b"
+        ],
+        "type": "mapping"
+      }
+    }
+  }
+}
+----
+

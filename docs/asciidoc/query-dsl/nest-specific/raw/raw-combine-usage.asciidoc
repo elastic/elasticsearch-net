@@ -1,0 +1,47 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[raw-combine-usage]]
+== Raw Combine Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q.Raw(RawTermQuery) && q.Term("x", "y")
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new RawQuery(RawTermQuery)
+&& new TermQuery { Field = "x", Value = "y" }
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "must": [
+      {
+        "term": {
+          "fieldname": "value"
+        }
+      },
+      {
+        "term": {
+          "x": {
+            "value": "y"
+          }
+        }
+      }
+    ]
+  }
+}
+----
+

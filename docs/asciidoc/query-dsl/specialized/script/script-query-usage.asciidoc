@@ -1,0 +1,55 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[script-query-usage]]
+== Script Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Script(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Inline(_templateString)
+    .Params(p=>p.Add("param1", 1))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new ScriptQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Inline = _templateString,
+    Params = new Dictionary<string, object>
+    {
+        { "param1", 1 }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "script": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "script": {
+      "inline": "doc['num1'].value > param1",
+      "params": {
+        "param1": 1
+      }
+    }
+  }
+}
+----
+

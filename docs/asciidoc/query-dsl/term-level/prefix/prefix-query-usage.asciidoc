@@ -1,0 +1,52 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[prefix-query-usage]]
+== Prefix Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Prefix(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("proj")
+    .Rewrite(RewriteMultiTerm.TopTermsBoostN)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new PrefixQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "proj",
+    Rewrite = RewriteMultiTerm.TopTermsBoostN
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "prefix": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "rewrite": "top_terms_boost_N",
+      "value": "proj"
+    }
+  }
+}
+----
+

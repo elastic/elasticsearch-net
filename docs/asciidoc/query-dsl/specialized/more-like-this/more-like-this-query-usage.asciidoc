@@ -1,0 +1,110 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[more-like-this-query-usage]]
+== More Like This Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.MoreLikeThis(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Like(l=>l
+        .Document(d=>d .Id(Project.Instance.Name))
+        .Text("some long text")
+    )
+    .Analyzer("some_analyzer")
+    .BoostTerms(1.1)
+    .Include()
+    .MaxDocumentFrequency(12)
+    .MaxQueryTerms(12)
+    .MaxWordLength(300)
+    .MinDocumentFrequency(1)
+    .MinTermFrequency(1)
+    .MinWordLength(10)
+    .StopWords("and", "the")
+    .MinimumShouldMatch(1)
+    .Fields(f=>f.Field(p=>p.Name))
+    .Unlike(l=>l
+        .Text("not like this text")
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MoreLikeThisQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Fields = Fields<Project>(p=>p.Name),
+    Like = new List<Like>
+    {
+        new LikeDocument<Project>(Project.Instance.Name),
+        "some long text"
+    },
+    Analyzer = "some_analyzer",
+    BoostTerms = 1.1,
+    Include = true,
+    MaxDocumentFrequency = 12,
+    MaxQueryTerms = 12,
+    MaxWordLength = 300,
+    MinDocumentFrequency = 1,
+    MinTermFrequency = 1,
+    MinWordLength = 10,
+    MinimumShouldMatch = 1,
+    StopWords = new [] { "and", "the"},
+    Unlike = new List<Like>
+    {
+        "not like this text"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "mlt": {
+    "fields": [
+      "name"
+    ],
+    "minimum_should_match": 1,
+    "stop_words": [
+      "and",
+      "the"
+    ],
+    "min_term_freq": 1,
+    "max_query_terms": 12,
+    "min_doc_freq": 1,
+    "max_doc_freq": 12,
+    "min_word_len": 10,
+    "max_word_len": 300,
+    "boost_terms": 1.1,
+    "analyzer": "some_analyzer",
+    "include": true,
+    "like": [
+      {
+        "_index": "project",
+        "_type": "project",
+        "_id": "Durgan LLC"
+      },
+      "some long text"
+    ],
+    "unlike": [
+      "not like this text"
+    ],
+    "_name": "named_query",
+    "boost": 1.1
+  }
+}
+----
+

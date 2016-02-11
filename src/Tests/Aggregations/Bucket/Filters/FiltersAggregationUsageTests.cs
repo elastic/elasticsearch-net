@@ -9,13 +9,16 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filters
 {
-	/** == Named filters
-	 *
+	/**
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
 	 * Each bucket will collect all documents that match its associated filter. For documents
-	 * that do not match any filter, these will be collected in the other bucket.
+	 * that do not match any filter, these will be collected in the _other bucket_.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
+	 * Be sure to read the Elasticsearch documentation {ref_current}/search-aggregations-bucket-filters-aggregation.html[Filters Aggregation]
+	*/
+
+	/**[float] 
+	* == Named filters 
 	*/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -71,9 +74,9 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucketKey = "other_states_of_being",
 					Filters = new NamedFiltersContainer
 					{
-							{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-							{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
+						{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
+						{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
+						{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
@@ -82,12 +85,12 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
+			/** === Handling Responses
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+			*/
 			response.IsValid.Should().BeTrue();
 
-			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-			*/
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 
@@ -109,7 +112,9 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/** == Anonymous filters **/
+	/**[float] 
+	*== Anonymous filters 
+	*/
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -160,23 +165,26 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucket = true,
 					Filters = new List<QueryContainer>
 					{
-							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
+						Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
+						Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
+						Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags")
+						{
+							Field = Field<Project>(p => p.CuratedTags.First().Name)
+						}
 				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
+			/** === Handling Responses
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+			*/
 			response.IsValid.Should().BeTrue();
 
-			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-			*/
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 			var results = filterAgg.AnonymousBuckets();
@@ -187,10 +195,13 @@ namespace Tests.Aggregations.Bucket.Filters
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
 
-			results.Last().DocCount.Should().Be(0);
+			results.Last().DocCount.Should().Be(0); // <1> The last bucket is the _other bucket_
 		}
 	}
 
+	/**[float]  
+	* == Empty Filters 
+	*/
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -232,6 +243,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
+	/**[float] 
+	* == Conditionless Filters */
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -1,0 +1,60 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[indices-query-usage]]
+== Indices Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Indices(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Indices(Index<Project>())
+    .Query(qq => qq.MatchAll())
+    .NoMatchQuery(qq => qq.MatchAll(m => m.Name("no_match")))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new IndicesQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Indices = Index<Project>(),
+    Query = new MatchAllQuery(),
+    NoMatchQuery = new MatchAllQuery { Name ="no_match" }
+
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "indices": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "indices": [
+      "project"
+    ],
+    "no_match_query": {
+      "match_all": {
+        "_name": "no_match"
+      }
+    },
+    "query": {
+      "match_all": {}
+    }
+  }
+}
+----
+

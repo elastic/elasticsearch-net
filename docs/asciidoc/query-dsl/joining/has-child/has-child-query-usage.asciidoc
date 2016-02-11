@@ -1,0 +1,63 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[has-child-query-usage]]
+== Has Child Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.HasChild<Developer>(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .InnerHits(i=>i.Explain())
+    .MaxChildren(5)
+    .MinChildren(1)
+    .ScoreMode(ChildScoreMode.Average)
+    .Query(qq=>qq.MatchAll())
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new HasChildQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Type = Infer.Type<Developer>(),
+    InnerHits = new InnerHits { Explain = true },
+    MaxChildren = 5,
+    MinChildren = 1,
+    Query = new MatchAllQuery(),
+    ScoreMode = ChildScoreMode.Average
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "has_child": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "type": "developer",
+    "score_mode": "avg",
+    "min_children": 1,
+    "max_children": 5,
+    "query": {
+      "match_all": {}
+    },
+    "inner_hits": {
+      "explain": true
+    }
+  }
+}
+----
+

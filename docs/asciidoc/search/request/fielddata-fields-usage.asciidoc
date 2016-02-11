@@ -1,0 +1,43 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[fielddata-fields-usage]]
+== Fielddata Fields Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.FielddataFields(fs => fs
+    .Field(p => p.Name)
+    .Field(p => p.LeadDeveloper)
+    .Field(p => p.StartedOn)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "fielddata_fields": [
+    "name",
+    "leadDeveloper",
+    "startedOn"
+  ]
+}
+----
+

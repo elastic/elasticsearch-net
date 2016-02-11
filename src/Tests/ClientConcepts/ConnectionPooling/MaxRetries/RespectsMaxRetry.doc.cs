@@ -8,12 +8,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 {
 	public class RespectsMaxRetry
 	{
-		/** == MaxRetries
-		* By default retry as many times as we have nodes. However retries still respect the request timeout.
-		* Meaning if you have a 100 node cluster and a request timeout of 20 seconds we will retry as many times as we can
-		* but give up after 20 seconds
+		/**[[max-retries]]
+		*== Max Retries
+		* By default, NEST will retry as many times as there are nodes in the cluster that the client knows about. 
+		* Retries still respects the request timeout however, 
+		* meaning if you have a 100 node cluster and a request timeout of 20 seconds, 
+		* the client will retry as many times as it before giving up at the request timeout of 20 seconds.
 		*/
-
 		[U]
 		public async Task DefaultMaxIsNumberOfNodes()
 		{
@@ -42,8 +43,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		}
 
 		/**
-		* When you have a 100 node cluster you might want to ensure a fixed number of retries. 
-		* Remember that the actual number of requests is initial attempt + set number of retries 
+		* When you have a 100 node cluster, you might want to ensure a fixed number of retries. 
+		* 
+		* IMPORTANT: the actual number of requests is **initial attempt + set number of retries** 
 		*/
 
 		[U]
@@ -68,9 +70,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 			);
 		}
 		/** 
-		* In our previous test we simulated very fast failures, in the real world a call might take upwards of a second
-		* Here we simulate a particular heavy search that takes 10 seconds to fail, our Request timeout is set to 20 seconds.
-		* In this case it does not make sense to retry our 10 second query on 10 nodes. We should try it twice and give up before a third call is attempted
+		* In our previous test we simulated very fast failures, but in the real world a call might take upwards of a second.
+		* In this next example, we simulate a particular heavy search that takes 10 seconds to fail, and set a request timeout of 20 seconds.
+		* We see that the request is tried twice and gives up before a third call is attempted, since the call takes 10 seconds and thus can be
+		* tried twice (initial call and one retry) before the request timeout.
 		*/
 		[U]
 		public async Task RespectsOveralRequestTimeout()
@@ -93,10 +96,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		}
 
 		/** 
-		* If you set smaller request time outs you might not want it to also affect the retry timeout, therefor you can configure these separately too.
-		* Here we simulate calls taking 3 seconds, a request time out of 2 and an overall retry timeout of 10 seconds.
-		* We should see 5 attempts to perform this query, testing that our request timeout cuts the query off short and that our max retry timeout of 10
-		* wins over the configured request timeout
+		* If you set a smaller request timeout you might not want it to also affect the retry timeout. 
+		* In cases like this, you can configure the `MaxRetryTimeout` separately.
+		* Here we simulate calls taking 3 seconds, a request timeout of 2 seconds and a max retry timeout of 10 seconds.
+		* We should see 5 attempts to perform this query, testing that our request timeout cuts the query off short and that 
+		* our max retry timeout of 10 seconds wins over the configured request timeout
 		*/
 		[U]
 		public async Task RespectsMaxRetryTimeoutOverRequestTimeout()
@@ -122,7 +126,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 		}
 		/** 
-		* If your retry policy expands beyond available nodes we won't retry the same node twice
+		* If your retry policy expands beyond the number of available nodes, the client **won't** retry the same node twice
 		*/
 		[U]
 		public async Task RetriesAreLimitedByNodesInPool()
@@ -145,9 +149,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		}
 
 		/** 
-		* This makes setting any retry setting on a single node connection pool a NOOP, this is by design! 
-		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
-		* not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
+		* This makes setting any retry setting on a single node connection pool a no-op by design! 
+		* Connection pooling and failover is all about trying to fail sanely whilst still utilizing the available resources and 
+		* not giving up on the fail fast principle; **It is NOT a mechanism for forcing requests to succeed.**
 		*/
 		[U]
 		public async Task DoesNotRetryOnSingleNodeConnectionPool()
@@ -165,7 +169,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9200 }
 				}
 			);
-
 		}
 	}
 }

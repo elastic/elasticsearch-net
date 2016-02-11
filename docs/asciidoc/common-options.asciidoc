@@ -1,0 +1,24 @@
+:output-dir: common-options
+
+[[common-options]]
+= Common Options
+
+[partintro]
+--
+NEST has a number of types for working with Elasticsearch conventions for:
+
+
+* <<time-units, Time Units>>
+
+* <<distance-units, Distance Units>>
+
+* <<date-math-expressions, Date Math>>
+
+--
+
+include::{output-dir}/time-unit/time-units.asciidoc[]
+
+include::{output-dir}/distance-unit/distance-units.asciidoc[]
+
+include::{output-dir}/date-math/date-math-expressions.asciidoc[]
+

@@ -1,0 +1,233 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[bool-dsl-complex-query-usage]]
+== Bool Dsl Complex Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q.Query() && q.Query()
+//second bool
+|| (
+    //complex nested bool
+    (+q.Query() || +q.Query() || !q.Query() && (!q.Query() && !q.ConditionlessQuery()))
+    // simple nested or
+    && (q.Query() || q.Query() || q.Query())
+    //all conditionless bool
+    && (q.NullQuery() || +q.ConditionlessQuery() || !q.ConditionlessQuery())
+    // actual bool query
+    && (base.QueryFluent(q)))
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+Query && Query
+//second bool
+|| (
+    //complex nested bool
+    (+Query || +Query || !Query && (!Query && !ConditionlessQuery))
+    // simple nested or
+    && (Query || Query || Query)
+    //all conditionless bool
+    && (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
+    // actual bool query
+    && (base.QueryInitializer))
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "should": [
+      {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "x": {
+                  "value": "y"
+                }
+              }
+            },
+            {
+              "term": {
+                "x": {
+                  "value": "y"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "bool": {
+          "must": [
+            {
+              "bool": {
+                "should": [
+                  {
+                    "bool": {
+                      "filter": [
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "bool": {
+                      "filter": [
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "bool": {
+                      "must_not": [
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        },
+                        {
+                          "term": {
+                            "x": {
+                              "value": "y"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
+                    }
+                  },
+                  {
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
+                    }
+                  },
+                  {
+                    "term": {
+                      "x": {
+                        "value": "y"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "bool": {
+                "must": [
+                  {
+                    "match_all": {}
+                  }
+                ],
+                "must_not": [
+                  {
+                    "match_all": {}
+                  }
+                ],
+                "should": [
+                  {
+                    "match_all": {}
+                  }
+                ],
+                "filter": [
+                  {
+                    "match_all": {}
+                  }
+                ],
+                "minimum_should_match": 1,
+                "boost": 2.0
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+----
+
+[source,csharp]
+----
+container.Bool.Should().NotBeNull();
+
+container.Bool.Should.Should().HaveCount(2);
+
+container.Bool.MustNot.Should().BeNull();
+
+container.Bool.Filter.Should().BeNull();
+
+container.Bool.Must.Should().BeNull();
+
+var firstBool = (container.Bool.Should.First() as IQueryContainer)?.Bool;
+
+firstBool.Should().NotBeNull();
+
+firstBool.Must.Should().HaveCount(2);
+
+firstBool.MustNot.Should().BeNull();
+
+firstBool.Filter.Should().BeNull();
+
+firstBool.Should.Should().BeNull();
+
+var secondBool = (container.Bool.Should.Last() as IQueryContainer)?.Bool;
+
+secondBool.Should().NotBeNull();
+
+secondBool.Must.Should().HaveCount(2); //the last bool query was all conditionless
+
+secondBool.MustNot.Should().BeNull();
+
+secondBool.Filter.Should().BeNull();
+
+secondBool.Should.Should().BeNull();
+
+var complexBool = (secondBool.Must.First() as IQueryContainer)?.Bool;
+
+complexBool.Should().NotBeNull();
+
+complexBool.Should.Should().HaveCount(6);
+
+var mustNotsBool = (complexBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null))?.Bool;
+
+mustNotsBool.Should().NotBeNull();
+
+mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
+----
+
+[source,csharp]
+----
+this.AssertShape(this.QueryInitializer);
+----
+

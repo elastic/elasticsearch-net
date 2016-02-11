@@ -1,0 +1,41 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[fields-usage]]
+== Fields Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Fields(fs => fs
+    .Field(p => p.Name)
+    .Field(p => p.StartedOn)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "fields": [
+    "name",
+    "startedOn"
+  ]
+}
+----
+

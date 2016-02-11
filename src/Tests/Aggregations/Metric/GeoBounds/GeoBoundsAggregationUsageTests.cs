@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.GeoBounds
 				{
 					geo_bounds = new
 					{
-						field = Field<Project>(p => p.Location),
+						field = "location",
 						wrap_longitude = true
 					}
 				}

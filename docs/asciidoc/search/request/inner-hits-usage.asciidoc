@@ -1,0 +1,211 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[inner-hits-usage]]
+== Inner Hits Usage
+
+[source,csharp]
+----
+public interface IRoyal
+{
+    string Name { get; set; }
+}
+----
+
+[source,csharp]
+----
+var current = create();
+
+var royals = current.ToList();
+
+var royal1 = royal;
+
+bulk.Index<TRoyal>(i => i.Document(royal1).Index(this._index).Parent(parent));
+
+indexChildren(royal);
+----
+
+[source,csharp]
+----
+var create = this._client.CreateIndex(this._index, c => c
+    .Settings(s => s
+        .NumberOfReplicas(0)
+        .NumberOfShards(1)
+    )
+    .Mappings(map => map
+        .Map<King>(m => m.AutoMap()
+            .Properties(props =>
+                RoyalProps(props)
+                .Nested<King>(n => n.Name(p => p.Foes).AutoMap())
+            )
+        )
+        .Map<Prince>(m => m.AutoMap().Properties(RoyalProps).Parent<King>())
+        .Map<Duke>(m => m.AutoMap().Properties(RoyalProps).Parent<Prince>())
+        .Map<Earl>(m => m.AutoMap().Properties(RoyalProps).Parent<Duke>())
+        .Map<Baron>(m => m.AutoMap().Properties(RoyalProps).Parent<Earl>())
+     )
+);
+var kings = King.Generator.Generate(2)
+    .Select(k =>
+    {
+        k.Foes = King.Generator.Generate(2).ToList();
+        return k;
+    });
+var bulk = new BulkDescriptor();
+IndexAll(bulk, () => kings, indexChildren: king =>
+     IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
+         IndexAll(bulk, () => Duke.Generator.Generate(3), prince.Name, duke =>
+             IndexAll(bulk, () => Earl.Generator.Generate(5), duke.Name, earl =>
+                 IndexAll(bulk, () => Baron.Generator.Generate(1), earl.Name)
+             )
+         )
+     )
+);
+this._client.Bulk(bulk);
+this._client.Refresh(this._index);
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Index(Index)
+.InnerHits(ih => ih
+    .Type<Earl>("earls", g => g
+        .Size(5)
+        .InnerHits(iih => iih
+            .Type<Baron>("barons")
+        )
+        .FielddataFields(p => p.Name)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Duke>(Index, typeof(Duke))
+{
+    InnerHits = new NamedInnerHits
+    {
+        { "earls", new InnerHitsContainer
+        {
+            Type = new TypeInnerHit<Earl>
+            {
+                InnerHit = new GlobalInnerHit
+                {
+                    Size = 5,
+                    FielddataFields = new Field[]{ "name" },
+                    InnerHits = new NamedInnerHits
+                    {
+                        { "barons", new TypeInnerHit<Baron>() }
+                    }
+                }
+            }
+        } }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "inner_hits": {
+    "earls": {
+      "type": {
+        "earl": {
+          "fielddata_fields": [
+            "name"
+          ],
+          "inner_hits": {
+            "barons": {
+              "type": {
+                "baron": {}
+              }
+            }
+          },
+          "size": 5
+        }
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Index(Index)
+.Query(q =>
+    q.HasChild<Prince>(hc => hc
+        .Query(hcq => hcq.MatchAll())
+        .InnerHits(ih => ih.Name("princes"))
+    ) || q.Nested(n => n
+        .Path(p => p.Foes)
+        .Query(nq => nq.MatchAll())
+        .InnerHits()
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<King>(Index, typeof(King))
+{
+    Query = new HasChildQuery
+    {
+        Type = typeof(Prince),
+        Query = new MatchAllQuery(),
+        InnerHits = new InnerHits { Name = "princes" }
+    } || new NestedQuery
+    {
+        Path = Field<King>(p => p.Foes),
+        Query = new MatchAllQuery(),
+        InnerHits = new InnerHits()
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "has_child": {
+            "type": "prince",
+            "query": {
+              "match_all": {}
+            },
+            "inner_hits": {
+              "name": "princes"
+            }
+          }
+        },
+        {
+          "nested": {
+            "query": {
+              "match_all": {}
+            },
+            "path": "foes",
+            "inner_hits": {}
+          }
+        }
+      ]
+    }
+  }
+}
+----
+

@@ -1,0 +1,158 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[max-retries]]
+== Max Retries
+
+By default, NEST will retry as many times as there are nodes in the cluster that the client knows about. 
+Retries still respects the request timeout however, 
+meaning if you have a 100 node cluster and a request timeout of 20 seconds, 
+the client will retry as many times as it before giving up at the request timeout of 20 seconds.
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways())
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
+);
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { BadResponse, 9202 },
+        { BadResponse, 9203 },
+        { BadResponse, 9204 },
+        { BadResponse, 9205 },
+        { BadResponse, 9206 },
+        { BadResponse, 9207 },
+        { BadResponse, 9208 },
+        { HealthyResponse, 9209 }
+    }
+);
+----
+
+When you have a 100 node cluster, you might want to ensure a fixed number of retries. 
+
+IMPORTANT: the actual number of requests is **initial attempt + set number of retries**
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways())
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing().MaximumRetries(3))
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { BadResponse, 9202 },
+        { BadResponse, 9203 },
+        { MaxRetriesReached }
+    }
+);
+----
+
+In our previous test we simulated very fast failures, but in the real world a call might take upwards of a second.
+In this next example, we simulate a particular heavy search that takes 10 seconds to fail, and set a request timeout of 20 seconds.
+We see that the request is tried twice and gives up before a third call is attempted, since the call takes 10 seconds and thus can be
+tried twice (initial call and one retry) before the request timeout.
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(20)))
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { MaxTimeoutReached }
+    }
+);
+----
+
+If you set a smaller request timeout you might not want it to also affect the retry timeout. 
+In cases like this, you can configure the `MaxRetryTimeout` separately.
+Here we simulate calls taking 3 seconds, a request timeout of 2 seconds and a max retry timeout of 10 seconds.
+We should see 5 attempts to perform this query, testing that our request timeout cuts the query off short and that 
+our max retry timeout of 10 seconds wins over the configured request timeout
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+    .ClientCalls(r => r.OnPort(9209).FailAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).MaxRetryTimeout(TimeSpan.FromSeconds(10)))
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { BadResponse, 9202 },
+        { BadResponse, 9203 },
+        { BadResponse, 9204 },
+        { MaxTimeoutReached }
+    }
+);
+----
+
+If your retry policy expands beyond the number of available nodes, the client **won't** retry the same node twice
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(2)
+    .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).MaxRetryTimeout(TimeSpan.FromSeconds(10)))
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { MaxRetriesReached }
+    }
+);
+----
+
+This makes setting any retry setting on a single node connection pool a no-op by design! 
+Connection pooling and failover is all about trying to fail sanely whilst still utilizing the available resources and 
+not giving up on the fail fast principle; **It is NOT a mechanism for forcing requests to succeed.**
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .SingleNodeConnection()
+    .Settings(s => s.DisablePing().MaximumRetries(10))
+);
+
+audit = await audit.TraceCall(
+    new ClientCall {
+        { BadResponse, 9200 }
+    }
+);
+----
+

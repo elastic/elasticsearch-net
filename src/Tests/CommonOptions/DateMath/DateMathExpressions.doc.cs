@@ -8,30 +8,40 @@ namespace Tests.CommonOptions.DateMath
 {
 	public class DateMathEpressions
 	{
-		/** # Date Expressions
-		* The date type supports using date math expression when using it in a query/filter
-		 *Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
+		/** == Date Math Expressions
+		 * The date type supports using date math expression when using it in a query/filter
+		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
 		 *
-		 * The expression starts with an "anchor" date, which can be either now or a date string (in the applicable format) ending with ||. 
-		 * It can then follow by a math expression, supporting +, - and / (rounding). 
-		 * The units supported are y (year), M (month), w (week), d (day), h (hour), m (minute), and s (second).
-		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
+		 * The expression starts with an "anchor" date, which can be either now or a date string (in the applicable format) ending with `||`. 
+		 * It can then follow by a math expression, supporting `+`, `-` and `/` (rounding). 
+		 * The units supported are 
+		 *
+		 * - `y` (year)
+		 * - `M` (month)
+		 * - `w` (week) 
+		 * - `d` (day) 
+		 * - `h` (hour) 
+		 * - `m` (minute)
+		 * - `s` (second)
 		 * 
-		 * Be sure to read the elasticsearch documentation {ref}/mapping-date-format.html#date-math[on this subject here]
-
+		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
+		 * :datemath: {ref_current}/common-options.html#date-math
+		 * Be sure to read the Elasticsearch documentation on {datemath}[Date Math].
 		 */
-
 		[U] public void SimpleExpressions()
 		{
-			/** You can create simple expressions using any of the static methods on  `DateMath` */
+			/** === Simple Expressions
+			* You can create simple expressions using any of the static methods on `DateMath` 
+			*/
 			Expect("now").WhenSerializing(Nest.DateMath.Now);
 			Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05, 05)));
 			
-			/** strings implicitly convert to date maths */
+			/** strings implicitly convert to `DateMath` */
 			Expect("now").WhenSerializing<Nest.DateMath>("now");
 
 			/** but are lenient to bad math expressions */
 			var nonsense = "now||*asdaqwe";
+
 			Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
 				/** the resulting date math will assume the whole string is the anchor */
 				.Result(dateMath => ((IDateMath)dateMath)
@@ -41,10 +51,10 @@ namespace Tests.CommonOptions.DateMath
 					)
 				);
 			
-			/** date's also implicitly convert to simple date math expressions */
+			/** `DateTime` also implicitly convert to simple date math expressions */
 			var date = new DateTime(2015, 05, 05);
 			Expect("2015-05-05T00:00:00").WhenSerializing<Nest.DateMath>(date)
-				/** the anchor will be an actual DateTime, even after a serialization - deserialization round trip */
+				/** the anchor will be an actual `DateTime`, even after a serialization/deserialization round trip */
 				.Result(dateMath => ((IDateMath)dateMath)
 				.	Anchor.Match(
 						d => d.Should().Be(date), 
@@ -55,19 +65,29 @@ namespace Tests.CommonOptions.DateMath
 
 		[U] public void ComplexExpressions()
 		{
-			/** Ranges can be chained on to simple expressions */
-			Expect("now+1d").WhenSerializing(Nest.DateMath.Now.Add("1d"));
+			/** === Complex Expressions
+			* Ranges can be chained on to simple expressions 
+			*/
+			Expect("now+1d").WhenSerializing(
+				Nest.DateMath.Now.Add("1d"));
 
-			/** plural means that you can chain multiple */
-			Expect("now+1d-1m").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
+			/** Including multiple operations */
+			Expect("now+1d-1m").WhenSerializing(
+				Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
 
-			/** a rounding value can also be chained at the end afterwhich no more ranges can be appended */
-			Expect("now+1d-1m/d").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)).RoundTo(Nest.TimeUnit.Day));
+			/** A rounding value can be chained to the end of the expression, after which no more ranges can be appended */
+			Expect("now+1d-1m/d").WhenSerializing(
+				Nest.DateMath.Now.Add("1d")
+					.Subtract(TimeSpan.FromMinutes(1))
+					.RoundTo(Nest.TimeUnit.Day));
 			
-			/** When anchoring date's we need to append `||` as clear separator between anchor and ranges */
-			/** plural means that you can chain multiple */
-			Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05,05)).Add("1d").Subtract(TimeSpan.FromMinutes(1)));
-
+			/** When anchoring dates, a `||` needs to be appended as clear separator between the anchor and ranges.
+			* Again, multiple ranges can be chained 
+			*/
+			Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(
+				Nest.DateMath.Anchored(new DateTime(2015,05,05))
+					.Add("1d")
+					.Subtract(TimeSpan.FromMinutes(1)));
 		}
 
 	}

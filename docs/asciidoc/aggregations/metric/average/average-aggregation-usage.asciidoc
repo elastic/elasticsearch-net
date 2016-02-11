@@ -1,0 +1,77 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[average-aggregation-usage]]
+== Average Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Average("average_commits", avg => avg
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+        .Field(p => p.NumberOfCommits)
+        .Missing(10)
+        .Script("_value * 1.2")
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
+    {
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        },
+        Missing = 10,
+        Script = new InlineScript("_value * 1.2")
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "average_commits": {
+      "meta": {
+        "foo": "bar"
+      },
+      "avg": {
+        "field": "numberOfCommits",
+        "missing": 10.0,
+        "script": {
+          "inline": "_value * 1.2"
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commitsAvg = response.Aggs.Average("average_commits");
+commitsAvg.Should().NotBeNull();
+commitsAvg.Value.Should().BeGreaterThan(0);
+commitsAvg.Meta.Should().NotBeNull().And.HaveCount(1);
+commitsAvg.Meta["foo"].Should().Be("bar");
+----
+

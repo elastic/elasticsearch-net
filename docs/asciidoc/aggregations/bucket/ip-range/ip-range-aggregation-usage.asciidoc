@@ -1,0 +1,77 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[ip-range-aggregation-usage]]
+== Ip Range Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .IpRange("ip_ranges", ip => ip
+        .Field(p => p.LeadDeveloper.IPAddress)
+        .Ranges(
+            r => r.To("10.0.0.5"),
+            r => r.From("10.0.0.5")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new IpRangeAggregation("ip_ranges")
+    {
+        Field = Field((Project p) => p.LeadDeveloper.IPAddress),
+        Ranges = new List<Nest.IpRange>
+        {
+            new Nest.IpRange { To = "10.0.0.5" },
+            new Nest.IpRange { From = "10.0.0.5" }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "leadDeveloper.iPAddress",
+        "ranges": [
+          {
+            "to": "10.0.0.5"
+          },
+          {
+            "from": "10.0.0.5"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var ipRanges = response.Aggs.IpRange("ip_ranges");
+ipRanges.Should().NotBeNull();
+ipRanges.Buckets.Should().NotBeNull();
+ipRanges.Buckets.Count.Should().BeGreaterThan(0);
+range.DocCount.Should().BeGreaterThan(0);
+----
+

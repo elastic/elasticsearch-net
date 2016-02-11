@@ -10,10 +10,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class VolatileUpdates
 	{
-		/** 
-		 * 
-		 */
-
+		/**== Volatile Updates */
 		protected int NumberOfNodes = 10;
 		private Random Random = new Random();
 
@@ -40,7 +37,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 
 		public void AssertCreateView(IConnectionPool pool)
 		{
-			/** 
+			/**
 			*/
 			var threads = Enumerable.Range(0, 50)
 				.Select(i => CreateReadAndUpdateThread(pool))

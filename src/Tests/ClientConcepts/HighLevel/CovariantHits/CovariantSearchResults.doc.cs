@@ -6,59 +6,59 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.HighLevel.CovariantHits
 {
-	/** # Covariant Search Results
-	 *
-	 * NEST directly supports returning covariant result sets.
-	 * Meaning a result can be typed to an interface or baseclass
-	 * but the actual instance type of the result can be that of the subclass directly
-	 *
-	 * Let look at an example, imagine we want to search over multiple types that all implement
-	 * `ISearchResult`
-	 *
-	 */
-	public interface ISearchResult
-	{
-		string Name { get; set; }
-	} 
-
-	/**
-	* We have three implementations of `ISearchResult` namely `A`, `B` and `C`
-	*/
-
-	public class A : ISearchResult
-	{
-		public string Name { get; set; }
-		public int PropertyOnA { get; set; }
-	} 
-
-	public class B : ISearchResult
-	{
-		public string Name { get; set; }
-		public int PropertyOnB { get; set; }
-	} 
-
-	public class C : ISearchResult
-	{
-		public string Name { get; set; }
-		public int PropertyOnC { get; set; }
-	} 
-
 	public class CovariantSearchResults
 	{
-		private IElasticClient _client = TestClient.GetFixedReturnClient(CovariantSearchResultMock.Json);
+		/**== Covariant Search Results
+		 *
+		 * NEST directly supports returning covariant result sets.
+		 * Meaning a result can be typed to an interface or base class
+		 * but the actual instance type of the result can be that of the subclass directly
+		 *
+		 * Let's look at an example; Imagine we want to search over multiple types that all implement
+		 * `ISearchResult`
+		 */
+		public interface ISearchResult
+		{
+			string Name { get; set; }
+		}
+
+		/**
+		* We have three implementations of `ISearchResult` namely `A`, `B` and `C`
+		*/
+		public class A : ISearchResult
+		{
+			public string Name { get; set; }
+			public int PropertyOnA { get; set; }
+		}
+
+		public class B : ISearchResult
+		{
+			public string Name { get; set; }
+			public int PropertyOnB { get; set; }
+		}
+
+		public class C : ISearchResult
+		{
+			public string Name { get; set; }
+			public int PropertyOnC { get; set; }
+		}
+
+
+		private readonly IElasticClient _client = TestClient.GetFixedReturnClient(CovariantSearchResultMock.Json);
+
 		[U] public void UsingTypes()
 		{
-			/**
+			/** === Using Types
 			* The most straightforward way to search over multiple types is to
 			* type the response to the parent interface or base class
-			* and pass the actual types we want to search over using `.Types()`
+			* and pass the actual types we want to search over using `.Type()`
 			*/
 			var result = this._client.Search<ISearchResult>(s => s
 				.Type(Types.Type(typeof(A), typeof(B), typeof(C)))
 				.Size(100)
 			);
 			/**
-			* Nest will translate this to a search over /index/a,b,c/_search. 
+			* NEST will translate this to a search over `/index/a,b,c/_search`; 
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
 			
@@ -91,7 +91,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 
 		[U] public void UsingConcreteTypeSelector()
 		{
-			/**
+			/** === Using ConcreteTypeSelector
 			* A more low level approach is to inspect the hit yourself and determine the CLR type to deserialize to
 			*/
 			var result = this._client.Search<ISearchResult>(s => s
@@ -100,8 +100,9 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			);
 
 			/**
-			* here for each hit we'll call the delegate with `d` which a dynamic representation of the `_source`
-			* and a typed `h` which represents the encapsulating hit.
+			* here for each hit we'll call the delegate passed to `ConcreteTypeSelector where 
+			* - `d` is a representation of the `_source` exposed as a `dynamic` type
+			* - a typed `h` which represents the encapsulating hit of the source i.e. `Hit<dynamic>`
 			*/
 			
 			/**
@@ -131,20 +132,19 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 		}
 
-		/** Scroll also supports CovariantSearchResponses
+		/** === Using CovariantTypes()
 		*/
-
 		[U] public void UsingCovariantTypesOnScroll()
 		{
 			/**
-			* Scroll() is a continuation of a previous Search() so Types() are lost. 
-			* You can hint the type types again using CovariantTypes()
+			* The Scroll API is a continuation of the previous Search example so Types() are lost. 
+			* You can hint at the types using `.CovariantTypes()`
 			*/
 			var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
 				.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
 			);
 			/**
-			* Nest will translate this to a search over /index/a,b,c/_search. 
+			* NEST will translate this to a search over `/index/a,b,c/_search`;
 			* hits that have `"_type" : "a"` will be serialized to `A` and so forth
 			*/
 			
@@ -185,8 +185,9 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			);
 
 			/**
-			* here for each hit we'll call the delegate with `d` which a dynamic representation of the `_source`
-			* and a typed `h` which represents the encapsulating hit.
+			* As before, within the delegate passed to `.ConcreteTypeSelector`
+			* - `d` is the `_source` typed as `dynamic`
+			* - `h` is the encapsulating typed hit
 			*/
 			
 			/**

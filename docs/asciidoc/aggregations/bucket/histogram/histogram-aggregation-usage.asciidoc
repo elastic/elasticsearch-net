@@ -1,0 +1,69 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[histogram-aggregation-usage]]
+== Histogram Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Histogram("commits", h => h
+        .Field(p => p.NumberOfCommits)
+        .Interval(100)
+        .Missing(0)
+        .Order(HistogramOrder.KeyDescending)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new HistogramAggregation("commits")
+    {
+        Field = Field<Project>(p => p.NumberOfCommits),
+        Interval = 100,
+        Missing = 0,
+        Order = HistogramOrder.KeyDescending
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "commits": {
+      "histogram": {
+        "field": "numberOfCommits",
+        "interval": 100.0,
+        "missing": 0.0,
+        "order": {
+          "_key": "desc"
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commits = response.Aggs.Histogram("commits");
+commits.Should().NotBeNull();
+item.DocCount.Should().BeGreaterThan(0);
+----
+

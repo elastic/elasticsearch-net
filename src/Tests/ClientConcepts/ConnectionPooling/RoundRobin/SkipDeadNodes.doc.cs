@@ -12,16 +12,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class SkippingDeadNodes
 	{
-		/** Round Robin - Skipping Dead Nodes
-		 * When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
-		 */
-
-		/** == GetNext
+		/** == Round Robin - Skipping Dead Nodes
+		*
+		* When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
+		*
+		* === GetNext
 		* GetNext is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 		* suffering from noisy neighboors advancing a global cursor.
 		*/
-
 		protected int NumberOfNodes = 3;
 
 		[U] public void EachViewSkipsAheadWithOne()
@@ -51,7 +50,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9202);
 			}
-			/** After we marke the first node alive again we expect it to be hit again*/
+			/** After we marked the first node alive again, we expect it to be hit again*/
 			seeds.First().MarkAlive();
 			for (var i = 0; i < 20; i++)
 			{
@@ -76,7 +75,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9202);
 			}
-			/** If we forward our clock 2 days the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
+			/** If we roll the clock forward two days, the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
 			dateTimeProvider.ChangeTime(d => d.AddDays(2));
 			var n = pool.CreateView().First();
 			n.Uri.Port.Should().Be(9201);
@@ -103,33 +102,33 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
-				new ClientCall { 
+				new ClientCall {
 					{ HealthyResponse, 9200},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0) }
 				},
-				/** The 2nd call does a ping on 9201 because its used for the first time. 
+				/** The 2nd call does a ping on 9201 because its used for the first time.
 				* It fails so we wrap over to node 9202 */
-				new ClientCall { 
+				new ClientCall {
 					{ BadResponse, 9201},
 					{ HealthyResponse, 9202},
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				},
 				/** The next call goes to 9203 which fails so we should wrap over */
-				new ClientCall { 
+				new ClientCall {
 					{ BadResponse, 9203},
 					{ HealthyResponse, 9200},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ HealthyResponse, 9202},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ HealthyResponse, 9200},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ HealthyResponse, 9202},
 					{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				},
@@ -153,7 +152,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 
 			await audit.TraceCalls(
 				/** All the calls fail */
-				new ClientCall { 
+				new ClientCall {
 					{ BadResponse, 9200},
 					{ BadResponse, 9201},
 					{ BadResponse, 9202},
@@ -165,25 +164,25 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				* each time to quickly see if the cluster is back up. We do not want to retry all 4
 				* nodes
 				*/
-				new ClientCall { 
+				new ClientCall {
 					{ AllNodesDead },
 					{ Resurrection, 9201},
 					{ BadResponse, 9201},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ AllNodesDead },
 					{ Resurrection, 9202},
 					{ BadResponse, 9202},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ AllNodesDead },
 					{ Resurrection, 9203},
 					{ BadResponse, 9203},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
 				},
-				new ClientCall { 
+				new ClientCall {
 					{ AllNodesDead },
 					{ Resurrection, 9200},
 					{ BadResponse, 9200},

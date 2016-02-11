@@ -1,0 +1,49 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[query-usage]]
+== Query Usage
+
+The query element within the search request body allows to define a query using the Query DSL.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Query(q => q
+    .Term(p => p.Name, "elasticsearch")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Query = new TermQuery
+    {
+        Field = "name",
+        Value = "elasticsearch"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "term": {
+      "name": {
+        "value": "elasticsearch"
+      }
+    }
+  }
+}
+----
+

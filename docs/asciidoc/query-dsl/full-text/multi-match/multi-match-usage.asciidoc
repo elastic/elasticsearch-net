@@ -1,0 +1,124 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[multi-match-usage]]
+== Multi Match Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Query("hello world")
+    .Analyzer("standard")
+    .Boost(1.1)
+    .Slop(2)
+    .Fuzziness(Fuzziness.Auto)
+    .PrefixLength(2)
+    .MaxExpansions(2)
+    .Operator(Operator.Or)
+    .MinimumShouldMatch(2)
+    .FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+    .TieBreaker(1.1)
+    .CutoffFrequency(0.001)
+    .Lenient()
+    .ZeroTermsQuery(ZeroTermsQuery.All)
+    .Name("named_query")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Query = "hello world",
+    Analyzer = "standard",
+    Boost = 1.1,
+    Slop = 2,
+    Fuzziness = Fuzziness.Auto,
+    PrefixLength = 2,
+    MaxExpansions = 2,
+    Operator = Operator.Or,
+    MinimumShouldMatch = 2,
+    FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+    TieBreaker = 1.1,
+    CutoffFrequency = 0.001,
+    Lenient = true,
+    ZeroTermsQuery = ZeroTermsQuery.All,
+    Name = "named_query",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "multi_match": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "query": "hello world",
+    "analyzer": "standard",
+    "fuzzy_rewrite": "constant_score_boolean",
+    "fuzziness": "AUTO",
+    "cutoff_frequency": 0.001,
+    "prefix_length": 2,
+    "max_expansions": 2,
+    "slop": 2,
+    "lenient": true,
+    "tie_breaker": 1.1,
+    "minimum_should_match": 2,
+    "operator": "or",
+    "fields": [
+      "description",
+      "myOtherField"
+    ],
+    "zero_terms_query": "all"
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    //.Fields(f => f.Field(p=>p.Description, 2.2).Field("myOtherField^0.3"))
+    .Fields(Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"))
+    .Query("hello world")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Fields = Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"),
+    Query = "hello world",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "multi_match": {
+    "query": "hello world",
+    "fields": [
+      "description^2.2",
+      "myOtherField^0.3"
+    ]
+  }
+}
+----
+

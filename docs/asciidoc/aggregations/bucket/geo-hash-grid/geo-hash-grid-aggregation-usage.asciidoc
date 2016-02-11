@@ -1,0 +1,66 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-hash-grid-aggregation-usage]]
+== Geo Hash Grid Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .GeoHash("my_geohash_grid", g => g
+        .Field(p => p.Location)
+        .GeoHashPrecision(GeoHashPrecision.Precision3)
+        .Size(1000)
+        .ShardSize(100)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new GeoHashGridAggregation("my_geohash_grid")
+    {
+        Field = Field<Project>(p => p.Location),
+        Precision = GeoHashPrecision.Precision3,
+        Size = 1000,
+        ShardSize = 100
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "my_geohash_grid": {
+      "geohash_grid": {
+        "field": "location",
+        "precision": 3,
+        "size": 1000,
+        "shard_size": 100
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var myGeoHashGrid = response.Aggs.GeoHash("my_geohash_grid");
+myGeoHashGrid.Should().NotBeNull();
+----
+

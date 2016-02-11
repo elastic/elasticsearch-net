@@ -1,0 +1,114 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[unary-add-operator-usage]]
+== Unary Add Operator Usage
+
+[source,csharp]
+----
+var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);
+
+LotsOfUnaryAdds(lotsOfUnaryAdds);
+----
+
+[source,csharp]
+----
+QueryContainer container = null;
+
+container &= +Query;
+
+LotsOfUnaryAdds(container);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+
+container &= +Query;
+
+LotsOfUnaryAdds(container);
+----
+
+[source,csharp]
+----
+lotsOfUnaryAdds.Should().NotBeNull();
+
+lotsOfUnaryAdds.Bool.Should().NotBeNull();
+
+lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+
+container |= +Query;
+
+var c = container as IQueryContainer;
+
+c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
+----
+
+[source,csharp]
+----
+ReturnsBool(+Query && +Query, q => +q.Query() && +q.Query(), b =>
+{
+    b.Filter.Should().NotBeEmpty().And.HaveCount(2);
+    b.Must.Should().BeNull();
+    b.Should.Should().BeNull();
+    b.MustNot.Should().BeNull();
+});
+b.Filter.Should().NotBeEmpty().And.HaveCount(2);
+b.Must.Should().BeNull();
+b.Should.Should().BeNull();
+b.MustNot.Should().BeNull();
+ReturnsBool(+Query || +Query || +ConditionlessQuery, q => +q.Query() || +q.Query() || +q.ConditionlessQuery(), b =>
+{
+    b.Should.Should().NotBeEmpty().And.HaveCount(2);
+    b.Must.Should().BeNull();
+    b.MustNot.Should().BeNull();
+    b.MustNot.Should().BeNull();
+    foreach (IQueryContainer q in b.Should)
+    {
+        q.Bool.Should().NotBeNull();
+        q.Bool.Filter.Should().NotBeEmpty().And.HaveCount(1);
+    }
+});
+b.Should.Should().NotBeEmpty().And.HaveCount(2);
+b.Must.Should().BeNull();
+b.MustNot.Should().BeNull();
+b.MustNot.Should().BeNull();
+q.Bool.Should().NotBeNull();
+q.Bool.Filter.Should().NotBeEmpty().And.HaveCount(1);
+ReturnsSingleQuery(+Query || +ConditionlessQuery, q => +q.Query() || +q.ConditionlessQuery(),
+    c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
+ReturnsSingleQuery(+ConditionlessQuery || +Query, q => +q.ConditionlessQuery() || +q.Query(),
+    c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
+ReturnsSingleQuery(+Query || +NullQuery, q => +q.Query() || +q.NullQuery(),
+    c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
+ReturnsSingleQuery(+NullQuery && +Query, q => +q.NullQuery() && +q.Query(),
+    c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
+ReturnsSingleQuery(+ConditionlessQuery || +ConditionlessQuery && +ConditionlessQuery || +Query,
+    q => +q.ConditionlessQuery() || +q.ConditionlessQuery() && +q.ConditionlessQuery() || +q.Query(),
+    c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
+ReturnsSingleQuery(
+    +NullQuery || +NullQuery || +ConditionlessQuery || +Query,
+    q => +q.NullQuery() || +q.NullQuery() || +q.ConditionlessQuery() || +q.Query(),
+    c => c.Bool.Filter.Should().NotBeNull());
+ReturnsNull(+NullQuery || +ConditionlessQuery, q => +q.NullQuery() || +q.ConditionlessQuery());
+ReturnsNull(+ConditionlessQuery && +NullQuery, q => +q.ConditionlessQuery() && +q.NullQuery());
+ReturnsNull(+ConditionlessQuery || +ConditionlessQuery, q => +q.ConditionlessQuery() || +q.ConditionlessQuery());
+ReturnsNull(
+    +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery,
+    q => +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery()
+
+);
+ReturnsNull(
+    +NullQuery || +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery,
+    q => +q.NullQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery()
+);
+----
+

@@ -1,0 +1,56 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-hash-cell-query-usage]]
+== Geo Hash Cell Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoHashCell(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .Location(new GeoLocation(13.4080, 52.5186))
+    .Neighbors()
+    .Precision(Nest.Distance.Meters(3))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoHashCellQuery
+{
+    Boost = 1.1,
+    Name = "named_query",
+    Field = Infer.Field<Project>(p=>p.Location),
+    Location = new GeoLocation(13.4080, 52.5186),
+    Neighbors = true,
+    Precision = Nest.Distance.Meters(3)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geohash_cell": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "precision": "3.0m",
+    "neighbors": true,
+    "location": {
+      "lat": 13.408,
+      "lon": 52.5186
+    }
+  }
+}
+----
+

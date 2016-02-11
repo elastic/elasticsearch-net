@@ -6,6 +6,11 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
+	/** 
+	* Filters documents that have fields that match any of the provided terms (not analyzed).
+	*
+	* Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-terms-query.html[Terms query] for more information.
+	*/
 	public class TermsQueryUsageTests : QueryDslUsageTestsBase
 	{
 		protected virtual string[] ExpectedTerms => new [] { "term1", "term2" };
@@ -53,6 +58,9 @@ namespace Tests.QueryDsl.TermLevel.Terms
 		};
 	}
 
+	/**[float]
+	*== Single term Terms Query 
+	*/
 	public class SingleTermTermsQueryUsageTests : TermsQueryUsageTests
 	{
 		protected override string[] ExpectedTerms => new [] { "term1"  };

@@ -1,0 +1,139 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[date-histogram-aggregation-usage]]
+== Date Histogram Aggregation Usage
+
+A multi-bucket aggregation similar to the histogram except it can only be applied on date values.
+From a functionality perspective, this histogram supports the same features as the normal histogram.
+The main difference is that the interval can be specified by date/time expressions.
+
+NOTE: When specifying a `format` **and** `extended_bounds`, in order for Elasticsearch to be able to parse
+the serialized `DateTime` of `extended_bounds` correctly, the `date_optional_time` format is included
+as part of the `format` value.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(aggs => aggs
+    .DateHistogram("projects_started_per_month", date => date
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .MinimumDocumentCount(2)
+        .Format("yyyy-MM-dd'T'HH:mm:ss")
+        .ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+        .Order(HistogramOrder.CountAscending)
+        .Missing(FixedDate)
+        .Aggregations(childAggs => childAggs
+            .Nested("project_tags", n => n
+                .Path(p => p.Tags)
+                .Aggregations(nestedAggs => nestedAggs
+                    .Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+                )
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = Field<Project>(p => p.StartedOn),
+        Interval = DateInterval.Month,
+        MinimumDocumentCount = 2,
+        Format = "yyyy-MM-dd'T'HH:mm:ss",
+        ExtendedBounds = new ExtendedBounds<DateTime>
+        {
+            Minimum = FixedDate.AddYears(-1),
+            Maximum = FixedDate.AddYears(1),
+        },
+        Order = HistogramOrder.CountAscending,
+        Missing = FixedDate,
+        Aggregations = new NestedAggregation("project_tags")
+        {
+            Path = Field<Project>(p => p.Tags),
+            Aggregations = new TermsAggregation("tags")
+            {
+                Field = Field<Project>(p => p.Tags.First().Name)
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month",
+        "min_doc_count": 2,
+        "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+        "order": {
+          "_count": "asc"
+        },
+        "extended_bounds": {
+          "min": "2014-06-06T12:01:02.123",
+          "max": "2016-06-06T12:01:02.123"
+        },
+        "missing": "2015-06-06T12:01:02.123"
+      },
+      "aggs": {
+        "project_tags": {
+          "nested": {
+            "path": "tags"
+          },
+          "aggs": {
+            "tags": {
+              "terms": {
+                "field": "tags.name"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling responses
+
+Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily
+in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+
+var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
+dateHistogram.Should().NotBeNull();
+dateHistogram.Buckets.Should().NotBeNull();
+dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
+item.Date.Should().NotBe(default(DateTime));
+item.DocCount.Should().BeGreaterThan(0);
+var nested = item.Nested("project_tags");
+nested.Should().NotBeNull();
+var nestedTerms = nested.Terms("tags");
+nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+----
+

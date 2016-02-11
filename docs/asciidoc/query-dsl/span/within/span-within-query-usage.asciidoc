@@ -1,0 +1,64 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[span-within-query-usage]]
+== Span Within Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanWithin(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Little(i=>i
+        .SpanTerm(st=>st.Field("field1").Value("hoya"))
+    )
+    .Big(e=>e
+        .SpanTerm(st=>st.Field("field1").Value("hoya2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanWithinQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
+    Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_within": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "little": {
+      "span_term": {
+        "field1": {
+          "value": "hoya"
+        }
+      }
+    },
+    "big": {
+      "span_term": {
+        "field1": {
+          "value": "hoya2"
+        }
+      }
+    }
+  }
+}
+----
+
