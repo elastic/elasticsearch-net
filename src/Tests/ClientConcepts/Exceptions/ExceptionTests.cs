@@ -45,7 +45,12 @@ namespace Tests.ClientConcepts.Exceptions
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo());
 			var inner = exception.InnerException;
+#if DOTNETCORE
+			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
+			inner.Should().BeNull();
+#else
 			inner.Should().NotBeNull();
+#endif
 		}
 
 		[I]
@@ -70,7 +75,12 @@ namespace Tests.ClientConcepts.Exceptions
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
 			var client = new ElasticClient(settings);
 			var response = client.RootNodeInfo();
+#if DOTNETCORE
+			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
+			response.CallDetails.OriginalException.Should().BeNull();
+#else
 			response.CallDetails.OriginalException.Should().NotBeNull();
+#endif
 			response.CallDetails.ServerError.Should().BeNull();
 		}
 	}
