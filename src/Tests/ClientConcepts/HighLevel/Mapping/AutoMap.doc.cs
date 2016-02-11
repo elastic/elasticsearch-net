@@ -286,7 +286,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 		/** ## Automap with attributes
 		 * It is also possible to define your mappings using attributes on your POCOS.  When you
-		 * use attributes, you MUST use AutoMap() in order for the attributes to be applied.
+		 * use attributes, you *must* use `.AutoMap()` in order for the attributes to be applied.
 		 * Here we define the same two types but this time using attributes.
 		 */
 		[ElasticsearchType(Name = "company")]
@@ -325,6 +325,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public List<Employee> Employees { get; set; }
 		}
 
+		/**
+			Then map the types by calling `.AutoMap()`
+		*/
 		[U]
 		public void UsingAutoMapWithAttributes()
 		{
@@ -466,7 +469,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
+			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
 		/**
@@ -636,6 +639,19 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
+		/** == Ignoring Properties
+		* Properties on a POCO can be ignored in a few ways:  
+		*
+		* - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
+		*
+		* - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
+		*
+		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
+		*
+		* This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property `PropertyToIgnore`, the infer mapping to ignore the 
+		* property `AnotherPropertyToIgnore` and the json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
+		*/
+
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributesAndPropertiesToIgnore
 		{
@@ -650,25 +666,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public string JsonIgnoredProperty { get; set; }
 		}
 
-		/** == Ignoring Properties
-		 * Properties on a POCO can be ignored in a few ways:  
-		 */
-		/**
-		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
-		 */
-		/**
-		 * - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
-		 */
-		/**
-		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used and inspected inside of `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
-		*/
-		/**
-		 * This example demonstrates all ways, using the attribute way to ignore the property `PropertyToIgnore`, the infer mapping way to ignore the 
-		 * property `AnotherPropertyToIgnore` and the json serializer specific attribute way to ignore the property `JsonIgnoredProperty`
-		 */
 		[U]
 		public void IgnoringProperties()
 		{
+			/** All of the properties except `Name` have been ignored in the mapping */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<CompanyWithAttributesAndPropertiesToIgnore>(m => m
@@ -702,18 +703,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/**
-		 * If you notice in our previous Company/Employee examples, the Employee type is recursive
-		 * in that itself contains a collection of type `Employee`.  By default, `.AutoMap()` will only
+		/** == Mapping Recursion
+		 * If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
+		 * in that the `Employee` class itself contains a collection of type `Employee`. By default, `.AutoMap()` will only
 		 * traverse a single depth when it encounters recursive instances like this.  Hence, in the
-		 * previous examples, the second level of Employee did not get any of its properties mapped.
+		 * previous examples, the collection of type `Employee` on the `Employee` class did not get any of its properties mapped.
 		 * This is done as a safe-guard to prevent stack overflows and all the fun that comes with
 		 * infinite recursion.  Additionally, in most cases, when it comes to Elasticsearch mappings, it is
 		 * often an edge case to have deeply nested mappings like this.  However, you may still have
-		 * the need to do this, so you can control the recursion depth of AutoMap().
+		 * the need to do this, so you can control the recursion depth of `.AutoMap()`.
 		 *
-		 * Let's introduce a very simple class A, to reduce the noise, which itself has a property
-		 * Child of type A.
+		 * Let's introduce a very simple class, `A`, which itself has a property
+		 * Child of type `A`.
 		 */
 		public class A
 		{
@@ -723,7 +724,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void ControllingRecursionDepth()
 		{
-			/** By default, AutoMap() only goes as far as depth 1 */
+			/** By default, `.AutoMap()` only goes as far as depth 1 */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<A>(m => m.AutoMap())
@@ -756,7 +757,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					.Map<A>(m => m.AutoMap(3))
 				);
 
-			/** AutoMap() has now mapped three levels of our Child property */
+			/** `.AutoMap()` has now mapped three levels of our Child property */
 			var expectedWithMaxRecursion = new
 			{
 				mappings = new
@@ -799,24 +800,24 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
-		/** # Applying conventions through the Visitor pattern
+		/** == Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
-		 * AutoMap internally implements the visitor pattern.  The default visitor `NoopPropertyVisitor` does 
-		 * nothing, and acts as a blank canvas for you to implement your own visiting methods.
+		 * AutoMap internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].  The default visitor, `NoopPropertyVisitor`, 
+		 * does nothing and acts as a blank canvas for you to implement your own visiting methods.
 		 *
 		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
 		 * (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 		 */
 		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 		{
-			/** Override the Visit method on INumberProperty and set DocValues = false */
+			// Override the Visit method on INumberProperty and set DocValues = false
 			public override void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 			{
 				type.DocValues = false;
 			}
 
-			/** Similarily, override the Visit method on IBooleanProperty and set DocValues = false */
+			// Similarily, override the Visit method on IBooleanProperty and set DocValues = false
 			public override void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 			{
 				type.DocValues = false;
@@ -826,15 +827,15 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingACustomPropertyVisitor()
 		{
-			/** Now we can pass an instance of our custom visitor to AutoMap() */
+			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 				);
 
-			/** and anytime it maps a property as a number (INumberProperty) or boolean (IBooleanProperty) 
+			/** and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBooleanProperty`) 
 			 * it will apply the transformation defined in each Visit() respectively, which in this example
-			 * disables doc values.
+			 * disables https://www.elastic.co/guide/en/elasticsearch/guide/current/doc-values.html[doc values].
 			 */
 			var expected = new
 			{
@@ -878,8 +879,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/** You can even take the visitor approach a step further, and instead of visiting on IProperty types, visit
-		 * directly on your POCO properties (PropertyInfo).  For example, lets create a visitor that maps all CLR types 
-		 * to an Elasticsearch string (IStringProperty).
+		 * directly on your POCO properties (`PropertyInfo`).  For example, let's create a visitor that maps all CLR types 
+		 * to an Elasticsearch string (`IStringProperty`).
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{

@@ -7,13 +7,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class DocumentPaths
 	{
-		/** # DocumentPaths
+		/** = DocumentPaths
+		 *
 		 * Many API's in elasticsearch describe a path to a document. In NEST besides generating a constructor that takes
 		 * and Index, Type and Id seperately we also generate a constructor taking a DocumentPath that allows you to describe the path
 		 * to your document more succintly 
 		 */
 
-		/** Manually newing */
+		/** == Creating new instances */
 		[U] public void FromId()
 		{
 			/** here we create a new document path based on Project with the id 1 */
@@ -36,12 +37,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect(1).WhenSerializing(path.Id);
 		}
 
-		//** if you have an instance of your document you can use it as well generate document paths */
+		/** == Creating from a document type instance
+		 * if you have an instance of your document you can use it as well generate document paths 
+		 */
 		[U] public void FromObject()
 		{
 			var project = new Project { Name = "hello-world" };
 
-			/** here we create a new document path based on a Project */
+			/** here we create a new document path based on the instance of `Project`, project */
 			IDocumentPath path = new DocumentPath<Project>(project);
 			Expect("project").WhenSerializing(path.Index);
 			Expect("project").WhenSerializing(path.Type);
@@ -72,7 +75,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			request = new IndexRequest<Project>(project) { };
 			
 			/** when comparing with the full blown constructor and passing document manually 
-			* DocumentPath&lt;T&gt;'s benefits become apparent. 
+			* `DocumentPath<T>`'s benefits become apparent. 
 			*/
 			request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
 			{
