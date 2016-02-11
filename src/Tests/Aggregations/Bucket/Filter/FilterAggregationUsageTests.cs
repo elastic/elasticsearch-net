@@ -95,7 +95,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			{
 				empty_filter = new
 				{
-					filter = new object()
+					filter = new {}
 				}
 			}
 		};
