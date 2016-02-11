@@ -1,5 +1,5 @@
 
-Our Json.NET contract resolver picks up attributes set on the interface
+Our Json.NET contract resolver picks up attributes set on the interface
 
 
 [source, csharp]

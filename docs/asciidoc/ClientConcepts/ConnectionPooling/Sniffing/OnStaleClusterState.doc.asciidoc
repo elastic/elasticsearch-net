@@ -1,9 +1,9 @@
-== Sniffing periodically
+== Sniffing periodically
 
-Connection pools that return true for `SupportsReseeding` can be configured to sniff periodically.
-In addition to sniffing on startup and sniffing on failures, sniffing periodically can benefit scenerio's where
-clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
-but without sniffing periodically it will never find the nodes that have been added to help out with load
+Connection pools that return true for `SupportsReseeding` can be configured to sniff periodically.
+In addition to sniffing on startup and sniffing on failures, sniffing periodically can benefit scenerio's where
+clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
+but without sniffing periodically it will never find the nodes that have been added to help out with load
 
 
 [source, csharp]
@@ -52,42 +52,35 @@ audit = await audit.TraceCalls(
 	}
 );
 ----
-Now let's forward the clock 31 minutes, our sniff lifespan should now go state
-and the first call should do a sniff which discovered we scaled up to a 100 nodes!
+Now let's forward the clock 31 minutes, our sniff lifespan should now go state
+and the first call should do a sniff which discovered we scaled up to a 100 nodes!
+
 
 [source, csharp]
 ----
 audit.ChangeTime(d => d.AddMinutes(31));
 ----
-[source, csharp]
-----
-audit = await audit.TraceCalls(
-	new ClientCall {
-----
 a sniff is done first and it prefers the first node master node 
 
 [source, csharp]
 ----
+audit = await audit.TraceCalls(
+	new ClientCall {
 { SniffOnStaleCluster },
 		{ SniffSuccess, 9202 },
 		{ HealthyResponse, 9201 },
 		{ pool => pool.Nodes.Count.Should().Be(100) }
 	}
 );
-----
-[source, csharp]
-----
+
 audit.ChangeTime(d => d.AddMinutes(31));
-----
-[source, csharp]
-----
-audit = await audit.TraceCalls(
-	new ClientCall {
 ----
 a sniff is done first and it prefers the first node master node 
 
 [source, csharp]
 ----
+audit = await audit.TraceCalls(
+	new ClientCall {
 { SniffOnStaleCluster },
 		{ SniffSuccess, 9202 },
 		{ HealthyResponse, 9200 },

@@ -51,4 +51,44 @@ var syncMethod = methodGroup.First(g =>
                             g.MethodInfo.GetGenericArguments().Length == asyncMethod.MethodInfo.GetGenericArguments().Length));
 asyncMethod.Parameter.HasDefaultValue.Should().Be(syncMethod.Parameter.HasDefaultValue,
                         $"sync and async versions of {asyncMethod.MethodType} '{nameof(ElasticClient)}{methodGroup.Key}' should match");
+
+private class MethodWithRequestParameter
+	    {
+            public string Name { get; }
+
+	        public MethodInfo MethodInfo { get; }
+
+            public bool IsAsync { get; }
+
+            public ClientMethodType MethodType { get; }
+
+	        public ParameterInfo Parameter { get; }
+
+	        public MethodWithRequestParameter(MethodInfo methodInfo)
+	        {
+	            Name = methodInfo.Name.EndsWith("Async")
+	                ? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)
+	                : methodInfo.Name;
+
+	            IsAsync = methodInfo.ReturnType.IsGeneric() &&
+	                      methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
+
+                MethodInfo = methodInfo;
+
+	            var parameterInfo = methodInfo.GetParameters()
+                    .FirstOrDefault(p => typeof(IRequest).IsAssignableFrom(p.ParameterType));
+
+	            if (parameterInfo != null)
+	            {
+                    Parameter = parameterInfo;
+                    MethodType = ClientMethodType.Initializer;
+                }
+	            else
+	            {
+	                Parameter = methodInfo.GetParameters()
+	                    .First(p => p.ParameterType.BaseType() == typeof(MulticastDelegate));
+                    MethodType = ClientMethodType.Fluent;
+	            }
+	        }
+	    }
 ----

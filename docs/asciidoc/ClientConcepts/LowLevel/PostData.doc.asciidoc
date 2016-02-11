@@ -1,18 +1,16 @@
-# Post data
-The low level allows you to post a string, byte[] array directly. On top of this if you pass a list of strings or objects
-they will be serialized in Elasticsearch's special bulk/multi format.
+# Post data
+The low level allows you to post a string, byte[] array directly. On top of this if you pass a list of strings or objects
+they will be serialized in Elasticsearch's special bulk/multi format.
 
 
-Even though the argument for postData on the low level client takes a PostData
-You can rely on C# implicit conversion to abstract the notion of PostData completely.
+Even though the argument for postData on the low level client takes a PostData
+You can rely on C# implicit conversion to abstract the notion of PostData completely.
 You can implicitly convert from the following types.
 
 [source, csharp]
 ----
 var fromString = ImplicitlyConvertsFrom(@string);
-----
-[source, csharp]
-----
+
 var fromByteArray = ImplicitlyConvertsFrom(bytes);
 var fromListOfString = ImplicitlyConvertsFrom(listOfStrings);
 var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
@@ -23,9 +21,7 @@ postData Bytes will always be set if it originated from a byte
 [source, csharp]
 ----
 fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
-----
-[source, csharp]
-----
+
 fromString.Type.Should().Be(PostType.LiteralString);
 fromByteArray.Type.Should().Be(PostType.ByteArray);
 fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
@@ -49,20 +45,20 @@ Although each implicitly types behaves slightly differently
 [source, csharp]
 ----
 await Post(()=>@string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
-----
-[source, csharp]
-----
+
 await Post(()=>bytes, writes: bytes, storesBytes: true, settings: settings);
 ----
-When passing a list of strings we assume its a list of valid serialized json that we 
+When passing a list of strings we assume its a list of valid serialized json that we 
 join with newlinefeeds making sure there is a trailing linefeed 
 
 [source, csharp]
 ----
 await Post(()=>listOfStrings, writes: multiStringJson, storesBytes: true, settings: settings);
 ----
-When passing a list of object we assume its a list of objects we need to serialize
-individually to json and join with newlinefeeds aking sure there is a trailing linefeed 
+
+When passing a list of object we assume its a list of objects we need to serialize
+individually to json and join with newlinefeeds aking sure there is a trailing linefeed 
+
 
 [source, csharp]
 ----
@@ -80,7 +76,7 @@ If you want to maintain a copy of the request that went out use the following se
 ----
 settings = new ConnectionSettings().DisableDirectStreaming();
 ----
-by forcing `DisableDirectStreaming` serializing happens first in a private MemoryStream 
+by forcing `DisableDirectStreaming` serializing happens first in a private MemoryStream 
 so we can get a hold of the serialized bytes 
 
 [source, csharp]
@@ -92,9 +88,7 @@ this behavior can also be observed when serializing a simple object using `Disab
 [source, csharp]
 ----
 await Post(()=>@object, writes: objectJson, storesBytes: true, settings: settings);
-----
-[source, csharp]
-----
+
 PostAssert(postData(), writes, storesBytes, settings);
 await PostAssertAsync(postData(), writes, storesBytes, settings);
 postData.Write(ms, settings);

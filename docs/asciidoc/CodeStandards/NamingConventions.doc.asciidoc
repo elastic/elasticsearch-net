@@ -1,11 +1,11 @@
-# Naming Conventions
+# Naming Conventions
 
-NEST uses the following naming conventions (with _some_ exceptions).
+NEST uses the following naming conventions (with _some_ exceptions).
 
 
-## Class Names
+## Class Names
 
-Abstract class names should end with a `Base` suffix
+Abstract class names should end with a `Base` suffix
 
 
 [source, csharp]
@@ -22,7 +22,7 @@ var abstractClasses = typeof(IRequest).Assembly().GetTypes()
 abstractClasses.Should().BeEmpty();
 ----
 
-Class names that end with `Base` suffix are abstract
+Class names that end with `Base` suffix are abstract
 
 
 [source, csharp]
@@ -36,9 +36,9 @@ var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
 				.ToList();
 baseClassesNotAbstract.Should().BeEmpty();
 ----
-## Requests and Responses
+## Requests and Responses
 
-Request class names should end with `Request`
+Request class names should end with `Request`
 
 
 [source, csharp]
@@ -53,7 +53,7 @@ var requests = types
 requests.Should().BeEmpty();
 ----
 
-Response class names should end with `Response`
+Response class names should end with `Response`
 
 
 [source, csharp]
@@ -67,10 +67,10 @@ var responses = types
 responses.Should().BeEmpty();
 ----
 
-Request and Response class names should be one to one in *most* cases.
-e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
-There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
-`Exists` requests.
+Request and Response class names should be one to one in *most* cases.
+e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
+There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
+`Exists` requests.
 
 
 [source, csharp]
