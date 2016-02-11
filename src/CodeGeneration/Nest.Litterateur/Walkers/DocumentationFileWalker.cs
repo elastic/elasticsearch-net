@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis.Text;
 using Nest.Litterateur.Documentation.Blocks;
 
 namespace Nest.Litterateur.Walkers
@@ -26,14 +28,26 @@ namespace Nest.Litterateur.Walkers
 			if (ClassDepth == 1)
 			{
 				base.VisitClassDeclaration(node);
-			}
-			// are we dealing with a simple nested POCO?
+			}				
 			else if (node.ChildNodes().All(childNode => childNode is PropertyDeclarationSyntax || childNode is AttributeListSyntax))
-			{ 
+			{
+				// simple nested POCO	
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				var walker = new CodeWithDocumentationWalker(ClassDepth - 2, line);
 				walker.Visit(node);
 				this.Blocks.AddRange(walker.Blocks);
+			}
+			else
+			{
+				var methods = node.ChildNodes().OfType<MethodDeclarationSyntax>();
+				if (!methods.Any(m => m.AttributeLists.SelectMany(a => a.Attributes).Any()))
+				{
+					// nested class with methods that are not unit or integration tests e.g. example PropertyVisitor
+					var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+					var walker = new CodeWithDocumentationWalker(ClassDepth - 2, line);
+					walker.Visit(node);
+					this.Blocks.AddRange(walker.Blocks);
+				}
 			}
 			--ClassDepth;
 		}
@@ -131,23 +145,21 @@ namespace Nest.Litterateur.Walkers
 			}
 
 			this.InsideMultiLineDocumentation = true;
-			this.CreateTextBlocksFromTrivia(trivia);
-			this.InsideMultiLineDocumentation = false;
-		}
 
-		private void CreateTextBlocksFromTrivia(SyntaxTrivia trivia)
-		{
 			var tokens = trivia.ToFullString().TrimStart('/', '*').TrimEnd('*', '/').Split('\n');
 			var builder = new StringBuilder();
+
 			foreach (var token in tokens)
 			{
-				var decodedToken = System.Net.WebUtility.HtmlDecode(token.Trim().Trim('*').Trim());
+				var decodedToken = System.Net.WebUtility.HtmlDecode(token.TrimStart().TrimStart('*').TrimStart());
 				builder.AppendLine(decodedToken);
 			}
 
 			var text = builder.ToString();
 			var line = trivia.SyntaxTree.GetLineSpan(trivia.Span).StartLinePosition.Line;
 			this.Blocks.Add(new TextBlock(text, line));
+
+			this.InsideMultiLineDocumentation = false;
 		}
 	}
 }

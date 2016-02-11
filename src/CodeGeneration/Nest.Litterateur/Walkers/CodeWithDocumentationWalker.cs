@@ -30,7 +30,7 @@ namespace Nest.Litterateur.Walkers
 		/// We want to support inlining /** */ documentations because its super handy 
 		/// to document fluent code, what ensues is total hackery
 		/// </summary>
-		/// <param name="classDepth"></param>
+		/// <param name="classDepth">the depth of the class</param>
 		/// <param name="lineNumber">line number used for sorting</param>
 		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null) : base(SyntaxWalkerDepth.StructuredTrivia) 
 		{
@@ -51,14 +51,8 @@ namespace Nest.Litterateur.Walkers
 				_code = Regex.Replace(_code, $"\t{{{repeatedTabs},}}", match => match.Value.Substring(repeatedTabs));
 
 				var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-
 				var line = _lineNumberOverride ?? nodeLine;
-
-				var codeBlocks = Regex.Split(_code, @"\/\*\*.*?\*\/", RegexOptions.Singleline)
-					.Select(b => b.TrimStart('\r', '\n').TrimEnd('\r', '\n', '\t'))
-					.Where(b => !string.IsNullOrEmpty(b) && b != ";")
-					.Select(b=>new CodeBlock(b, line))
-					.ToList();
+				var codeBlocks = ParseCodeBlocks(_code, line);
 
 				base.Visit(node);
 
@@ -79,20 +73,15 @@ namespace Nest.Litterateur.Walkers
 				_firstVisit = false;
 				foreach (var statement in node.Statements)
 				{
-					var leadingTabs = new string('\t', 3 + ClassDepth);
+					var repeatedTabs = 3 + ClassDepth;
 					SyntaxNode formattedStatement = statement;
 
-					_code = formattedStatement.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString().Replace(leadingTabs, string.Empty);
+					_code = formattedStatement.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString();
+					_code = Regex.Replace(_code, $"\t{{{repeatedTabs},}}", match => match.Value.Substring(repeatedTabs));
 
 					var nodeLine = formattedStatement.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-
 					var line = _lineNumberOverride ?? nodeLine;
-
-					var codeBlocks = Regex.Split(_code, @"\/\*\*.*?\*\/", RegexOptions.Singleline)
-						.Select(b => b.TrimStart('\r', '\n').TrimEnd('\r', '\n', '\t'))
-						.Where(b => !string.IsNullOrEmpty(b) && b != ";")
-						.Select(b => new CodeBlock(b, line))
-						.ToList();
+					var codeBlocks = ParseCodeBlocks(_code, line);
 
 					this.Blocks.AddRange(codeBlocks);
 				}
@@ -101,19 +90,38 @@ namespace Nest.Litterateur.Walkers
 			}
 		}
 
-		public override void VisitXmlText(XmlTextSyntax node)
+		public override void VisitTrivia(SyntaxTrivia trivia)
 		{
-			var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-			var line = _lineNumberOverride ?? nodeLine;
-			var text = node.TextTokens
-				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
-				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
+			if (trivia.Kind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
+			{
+				base.VisitTrivia(trivia);
+				return;
+			}
 
-			this.TextBlocks.Add(new TextBlock(text, line));
+			var tokens = trivia.ToFullString().TrimStart('/', '*').TrimEnd('*', '/').Split('\n');
+			var builder = new StringBuilder();
 
-			base.VisitXmlText(node);
+			foreach (var token in tokens)
+			{
+				var decodedToken = System.Net.WebUtility.HtmlDecode(token.TrimStart().TrimStart('*').TrimStart());
+				builder.AppendLine(decodedToken);
+			}
+
+			var text = builder.ToString();
+			var line = _firstVisit
+				? trivia.SyntaxTree.GetLineSpan(trivia.Span).StartLinePosition.Line
+				: _lineNumberOverride.GetValueOrDefault(0);
+
+			this.Blocks.Add(new TextBlock(text, line));
 		}
 
-
+		private List<CodeBlock> ParseCodeBlocks(string code, int line)
+		{
+			return Regex.Split(code, @"\/\*\*.*?\*\/", RegexOptions.Singleline)
+				.Select(b => b.TrimStart('\r', '\n').TrimEnd('\r', '\n', '\t'))
+				.Where(b => !string.IsNullOrEmpty(b) && b != ";")
+				.Select(b => new CodeBlock(b, line))
+				.ToList();
+		}
 	}
 }

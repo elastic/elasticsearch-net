@@ -13,28 +13,59 @@ namespace Nest.Litterateur.Documentation.Files
 	{
 		internal CSharpDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
-		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks, StringBuilder builder = null)
+		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks)
 		{
-			var sb = builder ?? new StringBuilder();
+			var builder = new StringBuilder();
+			var lastBlockWasCodeBlock = false;
+
+			RenderBlocksToDocumentation(blocks, builder, ref lastBlockWasCodeBlock);
+			if (lastBlockWasCodeBlock) builder.AppendLine("----");
+
+			RenderFooter(builder);
+
+			return builder.ToString();
+		}
+
+		private void RenderFooter(StringBuilder builder)
+		{
+			builder.AppendLine(":ref:  http://www.elastic.co/guide/elasticsearch/reference/current");
+		}
+
+		private void RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks, StringBuilder builder, ref bool lastBlockWasCodeBlock)
+		{
 			foreach (var block in blocks)
 			{
 				if (block is TextBlock)
 				{
-					sb.AppendLine(block.Value);
+					if (lastBlockWasCodeBlock)
+					{
+						lastBlockWasCodeBlock = false;
+						builder.AppendLine("----");
+					}
+
+					builder.AppendLine(block.Value);
 				}
 				else if (block is CodeBlock)
 				{
-					sb.AppendLine("[source, csharp]");
-					sb.AppendLine("----");
-					sb.AppendLine(block.Value);
-					sb.AppendLine("----");
+					if (!lastBlockWasCodeBlock)
+					{
+						builder.AppendLine("[source, csharp]");
+						builder.AppendLine("----");
+					}
+					else
+					{
+						builder.AppendLine();
+					}
+
+					builder.AppendLine(block.Value);
+					lastBlockWasCodeBlock = true;
 				}
 				else if (block is CombinedBlock)
 				{
-					RenderBlocksToDocumentation(MergeAdjacentCodeBlocks(((CombinedBlock)block).Blocks), sb);
+					var mergedBlocks = MergeAdjacentCodeBlocks(((CombinedBlock)block).Blocks);
+					RenderBlocksToDocumentation(mergedBlocks, builder, ref lastBlockWasCodeBlock);
 				}
 			}
-			return sb.ToString();
 		}
 
 		private List<IDocumentationBlock> MergeAdjacentCodeBlocks(IEnumerable<IDocumentationBlock> unmergedBlocks)
@@ -58,7 +89,7 @@ namespace Nest.Litterateur.Documentation.Files
 					blocks.Add(b);
 					continue;
 				}
-				
+
 				//wait with adding codeblocks
 				if (collapseCodeBlocks == null) collapseCodeBlocks = new List<string>();
 				collapseCodeBlocks.Add(b.Value);
