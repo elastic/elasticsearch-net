@@ -38,7 +38,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public DateTime Birthday { get; set; }
 			public bool IsManager { get; set; }
 			public List<Employee> Employees { get; set; }
-			public TimeSpan Hours { get; set;}
+			public TimeSpan Hours { get; set; }
 		}
 
 		[U]
@@ -115,7 +115,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		[U]
@@ -168,7 +168,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									hours = new
 									{
-										type = "long" 
+										type = "long"
 									},
 									isManager = new
 									{
@@ -229,7 +229,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/** ## Automapping with overrides
@@ -237,7 +237,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* various options on your properties (analyzer, doc_values, etc...).  In that case, it's
 		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
 		*/
-		[U] public void OverridingAutoMappedProperties()
+		[U]
+		public void OverridingAutoMappedProperties()
 		{
 			/**
 			* Here we are using AutoMap() to automatically map our company type, but then we're
@@ -252,7 +253,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							.Nested<Employee>(n => n
 								.Name(c => c.Employees)
 								.Properties(eps => eps
-									// snip
+								// snip
 								)
 							)
 						)
@@ -274,14 +275,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							employees = new
 							{
 								type = "nested",
-								properties = new {}
+								properties = new { }
 							}
 						}
 					}
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/** ## Automap with attributes
@@ -492,7 +493,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						.TtlField(ttl => ttl
 							.Enable()
 							.Default("10m")
-						)							
+						)
 						.Properties(ps => ps
 							.String(s => s
 								.Name(e => e.FirstName)
@@ -633,7 +634,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		[ElasticsearchType(Name = "company")]
@@ -699,7 +700,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/**
@@ -748,7 +749,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 
 			/** Now lets specify a maxRecursion of 3 */
 			var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
@@ -796,8 +797,67 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
+			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest)withMaxRecursionDescriptor);
 		}
+
+		[U]
+		//hide
+		public void PutMappingAlsoAdheresToMaxRecursion()
+		{
+			var descriptor = new PutMappingDescriptor<A>().AutoMap();
+
+			var expected = new
+			{
+				properties = new
+				{
+					child = new
+					{
+						properties = new { },
+						type = "object"
+					}
+				}
+			};
+
+			Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
+
+			var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
+
+			var expectedWithMaxRecursion = new
+			{
+				properties = new
+				{
+					child = new
+					{
+						type = "object",
+						properties = new
+						{
+							child = new
+							{
+								type = "object",
+								properties = new
+								{
+									child = new
+									{
+										type = "object",
+										properties = new
+										{
+											child = new
+											{
+												type = "object",
+												properties = new { }
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+		}
+		//endhide
 
 		/** # Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
