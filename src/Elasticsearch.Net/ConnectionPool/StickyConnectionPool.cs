@@ -70,6 +70,13 @@ namespace Elasticsearch.Net
                 yield break;
             }
 
+            // If the cursor is greater than the default then it's been
+            // set already but we now have a live node so we should reset it
+            if (GlobalCursor > -1)
+            {
+                Interlocked.Exchange(ref GlobalCursor, -1);
+            }
+
             var localCursor = 0;
 
             for (var attempts = 0; attempts < count; attempts++)
