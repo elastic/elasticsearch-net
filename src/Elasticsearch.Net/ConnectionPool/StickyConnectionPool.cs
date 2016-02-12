@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
     public class StickyConnectionPool : IConnectionPool
     {
@@ -50,8 +48,6 @@ namespace Elasticsearch.Net.ConnectionPool
             this.LastUpdate = this.DateTimeProvider.Now();
         }
 
-        protected int GlobalCursor = -1;
-
         public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
         {
             var now = this.DateTimeProvider.Now();
@@ -60,20 +56,18 @@ namespace Elasticsearch.Net.ConnectionPool
             var count = nodes.Count;
             Node node;
 
-            var globalCursor = Interlocked.Increment(ref GlobalCursor);
-
             if (count == 0)
             {
                 //could not find a suitable node retrying on first node off globalCursor
                 audit?.Invoke(AuditEvent.AllNodesDead, null);
-                node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
+                node = this.InternalNodes[0];
                 node.IsResurrected = true;
                 audit?.Invoke(AuditEvent.Resurrection, node);
                 yield return node;
                 yield break;
             }
 
-            var localCursor = globalCursor % count;
+            var localCursor = 0;
 
             for (var attempts = 0; attempts < count; attempts++)
             {
