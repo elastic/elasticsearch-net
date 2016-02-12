@@ -117,6 +117,71 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
             );
         }
 
+        [U(Skip = "Not sure how to trace this chain"), SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+        public async Task FallsOverDeadNodesWithRecoverResetToPrimary()
+        {
+            /** A cluster with 2 nodes where the second node fails on ping */
+            var audit = new Auditor(() => Framework.Cluster
+                .Nodes(3)
+                .ClientCalls(p => p.OnPort(9200).Fails(Twice))
+                .ClientCalls(p => p.OnPort(9200).Succeeds(Once))
+                .ClientCalls(p => p.OnPort(9201).Succeeds(Once))
+                .ClientCalls(p => p.OnPort(9201).Fails(Once))
+                .ClientCalls(p => p.OnPort(9202).FailAlways())
+                .StickyConnectionPool()
+                .Settings(p => p.DisablePing())
+            );
+
+            await audit.TraceCalls(
+                /** The first call goes to 9200 which fails, so we wrap to 9201 */
+                new ClientCall {
+                    { BadResponse, 9200},
+                    { HealthyResponse, 9201},
+                    { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
+                },
+                /** The 2nd call does a ping on 9201 which is healthy */
+                new ClientCall {
+                    { HealthyResponse, 9201},
+					/** Finally we assert that the connectionpool has one node that is marked as dead */
+					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
+                },
+                /** The 3rd call does a ping on 9201 which fails, then 9202 and 9203 as all fail */
+                new ClientCall {
+                    { BadResponse, 9201},
+                    { BadResponse, 9202},
+                    { MaxRetriesReached },
+                    { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+                },
+                /** Try to resurrect first node 9200, which fails */
+                new ClientCall {
+                    { AllNodesDead },
+                    { Resurrection, 9200},
+                    { BadResponse, 9200},
+                    { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+                },
+                /** Try to ressurect second node 9201 which succeeds */
+                new ClientCall {
+                    { AllNodesDead },
+                    { Resurrection, 9201},
+                    { HealthyResponse, 9201},
+                    { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(3) }
+                },
+                /** The ping on 9201 which returns a bad response leaving all nodes dead */
+                new ClientCall {
+                    { BadResponse, 9201},
+                    { MaxRetriesReached },
+                    { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+                },
+                /** Try ressurect from 9201 again which succeeded */
+                new ClientCall {
+                    { AllNodesDead },
+                    { Resurrection, 9200},
+                    { HealthyResponse, 9200},
+                    { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(3) }
+                }
+            );
+        }
+
         [U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
         public async Task PicksADifferentNodeEachTimeAnodeIsDown()
         {
