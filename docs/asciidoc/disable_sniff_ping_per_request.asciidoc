@@ -1,0 +1,79 @@
+:ref_current: http://www.elastic.co/guide/elasticsearch/reference/current
+
+== Disabling sniffing and pinging on a request basis 
+
+Even if you are using a sniffing connection pool thats set up to sniff on start/failure
+and pinging enabled, you can opt out of this behaviour on a per request basis
+
+In our first test we set up a cluster that pings and sniffs on startup 
+but we disable the sniffing on our first request so we only see the ping and the response
+
+
+[source, csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.SucceedAlways())
+				.SniffingConnectionPool()
+				.Settings(s => s.SniffOnStartup())
+			);
+----
+
+We disable sniffing so eventhoug its our first call we do not want to sniff on startup
+
+
+
+Instead the sniff on startup is deffered to the second call into the cluster that 
+does not disable sniffing on a per request basis
+
+
+
+And after that no sniff on startup will happen again
+
+
+[source, csharp]
+----
+audit = await audit.TraceCalls(
+new ClientCall(r=>r.DisableSniffing()) {
+		{ PingSuccess, 9200 },
+		{ HealthyResponse, 9200 }
+	},
+new ClientCall()
+	{
+		{ SniffOnStartup },
+		{ SniffSuccess, 9200 },
+		{ PingSuccess, 9200 },
+		{ HealthyResponse, 9200 }
+	},
+new ClientCall()
+	{ 
+		{ PingSuccess, 9201 },
+		{ HealthyResponse, 9201 }
+	}
+            );
+
+var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.SucceedAlways())
+				.SniffingConnectionPool()
+				.Settings(s => s.SniffOnStartup())
+			);
+audit = await audit.TraceCall(
+				new ClientCall(r=>r.DisablePing()) {
+					{ SniffOnStartup },
+					{ SniffSuccess, 9200 },
+					{ HealthyResponse, 9200 }
+				}
+            );
+var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.SucceedAlways())
+				.SniffingConnectionPool()
+				.Settings(s => s.SniffOnStartup())
+			);
+audit = await audit.TraceCall(
+				new ClientCall(r=>r.DisableSniffing().DisablePing()) {
+					{ HealthyResponse, 9200 }
+				}
+            );
+----

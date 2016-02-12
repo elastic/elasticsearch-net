@@ -10,9 +10,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class RequestPipelines
 	{
-		/** = Request pipeline
-		* Every request is executed in the context of `RequestPipeline` when using the default `ITransport` implementation.
-		* 
+		/** == Request pipeline
+		*
+		* Every request is executed in the context of a `RequestPipeline` when using the 
+		* default `ITransport` implementation.
 		*/
 
 		[U]
@@ -20,7 +21,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		{
 			var settings = TestClient.CreateSettings();
 
-			/** When calling Request(Async) on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
+			/** When calling Request/RequestAsync on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
 			var pipeline = new RequestPipeline(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
 			pipeline.GetType().Should().Implement<IDisposable>();
 

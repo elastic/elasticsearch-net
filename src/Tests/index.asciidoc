@@ -1,4 +1,7 @@
-﻿# Introduction
+﻿:github: https://github.com/elastic/elasticsearch-net
+:stackoverflow: http://stackoverflow.com
+
+== Introduction
 
 You've reached the documentation page for `Elasticsearch.Net` and `NEST`. The two official .NET clients for Elasticsearch. So why two clients I hear you say?
 
@@ -9,30 +12,29 @@ enough so that **all** the Elasticsearch API endpoints are represented as method
 
 Please read the getting started guide for both.
 
+=== Who's using Nest
+* {stackoverflow}[stackoverflow.com] (and the rest of the stackexchange family).
+* http://www.7digital.com[7digital.com] (run NEST on mono).
+* https://www.rijksmuseum.nl/en[rijksmuseum.nl] (Elasticsearch is the only datastorage hit for each page).
+* http://www.fogcreek.com/kiln/[Kiln] FogCreek's version control & code review tooling. 
+  They are so pleased with Elasticsearch that http://blog.fogcreek.com/kiln-powered-by-elasticsearch/[they made a video about how pleased they are!]
 
-## Who's using Nest
-* [stackoverflow.com](http://www.stackoverflow.com) (and the rest of the stackexchange family).
-* [7digital.com](http://www.7digital.com) (run NEST on mono).
-* [rijksmuseum.nl](https://www.rijksmuseum.nl/en) (Elasticsearch is the only datastorage hit for each page).
-* [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
-  They are so pleased with Elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
+=== Other resources
 
-## Other resources
-
-[@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
+http://twitter.com/joelabrahamsson[@joelabrahamsson] wrote a great http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch[intro into elasticsearch on .NET]
 using NEST. 
 
-Also checkout the [searchbox.io guys](https://searchbox.io/) rocking NEST [on AppHarbor](http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on) 
-with their [demo project](https://github.com/searchbox-io/.net-sample)
+Also checkout the https://searchbox.io/[searchbox.io guys] rocking NEST http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on[on AppHarbor]
+with their https://github.com/searchbox-io/.net-sample[demo project]
 
-## Questions, bugs, comments, requests
+=== Questions, bugs, comments, requests
 
-All of these are more then welcome on the github issues pages! We try to to at least reply within the same day.
+All of these are more then welcome on the {github}/issues[github issues pages]! We try to to at least reply within the same day.
 
-We also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest) or 
-['elasticsearch-net' on stackoverflow](http://stackoverflow.com/questions/tagged/elasticsearch-net)
+We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on stackoverflow] or 
+{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow]
 
-# License
+=== License
 
 This software is licensed under the Apache 2 license, quoted below.
 

@@ -33,7 +33,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 		}
 
-		/** 502 Bad Gateway
+		/** === 502 Bad Gateway
+		*
 		* Will be treated as an error that requires retrying 
 		*/
 		[U]
@@ -55,7 +56,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 		}
 
-		/** 503 Service Unavailable
+		/** === 503 Service Unavailable
+		*
 		* Will be treated as an error that requires retrying 
 		*/
 		[U]
@@ -78,7 +80,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		}
 
 		/**
-		* If a call returns a valid http status code other then 502/503 the request won't be retried.
+		* If a call returns a valid (_for the request*_) http status code other then 502/503. the request won't be retried.
 		*/
 		[U]
 		public async Task HttpTeapotDoesNotFallOver()

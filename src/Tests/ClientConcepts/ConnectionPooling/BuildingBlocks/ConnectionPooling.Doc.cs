@@ -9,12 +9,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class ConnectionPooling
 	{
-		/** = Connection Pooling
+		/** == Connection Pooling
 		 * Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 		 * we can use to issue client calls on.
 		 */
 		
-		/** == SingleNodeConnectionPool 
+		/** === SingleNodeConnectionPool 
 		* The simplest of all connection pools, this takes a single `Uri` and uses that to connect to elasticsearch for all the calls
 		* It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
 		* ready to go. 
@@ -46,7 +46,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 		}
 
-		/** == StaticConnectionPool 
+		/** === StaticConnectionPool 
 		* The static connection pool is great if you have a known small sized cluster and do no want to enable 
 		* sniffing to find out the cluster topology.
 		*/
@@ -74,7 +74,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 		}
 
-		/** == SniffingConnectionPool 
+		/** === SniffingConnectionPool 
 		* A subclass of StaticConnectionPool that allows itself to be reseeded at run time.
 		* It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 		*/

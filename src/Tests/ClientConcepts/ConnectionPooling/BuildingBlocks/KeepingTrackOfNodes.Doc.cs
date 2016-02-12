@@ -8,7 +8,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	public class KeepingTrackOfNodes
 	{
 
-		/** = Keeping track of nodes
+		/** == Keeping track of nodes
 		 * 
 		 */
 

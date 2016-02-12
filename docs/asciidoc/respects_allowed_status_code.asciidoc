@@ -1,0 +1,22 @@
+:ref_current: http://www.elastic.co/guide/elasticsearch/reference/current
+
+== Allowed status codes
+
+
+[source, csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.FailAlways(400))
+				.StaticConnectionPool()
+				.Settings(s => s.DisablePing().MaximumRetries(0))
+			);
+audit = await audit.TraceCalls(
+				new ClientCall() {
+					{ BadResponse, 9200 }
+				},
+				new ClientCall(r => r.AllowedStatusCodes(400)) {
+					{ HealthyResponse, 9201 }
+				}
+			);
+----

@@ -1,0 +1,22 @@
+:ref_current: http://www.elastic.co/guide/elasticsearch/reference/current
+
+== Forcing nodes
+Sometimes you might want to fire a single request to a specific node. You can do so using the `ForceNode`
+request configuration. This will ignore the pool and not retry.
+
+
+[source, csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.SucceedAlways())
+				.ClientCalls(r => r.OnPort(9208).FailAlways())
+				.StaticConnectionPool()
+				.Settings(s => s.DisablePing())
+			);
+audit = await audit.TraceCall(
+				new ClientCall(r => r.ForceNode(new Uri("http://localhost:9208"))) {
+					{ BadResponse, 9208 }
+				}
+			);
+----

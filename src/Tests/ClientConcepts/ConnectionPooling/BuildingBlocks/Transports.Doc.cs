@@ -8,7 +8,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class Transports
 	{
-		/** = Transports
+		/** == Transports
 		*
 		* The `ITransport` interface can be seen as the motor block of the client. It's interface is deceitfully simple. 
 		* It's ultimately responsible from translating a client call to a response. If for some reason you do not agree with the way we wrote
@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*/
 			var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
 
-			/** In the high level client like this: */
+			/** and in the high level client, like this: */
 			var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings());
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));

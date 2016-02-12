@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RespectsMaxRetryOverrides
 	{
-		/** == MaxRetries
+		/** == Maximum Retries
+		*
 		* By default retry as many times as we have nodes. However retries still respect the request timeout.
 		* Meaning if you have a 100 node cluster and a request timeout of 20 seconds we will retry as many times as we can
 		* but give up after 20 seconds

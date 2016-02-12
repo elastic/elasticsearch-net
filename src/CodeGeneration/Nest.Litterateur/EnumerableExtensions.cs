@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Nest.Litterateur
 {
@@ -37,5 +38,27 @@ namespace Nest.Litterateur
 			}
 		}
 
+	}
+
+	public static class StringExtensions
+	{
+		public static string PascalToUnderscore(this string input)
+		{
+			if (string.IsNullOrEmpty(input)) return string.Empty;
+
+			return Regex.Replace(
+				Regex.Replace(
+					Regex.Replace(input, @"([A-Z]+)([A-Z][a-z])", "$1_$2"), @"([a-z\d])([A-Z])", "$1_$2")
+				, @"[-\s]", "_").ToLower();
+		}
+
+		public static string TrimDocExtension(this string input)
+		{
+			if (string.IsNullOrEmpty(input)) return string.Empty;
+
+			return input.EndsWith(".doc", StringComparison.OrdinalIgnoreCase)
+				? input.Substring(0, input.Length - 4)
+				: input;
+		}
 	}
 }

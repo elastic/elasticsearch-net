@@ -9,11 +9,15 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.BoolDsl
 {
+	/** == Bool Queries
+	*/
 	public class BoolDslTests : OperatorUsageBase
 	{
 		protected readonly IElasticClient Client = TestClient.GetFixedReturnClient(new { });
 		
-		/** Writing boolean queries can grow rather verbose rather quickly using the query DSL e.g */
+		/** Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,
+		* take a single `bool` query with only two clauses
+		*/
 		public void VerboseWay()
 		{
 			var searchResults = this.Client.Search<Project>(s => s
@@ -27,22 +31,23 @@ namespace Tests.QueryDsl.BoolDsl
 				)
 			);
 		}
-		/** now this is just a single bool with only two clauses, imagine multiple nested bools this quickly becomes an exercise in 
-			hadouken indenting
+		/** Now, magine multiple nested bools this quickly becomes an exercise in 
+		*	_hadouken indenting_
 		*
 		*[[indent]]
 		*.hadouken indenting example
-		*image::http://i.imgur.com/BtjZedW.jpg[dead indent]	
+		*image::{imagesdir}/hadouken_indentation.jpg[dead indent]	
 		*
-
-		* For this reason, NEST introduces operator overloading so complex bool queries become easier to write, the previous example will become. */
-
+		* === Operator Overloading
+		* For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 
+		* The previous example now becomes the following with the fluent API
+		*/
 		public void UsingOperator()
 		{
 			var searchResults = this.Client.Search<Project>(s => s
 				.Query(q => q.Term(p => p.Name, "x") || q.Term(p => p.Name, "y"))
 			);
-			/** Or using the object initializer syntax */
+			/** or, using the object initializer syntax */
 			searchResults = this.Client.Search<Project>(new SearchRequest<Project>
 			{
 				Query = new TermQuery { Field = "name", Value= "x" } 
@@ -51,9 +56,9 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 
 		/** A naive implementation of operator overloading would rewrite 
-
+		*
 		* `term && term && term` to 
-
+		*
 		*>    bool
 		*>    |___must
 		*>        |___term
@@ -61,16 +66,16 @@ namespace Tests.QueryDsl.BoolDsl
 		*>                |___must
 		*>                    |___term
 		*>                    |___term
-
+		*
 		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and 
 		* join them together to become a single bool query
-
+		*
 		*>    bool
 		*>    |___must 
 		*>        |___term
 		*>        |___term
 		*>        |___term
-		
+		*
 		*/
 
 		[U] public void JoinsMustQueries() =>
@@ -80,21 +85,25 @@ namespace Tests.QueryDsl.BoolDsl
 				c => c.Bool.Must.Should().HaveCount(3)
 			);
 
-		/** The bool DSL offers also a short hand notation to mark a query as a must_not using ! */
+		/** The bool DSL offers also a short hand notation to mark a query as a `must_not` using the `!` operator */
+		[U] public void MustNotOperator() => 
+			Assert(q => !q.Query(), !Query, c => c.Bool.MustNot.Should().HaveCount(1));
 
-		[U] public void MustNotOperator() => Assert(q => !q.Query(), !Query, c => c.Bool.MustNot.Should().HaveCount(1));
+		/** And to mark a query as a `filter` using the `+` operator*/
+		[U] public void UnaryAddOperator() => 
+			Assert(q => +q.Query(), +Query, c => c.Bool.Filter.Should().HaveCount(1));
 
-		/** And to mark a query as a filter using + */
+		/** Both of these can be combined with `&&` to form a single bool query  */
+		[U] public void MustNotOperatorAnd() => 
+			Assert(q => !q.Query() && !q.Query(), !Query && !Query, c => c.Bool.MustNot.Should().HaveCount(2));
 
-		[U] public void UnaryAddOperator() => Assert(q => +q.Query(), +Query, c => c.Bool.Filter.Should().HaveCount(1));
+		[U] public void UnaryAddOperatorAnd() => 
+			Assert(q => +q.Query() && +q.Query(), +Query && +Query, c => c.Bool.Filter.Should().HaveCount(2));
 
-		/** Both of these can be combined with ands to a single bool query  */
-
-		[U] public void MustNotOperatorAnd() => Assert(q => !q.Query() && !q.Query(), !Query && !Query, c => c.Bool.MustNot.Should().HaveCount(2));
-		[U] public void UnaryAddOperatorAnd() => Assert(q => +q.Query() && +q.Query(), +Query && +Query, c => c.Bool.Filter.Should().HaveCount(2));
-
-		/** When combining multiple queries some or all possibly marked as must_not or filter NEST still combines to a single bool query
-
+		/** === Combining/Merging bool queries
+		*
+		* When combining multiple queries some or all possibly marked as `must_not` or `filter`, NEST still combines to a single bool query
+		*
 		*>    bool
 		*>    |___must 
 		*>    |   |___term
@@ -145,12 +154,10 @@ namespace Tests.QueryDsl.BoolDsl
 					c.Bool.Filter.Should().HaveCount(2);
 				});
 
-		/** You can still mix and match actual bool queries with the bool dsl e.g
-
-		* `bool(must=term, term, term) && !term`
-
-		* it would still merge into a single bool query. */
-		
+		/** You can still mix and match actual bool queries with the bool DSL e.g
+		*
+		* `bool(must=term, term, term) && !term` would still merge into a single bool query. 
+		*/
 		[U] public void MixAndMatch() =>
 			Assert(
 				q => q.Bool(b=>b.Must(mq=>mq.Query(),mq=>mq.Query(), mq=>mq.Query())) && !q.Query(),
@@ -161,10 +168,10 @@ namespace Tests.QueryDsl.BoolDsl
 					c.Bool.MustNot.Should().HaveCount(1);
 				});
 
-		/* NEST will also do the same with `should`'s or OR's when it sees that the boolean queries in play **ONLY** consist of `should clauses`. 
-		* This is because the boolquery does not quite follow the same boolean logic you expect from a programming language. 
+		/* NEST will also do the same with `should`'s or `||` when it sees that the boolean queries in play **ONLY** consist of `should clauses`. 
+		* This is because the `bool` query does not quite follow the same boolean logic you expect from a programming language. 
 
-		* To summarize the latter: 
+		* To summarize, the latter: 
 
 		* `term || term || term`
 
@@ -189,12 +196,13 @@ namespace Tests.QueryDsl.BoolDsl
 		*>        |___term3
 		*>        |___term4
 		
-		* This is because when a bool query has **only** should clauses atleast 1 of them has to match. When that bool query also has a must clause the should clauses start acting as a boost factor
+		* This is because when a `bool` query has **only** `should` clauses, at least one of them must match. 
+		* When that `bool` query also has a `must` clause then the `should` clauses start acting as a _boost_ factor
 		* and none of them have to match, drastically altering its meaning.
 
-		* So in the previous you could get back results that ONLY contain `term1` this is clearly not what you want in the strict boolean sense of the input.
+		* So in the previous you could get back results that **ONLY** contain `term1`. This is clearly not what you want in the strict boolean sense of the input.
 
-		* NEST therefor rewrites this query to 
+		* To aid with this, NEST rewrites the previous query to 
 
 		*>    bool 
 		*>    |___must 
@@ -220,7 +228,7 @@ namespace Tests.QueryDsl.BoolDsl
 					lastClause.Bool.Should.Should().HaveCount(3);
 				});
 
-		/* Note also that you can parenthesis to force evaluation order */
+		/* NOTE: You can add parentheses to force evaluation order */
 		
 		/* Also note that using shoulds as boosting factors can be really powerful so if you need this always remember that you can mix and match an actual bool query with the bool dsl */
 
@@ -251,8 +259,12 @@ namespace Tests.QueryDsl.BoolDsl
 					nestedBool.Bool.Should.Should().HaveCount(4);
 				});
 
-		/* Nest will also not combine if any metadata is set on the bool e.g boost/name nest will treat these as locked */
-
+		/** === Locked bool queries
+		* NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set, 
+		* NEST will treat these as locked 
+		*
+		* Here we demonstrate that two locked `bool` queries are not combined
+		*/
 		[U] public void DoNotCombineLockedBools() =>
 			Assert(
 				q => q.Bool(b=>b.Name("leftBool").Should(mq=>mq.Query())) 
@@ -261,6 +273,7 @@ namespace Tests.QueryDsl.BoolDsl
 				 || new BoolQuery { Name = "rightBool", Should = new QueryContainer[] { Query } },
 				c=>AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
 
+		/** neither are two `bool` queries where either the left or the right query is locked */
 		[U] public void DoNotCombineRightLockedBool() =>
 			Assert(
 				q => q.Bool(b=>b.Should(mq=>mq.Query())) 

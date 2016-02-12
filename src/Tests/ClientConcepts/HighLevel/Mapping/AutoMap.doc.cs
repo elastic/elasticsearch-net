@@ -8,7 +8,7 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/** # Auto mapping properties
+	/** == Auto mapping properties
 	 * 
 	 * When creating a mapping (either when creating an index or via the put mapping API),
 	 * NEST offers a feature called AutoMap(), which will automagically infer the correct
@@ -20,9 +20,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	public class AutoMap
 	{
 		/**
-		* For these examples, we'll define two POCOS.  A Company, which has a name
-		* and a collection of Employees.  And Employee, which has various properties of 
-		* different types, and itself has a collection of Employees. 
+		* For these examples, we'll define two POCOS, `Company`, which has a name
+		* and a collection of Employees, and `Employee` which has various properties of 
+		* different types, and itself has a collection of `Employee` types. 
 		*/
 		public class Company
 		{
@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void MappingManually()
 		{
-			/** ## Manual mapping
+			/** === Manual mapping
 			 * To create a mapping for our Company type, we can use the fluent API
 			 * and map each property explicitly
 			 */
@@ -75,9 +75,9 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/**
-			 * Which is all fine and dandy, and useful for some use cases. However in most cases
-			 * this is becomes too cumbersome of an approach, and you simply just want to map *all*
-			 * the properties of your POCO in a single go.
+			 * This is all fine and dandy and useful for some use cases however in most cases
+			 * this can become verbose and wieldy. The majority of the time you simply just want to map *all*
+			 * the properties of a POCO in a single go.
 			 */
 			var expected = new
 			{
@@ -121,7 +121,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[U]
 		public void UsingAutoMap()
 		{
-			/** ## Simple Automapping
+			/** === Simple Automapping
 			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
 			* explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
 			*/
@@ -835,7 +835,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			/** and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBooleanProperty`) 
 			 * it will apply the transformation defined in each Visit() respectively, which in this example
-			 * disables https://www.elastic.co/guide/en/elasticsearch/guide/current/doc-values.html[doc values].
+			 * disables {ref_current}/doc-values.html[doc values].
 			 */
 			var expected = new
 			{

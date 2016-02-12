@@ -17,7 +17,7 @@ namespace Nest.Litterateur.Documentation.Files
 		protected override FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + this.Extension;
+			var testInDocumenationFolder = Path.GetFileName(testFullPath).PascalToUnderscore();
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputFolder, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);

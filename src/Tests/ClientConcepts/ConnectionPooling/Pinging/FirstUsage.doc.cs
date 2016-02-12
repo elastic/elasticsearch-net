@@ -11,7 +11,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
 	public class FirstUsage
 	{
-		/** == Pinging
+		/** == Pinging - First Usage
 		* 
 		* Pinging is enabled by default for the Static & Sniffing connection pool. 
 		* This means that the first time a node is used or resurrected we issue a ping with a smaller (configurable) timeout.

@@ -21,8 +21,9 @@ namespace Nest.Litterateur
 			{
 				yield return InputFiles("doc.cs");
 				yield return InputFiles("asciidoc");
-				yield return InputFiles("ping");
+				yield return InputFiles("png");
 				yield return InputFiles("gif");
+				yield return InputFiles("jpg");
 			}
 		}	
 

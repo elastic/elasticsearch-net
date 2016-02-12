@@ -11,6 +11,24 @@ namespace Nest.Litterateur.Linker
 	/// </summary>
 	public class Linker
 	{
+		public Linker()
+		{
+			
+		}
 
+		public void GenerateIndex()
+		{
+			// TODO: harvest all the doc ids and write out an index file containing links for all
+		}
+
+		public void GenerateHeaderIds()
+		{
+			
+		}
+
+		public void GenerateAttributes()
+		{
+			
+		}
 	}
 }

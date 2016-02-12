@@ -9,7 +9,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	public class DateTimeProviders
 	{
 
-		/** = Date time providers
+		/** == Date time providers
 		 * 
 		 * Not typically something you'll have to pass to the client but all calls to `System.DateTime.UtcNow` 
 		 * in the client have been abstracted by `IDateTimeProvider`. This allows us to unit test timeouts and clusterfailover
@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*
 			*[[timeout]]
 			*.Default formula, x-axis time in minutes, y-axis number of attempts to revive
-			*image::timeoutplot.png[dead timeout]	
+			*image::{imagesdir}/timeoutplot.png[dead timeout]	
 			*
 			* The goal here is that whenever a node is resurrected and is found to still be offline, we send it
 			* _back to the doghouse_ for an ever increasingly long period, until we hit a bounded maximum.

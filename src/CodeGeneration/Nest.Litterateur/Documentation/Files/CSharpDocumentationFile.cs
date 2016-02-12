@@ -16,6 +16,9 @@ namespace Nest.Litterateur.Documentation.Files
 		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks)
 		{
 			var builder = new StringBuilder();
+
+			RenderHeader(builder);
+
 			var lastBlockWasCodeBlock = false;
 
 			RenderBlocksToDocumentation(blocks, builder, ref lastBlockWasCodeBlock);
@@ -26,9 +29,14 @@ namespace Nest.Litterateur.Documentation.Files
 			return builder.ToString();
 		}
 
+		private void RenderHeader(StringBuilder builder)
+		{
+			builder.AppendLine(":ref_current: http://www.elastic.co/guide/elasticsearch/reference/current");
+			builder.AppendLine();
+		}
+
 		private void RenderFooter(StringBuilder builder)
 		{
-			builder.AppendLine(":ref:  http://www.elastic.co/guide/elasticsearch/reference/current");
 		}
 
 		private void RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks, StringBuilder builder, ref bool lastBlockWasCodeBlock)
