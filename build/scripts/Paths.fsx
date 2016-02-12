@@ -217,7 +217,7 @@ module Tooling =
             sprintf "%s/bin/%s" this.Location proc
 
     type DnvmTooling() =
-        let dnvmUserLocation = Path.Combine(userProfileDir, "/.dnx/bin/dnvm.cmd") // sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
+        let dnvmUserLocation = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
         let dnvmProgramFilesLocation = "C:/Program Files/Microsoft DNX/Dnvm/dnvm.cmd"
         let dnvm = 
             match fileExists dnvmUserLocation with
