@@ -128,7 +128,7 @@ var response = client.Search<Tweet>(s => s
 	);
 ```
 
-As well as an object initializer syntax if lamdas aren't your thing:
+As well as an object initializer syntax if lambdas aren't your thing:
 
 ```csharp
 var request = new SearchRequest
