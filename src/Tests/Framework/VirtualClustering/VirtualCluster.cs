@@ -78,6 +78,12 @@ namespace Tests.Framework
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
 			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider), this.DateTimeProvider);
 		}
-	}
+
+        public SealedVirtualCluster StickyConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
+        {
+            var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
+            return new SealedVirtualCluster(this, new StickyConnectionPool(nodes, dateTimeProvider: this.DateTimeProvider), this.DateTimeProvider);
+        }
+    }
 
 }
