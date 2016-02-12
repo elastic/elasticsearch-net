@@ -48,6 +48,8 @@ namespace Elasticsearch.Net
             this.LastUpdate = this.DateTimeProvider.Now();
         }
 
+        protected int GlobalCursor = -1;
+
         public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null)
         {
             var now = this.DateTimeProvider.Now();
@@ -58,9 +60,10 @@ namespace Elasticsearch.Net
 
             if (count == 0)
             {
+                var globalCursor = Interlocked.Increment(ref GlobalCursor);
                 //could not find a suitable node retrying on first node off globalCursor
                 audit?.Invoke(AuditEvent.AllNodesDead, null);
-                node = this.InternalNodes[0];
+                node = this.InternalNodes[globalCursor % this.InternalNodes.Count];
                 node.IsResurrected = true;
                 audit?.Invoke(AuditEvent.Resurrection, node);
                 yield return node;
