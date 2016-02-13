@@ -97,19 +97,19 @@ var tweet = new Tweet
     Message = "Trying out NEST, so far so good?"
 };
 
-var response = client.Index(tweet);
+var response = client.Index(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
 ```
 
 All the calls have async variants:
 
 ```csharp
-var response = client.IndexAsync(tweet); // returns a Task<IndexResponse>
+var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
 ```
 
 ### Getting a document
 
 ```csharp
-var response = client.Get<Tweet>(1); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
+var response = client.Get<Tweet>(1, idx => idx.Index("mytweetindex")); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
 var tweet = response.Source; // the original document
 ```
 
