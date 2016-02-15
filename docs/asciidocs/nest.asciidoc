@@ -1,6 +1,6 @@
 == NEST
 
-A high level client that provides a strongly typed query DSL that maps one-to-one with the Elasitcsearch query DSL, and takes advantage of specific .NET features such as covariant results.  NEST internally uses, and still exposes, the low level Elasticsearch.Net client.
+A high level client that provides a strongly typed query DSL that maps one-to-one with the Elasticsearch query DSL, and takes advantage of specific .NET features such as covariant results.  NEST internally uses, and still exposes, the low level Elasticsearch.Net client.
 
 This page only provides a quick overview -- the full documentation can be found at http://nest.azurewebsites.net.
 
