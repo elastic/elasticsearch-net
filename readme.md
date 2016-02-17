@@ -37,6 +37,10 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     </tr>
 </table>
 
+## Upgrading from 1.x to 2.x
+
+Take a look at the [blog post for details around the evolution of NEST 2.x](https://www.elastic.co/blog/ga-release-of-nest-2-0-our-dot-net-client-for-elasticsearch), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/elasticsearch-net-breaking-changes.md).
+
 #[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 
 NEST is the official high-level .NET client of [elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
