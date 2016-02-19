@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Formatting;
 using Nest.Litterateur.Documentation.Blocks;
 using Nest.Litterateur.Walkers;
 
