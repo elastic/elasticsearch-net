@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,7 +9,11 @@ namespace Nest
 	{
 		Field Field { get; set; }
 		IEnumerable<GeoLocation> Points { get; set; }
+
+		[JsonProperty(PropertyName = "unit")]
 		DistanceUnit? GeoUnit { get; set; }
+
+		[JsonProperty(PropertyName = "distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 	}
 
