@@ -207,7 +207,7 @@ public class StringTimeSpanConverter : JsonConverter
 
 #Serialization settings
 
-Serialization settings are now configurable through `ConnectionSettings` constructor and are stored in one single class.
+Serialization settings are now configurable through `ConnectionSettings` constructor taking a factory function that returns an instance of `IElasticsearchSerializer`.
 
 
 ```c#
