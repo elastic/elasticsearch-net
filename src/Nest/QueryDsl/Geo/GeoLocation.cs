@@ -82,7 +82,7 @@ namespace Nest
 
 		public override string ToString()
 		{
-            return _latitude.ToString("#0.0#######") + "," + _longitude.ToString("#0.0#######");
+            return _latitude.ToString("#0.0#######", CultureInfo.InvariantCulture) + "," + _longitude.ToString("#0.0#######", CultureInfo.InvariantCulture);
 		}
 
 		public bool Equals(GeoLocation other)
@@ -128,7 +128,9 @@ namespace Nest
 
 		public static implicit operator GeoLocation(double[] lonLat)
 		{
-			if (lonLat.Length != 2) throw new ArgumentException("Invalid lon,lat array, must have a length of 2");
+			if (lonLat.Length != 2)
+				return null;
+			
 			return new GeoLocation(lonLat[1], lonLat[0]);
 		}
 	}
