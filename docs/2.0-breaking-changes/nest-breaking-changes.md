@@ -205,6 +205,42 @@ public class StringTimeSpanConverter : JsonConverter
 }
 ```
 
+#Serialization settings
+
+Serialization settings are now configurable through `ConnectionSettings` constructor and are stored in one single class.
+
+
+```c#
+var setting = new ConnectionSettings(..);
+
+setting.AddContractJsonConverters(type => new MyPrettyConverter(), type => new SomeOtherConverter());
+setting.SetJsonSerializerSettingsModifier(settings => settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+```
+
+becomes
+
+```c#
+var settings = new ConnectionSettings(connectionPool, connectionSettings => new MyJsonNetSerializer(connectionSettings))
+
+public class MyJsonNetSerializer : JsonNetSerializer
+{
+	public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+	{
+	}
+
+	protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+	{
+		settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+	}
+
+	protected override IList<Func<Type, JsonConverter>> ContractConverters => 
+		new List<Func<Type, JsonConverter>>
+		{
+			type => new MyPrettyConverter(),
+			type => new SomeOtherConverter()
+		};
+}
+```
 
 #Renamed Types
 
