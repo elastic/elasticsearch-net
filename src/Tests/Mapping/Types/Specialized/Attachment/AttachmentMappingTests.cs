@@ -4,31 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nest;
 using Xunit;
+using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Specialized.Attachment
 {
-	public class AttachmentTest
-	{
-		public string File { get; set; }
-
-		public string Author { get; set; }
-
-		public long ContentLength { get; set; }
-
-		public string ContentType { get; set; }
-
-		public DateTime Date { get; set; }
-
-		public string Keywords { get; set; }
-
-		public string Language { get; set; }
-
-		public string Name { get; set; }
-
-		public string Title { get; set; }
-	}
-
-	public class AttachmentMappingTests : TypeMappingTestBase<AttachmentTest>
+	public class AttachmentMappingTests : TypeMappingTestBase<Tests.Framework.MockData.Attachment>
 	{
 		protected override object ExpectJson => new
 		{
@@ -87,7 +67,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 			// TODO: Implement
 		}
 
-		protected override Func<PropertiesDescriptor<AttachmentTest>, IPromise<IProperties>> FluentProperties => p => p
+		protected override Func<PropertiesDescriptor<Framework.MockData.Attachment>, IPromise<IProperties>> FluentProperties => p => p
 			.Attachment(a => a
 				//.Fields(s => s)
 				.Name(n => n.File)
@@ -97,7 +77,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				.FileField(d => d
 					.Name(n => n.File)
 				)
-				.ContentLengthField((NumberPropertyDescriptor<AttachmentTest> d) => d
+				.ContentLengthField((NumberPropertyDescriptor<Framework.MockData.Attachment> d) => d
 					.Name(n => n.ContentLength)
 				)
 				.ContentTypeField(d => d
@@ -109,7 +89,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				.KeywordsField(d => d
 					.Name(n => n.Keywords)
 				)
-				.LanguageField((StringPropertyDescriptor<AttachmentTest> d) => d
+				.LanguageField((StringPropertyDescriptor<Framework.MockData.Attachment> d) => d
 					.Name(n => n.Language)
 					.DocValues()
 					.NotAnalyzed()
