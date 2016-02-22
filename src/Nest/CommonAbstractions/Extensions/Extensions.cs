@@ -81,39 +81,40 @@ namespace Nest
 			// make sure that only one thread can be adding to cache
 			lock (_enumCache)
 			{
-				// Just make sure that cache still does not contain key
-				if (!_enumCache.ContainsKey(key))
+				// Check to see if cache now contains key
+				if (_enumCache.ContainsKey(key))
+					return (T)_enumCache[key];
+
+				foreach (var name in Enum.GetNames(enumType))
 				{
-					foreach (var name in Enum.GetNames(enumType))
+					if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
+
+					var enumFieldInfo = enumType.GetField(name);
+					var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
+
+					if (enumMemberAttribute != null)
 					{
-						if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
-
-						var enumFieldInfo = enumType.GetField(name);
-						var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
-
-						if (enumMemberAttribute != null)
+						if (enumMemberAttribute.Value == str)
 						{
-							if (enumMemberAttribute.Value == str)
-							{
-								var value = (T)Enum.Parse(enumType, name);
-								_enumCache.Add(key, value);
-								return value;
-							}
+							var value = (T)Enum.Parse(enumType, name);
+							_enumCache.Add(key, value);
+							return value;
 						}
+					}
 
-						var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
+					var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
 
-						if (alternativeEnumMemberAttribute != null)
+					if (alternativeEnumMemberAttribute != null)
+					{
+						if (alternativeEnumMemberAttribute.Value == str)
 						{
-							if (alternativeEnumMemberAttribute.Value == str)
-							{
-								var value = (T)Enum.Parse(enumType, name);
-								_enumCache.Add(key, value);
-								return value;
-							}
+							var value = (T)Enum.Parse(enumType, name);
+							_enumCache.Add(key, value);
+							return value;
 						}
 					}
 				}
+
 			}
 
 			return null;
