@@ -15,13 +15,13 @@ namespace Nest
 	internal static class Extensions
 	{
 		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
-			where T: class, TReturn where TReturn: class =>
+			where T : class, TReturn where TReturn : class =>
 			func?.Invoke(@default) ?? @default;
-		
+
 		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
-			where T1: class, TReturn where TReturn: class =>
+			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
-		
+
 		internal static QueryContainer InvokeQuery<T>(
 			this Func<QueryContainerDescriptor<T>, QueryContainer> f,
 			QueryContainerDescriptor<T> container)
@@ -33,7 +33,7 @@ namespace Nest
 				return c;
 
 			//query is conditionless but the container is marked as strict, throw exception
-			if (c != null && c.IsStrict) 
+			if (c != null && c.IsStrict)
 				throw new ArgumentException("Query is conditionless but strict is turned on");
 
 			//query is conditionless return an empty container that can later be rewritten
@@ -53,7 +53,7 @@ namespace Nest
 
 			return da != null ? da.Value : Enum.GetName(enumValue.GetType(), enumValue);
 		}
-		
+
 		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };
 		internal static readonly JsonSerializer serializer = new JsonSerializer();
 		internal static string ToJsonNetString(this DateTime date)
@@ -78,34 +78,43 @@ namespace Nest
 			if (_enumCache.ContainsKey(key))
 				return (T)_enumCache[key];
 
-            foreach (var name in Enum.GetNames(enumType))
+			// make sure that only one thread can be adding to cache
+			lock (_enumCache)
 			{
-				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
+				// Check to see if cache now contains key
+				if (_enumCache.ContainsKey(key))
+					return (T)_enumCache[key];
 
-				var enumFieldInfo = enumType.GetField(name);
-				var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
-
-				if (enumMemberAttribute != null)
+				foreach (var name in Enum.GetNames(enumType))
 				{
-					if (enumMemberAttribute.Value == str)
+					if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name, true);
+
+					var enumFieldInfo = enumType.GetField(name);
+					var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
+
+					if (enumMemberAttribute != null)
 					{
-						var value = (T)Enum.Parse(enumType, name);
-						_enumCache.Add(key, value);
-						return value;
+						if (enumMemberAttribute.Value == str)
+						{
+							var value = (T)Enum.Parse(enumType, name);
+							_enumCache.Add(key, value);
+							return value;
+						}
+					}
+
+					var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
+
+					if (alternativeEnumMemberAttribute != null)
+					{
+						if (alternativeEnumMemberAttribute.Value == str)
+						{
+							var value = (T)Enum.Parse(enumType, name);
+							_enumCache.Add(key, value);
+							return value;
+						}
 					}
 				}
 
-				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
-
-				if (alternativeEnumMemberAttribute != null)
-				{
-					if (alternativeEnumMemberAttribute.Value == str)
-					{ 
-						var value = (T)Enum.Parse(enumType, name);
-						_enumCache.Add(key, value);
-						return value;
-					}
-				}
 			}
 
 			return null;
