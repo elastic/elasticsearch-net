@@ -28,11 +28,20 @@ namespace Nest
 
 		public string Resolve(Field field)
 		{
+			var name = ResolveFieldName(field);
+			if (field.Boost.HasValue) name += $"^{field.Boost.Value.ToString(CultureInfo.InvariantCulture)}";
+			return name;
+		}
+
+		private string ResolveFieldName(Field field)
+		{
 			if (field.IsConditionless()) return null;
 			if (!field.Name.IsNullOrEmpty()) return field.Name;
+
 			string f;
 			if (this.Fields.TryGetValue(field, out f))
 				return f;
+
 			f = this.Resolve(field.Expression, field.Property);
 			this.Fields.TryAdd(field, f);
 			return f;

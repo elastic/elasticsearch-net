@@ -75,6 +75,15 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("name")
 				.WhenSerializing(fieldString)
 				.WhenSerializing(fieldExpression);
+
+			fieldString = "name^2.1";
+			fieldString.Boost.Should().Be(2.1);
+			fieldExpression = Field<Project>(p => p.Name, 2.1);
+			/** Now this is much much terser then our first example using the constructor! */
+
+			Expect("name^2.1")
+				.WhenSerializing(fieldString)
+				.WhenSerializing(fieldExpression);
 		}
 
 		/** By default NEST will camelCase all the field names to be more javascripty */
