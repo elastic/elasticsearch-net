@@ -43,15 +43,15 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			var visitor = new TestVisitor();
 			response.Accept(visitor);
 
-			visitor.CountsShouldContainKeyAndCountBe("type", 2);
-			visitor.CountsShouldContainKeyAndCountBe("object", 3);
-			visitor.CountsShouldContainKeyAndCountBe("date", 5);
-			visitor.CountsShouldContainKeyAndCountBe("string", 18);
-			visitor.CountsShouldContainKeyAndCountBe("ip", 2);
-			visitor.CountsShouldContainKeyAndCountBe("number", 3);
-			visitor.CountsShouldContainKeyAndCountBe("geo_point", 3);
-			visitor.CountsShouldContainKeyAndCountBe("completion", 3);
-			visitor.CountsShouldContainKeyAndCountBe("nested", 2);
+			visitor.CountsShouldContainKeyAndCountBe("type", 1);
+			visitor.CountsShouldContainKeyAndCountBe("object", 2);
+			visitor.CountsShouldContainKeyAndCountBe("date", 4);
+			visitor.CountsShouldContainKeyAndCountBe("string", 17);
+			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
+			visitor.CountsShouldContainKeyAndCountBe("number", 2);
+			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
+			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
+			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
 		}
 	}
 
@@ -70,7 +70,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			if (!Counts.ContainsKey(key))
 			{
-				Counts.Add(key, 1);
+				Counts.Add(key, 0);
 			}
 			Counts[key] += 1;
 		}

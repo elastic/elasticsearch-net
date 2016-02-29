@@ -48,6 +48,10 @@ module Paths =
         let binFolder = BinFolder projectName
         sprintf "%s/net45" binFolder
 
+    let Net46BinFolder(projectName) =
+        let binFolder = BinFolder projectName
+        sprintf "%s/net46" binFolder
+
     let DotNet51BinFolder(projectName) =
         let binFolder = BinFolder(projectName)
         sprintf "%s/dotnet5.1" binFolder
