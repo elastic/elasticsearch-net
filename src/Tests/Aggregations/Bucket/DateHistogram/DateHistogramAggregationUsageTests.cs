@@ -13,9 +13,9 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
-	 * When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
-	 * the serialized DateTimes of extended_bounds correctly, the date_optional_time format is included
-	 * as part of the format value.
+	 * When both format and extended_bounds are specified, the `date_optional_time` format is included
+	 * as part of the format value so that Elasticsearch to be able to parse
+	 * the serialized DateTimes of extended_bounds correctly.
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 	*/

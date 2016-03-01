@@ -90,24 +90,45 @@ namespace Nest
 						var i = field as IpProperty;
 						if (i == null) continue;
 						this._visitor.Visit(i);
+						this.Accept(i.Fields);
 						break;
 					case "geo_point":
 						var gp = field as GeoPointProperty;
 						if (gp == null) continue;
 						this._visitor.Visit(gp);
+						this.Accept(gp.Fields);
 						break;
 					case "geo_shape":
 						var gs = field as GeoShapeProperty;
 						if (gs == null) continue;
 						this._visitor.Visit(gs);
+						this.Accept(gs.Fields);
 						break;
 					case "attachment":
 						var a = field as AttachmentProperty;
 						if (a == null) continue;
 						this._visitor.Visit(a);
+						this.Accept(a.Fields);
+						break;
+					case "completion":
+						var c = field as CompletionProperty;
+						if (c == null) continue;
+						this._visitor.Visit(c);
+						this.Accept(c.Fields);
+						break;
+					case "murmur3":
+						var mm = field as Murmur3HashProperty;
+						if (mm == null) continue;
+						this._visitor.Visit(mm);
+						this.Accept(mm.Fields);
+						break;
+					case "token_count":
+						var tc = field as TokenCountProperty;
+						if (tc == null) continue;
+						this._visitor.Visit(tc);
+						this.Accept(tc.Fields);
 						break;
 				}
-
 			}
 		}
 	}

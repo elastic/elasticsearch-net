@@ -9,15 +9,14 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filters
 {
-	/**
+	/** == Named filters
+	 *
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
 	 * Each bucket will collect all documents that match its associated filter. For documents
 	 * that do not match any filter, these will be collected in the other bucket.
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
 	*/
-
-	/** == Named filters **/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public FiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -111,7 +110,6 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/** == Anonymous filters **/
-
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
