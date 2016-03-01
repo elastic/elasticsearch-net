@@ -113,4 +113,25 @@ namespace Nest
 			return this.Assign(a => a[type.Name] = type);
 		}
 	}
+
+	internal static class PropertiesExtensions
+	{
+		internal static IProperties AutoMap<T>(this IProperties existingProperties, IPropertyVisitor visitor = null, int maxRecursion = 0)
+			where T : class
+		{
+			var properties = new Properties();
+			var autoProperties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties();
+			foreach (var autoProperty in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)autoProperties)
+				properties[autoProperty.Key] = autoProperty.Value;
+
+			// Existing/manually mapped properties always take precedence
+			if (existingProperties != null)
+			{
+				foreach (var existing in (IEnumerable<KeyValuePair<PropertyName, IProperty>>)existingProperties)
+					properties[existing.Key] = existing.Value;
+			}
+
+			return properties;
+		}
+	}
 }

@@ -252,9 +252,6 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						.Properties(ps => ps
 							.Nested<Employee>(n => n
 								.Name(c => c.Employees)
-								.Properties(eps => eps
-								// snip
-								)
 							)
 						)
 					)
@@ -275,12 +272,29 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							employees = new
 							{
 								type = "nested",
-								properties = new { }
 							}
 						}
 					}
 				}
 			};
+
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+
+			/**
+			 * AutoMap is idempotent. Calling it before or after manually
+			 * mapped properties should still yield the same results.
+			 */
+			descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<Company>(m => m
+						.Properties(ps => ps
+							.Nested<Employee>(n => n
+								.Name(c => c.Employees)
+							)
+						)
+						.AutoMap()
+					)
+				);
 
 			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
@@ -296,7 +310,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[String(Analyzer = "keyword", NullValue = "null", Similarity = SimilarityOption.BM25)]
 			public string Name { get; set; }
 
-			[String]
+			[String(Name = "office_hours")]
 			public TimeSpan? HeadOfficeHours { get; set; }
 
 			[Object(Path = "employees", Store = false)]
@@ -306,10 +320,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[ElasticsearchType(Name = "employee")]
 		public class EmployeeWithAttributes
 		{
-			[String]
+			[String(Name = "first_name")]
 			public string FirstName { get; set; }
 
-			[String]
+			[String(Name = "last_name")]
 			public string LastName { get; set; }
 
 			[Number(DocValues = false, IgnoreMalformed = true, Coerce = true)]
@@ -388,7 +402,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								similarity = "BM25",
 								type = "string"
 							},
-							headOfficeHours = new
+							office_hours = new
 							{
 								type = "string"
 							}
@@ -441,7 +455,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								},
 								type = "nested"
 							},
-							firstName = new
+							first_name = new
 							{
 								type = "string"
 							},
@@ -451,7 +465,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								store = true,
 								type = "boolean"
 							},
-							lastName = new
+							last_name = new
 							{
 								type = "string"
 							},
@@ -540,7 +554,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								similarity = "BM25",
 								type = "string"
 							},
-							headOfficeHours = new
+							office_hours = new
 							{
 								type = "string"
 							}
@@ -597,7 +611,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								},
 								type = "nested"
 							},
-							firstName = new
+							first_name = new
 							{
 								fields = new
 								{
@@ -620,7 +634,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								store = true,
 								type = "boolean"
 							},
-							lastName = new
+							last_name = new
 							{
 								type = "string"
 							},
