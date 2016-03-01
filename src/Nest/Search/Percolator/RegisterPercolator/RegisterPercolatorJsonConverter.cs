@@ -49,7 +49,14 @@ namespace Nest
 				foreach(var kv in request.Metadata)
 				{
 					writer.WritePropertyName(kv.Key);
-					writer.WriteValue(kv.Value);
+					if (kv.Value.GetType().IsValueType)
+					{
+						writer.WriteValue(kv.Value);
+					}
+					else
+					{
+						serializer.Serialize(writer, kv.Value);
+					}
 				}
 			}
 
