@@ -82,4 +82,33 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 			q => q.Fields = null
 		};
 	}
+
+	public class MultiMatchWithBoostUsageTests : QueryDslUsageTestsBase
+	{
+		public MultiMatchWithBoostUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object QueryJson => new
+		{
+			multi_match = new
+			{
+				query = "hello world",
+				fields = new[] {
+					"description^2.2",
+					"myOtherField^0.3"
+				}
+			}
+		};
+
+		protected override QueryContainer QueryInitializer => new MultiMatchQuery
+		{
+			Fields = Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"),
+			Query = "hello world",
+		};
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.MultiMatch(c => c
+				.Fields(f => f.Field(p=>p.Description, 2.2).Field("myOtherField^0.3"))
+				.Query("hello world")
+			);
+	}
 }
