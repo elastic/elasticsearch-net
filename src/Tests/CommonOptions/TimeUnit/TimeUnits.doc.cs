@@ -117,5 +117,69 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("2d").WhenSerializing<Union<DateInterval, Time>>((Time)"2d");
 			Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
+
+		[U]
+		public void ExpectedValues()
+		{
+			Assert(
+				1, Nest.TimeUnit.Year, TimeSpan.FromDays(365).TotalMilliseconds, "1y",
+				new Time(1, Nest.TimeUnit.Year),
+				new Time("1y"),
+				new Time(TimeSpan.FromDays(365).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Month, TimeSpan.FromDays(30).TotalMilliseconds, "1M",
+				new Time(1, Nest.TimeUnit.Month),
+				new Time("1M"),
+				new Time(TimeSpan.FromDays(30).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Week, TimeSpan.FromDays(7).TotalMilliseconds, "1w",
+				new Time(1, Nest.TimeUnit.Week),
+				new Time("1w"),
+				new Time(TimeSpan.FromDays(7).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Day, TimeSpan.FromDays(1).TotalMilliseconds, "1d",
+				new Time(1, Nest.TimeUnit.Day),
+				new Time("1d"),
+				new Time(TimeSpan.FromDays(1).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Hour, TimeSpan.FromHours(1).TotalMilliseconds, "1h",
+				new Time(1, Nest.TimeUnit.Hour),
+				new Time("1h"),
+				new Time(TimeSpan.FromHours(1).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Minute, TimeSpan.FromMinutes(1).TotalMilliseconds, "1m",
+				new Time(1, Nest.TimeUnit.Minute),
+				new Time("1m"),
+				new Time(TimeSpan.FromMinutes(1).TotalMilliseconds)
+			);
+
+			Assert(
+				1, Nest.TimeUnit.Second, TimeSpan.FromSeconds(1).TotalMilliseconds, "1s",
+				new Time(1, Nest.TimeUnit.Second),
+				new Time("1s"),
+				new Time(TimeSpan.FromSeconds(1).TotalMilliseconds)
+			);
+		}
+
+		private void Assert(double expectedFactor, Nest.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized, params Time[] times)
+		{
+			foreach (var time in times)
+			{
+				time.Factor.Should().Be(expectedFactor);
+				time.Interval.Should().Be(expectedInterval);
+				time.Milliseconds.Should().Be(expectedMilliseconds);
+				Expect(expectedSerialized).WhenSerializing(time);
+			}
+		}
 	}
 }
