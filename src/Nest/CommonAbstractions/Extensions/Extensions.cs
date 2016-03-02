@@ -72,7 +72,7 @@ namespace Nest
 		}
 
 		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
-		internal static T? ToEnum<T>(this string str) where T : struct
+		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
 		{
 			var enumType = typeof(T);
 			var key = $"{enumType.Name}.{str}";
@@ -82,7 +82,7 @@ namespace Nest
 
 			foreach (var name in Enum.GetNames(enumType))
 			{
-				if (name.Equals(str, StringComparison.OrdinalIgnoreCase))
+				if (name.Equals(str, comparison))
 				{
 					var v = (T)Enum.Parse(enumType, name, true);
 					_enumCache.TryAdd(key, v);
@@ -99,7 +99,6 @@ namespace Nest
 				}
 
 				var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
-
 				if (alternativeEnumMemberAttribute?.Value == str)
 				{
 					var v = (T) Enum.Parse(enumType, name);
