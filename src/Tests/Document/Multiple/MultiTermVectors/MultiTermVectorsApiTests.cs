@@ -48,7 +48,8 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override void ExpectResponse(IMultiTermVectorsResponse response)
 		{
-			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found).And.OnlyContain(d => d.IsValid);
+			response.IsValid.Should().BeTrue();
+			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
 			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
 
 			termvectorDoc.Should().NotBeNull();
