@@ -12,6 +12,6 @@ namespace Nest
 	public class MultiTermVectorsResponse : ResponseBase, IMultiTermVectorsResponse
 	{
 		[JsonProperty("docs")]
-		public IEnumerable<TermVectorsResponse> Documents { get; internal set; }= new List<TermVectorsResponse>();
+		public IEnumerable<TermVectorsResponse> Documents { get; internal set; } = new List<TermVectorsResponse>();
 	}
 }
