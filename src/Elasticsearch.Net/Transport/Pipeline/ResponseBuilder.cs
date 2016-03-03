@@ -130,15 +130,15 @@ namespace Elasticsearch.Net
 			var setSpecial = true;
 			if (this._requestData.ConnectionSettings.DisableDirectStreaming)
 				cs.ResponseBodyInBytes = bytes;
-
-			if (cs.Body is string)
+		    var returnType = typeof (TReturn);
+			if (returnType == typeof(string))
 				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-			else if (cs.Body is byte[])
+			else if (returnType == typeof(byte[]))
 				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-			else if (cs.Body is VoidResponse)
+			else if (returnType == typeof(VoidResponse))
 				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
-			else if (cs.Body is Stream)
-				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
+            else if (returnType == typeof(Stream))
+                this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
 			else
 				setSpecial = false;
 			return setSpecial;
