@@ -127,7 +127,7 @@ We can then iterate over each `name` bucket and extract our `max_age` result:
 
 	foreach(var name in names.Items)
 	{
-		var maxAge = name.Aggs.Max("max_age");
+		var maxAge = name.Max("max_age");
 	}
 
 That's aggregations in a nutshell.  Refer to the specific section on each aggregation type for more details.
