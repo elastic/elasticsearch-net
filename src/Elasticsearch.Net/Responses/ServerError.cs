@@ -43,6 +43,7 @@ namespace Elasticsearch.Net
 		{
 			object status, error;
 			int statusCode = -1;
+
 			if (dict.TryGetValue("status", out status))
 				statusCode = Convert.ToInt32(status);
 
@@ -82,11 +83,17 @@ namespace Elasticsearch.Net
 		public string ResourceType { get; set; }
 		public string Type { get; set; }
 		public List<RootCause> RootCause { get; set; }
+		public CausedBy CausedBy { get; set; }
 
 		internal static Error Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
 			var error = new Error();
 			error.FillValues(dict);
+
+			object causedBy;
+			if (dict.TryGetValue("caused_by", out causedBy))
+				error.CausedBy = (CausedBy) strategy.DeserializeObject(causedBy, typeof(CausedBy));
+
 			object rootCause;
 			if (!dict.TryGetValue("root_cause", out rootCause)) return error;
 
@@ -94,6 +101,26 @@ namespace Elasticsearch.Net
 			if (os == null) return error;
 			error.RootCause = os.Select(o => (RootCause)strategy.DeserializeObject(o, typeof(RootCause))).ToList();
 			return error;
+		}
+
+		public override string ToString() => CausedBy == null
+			? $"Type: {this.Type} Reason: \"{this.Reason}\""
+			: $"Type: {this.Type} Reason: \"{this.Reason}\" CausedBy: \"{this.CausedBy}\"";
+	}
+
+	public class CausedBy
+	{
+		public string Reason { get; set; }
+		public string Type { get; set; }
+
+		internal static CausedBy Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
+		{
+			var causedBy = new CausedBy();
+			object reason;
+			if (dict.TryGetValue("reason", out reason)) causedBy.Reason = Convert.ToString(reason);
+			object type;
+			if (dict.TryGetValue("type", out type)) causedBy.Type = Convert.ToString(type);
+			return causedBy;
 		}
 
 		public override string ToString() => $"Type: {this.Type} Reason: \"{this.Reason}\"";

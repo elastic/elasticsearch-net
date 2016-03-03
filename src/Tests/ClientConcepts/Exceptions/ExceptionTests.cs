@@ -83,5 +83,17 @@ namespace Tests.ClientConcepts.Exceptions
 #endif
 			response.CallDetails.ServerError.Should().BeNull();
 		}
+
+		[U]
+		public void DispatchIndicatesMissingRouteValues()
+		{
+			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
+			var client = new ElasticClient(settings);
+			
+			Action dispatch = () => client.Index(new Project());
+			var ce = dispatch.ShouldThrow<ArgumentException>();
+			ce.Should().NotBeNull();
+			ce.Which.Message.Should().Contain("index=<NULL>");
+		}
 	}
 }
