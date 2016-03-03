@@ -51,7 +51,7 @@ namespace Nest
 
 			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
 			this.Interval = match.Groups["interval"].Success
-				? match.Groups["interval"].Value.ToEnum<TimeUnit>()
+				? match.Groups["interval"].Value.ToEnum<TimeUnit>(StringComparison.Ordinal)
 				: TimeUnit.Millisecond;
 
 			this.Milliseconds = GetMilliseconds(this.Interval.Value, this.Factor.Value);
