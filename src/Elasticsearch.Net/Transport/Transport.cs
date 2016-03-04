@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
 using System;
 
 namespace Elasticsearch.Net
@@ -14,15 +13,7 @@ namespace Elasticsearch.Net
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 		public IRequestPipelineFactory PipelineProvider { get; }
 
-		/// <summary>
-		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
-		/// </summary>
-		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues)
-			: this(configurationValues, null, null, null)
-		{ }
-
-		/// <summary>
+	    /// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
@@ -31,10 +22,9 @@ namespace Elasticsearch.Net
 		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>
 		public Transport(
 			TConnectionSettings configurationValues,
-			IRequestPipelineFactory pipelineProvider,
-			IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory
-			)
+			IRequestPipelineFactory pipelineProvider = null,
+			IDateTimeProvider dateTimeProvider = null,
+			IMemoryStreamFactory memoryStreamFactory = null)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));

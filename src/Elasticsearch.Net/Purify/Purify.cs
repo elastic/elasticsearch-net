@@ -22,9 +22,7 @@ namespace Purify
 	/// </summary>
 	public static class Purifier
 	{
-
 		private static readonly bool hasBrokenDotNetUri;
-
 		private static readonly bool isMono;
 
 		static Purifier()
@@ -95,14 +93,14 @@ namespace Purify
 
 		private class PurifierDotNet : IPurifier
 		{
-			private static FieldInfo flagsField;
-			private static FieldInfo infoField;
-			private static FieldInfo stringField;
-			private static FieldInfo infoStringField;
-			private static FieldInfo moreInfoField;
-			private static FieldInfo moreInfoAbsoluteUri;
-			private static FieldInfo moreInfoPath;
-			private static FieldInfo moreInfoQuery;
+			private static readonly FieldInfo flagsField;
+			private static readonly FieldInfo infoField;
+			private static readonly FieldInfo stringField;
+			private static readonly FieldInfo infoStringField;
+			private static readonly FieldInfo moreInfoField;
+			private static readonly FieldInfo moreInfoAbsoluteUri;
+			private static readonly FieldInfo moreInfoPath;
+			private static readonly FieldInfo moreInfoQuery;
 
 			static PurifierDotNet()
 			{
@@ -110,9 +108,11 @@ namespace Purify
 				flagsField = uriType.GetField("m_Flags", BindingFlags.NonPublic | BindingFlags.Instance);
 				stringField = uriType.GetField("m_String", BindingFlags.NonPublic | BindingFlags.Instance);
 				infoField = uriType.GetField("m_Info", BindingFlags.NonPublic | BindingFlags.Instance);
+
 				var infoFieldType = infoField.FieldType;
 				infoStringField = infoFieldType.GetField("String", BindingFlags.Public | BindingFlags.Instance);
 				moreInfoField = infoFieldType.GetField("MoreInfo", BindingFlags.Public | BindingFlags.Instance);
+
 				var moreInfoType = moreInfoField.FieldType;
 				moreInfoAbsoluteUri = moreInfoType.GetField("AbsoluteUri", BindingFlags.Public | BindingFlags.Instance);
 				moreInfoQuery = moreInfoType.GetField("Query", BindingFlags.Public | BindingFlags.Instance);
@@ -120,33 +120,38 @@ namespace Purify
 			}
 
 			//Code inspired by Rasmus Faber's solution in this post: http://stackoverflow.com/questions/781205/getting-a-url-with-an-url-encoded-slash
-			public Uri Purify(Uri uri)
+		    Uri IPurifier.Purify(Uri uri)
 			{
 				string paq = uri.PathAndQuery; // need to access PathAndQuery
 				var abs = uri.AbsoluteUri; //need to access this as well the MoreInfo prop is initialized.
+
 				ulong flags = (ulong)flagsField.GetValue(uri);
-				flags &= ~((ulong)0x30); // Flags.PathNotCanonical|Flags.QueryNotCanonical
+				flags &= ~(ulong)0x30; // Flags.PathNotCanonical|Flags.QueryNotCanonical
 				flagsField.SetValue(uri, flags);
+
 				object info = infoField.GetValue(uri);
 				var source = (string)stringField.GetValue(uri);
 				infoStringField.SetValue(info, source);
+
 				object moreInfo = moreInfoField.GetValue(info);
 				moreInfoAbsoluteUri.SetValue(moreInfo, source);
+
 				var uriInfo = new UriInfo(uri, source);
 				moreInfoPath.SetValue(moreInfo, uriInfo.Path);
 				moreInfoQuery.SetValue(moreInfo, uriInfo.Query);
+
 				return uri;
 			}
 		}
 
 		private class PurifierMono : IPurifier
 		{
-			private static Type uriType = typeof(Uri);
-			private static FieldInfo mono_sourceField;
-			private static FieldInfo mono_queryField;
-			private static FieldInfo mono_pathField;
-			private static FieldInfo mono_cachedToStringField;
-			private static FieldInfo mono_cachedAbsoluteUriField;
+			private static readonly Type uriType = typeof(Uri);
+			private static readonly FieldInfo mono_sourceField;
+			private static readonly FieldInfo mono_queryField;
+			private static readonly FieldInfo mono_pathField;
+			private static readonly FieldInfo mono_cachedToStringField;
+			private static readonly FieldInfo mono_cachedAbsoluteUriField;
 
 			static PurifierMono()
 			{
@@ -158,14 +163,16 @@ namespace Purify
 					BindingFlags.NonPublic | BindingFlags.Instance);
 			}
 
-			public Uri Purify(Uri uri)
+		    Uri IPurifier.Purify(Uri uri)
 			{
 				var source = (string)mono_sourceField.GetValue(uri);
 				mono_cachedToStringField.SetValue(uri, source ?? string.Empty);
 				mono_cachedAbsoluteUriField.SetValue(uri, source ?? string.Empty);
+
 				var uriInfo = new UriInfo(uri, source);
 				mono_pathField.SetValue(uri, uriInfo.Path ?? string.Empty);
 				mono_queryField.SetValue(uri, uriInfo.Query ?? string.Empty);
+
 				return uri;
 			}
 		}
@@ -175,14 +182,15 @@ namespace Purify
 		/// </summary>
 		private class UriInfo
 		{
-			public string Path { get; private set; }
-			public string Query { get; private set; }
+			public string Path { get; }
+			public string Query { get; }
 
 			public UriInfo(Uri uri, string source)
 			{
 				var fragPos = source.IndexOf("#", StringComparison.Ordinal);
 				var queryPos = source.IndexOf("?", StringComparison.Ordinal);
 				var start = source.IndexOf(uri.Host, StringComparison.Ordinal) + uri.Host.Length;
+
 				var pathEnd = queryPos == -1 ? fragPos : queryPos;
 				if (pathEnd == -1)
 					pathEnd = source.Length + 1;
