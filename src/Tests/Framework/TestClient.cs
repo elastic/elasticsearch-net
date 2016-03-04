@@ -76,7 +76,8 @@ namespace Tests.Framework
 				? ((IConnection)new HttpConnection())
 				: new InMemoryConnection();
 
-		public static IElasticClient GetFixedReturnClient(object responseJson)
+		public static IElasticClient GetFixedReturnClient(
+			object responseJson, int statusCode = 200, Func<ConnectionSettings, ConnectionSettings> modifySettings = null)
 		{
 			var serializer = new JsonNetSerializer(new ConnectionSettings());
 			byte[] fixedResult;
@@ -85,9 +86,10 @@ namespace Tests.Framework
 				serializer.Serialize(responseJson, ms);
 				fixedResult = ms.ToArray();
 			}
-			var connection = new InMemoryConnection(fixedResult);
+			var connection = new InMemoryConnection(fixedResult, statusCode);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(connectionPool, connection);
+			var defaultSettings = new ConnectionSettings(connectionPool, connection);
+			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings);
 		}
 
