@@ -35,6 +35,11 @@ namespace Nest
 			this._Mapping.Index = fieldIndexOption;
 			return this;
 		}
+		public GenericMappingDescriptor<T> Index(FieldIndexOption fieldIndexOption)
+		{
+			this._Mapping.Index = fieldIndexOption == null ? null : fieldIndexOption.GetStringValue();
+			return this;
+		}
 		public GenericMappingDescriptor<T> Store(bool store = true)
 		{
 			this._Mapping.Store = store;
