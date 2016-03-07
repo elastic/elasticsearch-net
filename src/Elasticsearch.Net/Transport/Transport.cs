@@ -19,8 +19,7 @@ namespace Elasticsearch.Net
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues)
 			: this(configurationValues, null, null, null)
-		{
-		}
+		{}
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
@@ -33,7 +32,8 @@ namespace Elasticsearch.Net
 			TConnectionSettings configurationValues,
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamFactory)
+			IMemoryStreamFactory memoryStreamFactory
+			)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));

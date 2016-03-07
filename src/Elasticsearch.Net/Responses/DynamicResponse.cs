@@ -280,7 +280,6 @@ namespace Elasticsearch.Net
 			return new KeyValuePair<string, dynamic>(item.Key, new ElasticsearchDynamicValue(item.Value));
 		}
 
-		//TODO:For what purpose do you use this function?
 		private static string GetNeutralKey(string key)
 		{
 			return key;

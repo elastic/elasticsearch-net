@@ -163,9 +163,9 @@ namespace Purify
 					BindingFlags.NonPublic | BindingFlags.Instance);
 			}
 
-			Uri IPurifier.Purify(Uri uri)
+			public Uri Purify(Uri uri)
 			{
-				var source = (string) mono_sourceField.GetValue(uri);
+				var source = (string)mono_sourceField.GetValue(uri);
 				mono_cachedToStringField.SetValue(uri, source ?? string.Empty);
 				mono_cachedAbsoluteUriField.SetValue(uri, source ?? string.Empty);
 
