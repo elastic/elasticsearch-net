@@ -15,8 +15,14 @@ type Release() =
         CreateDir Paths.NugetOutput
         let package = (sprintf @"build\%s.nuspec" name)
         let packageContents = ReadFileAsString package
-        let re = @"(?<start>\<version\>|""(Elasticsearch.Net|Nest)"" version="")[^""><]+(?<end>\<\/version\>|"")"
+        //patch version itself
+        let re = @"(?<start>\<version\>)[^""><]+(?<end>\<\/version\>)"
         let replacedContents = regex_replace re (sprintf "${start}%s${end}" Versioning.FileVersion) packageContents
+        WriteStringToFile false package replacedContents
+
+        //patch dependency
+        let re = @"(?<start>""(Elasticsearch.Net|Nest)"" version="")[^""><]+(?<end>"")"
+        let replacedContents = regex_replace re (sprintf "${start}[%s,2)${end}" Versioning.FileVersion) packageContents
         WriteStringToFile false package replacedContents
     
         let dir = sprintf "%s/%s/" Paths.BuildOutput name
