@@ -14,7 +14,7 @@
 		<description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
 		<dependencies>
 			<dependency id="Elasticsearch.Net" version="[1.7.2,2)"/>
-			<dependency id="Newtonsoft.Json" version="[7,9)" />
+			<dependency id="Newtonsoft.Json" version="[8,9)" />
 		</dependencies>
 		<tags>elasticsearch elastic search lucene nest</tags>
 	</metadata>
