@@ -16,13 +16,9 @@ namespace Elasticsearch.Net
 
 		public abstract HttpMethod DefaultHttpMethod { get; }
 
-		#region Explicit implementation of IRequestParameters
-
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
 		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
-
-		#endregion
 
 		protected FluentRequestParameters()
 		{
