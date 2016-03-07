@@ -4,7 +4,6 @@ using System.Reflection;
 
 namespace Purify
 {
-
 #if DOTNETCORE
 	public static class Purifier
 	{
@@ -27,20 +26,21 @@ namespace Purify
 
 		static Purifier()
 		{
-			isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
+			isMono = typeof (Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
 			if (isMono)
 				return;
 
 			//ShouldUseLegacyV2Quirks was introduced in .net 4.5
 			//Eventhough 4.5 is an inplace update of 4.0 this call will return 
 			//a different value if an application specifically targets 4.0 or 4.5+
-			var legacyV2Quirks = typeof(UriParser).GetProperty("ShouldUseLegacyV2Quirks", BindingFlags.Static | BindingFlags.NonPublic);
+			var legacyV2Quirks = typeof (UriParser).GetProperty("ShouldUseLegacyV2Quirks",
+				BindingFlags.Static | BindingFlags.NonPublic);
 			if (legacyV2Quirks == null)
 			{
 				hasBrokenDotNetUri = true; //neither 4.0 or 4.5
 				return;
 			}
-			var isBrokenUri = (bool)legacyV2Quirks.GetValue(null, null);
+			var isBrokenUri = (bool) legacyV2Quirks.GetValue(null, null);
 			if (!isBrokenUri)
 				return; //application targets 4.5
 
@@ -104,7 +104,7 @@ namespace Purify
 
 			static PurifierDotNet()
 			{
-				var uriType = typeof(Uri);
+				var uriType = typeof (Uri);
 				flagsField = uriType.GetField("m_Flags", BindingFlags.NonPublic | BindingFlags.Instance);
 				stringField = uriType.GetField("m_String", BindingFlags.NonPublic | BindingFlags.Instance);
 				infoField = uriType.GetField("m_Info", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -120,17 +120,17 @@ namespace Purify
 			}
 
 			//Code inspired by Rasmus Faber's solution in this post: http://stackoverflow.com/questions/781205/getting-a-url-with-an-url-encoded-slash
-		    Uri IPurifier.Purify(Uri uri)
+			Uri IPurifier.Purify(Uri uri)
 			{
 				string paq = uri.PathAndQuery; // need to access PathAndQuery
 				var abs = uri.AbsoluteUri; //need to access this as well the MoreInfo prop is initialized.
 
-				ulong flags = (ulong)flagsField.GetValue(uri);
-				flags &= ~(ulong)0x30; // Flags.PathNotCanonical|Flags.QueryNotCanonical
+				ulong flags = (ulong) flagsField.GetValue(uri);
+				flags &= ~(ulong) 0x30; // Flags.PathNotCanonical|Flags.QueryNotCanonical
 				flagsField.SetValue(uri, flags);
 
 				object info = infoField.GetValue(uri);
-				var source = (string)stringField.GetValue(uri);
+				var source = (string) stringField.GetValue(uri);
 				infoStringField.SetValue(info, source);
 
 				object moreInfo = moreInfoField.GetValue(info);
@@ -146,7 +146,7 @@ namespace Purify
 
 		private class PurifierMono : IPurifier
 		{
-			private static readonly Type uriType = typeof(Uri);
+			private static readonly Type uriType = typeof (Uri);
 			private static readonly FieldInfo mono_sourceField;
 			private static readonly FieldInfo mono_queryField;
 			private static readonly FieldInfo mono_pathField;
@@ -163,9 +163,9 @@ namespace Purify
 					BindingFlags.NonPublic | BindingFlags.Instance);
 			}
 
-		    Uri IPurifier.Purify(Uri uri)
+			Uri IPurifier.Purify(Uri uri)
 			{
-				var source = (string)mono_sourceField.GetValue(uri);
+				var source = (string) mono_sourceField.GetValue(uri);
 				mono_cachedToStringField.SetValue(uri, source ?? string.Empty);
 				mono_cachedAbsoluteUriField.SetValue(uri, source ?? string.Empty);
 
