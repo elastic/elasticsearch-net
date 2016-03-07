@@ -444,6 +444,78 @@ namespace Elasticsearch.Net.Tests.Unit.ConnectionPools.Sniffing
 		}
 		
 		[Test]
+		public async Task ShouldRetryOnSniffConnectionException_Async_NoSugar()
+		{
+			using (var fake = new AutoFake(callsDoNothing: true))
+			{	
+				var uris = new[]
+				{
+					new Uri("http://localhost:9200"),
+					new Uri("http://localhost:9201"),
+					new Uri("http://localhost:9202")
+				};
+				var connectionPool = new SniffingConnectionPool(uris, randomizeOnStartup: false);
+				var config = new ConnectionConfiguration(connectionPool)
+					.SniffOnConnectionFault();
+				
+				fake.Provide<IConnectionConfigurationValues>(config);
+
+				var pingAsyncCall = FakeCalls.PingAtConnectionLevelAsync(fake);
+				pingAsyncCall.Returns(FakeResponse.OkAsync(config));
+
+				//sniffing is always synchronous and in turn will issue synchronous pings
+				var pingCall = FakeCalls.PingAtConnectionLevel(fake);
+				pingCall.Returns(FakeResponse.Ok(config));
+
+				var sniffCall = FakeCalls.Sniff(fake);
+				var seenPorts = new List<int>();
+				sniffCall.ReturnsLazily((Uri u, IRequestConfiguration c) =>
+				{
+					seenPorts.Add(u.Port);
+					throw new Exception("Something bad happened");
+				});
+
+				var getCall = FakeCalls.GetCall(fake);
+				getCall.Returns(FakeResponse.BadAsync(config));
+
+				FakeCalls.ProvideDefaultTransport(fake);
+				
+				var client = fake.Resolve<ElasticsearchClient>();
+
+				MaxRetryException exception = null;
+				try
+				{
+					await client.NodesHotThreadsAsync("nodex");
+				}
+				catch (MaxRetryException e)
+				{
+					exception = e;
+				}
+
+				//all nodes must be tried to sniff for more information
+				sniffCall.MustHaveHappened(Repeated.Exactly.Times(uris.Count()));
+				//make sure we only saw one call to hot threads (the one that failed initially)
+				getCall.MustHaveHappened(Repeated.Exactly.Once);
+				
+				//make sure the sniffs actually happened on all the individual nodes
+				seenPorts.ShouldAllBeEquivalentTo(uris.Select(u=>u.Port));
+				exception.Should().NotBeNull();
+				exception.InnerException.Message.Should().Contain("Sniffing known nodes");
+
+				ArgumentException ae = null;
+				try
+				{
+					await client.NodesHotThreadsAsync(null);
+				}
+				catch (ArgumentException e)
+				{
+					ae = e;
+				}
+				ae.Should().NotBeNull();
+			}
+		}
+		
+		[Test]
 		public void ShouldRetryOnSniffConnectionException()
 		{
 			using (var fake = new AutoFake(callsDoNothing: true))
