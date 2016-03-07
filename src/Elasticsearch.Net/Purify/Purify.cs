@@ -26,14 +26,14 @@ namespace Purify
 
 		static Purifier()
 		{
-			isMono = typeof (Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
+			isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
 			if (isMono)
 				return;
 
 			//ShouldUseLegacyV2Quirks was introduced in .net 4.5
 			//Eventhough 4.5 is an inplace update of 4.0 this call will return 
 			//a different value if an application specifically targets 4.0 or 4.5+
-			var legacyV2Quirks = typeof (UriParser).GetProperty("ShouldUseLegacyV2Quirks",
+			var legacyV2Quirks = typeof(UriParser).GetProperty("ShouldUseLegacyV2Quirks",
 				BindingFlags.Static | BindingFlags.NonPublic);
 			if (legacyV2Quirks == null)
 			{
@@ -104,7 +104,7 @@ namespace Purify
 
 			static PurifierDotNet()
 			{
-				var uriType = typeof (Uri);
+				var uriType = typeof(Uri);
 				flagsField = uriType.GetField("m_Flags", BindingFlags.NonPublic | BindingFlags.Instance);
 				stringField = uriType.GetField("m_String", BindingFlags.NonPublic | BindingFlags.Instance);
 				infoField = uriType.GetField("m_Info", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -146,7 +146,7 @@ namespace Purify
 
 		private class PurifierMono : IPurifier
 		{
-			private static readonly Type uriType = typeof (Uri);
+			private static readonly Type uriType = typeof(Uri);
 			private static readonly FieldInfo mono_sourceField;
 			private static readonly FieldInfo mono_queryField;
 			private static readonly FieldInfo mono_pathField;
