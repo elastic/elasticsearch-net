@@ -18,7 +18,7 @@ namespace Nest
 		{
 			get
 			{
-				return new DateTime(1970, 1, 1).AddMilliseconds(0 + this.Key);
+				return DateTime.SpecifyKind(new DateTime(1970, 1, 1).AddMilliseconds(0 + this.Key), DateTimeKind.Utc);
 			}
 		}
 
