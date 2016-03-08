@@ -25,6 +25,8 @@ namespace Nest
 		bool? TermStatistics { get; set; }
 		[JsonProperty("field_statistics")]
 		bool? FieldStatistics { get; set; }
+		[JsonProperty("filter")]
+		ITermVectorFilter Filter { get; set; }
 	}
 
 	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation 
@@ -47,6 +49,7 @@ namespace Nest
 		public bool? Positions { get; set; }
 		public bool? TermStatistics { get; set; }
 		public bool? FieldStatistics { get; set; }
+		public ITermVectorFilter Filter { get; set; }
 	}
 
 	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation 
@@ -62,6 +65,7 @@ namespace Nest
 		bool? IMultiTermVectorOperation.Positions { get; set; }
 		bool? IMultiTermVectorOperation.TermStatistics { get; set; }
 		bool? IMultiTermVectorOperation.FieldStatistics { get; set; }
+		ITermVectorFilter IMultiTermVectorOperation.Filter { get; set; }
 
 		public MultiTermVectorOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
@@ -77,5 +81,8 @@ namespace Nest
 		public MultiTermVectorOperationDescriptor<T> TermStatistics(bool termStatistics = true) => Assign(a => a.TermStatistics = termStatistics);
 
 		public MultiTermVectorOperationDescriptor<T> FieldStatistics(bool fieldStatistics = true) => Assign(a => a.FieldStatistics = fieldStatistics);
+
+		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) => 
+			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
 	}
 }
