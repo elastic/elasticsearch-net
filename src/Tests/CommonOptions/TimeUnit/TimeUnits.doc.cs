@@ -69,7 +69,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Time oneAndHalfYear = "1.5y";
 			Time twoWeeks = TimeSpan.FromDays(14);
 			Time twoDays = 1000*60*60*24*2;
-
+	
 			/**
 			* Milliseconds are calculated even when values are not passed as long
 			*/
@@ -96,6 +96,8 @@ namespace Tests.CommonOptions.TimeUnit
 			(twoDays == new Time("2d")).Should().BeTrue();
 			(twoDays != new Time("2.1d")).Should().BeTrue();
 			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
+			(new Time("1") == new Time(1)).Should().BeTrue();
+			(new Time("-1") == new Time(-1)).Should().BeTrue();
 		}
 
 		[U]

@@ -8,7 +8,7 @@ namespace Nest
 	[JsonConverter(typeof(TimeJsonConverter))]
 	public class Time : IComparable<Time>, IEquatable<Time>
 	{
-		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
 		private static readonly double _year = TimeSpan.FromDays(365).TotalMilliseconds;
 		private static readonly double _month = TimeSpan.FromDays(30).TotalMilliseconds;
