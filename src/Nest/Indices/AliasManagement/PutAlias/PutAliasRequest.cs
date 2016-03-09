@@ -30,6 +30,6 @@ namespace Nest
 
 		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 			where T : class =>
-			Assign(a => a.Filter = filterSelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

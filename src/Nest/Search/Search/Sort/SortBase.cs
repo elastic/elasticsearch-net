@@ -65,7 +65,7 @@ namespace Nest
 		public virtual TDescriptor Mode(SortMode? mode) => Assign(a => a.Mode = mode);
 
 		public virtual TDescriptor NestedFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) =>
-			Assign(a => a.NestedFilter = filterSelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.NestedFilter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public virtual TDescriptor NestedPath(Field path) => Assign(a => a.NestedPath = path);
 

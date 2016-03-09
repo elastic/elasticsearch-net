@@ -29,6 +29,6 @@ namespace Nest
 		QueryContainer IExplainRequest<TDocument>.Query { get; set; }
 
 		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) => 
-			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

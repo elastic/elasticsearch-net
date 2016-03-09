@@ -15,7 +15,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public IFieldLookup IndexedShape { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 
 		internal static bool IsConditionless(IGeoIndexedShapeQuery q) => 
 			q.Field.IsConditionless() || q.IndexedShape == null

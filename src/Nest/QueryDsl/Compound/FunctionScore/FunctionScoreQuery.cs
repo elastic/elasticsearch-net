@@ -37,7 +37,7 @@ namespace Nest
 		public double? MaxBoost { get; set; }
 		public double? MinScore { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.FunctionScore = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.FunctionScore = this;
 
 		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false) => 
 			force || !q.Functions.HasAny();
@@ -59,7 +59,7 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless) => Assign(a => _forcedConditionless = isConditionless);
 
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public FunctionScoreQueryDescriptor<T> Functions(Func<ScoreFunctionsDescriptor<T>, IPromise<IList<IScoreFunction>>> functions) =>
 			Assign(a => a.Functions = functions?.Invoke(new ScoreFunctionsDescriptor<T>())?.Value);

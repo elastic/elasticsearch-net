@@ -49,7 +49,7 @@ namespace Nest
 		IScriptFields IInnerHits.ScriptFields { get; set; }
 
 		public TopLevelInnerHit<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public TopLevelInnerHit<T> InnerHits(Func<TopLevelInnerHitsDescriptor<T>, IPromise<ITopLevelInnerHits>> selector) =>
 			Assign(a => a.InnerHits = selector?.Invoke(new TopLevelInnerHitsDescriptor<T>())?.Value);

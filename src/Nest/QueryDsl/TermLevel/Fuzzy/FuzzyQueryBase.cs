@@ -47,7 +47,7 @@ namespace Nest
 
 		public bool? Transpositions { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Fuzzy = this;
 
 		protected override bool Conditionless => FuzzyQueryBase.IsConditionless(this);
 

@@ -391,7 +391,7 @@ namespace Nest
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
 		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// Shortcut to default to a match all query
@@ -402,7 +402,7 @@ namespace Nest
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter) =>
-			Assign(a => a.PostFilter = filter.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.PostFilter = filter.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.

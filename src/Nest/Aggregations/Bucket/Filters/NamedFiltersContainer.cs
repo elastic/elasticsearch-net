@@ -31,11 +31,11 @@ namespace Nest
 		public NamedFiltersContainerDescriptor<T> Filter(string name, IQueryContainer filter) => Assign(name, filter);
 
 		public NamedFiltersContainerDescriptor<T> Filter(string name, Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(name, selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(name, selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public NamedFiltersContainerDescriptor<T> Filter<TOther>(string name, Func<QueryContainerDescriptor<TOther>, QueryContainer> selector)
 			where TOther : class =>
-			Assign(name, selector?.InvokeQuery(new QueryContainerDescriptor<TOther>()));
+			Assign(name, selector?.Invoke(new QueryContainerDescriptor<TOther>()));
 
 	}
 

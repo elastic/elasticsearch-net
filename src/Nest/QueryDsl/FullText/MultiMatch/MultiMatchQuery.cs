@@ -79,7 +79,7 @@ namespace Nest
 		public Fields Fields { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
 		internal static bool IsConditionless(IMultiMatchQuery q) => q.Fields.IsConditionless() || q.Query.IsNullOrEmpty();
 	}

@@ -196,7 +196,8 @@ namespace Tests.Search.Search
 		{
 			query = new
 			{
-				@bool = new {
+				@bool = new
+				{
 					must = new object[] { new { query_string = new { query = "query" } } },
 					should = new object[] { new { query_string = new { query = "query" } } },
 					must_not = new object[] { new { query_string = new { query = "query" } } }
@@ -273,12 +274,12 @@ namespace Tests.Search.Search
 	{
 		public SearchApiNullQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override object ExpectJson => new {};
+		protected override object ExpectJson => new { };
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Query(q => q
 				.Bool(b => b
-					.Must((Func<QueryContainerDescriptor<Project>,QueryContainer>)null)
+					.Must((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
 					.Should((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
 					.MustNot((Func<QueryContainerDescriptor<Project>, QueryContainer>)null)
 				)
@@ -319,10 +320,11 @@ namespace Tests.Search.Search
 			.Query(q => q
 				.Bool(b =>
 				{
+					b.Verbatim();
 					IBoolQuery bq = b;
-					bq.Must = new QueryContainer[] {null};
-					bq.Should = new QueryContainer[] {null};
-					bq.MustNot = new QueryContainer[] {null};
+					bq.Must = new QueryContainer[] { null };
+					bq.Should = new QueryContainer[] { null };
+					bq.MustNot = new QueryContainer[] { null };
 					return bq;
 				})
 			);
@@ -331,6 +333,7 @@ namespace Tests.Search.Search
 		{
 			Query = new BoolQuery
 			{
+				IsVerbatim = true,
 				Must = new QueryContainer[] { null },
 				Should = new QueryContainer[] { null },
 				MustNot = new QueryContainer[] { null }

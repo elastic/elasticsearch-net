@@ -28,7 +28,7 @@ namespace Nest
 	public class DateRangeQuery : FieldNameQueryBase, IDateRangeQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
-		internal override void WrapInContainer(IQueryContainer c) => c.Range = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Range = this;
 
 		public DateMath GreaterThanOrEqualTo { get; set; }
 		public DateMath LessThanOrEqualTo { get; set; }

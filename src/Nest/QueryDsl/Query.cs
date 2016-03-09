@@ -163,9 +163,6 @@ namespace Nest
 		public static QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanWithin(selector);
 
-		public static QueryContainerDescriptor<T> Strict(bool strict = true) =>
-			new QueryContainerDescriptor<T>().Strict(strict);
-
 		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Template(selector);
 

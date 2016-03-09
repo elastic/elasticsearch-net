@@ -13,7 +13,7 @@ namespace Nest
 		protected override bool Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanTerm = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanTerm = this;
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

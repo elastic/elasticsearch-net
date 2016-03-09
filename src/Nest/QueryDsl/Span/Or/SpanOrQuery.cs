@@ -18,7 +18,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanOr = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanOr = this;
 		internal static bool IsConditionless(ISpanOrQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
