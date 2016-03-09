@@ -18,7 +18,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public int? Limit { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Limit = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Limit = this;
 		internal static bool IsConditionless(ILimitQuery q) => !q.Limit.HasValue;
 	}
 

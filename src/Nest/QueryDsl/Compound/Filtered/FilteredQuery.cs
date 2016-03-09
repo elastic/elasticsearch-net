@@ -22,7 +22,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Filtered = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Filtered = this;
 
 		internal static bool IsConditionless(IFilteredQuery q)
 		{
@@ -46,9 +46,9 @@ namespace Nest
 		QueryContainer IFilteredQuery.Filter { get; set; }
 
 		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public FilteredQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

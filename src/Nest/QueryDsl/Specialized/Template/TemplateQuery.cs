@@ -29,7 +29,7 @@ namespace Nest
 		public Id Id { get; set; }
 		public IDictionary<string, object> Params { get; set;}
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Template = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Template = this;
 		internal static bool IsConditionless(ITemplateQuery q) => q.File.IsNullOrEmpty() && q.Id == null && q.Inline.IsNullOrEmpty();
 	}
 

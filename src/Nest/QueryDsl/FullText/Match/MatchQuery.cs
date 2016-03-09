@@ -71,7 +71,7 @@ namespace Nest
 		public Operator? Operator { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Match = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Match = this;
 
 		internal static bool IsConditionless(IMatchQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}

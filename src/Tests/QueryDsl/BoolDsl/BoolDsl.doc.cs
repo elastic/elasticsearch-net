@@ -35,11 +35,11 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		*[[indent]]
 		*.hadouken indenting
-		*image::hadouken-indentation.jpg[hadouken indenting]	
+		*image::hadouken-indentation.jpg[hadouken indenting]
 		*
 		*=== Operator Overloading
 		*
-		*For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 
+		*For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write.
 		*The previous example now becomes the following with the fluent API
 		*/
 		public void UsingOperator()
@@ -50,14 +50,14 @@ namespace Tests.QueryDsl.BoolDsl
 			/** or, using the object initializer syntax */
 			searchResults = this.Client.Search<Project>(new SearchRequest<Project>
 			{
-				Query = new TermQuery { Field = "name", Value= "x" } 
+				Query = new TermQuery { Field = "name", Value= "x" }
 					|| new TermQuery { Field = Field<Project>(p=>p.Name), Value = "y" }
 			});
 		}
 
-		/** A naive implementation of operator overloading would rewrite 
+		/** A naive implementation of operator overloading would rewrite
 		*
-		* `term && term && term` to 
+		* `term && term && term` to
 		*
 		*....
 		*bool
@@ -69,12 +69,12 @@ namespace Tests.QueryDsl.BoolDsl
 		*                |___term
 		*....
 		*
-		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and 
+		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and
 		* join them together to become a single bool query
 		*
 		*....
 		*bool
-		*|___must 
+		*|___must
 		*    |___term
 		*    |___term
 		*    |___term
@@ -120,7 +120,7 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		*....
 		*bool
-		*|___must 
+		*|___must
 		*|   |___term
 		*|   |___term
 		*|   |___term
@@ -140,20 +140,20 @@ namespace Tests.QueryDsl.BoolDsl
 					c.Bool.Must.Should().HaveCount(3);
 					c.Bool.MustNot.Should().HaveCount(1);
 				});
-			
+
 		}
 
 		/** Even more involved `term && term && term && !term && +term && +term` still only results in a single `bool` query:
 		*....
 		*bool
-		*|___must 
+		*|___must
 		*|   |___term
 		*|   |___term
 		*|   |___term
 		*|
 		*|___must_not
 		*|   |___term
-		*|   
+		*|
 		*|___filter
 		*    |___term
 		*    |___term
@@ -173,7 +173,7 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 
 		/** You can still mix and match actual bool queries with the bool DSL e.g
-		* `bool(must=term, term, term) && !term` would still merge into a single `bool` query. 
+		* `bool(must=term, term, term) && !term` would still merge into a single `bool` query.
 		*/
 		[U] public void MixAndMatch()
 		{
@@ -187,10 +187,10 @@ namespace Tests.QueryDsl.BoolDsl
 				});
 		}
 
-		/* NEST will also do the same with `should`s or `||` when it sees that the boolean queries in play **ONLY** consist of `should` clauses. 
-		* This is because the `bool` query does not quite follow the same boolean logic you expect from a programming language. 
+		/* NEST will also do the same with `should`s or `||` when it sees that the boolean queries in play **ONLY** consist of `should` clauses.
+		* This is because the `bool` query does not quite follow the same boolean logic you expect from a programming language.
 		*
-		* To summarize, the latter: 
+		* To summarize, the latter:
 		*
 		* `term || term || term`
 		*
@@ -205,7 +205,7 @@ namespace Tests.QueryDsl.BoolDsl
 		* but `term1 && (term2 || term3 || term4)` does **NOT** become
 		*....
 		*bool
-		*|___must 
+		*|___must
 		*|   |___term1
 		*|
 		*|___should
@@ -214,16 +214,16 @@ namespace Tests.QueryDsl.BoolDsl
 		*    |___term4
 		*....
 		*
-		* This is because when a `bool` query has **only** `should` clauses, at least one of them must match. 
+		* This is because when a `bool` query has **only** `should` clauses, at least one of them must match.
 		* When that `bool` query also has a `must` clause then the `should` clauses start acting as a _boost_ factor
 		* and none of them have to match, drastically altering its meaning.
 		*
 		* So in the previous you could get back results that **ONLY** contain `term1`. This is clearly not what you want in the strict boolean sense of the input.
 		*
-		* To aid with this, NEST rewrites the previous query to 
+		* To aid with this, NEST rewrites the previous query to
 		*....
-		*bool 
-		*|___must 
+		*bool
+		*|___must
 		*    |___term1
 		*    |___bool
 		*        |___should
@@ -249,15 +249,15 @@ namespace Tests.QueryDsl.BoolDsl
 
 		/** TIP: *add parentheses to force evaluation order*
 		*
-		* Also note that using shoulds as boosting factors can be really powerful so if you need this 
+		* Also note that using shoulds as boosting factors can be really powerful so if you need this
 		*always remember that you can mix and match an actual bool query with the bool dsl.
 		*
 		* There is another subtle situation where NEST will not blindly merge 2 bool queries with only should clauses. Imagine the following:
 		*
-		* `bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6` 
+		* `bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6`
 		*
-		* if NEST identified both sides of the OR operation as only containing `should` clauses and it would 
-		* join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query. 
+		* if NEST identified both sides of the OR operation as only containing `should` clauses and it would
+		* join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query.
 		* Rewriting this to a single bool with 5 `should` clauses would break because only matching on `term5` or `term6` should still be a hit.
 		**/
 		[U]
@@ -283,9 +283,9 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 
 		/** === Locked bool queries
-		* 
-		* NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set, 
-		* NEST will treat these as locked 
+		*
+		* NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set,
+		* NEST will treat these as locked
 		*
 		* Here we demonstrate that two locked `bool` queries are not combined
 		*/
@@ -335,10 +335,10 @@ namespace Tests.QueryDsl.BoolDsl
 			Action<IQueryContainer> assert
 			)
 		{
-			assert(fluent.InvokeQuery(new QueryContainerDescriptor<Project>()));
+			assert(fluent.Invoke(new QueryContainerDescriptor<Project>()));
 			assert((QueryContainer)ois);
 		}
-		
-		private IQueryContainer Create(Func<QueryContainerDescriptor<Project>, QueryContainer> selector) => selector.InvokeQuery(new QueryContainerDescriptor<Project>());
+
+		private IQueryContainer Create(Func<QueryContainerDescriptor<Project>, QueryContainer> selector) => selector.Invoke(new QueryContainerDescriptor<Project>());
 	}
 }

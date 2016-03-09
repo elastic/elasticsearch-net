@@ -18,7 +18,7 @@ namespace Nest
 		public string Raw { get; set; }
 
 		protected override bool Conditionless => this.Raw.IsNullOrEmpty();
-		internal override void WrapInContainer(IQueryContainer container) => container.RawQuery = this;
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.RawQuery = this;
 	}
 
 	public class RawQueryDescriptor : QueryDescriptorBase<RawQueryDescriptor, IRawQuery> , IRawQuery 

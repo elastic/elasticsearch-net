@@ -42,7 +42,7 @@ namespace Nest
 		public string Analyzer { get; set; }
 		public bool? DisableCoord { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.CommonTerms = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.CommonTerms = this;
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 

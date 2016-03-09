@@ -20,7 +20,7 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 		public QueryContainer Filter { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.ConstantScore = this;
 		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.IsConditionless();
 	}
 
@@ -32,6 +32,6 @@ namespace Nest
 		QueryContainer IConstantScoreQuery.Filter { get; set; }
 
 		public ConstantScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Filter = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

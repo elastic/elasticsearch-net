@@ -33,7 +33,7 @@ namespace Nest
 		public int? Post { get; set; }
 		public int? Dist { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanNot = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanNot = this;
 		internal static bool IsConditionless(ISpanNotQuery q)
 		{
 			var exclude = q.Exclude as IQuery;

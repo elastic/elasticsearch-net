@@ -24,7 +24,7 @@ namespace Nest
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
 		public Field Field { get; set; }
-		internal override void WrapInContainer(IQueryContainer container) => container.Missing = this;
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.Missing = this;
 		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 

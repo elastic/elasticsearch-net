@@ -29,7 +29,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoPolygon = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoPolygon = this;
 		internal static bool IsConditionless(IGeoPolygonQuery q) => q.Field == null || !q.Points.HasAny();
 	}
 

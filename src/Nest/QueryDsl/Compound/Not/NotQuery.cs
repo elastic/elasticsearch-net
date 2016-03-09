@@ -20,7 +20,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public IEnumerable<QueryContainer> Filters { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Not = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Not = this;
 		internal static bool IsConditionless(INotQuery q)
 		{
 			return !q.Filters.HasAny() || q.Filters.All(f => f.IsConditionless);
@@ -36,12 +36,12 @@ namespace Nest
 		IEnumerable<QueryContainer> INotQuery.Filters { get; set; }
 
 		public NotQueryDescriptor<T> Filters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors) =>
-			Assign(a => a.Filters = querySelectors.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
+			Assign(a => a.Filters = querySelectors.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).Where(q => q != null).ToListOrNullIfEmpty());
 
 		public NotQueryDescriptor<T> Filters(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> querySelectors) =>
-			Assign(a => a.Filters = querySelectors.Select(q => q?.InvokeQuery(new QueryContainerDescriptor<T>())).Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
+			Assign(a => a.Filters = querySelectors.Select(q => q?.Invoke(new QueryContainerDescriptor<T>())).Where(q => q != null).ToListOrNullIfEmpty());
 
-		public NotQueryDescriptor<T> Filters(params QueryContainer[] queries) => Assign(a => a.Filters = queries.Where(q => !q.IsNullOrConditionless()).ToListOrNullIfEmpty());
+		public NotQueryDescriptor<T> Filters(params QueryContainer[] queries) => Assign(a => a.Filters = queries.Where(q => q != null).ToListOrNullIfEmpty());
 
 	}
 }

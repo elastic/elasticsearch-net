@@ -81,12 +81,12 @@ namespace Nest
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<TDocument>()));
 
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter) =>
-			Assign(a => a.Filter = filter?.InvokeQuery(new QueryContainerDescriptor<TDocument>()));
+			Assign(a => a.Filter = filter?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

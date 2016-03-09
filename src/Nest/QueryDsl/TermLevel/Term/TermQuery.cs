@@ -15,7 +15,8 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public object Value { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Term = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Term = this;
+
 		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 

@@ -36,7 +36,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.HasChild = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
 		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
 	}
 
@@ -58,7 +58,7 @@ namespace Nest
 		}
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 

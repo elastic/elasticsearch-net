@@ -29,7 +29,7 @@ namespace Nest
 		public object Value { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Wildcard = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
 
 	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, 

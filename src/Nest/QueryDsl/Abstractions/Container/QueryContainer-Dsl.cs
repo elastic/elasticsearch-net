@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Nest
 {
 	internal static class QueryContainerExtensions
 	{
-		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
+		public static bool IsConditionless(this QueryContainer q) => q == null || (q.IsConditionless);
 	}
 
 	public partial class QueryContainer : IQueryContainer, IDescriptor
@@ -15,47 +16,48 @@ namespace Nest
 		bool IQueryContainer.IsStrict { get; set; }
 		internal bool IsStrict => Self.IsStrict;
 
+		bool IQueryContainer.IsWritable => Self.IsVerbatim || !Self.IsConditionless;
+		internal bool IsWritable => Self.IsWritable;
+
 		bool IQueryContainer.IsVerbatim { get; set; }
 		internal bool IsVerbatim => Self.IsVerbatim;
 
-		public QueryContainer()
-		{
-		}
-	
+		public QueryContainer() { }
+
 		public QueryContainer(QueryBase query) : this()
 		{
 			query?.WrapInContainer(this);
 		}
-	
+
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
-				? queryContainer 
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+				? queryContainer
 				: leftContainer.CombineAsMust(rightContainer);
 		}
-		
+
 		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
-				? queryContainer 
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+				? queryContainer
 				: leftContainer.CombineAsShould(rightContainer);
 		}
 
 		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryContainer leftContainer, QueryContainer rightContainer, out QueryContainer queryContainer)
 		{
 			var combined = new[] {leftContainer, rightContainer};
-			var any = combined.Any(bf => bf == null || bf.IsConditionless);
-			queryContainer = any ? combined.FirstOrDefault(bf => bf != null && !bf.IsConditionless) : null;
-			return any;
+			var anyEmpty = combined.Any(q => q == null || !q.IsWritable);
+			queryContainer = anyEmpty ? combined.FirstOrDefault(q => q != null && q.IsWritable) : null;
+			return anyEmpty;
 		}
 
-		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || queryContainer.IsConditionless
+		public static QueryContainer operator !(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
 			? null
 			: new QueryContainer(new BoolQuery {MustNot = new[] {queryContainer}});
 
-		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || queryContainer.IsConditionless
+		public static QueryContainer operator +(QueryContainer queryContainer) => queryContainer == null || (!queryContainer.IsWritable)
 			? null
 			: new QueryContainer(new BoolQuery {Filter = new[] {queryContainer}});
 
@@ -69,5 +71,4 @@ namespace Nest
 			new QueryWalker().Walk(this, visitor);
 		}
 	}
-
 }

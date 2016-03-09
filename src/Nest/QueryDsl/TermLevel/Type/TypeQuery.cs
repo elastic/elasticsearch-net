@@ -15,7 +15,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public TypeName Value { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Type = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Type = this;
 		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
 	

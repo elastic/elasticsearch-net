@@ -159,6 +159,6 @@ namespace Nest
 			Assign(a => a.MatchedFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public HighlightFieldDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
-			Assign(a => a.HighlightQuery = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }
