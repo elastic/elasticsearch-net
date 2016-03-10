@@ -73,8 +73,15 @@ namespace Tests.CommonOptions.TimeUnit
 			/**
 			* Milliseconds are calculated even when values are not passed as long
 			*/
-			oneAndHalfYear.Milliseconds.Should().BeGreaterThan(1);
 			twoWeeks.Milliseconds.Should().BeGreaterThan(1);
+
+			/**
+			* Except when dealing with years or months, whose millsecond value cannot
+			* be calculated *accurately*, since they are not fixed durations. For instance,
+			* 30 vs 31 vs 28 days in a month, or 366 vs 365 days in a year.
+			* In this instance, Milliseconds will be -1.
+			*/
+			oneAndHalfYear.Milliseconds.Should().Be(-1);
 
 			/**
 			* This allows you to do comparisons on the expressions
@@ -121,20 +128,31 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 
 		[U]
+		public void MillisecondsNeverSerializeToMonthsOrYears()
+		{
+			double millisecondsInAMonth = 2592000000;
+			Expect("4.29w").WhenSerializing(new Time(millisecondsInAMonth));
+			Expect("8.57w").WhenSerializing(new Time(millisecondsInAMonth * 2));
+			Expect("51.43w").WhenSerializing(new Time(millisecondsInAMonth * 12));
+			Expect("102.86w").WhenSerializing(new Time(millisecondsInAMonth * 24));
+		}
+
+		[U]
 		public void ExpectedValues()
 		{
+			Expect("-1").WhenSerializing(new Time(-1));
+			Expect("-1").WhenSerializing(new Time("-1"));
+
 			Assert(
-				1, Nest.TimeUnit.Year, TimeSpan.FromDays(365).TotalMilliseconds, "1y",
+				1, Nest.TimeUnit.Year, -1, "1y",
 				new Time(1, Nest.TimeUnit.Year),
-				new Time("1y"),
-				new Time(TimeSpan.FromDays(365).TotalMilliseconds)
+				new Time("1y")
 			);
 
 			Assert(
-				1, Nest.TimeUnit.Month, TimeSpan.FromDays(30).TotalMilliseconds, "1M",
+				1, Nest.TimeUnit.Month, -1, "1M",
 				new Time(1, Nest.TimeUnit.Month),
-				new Time("1M"),
-				new Time(TimeSpan.FromDays(30).TotalMilliseconds)
+				new Time("1M")
 			);
 
 			Assert(

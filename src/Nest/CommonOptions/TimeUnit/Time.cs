@@ -10,8 +10,8 @@ namespace Nest
 	{
 		private static readonly Regex _expressionRegex = new Regex(@"^(?<factor>[-+]?\d+(?:\.\d+)?)(?<interval>(?:y|M|w|d|h|m|s|ms))?$", RegexOptions.Compiled | RegexOptions.ExplicitCapture);
 
-		private static readonly double _year = TimeSpan.FromDays(365).TotalMilliseconds;
-		private static readonly double _month = TimeSpan.FromDays(30).TotalMilliseconds;
+		private static readonly double _yearApproximate = TimeSpan.FromDays(365).TotalMilliseconds;
+		private static readonly double _monthApproximate = TimeSpan.FromDays(30).TotalMilliseconds;
 		private static readonly double _week = TimeSpan.FromDays(7).TotalMilliseconds;
 		private static readonly double _day = TimeSpan.FromDays(1).TotalMilliseconds;
 		private static readonly double _hour = TimeSpan.FromHours(1).TotalMilliseconds;
@@ -20,6 +20,8 @@ namespace Nest
 
 		public double? Factor { get; private set; }
 		public TimeUnit? Interval { get; private set; }
+
+		// TODO make nullable in 3.0
 		public double Milliseconds { get; private set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
@@ -50,18 +52,26 @@ namespace Nest
 			if (!match.Success) throw new ArgumentException($"Time expression '{timeUnit}' string is invalid", nameof(timeUnit));
 
 			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
-			this.Interval = match.Groups["interval"].Success
-				? match.Groups["interval"].Value.ToEnum<TimeUnit>(StringComparison.Ordinal)
-				: TimeUnit.Millisecond;
 
-			this.Milliseconds = GetMilliseconds(this.Interval.Value, this.Factor.Value);
+			if (this.Factor > 0)
+			{
+				this.Interval = match.Groups["interval"].Success
+					? match.Groups["interval"].Value.ToEnum<TimeUnit>(StringComparison.Ordinal)
+					: TimeUnit.Millisecond;
+			}
+
+			this.Milliseconds = this.Interval.HasValue
+				? GetMilliseconds(this.Interval.Value, this.Factor.Value)
+				: this.Factor.Value;
 		}
 
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
-			if (this.Milliseconds == other.Milliseconds) return 0;
-			if (this.Milliseconds < other.Milliseconds) return -1;
+			var ms = GetMilliseconds(this.Interval.Value, this.Factor.Value, approximate: true);
+			var otherMs = GetMilliseconds(other.Interval.Value, other.Factor.Value, approximate: true);
+			if (ms == otherMs) return 0;
+			if (ms < otherMs) return -1;
 			return 1;
 		}
 
@@ -102,14 +112,14 @@ namespace Nest
 
 		public override int GetHashCode() => this.Milliseconds.GetHashCode();
 
-		private double GetMilliseconds(TimeUnit interval, double factor)
+		private double GetMilliseconds(TimeUnit interval, double factor, bool approximate = false)
 		{
 			switch (interval)
 			{
 				case TimeUnit.Year:
-					return factor * _year;
+					return approximate ? factor * _yearApproximate : -1;
 				case TimeUnit.Month:
-					return factor * _month;	
+					return approximate ? factor * _monthApproximate : -1;
 				case TimeUnit.Week:
 					return factor * _week;
 				case TimeUnit.Day:
@@ -129,17 +139,7 @@ namespace Nest
 		{
 			this.Milliseconds = ms;
 
-			if (ms >= _year)
-			{
-				Factor = ms / _year;
-				Interval = TimeUnit.Year;
-			}
-			else if (ms >= _month)
-			{
-				Factor = ms / _month;
-				Interval = TimeUnit.Month;
-			}
-			else if (ms >= _week)
+			if (ms >= _week)
 			{
 				Factor = ms / _week;
 				Interval = TimeUnit.Week;
@@ -169,8 +169,7 @@ namespace Nest
 				Factor = ms;
 				// If milliseconds is <= 0 then don't set an interval.
 				// This is used when setting things like index.refresh_interval = -1 (the only case where a unit isn't required)
-				if (ms > 0)
-					Interval = TimeUnit.Millisecond;
+				Interval = (ms > 0) ? (TimeUnit?)TimeUnit.Millisecond : null;
 			}
 		}
 	}
