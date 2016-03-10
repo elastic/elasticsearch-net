@@ -11,21 +11,25 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 	public class UnrecoverableExceptions
 	{
 		/** == Unrecoverable exceptions 
-		* Unrecoverable exceptions are excepted exceptions that are grounds to exit the client pipeline immediately. 
-		* By default the client won't throw on any ElasticsearchClientException but return an invalid response. 
-		* You can configure the client to throw using ThrowExceptions() on ConnectionSettings. The following test
+		* Unrecoverable exceptions are _excepted_ exceptions that are grounds to exit the client pipeline immediately. 
+		* By default, the client won't throw on any `ElasticsearchClientException` but instead return an invalid response which
+		* can be detected by checking `.IsValid` on the response 
+		* You can configure the client to throw using `ThrowExceptions()` on `ConnectionSettings`. The following test
 		* both a client that throws and one that returns an invalid response with an `.OriginalException` exposed 
 		*/
 
 		[U] public void SomePipelineFailuresAreRecoverable()
 		{
+			/** The following are recoverable exceptions */
 			var recoverablExceptions = new[]
 			{
 				new PipelineException(PipelineFailure.BadResponse),
 				new PipelineException(PipelineFailure.PingFailure),
 			};
+
 			recoverablExceptions.Should().OnlyContain(e => e.Recoverable);
 
+			/** and the unrecoverable exceptions */
 			var unrecoverableExceptions = new[]
 			{
 				new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup),
@@ -35,9 +39,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				new PipelineException(PipelineFailure.MaxRetriesReached),
 				new PipelineException(PipelineFailure.MaxTimeoutReached)
 			};
+
 			unrecoverableExceptions.Should().OnlyContain(e => !e.Recoverable);
 		}
 
+		/**	As an example, let's set up a 10 node cluster that will always succeed when pinged but
+			will fail with a 401 response when making client calls
+		*/
 		[U] public async Task BadAuthenticationIsUnrecoverable()
 		{
 			var audit = new Auditor(() => Framework.Cluster
@@ -48,6 +56,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				.AllDefaults()
 			);
 
+			/** Here we make a client call and determine that the first audit event was a successful ping, 
+			* followed by a bad response as a result of a bad authentication response
+			*/
 			audit = await audit.TraceElasticsearchException(
 				new ClientCall {
 					{ AuditEvent.PingSuccess, 9200 },

@@ -1,14 +1,13 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
 
 == Sniffing role detection
 
-		* 
-		* When we sniff the custer state we detect the role of the node whether its master eligible and holds data
-		 We use this information when selecting a node to perform an API call on.
+When we sniff the custer state we detect the role of the node whether its master eligible and holds data
+We use this information when selecting a node to perform an API call on.
 
 [source,csharp]
 ----

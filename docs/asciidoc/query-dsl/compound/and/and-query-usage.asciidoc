@@ -1,0 +1,42 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript]
+.Example json output
+----
+{
+  "and": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "filters": [
+      {
+        "match_all": {
+          "_name": "query1"
+        }
+      },
+      {
+        "match_all": {
+          "_name": "query2"
+        }
+      }
+    ]
+  }
+}
+----
+
+[source,csharp]
+----
+new AndQuery()
+		{
+Name = "named_query",
+Boost = 1.1,
+Filters = new QueryContainer[] {
+	new MatchAllQuery() { Name = "query1" },
+	new MatchAllQuery() { Name = "query2" },
+}
+		}
+----
+

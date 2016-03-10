@@ -6,13 +6,12 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Children
 {
-	/**
+	/** == Children Aggregation
 	 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
 	 * buckets on child documents.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-children-aggregation.html[on this subject here]
+	 * Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-children-aggregation.html[on this subject here]
 	 */
-
 	public class ChildrenAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -39,6 +38,7 @@ namespace Tests.Aggregations.Bucket.Children
 			}
 		};
 
+		/** Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Children<CommitActivity>("name_of_child_agg", child => child
@@ -49,6 +49,7 @@ namespace Tests.Aggregations.Bucket.Children
 				)
 			);
 
+		/** Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -61,10 +62,7 @@ namespace Tests.Aggregations.Bucket.Children
 			};
 	}
 
-
-	// TODO : move this to a general documentation test explaining how to
-	// combine aggregations using boolean operators?
-
+	// TODO: This looks to be a duplicate of what is in the writing aggregations documentation
 	public class ChildrenAggregationDslUsage : ChildrenAggregationUsageTests
 	{
 		public ChildrenAggregationDslUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

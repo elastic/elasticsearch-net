@@ -44,7 +44,10 @@ namespace Nest.Litterateur.Documentation.Files
 			var testFullPath = this.FileLocation.FullName;
 
 			var testInDocumentationFolder = 
-				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "").TrimDocExtension().PascalToHyphen() + ".asciidoc";
+				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "")
+				.TrimEnd(".doc")
+				.TrimEnd("Tests")
+				.PascalToHyphen() + ".asciidoc";
 
 			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumentationFolder));
 			var fileInfo = new FileInfo(documentationTargetPath);

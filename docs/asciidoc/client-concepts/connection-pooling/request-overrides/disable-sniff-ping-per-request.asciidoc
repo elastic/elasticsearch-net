@@ -1,8 +1,8 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
 
 == Disabling sniffing and pinging on a request basis 
 
@@ -22,7 +22,7 @@ var audit = new Auditor(() => Framework.Cluster
 );
 ----
 
-We disable sniffing so eventhoug its our first call we do not want to sniff on startup
+We disable sniffing so even though its our first call, we do not want to sniff on startup
 
 Instead the sniff on startup is deffered to the second call into the cluster that 
 does not disable sniffing on a per request basis

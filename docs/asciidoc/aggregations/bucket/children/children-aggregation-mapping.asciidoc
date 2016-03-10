@@ -1,8 +1,10 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
+
+== Child Aggregation Mapping
 
 To use the child aggregation you have to make sure 
  a `_parent` mapping is in place, here we create the project
@@ -12,9 +14,9 @@ To use the child aggregation you have to make sure
 [source,csharp]
 ----
 var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c => c
-	.Mappings(map=>map
-		.Map<Project>(m=>m.AutoMap())
-		.Map<CommitActivity>(m=>m
+	.Mappings(map => map
+		.Map<Project>(tm => tm.AutoMap())
+		.Map<CommitActivity>(tm => tm
 			.Parent<Project>()
 		)
 	)

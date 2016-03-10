@@ -8,7 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateHistogram
 {
-	/**
+	/** == Date Histogram Aggregation
 	 * A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 	 * The main difference is that the interval can be specified by date/time expressions.
@@ -17,7 +17,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * the serialized DateTimes of extended_bounds correctly, the date_optional_time format is included
 	 * as part of the format value.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
+	 * Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
 	*/
 	public class DateHistogramAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -65,6 +65,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
+		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Aggregations(aggs => aggs
@@ -87,6 +88,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				)
 			);
 
+		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -117,12 +119,12 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
+			/** === Handling responses
+			* Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily 
+			* in the correct type. TODO: [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]
+			*/
 			response.IsValid.Should().BeTrue();
 
-			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-			*/
 			var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
 			dateHistogram.Should().NotBeNull();
 			dateHistogram.Buckets.Should().NotBeNull();

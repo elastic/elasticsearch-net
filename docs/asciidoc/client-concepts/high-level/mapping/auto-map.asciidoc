@@ -1,23 +1,20 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
 
 == Auto mapping properties
 
-	 * 
-	 * When creating a mapping (either when creating an index or via the put mapping API),
-	 * NEST offers a feature called AutoMap(), which will automagically infer the correct
-	 * Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
-	 * you're using attributes to map your properties, then calling AutoMap() is required
-	 * in order for your attributes to be applied.  We'll look at examples of both.
-	 *
-	*
+When creating a mapping (either when creating an index or via the put mapping API),
+NEST offers a feature called AutoMap(), which will automagically infer the correct
+Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
+you're using attributes to map your properties, then calling AutoMap() is required
+in order for your attributes to be applied.  We'll look at examples of both.
 
-		* For these examples, we'll define two POCOS, `Company`, which has a name
-		* and a collection of Employees, and `Employee` which has various properties of 
-		 different types, and itself has a collection of `Employee` types. 
+For these examples, we'll define two POCOS, `Company`, which has a name
+and a collection of Employees, and `Employee` which has various properties of 
+different types, and itself has a collection of `Employee` types. 
 
 [source,csharp]
 ----
@@ -41,8 +38,8 @@ public class Employee
 
 === Manual mapping
 
-			 * To create a mapping for our Company type, we can use the fluent API
-			 * and map each property explicitly
+To create a mapping for our Company type, we can use the fluent API
+and map each property explicitly
 
 [source,csharp]
 ----
@@ -73,9 +70,9 @@ var descriptor = new CreateIndexDescriptor("myindex")
 	);
 ----
 
-			 * This is all fine and dandy and useful for some use cases however in most cases
-			 * this can become verbose and wieldy. The majority of the time you simply just want to map *all*
-			  the properties of a POCO in a single go.
+This is all fine and dandy and useful for some use cases however in most cases
+this can become verbose and wieldy. The majority of the time you simply just want to map *all*
+the properties of a POCO in a single go.
 
 [source,csharp]
 ----
@@ -120,8 +117,8 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 === Simple Automapping
 
-			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
-			* explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
+This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
+explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
 
 [source,csharp]
 ----
@@ -132,14 +129,19 @@ var descriptor = new CreateIndexDescriptor("myindex")
 	);
 ----
 
-			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			* In this example, 
-			* - Birthday was mapped as a date, 
-			* - Hours was mapped as a long (ticks)
-			* - IsManager was mapped as a boolean, 
-			* - Salary as an integer 
-			* - Employees as an object
-			* and the remaining string properties as strings.
+Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
+In this example, 
+
+* Birthday was mapped as a date, 
+
+* Hours was mapped as a long (ticks)
+
+* IsManager was mapped as a boolean, 
+
+* Salary as an integer 
+
+* Employees as an object
+and the remaining string properties as strings.
 
 [source,csharp]
 ----
@@ -236,13 +238,13 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 == Automapping with overrides
 
-		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
-		* various options on your properties (analyzer, docvalues, etc...).  In that case, it's
-		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
+In most cases, you'll want to map more than just the vanilla datatypes and also provide
+various options on your properties (analyzer, docvalues, etc...).  In that case, it's
+possible to use AutoMap() in conjuction with explicitly mapped properties.  
 
-			* Here we are using AutoMap() to automatically map our company type, but then we're
-			* overriding our employee property and making it a `nested` type, since by default,
-			 AutoMap() will infer objects as `object`.
+Here we are using AutoMap() to automatically map our company type, but then we're
+overriding our employee property and making it a `nested` type, since by default,
+AutoMap() will infer objects as `object`.
 
 [source,csharp]
 ----
@@ -287,9 +289,9 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 == Automap with attributes
 
-		 * It is also possible to define your mappings using attributes on your POCOS.  When you
-		 * use attributes, you *must* use `.AutoMap()` in order for the attributes to be applied.
-		  Here we define the same two types but this time using attributes.
+It is also possible to define your mappings using attributes on your POCOS.  When you
+use attributes, you *must* use `.AutoMap()` in order for the attributes to be applied.
+Here we define the same two types but this time using attributes.
 
 [source,csharp]
 ----
@@ -473,9 +475,9 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
-		 * Just as we were able to override the inferred properties in our earlier example, explicit (manual)
-		 * mappings also take precedence over attributes.  Therefore we can also override any mappings applied
-		  via any attributes defined on the POCO
+Just as we were able to override the inferred properties in our earlier example, explicit (manual)
+mappings also take precedence over attributes.  Therefore we can also override any mappings applied
+via any attributes defined on the POCO
 
 [source,csharp]
 ----
@@ -638,16 +640,16 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 == Ignoring Properties
 
-		* Properties on a POCO can be ignored in a few ways:  
-		*
-		* - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
-		*
-		* - Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
-		*
-		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
-		*
-		* This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property `PropertyToIgnore`, the infer mapping to ignore the 
-		* property `AnotherPropertyToIgnore` and the json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
+Properties on a POCO can be ignored in a few ways:  
+
+* Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
+
+* Using the `.InferMappingFor<TDocument>(Func<ClrTypeMappingDescriptor<TDocument>, IClrTypeMapping<TDocument>> selector)` on the connection settings
+
+* Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used, and inspected inside of the `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
+
+This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property `PropertyToIgnore`, the infer mapping to ignore the 
+property `AnotherPropertyToIgnore` and the json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
 
 [source,csharp]
 ----
@@ -703,17 +705,17 @@ settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 == Mapping Recursion
 
-		 * If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
-		 * in that the `Employee` class itself contains a collection of type `Employee`. By default, `.AutoMap()` will only
-		 * traverse a single depth when it encounters recursive instances like this.  Hence, in the
-		 * previous examples, the collection of type `Employee` on the `Employee` class did not get any of its properties mapped.
-		 * This is done as a safe-guard to prevent stack overflows and all the fun that comes with
-		 * infinite recursion.  Additionally, in most cases, when it comes to Elasticsearch mappings, it is
-		 * often an edge case to have deeply nested mappings like this.  However, you may still have
-		 * the need to do this, so you can control the recursion depth of `.AutoMap()`.
-		 *
-		 * Let's introduce a very simple class, `A`, which itself has a property
-		  Child of type `A`.
+If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
+in that the `Employee` class itself contains a collection of type `Employee`. By default, `.AutoMap()` will only
+traverse a single depth when it encounters recursive instances like this.  Hence, in the
+previous examples, the collection of type `Employee` on the `Employee` class did not get any of its properties mapped.
+This is done as a safe-guard to prevent stack overflows and all the fun that comes with
+infinite recursion.  Additionally, in most cases, when it comes to Elasticsearch mappings, it is
+often an edge case to have deeply nested mappings like this.  However, you may still have
+the need to do this, so you can control the recursion depth of `.AutoMap()`.
+
+Let's introduce a very simple class, `A`, which itself has a property
+Child of type `A`.
 
 [source,csharp]
 ----
@@ -816,13 +818,13 @@ Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRe
 
 == Applying conventions through the Visitor pattern
 
-		 * It is also possible to apply a transformation on all or specific properties.
-		 *
-		 * AutoMap internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].  The default visitor, `NoopPropertyVisitor`, 
-		 * does nothing and acts as a blank canvas for you to implement your own visiting methods.
-		 *
-		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
-		  (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
+It is also possible to apply a transformation on all or specific properties.
+
+AutoMap internally implements the https://en.wikipedia.org/wiki/Visitorpattern[visitor pattern].  The default visitor, `NoopPropertyVisitor`, 
+does nothing and acts as a blank canvas for you to implement your own visiting methods.
+
+For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
+(Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 
 [source,csharp]
 ----
@@ -848,13 +850,14 @@ Now we can pass an instance of our custom visitor to `.AutoMap()`
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
-		.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
+		.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor())) //<1>
 	);
 ----
+<1> Pass your `IPropertyVisitor` implementation to `.AutoMap`
 
 and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBooleanProperty`) 
-			 * it will apply the transformation defined in each Visit() respectively, which in this example
-			 * disables {ref_current}/doc-values.html[doc values].
+it will apply the transformation defined in each `Visit()` respectively, which in this example
+disables {ref_current}/doc-values.html[doc values].
 
 [source,csharp]
 ----
@@ -900,14 +903,15 @@ var expected = new
 ----
 
 You can even take the visitor approach a step further, and instead of visiting on IProperty types, visit
-		 * directly on your POCO properties (`PropertyInfo`).  For example, let's create a visitor that maps all CLR types 
-		 * to an Elasticsearch string (`IStringProperty`).
+directly on your POCO properties (`PropertyInfo`).  For example, let's create a visitor that maps all CLR types 
+to an Elasticsearch string (`IStringProperty`).
 
 [source,csharp]
 ----
 public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 {
-	public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new StringProperty();
+	public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => 
+		new StringProperty();
 }
 
 var descriptor = new CreateIndexDescriptor("myindex")

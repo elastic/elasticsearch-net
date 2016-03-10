@@ -1,13 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Nest.Litterateur.Documentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis.Text;
 using Nest.Litterateur.Documentation.Blocks;
 
 namespace Nest.Litterateur.Walkers
@@ -16,6 +13,7 @@ namespace Nest.Litterateur.Walkers
 	{
 		public DocumentationFileWalker() : base(SyntaxWalkerDepth.StructuredTrivia) { }
 
+		private string _propertyName;
 		private int ClassDepth { get; set; }
 		private bool InsideMultiLineDocumentation { get; set; }
 		private bool InsideAutoIncludeMethodBlock { get; set; }
@@ -55,23 +53,34 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
 		{
 			var propertyName = node.Identifier.Text;
-			if (propertyName == "ExpectJson")
+			if (propertyName == "ExpectJson" || propertyName == "QueryJson")
 			{
+				_propertyName = propertyName;
 				this.InsideFluentOrInitializerExample = true;
 				base.VisitPropertyDeclaration(node);
 				this.InsideFluentOrInitializerExample = false;
 			}
-			else if (propertyName == "Fluent")
+			else if (propertyName == "Fluent" || 
+				propertyName == "Initializer" || 
+				propertyName == "QueryFluent" || 
+				propertyName == "QueryInitializer")
 			{
+				// TODO: Look to get the generic types for the call so that we can prettify the fluent and OIS calls in docs e.g. client.Search<Project>({Call});
+				// var genericArguments = node.DescendantNodes().OfType<GenericNameSyntax>().FirstOrDefault();
+				// List<TypeSyntax> arguments = new List<TypeSyntax>();
+				// if (genericArguments != null)
+				// {
+				// 	arguments.AddRange(genericArguments.TypeArgumentList.Arguments);
+				// }
+
+				_propertyName = propertyName;
 				this.InsideFluentOrInitializerExample = true;
 				base.VisitPropertyDeclaration(node);
 				this.InsideFluentOrInitializerExample = false;
 			}
-			else if (propertyName == "Initializer")
+			else
 			{
-				this.InsideFluentOrInitializerExample = true;
-				base.VisitPropertyDeclaration(node);
-				this.InsideFluentOrInitializerExample = false;
+				_propertyName = null;
 			}
 		}
 
@@ -81,7 +90,7 @@ namespace Nest.Litterateur.Walkers
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
 			if (syntaxNode == null) return;
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-			var walker = new CodeWithDocumentationWalker(ClassDepth, line);
+			var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyName);
 			walker.Visit(syntaxNode);
 			this.Blocks.AddRange(walker.Blocks);
 		}
@@ -92,7 +101,7 @@ namespace Nest.Litterateur.Walkers
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations() as BlockSyntax;
 			if (syntaxNode == null) return;
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-			var walker = new CodeWithDocumentationWalker(ClassDepth, line);
+			var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyName);
 			walker.VisitBlock(syntaxNode);
 			this.Blocks.AddRange(walker.Blocks);
 		}
@@ -112,7 +121,7 @@ namespace Nest.Litterateur.Walkers
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
-					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
+					var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyName);
 					walker.Visit(node.WithAdditionalAnnotations());
 					this.Blocks.AddRange(walker.Blocks);
 					return;
@@ -120,7 +129,7 @@ namespace Nest.Litterateur.Walkers
 				base.VisitExpressionStatement(node);
 				var code = node.WithoutLeadingTrivia().ToFullString();
 				code = code.RemoveNumberOfLeadingTabsAfterNewline(ClassDepth + 2);
-				this.Blocks.Add(new CodeBlock(code, line, "csharp"));
+				this.Blocks.Add(new CodeBlock(code, line, Language.CSharp));
 			}
 			else base.VisitExpressionStatement(node);
 
@@ -134,14 +143,14 @@ namespace Nest.Litterateur.Walkers
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
-					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
+					var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyName);
 					walker.Visit(node.WithAdditionalAnnotations());
 					this.Blocks.AddRange(walker.Blocks);
 					return;
 				}
 				var code = node.WithoutLeadingTrivia().ToFullString();
 				code = code.RemoveNumberOfLeadingTabsAfterNewline(ClassDepth + 2);
-				this.Blocks.Add(new CodeBlock(code, line, "csharp"));
+				this.Blocks.Add(new CodeBlock(code, line, Language.CSharp));
 			}
 			base.VisitLocalDeclarationStatement(node);
 		}
@@ -158,7 +167,7 @@ namespace Nest.Litterateur.Walkers
 
 			var tokens = trivia.ToFullString()
 				.RemoveLeadingAndTrailingMultiLineComments()
-				.Split(new [] { Environment.NewLine }, StringSplitOptions.None);
+				.SplitOnNewLines(StringSplitOptions.None);
 			var builder = new StringBuilder();
 
 			foreach (var token in tokens)

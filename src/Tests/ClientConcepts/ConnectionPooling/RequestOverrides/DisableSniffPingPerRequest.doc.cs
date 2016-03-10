@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 
 			audit = await audit.TraceCalls(
 				/**
-				* We disable sniffing so eventhoug its our first call we do not want to sniff on startup
+				* We disable sniffing so even though its our first call, we do not want to sniff on startup
 				*/
 				new ClientCall(r=>r.DisableSniffing()) {
 					{ PingSuccess, 9200 },

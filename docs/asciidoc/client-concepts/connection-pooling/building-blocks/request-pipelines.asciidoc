@@ -1,14 +1,13 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
 
-== Request pipeline
+== Request Pipeline
 
-		*
-		* Every request is executed in the context of a `RequestPipeline` when using the 
-		 default `ITransport` implementation.
+Every request is executed in the context of a `RequestPipeline` when using the 
+default `ITransport` implementation.
 
 [source,csharp]
 ----
@@ -24,28 +23,30 @@ var pipeline = new RequestPipeline(settings, DateTimeProvider.Default, new Memor
 pipeline.GetType().Should().Implement<IDisposable>();
 ----
 
-However the transport does not instantiate RequestPipeline directly, it uses a pluggable `IRequestPipelineFactory`
+However the transport does not instantiate `RequestPipeline` directly; it uses a pluggable `IRequestPipelineFactory`
+to create it
 
 [source,csharp]
 ----
 var requestPipelineFactory = new RequestPipelineFactory();
 
-var requestPipeline = requestPipelineFactory.Create(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
+var requestPipeline = requestPipelineFactory.Create(
+	settings, 
+	DateTimeProvider.Default, //<1>
+	new MemoryStreamFactory(), 
+	new SearchRequestParameters());
 requestPipeline.Should().BeOfType<RequestPipeline>();
 requestPipeline.GetType().Should().Implement<IDisposable>();
 ----
+<1> An <<date-time-providers,`IDateTimeProvider` implementation>>
 
-which can be passed to the transport when instantiating a client 
+you can pass your own `IRequestPipeline` implementation to the transport when instantiating a client 
+allowing you to have requests executed on your own custom request pipeline
 
 [source,csharp]
 ----
 var transport = new Transport<ConnectionSettings>(settings, requestPipelineFactory, DateTimeProvider.Default, new MemoryStreamFactory());
-----
 
-this allows you to have requests executed on your own custom request pipeline 
-
-[source,csharp]
-----
 var pool = setupPool(new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) });
 var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
 settings = settingsSelector?.Invoke(settings) ?? settings;
@@ -65,7 +66,7 @@ sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeTrue();
 ----
 
 Only the cluster that supports reseeding will opt in to FirstPoolUsageNeedsSniffing() 
-			 You can however disable this on ConnectionSettings
+You can however disable this on ConnectionSettings
 
 [source,csharp]
 ----
@@ -81,7 +82,7 @@ sniffingPipeline.SniffsOnConnectionFailure.Should().BeTrue();
 ----
 
 Only the cluster that supports reseeding will opt in to SniffsOnConnectionFailure() 
-			 You can however disable this on ConnectionSettings
+You can however disable this on ConnectionSettings
 
 [source,csharp]
 ----
@@ -123,8 +124,8 @@ the sniffing connection pool supports reseeding so the pipeline will signal the 
 sniffingPipeline.StaleClusterState.Should().BeTrue();
 ----
 
-A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout
-		 See the maxretry documentation for more details, here we assert that our request pipeline exposes this propertly
+A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout.
+See the <<respects-max-retry, max retry documentation>> for more details, here we assert that our request pipeline exposes this propertly
 
 [source,csharp]
 ----

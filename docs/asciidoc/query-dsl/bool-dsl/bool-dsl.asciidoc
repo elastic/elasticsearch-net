@@ -1,8 +1,8 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../images/
+:imagesdir: ../../images
 
 == Bool Queries
 
@@ -23,11 +23,12 @@ var searchResults = this.Client.Search<Project>(s => s
 );
 ----
 
-Now, imagine multiple nested bools this quickly becomes an exercise in _hadouken indenting_
+Now, imagine multiple nested bools; you'll realise that this quickly becomes an exercise in _hadouken indenting_
 
 [[indent]]
 .hadouken indenting example
 image::{imagesdir}/hadouken-indentation.jpg[dead indent]
+
 === Operator Overloading
 
 For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 

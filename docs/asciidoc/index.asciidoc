@@ -1,57 +1,107 @@
-﻿:github: https://github.com/elastic/elasticsearch-net
-:stackoverflow: http://stackoverflow.com
+[[elasticsearch-net-reference]]
+= Elasticsearch.Net and NEST documentation:.NET Elasticsearch clients
 
-== Introduction
+include::intro.asciidoc[]
 
-You've reached the documentation page for `Elasticsearch.Net` and `NEST`. The two official .NET clients for Elasticsearch. So why two clients I hear you say?
+include::aggregations/bucket/children/children-aggregation-mapping.asciidoc[]
 
-`Elasticsearch.Net` is a very low level, dependency free, client that has no opinions about how you build and represent your requests and responses. It has abstracted 
-enough so that **all** the Elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build your json/request/response objects. It also comes with builtin, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is elastic so why not your client?
+include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
 
-`NEST` is a high level client that has the advantage of having mapped all the request and response objects, comes with a strongly typed query DSL that maps 1 to 1 with the Elasticsearch query DSL, and takes advantage of specific .NET features such as covariant results. NEST internally uses, and still exposes, the low level `Elasticsearch.Net` client.
+include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
 
-Please read the getting started guide for both.
+include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
 
-=== Who's using Nest
-* {stackoverflow}[stackoverflow.com] (and the rest of the stackexchange family).
-* http://www.7digital.com[7digital.com] (run NEST on mono).
-* https://www.rijksmuseum.nl/en[rijksmuseum.nl] (Elasticsearch is the only datastorage hit for each page).
-* http://www.fogcreek.com/kiln/[Kiln] FogCreek's version control & code review tooling. 
-  They are so pleased with Elasticsearch that http://blog.fogcreek.com/kiln-powered-by-elasticsearch/[they made a video about how pleased they are!]
+include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
 
-=== Other resources
+include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
 
-http://twitter.com/joelabrahamsson[@joelabrahamsson] wrote a great http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch[intro into elasticsearch on .NET]
-using NEST. 
+include::aggregations/writing-aggregations.asciidoc[]
 
-Also checkout the https://searchbox.io/[searchbox.io guys] rocking NEST http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on[on AppHarbor]
-with their https://github.com/searchbox-io/.net-sample[demo project]
+include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
 
-=== Questions, bugs, comments, requests
+include::client-concepts/connection-pooling/building-blocks/date-time-providers.asciidoc[]
 
-All of these are more then welcome on the {github}/issues[github issues pages]! We try to to at least reply within the same day.
+include::client-concepts/connection-pooling/building-blocks/keeping-track-of-nodes.asciidoc[]
 
-We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on stackoverflow] or 
-{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow]
+include::client-concepts/connection-pooling/building-blocks/request-pipelines.asciidoc[]
 
-=== License
+include::client-concepts/connection-pooling/building-blocks/transports.asciidoc[]
 
-....
-This software is licensed under the Apache 2 license, quoted below.
+include::client-concepts/connection-pooling/exceptions/unexpected-exceptions.asciidoc[]
 
-    Copyright (c) 2014 Elasticsearch <http://www.elasticsearch.org>
+include::client-concepts/connection-pooling/exceptions/unrecoverable-exceptions.asciidoc[]
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+include::client-concepts/connection-pooling/failover/falling-over.asciidoc[]
 
-       http://www.apache.org/licenses/LICENSE-2.0
+include::client-concepts/connection-pooling/max-retries/respects-max-retry.asciidoc[]
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-....
+include::client-concepts/connection-pooling/pinging/first-usage.asciidoc[]
 
+include::client-concepts/connection-pooling/pinging/revival.asciidoc[]
+
+include::client-concepts/connection-pooling/request-overrides/disable-sniff-ping-per-request.asciidoc[]
+
+include::client-concepts/connection-pooling/request-overrides/request-timeouts-overrides.asciidoc[]
+
+include::client-concepts/connection-pooling/request-overrides/respects-allowed-status-code.asciidoc[]
+
+include::client-concepts/connection-pooling/request-overrides/respects-force-node.asciidoc[]
+
+include::client-concepts/connection-pooling/request-overrides/respects-max-retry-overrides.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/round-robin.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/skip-dead-nodes.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/volatile-updates.asciidoc[]
+
+include::client-concepts/connection-pooling/sniffing/on-connection-failure.asciidoc[]
+
+include::client-concepts/connection-pooling/sniffing/on-stale-cluster-state.asciidoc[]
+
+include::client-concepts/connection-pooling/sniffing/on-startup.asciidoc[]
+
+include::client-concepts/connection-pooling/sniffing/role-detection.asciidoc[]
+
+include::client-concepts/high-level/covariant-hits/covariant-search-results.asciidoc[]
+
+include::client-concepts/high-level/inferrence/document-paths.asciidoc[]
+
+include::client-concepts/high-level/inferrence/field-inference.asciidoc[]
+
+include::client-concepts/high-level/inferrence/ids-inference.asciidoc[]
+
+include::client-concepts/high-level/inferrence/indices-paths.asciidoc[]
+
+include::client-concepts/high-level/inferrence/property-inference.asciidoc[]
+
+include::client-concepts/high-level/mapping/auto-map.asciidoc[]
+
+include::client-concepts/low-level/connecting.asciidoc[]
+
+include::client-concepts/low-level/lifetimes.asciidoc[]
+
+include::client-concepts/low-level/post-data.asciidoc[]
+
+include::code-standards/descriptors.asciidoc[]
+
+include::code-standards/elastic-client.asciidoc[]
+
+include::code-standards/naming-conventions.asciidoc[]
+
+include::code-standards/queries.asciidoc[]
+
+include::code-standards/serialization/properties.asciidoc[]
+
+include::common-options/date-math/date-math-expressions.asciidoc[]
+
+include::common-options/time-unit/time-units.asciidoc[]
+
+include::document/multiple/bulk/bulk-api.asciidoc[]
+
+include::query-dsl/bool-dsl/bool-dsl.asciidoc[]
+
+include::query-dsl/compound/and/and-query-usage.asciidoc[]
+
+include::query-dsl/geo/distance/distance-units.asciidoc[]
 

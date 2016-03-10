@@ -9,13 +9,13 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filter
 {
-	/**
+	/** 
+	 * == Filter Aggregation
 	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filter-aggregation.html[on this subject here]
+	 * Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html[the elasticsearch documentation on Filter Aggregation]
 	*/
-
 	public class FilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		public FilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
@@ -45,6 +45,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			}
 		};
 
+		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filter("bethels_projects", date => date
@@ -55,6 +56,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				)
 			);
 
+		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -68,12 +70,12 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
-
-			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			/** === Handling Responses
+			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
+			response.IsValid.Should().BeTrue();
+
 			var filterAgg = response.Aggs.Filter("bethels_projects");
 			filterAgg.Should().NotBeNull();
 			filterAgg.DocCount.Should().BeGreaterThan(0);
@@ -82,7 +84,11 @@ namespace Tests.Aggregations.Bucket.Filter
 			tags.Buckets.Should().NotBeEmpty();
 		}
 	}
-
+	
+	/** == Empty Filter
+	* When the collection of filters is empty or all are conditionless, NEST will serialize them
+	* to an empty object.
+	*/
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage)
@@ -100,6 +106,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			}
 		};
 
+		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filter("empty_filter", date => date
@@ -111,6 +118,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				)
 			);
 
+		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -123,6 +131,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
+		/** === Handling Response */
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();

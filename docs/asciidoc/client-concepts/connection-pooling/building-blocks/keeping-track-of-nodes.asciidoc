@@ -1,14 +1,19 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images/
+:imagesdir: ../../../images
 
 == Keeping track of nodes
+
+=== Creating a Node
+
+A `Node` can be instantiated by passing it a `Uri` 
 
 [source,csharp]
 ----
 var node = new Node(new Uri("http://localhost:9200"));
+
 node.Uri.Should().NotBeNull();
 node.Uri.Port.Should().Be(9200);
 ----
@@ -32,7 +37,10 @@ node.IsResurrected.Should().BeTrue();
 When instantiating your connection pool you could switch these to false to initialize the client to 
 a known cluster topology.  
 
-passing a node with a path should be preserved. Sometimes an elasticsearch node lives behind a proxy 
+=== Building a Node path
+
+passing a node with a path should be preserved. 
+Sometimes an elasticsearch node lives behind a proxy 
 
 [source,csharp]
 ----
@@ -58,6 +66,12 @@ which is exactly what the `CreatePath` method does on `Node`
 combinedPath = node.CreatePath("index/type/_search");
 
 combinedPath.AbsolutePath.Should().Be("/elasticsearch/index/type/_search");
+----
+
+=== Marking Nodes 
+
+[source,csharp]
+----
 var node = new Node(new Uri("http://localhost:9200"));
 node.FailedAttempts.Should().Be(0);
 node.IsAlive.Should().BeTrue();
@@ -75,7 +89,7 @@ node.IsAlive.Should().BeFalse();
 node.DeadUntil.Should().Be(deadUntil);
 ----
 
-however when marking a node alive deaduntil should be reset and attempts reset to 0
+however when marking a node alive, the `DeadUntil` property should be reset and `FailedAttempts` reset to 0
 
 [source,csharp]
 ----
@@ -86,7 +100,9 @@ node.DeadUntil.Should().Be(default(DateTime));
 node.IsAlive.Should().BeTrue();
 ----
 
-Nodes are considered equal if they have the same endpoint no matter what other metadata is associated 
+=== Node Equality
+
+Nodes are considered equal if they have the same endpoint, no matter what other metadata is associated 
 
 [source,csharp]
 ----

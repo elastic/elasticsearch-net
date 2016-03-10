@@ -1,24 +1,44 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Nest.Litterateur.Documentation.Blocks
 {
 	public class CodeBlock : IDocumentationBlock
 	{
-		public string Value { get; }
-		public int LineNumber { get; }
-
-		public string Language { get; set; }
-
-		public CodeBlock(string lineOfCode, int lineNumber, string language)
+		public CodeBlock(string lineOfCode, int lineNumber, Language language, string propertyName = null)
 		{
-			if (language == null)
-			{
-				throw new ArgumentNullException(nameof(language));
-			}
-
-			Value = lineOfCode.Trim();
+			Value = ExtractCallOutsFromText(lineOfCode);
 			LineNumber = lineNumber;
 			Language = language;
+			PropertyName = propertyName;
+		}
+
+		public List<string> CallOuts { get; } = new List<string>();
+
+		public Language Language { get; set; }
+
+		public int LineNumber { get; }
+
+		public string PropertyName { get; set; }
+
+		public string Value { get; private set; }
+
+		private string ExtractCallOutsFromText(string lineOfCode)
+		{
+			var matches = Regex.Matches(lineOfCode, @"//[ \t]*(?<callout>\<\d+\>)[ \t]*(?<text>\S.*)");
+			foreach (Match match in matches)
+			{
+				CallOuts.Add($"{match.Groups["callout"].Value} {match.Groups["text"].Value}");
+			}
+
+			if (CallOuts.Any())
+			{
+				lineOfCode = Regex.Replace(lineOfCode, @"//[ \t]*\<(\d+)\>.*", "//<$1>");
+			}
+
+			return lineOfCode.Trim();
 		}
 	}
 }

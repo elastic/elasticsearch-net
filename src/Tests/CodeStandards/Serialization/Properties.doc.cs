@@ -8,7 +8,6 @@ namespace Tests.CodeStandards.Serialization
 {
 	public class JsonProperties
 	{
-
 		/**
 		* Our Json.NET contract resolver picks up attributes set on the interface
 		*/
@@ -27,8 +26,6 @@ namespace Tests.CodeStandards.Serialization
 			serialized = c.Serializer.SerializeToString(new AnalysisDescriptor().CharFilters(cf=>cf));
 			serialized.Should().NotContain("char_filters").And.NotContain("charFilters");
 			serialized.Should().Contain("char_filter");
-
-
 		}
 	}
 }

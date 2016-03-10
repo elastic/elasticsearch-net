@@ -23,7 +23,6 @@ namespace Tests.Aggregations
 	public class Usage : UsageTestBase<ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		/**
-		*
 		* This is the json output for each example
 		**/
 		protected override object ExpectJson => new
@@ -121,7 +120,7 @@ namespace Tests.Aggregations
 		{   
 			get
 			{
-				var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>>
+				var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1> a list of aggregation functions to apply
 				{
 					a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
 					a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
@@ -131,7 +130,7 @@ namespace Tests.Aggregations
 					.Aggregations(aggs => aggs
 						.Children<CommitActivity>("name_of_child_agg", child => child
 							.Aggregations(childAggs =>
-								aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; })
+								aggregations.Aggregate(childAggs, (acc, agg) => { agg(acc); return acc; }) // <2> Using LINQ's `Aggregate()` function to accumulate/apply all of the aggregation functions
 							)
 						)
 					);

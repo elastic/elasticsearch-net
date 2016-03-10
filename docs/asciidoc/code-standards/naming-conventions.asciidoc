@@ -1,14 +1,14 @@
-:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current/
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../images/
+:imagesdir: ../images
 
-= Naming Conventions
+== Naming Conventions
 
 NEST uses the following naming conventions (with _some_ exceptions).
 
-== Class Names
+=== Class Names
 
 Abstract class names should end with a `Base` suffix
 
@@ -40,7 +40,7 @@ var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
 baseClassesNotAbstract.Should().BeEmpty();
 ----
 
-== Requests and Responses
+=== Requests and Responses
 
 Request class names should end with `Request`
 
@@ -72,11 +72,11 @@ responses.Should().BeEmpty();
 Request and Response class names should be one to one in *most* cases.
 e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
 There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
-`Exists` requests.
+the `Exists` requests.
 
 [source,csharp]
 ----
-var exceptions = new[]
+var exceptions = new[] //<1>
 {
 	typeof(CatAliasesRequest),
 	typeof(CatAllocationRequest),
@@ -127,4 +127,5 @@ var responses = types
 	.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 requests.Except(responses).Should().BeEmpty();
 ----
+<1> _Exceptions to the rule_
 

@@ -9,12 +9,12 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filters
 {
-	/**
+	/** == Filters Aggregation
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
 	 * Each bucket will collect all documents that match its associated filter. For documents
 	 * that do not match any filter, these will be collected in the other bucket.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
+	 * Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
 	*/
 
 	/** == Named filters **/
@@ -47,6 +47,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			}
 		};
 
+		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
@@ -63,6 +64,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				)
 			);
 
+		/** Object Initializer Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -83,12 +85,12 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
-
-			/**
+			/** === Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
+			response.IsValid.Should().BeTrue();
+
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 
@@ -111,7 +113,6 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/** == Anonymous filters **/
-
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -139,6 +140,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			}
 		};
 
+		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
@@ -154,6 +156,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				)
 			);
 
+		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -173,12 +176,12 @@ namespace Tests.Aggregations.Bucket.Filters
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
-
 			/**
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
+			response.IsValid.Should().BeTrue();
+
 			var filterAgg = response.Aggs.Filters("projects_by_state");
 			filterAgg.Should().NotBeNull();
 			var results = filterAgg.AnonymousBuckets();
@@ -193,6 +196,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
+	/** == Empty Filters */
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -234,6 +238,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
+	/** == Conditionless Filters */
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -8,14 +8,14 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/** == Auto mapping properties
-	 * 
-	 * When creating a mapping (either when creating an index or via the put mapping API),
-	 * NEST offers a feature called AutoMap(), which will automagically infer the correct
-	 * Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
-	 * you're using attributes to map your properties, then calling AutoMap() is required
-	 * in order for your attributes to be applied.  We'll look at examples of both.
-	 *
+	/**== Auto mapping properties
+	* 
+	* When creating a mapping (either when creating an index or via the put mapping API),
+	* NEST offers a feature called AutoMap(), which will automagically infer the correct
+	* Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
+	* you're using attributes to map your properties, then calling AutoMap() is required
+	* in order for your attributes to be applied.  We'll look at examples of both.
+	*
 	**/
 	public class AutoMap
 	{
@@ -830,11 +830,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
+					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor())) //<1> Pass your `IPropertyVisitor` implementation to `.AutoMap`
 				);
 
 			/** and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBooleanProperty`) 
-			 * it will apply the transformation defined in each Visit() respectively, which in this example
+			 * it will apply the transformation defined in each `Visit()` respectively, which in this example
 			 * disables {ref_current}/doc-values.html[doc values].
 			 */
 			var expected = new
@@ -884,7 +884,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{
-			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new StringProperty();
+			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => 
+				new StringProperty();
 		}
 
 		[U]
