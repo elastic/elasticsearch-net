@@ -11,7 +11,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	{
 		/** == Connection Pooling
 		 * Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
-		 * we can use to issue client calls on.
+		 * NEST can use to issue client calls on. There are 3 types of connection pool
+		 *
+		 * - <<SingleNodeConnectionPool>>
+		 * - <<StaticConnectionPool>>
+		 * - <<SniffingConnectionPool>>
 		 */
 		
 		/** === SingleNodeConnectionPool 
@@ -32,8 +36,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** and pinging */
 			pool.SupportsPinging.Should().BeFalse();
 
-			/** When you use the low ceremony ElasticClient constructor that takes a single Uri,
-			* We default to this SingleNodeConnectionPool */
+			/** When you use the low ceremony `ElasticClient` constructor that takes a single `Uri`,
+			* We default to using `SingleNodeConnectionPool` */
 			var client = new ElasticClient(uri);
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 
@@ -57,8 +61,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** a connection pool can be seeded using an enumerable of `Uri`s */
 			var pool = new StaticConnectionPool(uris);
 
-			/** Or using an enumerable of `Node` */
-			var nodes = uris.Select(u=>new Node(u));
+			/** Or using an enumerable of `Node`s */
+			var nodes = uris.Select(u => new Node(u));
 			pool = new StaticConnectionPool(nodes);
 
 			/** This type of pool is hardwired to opt out of sniffing*/
@@ -67,15 +71,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** but supports pinging when enabled */
 			pool.SupportsPinging.Should().BeTrue();
 
-			/** To create a client using this static connection pool pass 
-			* the connection pool to the connectionsettings you pass to ElasticClient
+			/** To create a client using this static connection pool, pass 
+			* the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 		}
 
 		/** === SniffingConnectionPool 
-		* A subclass of StaticConnectionPool that allows itself to be reseeded at run time.
+		* A subclass of `StaticConnectionPool` that allows itself to be reseeded at run time.
 		* It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 		*/
 		[U] public void Sniffing()
@@ -85,8 +89,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			/** a connection pool can be seeded using an enumerable of `Uri` */
 			var pool = new SniffingConnectionPool(uris);
 
-			/** Or using an enumerable of `Node`
-			* A major benefit here is you can include known node roles when seeding 
+			/** Or using an enumerable of `Node`s.
+			* A major benefit here is you can include known node roles when seeding and 
 			* NEST can use this information to favour sniffing on master eligible nodes first
 			* and take master only nodes out of rotation for issuing client calls on.
 			*/
@@ -100,7 +104,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			pool.SupportsPinging.Should().BeTrue();
 
 			/** To create a client using the sniffing connection pool pass 
-			* the connection pool to the connectionsettings you pass to ElasticClient
+			* the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 			*/
 			var client = new ElasticClient(new ConnectionSettings(pool));
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SniffingConnectionPool>();

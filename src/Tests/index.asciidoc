@@ -36,6 +36,7 @@ We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest
 
 === License
 
+....
 This software is licensed under the Apache 2 license, quoted below.
 
     Copyright (c) 2014 Elasticsearch <http://www.elasticsearch.org>
@@ -51,5 +52,6 @@ This software is licensed under the Apache 2 license, quoted below.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+....
 
 

@@ -9,11 +9,14 @@ namespace Nest.Litterateur
 	public static class LitUp
 	{
 		private static readonly string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
+
+		private static readonly Dictionary<string, decimal> Sections = new Dictionary<string, decimal>(); 
+
 		public static IEnumerable<DocumentationFile> InputFiles(string extension) =>
-			from f in Directory.GetFiles(Program.InputFolder, $"*.{extension}", SearchOption.AllDirectories)
+			from f in Directory.GetFiles(Program.InputDirPath, $"*.{extension}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)
 			where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
-			select DocumentationFile.Load(new FileInfo(f));
+			select DocumentationFile.Load(new FileInfo(f), Sections);
 
 		public static IEnumerable<IEnumerable<DocumentationFile>> Input
 		{

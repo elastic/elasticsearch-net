@@ -9,9 +9,9 @@ namespace Nest.Litterateur.Documentation.Files
 		protected override FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder = Path.GetFileName(testFullPath).PascalToUnderscore();
+			var testInDocumenationFolder = Path.GetFileName(testFullPath).PascalToHyphen();
 
-			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputFolder, "images", testInDocumenationFolder));
+			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.ImagesDirPath, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
 			if (fileInfo.Directory != null)
 				Directory.CreateDirectory(fileInfo.Directory.FullName);

@@ -1,32 +1,31 @@
 ﻿using System.IO;
-using Nest.Litterateur.Documentation;
 
 namespace Nest.Litterateur
 {
 	public static class Program
 	{
-		private static string DefaultTestFolder;
-		private static string DefaultDocFolder;
+		public const string ImagesDir = "images";
 
 		static Program()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 			if (currentDirectory.Name == "Nest.Litterateur" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
-				DefaultTestFolder = @"..\..\Tests";
-				DefaultDocFolder = @"..\..\..\docs\asciidoc";
+				InputDirPath = @"..\..\Tests";
+				OutputDirPath = @"..\..\..\docs\asciidoc";
 			}
 			else
 			{
-				DefaultTestFolder = @"..\..\..\..\..\src\Tests";
-				DefaultDocFolder = @"..\..\..\..\..\docs\asciidoc";
+				InputDirPath = @"..\..\..\..\..\src\Tests";
+				OutputDirPath = @"..\..\..\..\..\docs\asciidoc";
 			}
 		}
 
-		public static string InputFolder => DefaultTestFolder;
+		public static string ImagesDirPath => Path.Combine(OutputDirPath, ImagesDir);
 
-		
-		public static string OutputFolder => DefaultDocFolder;
+		public static string InputDirPath { get; }
+
+		public static string OutputDirPath { get; }
 
 		static void Main(string[] args) => LitUp.Go(args);
 	}

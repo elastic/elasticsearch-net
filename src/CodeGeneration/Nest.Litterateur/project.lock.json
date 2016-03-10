@@ -3,6 +3,10 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
+      "AsciiDoc/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      },
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -122,6 +126,15 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -436,6 +449,15 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "System.Collections/4.0.11-beta-23225": {
         "type": "package",
         "dependencies": {
@@ -621,12 +643,12 @@
           "lib/dotnet/System.Globalization.Extensions.dll": {}
         }
       },
-      "System.IO/4.0.0": {
+      "System.IO/4.0.0-beta-23109": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.0-beta-23109",
+          "System.Text.Encoding": "4.0.0-beta-23109",
+          "System.Threading.Tasks": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.IO.dll": {}
@@ -967,6 +989,10 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
+      "AsciiDoc/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      },
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -1086,6 +1112,15 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -1269,6 +1304,10 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
+      "AsciiDoc/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
+      },
       "Microsoft.CodeAnalysis/1.1.1": {
         "type": "package",
         "dependencies": {
@@ -1388,6 +1427,15 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "System.Collections/4.0.0": {
@@ -1702,6 +1750,15 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "System.Collections/4.0.11-beta-23225": {
         "type": "package",
         "dependencies": {
@@ -1887,12 +1944,12 @@
           "lib/dotnet/System.Globalization.Extensions.dll": {}
         }
       },
-      "System.IO/4.0.0": {
+      "System.IO/4.0.0-beta-23109": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.0-beta-23109",
+          "System.Text.Encoding": "4.0.0-beta-23109",
+          "System.Threading.Tasks": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.IO.dll": {}
@@ -2393,6 +2450,15 @@
           "lib/dotnet/Microsoft.CSharp.dll": {}
         }
       },
+      "Newtonsoft.Json/8.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "System.Collections/4.0.11-beta-23225": {
         "type": "package",
         "dependencies": {
@@ -2578,12 +2644,12 @@
           "lib/dotnet/System.Globalization.Extensions.dll": {}
         }
       },
-      "System.IO/4.0.0": {
+      "System.IO/4.0.0-beta-23109": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.0-beta-23109",
+          "System.Text.Encoding": "4.0.0-beta-23109",
+          "System.Threading.Tasks": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.IO.dll": {}
@@ -2954,6 +3020,10 @@
     }
   },
   "libraries": {
+    "AsciiDoc/1.0.0": {
+      "type": "project",
+      "path": "../../wrap/AsciiDoc/project.json"
+    },
     "Microsoft.CodeAnalysis/1.1.1": {
       "type": "package",
       "sha512": "X+UK+Ev5rQOCkb1HgMdUz47VK/qUvCe8FyObh3McgfIi+j2VXDsQq0YSPxqcKyQd72UmY0ttYDGLsA/ee0oC6w==",
@@ -3089,7 +3159,7 @@
     "Microsoft.CSharp/4.0.1-beta-23409": {
       "type": "package",
       "serviceable": true,
-      "sha512": "GGOOJF47WzXZoka0JHCToQxzSguIy1UeXZywUjA1NPqvKAWVwbSbZ2VxyeIL3jyTV1BHEbBX8FPL6vweUON2aw==",
+      "sha512": "I1jsSsyK89VfNebrnx2eiBD5YT6zp+DcX2v6AxZ/IosS38QYmA9YKVmssMd5yhRkXwr1f8MfgZTxF1Cli90JEQ==",
       "files": [
         "lib/dotnet/de/Microsoft.CSharp.xml",
         "lib/dotnet/es/Microsoft.CSharp.xml",
@@ -3125,6 +3195,28 @@
         "ref/wpa81/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "Newtonsoft.Json/8.0.2": {
+      "type": "package",
+      "sha512": "e5yWmEfu68rmtG431zl9N/7PlNKQDIuiDW5MHlEFAZcecakcxrIGnKqrPAtWNILzK2oNanRB5cD150MYhECK3g==",
+      "files": [
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.8.0.2.nupkg",
+        "Newtonsoft.Json.8.0.2.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "tools/install.ps1"
       ]
     },
     "System.Collections/4.0.0": {
@@ -3589,6 +3681,46 @@
         "System.Globalization.Extensions.4.0.0-beta-23109.nupkg",
         "System.Globalization.Extensions.4.0.0-beta-23109.nupkg.sha512",
         "System.Globalization.Extensions.nuspec"
+      ]
+    },
+    "System.IO/4.0.0-beta-23109": {
+      "type": "package",
+      "sha512": "5hFYIKRlgbPyYa9NKvizmrCACEbzVRpgMf+lF6erYxa5P7lPcbbQEt9C3xBbvShBwqNNzkosB5kD5MeaNKAmww==",
+      "files": [
+        "lib/net45/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "License.rtf",
+        "ref/dotnet/de/System.IO.xml",
+        "ref/dotnet/es/System.IO.xml",
+        "ref/dotnet/fr/System.IO.xml",
+        "ref/dotnet/it/System.IO.xml",
+        "ref/dotnet/ja/System.IO.xml",
+        "ref/dotnet/ko/System.IO.xml",
+        "ref/dotnet/ru/System.IO.xml",
+        "ref/dotnet/System.IO.dll",
+        "ref/dotnet/System.IO.xml",
+        "ref/dotnet/zh-hans/System.IO.xml",
+        "ref/dotnet/zh-hant/System.IO.xml",
+        "ref/net45/_._",
+        "ref/netcore50/de/System.IO.xml",
+        "ref/netcore50/es/System.IO.xml",
+        "ref/netcore50/fr/System.IO.xml",
+        "ref/netcore50/it/System.IO.xml",
+        "ref/netcore50/ja/System.IO.xml",
+        "ref/netcore50/ko/System.IO.xml",
+        "ref/netcore50/ru/System.IO.xml",
+        "ref/netcore50/System.IO.dll",
+        "ref/netcore50/System.IO.xml",
+        "ref/netcore50/zh-hans/System.IO.xml",
+        "ref/netcore50/zh-hant/System.IO.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "System.IO.4.0.0-beta-23109.nupkg",
+        "System.IO.4.0.0-beta-23109.nupkg.sha512",
+        "System.IO.nuspec"
       ]
     },
     "System.IO/4.0.0": {
@@ -4863,14 +4995,18 @@
     }
   },
   "projectFileDependencyGroups": {
-    "": [],
+    "": [
+      "Newtonsoft.Json >= 8.0.2"
+    ],
     "DNX,Version=v4.5.1": [
       "Microsoft.CSharp >= 4.0.1-beta-23409",
       "Microsoft.CodeAnalysis >= 1.1.1",
+      "AsciiDoc >= 1.0.0-*",
       "fx/System.Runtime ",
       "fx/System.Runtime.Serialization ",
       "fx/System.Threading.Tasks ",
-      "fx/System.Text.Encoding "
+      "fx/System.Text.Encoding ",
+      "fx/System.IO "
     ],
     ".NETPlatform,Version=v5.1": [
       "System.Runtime >= 4.0.21-beta-23225",
@@ -4878,6 +5014,7 @@
       "System.Reflection >= 4.1.0-beta-23225",
       "System.Collections.Specialized >= 4.0.0-beta-23109",
       "System.Linq >= 4.0.0-beta-23109",
+      "System.IO >= 4.0.0-beta-23109",
       "System.IO.FileSystem >= 4.0.0-beta-23109",
       "System.IO.Compression >= 4.0.0-beta-23109",
       "System.Runtime.Serialization.Primitives >= 4.0.10-beta-23109",

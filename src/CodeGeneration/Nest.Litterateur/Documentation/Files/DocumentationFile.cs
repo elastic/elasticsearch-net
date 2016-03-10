@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
@@ -19,13 +20,13 @@ namespace Nest.Litterateur.Documentation.Files
 
 		public abstract void SaveToDocumentationFolder();
 
-		public static DocumentationFile Load(FileInfo fileLocation)
+		public static DocumentationFile Load(FileInfo fileLocation, Dictionary<string, decimal> sections)
 		{
 			var extension = fileLocation?.Extension;
 			switch (extension)
 			{
 				case ".cs":
-					return new CSharpDocumentationFile(fileLocation);
+					return new CSharpDocumentationFile(fileLocation, sections);
 				case ".gif":
 				case ".jpg":
 				case ".jpeg":
@@ -43,11 +44,10 @@ namespace Nest.Litterateur.Documentation.Files
 			var testFullPath = this.FileLocation.FullName;
 
 			var testInDocumentationFolder = 
-				Path.GetFileNameWithoutExtension(testFullPath).TrimDocExtension().PascalToUnderscore() + ".asciidoc";
+				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "").TrimDocExtension().PascalToHyphen() + ".asciidoc";
 
-			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputFolder, testInDocumentationFolder));
+			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumentationFolder));
 			var fileInfo = new FileInfo(documentationTargetPath);
-
 			if (fileInfo.Directory != null)
 				Directory.CreateDirectory(fileInfo.Directory.FullName);
 

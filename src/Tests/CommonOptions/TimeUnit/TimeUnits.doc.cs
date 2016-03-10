@@ -9,17 +9,16 @@ namespace Tests.CommonOptions.TimeUnit
 {
 	public class TimeUnits 
 	{
-		/** #  Time units
+		/** ==  Time units
 		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
 		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
 		 * 
-		 * ## Using Time units in NEST
+		 * === Using Time units in NEST
 		 * NEST uses `Time` to strongly type this and there are several ways to construct one.
 		 *
-		 * ### Constructor
+		 * ==== Constructor
 		 * The most straight forward way to construct a `Time` is through its constructor
 		 */
-		
 		[U] public void Constructor()
 		{
 			var unitString = new Time("2d");
@@ -28,8 +27,13 @@ namespace Tests.CommonOptions.TimeUnit
 			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
 
 			/**
-			* When serializing Time constructed from a string, milliseconds, composition of factor and 
-			* interval, or a `TimeSpan` the expression will be serialized as time unit string
+			* When serializing Time constructed from 
+			* - a string 
+			* - milliseconds (as a double) 
+			* - composition of factor and interval
+			* - a `TimeSpan` 
+			*
+			* the expression will be serialized to a time unit string composed of the factor and interval e.g. `2d`
 			*/
 			Expect("2d")
 				.WhenSerializing(unitString)
@@ -38,7 +42,7 @@ namespace Tests.CommonOptions.TimeUnit
 				.WhenSerializing(unitMilliseconds);
 
 			/**
-			* Milliseconds are always calculated even when not using the constructor that takes a long
+			* The `Milliseconds` property on `Time` is calculated even when not using the constructor that takes a double
 			*/
 			unitMilliseconds.Milliseconds.Should().Be(1000*60*60*24*2);
 			unitComposed.Milliseconds.Should().Be(1000*60*60*24*2);
@@ -46,10 +50,9 @@ namespace Tests.CommonOptions.TimeUnit
 			unitString.Milliseconds.Should().Be(1000*60*60*24*2);
 		}
 		/**
-		* ### Implicit conversion
-		* Alternatively `string`, `TimeSpan` and `double` can be implicitly assigned to `Time` properties and variables 
+		* ==== Implicit conversion
+		* Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time` 
 		*/
-
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
 		{
@@ -62,7 +65,6 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("2d").WhenSerializing(twoDays);
 		}
 
-
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void EqualityAndComparable()
 		{
@@ -71,14 +73,12 @@ namespace Tests.CommonOptions.TimeUnit
 			Time twoDays = 1000*60*60*24*2;
 
 			/**
-			* Milliseconds are calculated even when values are not passed as long
+			* Again, the `Milliseconds` property is calculated on `Time`, 
+			* allowing you to do comparisons
 			*/
 			oneAndHalfYear.Milliseconds.Should().BeGreaterThan(1);
 			twoWeeks.Milliseconds.Should().BeGreaterThan(1);
 
-			/**
-			* This allows you to do comparisons on the expressions
-			*/
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
@@ -101,8 +101,8 @@ namespace Tests.CommonOptions.TimeUnit
 		[U]
 		public void UsingInterval()
 		{
-			/**
-			* Time units are specified as a union of either a `DateInterval` or `Time`
+			/** === Time units
+			* Time units are specified as a union of either a `DateInterval` or `Time`,
 			* both of which implicitly convert to the `Union` of these two.
 			*/
 			Expect("month").WhenSerializing<Union<DateInterval, Time>>(DateInterval.Month);

@@ -55,7 +55,13 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
 		{
 			var propertyName = node.Identifier.Text;
-			if (propertyName == "Fluent")
+			if (propertyName == "ExpectJson")
+			{
+				this.InsideFluentOrInitializerExample = true;
+				base.VisitPropertyDeclaration(node);
+				this.InsideFluentOrInitializerExample = false;
+			}
+			else if (propertyName == "Fluent")
 			{
 				this.InsideFluentOrInitializerExample = true;
 				base.VisitPropertyDeclaration(node);
@@ -112,7 +118,9 @@ namespace Nest.Litterateur.Walkers
 					return;
 				}
 				base.VisitExpressionStatement(node);
-				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString(), line));
+				var code = node.WithoutLeadingTrivia().ToFullString();
+				code = code.RemoveNumberOfLeadingTabsAfterNewline(ClassDepth + 2);
+				this.Blocks.Add(new CodeBlock(code, line, "csharp"));
 			}
 			else base.VisitExpressionStatement(node);
 
@@ -131,7 +139,9 @@ namespace Nest.Litterateur.Walkers
 					this.Blocks.AddRange(walker.Blocks);
 					return;
 				}
-				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString(), line));
+				var code = node.WithoutLeadingTrivia().ToFullString();
+				code = code.RemoveNumberOfLeadingTabsAfterNewline(ClassDepth + 2);
+				this.Blocks.Add(new CodeBlock(code, line, "csharp"));
 			}
 			base.VisitLocalDeclarationStatement(node);
 		}
@@ -146,12 +156,15 @@ namespace Nest.Litterateur.Walkers
 
 			this.InsideMultiLineDocumentation = true;
 
-			var tokens = trivia.ToFullString().TrimStart('/', '*').TrimEnd('*', '/').Split('\n');
+			var tokens = trivia.ToFullString()
+				.RemoveLeadingAndTrailingMultiLineComments()
+				.Split(new [] { Environment.NewLine }, StringSplitOptions.None);
 			var builder = new StringBuilder();
 
 			foreach (var token in tokens)
 			{
-				var decodedToken = System.Net.WebUtility.HtmlDecode(token.TrimStart().TrimStart('*').TrimStart());
+				var currentToken = token.RemoveLeadingSpacesAndAsterisk();
+				var decodedToken = System.Net.WebUtility.HtmlDecode(currentToken);
 				builder.AppendLine(decodedToken);
 			}
 

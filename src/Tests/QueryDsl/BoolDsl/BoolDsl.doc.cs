@@ -14,9 +14,9 @@ namespace Tests.QueryDsl.BoolDsl
 	public class BoolDslTests : OperatorUsageBase
 	{
 		protected readonly IElasticClient Client = TestClient.GetFixedReturnClient(new { });
-		
+
 		/** Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,
-		* take a single `bool` query with only two clauses
+		* take a single {ref_current}/query-dsl-bool-query.html[`bool` query] with only two clauses
 		*/
 		public void VerboseWay()
 		{
@@ -31,16 +31,16 @@ namespace Tests.QueryDsl.BoolDsl
 				)
 			);
 		}
-		/** Now, magine multiple nested bools this quickly becomes an exercise in 
-		*	_hadouken indenting_
+		/**Now, imagine multiple nested bools this quickly becomes an exercise in _hadouken indenting_
 		*
 		*[[indent]]
 		*.hadouken indenting example
-		*image::{imagesdir}/hadouken_indentation.jpg[dead indent]	
+		*image::{imagesdir}/hadouken-indentation.jpg[dead indent]	
 		*
-		* === Operator Overloading
-		* For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 
-		* The previous example now becomes the following with the fluent API
+		*=== Operator Overloading
+		*
+		*For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 
+		*The previous example now becomes the following with the fluent API
 		*/
 		public void UsingOperator()
 		{
@@ -59,23 +59,26 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		* `term && term && term` to 
 		*
-		*>    bool
-		*>    |___must
-		*>        |___term
-		*>            |___bool
-		*>                |___must
-		*>                    |___term
-		*>                    |___term
+		*....
+		*bool
+		*|___must
+		*    |___term
+		*        |___bool
+		*            |___must
+		*                |___term
+		*                |___term
+		*....
 		*
 		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and 
 		* join them together to become a single bool query
 		*
-		*>    bool
-		*>    |___must 
-		*>        |___term
-		*>        |___term
-		*>        |___term
-		*
+		*....
+		*bool
+		*|___must 
+		*    |___term
+		*    |___term
+		*    |___term
+		*....
 		*/
 
 		[U] public void JoinsMustQueries() =>
@@ -104,14 +107,16 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		* When combining multiple queries some or all possibly marked as `must_not` or `filter`, NEST still combines to a single bool query
 		*
-		*>    bool
-		*>    |___must 
-		*>    |   |___term
-		*>    |   |___term
-		*>    |   |___term
-		 >    |
-		*>    |___must_not
-		*>        |___term
+		*....
+		*bool
+		*|___must 
+		*|   |___term
+		*|   |___term
+		*|   |___term
+		*|
+		*|___must_not
+		*    |___term
+		*....
 		*/
 
 		[U] public void JoinsMustWithMustNot()
@@ -127,20 +132,21 @@ namespace Tests.QueryDsl.BoolDsl
 			
 		}
 
-		/** Even more involved `term && term && term && !term && +term && +term` still only results in a single bool query:
-
-		*>    bool
-		*>    |___must 
-		*>    |   |___term
-		*>    |   |___term
-		*>    |   |___term
-		*>    |
-		*>    |___must_not
-		*>    |   |___term
-		*>    |   
-		*>    |___filter
-		*>        |___term
-		*>        |___term
+		/** Even more involved `term && term && term && !term && +term && +term` still only results in a single `bool` query:
+		*....
+		*bool
+		*|___must 
+		*|   |___term
+		*|   |___term
+		*|   |___term
+		*|
+		*|___must_not
+		*|   |___term
+		*|   
+		*|___filter
+		*    |___term
+		*    |___term
+		*....
 		*/
 
 		[U] public void JoinsMustWithMustNotAndFilter() =>
@@ -155,8 +161,7 @@ namespace Tests.QueryDsl.BoolDsl
 				});
 
 		/** You can still mix and match actual bool queries with the bool DSL e.g
-		*
-		* `bool(must=term, term, term) && !term` would still merge into a single bool query. 
+		* `bool(must=term, term, term) && !term` would still merge into a single `bool` query. 
 		*/
 		[U] public void MixAndMatch() =>
 			Assert(
@@ -168,51 +173,50 @@ namespace Tests.QueryDsl.BoolDsl
 					c.Bool.MustNot.Should().HaveCount(1);
 				});
 
-		/* NEST will also do the same with `should`'s or `||` when it sees that the boolean queries in play **ONLY** consist of `should clauses`. 
+		/* NEST will also do the same with `should`s or `||` when it sees that the boolean queries in play **ONLY** consist of `should` clauses. 
 		* This is because the `bool` query does not quite follow the same boolean logic you expect from a programming language. 
-
+		*
 		* To summarize, the latter: 
-
+		*
 		* `term || term || term`
-
+		*
 		* becomes
-
-		*>    bool
-		*>    |___should
-		*>        |___term
-		*>        |___term
-		*>        |___term
-
-		* but 
-
-		* `term1 && (term2 || term3 || term4)` will NOT become
-
-		*>    bool
-		*>    |___must 
-		*>    |   |___term1
-		*>    |
-		*>    |___should
-		*>        |___term2
-		*>        |___term3
-		*>        |___term4
-		
+		*....
+		*bool
+		*|___should
+		*    |___term
+		*    |___term
+		*    |___term
+		*....
+		* but `term1 && (term2 || term3 || term4)` does **NOT** become
+		*....
+		*bool
+		*|___must 
+		*|   |___term1
+		*|
+		*|___should
+		*    |___term2
+		*    |___term3
+		*    |___term4
+		*....
+		*
 		* This is because when a `bool` query has **only** `should` clauses, at least one of them must match. 
 		* When that `bool` query also has a `must` clause then the `should` clauses start acting as a _boost_ factor
 		* and none of them have to match, drastically altering its meaning.
-
+		*
 		* So in the previous you could get back results that **ONLY** contain `term1`. This is clearly not what you want in the strict boolean sense of the input.
-
+		*
 		* To aid with this, NEST rewrites the previous query to 
-
-		*>    bool 
-		*>    |___must 
-		*>        |___term1
-		*>        |___bool
-		*>            |___should
-		*>                |___term2
-		*>                |___term3
-		*>                |___term4
-
+		*....
+		*bool 
+		*|___must 
+		*    |___term1
+		*    |___bool
+		*        |___should
+		*            |___term2
+		*            |___term3
+		*            |___term4
+		*....
 		*/
 
 		[U] public void JoinsWithShouldClauses() =>
@@ -228,18 +232,19 @@ namespace Tests.QueryDsl.BoolDsl
 					lastClause.Bool.Should.Should().HaveCount(3);
 				});
 
-		/* NOTE: You can add parentheses to force evaluation order */
-		
-		/* Also note that using shoulds as boosting factors can be really powerful so if you need this always remember that you can mix and match an actual bool query with the bool dsl */
-
-		/* There is another subtle situation where NEST will not blindly merge 2 bool queries with only should clauses. Image the following:
-
+		/** TIP: You can add parentheses to force evaluation order
+		*
+		* Also note that using shoulds as boosting factors can be really powerful so if you need this 
+		*always remember that you can mix and match an actual bool query with the bool dsl.
+		*
+		* There is another subtle situation where NEST will not blindly merge 2 bool queries with only should clauses. Imagine the following:
+		*
 		* `bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6` 
-		
-		* if NEST identified both sides of the OR operation as only containing should clauses and it would join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query. 
-		* Rewriting this to a single bool with 5 should clauses would break because only matching on term5 or term6 should still be a hit.
-		*/ 
- 
+		*
+		* if NEST identified both sides of the OR operation as only containing `should` clauses and it would 
+		* join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query. 
+		* Rewriting this to a single bool with 5 `should` clauses would break because only matching on `term5` or `term6` should still be a hit.
+		**/ 
 		[U] public void MixAndMatchMinimumShouldMatch() =>
 			Assert(
 				q => q.Bool(b=>b
@@ -260,6 +265,7 @@ namespace Tests.QueryDsl.BoolDsl
 				});
 
 		/** === Locked bool queries
+		* 
 		* NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set, 
 		* NEST will treat these as locked 
 		*
