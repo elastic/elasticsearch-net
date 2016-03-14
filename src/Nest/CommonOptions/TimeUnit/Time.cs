@@ -23,7 +23,7 @@ namespace Nest
 
 		// TODO make nullable in 3.0
 		public double Milliseconds { get; private set; }
-		private double? ApproximateMilliseconds { get; set; }
+		private double ApproximateMilliseconds { get; set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
 		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			this.Factor = factor;
 			this.Interval = interval;
-			SetMilliseconds(this.Interval.Value, this.Factor.Value);
+			SetMilliseconds(this.Interval, this.Factor.Value);
 		}
 
 		public Time(string timeUnit)
@@ -61,19 +61,14 @@ namespace Nest
 					: TimeUnit.Millisecond;
 			}
 
-			if (this.Interval.HasValue)
-				SetMilliseconds(this.Interval.Value, this.Factor.Value);
-			else
-				this.Milliseconds = this.Factor.Value;
+			SetMilliseconds(this.Interval, this.Factor.Value);
 		}
 
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
-			var ms = this.ApproximateMilliseconds ?? this.Milliseconds;
-			var otherMs = other.ApproximateMilliseconds ?? other.Milliseconds;
-			if (ms == otherMs) return 0;
-			if (ms < otherMs) return -1;
+			if (this.ApproximateMilliseconds == other.ApproximateMilliseconds) return 0;
+			if (this.ApproximateMilliseconds < other.ApproximateMilliseconds) return -1;
 			return 1;
 		}
 
@@ -101,7 +96,7 @@ namespace Nest
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return (this.ApproximateMilliseconds ?? Milliseconds) == (other.ApproximateMilliseconds ?? other.Milliseconds);
+			return (this.ApproximateMilliseconds == other.ApproximateMilliseconds);
 		}
 
 		public override bool Equals(object obj)
@@ -112,16 +107,15 @@ namespace Nest
 			return Equals((Time)obj);
 		}
 
-		public override int GetHashCode() => (this.ApproximateMilliseconds ?? this.Milliseconds).GetHashCode();
+		public override int GetHashCode() => this.ApproximateMilliseconds.GetHashCode();
 
-		private void SetMilliseconds(TimeUnit interval, double factor)
+		private void SetMilliseconds(TimeUnit? interval, double factor)
 		{
-			this.Milliseconds = GetMilliseconds(interval, factor);
-			if (this.Milliseconds == -1)
-				this.ApproximateMilliseconds = GetApproximateMilliseconds(interval, factor);
+			this.Milliseconds = interval.HasValue ? GetExactMilliseconds(interval.Value, factor) : factor;
+			this.ApproximateMilliseconds = interval.HasValue ? GetApproximateMilliseconds(interval.Value, factor) : factor;
 		}
 
-		private double GetMilliseconds(TimeUnit interval, double factor)
+		private double GetExactMilliseconds(TimeUnit interval, double factor)
 		{
 			switch (interval)
 			{
@@ -144,7 +138,8 @@ namespace Nest
 					return factor;
 			}
 		}
-		private double? GetApproximateMilliseconds(TimeUnit interval, double factor)
+
+		private double GetApproximateMilliseconds(TimeUnit interval, double factor)
 		{
 			switch (interval)
 			{
@@ -153,13 +148,14 @@ namespace Nest
 				case TimeUnit.Month:
 					return factor * _monthApproximate;
 				default:
-					return null;
+					return GetExactMilliseconds(interval, factor);
 			}
 		}
 
 		private void Reduce(double ms)
 		{
 			this.Milliseconds = ms;
+			this.ApproximateMilliseconds = ms;
 
 			if (ms >= _week)
 			{
