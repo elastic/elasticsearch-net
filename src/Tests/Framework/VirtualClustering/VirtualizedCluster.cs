@@ -14,6 +14,8 @@ namespace Tests.Framework
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private readonly ConnectionSettings _settings;
 		public FixedPipelineFactory _fixedRequestPipeline;
+		private Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IResponse> _syncCall;
+		private Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IResponse>> _asyncCall;
 
 		public IConnectionPool ConnectionPool => this.Client.ConnectionSettings.ConnectionPool;
 
@@ -25,13 +27,30 @@ namespace Tests.Framework
 
 			this._cluster = cluster;
 			this._connectionPool = pool;
+
+			this._syncCall = (c, r) => c.Search<Project>(s => s.RequestConfiguration(r));
+			this._asyncCall = async (c, r) =>
+			{
+				var res = await c.SearchAsync<Project>(s => s.RequestConfiguration(r));
+				return (IResponse)res;
+			};
 		}
 
-		public ISearchResponse<Project> ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
-			this.Client.Search<Project>(s => s.RequestConfiguration(requestOverrides));
+		public VirtualizedCluster ClientProxiesTo(
+			Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, IResponse> sync,
+			Func<IElasticClient, Func<RequestConfigurationDescriptor, IRequestConfiguration>, Task<IResponse>> async
+			)
+		{
+			this._syncCall = sync;
+			this._asyncCall = async;
+			return this;
+		}
 
-		public async Task<ISearchResponse<Project>> ClientCallAsync(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) => 
-			await this.Client.SearchAsync<Project>(s => s.RequestConfiguration(requestOverrides));
+		public IResponse ClientCall(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
+			this._syncCall(this.Client, requestOverrides);
+
+		public async Task<IResponse> ClientCallAsync(Func<RequestConfigurationDescriptor, IRequestConfiguration> requestOverrides = null) =>
+			await this._asyncCall(this.Client, requestOverrides);
 
 		public void ChangeTime(Func<DateTime, DateTime> change) => _dateTimeProvider.ChangeTime(change);
 

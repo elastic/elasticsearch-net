@@ -10,6 +10,8 @@ namespace Elasticsearch.Net
 	{
 		public PipelineFailure FailureReason { get; }
 
+		public IApiCallDetails Response { get; internal set; }
+
 		public bool Recoverable =>
 			FailureReason == PipelineFailure.BadResponse
 			|| FailureReason == PipelineFailure.PingFailure;
@@ -27,7 +29,7 @@ namespace Elasticsearch.Net
 			this.FailureReason = PipelineFailure.BadResponse;
 		}
 
-		public PipelineException(PipelineFailure failure, Exception innerException) 
+		public PipelineException(PipelineFailure failure, Exception innerException)
 			: base(GetMessage(failure), innerException)
 		{
 			this.FailureReason = failure;

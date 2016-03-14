@@ -27,8 +27,8 @@ namespace Tests.Framework
 			_clusterAsync = clusterAsync;
 		}
 
-		public ISearchResponse<Project> Response { get; internal set; }
-		public ISearchResponse<Project> ResponseAsync { get; internal set; }
+		public IResponse Response { get; internal set; }
+		public IResponse ResponseAsync { get; internal set; }
 
 		public List<Audit> AsyncAuditTrail { get; set; }
 		public List<Audit> AuditTrail { get; set; }
@@ -170,7 +170,7 @@ namespace Tests.Framework
 			var auditor = this;
 			foreach (var a in audits.Select((a, i)=> new { a, i }))
 			{
-				auditor = await auditor.TraceCall(a.a, a.i); 
+				auditor = await auditor.TraceCall(a.a, a.i);
 			}
 			return auditor;
 		}

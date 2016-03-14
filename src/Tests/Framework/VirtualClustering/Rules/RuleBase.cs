@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Elasticsearch.Net;
 using Nest;
 
 namespace Tests.Framework
@@ -14,6 +16,8 @@ namespace Tests.Framework
 		/// Either a hard exception or soft HTTP error code
 		/// </summary>
 		Union<Exception, int> Return { get; set; }
+
+		byte[] ReturnResponse { get; set; }
 	}
 
 	public abstract class RuleBase<TRule> : IRule
@@ -25,6 +29,7 @@ namespace Tests.Framework
 		TimeSpan? IRule.Takes { get; set; }
 		Union<TimesHelper.AllTimes, int> IRule.Times { get; set; }
 		Union<Exception, int> IRule.Return { get; set; }
+		byte[] IRule.ReturnResponse { get; set; }
 
 		public TRule OnPort(int port)
 		{
@@ -35,6 +40,25 @@ namespace Tests.Framework
 		public TRule Takes(TimeSpan span)
 		{
 			Self.Takes = span;
+			return (TRule)this;
+		}
+
+		public TRule ReturnResponse<T>(T response)
+			where T : class
+		{
+			byte[] r;
+			using (var ms = new MemoryStream())
+			{
+				new ElasticsearchDefaultSerializer().Serialize(response, ms);
+				r = ms.ToArray();
+			}
+			Self.ReturnResponse = r;
+			return (TRule)this;
+		}
+
+		public TRule ReturnResponse(byte[] response)
+		{
+			Self.ReturnResponse = response;
 			return (TRule)this;
 		}
 	}

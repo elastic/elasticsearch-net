@@ -12,12 +12,12 @@ namespace Elasticsearch.Net
 		private readonly byte[] _responseBody;
 		private readonly int _statusCode;
 
-		public InMemoryConnection() 
+		public InMemoryConnection()
 		{
 			_statusCode = 200;
 		}
 
-		public InMemoryConnection(byte[] responseBody, int statusCode = 200) 
+		public InMemoryConnection(byte[] responseBody, int statusCode = 200)
 		{
 			_responseBody = responseBody;
 			_statusCode = statusCode;
@@ -26,27 +26,27 @@ namespace Elasticsearch.Net
 		public virtual Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class =>
 			Task.FromResult(this.ReturnConnectionStatus<TReturn>(requestData));
 
-		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class => 
+		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class =>
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
 		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
 			where TReturn : class
 		{
 			var body = responseBody ?? _responseBody;
-            var data = requestData.PostData;
-            if (data != null)
-            {
-                using (var stream = new MemoryStream())
-                {
-                    if (requestData.HttpCompression)
-                        using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-                            data.Write(zipStream, requestData.ConnectionSettings);
-                    else
-                        data.Write(stream, requestData.ConnectionSettings);
-                }
-            }
+			var data = requestData.PostData;
+			if (data != null)
+			{
+				using (var stream = new MemoryStream())
+				{
+					if (requestData.HttpCompression)
+						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+							data.Write(zipStream, requestData.ConnectionSettings);
+					else
+						data.Write(stream, requestData.ConnectionSettings);
+				}
+			}
 
-            var builder = new ResponseBuilder<TReturn>(requestData)
+			var builder = new ResponseBuilder<TReturn>(requestData)
 			{
 				StatusCode = statusCode ?? this._statusCode,
 				Stream = (body != null) ? new MemoryStream(body) : null
@@ -57,6 +57,6 @@ namespace Elasticsearch.Net
 
 		void IDisposable.Dispose() => DisposeManagedResources();
 
-		protected virtual void DisposeManagedResources() {}
+		protected virtual void DisposeManagedResources() { }
 	}
 }
