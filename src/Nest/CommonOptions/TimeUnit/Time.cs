@@ -23,17 +23,11 @@ namespace Nest
 
 		// TODO make nullable in 3.0
 		public double Milliseconds { get; private set; }
+		private double? ApproximateMilliseconds { get; set; }
 
 		public static implicit operator Time(TimeSpan span) => new Time(span);
 		public static implicit operator Time(double milliseconds) => new Time(milliseconds);
 		public static implicit operator Time(string expression) => new Time(expression);
-
-		public Time(double factor, TimeUnit interval)
-		{
-			this.Factor = factor;
-			this.Interval = interval;
-			this.Milliseconds = GetMilliseconds(this.Interval.Value, this.Factor.Value);
-		}
 
 		public Time(TimeSpan timeSpan)
 		{
@@ -43,6 +37,13 @@ namespace Nest
 		public Time(double milliseconds)
 		{
 			Reduce(milliseconds);
+		}
+
+		public Time(double factor, TimeUnit interval)
+		{
+			this.Factor = factor;
+			this.Interval = interval;
+			SetMilliseconds(this.Interval.Value, this.Factor.Value);
 		}
 
 		public Time(string timeUnit)
@@ -60,16 +61,17 @@ namespace Nest
 					: TimeUnit.Millisecond;
 			}
 
-			this.Milliseconds = this.Interval.HasValue
-				? GetMilliseconds(this.Interval.Value, this.Factor.Value)
-				: this.Factor.Value;
+			if (this.Interval.HasValue)
+				SetMilliseconds(this.Interval.Value, this.Factor.Value);
+			else
+				this.Milliseconds = this.Factor.Value;
 		}
 
 		public int CompareTo(Time other)
 		{
 			if (other == null) return 1;
-			var ms = GetMilliseconds(this.Interval.Value, this.Factor.Value, approximate: true);
-			var otherMs = GetMilliseconds(other.Interval.Value, other.Factor.Value, approximate: true);
+			var ms = this.ApproximateMilliseconds ?? this.Milliseconds;
+			var otherMs = other.ApproximateMilliseconds ?? other.Milliseconds;
 			if (ms == otherMs) return 0;
 			if (ms < otherMs) return -1;
 			return 1;
@@ -99,7 +101,7 @@ namespace Nest
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return Milliseconds == other.Milliseconds;
+			return (this.ApproximateMilliseconds ?? Milliseconds) == (other.ApproximateMilliseconds ?? other.Milliseconds);
 		}
 
 		public override bool Equals(object obj)
@@ -110,16 +112,20 @@ namespace Nest
 			return Equals((Time)obj);
 		}
 
-		public override int GetHashCode() => this.Milliseconds.GetHashCode();
+		public override int GetHashCode() => (this.ApproximateMilliseconds ?? this.Milliseconds).GetHashCode();
 
-		private double GetMilliseconds(TimeUnit interval, double factor, bool approximate = false)
+		private void SetMilliseconds(TimeUnit interval, double factor)
+		{
+			this.Milliseconds = GetMilliseconds(interval, factor);
+			if (this.Milliseconds == -1)
+				this.ApproximateMilliseconds = GetApproximateMilliseconds(interval, factor);
+		}
+
+		private double GetMilliseconds(TimeUnit interval, double factor)
 		{
 			switch (interval)
 			{
-				case TimeUnit.Year:
-					return approximate ? factor * _yearApproximate : -1;
-				case TimeUnit.Month:
-					return approximate ? factor * _monthApproximate : -1;
+
 				case TimeUnit.Week:
 					return factor * _week;
 				case TimeUnit.Day:
@@ -130,8 +136,24 @@ namespace Nest
 					return factor * _minute;
 				case TimeUnit.Second:
 					return factor * _second;
+				case TimeUnit.Year:
+				case TimeUnit.Month:
+					// Cannot calculate exact milliseconds for non-fixed intervals
+					return -1;
 				default: // ms
 					return factor;
+			}
+		}
+		private double? GetApproximateMilliseconds(TimeUnit interval, double factor)
+		{
+			switch (interval)
+			{
+				case TimeUnit.Year:
+					return factor * _yearApproximate;
+				case TimeUnit.Month:
+					return factor * _monthApproximate;
+				default:
+					return null;
 			}
 		}
 
