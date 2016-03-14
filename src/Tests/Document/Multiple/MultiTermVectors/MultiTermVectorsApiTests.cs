@@ -42,7 +42,13 @@ namespace Tests.Document.Multiple.MultiTermVectors
 				field_statistics = true,
 				term_statistics = true,
 				positions = true,
-				offsets = true
+				offsets = true,
+				filter = new
+				{
+					max_num_terms = 3,
+					min_term_freq = 1,
+					min_doc_freq = 1
+				}
 			}).Take(2)
 		};
 
@@ -77,7 +83,18 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p.FieldStatistics().Payloads().TermStatistics().Positions().Offsets())
+			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
+				.FieldStatistics()
+				.Payloads()
+				.TermStatistics()
+				.Positions()
+				.Offsets()
+				.Filter(f => f
+					.MaximimumNumberOfTerms(3)
+					.MinimumTermFrequency(1)
+					.MinimumDocumentFrequency(1)
+				)
+			)
 		;
 
 		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
@@ -89,7 +106,13 @@ namespace Tests.Document.Multiple.MultiTermVectors
 					Payloads = true,
 					TermStatistics = true,
 					Positions = true,
-					Offsets = true
+					Offsets = true,
+					Filter = new TermVectorFilter
+					{
+						MaximumNumberOfTerms = 3,
+						MinimumTermFrequency = 1,
+						MinimumDocumentFrequency = 1
+					}
 				})
 		};
 	}
