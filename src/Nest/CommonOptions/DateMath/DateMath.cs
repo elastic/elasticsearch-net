@@ -71,7 +71,7 @@ namespace Nest
 
 			if (match.Groups["rounding"].Success)
 			{
-				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<TimeUnit>();
+				var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<TimeUnit>(StringComparison.Ordinal);
 				if (rounding.HasValue)
 					return math.RoundTo(rounding.Value);
 			}
