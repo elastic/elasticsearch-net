@@ -1,3 +1,5 @@
+:section-number: 7.3
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -8,7 +10,7 @@
 
 Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappensonce"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -17,22 +19,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.SniffingConnectionPool()
 	.AllDefaults()
 );
-await audit.TraceCall(new ClientCall
- {
-	{ SniffOnStartup},
-	{ SniffFailure, 9200},
-	{ SniffFailure, 9201},
-	{ SniffSuccess, 9202},
-	{ PingSuccess , 9200},
-	{ HealthyResponse, 9200}
-});
-var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.Sniff(s => s.Fails(Always))
-	.Sniff(s => s.OnPort(9202).Succeeds(Always))
-	.SniffingConnectionPool()
-	.AllDefaults()
-);
+
 await audit.TraceCalls(
 	 new ClientCall
 	 {
@@ -49,6 +36,10 @@ await audit.TraceCalls(
 		{ HealthyResponse, 9201}
 	}
 );
+----
+
+[source,csharp,method-name="sniffonstartuptakesnewclusterstate"]
+----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
 	.Sniff(s => s.Fails(Always))
@@ -56,6 +47,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.SniffingConnectionPool()
 	.AllDefaults()
 );
+
 await audit.TraceCall(new ClientCall {
 	{ SniffOnStartup},
 	{ SniffFailure, 9200},
@@ -64,6 +56,10 @@ await audit.TraceCall(new ClientCall {
 	{ PingSuccess, 9204},
 	{ HealthyResponse, 9204}
 });
+----
+
+[source,csharp,method-name="snifftriesallnodes"]
+----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
 	.Sniff(s => s.Fails(Always))
@@ -71,6 +67,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.SniffingConnectionPool()
 	.AllDefaults()
 );
+
 await audit.TraceCall(new ClientCall {
 	{ SniffOnStartup},
 	{ SniffFailure, 9200},
@@ -86,6 +83,10 @@ await audit.TraceCall(new ClientCall {
 	{ PingSuccess, 9200},
 	{ HealthyResponse, 9200}
 });
+----
+
+[source,csharp,method-name="sniffprefersmasternodes"]
+----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
 		new Node(new Uri("http://localhost:9200")) { MasterEligible = false },
@@ -96,12 +97,17 @@ var audit = new Auditor(() => Framework.Cluster
 	.SniffingConnectionPool()
 	.AllDefaults()
 );
+
 await audit.TraceCall(new ClientCall {
 	{ SniffOnStartup},
 	{ SniffSuccess, 9202},
 	{ PingSuccess, 9200},
 	{ HealthyResponse, 9200}
 });
+----
+
+[source,csharp,method-name="sniffprefersmasternodesbutstillfailsover"]
+----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
 		new Node(new Uri("http://localhost:9200")) { MasterEligible = true },
@@ -113,12 +119,33 @@ var audit = new Auditor(() => Framework.Cluster
 	.SniffingConnectionPool()
 	.AllDefaults()
 );
+
 await audit.TraceCall(new ClientCall {
 	{ SniffOnStartup},
 	{ SniffFailure, 9200},
 	{ SniffFailure, 9201},
 	{ SniffSuccess, 9202},
 	{ PingSuccess, 9200},
+	{ HealthyResponse, 9200}
+});
+----
+
+[source,csharp,method-name="asniffonstartuphappens"]
+----
+var audit = new Auditor(() => Framework.Cluster
+	.Nodes(10)
+	.Sniff(s => s.Fails(Always))
+	.Sniff(s => s.OnPort(9202).Succeeds(Always))
+	.SniffingConnectionPool()
+	.AllDefaults()
+);
+await audit.TraceCall(new ClientCall
+ {
+	{ SniffOnStartup},
+	{ SniffFailure, 9200},
+	{ SniffFailure, 9201},
+	{ SniffSuccess, 9202},
+	{ PingSuccess , 9200},
 	{ HealthyResponse, 9200}
 });
 ----

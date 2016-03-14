@@ -9,7 +9,7 @@
 Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,
 take a single {ref_current}/query-dsl-bool-query.html[`bool` query] with only two clauses
 
-[source,csharp]
+[source,csharp,method-name="verboseway"]
 ----
 var searchResults = this.Client.Search<Project>(s => s
 	.Query(q => q
@@ -34,7 +34,7 @@ image::{imagesdir}/hadouken-indentation.jpg[dead indent]
 For this reason, NEST introduces **operator overloading** so complex bool queries become easier to write. 
 The previous example now becomes the following with the fluent API
 
-[source,csharp]
+[source,csharp,method-name="usingoperator"]
 ----
 var searchResults = this.Client.Search<Project>(s => s
 	.Query(q => q.Term(p => p.Name, "x") || q.Term(p => p.Name, "y"))
@@ -43,7 +43,7 @@ var searchResults = this.Client.Search<Project>(s => s
 
 or, using the object initializer syntax 
 
-[source,csharp]
+[source,csharp,method-name="usingoperator"]
 ----
 searchResults = this.Client.Search<Project>(new SearchRequest<Project>
 {
@@ -98,7 +98,7 @@ bool
    |___term
 ....
 
-[source,csharp]
+[source,csharp,method-name="joinsmustwithmustnot"]
 ----
 Assert(
 	q => q.Query() && q.Query() && q.Query() && !q.Query(),
@@ -108,7 +108,9 @@ Assert(
 		c.Bool.Must.Should().HaveCount(3);
 		c.Bool.MustNot.Should().HaveCount(1);
 	});
+
 c.Bool.Must.Should().HaveCount(3);
+
 c.Bool.MustNot.Should().HaveCount(1);
 ----
 
@@ -154,13 +156,21 @@ Here we demonstrate that two locked `bool` queries are not combined
 
 neither are two `bool` queries where either the left or the right query is locked 
 
-[source,csharp]
+[source,csharp,method-name="assertdoesnotjoinontolockedbool"]
 ----
 c.Bool.Should.Should().HaveCount(2);
+
 var nestedBool = c.Bool.Should.Cast<IQueryContainer>().First(b=>!string.IsNullOrEmpty(b.Bool?.Name));
+
 nestedBool.Bool.Should.Should().HaveCount(1);
+
 nestedBool.Bool.Name.Should().Be(firstName);
+----
+
+[source,csharp,method-name="assert"]
+----
 assert(fluent.InvokeQuery(new QueryContainerDescriptor<Project>()));
+
 assert((QueryContainer)ois);
 ----
 

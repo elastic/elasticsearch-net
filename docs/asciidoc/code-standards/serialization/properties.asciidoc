@@ -6,7 +6,7 @@
 
 Our Json.NET contract resolver picks up attributes set on the interface
 
-[source,csharp]
+[source,csharp,method-name="seesinterfaceproperties"]
 ----
 var pool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 var settings = new ConnectionSettings(pool, new InMemoryConnection());

@@ -18,7 +18,7 @@ NEST uses `Distance` to strongly type distance units and there are several ways 
 
 The most straight forward way to construct a `Distance` is through its constructor
 
-[source,csharp]
+[source,csharp,method-name="constructor"]
 ----
 var unitComposed = new Nest.Distance(25);
 var unitComposedWithUnits = new Nest.Distance(25, DistanceUnit.Meters);
@@ -26,7 +26,7 @@ var unitComposedWithUnits = new Nest.Distance(25, DistanceUnit.Meters);
 
 `Distance` serializes to a string composed of a factor and distance unit
 
-[source,csharp]
+[source,csharp,method-name="constructor"]
 ----
 Expect("25.0m")
 	.WhenSerializing(unitComposed)
@@ -38,10 +38,12 @@ Expect("25.0m")
 Alternatively a distance unit `string` can be assigned to a `Distance`, resulting in an implicit conversion to a new `Distance` instance. 
 If no `DistanceUnit` is specified, the default distance unit is meters
 
-[source,csharp]
+[source,csharp,method-name="implicitconversion"]
 ----
 Nest.Distance distanceString = "25";
+
 Nest.Distance distanceStringWithUnits = "25m";
+
 Expect(new Nest.Distance(25))
 	.WhenSerializing(distanceString)
 	.WhenSerializing(distanceStringWithUnits);
@@ -55,28 +57,28 @@ A number of distance units are supported, from millimeters to nautical miles
 
 `mm` (Millimeters)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("2.0mm").WhenSerializing(new Nest.Distance(2, DistanceUnit.Millimeters));
 ----
 
 `cm` (Centimeters)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("123.456cm").WhenSerializing(new Nest.Distance(123.456, DistanceUnit.Centimeters));
 ----
 
 `m` (Meters)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("400.0m").WhenSerializing(new Nest.Distance(400, DistanceUnit.Meters));
 ----
 
 `km` (Kilometers)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("0.1km").WhenSerializing(new Nest.Distance(0.1, DistanceUnit.Kilometers));
 ----
@@ -85,35 +87,35 @@ Expect("0.1km").WhenSerializing(new Nest.Distance(0.1, DistanceUnit.Kilometers))
 
 `in` (Inches)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("43.23in").WhenSerializing(new Nest.Distance(43.23, DistanceUnit.Inch));
 ----
 
 `ft` (Feet)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("3.33ft").WhenSerializing(new Nest.Distance(3.33, DistanceUnit.Feet));
 ----
 
 `yd` (Yards)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("9.0yd").WhenSerializing(new Nest.Distance(9, DistanceUnit.Yards));
 ----
 
 `mi` (Miles)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("0.62mi").WhenSerializing(new Nest.Distance(0.62, DistanceUnit.Miles));
 ----
 
 `nmi` or `NM` (Nautical Miles)
 
-[source,csharp]
+[source,csharp,method-name="usingdifferentunits"]
 ----
 Expect("45.5nmi").WhenSerializing(new Nest.Distance(45.5, DistanceUnit.NauticalMiles));
 ----

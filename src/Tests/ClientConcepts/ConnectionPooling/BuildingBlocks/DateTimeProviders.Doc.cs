@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class DateTimeProviders
 	{
-		/** == Date time providers
+		/** :section-number: 4.5
+		 * == Date time providers
 		 * 
 		 * Not typically something you'll have to pass to the client but all calls to `System.DateTime.UtcNow` 
 		 * in the client have been abstracted by `IDateTimeProvider`. This allows us to unit test timeouts and cluster failover

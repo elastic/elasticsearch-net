@@ -1,39 +1,37 @@
 [[elasticsearch-net-reference]]
-= Elasticsearch.Net and NEST documentation:.NET Elasticsearch clients
+= Elasticsearch.Net and NEST, the .NET Elasticsearch clients
 
 include::intro.asciidoc[]
 
-include::aggregations/bucket/children/children-aggregation-mapping.asciidoc[]
+include::client-concepts/low-level/connecting.asciidoc[]
 
-include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
+include::client-concepts/low-level/lifetimes.asciidoc[]
 
-include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
+include::client-concepts/low-level/post-data.asciidoc[]
 
-include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
+include::client-concepts/high-level/inference/field-inference.asciidoc[]
 
-include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
+include::client-concepts/high-level/inference/property-inference.asciidoc[]
 
-include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
+include::client-concepts/high-level/inference/ids-inference.asciidoc[]
 
-include::aggregations/writing-aggregations.asciidoc[]
+include::client-concepts/high-level/inference/document-paths.asciidoc[]
+
+include::client-concepts/high-level/inference/indices-paths.asciidoc[]
+
+include::client-concepts/high-level/mapping/auto-map.asciidoc[]
 
 include::client-concepts/connection-pooling/building-blocks/connection-pooling.asciidoc[]
 
-include::client-concepts/connection-pooling/building-blocks/date-time-providers.asciidoc[]
-
-include::client-concepts/connection-pooling/building-blocks/keeping-track-of-nodes.asciidoc[]
+include::client-concepts/high-level/covariant-hits/covariant-search-results.asciidoc[]
 
 include::client-concepts/connection-pooling/building-blocks/request-pipelines.asciidoc[]
 
 include::client-concepts/connection-pooling/building-blocks/transports.asciidoc[]
 
-include::client-concepts/connection-pooling/exceptions/unexpected-exceptions.asciidoc[]
+include::client-concepts/connection-pooling/building-blocks/keeping-track-of-nodes.asciidoc[]
 
-include::client-concepts/connection-pooling/exceptions/unrecoverable-exceptions.asciidoc[]
-
-include::client-concepts/connection-pooling/failover/falling-over.asciidoc[]
-
-include::client-concepts/connection-pooling/max-retries/respects-max-retry.asciidoc[]
+include::client-concepts/connection-pooling/building-blocks/date-time-providers.asciidoc[]
 
 include::client-concepts/connection-pooling/pinging/first-usage.asciidoc[]
 
@@ -49,12 +47,6 @@ include::client-concepts/connection-pooling/request-overrides/respects-force-nod
 
 include::client-concepts/connection-pooling/request-overrides/respects-max-retry-overrides.asciidoc[]
 
-include::client-concepts/connection-pooling/round-robin/round-robin.asciidoc[]
-
-include::client-concepts/connection-pooling/round-robin/skip-dead-nodes.asciidoc[]
-
-include::client-concepts/connection-pooling/round-robin/volatile-updates.asciidoc[]
-
 include::client-concepts/connection-pooling/sniffing/on-connection-failure.asciidoc[]
 
 include::client-concepts/connection-pooling/sniffing/on-stale-cluster-state.asciidoc[]
@@ -63,25 +55,111 @@ include::client-concepts/connection-pooling/sniffing/on-startup.asciidoc[]
 
 include::client-concepts/connection-pooling/sniffing/role-detection.asciidoc[]
 
-include::client-concepts/high-level/covariant-hits/covariant-search-results.asciidoc[]
+include::aggregations/writing-aggregations.asciidoc[]
 
-include::client-concepts/high-level/inferrence/document-paths.asciidoc[]
+include::aggregations/bucket/children/children-aggregation-mapping.asciidoc[]
 
-include::client-concepts/high-level/inferrence/field-inference.asciidoc[]
+include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]
 
-include::client-concepts/high-level/inferrence/ids-inference.asciidoc[]
+include::aggregations/bucket/date-histogram/date-histogram-aggregation-usage.asciidoc[]
 
-include::client-concepts/high-level/inferrence/indices-paths.asciidoc[]
+include::aggregations/bucket/date-range/date-range-aggregation-usage.asciidoc[]
 
-include::client-concepts/high-level/inferrence/property-inference.asciidoc[]
+include::aggregations/bucket/filter/filter-aggregation-usage.asciidoc[]
 
-include::client-concepts/high-level/mapping/auto-map.asciidoc[]
+include::aggregations/bucket/filters/filters-aggregation-usage.asciidoc[]
 
-include::client-concepts/low-level/connecting.asciidoc[]
+include::aggregations/bucket/geo-distance/geo-distance-aggregation-usage.asciidoc[]
 
-include::client-concepts/low-level/lifetimes.asciidoc[]
+include::aggregations/bucket/geo-hash-grid/geo-hash-grid-aggregation-usage.asciidoc[]
 
-include::client-concepts/low-level/post-data.asciidoc[]
+include::aggregations/bucket/global/global-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/histogram/histogram-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/ip-range/ip-range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/missing/missing-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/nested/nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/range/range-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/reverse-nested/reverse-nested-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/sampler/sampler-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/significant-terms/significant-terms-aggregation-usage.asciidoc[]
+
+include::aggregations/bucket/terms/terms-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/average/average-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/cardinality/cardinality-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/extended-stats/extended-stats-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/max/max-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/min/min-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/percentile-ranks/percentile-ranks-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/percentiles/percentiles-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/scripted-metric/scripted-metric-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/stats/stats-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/sum/sum-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/top-hits/top-hits-aggregation-usage.asciidoc[]
+
+include::aggregations/metric/value-count/value-count-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/average-bucket/average-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-script/bucket-script-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/bucket-selector/bucket-selector-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/cumulative-sum/cumulative-sum-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/derivative/derivative-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/max-bucket/max-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/min-bucket/min-bucket-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-ewma-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-holt-linear-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-holt-winters-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-linear-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/moving-average/moving-average-simple-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/serial-differencing/serial-differencing-aggregation-usage.asciidoc[]
+
+include::aggregations/pipeline/sum-bucket/sum-bucket-aggregation-usage.asciidoc[]
+
+include::client-concepts/connection-pooling/exceptions/unexpected-exceptions.asciidoc[]
+
+include::client-concepts/connection-pooling/exceptions/unrecoverable-exceptions.asciidoc[]
+
+include::client-concepts/connection-pooling/failover/falling-over.asciidoc[]
+
+include::client-concepts/connection-pooling/max-retries/respects-max-retry.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/round-robin.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/skip-dead-nodes.asciidoc[]
+
+include::client-concepts/connection-pooling/round-robin/volatile-updates.asciidoc[]
 
 include::code-standards/descriptors.asciidoc[]
 
@@ -104,4 +182,6 @@ include::query-dsl/bool-dsl/bool-dsl.asciidoc[]
 include::query-dsl/compound/and/and-query-usage.asciidoc[]
 
 include::query-dsl/geo/distance/distance-units.asciidoc[]
+
+include::search/suggesters/suggest-api.asciidoc[]
 

@@ -14,7 +14,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class RoleDetection
 	{
-		/** == Sniffing role detection
+		/** :section-number: 7.4
+		* == Sniffing role detection
 		* 
 		* When we sniff the custer state we detect the role of the node whether its master eligible and holds data
 		* We use this information when selecting a node to perform an API call on.

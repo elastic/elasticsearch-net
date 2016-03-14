@@ -23,7 +23,7 @@ namespace Nest.Litterateur.Walkers
 	{
 		private bool _firstVisit = true;
 		private string _code;
-		private readonly string _propertyName;
+		private readonly string _propertyOrMethodName;
 
 		public int ClassDepth { get; }
 
@@ -39,12 +39,12 @@ namespace Nest.Litterateur.Walkers
 		/// </summary>
 		/// <param name="classDepth">the depth of the class</param>
 		/// <param name="lineNumber">line number used for sorting</param>
-		/// <param name="propertyName">the name of the property that we are walking</param>
-		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null, string propertyName = null) : base(SyntaxWalkerDepth.StructuredTrivia)
+		/// <param name="propertyOrMethodName">the name of the property that we are walking</param>
+		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null, string propertyOrMethodName = null) : base(SyntaxWalkerDepth.StructuredTrivia)
 		{
 			ClassDepth = classDepth;
 			_lineNumberOverride = lineNumber;
-			_propertyName = propertyName;
+			_propertyOrMethodName = propertyOrMethodName;
 		}
 
 		public override void Visit(SyntaxNode node)
@@ -59,7 +59,7 @@ namespace Nest.Litterateur.Walkers
 				_code = _code.RemoveNumberOfLeadingTabsAfterNewline(repeatedTabs);
 
 #if !DOTNETCORE
-				if (_propertyName == "ExpectJson" || _propertyName == "QueryJson")
+				if (_propertyOrMethodName == "ExpectJson" || _propertyOrMethodName == "QueryJson")
 				{
 					// try to get the json for the anonymous type. 
 					// Only supports system types and Json.Net LINQ objects e.g. JObject
@@ -80,12 +80,12 @@ namespace Nest.Litterateur.Walkers
 
 				var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				var line = _lineNumberOverride ?? nodeLine;
-				var codeBlocks = ParseCodeBlocks(_code, line, language, _propertyName);
+				var codeBlocks = ParseCodeBlocks(_code, line, language, _propertyOrMethodName);
 
 				base.Visit(node);
 
-				var nodeHasLeadingTriva = node.HasLeadingTrivia && node.GetLeadingTrivia()
-					.Any(c => c.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+				var nodeHasLeadingTriva = node.HasLeadingTrivia && 
+					node.GetLeadingTrivia().Any(c => c.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
 				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks, swap: nodeHasLeadingTriva);
 				this.Blocks.Add(new CombinedBlock(blocks, line));
 				return;
@@ -109,7 +109,7 @@ namespace Nest.Litterateur.Walkers
 
 					var nodeLine = formattedStatement.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 					var line = _lineNumberOverride ?? nodeLine;
-					var codeBlocks = ParseCodeBlocks(_code, line, Language.CSharp, _propertyName);
+					var codeBlocks = ParseCodeBlocks(_code, line, Language.CSharp, _propertyOrMethodName);
 
 					this.Blocks.AddRange(codeBlocks);
 				}

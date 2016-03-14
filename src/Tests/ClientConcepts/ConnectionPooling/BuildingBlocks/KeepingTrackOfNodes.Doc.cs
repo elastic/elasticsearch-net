@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 	public class KeepingTrackOfNodes
 	{
 
-		/** == Keeping track of nodes
+		/** :section-number: 4.4
+		 * == Keeping track of nodes
 		 * 
 		 */
 

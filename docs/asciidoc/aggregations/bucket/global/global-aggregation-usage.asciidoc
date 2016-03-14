@@ -1,0 +1,68 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "all_projects": {
+      "global": {},
+      "aggs": {
+        "names": {
+          "terms": {
+            "field": "name"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.Global("all_projects", g => g
+		.Aggregations(aa => aa
+			.Terms("names", t => t
+				.Field(p => p.Name)
+			)
+		)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new GlobalAggregation("all_projects")
+	{
+		Aggregations = new TermsAggregation("names")
+		{
+			Field = Field<Project>(p => p.Name)
+		}
+	}
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var allProjects = response.Aggs.Global("all_projects");
+allProjects.Should().NotBeNull();
+var names = allProjects.Terms("names");
+names.Should().NotBeNull();
+----
+

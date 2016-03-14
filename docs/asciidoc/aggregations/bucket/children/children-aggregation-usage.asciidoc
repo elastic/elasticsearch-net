@@ -11,7 +11,7 @@ buckets on child documents.
 
 Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-children-aggregation.html[on this subject here]
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -39,7 +39,9 @@ Be sure to read the elasticsearch documentation {ref_current}/search-aggregation
 
 Fluent DSL Example 
 
-[source,csharp]
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -54,7 +56,9 @@ s => s
 
 Object Initializer Syntax Example 
 
-[source,csharp]
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {

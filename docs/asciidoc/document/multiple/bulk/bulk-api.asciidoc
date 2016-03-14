@@ -4,7 +4,113 @@
 
 :imagesdir: ../../../images
 
-[source,csharp]
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+[
+  {
+    "index": {
+      "_type": "project",
+      "_id": "Durgan LLC"
+    }
+  },
+  {
+    "name": "Koch, Collier and Mohr",
+    "state": "BellyUp",
+    "startedOn": "2015-01-01T00:00:00",
+    "lastActivity": "0001-01-01T00:00:00",
+    "leadDeveloper": {
+      "gender": "Male",
+      "id": 0,
+      "firstName": "Martijn",
+      "lastName": "Laarman"
+    },
+    "location": {
+      "lat": 42.1523,
+      "lon": -80.321
+    }
+  },
+  {
+    "update": {
+      "_type": "project",
+      "_id": "Durgan LLC"
+    }
+  },
+  {
+    "doc": {
+      "leadDeveloper": {
+        "firstName": "martijn"
+      }
+    }
+  },
+  {
+    "create": {
+      "_type": "project",
+      "_id": "Durgan LLC1"
+    }
+  },
+  {
+    "name": "Koch, Collier and Mohr",
+    "state": "BellyUp",
+    "startedOn": "2015-01-01T00:00:00",
+    "lastActivity": "0001-01-01T00:00:00",
+    "leadDeveloper": {
+      "gender": "Male",
+      "id": 0,
+      "firstName": "Martijn",
+      "lastName": "Laarman"
+    },
+    "location": {
+      "lat": 42.1523,
+      "lon": -80.321
+    }
+  },
+  {
+    "delete": {
+      "_type": "project",
+      "_id": "Durgan LLC1"
+    }
+  }
+]
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+d => d
+.Index(CallIsolatedValue)
+.Index<Project>(b => b.Document(Project.Instance))
+.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
+.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
+.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new BulkRequest(CallIsolatedValue)
+{
+	Operations = new List<IBulkOperation>
+	{
+		new BulkIndexOperation<Project>(Project.Instance),
+		new BulkUpdateOperation<Project, object>(Project.Instance)
+		{
+			Doc = new { leadDeveloper = new { firstName = "martijn" } }
+		},
+		new BulkCreateOperation<Project>(Project.Instance)
+		{
+			Id = Project.Instance.Name + "1"
+		},
+		new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
+	}
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
 ----
 response.Took.Should().BeGreaterThan(0);
 response.Errors.Should().BeFalse();
@@ -19,31 +125,7 @@ item.IsValid.Should().BeTrue();
 item.Shards.Should().NotBeNull();
 item.Shards.Total.Should().BeGreaterThan(0);
 item.Shards.Successful.Should().BeGreaterThan(0);
-var p1 = this.Client.Source<Project>(Project.Instance.Name, p=>p.Index(CallIsolatedValue));
+var p1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
 p1.LeadDeveloper.FirstName.Should().Be("martijn");
-
-d => d
-.Index(CallIsolatedValue)
-.Index<Project>(b => b.Document(Project.Instance))
-.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
-.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
-
-new BulkRequest(CallIsolatedValue)
-		{
-Operations = new List<IBulkOperation>
-{
-	new BulkIndexOperation<Project>(Project.Instance),
-	new BulkUpdateOperation<Project, object>(Project.Instance)
-	{
-		Doc = new { leadDeveloper = new { firstName = "martijn" } }
-	},
-	new BulkCreateOperation<Project>(Project.Instance)
-	{
-		Id = Project.Instance.Name + "1"
-	},
-	new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
-}
-		}
 ----
 

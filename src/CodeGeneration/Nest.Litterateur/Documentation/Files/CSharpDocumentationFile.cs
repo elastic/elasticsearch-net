@@ -30,7 +30,9 @@ namespace Nest.Litterateur.Documentation.Files
 			var lastBlockWasCodeBlock = false;
 			var callouts = new List<string>();
 			Language? language = null;
-			RenderBlocksToDocumentation(blocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language);
+			string propertyOrMethodName = null;
+
+			RenderBlocksToDocumentation(blocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language, ref propertyOrMethodName);
 			if (lastBlockWasCodeBlock)
 			{
 				builder.AppendLine("----");
@@ -47,7 +49,8 @@ namespace Nest.Litterateur.Documentation.Files
 			StringBuilder builder, 
 			ref bool lastBlockWasCodeBlock, 
 			ref List<string> callouts, 
-			ref Language? language)
+			ref Language? language,
+			ref string propertyOrMethodName)
 		{
 			foreach (var block in blocks)
 			{
@@ -75,7 +78,7 @@ namespace Nest.Litterateur.Documentation.Files
 					var codeBlock = (CodeBlock)block;
 
 					// don't write different language code blocks in the same delimited source block
-					if (lastBlockWasCodeBlock && codeBlock.Language != language)
+					if (lastBlockWasCodeBlock && (codeBlock.Language != language || codeBlock.PropertyName != propertyOrMethodName))
 					{
 						lastBlockWasCodeBlock = false;
 						builder.AppendLine("----");
@@ -92,8 +95,8 @@ namespace Nest.Litterateur.Documentation.Files
 
 					if (!lastBlockWasCodeBlock)
 					{
-						builder.AppendLine($"[source, {codeBlock.Language.ToString().ToLowerInvariant()}]");
-						builder.AppendLine("----");
+						builder.AppendLine($"[source,{codeBlock.Language.ToString().ToLowerInvariant()},method-name=\"{codeBlock.PropertyName ?? "unknown"}\"]");
+                        builder.AppendLine("----");
 					}
 					else
 					{
@@ -106,11 +109,12 @@ namespace Nest.Litterateur.Documentation.Files
 					callouts.AddRange(codeBlock.CallOuts);
 					lastBlockWasCodeBlock = true;
 					language = codeBlock.Language;
+					propertyOrMethodName = codeBlock.PropertyName;
 				}
 				else if (block is CombinedBlock)
 				{
 					var mergedBlocks = MergeAdjacentCodeBlocks(((CombinedBlock)block).Blocks);
-					RenderBlocksToDocumentation(mergedBlocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language);
+					RenderBlocksToDocumentation(mergedBlocks, builder, ref lastBlockWasCodeBlock, ref callouts, ref language, ref propertyOrMethodName);
 				}
 			}
 		}
@@ -122,6 +126,7 @@ namespace Nest.Litterateur.Documentation.Files
 			List<string> collapseCallouts = null;
 			int lineNumber = 0;
 			Language? language = null;
+			string propertyOrMethodName = null;
 
 			foreach (var b in unmergedBlocks)
 			{
@@ -129,7 +134,7 @@ namespace Nest.Litterateur.Documentation.Files
 				//at this point close that buffer and add a new codeblock 
 				if (!(b is CodeBlock) && collapseCodeBlocks != null)
 				{
-					var block = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value);
+					var block = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value, propertyOrMethodName);
 					block.CallOuts.AddRange(collapseCallouts);
 					blocks.Add(block);
 					collapseCodeBlocks = null;
@@ -148,13 +153,16 @@ namespace Nest.Litterateur.Documentation.Files
 				if (collapseCallouts == null) collapseCallouts = new List<string>();
 
 				var codeBlock = (CodeBlock)b;
-				if (language != null && codeBlock.Language != language)
+
+				if ((language != null && codeBlock.Language != language) || 
+					(propertyOrMethodName != null && codeBlock.PropertyName != propertyOrMethodName))
 				{
 					blocks.Add(codeBlock);
 					continue;
 				}
 
 				language = codeBlock.Language;
+				propertyOrMethodName = codeBlock.PropertyName;
 				collapseCodeBlocks.Add(codeBlock.Value);
 				collapseCallouts.AddRange(codeBlock.CallOuts);
 
@@ -163,7 +171,7 @@ namespace Nest.Litterateur.Documentation.Files
 			//make sure we flush our code buffer
 			if (collapseCodeBlocks != null)
 			{
-				var joinedCodeBlock = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value);
+				var joinedCodeBlock = new CodeBlock(string.Join(Environment.NewLine, collapseCodeBlocks), lineNumber, language.Value, propertyOrMethodName);
 				joinedCodeBlock.CallOuts.AddRange(collapseCallouts);
 				blocks.Add(joinedCodeBlock);
 			}
@@ -208,13 +216,14 @@ namespace Nest.Litterateur.Documentation.Files
 			}
 			else
 			{
-				_sections.Add(sectionPath, 1);
+				_sections.Add(sectionPath, 100);
 			}
 
 			// add attributes and write to destination
 			using (var file = new StreamWriter(docFile.FullName))
 			{
-				document.Accept(new AddAttributeEntriesVisitor(docFile));
+				var visitor = new AddAttributeEntriesVisitor(docFile);
+				document = visitor.Convert(document);
 				document.Accept(new AsciiDocVisitor(file));
 			}
 		}

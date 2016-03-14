@@ -45,7 +45,7 @@ namespace Nest.Litterateur
 			// generate the index.asciidoc file from the sections
 			var indexDoc = new Document
 			{
-				Title = new DocumentTitle("Elasticsearch.Net and NEST documentation", ".NET Elasticsearch clients")
+				Title = new DocumentTitle("Elasticsearch.Net and NEST, the .NET Elasticsearch clients")
 				{
 					Attributes =
 					{

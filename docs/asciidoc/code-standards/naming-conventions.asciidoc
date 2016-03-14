@@ -12,7 +12,7 @@ NEST uses the following naming conventions (with _some_ exceptions).
 
 Abstract class names should end with a `Base` suffix
 
-[source,csharp]
+[source,csharp,method-name="abstractclassnamesendwithbase"]
 ----
 var exceptions = new[]
 {
@@ -28,15 +28,17 @@ abstractClasses.Should().BeEmpty();
 
 Class names that end with `Base` suffix are abstract
 
-[source,csharp]
+[source,csharp,method-name="classnamecontainsbaseshouldbeabstract"]
 ----
 var exceptions = new[] { typeof(DateMath) };
+
 var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
 	.Where(t => t.IsClass() && !exceptions.Contains(t))
 	.Where(t => t.Name.Split('`')[0].EndsWith("Base"))
 	.Where(t => !t.IsAbstractClass())
 	.Select(t => t.Name.Split('`')[0])
 	.ToList();
+
 baseClassesNotAbstract.Should().BeEmpty();
 ----
 
@@ -44,28 +46,32 @@ baseClassesNotAbstract.Should().BeEmpty();
 
 Request class names should end with `Request`
 
-[source,csharp]
+[source,csharp,method-name="requestclassnamesendwithrequest"]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
+
 var requests = types
 	.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
 	.Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
 	.Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
 	.Select(t => t.Name.Split('`')[0])
 	.ToList();
+
 requests.Should().BeEmpty();
 ----
 
 Response class names should end with `Response`
 
-[source,csharp]
+[source,csharp,method-name="responseclassnamesendwithresponse"]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
+
 var responses = types
 	.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
 	.Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
 	.Select(t => t.Name.Split('`')[0])
 	.ToList();
+
 responses.Should().BeEmpty();
 ----
 
@@ -74,7 +80,7 @@ e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => 
 There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
 the `Exists` requests.
 
-[source,csharp]
+[source,csharp,method-name="paritybetweenrequestsandresponses"]
 ----
 var exceptions = new[] //<1>
 {
@@ -112,7 +118,9 @@ var exceptions = new[] //<1>
 	typeof(IndicesShardStoresRequest),
 	typeof(RenderSearchTemplateRequest)
 };
+
 var types = typeof(IRequest).Assembly().GetTypes();
+
 var requests = new HashSet<string>(types
 	.Where(t =>
 		t.IsClass() &&
@@ -122,9 +130,11 @@ var requests = new HashSet<string>(types
 		&& !exceptions.Contains(t))
 	.Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 );
+
 var responses = types
 	.Where(t => t.IsClass() && !t.IsAbstract() && typeof(IResponse).IsAssignableFrom(t))
 	.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
+
 requests.Except(responses).Should().BeEmpty();
 ----
 <1> _Exceptions to the rule_

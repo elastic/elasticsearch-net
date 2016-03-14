@@ -1,3 +1,5 @@
+:section-number: 7.1
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -23,7 +25,7 @@ still fails once
 After this second failure on 9201 another sniff will be returned a cluster that no 
 longer fails but looks completely different (9210-9212) we should be able to handle this
 
-[source,csharp]
+[source,csharp,method-name="doesasniffafterconnectionfailure"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(5)
@@ -52,7 +54,7 @@ Our pool should now have three nodes
 
 We assert we do a sniff on the first master node in our updated cluster 
 
-[source,csharp]
+[source,csharp,method-name="doesasniffafterconnectionfailure"]
 ----
 audit = await audit.TraceCalls(
 new ClientCall {
@@ -88,7 +90,7 @@ new ClientCall {
 Here we set up our cluster exactly the same as the previous setup 
 Only we enable pinging (default is true) and make the ping fail
 
-[source,csharp]
+[source,csharp,method-name="doesasniffafterconnectionfailureonping"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(5)
@@ -118,7 +120,7 @@ We assert we do a sniff on the first master node in our updated cluster
 
 9210 was already pinged after the sniff returned the new nodes 
 
-[source,csharp]
+[source,csharp,method-name="doesasniffafterconnectionfailureonping"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {

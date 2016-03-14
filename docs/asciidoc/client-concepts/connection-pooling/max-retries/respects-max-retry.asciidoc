@@ -10,7 +10,7 @@ By default retry as many times as we have nodes. However retries still respect t
 Meaning if you have a 100 node cluster and a request timeout of 20 seconds we will retry as many times as we can
 but give up after 20 seconds
 
-[source,csharp]
+[source,csharp,method-name="defaultmaxisnumberofnodes"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -38,7 +38,7 @@ audit = await audit.TraceCall(
 When you have a 100 node cluster you might want to ensure a fixed number of retries. 
 Remember that the actual number of requests is initial attempt + set number of retries 
 
-[source,csharp]
+[source,csharp,method-name="fixedmaximumnumberofretries"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -47,6 +47,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.StaticConnectionPool()
 	.Settings(s => s.DisablePing().MaximumRetries(3))
 );
+
 audit = await audit.TraceCall(
 	new ClientCall {
 		{ BadResponse, 9200 },
@@ -62,7 +63,7 @@ In our previous test we simulated very fast failures, in the real world a call m
 Here we simulate a particular heavy search that takes 10 seconds to fail, our Request timeout is set to 20 seconds.
 In this case it does not make sense to retry our 10 second query on 10 nodes. We should try it twice and give up before a third call is attempted
 
-[source,csharp]
+[source,csharp,method-name="respectsoveralrequesttimeout"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -71,6 +72,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.StaticConnectionPool()
 	.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(20)))
 );
+
 audit = await audit.TraceCall(
 	new ClientCall {
 		{ BadResponse, 9200 },
@@ -85,7 +87,7 @@ Here we simulate calls taking 3 seconds, a request time out of 2 and an overall 
 We should see 5 attempts to perform this query, testing that our request timeout cuts the query off short and that our max retry timeout of 10
 wins over the configured request timeout
 
-[source,csharp]
+[source,csharp,method-name="respectsmaxretrytimeoutoverrequesttimeout"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -94,6 +96,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.StaticConnectionPool()
 	.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).MaxRetryTimeout(TimeSpan.FromSeconds(10)))
 );
+
 audit = await audit.TraceCall(
 	new ClientCall {
 		{ BadResponse, 9200 },
@@ -108,7 +111,7 @@ audit = await audit.TraceCall(
 
 If your retry policy expands beyond available nodes we won't retry the same node twice
 
-[source,csharp]
+[source,csharp,method-name="retriesarelimitedbynodesinpool"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(2)
@@ -117,6 +120,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.StaticConnectionPool()
 	.Settings(s => s.DisablePing().RequestTimeout(TimeSpan.FromSeconds(2)).MaxRetryTimeout(TimeSpan.FromSeconds(10)))
 );
+
 audit = await audit.TraceCall(
 	new ClientCall {
 		{ BadResponse, 9200 },
@@ -130,7 +134,7 @@ This makes setting any retry setting on a single node connection pool a NOOP, th
 Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
 not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
 
-[source,csharp]
+[source,csharp,method-name="doesnotretryonsinglenodeconnectionpool"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -139,6 +143,7 @@ var audit = new Auditor(() => Framework.Cluster
 	.SingleNodeConnection()
 	.Settings(s => s.DisablePing().MaximumRetries(10))
 );
+
 audit = await audit.TraceCall(
 	new ClientCall {
 		{ BadResponse, 9200 }

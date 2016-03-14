@@ -1,0 +1,66 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commits": {
+      "histogram": {
+        "field": "numberOfCommits",
+        "interval": 100.0,
+        "missing": 0.0,
+        "order": {
+          "_key": "desc"
+        }
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.Histogram("commits", h => h
+		.Field(p => p.NumberOfCommits)
+		.Interval(100)
+		.Missing(0)
+		.Order(HistogramOrder.KeyDescending)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new HistogramAggregation("commits")
+	{
+		Field = Field<Project>(p => p.NumberOfCommits),
+		Interval = 100,
+		Missing = 0,
+		Order = HistogramOrder.KeyDescending
+	}
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var commits = response.Aggs.Histogram("commits");
+commits.Should().NotBeNull();
+item.DocCount.Should().BeGreaterThan(0);
+----
+

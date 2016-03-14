@@ -1,3 +1,5 @@
+:section-number: 6.2
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -12,7 +14,7 @@ we set up a 10 node cluster with a global time out of 20 seconds.
 Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 before the max request time out kills the client call.
 
-[source,csharp]
+[source,csharp,method-name="respectsrequesttimeoutoverride"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -26,7 +28,7 @@ var audit = new Auditor(() => Framework.Cluster
 On the second request we specify a request timeout override to 60 seconds
 We should now see more nodes being tried.
 
-[source,csharp]
+[source,csharp,method-name="respectsrequesttimeoutoverride"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {
@@ -56,7 +58,7 @@ we set up a 10 node cluster with a global time out of 20 seconds.
 Each call on a node takes 10 seconds. So we can only try this call on 2 nodes
 before the max request time out kills the client call.
 
-[source,csharp]
+[source,csharp,method-name="respectsconnecttimeoutoverride"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -73,7 +75,7 @@ calls always take 20, so we should see a single ping failure
 On the second request we set a request ping timeout override of 2seconds
 We should now see more nodes being tried before the request timeout is hit.
 
-[source,csharp]
+[source,csharp,method-name="respectsconnecttimeoutoverride"]
 ----
 audit = await audit.TraceCalls(
 new ClientCall {

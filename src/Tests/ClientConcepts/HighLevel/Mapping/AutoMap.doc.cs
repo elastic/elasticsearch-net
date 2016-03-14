@@ -8,7 +8,8 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/**== Auto mapping properties
+	/** :section-number: 3.1
+	* == Auto mapping properties
 	* 
 	* When creating a mapping (either when creating an index or via the put mapping API),
 	* NEST offers a feature called AutoMap(), which will automagically infer the correct

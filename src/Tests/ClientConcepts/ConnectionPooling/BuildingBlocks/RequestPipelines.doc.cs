@@ -8,7 +8,8 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
-	/** == Request Pipeline
+	/** :section-number: 4.2 
+	* == Request Pipeline
 	* Every request is executed in the context of a `RequestPipeline` when using the 
 	* default `ITransport` implementation.
 	*/

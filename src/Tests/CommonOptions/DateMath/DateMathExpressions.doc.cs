@@ -25,8 +25,8 @@ namespace Tests.CommonOptions.DateMath
 		 * - `s` (second)
 		 * 
 		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
-		 * 
-		 * Be sure to read the elasticsearch documentation {ref_current}/mapping-date-format.html#date-math[on this subject here]
+		 * :datemath: {ref_current}/common-options.html#date-math
+		 * Be sure to read the elasticsearch documentation {datemath}[on this subject here]
 		 */
 		[U] public void SimpleExpressions()
 		{

@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class Transports
 	{
-		/** == Transports
+		/** :section-number: 4.3
+		* == Transports
 		*
 		* The `ITransport` interface can be seen as the motor block of the client. It's interface is deceitfully simple and
 		* it's ultimately responsible from translating a client call to a response. 

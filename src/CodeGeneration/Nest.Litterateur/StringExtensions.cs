@@ -79,7 +79,13 @@ namespace Nest.Litterateur
 		private static Dictionary<string, string> Substitutions = new Dictionary<string, string>
 		{
 			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
-			{ "FirstNameToFind", "\"pierce\"" }
+			{ "FirstNameToFind", "\"pierce\"" },
+			{ "Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First()", "\"red\"" },
+			{ "Project.Instance.Name", "\"Durgan LLC\"" },
+			{ "Project.InstanceAnonymous", "new {name = \"Koch, Collier and Mohr\", state = \"BellyUp\",startedOn = " +
+			                               "\"2015-01-01T00:00:00\",lastActivity = \"0001-01-01T00:00:00\",leadDeveloper = " +
+			                               "new { gender = \"Male\", id = 0, firstName = \"Martijn\", lastName = \"Laarman\" }," +
+										   "location = new { lat = 42.1523, lon = -80.321 }}" },
 		}; 
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)

@@ -15,26 +15,25 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class Connecting
 	{
-		/** # Connecting 
-		 * Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
+		/** :section-number: 1.1
+		 * == Connecting 
+		 * Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy and there a few options to suit a number of different use cases.
 		 * 
-		 * # Choosing the right connection strategy
+		 * [[connection-strategies]]
+		 * === Choosing the right Connection Strategy
 		 * If you simply new an `ElasticLowLevelClient`, it will be a non-failover connection to `http://localhost:9200`
 		 */
-
 		public void InstantiateUsingAllDefaults()
 		{
 			var client = new ElasticLowLevelClient();
-			var tokenizers = new TokenizersDescriptor();
-
 		}
+
 		/**
 		 * If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
 		 * you will need to pass in some instance of `IConnectionConfigurationValues`.
 		 * 
 		 * The easiest way to do this is:
 		 */
-
 		public void InstantiatingASingleNodeClient()
 		{
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
@@ -43,11 +42,10 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** 
-		 * This however is still a non-failover connection. Meaning if that `node` goes down the operation will not be retried on any other nodes in the cluster.
+		 * This will still be a non-failover connection, meaning if that `node` goes down the operation will not be retried on any other nodes in the cluster.
 		 * 
 		 * To get a failover connection we have to pass an `IConnectionPool` instance instead of a `Uri`.
 		 */
-
 		public void InstantiatingAConnectionPoolClient()
 		{
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
@@ -58,25 +56,22 @@ namespace Tests.ClientConcepts.LowLevel
 
 		/** 
 		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
-		 * Be sure to read more about [Connection Pooling and Cluster Failover here](/elasticsearch-net/cluster-failover.html)
+		 * Be sure to read more about <<../connection-pooling/connection-pooling, Connection Pooling and Cluster Failover here>>.
 		 * 
-		 * ## Options
+		 * === Configuration Options
 		 * 
 		 *  Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
 		 */
 
 		public void SpecifyingClientOptions()
 		{
-			//hide
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var connectionPool = new SniffingConnectionPool(new[] { node });
-			//endhide
 
 			var config = new ConnectionConfiguration(connectionPool)
 				.DisableDirectStreaming()
 				.BasicAuthentication("user", "pass")
 				.RequestTimeout(TimeSpan.FromSeconds(5));
-
 		}
 		/**
 		 * The following is a list of available connection configuration options:
@@ -84,19 +79,15 @@ namespace Tests.ClientConcepts.LowLevel
 
 		public void AvailableOptions()
 		{
-			//hide
 			var client = new ElasticLowLevelClient();
-			//endhide
 
 			var config = new ConnectionConfiguration()
+				.DisableAutomaticProxyDetection() 
+				/** `DisableAutomaticProxyDetection`: Disable automatic proxy detection.  Defaults to true. */
 
-				.DisableAutomaticProxyDetection()
-				/** Disable automatic proxy detection.  Defaults to true. */
-
-				.EnableHttpCompression()
-				/**
-				 * Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured 
-				 * to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
+				.EnableHttpCompression() 
+				/** `EnableHttpCompression`: Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured to allow this.  
+				* See the {ref_current}/modules-http.html[http module settings] for more info). 
 				*/
 
 				.DisableDirectStreaming()
@@ -106,8 +97,10 @@ namespace Tests.ClientConcepts.LowLevel
 				  */;
 
 			var result = client.Search<SearchResponse<object>>(new { size = 12 });
+
+			/** This will only have a value if the client configuration has `DisableDirectStreaming` set */
 			var raw = result.ResponseBodyInBytes;
-			/** This will only have a value if the client configuration has ExposeRawResponse set */
+			
 
 			/** 
 			 * Please note that this only make sense if you need a mapped response and the raw response at the same time. 
@@ -115,67 +108,65 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 			var stringResult = client.Search<string>(new { });
 
-			//hide
+
 			config = config
-				//endhide
 				.GlobalQueryStringParameters(new NameValueCollection())
 				/**
-				* Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
+				* - `GlobalQueryStringParameters`: Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 				*/
 
 				.Proxy(new Uri("http://myproxy"), "username", "pass")
-				/** Sets proxy information on the connection. */
+				/** - `Proxy`: Sets proxy information on the connection. */
 
 				.RequestTimeout(TimeSpan.FromSeconds(4))
-				/**
+				/** - `RequestTimeout`:
 				* Sets the global maximum time a connection may take.
-				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 
-				 * (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx).
+				* Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 
+				* (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx[the MSDN documentation on `HttpWebRequest.Timeout` Property]).
 				*/
 
 				.ThrowExceptions()
-				/**
+				/** - `ThrowExceptions`
 				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to throw 
 				* exceptions. 
-				*
-				* There are three category of exceptions thay may be thrown:
+				* 
+				* There are three category of exceptions that may be thrown:
 				*  
-				* 1) ElasticsearchClientException: These are known exceptions, either an exception that occurred in the request pipeline
+				* . **ElasticsearchClientException**: These are known exceptions, either an exception that occurred in the request pipeline
 				* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
 				* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
 				* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
 				* root causing exception.
 				*                                  
-				* 2) UnexpectedElasticsearchClientException:  These are unknown exceptions, for instance a response from Elasticsearch not
-				* properly deserialized.  These are usually bugs and should be reported.  This excpetion also inherits from ElasticsearchClientException
+				* . **UnexpectedElasticsearchClientException**:  These are unknown exceptions, for instance a response from Elasticsearch not
+				* properly deserialized.  These are usually bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
 				* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
 				*
-				* 3) Development time exceptions: These are CLR exceptions like ArgumentException, NullArgumentException etc... that are thrown
+				* . **Development time exceptions**: These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException` etc... that are thrown
 				* when an API in the client is misused.  These should not be handled as you want to know about them during development.
 				*
 				*/
 
 				.PrettyJson()
 				/**
-				* Forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
+				* - `PrettyJson`: forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 				*/
 
 				.BasicAuthentication("username", "password")
-				/** Sets the HTTP basic authentication credentials to specify with all requests. */;
+				/** - `BasicAuthentication(username, password)`: sets the HTTP basic authentication credentials to specify with all requests. */;
 
 			/**
-			* **Note:** This can alternatively be specified on the node URI directly:
-			 */
-
+			* NOTE: Basic authentication credentials can alternatively be specified on the node URI directly:
+			*/
 			var uri = new Uri("http://username:password@localhost:9200");
 			var settings = new ConnectionConfiguration(uri);
 
 			/**
-			*  ...but may become tedious when using connection pooling with multiple nodes.
+			*...but this may become tedious when using connection pooling with multiple nodes.
 			*/
 		}
 
-        /** 
+        /** === `OnRequestCompleted`
          * You can pass a callback of type `Action&lt;IApiCallDetails&gt;` that can eaves drop every time a response (good or bad) is created. 
          * If you have complex logging needs this is a good place to add that in.
         */
@@ -193,8 +184,8 @@ namespace Tests.ClientConcepts.LowLevel
             counter.Should().Be(2);
         }
 
-        /** 
-	     * An example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
+        /** [[complex-logging]]
+	     * Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
          * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
          * to `true`
 		*/
@@ -202,7 +193,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 		    var list = new List<string>();
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection())
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` to make the actual request
                 .DisableDirectStreaming()
 				.OnRequestCompleted(response =>
 				{
@@ -263,10 +254,10 @@ namespace Tests.ClientConcepts.LowLevel
 		public void ConfiguringSSL()
 		{
 			/**
-			 * ## Configuring SSL
+			 * === Configuring SSL
 			 * SSL must be configured outside of the client using .NET's 
-			 * [ServicePointManager](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx)
-			 * class and setting the [ServerCertificateValidationCallback](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx)
+			 * http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
+			 * class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
 			 * property.
 			 * 
 			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
@@ -276,23 +267,21 @@ namespace Tests.ClientConcepts.LowLevel
 			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 #endif
 			/**
-			 * However, this will accept all requests from the AppDomain to untrusted SSL sites, 
-			 * therefore we recommend doing some minimal introspection on the passed in certificate.
+			 * However, this will accept **all** requests from the AppDomain to untrusted SSL sites, 
+			 * therefore **we recommend doing some minimal introspection on the passed in certificate.**
 			 */
 		}
 
 		/**
-		* ## Overriding default Json.NET behavior
+		* === Overriding default Json.NET behavior
 		*
 		* Please be advised that this is an expert behavior but if you need to get to the nitty gritty this can be really useful
 		*
-		* Create a subclass of the `JsonNetSerializer` 
-		 
+		* Create a subclass of the `JsonNetSerializer` 		 
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-
 
 			/** 
 			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
@@ -305,19 +294,19 @@ namespace Tests.ClientConcepts.LowLevel
 			* This can be much faster then registering them on JsonSerializerSettings.Converters
 			*/
 			public int CallToContractConverter { get; set; } = 0;
-			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>()
+			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>
 			{
-				{ t => {
+				t => {
 					CallToContractConverter++;
 					return null;
-				} }
+				}
 			};
 
 		}
 
 		/**
-		* You can then register a factory on ConnectionSettings to create an instance of your subclass instead. 
-		* This is called once per instance of ConnectionSettings.
+		* You can then register a factory on `ConnectionSettings` to create an instance of your subclass instead. 
+		* This is **_called once per instance_** of ConnectionSettings.
 		*/
 		[U]
 		public void ModifyJsonSerializerSettingsIsCalled()

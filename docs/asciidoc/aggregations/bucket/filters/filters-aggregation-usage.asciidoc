@@ -14,7 +14,7 @@ Be sure to read the elasticsearch documentation {ref_current}/search-aggregation
 
 == Named filters 
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -59,9 +59,9 @@ Be sure to read the elasticsearch documentation {ref_current}/search-aggregation
 }
 ----
 
-=== Fluent DSL Example 
+=== Fluent DSL Example
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -80,9 +80,9 @@ s => s
 )
 ----
 
-Object Initializer Example 
+=== Object Initializer Syntax Example
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -107,7 +107,7 @@ new SearchRequest<Project>
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
-[source,csharp]
+[source,csharp,method-name="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 
@@ -129,7 +129,7 @@ namedResult.DocCount.Should().Be(0);
 
 == Anonymous filters 
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -173,9 +173,9 @@ namedResult.DocCount.Should().Be(0);
 }
 ----
 
-=== Fluent DSL Example 
+=== Fluent DSL Example
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -193,9 +193,9 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example 
+=== Object Initializer Syntax Example
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -204,20 +204,25 @@ new SearchRequest<Project>
 		OtherBucket = true,
 		Filters = new List<QueryContainer>
 		{
-				 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-				 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-				 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
+			Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
+			Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
+			Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 		},
 		Aggregations =
-			new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+			new TermsAggregation("project_tags")
+			{
+				Field = Field<Project>(p => p.CuratedTags.First().Name)
+			}
 	}
 }
 ----
 
+=== Handling Responses
+
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
-[source,csharp]
+[source,csharp,method-name="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 
@@ -231,7 +236,7 @@ results.Last().DocCount.Should().Be(0);
 
 == Empty Filters 
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -245,7 +250,9 @@ results.Last().DocCount.Should().Be(0);
 }
 ----
 
-[source,csharp]
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -253,7 +260,12 @@ s => s
 		.AnonymousFilters()
 	)
 )
+----
 
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
 new SearchRequest<Project>
 {
 	Aggregations = new FiltersAggregation("empty_filters")
@@ -261,14 +273,19 @@ new SearchRequest<Project>
 		Filters = new List<QueryContainer>()
 	}
 }
+----
 
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
 response.IsValid.Should().BeTrue();
 response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
 ----
 
 == Conditionless Filters 
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -282,7 +299,9 @@ response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
 }
 ----
 
-[source,csharp]
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -292,7 +311,12 @@ s => s
 		)
 	)
 )
+----
 
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
 new SearchRequest<Project>
 {
 	Aggregations = new FiltersAggregation("conditionless_filters")
@@ -303,7 +327,12 @@ new SearchRequest<Project>
 		}
 	}
 }
+----
 
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
 response.IsValid.Should().BeTrue();
 response.Aggs.Filters("conditionless_filters").Buckets.Should().BeEmpty();
 ----

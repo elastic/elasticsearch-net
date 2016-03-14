@@ -7,7 +7,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RequestTimeoutsOverrides
 	{
-		/** == Request Timeouts
+		/** :section-number: 6.2
+		* == Request Timeouts
 		*
 		* While you can specify Request time out globally you can override this per request too
 		*/

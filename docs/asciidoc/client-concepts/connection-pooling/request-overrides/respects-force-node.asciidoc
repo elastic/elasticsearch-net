@@ -1,3 +1,5 @@
+:section-number: 6.4
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -9,7 +11,7 @@
 Sometimes you might want to fire a single request to a specific node. You can do so using the `ForceNode`
 request configuration. This will ignore the pool and not retry.
 
-[source,csharp]
+[source,csharp,method-name="onlycallsforcednode"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

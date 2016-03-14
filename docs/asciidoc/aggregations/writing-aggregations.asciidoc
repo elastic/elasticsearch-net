@@ -1,3 +1,5 @@
+:section-number: 10
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -20,7 +22,7 @@ want to use each.
 
 This is the json output for each example
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -51,7 +53,7 @@ This is the json output for each example
 The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -70,7 +72,7 @@ The object initializer syntax (OIS) is a one-to-one mapping with how aggregation
 have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one 
 mapping, being dictionary based in C means it can grow exponentially in complexity rather quickly.
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -91,7 +93,7 @@ It also allows you to combine multiple aggregations using bitwise AND (`&&`) ope
 
 Compare the following example with the previous vanilla OIS syntax
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -110,7 +112,7 @@ An advanced scenario may involve an existing collection of aggregation functions
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
 (`childAggs` below) in turn, returning the descriptor after each function application.
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1>
 {

@@ -16,7 +16,7 @@ as part of the format value.
 
 Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -58,7 +58,7 @@ Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregati
 
 === Fluent DSL Example 
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Size(0)
@@ -85,7 +85,7 @@ s => s
 
 === Object Initializer Syntax Example 
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -120,7 +120,7 @@ new SearchRequest<Project>
 Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily 
 in the correct type. TODO: [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]
 
-[source,csharp]
+[source,csharp,method-name="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 

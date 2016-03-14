@@ -1,0 +1,74 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "tags": {
+      "nested": {
+        "path": "tags"
+      },
+      "aggs": {
+        "tag_names": {
+          "terms": {
+            "field": "tags.name"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.Nested("tags", n => n
+		.Path(p => p.Tags)
+		.Aggregations(aa => aa
+			.Terms("tag_names", t => t
+				.Field(p => p.Tags.Suffix("name"))
+			)
+		)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new NestedAggregation("tags")
+	{
+		Path = "tags",
+		Aggregations = new TermsAggregation("tag_names")
+		{
+			Field = "tags.name"
+		}
+	}
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var tags = response.Aggs.Nested("tags");
+tags.Should().NotBeNull();
+var tagNames = tags.Terms("tag_names");
+tagNames.Should().NotBeNull();
+item.Key.Should().NotBeNullOrEmpty();
+item.DocCount.Should().BeGreaterThan(0);
+----
+

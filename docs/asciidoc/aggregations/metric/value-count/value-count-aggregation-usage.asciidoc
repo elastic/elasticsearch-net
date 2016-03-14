@@ -1,0 +1,52 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commit_count": {
+      "value_count": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.ValueCount("commit_count", c => c
+		.Field(p => p.NumberOfCommits)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var commitCount = response.Aggs.ValueCount("commit_count");
+commitCount.Should().NotBeNull();
+commitCount.Value.Should().BeGreaterThan(0);
+----
+

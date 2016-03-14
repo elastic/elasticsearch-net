@@ -1,3 +1,5 @@
+:section-number: 6.3
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -6,7 +8,7 @@
 
 == Allowed status codes
 
-[source,csharp]
+[source,csharp,method-name="canoverridebadresponse"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

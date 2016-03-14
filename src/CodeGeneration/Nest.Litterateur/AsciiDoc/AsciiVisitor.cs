@@ -12,24 +12,38 @@ namespace Nest.Litterateur.AsciiDoc
 	public class AddAttributeEntriesVisitor : NoopVisitor
 	{
 		private readonly FileInfo _destination;
-
+		private bool _topLevel = true;
 		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
+		private Document _newDocument;
 
 		public AddAttributeEntriesVisitor(FileInfo destination)
 		{
 			_destination = destination;
 		}
 
+		public Document Convert(Document document)
+		{
+			document.Accept(this);
+			return _newDocument;
+		}
+
 		public override void Visit(Document document)
 		{
+			_newDocument = new Document();
+
+			foreach (var attributeEntry in document.Attributes)
+			{
+				_newDocument.Attributes.Add(attributeEntry);
+			}
+
 			if (!document.Attributes.Any(a => a.Name == "ref_current"))
 			{
-				document.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/current"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/current"));
 			}
 
 			if (!document.Attributes.Any(a => a.Name == "github"))
 			{
-				document.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
+				_newDocument.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
 			}
 
 			if (!document.Attributes.Any(a => a.Name == "imagesdir"))
@@ -40,10 +54,75 @@ namespace Nest.Litterateur.AsciiDoc
 				var count = difference.Count(c => c == '\\');
 				var imagesDir = string.Join(string.Empty, Enumerable.Repeat("../", count));
 
-				document.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}"));
+				_newDocument.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}"));
 			}
 
 			base.Visit(document);
+		}
+
+		public override void Visit(IList<IElement> elements)
+		{
+			if (_topLevel)
+			{
+				_topLevel = false;
+				for (int index = 0; index < elements.Count; index++)
+				{
+					var element = elements[index];
+					var source = element as Source;
+
+					if (source != null)
+					{
+						// remove empty source blocks
+						if (string.IsNullOrWhiteSpace(source.Text))
+						{
+							continue;
+						}
+
+						// check that the previous element is a SectionTitle and if not, add one
+						var lastSourceBlock = _newDocument.Elements.LastOrDefault(e => e is Source);
+						var lastSectionTitle = _newDocument.Elements.OfType<SectionTitle>().LastOrDefault(e => e.Level == 3);
+						if (lastSourceBlock != null && lastSectionTitle != null)
+						{
+							var lastSectionTitleIndex = _newDocument.Elements.IndexOf(lastSectionTitle);
+							var lastSourceBlockIndex = _newDocument.Elements.IndexOf(lastSourceBlock);
+							if (lastSectionTitleIndex > lastSourceBlockIndex)
+							{
+								_newDocument.Elements.Add(element);
+								continue;
+							}
+						}
+
+						var method = source.Attributes.OfType<NamedAttribute>()
+							.FirstOrDefault(a => a.Name == "method-name");
+
+						if (method == null)
+						{
+							_newDocument.Elements.Add(element);
+							continue;
+						}
+
+						switch (method.Value)
+						{
+							case "fluent":
+							case "queryfluent":
+								_newDocument.Elements.Add(new SectionTitle("Fluent DSL Example", 3));
+								break;
+							case "initializer":
+							case "queryinitializer":
+								_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
+								break;
+							case "expectresponse":
+								_newDocument.Elements.Add(new SectionTitle("Handling Responses", 3));
+								break;
+						}
+
+					}
+
+					_newDocument.Elements.Add(element);
+				}
+			}
+
+			base.Visit(elements);
 		}
 
 		public override void Visit(Source source)

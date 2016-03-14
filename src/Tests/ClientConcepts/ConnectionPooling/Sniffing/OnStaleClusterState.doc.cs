@@ -10,7 +10,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnStaleClusterState
 	{
-		/** == Sniffing periodically
+		/** :section-number: 7.2
+		* == Sniffing periodically
 		* 
 		* Connection pools that return true for `SupportsReseeding` can be configured to sniff periodically.
 		* In addition to sniffing on startup and sniffing on failures, sniffing periodically can benefit scenerio's where

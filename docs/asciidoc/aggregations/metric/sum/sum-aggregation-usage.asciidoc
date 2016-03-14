@@ -1,0 +1,52 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commits_sum": {
+      "sum": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.Sum("commits_sum", sm => sm
+		.Field(p => p.NumberOfCommits)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var commitsSum = response.Aggs.Sum("commits_sum");
+commitsSum.Should().NotBeNull();
+commitsSum.Value.Should().BeGreaterThan(0);
+----
+

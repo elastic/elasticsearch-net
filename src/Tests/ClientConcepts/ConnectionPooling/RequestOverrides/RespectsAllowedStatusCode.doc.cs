@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RespectsAllowedStatusCode
 	{
-		/** == Allowed status codes
+		/** :section-number: 6.3
+		* == Allowed status codes
 		*/
 
 		[U]

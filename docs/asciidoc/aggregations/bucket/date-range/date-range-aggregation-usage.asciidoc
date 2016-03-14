@@ -16,7 +16,7 @@ IMPORTANT: this aggregation includes the `from` value and excludes the `to` valu
 
 Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.html[the elasticsearch documentation on {sectiontitle}]
 
-[source,javascript]
+[source,javascript,method-name="expectjson"]
 .Example json output
 ----
 {
@@ -51,7 +51,7 @@ Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.h
 
 === Fluent DSL Example 
 
-[source,csharp]
+[source,csharp,method-name="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -71,7 +71,7 @@ s => s
 
 === Object Initializer Syntax Example 
 
-[source,csharp]
+[source,csharp,method-name="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -95,7 +95,7 @@ new SearchRequest<Project>
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
-[source,csharp]
+[source,csharp,method-name="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 
@@ -106,7 +106,9 @@ dateHistogram.Buckets.Should().NotBeNull();
 
 We specified three ranges so we expect to have three of them in the response 
 
-[source,csharp]
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
 ----
 dateHistogram.Buckets.Count.Should().Be(3);
 

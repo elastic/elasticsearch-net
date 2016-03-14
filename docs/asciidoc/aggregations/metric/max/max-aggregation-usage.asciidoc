@@ -1,0 +1,52 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method-name="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "max_commits": {
+      "max": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method-name="fluent"]
+----
+s => s
+.Aggregations(a => a
+	.Max("max_commits", m => m
+		.Field(p => p.NumberOfCommits)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method-name="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+=== Handling Responses
+
+[source,csharp,method-name="expectresponse"]
+----
+response.IsValid.Should().BeTrue();
+var max = response.Aggs.Max("max_commits");
+max.Should().NotBeNull();
+max.Value.Should().BeGreaterThan(0);
+----
+

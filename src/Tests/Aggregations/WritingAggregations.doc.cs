@@ -8,7 +8,8 @@ using System.Linq;
 
 namespace Tests.Aggregations
 {
-	/** == Aggregations
+	/** :section-number: 10
+		* == Aggregations
 		*
 		* Aggregations are arguably one of the most powerful features of Elasticsearch.
 		* NEST allows you to write your aggregations using 

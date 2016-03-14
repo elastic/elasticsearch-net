@@ -47,7 +47,6 @@ namespace Tests.Aggregations.Bucket.Filters
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
@@ -64,7 +63,6 @@ namespace Tests.Aggregations.Bucket.Filters
 				)
 			);
 
-		/** Object Initializer Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -140,7 +138,6 @@ namespace Tests.Aggregations.Bucket.Filters
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filters("projects_by_state", agg => agg
@@ -156,7 +153,6 @@ namespace Tests.Aggregations.Bucket.Filters
 				)
 			);
 
-		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -165,18 +161,21 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucket = true,
 					Filters = new List<QueryContainer>
 					{
-							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
-							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
+						Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
+						Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
+						Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags")
+						{
+							Field = Field<Project>(p => p.CuratedTags.First().Name)
+						}
 				}
 			};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			/**
+			/** === Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/

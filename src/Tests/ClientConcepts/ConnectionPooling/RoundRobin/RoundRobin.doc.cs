@@ -11,16 +11,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class RoundRobin
 	{
-		/** Round Robin
+		/** == Round Robin
 		 * Each connection pool round robins over the `live` nodes, to evenly distribute the load over all known nodes.
 		 */
 
-		/** == GetNext
-		* GetNext is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
+		/** === GetNext
+		* `GetNext` is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 		* suffering from noisy neighboors advancing a global cursor.
 		*/
-
 		protected int NumberOfNodes = 10;
 
 		[U] public void EachViewStartsAtNexPositionAndWrapsOver()
@@ -36,7 +35,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		public void AssertCreateView(IConnectionPool pool)
 		{ 
 			/**
-			* Here we have setup a static connection pool seeded with 10 nodes. We force randomizationOnStartup to false
+			* Here we have setup a static connection pool seeded with 10 nodes. We force randomization OnStartup to false
 			* so that we can test the nodes being returned are int the order we expect them to. 
 			* So what order we expect? Imagine the following:
 			*

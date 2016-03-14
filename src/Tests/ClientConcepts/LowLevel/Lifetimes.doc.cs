@@ -13,19 +13,23 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class Lifetimes
 	{
-		/**
-		* ## Lifetimes
+		/** :section-number: 1.2
+		* == Lifetimes
 		*
 		* If you are using an IOC container its always useful to know the best practices around the lifetime of your objects 
 		*
-		* In general we advise folks to register their ElasticClient instances as singleton. The client is thread safe
-		* so sharing this instance over threads is ok. 
+		* In general we advise folks to register their ElasticClient instances as singletons. The client is thread safe
+		* so sharing an instance between threads is fine. 
 		*
 		* Zooming in however the actual moving part that benefits the most from being static for most of the duration of your
-		* application is ConnectionSettings. Caches are per ConnectionSettings. 
+		* application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`. 
 		*
-		* In some applications it could make perfect sense to have multiple singleton IElasticClient's registered with different
-		* connectionsettings. e.g if you have 2 functionally isolated Elasticsearch clusters.
+		* In some applications it could make perfect sense to have multiple singleton `ElasticClient`'s registered with different
+		* connection settings. e.g if you have 2 functionally isolated Elasticsearch clusters.
+		*
+		* NOTE: Due to the semantic versioning of NEST and the alignment of versions to Elasticsearch, all instances of `ElasticClient` and thus
+		* Elasticsearch that are connected to must be on the same major version i.e. it is not possible to have both an `ElasticClient` to connect to
+		* Elasticsearch 1.x and 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
 		*
 		* Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
 		*/
@@ -79,7 +83,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/**
-		* Disposing the ConnectionSettings will dispose the `IConnectionPool` and `IConnection` it has a hold of
+		* Disposing `ConnectionSettings` will dispose the `IConnectionPool` and `IConnection` it has a hold of
 		*/
 		[U] public void DisposingSettingsDisposesMovingParts()
 		{

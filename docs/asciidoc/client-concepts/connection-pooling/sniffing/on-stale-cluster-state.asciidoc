@@ -1,3 +1,5 @@
+:section-number: 7.2
+
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -11,7 +13,7 @@ In addition to sniffing on startup and sniffing on failures, sniffing periodical
 clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
 but without sniffing periodically it will never find the nodes that have been added to help out with load
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappens"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -39,7 +41,7 @@ var audit = new Auditor(() => Framework.Cluster
 
 healty cluster all nodes return healthy responses
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall { { HealthyResponse, 9200 } },
@@ -62,14 +64,14 @@ audit = await audit.TraceCalls(
 Now let's forward the clock 31 minutes, our sniff lifespan should now go state
 and the first call should do a sniff which discovered we scaled up to a 100 nodes!
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappens"]
 ----
 audit.ChangeTime(d => d.AddMinutes(31));
 ----
 
 a sniff is done first and it prefers the first node master node 
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {
@@ -85,7 +87,7 @@ audit.ChangeTime(d => d.AddMinutes(31));
 
 a sniff is done first and it prefers the first node master node 
 
-[source,csharp]
+[source,csharp,method-name="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {
