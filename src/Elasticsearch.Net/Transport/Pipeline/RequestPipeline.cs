@@ -459,7 +459,11 @@ namespace Elasticsearch.Net
 				AuditTrail = this.AuditTrail
 			};
 
-			if (_settings.ThrowExceptions) throw clientException;
+			if (_settings.ThrowExceptions)
+			{
+				this._settings.OnRequestCompleted?.Invoke(clientException.Response);
+				throw clientException;
+			}
 
 			if (response == null)
 			{
