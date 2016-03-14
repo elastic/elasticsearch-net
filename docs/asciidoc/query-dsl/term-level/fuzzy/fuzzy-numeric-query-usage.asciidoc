@@ -1,0 +1,43 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "fuzzy": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "fuzziness": 2.0,
+      "max_expansions": 100,
+      "prefix_length": 3,
+      "rewrite": "constant_score",
+      "transpositions": true,
+      "value": 12.0
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new FuzzyNumericQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+Fuzziness = 2,
+Value = 12,
+MaxExpansions = 100,
+PrefixLength = 3,
+Rewrite = RewriteMultiTerm.ConstantScore,
+Transpositions = true
+		}
+----
+

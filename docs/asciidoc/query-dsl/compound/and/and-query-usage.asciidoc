@@ -4,7 +4,7 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method-name="queryjson"]
+[source,javascript,method="queryjson"]
 .Example json output
 ----
 {
@@ -29,7 +29,7 @@
 
 === Object Initializer Syntax Example
 
-[source,csharp,method-name="queryinitializer"]
+[source,csharp,method="queryinitializer"]
 ----
 new AndQuery()
 		{

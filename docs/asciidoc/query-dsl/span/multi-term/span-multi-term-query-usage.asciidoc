@@ -1,0 +1,36 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "span_multi": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "match": {
+      "prefix": {
+        "name": {
+          "value": "pre-*"
+        }
+      }
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new SpanMultiTermQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+		}
+----
+

@@ -9,7 +9,7 @@
 When using connection pooling and the pool has sufficient nodes a request will be retried if 
 the call to a node throws an exception or returns a 502 or 503
 
-[source,csharp,method-name="exceptionfallsovertonextnode"]
+[source,csharp,method="exceptionfallsovertonextnode"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -30,7 +30,7 @@ audit = await audit.TraceCall(
 
 Will be treated as an error that requires retrying 
 
-[source,csharp,method-name="http502fallsover"]
+[source,csharp,method="http502fallsover"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -52,7 +52,7 @@ audit = await audit.TraceCall(
 
 Will be treated as an error that requires retrying 
 
-[source,csharp,method-name="http503fallsover"]
+[source,csharp,method="http503fallsover"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -72,7 +72,7 @@ audit = await audit.TraceCall(
 
 If a call returns a valid (_for the request*_) http status code other then 502/503. the request won't be retried.
 
-[source,csharp,method-name="httpteapotdoesnotfallover"]
+[source,csharp,method="httpteapotdoesnotfallover"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

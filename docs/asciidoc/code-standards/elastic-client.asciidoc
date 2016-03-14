@@ -4,7 +4,7 @@
 
 :imagesdir: ../images
 
-[source,csharp,method-name="consistentinitializerparameternames"]
+[source,csharp,method="consistentinitializerparameternames"]
 ----
 var requestParametersNotNamedRequest =
 	from m in typeof(IElasticClient).GetMethods()
@@ -16,7 +16,7 @@ var requestParametersNotNamedRequest =
 requestParametersNotNamedRequest.Should().BeEmpty();
 ----
 
-[source,csharp,method-name="initializerrequestsarenotoptional"]
+[source,csharp,method="initializerrequestsarenotoptional"]
 ----
 var requestParameters =
 	(from m in typeof(IElasticClient).GetMethods()
@@ -27,7 +27,7 @@ var requestParameters =
 requestParameter.HasDefaultValue.Should().BeFalse();
 ----
 
-[source,csharp,method-name="concreteclientoptionalparametersmatchinterfaceclient"]
+[source,csharp,method="concreteclientoptionalparametersmatchinterfaceclient"]
 ----
 var concreteMethodParametersDoNotMatchInterface = new List<string>();
 
@@ -53,7 +53,7 @@ concreteMethodParametersDoNotMatchInterface.Add(
 concreteMethodParametersDoNotMatchInterface.Should().BeEmpty();
 ----
 
-[source,csharp,method-name="consistentoptionalparametersforsyncandasyncmethods"]
+[source,csharp,method="consistentoptionalparametersforsyncandasyncmethods"]
 ----
 var methodGroups =
                 from methodInfo in typeof(IElasticClient).GetMethods()
@@ -79,7 +79,7 @@ asyncMethod.Parameter.HasDefaultValue.Should().Be(syncMethod.Parameter.HasDefaul
                         $"sync and async versions of {asyncMethod.MethodType} '{nameof(ElasticClient)}{methodGroup.Key}' should match");
 ----
 
-[source,csharp,method-name="consistentfluentparameternames"]
+[source,csharp,method="consistentfluentparameternames"]
 ----
 var fluentParametersNotNamedSelector =
 	from m in typeof (IElasticClient).GetMethods()
@@ -90,7 +90,7 @@ var fluentParametersNotNamedSelector =
 fluentParametersNotNamedSelector.Should().BeEmpty();
 ----
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 private class MethodWithRequestParameter
 	    {

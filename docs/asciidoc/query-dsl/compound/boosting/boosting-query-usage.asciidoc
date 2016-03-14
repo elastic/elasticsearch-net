@@ -1,0 +1,42 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "boosting": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "negative": {
+      "match_all": {
+        "_name": "query"
+      }
+    },
+    "negative_boost": 1.12,
+    "positive": {
+      "match_all": {
+        "_name": "filter"
+      }
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new BoostingQuery()
+		{
+Name = "named_query",
+Boost = 1.1,
+PositiveQuery = new MatchAllQuery { Name ="filter" },
+NegativeQuery= new MatchAllQuery() { Name = "query" },
+NegativeBoost = 1.12
+		}
+----
+

@@ -4,7 +4,7 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method-name="expectjson"]
+[source,javascript,method="expectjson"]
 .Example json output
 ----
 {
@@ -27,7 +27,7 @@
 
 === Fluent DSL Example
 
-[source,csharp,method-name="fluent"]
+[source,csharp,method="fluent"]
 ----
 s => s
 .Aggregations(a => a
@@ -44,7 +44,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method-name="initializer"]
+[source,csharp,method="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -62,7 +62,7 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-[source,csharp,method-name="expectresponse"]
+[source,csharp,method="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 var commitsAvg = response.Aggs.Average("average_commits");

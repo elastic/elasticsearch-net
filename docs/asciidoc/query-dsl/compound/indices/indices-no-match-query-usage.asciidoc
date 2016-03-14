@@ -1,0 +1,38 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "indices": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "indices": [
+      "_all"
+    ],
+    "no_match_query": "all",
+    "query": {
+      "match_all": {}
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new IndicesQuery()
+		{
+Name = "named_query",
+Boost = 1.1,
+Indices = Nest.Indices.All,
+Query = new MatchAllQuery(),
+NoMatchQuery = new NoMatchQueryContainer { Shortcut = NoMatchShortcut.All }
+		}
+----
+

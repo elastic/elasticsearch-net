@@ -14,7 +14,7 @@ GetNext is implemented in a lock free thread safe fashion, meaning each callee g
 over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 suffering from noisy neighboors advancing a global cursor.
 
-[source,csharp,method-name="eachviewseesnextbutskipsthedeadnode"]
+[source,csharp,method="eachviewseesnextbutskipsthedeadnode"]
 ----
 var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
 
@@ -31,7 +31,7 @@ node = pool.CreateView().First();
 node.Uri.Port.Should().Be(9202);
 ----
 
-[source,csharp,method-name="eachviewskipsaheadwithone"]
+[source,csharp,method="eachviewskipsaheadwithone"]
 ----
 var seeds = Enumerable.Range(9200, NumberOfNodes).Select(p => new Node(new Uri("http://localhost:" + p))).ToList();
 var pool = new StaticConnectionPool(seeds, randomize: false);
@@ -45,7 +45,7 @@ node.Uri.Port.Should().Be(9202);
 
 After we marked the first node alive again, we expect it to be hit again
 
-[source,csharp,method-name="eachviewseesnextbutskipsthedeadnode"]
+[source,csharp,method="eachviewseesnextbutskipsthedeadnode"]
 ----
 seeds.First().MarkAlive();
 
@@ -62,7 +62,7 @@ node = pool.CreateView().First();
 node.Uri.Port.Should().Be(9200);
 ----
 
-[source,csharp,method-name="viewseesresurrectednodes"]
+[source,csharp,method="viewseesresurrectednodes"]
 ----
 var dateTimeProvider = new TestableDateTimeProvider();
 
@@ -83,7 +83,7 @@ node.Uri.Port.Should().Be(9202);
 
 If we roll the clock forward two days, the node that was marked dead until tomorrow (or yesterday!) should be resurrected 
 
-[source,csharp,method-name="viewseesresurrectednodes"]
+[source,csharp,method="viewseesresurrectednodes"]
 ----
 dateTimeProvider.ChangeTime(d => d.AddDays(2));
 
@@ -104,7 +104,7 @@ n.IsResurrected.Should().BeTrue();
 
 A cluster with 2 nodes where the second node fails on ping 
 
-[source,csharp,method-name="fallsoverdeadnodes"]
+[source,csharp,method="fallsoverdeadnodes"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(4)
@@ -125,7 +125,7 @@ Finally we assert that the connectionpool has one node that is marked as dead
 
 The next call goes to 9203 which fails so we should wrap over 
 
-[source,csharp,method-name="fallsoverdeadnodes"]
+[source,csharp,method="fallsoverdeadnodes"]
 ----
 await audit.TraceCalls(
 new ClientCall { 
@@ -163,7 +163,7 @@ new ClientCall {
 
 A cluster with 2 nodes where the second node fails on ping 
 
-[source,csharp,method-name="picksadifferentnodeeachtimeanodeisdown"]
+[source,csharp,method="picksadifferentnodeeachtimeanodeisdown"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(4)
@@ -179,7 +179,7 @@ After all our registered nodes are marked dead we want to sample a single dead n
 each time to quickly see if the cluster is back up. We do not want to retry all 4
 nodes
 
-[source,csharp,method-name="picksadifferentnodeeachtimeanodeisdown"]
+[source,csharp,method="picksadifferentnodeeachtimeanodeisdown"]
 ----
 await audit.TraceCalls(
 new ClientCall { 

@@ -1,0 +1,57 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "span_or": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "clauses": [
+      {
+        "span_term": {
+          "field": {
+            "value": "value1"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value2"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value3"
+          }
+        }
+      }
+    ]
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new SpanOrQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Clauses = new List<ISpanQuery>
+{
+	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
+	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
+	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+},
+		}
+----
+

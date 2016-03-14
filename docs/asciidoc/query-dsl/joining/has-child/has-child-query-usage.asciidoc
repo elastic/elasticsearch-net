@@ -1,0 +1,44 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "has_child": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "type": "developer",
+    "score_mode": "avg",
+    "min_children": 1,
+    "max_children": 5,
+    "query": {
+      "match_all": {}
+    },
+    "inner_hits": {
+      "explain": true
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new HasChildQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Type = Infer.Type<Developer>(),
+InnerHits = new InnerHits { Explain = true },
+MaxChildren = 5,
+MinChildren = 1,
+Query = new MatchAllQuery(),
+ScoreMode = ChildScoreMode.Average
+		}
+----
+

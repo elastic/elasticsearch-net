@@ -18,7 +18,7 @@ For these examples, we'll define two POCOS, `Company`, which has a name
 and a collection of Employees, and `Employee` which has various properties of 
 different types, and itself has a collection of `Employee` types. 
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class Company
 {
@@ -43,7 +43,7 @@ public class Employee
 To create a mapping for our Company type, we can use the fluent API
 and map each property explicitly
 
-[source,csharp,method-name="mappingmanually"]
+[source,csharp,method="mappingmanually"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -76,7 +76,7 @@ This is all fine and dandy and useful for some use cases however in most cases
 this can become verbose and wieldy. The majority of the time you simply just want to map *all*
 the properties of a POCO in a single go.
 
-[source,csharp,method-name="mappingmanually"]
+[source,csharp,method="mappingmanually"]
 ----
 var expected = new
 {
@@ -122,7 +122,7 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
 explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
 
-[source,csharp,method-name="usingautomap"]
+[source,csharp,method="usingautomap"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -145,7 +145,7 @@ In this example,
 * Employees as an object
 and the remaining string properties as strings.
 
-[source,csharp,method-name="usingautomap"]
+[source,csharp,method="usingautomap"]
 ----
 var expected = new
 {
@@ -248,7 +248,7 @@ Here we are using AutoMap() to automatically map our company type, but then we'r
 overriding our employee property and making it a `nested` type, since by default,
 AutoMap() will infer objects as `object`.
 
-[source,csharp,method-name="overridingautomappedproperties"]
+[source,csharp,method="overridingautomappedproperties"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -296,7 +296,7 @@ It is also possible to define your mappings using attributes on your POCOS.  Whe
 use attributes, you *must* use `.AutoMap()` in order for the attributes to be applied.
 Here we define the same two types but this time using attributes.
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 [ElasticsearchType(Name = "company")]
 public class CompanyWithAttributes
@@ -337,7 +337,7 @@ public class EmployeeWithAttributes
 
 			Then map the types by calling `.AutoMap()`
 
-[source,csharp,method-name="usingautomapwithattributes"]
+[source,csharp,method="usingautomapwithattributes"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -484,7 +484,7 @@ Just as we were able to override the inferred properties in our earlier example,
 mappings also take precedence over attributes.  Therefore we can also override any mappings applied
 via any attributes defined on the POCO
 
-[source,csharp,method-name="overridingautomappedattributes"]
+[source,csharp,method="overridingautomappedattributes"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -658,7 +658,7 @@ Properties on a POCO can be ignored in a few ways:
 This example demonstrates all ways, using the `Ignore` property on the attribute to ignore the property `PropertyToIgnore`, the infer mapping to ignore the 
 property `AnotherPropertyToIgnore` and the json serializer specific attribute  to ignore the property `JsonIgnoredProperty`
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 [ElasticsearchType(Name = "company")]
 public class CompanyWithAttributesAndPropertiesToIgnore
@@ -677,7 +677,7 @@ public class CompanyWithAttributesAndPropertiesToIgnore
 
 All of the properties except `Name` have been ignored in the mapping 
 
-[source,csharp,method-name="ignoringproperties"]
+[source,csharp,method="ignoringproperties"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -726,7 +726,7 @@ the need to do this, so you can control the recursion depth of `.AutoMap()`.
 Let's introduce a very simple class, `A`, which itself has a property
 Child of type `A`.
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class A
 {
@@ -736,7 +736,7 @@ public class A
 
 By default, `.AutoMap()` only goes as far as depth 1 
 
-[source,csharp,method-name="controllingrecursiondepth"]
+[source,csharp,method="controllingrecursiondepth"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -746,7 +746,7 @@ var descriptor = new CreateIndexDescriptor("myindex")
 
 Thus we do not map properties on the second occurrence of our Child property 
 
-[source,csharp,method-name="controllingrecursiondepth"]
+[source,csharp,method="controllingrecursiondepth"]
 ----
 var expected = new
 {
@@ -771,7 +771,7 @@ Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 
 Now lets specify a maxRecursion of 3 
 
-[source,csharp,method-name="controllingrecursiondepth"]
+[source,csharp,method="controllingrecursiondepth"]
 ----
 var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -781,7 +781,7 @@ var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
 
 `.AutoMap()` has now mapped three levels of our Child property 
 
-[source,csharp,method-name="controllingrecursiondepth"]
+[source,csharp,method="controllingrecursiondepth"]
 ----
 var expectedWithMaxRecursion = new
 {
@@ -835,7 +835,7 @@ does nothing and acts as a blank canvas for you to implement your own visiting m
 For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
 (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 {
@@ -855,7 +855,7 @@ public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
 
 Now we can pass an instance of our custom visitor to `.AutoMap()` 
 
-[source,csharp,method-name="usingacustompropertyvisitor"]
+[source,csharp,method="usingacustompropertyvisitor"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms
@@ -868,7 +868,7 @@ and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBoo
 it will apply the transformation defined in each `Visit()` respectively, which in this example
 disables {ref_current}/doc-values.html[doc values].
 
-[source,csharp,method-name="usingacustompropertyvisitor"]
+[source,csharp,method="usingacustompropertyvisitor"]
 ----
 var expected = new
 {
@@ -915,7 +915,7 @@ You can even take the visitor approach a step further, and instead of visiting o
 directly on your POCO properties (`PropertyInfo`).  For example, let's create a visitor that maps all CLR types 
 to an Elasticsearch string (`IStringProperty`).
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 {
@@ -924,7 +924,7 @@ public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 }
 ----
 
-[source,csharp,method-name="usingacustompropertyvisitoronpropertyinfo"]
+[source,csharp,method="usingacustompropertyvisitoronpropertyinfo"]
 ----
 var descriptor = new CreateIndexDescriptor("myindex")
 	.Mappings(ms => ms

@@ -1,0 +1,30 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "type": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "value": "developer"
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new TypeQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Value = Type<Developer>()
+		}
+----
+

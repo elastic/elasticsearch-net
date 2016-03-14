@@ -1,0 +1,135 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,csharp,method="queryjson"]
+----
+new
+		{
+@bool = new
+{
+	should = new object[] {
+		new {
+			@bool = new {
+				must = new [] {
+					new { term = new { x = new { value = "y" } } },
+					new { term = new { x = new { value = "y" } } }
+				}
+			}
+		},
+		new {
+			@bool = new {
+				must = new object[] {
+					new {
+						@bool = new {
+							should = new object [] {
+								new {
+									@bool = new {
+										filter = new [] {
+											new { term = new { x = new { value = "y" } } }
+										}
+									}
+								},
+								new {
+									@bool = new {
+										filter = new [] {
+											new { term = new { x = new { value = "y" } } }
+										}
+									}
+								},
+								new {
+									@bool = new {
+										must_not = new [] {
+											new { term = new { x = new { value = "y" } } },
+											new { term = new { x = new { value = "y" } } }
+										}
+									}
+								},
+								new { term = new { x = new { value = "y" } } },
+								new { term = new { x = new { value = "y" } } },
+								new { term = new { x = new { value = "y" } } }
+							}
+						}
+					},
+					base.QueryJson,
+				}
+			}
+		}
+	}
+}
+		}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+Query && Query
+//second bool
+|| (
+	//complex nested bool
+	(+Query || +Query || !Query && (!Query && !ConditionlessQuery))
+	// simple nested or
+	&& (Query || Query || Query)
+	//all conditionless bool
+	&& (NullQuery || +ConditionlessQuery || !ConditionlessQuery)
+	// actual bool query
+	&& (base.QueryInitializer))
+----
+
+[source,csharp,method="assertshape"]
+----
+container.Bool.Should().NotBeNull();
+
+container.Bool.Should.Should().HaveCount(2);
+
+container.Bool.MustNot.Should().BeNull();
+
+container.Bool.Filter.Should().BeNull();
+
+container.Bool.Must.Should().BeNull();
+
+var firstBool = (container.Bool.Should.First() as IQueryContainer)?.Bool;
+
+firstBool.Should().NotBeNull();
+
+firstBool.Must.Should().HaveCount(2);
+
+firstBool.MustNot.Should().BeNull();
+
+firstBool.Filter.Should().BeNull();
+
+firstBool.Should.Should().BeNull();
+
+var secondBool = (container.Bool.Should.Last() as IQueryContainer)?.Bool;
+
+secondBool.Should().NotBeNull();
+
+secondBool.Must.Should().HaveCount(2); //the last bool query was all conditionless
+
+secondBool.MustNot.Should().BeNull();
+
+secondBool.Filter.Should().BeNull();
+
+secondBool.Should.Should().BeNull();
+
+var complexBool = (secondBool.Must.First() as IQueryContainer)?.Bool;
+
+complexBool.Should().NotBeNull();
+
+complexBool.Should.Should().HaveCount(6);
+
+var mustNotsBool = (complexBool.Should.Cast<IQueryContainer>().FirstOrDefault(q => q.Bool != null && q.Bool.MustNot != null))?.Bool;
+
+mustNotsBool.Should().NotBeNull();
+
+mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
+----
+
+[source,csharp,method="asssertshape"]
+----
+this.AssertShape(this.QueryInitializer);
+----
+

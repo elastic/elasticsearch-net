@@ -10,7 +10,7 @@
 
 Property names resolve to the last token. An example using the `.Suffix()` extension
 
-[source,csharp,method-name="propertynamesareresolvedtolasttokenusingsuffix"]
+[source,csharp,method="propertynamesareresolvedtolasttokenusingsuffix"]
 ----
 Expression<Func<Project, object>> expression = p => p.Name.Suffix("raw");
 Expect("raw").WhenSerializing<PropertyName>(expression);
@@ -18,7 +18,7 @@ Expect("raw").WhenSerializing<PropertyName>(expression);
 
 And an example using the `.ApplySuffix()` extension on lambda expressions
 
-[source,csharp,method-name="propertynamesareresolvedtolasttokenusingapplysuffix"]
+[source,csharp,method="propertynamesareresolvedtolasttokenusingapplysuffix"]
 ----
 Expression<Func<Project, object>> expression = p => p.Name;
 
@@ -30,7 +30,7 @@ Expect("raw").WhenSerializing<PropertyName>(expression);
 Property names cannot contain a `.` in order to prevent the potential for collision with a field that 
 may have {ref_current}/_multi_fields.html[`multi_fields`] 
 
-[source,csharp,method-name="stringscontainingdotsisanexception"]
+[source,csharp,method="stringscontainingdotsisanexception"]
 ----
 Assert.Throws<ArgumentException>(() => Expect("exception!").WhenSerializing<PropertyName>("name.raw"));
 ----

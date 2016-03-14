@@ -95,7 +95,7 @@ namespace Nest.Litterateur.Documentation.Files
 
 					if (!lastBlockWasCodeBlock)
 					{
-						builder.AppendLine($"[source,{codeBlock.Language.ToString().ToLowerInvariant()},method-name=\"{codeBlock.PropertyName ?? "unknown"}\"]");
+						builder.AppendLine($"[source,{codeBlock.Language.ToString().ToLowerInvariant()},method=\"{codeBlock.PropertyName ?? "unknown"}\"]");
                         builder.AppendLine("----");
 					}
 					else

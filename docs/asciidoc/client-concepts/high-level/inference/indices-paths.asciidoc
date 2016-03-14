@@ -13,7 +13,7 @@ In nest this is encoded using `Indices`
 
 Several types implicitly convert to `Indices` 
 
-[source,csharp,method-name="implicitconversionfromstring"]
+[source,csharp,method="implicitconversionfromstring"]
 ----
 Nest.Indices singleIndexFromString = "name";
 Nest.Indices multipleIndicesFromString = "name1, name2";
@@ -39,7 +39,7 @@ allWithOthersFromString.Match(
 
 to ease creating Field's from expressions there is a static Property class you can use 
 
-[source,csharp,method-name="usingstaticpropertyfield"]
+[source,csharp,method="usingstaticpropertyfield"]
 ----
 var all = Nest.Indices.All;
 

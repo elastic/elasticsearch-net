@@ -1,0 +1,40 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../images
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "fielddata_fields": [
+    "name",
+    "leadDeveloper",
+    "startedOn"
+  ]
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+s => s
+.FielddataFields(fs => fs
+	.Field(p => p.Name)
+	.Field(p => p.LeadDeveloper)
+	.Field(p => p.StartedOn)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+new SearchRequest<Project>
+{
+	FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
+}
+----
+

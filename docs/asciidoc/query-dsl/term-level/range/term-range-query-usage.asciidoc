@@ -1,0 +1,39 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "range": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "gt": "foo",
+      "gte": "foof",
+      "lt": "bar",
+      "lte": "barb"
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new TermRangeQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+GreaterThan = "foo",
+GreaterThanOrEqualTo = "foof",
+LessThan = "bar",
+LessThanOrEqualTo = "barb"
+		}
+----
+

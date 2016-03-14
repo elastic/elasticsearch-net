@@ -14,7 +14,7 @@ Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy and there a f
 
 If you simply new an `ElasticLowLevelClient`, it will be a non-failover connection to `http://localhost:9200`
 
-[source,csharp,method-name="instantiateusingalldefaults"]
+[source,csharp,method="instantiateusingalldefaults"]
 ----
 var client = new ElasticLowLevelClient();
 ----
@@ -24,7 +24,7 @@ you will need to pass in some instance of `IConnectionConfigurationValues`.
 
 The easiest way to do this is:
 
-[source,csharp,method-name="instantiatingasinglenodeclient"]
+[source,csharp,method="instantiatingasinglenodeclient"]
 ----
 var node = new Uri("http://mynode.example.com:8082/apiKey");
 
@@ -37,7 +37,7 @@ This will still be a non-failover connection, meaning if that `node` goes down t
 
 To get a failover connection we have to pass an `IConnectionPool` instance instead of a `Uri`.
 
-[source,csharp,method-name="instantiatingaconnectionpoolclient"]
+[source,csharp,method="instantiatingaconnectionpoolclient"]
 ----
 var node = new Uri("http://mynode.example.com:8082/apiKey");
 
@@ -55,7 +55,7 @@ Be sure to read more about <<../connection-pooling/connection-pooling, Connectio
 
  Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
 
-[source,csharp,method-name="specifyingclientoptions"]
+[source,csharp,method="specifyingclientoptions"]
 ----
 var node = new Uri("http://mynode.example.com:8082/apiKey");
 
@@ -69,7 +69,7 @@ var config = new ConnectionConfiguration(connectionPool)
 
 The following is a list of available connection configuration options:
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 var client = new ElasticLowLevelClient();
 ----
@@ -82,7 +82,7 @@ See the {ref_current}/modules-http.html[http module settings] for more info).
 By default responses are deserialized off stream to the object you tell it to.
 For debugging purposes it can be very useful to keep a copy of the raw response on the result object. 
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 var config = new ConnectionConfiguration()
 	.DisableAutomaticProxyDetection()
@@ -94,7 +94,7 @@ var result = client.Search<SearchResponse<object>>(new { size = 12 });
 
 This will only have a value if the client configuration has `DisableDirectStreaming` set 
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 var raw = result.ResponseBodyInBytes;
 ----
@@ -102,7 +102,7 @@ var raw = result.ResponseBodyInBytes;
 Please note that this only make sense if you need a mapped response and the raw response at the same time. 
 If you need a `string` or `byte[]` response simply call:
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 var stringResult = client.Search<string>(new { });
 ----
@@ -139,7 +139,7 @@ when an API in the client is misused.  These should not be handled as you want t
 
 * `BasicAuthentication(username, password)`: sets the HTTP basic authentication credentials to specify with all requests. 
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 config = config
 	.GlobalQueryStringParameters(new NameValueCollection())
@@ -152,7 +152,7 @@ config = config
 
 NOTE: Basic authentication credentials can alternatively be specified on the node URI directly:
 
-[source,csharp,method-name="availableoptions"]
+[source,csharp,method="availableoptions"]
 ----
 var uri = new Uri("http://username:password@localhost:9200");
 
@@ -166,7 +166,7 @@ var settings = new ConnectionConfiguration(uri);
 You can pass a callback of type `Action<IApiCallDetails>` that can eaves drop every time a response (good or bad) is created. 
 If you have complex logging needs this is a good place to add that in.
 
-[source,csharp,method-name="onrequestcompletediscalled"]
+[source,csharp,method="onrequestcompletediscalled"]
 ----
 var counter = 0;
 
@@ -191,7 +191,7 @@ Here's an example of using `OnRequestCompleted()` for complex logging. Remember,
 to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
 to `true`
 
-[source,csharp,method-name="usingonrequestcompletedforlogging"]
+[source,csharp,method="usingonrequestcompletedforlogging"]
 ----
 var list = new List<string>();
 
@@ -279,7 +279,7 @@ property.
 
 The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
 
-[source,csharp,method-name="configuringssl"]
+[source,csharp,method="configuringssl"]
 ----
 ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 ----
@@ -298,7 +298,7 @@ Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSetti
 You can inject contract resolved converters by implementing the ContractConverters property
 This can be much faster then registering them on JsonSerializerSettings.Converters
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class MyJsonNetSerializer : JsonNetSerializer
 {
@@ -320,7 +320,7 @@ public int CallToContractConverter { get; set; } = 0;
 You can then register a factory on `ConnectionSettings` to create an instance of your subclass instead. 
 This is **_called once per instance_** of ConnectionSettings.
 
-[source,csharp,method-name="modifyjsonserializersettingsiscalled"]
+[source,csharp,method="modifyjsonserializersettingsiscalled"]
 ----
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 

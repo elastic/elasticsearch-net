@@ -11,7 +11,7 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html[the elasticsearch documentation on Filter Aggregation]
 
-[source,javascript,method-name="expectjson"]
+[source,javascript,method="expectjson"]
 .Example json output
 ----
 {
@@ -38,7 +38,7 @@ Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html
 
 === Fluent DSL Example 
 
-[source,csharp,method-name="fluent"]
+[source,csharp,method="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -53,7 +53,7 @@ s => s
 
 === Object Initializer Syntax Example 
 
-[source,csharp,method-name="initializer"]
+[source,csharp,method="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -71,7 +71,7 @@ new SearchRequest<Project>
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
-[source,csharp,method-name="expectresponse"]
+[source,csharp,method="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 
@@ -88,7 +88,7 @@ tags.Buckets.Should().NotBeEmpty();
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
 
-[source,javascript,method-name="expectjson"]
+[source,javascript,method="expectjson"]
 .Example json output
 ----
 {
@@ -102,7 +102,7 @@ to an empty object.
 
 === Fluent DSL Example 
 
-[source,csharp,method-name="fluent"]
+[source,csharp,method="fluent"]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -118,7 +118,7 @@ s => s
 
 === Object Initializer Syntax Example 
 
-[source,csharp,method-name="initializer"]
+[source,csharp,method="initializer"]
 ----
 new SearchRequest<Project>
 {
@@ -134,7 +134,7 @@ new SearchRequest<Project>
 
 === Handling Response 
 
-[source,csharp,method-name="expectresponse"]
+[source,csharp,method="expectresponse"]
 ----
 response.IsValid.Should().BeTrue();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);

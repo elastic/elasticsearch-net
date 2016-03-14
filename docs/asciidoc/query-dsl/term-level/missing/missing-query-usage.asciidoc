@@ -1,0 +1,34 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "missing": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "existence": true,
+    "field": "description",
+    "null_value": true
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new MissingQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+NullValue = true,
+Existence = true
+		}
+----
+

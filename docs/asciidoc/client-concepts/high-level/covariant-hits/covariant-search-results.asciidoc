@@ -15,7 +15,7 @@ but the actual instance type of the result can be that of the subclass directly
 Let's look at an example; Imagine we want to search over multiple types that all implement
 `ISearchResult`
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public interface ISearchResult
 {
@@ -25,7 +25,7 @@ public interface ISearchResult
 
 We have three implementations of `ISearchResult` namely `A`, `B` and `C`
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class A : ISearchResult
 {
@@ -52,7 +52,7 @@ The most straightforward way to search over multiple types is to
 type the response to the parent interface or base class
 and pass the actual types we want to search over using `.Type()`
 
-[source,csharp,method-name="usingtypes"]
+[source,csharp,method="usingtypes"]
 ----
 var result = this._client.Search<ISearchResult>(s => s
 	.Type(Types.Type(typeof(A), typeof(B), typeof(C)))
@@ -66,7 +66,7 @@ hits that have "_type" : "a` will be serialized to `A` and so forth
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
-[source,csharp,method-name="usingtypes"]
+[source,csharp,method="usingtypes"]
 ----
 result.IsValid.Should().BeTrue();
 
@@ -76,7 +76,7 @@ result.Documents.Count().Should().Be(100);
 To prove the returned result set is covariant we filter the documents based on their 
 actual type and assert the returned subsets are the expected sizes
 
-[source,csharp,method-name="usingtypes"]
+[source,csharp,method="usingtypes"]
 ----
 var aDocuments = result.Documents.OfType<A>();
 
@@ -89,7 +89,7 @@ cDocuments.Count().Should().Be(50);
 
 and assume that properties that only exist on the subclass itself are properly filled
 
-[source,csharp,method-name="usingtypes"]
+[source,csharp,method="usingtypes"]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 
@@ -101,7 +101,7 @@ cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 
 A more low level approach is to inspect the hit yourself and determine the CLR type to deserialize to
 
-[source,csharp,method-name="usingconcretetypeselector"]
+[source,csharp,method="usingconcretetypeselector"]
 ----
 var result = this._client.Search<ISearchResult>(s => s
 	.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
@@ -118,7 +118,7 @@ here for each hit we'll call the delegate passed to ConcreteTypeSelector where
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
-[source,csharp,method-name="usingconcretetypeselector"]
+[source,csharp,method="usingconcretetypeselector"]
 ----
 result.IsValid.Should().BeTrue();
 
@@ -128,7 +128,7 @@ result.Documents.Count().Should().Be(100);
 To prove the returned result set is covariant we filter the documents based on their 
 actual type and assert the returned subsets are the expected sizes
 
-[source,csharp,method-name="usingconcretetypeselector"]
+[source,csharp,method="usingconcretetypeselector"]
 ----
 var aDocuments = result.Documents.OfType<A>();
 
@@ -145,7 +145,7 @@ cDocuments.Count().Should().Be(50);
 
 and assume that properties that only exist on the subclass itself are properly filled
 
-[source,csharp,method-name="usingconcretetypeselector"]
+[source,csharp,method="usingconcretetypeselector"]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 
@@ -159,7 +159,7 @@ Scroll also supports CovariantSearchResponses
 The Scroll API is a continuation of the previous Search example so Types() are lost. 
 You can hint at the types using `.CovariantTypes()`
 
-[source,csharp,method-name="usingcovarianttypesonscroll"]
+[source,csharp,method="usingcovarianttypesonscroll"]
 ----
 var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
 	.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
@@ -172,7 +172,7 @@ hits that have "_type" : "a` will be serialized to `A` and so forth
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
-[source,csharp,method-name="usingcovarianttypesonscroll"]
+[source,csharp,method="usingcovarianttypesonscroll"]
 ----
 result.IsValid.Should().BeTrue();
 
@@ -182,7 +182,7 @@ result.Documents.Count().Should().Be(100);
 To prove the returned result set is covariant we filter the documents based on their 
 actual type and assert the returned subsets are the expected sizes
 
-[source,csharp,method-name="usingcovarianttypesonscroll"]
+[source,csharp,method="usingcovarianttypesonscroll"]
 ----
 var aDocuments = result.Documents.OfType<A>();
 
@@ -199,7 +199,7 @@ cDocuments.Count().Should().Be(50);
 
 and assume that properties that only exist on the subclass itself are properly filled
 
-[source,csharp,method-name="usingcovarianttypesonscroll"]
+[source,csharp,method="usingcovarianttypesonscroll"]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 
@@ -210,7 +210,7 @@ cDocuments.Should().OnlyContain(a => a.PropertyOnC > 0);
 
 The more low level concrete type selector can also be specified on scroll
 
-[source,csharp,method-name="usingconcretetypeselectoronscroll"]
+[source,csharp,method="usingconcretetypeselectoronscroll"]
 ----
 var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(1), "scrollid", s => s
 	.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
@@ -226,7 +226,7 @@ As before, within the delegate passed to `.ConcreteTypeSelector`
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
 
-[source,csharp,method-name="usingconcretetypeselectoronscroll"]
+[source,csharp,method="usingconcretetypeselectoronscroll"]
 ----
 result.IsValid.Should().BeTrue();
 
@@ -236,7 +236,7 @@ result.Documents.Count().Should().Be(100);
 To prove the returned result set is covariant we filter the documents based on their 
 actual type and assert the returned subsets are the expected sizes
 
-[source,csharp,method-name="usingconcretetypeselectoronscroll"]
+[source,csharp,method="usingconcretetypeselectoronscroll"]
 ----
 var aDocuments = result.Documents.OfType<A>();
 
@@ -253,7 +253,7 @@ cDocuments.Count().Should().Be(50);
 
 and assume that properties that only exist on the subclass itself are properly filled
 
-[source,csharp,method-name="usingconcretetypeselectoronscroll"]
+[source,csharp,method="usingconcretetypeselectoronscroll"]
 ----
 aDocuments.Should().OnlyContain(a => a.PropertyOnA > 0);
 

@@ -15,14 +15,14 @@ These expressions are assigned to a type called `Field` and there are several wa
 
 Using the constructor directly is possible but rather involved 
 
-[source,csharp,method-name="usingconstructors"]
+[source,csharp,method="usingconstructors"]
 ----
 var fieldString = new Field { Name = "name" };
 ----
 
 especially when using C expressions since these can not be simply new'ed
 
-[source,csharp,method-name="usingconstructors"]
+[source,csharp,method="usingconstructors"]
 ----
 Expression<Func<Project, object>> expression = p => p.Name;
 
@@ -34,14 +34,14 @@ Expect("name")
 
 Therefore you can also implicitly convert strings and expressions to `Field`s 
 
-[source,csharp,method-name="implicitconversion"]
+[source,csharp,method="implicitconversion"]
 ----
 Field fieldString = "name";
 ----
 
 but for expressions this is still rather involved 
 
-[source,csharp,method-name="implicitconversion"]
+[source,csharp,method="implicitconversion"]
 ----
 Expression<Func<Project, object>> expression = p => p.Name;
 
@@ -54,14 +54,14 @@ Expect("name")
 
 to ease creating `Field`s from expressions there is a static Property class you can use 
 
-[source,csharp,method-name="usingstaticpropertyfield"]
+[source,csharp,method="usingstaticpropertyfield"]
 ----
 Field fieldString = "name";
 ----
 
 but for expressions this is still rather involved 
 
-[source,csharp,method-name="usingstaticpropertyfield"]
+[source,csharp,method="usingstaticpropertyfield"]
 ----
 var fieldExpression = Infer.Field<Project>(p => p.Name);
 ----
@@ -69,14 +69,14 @@ var fieldExpression = Infer.Field<Project>(p => p.Name);
 this can be even shortened even further using static imports in c 6 i.e.
 				`using static Nest.Static;` 
 
-[source,csharp,method-name="usingstaticpropertyfield"]
+[source,csharp,method="usingstaticpropertyfield"]
 ----
 fieldExpression = Field<Project>(p => p.Name);
 ----
 
 Now this is much much terser then our first example using the constructor! 
 
-[source,csharp,method-name="usingstaticpropertyfield"]
+[source,csharp,method="usingstaticpropertyfield"]
 ----
 Expect("name")
 	.WhenSerializing(fieldString)
@@ -87,7 +87,7 @@ By default, NEST will camel-case all field names to be more _javascript-y_
 
 using `DefaultFieldNameInferrer()` on ConnectionSettings you can change this behavior 
 
-[source,csharp,method-name="defaultfieldnameinferrer"]
+[source,csharp,method="defaultfieldnameinferrer"]
 ----
 var setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p.ToUpper()));
 
@@ -96,14 +96,14 @@ setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
 However string are *always* passed along verbatim 
 
-[source,csharp,method-name="defaultfieldnameinferrer"]
+[source,csharp,method="defaultfieldnameinferrer"]
 ----
 setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 ----
 
 if you want the same behavior for expressions simply do nothing in the default inferrer 
 
-[source,csharp,method-name="defaultfieldnameinferrer"]
+[source,csharp,method="defaultfieldnameinferrer"]
 ----
 setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 
@@ -114,14 +114,14 @@ setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 
 You can follow your property expression to any depth. Here we are traversing to the LeadDeveloper's (Person) FirstName 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("leadDeveloper.firstName").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName));
 ----
 
 When dealing with collection indexers, the indexer access is ignored allowing you to traverse into properties of collections 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags[0]));
 ----
@@ -129,7 +129,7 @@ Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags[0]));
 NOTE: Similarly, LINQ's `.First()` method also works 
 remember these are expressions and not actual code that will be executed
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
 
@@ -140,7 +140,7 @@ Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.Fir
 
 An indexer on a dictionary is assumed to describe a property name 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
 
@@ -149,7 +149,7 @@ Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metad
 
 A cool feature here is that we'll evaluate variables passed to an indexer 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 var variable = "var";
 
@@ -163,7 +163,7 @@ you to analyze a string in a number of different ways, these _"virtual" sub fiel
 do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that 
 should be mapped. 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
 
@@ -180,14 +180,14 @@ Expect("metadata.hardcoded.created.raw").WhenSerializing(Field<Project>(p => p.M
 
 You can even chain `.Suffix()` calls to any depth!
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 Expect("curatedTags.name.raw.evendeeper").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name.Suffix("raw").Suffix("evendeeper")));
 ----
 
 Variables passed to suffix will be evaluated as well 
 
-[source,csharp,method-name="complexfieldnameexpressions"]
+[source,csharp,method="complexfieldnameexpressions"]
 ----
 var suffix = "unanalyzed";
 
@@ -201,7 +201,7 @@ to a list of fields.
 
 Here we have a list of expressions 
 
-[source,csharp,method-name="appendingsuffixtoexpressions"]
+[source,csharp,method="appendingsuffixtoexpressions"]
 ----
 var expressions = new List<Expression<Func<Project, object>>>
 {
@@ -214,7 +214,7 @@ var expressions = new List<Expression<Func<Project, object>>>
 
 and we want to append the suffix "raw" to each 
 
-[source,csharp,method-name="appendingsuffixtoexpressions"]
+[source,csharp,method="appendingsuffixtoexpressions"]
 ----
 var fieldExpressions = 
 	expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
@@ -232,7 +232,7 @@ Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
 
 When using NEST's property attributes you can specify a new name for the properties
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class BuiltIn
 {
@@ -241,7 +241,7 @@ public class BuiltIn
 }
 ----
 
-[source,csharp,method-name="builtinannotiatons"]
+[source,csharp,method="builtinannotiatons"]
 ----
 Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 ----
@@ -250,7 +250,7 @@ Starting with NEST 2.x we also ask the serializer if it can resolve the property
 Here we ask the default `JsonNetSerializer` to resolve a property name and it takes 
 the `JsonPropertyAttribute` into account
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class SerializerSpecific
 {
@@ -259,7 +259,7 @@ public class SerializerSpecific
 }
 ----
 
-[source,csharp,method-name="serializerspecificannotations"]
+[source,csharp,method="serializerspecificannotations"]
 ----
 Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 ----
@@ -267,7 +267,7 @@ Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 If both a NEST property attribute and a serializer specific attribute are present on a property, 
 NEST takes precedence
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 public class Both
 {
@@ -277,7 +277,7 @@ public class Both
 }
 ----
 
-[source,csharp,method-name="nestattributetakesprecedence"]
+[source,csharp,method="nestattributetakesprecedence"]
 ----
 Expect("naam").WhenSerializing(Field<Both>(p => p.Name));
 
@@ -290,7 +290,7 @@ Expect(new
 Resolution of field names is cached per connection settings instance. To demonstrate,
 take the following simple POCOs
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 class A { public C C { get; set; } }
 
@@ -299,7 +299,7 @@ class B { public C C { get; set; } }
 class C { public string Name { get; set; } }
 ----
 
-[source,csharp,method-name="expressionsarecachedbutseedifferenttypes"]
+[source,csharp,method="expressionsarecachedbutseedifferenttypes"]
 ----
 var connectionSettings = TestClient.CreateSettings(forceInMemory: true);
 
@@ -313,7 +313,7 @@ var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 Here we have to similary shaped expressions on coming from A and on from B
 that will resolve to the same field name, as expected
 
-[source,csharp,method-name="expressionsarecachedbutseedifferenttypes"]
+[source,csharp,method="expressionsarecachedbutseedifferenttypes"]
 ----
 fieldNameOnA.Should().Be("c.name");
 
@@ -323,7 +323,7 @@ fieldNameOnB.Should().Be("c.name");
 now we create a new connectionsettings with a remap for C on class A to `d`
 now when we resolve the field path for A will be different
 
-[source,csharp,method-name="expressionsarecachedbutseedifferenttypes"]
+[source,csharp,method="expressionsarecachedbutseedifferenttypes"]
 ----
 var newConnectionSettings = TestClient.CreateSettings(forceInMemory: true, modifySettings: s => s
 	.InferMappingFor<A>(m => m
@@ -344,7 +344,7 @@ fieldNameOnB.Should().Be("c.name");
 
 however we didn't break inferrence on the first client instance using its separate connectionsettings 
 
-[source,csharp,method-name="expressionsarecachedbutseedifferenttypes"]
+[source,csharp,method="expressionsarecachedbutseedifferenttypes"]
 ----
 fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
 
@@ -367,7 +367,7 @@ To wrap up, the precedence in which field names are inferred is:
 
 The following example class will demonstrate this precedence
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 class Precedence
 {
@@ -398,7 +398,7 @@ class Precedence
 
 Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
 
-[source,csharp,method-name="unknown"]
+[source,csharp,method="unknown"]
 ----
 class CustomSerializer : JsonNetSerializer
 {
@@ -416,7 +416,7 @@ class CustomSerializer : JsonNetSerializer
 here we provide an explicit rename of a property on connectionsettings using `.Rename()`
 and all properties that are not mapped verbatim should be uppercased
 
-[source,csharp,method-name="precedenceisasexpected"]
+[source,csharp,method="precedenceisasexpected"]
 ----
 var usingSettings = WithConnectionSettings(s => s
 	
@@ -439,7 +439,7 @@ usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p =>
 
 The same naming rules also apply when indexing a document 
 
-[source,csharp,method-name="precedenceisasexpected"]
+[source,csharp,method="precedenceisasexpected"]
 ----
 usingSettings.Expect(new [] 
 {

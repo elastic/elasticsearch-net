@@ -10,7 +10,7 @@
 
 Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 
-[source,csharp,method-name="asniffonstartuphappensonce"]
+[source,csharp,method="asniffonstartuphappensonce"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -38,7 +38,7 @@ await audit.TraceCalls(
 );
 ----
 
-[source,csharp,method-name="sniffonstartuptakesnewclusterstate"]
+[source,csharp,method="sniffonstartuptakesnewclusterstate"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -58,7 +58,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method-name="snifftriesallnodes"]
+[source,csharp,method="snifftriesallnodes"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -85,7 +85,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method-name="sniffprefersmasternodes"]
+[source,csharp,method="sniffprefersmasternodes"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
@@ -106,7 +106,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method-name="sniffprefersmasternodesbutstillfailsover"]
+[source,csharp,method="sniffprefersmasternodesbutstillfailsover"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
@@ -130,7 +130,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

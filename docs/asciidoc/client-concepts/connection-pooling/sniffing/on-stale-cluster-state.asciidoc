@@ -13,7 +13,7 @@ In addition to sniffing on startup and sniffing on failures, sniffing periodical
 clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
 but without sniffing periodically it will never find the nodes that have been added to help out with load
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -41,7 +41,7 @@ var audit = new Auditor(() => Framework.Cluster
 
 healty cluster all nodes return healthy responses
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall { { HealthyResponse, 9200 } },
@@ -64,14 +64,14 @@ audit = await audit.TraceCalls(
 Now let's forward the clock 31 minutes, our sniff lifespan should now go state
 and the first call should do a sniff which discovered we scaled up to a 100 nodes!
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 audit.ChangeTime(d => d.AddMinutes(31));
 ----
 
 a sniff is done first and it prefers the first node master node 
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {
@@ -87,7 +87,7 @@ audit.ChangeTime(d => d.AddMinutes(31));
 
 a sniff is done first and it prefers the first node master node 
 
-[source,csharp,method-name="asniffonstartuphappens"]
+[source,csharp,method="asniffonstartuphappens"]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {

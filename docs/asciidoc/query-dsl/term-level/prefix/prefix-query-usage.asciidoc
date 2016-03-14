@@ -1,0 +1,35 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "prefix": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "rewrite": "top_terms_boost_N",
+      "value": "proj"
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new PrefixQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+Value = "proj",
+Rewrite = RewriteMultiTerm.TopTermsBoostN
+		}
+----
+

@@ -9,12 +9,16 @@ using AsciiDoc;
 
 namespace Nest.Litterateur.AsciiDoc
 {
+	/// <summary>
+	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries, section titles
+	/// </summary>
 	public class AddAttributeEntriesVisitor : NoopVisitor
 	{
-		private readonly FileInfo _destination;
-		private bool _topLevel = true;
 		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
+
+		private readonly FileInfo _destination;
 		private Document _newDocument;
+		private bool _topLevel = true;
 
 		public AddAttributeEntriesVisitor(FileInfo destination)
 		{
@@ -29,7 +33,16 @@ namespace Nest.Litterateur.AsciiDoc
 
 		public override void Visit(Document document)
 		{
-			_newDocument = new Document();
+			_newDocument = new Document
+			{
+				Title = document.Title,
+				DocType = document.DocType
+			};
+
+			foreach (var authorInfo in document.Authors)
+			{
+				_newDocument.Authors.Add(authorInfo);
+			}
 
 			foreach (var attributeEntry in document.Attributes)
 			{
@@ -78,7 +91,7 @@ namespace Nest.Litterateur.AsciiDoc
 							continue;
 						}
 
-						// check that the previous element is a SectionTitle and if not, add one
+						// if there is a section title since the last source block, don't add one
 						var lastSourceBlock = _newDocument.Elements.LastOrDefault(e => e is Source);
 						var lastSectionTitle = _newDocument.Elements.OfType<SectionTitle>().LastOrDefault(e => e.Level == 3);
 						if (lastSourceBlock != null && lastSectionTitle != null)
@@ -92,9 +105,7 @@ namespace Nest.Litterateur.AsciiDoc
 							}
 						}
 
-						var method = source.Attributes.OfType<NamedAttribute>()
-							.FirstOrDefault(a => a.Name == "method-name");
-
+						var method = source.Attributes.OfType<NamedAttribute>().FirstOrDefault(a => a.Name == "method");
 						if (method == null)
 						{
 							_newDocument.Elements.Add(element);
@@ -144,7 +155,7 @@ namespace Nest.Litterateur.AsciiDoc
 				return;
 			}
 
-			// Generate an anchor for all section titles
+			// Generate an anchor for all Level 2 section titles
 			if (!sectionTitle.Attributes.HasAnchor)
 			{
 				var builder = new StringBuilder();
@@ -157,18 +168,15 @@ namespace Nest.Litterateur.AsciiDoc
 				sectionTitle.Attributes.Add(new Anchor(title));
 			}
 
-			// check for duplicate ids
+			// Check for duplicate ids across documents
 			var key = sectionTitle.Attributes.Anchor.Id;
 			string existingFile;
 			if (Ids.TryGetValue(key, out existingFile))
 			{
 				throw new Exception($"duplicate id {key} in {_destination.FullName}. Id already exists in {existingFile}");
 			}
-			else
-			{
-				Ids.Add(key, _destination.FullName);
-			}
 
+			Ids.Add(key, _destination.FullName);
 			base.Visit(sectionTitle);
 		}
 	}

@@ -1,0 +1,37 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "script": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "inline": "doc['num1'].value > param1",
+    "params": {
+      "param1": 1
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new ScriptQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Inline = _templateString,
+Params = new Dictionary<string, object>
+{
+	{ "param1", 1 }
+}
+		}
+----
+

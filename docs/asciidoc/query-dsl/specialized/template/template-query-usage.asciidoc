@@ -1,0 +1,41 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,csharp,method="queryjson"]
+----
+new
+		{
+template = new
+{
+	_name = "named_query",
+	boost = 1.1,
+	inline = _templateString,
+	@params = new
+	{
+		query_string = "all about search"
+	}
+}
+
+
+		}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new TemplateQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Inline = _templateString,
+Params = new Dictionary<string, object>
+{
+	{ "query_string", "all about search" }
+}
+		}
+----
+

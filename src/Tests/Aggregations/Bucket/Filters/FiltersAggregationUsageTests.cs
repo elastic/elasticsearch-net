@@ -12,9 +12,9 @@ namespace Tests.Aggregations.Bucket.Filters
 	/** == Filters Aggregation
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
 	 * Each bucket will collect all documents that match its associated filter. For documents
-	 * that do not match any filter, these will be collected in the other bucket.
+	 * that do not match any filter, these will be collected in the _other bucket_.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
+	 * Be sure to read {ref_current}/search-aggregations-bucket-filters-aggregation.html[the Elasticsearch documentation on Filters Aggregation].
 	*/
 
 	/** == Named filters **/
@@ -191,6 +191,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
 
+			/** The last bucket is the _other bucket_ */
 			results.Last().DocCount.Should().Be(0);
 		}
 	}

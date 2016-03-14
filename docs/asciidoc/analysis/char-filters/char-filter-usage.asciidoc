@@ -1,0 +1,45 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../images
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "analysis": {
+    "char_filter": {
+      "stripMe": {
+        "type": "html_strip"
+      },
+      "patterned": {
+        "pattern": "x",
+        "replacement": "y",
+        "type": "pattern_replace"
+      },
+      "mapped": {
+        "mappings": [
+          "a=>b"
+        ],
+        "type": "mapping"
+      }
+    }
+  }
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+InitializerExample
+----
+

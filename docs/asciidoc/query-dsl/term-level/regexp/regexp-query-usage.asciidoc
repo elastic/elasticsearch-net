@@ -1,0 +1,37 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "regexp": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "flags": "INTERSECTION|COMPLEMENT|EMPTY",
+      "max_determinized_states": 20000,
+      "value": "s.*y"
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new RegexpQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+Value = "s.*y",
+Flags = "INTERSECTION|COMPLEMENT|EMPTY",
+MaximumDeterminizedStates = 20000
+		}
+----
+

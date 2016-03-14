@@ -7,12 +7,12 @@ namespace Nest.Litterateur.Documentation.Blocks
 {
 	public class CodeBlock : IDocumentationBlock
 	{
-		public CodeBlock(string lineOfCode, int lineNumber, Language language, string propertyName)
+		public CodeBlock(string lineOfCode, int lineNumber, Language language, string propertyOrMethodName)
 		{
 			Value = ExtractCallOutsFromText(lineOfCode);
 			LineNumber = lineNumber;
 			Language = language;
-			PropertyName = propertyName?.ToLowerInvariant();
+			PropertyName = propertyOrMethodName?.ToLowerInvariant();
 		}
 
 		public List<string> CallOuts { get; } = new List<string>();
@@ -23,7 +23,7 @@ namespace Nest.Litterateur.Documentation.Blocks
 
 		public string PropertyName { get; set; }
 
-		public string Value { get; private set; }
+		public string Value { get; }
 
 		private string ExtractCallOutsFromText(string lineOfCode)
 		{

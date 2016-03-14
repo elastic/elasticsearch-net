@@ -14,7 +14,7 @@ Each connection pool round robins over the `live` nodes, to evenly distribute th
 over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 suffering from noisy neighboors advancing a global cursor.
 
-[source,csharp,method-name="eachviewstartsatnexpositionandwrapsover"]
+[source,csharp,method="eachviewstartsatnexpositionandwrapsover"]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 var staticPool = new StaticConnectionPool(uris, randomize: false);
@@ -32,7 +32,7 @@ Thread B calls GetNext() second without a local cursor and therefor starts at 1.
 After this each thread should walk the nodes in successive order using their local cursor
 e.g Thread A might get 0,1,2,3,5 and thread B will get 1,2,3,4,0.
 
-[source,csharp,method-name="assertcreateview"]
+[source,csharp,method="assertcreateview"]
 ----
 var startingPositions = Enumerable.Range(0, NumberOfNodes)
 	.Select(i => pool.CreateView().First())
@@ -54,7 +54,7 @@ Lets up the ante:
 We'll validate that each thread sees all the nodes and they they wrap over e.g after node 9209 
 comes 9200 again
 
-[source,csharp,method-name="assertcreateview"]
+[source,csharp,method="assertcreateview"]
 ----
 var threadedStartPositions = new ConcurrentBag<int>();
 
@@ -70,7 +70,7 @@ t.Join();
 Each thread reported the first node it started off lets make sure we see each node twice as the first node
 because we started `NumberOfNodes * 2` threads
 
-[source,csharp,method-name="assertcreateview"]
+[source,csharp,method="assertcreateview"]
 ----
 var grouped = threadedStartPositions.GroupBy(p => p).ToList();
 

@@ -1,0 +1,19 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../../images
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new GeoShapeLineStringQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = Field<Project>(p=>p.Location),
+Shape = new LineStringGeoShape(this._coordinates)
+		}
+----
+

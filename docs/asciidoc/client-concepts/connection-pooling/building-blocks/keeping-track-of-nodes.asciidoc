@@ -12,7 +12,7 @@
 
 A `Node` can be instantiated by passing it a `Uri` 
 
-[source,csharp,method-name="creating"]
+[source,csharp,method="creating"]
 ----
 var node = new Node(new Uri("http://localhost:9200"));
 
@@ -22,7 +22,7 @@ node.Uri.Port.Should().Be(9200);
 
 By default master eligible and holds data is presumed to be true 
 
-[source,csharp,method-name="creating"]
+[source,csharp,method="creating"]
 ----
 node.MasterEligible.Should().BeTrue();
 
@@ -31,7 +31,7 @@ node.HoldsData.Should().BeTrue();
 
 Is resurrected is true on first usage, hints to the transport that a ping might be useful 
 
-[source,csharp,method-name="creating"]
+[source,csharp,method="creating"]
 ----
 node.IsResurrected.Should().BeTrue();
 ----
@@ -44,7 +44,7 @@ a known cluster topology.
 passing a node with a path should be preserved. 
 Sometimes an elasticsearch node lives behind a proxy 
 
-[source,csharp,method-name="buildingpaths"]
+[source,csharp,method="buildingpaths"]
 ----
 var node = new Node(new Uri("http://test.example/elasticsearch"));
 
@@ -55,7 +55,7 @@ node.Uri.AbsolutePath.Should().Be("/elasticsearch/");
 
 We force paths to end with a forward slash so that they can later be safely combined 
 
-[source,csharp,method-name="buildingpaths"]
+[source,csharp,method="buildingpaths"]
 ----
 var combinedPath = new Uri(node.Uri, "index/type/_search");
 
@@ -64,7 +64,7 @@ combinedPath.AbsolutePath.Should().Be("/elasticsearch/index/type/_search");
 
 which is exactly what the `CreatePath` method does on `Node` 
 
-[source,csharp,method-name="buildingpaths"]
+[source,csharp,method="buildingpaths"]
 ----
 combinedPath = node.CreatePath("index/type/_search");
 
@@ -73,7 +73,7 @@ combinedPath.AbsolutePath.Should().Be("/elasticsearch/index/type/_search");
 
 === Marking Nodes 
 
-[source,csharp,method-name="marknodes"]
+[source,csharp,method="marknodes"]
 ----
 var node = new Node(new Uri("http://localhost:9200"));
 
@@ -85,7 +85,7 @@ node.IsAlive.Should().BeTrue();
 every time a node is marked dead the number of attempts should increase
 and the passed datetime should be exposed.
 
-[source,csharp,method-name="marknodes"]
+[source,csharp,method="marknodes"]
 ----
 var deadUntil = DateTime.Now.AddMinutes(1);
 
@@ -100,7 +100,7 @@ node.DeadUntil.Should().Be(deadUntil);
 
 however when marking a node alive, the `DeadUntil` property should be reset and `FailedAttempts` reset to 0
 
-[source,csharp,method-name="marknodes"]
+[source,csharp,method="marknodes"]
 ----
 node.MarkAlive();
 
@@ -115,7 +115,7 @@ node.IsAlive.Should().BeTrue();
 
 Nodes are considered equal if they have the same endpoint, no matter what other metadata is associated 
 
-[source,csharp,method-name="equality"]
+[source,csharp,method="equality"]
 ----
 var node = new Node(new Uri("http://localhost:9200")) { MasterEligible = false };
 

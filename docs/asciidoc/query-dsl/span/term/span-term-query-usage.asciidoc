@@ -1,0 +1,33 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "span_term": {
+    "user": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "value": "kimchy"
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new SpanTermQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Value = "kimchy",
+Field = "user"
+		}
+----
+

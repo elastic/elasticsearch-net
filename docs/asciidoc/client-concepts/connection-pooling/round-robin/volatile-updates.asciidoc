@@ -4,7 +4,7 @@
 
 :imagesdir: ../../../images
 
-[source,csharp,method-name="staticpoolwithstandsconcurrentreadandwrites"]
+[source,csharp,method="staticpoolwithstandsconcurrentreadandwrites"]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 
@@ -15,7 +15,7 @@ Action callStatic = () => this.AssertCreateView(staticPool);
 callStatic.ShouldNotThrow();
 ----
 
-[source,csharp,method-name="sniffingpoolwithstandsconcurrentreadandwrites"]
+[source,csharp,method="sniffingpoolwithstandsconcurrentreadandwrites"]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 var sniffingPool = new SniffingConnectionPool(uris, randomize: false);
@@ -23,7 +23,7 @@ Action callSniffing = () => this.AssertCreateView(sniffingPool);
 callSniffing.ShouldNotThrow();
 ----
 
-[source,csharp,method-name="assertcreateview"]
+[source,csharp,method="assertcreateview"]
 ----
 var threads = Enumerable.Range(0, 50)
 	.Select(i => CreateReadAndUpdateThread(pool))

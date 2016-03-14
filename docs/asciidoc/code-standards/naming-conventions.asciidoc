@@ -12,7 +12,7 @@ NEST uses the following naming conventions (with _some_ exceptions).
 
 Abstract class names should end with a `Base` suffix
 
-[source,csharp,method-name="abstractclassnamesendwithbase"]
+[source,csharp,method="abstractclassnamesendwithbase"]
 ----
 var exceptions = new[]
 {
@@ -28,7 +28,7 @@ abstractClasses.Should().BeEmpty();
 
 Class names that end with `Base` suffix are abstract
 
-[source,csharp,method-name="classnamecontainsbaseshouldbeabstract"]
+[source,csharp,method="classnamecontainsbaseshouldbeabstract"]
 ----
 var exceptions = new[] { typeof(DateMath) };
 
@@ -46,7 +46,7 @@ baseClassesNotAbstract.Should().BeEmpty();
 
 Request class names should end with `Request`
 
-[source,csharp,method-name="requestclassnamesendwithrequest"]
+[source,csharp,method="requestclassnamesendwithrequest"]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
 
@@ -62,7 +62,7 @@ requests.Should().BeEmpty();
 
 Response class names should end with `Response`
 
-[source,csharp,method-name="responseclassnamesendwithresponse"]
+[source,csharp,method="responseclassnamesendwithresponse"]
 ----
 var types = typeof(IRequest).Assembly().GetTypes();
 
@@ -80,7 +80,7 @@ e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => 
 There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
 the `Exists` requests.
 
-[source,csharp,method-name="paritybetweenrequestsandresponses"]
+[source,csharp,method="paritybetweenrequestsandresponses"]
 ----
 var exceptions = new[] //<1>
 {

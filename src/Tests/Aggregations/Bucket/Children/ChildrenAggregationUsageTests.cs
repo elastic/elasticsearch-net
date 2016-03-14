@@ -38,7 +38,6 @@ namespace Tests.Aggregations.Bucket.Children
 			}
 		};
 
-		/** Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Children<CommitActivity>("name_of_child_agg", child => child
@@ -49,7 +48,6 @@ namespace Tests.Aggregations.Bucket.Children
 				)
 			);
 
-		/** Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{

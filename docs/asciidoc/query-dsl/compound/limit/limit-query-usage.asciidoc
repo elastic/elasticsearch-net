@@ -1,0 +1,30 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "limit": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "limit": 100
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new LimitQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Limit = 100
+		}
+----
+

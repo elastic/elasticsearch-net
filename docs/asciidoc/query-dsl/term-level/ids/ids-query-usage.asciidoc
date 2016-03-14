@@ -1,0 +1,40 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "ids": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "types": [
+      "project",
+      "developer"
+    ],
+    "values": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new IdsQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Values = new List<Id> { 1, 2,3,4 },
+Types = Type<Project>().And<Developer>()
+		}
+----
+

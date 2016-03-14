@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Nest.Litterateur.Documentation.Files;
@@ -16,8 +17,8 @@ namespace Nest.Litterateur
 
 		private static readonly Dictionary<string, decimal> Sections = new Dictionary<string, decimal>();
 
-		public static IEnumerable<DocumentationFile> InputFiles(string extension) =>
-			from f in Directory.GetFiles(Program.InputDirPath, $"*.{extension}", SearchOption.AllDirectories)
+		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
+			from f in Directory.GetFiles(Program.InputDirPath, $"{path}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)
 			where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
 			select DocumentationFile.Load(new FileInfo(f), Sections);
@@ -26,11 +27,12 @@ namespace Nest.Litterateur
 		{
 			get
 			{
-				yield return InputFiles("doc.cs");
-				yield return InputFiles("asciidoc");
-				yield return InputFiles("png");
-				yield return InputFiles("gif");
-				yield return InputFiles("jpg");
+				yield return InputFiles("*.doc.cs");
+				yield return InputFiles("*UsageTests.cs");
+				yield return InputFiles("*.asciidoc");
+				yield return InputFiles("*.png");
+				yield return InputFiles("*.gif");
+				yield return InputFiles("*.jpg");
 			}
 		}	
 
@@ -66,7 +68,12 @@ namespace Nest.Litterateur
 			{
 				indexDoc.Accept(visitor);
 			}
+
+			if (Debugger.IsAttached)
+				Console.ReadKey();
 #endif
+
+
 		}
 	}
 }

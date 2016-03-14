@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -101,6 +102,7 @@ namespace Nest.Litterateur
 				$@"
 					using System;
                     using System.Collections.Generic; 
+					using System.ComponentModel;
 					using Newtonsoft.Json; 
 					using Newtonsoft.Json.Linq;
 
@@ -124,6 +126,7 @@ namespace Nest.Litterateur
 				MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
+				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location), 
 			};
 
 			var compilation =
@@ -143,11 +146,12 @@ namespace Nest.Litterateur
 						diagnostic.IsWarningAsError ||
 						diagnostic.Severity == DiagnosticSeverity.Error);
 
-					var builder = new StringBuilder();
+					var builder = new StringBuilder($"Unable to serialize: {anonymousTypeString}");
 					foreach (var diagnostic in failures)
 					{
 						builder.AppendLine($"{diagnostic.Id}: {diagnostic.GetMessage()}");
 					}
+					builder.AppendLine(new string('-', 30));
 
 					Console.Error.WriteLine(builder.ToString());
 					return false;

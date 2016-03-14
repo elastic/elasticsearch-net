@@ -1,0 +1,56 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "match": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "query": "hello world",
+      "analyzer": "standard",
+      "fuzzy_rewrite": "constant_score_boolean",
+      "fuzziness": "AUTO",
+      "fuzzy_transpositions": true,
+      "cutoff_frequency": 0.001,
+      "prefix_length": 2,
+      "max_expansions": 2,
+      "slop": 2,
+      "lenient": true,
+      "minimum_should_match": 2,
+      "operator": "or",
+      "type": "phrase"
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new MatchPhraseQuery
+		{
+Field = Field<Project>(p=>p.Description),
+Analyzer = "standard",
+Boost = 1.1,
+Name = "named_query",
+CutoffFrequency = 0.001,
+Query = "hello world",
+Fuzziness = Fuzziness.Auto,
+FuzzyTranspositions = true,
+MinimumShouldMatch = 2,
+FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+MaxExpansions = 2,
+Slop = 2,
+Lenient = true,
+Operator = Operator.Or,
+PrefixLength = 2
+		}
+----
+

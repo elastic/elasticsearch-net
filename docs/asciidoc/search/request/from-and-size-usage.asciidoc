@@ -1,0 +1,35 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../images
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "from": 10,
+  "size": 12
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+new SearchRequest<Project>()
+{
+	From = 10,
+	Size = 12
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+s => s
+	.From(10)
+	.Size(12)
+----
+

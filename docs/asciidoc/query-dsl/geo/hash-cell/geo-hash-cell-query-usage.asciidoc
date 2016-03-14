@@ -1,0 +1,38 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "geohash_cell": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "precision": "3.0m",
+    "neighbors": true,
+    "location": {
+      "lat": 13.408,
+      "lon": 52.5186
+    }
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new GeoHashCellQuery
+		{
+Boost = 1.1,
+Name = "named_query",
+Field = Infer.Field<Project>(p=>p.Location),
+Location = new GeoLocation(13.4080, 52.5186),
+Neighbors = true,
+Precision = Nest.Distance.Meters(3)
+		}
+----
+

@@ -1,0 +1,50 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "span_not": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "include": {
+      "span_term": {
+        "field1": {
+          "value": "hoya"
+        }
+      }
+    },
+    "exclude": {
+      "span_term": {
+        "field1": {
+          "value": "hoya2"
+        }
+      }
+    },
+    "pre": 14,
+    "post": 13,
+    "dist": 12
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new SpanNotQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Dist = 12,
+Post = 13,
+Pre = 14,
+Include = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
+Exclude = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
+		}
+----
+

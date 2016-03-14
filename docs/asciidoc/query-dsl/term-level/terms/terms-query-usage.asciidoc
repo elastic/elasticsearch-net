@@ -1,0 +1,38 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images
+
+[source,javascript,method="queryjson"]
+.Example json output
+----
+{
+  "terms": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "description": [
+      "term1",
+      "term2"
+    ],
+    "disable_coord": true,
+    "minimum_should_match": 2
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="queryinitializer"]
+----
+new TermsQuery
+		{
+Name = "named_query",
+Boost = 1.1,
+Field = "description",
+Terms = new [] { "term1", "term2" },
+DisableCoord = true,
+MinimumShouldMatch = 2
+		}
+----
+

@@ -1,0 +1,34 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../images
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "post_filter": {
+    "match_all": {}
+  }
+}
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+new SearchRequest<Project>()
+{
+	PostFilter = new QueryContainer(new MatchAllQuery())
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+s => s
+.PostFilter(f => f.MatchAll())
+----
+

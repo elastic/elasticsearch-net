@@ -25,7 +25,7 @@ You can implicitly convert from the following types
 
 * `object`	
 
-[source,csharp,method-name="implicitconversions"]
+[source,csharp,method="implicitconversions"]
 ----
 var fromString = ImplicitlyConvertsFrom(@string);
 
@@ -37,19 +37,19 @@ var fromObject = ImplicitlyConvertsFrom(@object);
 
 PostData bytes will always be set if it originated from a byte
 
-[source,csharp,method-name="implicitconversions"]
+[source,csharp,method="implicitconversions"]
 ----
 fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
 ----
 
-[source,csharp,method-name="writescorrectlyusingbothlowandhighlevelsettings"]
+[source,csharp,method="writescorrectlyusingbothlowandhighlevelsettings"]
 ----
 await this.AssertOn(new ConnectionSettings());
 
 await this.AssertOn(new ConnectionConfiguration());
 ----
 
-[source,csharp,method-name="implicitconversions"]
+[source,csharp,method="implicitconversions"]
 ----
 fromString.Type.Should().Be(PostType.LiteralString);
 fromByteArray.Type.Should().Be(PostType.ByteArray);
@@ -70,7 +70,7 @@ fromObject.Type.Should().Be(PostType.Serializable);
 
 Although each implicitly types behaves slightly differently 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => @string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
 
@@ -80,7 +80,7 @@ await Post(() => bytes, writes: bytes, storesBytes: true, settings: settings);
 When passing a list of strings we assume its a list of valid serialized json that we 
 join with newlinefeeds making sure there is a trailing linefeed 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, settings: settings);
 ----
@@ -88,21 +88,21 @@ await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, sett
 When passing a list of object we assume its a list of objects we need to serialize
 individually to json and join with newlinefeeds aking sure there is a trailing linefeed 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: false, settings: settings);
 ----
 
 In all other cases postdata is serialized as is. 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => @object, writes: objectJson, storesBytes: false, settings: settings);
 ----
 
 If you want to maintain a copy of the request that went out use the following settings 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 settings = new ConnectionSettings().DisableDirectStreaming();
 ----
@@ -110,26 +110,26 @@ settings = new ConnectionSettings().DisableDirectStreaming();
 by forcing `DisableDirectStreaming` serializing happens first in a private MemoryStream 
 so we can get hold of the serialized bytes 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
 ----
 
 this behavior can also be observed when serializing a simple object using `DisableDirectStreaming` 
 
-[source,csharp,method-name="asserton"]
+[source,csharp,method="asserton"]
 ----
 await Post(() => @object, writes: objectJson, storesBytes: true, settings: settings);
 ----
 
-[source,csharp,method-name="post"]
+[source,csharp,method="post"]
 ----
 PostAssert(postData(), writes, storesBytes, settings);
 
 await PostAssertAsync(postData(), writes, storesBytes, settings);
 ----
 
-[source,csharp,method-name="postassert"]
+[source,csharp,method="postassert"]
 ----
 postData.Write(ms, settings);
 
@@ -142,7 +142,7 @@ postData.WrittenBytes.Should().NotBeNull();
 postData.WrittenBytes.Should().BeNull();
 ----
 
-[source,csharp,method-name="postassertasync"]
+[source,csharp,method="postassertasync"]
 ----
 await postData.WriteAsync(ms, settings);
 
