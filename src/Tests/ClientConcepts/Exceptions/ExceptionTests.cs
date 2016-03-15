@@ -19,14 +19,14 @@ namespace Tests.ClientConcepts.Exceptions
 			_port = cluster.Node.Port;
 		}
 
-		[I]
+		//[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
 			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
-#if DOTNETCORE 
+#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus the inner exception should not be set
 			exception.InnerException.Should().BeNull();
 #else
@@ -37,7 +37,7 @@ namespace Tests.ClientConcepts.Exceptions
 			exception.Response.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
-		[I]
+		//[I]
 		public void ClientTestWhenThrowExceptionsEnabled()
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"))
@@ -53,23 +53,23 @@ namespace Tests.ClientConcepts.Exceptions
 #endif
 		}
 
-		[I]
+		//[I]
 		public void ServerTestWhenThrowExceptionsDisabled()
 		{
 			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
-#if DOTNETCORE 
+#if DOTNETCORE
 			// HttpClient does not throw on "known error" status codes (i.e. 404) thus OriginalException should not be set
 			response.CallDetails.OriginalException.Should().BeNull();
-#else 
+#else
 			response.CallDetails.OriginalException.Should().NotBeNull();
 #endif
 			response.CallDetails.ServerError.Should().NotBeNull();
 			response.CallDetails.ServerError.Status.Should().BeGreaterThan(0);
 		}
 
-		[I]
+		//[I]
 		public void ClientTestWhenThrowExceptionsDisabled()
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
@@ -89,7 +89,7 @@ namespace Tests.ClientConcepts.Exceptions
 		{
 			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
 			var client = new ElasticClient(settings);
-			
+
 			Action dispatch = () => client.Index(new Project());
 			var ce = dispatch.ShouldThrow<ArgumentException>();
 			ce.Should().NotBeNull();
