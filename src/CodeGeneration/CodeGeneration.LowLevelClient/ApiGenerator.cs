@@ -24,7 +24,7 @@ namespace CodeGeneration.LowLevelClient
 		private static string ViewFolder;
 		private static string ApiEndpointsFolder;
 		private static readonly RazorMachine RazorHelper;
-		private static readonly string Version = "2.2";
+		private static readonly string Version = "master";
 		private static readonly List<string> ApiListings = new List<string>
 		{
 			"https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api"

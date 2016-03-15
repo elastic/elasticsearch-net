@@ -45,6 +45,10 @@ namespace Elasticsearch.Net
 		public BulkRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
 		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public BulkRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
+		
+		
 		///<summary>The URL-encoded request definition</summary>
 		public BulkRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -62,6 +66,10 @@ namespace Elasticsearch.Net
 	public class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatAliasesRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -100,6 +108,10 @@ namespace Elasticsearch.Net
 	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatAllocationRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
@@ -143,6 +155,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatCountRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -180,6 +196,10 @@ namespace Elasticsearch.Net
 	public class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatFielddataRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
@@ -226,6 +246,10 @@ namespace Elasticsearch.Net
 	public class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatHealthRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -291,6 +315,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatIndicesRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
 		
@@ -337,6 +365,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatMasterRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -374,6 +406,10 @@ namespace Elasticsearch.Net
 	public class CatNodeattrsRequestParameters : FluentRequestParameters<CatNodeattrsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatNodeattrsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeattrsRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -413,6 +449,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatNodesRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -450,6 +490,10 @@ namespace Elasticsearch.Net
 	public class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatPendingTasksRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -489,6 +533,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatPluginsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -526,6 +574,10 @@ namespace Elasticsearch.Net
 	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatRecoveryRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryRequestParameters Bytes(Bytes bytes) => this.AddQueryString("bytes", bytes);
@@ -565,6 +617,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatRepositoriesRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public CatRepositoriesRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
@@ -603,6 +659,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatSegmentsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsRequestParameters H(params string[] h) => this.AddQueryString("h", h);
 		
@@ -632,6 +692,10 @@ namespace Elasticsearch.Net
 	public class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatShardsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -671,6 +735,10 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatSnapshotsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
+		
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public CatSnapshotsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -708,6 +776,10 @@ namespace Elasticsearch.Net
 	public class CatThreadPoolRequestParameters : FluentRequestParameters<CatThreadPoolRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatThreadPoolRequestParameters Format(string format) => this.AddQueryString("format", format);
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolRequestParameters Local(bool local) => this.AddQueryString("local", local);
@@ -779,6 +851,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Explicit operation timeout</summary>
 		public ClusterGetSettingsRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Whether to return all default clusters setting.</summary>
+		public ClusterGetSettingsRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -1649,6 +1725,10 @@ namespace Elasticsearch.Net
 		public IndexRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public IndexRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
+		
+		
 		///<summary>The URL-encoded request definition</summary>
 		public IndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -1700,10 +1780,10 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
-		public AnalyzeRequestParameters Detail(bool detail) => this.AddQueryString("detail", detail);
+		public AnalyzeRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
 		
 		
-		///<summary>A comma-separated list of token attributes to output, this parameter works only with `detail=true`</summary>
+		///<summary>A comma-separated list of token attributes to output, this parameter works only with `explain=true`</summary>
 		public AnalyzeRequestParameters Attributes(params string[] attributes) => this.AddQueryString("attributes", attributes);
 		
 		
@@ -2221,6 +2301,10 @@ namespace Elasticsearch.Net
 		public GetIndexRequestParameters Human(bool human) => this.AddQueryString("human", human);
 		
 		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public GetIndexRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
+		
+		
 		///<summary>The URL-encoded request definition</summary>
 		public GetIndexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2393,6 +2477,10 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
 		public GetIndexSettingsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public GetIndexSettingsRequestParameters IncludeDefaults(bool include_defaults) => this.AddQueryString("include_defaults", include_defaults);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -3110,6 +3198,102 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for IngestDeletePipeline
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
+	///</pre>
+	///</summary>
+	public class IngestDeletePipelineRequestParameters : FluentRequestParameters<IngestDeletePipelineRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestDeletePipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public IngestDeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public IngestDeletePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestDeletePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for IngestGetPipeline
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
+	///</pre>
+	///</summary>
+	public class IngestGetPipelineRequestParameters : FluentRequestParameters<IngestGetPipelineRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestGetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public IngestGetPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestGetPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for IngestPutPipeline
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
+	///</pre>
+	///</summary>
+	public class IngestPutPipelineRequestParameters : FluentRequestParameters<IngestPutPipelineRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestPutPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public IngestPutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public IngestPutPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestPutPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for IngestSimulate
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
+	///</pre>
+	///</summary>
+	public class IngestSimulateRequestParameters : FluentRequestParameters<IngestSimulateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
+		public IngestSimulateRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public IngestSimulateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestSimulateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for Mget
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html
@@ -3537,6 +3721,40 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for Reindex
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
+	///</pre>
+	///</summary>
+	public class ReindexRequestParameters : FluentRequestParameters<ReindexRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public ReindexRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public ReindexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public ReindexRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		
+		
+		///<summary>Should the request should block until the reindex is complete.</summary>
+		public ReindexRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ReindexRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ReindexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4088,6 +4306,82 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for TasksCancel
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html
+	///</pre>
+	///</summary>
+	public class TasksCancelRequestParameters : FluentRequestParameters<TasksCancelRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public TasksCancelRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		
+		
+		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
+		public TasksCancelRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
+		
+		
+		///<summary>Cancel tasks with specified parent node.</summary>
+		public TasksCancelRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
+		
+		
+		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
+		public TasksCancelRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public TasksCancelRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TasksCancelRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for TasksList
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html
+	///</pre>
+	///</summary>
+	public class TasksListRequestParameters : FluentRequestParameters<TasksListRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public TasksListRequestParameters NodeId(params string[] node_id) => this.AddQueryString("node_id", node_id);
+		
+		
+		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+		public TasksListRequestParameters Actions(params string[] actions) => this.AddQueryString("actions", actions);
+		
+		
+		///<summary>Return detailed task information (default: false)</summary>
+		public TasksListRequestParameters Detailed(bool detailed) => this.AddQueryString("detailed", detailed);
+		
+		
+		///<summary>Return tasks with specified parent node.</summary>
+		public TasksListRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
+		
+		
+		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
+		public TasksListRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		
+		
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public TasksListRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public TasksListRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TasksListRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for Termvectors
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html
@@ -4103,10 +4397,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public TermVectorsRequestParameters FieldStatistics(bool field_statistics) => this.AddQueryString("field_statistics", field_statistics);
-		
-		
-		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public TermVectorsRequestParameters Dfs(bool dfs) => this.AddQueryString("dfs", dfs);
 		
 		
 		///<summary>A comma-separated list of fields to return.</summary>
@@ -4155,6 +4445,188 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public TermVectorsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for Update-By-Query
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
+	///</pre>
+	///</summary>
+	public class Update-By-QueryRequestParameters : FluentRequestParameters<Update-By-QueryRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public Update-By-QueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public Update-By-QueryRequestParameters AnalyzeWildcard(bool analyze_wildcard) => this.AddQueryString("analyze_wildcard", analyze_wildcard);
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public Update-By-QueryRequestParameters DefaultOperator(DefaultOperator default_operator) => this.AddQueryString("default_operator", default_operator);
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public Update-By-QueryRequestParameters Df(string df) => this.AddQueryString("df", df);
+		
+		
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public Update-By-QueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
+		
+		
+		///<summary>A comma-separated list of fields to return as part of a hit</summary>
+		public Update-By-QueryRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
+		
+		
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		public Update-By-QueryRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);
+		
+		
+		///<summary>Starting offset (default: 0)</summary>
+		public Update-By-QueryRequestParameters From(long from) => this.AddQueryString("from", from);
+		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public Update-By-QueryRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public Update-By-QueryRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		
+		
+		///<summary>What to do when the reindex hits version conflicts?</summary>
+		public Update-By-QueryRequestParameters Conflicts(Conflicts conflicts) => this.AddQueryString("conflicts", conflicts);
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public Update-By-QueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public Update-By-QueryRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public Update-By-QueryRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms) => this.AddQueryString("lowercase_expanded_terms", lowercase_expanded_terms);
+		
+		
+		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
+		public Update-By-QueryRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
+		
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public Update-By-QueryRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
+		
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public Update-By-QueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
+		
+		
+		///<summary>A comma-separated list of specific routing values</summary>
+		public Update-By-QueryRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
+		
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Update-By-QueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		
+		
+		///<summary>Search operation type</summary>
+		public Update-By-QueryRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
+		
+		
+		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
+		public Update-By-QueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout.ToTimeUnit());
+		
+		
+		///<summary>Number of hits to return (default: 10)</summary>
+		public Update-By-QueryRequestParameters Size(long size) => this.AddQueryString("size", size);
+		
+		
+		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		public Update-By-QueryRequestParameters Sort(params string[] sort) => this.AddQueryString("sort", sort);
+		
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public Update-By-QueryRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
+		
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public Update-By-QueryRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
+		
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public Update-By-QueryRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
+		
+		
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public Update-By-QueryRequestParameters TerminateAfter(long terminate_after) => this.AddQueryString("terminate_after", terminate_after);
+		
+		
+		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		public Update-By-QueryRequestParameters Stats(params string[] stats) => this.AddQueryString("stats", stats);
+		
+		
+		///<summary>Specify which field to use for suggestions</summary>
+		public Update-By-QueryRequestParameters SuggestField(string suggest_field) => this.AddQueryString("suggest_field", suggest_field);
+		
+		
+		///<summary>Specify suggest mode</summary>
+		public Update-By-QueryRequestParameters SuggestMode(SuggestMode suggest_mode) => this.AddQueryString("suggest_mode", suggest_mode);
+		
+		
+		///<summary>How many suggestions to return in response</summary>
+		public Update-By-QueryRequestParameters SuggestSize(long suggest_size) => this.AddQueryString("suggest_size", suggest_size);
+		
+		
+		///<summary>The source text for which the suggestions should be returned</summary>
+		public Update-By-QueryRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
+		
+		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Update-By-QueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
+		public Update-By-QueryRequestParameters TrackScores(bool track_scores) => this.AddQueryString("track_scores", track_scores);
+		
+		
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public Update-By-QueryRequestParameters Version(bool version) => this.AddQueryString("version", version);
+		
+		
+		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
+		public Update-By-QueryRequestParameters VersionType(bool version_type) => this.AddQueryString("version_type", version_type);
+		
+		
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public Update-By-QueryRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
+		
+		
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public Update-By-QueryRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public Update-By-QueryRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		
+		
+		///<summary>Size on the scroll request powering the update-by-query</summary>
+		public Update-By-QueryRequestParameters ScrollSize(integer scroll_size) => this.AddQueryString("scroll_size", scroll_size);
+		
+		
+		///<summary>Should the request should block until the reindex is complete.</summary>
+		public Update-By-QueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public Update-By-QueryRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public Update-By-QueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

@@ -119,11 +119,7 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "dfs_query_then_fetch")]
 		DfsQueryThenFetch,
 		[EnumMember(Value = "dfs_query_and_fetch")]
-		DfsQueryAndFetch,
-		[EnumMember(Value = "count")]
-		Count,
-		[EnumMember(Value = "scan")]
-		Scan
+		DfsQueryAndFetch
 	}
 	
 	
@@ -156,6 +152,15 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	public enum Conflicts 
+	{
+		[EnumMember(Value = "abort")]
+		Abort,
+		[EnumMember(Value = "proceed")]
+		Proceed
+	}
+	
+	
 	[Flags]public enum ClusterStateMetric 
 	{
 		[EnumMember(Value = "blocks")]
@@ -183,10 +188,8 @@ namespace Elasticsearch.Net
 		Settings = 1 << 0,
 		[EnumMember(Value = "_mappings")]
 		Mappings = 1 << 1,
-		[EnumMember(Value = "_warmers")]
-		Warmers = 1 << 2,
 		[EnumMember(Value = "_aliases")]
-		Aliases = 1 << 3
+		Aliases = 1 << 2
 	}
 	
 	
@@ -246,7 +249,9 @@ namespace Elasticsearch.Net
 		[EnumMember(Value = "http")]
 		Http = 1 << 6,
 		[EnumMember(Value = "plugins")]
-		Plugins = 1 << 7
+		Plugins = 1 << 7,
+		[EnumMember(Value = "ingest")]
+		Ingest = 1 << 8
 	}
 	
 	
@@ -270,8 +275,10 @@ namespace Elasticsearch.Net
 		ThreadPool = 1 << 7,
 		[EnumMember(Value = "transport")]
 		Transport = 1 << 8,
+		[EnumMember(Value = "discovery")]
+		Discovery = 1 << 9,
 		[EnumMember(Value = "_all")]
-		All = 1 << 9
+		All = 1 << 10
 	}
 	
 	
@@ -426,8 +433,6 @@ namespace Elasticsearch.Net
 					case SearchType.QueryAndFetch: return "query_and_fetch";
 					case SearchType.DfsQueryThenFetch: return "dfs_query_then_fetch";
 					case SearchType.DfsQueryAndFetch: return "dfs_query_and_fetch";
-					case SearchType.Count: return "count";
-					case SearchType.Scan: return "scan";
 				}
 			
 			}
@@ -463,6 +468,16 @@ namespace Elasticsearch.Net
 			
 			}
 			
+			if (e is Conflicts)
+			{ 
+				switch((Conflicts)e)
+				{
+					case Conflicts.Abort: return "abort";
+					case Conflicts.Proceed: return "proceed";
+				}
+			
+			}
+			
 			if (e is ClusterStateMetric)
 			{ 
 				var list = new List<string>();
@@ -483,7 +498,6 @@ namespace Elasticsearch.Net
 				var list = new List<string>();
 				if (e.HasFlag(Feature.Settings)) list.Add("_settings");
 				if (e.HasFlag(Feature.Mappings)) list.Add("_mappings");
-				if (e.HasFlag(Feature.Warmers)) list.Add("_warmers");
 				if (e.HasFlag(Feature.Aliases)) list.Add("_aliases");
 				return string.Join(",", list);
 			
@@ -524,6 +538,7 @@ namespace Elasticsearch.Net
 				if (e.HasFlag(NodesInfoMetric.Transport)) list.Add("transport");
 				if (e.HasFlag(NodesInfoMetric.Http)) list.Add("http");
 				if (e.HasFlag(NodesInfoMetric.Plugins)) list.Add("plugins");
+				if (e.HasFlag(NodesInfoMetric.Ingest)) list.Add("ingest");
 				return string.Join(",", list);
 			
 			}
@@ -540,6 +555,7 @@ namespace Elasticsearch.Net
 				if (e.HasFlag(NodesStatsMetric.Process)) list.Add("process");
 				if (e.HasFlag(NodesStatsMetric.ThreadPool)) list.Add("thread_pool");
 				if (e.HasFlag(NodesStatsMetric.Transport)) list.Add("transport");
+				if (e.HasFlag(NodesStatsMetric.Discovery)) list.Add("discovery");
 				if (e.HasFlag(NodesStatsMetric.All)) return "_all";
 				return string.Join(",", list);
 			
