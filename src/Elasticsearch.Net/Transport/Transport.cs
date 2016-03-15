@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 		public IRequestPipelineFactory PipelineProvider { get; }
 
 		/// <summary>
-		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
+		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues)
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 		{ }
 
 		/// <summary>
-		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
+		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		/// <param name="pipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
@@ -82,6 +82,11 @@ namespace Elasticsearch.Net
 					{
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
+					}
+					catch (ResolveException resolveException)
+					{
+						resolveException.RethrowKeepingStackTrace();
+						return null; //dead code due to call to RethrowKeepingStackTrace()
 					}
 					catch (Exception killerException)
 					{
@@ -142,6 +147,11 @@ namespace Elasticsearch.Net
 					{
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
+					}
+					catch (ResolveException resolveException)
+					{
+						resolveException.RethrowKeepingStackTrace();
+						return null; //dead code due to call to RethrowKeepingStackTrace()
 					}
 					catch (Exception killerException)
 					{
