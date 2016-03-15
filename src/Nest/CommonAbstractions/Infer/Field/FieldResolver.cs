@@ -51,17 +51,14 @@ namespace Nest
 		{
 			if (property.IsConditionless()) return null;
 			if (!property.Name.IsNullOrEmpty())
-			{
-				if (property.Name.Contains("."))
-					throw new ArgumentException("Property names cannot contain dots.");
 				return property.Name;
-			}
-			string f;
-			if (this.Properties.TryGetValue(property, out f))
-				return f;
-			f = this.Resolve(property.Expression, property.Property, true);
-			this.Properties.TryAdd(property, f);
-			return f;
+
+			string propertyName;
+			if (this.Properties.TryGetValue(property, out propertyName))
+				return propertyName;
+			propertyName = this.Resolve(property.Expression, property.Property, true);
+			this.Properties.TryAdd(property, propertyName);
+			return propertyName;
 		}
 
 		private string Resolve(Expression expression, MemberInfo member, bool toLastToken = false)
@@ -74,7 +71,7 @@ namespace Nest
 					: null;
 
 			if (name == null)
-				throw new ArgumentException("Could not resolve a name from the given Expression or MemberInfo.");
+				throw new ResolveException("Name resolved to null for the given Expression or MemberInfo.");
 
 			return name;
 		}
