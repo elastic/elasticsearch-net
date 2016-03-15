@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 		public int Status { get; set; }
 
 		public static ServerError Create(Stream stream) => ElasticsearchDefaultSerializer.Instance.Deserialize<ServerError>(stream);
-		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) => 
+		public static Task<ServerError> CreateAsync(Stream stream, CancellationToken token) =>
 			ElasticsearchDefaultSerializer.Instance.DeserializeAsync<ServerError>(stream, token);
 
 		/// <summary>
@@ -31,9 +31,9 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Creating the server error might fail in cases where a proxy returns an http response which is not json at all
 		/// </summary>
-		public static Task<ServerError> TryCreateAsync(Stream stream, CancellationToken token)
+		public static async Task<ServerError> TryCreateAsync(Stream stream, CancellationToken token)
 		{
-			try { return CreateAsync(stream, token); }
+			try { return await CreateAsync(stream, token).ConfigureAwait(false); }
 			catch { // ignored
 			}
 			return null;
@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 			};
 		}
 
-		public override string ToString() 
+		public override string ToString()
 		{
 			var sb = new StringBuilder();
 			sb.Append($"ServerError: {Status}");
