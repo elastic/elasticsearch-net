@@ -572,10 +572,11 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The has_child filter accepts a query and the child type to run against, 
-		/// and results in parent documents that have child docs matching the query.
+		/// The has_parent filter accepts a query and a parent type. 
+		/// The query is executed in the parent document space, which is specified by the parent type.
+		/// This filter returns child documents which associated parents have matched. 
 		/// </summary>
-		/// <typeparam name="K">Type of the child</typeparam>
+		/// <typeparam name="K">Type of the parent</typeparam>
 		public FilterContainer HasParent<K>(Action<HasParentFilterDescriptor<K>> filterSelector) where K : class
 		{
 			var filter = new HasParentFilterDescriptor<K>();
