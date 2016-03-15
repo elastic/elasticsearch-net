@@ -1,10 +1,10 @@
 {
-  "indices.refresh": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html",
+  "indices.forcemerge": {
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html",
     "methods": ["POST", "GET"],
     "url": {
-      "path": "/_refresh",
-      "paths": ["/_refresh", "/{index}/_refresh"],
+      "path": "/_forcemerge",
+      "paths": ["/_forcemerge", "/{index}/_forcemerge"],
       "parts": {
         "index": {
           "type" : "list",
@@ -12,6 +12,10 @@
         }
       },
       "params": {
+        "flush": {
+          "type" : "boolean",
+          "description" : "Specify whether the index should be flushed after performing the operation (default: true)"
+        },
         "ignore_unavailable": {
             "type" : "boolean",
             "description" : "Whether specified concrete indices should be ignored when unavailable (missing or closed)"
@@ -26,13 +30,20 @@
             "default" : "open",
             "description" : "Whether to expand wildcard expression to concrete indices that are open, closed or both."
         },
-        "force": {
-            "type" : "boolean",
-            "description" : "Force a refresh even if not required",
-            "default": false
+        "max_num_segments": {
+          "type" : "number",
+          "description" : "The number of segments the index should be merged into (default: dynamic)"
+        },
+        "only_expunge_deletes": {
+          "type" : "boolean",
+          "description" : "Specify whether the operation should only expunge deleted documents"
         },
         "operation_threading": {
           "description" : "TODO: ?"
+        },
+        "wait_for_merge": {
+          "type" : "boolean",
+          "description" : "Specify whether the request should block until the merge process is finished (default: true)"
         }
       }
     },

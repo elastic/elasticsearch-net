@@ -1,6 +1,6 @@
 {
   "indices.analyze": {
-    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/2.0/indices-analyze.html",
+    "documentation": "http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html",
     "methods": ["GET", "POST"],
     "url": {
       "path": "/_analyze",
@@ -43,6 +43,14 @@
         "tokenizer": {
           "type" : "string",
           "description" : "The name of the tokenizer to use for the analysis"
+        },
+        "detail": {
+          "type" : "boolean",
+          "description" : "With `true`, outputs more advanced details. (default: false)"
+        },
+        "attributes": {
+          "type" : "list",
+          "description" : "A comma-separated list of token attributes to output, this parameter works only with `detail=true`"
         },
         "format": {
           "type": "enum",
