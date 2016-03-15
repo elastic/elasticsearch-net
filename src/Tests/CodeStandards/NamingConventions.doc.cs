@@ -8,7 +8,7 @@ using Tests.Framework;
 namespace Tests.CodeStandards
 {
 	/** # Naming Conventions
-	* 
+	*
 	* NEST uses the following naming conventions (with _some_ exceptions).
 	*/
 	public class NamingConventions
@@ -111,6 +111,9 @@ namespace Tests.CodeStandards
 				typeof(CatSegmentsRequest),
 				typeof(CatShardsRequest),
 				typeof(CatThreadPoolRequest),
+				typeof(CatRepositoriesRequest),
+				typeof(CatSnapshotsRequest),
+				typeof(IndicesForcemergeRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
