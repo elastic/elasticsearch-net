@@ -446,12 +446,12 @@ namespace Nest
 
 			return this.New(query, q => q.HasChild = query);
 		}
-		
+
 		/// <summary>
-		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
+		/// The has_parent query works the same as the has_parent filter, by automatically wrapping the filter with a 
 		/// constant_score.
 		/// </summary>
-		/// <typeparam name="K">Type of the child</typeparam>
+		/// <typeparam name="K">Type of the parent</typeparam>
 		public QueryContainer HasParent<K>(Action<HasParentQueryDescriptor<K>> selector) where K : class
 		{
 			var query = new HasParentQueryDescriptor<K>();
