@@ -3176,30 +3176,30 @@ namespace Nest
 			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
-		internal ElasticsearchResponse<T> Update-By-QueryDispatch<T>(IRequest<Update-By-QueryRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> UpdateByQueryDispatch<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Update-By-Query<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.Update-By-Query<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("Update-By-Query", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> Update-By-QueryDispatchAsync<T>(IRequest<Update-By-QueryRequestParameters> p , PostData<object> body) where T : class
+		internal Task<ElasticsearchResponse<T>> UpdateByQueryDispatchAsync<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
 				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.Update-By-QueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.Update-By-QueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("Update-By-Query", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
 		internal ElasticsearchResponse<T> UpdateDispatch<T>(IRequest<UpdateRequestParameters> p , PostData<object> body) where T : class

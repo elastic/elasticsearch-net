@@ -61,7 +61,7 @@ namespace CodeGeneration.LowLevelClient
 		public static string PascalCase(string s)
 		{
 			var textInfo = new CultureInfo("en-US").TextInfo;
-			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
+			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty).Replace("-", string.Empty);
 		}
 
 		public void GenerateEndpointFiles()

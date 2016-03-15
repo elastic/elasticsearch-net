@@ -32,8 +32,8 @@ namespace Nest
         /// <param name="selector">the descriptor to describe the reindex operation</param>
         /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
         public IObservable<IReindexResponse<T>> Reindex<T>(IndexName from, IndexName to, Func<ReindexDescriptor<T>, IReindexRequest> selector = null)
-			where T : class => 
-			this.Reindex<T>(selector.InvokeOrDefault(new ReindexDescriptor<T>(from, to)));
+			where T : class =>
+			this.Reindex<T>(selector.InvokeOrDefault(new ReindexDescriptor<T>()));
 
         /// <summary>
         /// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
@@ -41,7 +41,7 @@ namespace Nest
         /// <param name="request">a request object to describe the reindex operation</param>
         /// <returns>An IObservable&lt;IReindexResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
         public IObservable<IReindexResponse<T>> Reindex<T>(IReindexRequest request)
-			where T : class => 
+			where T : class =>
 			new ReindexObservable<T>(this, ConnectionSettings, request);
 	}
 }

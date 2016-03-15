@@ -8134,8 +8134,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Cancel the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> TasksCancel<T>(number task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_tasks/{task_id}/_cancel"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8148,8 +8148,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Cancel the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(number task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_tasks/{task_id}/_cancel"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_tasks 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8188,8 +8188,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Return the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> TasksList<T>(number task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> TasksList<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_tasks/{task_id}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_tasks/{task_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8202,8 +8202,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Return the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TasksListAsync<T>(number task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> TasksListAsync<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_tasks/{task_id}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8345,7 +8345,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Update-By-Query<T>(string index, PostData<object> body, Func<Update-By-QueryRequestParameters, Update-By-QueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_update_by_query 
@@ -8360,7 +8360,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> Update-By-QueryAsync<T>(string index, PostData<object> body, Func<Update-By-QueryRequestParameters, Update-By-QueryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query 
@@ -8376,7 +8376,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Update-By-Query<T>(string index, string type, PostData<object> body, Func<Update-By-QueryRequestParameters, Update-By-QueryRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> UpdateByQuery<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_update_by_query 
@@ -8392,7 +8392,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> Update-By-QueryAsync<T>(string index, string type, PostData<object> body, Func<Update-By-QueryRequestParameters, Update-By-QueryRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update 

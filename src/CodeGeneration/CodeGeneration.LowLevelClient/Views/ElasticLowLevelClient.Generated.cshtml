@@ -34,7 +34,11 @@ namespace Elasticsearch.Net
 		{
 			var url = method.Path.Split(new[] {'/'}, 2).Last();
 			int i = -1;
-			var patchedUrl = Regex.Replace(url, @"{(\w+)}", "{$1.NotNull(\"$1\")}");
+			var patchedUrl = url;
+			if (!url.Contains("{task_id}"))
+			{
+				patchedUrl = Regex.Replace(url, @"{(\w+)}", "{$1.NotNull(\"$1\")}");
+			}
 			bool isAsync = method.ReturnType.StartsWith("Task<");
 			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
 		<text>///<summary>Represents a @method.HttpMethod on @method.Path 

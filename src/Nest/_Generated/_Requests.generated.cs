@@ -5145,20 +5145,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITasksCancelRequest : IRequest<TasksCancelRequestParameters> 
 	{
-		number_ TaskId { get; }
+		TaskId TaskId { get; }
 	 } 
 	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html</pre></summary>
 	public partial class TasksCancelRequest  : RequestBase<TasksCancelRequestParameters>, ITasksCancelRequest
 	{
 		protected ITasksCancelRequest Self => this;
-		number_ ITasksCancelRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
 		public TasksCancelRequest() : base(){}
 		
 
 		/// <summary>/_tasks/{task_id}/_cancel</summary>
 ///<param name="task_id">Optional, accepts null</param>
-		public TasksCancelRequest(number_ task_id) : base(r=>r.Optional("task_id", task_id)){}
+		public TasksCancelRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -5186,20 +5186,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITasksListRequest : IRequest<TasksListRequestParameters> 
 	{
-		number_ TaskId { get; }
+		TaskId TaskId { get; }
 	 } 
 	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html</pre></summary>
 	public partial class TasksListRequest  : RequestBase<TasksListRequestParameters>, ITasksListRequest
 	{
 		protected ITasksListRequest Self => this;
-		number_ ITasksListRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksListRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks</summary>
 		public TasksListRequest() : base(){}
 		
 
 		/// <summary>/_tasks/{task_id}</summary>
 ///<param name="task_id">Optional, accepts null</param>
-		public TasksListRequest(number_ task_id) : base(r=>r.Optional("task_id", task_id)){}
+		public TasksListRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -5346,26 +5346,26 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdate-By-QueryRequest : IRequest<Update-By-QueryRequestParameters> 
+	public partial interface IUpdateByQueryRequest : IRequest<UpdateByQueryRequestParameters> 
 	{
 		Indices Index { get; }
 		Types Type { get; }
 	 } 
-	///<summary>Request parameters for Update-By-Query <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
-	public partial class Update-By-QueryRequest  : RequestBase<Update-By-QueryRequestParameters>, IUpdate-By-QueryRequest
+	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class UpdateByQueryRequest  : RequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
-		protected IUpdate-By-QueryRequest Self => this;
-		Indices IUpdate-By-QueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IUpdate-By-QueryRequest.Type => Self.RouteValues.Get<Types>("type");
+		protected IUpdateByQueryRequest Self => this;
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
 ///<param name="index">Optional, accepts null</param>
-		public Update-By-QueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public UpdateByQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
 		/// <summary>/{index}/{type}/_update_by_query</summary>
 ///<param name="index">Optional, accepts null</param>		
 ///<param name="type">Optional, accepts null</param>
-		public Update-By-QueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 		
 
 			///<summary>The analyzer to use for the query string</summary>
@@ -5486,7 +5486,7 @@ namespace Nest
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Size on the scroll request powering the update-by-query</summary>
-		public integer ScrollSize { get { return Q<integer>("scroll_size"); } set { Q("scroll_size", value); } }
+		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }

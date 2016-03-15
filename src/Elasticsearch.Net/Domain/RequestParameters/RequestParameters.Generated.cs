@@ -4448,185 +4448,185 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for Update-By-Query
+	///<summary>Request parameters descriptor for UpdateByQuery
 	///<pre>
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
 	///</pre>
 	///</summary>
-	public class Update-By-QueryRequestParameters : FluentRequestParameters<Update-By-QueryRequestParameters> 
+	public class UpdateByQueryRequestParameters : FluentRequestParameters<UpdateByQueryRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public Update-By-QueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
+		public UpdateByQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
 		
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public Update-By-QueryRequestParameters AnalyzeWildcard(bool analyze_wildcard) => this.AddQueryString("analyze_wildcard", analyze_wildcard);
+		public UpdateByQueryRequestParameters AnalyzeWildcard(bool analyze_wildcard) => this.AddQueryString("analyze_wildcard", analyze_wildcard);
 		
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public Update-By-QueryRequestParameters DefaultOperator(DefaultOperator default_operator) => this.AddQueryString("default_operator", default_operator);
+		public UpdateByQueryRequestParameters DefaultOperator(DefaultOperator default_operator) => this.AddQueryString("default_operator", default_operator);
 		
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public Update-By-QueryRequestParameters Df(string df) => this.AddQueryString("df", df);
+		public UpdateByQueryRequestParameters Df(string df) => this.AddQueryString("df", df);
 		
 		
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public Update-By-QueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
+		public UpdateByQueryRequestParameters Explain(bool explain) => this.AddQueryString("explain", explain);
 		
 		
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Update-By-QueryRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
+		public UpdateByQueryRequestParameters Fields(params string[] fields) => this.AddQueryString("fields", fields);
 		
 		
 		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public Update-By-QueryRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);
+		public UpdateByQueryRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);
 		
 		
 		///<summary>Starting offset (default: 0)</summary>
-		public Update-By-QueryRequestParameters From(long from) => this.AddQueryString("from", from);
+		public UpdateByQueryRequestParameters From(long from) => this.AddQueryString("from", from);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public Update-By-QueryRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		public UpdateByQueryRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public Update-By-QueryRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		public UpdateByQueryRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		
 		///<summary>What to do when the reindex hits version conflicts?</summary>
-		public Update-By-QueryRequestParameters Conflicts(Conflicts conflicts) => this.AddQueryString("conflicts", conflicts);
+		public UpdateByQueryRequestParameters Conflicts(Conflicts conflicts) => this.AddQueryString("conflicts", conflicts);
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public Update-By-QueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		public UpdateByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public Update-By-QueryRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
+		public UpdateByQueryRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
 		
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public Update-By-QueryRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms) => this.AddQueryString("lowercase_expanded_terms", lowercase_expanded_terms);
+		public UpdateByQueryRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms) => this.AddQueryString("lowercase_expanded_terms", lowercase_expanded_terms);
 		
 		
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
-		public Update-By-QueryRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
+		public UpdateByQueryRequestParameters Pipeline(string pipeline) => this.AddQueryString("pipeline", pipeline);
 		
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public Update-By-QueryRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
+		public UpdateByQueryRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public Update-By-QueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
+		public UpdateByQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public Update-By-QueryRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
+		public UpdateByQueryRequestParameters Routing(params string[] routing) => this.AddQueryString("routing", routing);
 		
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Update-By-QueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
+		public UpdateByQueryRequestParameters Scroll(TimeSpan scroll) => this.AddQueryString("scroll", scroll.ToTimeUnit());
 		
 		
 		///<summary>Search operation type</summary>
-		public Update-By-QueryRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
+		public UpdateByQueryRequestParameters SearchType(SearchType search_type) => this.AddQueryString("search_type", search_type);
 		
 		
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Update-By-QueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout.ToTimeUnit());
+		public UpdateByQueryRequestParameters SearchTimeout(TimeSpan search_timeout) => this.AddQueryString("search_timeout", search_timeout.ToTimeUnit());
 		
 		
 		///<summary>Number of hits to return (default: 10)</summary>
-		public Update-By-QueryRequestParameters Size(long size) => this.AddQueryString("size", size);
+		public UpdateByQueryRequestParameters Size(long size) => this.AddQueryString("size", size);
 		
 		
 		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public Update-By-QueryRequestParameters Sort(params string[] sort) => this.AddQueryString("sort", sort);
+		public UpdateByQueryRequestParameters Sort(params string[] sort) => this.AddQueryString("sort", sort);
 		
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public Update-By-QueryRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
+		public UpdateByQueryRequestParameters SourceEnabled(params string[] source_enabled) => this.AddQueryString("_source", source_enabled);
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Update-By-QueryRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
+		public UpdateByQueryRequestParameters SourceExclude(params string[] source_exclude) => this.AddQueryString("_source_exclude", source_exclude);
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Update-By-QueryRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
+		public UpdateByQueryRequestParameters SourceInclude(params string[] source_include) => this.AddQueryString("_source_include", source_include);
 		
 		
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public Update-By-QueryRequestParameters TerminateAfter(long terminate_after) => this.AddQueryString("terminate_after", terminate_after);
+		public UpdateByQueryRequestParameters TerminateAfter(long terminate_after) => this.AddQueryString("terminate_after", terminate_after);
 		
 		
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public Update-By-QueryRequestParameters Stats(params string[] stats) => this.AddQueryString("stats", stats);
+		public UpdateByQueryRequestParameters Stats(params string[] stats) => this.AddQueryString("stats", stats);
 		
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public Update-By-QueryRequestParameters SuggestField(string suggest_field) => this.AddQueryString("suggest_field", suggest_field);
+		public UpdateByQueryRequestParameters SuggestField(string suggest_field) => this.AddQueryString("suggest_field", suggest_field);
 		
 		
 		///<summary>Specify suggest mode</summary>
-		public Update-By-QueryRequestParameters SuggestMode(SuggestMode suggest_mode) => this.AddQueryString("suggest_mode", suggest_mode);
+		public UpdateByQueryRequestParameters SuggestMode(SuggestMode suggest_mode) => this.AddQueryString("suggest_mode", suggest_mode);
 		
 		
 		///<summary>How many suggestions to return in response</summary>
-		public Update-By-QueryRequestParameters SuggestSize(long suggest_size) => this.AddQueryString("suggest_size", suggest_size);
+		public UpdateByQueryRequestParameters SuggestSize(long suggest_size) => this.AddQueryString("suggest_size", suggest_size);
 		
 		
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public Update-By-QueryRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
+		public UpdateByQueryRequestParameters SuggestText(string suggest_text) => this.AddQueryString("suggest_text", suggest_text);
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Update-By-QueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public UpdateByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public Update-By-QueryRequestParameters TrackScores(bool track_scores) => this.AddQueryString("track_scores", track_scores);
+		public UpdateByQueryRequestParameters TrackScores(bool track_scores) => this.AddQueryString("track_scores", track_scores);
 		
 		
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public Update-By-QueryRequestParameters Version(bool version) => this.AddQueryString("version", version);
+		public UpdateByQueryRequestParameters Version(bool version) => this.AddQueryString("version", version);
 		
 		
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public Update-By-QueryRequestParameters VersionType(bool version_type) => this.AddQueryString("version_type", version_type);
+		public UpdateByQueryRequestParameters VersionType(bool version_type) => this.AddQueryString("version_type", version_type);
 		
 		
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public Update-By-QueryRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
+		public UpdateByQueryRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
 		
 		
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public Update-By-QueryRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		public UpdateByQueryRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public Update-By-QueryRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		public UpdateByQueryRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
 		
 		///<summary>Size on the scroll request powering the update-by-query</summary>
-		public Update-By-QueryRequestParameters ScrollSize(integer scroll_size) => this.AddQueryString("scroll_size", scroll_size);
+		public UpdateByQueryRequestParameters ScrollSize(int scroll_size) => this.AddQueryString("scroll_size", scroll_size);
 		
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public Update-By-QueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		public UpdateByQueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public Update-By-QueryRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public UpdateByQueryRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public Update-By-QueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public UpdateByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

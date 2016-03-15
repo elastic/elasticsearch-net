@@ -25,17 +25,17 @@ namespace Tests.Search.MultiSearch
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true; 
+		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_msearch";
 
 		protected override bool SupportsDeserialization => false;
-	
+
 		protected override object ExpectJson => new object[]
 		{
 			new {},
 			new { from = 0, size = 10, query = new { match_all = new {} } },
-			new { search_type = "count" },
+			new { search_type = "dfs_query_then_fetch" },
 			new {},
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
@@ -47,7 +47,7 @@ namespace Tests.Search.MultiSearch
 			.Index(typeof(Project))
 			.Type(typeof(Project))
 			.Search<Project>("10projects",s => s.Query(q => q.MatchAll()).From(0).Size(10))
-			.Search<Project>("count_project", s => s.SearchType(SearchType.Count))
+			.Search<Project>("count_project", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
 			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll());
 
@@ -56,7 +56,7 @@ namespace Tests.Search.MultiSearch
 			Operations = new Dictionary<string, ISearchRequest>
 			{
 				{ "10projects", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
-				{ "count_project", new SearchRequest<Project> { SearchType = SearchType.Count } },
+				{ "count_project", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch} },
 				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 			}

@@ -22,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("_mappings,_aliases")
 				.WhenSerializing(fieldString);
 		}
-		
+
 		[U]
 		public void ImplicitConversion()
 		{
@@ -30,7 +30,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			* Here we new an GET index elasticsearch request whichs takes Indices and Features.
 			* Notice how we can use the Feature enum directly.
 			*/
-			var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);
-		} 
+			var request = new GetIndexRequest(All, Feature.Settings);
+		}
 	}
 }

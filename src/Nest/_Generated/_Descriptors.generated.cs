@@ -4622,13 +4622,13 @@ namespace Nest
 	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html</pre></summary>
 	public partial class TasksCancelDescriptor  : RequestDescriptorBase<TasksCancelDescriptor,TasksCancelRequestParameters, ITasksCancelRequest>, ITasksCancelRequest
 	{ 
-		number_ ITasksCancelRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
 		public TasksCancelDescriptor() : base(){}
 		
 
 			///<summary>Cancel the task with specified id</summary>
-		public TasksCancelDescriptor TaskId(number_ taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public TasksCancelDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -4657,13 +4657,13 @@ namespace Nest
 	///<summary>descriptor for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html</pre></summary>
 	public partial class TasksListDescriptor  : RequestDescriptorBase<TasksListDescriptor,TasksListRequestParameters, ITasksListRequest>, ITasksListRequest
 	{ 
-		number_ ITasksListRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksListRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks</summary>
 		public TasksListDescriptor() : base(){}
 		
 
 			///<summary>Return the task with specified id</summary>
-		public TasksListDescriptor TaskId(number_ taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+		public TasksListDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -4777,182 +4777,182 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for Update-By-Query <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
-	public partial class Update-By-QueryDescriptor  : RequestDescriptorBase<Update-By-QueryDescriptor,Update-By-QueryRequestParameters, IUpdate-By-QueryRequest>, IUpdate-By-QueryRequest
+	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class UpdateByQueryDescriptor  : RequestDescriptorBase<UpdateByQueryDescriptor,UpdateByQueryRequestParameters, IUpdateByQueryRequest>, IUpdateByQueryRequest
 	{ 
-		Indices IUpdate-By-QueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IUpdate-By-QueryRequest.Type => Self.RouteValues.Get<Types>("type");
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
-		public Update-By-QueryDescriptor() {}
+		public UpdateByQueryDescriptor() {}
 		
 
 			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
-		public Update-By-QueryDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpdateByQueryDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
-		public Update-By-QueryDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public UpdateByQueryDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
-		public Update-By-QueryDescriptor AllIndices() => this.Index(Indices.All);
+		public UpdateByQueryDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public Update-By-QueryDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public UpdateByQueryDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public Update-By-QueryDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+		public UpdateByQueryDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
 
 		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
-		public Update-By-QueryDescriptor AllTypes() => this.Type(Types.All);
+		public UpdateByQueryDescriptor AllTypes() => this.Type(Types.All);
 
 	
 		///<summary>The analyzer to use for the query string</summary>
-		public Update-By-QueryDescriptor Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
+		public UpdateByQueryDescriptor Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public Update-By-QueryDescriptor AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
+		public UpdateByQueryDescriptor AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public Update-By-QueryDescriptor DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
+		public UpdateByQueryDescriptor DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public Update-By-QueryDescriptor Df(string df) => AssignParam(p=>p.Df(df));
+		public UpdateByQueryDescriptor Df(string df) => AssignParam(p=>p.Df(df));
 
 		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
-		public Update-By-QueryDescriptor Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
+		public UpdateByQueryDescriptor Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
 
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Update-By-QueryDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		public UpdateByQueryDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return as part of a hit</summary>
-		public Update-By-QueryDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public UpdateByQueryDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
 
 		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public Update-By-QueryDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
+		public UpdateByQueryDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
 			
 		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public Update-By-QueryDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public UpdateByQueryDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._FielddataFields(fields));
 
 		///<summary>Starting offset (default: 0)</summary>
-		public Update-By-QueryDescriptor From(long from) => AssignParam(p=>p.From(from));
+		public UpdateByQueryDescriptor From(long from) => AssignParam(p=>p.From(from));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public Update-By-QueryDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public UpdateByQueryDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public Update-By-QueryDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public UpdateByQueryDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>What to do when the reindex hits version conflicts?</summary>
-		public Update-By-QueryDescriptor Conflicts(Conflicts conflicts) => AssignParam(p=>p.Conflicts(conflicts));
+		public UpdateByQueryDescriptor Conflicts(Conflicts conflicts) => AssignParam(p=>p.Conflicts(conflicts));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public Update-By-QueryDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public UpdateByQueryDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public Update-By-QueryDescriptor Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
+		public UpdateByQueryDescriptor Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public Update-By-QueryDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
+		public UpdateByQueryDescriptor LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
-		public Update-By-QueryDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+		public UpdateByQueryDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public Update-By-QueryDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public UpdateByQueryDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public Update-By-QueryDescriptor QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
+		public UpdateByQueryDescriptor QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public Update-By-QueryDescriptor Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+		public UpdateByQueryDescriptor Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public Update-By-QueryDescriptor Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
+		public UpdateByQueryDescriptor Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
 
 		///<summary>Search operation type</summary>
-		public Update-By-QueryDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
+		public UpdateByQueryDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
 
 		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
-		public Update-By-QueryDescriptor SearchTimeout(Time search_timeout) => AssignParam(p=>p.SearchTimeout(search_timeout.ToTimeSpan()));
+		public UpdateByQueryDescriptor SearchTimeout(Time search_timeout) => AssignParam(p=>p.SearchTimeout(search_timeout.ToTimeSpan()));
 
 		///<summary>Number of hits to return (default: 10)</summary>
-		public Update-By-QueryDescriptor Size(long size) => AssignParam(p=>p.Size(size));
+		public UpdateByQueryDescriptor Size(long size) => AssignParam(p=>p.Size(size));
 
 		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
-		public Update-By-QueryDescriptor Sort(params string[] sort) => AssignParam(p=>p.Sort(sort));
+		public UpdateByQueryDescriptor Sort(params string[] sort) => AssignParam(p=>p.Sort(sort));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public Update-By-QueryDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+		public UpdateByQueryDescriptor SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Update-By-QueryDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+		public UpdateByQueryDescriptor SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public Update-By-QueryDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public UpdateByQueryDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Update-By-QueryDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+		public UpdateByQueryDescriptor SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public Update-By-QueryDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+		public UpdateByQueryDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._SourceInclude(fields));
 
 		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
-		public Update-By-QueryDescriptor TerminateAfter(long terminate_after) => AssignParam(p=>p.TerminateAfter(terminate_after));
+		public UpdateByQueryDescriptor TerminateAfter(long terminate_after) => AssignParam(p=>p.TerminateAfter(terminate_after));
 
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public Update-By-QueryDescriptor Stats(params string[] stats) => AssignParam(p=>p.Stats(stats));
+		public UpdateByQueryDescriptor Stats(params string[] stats) => AssignParam(p=>p.Stats(stats));
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public Update-By-QueryDescriptor SuggestField(string suggest_field) => AssignParam(p=>p.SuggestField(suggest_field));
+		public UpdateByQueryDescriptor SuggestField(string suggest_field) => AssignParam(p=>p.SuggestField(suggest_field));
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public Update-By-QueryDescriptor SuggestField<T>(Expression<Func<T, object>> field) where T : class =>
+		public UpdateByQueryDescriptor SuggestField<T>(Expression<Func<T, object>> field) where T : class =>
 			AssignParam(p=>p._SuggestField(field));
 
 		///<summary>Specify suggest mode</summary>
-		public Update-By-QueryDescriptor SuggestMode(SuggestMode suggest_mode) => AssignParam(p=>p.SuggestMode(suggest_mode));
+		public UpdateByQueryDescriptor SuggestMode(SuggestMode suggest_mode) => AssignParam(p=>p.SuggestMode(suggest_mode));
 
 		///<summary>How many suggestions to return in response</summary>
-		public Update-By-QueryDescriptor SuggestSize(long suggest_size) => AssignParam(p=>p.SuggestSize(suggest_size));
+		public UpdateByQueryDescriptor SuggestSize(long suggest_size) => AssignParam(p=>p.SuggestSize(suggest_size));
 
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public Update-By-QueryDescriptor SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
+		public UpdateByQueryDescriptor SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
 
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public Update-By-QueryDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public UpdateByQueryDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
-		public Update-By-QueryDescriptor TrackScores(bool track_scores = true) => AssignParam(p=>p.TrackScores(track_scores));
+		public UpdateByQueryDescriptor TrackScores(bool track_scores = true) => AssignParam(p=>p.TrackScores(track_scores));
 
 		///<summary>Specify whether to return document version as part of a hit</summary>
-		public Update-By-QueryDescriptor Version(bool version = true) => AssignParam(p=>p.Version(version));
+		public UpdateByQueryDescriptor Version(bool version = true) => AssignParam(p=>p.Version(version));
 
 		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
-		public Update-By-QueryDescriptor VersionType(bool version_type = true) => AssignParam(p=>p.VersionType(version_type));
+		public UpdateByQueryDescriptor VersionType(bool version_type = true) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public Update-By-QueryDescriptor RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
+		public UpdateByQueryDescriptor RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
 
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public Update-By-QueryDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public UpdateByQueryDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public Update-By-QueryDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+		public UpdateByQueryDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>Size on the scroll request powering the update-by-query</summary>
-		public Update-By-QueryDescriptor ScrollSize(integer scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
+		public UpdateByQueryDescriptor ScrollSize(int scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
 
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public Update-By-QueryDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+		public UpdateByQueryDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>The URL-encoded request definition</summary>
-		public Update-By-QueryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateByQueryDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public Update-By-QueryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public UpdateByQueryDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 
 		//TODO THIS METHOD IS UNMAPPED!
 		
