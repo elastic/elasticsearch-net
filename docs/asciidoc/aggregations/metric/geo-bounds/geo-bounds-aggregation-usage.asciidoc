@@ -4,21 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "viewport": {
-      "geo_bounds": {
-        "field": "location",
-        "wrap_longitude": true
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -42,6 +27,21 @@ new SearchRequest<Project>
 	{
 		WrapLongitude = true
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "viewport": {
+      "geo_bounds": {
+        "field": "location",
+        "wrap_longitude": true
+      }
+    }
+  }
 }
 ----
 

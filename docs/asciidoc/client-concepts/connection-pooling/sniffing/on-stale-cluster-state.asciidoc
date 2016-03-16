@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[sniffing-periodically]]
 == Sniffing periodically
 
 Connection pools that return true for `SupportsReseeding` can be configured to sniff periodically.

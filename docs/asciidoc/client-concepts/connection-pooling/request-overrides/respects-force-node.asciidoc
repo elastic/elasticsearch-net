@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[forcing-nodes]]
 == Forcing nodes
 
 Sometimes you might want to fire a single request to a specific node. You can do so using the `ForceNode`

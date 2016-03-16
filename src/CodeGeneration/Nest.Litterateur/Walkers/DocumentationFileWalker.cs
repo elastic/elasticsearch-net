@@ -30,6 +30,8 @@ namespace Nest.Litterateur.Walkers
 		private bool InsideMultiLineDocumentation { get; set; }
 		private bool InsideAutoIncludeMethodBlock { get; set; }
 		private bool InsideFluentOrInitializerExample { get; set; }
+		private bool IncludeMethodBlockContainsLambda { get; set; }
+		private int EndLine { get; set; }
 		public List<IDocumentationBlock> Blocks { get; } = new List<IDocumentationBlock>();
 
 		public override void VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
@@ -121,6 +123,8 @@ namespace Nest.Litterateur.Walkers
 			_propertyOrMethodName = node.Identifier.Text;
 			base.VisitMethodDeclaration(node);
 			this.InsideAutoIncludeMethodBlock = false;
+			this.IncludeMethodBlockContainsLambda = false;
+			this.EndLine = 0;
 		}
 
 		public override void VisitExpressionStatement(ExpressionStatementSyntax node)
@@ -128,6 +132,13 @@ namespace Nest.Litterateur.Walkers
 			if (this.InsideAutoIncludeMethodBlock)
 			{
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+
+				// this lambda has already been included so skip it
+				//if (IncludeMethodBlockContainsLambda && this.EndLine >= line)
+				//{
+				//	return;
+				//}
+
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
@@ -142,7 +153,6 @@ namespace Nest.Litterateur.Walkers
 				this.Blocks.Add(new CodeBlock(code, line, Language.CSharp, _propertyOrMethodName));
 			}
 			else base.VisitExpressionStatement(node);
-
 		}
 
 		public override void VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
@@ -150,7 +160,8 @@ namespace Nest.Litterateur.Walkers
 			if (this.InsideAutoIncludeMethodBlock)
 			{
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
-				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+				var linePositionSpan = node.SyntaxTree.GetLineSpan(node.Span);
+				var line = linePositionSpan.StartLinePosition.Line;
 				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
 					var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyOrMethodName);
@@ -161,6 +172,13 @@ namespace Nest.Litterateur.Walkers
 				var code = node.WithoutLeadingTrivia().ToFullString();
 				code = code.RemoveNumberOfLeadingTabsAfterNewline(ClassDepth + 2);
 				this.Blocks.Add(new CodeBlock(code, line, Language.CSharp, _propertyOrMethodName));
+
+				if (allchildren.Any(a => a.Kind() == SyntaxKind.SimpleLambdaExpression))
+				{
+					// nested lambda inside this local declaration
+					this.IncludeMethodBlockContainsLambda = true;
+					this.EndLine = linePositionSpan.EndLinePosition.Line;
+				}
 			}
 			base.VisitLocalDeclarationStatement(node);
 		}

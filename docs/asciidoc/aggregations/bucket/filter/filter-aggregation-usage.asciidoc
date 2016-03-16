@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[filter-aggregation]]
 == Filter Aggregation
 
 Defines a single bucket of all the documents in the current document set context that match a specified filter. 
@@ -11,32 +12,9 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html[the elasticsearch documentation on Filter Aggregation]
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "bethels_projects": {
-      "filter": {
-        "term": {
-          "leadDeveloper.firstName": {
-            "value": "pierce"
-          }
-        }
-      },
-      "aggs": {
-        "project_tags": {
-          "terms": {
-            "field": "curatedTags.name"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example 
+
+=== Fluent DSL Example
 
 [source,csharp,method="fluent"]
 ----
@@ -83,22 +61,11 @@ tags.Should().NotBeNull();
 tags.Buckets.Should().NotBeEmpty();
 ----
 
+[[empty-filter]]
 == Empty Filter
 
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
-
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "empty_filter": {
-      "filter": {}
-    }
-  }
-}
-----
 
 === Fluent DSL Example 
 

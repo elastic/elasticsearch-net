@@ -4,27 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "average_commits": {
-      "meta": {
-        "foo": "bar"
-      },
-      "avg": {
-        "field": "numberOfCommits",
-        "missing": 10.0,
-        "script": {
-          "inline": "_value * 1.2"
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -57,6 +36,27 @@ new SearchRequest<Project>
 		Missing = 10,
 		Script = new InlineScript("_value * 1.2")
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "average_commits": {
+      "meta": {
+        "foo": "bar"
+      },
+      "avg": {
+        "field": "numberOfCommits",
+        "missing": 10.0,
+        "script": {
+          "inline": "_value * 1.2"
+        }
+      }
+    }
+  }
 }
 ----
 

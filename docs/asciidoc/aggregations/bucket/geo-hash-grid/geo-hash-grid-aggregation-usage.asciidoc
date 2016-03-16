@@ -4,23 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "my_geohash_grid": {
-      "geohash_grid": {
-        "field": "location",
-        "precision": 3,
-        "size": 1000,
-        "shard_size": 100
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -49,6 +32,23 @@ new SearchRequest<Project>
 		Size = 1000,
 		ShardSize = 100
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "my_geohash_grid": {
+      "geohash_grid": {
+        "field": "location",
+        "precision": 3,
+        "size": 1000,
+        "shard_size": 100
+      }
+    }
+  }
 }
 ----
 

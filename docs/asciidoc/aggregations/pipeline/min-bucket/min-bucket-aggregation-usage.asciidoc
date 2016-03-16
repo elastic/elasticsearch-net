@@ -4,34 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month"
-      },
-      "aggs": {
-        "commits": {
-          "sum": {
-            "field": "numberOfCommits"
-          }
-        }
-      }
-    },
-    "min_commits_per_month": {
-      "min_bucket": {
-        "buckets_path": "projects_started_per_month>commits"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -69,6 +41,34 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 }
 && new MinBucketAggregation("min_commits_per_month", "projects_started_per_month>commits")
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        }
+      }
+    },
+    "min_commits_per_month": {
+      "min_bucket": {
+        "buckets_path": "projects_started_per_month>commits"
+      }
+    }
+  }
+}
 ----
 
 === Handling Responses

@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[document-paths]]
 == DocumentPaths
 
 Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes

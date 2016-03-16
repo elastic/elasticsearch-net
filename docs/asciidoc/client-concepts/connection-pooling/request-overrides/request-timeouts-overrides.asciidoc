@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[request-timeouts]]
 == Request Timeouts
 
 While you can specify Request time out globally you can override this per request too
@@ -49,6 +50,7 @@ new ClientCall(r => r.RequestTimeout(TimeSpan.FromSeconds(80)))
 );
 ----
 
+[[connect-timeouts]]
 == Connect Timeouts
 
 Connect timeouts can be overridden, webrequest/httpclient can not distinguish connect and retry timeouts however

@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[unexpected-exceptions]]
 == Unexpected exceptions 
 
 When a client call throws an exception that the IConnction can not handle, this exception will bubble

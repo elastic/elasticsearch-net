@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[child-aggregation-mapping]]
 == Child Aggregation Mapping
 
 To use the child aggregation you have to make sure 

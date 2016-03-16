@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[date-time-providers]]
 == Date time providers
 
 Not typically something you'll have to pass to the client but all calls to `System.DateTime.UtcNow` 

@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[disabling-sniffing-and-pinging-on-a-request-basis]]
 == Disabling sniffing and pinging on a request basis 
 
 Even if you are using a sniffing connection pool thats set up to sniff on start/failure

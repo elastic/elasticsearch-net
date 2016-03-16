@@ -6,13 +6,14 @@
 
 :imagesdir: ../../images
 
+[[post-data]]
 == Post data
 
 The low level client allows you to post a `string` or `byte[]` array directly. On top of this if you pass a collection of `strings` or `objects`
 they will be serialized in Elasticsearch's special bulk/multi format.
 
-Even though the argument for `PostData` on the low level client takes a `PostData`
-You can rely on C implicit conversion to abstract the notion of PostData completely.
+Even though the argument for `PostData` on the low level client takes a `PostData<object>`
+You can rely on implicit conversion to abstract the notion of PostData completely.
 You can implicitly convert from the following types
 
 * `string`
@@ -35,7 +36,7 @@ var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
 var fromObject = ImplicitlyConvertsFrom(@object);
 ----
 
-PostData bytes will always be set if it originated from a byte
+PostData bytes will always be set if it originated from `byte[]` 
 
 [source,csharp,method="implicitconversions"]
 ----

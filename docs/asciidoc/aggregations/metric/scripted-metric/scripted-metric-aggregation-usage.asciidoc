@@ -4,31 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "sum_the_hard_way": {
-      "scripted_metric": {
-        "init_script": {
-          "inline": "_agg['commits'] = []"
-        },
-        "map_script": {
-          "inline": "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"
-        },
-        "combine_script": {
-          "inline": "sum = 0; for (c in _agg.commits) { sum += c }; return sum"
-        },
-        "reduce_script": {
-          "inline": "sum = 0; for (a in _aggs) { sum += a }; return sum"
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -57,6 +32,31 @@ new SearchRequest<Project>
 		CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum"),
 		ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum")
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "sum_the_hard_way": {
+      "scripted_metric": {
+        "init_script": {
+          "inline": "_agg['commits'] = []"
+        },
+        "map_script": {
+          "inline": "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"
+        },
+        "combine_script": {
+          "inline": "sum = 0; for (c in _agg.commits) { sum += c }; return sum"
+        },
+        "reduce_script": {
+          "inline": "sum = 0; for (a in _aggs) { sum += a }; return sum"
+        }
+      }
+    }
+  }
 }
 ----
 

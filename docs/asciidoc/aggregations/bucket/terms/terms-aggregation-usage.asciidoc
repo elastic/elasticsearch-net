@@ -4,40 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "states": {
-      "meta": {
-        "foo": "bar"
-      },
-      "terms": {
-        "field": "state",
-        "min_doc_count": 2,
-        "size": 5,
-        "shard_size": 100,
-        "show_term_doc_error_count": true,
-        "execution_hint": "map",
-        "missing": "n/a",
-        "script": {
-          "inline": "'State of Being: '+_value"
-        },
-        "order": [
-          {
-            "_term": "asc"
-          },
-          {
-            "_count": "desc"
-          }
-        ]
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -88,6 +54,40 @@ new SearchRequest<Project>
 			{ "foo", "bar" }
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
+      "terms": {
+        "field": "state",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "show_term_doc_error_count": true,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "script": {
+          "inline": "'State of Being: '+_value"
+        },
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
+      }
+    }
+  }
 }
 ----
 

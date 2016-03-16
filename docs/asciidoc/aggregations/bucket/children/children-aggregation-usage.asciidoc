@@ -4,38 +4,13 @@
 
 :imagesdir: ../../../images
 
+[[children-aggregation]]
 == Children Aggregation
 
 A special single bucket aggregation that enables aggregating from buckets on parent document types to
 buckets on child documents.
 
 Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-children-aggregation.html[on this subject here]
-
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "name_of_child_agg": {
-      "children": {
-        "type": "commits"
-      },
-      "aggs": {
-        "average_per_child": {
-          "avg": {
-            "field": "confidenceFactor"
-          }
-        },
-        "max_per_child": {
-          "max": {
-            "field": "confidenceFactor"
-          }
-        }
-      }
-    }
-  }
-}
-----
 
 === Fluent DSL Example
 
@@ -74,6 +49,32 @@ new SearchRequest<Project>
 			new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "name_of_child_agg": {
+      "children": {
+        "type": "commits"
+      },
+      "aggs": {
+        "average_per_child": {
+          "avg": {
+            "field": "confidenceFactor"
+          }
+        },
+        "max_per_child": {
+          "max": {
+            "field": "confidenceFactor"
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

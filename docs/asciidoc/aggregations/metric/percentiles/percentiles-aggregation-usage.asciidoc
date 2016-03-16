@@ -4,32 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "commits_outlier": {
-      "percentiles": {
-        "field": "numberOfCommits",
-        "percents": [
-          95.0,
-          99.0,
-          99.9
-        ],
-        "hdr": {
-          "number_of_significant_value_digits": 3
-        },
-        "script": {
-          "inline": "doc['numberOfCommits'].value * 1.2"
-        },
-        "missing": 0.0
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -66,6 +40,32 @@ new SearchRequest<Project>
 		Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
 		Missing = 0
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commits_outlier": {
+      "percentiles": {
+        "field": "numberOfCommits",
+        "percents": [
+          95.0,
+          99.0,
+          99.9
+        ],
+        "hdr": {
+          "number_of_significant_value_digits": 3
+        },
+        "script": {
+          "inline": "doc['numberOfCommits'].value * 1.2"
+        },
+        "missing": 0.0
+      }
+    }
+  }
 }
 ----
 

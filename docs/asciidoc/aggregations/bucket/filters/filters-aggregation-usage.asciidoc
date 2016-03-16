@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[filters-aggregation]]
 == Filters Aggregation
 
 Defines a multi bucket aggregations where each bucket is associated with a filter. 
@@ -12,7 +13,51 @@ that do not match any filter, these will be collected in the _other bucket_.
 
 Be sure to read {ref_current}/search-aggregations-bucket-filters-aggregation.html[the Elasticsearch documentation on Filters Aggregation].
 
+[[named-filters]]
 == Named filters 
+
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+s => s
+.Aggregations(aggs => aggs
+	.Filters("projects_by_state", agg => agg
+		.OtherBucket()
+		.OtherBucketKey("other_states_of_being")
+		.NamedFilters(filters => filters
+			.Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
+			.Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
+			.Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
+		)
+		.Aggregations(childAggs => childAggs
+			.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+		)
+	)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new FiltersAggregation("projects_by_state")
+	{
+		OtherBucket = true,
+		OtherBucketKey = "other_states_of_being",
+		Filters = new NamedFiltersContainer
+		{
+			{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
+			{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
+			{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
+		},
+		Aggregations =
+			new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+	}
+}
+----
 
 [source,javascript,method="expectjson"]
 .Example json output
@@ -59,49 +104,6 @@ Be sure to read {ref_current}/search-aggregations-bucket-filters-aggregation.htm
 }
 ----
 
-=== Fluent DSL Example
-
-[source,csharp,method="fluent"]
-----
-s => s
-.Aggregations(aggs => aggs
-	.Filters("projects_by_state", agg => agg
-		.OtherBucket()
-		.OtherBucketKey("other_states_of_being")
-		.NamedFilters(filters => filters
-			.Filter("belly_up", f => f.Term(p => p.State, StateOfBeing.BellyUp))
-			.Filter("stable", f => f.Term(p => p.State, StateOfBeing.Stable))
-			.Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
-		)
-		.Aggregations(childAggs => childAggs
-			.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
-		)
-	)
-)
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp,method="initializer"]
-----
-new SearchRequest<Project>
-{
-	Aggregations = new FiltersAggregation("projects_by_state")
-	{
-		OtherBucket = true,
-		OtherBucketKey = "other_states_of_being",
-		Filters = new NamedFiltersContainer
-		{
-				{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-				{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-				{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
-		},
-		Aggregations =
-			new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
-	}
-}
-----
-
 === Handling Responses
 
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
@@ -127,51 +129,8 @@ namedResult.Should().NotBeNull();
 namedResult.DocCount.Should().Be(0);
 ----
 
+[[anonymous-filters]]
 == Anonymous filters 
-
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "projects_by_state": {
-      "filters": {
-        "other_bucket": true,
-        "filters": [
-          {
-            "term": {
-              "state": {
-                "value": "BellyUp"
-              }
-            }
-          },
-          {
-            "term": {
-              "state": {
-                "value": "Stable"
-              }
-            }
-          },
-          {
-            "term": {
-              "state": {
-                "value": "VeryActive"
-              }
-            }
-          }
-        ]
-      },
-      "aggs": {
-        "project_tags": {
-          "terms": {
-            "field": "curatedTags.name"
-          }
-        }
-      }
-    }
-  }
-}
-----
 
 === Fluent DSL Example
 
@@ -217,6 +176,50 @@ new SearchRequest<Project>
 }
 ----
 
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "projects_by_state": {
+      "filters": {
+        "other_bucket": true,
+        "filters": [
+          {
+            "term": {
+              "state": {
+                "value": "BellyUp"
+              }
+            }
+          },
+          {
+            "term": {
+              "state": {
+                "value": "Stable"
+              }
+            }
+          },
+          {
+            "term": {
+              "state": {
+                "value": "VeryActive"
+              }
+            }
+          }
+        ]
+      },
+      "aggs": {
+        "project_tags": {
+          "terms": {
+            "field": "curatedTags.name"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
@@ -231,32 +234,12 @@ filterAgg.Should().NotBeNull();
 var results = filterAgg.AnonymousBuckets();
 results.Count.Should().Be(4);
 singleBucket.DocCount.Should().BeGreaterThan(0);
+results.Last().DocCount.Should().Be(0); //<1>
 ----
+<1> The last bucket is the _other bucket_
 
-The last bucket is the _other bucket_ 
-
-=== Handling Responses
-
-[source,csharp,method="expectresponse"]
-----
-results.Last().DocCount.Should().Be(0);
-----
-
+[[empty-filters]]
 == Empty Filters 
-
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "empty_filters": {
-      "filters": {
-        "filters": []
-      }
-    }
-  }
-}
-----
 
 === Fluent DSL Example
 
@@ -283,6 +266,20 @@ new SearchRequest<Project>
 }
 ----
 
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "empty_filters": {
+      "filters": {
+        "filters": []
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 [source,csharp,method="expectresponse"]
@@ -291,21 +288,8 @@ response.IsValid.Should().BeTrue();
 response.Aggs.Filters("empty_filters").Buckets.Should().BeEmpty();
 ----
 
+[[conditionless-filters]]
 == Conditionless Filters 
-
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "conditionless_filters": {
-      "filters": {
-        "filters": []
-      }
-    }
-  }
-}
-----
 
 === Fluent DSL Example
 
@@ -334,6 +318,20 @@ new SearchRequest<Project>
 			new QueryContainer()
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "conditionless_filters": {
+      "filters": {
+        "filters": []
+      }
+    }
+  }
 }
 ----
 

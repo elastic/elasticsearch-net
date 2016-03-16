@@ -4,28 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "ip_ranges": {
-      "ip_range": {
-        "field": "leadDeveloper.iPAddress",
-        "ranges": [
-          {
-            "to": "10.0.0.5"
-          },
-          {
-            "from": "10.0.0.5"
-          }
-        ]
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -57,6 +35,28 @@ new SearchRequest<Project>
 			new Nest.IpRange { From = "10.0.0.5" }
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "ip_ranges": {
+      "ip_range": {
+        "field": "leadDeveloper.iPAddress",
+        "ranges": [
+          {
+            "to": "10.0.0.5"
+          },
+          {
+            "from": "10.0.0.5"
+          }
+        ]
+      }
+    }
+  }
 }
 ----
 

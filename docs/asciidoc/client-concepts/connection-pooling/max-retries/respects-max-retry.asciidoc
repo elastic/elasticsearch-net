@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[max-retries]]
 == MaxRetries
 
 By default retry as many times as we have nodes. However retries still respect the request timeout.

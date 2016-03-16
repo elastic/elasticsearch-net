@@ -4,20 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "min_commits": {
-      "min": {
-        "field": "numberOfCommits"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -37,6 +23,20 @@ s => s
 new SearchRequest<Project>
 {
 	Aggregations = new MinAggregation("min_commits", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "min_commits": {
+      "min": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
 }
 ----
 

@@ -4,35 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month"
-      },
-      "aggs": {
-        "commits": {
-          "sum": {
-            "field": "numberOfCommits"
-          }
-        }
-      }
-    },
-    "average_commits_per_month": {
-      "avg_bucket": {
-        "buckets_path": "projects_started_per_month>commits",
-        "gap_policy": "insert_zeros"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -74,6 +45,35 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 	GapPolicy = GapPolicy.InsertZeros
 }
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        }
+      }
+    },
+    "average_commits_per_month": {
+      "avg_bucket": {
+        "buckets_path": "projects_started_per_month>commits",
+        "gap_policy": "insert_zeros"
+      }
+    }
+  }
+}
 ----
 
 === Handling Responses

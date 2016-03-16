@@ -4,25 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "commits": {
-      "histogram": {
-        "field": "numberOfCommits",
-        "interval": 100.0,
-        "missing": 0.0,
-        "order": {
-          "_key": "desc"
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -51,6 +32,25 @@ new SearchRequest<Project>
 		Missing = 0,
 		Order = HistogramOrder.KeyDescending
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commits": {
+      "histogram": {
+        "field": "numberOfCommits",
+        "interval": 100.0,
+        "missing": 0.0,
+        "order": {
+          "_key": "desc"
+        }
+      }
+    }
+  }
 }
 ----
 

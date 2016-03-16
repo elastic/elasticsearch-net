@@ -4,39 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "tags": {
-      "nested": {
-        "path": "tags"
-      },
-      "aggs": {
-        "tag_names": {
-          "terms": {
-            "field": "tags.name"
-          },
-          "aggs": {
-            "tags_to_project": {
-              "reverse_nested": {},
-              "aggs": {
-                "top_projects_per_tag": {
-                  "terms": {
-                    "field": "name"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -84,6 +51,39 @@ new SearchRequest<Project>
 			}
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "tags": {
+      "nested": {
+        "path": "tags"
+      },
+      "aggs": {
+        "tag_names": {
+          "terms": {
+            "field": "tags.name"
+          },
+          "aggs": {
+            "tags_to_project": {
+              "reverse_nested": {},
+              "aggs": {
+                "top_projects_per_tag": {
+                  "terms": {
+                    "field": "name"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

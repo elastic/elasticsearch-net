@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[{sectiontitle}]]
 == {sectiontitle}
 
 A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
@@ -16,40 +17,9 @@ IMPORTANT: this aggregation includes the `from` value and excludes the `to` valu
 
 Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.html[the elasticsearch documentation on {sectiontitle}]
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "projects_date_ranges": {
-      "date_range": {
-        "field": "startedOn",
-        "ranges": [
-          {
-            "to": "now",
-            "from": "2015-06-06T12:01:02.123||+2d"
-          },
-          {
-            "to": "now+1d-30m/h"
-          },
-          {
-            "from": "2012-05-05||+1d-1m"
-          }
-        ]
-      },
-      "aggs": {
-        "project_tags": {
-          "terms": {
-            "field": "tags"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example 
+
+=== Fluent DSL Example
 
 [source,csharp,method="fluent"]
 ----

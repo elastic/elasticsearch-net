@@ -6,14 +6,6 @@
 
 Enables explanation for each hit on how its score was computed.
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "explain": true
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -27,5 +19,13 @@ s => s
 [source,csharp,method="initializer"]
 ----
 new SearchRequest<Project> { Explain = true }
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "explain": true
+}
 ----
 

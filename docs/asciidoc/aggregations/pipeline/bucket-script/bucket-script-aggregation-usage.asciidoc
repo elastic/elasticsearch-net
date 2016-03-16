@@ -4,56 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month"
-      },
-      "aggs": {
-        "commits": {
-          "sum": {
-            "field": "numberOfCommits"
-          }
-        },
-        "stable_state": {
-          "filter": {
-            "term": {
-              "state": {
-                "value": "Stable"
-              }
-            }
-          },
-          "aggs": {
-            "commits": {
-              "sum": {
-                "field": "numberOfCommits"
-              }
-            }
-          }
-        },
-        "stable_percentage": {
-          "bucket_script": {
-            "buckets_path": {
-              "totalCommits": "commits",
-              "stableCommits": "stable_state>commits"
-            },
-            "script": {
-              "inline": "stableCommits / totalCommits * 100"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -122,6 +72,56 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 		}
 }
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "stable_state": {
+          "filter": {
+            "term": {
+              "state": {
+                "value": "Stable"
+              }
+            }
+          },
+          "aggs": {
+            "commits": {
+              "sum": {
+                "field": "numberOfCommits"
+              }
+            }
+          }
+        },
+        "stable_percentage": {
+          "bucket_script": {
+            "buckets_path": {
+              "totalCommits": "commits",
+              "stableCommits": "stable_state>commits"
+            },
+            "script": {
+              "inline": "stableCommits / totalCommits * 100"
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ----
 
 === Handling Responses

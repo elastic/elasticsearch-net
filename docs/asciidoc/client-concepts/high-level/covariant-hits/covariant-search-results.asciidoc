@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[covariant-search-results]]
 == Covariant Search Results
 
 NEST directly supports returning covariant result sets.

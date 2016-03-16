@@ -6,6 +6,7 @@
 
 :imagesdir: ../images
 
+[[aggregations]]
 == Aggregations
 
 Aggregations are arguably one of the most powerful features of Elasticsearch.
@@ -22,36 +23,12 @@ want to use each.
 
 This is the json output for each example
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "name_of_child_agg": {
-      "children": {
-        "type": "commits"
-      },
-      "aggs": {
-        "average_per_child": {
-          "avg": {
-            "field": "confidenceFactor"
-          }
-        },
-        "max_per_child": {
-          "max": {
-            "field": "confidenceFactor"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL
 
 The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
+
+=== Fluent DSL Example
 
 [source,csharp,method="fluent"]
 ----

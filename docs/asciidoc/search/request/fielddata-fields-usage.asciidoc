@@ -4,18 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "fielddata_fields": [
-    "name",
-    "leadDeveloper",
-    "startedOn"
-  ]
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -35,6 +23,18 @@ s => s
 new SearchRequest<Project>
 {
 	FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "fielddata_fields": [
+    "name",
+    "leadDeveloper",
+    "startedOn"
+  ]
 }
 ----
 

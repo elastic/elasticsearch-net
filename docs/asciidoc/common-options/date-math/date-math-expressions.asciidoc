@@ -4,6 +4,7 @@
 
 :imagesdir: ../../images
 
+[[date-math-expressions]]
 == Date Math Expressions
 
 The date type supports using date math expression when using it in a query/filter

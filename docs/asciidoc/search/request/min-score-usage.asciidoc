@@ -4,21 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "min_score": 0.5,
-  "query": {
-    "term": {
-      "name": {
-        "value": "elasticsearch"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -42,6 +27,21 @@ new SearchRequest<Project>
 		Field = "name",
 		Value = "elasticsearch"
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "min_score": 0.5,
+  "query": {
+    "term": {
+      "name": {
+        "value": "elasticsearch"
+      }
+    }
+  }
 }
 ----
 

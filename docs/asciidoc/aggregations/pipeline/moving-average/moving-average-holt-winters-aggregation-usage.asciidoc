@@ -4,44 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month"
-      },
-      "aggs": {
-        "commits": {
-          "sum": {
-            "field": "numberOfCommits"
-          }
-        },
-        "commits_moving_avg": {
-          "moving_avg": {
-            "buckets_path": "commits",
-            "window": 60,
-            "model": "holt_winters",
-            "settings": {
-              "type": "mult",
-              "alpha": 0.5,
-              "beta": 0.5,
-              "gamma": 0.5,
-              "period": 30,
-              "pad": false
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -103,6 +65,44 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 		}
 }
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "commits_moving_avg": {
+          "moving_avg": {
+            "buckets_path": "commits",
+            "window": 60,
+            "model": "holt_winters",
+            "settings": {
+              "type": "mult",
+              "alpha": 0.5,
+              "beta": 0.5,
+              "gamma": 0.5,
+              "period": 30,
+              "pad": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
 ----
 
 === Handling Responses

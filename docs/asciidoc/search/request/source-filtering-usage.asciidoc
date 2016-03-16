@@ -8,19 +8,6 @@ Allows to control how the _source field is returned  with every hit.
 By default operations return the contents of the _source field unless 
  you have used the fields parameter or if the source field is disabled.
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "_source": {
-    "include": [
-      "name",
-      "startedOn"
-    ]
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -46,6 +33,19 @@ new SearchRequest<Project>
 	{
 		Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "_source": {
+    "include": [
+      "name",
+      "startedOn"
+    ]
+  }
 }
 ----
 

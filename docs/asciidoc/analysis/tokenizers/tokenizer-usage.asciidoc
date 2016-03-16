@@ -4,6 +4,20 @@
 
 :imagesdir: ../../images
 
+=== Fluent DSL Example
+
+[source,csharp,method="fluent"]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp,method="initializer"]
+----
+InitializerExample
+----
+
 [source,javascript,method="expectjson"]
 .Example json output
 ----
@@ -55,19 +69,5 @@
     }
   }
 }
-----
-
-=== Fluent DSL Example
-
-[source,csharp,method="fluent"]
-----
-FluentExample
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp,method="initializer"]
-----
-InitializerExample
 ----
 

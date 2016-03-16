@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[round-robin---skipping-dead-nodes]]
 == Round Robin - Skipping Dead Nodes
 
 When selecting nodes the connection pool will try and skip all the nodes that are marked dead.

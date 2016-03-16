@@ -4,20 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "projects_without_a_description": {
-      "missing": {
-        "field": "description"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -40,6 +26,20 @@ new SearchRequest<Project>
 	{
 		Field = Field<Project>(p => p.Description)
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "projects_without_a_description": {
+      "missing": {
+        "field": "description"
+      }
+    }
+  }
 }
 ----
 

@@ -4,6 +4,7 @@
 
 :imagesdir: ../images
 
+[[naming-conventions]]
 == Naming Conventions
 
 NEST uses the following naming conventions (with _some_ exceptions).

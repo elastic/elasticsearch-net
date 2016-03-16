@@ -4,21 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "state_count": {
-      "cardinality": {
-        "field": "state",
-        "precision_threshold": 100
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -42,6 +27,21 @@ new SearchRequest<Project>
 	{
 		PrecisionThreshold = 100
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "state_count": {
+      "cardinality": {
+        "field": "state",
+        "precision_threshold": 100
+      }
+    }
+  }
 }
 ----
 

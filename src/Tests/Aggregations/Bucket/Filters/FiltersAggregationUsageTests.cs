@@ -72,9 +72,9 @@ namespace Tests.Aggregations.Bucket.Filters
 					OtherBucketKey = "other_states_of_being",
 					Filters = new NamedFiltersContainer
 					{
-							{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
-							{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
-							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
+						{ "belly_up", Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) },
+						{ "stable", Query<Project>.Term(p=>p.State, StateOfBeing.Stable) },
+						{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
 						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
@@ -191,8 +191,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
 
-			/** The last bucket is the _other bucket_ */
-			results.Last().DocCount.Should().Be(0);
+			results.Last().DocCount.Should().Be(0); // <1> The last bucket is the _other bucket_
 		}
 	}
 

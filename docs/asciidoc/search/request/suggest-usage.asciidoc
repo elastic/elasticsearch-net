@@ -25,73 +25,6 @@ payload.Name.Should().Be(Project.Instance.Name);
 payload.State.Should().NotBeNull();
 ----
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "suggest": {
-    "my-completion-suggest": {
-      "completion": {
-        "analyzer": "simple",
-        "context": {
-          "color": "red"
-        },
-        "field": "suggest",
-        "fuzzy": {
-          "fuzziness": "AUTO",
-          "min_length": 1,
-          "prefix_length": 2,
-          "transpositions": true,
-          "unicode_aware": false
-        },
-        "shard_size": 7,
-        "size": 8
-      },
-      "text": "Durgan LLC"
-    },
-    "my-phrase-suggest": {
-      "phrase": {
-        "collate": {
-          "query": {
-            "inline": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
-            "params": {
-              "field_name": "title"
-            }
-          },
-          "prune": true
-        },
-        "confidence": 10.1,
-        "direct_generator": [
-          {
-            "field": "description"
-          }
-        ],
-        "field": "name",
-        "gram_size": 1,
-        "real_word_error_likelihood": 0.5
-      },
-      "text": "hello world"
-    },
-    "my-term-suggest": {
-      "term": {
-        "analyzer": "standard",
-        "field": "name",
-        "max_edits": 1,
-        "max_inspections": 2,
-        "max_term_freq": 3.0,
-        "min_doc_freq": 4.0,
-        "min_word_len": 5,
-        "prefix_len": 6,
-        "shard_size": 7,
-        "size": 8,
-        "suggest_mode": "always"
-      },
-      "text": "hello world"
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -222,6 +155,73 @@ new SearchRequest<Project>
 			}
 		} },
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "suggest": {
+    "my-completion-suggest": {
+      "completion": {
+        "analyzer": "simple",
+        "context": {
+          "color": "red"
+        },
+        "field": "suggest",
+        "fuzzy": {
+          "fuzziness": "AUTO",
+          "min_length": 1,
+          "prefix_length": 2,
+          "transpositions": true,
+          "unicode_aware": false
+        },
+        "shard_size": 7,
+        "size": 8
+      },
+      "text": "Durgan LLC"
+    },
+    "my-phrase-suggest": {
+      "phrase": {
+        "collate": {
+          "query": {
+            "inline": "{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}",
+            "params": {
+              "field_name": "title"
+            }
+          },
+          "prune": true
+        },
+        "confidence": 10.1,
+        "direct_generator": [
+          {
+            "field": "description"
+          }
+        ],
+        "field": "name",
+        "gram_size": 1,
+        "real_word_error_likelihood": 0.5
+      },
+      "text": "hello world"
+    },
+    "my-term-suggest": {
+      "term": {
+        "analyzer": "standard",
+        "field": "name",
+        "max_edits": 1,
+        "max_inspections": 2,
+        "max_term_freq": 3.0,
+        "min_doc_freq": 4.0,
+        "min_word_len": 5,
+        "prefix_len": 6,
+        "shard_size": 7,
+        "size": 8,
+        "suggest_mode": "always"
+      },
+      "text": "hello world"
+    }
+  }
 }
 ----
 

@@ -4,28 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "sample": {
-      "sampler": {
-        "shard_size": 200,
-        "field": "name"
-      },
-      "aggs": {
-        "significant_names": {
-          "significant_terms": {
-            "field": "name"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -59,6 +37,28 @@ new SearchRequest<Project>
 			Field = "name"
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "sample": {
+      "sampler": {
+        "shard_size": 200,
+        "field": "name"
+      },
+      "aggs": {
+        "significant_names": {
+          "significant_terms": {
+            "field": "name"
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

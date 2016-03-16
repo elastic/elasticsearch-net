@@ -4,35 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month"
-      },
-      "aggs": {
-        "commits": {
-          "sum": {
-            "field": "numberOfCommits"
-          }
-        },
-        "thirtieth_difference": {
-          "serial_diff": {
-            "buckets_path": "commits",
-            "lag": 30
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Handling Responses
 
 [source,csharp,method="expectresponse"]
@@ -89,5 +60,34 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 		}
 }
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "thirtieth_difference": {
+          "serial_diff": {
+            "buckets_path": "commits",
+            "lag": 30
+          }
+        }
+      }
+    }
+  }
+}
 ----
 

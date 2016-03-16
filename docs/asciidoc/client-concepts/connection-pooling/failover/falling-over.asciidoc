@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[fail-over]]
 == Fail over
 
 When using connection pooling and the pool has sufficient nodes a request will be retried if 

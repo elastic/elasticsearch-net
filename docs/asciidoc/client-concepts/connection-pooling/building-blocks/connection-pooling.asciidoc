@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[connection-pooling]]
 == Connection Pooling
 
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which

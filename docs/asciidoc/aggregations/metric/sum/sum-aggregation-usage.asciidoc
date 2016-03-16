@@ -4,20 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "commits_sum": {
-      "sum": {
-        "field": "numberOfCommits"
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -37,6 +23,20 @@ s => s
 new SearchRequest<Project>
 {
 	Aggregations = new SumAggregation("commits_sum", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "commits_sum": {
+      "sum": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
 }
 ----
 

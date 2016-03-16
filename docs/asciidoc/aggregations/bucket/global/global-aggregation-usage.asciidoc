@@ -4,25 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "all_projects": {
-      "global": {},
-      "aggs": {
-        "names": {
-          "terms": {
-            "field": "name"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -52,6 +33,25 @@ new SearchRequest<Project>
 			Field = Field<Project>(p => p.Name)
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "all_projects": {
+      "global": {},
+      "aggs": {
+        "names": {
+          "terms": {
+            "field": "name"
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

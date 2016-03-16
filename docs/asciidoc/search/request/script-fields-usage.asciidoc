@@ -4,28 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "script_fields": {
-    "test1": {
-      "script": {
-        "inline": "doc['my_field_name'].value * 2"
-      }
-    },
-    "test2": {
-      "script": {
-        "inline": "doc['my_field_name'].value * factor",
-        "params": {
-          "factor": 2.0
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -64,6 +42,28 @@ new SearchRequest<Project>
 			}
 		} }
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "script_fields": {
+    "test1": {
+      "script": {
+        "inline": "doc['my_field_name'].value * 2"
+      }
+    },
+    "test2": {
+      "script": {
+        "inline": "doc['my_field_name'].value * factor",
+        "params": {
+          "factor": 2.0
+        }
+      }
+    }
+  }
 }
 ----
 

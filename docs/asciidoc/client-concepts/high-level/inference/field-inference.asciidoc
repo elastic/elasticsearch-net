@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[strongly-typed-field-access]]
 == Strongly typed Field Access 
 
 Several places in the elasticsearch API expect the path to a field from your original source document as a string.
@@ -158,10 +159,10 @@ Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable])
 Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 ----
 
-If you are using elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
+If you are using Elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
 you to analyze a string in a number of different ways, these _"virtual" sub fields 
 do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that 
-should be mapped. 
+should be mapped and <<auto-map, how they are mapped>> 
 
 [source,csharp,method="complexfieldnameexpressions"]
 ----
@@ -413,7 +414,7 @@ class CustomSerializer : JsonNetSerializer
 }
 ----
 
-here we provide an explicit rename of a property on connectionsettings using `.Rename()`
+here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
 and all properties that are not mapped verbatim should be uppercased
 
 [source,csharp,method="precedenceisasexpected"]

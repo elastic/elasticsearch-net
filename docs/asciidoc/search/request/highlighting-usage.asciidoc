@@ -4,70 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "query": {
-    "match": {
-      "name.standard": {
-        "query": "Upton Sons Shield Rice Rowe Roberts"
-      }
-    }
-  },
-  "highlight": {
-    "pre_tags": [
-      "<tag1>"
-    ],
-    "post_tags": [
-      "</tag1>"
-    ],
-    "fields": {
-      "name.standard": {
-        "type": "plain",
-        "force_source": true,
-        "fragment_size": 150,
-        "number_of_fragments": 3,
-        "no_match_size": 150
-      },
-      "leadDeveloper.firstName": {
-        "type": "fvh",
-        "pre_tags": [
-          "<name>"
-        ],
-        "post_tags": [
-          "</name>"
-        ],
-        "highlight_query": {
-          "match": {
-            "leadDeveloper.firstName": {
-              "query": "Kurt Edgardo Naomi Dariana Justice Felton"
-            }
-          }
-        }
-      },
-      "state.offsets": {
-        "type": "postings",
-        "pre_tags": [
-          "<state>"
-        ],
-        "post_tags": [
-          "</state>"
-        ],
-        "highlight_query": {
-          "terms": {
-            "state.offsets": [
-              "stable",
-              "bellyup"
-            ]
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -171,6 +107,70 @@ new SearchRequest<Project>
 			}
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "query": {
+    "match": {
+      "name.standard": {
+        "query": "Upton Sons Shield Rice Rowe Roberts"
+      }
+    }
+  },
+  "highlight": {
+    "pre_tags": [
+      "<tag1>"
+    ],
+    "post_tags": [
+      "</tag1>"
+    ],
+    "fields": {
+      "name.standard": {
+        "type": "plain",
+        "force_source": true,
+        "fragment_size": 150,
+        "number_of_fragments": 3,
+        "no_match_size": 150
+      },
+      "leadDeveloper.firstName": {
+        "type": "fvh",
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.firstName": {
+              "query": "Kurt Edgardo Naomi Dariana Justice Felton"
+            }
+          }
+        }
+      },
+      "state.offsets": {
+        "type": "postings",
+        "pre_tags": [
+          "<state>"
+        ],
+        "post_tags": [
+          "</state>"
+        ],
+        "highlight_query": {
+          "terms": {
+            "state.offsets": [
+              "stable",
+              "bellyup"
+            ]
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

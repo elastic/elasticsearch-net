@@ -4,59 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "states": {
-      "terms": {
-        "field": "state"
-      },
-      "aggs": {
-        "top_state_hits": {
-          "top_hits": {
-            "sort": [
-              {
-                "startedOn": {
-                  "order": "desc"
-                }
-              }
-            ],
-            "_source": {
-              "include": [
-                "name",
-                "startedOn"
-              ]
-            },
-            "size": 1,
-            "version": true,
-            "explain": true,
-            "fielddata_fields": [
-              "state",
-              "numberOfCommits"
-            ],
-            "highlight": {
-              "fields": {
-                "tags": {},
-                "description": {}
-              }
-            },
-            "script_fields": {
-              "commit_factor": {
-                "script": {
-                  "inline": "doc['numberOfCommits'].value * 2"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -140,6 +87,59 @@ new SearchRequest<Project>
 			}
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "states": {
+      "terms": {
+        "field": "state"
+      },
+      "aggs": {
+        "top_state_hits": {
+          "top_hits": {
+            "sort": [
+              {
+                "startedOn": {
+                  "order": "desc"
+                }
+              }
+            ],
+            "_source": {
+              "include": [
+                "name",
+                "startedOn"
+              ]
+            },
+            "size": 1,
+            "version": true,
+            "explain": true,
+            "fielddata_fields": [
+              "state",
+              "numberOfCommits"
+            ],
+            "highlight": {
+              "fields": {
+                "tags": {},
+                "description": {}
+              }
+            },
+            "script_fields": {
+              "commit_factor": {
+                "script": {
+                  "inline": "doc['numberOfCommits'].value * 2"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

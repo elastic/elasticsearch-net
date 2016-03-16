@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[unrecoverable-exceptions]]
 == Unrecoverable exceptions 
 
 Unrecoverable exceptions are _excepted_ exceptions that are grounds to exit the client pipeline immediately. 

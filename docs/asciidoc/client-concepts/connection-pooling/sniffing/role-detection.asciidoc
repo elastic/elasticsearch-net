@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[sniffing-role-detection]]
 == Sniffing role detection
 
 When we sniff the custer state we detect the role of the node whether its master eligible and holds data

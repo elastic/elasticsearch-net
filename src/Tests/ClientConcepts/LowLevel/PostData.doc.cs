@@ -40,8 +40,8 @@ namespace Tests.ClientConcepts.LowLevel
 
 		[U] public void ImplicitConversions()
 		{
-			/** Even though the argument for `PostData` on the low level client takes a `PostData`
-			* You can rely on C# implicit conversion to abstract the notion of PostData completely.
+			/** Even though the argument for `PostData` on the low level client takes a `PostData<object>`
+			* You can rely on implicit conversion to abstract the notion of PostData completely.
 			* You can implicitly convert from the following types
 			* - `string`
 			* - `byte[]`
@@ -56,7 +56,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
 			var fromObject = ImplicitlyConvertsFrom(@object);
 
-			/** PostData bytes will always be set if it originated from a byte*/
+			/** PostData bytes will always be set if it originated from `byte[]` */
 			fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
 
 			fromString.Type.Should().Be(PostType.LiteralString);

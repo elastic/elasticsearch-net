@@ -4,16 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "post_filter": {
-    "match_all": {}
-  }
-}
-----
-
 === Object Initializer Syntax Example
 
 [source,csharp,method="initializer"]
@@ -21,6 +11,16 @@
 new SearchRequest<Project>()
 {
 	PostFilter = new QueryContainer(new MatchAllQuery())
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "post_filter": {
+    "match_all": {}
+  }
 }
 ----
 

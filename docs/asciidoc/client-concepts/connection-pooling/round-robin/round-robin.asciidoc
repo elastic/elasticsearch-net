@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[round-robin]]
 == Round Robin
 
 Each connection pool round robins over the `live` nodes, to evenly distribute the load over all known nodes.

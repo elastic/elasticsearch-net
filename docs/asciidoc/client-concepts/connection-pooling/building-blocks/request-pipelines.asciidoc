@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[request-pipeline]]
 == Request Pipeline
 
 Every request is executed in the context of a `RequestPipeline` when using the 

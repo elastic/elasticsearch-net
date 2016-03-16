@@ -4,6 +4,7 @@
 
 :imagesdir: ../../../images
 
+[[date-histogram-aggregation]]
 == Date Histogram Aggregation
 
 A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
@@ -16,47 +17,9 @@ as part of the format value.
 
 Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "size": 0,
-  "aggs": {
-    "projects_started_per_month": {
-      "date_histogram": {
-        "field": "startedOn",
-        "interval": "month",
-        "min_doc_count": 2,
-        "format": "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
-        "order": {
-          "_count": "asc"
-        },
-        "extended_bounds": {
-          "min": "2014-06-06T12:01:02.123",
-          "max": "2016-06-06T12:01:02.123"
-        },
-        "missing": "2015-06-06T12:01:02.123"
-      },
-      "aggs": {
-        "project_tags": {
-          "nested": {
-            "path": "tags"
-          },
-          "aggs": {
-            "tags": {
-              "terms": {
-                "field": "tags.name"
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example 
+
+=== Fluent DSL Example
 
 [source,csharp,method="fluent"]
 ----

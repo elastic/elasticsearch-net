@@ -4,6 +4,7 @@
 
 :imagesdir: ../../images
 
+[[bool-queries]]
 == Bool Queries
 
 Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,

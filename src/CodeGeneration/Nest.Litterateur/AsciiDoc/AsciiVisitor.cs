@@ -78,16 +78,33 @@ namespace Nest.Litterateur.AsciiDoc
 			if (_topLevel)
 			{
 				_topLevel = false;
+				Source exampleJson = null;
+
 				for (int index = 0; index < elements.Count; index++)
 				{
 					var element = elements[index];
 					var source = element as Source;
-
+					
 					if (source != null)
 					{
 						// remove empty source blocks
 						if (string.IsNullOrWhiteSpace(source.Text))
 						{
+							continue;
+						}
+
+						var method = source.Attributes.OfType<NamedAttribute>().FirstOrDefault(a => a.Name == "method");
+						if (method == null)
+						{
+							_newDocument.Elements.Add(element);
+							continue;
+						}
+
+						if (method.Value == "expectjson" && 
+							source.Attributes.Count > 1 && 
+							source.Attributes[1].Name == "javascript")
+						{
+							exampleJson = source;
 							continue;
 						}
 
@@ -105,31 +122,37 @@ namespace Nest.Litterateur.AsciiDoc
 							}
 						}
 
-						var method = source.Attributes.OfType<NamedAttribute>().FirstOrDefault(a => a.Name == "method");
-						if (method == null)
-						{
-							_newDocument.Elements.Add(element);
-							continue;
-						}
-
 						switch (method.Value)
 						{
 							case "fluent":
 							case "queryfluent":
 								_newDocument.Elements.Add(new SectionTitle("Fluent DSL Example", 3));
+								_newDocument.Elements.Add(element);
 								break;
 							case "initializer":
 							case "queryinitializer":
 								_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
+								_newDocument.Elements.Add(element);
+								// Move the example json to after the initializer example
+								if (exampleJson != null)
+								{
+									_newDocument.Elements.Add(exampleJson);
+									exampleJson = null;
+								}
 								break;
 							case "expectresponse":
 								_newDocument.Elements.Add(new SectionTitle("Handling Responses", 3));
+								_newDocument.Elements.Add(element);
+								break;
+							default:
+								_newDocument.Elements.Add(element);
 								break;
 						}
-
 					}
-
-					_newDocument.Elements.Add(element);
+					else
+					{
+						_newDocument.Elements.Add(element);
+					}
 				}
 			}
 
@@ -152,6 +175,7 @@ namespace Nest.Litterateur.AsciiDoc
 		{
 			if (sectionTitle.Level != 2)
 			{
+				base.Visit(sectionTitle);
 				return;
 			}
 

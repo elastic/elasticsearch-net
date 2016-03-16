@@ -121,10 +121,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 
 			/** 
-			* If you are using elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
+			* If you are using Elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
 			* you to analyze a string in a number of different ways, these _"virtual"_ sub fields 
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that 
-			* should be mapped. 
+			* should be mapped and <<auto-map, how they are mapped>> 
 			*/
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
 			Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
@@ -327,7 +327,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		[U]
 		public void PrecedenceIsAsExpected()
 		{
-			/** here we provide an explicit rename of a property on connectionsettings using `.Rename()`
+			/** here we provide an explicit rename of a property on `ConnectionSettings` using `.Rename()`
 			* and all properties that are not mapped verbatim should be uppercased
 			*/
 			var usingSettings = WithConnectionSettings(s => s

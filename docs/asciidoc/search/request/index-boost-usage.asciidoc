@@ -4,17 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "indices_boost": {
-    "index1": 1.4,
-    "index2": 1.3
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -37,6 +26,17 @@ new SearchRequest<Project>
 			{ "index1", 1.4 },
 			{ "index2", 1.3 }
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "indices_boost": {
+    "index1": 1.4,
+    "index2": 1.3
+  }
 }
 ----
 

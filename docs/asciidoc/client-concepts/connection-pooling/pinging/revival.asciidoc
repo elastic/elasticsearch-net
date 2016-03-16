@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[pinging---revival]]
 == Pinging - Revival
 
 When a node is marked dead it will only be put in the dog house for a certain amount of time. Once it comes out of the dog house, or revived, we schedule a ping 

@@ -2,9 +2,15 @@ using System.IO;
 
 namespace Nest.Litterateur.Documentation.Files
 {
-	public class ImageDocumentationFile : RawDocumentationFile
+	public class ImageDocumentationFile : DocumentationFile
 	{
 		public ImageDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
+
+		public override void SaveToDocumentationFolder()
+		{
+			var docFileName = this.CreateDocumentationLocation();
+			this.FileLocation.CopyTo(docFileName.FullName, true);
+		}
 
 		protected override FileInfo CreateDocumentationLocation()
 		{

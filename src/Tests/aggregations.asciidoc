@@ -1,0 +1,13 @@
+﻿:output-dir: aggregations
+
+[[aggregations]]
+= Aggregations
+
+include::{output-dir}/writing-aggregations.asciidoc[]
+
+include::aggregations-usage.asciidoc[]
+
+
+
+
+

@@ -4,15 +4,6 @@
 
 :imagesdir: ../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "from": 10,
-  "size": 12
-}
-----
-
 === Object Initializer Syntax Example
 
 [source,csharp,method="initializer"]
@@ -21,6 +12,15 @@ new SearchRequest<Project>()
 {
 	From = 10,
 	Size = 12
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "from": 10,
+  "size": 12
 }
 ----
 

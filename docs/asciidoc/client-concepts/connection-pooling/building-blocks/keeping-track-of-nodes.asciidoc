@@ -6,6 +6,7 @@
 
 :imagesdir: ../../../images
 
+[[keeping-track-of-nodes]]
 == Keeping track of nodes
 
 === Creating a Node

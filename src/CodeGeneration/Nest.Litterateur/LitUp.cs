@@ -5,10 +5,6 @@ using System.IO;
 using System.Linq;
 using Nest.Litterateur.Documentation.Files;
 
-#if !DOTNETCORE
-using AsciiDoc;
-#endif
-
 namespace Nest.Litterateur
 {
 	public static class LitUp
@@ -29,10 +25,12 @@ namespace Nest.Litterateur
 			{
 				yield return InputFiles("*.doc.cs");
 				yield return InputFiles("*UsageTests.cs");
-				yield return InputFiles("*.asciidoc");
 				yield return InputFiles("*.png");
 				yield return InputFiles("*.gif");
 				yield return InputFiles("*.jpg");
+				// process asciidocs last as they may have generated
+				// includes to other output asciidocs
+				yield return InputFiles("*.asciidoc");
 			}
 		}	
 
@@ -44,36 +42,10 @@ namespace Nest.Litterateur
 			}
 
 #if !DOTNETCORE
-			// generate the index.asciidoc file from the sections
-			var indexDoc = new Document
-			{
-				Title = new DocumentTitle("Elasticsearch.Net and NEST, the .NET Elasticsearch clients")
-				{
-					Attributes =
-					{
-						new Anchor("elasticsearch-net-reference", null),
-					}
-				}
-			};
-
-			indexDoc.Elements.Add(new Include("intro.asciidoc"));
-
-			// TODO: Only the top level sections should be in the index where each top level section should link to other sections
-			foreach (var section in Sections.GroupBy(s => s.Key).OrderBy(s => s.Min(kv => kv.Value)).ThenBy(s => s.Key))
-			{
-				indexDoc.Elements.Add(new Include(section.Key));
-			}
-
-			using (var visitor = new AsciiDocVisitor(Path.Combine(Program.OutputDirPath, "index.asciidoc")))
-			{
-				indexDoc.Accept(visitor);
-			}
-
 			if (Debugger.IsAttached)
+				Console.WriteLine("Press any key to continue...");
 				Console.ReadKey();
 #endif
-
-
 		}
 	}
 }

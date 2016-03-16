@@ -4,27 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "tags": {
-      "nested": {
-        "path": "tags"
-      },
-      "aggs": {
-        "tag_names": {
-          "terms": {
-            "field": "tags.name"
-          }
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -56,6 +35,27 @@ new SearchRequest<Project>
 			Field = "tags.name"
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "tags": {
+      "nested": {
+        "path": "tags"
+      },
+      "aggs": {
+        "tag_names": {
+          "terms": {
+            "field": "tags.name"
+          }
+        }
+      }
+    }
+  }
 }
 ----
 

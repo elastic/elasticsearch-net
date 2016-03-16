@@ -8,7 +8,7 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/** :section-number: 3.1
+	/** [[auto-map]]
 	* == Auto mapping properties
 	* 
 	* When creating a mapping (either when creating an index or via the put mapping API),

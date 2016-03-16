@@ -1,0 +1,26 @@
+﻿:output-dir: client-concepts/high-level
+
+[[high-level]]
+== High Level
+
+include::{output-dir}/inference/field-inference.asciidoc[]
+
+include::{output-dir}/inference/property-inference.asciidoc[]
+
+include::{output-dir}/inference/ids-inference.asciidoc[]
+
+include::{output-dir}/inference/document-paths.asciidoc[]
+
+include::{output-dir}/inference/indices-paths.asciidoc[]
+
+include::{output-dir}/inference/features-inference.asciidoc[]
+
+include::{output-dir}/mapping/auto-map.asciidoc[]
+
+include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
+
+
+
+
+
+

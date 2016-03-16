@@ -1,11 +1,10 @@
-:section-number: 3.1
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
 :imagesdir: ../../../images
 
+[[auto-mapping-properties]]
 == Auto mapping properties
 
 When creating a mapping (either when creating an index or via the put mapping API),
@@ -238,6 +237,7 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
+[[automapping-with-overrides]]
 == Automapping with overrides
 
 In most cases, you'll want to map more than just the vanilla datatypes and also provide
@@ -290,6 +290,7 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
+[[automap-with-attributes]]
 == Automap with attributes
 
 It is also possible to define your mappings using attributes on your POCOS.  When you
@@ -645,6 +646,7 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
+[[ignoring-properties]]
 == Ignoring Properties
 
 Properties on a POCO can be ignored in a few ways:  
@@ -712,6 +714,7 @@ var settings = WithConnectionSettings(s => s
 settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 ----
 
+[[mapping-recursion]]
 == Mapping Recursion
 
 If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
@@ -825,6 +828,7 @@ var expectedWithMaxRecursion = new
 Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 ----
 
+[[applying-conventions-through-the-visitor-pattern]]
 == Applying conventions through the Visitor pattern
 
 It is also possible to apply a transformation on all or specific properties.

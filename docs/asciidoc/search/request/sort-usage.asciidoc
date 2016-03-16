@@ -7,75 +7,6 @@
 Allows to add one or more sort on specific fields. Each sort can be reversed as well. 
 The sort is defined on a per field level, with special field name for score to sort by score.
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "sort": [
-    {
-      "startedOn": {
-        "order": "asc"
-      }
-    },
-    {
-      "name": {
-        "order": "desc"
-      }
-    },
-    {
-      "_score": {
-        "order": "desc"
-      }
-    },
-    {
-      "_doc": {
-        "order": "asc"
-      }
-    },
-    {
-      "lastActivity": {
-        "missing": "_last",
-        "order": "desc",
-        "mode": "avg",
-        "nested_filter": {
-          "match_all": {}
-        },
-        "nested_path": "tags",
-        "unmapped_type": "date"
-      }
-    },
-    {
-      "_geo_distance": {
-        "location": [
-          {
-            "lat": 70.0,
-            "lon": -70.0
-          },
-          {
-            "lat": -12.0,
-            "lon": 12.0
-          }
-        ],
-        "order": "asc",
-        "mode": "min"
-      }
-    },
-    {
-      "_script": {
-        "order": "asc",
-        "type": "number",
-        "script": {
-          "params": {
-            "factor": 1.1
-          },
-          "inline": "doc['numberOfCommits'].value * factor"
-        }
-      }
-    }
-  ]
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -157,6 +88,75 @@ new SearchRequest<Project>
 			}
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "sort": [
+    {
+      "startedOn": {
+        "order": "asc"
+      }
+    },
+    {
+      "name": {
+        "order": "desc"
+      }
+    },
+    {
+      "_score": {
+        "order": "desc"
+      }
+    },
+    {
+      "_doc": {
+        "order": "asc"
+      }
+    },
+    {
+      "lastActivity": {
+        "missing": "_last",
+        "order": "desc",
+        "mode": "avg",
+        "nested_filter": {
+          "match_all": {}
+        },
+        "nested_path": "tags",
+        "unmapped_type": "date"
+      }
+    },
+    {
+      "_geo_distance": {
+        "location": [
+          {
+            "lat": 70.0,
+            "lon": -70.0
+          },
+          {
+            "lat": -12.0,
+            "lon": 12.0
+          }
+        ],
+        "order": "asc",
+        "mode": "min"
+      }
+    },
+    {
+      "_script": {
+        "order": "asc",
+        "type": "number",
+        "script": {
+          "params": {
+            "factor": 1.1
+          },
+          "inline": "doc['numberOfCommits'].value * factor"
+        }
+      }
+    }
+  ]
 }
 ----
 

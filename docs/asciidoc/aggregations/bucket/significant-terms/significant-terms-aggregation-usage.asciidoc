@@ -4,25 +4,6 @@
 
 :imagesdir: ../../../images
 
-[source,javascript,method="expectjson"]
-.Example json output
-----
-{
-  "aggs": {
-    "significant_names": {
-      "significant_terms": {
-        "field": "name",
-        "min_doc_count": 10,
-        "mutual_information": {
-          "background_is_superset": true,
-          "include_negatives": true
-        }
-      }
-    }
-  }
-}
-----
-
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -56,6 +37,25 @@ new SearchRequest<Project>
 			IncludeNegatives = true
 		}
 	}
+}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "aggs": {
+    "significant_names": {
+      "significant_terms": {
+        "field": "name",
+        "min_doc_count": 10,
+        "mutual_information": {
+          "background_is_superset": true,
+          "include_negatives": true
+        }
+      }
+    }
+  }
 }
 ----
 
