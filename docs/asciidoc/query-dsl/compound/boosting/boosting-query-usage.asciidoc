@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[boosting-query-usage]]
+== Boosting Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

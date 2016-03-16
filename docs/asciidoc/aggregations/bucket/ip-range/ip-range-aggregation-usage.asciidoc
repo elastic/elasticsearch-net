@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[ip-range-aggregation-usage]]
+== Ip Range Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[serial-differencing-aggregation-usage]]
+== Serial Differencing Aggregation Usage
+
 === Handling Responses
 
 [source,csharp,method="expectresponse"]

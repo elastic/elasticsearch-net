@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[filtered-query-usage]]
+== Filtered Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

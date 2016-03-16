@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[indices-no-match-query-usage]]
+== Indices No Match Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

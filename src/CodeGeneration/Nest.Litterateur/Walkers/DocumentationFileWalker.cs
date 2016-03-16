@@ -134,10 +134,10 @@ namespace Nest.Litterateur.Walkers
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 
 				// this lambda has already been included so skip it
-				//if (IncludeMethodBlockContainsLambda && this.EndLine >= line)
-				//{
-				//	return;
-				//}
+				if (IncludeMethodBlockContainsLambda && this.EndLine >= line)
+				{
+					return;
+				}
 
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))

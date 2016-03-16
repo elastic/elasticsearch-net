@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[constant-score-query-usage]]
+== Constant Score Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

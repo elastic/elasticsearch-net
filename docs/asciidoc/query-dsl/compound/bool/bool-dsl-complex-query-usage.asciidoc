@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[bool-dsl-complex-query-usage]]
+== Bool Dsl Complex Query Usage
+
 [source,csharp,method="queryjson"]
 ----
 new

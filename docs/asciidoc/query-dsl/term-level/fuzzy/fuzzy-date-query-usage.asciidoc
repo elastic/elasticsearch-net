@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[fuzzy-date-query-usage]]
+== Fuzzy Date Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

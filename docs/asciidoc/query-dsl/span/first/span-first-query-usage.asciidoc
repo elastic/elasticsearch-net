@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[span-first-query-usage]]
+== Span First Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

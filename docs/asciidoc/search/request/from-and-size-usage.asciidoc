@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[from-and-size-usage]]
+== From And Size Usage
+
 === Object Initializer Syntax Example
 
 [source,csharp,method="initializer"]

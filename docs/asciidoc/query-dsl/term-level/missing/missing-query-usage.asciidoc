@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[missing-query-usage]]
+== Missing Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

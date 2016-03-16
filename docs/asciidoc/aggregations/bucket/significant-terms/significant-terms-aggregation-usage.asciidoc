@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[significant-terms-aggregation-usage]]
+== Significant Terms Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

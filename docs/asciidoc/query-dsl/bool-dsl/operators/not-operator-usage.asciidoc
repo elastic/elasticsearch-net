@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[not-operator-usage]]
+== Not Operator Usage
+
 [source,csharp,method="combiningmanyusingaggregate"]
 ----
 var lotsOfNots = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);

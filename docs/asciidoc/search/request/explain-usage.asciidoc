@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[explain-usage]]
+== Explain Usage
+
 Enables explanation for each hit on how its score was computed.
 
 === Fluent DSL Example

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[wildcard-query-usage]]
+== Wildcard Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

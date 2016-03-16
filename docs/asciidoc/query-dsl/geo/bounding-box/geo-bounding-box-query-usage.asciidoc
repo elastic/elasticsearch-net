@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[geo-bounding-box-query-usage]]
+== Geo Bounding Box Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

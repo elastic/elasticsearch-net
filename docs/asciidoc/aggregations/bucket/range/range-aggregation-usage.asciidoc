@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[range-aggregation-usage]]
+== Range Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

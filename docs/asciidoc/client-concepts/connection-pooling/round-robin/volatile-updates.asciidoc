@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[volatile-updates]]
+== Volatile Updates
+
 [source,csharp,method="staticpoolwithstandsconcurrentreadandwrites"]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));

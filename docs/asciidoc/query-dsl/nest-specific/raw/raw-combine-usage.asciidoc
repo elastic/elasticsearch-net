@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[raw-combine-usage]]
+== Raw Combine Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

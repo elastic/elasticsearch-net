@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[fuzzy-query-usage]]
+== Fuzzy Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

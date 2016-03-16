@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[or-operator-usage]]
+== Or Operator Usage
+
 [source,csharp,method="combiningmanyusingaggregate"]
 ----
 var lotsOfOrs = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);

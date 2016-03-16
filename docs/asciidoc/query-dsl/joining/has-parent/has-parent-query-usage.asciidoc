@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[has-parent-query-usage]]
+== Has Parent Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

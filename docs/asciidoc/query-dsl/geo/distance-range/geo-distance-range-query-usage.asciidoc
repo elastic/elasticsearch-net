@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[geo-distance-range-query-usage]]
+== Geo Distance Range Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

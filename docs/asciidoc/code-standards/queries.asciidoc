@@ -4,6 +4,9 @@
 
 :imagesdir: ../images
 
+[[queries]]
+== Queries
+
 [source,csharp,method="staticqueryexposesall"]
 ----
 var staticProperties = from p in typeof(Query<>).GetMethods()

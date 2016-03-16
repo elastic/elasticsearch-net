@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[moving-average-holt-linear-aggregation-usage]]
+== Moving Average Holt Linear Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

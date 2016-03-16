@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[source-filtering-usage]]
+== Source Filtering Usage
+
 Allows to control how the _source field is returned  with every hit.
 By default operations return the contents of the _source field unless 
  you have used the fields parameter or if the source field is disabled.

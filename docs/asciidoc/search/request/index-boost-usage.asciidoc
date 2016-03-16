@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[index-boost-usage]]
+== Index Boost Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

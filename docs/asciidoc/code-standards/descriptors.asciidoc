@@ -4,6 +4,9 @@
 
 :imagesdir: ../images
 
+[[descriptors]]
+== Descriptors
+
 Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
 
 [source,csharp,method="descriptorshavetobemarkedwithidescriptor"]

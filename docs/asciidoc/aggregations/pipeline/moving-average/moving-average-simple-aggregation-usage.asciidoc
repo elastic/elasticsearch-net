@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[moving-average-simple-aggregation-usage]]
+== Moving Average Simple Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

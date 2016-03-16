@@ -1,13 +1,11 @@
-:section-number: 10
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
 
 :imagesdir: ../images
 
-[[aggregations]]
-== Aggregations
+[[writing-aggregations]]
+== Writing Aggregations
 
 Aggregations are arguably one of the most powerful features of Elasticsearch.
 NEST allows you to write your aggregations using 

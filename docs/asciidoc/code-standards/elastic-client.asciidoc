@@ -4,6 +4,9 @@
 
 :imagesdir: ../images
 
+[[elastic-client]]
+== Elastic Client
+
 [source,csharp,method="consistentinitializerparameternames"]
 ----
 var requestParametersNotNamedRequest =

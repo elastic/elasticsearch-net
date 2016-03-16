@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[average-bucket-aggregation-usage]]
+== Average Bucket Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[dismax-query-usage]]
+== Dismax Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

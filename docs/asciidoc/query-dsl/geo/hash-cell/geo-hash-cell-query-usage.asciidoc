@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[geo-hash-cell-query-usage]]
+== Geo Hash Cell Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

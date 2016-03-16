@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[cumulative-sum-aggregation-usage]]
+== Cumulative Sum Aggregation Usage
+
 === Handling Responses
 
 [source,csharp,method="expectresponse"]

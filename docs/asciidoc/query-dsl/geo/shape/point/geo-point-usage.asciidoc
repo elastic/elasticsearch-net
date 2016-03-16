@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../../images
 
+[[geo-point-usage]]
+== Geo Point Usage
+
 === Object Initializer Syntax Example
 
 [source,csharp,method="queryinitializer"]

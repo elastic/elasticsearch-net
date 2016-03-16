@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[derivative-aggregation-usage]]
+== Derivative Aggregation Usage
+
 === Handling Responses
 
 [source,csharp,method="expectresponse"]

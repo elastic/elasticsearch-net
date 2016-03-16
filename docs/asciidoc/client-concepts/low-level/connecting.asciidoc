@@ -216,19 +216,6 @@ var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) 
                     }
                 });
 
-list.Add(
-                            $"{response.HttpMethod} {response.Uri} \n" +
-                            $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
-
-list.Add($"{response.HttpMethod} {response.Uri}");
-
-list.Add($"Status: {response.HttpStatusCode}\n" +
-                                 $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
-                                 $"{new string('-', 30)}\n");
-
-list.Add($"Status: {response.HttpStatusCode}\n" +
-                                 $"{new string('-', 30)}\n");
-
 var client = new ElasticClient(settings);
 
 var syncResponse = client.Search<object>(s => s

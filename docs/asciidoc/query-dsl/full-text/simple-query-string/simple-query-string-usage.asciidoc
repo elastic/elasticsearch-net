@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[simple-query-string-usage]]
+== Simple Query String Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

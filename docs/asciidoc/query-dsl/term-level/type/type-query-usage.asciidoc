@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[type-query-usage]]
+== Type Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

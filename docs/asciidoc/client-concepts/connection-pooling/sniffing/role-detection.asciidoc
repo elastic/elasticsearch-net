@@ -39,18 +39,6 @@ var audit = new Auditor(() => Framework.Cluster
 	}
 };
 
-pool.Should().NotBeNull();
-
-pool.Nodes.Should().HaveCount(10);
-
-pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
-
-pool.Should().NotBeNull();
-
-pool.Nodes.Should().HaveCount(8);
-
-pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
-
 await audit.TraceStartup();
 ----
 
@@ -81,22 +69,6 @@ var audit = new Auditor(() => Framework.Cluster
 		pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
 	}
 };
-
-pool.Should().NotBeNull();
-
-pool.Nodes.Should().HaveCount(10);
-
-pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
-
-pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
-
-pool.Should().NotBeNull();
-
-pool.Nodes.Should().HaveCount(8);
-
-pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
-
-pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
 
 await audit.TraceStartup();
 ----
@@ -173,12 +145,6 @@ var audit = new Auditor(() => Framework.Cluster
 		pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
 	}
 };
-pool.Should().NotBeNull();
-pool.Nodes.Should().HaveCount(10);
-pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(10);
-pool.Should().NotBeNull();
-pool.Nodes.Should().HaveCount(8);
-pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
 await audit.TraceStartup();
 ----
 

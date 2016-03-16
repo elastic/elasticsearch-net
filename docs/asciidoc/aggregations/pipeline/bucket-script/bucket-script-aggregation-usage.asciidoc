@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[bucket-script-aggregation-usage]]
+== Bucket Script Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

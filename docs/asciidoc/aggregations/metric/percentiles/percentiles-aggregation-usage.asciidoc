@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[percentiles-aggregation-usage]]
+== Percentiles Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[missing-aggregation-usage]]
+== Missing Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

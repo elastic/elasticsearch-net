@@ -8,19 +8,18 @@ using System.Linq;
 
 namespace Tests.Aggregations
 {
-	/** :section-number: 10
-		* == Aggregations
-		*
-		* Aggregations are arguably one of the most powerful features of Elasticsearch.
-		* NEST allows you to write your aggregations using 
-		*
-		* - a strict fluent DSL
-		* - a verbatim object initializer syntax that maps verbatim to the elasticsearch API 
-		* - a more terse object initializer aggregation DSL
-		* 
-		* Three different ways, yikes that's a lot to take in! Lets go over them one by one and explain when you might
-		* want to use each.
-		*/
+	/** == Writing Aggregations
+	*
+	* Aggregations are arguably one of the most powerful features of Elasticsearch.
+	* NEST allows you to write your aggregations using 
+	*
+	* - a strict fluent DSL
+	* - a verbatim object initializer syntax that maps verbatim to the elasticsearch API 
+	* - a more terse object initializer aggregation DSL
+	* 
+	* Three different ways, yikes that's a lot to take in! Lets go over them one by one and explain when you might
+	* want to use each.
+	*/
 	public class Usage : UsageTestBase<ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		/**

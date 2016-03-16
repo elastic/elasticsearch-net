@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[more-like-this-query-usage]]
+== More Like This Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

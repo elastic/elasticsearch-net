@@ -24,6 +24,11 @@ namespace Nest.Litterateur
 				, @"[-\s]", "-").TrimEnd('-').ToLower();
 		}
 
+		public static string LowercaseHyphenToPascal(this string lowercaseHyphenatedInput)
+		{
+			return Regex.Replace(lowercaseHyphenatedInput.Replace("-", " "), @"\b([a-z])", m => m.Captures[0].Value.ToUpper());
+		}
+
 		public static string TrimEnd(this string input, string trim)
 		{
 			if (string.IsNullOrEmpty(input)) return string.Empty;

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[nested-query-usage]]
+== Nested Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

@@ -70,6 +70,19 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}"));
 			}
 
+			// see if the document has some kind of top level title.
+			if (document.Title == null &&
+			    document.Elements.Count > 0 &&
+			    !document.Elements.OfType<SectionTitle>().Any(s => s.Level == 2))
+			{
+				var id = Path.GetFileNameWithoutExtension(_destination.Name);
+				var title = id.LowercaseHyphenToPascal();
+				var sectionTitle = new SectionTitle(title, 2);
+				sectionTitle.Attributes.Add(new Anchor(id));
+
+				_newDocument.Elements.Add(sectionTitle);
+			}
+
 			base.Visit(document);
 		}
 

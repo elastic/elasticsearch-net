@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[numeric-range-query-usage]]
+== Numeric Range Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

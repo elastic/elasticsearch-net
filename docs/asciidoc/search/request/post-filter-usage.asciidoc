@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[post-filter-usage]]
+== Post Filter Usage
+
 === Object Initializer Syntax Example
 
 [source,csharp,method="initializer"]

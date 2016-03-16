@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[geo-hash-grid-aggregation-usage]]
+== Geo Hash Grid Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

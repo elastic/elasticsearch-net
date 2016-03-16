@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[max-bucket-aggregation-usage]]
+== Max Bucket Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[function-score-query-usage]]
+== Function Score Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

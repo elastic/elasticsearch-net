@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[term-range-query-usage]]
+== Term Range Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

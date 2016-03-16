@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[match-usage]]
+== Match Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

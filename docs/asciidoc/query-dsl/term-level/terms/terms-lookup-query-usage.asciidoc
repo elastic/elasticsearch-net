@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[terms-lookup-query-usage]]
+== Terms Lookup Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[template-query-usage]]
+== Template Query Usage
+
 [source,csharp,method="queryjson"]
 ----
 new

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[highlighting-usage]]
+== Highlighting Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[unary-add-operator-usage]]
+== Unary Add Operator Usage
+
 [source,csharp,method="combiningmanyusingaggregate"]
 ----
 var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);

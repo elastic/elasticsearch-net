@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[moving-average-holt-winters-aggregation-usage]]
+== Moving Average Holt Winters Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

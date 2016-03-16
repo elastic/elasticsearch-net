@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[limit-query-usage]]
+== Limit Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

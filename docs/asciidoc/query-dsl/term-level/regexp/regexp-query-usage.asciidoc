@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[regexp-query-usage]]
+== Regexp Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

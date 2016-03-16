@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[span-multi-term-query-usage]]
+== Span Multi Term Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

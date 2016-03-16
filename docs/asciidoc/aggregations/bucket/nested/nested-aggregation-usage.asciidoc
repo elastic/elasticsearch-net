@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[nested-aggregation-usage]]
+== Nested Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

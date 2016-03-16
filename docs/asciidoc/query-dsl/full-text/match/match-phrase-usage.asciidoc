@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[match-phrase-usage]]
+== Match Phrase Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

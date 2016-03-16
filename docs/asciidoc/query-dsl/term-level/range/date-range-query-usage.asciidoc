@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[date-range-query-usage]]
+== Date Range Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

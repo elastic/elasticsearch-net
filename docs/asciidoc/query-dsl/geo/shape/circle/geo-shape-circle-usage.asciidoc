@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../../images
 
+[[geo-shape-circle-usage]]
+== Geo Shape Circle Usage
+
 === Object Initializer Syntax Example
 
 [source,csharp,method="queryinitializer"]

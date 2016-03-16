@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[char-filter-usage]]
+== Char Filter Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

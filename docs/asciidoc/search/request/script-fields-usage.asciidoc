@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[script-fields-usage]]
+== Script Fields Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

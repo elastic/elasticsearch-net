@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[geo-bounds-aggregation-usage]]
+== Geo Bounds Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

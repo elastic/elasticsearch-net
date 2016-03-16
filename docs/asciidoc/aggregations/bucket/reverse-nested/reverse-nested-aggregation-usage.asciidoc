@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[reverse-nested-aggregation-usage]]
+== Reverse Nested Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]

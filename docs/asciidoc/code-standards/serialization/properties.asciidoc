@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[properties]]
+== Properties
+
 Our Json.NET contract resolver picks up attributes set on the interface
 
 [source,csharp,method="seesinterfaceproperties"]

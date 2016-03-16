@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[or-query-usage]]
+== Or Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

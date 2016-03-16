@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../../images
 
+[[geo-line-string-usage]]
+== Geo Line String Usage
+
 === Object Initializer Syntax Example
 
 [source,csharp,method="queryinitializer"]

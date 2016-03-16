@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[prefix-query-usage]]
+== Prefix Query Usage
+
 [source,javascript,method="queryjson"]
 .Example json output
 ----

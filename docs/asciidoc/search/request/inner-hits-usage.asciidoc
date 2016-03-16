@@ -4,6 +4,9 @@
 
 :imagesdir: ../../images
 
+[[inner-hits-usage]]
+== Inner Hits Usage
+
 [source,csharp,method="unknown"]
 ----
 public interface IRoyal
@@ -51,7 +54,6 @@ var kings = King.Generator.Generate(2)
 		k.Foes = King.Generator.Generate(2).ToList();
 		return k;
 	});
-k.Foes = King.Generator.Generate(2).ToList();
 var bulk = new BulkDescriptor();
 IndexAll(bulk, () => kings, indexChildren: king =>
 	 IndexAll(bulk, () => Prince.Generator.Generate(2), king.Name, prince =>
@@ -110,6 +112,32 @@ InnerHits = new NamedInnerHits
 		}
 ----
 
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "inner_hits": {
+    "earls": {
+      "type": {
+        "earl": {
+          "fielddata_fields": [
+            "name"
+          ],
+          "inner_hits": {
+            "barons": {
+              "type": {
+                "baron": {}
+              }
+            }
+          },
+          "size": 5
+        }
+      }
+    }
+  }
+}
+----
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
@@ -146,5 +174,38 @@ Query = new HasChildQuery
 	InnerHits = new InnerHits()
 }
 		}
+----
+
+[source,javascript,method="expectjson"]
+.Example json output
+----
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "has_child": {
+            "type": "prince",
+            "query": {
+              "match_all": {}
+            },
+            "inner_hits": {
+              "name": "princes"
+            }
+          }
+        },
+        {
+          "nested": {
+            "query": {
+              "match_all": {}
+            },
+            "path": "foes",
+            "inner_hits": {}
+          }
+        }
+      ]
+    }
+  }
+}
 ----
 

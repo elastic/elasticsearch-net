@@ -4,6 +4,9 @@
 
 :imagesdir: ../../../images
 
+[[value-count-aggregation-usage]]
+== Value Count Aggregation Usage
+
 === Fluent DSL Example
 
 [source,csharp,method="fluent"]
