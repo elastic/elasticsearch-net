@@ -66,14 +66,14 @@ namespace Nest
 			instance.Fields = new FieldValues(serializer.GetConnectionSettings().Inferrer, instance.Fields);
 			return instance;
 		}
-	
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
 		}
 	}
 
-	internal static class ConcreteTypeConverter 
+	internal static class ConcreteTypeConverter
 	{
 		internal static object GetUsingConcreteTypeConverter<T>(
 			JsonReader reader, JsonSerializer serializer, ConcreteTypeConverter<T> realConcreteConverter)
@@ -103,8 +103,8 @@ namespace Nest
 		}
 
 		internal static Type GetConcreteTypeUsingSelector<T>(
-			JsonSerializer serializer, 
-			ConcreteTypeConverter<T> realConcreteConverter, 
+			JsonSerializer serializer,
+			ConcreteTypeConverter<T> realConcreteConverter,
 			JObject jObject)
 			where T: class
 		{
@@ -122,7 +122,7 @@ namespace Nest
 			hitDynamic.Fields = fieldValues;
 			hitDynamic.Source = d._source;
 			hitDynamic.Index = d._index;
-			hitDynamic.Score = d._score;
+			hitDynamic.Score = d._score != null ? (double)d._score : 0;
 			hitDynamic.Type = d._type;
 			hitDynamic.Version = d._version;
 			hitDynamic.Id = d._id;
