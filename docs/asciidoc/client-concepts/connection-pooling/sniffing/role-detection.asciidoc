@@ -12,7 +12,7 @@
 When we sniff the custer state we detect the role of the node whether its master eligible and holds data
 We use this information when selecting a node to perform an API call on.
 
-[source,csharp,method="detectsdatanodes"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -42,7 +42,7 @@ var audit = new Auditor(() => Framework.Cluster
 await audit.TraceStartup();
 ----
 
-[source,csharp,method="detectsfqdn"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -73,7 +73,7 @@ var audit = new Auditor(() => Framework.Cluster
 await audit.TraceStartup();
 ----
 
-[source,csharp,method="sniffpicksuproles"]
+[source,csharp]
 ----
 var node = SniffAndReturnNode();
 
@@ -88,21 +88,21 @@ node.MasterEligible.Should().BeTrue();
 node.HoldsData.Should().BeFalse();
 ----
 
-[source,csharp,method="sniffandreturnnode"]
+[source,csharp]
 ----
 var pipeline = CreatePipeline();
 
 pipeline.Sniff();
 ----
 
-[source,csharp,method="sniffandreturnnodeasync"]
+[source,csharp]
 ----
 var pipeline = CreatePipeline();
 
 await pipeline.SniffAsync();
 ----
 
-[source,csharp,method="createpipeline"]
+[source,csharp]
 ----
 this._settings =
 	this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
@@ -111,7 +111,7 @@ var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new
 	new SearchRequestParameters());
 ----
 
-[source,csharp,method="assertsniffresponse"]
+[source,csharp]
 ----
 var nodes = this._settings.ConnectionPool.Nodes;
 
@@ -120,7 +120,7 @@ nodes.Should().NotBeEmpty().And.HaveCount(1);
 var node = nodes.First();
 ----
 
-[source,csharp,method="detectsmasternodes"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

@@ -13,7 +13,7 @@ By default operations return the contents of the _source field unless
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Source(so => so
@@ -28,7 +28,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -39,7 +39,7 @@ new SearchRequest<Project>
 }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -54,7 +54,7 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-[source,csharp,method="expectresponse"]
+[source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 document.Name.Should().NotBeNull();
@@ -62,7 +62,7 @@ document.StartedOn.Should().NotBe(default(DateTime));
 document.Description.Should().BeNull();
 ----
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 internal class WithSourceFilterProperty
 {
@@ -71,7 +71,7 @@ internal class WithSourceFilterProperty
 }
 ----
 
-[source,csharp,method="candeserializeboolean"]
+[source,csharp]
 ----
 var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": false }");
 
@@ -82,7 +82,7 @@ o.SourceFilter.Should().NotBeNull();
 o.SourceFilter.Exclude.Should().Contain("*");
 ----
 
-[source,csharp,method="candeserializearray"]
+[source,csharp]
 ----
 var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": [\"obj.*\"] }");
 
@@ -93,7 +93,7 @@ o.SourceFilter.Should().NotBeNull();
 o.SourceFilter.Include.Should().Contain("obj.*");
 ----
 
-[source,csharp,method="candeserializestring"]
+[source,csharp]
 ----
 var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": \"obj.*\" }");
 
@@ -104,7 +104,7 @@ o.SourceFilter.Should().NotBeNull();
 o.SourceFilter.Include.Should().Contain("obj.*");
 ----
 
-[source,csharp,method="candeserializeobject"]
+[source,csharp]
 ----
 var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"include\": [\"obj.*\"], \"exclude\": [\"foo.*\"] } }");
 

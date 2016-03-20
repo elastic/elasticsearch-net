@@ -9,7 +9,7 @@
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="queryinitializer"]
+[source,csharp]
 ----
 new GeoShapeMultiPointQuery
 		{

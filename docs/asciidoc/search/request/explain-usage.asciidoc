@@ -11,7 +11,7 @@ Enables explanation for each hit on how its score was computed.
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Explain()
@@ -19,12 +19,12 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project> { Explain = true }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {

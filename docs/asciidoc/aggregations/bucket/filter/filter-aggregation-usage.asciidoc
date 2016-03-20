@@ -12,11 +12,9 @@ Often this will be used to narrow down the current aggregation context to a spec
 
 Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html[the elasticsearch documentation on Filter Aggregation]
 
-=== Fluent DSL Example 
-
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -29,9 +27,9 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example 
+=== Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -44,12 +42,37 @@ new SearchRequest<Project>
 }
 ----
 
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "bethels_projects": {
+      "filter": {
+        "term": {
+          "leadDeveloper.firstName": {
+            "value": "pierce"
+          }
+        }
+      },
+      "aggs": {
+        "project_tags": {
+          "terms": {
+            "field": "curatedTags.name"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 === Handling Responses
 
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
-[source,csharp,method="expectresponse"]
+[source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 
@@ -62,14 +85,15 @@ tags.Buckets.Should().NotBeEmpty();
 ----
 
 [[empty-filter]]
+[float]
 == Empty Filter
 
 When the collection of filters is empty or all are conditionless, NEST will serialize them
 to an empty object.
 
-=== Fluent DSL Example 
+=== Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -83,9 +107,9 @@ s => s
 )
 ----
 
-=== Object Initializer Syntax Example 
+=== Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -99,9 +123,21 @@ new SearchRequest<Project>
 }
 ----
 
-=== Handling Response 
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "empty_filter": {
+      "filter": {}
+    }
+  }
+}
+----
 
-[source,csharp,method="expectresponse"]
+=== Handling Responses
+
+[source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);

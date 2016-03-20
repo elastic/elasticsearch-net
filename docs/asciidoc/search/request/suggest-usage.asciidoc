@@ -12,7 +12,7 @@ The sort is defined on a per field level, with special field name for score to s
 
 === Handling Responses
 
-[source,csharp,method="expectresponse"]
+[source,csharp]
 ----
 var myCompletionSuggest = response.Suggest["my-completion-suggest"];
 myCompletionSuggest.Should().NotBeNull();
@@ -30,7 +30,7 @@ payload.State.Should().NotBeNull();
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Suggest(ss => ss
@@ -87,7 +87,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -161,7 +161,7 @@ new SearchRequest<Project>
 }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {

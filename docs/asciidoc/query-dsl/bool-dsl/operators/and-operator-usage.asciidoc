@@ -7,14 +7,14 @@
 [[and-operator-usage]]
 == And Operator Usage
 
-[source,csharp,method="combiningmanyusingaggregate"]
+[source,csharp]
 ----
 var lotsOfAnds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && Query, q => q);
 
 LotsOfAnds(lotsOfAnds);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithnull"]
+[source,csharp]
 ----
 QueryContainer container = null;
 
@@ -23,7 +23,7 @@ container &= Query;
 LotsOfAnds(container);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithdefault"]
+[source,csharp]
 ----
 var container = new QueryContainer();
 
@@ -32,7 +32,7 @@ container &= Query;
 LotsOfAnds(container);
 ----
 
-[source,csharp,method="lotsofands"]
+[source,csharp]
 ----
 lotsOfAnds.Should().NotBeNull();
 
@@ -41,7 +41,7 @@ lotsOfAnds.Bool.Should().NotBeNull();
 lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
-[source,csharp,method="and"]
+[source,csharp]
 ----
 ReturnsBool(Query && Query, q => q.Query() && q.Query(), b =>
 {

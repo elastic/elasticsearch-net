@@ -9,17 +9,18 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class ConnectionPooling
 	{
-		/** :section-number: 4.1
-		 * == Connection Pooling
+		/** == Connection Pooling
 		 * Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 		 * NEST can use to issue client calls on. There are 3 types of connection pool
 		 *
-		 * - <<SingleNodeConnectionPool>>
-		 * - <<StaticConnectionPool>>
-		 * - <<SniffingConnectionPool>>
+		 * - <<single-node-connection-pool,SingleNodeConnectionPool>>
+		 * - <<static-connection-pool,StaticConnectionPool>>
+		 * - <<sniffing-connection-pool,SniffingConnectionPool>>
 		 */
 		
-		/** === SingleNodeConnectionPool 
+		/** 
+		* [[single-node-connection-pool]]
+		* === SingleNodeConnectionPool 
 		* The simplest of all connection pools, this takes a single `Uri` and uses that to connect to elasticsearch for all the calls
 		* It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
 		* ready to go. 
@@ -51,7 +52,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 		}
 
-		/** === StaticConnectionPool 
+		/**[[static-connection-pool]] 
+		* === StaticConnectionPool 
 		* The static connection pool is great if you have a known small sized cluster and do no want to enable 
 		* sniffing to find out the cluster topology.
 		*/
@@ -79,7 +81,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 		}
 
-		/** === SniffingConnectionPool 
+		/**[[sniffing-connection-pool]] 
+		* === SniffingConnectionPool 
 		* A subclass of `StaticConnectionPool` that allows itself to be reseeded at run time.
 		* It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 		*/

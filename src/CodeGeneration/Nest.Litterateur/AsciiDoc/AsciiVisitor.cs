@@ -181,6 +181,14 @@ namespace Nest.Litterateur.AsciiDoc
 				source.Attributes.Add(new Title("Example json output"));
 			}
 
+			// remove method attributes as the elastic doc generation doesn't like them; it 
+			// expects a linenumbering in the index 2 position of a source block
+			var methodAttribute = source.Attributes.FirstOrDefault(a => a.Name == "method");
+			if (methodAttribute != null)
+			{
+				source.Attributes.Remove(methodAttribute);
+			}
+
 			base.Visit(source);
 		}
 

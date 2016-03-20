@@ -26,7 +26,7 @@ still fails once
 After this second failure on 9201 another sniff will be returned a cluster that no 
 longer fails but looks completely different (9210-9212) we should be able to handle this
 
-[source,csharp,method="doesasniffafterconnectionfailure"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(5)
@@ -55,7 +55,7 @@ Our pool should now have three nodes
 
 We assert we do a sniff on the first master node in our updated cluster 
 
-[source,csharp,method="doesasniffafterconnectionfailure"]
+[source,csharp]
 ----
 audit = await audit.TraceCalls(
 new ClientCall {
@@ -91,7 +91,7 @@ new ClientCall {
 Here we set up our cluster exactly the same as the previous setup 
 Only we enable pinging (default is true) and make the ping fail
 
-[source,csharp,method="doesasniffafterconnectionfailureonping"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(5)
@@ -121,7 +121,7 @@ We assert we do a sniff on the first master node in our updated cluster
 
 9210 was already pinged after the sniff returned the new nodes 
 
-[source,csharp,method="doesasniffafterconnectionfailureonping"]
+[source,csharp]
 ----
 audit = await audit.TraceCalls(
 	new ClientCall {

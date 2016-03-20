@@ -28,7 +28,7 @@ It benefits from types that are carried over to sub aggregations
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Aggregations(aggs => aggs
@@ -47,7 +47,7 @@ The object initializer syntax (OIS) is a one-to-one mapping with how aggregation
 have to be represented in the Elasticsearch API. While it has the benefit of being a one-to-one 
 mapping, being dictionary based in C means it can grow exponentially in complexity rather quickly.
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -68,7 +68,7 @@ It also allows you to combine multiple aggregations using bitwise AND (`&&`) ope
 
 Compare the following example with the previous vanilla OIS syntax
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -87,7 +87,7 @@ An advanced scenario may involve an existing collection of aggregation functions
 on the request. Using LINQ's `.Aggregate()` method, each function can be applied to the aggregation descriptor
 (`childAggs` below) in turn, returning the descriptor after each function application.
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1>
 {

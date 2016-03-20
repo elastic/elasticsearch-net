@@ -65,7 +65,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Aggregations(aggs => aggs
@@ -88,7 +87,6 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				)
 			);
 
-		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{

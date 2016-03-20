@@ -13,10 +13,10 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class PostingData
 	{
-		/** :section-number: 1.3 
-		 * == Post data
-		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this if you pass a collection of `strings` or `objects`
-		 * they will be serialized in Elasticsearch's special bulk/multi format.
+		/**== Post data
+		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this, 
+		 * if you pass a collection of `string`s or `object`s they will be serialized 
+		 * using Elasticsearch's special bulk/multi format.
 		 */
 		private readonly string @string = "fromString";
 		private readonly byte[] bytes = Utf8Bytes("fromByteArray");
@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		[U] public void ImplicitConversions()
 		{
-			/** Even though the argument for `PostData` on the low level client takes a `PostData<object>`
+			/** Even though the argument for `PostData` on the low level client takes a `PostData<object>`,
 			* You can rely on implicit conversion to abstract the notion of PostData completely.
 			* You can implicitly convert from the following types
 			* - `string`
@@ -78,8 +78,6 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
-
-
 		}
 
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()

@@ -1,4 +1,4 @@
-﻿:output-dir:client-concepts/connection-pooling
+﻿:output-dir: client-concepts/connection-pooling
 :building-blocks: {output-dir}/building-blocks
 :sniffing: {output-dir}/sniffing
 :pinging: {output-dir}/pinging

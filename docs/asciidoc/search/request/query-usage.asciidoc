@@ -11,7 +11,7 @@ The query element within the search request body allows to define a query using 
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Query(q => q
@@ -21,7 +21,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -33,7 +33,7 @@ new SearchRequest<Project>
 }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {

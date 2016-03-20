@@ -9,7 +9,7 @@
 [[allowed-status-codes]]
 == Allowed status codes
 
-[source,csharp,method="canoverridebadresponse"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

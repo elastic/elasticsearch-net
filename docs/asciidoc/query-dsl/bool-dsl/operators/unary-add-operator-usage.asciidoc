@@ -7,14 +7,14 @@
 [[unary-add-operator-usage]]
 == Unary Add Operator Usage
 
-[source,csharp,method="combiningmanyusingaggregate"]
+[source,csharp]
 ----
 var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);
 
 LotsOfUnaryAdds(lotsOfUnaryAdds);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithnull"]
+[source,csharp]
 ----
 QueryContainer container = null;
 
@@ -23,7 +23,7 @@ container &= +Query;
 LotsOfUnaryAdds(container);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithdefault"]
+[source,csharp]
 ----
 var container = new QueryContainer();
 
@@ -32,7 +32,7 @@ container &= +Query;
 LotsOfUnaryAdds(container);
 ----
 
-[source,csharp,method="lotsofunaryadds"]
+[source,csharp]
 ----
 lotsOfUnaryAdds.Should().NotBeNull();
 
@@ -41,7 +41,7 @@ lotsOfUnaryAdds.Bool.Should().NotBeNull();
 lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
-[source,csharp,method="combindingmanyboolfiltersusingorsshouldflatten"]
+[source,csharp]
 ----
 var container = new QueryContainer();
 
@@ -52,7 +52,7 @@ var c = container as IQueryContainer;
 c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
-[source,csharp,method="unaryadd"]
+[source,csharp]
 ----
 ReturnsBool(+Query && +Query, q => +q.Query() && +q.Query(), b =>
 {

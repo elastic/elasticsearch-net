@@ -15,7 +15,7 @@ This allows us to fail and fallover to a healthy node faster
 
 A cluster with 2 nodes where the second node fails on ping 
 
-[source,csharp,method="pingfailsfallsovertohealthynodewithoutping"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(2)
@@ -33,7 +33,7 @@ It fails so we wrap over to node 9200 which we've already pinged
 
 Finally we assert that the connectionpool has one node that is marked as dead 
 
-[source,csharp,method="pingfailsfallsovertohealthynodewithoutping"]
+[source,csharp]
 ----
 await audit.TraceCalls(
 new ClientCall { 
@@ -54,7 +54,7 @@ new ClientCall {
 
 A cluster with 4 nodes where the second and third pings fail 
 
-[source,csharp,method="pingfailsfallsovermultipletimestohealthynode"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(4)
@@ -74,7 +74,7 @@ we haven't used it before and it succeeds
 
 Finally we assert that the connectionpool has two nodes that are marked as dead 
 
-[source,csharp,method="pingfailsfallsovermultipletimestohealthynode"]
+[source,csharp]
 ----
 await audit.TraceCalls(
 new ClientCall { 
@@ -97,7 +97,7 @@ new ClientCall {
 
  A healthy cluster of 4 (min master nodes of 3 of course!) 
 
-[source,csharp,method="allnodesarepingedonlyonfirstuseprovidedtheyarehealthy"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(4)

@@ -9,19 +9,19 @@
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 FluentExample
 ----
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 InitializerExample
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {

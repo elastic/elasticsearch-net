@@ -11,7 +11,7 @@
 
 Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 
-[source,csharp,method="asniffonstartuphappensonce"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -39,7 +39,7 @@ await audit.TraceCalls(
 );
 ----
 
-[source,csharp,method="sniffonstartuptakesnewclusterstate"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -59,7 +59,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method="snifftriesallnodes"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -86,7 +86,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method="sniffprefersmasternodes"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
@@ -107,7 +107,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method="sniffprefersmasternodesbutstillfailsover"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(new[] {
@@ -131,7 +131,7 @@ await audit.TraceCall(new ClientCall {
 });
 ----
 
-[source,csharp,method="asniffonstartuphappens"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

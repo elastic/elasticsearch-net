@@ -9,8 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filter
 {
-	/** 
-	 * == Filter Aggregation
+	/**== Filter Aggregation
 	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
@@ -45,7 +44,6 @@ namespace Tests.Aggregations.Bucket.Filter
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filter("bethels_projects", date => date
@@ -56,7 +54,6 @@ namespace Tests.Aggregations.Bucket.Filter
 				)
 			);
 
-		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -85,7 +82,8 @@ namespace Tests.Aggregations.Bucket.Filter
 		}
 	}
 	
-	/** == Empty Filter
+	/**[float] 
+	* == Empty Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
@@ -106,7 +104,6 @@ namespace Tests.Aggregations.Bucket.Filter
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.Filter("empty_filter", date => date
@@ -118,7 +115,6 @@ namespace Tests.Aggregations.Bucket.Filter
 				)
 			);
 
-		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
@@ -131,7 +127,6 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
-		/** === Handling Response */
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();

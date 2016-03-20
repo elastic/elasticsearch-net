@@ -3,11 +3,11 @@
 [[aggregations]]
 = Aggregations
 
+[partintro]
+--
+Something about aggregations
+--
+
 include::{output-dir}/writing-aggregations.asciidoc[]
 
 include::aggregations-usage.asciidoc[]
-
-
-
-
-

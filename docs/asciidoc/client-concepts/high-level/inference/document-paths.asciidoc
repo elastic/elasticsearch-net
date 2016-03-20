@@ -1,5 +1,3 @@
-:section-number: 2.4
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -17,7 +15,7 @@ to your document more succintly
 
 here we create a new document path based on Project with the id 1 
 
-[source,csharp,method="fromid"]
+[source,csharp]
 ----
 IDocumentPath path = new DocumentPath<Project>(1);
 
@@ -28,7 +26,7 @@ Expect(1).WhenSerializing(path.Id);
 
 You can still override the inferred index and type name
 
-[source,csharp,method="fromid"]
+[source,csharp]
 ----
 path = new DocumentPath<Project>(1).Type("project1");
 
@@ -39,7 +37,7 @@ Expect("project1").WhenSerializing(path.Index);
 
 and there is also a static way to describe such paths 
 
-[source,csharp,method="fromid"]
+[source,csharp]
 ----
 path = DocumentPath<Project>.Id(1);
 
@@ -52,14 +50,14 @@ Expect(1).WhenSerializing(path.Id);
 
 if you have an instance of your document you can use it as well generate document paths 
 
-[source,csharp,method="fromobject"]
+[source,csharp]
 ----
 var project = new Project { Name = "hello-world" };
 ----
 
 here we create a new document path based on the instance of `Project`, project 
 
-[source,csharp,method="fromobject"]
+[source,csharp]
 ----
 IDocumentPath path = new DocumentPath<Project>(project);
 
@@ -72,7 +70,7 @@ Expect("hello-world").WhenSerializing(path.Id);
 
 You can still override the inferred index and type name
 
-[source,csharp,method="fromobject"]
+[source,csharp]
 ----
 path = new DocumentPath<Project>(project).Type("project1");
 
@@ -85,7 +83,7 @@ Expect("project1").WhenSerializing(path.Index);
 
 and again, there is also a static way to describe such paths 
 
-[source,csharp,method="fromobject"]
+[source,csharp]
 ----
 path = DocumentPath<Project>.Id(project);
 
@@ -100,14 +98,14 @@ DocumentPath<Project> p = project;
 
 === An example with requests 
 
-[source,csharp,method="usingwithrequests"]
+[source,csharp]
 ----
 var project = new Project { Name = "hello-world" };
 ----
 
 we can see an example of how `DocumentPath` helps your describe your requests more tersely 
 
-[source,csharp,method="usingwithrequests"]
+[source,csharp]
 ----
 var request = new IndexRequest<Project>(2) { Document = project };
 
@@ -117,7 +115,7 @@ request = new IndexRequest<Project>(project) { };
 when comparing with the full blown constructor and passing document manually,
 `DocumentPath<T>`'s benefits become apparent. 
 
-[source,csharp,method="usingwithrequests"]
+[source,csharp]
 ----
 request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
 {

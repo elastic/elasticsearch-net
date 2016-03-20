@@ -8,7 +8,8 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
-	/** [[auto-map]]
+	/**
+	* [[auto-map]]
 	* == Auto mapping properties
 	* 
 	* When creating a mapping (either when creating an index or via the put mapping API),

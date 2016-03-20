@@ -20,14 +20,14 @@ This is the minimum `ITransport` needs to report back for the client to function
 
 e.g in the low level client, transport is instantiated like this:
 
-[source,csharp,method="interfaceexplained"]
+[source,csharp]
 ----
 var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
 ----
 
 and in the high level client, like this: 
 
-[source,csharp,method="interfaceexplained"]
+[source,csharp]
 ----
 var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings());
 
@@ -39,7 +39,7 @@ The only two methods on `ITransport` are `Request()` and `RequestAsync()`, the d
 many of the building blocks in the client, if these do not work for you can swap them out for your own custom `ITransport` implementation. 
 If you feel this need, {github}/issues[please let us know] as we'd love to learn why you've go down this route!
 
-[source,csharp,method="interfaceexplained"]
+[source,csharp]
 ----
 var response = inMemoryTransport.Request<SearchResponse<Project>>(HttpMethod.GET, "/_search", new { query = new { match_all = new { } } });
 

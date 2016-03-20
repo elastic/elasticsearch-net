@@ -7,7 +7,7 @@
 [[inner-hits-usage]]
 == Inner Hits Usage
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 public interface IRoyal
 	{
@@ -15,7 +15,7 @@ string Name { get; set; }
 	}
 ----
 
-[source,csharp,method="indexall"]
+[source,csharp]
 ----
 var current = create();
 
@@ -28,7 +28,7 @@ bulk.Index<TRoyal>(i => i.Document(royal1).Index(this._index).Parent(parent));
 indexChildren(royal);
 ----
 
-[source,csharp,method="seed"]
+[source,csharp]
 ----
 var create = this._client.CreateIndex(this._index, c => c
 	.Settings(s => s
@@ -70,7 +70,7 @@ this._client.Refresh(this._index);
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Index(Index)
@@ -87,7 +87,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Duke>(Index, typeof(Duke))
 		{
@@ -112,7 +112,7 @@ InnerHits = new NamedInnerHits
 		}
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -140,7 +140,7 @@ InnerHits = new NamedInnerHits
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Index(Index)
@@ -158,7 +158,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<King>(Index, typeof(King))
 		{
@@ -176,7 +176,7 @@ Query = new HasChildQuery
 		}
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {

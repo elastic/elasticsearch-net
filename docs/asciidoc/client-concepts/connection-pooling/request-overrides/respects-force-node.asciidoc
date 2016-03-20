@@ -12,7 +12,7 @@
 Sometimes you might want to fire a single request to a specific node. You can do so using the `ForceNode`
 request configuration. This will ignore the pool and not retry.
 
-[source,csharp,method="onlycallsforcednode"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

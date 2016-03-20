@@ -7,7 +7,7 @@
 [[template-query-usage]]
 == Template Query Usage
 
-[source,csharp,method="queryjson"]
+[source,csharp]
 ----
 new
 		{
@@ -28,7 +28,7 @@ template = new
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="queryinitializer"]
+[source,csharp]
 ----
 new TemplateQuery
 		{

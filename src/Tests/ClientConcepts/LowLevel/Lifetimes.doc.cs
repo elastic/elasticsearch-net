@@ -13,8 +13,7 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class Lifetimes
 	{
-		/** :section-number: 1.2
-		* == Lifetimes
+		/**== Lifetimes
 		*
 		* If you are using an IOC container its always useful to know the best practices around the lifetime of your objects 
 		*

@@ -3,6 +3,19 @@
 [[high-level]]
 == High Level
 
+A high level client that provides a strongly typed query DSL that maps one-to-one with the Elasticsearch query DSL 
+and takes advantage of specific .NET features such as covariant results. 
+
+NEST internally uses and still exposes the low level client, `ElasticLowLevelClient`, from <<low-level,Elasticsearch.Net>>
+
+There are a number of conventions that NEST uses for inference of
+
+- Field and Property names
+- Document ids
+- Building a URI path to a document
+- Building a URI path to one or more indices
+- Inferring
+
 include::{output-dir}/inference/field-inference.asciidoc[]
 
 include::{output-dir}/inference/property-inference.asciidoc[]

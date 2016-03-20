@@ -1,5 +1,3 @@
-:section-number: 1.3
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -9,10 +7,11 @@
 [[post-data]]
 == Post data
 
-The low level client allows you to post a `string` or `byte[]` array directly. On top of this if you pass a collection of `strings` or `objects`
-they will be serialized in Elasticsearch's special bulk/multi format.
+The low level client allows you to post a `string` or `byte[]` array directly. On top of this, 
+if you pass a collection of `string`s or `object`s they will be serialized 
+using Elasticsearch's special bulk/multi format.
 
-Even though the argument for `PostData` on the low level client takes a `PostData<object>`
+Even though the argument for `PostData` on the low level client takes a `PostData<object>`,
 You can rely on implicit conversion to abstract the notion of PostData completely.
 You can implicitly convert from the following types
 
@@ -26,7 +25,7 @@ You can implicitly convert from the following types
 
 * `object`	
 
-[source,csharp,method="implicitconversions"]
+[source,csharp]
 ----
 var fromString = ImplicitlyConvertsFrom(@string);
 
@@ -38,19 +37,19 @@ var fromObject = ImplicitlyConvertsFrom(@object);
 
 PostData bytes will always be set if it originated from `byte[]` 
 
-[source,csharp,method="implicitconversions"]
+[source,csharp]
 ----
 fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
 ----
 
-[source,csharp,method="writescorrectlyusingbothlowandhighlevelsettings"]
+[source,csharp]
 ----
 await this.AssertOn(new ConnectionSettings());
 
 await this.AssertOn(new ConnectionConfiguration());
 ----
 
-[source,csharp,method="implicitconversions"]
+[source,csharp]
 ----
 fromString.Type.Should().Be(PostType.LiteralString);
 fromByteArray.Type.Should().Be(PostType.ByteArray);
@@ -71,7 +70,7 @@ fromObject.Type.Should().Be(PostType.Serializable);
 
 Although each implicitly types behaves slightly differently 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => @string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
 
@@ -81,7 +80,7 @@ await Post(() => bytes, writes: bytes, storesBytes: true, settings: settings);
 When passing a list of strings we assume its a list of valid serialized json that we 
 join with newlinefeeds making sure there is a trailing linefeed 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, settings: settings);
 ----
@@ -89,21 +88,21 @@ await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, sett
 When passing a list of object we assume its a list of objects we need to serialize
 individually to json and join with newlinefeeds aking sure there is a trailing linefeed 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: false, settings: settings);
 ----
 
 In all other cases postdata is serialized as is. 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => @object, writes: objectJson, storesBytes: false, settings: settings);
 ----
 
 If you want to maintain a copy of the request that went out use the following settings 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 settings = new ConnectionSettings().DisableDirectStreaming();
 ----
@@ -111,26 +110,26 @@ settings = new ConnectionSettings().DisableDirectStreaming();
 by forcing `DisableDirectStreaming` serializing happens first in a private MemoryStream 
 so we can get hold of the serialized bytes 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
 ----
 
 this behavior can also be observed when serializing a simple object using `DisableDirectStreaming` 
 
-[source,csharp,method="asserton"]
+[source,csharp]
 ----
 await Post(() => @object, writes: objectJson, storesBytes: true, settings: settings);
 ----
 
-[source,csharp,method="post"]
+[source,csharp]
 ----
 PostAssert(postData(), writes, storesBytes, settings);
 
 await PostAssertAsync(postData(), writes, storesBytes, settings);
 ----
 
-[source,csharp,method="postassert"]
+[source,csharp]
 ----
 postData.Write(ms, settings);
 
@@ -143,7 +142,7 @@ postData.WrittenBytes.Should().NotBeNull();
 postData.WrittenBytes.Should().BeNull();
 ----
 
-[source,csharp,method="postassertasync"]
+[source,csharp]
 ----
 await postData.WriteAsync(ms, settings);
 

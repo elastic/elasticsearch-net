@@ -8,8 +8,7 @@ using Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.PropertyNames
 {
-	/** :section-number: 2.2 
-	* == Property Names */
+	/**== Property Names */
 	public class PropertyNames
 	{
 		/** 

@@ -15,7 +15,7 @@ both a client that throws and one that returns an invalid response with an `.Ori
 
 The following are recoverable exceptions 
 
-[source,csharp,method="somepipelinefailuresarerecoverable"]
+[source,csharp]
 ----
 var recoverablExceptions = new[]
 {
@@ -28,7 +28,7 @@ recoverablExceptions.Should().OnlyContain(e => e.Recoverable);
 
 and the unrecoverable exceptions 
 
-[source,csharp,method="somepipelinefailuresarerecoverable"]
+[source,csharp]
 ----
 var unrecoverableExceptions = new[]
 {
@@ -46,7 +46,7 @@ unrecoverableExceptions.Should().OnlyContain(e => !e.Recoverable);
 As an example, let's set up a 10 node cluster that will always succeed when pinged but
 			will fail with a 401 response when making client calls
 
-[source,csharp,method="badauthenticationisunrecoverable"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -60,7 +60,7 @@ var audit = new Auditor(() => Framework.Cluster
 Here we make a client call and determine that the first audit event was a successful ping, 
 followed by a bad response as a result of a bad authentication response
 
-[source,csharp,method="badauthenticationisunrecoverable"]
+[source,csharp]
 ----
 audit = await audit.TraceElasticsearchException(
 	new ClientCall {

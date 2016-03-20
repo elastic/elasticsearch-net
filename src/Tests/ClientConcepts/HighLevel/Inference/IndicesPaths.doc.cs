@@ -6,8 +6,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class IndicesPaths
 	{
-		/** :section-number: 2.5
-		 * == Indices paths
+		/**== Indices paths
 		 * 
 		 * Some API's in elasticsearch take one or many index name or a special "_all" marker to send the request to all the indices
 		 * In nest this is encoded using `Indices`

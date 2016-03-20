@@ -9,7 +9,7 @@
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>()
 {
@@ -18,7 +18,7 @@ new SearchRequest<Project>()
 }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -29,7 +29,7 @@ new SearchRequest<Project>()
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 	.From(10)

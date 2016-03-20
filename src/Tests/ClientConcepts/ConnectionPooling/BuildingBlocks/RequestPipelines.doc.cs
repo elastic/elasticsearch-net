@@ -118,7 +118,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 
 		/** A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout.
-		* See the <<respects-max-retry, max retry documentation>> for more details, here we assert that our request pipeline exposes this propertly
+		* See the <<max-retries, max retry documentation>> for more details, here we assert that our request pipeline exposes this propertly
 		*/
 		[U]
 		public void IsTakingTooLong()

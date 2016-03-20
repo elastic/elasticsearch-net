@@ -17,7 +17,8 @@ namespace Tests.Aggregations.Bucket.Filters
 	 * Be sure to read {ref_current}/search-aggregations-bucket-filters-aggregation.html[the Elasticsearch documentation on Filters Aggregation].
 	*/
 
-	/** == Named filters **/
+	/**[float] 
+	* == Named filters **/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public FiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -110,7 +111,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/** == Anonymous filters **/
+	/**[float] 
+	*== Anonymous filters **/
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -195,7 +197,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/** == Empty Filters */
+	/**[float]  
+	* == Empty Filters */
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

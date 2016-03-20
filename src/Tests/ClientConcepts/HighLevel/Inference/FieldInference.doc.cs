@@ -19,8 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FieldInferrence
 	{
-		/** :section-number: 2.1 
-		 * == Strongly typed Field Access 
+		/**== Strongly typed Field Access 
 		 * 
 		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
 		 * NEST allows you to use C# expressions to strongly type these field path strings. 
@@ -124,7 +123,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			* If you are using Elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
 			* you to analyze a string in a number of different ways, these _"virtual"_ sub fields 
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that 
-			* should be mapped and <<auto-map, how they are mapped>> 
+			* should be mapped and link:../mapping/auto-map[how they are mapped] 
 			*/
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
 			Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Suffix("raw")));

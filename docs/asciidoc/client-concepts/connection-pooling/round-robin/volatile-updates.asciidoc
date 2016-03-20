@@ -7,7 +7,7 @@
 [[volatile-updates]]
 == Volatile Updates
 
-[source,csharp,method="staticpoolwithstandsconcurrentreadandwrites"]
+[source,csharp]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 
@@ -18,7 +18,7 @@ Action callStatic = () => this.AssertCreateView(staticPool);
 callStatic.ShouldNotThrow();
 ----
 
-[source,csharp,method="sniffingpoolwithstandsconcurrentreadandwrites"]
+[source,csharp]
 ----
 var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 var sniffingPool = new SniffingConnectionPool(uris, randomize: false);
@@ -26,7 +26,7 @@ Action callSniffing = () => this.AssertCreateView(sniffingPool);
 callSniffing.ShouldNotThrow();
 ----
 
-[source,csharp,method="assertcreateview"]
+[source,csharp]
 ----
 var threads = Enumerable.Range(0, 50)
 	.Select(i => CreateReadAndUpdateThread(pool))

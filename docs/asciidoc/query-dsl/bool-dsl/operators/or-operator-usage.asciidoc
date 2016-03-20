@@ -7,14 +7,14 @@
 [[or-operator-usage]]
 == Or Operator Usage
 
-[source,csharp,method="combiningmanyusingaggregate"]
+[source,csharp]
 ----
 var lotsOfOrs = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
 
 LotsOfOrs(lotsOfOrs);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithnull"]
+[source,csharp]
 ----
 QueryContainer container = null;
 
@@ -23,7 +23,7 @@ container |= Query;
 LotsOfOrs(container);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithdefault"]
+[source,csharp]
 ----
 var container = new QueryContainer();
 
@@ -32,7 +32,7 @@ container |= Query;
 LotsOfOrs(container);
 ----
 
-[source,csharp,method="lotsofors"]
+[source,csharp]
 ----
 lotsOfOrs.Should().NotBeNull();
 
@@ -41,7 +41,7 @@ lotsOfOrs.Bool.Should().NotBeNull();
 lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
-[source,csharp,method="or"]
+[source,csharp]
 ----
 ReturnsBool(Query || Query, q => q.Query() || q.Query(), b =>
 {

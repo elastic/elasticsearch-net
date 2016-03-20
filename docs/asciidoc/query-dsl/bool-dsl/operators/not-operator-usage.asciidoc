@@ -7,14 +7,14 @@
 [[not-operator-usage]]
 == Not Operator Usage
 
-[source,csharp,method="combiningmanyusingaggregate"]
+[source,csharp]
 ----
 var lotsOfNots = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q || Query, q => q);
 
 LotsOfNots(lotsOfNots);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithnull"]
+[source,csharp]
 ----
 QueryContainer container = null;
 
@@ -23,7 +23,7 @@ container |= Query;
 LotsOfNots(container);
 ----
 
-[source,csharp,method="combiningmanyusingforeachinitializingwithdefault"]
+[source,csharp]
 ----
 var container = new QueryContainer();
 
@@ -32,7 +32,7 @@ container |= Query;
 LotsOfNots(container);
 ----
 
-[source,csharp,method="lotsofnots"]
+[source,csharp]
 ----
 lotsOfNots.Should().NotBeNull();
 
@@ -41,7 +41,7 @@ lotsOfNots.Bool.Should().NotBeNull();
 lotsOfNots.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
-[source,csharp,method="not"]
+[source,csharp]
 ----
 ReturnsBool(!Query && !Query, q => !q.Query() && !q.Query(), b =>
 {

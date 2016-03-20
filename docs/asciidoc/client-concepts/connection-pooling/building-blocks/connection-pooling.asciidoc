@@ -1,5 +1,3 @@
-:section-number: 4.1
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -12,19 +10,20 @@
 Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 NEST can use to issue client calls on. There are 3 types of connection pool
 
-* <<SingleNodeConnectionPool>>
+* <<single-node-connection-pool,SingleNodeConnectionPool>>
 
-* <<StaticConnectionPool>>
+* <<static-connection-pool,StaticConnectionPool>>
 
-* <<SniffingConnectionPool>>
+* <<sniffing-connection-pool,SniffingConnectionPool>>
 
+[[single-node-connection-pool]]
 === SingleNodeConnectionPool 
 
 The simplest of all connection pools, this takes a single `Uri` and uses that to connect to elasticsearch for all the calls
 It doesn't opt in to sniffing and pinging behavior, and will never mark nodes dead or alive. The one `Uri` it holds is always
 ready to go. 
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 var uri = new Uri("http://localhost:9201");
 var pool = new SingleNodeConnectionPool(uri);
@@ -35,14 +34,14 @@ node.Uri.Port.Should().Be(9201);
 
 This type of pool is hardwired to opt out of sniffing
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 pool.SupportsReseeding.Should().BeFalse();
 ----
 
 and pinging 
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 pool.SupportsPinging.Should().BeFalse();
 ----
@@ -50,7 +49,7 @@ pool.SupportsPinging.Should().BeFalse();
 When you use the low ceremony `ElasticClient` constructor that takes a single `Uri`,
 We default to using `SingleNodeConnectionPool` 
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 var client = new ElasticClient(uri);
 
@@ -59,7 +58,7 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionP
 
 However we urge that you always pass your connection settings explicitly 
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 client = new ElasticClient(new ConnectionSettings(uri));
 
@@ -68,33 +67,35 @@ client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionP
 
 or even better pass the connection pool explicitly  
 
-[source,csharp,method="singlenode"]
+[source,csharp]
 ----
 client = new ElasticClient(new ConnectionSettings(pool));
 
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<SingleNodeConnectionPool>();
 ----
 
+[[static-connection-pool]] 
+
 === StaticConnectionPool 
 
 The static connection pool is great if you have a known small sized cluster and do no want to enable 
 sniffing to find out the cluster topology.
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 var uris = Enumerable.Range(9200, 5).Select(p => new Uri("http://localhost:" + p));
 ----
 
 a connection pool can be seeded using an enumerable of `Uri`s 
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 var pool = new StaticConnectionPool(uris);
 ----
 
 Or using an enumerable of `Node`s 
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 var nodes = uris.Select(u => new Node(u));
 
@@ -103,14 +104,14 @@ pool = new StaticConnectionPool(nodes);
 
 This type of pool is hardwired to opt out of sniffing
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 pool.SupportsReseeding.Should().BeFalse();
 ----
 
 but supports pinging when enabled 
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 pool.SupportsPinging.Should().BeTrue();
 ----
@@ -118,26 +119,28 @@ pool.SupportsPinging.Should().BeTrue();
 To create a client using this static connection pool, pass 
 the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 
-[source,csharp,method="static"]
+[source,csharp]
 ----
 var client = new ElasticClient(new ConnectionSettings(pool));
 
 client.ConnectionSettings.ConnectionPool.Should().BeOfType<StaticConnectionPool>();
 ----
 
+[[sniffing-connection-pool]] 
+
 === SniffingConnectionPool 
 
 A subclass of `StaticConnectionPool` that allows itself to be reseeded at run time.
 It comes with a very minor overhead of a `ReaderWriterLockSlim` to ensure thread safety.
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 var uris = Enumerable.Range(9200, 5).Select(p => new Uri("http://localhost:" + p));
 ----
 
 a connection pool can be seeded using an enumerable of `Uri` 
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 var pool = new SniffingConnectionPool(uris);
 ----
@@ -147,7 +150,7 @@ A major benefit here is you can include known node roles when seeding and
 NEST can use this information to favour sniffing on master eligible nodes first
 and take master only nodes out of rotation for issuing client calls on.
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 var nodes = uris.Select(u=>new Node(u));
 
@@ -156,14 +159,14 @@ pool = new SniffingConnectionPool(nodes);
 
 This type of pool is hardwired to opt in to sniffing
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 pool.SupportsReseeding.Should().BeTrue();
 ----
 
 and pinging 
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 pool.SupportsPinging.Should().BeTrue();
 ----
@@ -171,7 +174,7 @@ pool.SupportsPinging.Should().BeTrue();
 To create a client using the sniffing connection pool pass 
 the connection pool to the `ConnectionSettings` you pass to `ElasticClient`
 
-[source,csharp,method="sniffing"]
+[source,csharp]
 ----
 var client = new ElasticClient(new ConnectionSettings(pool));
 

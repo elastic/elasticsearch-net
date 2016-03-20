@@ -7,8 +7,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class IdsInference
 	{
-		/** :section-number: 2.3 
-		 * == Id Inference
+		/**== Id Inference
 		 * 
 		 * === Implicit Conversions
 		 *

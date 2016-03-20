@@ -1,5 +1,3 @@
-:section-number: 1.2
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -26,7 +24,7 @@ Elasticsearch 1.x and 2.x in the same application as the former would require NE
 
 Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 class AConnectionSettings : ConnectionSettings
 {
@@ -66,7 +64,7 @@ class AConnection : InMemoryConnection
 
 `ConnectionSettings`, `IConnectionPool` and `IConnection` all explictily implement `IDisposable`
 
-[source,csharp,method="initialdisposestate"]
+[source,csharp]
 ----
 var connection = new AConnection();
 var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
@@ -78,7 +76,7 @@ connection.IsDisposed.Should().BeFalse();
 
 Disposing `ConnectionSettings` will dispose the `IConnectionPool` and `IConnection` it has a hold of
 
-[source,csharp,method="disposingsettingsdisposesmovingparts"]
+[source,csharp]
 ----
 var connection = new AConnection();
 

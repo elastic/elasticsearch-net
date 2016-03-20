@@ -8,15 +8,14 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateRange
 {
-	/** :sectiontitle: Date Range Aggregation
-	 * == {sectiontitle}
+	/**== Date Range Aggregation
 	 * A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
 	 * and `to` values can be expressed in `DateMath` expressions, and it is also possible to specify a date format by which the from and 
 	 * to response fields will be returned. 
 	 *
 	 * IMPORTANT: this aggregation includes the `from` value and excludes the `to` value for each range.
 	 *
-	 * Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.html[the elasticsearch documentation on {sectiontitle}]
+	 * Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.html[the elasticsearch documentation on Date Range Aggregation]
 	*/
 	public class DateRangeAggregationUsageTests : AggregationUsageTestBase
 	{
@@ -46,7 +45,6 @@ namespace Tests.Aggregations.Bucket.DateRange
 			}
 		};
 
-		/** === Fluent DSL Example */
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(aggs => aggs
 				.DateRange("projects_date_ranges", date => date
@@ -62,7 +60,6 @@ namespace Tests.Aggregations.Bucket.DateRange
 				)
 			);
 
-		/** === Object Initializer Syntax Example */
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{

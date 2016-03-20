@@ -13,14 +13,14 @@ Not typically something you'll have to pass to the client but all calls to `Syst
 in the client have been abstracted by `IDateTimeProvider`. This allows us to unit test timeouts and cluster failover
 without being bound to wall clock time as calculated by using `System.DateTime.UtcNow` directly.
 
-[source,csharp,method="defaultnowbehaviour"]
+[source,csharp]
 ----
 var dateTimeProvider = DateTimeProvider.Default;
 ----
 
 dates are always returned in UTC 
 
-[source,csharp,method="defaultnowbehaviour"]
+[source,csharp]
 ----
 dateTimeProvider.Now().Should().BeCloseTo(DateTime.UtcNow);
 ----
@@ -29,7 +29,7 @@ Another responsibility of this interface is to calculate the time a node has to 
 based on the number of attempts to revive it. For very advanced use cases, this might be something of interest
 to provide a custom implementation for.
 
-[source,csharp,method="deadtimeoutcalculation"]
+[source,csharp]
 ----
 var dateTimeProvider = DateTimeProvider.Default;
 ----
@@ -37,7 +37,7 @@ var dateTimeProvider = DateTimeProvider.Default;
 The default timeout calculation is: `min(timeout * 2 ^ (attempts * 0.5 -1), maxTimeout)`, where the 
 default values for `timeout` and `maxTimeout` are
 
-[source,csharp,method="deadtimeoutcalculation"]
+[source,csharp]
 ----
 var timeout = TimeSpan.FromMinutes(1);
 
@@ -53,7 +53,7 @@ image::{imagesdir}/timeoutplot.png[dead timeout]
 The goal here is that whenever a node is resurrected and is found to still be offline, we send it
 _back to the doghouse_ for an ever increasingly long period, until we hit a bounded maximum.
 
-[source,csharp,method="deadtimeoutcalculation"]
+[source,csharp]
 ----
 var timeouts = Enumerable.Range(0, 30)
 	.Select(attempt => dateTimeProvider.DeadTime(attempt, timeout, maxTimeout))

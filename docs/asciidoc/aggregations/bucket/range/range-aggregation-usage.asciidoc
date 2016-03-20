@@ -9,7 +9,7 @@
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Aggregations(a => a
@@ -26,7 +26,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>
 {
@@ -43,7 +43,7 @@ new SearchRequest<Project>
 }
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -71,7 +71,7 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-[source,csharp,method="expectresponse"]
+[source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 var commitRanges = response.Aggs.Range("commit_ranges");

@@ -7,7 +7,7 @@
 [[regexp-query-usage]]
 == Regexp Query Usage
 
-[source,javascript,method="queryjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -25,7 +25,7 @@
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="queryinitializer"]
+[source,csharp]
 ----
 new RegexpQuery
 		{

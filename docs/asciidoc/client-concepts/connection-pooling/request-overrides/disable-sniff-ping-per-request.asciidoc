@@ -17,7 +17,7 @@ but we disable the sniffing on our first request so we only see the ping and the
 
 Let's set up the cluster and configure clients to **always** sniff on startup 
 
-[source,csharp,method="disablesniff"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -35,7 +35,7 @@ does not disable sniffing on a per request basis
 
 And after that no sniff on startup will happen again 
 
-[source,csharp,method="disablesniff"]
+[source,csharp]
 ----
 audit = await audit.TraceCalls(
 new ClientCall(r => r.DisableSniffing()) //<1>
@@ -65,7 +65,7 @@ new ClientCall()
 
 Now, let's disable pinging on the request 
 
-[source,csharp,method="disableping"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)
@@ -88,7 +88,7 @@ audit = await audit.TraceCall(
 
 Finally, let's demonstrate disabling both sniff and ping on the request 
 
-[source,csharp,method="disablesniffandping"]
+[source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
 	.Nodes(10)

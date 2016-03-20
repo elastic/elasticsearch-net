@@ -9,7 +9,7 @@
 
 === Fluent DSL Example
 
-[source,csharp,method="fluent"]
+[source,csharp]
 ----
 s => s
 .Size(0)
@@ -42,7 +42,7 @@ s => s
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="initializer"]
+[source,csharp]
 ----
 new SearchRequest<Project>()
 		{
@@ -70,7 +70,7 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 		}
 ----
 
-[source,javascript,method="expectjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -110,7 +110,7 @@ Aggregations = new DateHistogramAggregation("projects_started_per_month")
 
 === Handling Responses
 
-[source,csharp,method="expectresponse"]
+[source,csharp]
 ----
 response.IsValid.Should().BeTrue();
 ----

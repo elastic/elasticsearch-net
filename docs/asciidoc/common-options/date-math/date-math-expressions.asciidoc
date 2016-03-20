@@ -38,7 +38,7 @@ Be sure to read the elasticsearch documentation {datemath}[on this subject here]
 
 You can create simple expressions using any of the static methods on `DateMath` 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 Expect("now").WhenSerializing(Nest.DateMath.Now);
 
@@ -47,21 +47,21 @@ Expect("2015-05-05T00:00:00").WhenSerializing(Nest.DateMath.Anchored(new DateTim
 
 strings implicitly convert to `DateMath` 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 Expect("now").WhenSerializing<Nest.DateMath>("now");
 ----
 
 but are lenient to bad math expressions 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 var nonsense = "now||*asdaqwe";
 ----
 
 the resulting date math will assume the whole string is the anchor 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
 .Result(dateMath => ((IDateMath)dateMath)
@@ -74,14 +74,14 @@ Expect(nonsense).WhenSerializing<Nest.DateMath>(nonsense)
 
 `DateTime` also implicitly convert to simple date math expressions 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 var date = new DateTime(2015, 05, 05);
 ----
 
 the anchor will be an actual `DateTime`, even after a serialization/deserialization round trip 
 
-[source,csharp,method="simpleexpressions"]
+[source,csharp]
 ----
 Expect("2015-05-05T00:00:00").WhenSerializing<Nest.DateMath>(date)
 .Result(dateMath => ((IDateMath)dateMath)
@@ -96,21 +96,21 @@ Expect("2015-05-05T00:00:00").WhenSerializing<Nest.DateMath>(date)
 
 Ranges can be chained on to simple expressions 
 
-[source,csharp,method="complexexpressions"]
+[source,csharp]
 ----
 Expect("now+1d").WhenSerializing(Nest.DateMath.Now.Add("1d"));
 ----
 
 Including multiple operations 
 
-[source,csharp,method="complexexpressions"]
+[source,csharp]
 ----
 Expect("now+1d-1m").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)));
 ----
 
 A rounding value can be chained to the end of the expression, after which no more ranges can be appended 
 
-[source,csharp,method="complexexpressions"]
+[source,csharp]
 ----
 Expect("now+1d-1m/d").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeSpan.FromMinutes(1)).RoundTo(Nest.TimeUnit.Day));
 ----
@@ -118,7 +118,7 @@ Expect("now+1d-1m/d").WhenSerializing(Nest.DateMath.Now.Add("1d").Subtract(TimeS
 When anchoring dates, a `||` needs to be appended as clear separator between the anchor and ranges.
 Again, multiple ranges can be chained 
 
-[source,csharp,method="complexexpressions"]
+[source,csharp]
 ----
 Expect("2015-05-05T00:00:00||+1d-1m").WhenSerializing(Nest.DateMath.Anchored(new DateTime(2015,05,05)).Add("1d").Subtract(TimeSpan.FromMinutes(1)));
 ----

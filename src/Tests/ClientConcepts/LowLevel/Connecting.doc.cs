@@ -15,8 +15,7 @@ namespace Tests.ClientConcepts.LowLevel
 {
 	public class Connecting
 	{
-		/**
-		 * == Connecting 
+		/**== Connecting 
 		 * Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy and there a few options to suit a number of different use cases.
 		 * 
 		 * [[connection-strategies]]

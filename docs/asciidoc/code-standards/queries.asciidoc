@@ -7,7 +7,7 @@
 [[queries]]
 == Queries
 
-[source,csharp,method="staticqueryexposesall"]
+[source,csharp]
 ----
 var staticProperties = from p in typeof(Query<>).GetMethods()
 					   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
@@ -18,7 +18,7 @@ var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("Geo
 staticProperties.Distinct().Should().Contain(placeHolders.Distinct());
 ----
 
-[source,csharp,method="fluentdescriptorexposesall"]
+[source,csharp]
 ----
 var fluentMethods = from p in typeof(QueryContainerDescriptor<>).GetMethods()
 					   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
@@ -29,7 +29,7 @@ var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("Geo
 fluentMethods.Distinct().Should().Contain(placeHolders.Distinct());
 ----
 
-[source,csharp,method="visitorvisitsall"]
+[source,csharp]
 ----
 var skipQueryImplementations = new[] { typeof(IFieldNameQuery), typeof(IFuzzyQuery<,>), typeof(IConditionlessQuery) };
 
@@ -52,7 +52,7 @@ var missingTypes = from q in queries
 missingTypes.Should().BeEmpty();
 ----
 
-[source,csharp,method="interfacepropertiesmustbemarkedexplicitly"]
+[source,csharp]
 ----
 var properties = from p in QueryProperties
 				 let a = p.GetCustomAttributes<JsonIgnoreAttribute>().Concat<Attribute>(p.GetCustomAttributes<JsonPropertyAttribute>())

@@ -8,8 +8,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 {
 	public class CovariantSearchResults
 	{
-		/** :section-number: 4.1 
-		 * == Covariant Search Results
+		/**== Covariant Search Results
 		 *
 		 * NEST directly supports returning covariant result sets.
 		 * Meaning a result can be typed to an interface or base class

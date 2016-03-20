@@ -7,7 +7,7 @@
 [[bool-dsl-complex-query-usage]]
 == Bool Dsl Complex Query Usage
 
-[source,csharp,method="queryjson"]
+[source,csharp]
 ----
 new
 		{
@@ -67,7 +67,7 @@ new
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="queryinitializer"]
+[source,csharp]
 ----
 Query && Query
 //second bool
@@ -82,7 +82,7 @@ Query && Query
 	&& (base.QueryInitializer))
 ----
 
-[source,csharp,method="assertshape"]
+[source,csharp]
 ----
 container.Bool.Should().NotBeNull();
 
@@ -131,7 +131,7 @@ mustNotsBool.Should().NotBeNull();
 mustNotsBool.MustNot.Should().HaveCount(2); //one of the three must nots was conditionless
 ----
 
-[source,csharp,method="asssertshape"]
+[source,csharp]
 ----
 this.AssertShape(this.QueryInitializer);
 ----

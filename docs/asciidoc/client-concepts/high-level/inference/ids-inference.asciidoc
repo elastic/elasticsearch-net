@@ -1,5 +1,3 @@
-:section-number: 2.3
-
 :ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
 
 :github: https://github.com/elastic/elasticsearch-net
@@ -24,7 +22,7 @@ This is a special box type that you can implicitly convert to from the following
 
 Methods that take an `Id` can be passed any of these types and it will be implicitly converted to an `Id` 
 
-[source,csharp,method="canimplicitlyconverttoid"]
+[source,csharp]
 ----
 Id idFromInt = 1;
 Id idFromLong = 2L;
@@ -43,7 +41,7 @@ There is no implicit conversion from any object to Id but we can call `Id.From`.
 
 Imagine your codebase has the following type that we want to index into Elasticsearch
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 class MyDTO
 {
@@ -56,7 +54,7 @@ class MyDTO
 By default NEST will try to find a property called `Id` on the class using reflection
 and create a cached fast func delegate based on the properties getter
 
-[source,csharp,method="cangetidfromdocument"]
+[source,csharp]
 ----
 var dto = new MyDTO
 {
@@ -71,7 +69,7 @@ Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenInferringIdOn(dto);
 Using the connection settings you can specify a different property that NEST should use to infer the document Id.
 Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property 
 
-[source,csharp,method="cangetidfromdocument"]
+[source,csharp]
 ----
 WithConnectionSettings(x => x
 	.InferMappingFor<MyDTO>(m => m
@@ -85,7 +83,7 @@ IMPORTANT: Inference rules are cached __per__ `ConnectionSettings` instance.
 Because the cache is per `ConnectionSettings` instance, we can create another `ConnectionSettings` instance
 with different inference rules
 
-[source,csharp,method="cangetidfromdocument"]
+[source,csharp]
 ----
 WithConnectionSettings(x => x
 	.InferMappingFor<MyDTO>(m => m
@@ -99,7 +97,7 @@ WithConnectionSettings(x => x
 Another way is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty` 
 to the name of the property that should be used for the document id 
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 [ElasticsearchType(IdProperty = nameof(Name))]
 class MyOtherDTO
@@ -112,7 +110,7 @@ class MyOtherDTO
 
 Now when we infer the id we expect it to be the value of the `Name` property without doing any configuration on the `ConnectionSettings` 
 
-[source,csharp,method="cangetidfromattribute"]
+[source,csharp]
 ----
 var dto = new MyOtherDTO { Id = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E"),  Name = "x", OtherName = "y" };
 
@@ -125,7 +123,7 @@ This attribute *is* cached statically/globally, however an inference rule on the
 still win over the attribute. Here we demonstrate this by creating a different `ConnectionSettings` instance
 that will infer the document id from the property `OtherName`:
 
-[source,csharp,method="cangetidfromattribute"]
+[source,csharp]
 ----
 WithConnectionSettings(x => x
 	.InferMappingFor<MyOtherDTO>(m => m

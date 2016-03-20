@@ -1,7 +1,12 @@
 ﻿:output-dir: query-dsl
 
 [[query-dsl]]
-== Query DSL
+= Query DSL
+
+[partintro]
+--
+Something about the query DSL
+--
 
 include::{output-dir}/bool-dsl/bool-dsl.asciidoc[]
 

@@ -7,7 +7,7 @@
 [[geo-distance-query-usage]]
 == Geo Distance Query Usage
 
-[source,javascript,method="queryjson"]
+[source,javascript]
 .Example json output
 ----
 {
@@ -30,7 +30,7 @@
 
 === Object Initializer Syntax Example
 
-[source,csharp,method="queryinitializer"]
+[source,csharp]
 ----
 new GeoDistanceQuery
 		{

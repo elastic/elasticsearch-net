@@ -8,8 +8,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FeaturesInference
 	{
-		/** :section-number: 2.6 
-		 * == Features
+		/**== Features
 		 * Some URIs in Elasticsearch take a `Feature` enum.
 		 * Within NEST, route values on the URI are represented as classes that implement an interface, `IUrlParameter`.
 		 * Since enums _cannot_ implement interfaces in C#, a route parameter that would be of type `Feature` is represented using the `Features` class that

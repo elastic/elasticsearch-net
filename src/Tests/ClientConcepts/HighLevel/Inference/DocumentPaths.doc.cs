@@ -7,8 +7,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class DocumentPaths
 	{
-		/** :section-number: 2.4 
-		 * == Document Paths
+		/**== Document Paths
 		 *
 		 * Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
 		 * and Index, Type and Id seperately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path

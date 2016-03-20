@@ -7,7 +7,7 @@
 [[elastic-client]]
 == Elastic Client
 
-[source,csharp,method="consistentinitializerparameternames"]
+[source,csharp]
 ----
 var requestParametersNotNamedRequest =
 	from m in typeof(IElasticClient).GetMethods()
@@ -19,7 +19,7 @@ var requestParametersNotNamedRequest =
 requestParametersNotNamedRequest.Should().BeEmpty();
 ----
 
-[source,csharp,method="initializerrequestsarenotoptional"]
+[source,csharp]
 ----
 var requestParameters =
 	(from m in typeof(IElasticClient).GetMethods()
@@ -30,7 +30,7 @@ var requestParameters =
 requestParameter.HasDefaultValue.Should().BeFalse();
 ----
 
-[source,csharp,method="concreteclientoptionalparametersmatchinterfaceclient"]
+[source,csharp]
 ----
 var concreteMethodParametersDoNotMatchInterface = new List<string>();
 
@@ -56,7 +56,7 @@ concreteMethodParametersDoNotMatchInterface.Add(
 concreteMethodParametersDoNotMatchInterface.Should().BeEmpty();
 ----
 
-[source,csharp,method="consistentoptionalparametersforsyncandasyncmethods"]
+[source,csharp]
 ----
 var methodGroups =
                 from methodInfo in typeof(IElasticClient).GetMethods()
@@ -82,7 +82,7 @@ asyncMethod.Parameter.HasDefaultValue.Should().Be(syncMethod.Parameter.HasDefaul
                         $"sync and async versions of {asyncMethod.MethodType} '{nameof(ElasticClient)}{methodGroup.Key}' should match");
 ----
 
-[source,csharp,method="consistentfluentparameternames"]
+[source,csharp]
 ----
 var fluentParametersNotNamedSelector =
 	from m in typeof (IElasticClient).GetMethods()
@@ -93,7 +93,7 @@ var fluentParametersNotNamedSelector =
 fluentParametersNotNamedSelector.Should().BeEmpty();
 ----
 
-[source,csharp,method="unknown"]
+[source,csharp]
 ----
 private class MethodWithRequestParameter
 	    {
