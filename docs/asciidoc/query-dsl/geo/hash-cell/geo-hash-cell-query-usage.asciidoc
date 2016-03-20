@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images
+:imagesdir: ../../../images/
 
 [[geo-hash-cell-query-usage]]
 == Geo Hash Cell Query Usage

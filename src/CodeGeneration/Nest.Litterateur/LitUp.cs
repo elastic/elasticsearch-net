@@ -11,13 +11,11 @@ namespace Nest.Litterateur
 	{
 		private static readonly string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
 
-		private static readonly Dictionary<string, decimal> Sections = new Dictionary<string, decimal>();
-
 		public static IEnumerable<DocumentationFile> InputFiles(string path) =>
 			from f in Directory.GetFiles(Program.InputDirPath, $"{path}", SearchOption.AllDirectories)
 			let dir = new DirectoryInfo(f)
 			where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
-			select DocumentationFile.Load(new FileInfo(f), Sections);
+			select DocumentationFile.Load(new FileInfo(f));
 
 		public static IEnumerable<IEnumerable<DocumentationFile>> Input
 		{

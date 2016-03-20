@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images
+:imagesdir: ../../../images/
 
 [[geo-polygon-query-usage]]
 == Geo Polygon Query Usage

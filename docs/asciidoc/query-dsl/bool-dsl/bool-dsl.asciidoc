@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../images
+:imagesdir: ../../images/
 
 [[bool-queries]]
 == Bool Queries
@@ -28,7 +28,7 @@ Now, imagine multiple nested bools; you'll realise that this quickly becomes an 
 
 [[indent]]
 .hadouken indenting example
-image::{imagesdir}/hadouken-indentation.jpg[dead indent]
+image::{imagesdir}hadouken-indentation.jpg[dead indent]
 
 === Operator Overloading
 

@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images
+:imagesdir: ../../../images/
 
 [[moving-average-simple-aggregation-usage]]
 == Moving Average Simple Aggregation Usage

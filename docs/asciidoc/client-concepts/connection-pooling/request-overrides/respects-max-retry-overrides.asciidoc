@@ -4,7 +4,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images
+:imagesdir: ../../../images/
 
 [[maximum-retries]]
 == Maximum Retries

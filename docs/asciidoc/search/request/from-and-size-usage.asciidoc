@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../images
+:imagesdir: ../../images/
 
 [[from-and-size-usage]]
 == From And Size Usage

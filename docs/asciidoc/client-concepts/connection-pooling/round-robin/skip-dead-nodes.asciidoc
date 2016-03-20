@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../images
+:imagesdir: ../../../images/
 
 [[round-robin---skipping-dead-nodes]]
 == Round Robin - Skipping Dead Nodes

@@ -20,13 +20,13 @@ namespace Nest.Litterateur.Documentation.Files
 
 		public abstract void SaveToDocumentationFolder();
 
-		public static DocumentationFile Load(FileInfo fileLocation, Dictionary<string, decimal> sections)
+		public static DocumentationFile Load(FileInfo fileLocation)
 		{
 			var extension = fileLocation?.Extension;
 			switch (extension)
 			{
 				case ".cs":
-					return new CSharpDocumentationFile(fileLocation, sections);
+					return new CSharpDocumentationFile(fileLocation);
 				case ".gif":
 				case ".jpg":
 				case ".jpeg":

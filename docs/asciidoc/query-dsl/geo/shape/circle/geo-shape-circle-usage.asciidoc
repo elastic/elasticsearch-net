@@ -2,7 +2,7 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
-:imagesdir: ../../../../images
+:imagesdir: ../../../../images/
 
 [[geo-shape-circle-usage]]
 == Geo Shape Circle Usage

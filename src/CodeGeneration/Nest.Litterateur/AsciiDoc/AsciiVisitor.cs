@@ -10,7 +10,8 @@ using AsciiDoc;
 namespace Nest.Litterateur.AsciiDoc
 {
 	/// <summary>
-	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries, section titles
+	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries, 
+	/// section titles, rearranges sections, etc.
 	/// </summary>
 	public class AddAttributeEntriesVisitor : NoopVisitor
 	{
@@ -59,7 +60,7 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
 			}
 
-			if (!document.Attributes.Any(a => a.Name == "imagesdir"))
+			  if (!document.Attributes.Any(a => a.Name == "imagesdir"))
 			{
 				var targetDirectory = new DirectoryInfo(Program.OutputDirPath).FullName;
 				var currentDirectory = _destination.Directory.FullName;
@@ -67,10 +68,10 @@ namespace Nest.Litterateur.AsciiDoc
 				var count = difference.Count(c => c == '\\');
 				var imagesDir = string.Join(string.Empty, Enumerable.Repeat("../", count));
 
-				_newDocument.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}"));
+				_newDocument.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}/"));
 			}
 
-			// see if the document has some kind of top level title.
+			// see if the document has some kind of top level title and add one with an anchor if not.
 			if (document.Title == null &&
 			    document.Elements.Count > 0 &&
 			    !document.Elements.OfType<SectionTitle>().Any(s => s.Level == 2))

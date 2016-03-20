@@ -35,7 +35,7 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		*[[indent]]
 		*.hadouken indenting example
-		*image::{imagesdir}/hadouken-indentation.jpg[dead indent]	
+		*image::{imagesdir}hadouken-indentation.jpg[dead indent]	
 		*
 		*=== Operator Overloading
 		*

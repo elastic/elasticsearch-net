@@ -42,7 +42,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			*
 			*[[timeout]]
 			*.Default formula, x-axis time in minutes, y-axis number of attempts to revive
-			*image::{imagesdir}/timeoutplot.png[dead timeout]	
+			*image::{imagesdir}timeoutplot.png[dead timeout]	
 			*
 			* The goal here is that whenever a node is resurrected and is found to still be offline, we send it
 			* _back to the doghouse_ for an ever increasingly long period, until we hit a bounded maximum.

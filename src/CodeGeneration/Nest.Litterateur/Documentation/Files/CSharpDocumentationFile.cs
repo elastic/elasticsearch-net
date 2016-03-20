@@ -17,11 +17,8 @@ namespace Nest.Litterateur.Documentation.Files
 {
 	public class CSharpDocumentationFile : DocumentationFile
 	{
-		private readonly Dictionary<string, decimal> _sections;
-
-		internal CSharpDocumentationFile(FileInfo fileLocation, Dictionary<string, decimal> sections) : base(fileLocation)
+		internal CSharpDocumentationFile(FileInfo fileLocation) : base(fileLocation)
 		{
-			_sections = sections;
 		}
 
 		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks)
@@ -205,20 +202,6 @@ namespace Nest.Litterateur.Documentation.Files
 			// tidy up the asciidoc
 			var document = Document.Parse(body);
 
-			// extract section number from doc
-			var sectionAttributeEntry = document.Attributes.SingleOrDefault(a => a.Name == "section-number");
-			decimal sectionValue;
-
-			var sectionPath = GetPathRelativeToOutput(docFile);
-			if (sectionAttributeEntry != null && decimal.TryParse(sectionAttributeEntry.Value, out sectionValue))
-			{
-				_sections.Add(sectionPath, sectionValue);
-			}
-			else
-			{
-				_sections.Add(sectionPath, 100);
-			}
-
 			// add attributes and write to destination
 			using (var file = new StreamWriter(docFile.FullName))
 			{
@@ -228,12 +211,5 @@ namespace Nest.Litterateur.Documentation.Files
 			}
 		}
 #endif
-
-		private string GetPathRelativeToOutput(FileInfo docFileName)
-		{
-			var targetDirectory = new DirectoryInfo(Program.OutputDirPath).FullName;
-			var currentDirectory = docFileName.FullName;
-			return currentDirectory.Replace(targetDirectory, string.Empty).Replace("\\", "/").TrimStart('/');
-		}
 	}
 }
