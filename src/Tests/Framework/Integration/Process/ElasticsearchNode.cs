@@ -51,7 +51,7 @@ namespace Tests.Framework.Integration
 
 #if DOTNETCORE
 		// Investigate  problem with ManualResetEvent on CoreClr
-		// Maybe due to .WaitOne() not taking exitContext? 
+		// Maybe due to .WaitOne() not taking exitContext?
 		public class Signal
 		{
 			private readonly object _lock = new object();
@@ -94,9 +94,9 @@ namespace Tests.Framework.Integration
 #endif
 
 		public ElasticsearchNode(
-			string elasticsearchVersion, 
-			bool runningIntegrations, 
-			bool doNotSpawnIfAlreadyRunning, 
+			string elasticsearchVersion,
+			bool runningIntegrations,
+			bool doNotSpawnIfAlreadyRunning,
 			string prefix
 			)
 		{
@@ -110,17 +110,17 @@ namespace Tests.Framework.Integration
 
 			this.BootstrapWork = _blockingSubject;
 
-			if (!runningIntegrations)
-			{
-				this.Port = 9200;
-				return;
-			}
-
 			var appData = GetApplicationDataDirectory();
 			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
+
+			if (!runningIntegrations)
+			{
+				this.Port = 9200;
+				return;
+			}
 
 			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
@@ -181,7 +181,8 @@ namespace Tests.Framework.Integration
 				$"-Des.node.name={this.NodeName}",
 				$"-Des.path.repo={this.RepositoryPath}",
 				$"-Des.script.inline=on",
-				$"-Des.script.indexed=on"
+				$"-Des.script.indexed=on",
+				$"--node.testingcluster true"
 			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
@@ -261,7 +262,7 @@ namespace Tests.Framework.Integration
 
 				InstallPlugins();
 
-				//hunspell config 
+				//hunspell config
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
 				var hunspellPrefix = Path.Combine(hunspellFolder, "en_US");
 				if (!File.Exists(hunspellPrefix + ".dic"))
@@ -326,7 +327,7 @@ namespace Tests.Framework.Integration
 					throw new Exception($"Could not install {command} within {timeout}");
 			}
 		}
-		
+
 		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			var port = this.Started ? this.Port : 9200;

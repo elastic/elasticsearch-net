@@ -435,9 +435,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters> 
@@ -739,9 +737,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters> 
@@ -838,8 +834,8 @@ namespace Nest
 		protected ICatSnapshotsRequest Self => this;
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_cat/snapshots/{repository}</summary>
-///<param name="repository">Optional, accepts null</param>
-		public CatSnapshotsRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
+///<param name="repository">this parameter is required</param>
+		public CatSnapshotsRequest(Names repository) : base(r=>r.Required("repository", repository)){}
 		
 
 			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -866,9 +862,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 

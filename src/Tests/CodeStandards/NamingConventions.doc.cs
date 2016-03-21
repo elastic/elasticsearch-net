@@ -8,7 +8,7 @@ using Tests.Framework;
 namespace Tests.CodeStandards
 {
 	/** # Naming Conventions
-	* 
+	*
 	* NEST uses the following naming conventions (with _some_ exceptions).
 	*/
 	public class NamingConventions
@@ -126,7 +126,9 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
+#pragma warning disable 612
 				typeof(CatNodeattrsRequest),
+#pragma warning restore 612
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest)
 			};
