@@ -3,13 +3,13 @@
 
 namespace Nest
 {
-	[Obsolete()]
+	[Obsolete("Scheduled to be removed in 5.0.  Use ICatNodeAttributesRequest instead.")]
 	public partial interface ICatNodeattrsRequest { }
 
-	[Obsolete()]
+	[Obsolete("Scheduled to be removed in 5.0.  Use CatNodeAttributesRequest instead.")]
 	public partial class CatNodeattrsRequest { }
 
-	[Obsolete()]
+	[Obsolete("Scheduled to be removed in 5.0.  Use CatNodeAttributesDescriptor instead.")]
 	public partial class CatNodeattrsDescriptor { }
 
 
