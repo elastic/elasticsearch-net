@@ -398,7 +398,6 @@
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\Infer\TaskId\TaskId.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
