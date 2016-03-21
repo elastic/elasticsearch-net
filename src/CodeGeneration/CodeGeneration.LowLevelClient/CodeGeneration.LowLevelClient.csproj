@@ -47,10 +47,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="ApiGenerator.cs" />
+    <Compile Include="Domain\ApiBody.cs" />
+    <Compile Include="Domain\ApiEndpoint.cs" />
+    <Compile Include="Domain\ApiQueryParameters.cs" />
+    <Compile Include="Domain\ApiUrl.cs" />
+    <Compile Include="Domain\ApiUrlPart.cs" />
+    <Compile Include="Domain\Constructor.cs" />
+    <Compile Include="Domain\CsharpMethod.cs" />
+    <Compile Include="Domain\RestApiSpec.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
+    <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\FieldStatsDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\IndicesStatsDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\PutIndexTemplateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\ScrollDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\UpdateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Global\GlobalQueryParameters.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="App.config" />
     <None Include="paket.references" />
-    <None Include="**\*.cshtml" />
+    <None Include="Views\ElasticLowLevelClient.Generated.cshtml" />
+    <None Include="Views\Enums.Generated.cshtml" />
+    <None Include="Views\IElasticLowLevelClient.Generated.cshtml" />
+    <None Include="Views\RequestParameters.Generated.cshtml" />
+    <None Include="Views\_Descriptors.Generated.cshtml" />
+    <None Include="Views\_LowLevelDispatch.Generated.cshtml" />
+    <None Include="Views\_RequestParametersExtensions.Generated.cshtml" />
+    <None Include="Views\_Requests.Generated.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

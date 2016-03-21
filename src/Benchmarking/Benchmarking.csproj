@@ -43,7 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="Arguments.cs" />
+    <Compile Include="BenchmarkingCluster.cs" />
+    <Compile Include="BenchmarkingTestConfiguration.cs" />
+    <Compile Include="HttpTester.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageGenerator.cs" />
+    <Compile Include="Metrics.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="PartitionExtension.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results.cs" />
+    <Compile Include="Tester.cs" />
+    <Compile Include="TypeExtensions.cs" />
     <None Include="App.config" />
     <None Include="paket.references" />
   </ItemGroup>
