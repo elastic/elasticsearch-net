@@ -2094,6 +2094,57 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IForceMergeRequest : IRequest<ForceMergeRequestParameters> 
+	{
+		Indices Index { get; }
+	 } 
+	///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
+	public partial class ForceMergeRequest  : RequestBase<ForceMergeRequestParameters>, IForceMergeRequest
+	{
+		protected IForceMergeRequest Self => this;
+		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_forcemerge</summary>
+		public ForceMergeRequest() : base(){}
+		
+
+		/// <summary>/{index}/_forcemerge</summary>
+///<param name="index">Optional, accepts null</param>
+		public ForceMergeRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
+		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
+		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q("max_num_segments", value); } }
+		
+		///<summary>Specify whether the operation should only expunge deleted documents</summary>
+		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
+		
+		///<summary>TODO: ?</summary>
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
+		
+		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
+		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2889,59 +2940,6 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesForcemergeRequest : IRequest<IndicesForcemergeRequestParameters> 
-	{
-		Indices Index { get; }
-	 } 
-	///<summary>Request parameters for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
-	public partial class IndicesForcemergeRequest  : RequestBase<IndicesForcemergeRequestParameters>, IIndicesForcemergeRequest
-	{
-		protected IIndicesForcemergeRequest Self => this;
-		Indices IIndicesForcemergeRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_forcemerge</summary>
-		public IndicesForcemergeRequest() : base(){}
-		
-
-		/// <summary>/{index}/_forcemerge</summary>
-///<param name="index">Optional, accepts null</param>
-		public IndicesForcemergeRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q("max_num_segments", value); } }
-		
-		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
-		
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters> 

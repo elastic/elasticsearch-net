@@ -10,12 +10,12 @@ using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 
-namespace Tests.Indices.StatusManagement.Optimize
+namespace Tests.Indices.StatusManagement.ForceMerge
 {
 	[Collection(IntegrationContext.OwnIndex)]
-	public class OptimizeApiTests : ApiIntegrationTestBase<IOptimizeResponse, IOptimizeRequest, OptimizeDescriptor, OptimizeRequest>
+	public class ForceMergeApiTests : ApiIntegrationTestBase<IForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor, ForceMergeRequest>
 	{
-		public OptimizeApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ForceMergeApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
 		{
@@ -23,20 +23,20 @@ namespace Tests.Indices.StatusManagement.Optimize
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Optimize(CallIsolatedValue, f),
-			fluentAsync: (client, f) => client.OptimizeAsync(CallIsolatedValue, f),
-			request: (client, r) => client.Optimize(r),
-			requestAsync: (client, r) => client.OptimizeAsync(r)
+			fluent: (client, f) => client.ForceMerge(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.ForceMergeAsync(CallIsolatedValue, f),
+			request: (client, r) => client.ForceMerge(r),
+			requestAsync: (client, r) => client.ForceMergeAsync(r)
 		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{CallIsolatedValue}/_optimize?allow_no_indices=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_forcemerge?allow_no_indices=true";
 
-		protected override Func<OptimizeDescriptor, IOptimizeRequest> Fluent => d => d.AllowNoIndices();
+		protected override Func<ForceMergeDescriptor, IForceMergeRequest> Fluent => d => d.AllowNoIndices();
 
-		protected override OptimizeRequest Initializer => new OptimizeRequest(CallIsolatedValue) { AllowNoIndices = true };
+		protected override ForceMergeRequest Initializer => new ForceMergeRequest(CallIsolatedValue) { AllowNoIndices = true };
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
