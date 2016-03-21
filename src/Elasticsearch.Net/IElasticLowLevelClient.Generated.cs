@@ -524,7 +524,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> CatNodeattrs<T>(Func<CatNodeattrsRequestParameters, CatNodeattrsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> CatNodeattrs<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_cat/nodeattrs
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -536,7 +536,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> CatNodeattrsAsync<T>(Func<CatNodeattrsRequestParameters, CatNodeattrsRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> CatNodeattrsAsync<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_cat/nodes
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

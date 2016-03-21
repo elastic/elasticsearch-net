@@ -28,7 +28,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public ICatResponse<CatNodeAttributesRecord> CatNodeAttributes(ICatNodeAttributesRequest request) =>
-			this.DoCat<ICatNodeAttributesRequest, CatNodeattrsRequestParameters, CatNodeAttributesRecord>(request, this.LowLevelDispatch.CatNodeattrsDispatch<CatResponse<CatNodeAttributesRecord>>);
+			this.DoCat<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request, this.LowLevelDispatch.CatNodeattrsDispatch<CatResponse<CatNodeAttributesRecord>>);
 
 		/// <inheritdoc/>
 		public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(Func<CatNodeAttributesDescriptor, ICatNodeAttributesRequest> selector = null) =>
@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<ICatResponse<CatNodeAttributesRecord>> CatNodeAttributesAsync(ICatNodeAttributesRequest request) =>
-			this.DoCatAsync<ICatNodeAttributesRequest, CatNodeattrsRequestParameters, CatNodeAttributesRecord>(request, this.LowLevelDispatch.CatNodeattrsDispatchAsync<CatResponse<CatNodeAttributesRecord>>);
+			this.DoCatAsync<ICatNodeAttributesRequest, CatNodeAttributesRequestParameters, CatNodeAttributesRecord>(request, this.LowLevelDispatch.CatNodeattrsDispatchAsync<CatResponse<CatNodeAttributesRecord>>);
 
 	}
 }

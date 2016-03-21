@@ -403,40 +403,40 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html
 	///</pre>
 	///</summary>
-	public class CatNodeattrsRequestParameters : FluentRequestParameters<CatNodeattrsRequestParameters> 
+	public class CatNodeAttributesRequestParameters : FluentRequestParameters<CatNodeAttributesRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public CatNodeattrsRequestParameters Format(string format) => this.AddQueryString("format", format);
+		public CatNodeAttributesRequestParameters Format(string format) => this.AddQueryString("format", format);
 		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodeattrsRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		public CatNodeAttributesRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeattrsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public CatNodeAttributesRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeattrsRequestParameters H(params string[] h) => this.AddQueryString("h", h);
+		public CatNodeAttributesRequestParameters H(params string[] h) => this.AddQueryString("h", h);
 		
 		
 		///<summary>Return help information</summary>
-		public CatNodeattrsRequestParameters Help(bool help) => this.AddQueryString("help", help);
+		public CatNodeAttributesRequestParameters Help(bool help) => this.AddQueryString("help", help);
 		
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeattrsRequestParameters V(bool v) => this.AddQueryString("v", v);
+		public CatNodeAttributesRequestParameters V(bool v) => this.AddQueryString("v", v);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public CatNodeattrsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public CatNodeAttributesRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodeattrsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public CatNodeAttributesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

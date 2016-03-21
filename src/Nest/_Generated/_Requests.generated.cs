@@ -523,13 +523,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodeattrsRequest : IRequest<CatNodeattrsRequestParameters> 
+	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsRequest  : RequestBase<CatNodeattrsRequestParameters>, ICatNodeattrsRequest
+	public partial class CatNodeAttributesRequest  : RequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
-		protected ICatNodeattrsRequest Self => this;
+		protected ICatNodeAttributesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
 		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
 		
@@ -554,9 +554,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters> 

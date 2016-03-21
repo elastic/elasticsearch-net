@@ -360,35 +360,32 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsDescriptor  : RequestDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters, ICatNodeattrsRequest>, ICatNodeattrsRequest
+	public partial class CatNodeAttributesDescriptor  : RequestDescriptorBase<CatNodeAttributesDescriptor,CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{ 
 			
 		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
-		public CatNodeattrsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+		public CatNodeAttributesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodeattrsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+		public CatNodeAttributesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeattrsDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public CatNodeAttributesDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeattrsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
+		public CatNodeAttributesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatNodeattrsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+		public CatNodeAttributesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeattrsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
+		public CatNodeAttributesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatNodeattrsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodeAttributesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodeattrsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public CatNodeAttributesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

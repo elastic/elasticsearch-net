@@ -238,7 +238,7 @@ namespace Nest
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal ElasticsearchResponse<T> CatNodeattrsDispatch<T>(IRequest<CatNodeattrsRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> CatNodeattrsDispatch<T>(IRequest<CatNodeAttributesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -249,7 +249,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodeattrs", p, new [] { GET }, "/_cat/nodeattrs");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatNodeattrsDispatchAsync<T>(IRequest<CatNodeattrsRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> CatNodeattrsDispatchAsync<T>(IRequest<CatNodeAttributesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{

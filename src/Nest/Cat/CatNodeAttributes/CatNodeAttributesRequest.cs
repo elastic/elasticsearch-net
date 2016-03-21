@@ -3,17 +3,10 @@
 
 namespace Nest
 {
-	[Obsolete()]
-	public partial interface ICatNodeattrsRequest { }
+	public partial interface ICatNodeAttributesRequest { }
 
-	[Obsolete()]
-	public partial class CatNodeattrsRequest { }
+	public partial class CatNodeAttributesRequest { }
 
-	[Obsolete()]
-	public partial class CatNodeattrsDescriptor { }
-
-
-	public interface ICatNodeAttributesRequest : ICatNodeattrsRequest { }
-	public class CatNodeAttributesRequest : CatNodeattrsRequest, ICatNodeAttributesRequest { }
-	public class CatNodeAttributesDescriptor : CatNodeattrsDescriptor, ICatNodeAttributesRequest { }
+	[DescriptorFor("CatNodeattrs")]
+	public partial class CatNodeAttributesDescriptor { }
 }
