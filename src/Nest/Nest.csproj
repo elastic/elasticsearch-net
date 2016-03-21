@@ -696,6 +696,9 @@
     <Compile Include="Indices\StatusManagement\Flush\ElasticClient-Flush.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushRequest.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushResponse.cs" />
+    <Compile Include="Indices\StatusManagement\ForceMerge\ElasticClient-ForceMerge.cs" />
+    <Compile Include="Indices\StatusManagement\ForceMerge\ForceMergeRequest.cs" />
+    <Compile Include="Indices\StatusManagement\ForceMerge\ForceMergeResponse.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\ElasticClient-Optimize.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeRequest.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeResponse.cs" />

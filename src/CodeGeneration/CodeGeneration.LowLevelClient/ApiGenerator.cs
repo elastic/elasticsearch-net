@@ -51,10 +51,10 @@ namespace CodeGeneration.LowLevelClient
 			}
 			else
 			{
-				NestFolder = @"..\..\..\..\..\src\Nest\";
-				EsNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
-				ViewFolder = @"..\..\Views\";
-				ApiEndpointsFolder = @"..\..\ApiEndpoints\";
+				NestFolder = @"..\..\..\..\..\...\src\Nest\";
+				EsNetFolder = @"..\..\..\..\..\..\src\Elasticsearch.Net\";
+				ViewFolder = @"..\..\..\Views\";
+				ApiEndpointsFolder = @"..\..\..\ApiEndpoints\";
 			}
 		}
 

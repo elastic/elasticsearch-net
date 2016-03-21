@@ -113,7 +113,7 @@ namespace Tests.CodeStandards
 				typeof(CatThreadPoolRequest),
 				typeof(CatRepositoriesRequest),
 				typeof(CatSnapshotsRequest),
-				typeof(IndicesForcemergeRequest),
+				typeof(ForceMergeRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
