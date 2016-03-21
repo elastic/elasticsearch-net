@@ -11,6 +11,7 @@ namespace Nest
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> HitsMetaData { get; }
 		IDictionary<string, IAggregate> Aggregations { get; }
+		Profile Profile { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
 		int Took { get; }
@@ -20,9 +21,9 @@ namespace Nest
 		long Total { get; }
 		double MaxScore { get; }
 		/// <summary>
-		/// Returns a view on the documents inside the hits that are returned. 
-		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use 
-		/// .Fields instead or try the 'source filtering' feature introduced in Elasticsearch 1.0 
+		/// Returns a view on the documents inside the hits that are returned.
+		/// <para>NOTE: if you use Fields() on the search descriptor .Documents will be empty use
+		/// .Fields instead or try the 'source filtering' feature introduced in Elasticsearch 1.0
 		/// using .Source() on the search descriptor to get Documents of type T with only certain parts selected
 		/// </para>
 		/// </summary>
@@ -52,7 +53,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "aggregations")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, IAggregate> Aggregations { get; internal set; } = new Dictionary<string, IAggregate>();
-		
+
+		[JsonProperty(PropertyName = "profile")]
+		public Profile Profile { get; internal set; }
+
 		private AggregationsHelper _agg = null;
 		[JsonIgnore]
 		public AggregationsHelper Aggs => _agg ?? (_agg = new AggregationsHelper(this.Aggregations));
@@ -81,10 +85,10 @@ namespace Nest
 		[JsonIgnore]
 		public double MaxScore => this.HitsMetaData?.MaxScore ?? 0;
 
-		private IList<T> _documents; 
+		private IList<T> _documents;
 		/// <inheritdoc/>
 		[JsonIgnore]
-		public IEnumerable<T> Documents => 
+		public IEnumerable<T> Documents =>
 			this._documents ?? (this._documents = this.Hits
 				.Select(h => h.Source)
 				.ToList());
@@ -92,9 +96,9 @@ namespace Nest
 		[JsonIgnore]
 		public IEnumerable<IHit<T>> Hits => this.HitsMetaData?.Hits ?? Enumerable.Empty<IHit<T>>();
 
-		private IList<FieldValues> _fields; 
+		private IList<FieldValues> _fields;
 		/// <inheritdoc/>
-		public IEnumerable<FieldValues> Fields => 
+		public IEnumerable<FieldValues> Fields =>
 				this._fields ?? (this._fields = this.Hits
 					.Select(h => h.Fields)
 					.ToList());
@@ -108,12 +112,12 @@ namespace Nest
 		{
 			get
 			{
-				if (_highlights != null) return _highlights; 
-				
+				if (_highlights != null) return _highlights;
+
 				var dict = new HighlightDocumentDictionary();
 				if (this.HitsMetaData == null || !this.HitsMetaData.Hits.HasAny())
 					return dict;
-				
+
 
 				foreach (var hit in this.HitsMetaData.Hits)
 				{

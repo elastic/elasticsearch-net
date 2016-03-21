@@ -29,6 +29,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "track_scores")]
 		bool? TrackScores { get; set; }
 
+		[JsonProperty(PropertyName = "profile")]
+		bool? Profile { get; set; }
+
 		[JsonProperty(PropertyName = "min_score")]
 		double? MinScore { get; set; }
 
@@ -101,6 +104,7 @@ namespace Nest
 		public bool? Explain { get; set; }
 		public bool? Version { get; set; }
 		public bool? TrackScores { get; set; }
+		public bool? Profile { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public Fields Fields { get; set; }
@@ -143,6 +147,7 @@ namespace Nest
 		public bool? Explain { get; set; }
 		public bool? Version { get; set; }
 		public bool? TrackScores { get; set; }
+		public bool? Profile { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public Fields Fields { get; set; }
@@ -198,6 +203,7 @@ namespace Nest
 		bool? ISearchRequest.Explain { get; set; }
 		bool? ISearchRequest.Version { get; set; }
 		bool? ISearchRequest.TrackScores { get; set; }
+		bool? ISearchRequest.Profile { get; set; }
 		double? ISearchRequest.MinScore { get; set; }
 		long? ISearchRequest.TerminateAfter { get; set; }
 
@@ -224,7 +230,7 @@ namespace Nest
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		/// <summary>
-		/// The number of hits to return. Defaults to 10. When using scroll search type 
+		/// The number of hits to return. Defaults to 10. When using scroll search type
 		/// size is actually multiplied by the number of shards!
 		/// </summary>
 		public SearchDescriptor<T> Size(int size) => Assign(a => a.Size = size);
@@ -245,14 +251,14 @@ namespace Nest
 		public SearchDescriptor<T> Skip(int skip) => this.From(skip);
 
 		/// <summary>
-		/// A search timeout, bounding the search request to be executed within the 
+		/// A search timeout, bounding the search request to be executed within the
 		/// specified time value and bail with the hits accumulated up
 		/// to that point when expired. Defaults to no timeout.
 		/// </summary>
 		public SearchDescriptor<T> Timeout(string timeout) => Assign(a => a.Timeout = timeout);
 
 		/// <summary>
-		/// Enables explanation for each hit on how its score was computed. 
+		/// Enables explanation for each hit on how its score was computed.
 		/// (Use .DocumentsWithMetaData on the return results)
 		/// </summary>
 		public SearchDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
@@ -268,19 +274,26 @@ namespace Nest
 		public SearchDescriptor<T> TrackScores(bool trackscores = true) => Assign(a => a.TrackScores = trackscores);
 
 		/// <summary>
+		/// The Profile API provides detailed timing information about the execution of individual components in a query.
+		/// It gives the user insight into how queries are executed at a low level so that the user can understand
+		/// why certain queries are slow, and take steps to improve their slow queries.
+		/// </summary>
+		public SearchDescriptor<T> Profile(bool profile = true) => Assign(a => a.Profile = profile);
+
+		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
 		public SearchDescriptor<T> MinScore(double minScore) => Assign(a => a.MinScore = minScore);
 
 		/// <summary>
-		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. 
-		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early. 
+		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
+		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early.
 		/// </summary>
 		public SearchDescriptor<T> TerminateAfter(long terminateAfter) => Assign(a => a.TerminateAfter = terminateAfter);
 
 		/// <summary>
 		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// Controls a preference of which shard replicas to execute the search request on.
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
@@ -291,11 +304,11 @@ namespace Nest
 
 		/// <summary>
 		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// Controls a preference of which shard replicas to execute the search request on.
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
-		/// The operation will go and be executed on the primary shard, and if not available (failover), 
+		/// The operation will go and be executed on the primary shard, and if not available (failover),
 		/// will execute on other shards.
 		/// </para>
 		/// </summary>
@@ -303,7 +316,7 @@ namespace Nest
 
 		/// <summary>
 		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// Controls a preference of which shard replicas to execute the search request on.
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
@@ -314,7 +327,7 @@ namespace Nest
 
 		/// <summary>
 		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// Controls a preference of which shard replicas to execute the search request on.
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
@@ -325,7 +338,7 @@ namespace Nest
 
 		/// <summary>
 		/// <para>
-		/// Controls a preference of which shard replicas to execute the search request on. 
+		/// Controls a preference of which shard replicas to execute the search request on.
 		/// By default, the operation is randomized between the each shard replicas.
 		/// </para>
 		/// <para>
@@ -335,7 +348,7 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnPreferredNode(string node) => this.Preference(node.IsNullOrEmpty() ? null : $"_prefer_node:{node}");
 
 		/// <summary>
-		/// Allows to configure different boost level per index when searching across 
+		/// Allows to configure different boost level per index when searching across
 		/// more than one indices. This is very handy when hits coming from one index
 		/// matter more than hits coming from another index (think social graph where each user has an index).
 		/// </summary>
@@ -343,7 +356,7 @@ namespace Nest
 			Assign(a => a.IndicesBoost = boost?.Invoke(new FluentDictionary<IndexName, double>()));
 
 		/// <summary>
-		/// Allows to selectively load specific fields for each document 
+		/// Allows to selectively load specific fields for each document
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
@@ -363,7 +376,7 @@ namespace Nest
 		///</summary>
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
 
-		public SearchDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) => 
+		public SearchDescriptor<T> InnerHits(Func<NamedInnerHitsDescriptor<T>, IPromise<INamedInnerHits>> selector) =>
 			Assign(a => a.InnerHits = selector?.Invoke(new NamedInnerHitsDescriptor<T>())?.Value);
 
 		///<summary>
@@ -390,7 +403,7 @@ namespace Nest
 			Assign(a => a.PostFilter = filter.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
-		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
+		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter.
 		/// </summary>
 		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));

@@ -534,6 +534,7 @@
     <Compile Include=".\Search\Suggesters\SuggestApiTest.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
+    <Compile Include="Search\Request\ProfileUsageTests.cs" />
     <None Include="index.asciidoc" />
     <None Include="paket.references" />
     <None Include="tests.yaml" />
