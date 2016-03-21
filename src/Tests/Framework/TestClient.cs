@@ -77,10 +77,10 @@ namespace Tests.Framework
 				: new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(
-			object response, 
-			int statusCode = 200, 
-			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, 
-			string contentType = "application/json", 
+			object response,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			string contentType = "application/json",
 			Exception exception = null)
 		{
 			var serializer = new JsonNetSerializer(new ConnectionSettings());
@@ -147,7 +147,7 @@ namespace Tests.Framework
 										directoryInfo.Parent != null &&
 										directoryInfo.Parent.Name == "src"
 				? "tests.yaml"
-				: @"..\..\tests.yaml";
+				: @"..\..\..\tests.yaml";
 
 			return new YamlConfiguration(yamlConfigurationPath);
 		}

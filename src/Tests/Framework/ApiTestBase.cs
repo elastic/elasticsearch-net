@@ -16,14 +16,14 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		private readonly IIntegrationCluster _cluster;
+		protected readonly IIntegrationCluster _cluster;
 		private readonly LazyResponses _responses;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 
-		protected IDictionary<Integration.ClientMethod, string> UniqueValues { get; } 		
+		protected IDictionary<Integration.ClientMethod, string> UniqueValues { get; }
 		protected string CallIsolatedValue { get; private set; }
 
 		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<Integration.ClientMethod, string> values) { }

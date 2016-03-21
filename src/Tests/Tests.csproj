@@ -534,6 +534,14 @@
     <Compile Include=".\Search\Suggesters\SuggestApiTest.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
+    <Compile Include="Cat\CatHelp\CatHelpApiTests.cs" />
+    <Compile Include="Cat\CatHelp\CatHelpUrlTests.cs" />
+    <Compile Include="Cat\CatNodeAttributes\CatNodeAttributesApiTests.cs" />
+    <Compile Include="Cat\CatNodeAttributes\CatAliasesUrlTests.cs" />
+    <Compile Include="Cat\CatRepositories\CatRepositoriesApiTests.cs" />
+    <Compile Include="Cat\CatRepositories\CatRepositoriesUrlTests.cs" />
+    <Compile Include="Cat\CatSnapshots\CatSnapshotsApiTests.cs" />
+    <Compile Include="Cat\CatSnapshots\CatSnapshotsUrlTests.cs" />
     <None Include="index.asciidoc" />
     <None Include="paket.references" />
     <None Include="tests.yaml" />
