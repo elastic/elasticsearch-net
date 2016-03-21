@@ -547,6 +547,8 @@
     <Compile Include="Indices\StatusManagement\ForceMerge\ForceMergeUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateApiTests.cs" />
     <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresApiTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresUrlTests.cs" />
     <None Include="index.asciidoc" />
     <None Include="paket.references" />
     <None Include="tests.yaml" />
