@@ -28,5 +28,4 @@ namespace Tests.Cat.CatAliases
 			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == "projects-alias");
 		}
 	}
-
 }
