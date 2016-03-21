@@ -697,6 +697,10 @@
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\ShardSegmentRouting.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\ShardsSegment.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\ElasticClient-IndicesShardStores.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\ShardStoreJsonConverter.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresRequest.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\ElasticClient-IndicesStats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndexStats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStats.cs" />
