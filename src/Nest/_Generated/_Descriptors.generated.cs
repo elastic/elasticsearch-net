@@ -258,9 +258,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatHelpDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
@@ -514,9 +511,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatRepositoriesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
@@ -601,13 +595,11 @@ namespace Nest
 	{ 
 		Names ICatSnapshotsRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 			/// <summary>/_cat/snapshots/{repository}</summary>
-		public CatSnapshotsDescriptor() : base(){}
+///<param name="repository"> this parameter is required</param>
+		public CatSnapshotsDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
 		
 
-			///<summary>Name of repository from which to fetch the snapshot information</summary>
-		public CatSnapshotsDescriptor RepositoryName(Names repository) => Assign(a=>a.RouteValues.Optional("repository", repository));
-
-	
+		
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public CatSnapshotsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -628,9 +620,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatSnapshotsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	

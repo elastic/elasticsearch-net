@@ -129,7 +129,9 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
+#pragma warning disable 612
 				typeof(CatNodeattrsRequest),
+#pragma warning restore 612
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest)
 			};
