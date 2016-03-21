@@ -39,7 +39,20 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="Documentation\Blocks\CodeBlock.cs" />
+    <Compile Include="Documentation\Blocks\CombinedBlock.cs" />
+    <Compile Include="Documentation\Blocks\IDocumentationBlock.cs" />
+    <Compile Include="Documentation\Blocks\TextBlock.cs" />
+    <Compile Include="Documentation\Files\CSharpDocumentationFile.cs" />
+    <Compile Include="Documentation\Files\DocumentationFile.cs" />
+    <Compile Include="Documentation\Files\RawDocumentationFile.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Linker\Linker.cs" />
+    <Compile Include="LitUp.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Walkers\CodeWithDocumentationWalker.cs" />
+    <Compile Include="Walkers\DocumentationFileWalker.cs" />
     <None Include="App.config" />
     <None Include="paket.references" />
   </ItemGroup>
