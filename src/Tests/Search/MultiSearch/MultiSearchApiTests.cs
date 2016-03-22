@@ -47,7 +47,7 @@ namespace Tests.Search.MultiSearch
 			.Index(typeof(Project))
 			.Type(typeof(Project))
 			.Search<Project>("10projects",s => s.Query(q => q.MatchAll()).From(0).Size(10))
-			.Search<Project>("count_project", s => s.SearchType(SearchType.DfsQueryThenFetch))
+			.Search<Project>("dfs_projects", s => s.SearchType(SearchType.DfsQueryThenFetch))
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
 			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll());
 
@@ -56,7 +56,7 @@ namespace Tests.Search.MultiSearch
 			Operations = new Dictionary<string, ISearchRequest>
 			{
 				{ "10projects", new SearchRequest<Project> { From = 0, Size = 10, Query = new QueryContainer(new MatchAllQuery()) } },
-				{ "count_project", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch} },
+				{ "dfs_projects", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch} },
 				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 			}
@@ -76,9 +76,9 @@ namespace Tests.Search.MultiSearch
 			projects.IsValid.Should().BeTrue();
 			projects.Documents.Should().HaveCount(10);
 
-			var projectsCount = r.GetResponse<Project>("count_project");
-			projectsCount.IsValid.Should().BeTrue();
-			projectsCount.Documents.Should().HaveCount(0);
+			var dfsProjects = r.GetResponse<Project>("dfs_projects");
+			dfsProjects.IsValid.Should().BeTrue();
+			dfsProjects.Documents.Should().HaveCount(10);
 
 			var developers = r.GetResponse<Developer>("5developers");
 			developers.IsValid.Should().BeTrue();
