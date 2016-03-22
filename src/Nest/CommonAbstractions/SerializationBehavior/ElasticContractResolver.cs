@@ -44,7 +44,7 @@ namespace Nest
 				contract.Converter = new QueryContainerCollectionJsonConverter();
 			else if (objectType == typeof(ServerError))
 				contract.Converter = new ServerErrorJsonConverter();
-			else if (objectType == typeof(DateTime) || 
+			else if (objectType == typeof(DateTime) ||
 					 objectType == typeof(DateTime?) ||
 					 objectType == typeof(DateTimeOffset) ||
 					 objectType == typeof(DateTimeOffset?))

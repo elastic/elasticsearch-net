@@ -1006,6 +1006,7 @@
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\LikeDocument.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
     <Compile Include="QueryDsl\Specialized\Script\ScriptQuery.cs" />
+    <Compile Include="QueryDsl\Specialized\Script\ScriptQueryConverter.cs" />
     <Compile Include="QueryDsl\Specialized\Template\TemplateQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Exists\ExistsQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueries.cs" />
