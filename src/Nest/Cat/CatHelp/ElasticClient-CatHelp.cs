@@ -33,7 +33,7 @@ namespace Nest
 			using (var ms = new MemoryStream())
 			{
 				stream.CopyTo(ms);
-				var body = Encoding.UTF8.GetString(ms.ToArray());
+				var body = ms.ToArray().Utf8String();
 				return new CatResponse<CatHelpRecord>
 				{
 					Records = body.Split('\n').Skip(1)
