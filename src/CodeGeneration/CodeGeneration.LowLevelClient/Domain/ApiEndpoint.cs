@@ -22,10 +22,15 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			get
 			{
-				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body")
-					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
+				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body").ToList();
 				if (!parts.Any()) return string.Empty;
-				return $"AllSet({string.Join(", ", parts)})";
+
+				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
+				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
+				var assignments = parts
+					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
+
+				return $"{call}({string.Join(", ", assignments)})";
 			}
 		}
 	}

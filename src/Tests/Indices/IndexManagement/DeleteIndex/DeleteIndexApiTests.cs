@@ -4,11 +4,12 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
+using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DeleteIndexApiTests 
+	public class DeleteIndexApiTests
 		: ApiIntegrationTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -31,5 +32,23 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override DeleteIndexRequest Initializer => new DeleteIndexRequest(CallIsolatedValue);
+	}
+
+	[Collection(IntegrationContext.Indexing)]
+	public class DeleteAllIndicesApiTests : ApiTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+	{
+		public DeleteAllIndicesApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.DeleteIndex(AllIndices),
+			fluentAsync: (client, f) => client.DeleteIndexAsync(AllIndices),
+			request: (client, r) => client.DeleteIndex(r),
+			requestAsync: (client, r) => client.DeleteIndexAsync(r)
+		);
+
+		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override string UrlPath => $"/_all";
+
+		protected override DeleteIndexRequest Initializer => new DeleteIndexRequest(AllIndices);
 	}
 }

@@ -15,9 +15,9 @@ namespace Nest
 			this._lowLevel = rawElasticClient;
 		}
 
-		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty()) && !pathVariables.All(p => p == "_all");
+		internal bool AllSetNoFallback(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty());
 
-		internal bool AllSet(params IUrlParameter[] pathVariables) => pathVariables.All(p => p != null);
+		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty()) && !pathVariables.All(p => p == "_all");
 
 		internal static Exception InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
 		{
@@ -38,7 +38,7 @@ namespace Nest
 		{
 			var pretty = ReplaceParams.Replace(endpoint, (m) =>
 			{
-				var key = m.Groups[1].Value.ToLowerInvariant(); 
+				var key = m.Groups[1].Value.ToLowerInvariant();
 				switch(key)
 				{
 					case "index" :  return PrettyParam(key, request.RouteValues.Index);
