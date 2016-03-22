@@ -10,11 +10,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Formatting;
-#if !DOTNETCORE
-using Microsoft.CodeAnalysis.MSBuild;
-#endif
-using Microsoft.CodeAnalysis.Text;
 using Nest.Litterateur.Documentation.Blocks;
 
 namespace Nest.Litterateur.Walkers

@@ -15,8 +15,7 @@ namespace Tests.Aggregations.Bucket.Filters
 	 * that do not match any filter, these will be collected in the _other bucket_.
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filters-aggregation.html[Filters Aggregation].
-	*/
-
+	 */
 	/**[float] 
 	* == Named filters 
 	*/

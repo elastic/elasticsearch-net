@@ -110,6 +110,9 @@ namespace Tests.CodeStandards
 				typeof(CatSegmentsRequest),
 				typeof(CatShardsRequest),
 				typeof(CatThreadPoolRequest),
+				typeof(CatRepositoriesRequest),
+				typeof(CatSnapshotsRequest),
+				typeof(ForceMergeRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
@@ -125,7 +128,9 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
+#pragma warning disable 612
 				typeof(CatNodeattrsRequest),
+#pragma warning restore 612
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest)
 			};

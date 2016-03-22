@@ -34,19 +34,19 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			//We try and fetch the test name during integration tests when running fiddler to send the name 
+			//We try and fetch the test name during integration tests when running fiddler to send the name
 			//as the TestMethod header, this allows us to quickly identify which test sent which request
 			.GlobalHeaders(new NameValueCollection
 			{
 				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
 			});
 
-			
+
 		public static ConnectionSettings CreateSettings(
-			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, 
-			int port = 9200, 
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			int port = 9200,
 			bool forceInMemory = false,
-			Func<Uri, IConnectionPool> createPool = null, 
+			Func<Uri, IConnectionPool> createPool = null,
 			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
 			)
 		{
@@ -76,18 +76,33 @@ namespace Tests.Framework
 				? ((IConnection)new HttpConnection())
 				: new InMemoryConnection();
 
-		public static IElasticClient GetFixedReturnClient(object responseJson)
+		public static IElasticClient GetFixedReturnClient(
+			object response,
+			int statusCode = 200,
+			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
+			string contentType = "application/json",
+			Exception exception = null)
 		{
 			var serializer = new JsonNetSerializer(new ConnectionSettings());
 			byte[] fixedResult;
-			using (var ms = new MemoryStream())
+
+			if (contentType == "application/json")
 			{
-				serializer.Serialize(responseJson, ms);
-				fixedResult = ms.ToArray();
+				using (var ms = new MemoryStream())
+				{
+					serializer.Serialize(response, ms);
+					fixedResult = ms.ToArray();
+				}
 			}
-			var connection = new InMemoryConnection(fixedResult);
+			else
+			{
+				fixedResult = Encoding.UTF8.GetBytes(response.ToString());
+			}
+
+			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(connectionPool, connection);
+			var defaultSettings = new ConnectionSettings(connectionPool, connection);
+			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings);
 		}
 
@@ -128,11 +143,11 @@ namespace Tests.Framework
 
 			// If running the classic .NET solution, tests run from bin/{config} directory,
 			// but when running DNX solution, tests run from the test project root
-			var yamlConfigurationPath = directoryInfo.Name == "Tests" && 
-										directoryInfo.Parent != null && 
+			var yamlConfigurationPath = directoryInfo.Name == "Tests" &&
+										directoryInfo.Parent != null &&
 										directoryInfo.Parent.Name == "src"
 				? "tests.yaml"
-				: @"..\..\tests.yaml";
+				: @"..\..\..\tests.yaml";
 
 			return new YamlConfiguration(yamlConfigurationPath);
 		}

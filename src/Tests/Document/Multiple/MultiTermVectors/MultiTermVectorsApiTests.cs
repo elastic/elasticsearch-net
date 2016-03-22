@@ -42,15 +42,27 @@ namespace Tests.Document.Multiple.MultiTermVectors
 				field_statistics = true,
 				term_statistics = true,
 				positions = true,
-				offsets = true
+				offsets = true,
+				filter = new
+				{
+					max_num_terms = 3,
+					min_term_freq = 1,
+					min_doc_freq = 1
+				}
 			}).Take(2)
 		};
 
 		protected override void ExpectResponse(IMultiTermVectorsResponse response)
 		{
+			response.IsValid.Should().BeTrue();
 			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
 			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
+
 			termvectorDoc.Should().NotBeNull();
+			termvectorDoc.Index.Should().NotBeNull();
+			termvectorDoc.Type.Should().NotBeNull();
+			termvectorDoc.Id.Should().NotBeNull();
+			termvectorDoc.Took.Should().BeGreaterThan(0);
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
 			var vectors = termvectorDoc.TermVectors["firstName"];
@@ -71,7 +83,18 @@ namespace Tests.Document.Multiple.MultiTermVectors
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()
-			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p.FieldStatistics().Payloads().TermStatistics().Positions().Offsets())
+			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p
+				.FieldStatistics()
+				.Payloads()
+				.TermStatistics()
+				.Positions()
+				.Offsets()
+				.Filter(f => f
+					.MaximimumNumberOfTerms(3)
+					.MinimumTermFrequency(1)
+					.MinimumDocumentFrequency(1)
+				)
+			)
 		;
 
 		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
@@ -83,7 +106,13 @@ namespace Tests.Document.Multiple.MultiTermVectors
 					Payloads = true,
 					TermStatistics = true,
 					Positions = true,
-					Offsets = true
+					Offsets = true,
+					Filter = new TermVectorFilter
+					{
+						MaximumNumberOfTerms = 3,
+						MinimumTermFrequency = 1,
+						MinimumDocumentFrequency = 1
+					}
 				})
 		};
 	}

@@ -65,7 +65,7 @@ namespace Nest
 					break;
 				case "_geo_distance":
 					var geo = s as IGeoDistanceSort;
-					writer.WritePropertyName("_geo_distance");
+					writer.WritePropertyName(geo.SortKey.Name);
 					base.Reserialize(writer, s, serializer, w =>
 					{
 						writer.WritePropertyName(settings.Inferrer.Field(geo.Field));

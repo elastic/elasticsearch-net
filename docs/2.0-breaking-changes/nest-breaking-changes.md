@@ -98,7 +98,7 @@ client.Search<Project>(s=>s
 
 This isolates all the sort options properly and adheres stricter to the 1 to 1 mapping. `NEST 1.x` also had this full descriptor but the mix and matching
 of the convenience methods of the parent means some fluent methods were additive whilst others always overwrite what was previously set.
-In `NEST 2.0` this discrapency is gone.
+In `NEST 2.0` this discrepency is gone.
 
 This happens in more places e.g index settings and mappings.
 
@@ -205,6 +205,42 @@ public class StringTimeSpanConverter : JsonConverter
 }
 ```
 
+#Serialization settings
+
+Serialization settings are now configurable through `ConnectionSettings` constructor taking a factory function that returns an instance of `IElasticsearchSerializer`.
+
+
+```c#
+var setting = new ConnectionSettings(..);
+
+setting.AddContractJsonConverters(type => new MyPrettyConverter(), type => new SomeOtherConverter());
+setting.SetJsonSerializerSettingsModifier(settings => settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+```
+
+becomes
+
+```c#
+var settings = new ConnectionSettings(connectionPool, connectionSettings => new MyJsonNetSerializer(connectionSettings))
+
+public class MyJsonNetSerializer : JsonNetSerializer
+{
+	public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+	{
+	}
+
+	protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+	{
+		settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+	}
+
+	protected override IList<Func<Type, JsonConverter>> ContractConverters => 
+		new List<Func<Type, JsonConverter>>
+		{
+			type => new MyPrettyConverter(),
+			type => new SomeOtherConverter()
+		};
+}
+```
 
 #Renamed Types
 

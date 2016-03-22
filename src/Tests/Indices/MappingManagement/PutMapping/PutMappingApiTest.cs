@@ -35,25 +35,195 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			properties = new
 			{
+				curatedTags = new
+				{
+					properties = new
+					{
+						added = new
+						{
+							type = "date"
+						},
+						name = new
+						{
+							type = "string"
+						}
+					},
+					type = "object"
+				},
+				description = new
+				{
+					type = "string"
+				},
+				lastActivity = new
+				{
+					type = "date"
+				},
+				leadDeveloper = new
+				{
+					properties = new
+					{
+						firstName = new
+						{
+							type = "string"
+						},
+						gender = new
+						{
+							type = "integer"
+						},
+						id = new
+						{
+							type = "long"
+						},
+						iPAddress = new
+						{
+							type = "string"
+						},
+						jobTitle = new
+						{
+							type = "string"
+						},
+						lastName = new
+						{
+							type = "string"
+						},
+						location = new
+						{
+							type = "geo_point"
+						},
+						nickname = new
+						{
+							type = "string"
+						}
+					},
+					type = "object"
+				},
+				location = new
+				{
+					properties = new
+					{
+						lat = new
+						{
+							type = "double"
+						},
+						lon = new
+						{
+							type = "double"
+						}
+					},
+					type = "object"
+				},
+				metadata = new
+				{
+					type = "object"
+				},
 				name = new
 				{
-					type = "string",
-					index = "not_analyzed"
+					index = "not_analyzed",
+					type = "string"
+				},
+				numberOfCommits = new
+				{
+					type = "integer"
+				},
+				startedOn = new
+				{
+					type = "date"
+				},
+				state = new
+				{
+					type = "integer"
+				},
+				suggest = new
+				{
+					type = "completion"
+				},
+				tags = new
+				{
+					properties = new
+					{
+						added = new
+						{
+							type = "date"
+						},
+						name = new
+						{
+							type = "string"
+						}
+					},
+					type = "object"
 				}
 			}
 		};
 
+
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
-			.Properties(prop=>prop
-				.String(s=>s.Name(p=>p.Name).NotAnalyzed())
+			.AutoMap()
+			.Properties(prop => prop
+				.String(s => s
+					.Name(p => p.Name)
+					.NotAnalyzed()
+				)
+				.Object<object>(o => o
+					.Name(p => p.Metadata)
+				)
 			);
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
 			Properties = new Properties<Project>
 			{
-				{ p=>p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  }
+
+				{ p => p.CuratedTags, new ObjectProperty
+						{
+							Properties = new Properties<Tag>
+							{
+								{ p => p.Added, new DateProperty() },
+								{ p => p.Name, new StringProperty() },
+							}
+						}
+				},
+				{ p => p.Description, new StringProperty() },
+				{ p => p.LastActivity, new DateProperty() },
+				{ p => p.LeadDeveloper, new ObjectProperty
+						{
+							Properties = new Properties<Developer>
+							{
+								{ p => p.FirstName, new StringProperty() },
+								{ p => p.Gender, new NumberProperty(NumberType.Integer) },
+								{ p => p.Id, new NumberProperty(NumberType.Long) },
+								{ p => p.IPAddress, new StringProperty() },
+								{ p => p.JobTitle, new StringProperty() },
+								{ p => p.LastName, new StringProperty() },
+								{ p => p.Location, new GeoPointProperty() },
+								{ p => p.OnlineHandle, new StringProperty() },
+							}
+						}
+				},
+				{ p => p.Location, new ObjectProperty
+						{
+							Properties = new Properties<SimpleGeoPoint>
+							{
+								{ p => p.Lat, new NumberProperty(NumberType.Double) },
+								{ p => p.Lon, new NumberProperty(NumberType.Double) },
+							}
+						}
+				},
+				{ p => p.Metadata, new ObjectProperty() },
+				{ p => p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  },
+				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
+				{ p => p.StartedOn, new DateProperty() },
+				{ p => p.State, new NumberProperty(NumberType.Integer) },
+				{ p => p.Suggest, new CompletionProperty() },
+				{ p => p.Tags, new ObjectProperty
+						{
+							Properties = new Properties<Tag>
+							{
+								{ p => p.Added, new DateProperty() },
+								{ p => p.Name, new StringProperty() },
+							}
+						}
+				},
 			}
 		};
 	}

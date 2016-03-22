@@ -20,7 +20,7 @@ namespace Tests.Framework
 		private VirtualCluster _cluster;
 		private TestableDateTimeProvider _dateTimeProvider;
 
-		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider) 
+		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider)
 		{
 			this.UpdateCluster(cluster);
 			this._dateTimeProvider = dateTimeProvider;
@@ -53,7 +53,7 @@ namespace Tests.Framework
 						this._cluster.SniffingRules,
 						requestData.RequestTimeout,
 						(r) => this.UpdateCluster(r.NewClusterState),
-						() => SniffResponse.Create(this._cluster.Nodes, this._cluster.SniffShouldReturnFqnd)
+						(r) => SniffResponse.Create(this._cluster.Nodes, this._cluster.SniffShouldReturnFqnd)
 					);
 				}
 				if (IsPingRequest(requestData))
@@ -64,7 +64,7 @@ namespace Tests.Framework
 						this._cluster.PingingRules,
 						requestData.PingTimeout,
 						(r) => { },
-						() => null //HEAD request
+						(r) => null //HEAD request
 					);
 				}
 				var called = Interlocked.Increment(ref state.Called);
@@ -89,11 +89,11 @@ namespace Tests.Framework
 		}
 
 		private ElasticsearchResponse<TReturn> HandleRules<TReturn, TRule>(
-			RequestData requestData, 
+			RequestData requestData,
 			IEnumerable<TRule> rules,
 			TimeSpan timeout,
 			Action<TRule> beforeReturn,
-			Func<byte[]> successResponse
+			Func<TRule, byte[]> successResponse
 			) where TReturn : class where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
@@ -118,10 +118,10 @@ namespace Tests.Framework
 
 				return Sometimes<TReturn, TRule>(requestData, timeout, beforeReturn, successResponse, state, rule, times);
 			}
-			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
+			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse(default(TRule)));
 		}
 
-		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
 			where TReturn : class
 			where TRule : IRule
 		{
@@ -142,7 +142,7 @@ namespace Tests.Framework
 				: Fail<TReturn, TRule>(requestData, rule);
 		}
 
-		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
+		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, TimeSpan timeout, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, State state, TRule rule, int times)
 			where TReturn : class
 			where TRule : IRule
 		{
@@ -184,41 +184,53 @@ namespace Tests.Framework
 				{
 					throw e;
 				},
-				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(), statusCode)
+				(statusCode) => this.ReturnConnectionStatus<TReturn>(requestData, CallResponse(rule), statusCode)
 			);
 		}
 
-		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<TRule, byte[]> successResponse, TRule rule)
 			where TReturn : class
 			where TRule : IRule
 		{
 			var state = this.Calls[requestData.Uri.Port];
 			var succeeded = Interlocked.Increment(ref state.Successes);
 			beforeReturn?.Invoke(rule);
-			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
+			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse(rule));
 		}
 
-		private byte[] CallResponse()
+		private byte[] CallResponse<TRule>(TRule rule)
+			where TRule : IRule
 		{
-			var response = new
-			{
-				name = "Razor Fist",
-				cluster_name = "elasticsearch-test-cluster",
-				version = new
-				{
-					number = "2.0.0",
-					build_hash = "af1dc6d8099487755c3143c931665b709de3c764",
-					build_timestamp = "2015-07-07T11:28:47Z",
-					build_snapshot = true,
-					lucene_version = "5.2.1"
-				},
-				tagline = "You Know, for Search"
-			};
+			if (rule?.ReturnResponse != null)
+				return rule.ReturnResponse;
 
+			var response = DefaultResponse;
 			using (var ms = new MemoryStream())
 			{
 				new ElasticsearchDefaultSerializer().Serialize(response, ms);
 				return ms.ToArray();
+			}
+		}
+
+		private static object DefaultResponse
+		{
+			get
+			{
+				var response = new
+				{
+					name = "Razor Fist",
+					cluster_name = "elasticsearch-test-cluster",
+					version = new
+					{
+						number = "2.0.0",
+						build_hash = "af1dc6d8099487755c3143c931665b709de3c764",
+						build_timestamp = "2015-07-07T11:28:47Z",
+						build_snapshot = true,
+						lucene_version = "5.2.1"
+					},
+					tagline = "You Know, for Search"
+				};
+				return response;
 			}
 		}
 

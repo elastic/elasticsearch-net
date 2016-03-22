@@ -15,17 +15,6 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
-		internal static ElasticsearchClientException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
-		{
-			var sb = new StringBuilder();
-			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
-			sb.AppendLine($"Received a request marked as {provided.HttpMethod.GetStringValue()}");
-			sb.AppendLine($"This endpoint accepts {string.Join(",", methods.Select(p=>p.GetStringValue()))}");
-			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
-			foreach (var endpoint in endpoints)
-				sb.AppendLine($"  - {endpoint}");
-			return new ElasticsearchClientException(sb.ToString());
-		}
 
 		internal ElasticsearchResponse<T> BulkDispatch<T>(IRequest<BulkRequestParameters> p , PostData<object> body) where T : class
 		{
@@ -361,6 +350,28 @@ namespace Nest
 			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
+		internal ElasticsearchResponse<T> CatRepositoriesDispatch<T>(IRequest<CatRepositoriesRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.CatRepositories<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("CatRepositories", p, new [] { GET }, "/_cat/repositories");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CatRepositoriesDispatchAsync<T>(IRequest<CatRepositoriesRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.CatRepositoriesAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("CatRepositories", p, new [] { GET }, "/_cat/repositories");
+		}
+		
 		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(IRequest<CatSegmentsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -407,6 +418,30 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
+		}
+		
+		internal ElasticsearchResponse<T> CatSnapshotsDispatch<T>(IRequest<CatSnapshotsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Repository)) return _lowLevel.CatSnapshots<T>(p.RouteValues.Repository,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots/{repository}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CatSnapshotsDispatchAsync<T>(IRequest<CatSnapshotsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Repository)) return _lowLevel.CatSnapshotsAsync<T>(p.RouteValues.Repository,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("CatSnapshots", p, new [] { GET }, "/_cat/snapshots/{repository}");
 		}
 		
 		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(IRequest<CatThreadPoolRequestParameters> p ) where T : class
@@ -1383,6 +1418,38 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
+		}
+		
+		internal ElasticsearchResponse<T> IndicesForcemergeDispatch<T>(IRequest<ForceMergeRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesForcemerge<T>(p.RouteValues.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesForcemergeForAll<T>(u => p.RequestParameters);
+
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesForcemergeGet<T>(p.RouteValues.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesForcemergeGetForAll<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("IndicesForcemerge", p, new [] { POST, GET }, "/_forcemerge", "/{index}/_forcemerge");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> IndicesForcemergeDispatchAsync<T>(IRequest<ForceMergeRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesForcemergeAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesForcemergeForAllAsync<T>(u => p.RequestParameters);
+
+				case GET:
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesForcemergeGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesForcemergeGetForAllAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("IndicesForcemerge", p, new [] { POST, GET }, "/_forcemerge", "/{index}/_forcemerge");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(IRequest<GetIndexRequestParameters> p ) where T : class

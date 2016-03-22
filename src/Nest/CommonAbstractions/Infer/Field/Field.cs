@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -22,8 +23,11 @@ namespace Nest
 
 		public static Field Create(string name, double? boost = null)
 		{
-			Field field = name;
-			field.Boost = boost;
+			if (name.IsNullOrEmpty()) return null;
+
+			double? b;
+			Field field = ParseFieldName(name, out b);
+			field.Boost = b ?? boost;
 			return field;
 		}
 
@@ -34,14 +38,30 @@ namespace Nest
 			return field;
 		}
 
+		private static string ParseFieldName(string name, out double? boost)
+		{
+			boost = null;
+			var parts = name.Split(new [] { '^' }, StringSplitOptions.RemoveEmptyEntries);
+			if (parts.Length > 1)
+			{
+				name = parts[0];
+				boost = Double.Parse(parts[1], CultureInfo.InvariantCulture);
+			}
+			return name;
+		}
+
 		public static implicit operator Field(string name)
 		{
-			name.ThrowIfNullOrEmpty(nameof(name), "trying to implicitly convert from string to field");
+			if (name.IsNullOrEmpty()) return null;
 
-			return name == null ? null : new Field
+			double? boost;
+			name = ParseFieldName(name, out boost);
+			return  new Field
 			{
 				Name = name,
-				ComparisonValue = name
+				ComparisonValue = name,
+				Boost = boost
+				
 			};
 		}
 

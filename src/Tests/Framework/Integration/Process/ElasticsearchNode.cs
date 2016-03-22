@@ -22,10 +22,12 @@ namespace Tests.Framework.Integration
 	{
 		private static readonly object _lock = new object();
 		// <installpath> <> <plugin folder prefix>
-		private readonly Dictionary<string, string> SupportedPlugins = new Dictionary<string, string>
+		private readonly Dictionary<string, Func<string, string>> SupportedPlugins = new Dictionary<string, Func<string, string>>
 		{
-			{ "delete-by-query", "delete-by-query" },
-			{ "cloud-azure", "cloud-azure" }
+			{ "delete-by-query", _ => "delete-by-query" },
+			{ "cloud-azure", _ => "cloud-azure" },
+			{ "mapper-attachments", MapperAttachmentPlugin.GetVersion },
+			{ "mapper-murmur3", _ => "mapper-murmur3" },
 		};
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
@@ -49,7 +51,7 @@ namespace Tests.Framework.Integration
 
 #if DOTNETCORE
 		// Investigate  problem with ManualResetEvent on CoreClr
-		// Maybe due to .WaitOne() not taking exitContext? 
+		// Maybe due to .WaitOne() not taking exitContext?
 		public class Signal
 		{
 			private readonly object _lock = new object();
@@ -92,9 +94,9 @@ namespace Tests.Framework.Integration
 #endif
 
 		public ElasticsearchNode(
-			string elasticsearchVersion, 
-			bool runningIntegrations, 
-			bool doNotSpawnIfAlreadyRunning, 
+			string elasticsearchVersion,
+			bool runningIntegrations,
+			bool doNotSpawnIfAlreadyRunning,
 			string prefix
 			)
 		{
@@ -108,17 +110,17 @@ namespace Tests.Framework.Integration
 
 			this.BootstrapWork = _blockingSubject;
 
-			if (!runningIntegrations)
-			{
-				this.Port = 9200;
-				return;
-			}
-
 			var appData = GetApplicationDataDirectory();
 			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
+
+			if (!runningIntegrations)
+			{
+				this.Port = 9200;
+				return;
+			}
 
 			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
@@ -179,7 +181,8 @@ namespace Tests.Framework.Integration
 				$"-Des.node.name={this.NodeName}",
 				$"-Des.path.repo={this.RepositoryPath}",
 				$"-Des.script.inline=on",
-				$"-Des.script.indexed=on"
+				$"-Des.script.indexed=on",
+				$"--node.testingcluster true"
 			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
@@ -253,13 +256,13 @@ namespace Tests.Framework.Integration
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
-					Console.WriteLine($"Unziping elasticsearch: {this.Version} ...");
+					Console.WriteLine($"Unzipping elasticsearch: {this.Version} ...");
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 
 				InstallPlugins();
 
-				//hunspell config 
+				//hunspell config
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
 				var hunspellPrefix = Path.Combine(hunspellFolder, "en_US");
 				if (!File.Exists(hunspellPrefix + ".dic"))
@@ -288,43 +291,43 @@ namespace Tests.Framework.Integration
 			foreach (var plugin in SupportedPlugins)
 			{
 				var installPath = plugin.Key;
-				var localPath = plugin.Value;
-				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", localPath);
+				var command = plugin.Value(this.Version);
+				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", installPath);
 
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
 
 				// assume plugin already installed
 				if (Directory.Exists(pluginFolder)) continue;
 
-				Console.WriteLine($"Installing elasticsearch plugin: {localPath} ...");
-				var timeout = TimeSpan.FromSeconds(60);
+				Console.WriteLine($"Installing elasticsearch plugin: {installPath} ...");
+				var timeout = TimeSpan.FromSeconds(120);
 				var handle = new ManualResetEvent(false);
 				Task.Run(() =>
 				{
-					using (var p = new ObservableProcess(pluginBat, "install", installPath))
+					using (var p = new ObservableProcess(pluginBat, "install", command))
 					{
 						var o = p.Start();
-						Console.WriteLine($"Calling: {pluginBat} install {installPath}");
+						Console.WriteLine($"Calling: {pluginBat} install {command}");
 						o.Subscribe(e=>Console.WriteLine(e),
 							(e) =>
 							{
-								Console.WriteLine($"Failed installing elasticsearch plugin: {localPath} ");
+								Console.WriteLine($"Failed installing elasticsearch plugin: {command}");
 								handle.Set();
 								throw e;
 							},
 							() => {
-								Console.WriteLine($"Finished installing elasticsearch plugin: {localPath} exit code: {p.ExitCode}");
+								Console.WriteLine($"Finished installing elasticsearch plugin: {installPath} exit code: {p.ExitCode}");
 								handle.Set();
 							});
 						if (!handle.WaitOne(timeout, true))
-							throw new Exception($"Could not install ${installPath} within {timeout}");
+							throw new Exception($"Could not install {command} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
-					throw new Exception($"Could not install ${installPath} within {timeout}");
+					throw new Exception($"Could not install {command} within {timeout}");
 			}
 		}
-		
+
 		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			var port = this.Started ? this.Port : 9200;
@@ -361,7 +364,7 @@ namespace Tests.Framework.Integration
 			this._process?.Dispose();
 			this._processListener?.Dispose();
 
-			if (this.Info != null && this.Info.Pid.HasValue)
+			if (this.Info?.Pid != null)
 			{
 				var esProcess = Process.GetProcessById(this.Info.Pid.Value);
 				Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");

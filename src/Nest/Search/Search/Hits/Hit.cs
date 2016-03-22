@@ -37,11 +37,12 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_index")]
 		public string Index { get; internal set; }
-		
+
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
-		
+
+		// TODO make this nullable for 5.0
 		[JsonProperty(PropertyName = "_score")]
 		public double Score { get; set; }
 

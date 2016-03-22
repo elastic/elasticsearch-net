@@ -191,7 +191,7 @@ namespace Elasticsearch.Net
 				yield break;
 			}
 
-			//This for loop allows to break out of the view state machine if we need to 
+			//This for loop allows to break out of the view state machine if we need to
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
 			var refreshed = false;
@@ -243,13 +243,14 @@ namespace Elasticsearch.Net
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
+					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
 				}
 				catch (Exception e)
 				{
+					var response = (e as PipelineException)?.Response;
 					audit.Event = PingFailure;
 					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e);
+					throw new PipelineException(PipelineFailure.PingFailure, e) { Response = response };
 				}
 			}
 		}
@@ -266,21 +267,22 @@ namespace Elasticsearch.Net
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
+					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
 				}
 				catch (Exception e)
 				{
+					var response = (e as PipelineException)?.Response;
 					audit.Event = PingFailure;
 					audit.Exception = e;
-					throw new PipelineException(PipelineFailure.PingFailure, e);
-				}	
+					throw new PipelineException(PipelineFailure.PingFailure, e) { Response = response };
+				}
 			}
 		}
 
-		private void ThrowBadAuthPipelineExceptionWhenNeeded<TReturn>(ElasticsearchResponse<TReturn> response)
+		private void ThrowBadAuthPipelineExceptionWhenNeeded(IApiCallDetails response)
 		{
 			if (response.HttpStatusCode == 401)
-				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException);
+				throw new PipelineException(PipelineFailure.BadAuthentication, response.OriginalException) { Response = response };
 		}
 
 		public string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout.ToTimeUnit();
@@ -319,7 +321,7 @@ namespace Elasticsearch.Net
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
+						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -352,7 +354,7 @@ namespace Elasticsearch.Net
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse);
+						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
@@ -426,25 +428,26 @@ namespace Elasticsearch.Net
 		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<PipelineException> pipelineExceptions)
 			where TReturn : class
 		{
+			var callDetails = response ?? pipelineExceptions.LastOrDefault()?.Response;
 			var pipelineFailure = PipelineFailure.BadResponse;
 			if (pipelineExceptions.HasAny())
 				pipelineFailure = pipelineExceptions.Last().FailureReason;
 
 			var innerException = pipelineExceptions.HasAny()
 				? new AggregateException(pipelineExceptions)
-				: response?.OriginalException;
+				: callDetails?.OriginalException;
 
 			var exceptionMessage = innerException?.Message ?? "Could not complete the request to Elasticsearch.";
 
 			if (this.IsTakingTooLong)
 			{
-				pipelineFailure = PipelineFailure.MaxTimeoutReached; 
+				pipelineFailure = PipelineFailure.MaxTimeoutReached;
 				this.Audit(MaxTimeoutReached);
 				exceptionMessage = "Maximum timout reached while retrying request";
 			}
 			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
 			{
-				pipelineFailure = PipelineFailure.MaxRetriesReached; 
+				pipelineFailure = PipelineFailure.MaxRetriesReached;
 				this.Audit(MaxRetriesReached);
 				exceptionMessage = "Maximum number of retries reached.";
 			}
@@ -452,14 +455,20 @@ namespace Elasticsearch.Net
 			var clientException = new ElasticsearchClientException(pipelineFailure, exceptionMessage, innerException)
 			{
 				Request = data,
-				Response = response,
+				Response = callDetails,
 				AuditTrail = this.AuditTrail
 			};
 
-			if (_settings.ThrowExceptions) throw clientException;
+			if (_settings.ThrowExceptions)
+			{
+				this._settings.OnRequestCompleted?.Invoke(clientException.Response);
+				throw clientException;
+			}
 
 			if (response == null)
+			{
 				response = new ResponseBuilder<TReturn>(data) { Exception = clientException }.ToResponse();
+			}
 
 			response.AuditTrail = this.AuditTrail;
 		}

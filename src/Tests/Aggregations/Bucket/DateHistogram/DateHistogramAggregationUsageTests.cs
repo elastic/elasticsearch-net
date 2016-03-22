@@ -17,7 +17,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 	 * the serialized ``DateTime`` of `extended_bounds` correctly, the `date_optional_time` format is included
 	 * as part of the `format` value.
 	 *
-	 * Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
+	 * Be sure to read the elasticsearch documentation on {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[Date Histogram Aggregation].
 	*/
 	public class DateHistogramAggregationUsageTests : AggregationUsageTestBase
 	{

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Nest
 {
@@ -49,7 +50,14 @@ namespace Nest
 				foreach(var kv in request.Metadata)
 				{
 					writer.WritePropertyName(kv.Key);
-					writer.WriteValue(kv.Value);
+#if DOTNETCORE
+					if (kv.Value.GetType().GetTypeInfo().IsValueType)
+#else
+					if (kv.Value.GetType().IsValueType)
+#endif
+						writer.WriteValue(kv.Value);
+					else
+						serializer.Serialize(writer, kv.Value);
 				}
 			}
 

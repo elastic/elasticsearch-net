@@ -10,6 +10,7 @@ using Nest;
 using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -26,13 +27,13 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var client = new ElasticLowLevelClient();
 		}
-
 		/**
-		 * If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
+		 * If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then
 		 * you will need to pass in some instance of `IConnectionConfigurationValues`.
-		 * 
+		 *
 		 * The easiest way to do this is:
 		 */
+
 		public void InstantiatingASingleNodeClient()
 		{
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
@@ -55,7 +56,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		/** 
 		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
-		 * Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover here>>.
+		 * Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover>>.
 		 * 
 		 * === Configuration Options
 		 * 
@@ -88,7 +89,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			/** This will only have a value if the client configuration has `DisableDirectStreaming` set */
 			var raw = result.ResponseBodyInBytes;
-			
+
 			/** 
 			 * Please note that using `.DisableDirectStreaming` only makes sense if you need the mapped response **and** the raw response __at the same time__. 
 			 * If you need a only `string` or `byte[]` response simply call
@@ -103,33 +104,33 @@ namespace Tests.ClientConcepts.LowLevel
 				.ThrowExceptions() // <4> As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to <<thrown-exceptions, throw exceptions>>. 
 				.PrettyJson() // <5> forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 				.BasicAuthentication("username", "password"); // <6> sets the HTTP basic authentication credentials to specify with all requests.
-			/**
+				/**
 			* NOTE: Basic authentication credentials can alternatively be specified on the node URI directly:
-			*/
+				*/
 			var uri = new Uri("http://username:password@localhost:9200");
 			var settings = new ConnectionConfiguration(uri);
 
-			/**
+				/**
 			*...but this may become tedious when using connection pooling with multiple nodes.
-	        * 
+				*
 			* [[thrown-exceptions]]
 			* === Exceptions		
 			* There are three category of exceptions that may be thrown:
-			*  
+				*  
 			* . `ElasticsearchClientException`: These are known exceptions, either an exception that occurred in the request pipeline
-			* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
-			* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
-			* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
-			* root causing exception.
-			*                                  
+				* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
+				* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
+				* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
+				* root causing exception.
+				*                                  
 			* . `UnexpectedElasticsearchClientException`:  These are unknown exceptions, for instance a response from Elasticsearch not
 			* properly deserialized.  These are usually bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
-			* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
-			*
+				* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
+				*
 			* . Development time exceptions: These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException` etc... that are thrown
-			* when an API in the client is misused.  These should not be handled as you want to know about them during development.
-			*
-			*/
+				* when an API in the client is misused.  These should not be handled as you want to know about them during development.
+				*
+				*/
 		}
 
         /** === OnRequestCompleted
@@ -150,6 +151,20 @@ namespace Tests.ClientConcepts.LowLevel
             counter.Should().Be(2);
         }
 
+        [U]
+        public void OnRequestCompletedIsCalledWhenExceptionIsThrown()
+        {
+			var counter = 0;
+			var client = TestClient.GetFixedReturnClient(new { }, 500, s => s
+				.ThrowExceptions()
+				.OnRequestCompleted(r => counter++)
+			);
+			Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo());
+            counter.Should().Be(1);
+			Assert.ThrowsAsync<ElasticsearchClientException>(() => client.RootNodeInfoAsync());
+            counter.Should().Be(2);
+        }
+
         /** [[complex-logging]]
 	     * Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
          * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
@@ -161,8 +176,8 @@ namespace Tests.ClientConcepts.LowLevel
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` to make the actual request
                 .DisableDirectStreaming()
-                .OnRequestCompleted(response =>
-                {
+				.OnRequestCompleted(response =>
+				{
                     // log out the request
                     if (response.RequestBodyInBytes != null)
                     {
@@ -244,13 +259,14 @@ namespace Tests.ClientConcepts.LowLevel
 		*
 		* Please be advised that this is an expert behavior but if you need to get to the nitty gritty this can be really useful
 		*
-		* Create a subclass of the `JsonNetSerializer` 		 
+		* Create a subclass of the `JsonNetSerializer` 
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
 
-			/** 
+
+			/**
 			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
 			*/
 			public int CallToModify { get; set; } = 0;

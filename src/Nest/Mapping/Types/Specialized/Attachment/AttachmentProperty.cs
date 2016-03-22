@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -22,7 +22,7 @@ namespace Nest
 	{
 		public AttachmentProperty() : base("attachment") { }
 
-		private IDictionary Dictionary => this.Fields;
+		private IDictionary<PropertyName, IProperty> Dictionary => this.Fields ?? (this.Fields = new Properties());
 
 		public IStringProperty AuthorField
 		{
@@ -50,8 +50,8 @@ namespace Nest
 
 		public IStringProperty FileField
 		{
-			get { return Dictionary["file"] as IStringProperty; }
-			set { Dictionary["file"] = value; }
+			get { return Dictionary["content"] as IStringProperty; }
+			set { Dictionary["content"] = value; }
 		}
 
 		public IStringProperty KeywordsField
@@ -93,7 +93,7 @@ namespace Nest
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		IStringProperty IAttachmentProperty.LanguageField { get; set; }
 
-		private IDictionary Dictionary => Self.Fields;
+		private IDictionary<PropertyName, IProperty> Dictionary => Self.Fields ?? (Self.Fields = new Properties());
 
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 
@@ -117,7 +117,7 @@ namespace Nest
 			SetMetadataField(selector, "name");
 
 		public AttachmentPropertyDescriptor<T> FileField(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
-			SetMetadataField(selector, "file");
+			SetMetadataField(selector, "content");
 
 		public AttachmentPropertyDescriptor<T> AuthorField(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
 			SetMetadataField(selector, "author");
@@ -128,10 +128,18 @@ namespace Nest
 		public AttachmentPropertyDescriptor<T> ContentTypeField(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
 			SetMetadataField(selector, "content_type");
 
+		[Obsolete("Use ContentLengthField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector)")]
 		public AttachmentPropertyDescriptor<T> ContentLengthField(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
 			SetMetadataField(selector, "content_length");
 
+		public AttachmentPropertyDescriptor<T> ContentLengthField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
+			SetMetadataField(selector, "content_length");
+
+		[Obsolete("Use LanguageField(Func<StringPropertyDescriptor<T>, IStringProperty> selector)")]
 		public AttachmentPropertyDescriptor<T> LanguageField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
+			SetMetadataField(selector, "language");
+
+		public AttachmentPropertyDescriptor<T> LanguageField(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
 			SetMetadataField(selector, "language");
 	}
 }

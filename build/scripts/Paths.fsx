@@ -48,6 +48,10 @@ module Paths =
         let binFolder = BinFolder projectName
         sprintf "%s/net45" binFolder
 
+    let Net46BinFolder(projectName) =
+        let binFolder = BinFolder projectName
+        sprintf "%s/net46" binFolder
+
     let DotNet51BinFolder(projectName) =
         let binFolder = BinFolder(projectName)
         sprintf "%s/dotnet5.1" binFolder
@@ -205,19 +209,18 @@ module Tooling =
         member this.OperatingSystem = parts.[4] 
         member this.Alias = parts.[5]
 
-        member this.Location = 
-            sprintf "%s/.dnx/runtimes/dnx-%s-%s-%s.%s" 
-                userProfileDir
-                this.Runtime 
+        member this.Location = Path.Combine(userProfileDir,
+            sprintf ".dnx/runtimes/dnx-%s-%s-%s.%s"
+                this.Runtime
                 this.OperatingSystem 
                 this.Architecture 
-                this.Version
+                this.Version)
 
         member this.Process proc =
             sprintf "%s/bin/%s" this.Location proc
 
     type DnvmTooling() =
-        let dnvmUserLocation = sprintf "%s/.dnx/bin/dnvm.cmd" userProfileDir
+        let dnvmUserLocation = Path.Combine(userProfileDir, ".dnx/bin/dnvm.cmd")
         let dnvmProgramFilesLocation = "C:/Program Files/Microsoft DNX/Dnvm/dnvm.cmd"
         let dnvm = 
             match fileExists dnvmUserLocation with

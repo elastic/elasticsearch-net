@@ -47,7 +47,8 @@ namespace Tests.Search.Percolator.RegisterPercolator
 				match = new { name = new { query = "nest" } }
 			},
 			language = "c#",
-			commits = 5000
+			commits = 5000,
+			project = Project.Instance
 		};
 
 		protected override void ExpectResponse(IRegisterPercolatorResponse response)
@@ -70,6 +71,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			.Metadata(md => md
 				.Add("language", "c#")
 				.Add("commits", 5000)
+				.Add("project", Project.Instance)
 			);
 
 		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(this.CallIsolatedValue + "-index", this.CallIsolatedValue)
@@ -82,7 +84,8 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			Metadata = new Dictionary<string, object>
 			{
 				{ "language", "c#" },
-				{ "commits", 5000 }
+				{ "commits", 5000 },
+				{ "project", Project.Instance }
 			}
 		};
 	}

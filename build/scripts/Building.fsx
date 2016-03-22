@@ -58,6 +58,7 @@ type Build() =
                 | "Nest" 
                 | "Elasticsearch.Net" ->
                     gitLink (Paths.Net45BinFolder projectName) projectName
+                    gitLink (Paths.Net46BinFolder projectName) projectName
                     gitLink (Paths.DotNet51BinFolder projectName) projectName
                 | _  -> ()
             CopyDir outputFolder binFolder allFiles

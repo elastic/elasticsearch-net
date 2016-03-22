@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
+using Nest;
 using Tests.Framework;
+using Tests.Framework.MockData;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 {
@@ -67,6 +70,93 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				(e) =>
 				{
 					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+				}
+			);
+		}
+
+		private static byte[] ResponseHtml = Encoding.UTF8.GetBytes(@"<html>
+<head><title>401 Authorization Required</title></head>
+<body bgcolor=""white"">
+<center><h1>401 Authorization Required</h1></center>
+<hr><center>nginx/1.4.6 (Ubuntu)</center>
+</body>
+</html>
+");
+		[U] public async Task BadAuthenticationHtmlResponseIsIgnored()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Ping(r => r.SucceedAlways())
+				.ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+				.StaticConnectionPool()
+				.AllDefaults()
+			);
+
+			audit = await audit.TraceElasticsearchException(
+				new ClientCall {
+					{ AuditEvent.PingSuccess, 9200 },
+					{ AuditEvent.BadResponse, 9200 },
+				},
+				(e) =>
+				{
+					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.ResponseBodyInBytes.Should().BeNull();
+				}
+			);
+		}
+
+		[U] public async Task BadAuthenticationHtmlResponseStillExposedWhenUsingDisableDirectStreaming()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Ping(r => r.SucceedAlways())
+				.ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+				.StaticConnectionPool()
+				.Settings(s=>s.DisableDirectStreaming())
+			);
+
+			audit = await audit.TraceElasticsearchException(
+				new ClientCall {
+					{ AuditEvent.PingSuccess, 9200 },
+					{ AuditEvent.BadResponse, 9200 },
+				},
+				(e) =>
+				{
+					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.ResponseBodyInBytes.Should().NotBeNull();
+					var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+					responseString.Should().Contain("nginx/");
+					e.DebugInformation.Should().Contain("nginx/");
+				}
+			);
+		}
+
+		[U] public async Task BadAuthOnGetClientCallDoesNotThrowSerializationException()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Ping(r => r.SucceedAlways())
+				.ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+				.StaticConnectionPool()
+				.Settings(s=>s.DisableDirectStreaming().DefaultIndex("default-index"))
+				.ClientProxiesTo(
+					(c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
+					async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse
+				)
+			);
+
+			audit = await audit.TraceElasticsearchException(
+				new ClientCall {
+					{ AuditEvent.PingSuccess, 9200 },
+					{ AuditEvent.BadResponse, 9200 },
+				},
+				(e) =>
+				{
+					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.ResponseBodyInBytes.Should().NotBeNull();
+					var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+					responseString.Should().Contain("nginx/");
+					e.DebugInformation.Should().Contain("nginx/");
 				}
 			);
 		}

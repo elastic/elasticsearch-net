@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,13 +25,13 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-
 			var dictionary = value as IDictionary;
 			if (dictionary == null) return;
 
 			var settings = serializer.GetConnectionSettings();
 
-			writer.WriteStartObject();
+			var seenEntries = new Dictionary<string, object>();
+
 			foreach (DictionaryEntry entry in dictionary)
 			{
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
@@ -64,11 +65,15 @@ namespace Nest
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 
-				writer.WritePropertyName(key);
-				serializer.Serialize(writer, entry.Value);
-
+				seenEntries[key] = entry.Value;
 			}
 
+			writer.WriteStartObject();
+			foreach(var entry in seenEntries)
+			{
+				writer.WritePropertyName(entry.Key);
+				serializer.Serialize(writer, entry.Value);
+			}
 			writer.WriteEndObject();
 		}
 	}

@@ -11,18 +11,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	/**
 	* [[auto-map]]
 	* == Auto mapping properties
-	* 
-	* When creating a mapping (either when creating an index or via the put mapping API),
-	* NEST offers a feature called AutoMap(), which will automagically infer the correct
-	* Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
-	* you're using attributes to map your properties, then calling AutoMap() is required
-	* in order for your attributes to be applied.  We'll look at examples of both.
-	*
+	 * 
+	 * When creating a mapping (either when creating an index or via the put mapping API),
+	 * NEST offers a feature called AutoMap(), which will automagically infer the correct
+	 * Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
+	 * you're using attributes to map your properties, then calling AutoMap() is required
+	 * in order for your attributes to be applied.  We'll look at examples of both.
+	 *
 	**/
 	public class AutoMap
 	{
 		/**
-		* For these examples, we'll define two POCOS, `Company`, which has a name
+		* For these examples, we'll define two POCOs, `Company`, which has a name
 		* and a collection of Employees, and `Employee` which has various properties of 
 		* different types, and itself has a collection of `Employee` types. 
 		*/
@@ -117,7 +117,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		[U]
@@ -231,7 +231,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/**[float] 
@@ -240,7 +240,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* various options for your properties (analyzer to use, whether to enable doc_values, etc...).  
 		* In that case, it's possible to use `.AutoMap()` in conjuction with explicitly mapped properties.  
 		*/
-		[U] public void OverridingAutoMappedProperties()
+		[U]
+		public void OverridingAutoMappedProperties()
 		{
 			/**
 			* Here we are using `.AutoMap()` to automatically map our company type, but then we're
@@ -276,15 +277,32 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							employees = new
 							{
-								type = "nested",
-								properties = new {}
+								type = "nested"
 							}
 						}
 					}
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
+
+			/**
+			 * `.AutoMap()` is __idempotent__; calling it before or after manually
+			 * mapped properties should still yield the same results.
+			 */
+			descriptor = new CreateIndexDescriptor("myindex")
+				.Mappings(ms => ms
+					.Map<Company>(m => m
+						.Properties(ps => ps
+							.Nested<Employee>(n => n
+								.Name(c => c.Employees)
+							)
+						)
+						.AutoMap()
+					)
+				);
+
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/**[[attribute-mapping]]
@@ -300,7 +318,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			[String(Analyzer = "keyword", NullValue = "null", Similarity = SimilarityOption.BM25)]
 			public string Name { get; set; }
 
-			[String]
+			[String(Name = "office_hours")]
 			public TimeSpan? HeadOfficeHours { get; set; }
 
 			[Object(Path = "employees", Store = false)]
@@ -310,10 +328,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[ElasticsearchType(Name = "employee")]
 		public class EmployeeWithAttributes
 		{
-			[String]
+			[String(Name = "first_name")]
 			public string FirstName { get; set; }
 
-			[String]
+			[String(Name = "last_name")]
 			public string LastName { get; set; }
 
 			[Number(DocValues = false, IgnoreMalformed = true, Coerce = true)]
@@ -393,7 +411,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								similarity = "BM25",
 								type = "string"
 							},
-							headOfficeHours = new
+							office_hours = new
 							{
 								type = "string"
 							}
@@ -446,7 +464,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								},
 								type = "nested"
 							},
-							firstName = new
+							first_name = new
 							{
 								type = "string"
 							},
@@ -456,7 +474,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								store = true,
 								type = "boolean"
 							},
-							lastName = new
+							last_name = new
 							{
 								type = "string"
 							},
@@ -498,7 +516,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						.TtlField(ttl => ttl
 							.Enable()
 							.Default("10m")
-						)							
+						)
 						.Properties(ps => ps
 							.String(s => s
 								.Name(e => e.FirstName)
@@ -545,7 +563,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								similarity = "BM25",
 								type = "string"
 							},
-							headOfficeHours = new
+							office_hours = new
 							{
 								type = "string"
 							}
@@ -602,7 +620,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								},
 								type = "nested"
 							},
-							firstName = new
+							first_name = new
 							{
 								fields = new
 								{
@@ -625,7 +643,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								store = true,
 								type = "boolean"
 							},
-							lastName = new
+							last_name = new
 							{
 								type = "string"
 							},
@@ -639,7 +657,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				}
 			};
 
-			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/**[float] 
@@ -704,7 +722,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				)
 			);
 
-			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
+			settings.Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
 
 		/**[float]
@@ -805,6 +823,65 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
+		[U]
+		//hide
+		public void PutMappingAlsoAdheresToMaxRecursion()
+		{
+			var descriptor = new PutMappingDescriptor<A>().AutoMap();
+
+			var expected = new
+			{
+				properties = new
+				{
+					child = new
+					{
+						properties = new { },
+						type = "object"
+					}
+				}
+			};
+
+			Expect(expected).WhenSerializing((IPutMappingRequest)descriptor);
+
+			var withMaxRecursionDescriptor = new PutMappingDescriptor<A>().AutoMap(3);
+
+			var expectedWithMaxRecursion = new
+			{
+				properties = new
+				{
+					child = new
+					{
+						type = "object",
+						properties = new
+						{
+							child = new
+							{
+								type = "object",
+								properties = new
+								{
+									child = new
+									{
+										type = "object",
+										properties = new
+										{
+											child = new
+											{
+												type = "object",
+												properties = new { }
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			};
+
+			Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecursionDescriptor);
+		}
+		//endhide
+
 		/**[float] 
 		 * == Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
@@ -816,7 +893,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 		 */
 		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
-		{		
+		{
 			public override void Visit(
 				INumberProperty type, 
 				PropertyInfo propertyInfo, 

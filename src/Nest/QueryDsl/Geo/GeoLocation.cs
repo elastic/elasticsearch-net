@@ -82,7 +82,7 @@ namespace Nest
 
 		public override string ToString()
 		{
-			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", _latitude, _longitude);
+            return _latitude.ToString("#0.0#######", CultureInfo.InvariantCulture) + "," + _longitude.ToString("#0.0#######", CultureInfo.InvariantCulture);
 		}
 
 		public bool Equals(GeoLocation other)
@@ -112,6 +112,9 @@ namespace Nest
 
 		public static implicit operator GeoLocation(string latLon)
 		{
+            if (string.IsNullOrEmpty(latLon))
+                throw new ArgumentNullException(nameof(latLon));
+
 			var parts = latLon.Split(',');
 			if (parts.Length != 2) throw new ArgumentException("Invalid format: string must be in the form of lat,lon");
 			double lat;
@@ -125,7 +128,9 @@ namespace Nest
 
 		public static implicit operator GeoLocation(double[] lonLat)
 		{
-			if (lonLat.Length != 2) throw new ArgumentException("Invalid lon,lat array, must have a length of 2");
+			if (lonLat.Length != 2)
+				return null;
+			
 			return new GeoLocation(lonLat[1], lonLat[0]);
 		}
 	}

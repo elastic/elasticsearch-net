@@ -37,6 +37,10 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     </tr>
 </table>
 
+## Upgrading from 1.x to 2.x
+
+Take a look at the [blog post for details around the evolution of NEST 2.x](https://www.elastic.co/blog/ga-release-of-nest-2-0-our-dot-net-client-for-elasticsearch), in addition to the list of breaking changes for [NEST](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/nest-breaking-changes.md) and [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net/blob/master/docs/2.0-breaking-changes/elasticsearch-net-breaking-changes.md).
+
 #[NEST](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Nest#nest-)
 
 NEST is the official high-level .NET client of [elasticsearch](https://github.com/elasticsearch/elasticsearch).  It aims to be a solid, strongly typed client with a very concise API.
@@ -97,25 +101,25 @@ var tweet = new Tweet
     Message = "Trying out NEST, so far so good?"
 };
 
-var response = client.Index(tweet);
+var response = client.Index(tweet, idx => idx.Index("mytweetindex")); //or specify index via settings.DefaultIndex("mytweetindex");
 ```
 
 All the calls have async variants:
 
 ```csharp
-var response = client.IndexAsync(tweet); // returns a Task<IndexResponse>
+var response = client.IndexAsync(tweet, idx => idx.Index("mytweetindex")); // returns a Task<IndexResponse>
 ```
 
 ### Getting a document
 
 ```csharp
-var response = client.Get<Tweet>(1); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
+var response = client.Get<Tweet>(1, idx => idx.Index("mytweetindex")); // returns an IGetResponse mapped 1-to-1 with the Elasticsearch JSON response
 var tweet = response.Source; // the original document
 ```
 
 ### Searching for documents
 
-NEST exposes a fluent interface and a [powerful query DSL](http://nest.azurewebsites.net/concepts/writing-queries.html)
+NEST exposes a fluent interface and a [powerful query DSL](http://nest.azurewebsites.net/concepts/writing-queries.html) (NOTE: this documentation is for NEST 1.x - [documentation for 2.x is in progress](https://github.com/elastic/elasticsearch-net/tree/feature/documentation/docs/asciidoc))
 
 ```csharp
 var response = client.Search<Tweet>(s => s
@@ -128,7 +132,7 @@ var response = client.Search<Tweet>(s => s
 	);
 ```
 
-As well as an object initializer syntax if lamdas aren't your thing:
+As well as an object initializer syntax if lambdas aren't your thing:
 
 ```csharp
 var request = new SearchRequest
@@ -164,8 +168,8 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 });
 ```
 
-#### [Read the full documentation here](http://nest.azurewebsites.net/)
-(The documentation is terribly out of date at the moment, but we're in the process of [completely revamping them](https://github.com/elastic/elasticsearch-net/tree/master/docs/contents/new).  Please bare with us during the transition.)
+#### [Read the full documentation here](http://nest.azurewebsites.net/) 
+**(The documentation is terribly out of date at the moment, but we're in the process of [completely revamping them](https://github.com/elastic/elasticsearch-net/tree/feature/documentation/docs/asciidoc).  Please bare with us during the transition.)**
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 

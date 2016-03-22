@@ -3,7 +3,7 @@
 namespace Elasticsearch.Net
 {
 	public partial interface IElasticLowLevelClient
-	{	
+	{
 		/// <summary>
 		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
 		/// </summary>
@@ -27,6 +27,5 @@ namespace Elasticsearch.Net
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where T : class;
-
 	}
 }

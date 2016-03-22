@@ -123,6 +123,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 							}
 						});
+
 						//.NET does not allow get requests to have a body payload.
 						if (method != "GET" && this.Body != null)
 						{

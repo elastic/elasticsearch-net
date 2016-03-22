@@ -55,16 +55,16 @@ namespace Elasticsearch.Net
 
 		private void SetBody(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
+			byte[] bytes = null;
+			if (NeedsToEagerReadStream())
+			{
+				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
+				stream.CopyTo(inMemoryStream, BufferSize);
+				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+			}
+
 			if (response.Success)
 			{
-				byte[] bytes = null;
-				if (NeedsToEagerReadStream())
-				{
-					var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-					stream.CopyTo(inMemoryStream, BufferSize);
-					bytes = this.SwapStreams(ref stream, ref inMemoryStream);
-				}
-
 				if (!SetSpecialTypes(stream, response, bytes))
 				{
 					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
@@ -76,21 +76,23 @@ namespace Elasticsearch.Net
 				ServerError serverError;
 				if (ServerError.TryCreate(stream, out serverError))
 					response.ServerError = serverError;
+				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+					response.ResponseBodyInBytes = bytes;
 			}
 		}
 
 		private async Task SetBodyAsync(ElasticsearchResponse<TReturn> response, Stream stream)
 		{
+			byte[] bytes = null;
+			if (NeedsToEagerReadStream())
+			{
+				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
+				await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken).ConfigureAwait(false);
+				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
+			}
+
 			if (response.Success)
 			{
-				byte[] bytes = null;
-				if (NeedsToEagerReadStream())
-				{
-					var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-					await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken).ConfigureAwait(false);
-					bytes = this.SwapStreams(ref stream, ref inMemoryStream);
-				}
-
 				if (!SetSpecialTypes(stream, response, bytes))
 				{
 					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
@@ -100,6 +102,8 @@ namespace Elasticsearch.Net
 			else if (response.HttpStatusCode != null)
 			{
 				response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
+				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
+					response.ResponseBodyInBytes = bytes;
 			}
 		}
 
@@ -130,15 +134,15 @@ namespace Elasticsearch.Net
 			var setSpecial = true;
 			if (this._requestData.ConnectionSettings.DisableDirectStreaming)
 				cs.ResponseBodyInBytes = bytes;
-
-			if (cs.Body is string)
+		    var returnType = typeof (TReturn);
+			if (returnType == typeof(string))
 				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-			else if (cs.Body is byte[])
+			else if (returnType == typeof(byte[]))
 				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-			else if (cs.Body is VoidResponse)
+			else if (returnType == typeof(VoidResponse))
 				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
-			else if (cs.Body is Stream)
-				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
+            else if (returnType == typeof(Stream))
+                this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
 			else
 				setSpecial = false;
 			return setSpecial;

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -33,5 +35,130 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		{
 			IgnoreUnavailable = true
 		};
+
+		protected override void ExpectResponse(IGetMappingResponse response)
+		{
+			response.IsValid.Should().BeTrue();
+
+			var visitor = new TestVisitor();
+			response.Accept(visitor);
+
+			visitor.CountsShouldContainKeyAndCountBe("type", 1);
+			visitor.CountsShouldContainKeyAndCountBe("object", 2);
+			visitor.CountsShouldContainKeyAndCountBe("date", 4);
+			visitor.CountsShouldContainKeyAndCountBe("string", 17);
+			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
+			visitor.CountsShouldContainKeyAndCountBe("number", 2);
+			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
+			visitor.CountsShouldContainKeyAndCountBe("completion", 2);
+			visitor.CountsShouldContainKeyAndCountBe("nested", 1);
+		}
+	}
+
+	internal class TestVisitor : IMappingVisitor
+	{
+		public TestVisitor()
+		{
+			Counts = new Dictionary<string, int>();
+		}
+
+		public int Depth { get; set; }
+
+		public Dictionary<string, int> Counts { get; }
+
+		private void Increment(string key)
+		{
+			if (!Counts.ContainsKey(key))
+			{
+				Counts.Add(key, 0);
+			}
+			Counts[key] += 1;
+		}
+
+		public void CountsShouldContainKeyAndCountBe(string key, int count)
+		{
+			this.Counts.ContainsKey(key).Should().BeTrue();
+			this.Counts[key].Should().Be(count);
+		}
+
+		public void Visit(DateProperty mapping)
+		{
+			Increment("date");
+		}
+
+		public void Visit(BinaryProperty mapping)
+		{
+			Increment("binary");
+		}
+
+		public void Visit(NestedProperty mapping)
+		{
+			Increment("nested");
+		}
+
+		public void Visit(GeoPointProperty mapping)
+		{
+			Increment("geo_point");
+		}
+
+		public void Visit(AttachmentProperty mapping)
+		{
+			Increment("attachment");
+		}
+
+		public void Visit(CompletionProperty mapping)
+		{
+			Increment("completion");
+		}
+
+		public void Visit(TokenCountProperty mapping)
+		{
+			Increment("token_count");
+		}
+
+		public void Visit(Murmur3HashProperty mapping)
+		{
+			Increment("murmur3");
+		}
+
+		public void Visit(NumberProperty mapping)
+		{
+			Increment("number");
+		}
+
+		public void Visit(GeoShapeProperty mapping)
+		{
+			Increment("geo_shape");
+		}
+
+		public void Visit(IpProperty mapping)
+		{
+			Increment("ip");
+		}
+
+		public void Visit(ObjectProperty mapping)
+		{
+			Increment("object");
+		}
+
+		public void Visit(BooleanProperty mapping)
+		{
+			Increment("boolean");
+		}
+
+		public void Visit(NumberType mapping)
+		{
+			throw new InvalidOperationException("NumberType should never be called");
+		}
+
+		public void Visit(StringProperty mapping)
+		{
+			Increment("string");
+		}
+
+		public void Visit(TypeMapping mapping)
+		{
+			Increment("type");
+		}
 	}
 }

@@ -39,17 +39,19 @@ namespace Tests.Search.Request
 					new {
 						_geo_distance = new {
 							location = new [] {
-							new {
-								lat = 70.0,
-								lon = -70.0
-							},
-							new {
-								lat = -12.0,
-								lon = 12.0
-							}
+								new {
+									lat = 70.0,
+									lon = -70.0
+								},
+								new {
+									lat = -12.0,
+									lon = 12.0
+								}
 							},
 							order = "asc",
-							mode = "min"
+							mode = "min",
+							distance_type = "arc",
+							unit = "cm"
 						}
 					},
 					new {
@@ -84,7 +86,7 @@ namespace Tests.Search.Request
 				)
 				.GeoDistance(g => g
 					.Field(p => p.Location)
-					.DistanceType(GeoDistanceType.SloppyArc)
+					.DistanceType(GeoDistanceType.Arc)
 					.Order(SortOrder.Ascending)
 					.Unit(DistanceUnit.Centimeters)
 					.Mode(SortMode.Min)

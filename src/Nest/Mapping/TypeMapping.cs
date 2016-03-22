@@ -140,8 +140,8 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) => 
-			Assign(a => a.Properties = new PropertyWalker(typeof(T), visitor, maxRecursion).GetProperties());
+		public TypeMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null, int maxRecursion = 0) =>
+			Assign(a => a.Properties = a.Properties.AutoMap<T>(visitor, maxRecursion));
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> AutoMap(int maxRecursion) => AutoMap(null, maxRecursion);
