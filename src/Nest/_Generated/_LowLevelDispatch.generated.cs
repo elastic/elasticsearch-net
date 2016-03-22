@@ -1420,7 +1420,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesForcemergeDispatch<T>(IRequest<IndicesForcemergeRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesForcemergeDispatch<T>(IRequest<ForceMergeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1432,7 +1432,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesForcemerge", p, new [] { POST }, "/_forcemerge", "/{index}/_forcemerge");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesForcemergeDispatchAsync<T>(IRequest<IndicesForcemergeRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesForcemergeDispatchAsync<T>(IRequest<ForceMergeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{

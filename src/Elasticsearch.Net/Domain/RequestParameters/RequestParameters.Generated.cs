@@ -2223,48 +2223,48 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html
 	///</pre>
 	///</summary>
-	public class IndicesForcemergeRequestParameters : FluentRequestParameters<IndicesForcemergeRequestParameters> 
+	public class ForceMergeRequestParameters : FluentRequestParameters<ForceMergeRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesForcemergeRequestParameters Flush(bool flush) => this.AddQueryString("flush", flush);
+		public ForceMergeRequestParameters Flush(bool flush) => this.AddQueryString("flush", flush);
 		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesForcemergeRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		public ForceMergeRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesForcemergeRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		public ForceMergeRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesForcemergeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		public ForceMergeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesForcemergeRequestParameters MaxNumSegments(long max_num_segments) => this.AddQueryString("max_num_segments", max_num_segments);
+		public ForceMergeRequestParameters MaxNumSegments(long max_num_segments) => this.AddQueryString("max_num_segments", max_num_segments);
 		
 		
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesForcemergeRequestParameters OnlyExpungeDeletes(bool only_expunge_deletes) => this.AddQueryString("only_expunge_deletes", only_expunge_deletes);
+		public ForceMergeRequestParameters OnlyExpungeDeletes(bool only_expunge_deletes) => this.AddQueryString("only_expunge_deletes", only_expunge_deletes);
 		
 		
 		///<summary>TODO: ?</summary>
-		public IndicesForcemergeRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
+		public ForceMergeRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesForcemergeRequestParameters WaitForMerge(bool wait_for_merge) => this.AddQueryString("wait_for_merge", wait_for_merge);
+		public ForceMergeRequestParameters WaitForMerge(bool wait_for_merge) => this.AddQueryString("wait_for_merge", wait_for_merge);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesForcemergeRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ForceMergeRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesForcemergeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ForceMergeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

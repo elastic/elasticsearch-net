@@ -2760,7 +2760,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesForcemergeForAll<T>(Func<IndicesForcemergeRequestParameters, IndicesForcemergeRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesForcemergeForAll<T>(Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_forcemerge
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2772,7 +2772,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesForcemergeForAllAsync<T>(Func<IndicesForcemergeRequestParameters, IndicesForcemergeRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesForcemergeForAllAsync<T>(Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_forcemerge
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2785,7 +2785,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesForcemerge<T>(string index, Func<IndicesForcemergeRequestParameters, IndicesForcemergeRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesForcemerge<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/_forcemerge
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2798,7 +2798,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesForcemergeAsync<T>(string index, Func<IndicesForcemergeRequestParameters, IndicesForcemergeRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesForcemergeAsync<T>(string index, Func<ForceMergeRequestParameters, ForceMergeRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

@@ -2273,55 +2273,52 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesForcemergeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-forcemerge.html</pre></summary>
-	public partial class IndicesForcemergeDescriptor  : RequestDescriptorBase<IndicesForcemergeDescriptor,IndicesForcemergeRequestParameters, IIndicesForcemergeRequest>, IIndicesForcemergeRequest
+	public partial class ForceMergeDescriptor  : RequestDescriptorBase<ForceMergeDescriptor,ForceMergeRequestParameters, IForceMergeRequest>, IForceMergeRequest
 	{ 
-		Indices IIndicesForcemergeRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices IForceMergeRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_forcemerge</summary>
-		public IndicesForcemergeDescriptor() : base(){}
+		public ForceMergeDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public IndicesForcemergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ForceMergeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public IndicesForcemergeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public ForceMergeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public IndicesForcemergeDescriptor AllIndices() => this.Index(Indices.All);
+		public ForceMergeDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public IndicesForcemergeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
+		public ForceMergeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesForcemergeDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public ForceMergeDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesForcemergeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public ForceMergeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesForcemergeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public ForceMergeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public IndicesForcemergeDescriptor MaxNumSegments(long max_num_segments) => AssignParam(p=>p.MaxNumSegments(max_num_segments));
+		public ForceMergeDescriptor MaxNumSegments(long max_num_segments) => AssignParam(p=>p.MaxNumSegments(max_num_segments));
 
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public IndicesForcemergeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true) => AssignParam(p=>p.OnlyExpungeDeletes(only_expunge_deletes));
+		public ForceMergeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true) => AssignParam(p=>p.OnlyExpungeDeletes(only_expunge_deletes));
 
 		///<summary>TODO: ?</summary>
-		public IndicesForcemergeDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
+		public ForceMergeDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public IndicesForcemergeDescriptor WaitForMerge(bool wait_for_merge = true) => AssignParam(p=>p.WaitForMerge(wait_for_merge));
+		public ForceMergeDescriptor WaitForMerge(bool wait_for_merge = true) => AssignParam(p=>p.WaitForMerge(wait_for_merge));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesForcemergeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ForceMergeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesForcemergeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public ForceMergeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
