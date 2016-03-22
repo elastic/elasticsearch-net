@@ -22,10 +22,15 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			get
 			{
-				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body")
-					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
+				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body").ToList();
 				if (!parts.Any()) return string.Empty;
-				return $"AllSet({string.Join(", ", parts)})";
+
+				var allPartsAreRequired = parts.Any() && parts.All(p => p.Required);
+				var call = allPartsAreRequired ? "AllSetNoFallback" : "AllSet";
+				var assignments = parts
+					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
+
+				return $"{call}({string.Join(", ", assignments)})";
 			}
 		}
 	}
@@ -81,7 +86,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				//if on operation has two endpoints and one of them is GET always favor the other as default
 				return currentHttpMethod == "GET" ? "Get" : string.Empty;
 			}
-			
+
 			return availableMethods.First() == currentHttpMethod ? string.Empty : this.PascalCase(currentHttpMethod);
 		}
 
@@ -154,7 +159,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnType = "ElasticsearchResponse<T>",
 							ReturnTypeGeneric = "<T>",
 							CallTypeGeneric = "T",
-							ReturnDescription = 
+							ReturnDescription =
 								"ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:"
 								+ explanationOfT,
 							FullName = methodName,
@@ -166,8 +171,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 						};
 						Generator.PatchMethod(apiMethod);
 
-						args = args.Concat(new[] 
-						{ 
+						args = args.Concat(new[]
+						{
 							"Func<"+apiMethod.QueryStringParamName+", " + apiMethod.QueryStringParamName + "> requestParameters = null"
 						}).ToList();
 						apiMethod.Arguments = string.Join(", ", args);
@@ -179,7 +184,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnType = "Task<ElasticsearchResponse<T>>",
 							ReturnTypeGeneric = "<T>",
 							CallTypeGeneric = "T",
-							ReturnDescription = 
+							ReturnDescription =
 								"A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:"
 								+ explanationOfT,
 							FullName = methodName + "Async",
@@ -192,15 +197,15 @@ namespace CodeGeneration.LowLevelClient.Domain
 						};
 						Generator.PatchMethod(apiMethod);
 						yield return apiMethod;
-						
+
 						//No need for deserialization state when returning dynamicdictionary
 
 						var explanationOfDynamic =
-							paraIndent + 
+							paraIndent +
 								"<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely </para>"
-							+ paraIndent + 
+							+ paraIndent +
 								"<para> - i.e result.Response.hits.hits[0].property.nested[\"nested_deeper\"] </para>"
-							+ paraIndent + 
+							+ paraIndent +
 								"<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist </para>";
 
 						var defaultBoundGeneric = Url.Path.Contains("_cat") ? "string" : "DynamicDictionary";
@@ -212,7 +217,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnTypeGeneric = null,
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,
-							ReturnDescription = 
+							ReturnDescription =
 								"ElasticsearchResponse&lt;DynamicDictionary&gt;"
 								+ explanationOfDynamic,
 							FullName = methodName,
@@ -225,7 +230,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						};
 						Generator.PatchMethod(apiMethod);
 						yield return apiMethod;
-						
+
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -233,7 +238,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnTypeGeneric = null,
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,
-							ReturnDescription =  
+							ReturnDescription =
 								"A task of ElasticsearchResponse&lt;DynamicDictionary$gt;"
 								+ explanationOfDynamic,
 							FullName = methodName + "Async",

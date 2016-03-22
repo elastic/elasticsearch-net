@@ -26,4 +26,22 @@ namespace Tests.Indices.IndexManagement.GetIndex
 
 		protected override GetIndexRequest Initializer => new GetIndexRequest(Index<Project>());
 	}
+
+
+	[Collection(IntegrationContext.ReadOnly)]
+	public class GetAllIndicesApiTests : ApiTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+	{
+		public GetAllIndicesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.GetIndex(AllIndices),
+			fluentAsync: (client, f) => client.GetIndexAsync(AllIndices),
+			request: (client, r) => client.GetIndex(r),
+			requestAsync: (client, r) => client.GetIndexAsync(r)
+		);
+
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/_all";
+
+		protected override GetIndexRequest Initializer => new GetIndexRequest(AllIndices);
+	}
 }
