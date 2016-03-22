@@ -17,7 +17,7 @@ namespace Nest
 		public string Resolve(IndexName i)
 		{
 			if (i == null || string.IsNullOrEmpty(i.Name))
-				return this.Resolve((Type)null);
+				return this.Resolve(i.Type);
 			ValidateIndexName(i.Name);
 			return i.Name;
 		}

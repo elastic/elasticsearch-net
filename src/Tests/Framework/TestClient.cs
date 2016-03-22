@@ -101,7 +101,8 @@ namespace Tests.Framework
 
 			var connection = new InMemoryConnection(fixedResult, statusCode, exception);
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var defaultSettings = new ConnectionSettings(connectionPool, connection);
+			var defaultSettings = new ConnectionSettings(connectionPool, connection)
+				.DefaultIndex("default-index");
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings);
 		}
