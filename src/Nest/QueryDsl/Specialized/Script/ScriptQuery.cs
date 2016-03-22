@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptQuery>))]
+	[JsonConverter(typeof(ScriptQueryConverter))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
@@ -36,11 +36,12 @@ namespace Nest
 		public string Lang { get; set; }
 
 		internal override void WrapInContainer(IQueryContainer c) => c.Script = this;
-		internal static bool IsConditionless(IScriptQuery q) => 
+		internal static bool IsConditionless(IScriptQuery q) =>
 			q.Inline.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
+
 	}
 
-	public class ScriptQueryDescriptor<T> 
+	public class ScriptQueryDescriptor<T>
 		: QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>
 		, IScriptQuery where T : class
 	{
