@@ -76,6 +76,6 @@ namespace Nest
 		public IndexConstraintComparisonDescriptor GreaterThan(string gt) => Assign(a => a.GreaterThan = gt);
 		public IndexConstraintComparisonDescriptor GreaterThanOrEqualTo(string gte) => Assign(a => a.GreaterThanOrEqualTo = gte);
 		public IndexConstraintComparisonDescriptor LessThan(string lt) => Assign(a => a.LessThan = lt);
-		public IndexConstraintComparisonDescriptor LessThanOrEqualTo(string lte) => Assign(a => a.GreaterThanOrEqualTo = lte);
-	}	
+		public IndexConstraintComparisonDescriptor LessThanOrEqualTo(string lte) => Assign(a => a.LessThanOrEqualTo = lte);
+	}
 }
