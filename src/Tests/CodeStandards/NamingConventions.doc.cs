@@ -96,25 +96,6 @@ namespace Tests.CodeStandards
 			// Add any exceptions to the rule here.
 			var exceptions = new[]
 			{
-				typeof(CatAliasesRequest),
-				typeof(CatAllocationRequest),
-				typeof(CatCountRequest),
-				typeof(CatFielddataRequest),
-				typeof(CatHealthRequest),
-				typeof(CatHelpRequest),
-				typeof(CatIndicesRequest),
-				typeof(CatMasterRequest),
-				typeof(CatNodesRequest),
-				typeof(CatPendingTasksRequest),
-				typeof(CatPluginsRequest),
-				typeof(CatRecoveryRequest),
-				typeof(CatSegmentsRequest),
-				typeof(CatShardsRequest),
-				typeof(CatThreadPoolRequest),
-				typeof(CatNodeAttributesRequest),
-				typeof(CatRepositoriesRequest),
-				typeof(CatSnapshotsRequest),
-				typeof(ForceMergeRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
@@ -130,8 +111,15 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
-				typeof(IndicesShardStoresRequest),
-				typeof(RenderSearchTemplateRequest)
+				//UNMAPPED
+				typeof(ReindexRequest),
+				typeof(IngestDeletePipelineRequest),
+				typeof(IngestGetPipelineRequest),
+				typeof(IngestPutPipelineRequest),
+				typeof(IngestSimulateRequest),
+				typeof(TasksCancelRequest),
+				typeof(TasksListRequest),
+				typeof(UpdateByQueryRequest)
 			};
 
 			var types = typeof(IRequest).Assembly().GetTypes();
@@ -142,6 +130,7 @@ namespace Tests.CodeStandards
 					!t.IsAbstract() &&
 					typeof(IRequest).IsAssignableFrom(t) &&
 					!typeof(IDescriptor).IsAssignableFrom(t)
+					&& !t.Name.StartsWith("Cat")
 					&& !exceptions.Contains(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 			);

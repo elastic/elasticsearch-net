@@ -51,7 +51,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
-		protected override string UrlPath => $"/{IndexWithUnassignedShards}/_shard_stores";
+		protected override string UrlPath => $"/{IndexWithUnassignedShards}/_shard_stores?status=all";
 
 		[I] public Task AssertResponse() => AssertOnAllResponses(r =>
 		{
