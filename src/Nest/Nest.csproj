@@ -1084,6 +1084,9 @@
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\ElasticClient-DeleteSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\ElasticClient-SearchTemplate.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\ElasticClient-RenderSearchTemplate.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateRequest.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\ElasticClient-GetSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateRequest.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
