@@ -13,12 +13,12 @@
 ----
 s => s
 .Aggregations(a => a
-	.Histogram("commits", h => h
-		.Field(p => p.NumberOfCommits)
-		.Interval(100)
-		.Missing(0)
-		.Order(HistogramOrder.KeyDescending)
-	)
+    .Histogram("commits", h => h
+        .Field(p => p.NumberOfCommits)
+        .Interval(100)
+        .Missing(0)
+        .Order(HistogramOrder.KeyDescending)
+    )
 )
 ----
 
@@ -28,13 +28,13 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new HistogramAggregation("commits")
-	{
-		Field = Field<Project>(p => p.NumberOfCommits),
-		Interval = 100,
-		Missing = 0,
-		Order = HistogramOrder.KeyDescending
-	}
+    Aggregations = new HistogramAggregation("commits")
+    {
+        Field = Field<Project>(p => p.NumberOfCommits),
+        Interval = 100,
+        Missing = 0,
+        Order = HistogramOrder.KeyDescending
+    }
 }
 ----
 

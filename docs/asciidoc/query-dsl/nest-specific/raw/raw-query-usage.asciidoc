@@ -7,6 +7,21 @@
 [[raw-query-usage]]
 == Raw Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Raw(RawTermQuery)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new RawQuery(RawTermQuery)
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -15,12 +30,5 @@
     "fieldname": "value"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new RawQuery(RawTermQuery)
 ----
 

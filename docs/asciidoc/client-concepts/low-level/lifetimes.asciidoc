@@ -28,37 +28,37 @@ Let's demonstrate which components are disposed by creating our own derived `Con
 ----
 class AConnectionSettings : ConnectionSettings
 {
-	public AConnectionSettings(IConnectionPool pool, IConnection connection)
-		: base(pool, connection)
-	{ }
-	public bool IsDisposed { get; private set; }
-	protected override void DisposeManagedResources()
-	{
-		this.IsDisposed = true;
-		base.DisposeManagedResources();
-	}
+    public AConnectionSettings(IConnectionPool pool, IConnection connection)
+        : base(pool, connection)
+    { }
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
 }
 
 class AConnectionPool : SingleNodeConnectionPool
 {
-	public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
+    public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
 
-	public bool IsDisposed { get; private set; }
-	protected override void DisposeManagedResources()
-	{
-		this.IsDisposed = true;
-		base.DisposeManagedResources();
-	}
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
 }
 
 class AConnection : InMemoryConnection
 {
-	public bool IsDisposed { get; private set; }
-	protected override void DisposeManagedResources()
-	{
-		this.IsDisposed = true;
-		base.DisposeManagedResources();
-	}
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
 }
 ----
 

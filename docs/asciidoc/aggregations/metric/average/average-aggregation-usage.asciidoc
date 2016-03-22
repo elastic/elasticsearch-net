@@ -13,14 +13,14 @@
 ----
 s => s
 .Aggregations(a => a
-	.Average("average_commits", avg => avg
-		.Meta(m => m
-			.Add("foo", "bar")
-		)
-		.Field(p => p.NumberOfCommits)
-		.Missing(10)
-		.Script("_value * 1.2")
-	)
+    .Average("average_commits", avg => avg
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+        .Field(p => p.NumberOfCommits)
+        .Missing(10)
+        .Script("_value * 1.2")
+    )
 )
 ----
 
@@ -30,15 +30,15 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
-	{
-		Meta = new Dictionary<string, object>
-		{
-			{ "foo", "bar" }
-		},
-		Missing = 10,
-		Script = new InlineScript("_value * 1.2")
-	}
+    Aggregations = new AverageAggregation("average_commits", Field<Project>(p => p.NumberOfCommits))
+    {
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        },
+        Missing = 10,
+        Script = new InlineScript("_value * 1.2")
+    }
 }
 ----
 

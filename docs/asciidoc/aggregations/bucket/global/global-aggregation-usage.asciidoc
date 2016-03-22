@@ -13,13 +13,13 @@
 ----
 s => s
 .Aggregations(a => a
-	.Global("all_projects", g => g
-		.Aggregations(aa => aa
-			.Terms("names", t => t
-				.Field(p => p.Name)
-			)
-		)
-	)
+    .Global("all_projects", g => g
+        .Aggregations(aa => aa
+            .Terms("names", t => t
+                .Field(p => p.Name)
+            )
+        )
+    )
 )
 ----
 
@@ -29,13 +29,13 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new GlobalAggregation("all_projects")
-	{
-		Aggregations = new TermsAggregation("names")
-		{
-			Field = Field<Project>(p => p.Name)
-		}
-	}
+    Aggregations = new GlobalAggregation("all_projects")
+    {
+        Aggregations = new TermsAggregation("names")
+        {
+            Field = Field<Project>(p => p.Name)
+        }
+    }
 }
 ----
 

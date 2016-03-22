@@ -13,13 +13,13 @@
 ----
 s => s
 .Aggregations(a => a
-	.IpRange("ip_ranges", ip => ip
-		.Field(p => p.LeadDeveloper.IPAddress)
-		.Ranges(
-			r => r.To("10.0.0.5"),
-			r => r.From("10.0.0.5")
-		)
-	)
+    .IpRange("ip_ranges", ip => ip
+        .Field(p => p.LeadDeveloper.IPAddress)
+        .Ranges(
+            r => r.To("10.0.0.5"),
+            r => r.From("10.0.0.5")
+        )
+    )
 )
 ----
 
@@ -29,15 +29,15 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new IpRangeAggregation("ip_ranges")
-	{
-		Field = Field((Project p) => p.LeadDeveloper.IPAddress),
-		Ranges = new List<Nest.IpRange>
-		{
-			new Nest.IpRange { To = "10.0.0.5" },
-			new Nest.IpRange { From = "10.0.0.5" }
-		}
-	}
+    Aggregations = new IpRangeAggregation("ip_ranges")
+    {
+        Field = Field((Project p) => p.LeadDeveloper.IPAddress),
+        Ranges = new List<Nest.IpRange>
+        {
+            new Nest.IpRange { To = "10.0.0.5" },
+            new Nest.IpRange { From = "10.0.0.5" }
+        }
+    }
 }
 ----
 

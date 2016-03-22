@@ -14,21 +14,21 @@
 s => s
 .Size(0)
 .Aggregations(a => a
-	.DateHistogram("projects_started_per_month", dh => dh
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.Aggregations(aa => aa
-			.Sum("commits", sm => sm
-				.Field(p => p.NumberOfCommits)
-			)
-			.BucketSelector("commits_bucket_filter", bs => bs
-				.BucketsPath(bp => bp
-					.Add("totalCommits", "commits")
-				)
-				.Script("totalCommits >= 500")
-			)
-		)
-	)
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .BucketSelector("commits_bucket_filter", bs => bs
+                .BucketsPath(bp => bp
+                    .Add("totalCommits", "commits")
+                )
+                .Script("totalCommits >= 500")
+            )
+        )
+    )
 )
 ----
 
@@ -37,23 +37,23 @@ s => s
 [source,csharp]
 ----
 new SearchRequest<Project>()
-		{
-Size = 0,
-Aggregations = new DateHistogramAggregation("projects_started_per_month")
 {
-	Field = "startedOn",
-	Interval = DateInterval.Month,
-	Aggregations = 
-		new SumAggregation("commits", "numberOfCommits") &&
-		new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
-			{
-				{ "totalCommits", "commits" },
-			})
-		{
-			Script = (InlineScript)"totalCommits >= 500"
-		}
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
+                {
+                    { "totalCommits", "commits" },
+                })
+            {
+                Script = (InlineScript)"totalCommits >= 500"
+            }
+    }
 }
-		}
 ----
 
 [source,javascript]

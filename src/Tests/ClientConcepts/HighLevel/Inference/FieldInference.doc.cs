@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FieldInferrence
 	{
-		/**== Strongly typed Field Access 
+		/**== Field Inference
 		 * 
 		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
 		 * NEST allows you to use C# expressions to strongly type these field path strings. 
@@ -27,13 +27,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		 * These expressions are assigned to a type called `Field` and there are several ways to create an instance of one:
 		 */
 
-		/** Using the constructor directly is possible but rather involved */
+		/**=== Constructor 
+		* Using the constructor directly is possible but rather involved */
 		[U]
 		public void UsingConstructors()
 		{
 			var fieldString = new Field { Name = "name" };
 
-			/** especially when using C# expressions since these can not be simply new'ed*/
+			/** This is more cumbersome when using C# expressions since they cannot be instantiated easily*/
 			Expression<Func<Project, object>> expression = p => p.Name;
 			var fieldExpression = Field.Create(expression);
 
@@ -42,13 +43,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 				.WhenSerializing(fieldString);
 		}
 
-		/** Therefore you can also implicitly convert strings and expressions to `Field`s */
+		/**=== Implicit Conversion 
+		* Therefore you can also implicitly convert strings and expressions to ``Field``s */
 		[U]
 		public void ImplicitConversion()
 		{
 			Field fieldString = "name";
 
-			/** but for expressions this is still rather involved */
+			/** but for expressions this is _still_ rather involved */
 			Expression<Func<Project, object>> expression = p => p.Name;
 			Field fieldExpression = expression;
 
@@ -57,7 +59,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 				.WhenSerializing(fieldString);
 		}
 
-		/** to ease creating `Field`s from expressions there is a static Property class you can use */
+		/**=== ``Nest.Infer`` 
+		* to ease creating ``Field``s from expressions there is a static `Infer` class you can use 
+		*/
 		[U]
 		public void UsingStaticPropertyField()
 		{
@@ -66,18 +70,21 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			/** but for expressions this is still rather involved */
 			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
-			/** this can be even shortened even further using static imports in c# 6 i.e.
-				`using static Nest.Static;` 
+			/** this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
+				`using static Nest.Infer;` 
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
-			/** Now this is much much terser then our first example using the constructor! */
+			/** Now that is much terser then our first example using the constructor! */
 
 			Expect("name")
 				.WhenSerializing(fieldString)
 				.WhenSerializing(fieldExpression);
 		}
 
-		/** By default, NEST will camel-case all field names to be more _javascript-y_ */
+		/**=== Field name casing
+		* By default, NEST will camel-case **all** field names to better align with typical
+		* javascript/json conventions
+		*/
 		[U]
 		public void DefaultFieldNameInferrer()
 		{
@@ -86,31 +93,34 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 
 			setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
-			/** However string are *always* passed along verbatim */
+			/** However ``string``s are *always* passed along verbatim */
 			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
-			/** if you want the same behavior for expressions simply do nothing in the default inferrer */
+			/** if you want the same behavior for expressions, simply pass a Func<string,string> to `DefaultFieldNameInferrer` 
+			* to make no changes to the name 
+			*/
 			setup = WithConnectionSettings(s => s.DefaultFieldNameInferrer(p => p));
 			setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 		}
 
-		/** === Complex field name expressions */
+		/**=== Complex field name expressions */
 		[U]
 		public void ComplexFieldNameExpressions()
 		{
-			/** You can follow your property expression to any depth. Here we are traversing to the LeadDeveloper's (Person) FirstName */
+			/** You can follow your property expression to any depth. Here we are traversing to the ``LeadDeveloper``'s `FirstName` */
 			Expect("leadDeveloper.firstName").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName));
 
 			/** When dealing with collection indexers, the indexer access is ignored allowing you to traverse into properties of collections */
 			Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags[0]));
 
-			/** Similarly, LINQ's `.First()` method also works 
-			* NOTE: remember these are expressions and not actual code that will be executed */
+			/** Similarly, LINQ's `.First()` method also works */			
 			Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
 			Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
 			Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
 
-			/** An indexer on a dictionary is assumed to describe a property name */
+			/** NOTE: Remember, these are _expressions_ and not actual code that will be executed
+			*
+			* An indexer on a dictionary is assumed to describe a property name */
 			Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
 			Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
 
@@ -121,9 +131,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 
 			/** 
 			* If you are using Elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow 
-			* you to analyze a string in a number of different ways, these _"virtual"_ sub fields 
+			* you to analyze a string in a number of different ways, these __"virtual"__ sub fields 
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that 
-			* should be mapped and link:../mapping/auto-map[how they are mapped] 
+			* should be mapped and <<auto-map, how they are mapped>> 
 			*/
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
 			Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
@@ -169,7 +179,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
 		}
 
-		/** === Annotations 
+		/**=== Annotations 
 		* 
 		* When using NEST's property attributes you can specify a new name for the properties
 		*/
@@ -248,8 +258,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			fieldNameOnB.Should().Be("c.name");
 
 			/**
-			* now we create a new connectionsettings with a remap for C on class A to `d`
-			* now when we resolve the field path for A will be different
+			* now we create a new connectionsettings with a remap for `C` on class `A` to `"d"`
+			* now when we resolve the field path for property `C` on `A`, it will be different than
+			* for property `C` on `B`
 			*/
 			var newConnectionSettings = TestClient.CreateSettings(forceInMemory: true, modifySettings: s => s
 				.InferMappingFor<A>(m => m

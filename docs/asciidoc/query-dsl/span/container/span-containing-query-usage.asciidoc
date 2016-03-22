@@ -7,6 +7,36 @@
 [[span-containing-query-usage]]
 == Span Containing Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanContaining(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Little(i=>i
+        .SpanTerm(st=>st.Field("field1").Value("hoya"))
+    )
+    .Big(e=>e
+        .SpanTerm(st=>st.Field("field1").Value("hoya2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanContainingQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
+    Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -30,18 +60,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SpanContainingQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Little = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya"} },
-Big = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2"} },
-		}
 ----
 

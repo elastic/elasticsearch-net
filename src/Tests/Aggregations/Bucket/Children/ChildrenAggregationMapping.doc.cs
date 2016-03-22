@@ -3,8 +3,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Bucket.Children
 {
-	/** == Child Aggregation Mapping
-	*/
+	/** == Child Aggregation Mapping */
 	public class ChildrenAggregationMapping
 	{
 		private void MappingExample()
@@ -17,7 +16,7 @@ namespace Tests.Aggregations.Bucket.Children
 				.Mappings(map => map
 					.Map<Project>(tm => tm.AutoMap())
 					.Map<CommitActivity>(tm => tm
-						.Parent<Project>()
+						.Parent<Project>() //<1> Set the parent of `CommitActivity` to the `Project` type
 					)
 				)
 			);

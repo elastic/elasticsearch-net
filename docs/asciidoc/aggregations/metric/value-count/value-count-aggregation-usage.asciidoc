@@ -13,9 +13,9 @@
 ----
 s => s
 .Aggregations(a => a
-	.ValueCount("commit_count", c => c
-		.Field(p => p.NumberOfCommits)
-	)
+    .ValueCount("commit_count", c => c
+        .Field(p => p.NumberOfCommits)
+    )
 )
 ----
 
@@ -25,7 +25,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
+    Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
 }
 ----
 

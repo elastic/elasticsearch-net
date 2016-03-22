@@ -7,16 +7,29 @@
 [[geo-multi-point-usage]]
 == Geo Multi Point Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoShapeMultiPoint(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .Coordinates(this._coordinates)
+)
+----
+
 === Object Initializer Syntax Example
 
 [source,csharp]
 ----
 new GeoShapeMultiPointQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = Field<Project>(p=>p.Location),
-Shape = new MultiPointGeoShape(this._coordinates)
-		}
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    Shape = new MultiPointGeoShape(this._coordinates)
+}
 ----
 

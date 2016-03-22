@@ -16,19 +16,19 @@ but give up after 20 seconds
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways())
-	.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing())
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways())
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
 );
 audit = await audit.TraceCall(
-	new ClientCall(r => r.MaxRetries(2)) {
-		{ BadResponse, 9200 },
-		{ BadResponse, 9201 },
-		{ BadResponse, 9202 },
-		{ MaxRetriesReached }
-	}
+    new ClientCall(r => r.MaxRetries(2)) {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { BadResponse, 9202 },
+        { MaxRetriesReached }
+    }
 );
 ----
 
@@ -38,20 +38,20 @@ Remember that the actual number of requests is initial attempt + set number of r
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways())
-	.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing().MaximumRetries(5))
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways())
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing().MaximumRetries(5))
 );
 
 audit = await audit.TraceCall(
-	new ClientCall(r => r.MaxRetries(2)) {
-		{ BadResponse, 9200 },
-		{ BadResponse, 9201 },
-		{ BadResponse, 9202 },
-		{ MaxRetriesReached }
-	}
+    new ClientCall(r => r.MaxRetries(2)) {
+        { BadResponse, 9200 },
+        { BadResponse, 9201 },
+        { BadResponse, 9202 },
+        { MaxRetriesReached }
+    }
 );
 ----
 
@@ -62,17 +62,17 @@ not giving up on the fail fast principle. It's *NOT* a mechanism for forcing req
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
-	.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-	.SingleNodeConnection()
-	.Settings(s => s.DisablePing().MaximumRetries(10))
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+    .ClientCalls(r => r.OnPort(9209).SucceedAlways())
+    .SingleNodeConnection()
+    .Settings(s => s.DisablePing().MaximumRetries(10))
 );
 
 audit = await audit.TraceCall(
-	new ClientCall(r => r.MaxRetries(10)) {
-		{ BadResponse, 9200 }
-	}
+    new ClientCall(r => r.MaxRetries(10)) {
+        { BadResponse, 9200 }
+    }
 );
 ----
 

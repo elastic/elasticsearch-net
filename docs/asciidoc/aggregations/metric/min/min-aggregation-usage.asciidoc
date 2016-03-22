@@ -13,9 +13,9 @@
 ----
 s => s
 .Aggregations(a => a
-	.Min("min_commits", m => m
-		.Field(p => p.NumberOfCommits)
-	)
+    .Min("min_commits", m => m
+        .Field(p => p.NumberOfCommits)
+    )
 )
 ----
 
@@ -25,7 +25,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new MinAggregation("min_commits", Field<Project>(p => p.NumberOfCommits))
+    Aggregations = new MinAggregation("min_commits", Field<Project>(p => p.NumberOfCommits))
 }
 ----
 

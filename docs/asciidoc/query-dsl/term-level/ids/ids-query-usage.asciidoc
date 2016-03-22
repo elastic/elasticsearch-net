@@ -7,6 +7,32 @@
 [[ids-query-usage]]
 == Ids Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Ids(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Values(1, 2, 3, 4)
+    .Types(typeof(Project), typeof(Developer))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new IdsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Values = new List<Id> { 1, 2,3,4 },
+    Types = Type<Project>().And<Developer>()
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -26,18 +52,5 @@
     ]
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new IdsQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Values = new List<Id> { 1, 2,3,4 },
-Types = Type<Project>().And<Developer>()
-		}
 ----
 

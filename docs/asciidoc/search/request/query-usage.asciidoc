@@ -15,7 +15,7 @@ The query element within the search request body allows to define a query using 
 ----
 s => s
 .Query(q => q
-	.Term(p => p.Name, "elasticsearch")
+    .Term(p => p.Name, "elasticsearch")
 )
 ----
 
@@ -25,11 +25,11 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Query = new TermQuery
-	{
-		Field = "name",
-		Value = "elasticsearch"
-	}
+    Query = new TermQuery
+    {
+        Field = "name",
+        Value = "elasticsearch"
+    }
 }
 ----
 

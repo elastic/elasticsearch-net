@@ -13,21 +13,21 @@
 ----
 s => s
 .Aggregations(a => a
-	.Terms("states", st => st
-		.Field(p => p.State)
-		.MinimumDocumentCount(2)
-		.Size(5)
-		.ShardSize(100)
-		.ShowTermDocumentCountError()
-		.ExecutionHint(TermsAggregationExecutionHint.Map)
-		.Missing("n/a")
-		.Script("'State of Being: '+_value")
-		.Order(TermsOrder.TermAscending)
-		.Order(TermsOrder.CountDescending)
-		.Meta(m => m
-			.Add("foo", "bar")
-		)
-	)
+    .Terms("states", st => st
+        .Field(p => p.State)
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ShowTermDocumentCountError()
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Script("'State of Being: '+_value")
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+    )
 )
 ----
 
@@ -37,26 +37,26 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new TermsAggregation("states")
-	{
-		Field = Field<Project>(p => p.State),
-		MinimumDocumentCount = 2,
-		Size = 5,
-		ShardSize = 100,
-		ShowTermDocumentCountError = true,
-		ExecutionHint = TermsAggregationExecutionHint.Map,
-		Missing = "n/a",
-		Script = new InlineScript("'State of Being: '+_value"),
-		Order = new List<TermsOrder>
-		{
-			TermsOrder.TermAscending,
-			TermsOrder.CountDescending
-		},
-		Meta = new Dictionary<string, object>
-		{
-			{ "foo", "bar" }
-		}
-	}
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ShowTermDocumentCountError = true,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Script = new InlineScript("'State of Being: '+_value"),
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
+    }
 }
 ----
 

@@ -70,8 +70,40 @@ namespace Nest.Litterateur
 		}
 
 		public static string RemoveNumberOfLeadingTabsAfterNewline(this string input, int numberOfTabs)
-		{
-			return Regex.Replace(input, $"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})", m => m.Value.Replace("\t", string.Empty));
+		{		
+			var firstTab = input.IndexOf("\t", StringComparison.OrdinalIgnoreCase);
+
+			if (firstTab == -1)
+			{
+				return input;
+			}
+			int count = 0;
+			char firstNonTabCharacter = Char.MinValue;
+
+			for (int i = firstTab; i < input.Length; i++)
+			{
+				if (input[i] != '\t')
+				{
+					firstNonTabCharacter = input[i];
+					count = i - firstTab;
+					break;
+				}
+			}
+
+			if (firstNonTabCharacter == '{' && numberOfTabs != count)
+			{
+				numberOfTabs = count;
+			}
+			
+			return Regex.Replace(
+				Regex.Replace(
+					input, 
+					$"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})", 
+					m => m.Value.Replace("\t", string.Empty)
+				),
+				$"(?<spaces>[\n|\r\n]+\\s{{{numberOfTabs * 4}}})", 
+				m => m.Value.Replace(" ", string.Empty)
+			);
 		}
 
 		public static string[] SplitOnNewLines(this string input, StringSplitOptions options)
@@ -92,6 +124,8 @@ namespace Nest.Litterateur
 			                               "\"2015-01-01T00:00:00\",lastActivity = \"0001-01-01T00:00:00\",leadDeveloper = " +
 			                               "new { gender = \"Male\", id = 0, firstName = \"Martijn\", lastName = \"Laarman\" }," +
 										   "location = new { lat = 42.1523, lon = -80.321 }}" },
+			{ "_templateString", "\"{ \\\"match\\\": { \\\"text\\\": \\\"{{query_string}}\\\" } }\"" },
+			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" }
 		}; 
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)

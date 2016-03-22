@@ -21,7 +21,7 @@ node.Uri.Should().NotBeNull();
 node.Uri.Port.Should().Be(9200);
 ----
 
-By default master eligible and holds data is presumed to be true 
+By default master eligible and holds data is presumed to be true *
 
 [source,csharp]
 ----

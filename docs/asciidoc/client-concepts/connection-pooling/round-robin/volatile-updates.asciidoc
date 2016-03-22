@@ -29,8 +29,8 @@ callSniffing.ShouldNotThrow();
 [source,csharp]
 ----
 var threads = Enumerable.Range(0, 50)
-	.Select(i => CreateReadAndUpdateThread(pool))
-	.ToList();
+    .Select(i => CreateReadAndUpdateThread(pool))
+    .ToList();
 
 t.Start();
 

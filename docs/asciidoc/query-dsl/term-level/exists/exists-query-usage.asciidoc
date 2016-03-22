@@ -7,6 +7,30 @@
 [[exists-query-usage]]
 == Exists Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Exists(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new ExistsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -17,17 +41,5 @@
     "field": "description"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new ExistsQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-		}
 ----
 

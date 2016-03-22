@@ -12,7 +12,8 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		 * In nest this is encoded using `Indices`
 		 */
 
-		/** Several types implicitly convert to `Indices` */
+		/**=== Implicit Conversion 
+		* Several types implicitly convert to `Indices` */
 		[U] public void ImplicitConversionFromString()
 		{
 			Nest.Indices singleIndexFromString = "name";
@@ -38,16 +39,18 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			);
 		}
 
-		/** to ease creating Field's from expressions there is a static Property class you can use */
+		/**=== Using `Nest.Indices`
+		* To ease creating ``Indice``s from expressions, there is a static `Nest.Indices` class you can use 
+		*/
 		[U] public void UsingStaticPropertyField()
 		{
-			/** */
-			var all = Nest.Indices.All;
-			var many = Nest.Indices.Index("name1", "name2");
-			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>();
-			var singleTyped = Nest.Indices.Index<Project>();
+			var all = Nest.Indices.All; //<1> Using "_all" indices
+			var many = Nest.Indices.Index("name1", "name2"); //<2> specifying multiple indices using strings
+			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>(); //<3> speciying multiple using types
+			var singleTyped = Nest.Indices.Index<Project>(); 
 			var singleString = Nest.Indices.Index("name1");
-			var invalidSingleString = Nest.Indices.Index("name1, name2");
+
+			var invalidSingleString = Nest.Indices.Index("name1, name2"); //<4> **invalid** single index name
 		}
 	}
 }

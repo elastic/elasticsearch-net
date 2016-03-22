@@ -14,22 +14,22 @@
 s => s
 .Size(0)
 .Aggregations(a => a
-	.DateHistogram("projects_started_per_month", dh => dh
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.Aggregations(aa => aa
-			.Sum("commits", sm => sm
-				.Field(p => p.NumberOfCommits)
-			)
-			.MovingAverage("commits_moving_avg", mv => mv
-				.BucketsPath("commits")
-				.GapPolicy(GapPolicy.InsertZeros)
-				.Model(m => m
-					.Linear()
-				)
-			)
-		)
-	)
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .MovingAverage("commits_moving_avg", mv => mv
+                .BucketsPath("commits")
+                .GapPolicy(GapPolicy.InsertZeros)
+                .Model(m => m
+                    .Linear()
+                )
+            )
+        )
+    )
 )
 ----
 
@@ -38,21 +38,21 @@ s => s
 [source,csharp]
 ----
 new SearchRequest<Project>()
-		{
-Size = 0,
-Aggregations = new DateHistogramAggregation("projects_started_per_month")
 {
-	Field = "startedOn",
-	Interval = DateInterval.Month,
-	Aggregations = 
-		new SumAggregation("commits", "numberOfCommits") &&
-		new MovingAverageAggregation("commits_moving_avg", "commits")
-		{
-			GapPolicy = GapPolicy.InsertZeros,
-			Model = new LinearModel()
-		}
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new MovingAverageAggregation("commits_moving_avg", "commits")
+            {
+                GapPolicy = GapPolicy.InsertZeros,
+                Model = new LinearModel()
+            }
+    }
 }
-		}
 ----
 
 [source,javascript]

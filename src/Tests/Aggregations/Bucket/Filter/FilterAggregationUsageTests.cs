@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filter
 {
-	/**== Filter Aggregation
+	/**
 	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
@@ -69,7 +69,7 @@ namespace Tests.Aggregations.Bucket.Filter
 		{
 			/** === Handling Responses
 			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
 

@@ -13,17 +13,17 @@
 ----
 s => s
 .Aggregations(a => a
-	.Percentiles("commits_outlier", pr => pr
-		.Field(p => p.NumberOfCommits)
-		.Percents(95, 99, 99.9)
-		.Method(m => m
-			.HDRHistogram(hdr => hdr
-				.NumberOfSignificantValueDigits(3)
-			)
-		)
-		.Script("doc['numberOfCommits'].value * 1.2")
-		.Missing(0)
-	)
+    .Percentiles("commits_outlier", pr => pr
+        .Field(p => p.NumberOfCommits)
+        .Percents(95, 99, 99.9)
+        .Method(m => m
+            .HDRHistogram(hdr => hdr
+                .NumberOfSignificantValueDigits(3)
+            )
+        )
+        .Script("doc['numberOfCommits'].value * 1.2")
+        .Missing(0)
+    )
 )
 ----
 
@@ -33,16 +33,16 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
-	{
-		Percents = new[] { 95, 99, 99.9 },
-		Method = new HDRHistogramMethod
-		{
-			NumberOfSignificantValueDigits = 3
-		},
-		Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
-		Missing = 0
-	}
+    Aggregations = new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
+    {
+        Percents = new[] { 95, 99, 99.9 },
+        Method = new HDRHistogramMethod
+        {
+            NumberOfSignificantValueDigits = 3
+        },
+        Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
+        Missing = 0
+    }
 }
 ----
 

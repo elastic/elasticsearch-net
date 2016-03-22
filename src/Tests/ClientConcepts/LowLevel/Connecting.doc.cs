@@ -78,13 +78,12 @@ namespace Tests.ClientConcepts.LowLevel
 
 		public void AvailableOptions()
 		{
-			var client = new ElasticLowLevelClient();
-
 			var config = new ConnectionConfiguration()
 				.DisableAutomaticProxyDetection() // <1> Disable automatic proxy detection.  Defaults to `true`.
 				.EnableHttpCompression() // <2> Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured to allow this. See the {ref_current}/modules-http.html[http module settings] for more info). 		
 				.DisableDirectStreaming(); // <3> By default responses are deserialized directly from the response stream to the object you tell it to. For debugging purposes, it can be very useful to keep a copy of the raw response on the result object, which is what calling this method will do.
 
+			var client = new ElasticLowLevelClient(config);
 			var result = client.Search<SearchResponse<object>>(new { size = 12 });
 
 			/** This will only have a value if the client configuration has `DisableDirectStreaming` set */

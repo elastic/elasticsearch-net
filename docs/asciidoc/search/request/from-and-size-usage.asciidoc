@@ -13,8 +13,8 @@
 ----
 new SearchRequest<Project>()
 {
-	From = 10,
-	Size = 12
+    From = 10,
+    Size = 12
 }
 ----
 
@@ -32,7 +32,7 @@ new SearchRequest<Project>()
 [source,csharp]
 ----
 s => s
-	.From(10)
-	.Size(12)
+    .From(10)
+    .Size(12)
 ----
 

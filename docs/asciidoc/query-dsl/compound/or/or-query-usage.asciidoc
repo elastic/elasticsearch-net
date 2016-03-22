@@ -7,6 +7,36 @@
 [[or-query-usage]]
 == Or Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Or(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Filters(
+        qq => qq.MatchAll(m => m.Name("query1")),
+        qq => qq.MatchAll(m => m.Name("query2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new OrQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Filters = new QueryContainer[] {
+        new MatchAllQuery() { Name = "query1" },
+        new MatchAllQuery() { Name = "query2" },
+    }
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -28,20 +58,5 @@
     ]
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new OrQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-Filters = new QueryContainer[] {
-	new MatchAllQuery() { Name = "query1" },
-	new MatchAllQuery() { Name = "query2" },
-}
-		}
 ----
 

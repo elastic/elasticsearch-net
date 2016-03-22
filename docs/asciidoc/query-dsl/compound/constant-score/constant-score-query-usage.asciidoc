@@ -7,6 +7,30 @@
 [[constant-score-query-usage]]
 == Constant Score Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.ConstantScore(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Filter(qq => qq.MatchAll(m => m.Name("filter")))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new ConstantScoreQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Filter = new MatchAllQuery { Name = "filter" },
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -21,17 +45,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new ConstantScoreQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-Filter = new MatchAllQuery { Name = "filter" },
-		}
 ----
 

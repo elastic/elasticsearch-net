@@ -7,6 +7,39 @@
 [[span-or-query-usage]]
 == Span Or Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanOr(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Clauses(
+        c => c.SpanTerm(st => st.Field("field").Value("value1")),
+        c => c.SpanTerm(st => st.Field("field").Value("value2")),
+        c => c.SpanTerm(st => st.Field("field").Value("value3"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanOrQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Clauses = new List<ISpanQuery>
+    {
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+    },
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -39,22 +72,5 @@
     ]
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SpanOrQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Clauses = new List<ISpanQuery>
-{
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
-},
-		}
 ----
 

@@ -9,16 +9,17 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Filters
 {
-	/** == Filters Aggregation
+	/**
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
 	 * Each bucket will collect all documents that match its associated filter. For documents
 	 * that do not match any filter, these will be collected in the _other bucket_.
 	 *
-	 * Be sure to read {ref_current}/search-aggregations-bucket-filters-aggregation.html[the Elasticsearch documentation on Filters Aggregation].
+	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filters-aggregation.html[Filters Aggregation].
 	*/
 
 	/**[float] 
-	* == Named filters **/
+	* == Named filters 
+	*/
 	public class FiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public FiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -86,7 +87,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		{
 			/** === Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
 
@@ -112,7 +113,8 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/**[float] 
-	*== Anonymous filters **/
+	*== Anonymous filters 
+	*/
 	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -179,7 +181,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		{
 			/** === Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
 
@@ -198,7 +200,8 @@ namespace Tests.Aggregations.Bucket.Filters
 	}
 
 	/**[float]  
-	* == Empty Filters */
+	* == Empty Filters 
+	*/
 	public class EmptyFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -240,7 +243,8 @@ namespace Tests.Aggregations.Bucket.Filters
 		}
 	}
 
-	/** == Conditionless Filters */
+	/**[float] 
+	* == Conditionless Filters */
 	public class ConditionlessFiltersAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ConditionlessFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

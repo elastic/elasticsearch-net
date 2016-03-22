@@ -15,28 +15,28 @@ We use this information when selecting a node to perform an API call on.
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.Sniff(s => s.Fails(Always))
-	.Sniff(s => s.OnPort(9202)
-		.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
-	)
-	.SniffingConnectionPool()
-	.AllDefaults()
+    .Nodes(10)
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202)
+        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
 )
 {
-	AssertPoolBeforeCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(10);
-		pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
-	},
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+    },
 
-	AssertPoolAfterCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(8);
-		pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
-	}
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+    }
 };
 
 await audit.TraceStartup();
@@ -45,29 +45,29 @@ await audit.TraceStartup();
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.Sniff(s => s.SucceedAlways()
-		.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
-	)
-	.SniffingConnectionPool()
-	.AllDefaults()
+    .Nodes(10)
+    .Sniff(s => s.SucceedAlways()
+        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
 )
 {
-	AssertPoolBeforeCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(10);
-		pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
-		pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
-	},
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+        pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
+    },
 
-	AssertPoolAfterCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(8);
-		pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
-		pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
-	}
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+        pool.Nodes.Should().OnlyContain(n => n.Uri.Host.StartsWith("fqdn") && !n.Uri.Host.Contains("/"));
+    }
 };
 
 await audit.TraceStartup();
@@ -105,10 +105,10 @@ await pipeline.SniffAsync();
 [source,csharp]
 ----
 this._settings =
-	this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+    this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
 
 var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
-	new SearchRequestParameters());
+    new SearchRequestParameters());
 ----
 
 [source,csharp]
@@ -123,27 +123,27 @@ var node = nodes.First();
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.Sniff(s => s.Fails(Always))
-	.Sniff(s => s.OnPort(9202)
-		.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
-	)
-	.SniffingConnectionPool()
-	.AllDefaults()
+    .Nodes(10)
+    .Sniff(s => s.Fails(Always))
+    .Sniff(s => s.OnPort(9202)
+        .Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligible(9200, 9201, 9202))
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
 )
 {
-	AssertPoolBeforeCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(10);
-		pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(10);
-	},
-	AssertPoolAfterCall = (pool) =>
-	{
-		pool.Should().NotBeNull();
-		pool.Nodes.Should().HaveCount(8);
-		pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
-	}
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(10);
+    },
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(8);
+        pool.Nodes.Where(n => n.MasterEligible).Should().HaveCount(3);
+    }
 };
 await audit.TraceStartup();
 ----

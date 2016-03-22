@@ -7,6 +7,62 @@
 [[function-score-query-usage]]
 == Function Score Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.FunctionScore(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Query(qq => qq.MatchAll())
+    .BoostMode(FunctionBoostMode.Multiply)
+    .ScoreMode(FunctionScoreMode.Sum)
+    .MaxBoost(20.0)
+    .MinScore(1.0)
+    .Functions(f => f
+        .Exponential(b => b.Field(p => p.NumberOfCommits).Decay(0.5).Origin(1.0).Scale(0.1).Weight(2.1))
+        .GaussDate(b => b.Field(p => p.LastActivity).Origin(DateMath.Now).Decay(0.5).Scale("1d"))
+        .LinearGeoLocation(b => b.Field(p => p.Location).Origin(new GeoLocation(70, -70)).Scale(Distance.Miles(1)).MultiValueMode(MultiValueMode.Average))
+        .FieldValueFactor(b => b.Field("x").Factor(1.1).Missing(0.1).Modifier(FieldValueFactorModifier.Ln))
+        .RandomScore(1337)
+        .RandomScore("randomstring")
+        .Weight(1.0)
+        .ScriptScore(ss => ss.Script(s => s.File("x")))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new FunctionScoreQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Query = new MatchAllQuery { },
+    BoostMode = FunctionBoostMode.Multiply,
+    ScoreMode = FunctionScoreMode.Sum,
+    MaxBoost = 20.0,
+    MinScore = 1.0,
+    Functions = new List<IScoreFunction>
+    {
+        new ExponentialDecayFunction { Origin = 1.0, Decay =    0.5, Field = Field<Project>(p=>p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
+        new GaussDateDecayFunction { Origin = DateMath.Now, Field = Field<Project>(p=>p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
+        new LinearGeoDecayFunction { Origin = new GeoLocation(70, -70), Field = Field<Project>(p=>p.Location), Scale = Distance.Miles(1), MultiValueMode = MultiValueMode.Average },
+        new FieldValueFactorFunction    
+        {
+            Field = "x", Factor = 1.1,    Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
+        },
+        new RandomScoreFunction { Seed = 1337 },
+        new RandomScoreFunction { Seed = "randomstring" },
+        new WeightFunction { Weight = 1.0},
+        new ScriptScoreFunction { Script = new ScriptQuery { File = "x" } }
+    }
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -84,35 +140,5 @@
     "score_mode": "sum"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new FunctionScoreQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-Query = new MatchAllQuery { },
-BoostMode = FunctionBoostMode.Multiply,
-ScoreMode = FunctionScoreMode.Sum,
-MaxBoost = 20.0,
-MinScore = 1.0,
-Functions = new List<IScoreFunction>
-{
-	new ExponentialDecayFunction { Origin = 1.0, Decay =	0.5, Field = Field<Project>(p=>p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
-	new GaussDateDecayFunction { Origin = DateMath.Now, Field = Field<Project>(p=>p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
-	new LinearGeoDecayFunction { Origin = new GeoLocation(70, -70), Field = Field<Project>(p=>p.Location), Scale = Distance.Miles(1), MultiValueMode = MultiValueMode.Average },
-	new FieldValueFactorFunction	
-	{
-		Field = "x", Factor = 1.1,	Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
-	},
-	new RandomScoreFunction { Seed = 1337 },
-	new RandomScoreFunction { Seed = "randomstring" },
-	new WeightFunction { Weight = 1.0},
-	new ScriptScoreFunction { Script = new ScriptQuery { File = "x" } }
-}
-		}
 ----
 

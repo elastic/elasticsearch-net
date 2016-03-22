@@ -7,6 +7,42 @@
 [[fuzzy-numeric-query-usage]]
 == Fuzzy Numeric Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.FuzzyNumeric(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Fuzziness(2)
+    .Value(12)
+    .MaxExpansions(100)
+    .PrefixLength(3)
+    .Rewrite(RewriteMultiTerm.ConstantScore)
+    .Transpositions()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new FuzzyNumericQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Fuzziness = 2,
+    Value = 12,
+    MaxExpansions = 100,
+    PrefixLength = 3,
+    Rewrite = RewriteMultiTerm.ConstantScore,
+    Transpositions = true
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -24,23 +60,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new FuzzyNumericQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Fuzziness = 2,
-Value = 12,
-MaxExpansions = 100,
-PrefixLength = 3,
-Rewrite = RewriteMultiTerm.ConstantScore,
-Transpositions = true
-		}
 ----
 

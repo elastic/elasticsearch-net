@@ -19,8 +19,8 @@ The following are recoverable exceptions
 ----
 var recoverablExceptions = new[]
 {
-	new PipelineException(PipelineFailure.BadResponse),
-	new PipelineException(PipelineFailure.PingFailure),
+    new PipelineException(PipelineFailure.BadResponse),
+    new PipelineException(PipelineFailure.PingFailure),
 };
 
 recoverablExceptions.Should().OnlyContain(e => e.Recoverable);
@@ -32,12 +32,12 @@ and the unrecoverable exceptions
 ----
 var unrecoverableExceptions = new[]
 {
-	new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup),
-	new PipelineException(PipelineFailure.SniffFailure),
-	new PipelineException(PipelineFailure.Unexpected),
-	new PipelineException(PipelineFailure.BadAuthentication),
-	new PipelineException(PipelineFailure.MaxRetriesReached),
-	new PipelineException(PipelineFailure.MaxTimeoutReached)
+    new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup),
+    new PipelineException(PipelineFailure.SniffFailure),
+    new PipelineException(PipelineFailure.Unexpected),
+    new PipelineException(PipelineFailure.BadAuthentication),
+    new PipelineException(PipelineFailure.MaxRetriesReached),
+    new PipelineException(PipelineFailure.MaxTimeoutReached)
 };
 
 unrecoverableExceptions.Should().OnlyContain(e => !e.Recoverable);
@@ -49,11 +49,11 @@ As an example, let's set up a 10 node cluster that will always succeed when ping
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.Ping(r => r.SucceedAlways())
-	.ClientCalls(r => r.FailAlways(401))
-	.StaticConnectionPool()
-	.AllDefaults()
+    .Nodes(10)
+    .Ping(r => r.SucceedAlways())
+    .ClientCalls(r => r.FailAlways(401))
+    .StaticConnectionPool()
+    .AllDefaults()
 );
 ----
 
@@ -63,14 +63,14 @@ followed by a bad response as a result of a bad authentication response
 [source,csharp]
 ----
 audit = await audit.TraceElasticsearchException(
-	new ClientCall {
-		{ AuditEvent.PingSuccess, 9200 },
-		{ AuditEvent.BadResponse, 9200 },
-	},
-	(e) =>
-	{
-		e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
-	}
+    new ClientCall {
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9200 },
+    },
+    (e) =>
+    {
+        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+    }
 );
 ----
 

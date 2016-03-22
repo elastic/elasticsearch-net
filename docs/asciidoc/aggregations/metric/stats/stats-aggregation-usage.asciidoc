@@ -13,9 +13,9 @@
 ----
 s => s
 .Aggregations(a => a
-	.Stats("commit_stats", st => st
-		.Field(p => p.NumberOfCommits)
-	)
+    .Stats("commit_stats", st => st
+        .Field(p => p.NumberOfCommits)
+    )
 )
 ----
 
@@ -25,7 +25,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
+    Aggregations = new StatsAggregation("commit_stats", Field<Project>(p => p.NumberOfCommits))
 }
 ----
 

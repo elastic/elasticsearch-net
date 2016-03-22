@@ -7,6 +7,38 @@
 [[dismax-query-usage]]
 == Dismax Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.DisMax(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .TieBreaker(1.11)
+    .Queries(
+        qq => qq.MatchAll(m => m.Name("query1")),
+        qq => qq.MatchAll(m => m.Name("query2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new DisMaxQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    TieBreaker = 1.11,
+    Queries = new QueryContainer[] {
+        new MatchAllQuery() { Name = "query1" },
+        new MatchAllQuery() { Name = "query2" },
+    }
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -29,21 +61,5 @@
     "tie_breaker": 1.11
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new DisMaxQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-TieBreaker = 1.11,
-Queries = new QueryContainer[] {
-	new MatchAllQuery() { Name = "query1" },
-	new MatchAllQuery() { Name = "query2" },
-}
-		}
 ----
 

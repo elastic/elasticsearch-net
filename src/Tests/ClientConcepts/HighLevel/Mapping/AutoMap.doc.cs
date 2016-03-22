@@ -234,17 +234,18 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** ## Automapping with overrides
+		/**[float] 
+		* == Auto mapping with overrides
 		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
-		* various options on your properties (analyzer, doc_values, etc...).  In that case, it's
-		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
+		* various options for your properties (analyzer to use, whether to enable doc_values, etc...).  
+		* In that case, it's possible to use `.AutoMap()` in conjuction with explicitly mapped properties.  
 		*/
 		[U] public void OverridingAutoMappedProperties()
 		{
 			/**
-			* Here we are using AutoMap() to automatically map our company type, but then we're
+			* Here we are using `.AutoMap()` to automatically map our company type, but then we're
 			* overriding our employee property and making it a `nested` type, since by default,
-			* AutoMap() will infer objects as `object`.
+			* `.AutoMap()` will infer objects as `object`.
 			*/
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
@@ -286,10 +287,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** ## Automap with attributes
-		 * It is also possible to define your mappings using attributes on your POCOS.  When you
+		/**[[attribute-mapping]]
+		 * [float] 
+		 * == Attribute mapping
+		 * It is also possible to define your mappings using attributes on your POCOs.  When you
 		 * use attributes, you *must* use `.AutoMap()` in order for the attributes to be applied.
-		 * Here we define the same two types but this time using attributes.
+		 * Here we define the same two types as before, but this time using attributes to define the mappings.
 		 */
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributes
@@ -327,9 +330,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			public List<Employee> Employees { get; set; }
 		}
 
-		/**
-			Then map the types by calling `.AutoMap()`
-		*/
+		/**Then we map the types by calling `.AutoMap()` */
 		[U]
 		public void UsingAutoMapWithAttributes()
 		{
@@ -641,7 +642,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** == Ignoring Properties
+		/**[float] 
+		* == Ignoring Properties
 		* Properties on a POCO can be ignored in a few ways:  
 		*
 		* - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
@@ -705,7 +707,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			settings.Expect(expected).WhenSerializing((ICreateIndexRequest) descriptor);
 		}
 
-		/** == Mapping Recursion
+		/**[float]
+		 * == Mapping Recursion
 		 * If you notice in our previous `Company` and `Employee` examples, the `Employee` type is recursive
 		 * in that the `Employee` class itself contains a collection of type `Employee`. By default, `.AutoMap()` will only
 		 * traverse a single depth when it encounters recursive instances like this.  Hence, in the
@@ -802,25 +805,30 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			Expect(expectedWithMaxRecursion).WhenSerializing((ICreateIndexRequest) withMaxRecursionDescriptor);
 		}
 
-		/** == Applying conventions through the Visitor pattern
+		/**[float] 
+		 * == Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
-		 * AutoMap internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern].  The default visitor, `NoopPropertyVisitor`, 
+		 * AutoMap internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`, 
 		 * does nothing and acts as a blank canvas for you to implement your own visiting methods.
 		 *
-		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
+		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types
 		 * (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 		 */
 		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
-		{
-			// Override the Visit method on INumberProperty and set DocValues = false
-			public override void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{		
+			public override void Visit(
+				INumberProperty type, 
+				PropertyInfo propertyInfo, 
+				ElasticsearchPropertyAttributeBase attribute) //<1> Override the `Visit` method on `INumberProperty` and set `DocValues = false`
 			{
 				type.DocValues = false;
 			}
 
-			// Similarily, override the Visit method on IBooleanProperty and set DocValues = false
-			public override void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+			public override void Visit(
+				IBooleanProperty type, 
+				PropertyInfo propertyInfo, 
+				ElasticsearchPropertyAttributeBase attribute) //<2> Similarily, override the `Visit` method on `IBooleanProperty` and set `DocValues = false`
 			{
 				type.DocValues = false;
 			}
@@ -832,12 +840,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			/** Now we can pass an instance of our custom visitor to `.AutoMap()` */
 			var descriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
-					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor())) //<1> Pass your `IPropertyVisitor` implementation to `.AutoMap`
+					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 				);
 
-			/** and anytime it maps a property as a number (`INumberProperty`) or boolean (`IBooleanProperty`) 
-			 * it will apply the transformation defined in each `Visit()` respectively, which in this example
-			 * disables {ref_current}/doc-values.html[doc values].
+			/** and anytime the client maps a property of the POCO (``Employee`` in this example) as a number (``INumberProperty``) or boolean (``IBooleanProperty``), 
+			 * it will apply the transformation defined in each `Visit()` call respectively, which in this example
+			 * disables {ref_current}/doc-values.html[doc_values].
 			 */
 			var expected = new
 			{
@@ -880,14 +888,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 			};
 		}
 
-		/** You can even take the visitor approach a step further, and instead of visiting on IProperty types, visit
-		 * directly on your POCO properties (`PropertyInfo`).  For example, let's create a visitor that maps all CLR types 
-		 * to an Elasticsearch string (`IStringProperty`).
+		/**=== Visiting on ``PropertyInfo`` 
+		 * You can even take the visitor approach a step further, and instead of visiting on `IProperty` types, visit
+		 * directly on your POCO properties (``PropertyInfo``). As an example, let's create a visitor that maps all CLR types 
+		 * to an Elasticsearch string (``IStringProperty``).
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{
-			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => 
-				new StringProperty();
+			public override IProperty Visit(
+				PropertyInfo propertyInfo, 
+				ElasticsearchPropertyAttributeBase attribute) => new StringProperty();
 		}
 
 		[U]

@@ -13,10 +13,10 @@
 ----
 s => s
 .Aggregations(a => a
-	.Cardinality("state_count", c => c
-		.Field(p => p.State)
-		.PrecisionThreshold(100)
-	)
+    .Cardinality("state_count", c => c
+        .Field(p => p.State)
+        .PrecisionThreshold(100)
+    )
 )
 ----
 
@@ -26,10 +26,10 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new CardinalityAggregation("state_count", Field<Project>(p => p.State))
-	{
-		PrecisionThreshold = 100
-	}
+    Aggregations = new CardinalityAggregation("state_count", Field<Project>(p => p.State))
+    {
+        PrecisionThreshold = 100
+    }
 }
 ----
 

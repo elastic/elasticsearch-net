@@ -7,6 +7,34 @@
 [[prefix-query-usage]]
 == Prefix Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Prefix(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("proj")
+    .Rewrite(RewriteMultiTerm.TopTermsBoostN)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new PrefixQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "proj",
+    Rewrite = RewriteMultiTerm.TopTermsBoostN
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -20,19 +48,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new PrefixQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Value = "proj",
-Rewrite = RewriteMultiTerm.TopTermsBoostN
-		}
 ----
 

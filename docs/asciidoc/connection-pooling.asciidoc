@@ -1,11 +1,19 @@
-﻿:output-dir: client-concepts/connection-pooling
+:output-dir: client-concepts/connection-pooling
+
 :building-blocks: {output-dir}/building-blocks
+
 :sniffing: {output-dir}/sniffing
+
 :pinging: {output-dir}/pinging
+
 :round-robin: {output-dir}/round-robin
+
 :failover: {output-dir}/failover
+
 :max-retries: {output-dir}/max-retries
+
 :request-overrides: {output-dir}/request-overrides
+
 :exceptions: {output-dir}/exceptions
 
 include::{building-blocks}/connection-pooling.asciidoc[]
@@ -53,9 +61,4 @@ include::{request-overrides}/respects-force-node.asciidoc[]
 include::{exceptions}/unexpected-exceptions.asciidoc[]
 
 include::{exceptions}/unrecoverable-exceptions.asciidoc[]
-
-
-
-
-
 

@@ -7,6 +7,32 @@
 [[filtered-query-usage]]
 == Filtered Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Filtered(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Filter(qq => qq.MatchAll(m => m.Name("filter")))
+    .Query(qq => qq.MatchAll(m => m.Name("query")))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new FilteredQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Filter = new MatchAllQuery { Name ="filter" },
+    Query = new MatchAllQuery() { Name = "query" },
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -26,18 +52,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new FilteredQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-Filter = new MatchAllQuery { Name ="filter" },
-Query = new MatchAllQuery() { Name = "query" },
-		}
 ----
 

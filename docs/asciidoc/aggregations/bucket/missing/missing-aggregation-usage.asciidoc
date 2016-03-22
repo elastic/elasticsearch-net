@@ -13,9 +13,9 @@
 ----
 s => s
 .Aggregations(a => a
-	.Missing("projects_without_a_description", m => m
-		.Field(p => p.Description)
-	)
+    .Missing("projects_without_a_description", m => m
+        .Field(p => p.Description)
+    )
 )
 ----
 
@@ -25,10 +25,10 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new MissingAggregation("projects_without_a_description")
-	{
-		Field = Field<Project>(p => p.Description)
-	}
+    Aggregations = new MissingAggregation("projects_without_a_description")
+    {
+        Field = Field<Project>(p => p.Description)
+    }
 }
 ----
 

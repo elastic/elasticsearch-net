@@ -28,18 +28,18 @@ commitsDerivative.Value.Should().NotBe(null);
 s => s
 .Size(0)
 .Aggregations(a => a
-	.DateHistogram("projects_started_per_month", dh => dh
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.Aggregations(aa => aa
-			.Sum("commits", sm => sm
-				.Field(p => p.NumberOfCommits)
-			)
-			.CumulativeSum("cumulative_commits", d => d
-				.BucketsPath("commits")
-			)
-		)
-	)
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .CumulativeSum("cumulative_commits", d => d
+                .BucketsPath("commits")
+            )
+        )
+    )
 )
 ----
 
@@ -48,17 +48,17 @@ s => s
 [source,csharp]
 ----
 new SearchRequest<Project>
-		{
-Size = 0,
-Aggregations = new DateHistogramAggregation("projects_started_per_month")
 {
-	Field = "startedOn",
-	Interval = DateInterval.Month,
-	Aggregations =
-		new SumAggregation("commits", "numberOfCommits") &&
-		new CumulativeSumAggregation("cumulative_commits", "commits")
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations =
+            new SumAggregation("commits", "numberOfCommits") &&
+            new CumulativeSumAggregation("cumulative_commits", "commits")
+    }
 }
-		}
 ----
 
 [source,javascript]

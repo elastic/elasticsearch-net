@@ -13,41 +13,41 @@
 ----
 s => s
 .Aggregations(a => a
-	.Terms("states", t => t
-		.Field(p => p.State)
-		.Aggregations(aa => aa
-			.TopHits("top_state_hits", th => th
-				.Sort(srt => srt
-					.Field(p => p.StartedOn)
-					.Order(SortOrder.Descending)
-				)
-				.Source(src => src
-					.Include(fs => fs
-						.Field(p => p.Name)
-						.Field(p => p.StartedOn)
-					)
-				)
-				.Size(1)
-				.Version()
-				.Explain()
-				.FielddataFields(fd => fd
-					.Field(p => p.State)
-					.Field(p => p.NumberOfCommits)
-				)
-				.Highlight(h => h
-					.Fields(
-						hf => hf.Field(p => p.Tags),
-						hf => hf.Field(p => p.Description)
-					)
-				)
-				.ScriptFields(sfs => sfs
-					.ScriptField("commit_factor", sf => sf
-						.Inline("doc['numberOfCommits'].value * 2")
-					)
-				)
-			)
-		)
-	)
+    .Terms("states", t => t
+        .Field(p => p.State)
+        .Aggregations(aa => aa
+            .TopHits("top_state_hits", th => th
+                .Sort(srt => srt
+                    .Field(p => p.StartedOn)
+                    .Order(SortOrder.Descending)
+                )
+                .Source(src => src
+                    .Include(fs => fs
+                        .Field(p => p.Name)
+                        .Field(p => p.StartedOn)
+                    )
+                )
+                .Size(1)
+                .Version()
+                .Explain()
+                .FielddataFields(fd => fd
+                    .Field(p => p.State)
+                    .Field(p => p.NumberOfCommits)
+                )
+                .Highlight(h => h
+                    .Fields(
+                        hf => hf.Field(p => p.Tags),
+                        hf => hf.Field(p => p.Description)
+                    )
+                )
+                .ScriptFields(sfs => sfs
+                    .ScriptField("commit_factor", sf => sf
+                        .Inline("doc['numberOfCommits'].value * 2")
+                    )
+                )
+            )
+        )
+    )
 )
 ----
 
@@ -57,39 +57,39 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new TermsAggregation("states")
-	{
-		Field = Field<Project>(p => p.State),
-		Aggregations = new TopHitsAggregation("top_state_hits")
-		{
-			Sort = new List<ISort>
-			{
-				{
-					new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
-				}
-			},
-			Source = new SourceFilter
-			{
-				Include = new [] { "name", "startedOn" }
-			},
-			Size = 1,
-			Version = true,
-			Explain = true,
-			FielddataFields = new [] { "state", "numberOfCommits" },
-			Highlight = new Highlight
-			{
-				Fields = new Dictionary<Nest.Field, IHighlightField>
-				{
-					{ Field<Project>(p => p.Tags), new HighlightField() },
-					{ Field<Project>(p => p.Description), new HighlightField() }
-				}
-			},
-			ScriptFields = new ScriptFields
-			{
-				{ "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
-			}
-		}
-	}
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State),
+        Aggregations = new TopHitsAggregation("top_state_hits")
+        {
+            Sort = new List<ISort>
+            {
+                {
+                    new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
+                }
+            },
+            Source = new SourceFilter
+            {
+                Include = new [] { "name", "startedOn" }
+            },
+            Size = 1,
+            Version = true,
+            Explain = true,
+            FielddataFields = new [] { "state", "numberOfCommits" },
+            Highlight = new Highlight
+            {
+                Fields = new Dictionary<Nest.Field, IHighlightField>
+                {
+                    { Field<Project>(p => p.Tags), new HighlightField() },
+                    { Field<Project>(p => p.Description), new HighlightField() }
+                }
+            },
+            ScriptFields = new ScriptFields
+            {
+                { "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
+            }
+        }
+    }
 }
 ----
 

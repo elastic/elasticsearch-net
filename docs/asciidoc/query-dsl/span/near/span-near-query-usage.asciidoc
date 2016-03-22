@@ -7,6 +7,45 @@
 [[span-near-query-usage]]
 == Span Near Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanNear(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Clauses(
+        c=>c.SpanTerm(st=>st.Field("field").Value("value1")),
+        c=>c.SpanTerm(st=>st.Field("field").Value("value2")),
+        c=>c.SpanTerm(st=>st.Field("field").Value("value3"))
+    )
+    .Slop(12)
+    .InOrder(false)
+    .CollectPayloads(false)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanNearQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Clauses = new List<ISpanQuery>
+    {
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+    },
+    Slop = 12,
+    InOrder = false,
+    CollectPayloads = false
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -42,25 +81,5 @@
     "boost": 1.1
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SpanNearQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Clauses = new List<ISpanQuery>
-{
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
-	new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
-},
-Slop = 12,
-InOrder = false,
-CollectPayloads = false
-		}
 ----
 

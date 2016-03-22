@@ -13,17 +13,17 @@
 ----
 s => s
 .Aggregations(a => a
-	.PercentileRanks("commits_outlier", pr => pr
-		.Field(p => p.NumberOfCommits)
-		.Values(15, 30)
-		.Method(m => m
-			.TDigest(td => td
-				.Compression(200)
-			)
-		)
-		.Script("doc['numberOfCommits'].value * 1.2")
-		.Missing(0)
-	)
+    .PercentileRanks("commits_outlier", pr => pr
+        .Field(p => p.NumberOfCommits)
+        .Values(15, 30)
+        .Method(m => m
+            .TDigest(td => td
+                .Compression(200)
+            )
+        )
+        .Script("doc['numberOfCommits'].value * 1.2")
+        .Missing(0)
+    )
 )
 ----
 
@@ -33,16 +33,16 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
-	{
-		Values = new List<double> { 15, 30 },
-		Method = new TDigestMethod
-		{
-			Compression = 200
-		},
-		Script = (InlineScript)"doc['numberOfCommits'].value * 1.2",
-		Missing = 0
-	}
+    Aggregations = new PercentileRanksAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
+    {
+        Values = new List<double> { 15, 30 },
+        Method = new TDigestMethod
+        {
+            Compression = 200
+        },
+        Script = (InlineScript)"doc['numberOfCommits'].value * 1.2",
+        Missing = 0
+    }
 }
 ----
 

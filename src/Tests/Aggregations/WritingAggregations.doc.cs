@@ -5,12 +5,14 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
 using System.Linq;
+using Tests.Aggregations.Bucket.Children;
+using Tests.Framework.Integration;
+using FluentAssertions;
 
 namespace Tests.Aggregations
 {
-	/** == Writing Aggregations
-	*
-	* Aggregations are arguably one of the most powerful features of Elasticsearch.
+	/** 
+	*== Writing Aggregations
 	* NEST allows you to write your aggregations using 
 	*
 	* - a strict fluent DSL
@@ -135,6 +137,51 @@ namespace Tests.Aggregations
 						)
 					);
 			}
+		}
+	}
+
+	/**[[aggs-vs-aggregations]]
+	*=== Aggs vs. Aggregations 
+	*
+	* The response exposesboth `.Aggregations` and `.Aggs` properties for handling aggregations. Why two properties you ask? 
+	* Well, the former is a dictionary of aggregation names to `IAggregate` types, a common interface for
+	* aggregation responses (termed __Aggregates__ in NEST), and the latter, is a convenience helper to get the right type 
+	* of aggregation response out of the dictionary based on a key name.
+	*
+	* This is better illustrated with an example
+	*/
+	public class AggsUsage : ChildrenAggregationUsageTests
+	{
+		public AggsUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		/** Let's imagine we make the following request. */
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+		.Aggregations(aggs => aggs
+			.Children<CommitActivity>("name_of_child_agg", child => child
+				.Aggregations(childAggs => childAggs
+					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+				)
+			)
+		);
+
+		/**=== Aggs usage 
+		* Now, using `.Aggs`, we can easily get the `Children` aggregation response out and from that,
+		* the `Average` and `Max` sub aggregations.
+		*/
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
+
+			var childAggregation = response.Aggs.Children("name_of_child_agg");
+
+			var averagePerChild = childAggregation.Average("average_per_child");
+
+			averagePerChild.Should().NotBeNull(); //<1> Do something with the average per child. Here we just assert it's not null
+
+			var maxPerChild = childAggregation.Max("max_per_child");
+
+			maxPerChild.Should().NotBeNull(); //<2> Do something with the max per child. Here we just assert it's not null
 		}
 	}
 }

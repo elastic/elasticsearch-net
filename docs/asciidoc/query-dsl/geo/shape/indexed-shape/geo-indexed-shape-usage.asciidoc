@@ -7,6 +7,41 @@
 [[geo-indexed-shape-usage]]
 == Geo Indexed Shape Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoIndexedShape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .IndexedShape(p=>p
+        .Id(2)
+        .Path(pp=>pp.Location)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoIndexedShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    IndexedShape = new FieldLookup
+    {
+        Id = 2,
+        Index = Index<Project>(),
+        Type = Type<Project>(),
+        Path = Field<Project>(p=>p.Location)
+    }
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -24,24 +59,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new GeoIndexedShapeQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = Field<Project>(p=>p.Location),
-IndexedShape = new FieldLookup
-{
-	Id = 2,
-	Index = Index<Project>(),
-	Type = Type<Project>(),
-	Path = Field<Project>(p=>p.Location)
-}
-		}
 ----
 

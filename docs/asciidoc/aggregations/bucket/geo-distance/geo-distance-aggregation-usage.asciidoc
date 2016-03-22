@@ -13,15 +13,15 @@
 ----
 s => s
 .Aggregations(a => a
-	.GeoDistance("rings_around_amsterdam", g => g
-		.Field(p => p.Location)
-		.Origin(52.376, 4.894)
-		.Ranges(
-			r => r.To(100),
-			r => r.From(100).To(300),
-			r => r.From(300)
-		)
-	)
+    .GeoDistance("rings_around_amsterdam", g => g
+        .Field(p => p.Location)
+        .Origin(52.376, 4.894)
+        .Ranges(
+            r => r.To(100),
+            r => r.From(100).To(300),
+            r => r.From(300)
+        )
+    )
 )
 ----
 
@@ -31,17 +31,17 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
-	{
-		Field = Field((Project p) => p.Location),
-		Origin = "52.376, 4.894",
-		Ranges = new List<Nest.Range>
-		{
-			new Nest.Range { To = 100 },
-			new Nest.Range { From = 100, To = 300 },
-			new Nest.Range { From = 300 }
-		}
-	}
+    Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
+    {
+        Field = Field((Project p) => p.Location),
+        Origin = "52.376, 4.894",
+        Ranges = new List<Nest.Range>
+        {
+            new Nest.Range { To = 100 },
+            new Nest.Range { From = 100, To = 300 },
+            new Nest.Range { From = 300 }
+        }
+    }
 }
 ----
 

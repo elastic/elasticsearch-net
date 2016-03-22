@@ -13,7 +13,7 @@
 ----
 new SearchRequest<Project>()
 {
-	PostFilter = new QueryContainer(new MatchAllQuery())
+    PostFilter = new QueryContainer(new MatchAllQuery())
 }
 ----
 

@@ -4,8 +4,8 @@
 
 :imagesdir: ../../../images/
 
-[[filter-aggregation]]
-== Filter Aggregation
+[[filter-aggregation-usage]]
+== Filter Aggregation Usage
 
 Defines a single bucket of all the documents in the current document set context that match a specified filter. 
 Often this will be used to narrow down the current aggregation context to a specific set of documents.
@@ -18,12 +18,12 @@ Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html
 ----
 s => s
 .Aggregations(aggs => aggs
-	.Filter("bethels_projects", date => date
-		.Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
-		.Aggregations(childAggs => childAggs
-			.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
-		)
-	)
+    .Filter("bethels_projects", date => date
+        .Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
+        .Aggregations(childAggs => childAggs
+            .Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+        )
+    )
 )
 ----
 
@@ -33,12 +33,12 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new FilterAggregation("bethels_projects")
-	{
-		Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
-		Aggregations =
-			new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name)}
-	}
+    Aggregations = new FilterAggregation("bethels_projects")
+    {
+        Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
+        Aggregations =
+            new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name)}
+    }
 }
 ----
 
@@ -70,7 +70,7 @@ new SearchRequest<Project>
 === Handling Responses
 
 Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
-in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----
@@ -97,13 +97,13 @@ to an empty object.
 ----
 s => s
 .Aggregations(aggs => aggs
-	.Filter("empty_filter", date => date
-		.Filter(f => f
-			.Bool(b => b
-				.Filter(new QueryContainer[0])
-			)
-		)
-	)
+    .Filter("empty_filter", date => date
+        .Filter(f => f
+            .Bool(b => b
+                .Filter(new QueryContainer[0])
+            )
+        )
+    )
 )
 ----
 
@@ -113,13 +113,13 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new FilterAggregation("empty_filter")
-	{
-		Filter = new BoolQuery
-		{
-			Filter = new List<QueryContainer>()
-		}
-	}
+    Aggregations = new FilterAggregation("empty_filter")
+    {
+        Filter = new BoolQuery
+        {
+            Filter = new List<QueryContainer>()
+        }
+    }
 }
 ----
 

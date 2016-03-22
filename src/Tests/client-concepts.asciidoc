@@ -1,11 +1,7 @@
-﻿[[client-concepts]]
-= Client Concepts
-
-include::low-level.asciidoc[]
+﻿include::low-level.asciidoc[]
 
 include::high-level.asciidoc[]
 
-include::connection-pooling.asciidoc[]
 
 
 

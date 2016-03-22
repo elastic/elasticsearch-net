@@ -8,10 +8,12 @@ using Xunit;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.PropertyNames
 {
-	/**== Property Names */
+	/**[[property-inference]]
+	* == Property Name Inference 
+	*/
 	public class PropertyNames
 	{
-		/** 
+		/**=== Using `.Suffix()` extension method on `object`
 		 * Property names resolve to the last token. An example using the `.Suffix()` extension
 		 */
 		[U] public void PropertyNamesAreResolvedToLastTokenUsingSuffix()
@@ -20,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.PropertyNames
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/** 
+		/**=== `.ApplySuffix()` extension  method on Expression Delegates
 		 * And an example using the `.ApplySuffix()` extension on lambda expressions
 		 */
 		[U]
@@ -31,7 +33,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.PropertyNames
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/** Property names cannot contain a `.` in order to prevent the potential for collision with a field that 
+		/** Property names cannot contain a ``.``. in order to prevent the potential for collision with a field that 
 		 * may have {ref_current}/_multi_fields.html[`multi_fields`] 
 		 */
 		[U] public void StringsContainingDotsIsAnException()

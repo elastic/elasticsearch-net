@@ -11,7 +11,7 @@ namespace Nest.Litterateur.Walkers
 {
 	class DocumentationFileWalker : CSharpSyntaxWalker
 	{
-		private static readonly string[] PropertyNamesOfInterest =
+		private static readonly string[] PropertyOrMethodNamesOfInterest =
 		{
 			"ExpectJson",
 			"QueryJson",
@@ -79,7 +79,7 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
 		{
 			_propertyOrMethodName = node.Identifier.Text;
-			if (PropertyNamesOfInterest.Contains(_propertyOrMethodName))
+			if (PropertyOrMethodNamesOfInterest.Contains(_propertyOrMethodName))
 			{
 				// TODO: Look to get the generic types for the call so that we can prettify the fluent and OIS calls in docs e.g. client.Search<Project>({Call});
 				// var genericArguments = node.DescendantNodes().OfType<GenericNameSyntax>().FirstOrDefault();
@@ -97,7 +97,7 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitArrowExpressionClause(ArrowExpressionClauseSyntax node)
 		{
-			if (!this.InsideFluentOrInitializerExample) return;
+			if (!this.InsideFluentOrInitializerExample && !PropertyOrMethodNamesOfInterest.Contains(_propertyOrMethodName)) return;
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
 			if (syntaxNode == null) return;
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;

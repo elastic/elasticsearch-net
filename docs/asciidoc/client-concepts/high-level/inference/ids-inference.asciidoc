@@ -4,8 +4,8 @@
 
 :imagesdir: ../../../images/
 
-[[id-inference]]
-== Id Inference
+[[ids-inference]]
+== Ids Inference
 
 === Implicit Conversions
 
@@ -45,9 +45,9 @@ Imagine your codebase has the following type that we want to index into Elastics
 ----
 class MyDTO
 {
-	public Guid Id { get; set; }
-	public string Name { get; set; }
-	public string OtherName { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string OtherName { get; set; }
 }
 ----
 
@@ -58,9 +58,9 @@ and create a cached fast func delegate based on the properties getter
 ----
 var dto = new MyDTO
 {
-	Id = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E"),
-	Name = "x",
-	OtherName = "y"
+    Id = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E"),
+    Name = "x",
+    OtherName = "y"
 };
 
 Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenInferringIdOn(dto);
@@ -72,9 +72,9 @@ Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-	.InferMappingFor<MyDTO>(m => m
-		.IdProperty(p => p.Name)
-	)
+    .InferMappingFor<MyDTO>(m => m
+        .IdProperty(p => p.Name)
+    )
 ).Expect("x").WhenInferringIdOn(dto);
 ----
 
@@ -86,9 +86,9 @@ with different inference rules
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-	.InferMappingFor<MyDTO>(m => m
-		.IdProperty(p => p.OtherName)
-	)
+    .InferMappingFor<MyDTO>(m => m
+        .IdProperty(p => p.OtherName)
+    )
 ).Expect("y").WhenInferringIdOn(dto);
 ----
 
@@ -102,9 +102,9 @@ to the name of the property that should be used for the document id
 [ElasticsearchType(IdProperty = nameof(Name))]
 class MyOtherDTO
 {
-	public Guid Id { get; set; }
-	public string Name { get; set; }
-	public string OtherName { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public string OtherName { get; set; }
 }
 ----
 
@@ -126,9 +126,9 @@ that will infer the document id from the property `OtherName`:
 [source,csharp]
 ----
 WithConnectionSettings(x => x
-	.InferMappingFor<MyOtherDTO>(m => m
-		.IdProperty(p => p.OtherName)
-	)
+    .InferMappingFor<MyOtherDTO>(m => m
+        .IdProperty(p => p.OtherName)
+    )
 ).Expect("y").WhenInferringIdOn(dto);
 ----
 

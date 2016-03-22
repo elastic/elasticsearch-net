@@ -7,6 +7,36 @@
 [[terms-query-usage]]
 == Terms Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .DisableCoord()
+    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
+    .Terms("term1", "term2")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Terms = new [] { "term1", "term2" },
+    DisableCoord = true,
+    MinimumShouldMatch = 2
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -22,20 +52,5 @@
     "minimum_should_match": 2
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new TermsQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Terms = new [] { "term1", "term2" },
-DisableCoord = true,
-MinimumShouldMatch = 2
-		}
 ----
 

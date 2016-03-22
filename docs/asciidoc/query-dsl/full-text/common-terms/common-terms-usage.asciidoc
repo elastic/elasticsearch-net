@@ -7,6 +7,44 @@
 [[common-terms-usage]]
 == Common Terms Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.CommonTerms(c => c
+    .Field(p => p.Description)
+    .Analyzer("standard")
+    .Boost(1.1)
+    .CutoffFrequency(0.001)
+    .DisableCoord()
+    .HighFrequencyOperator(Operator.And)
+    .LowFrequencyOperator(Operator.Or)
+    .MinimumShouldMatch(1)
+    .Name("named_query")
+    .Query("nelly the elephant not as a")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new CommonTermsQuery()
+{
+    Field = Field<Project>(p => p.Description),
+    Analyzer = "standard",
+    Boost = 1.1,
+    CutoffFrequency = 0.001,
+    DisableCoord = true,
+    HighFrequencyOperator = Operator.And,
+    LowFrequencyOperator = Operator.Or,
+    MinimumShouldMatch = 1,
+    Name = "named_query",
+    Query = "nelly the elephant not as a"
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -25,24 +63,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new CommonTermsQuery()
-		{
-Field = Field<Project>(p => p.Description),
-Analyzer = "standard",
-Boost = 1.1,
-CutoffFrequency = 0.001,
-DisableCoord = true,
-HighFrequencyOperator = Operator.And,
-LowFrequencyOperator = Operator.Or,
-MinimumShouldMatch = 1,
-Name = "named_query",
-Query = "nelly the elephant not as a"
-		}
 ----
 

@@ -7,6 +7,54 @@
 [[span-not-query-usage]]
 == Span Not Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanNot(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Dist(12)
+    .Post(13)
+    .Pre(14)
+    .Include(i => i
+        .SpanTerm(st => st.Field("field1").Value("hoya"))
+    )
+    .Exclude(e => e
+        .SpanTerm(st => st.Field("field1").Value("hoya2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanNotQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Dist = 12,
+    Post = 13,
+    Pre = 14,
+    Include = new SpanQuery
+    {
+        SpanTerm = new SpanTermQuery
+        {
+            Field = "field1", Value = "hoya"
+        }
+    },
+    Exclude = new SpanQuery
+    {
+        SpanTerm = new SpanTermQuery
+        {
+            Field = "field1", Value = "hoya2"
+        }
+    },
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -33,21 +81,5 @@
     "dist": 12
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SpanNotQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Dist = 12,
-Post = 13,
-Pre = 14,
-Include = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
-Exclude = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
-		}
 ----
 

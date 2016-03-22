@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AsciiDoc;
 
@@ -13,7 +14,7 @@ namespace Nest.Litterateur.AsciiDoc
 	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries, 
 	/// section titles, rearranges sections, etc.
 	/// </summary>
-	public class AddAttributeEntriesVisitor : NoopVisitor
+	public class GeneratedAsciidocVisitor : NoopVisitor
 	{
 		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
 
@@ -21,7 +22,7 @@ namespace Nest.Litterateur.AsciiDoc
 		private Document _newDocument;
 		private bool _topLevel = true;
 
-		public AddAttributeEntriesVisitor(FileInfo destination)
+		public GeneratedAsciidocVisitor(FileInfo destination)
 		{
 			_destination = destination;
 		}
@@ -72,16 +73,19 @@ namespace Nest.Litterateur.AsciiDoc
 			}
 
 			// see if the document has some kind of top level title and add one with an anchor if not.
-			if (document.Title == null &&
-			    document.Elements.Count > 0 &&
-			    !document.Elements.OfType<SectionTitle>().Any(s => s.Level == 2))
+			if (document.Title == null && document.Elements.Count > 0)
 			{
-				var id = Path.GetFileNameWithoutExtension(_destination.Name);
-				var title = id.LowercaseHyphenToPascal();
-				var sectionTitle = new SectionTitle(title, 2);
-				sectionTitle.Attributes.Add(new Anchor(id));
+				var sectionTitle = document.Elements[0] as SectionTitle;
 
-				_newDocument.Elements.Add(sectionTitle);
+				if (sectionTitle == null || sectionTitle.Level != 2)
+				{
+					var id = Path.GetFileNameWithoutExtension(_destination.Name);
+					var title = id.LowercaseHyphenToPascal();
+					sectionTitle = new SectionTitle(title, 2);
+					sectionTitle.Attributes.Add(new Anchor(id));
+
+					_newDocument.Elements.Add(sectionTitle);
+				}
 			}
 
 			base.Visit(document);
@@ -93,6 +97,7 @@ namespace Nest.Litterateur.AsciiDoc
 			{
 				_topLevel = false;
 				Source exampleJson = null;
+				Source objectInitializerExample = null;
 
 				for (int index = 0; index < elements.Count; index++)
 				{
@@ -114,7 +119,7 @@ namespace Nest.Litterateur.AsciiDoc
 							continue;
 						}
 
-						if (method.Value == "expectjson" && 
+						if ((method.Value == "expectjson" || method.Value == "queryjson") && 
 							source.Attributes.Count > 1 && 
 							source.Attributes[1].Name == "javascript")
 						{
@@ -142,9 +147,21 @@ namespace Nest.Litterateur.AsciiDoc
 							case "queryfluent":
 								_newDocument.Elements.Add(new SectionTitle("Fluent DSL Example", 3));
 								_newDocument.Elements.Add(element);
+
+								if (objectInitializerExample != null)
+								{
+									_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
+									_newDocument.Elements.Add(objectInitializerExample);
+									objectInitializerExample = null;
+									
+									if (exampleJson != null)
+									{
+										_newDocument.Elements.Add(exampleJson);
+										exampleJson = null;
+									}
+								}
 								break;
 							case "initializer":
-							case "queryinitializer":
 								_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
 								_newDocument.Elements.Add(element);
 								// Move the example json to after the initializer example
@@ -152,6 +169,24 @@ namespace Nest.Litterateur.AsciiDoc
 								{
 									_newDocument.Elements.Add(exampleJson);
 									exampleJson = null;
+								}
+								break;
+							case "queryinitializer":
+								if (objectInitializerExample != null)
+								{
+									_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
+									_newDocument.Elements.Add(objectInitializerExample);
+									
+									// Move the example json to after the initializer example
+									if (exampleJson != null)
+									{
+										_newDocument.Elements.Add(exampleJson);
+										exampleJson = null;
+									}
+								}
+								else
+								{
+									objectInitializerExample = source;
 								}
 								break;
 							case "expectresponse":
@@ -189,6 +224,10 @@ namespace Nest.Litterateur.AsciiDoc
 			{
 				source.Attributes.Remove(methodAttribute);
 			}
+
+			// Replace tabs with spaces and remove comment escaping from output 
+			// (elastic docs generation does not like this callout format)
+			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
 
 			base.Visit(source);
 		}

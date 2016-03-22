@@ -13,10 +13,10 @@
 ----
 s => s
 .Aggregations(a => a
-	.GeoBounds("viewport", gb => gb
-		.Field(p => p.Location)
-		.WrapLongitude(true)
-	)
+    .GeoBounds("viewport", gb => gb
+        .Field(p => p.Location)
+        .WrapLongitude(true)
+    )
 )
 ----
 
@@ -26,10 +26,10 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
-	{
-		WrapLongitude = true
-	}
+    Aggregations = new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+    {
+        WrapLongitude = true
+    }
 }
 ----
 

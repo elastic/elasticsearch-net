@@ -7,6 +7,34 @@
 [[boosting-query-usage]]
 == Boosting Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Boosting(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Positive(qq => qq.MatchAll(m => m.Name("filter")))
+    .Negative(qq => qq.MatchAll(m => m.Name("query")))
+    .NegativeBoost(1.12)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new BoostingQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    PositiveQuery = new MatchAllQuery { Name ="filter" },
+    NegativeQuery= new MatchAllQuery() { Name = "query" },
+    NegativeBoost = 1.12
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -27,19 +55,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new BoostingQuery()
-		{
-Name = "named_query",
-Boost = 1.1,
-PositiveQuery = new MatchAllQuery { Name ="filter" },
-NegativeQuery= new MatchAllQuery() { Name = "query" },
-NegativeBoost = 1.12
-		}
 ----
 

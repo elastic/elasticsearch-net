@@ -13,17 +13,17 @@ the call to a node throws an exception or returns a 502 or 503
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways())
-	.ClientCalls(r => r.OnPort(9201).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing())
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways())
+    .ClientCalls(r => r.OnPort(9201).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
 );
 audit = await audit.TraceCall(
-	new ClientCall {
-		{ BadResponse, 9200 },
-		{ HealthyResponse, 9201 },
-	}
+    new ClientCall {
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
+    }
 );
 ----
 
@@ -34,18 +34,18 @@ Will be treated as an error that requires retrying
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways(502))
-	.ClientCalls(r => r.OnPort(9201).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing())
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways(502))
+    .ClientCalls(r => r.OnPort(9201).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
 );
 
 audit = await audit.TraceCall(
-	new ClientCall {
-		{ BadResponse, 9200 },
-		{ HealthyResponse, 9201 },
-	}
+    new ClientCall {
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
+    }
 );
 ----
 
@@ -56,37 +56,37 @@ Will be treated as an error that requires retrying
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways(503))
-	.ClientCalls(r => r.OnPort(9201).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing())
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways(503))
+    .ClientCalls(r => r.OnPort(9201).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
 );
 
 audit = await audit.TraceCall(
-	new ClientCall {
-		{ BadResponse, 9200 },
-		{ HealthyResponse, 9201 },
-	}
+    new ClientCall {
+        { BadResponse, 9200 },
+        { HealthyResponse, 9201 },
+    }
 );
 ----
 
-If a call returns a valid (_for the request*_) http status code other then 502/503. the request won't be retried.
+If a call returns a valid _for the request*_) http status code other then 502/503. the request won't be retried.
 
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.FailAlways(418))
-	.ClientCalls(r => r.OnPort(9201).SucceedAlways())
-	.StaticConnectionPool()
-	.Settings(s => s.DisablePing())
+    .Nodes(10)
+    .ClientCalls(r => r.FailAlways(418))
+    .ClientCalls(r => r.OnPort(9201).SucceedAlways())
+    .StaticConnectionPool()
+    .Settings(s => s.DisablePing())
 );
 
 audit = await audit.TraceCall(
-	new ClientCall {
-		{ BadResponse, 9200 },
-	}
+    new ClientCall {
+        { BadResponse, 9200 },
+    }
 );
 ----
 

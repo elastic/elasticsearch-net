@@ -13,9 +13,9 @@
 ----
 s => s
 .FielddataFields(fs => fs
-	.Field(p => p.Name)
-	.Field(p => p.LeadDeveloper)
-	.Field(p => p.StartedOn)
+    .Field(p => p.Name)
+    .Field(p => p.LeadDeveloper)
+    .Field(p => p.StartedOn)
 )
 ----
 
@@ -25,7 +25,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
+    FielddataFields = new string [] { "name", "leadDeveloper", "startedOn" }
 }
 ----
 

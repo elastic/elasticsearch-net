@@ -7,7 +7,8 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class IdsInference
 	{
-		/**== Id Inference
+		/**[[ids-inference]]
+		 *== Ids Inference
 		 * 
 		 * === Implicit Conversions
 		 *

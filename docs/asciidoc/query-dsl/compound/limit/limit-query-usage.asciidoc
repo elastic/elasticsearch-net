@@ -7,6 +7,30 @@
 [[limit-query-usage]]
 == Limit Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Limit(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Limit(100)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new LimitQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Limit = 100
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -17,17 +41,5 @@
     "limit": 100
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new LimitQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Limit = 100
-		}
 ----
 

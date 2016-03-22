@@ -8,14 +8,14 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateHistogram
 {
-	/** == Date Histogram Aggregation
+	/**
 	 * A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
 	 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 	 * The main difference is that the interval can be specified by date/time expressions.
 	 *
-	 * When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
-	 * the serialized DateTimes of extended_bounds correctly, the date_optional_time format is included
-	 * as part of the format value.
+	 * NOTE: When specifying a `format` **and** `extended_bounds`, in order for Elasticsearch to be able to parse
+	 * the serialized ``DateTime`` of `extended_bounds` correctly, the `date_optional_time` format is included
+	 * as part of the `format` value.
 	 *
 	 * Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
 	*/
@@ -35,7 +35,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						field = "startedOn",
 						interval = "month",
 						min_doc_count = 2,
-						format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time",
+						format = "yyyy-MM-dd'T'HH:mm:ss||date_optional_time", //<1> Note the inclusion of `date_optional_time` to `format`
 						order = new { _count = "asc" },
 						extended_bounds = new
 						{
@@ -119,7 +119,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		{
 			/** === Handling responses
 			* Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily 
-			* in the correct type. TODO: [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
 

@@ -7,6 +7,34 @@
 [[wildcard-query-usage]]
 == Wildcard Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Wildcard(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("p*oj")
+    .Rewrite(RewriteMultiTerm.TopTermsBoostN)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new WildcardQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "p*oj",
+    Rewrite = RewriteMultiTerm.TopTermsBoostN
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -20,19 +48,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new WildcardQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Value = "p*oj",
-Rewrite = RewriteMultiTerm.TopTermsBoostN
-		}
 ----
 

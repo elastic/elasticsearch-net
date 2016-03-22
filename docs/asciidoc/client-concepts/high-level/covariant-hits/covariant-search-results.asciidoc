@@ -11,14 +11,13 @@ NEST directly supports returning covariant result sets.
 Meaning a result can be typed to an interface or base class
 but the actual instance type of the result can be that of the subclass directly
 
-Let's look at an example; Imagine we want to search over multiple types that all implement
-`ISearchResult`
+Let's look at an example; Imagine we want to search over multiple types that all implement`ISearchResult`
 
 [source,csharp]
 ----
 public interface ISearchResult
 {
-	string Name { get; set; }
+    string Name { get; set; }
 }
 ----
 
@@ -28,20 +27,20 @@ We have three implementations of `ISearchResult` namely `A`, `B` and `C`
 ----
 public class A : ISearchResult
 {
-	public string Name { get; set; }
-	public int PropertyOnA { get; set; }
+    public string Name { get; set; }
+    public int PropertyOnA { get; set; }
 }
 
 public class B : ISearchResult
 {
-	public string Name { get; set; }
-	public int PropertyOnB { get; set; }
+    public string Name { get; set; }
+    public int PropertyOnB { get; set; }
 }
 
 public class C : ISearchResult
 {
-	public string Name { get; set; }
-	public int PropertyOnC { get; set; }
+    public string Name { get; set; }
+    public int PropertyOnC { get; set; }
 }
 ----
 
@@ -54,13 +53,13 @@ and pass the actual types we want to search over using `.Type()`
 [source,csharp]
 ----
 var result = this._client.Search<ISearchResult>(s => s
-	.Type(Types.Type(typeof(A), typeof(B), typeof(C)))
-	.Size(100)
+    .Type(Types.Type(typeof(A), typeof(B), typeof(C)))
+    .Size(100)
 );
 ----
 
 NEST will translate this to a search over `/index/a,b,c/_search`; 
-hits that have "_type" : "a` will be serialized to `A` and so forth
+hits that have `"_type" : "a"` will be serialized to `A` and so forth
 
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
@@ -103,12 +102,12 @@ A more low level approach is to inspect the hit yourself and determine the CLR t
 [source,csharp]
 ----
 var result = this._client.Search<ISearchResult>(s => s
-	.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
-	.Size(100)
+    .ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
+    .Size(100)
 );
 ----
 
-here for each hit we'll call the delegate passed to ConcreteTypeSelector where 
+here for each hit we'll call the delegate passed to `ConcreteTypeSelector where 
 
 * `d` is a representation of the `_source` exposed as a `dynamic` type
 
@@ -161,12 +160,12 @@ You can hint at the types using `.CovariantTypes()`
 [source,csharp]
 ----
 var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(60), "scrollId", s => s
-	.CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
+    .CovariantTypes(Types.Type(typeof(A), typeof(B), typeof(C)))
 );
 ----
 
 NEST will translate this to a search over `/index/a,b,c/_search`;
-hits that have "_type" : "a` will be serialized to `A` and so forth
+hits that have `"_type" : "a"` will be serialized to `A` and so forth
 
 Here we assume our response is valid and that we received the 100 documents
 we are expecting. Remember `result.Documents` is an `IEnumerable<ISearchResult>`
@@ -212,7 +211,7 @@ The more low level concrete type selector can also be specified on scroll
 [source,csharp]
 ----
 var result = this._client.Scroll<ISearchResult>(TimeSpan.FromMinutes(1), "scrollid", s => s
-	.ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
+    .ConcreteTypeSelector((d, h) => h.Type == "a" ? typeof(A) : h.Type == "b" ? typeof(B) : typeof(C))
 );
 ----
 

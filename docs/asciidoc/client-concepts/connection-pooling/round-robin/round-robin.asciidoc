@@ -36,9 +36,9 @@ e.g Thread A might get 0,1,2,3,5 and thread B will get 1,2,3,4,0.
 [source,csharp]
 ----
 var startingPositions = Enumerable.Range(0, NumberOfNodes)
-	.Select(i => pool.CreateView().First())
-	.Select(n => n.Uri.Port)
-	.ToList();
+    .Select(i => pool.CreateView().First())
+    .Select(n => n.Uri.Port)
+    .ToList();
 
 var expectedOrder = Enumerable.Range(9200, NumberOfNodes);
 
@@ -60,8 +60,8 @@ comes 9200 again
 var threadedStartPositions = new ConcurrentBag<int>();
 
 var threads = Enumerable.Range(0, 20)
-	.Select(i => CreateThreadCallingGetNext(pool, threadedStartPositions))
-	.ToList();
+    .Select(i => CreateThreadCallingGetNext(pool, threadedStartPositions))
+    .ToList();
 
 t.Start();
 

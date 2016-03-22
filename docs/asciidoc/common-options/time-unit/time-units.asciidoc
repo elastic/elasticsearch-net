@@ -41,10 +41,10 @@ the expression will be serialized to a time unit string composed of the factor a
 [source,csharp]
 ----
 Expect("2d")
-	.WhenSerializing(unitString)
-	.WhenSerializing(unitComposed)
-	.WhenSerializing(unitTimeSpan)
-	.WhenSerializing(unitMilliseconds);
+    .WhenSerializing(unitString)
+    .WhenSerializing(unitComposed)
+    .WhenSerializing(unitTimeSpan)
+    .WhenSerializing(unitMilliseconds);
 ----
 
 The `Milliseconds` property on `Time` is calculated even when not using the constructor that takes a double

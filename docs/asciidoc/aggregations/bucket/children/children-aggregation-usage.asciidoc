@@ -4,13 +4,13 @@
 
 :imagesdir: ../../../images/
 
-[[children-aggregation]]
-== Children Aggregation
+[[children-aggregation-usage]]
+== Children Aggregation Usage
 
 A special single bucket aggregation that enables aggregating from buckets on parent document types to
 buckets on child documents.
 
-Be sure to read the elasticsearch documentation {ref_current}/search-aggregations-bucket-children-aggregation.html[on this subject here]
+Be sure to read {ref_current}/search-aggregations-bucket-children-aggregation.html[the elasticsearch documentation on Children Aggregation]
 
 === Fluent DSL Example
 
@@ -18,12 +18,12 @@ Be sure to read the elasticsearch documentation {ref_current}/search-aggregation
 ----
 s => s
 .Aggregations(aggs => aggs
-	.Children<CommitActivity>("name_of_child_agg", child => child
-		.Aggregations(childAggs => childAggs
-			.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-			.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
-		)
-	)
+    .Children<CommitActivity>("name_of_child_agg", child => child
+        .Aggregations(childAggs => childAggs
+            .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+            .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        )
+    )
 )
 ----
 
@@ -33,22 +33,12 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
-	{
-		Aggregations = 
-			new AverageAggregation("average_per_child", "confidenceFactor") &&
-			new MaxAggregation("max_per_child", "confidenceFactor")
-	}
-}
-
-new SearchRequest<Project>
-{
-	Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
-	{
-		Aggregations =
-			new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
-			&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
-	}
+    Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+    {
+        Aggregations = 
+            new AverageAggregation("average_per_child", "confidenceFactor") &&
+            new MaxAggregation("max_per_child", "confidenceFactor")
+    }
 }
 ----
 

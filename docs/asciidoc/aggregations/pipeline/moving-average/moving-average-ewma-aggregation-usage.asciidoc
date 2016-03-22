@@ -14,23 +14,23 @@
 s => s
 .Size(0)
 .Aggregations(a => a
-	.DateHistogram("projects_started_per_month", dh => dh
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.Aggregations(aa => aa
-			.Sum("commits", sm => sm
-				.Field(p => p.NumberOfCommits)
-			)
-			.MovingAverage("commits_moving_avg", mv => mv
-				.BucketsPath("commits")
-				.Model(m => m
-					.Ewma(e => e
-						.Alpha(0.3f)
-					)
-				)
-			)
-		)
-	)
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .MovingAverage("commits_moving_avg", mv => mv
+                .BucketsPath("commits")
+                .Model(m => m
+                    .Ewma(e => e
+                        .Alpha(0.3f)
+                    )
+                )
+            )
+        )
+    )
 )
 ----
 
@@ -39,23 +39,23 @@ s => s
 [source,csharp]
 ----
 new SearchRequest<Project>()
-		{
-Size = 0,
-Aggregations = new DateHistogramAggregation("projects_started_per_month")
 {
-	Field = "startedOn",
-	Interval = DateInterval.Month,
-	Aggregations = 
-		new SumAggregation("commits", "numberOfCommits") &&
-		new MovingAverageAggregation("commits_moving_avg", "commits")
-		{
-			Model = new EwmaModel
-			{
-				Alpha = 0.3f,
-			}
-		}
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new MovingAverageAggregation("commits_moving_avg", "commits")
+            {
+                Model = new EwmaModel
+                {
+                    Alpha = 0.3f,
+                }
+            }
+    }
 }
-		}
 ----
 
 [source,javascript]

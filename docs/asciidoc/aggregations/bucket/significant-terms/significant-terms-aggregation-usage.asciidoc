@@ -13,14 +13,14 @@
 ----
 s => s
 .Aggregations(a => a
-	.SignificantTerms("significant_names", st => st
-		.Field(p => p.Name)
-		.MinimumDocumentCount(10)
-		.MutualInformation(mi => mi
-			.BackgroundIsSuperSet()
-			.IncludeNegatives()
-		)
-	)
+    .SignificantTerms("significant_names", st => st
+        .Field(p => p.Name)
+        .MinimumDocumentCount(10)
+        .MutualInformation(mi => mi
+            .BackgroundIsSuperSet()
+            .IncludeNegatives()
+        )
+    )
 )
 ----
 
@@ -30,16 +30,16 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new SignificantTermsAggregation("significant_names")
-	{
-		Field = Field<Project>(p => p.Name),
-		MinimumDocumentCount = 10,
-		MutualInformation = new MutualInformationHeuristic
-		{
-			BackgroundIsSuperSet = true,
-			IncludeNegatives = true
-		}
-	}
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = Field<Project>(p => p.Name),
+        MinimumDocumentCount = 10,
+        MutualInformation = new MutualInformationHeuristic
+        {
+            BackgroundIsSuperSet = true,
+            IncludeNegatives = true
+        }
+    }
 }
 ----
 

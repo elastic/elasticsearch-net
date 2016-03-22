@@ -7,6 +7,56 @@
 [[multi-match-usage]]
 == Multi Match Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Query("hello world")
+    .Analyzer("standard")
+    .Boost(1.1)
+    .Slop(2)
+    .Fuzziness(Fuzziness.Auto)
+    .PrefixLength(2)
+    .MaxExpansions(2)
+    .Operator(Operator.Or)
+    .MinimumShouldMatch(2)
+    .FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+    .TieBreaker(1.1)
+    .CutoffFrequency(0.001)
+    .Lenient()
+    .ZeroTermsQuery(ZeroTermsQuery.All)
+    .Name("named_query")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Query = "hello world",
+    Analyzer = "standard",
+    Boost = 1.1,
+    Slop = 2,
+    Fuzziness = Fuzziness.Auto,
+    PrefixLength = 2,
+    MaxExpansions = 2,
+    Operator = Operator.Or,
+    MinimumShouldMatch = 2,
+    FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+    TieBreaker = 1.1,
+    CutoffFrequency = 0.001,
+    Lenient = true,
+    ZeroTermsQuery = ZeroTermsQuery.All,
+    Name = "named_query",
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -33,30 +83,5 @@
     "zero_terms_query": "all"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new MultiMatchQuery
-		{
-Fields = Field<Project>(p=>p.Description).And("myOtherField"),
-Query = "hello world",
-Analyzer = "standard",
-Boost = 1.1,
-Slop = 2,
-Fuzziness = Fuzziness.Auto,
-PrefixLength = 2,
-MaxExpansions = 2,
-Operator = Operator.Or,
-MinimumShouldMatch = 2,
-FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
-TieBreaker = 1.1,
-CutoffFrequency = 0.001,
-Lenient = true,
-ZeroTermsQuery = ZeroTermsQuery.All,
-Name = "named_query",
-		}
 ----
 

@@ -5,7 +5,7 @@
 
 [partintro]
 --
-Something about the query DSL
+NEST exposes all of the query DSL endpoints available in Elasticsearch
 --
 
 include::{output-dir}/bool-dsl/bool-dsl.asciidoc[]

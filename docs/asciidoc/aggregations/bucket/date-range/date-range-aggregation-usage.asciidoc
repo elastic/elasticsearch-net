@@ -4,8 +4,8 @@
 
 :imagesdir: ../../../images/
 
-[[date-range-aggregation]]
-== Date Range Aggregation
+[[date-range-aggregation-usage]]
+== Date Range Aggregation Usage
 
 A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
 and `to` values can be expressed in `DateMath` expressions, and it is also possible to specify a date format by which the from and 
@@ -21,17 +21,17 @@ Be sure to read {ref_current}/search-aggregations-bucket-daterange-aggregation.h
 ----
 s => s
 .Aggregations(aggs => aggs
-	.DateRange("projects_date_ranges", date => date
-		.Field(p => p.StartedOn)
-		.Ranges(
-			r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
-			r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
-			r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
-		)
-		.Aggregations(childAggs => childAggs
-			.Terms("project_tags", avg => avg.Field(p => p.Tags))
-		)
-	)
+    .DateRange("projects_date_ranges", date => date
+        .Field(p => p.StartedOn)
+        .Ranges(
+            r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
+            r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+            r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+        )
+        .Aggregations(childAggs => childAggs
+            .Terms("project_tags", avg => avg.Field(p => p.Tags))
+        )
+    )
 )
 ----
 
@@ -41,18 +41,18 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new DateRangeAggregation("projects_date_ranges")
-	{
-		Field = Field<Project>(p => p.StartedOn),
-		Ranges = new List<DateRangeExpression>
-		{
-			new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
-			new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
-			new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
-		},
-		Aggregations =
-			new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
-	}
+    Aggregations = new DateRangeAggregation("projects_date_ranges")
+    {
+        Field = Field<Project>(p => p.StartedOn),
+        Ranges = new List<DateRangeExpression>
+        {
+            new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
+            new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
+            new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
+        },
+        Aggregations =
+            new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
+    }
 }
 ----
 
@@ -92,7 +92,7 @@ new SearchRequest<Project>
 === Handling Responses
 
 Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----

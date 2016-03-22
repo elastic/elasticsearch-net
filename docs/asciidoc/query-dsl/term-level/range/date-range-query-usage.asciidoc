@@ -7,6 +7,42 @@
 [[date-range-query-usage]]
 == Date Range Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.DateRange(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan(FixedDate)
+    .GreaterThanOrEquals(DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month))
+    .LessThan("01/01/2012")
+    .LessThanOrEquals(DateMath.Now)
+    .Format("dd/MM/yyyy||yyyy")
+    .TimeZone("+01:00")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new DateRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = FixedDate,
+    GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
+    LessThan = "01/01/2012",
+    LessThanOrEqualTo = DateMath.Now,
+    TimeZone = "+01:00",
+    Format = "dd/MM/yyyy||yyyy"
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -24,23 +60,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new DateRangeQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-GreaterThan = FixedDate,
-GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
-LessThan = "01/01/2012",
-LessThanOrEqualTo = DateMath.Now,
-TimeZone = "+01:00",
-Format = "dd/MM/yyyy||yyyy"
-		}
 ----
 

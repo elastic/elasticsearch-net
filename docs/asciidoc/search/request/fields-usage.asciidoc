@@ -13,8 +13,8 @@
 ----
 s => s
 .Fields(fs => fs
-	.Field(p => p.Name)
-	.Field(p => p.StartedOn)
+    .Field(p => p.Name)
+    .Field(p => p.StartedOn)
 )
 ----
 
@@ -24,7 +24,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
+    Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
 }
 ----
 

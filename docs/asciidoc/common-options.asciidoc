@@ -1,4 +1,4 @@
-﻿:output-dir: common-options
+:output-dir: common-options
 
 [[common-options]]
 = Common Options
@@ -6,6 +6,7 @@
 [partintro]
 --
 Something about the convenience types for working with time and distance units and date math expressions
+
 --
 
 include::{output-dir}/time-unit/time-units.asciidoc[]
@@ -13,7 +14,4 @@ include::{output-dir}/time-unit/time-units.asciidoc[]
 include::{output-dir}/distance-unit/distance-units.asciidoc[]
 
 include::{output-dir}/date-math/date-math-expressions.asciidoc[]
-
-
-
 

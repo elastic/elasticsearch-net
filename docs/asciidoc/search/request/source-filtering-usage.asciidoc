@@ -9,7 +9,7 @@
 
 Allows to control how the _source field is returned  with every hit.
 By default operations return the contents of the _source field unless 
- you have used the fields parameter or if the source field is disabled.
+ you have used the fields parameter or if the _source field is disabled.
 
 === Fluent DSL Example
 
@@ -17,12 +17,12 @@ By default operations return the contents of the _source field unless
 ----
 s => s
 .Source(so => so
-	.Include(f => f
-		.Fields(
-			p => p.Name,
-			p => p.StartedOn
-		)
-	)
+    .Include(f => f
+        .Fields(
+            p => p.Name,
+            p => p.StartedOn
+        )
+    )
 )
 ----
 
@@ -32,10 +32,10 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Source = new SourceFilter
-	{
-		Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
-	}
+    Source = new SourceFilter
+    {
+        Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
+    }
 }
 ----
 
@@ -66,8 +66,8 @@ document.Description.Should().BeNull();
 ----
 internal class WithSourceFilterProperty
 {
-	[JsonProperty("_source")]
-	public ISourceFilter SourceFilter { get; set; }
+    [JsonProperty("_source")]
+    public ISourceFilter SourceFilter { get; set; }
 }
 ----
 

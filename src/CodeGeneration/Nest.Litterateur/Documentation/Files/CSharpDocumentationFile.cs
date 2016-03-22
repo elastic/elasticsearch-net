@@ -205,7 +205,7 @@ namespace Nest.Litterateur.Documentation.Files
 			// add attributes and write to destination
 			using (var file = new StreamWriter(docFile.FullName))
 			{
-				var visitor = new AddAttributeEntriesVisitor(docFile);
+				var visitor = new GeneratedAsciidocVisitor(docFile);
 				document = visitor.Convert(document);
 				document.Accept(new AsciiDocVisitor(file));
 			}

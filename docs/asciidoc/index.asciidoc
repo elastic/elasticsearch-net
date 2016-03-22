@@ -1,5 +1,5 @@
-﻿[[elasticsearch-net-reference]]
-= Elasticsearch.Net and NEST: the .NET Elasticsearch clients
+[[elasticsearch-net-reference]]
+= Elasticsearch.Net and NEST:  the .NET clients
 
 include::intro.asciidoc[]
 
@@ -10,5 +10,4 @@ include::common-options.asciidoc[]
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]
-
 

@@ -7,6 +7,38 @@
 [[terms-lookup-query-usage]]
 == Terms Lookup Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .TermsLookup<Developer>(e=>e.Path(p=>p.LastName).Id(12))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    TermsLookup = new FieldLookup
+    {
+        Id = 12,
+        Index = Index<Developer>(),
+        Type = Type<Developer>(),
+        Path = Field<Developer>(p=>p.LastName)
+    }
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -22,24 +54,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new TermsQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-TermsLookup = new FieldLookup
-{
-	Id = 12,
-	Index = Index<Developer>(),
-	Type = Type<Developer>(),
-	Path = Field<Developer>(p=>p.LastName)
-}
-		}
 ----
 

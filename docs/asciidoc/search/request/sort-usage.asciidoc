@@ -8,7 +8,7 @@
 == Sort Usage
 
 Allows to add one or more sort on specific fields. Each sort can be reversed as well. 
-The sort is defined on a per field level, with special field name for score to sort by score.
+The sort is defined on a per field level, with special field name for _score to sort by score.
 
 === Fluent DSL Example
 
@@ -16,35 +16,35 @@ The sort is defined on a per field level, with special field name for score to s
 ----
 s => s
 .Sort(ss => ss
-	.Ascending(p => p.StartedOn)
-	.Descending(p => p.Name)
-	.Descending(SortSpecialField.Score)
-	.Ascending(SortSpecialField.DocumentIndexOrder)
-	.Field(f => f
-		.Field(p => p.LastActivity)
-		.Order(SortOrder.Descending)
-		.MissingLast()
-		.UnmappedType(FieldType.Date)
-		.Mode(SortMode.Average)
-		.NestedPath(p => p.Tags)
-		.NestedFilter(q => q.MatchAll())
-	)
-	.GeoDistance(g => g
-		.Field(p => p.Location)
-		.DistanceType(GeoDistanceType.SloppyArc)
-		.Order(SortOrder.Ascending)
-		.Unit(DistanceUnit.Centimeters)
-		.Mode(SortMode.Min)
-		.PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
-	)
-	.Script(sc => sc
-		.Type("number")
-		.Ascending()
-		.Script(script => script
-			.Inline("doc['numberOfCommits'].value * factor")
-			.Params(p => p.Add("factor", 1.1))
-		)
-	)
+    .Ascending(p => p.StartedOn)
+    .Descending(p => p.Name)
+    .Descending(SortSpecialField.Score)
+    .Ascending(SortSpecialField.DocumentIndexOrder)
+    .Field(f => f
+        .Field(p => p.LastActivity)
+        .Order(SortOrder.Descending)
+        .MissingLast()
+        .UnmappedType(FieldType.Date)
+        .Mode(SortMode.Average)
+        .NestedPath(p => p.Tags)
+        .NestedFilter(q => q.MatchAll())
+    )
+    .GeoDistance(g => g
+        .Field(p => p.Location)
+        .DistanceType(GeoDistanceType.SloppyArc)
+        .Order(SortOrder.Ascending)
+        .Unit(DistanceUnit.Centimeters)
+        .Mode(SortMode.Min)
+        .PinTo(new GeoLocation(70, -70), new GeoLocation(-12, 12))
+    )
+    .Script(sc => sc
+        .Type("number")
+        .Ascending()
+        .Script(script => script
+            .Inline("doc['numberOfCommits'].value * factor")
+            .Params(p => p.Add("factor", 1.1))
+        )
+    )
 )
 ----
 
@@ -54,43 +54,43 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Sort = new List<ISort>
-	{
-		new SortField { Field = "startedOn", Order = SortOrder.Ascending },
-		new SortField { Field = "name", Order = SortOrder.Descending },
-		new SortField { Field = "_score", Order = SortOrder.Descending },
-		new SortField { Field = "_doc", Order = SortOrder.Ascending },
-		new SortField {
-			Field = Field<Project>(p=>p.LastActivity),
-			Order = SortOrder.Descending,
-			Missing = "_last",
-			UnmappedType = FieldType.Date,
-			Mode = SortMode.Average,
-			NestedPath = Field<Project>(p=>p.Tags),
-			NestedFilter = new MatchAllQuery(),
-		},
-		new GeoDistanceSort
-		{
-			Field = "location",
-			Order = SortOrder.Ascending,
-			DistanceType = GeoDistanceType.Arc,
-			GeoUnit = DistanceUnit.Centimeters,
-			Mode = SortMode.Min,
-			Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
-		},
-		new ScriptSort
-		{
-			Type = "number",
-			Order = SortOrder.Ascending, 
-			Script =  new InlineScript("doc['numberOfCommits'].value * factor")
-			{
-				Params = new Dictionary<string, object>
-				{
-					{ "factor", 1.1 }
-				}
-			}
-		}
-	}
+    Sort = new List<ISort>
+    {
+        new SortField { Field = "startedOn", Order = SortOrder.Ascending },
+        new SortField { Field = "name", Order = SortOrder.Descending },
+        new SortField { Field = "_score", Order = SortOrder.Descending },
+        new SortField { Field = "_doc", Order = SortOrder.Ascending },
+        new SortField {
+            Field = Field<Project>(p=>p.LastActivity),
+            Order = SortOrder.Descending,
+            Missing = "_last",
+            UnmappedType = FieldType.Date,
+            Mode = SortMode.Average,
+            NestedPath = Field<Project>(p=>p.Tags),
+            NestedFilter = new MatchAllQuery(),
+        },
+        new GeoDistanceSort
+        {
+            Field = "location",
+            Order = SortOrder.Ascending,
+            DistanceType = GeoDistanceType.Arc,
+            GeoUnit = DistanceUnit.Centimeters,
+            Mode = SortMode.Min,
+            Points = new [] {new GeoLocation(70, -70), new GeoLocation(-12, 12) }
+        },
+        new ScriptSort
+        {
+            Type = "number",
+            Order = SortOrder.Ascending, 
+            Script =  new InlineScript("doc['numberOfCommits'].value * factor")
+            {
+                Params = new Dictionary<string, object>
+                {
+                    { "factor", 1.1 }
+                }
+            }
+        }
+    }
 }
 ----
 

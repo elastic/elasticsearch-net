@@ -13,12 +13,12 @@
 ----
 s => s
 .Aggregations(a => a
-	.GeoHash("my_geohash_grid", g => g
-		.Field(p => p.Location)
-		.GeoHashPrecision(GeoHashPrecision.Precision3)
-		.Size(1000)
-		.ShardSize(100)
-	)
+    .GeoHash("my_geohash_grid", g => g
+        .Field(p => p.Location)
+        .GeoHashPrecision(GeoHashPrecision.Precision3)
+        .Size(1000)
+        .ShardSize(100)
+    )
 )
 ----
 
@@ -28,13 +28,13 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new GeoHashGridAggregation("my_geohash_grid")
-	{
-		Field = Field<Project>(p => p.Location),
-		Precision = GeoHashPrecision.Precision3,
-		Size = 1000,
-		ShardSize = 100
-	}
+    Aggregations = new GeoHashGridAggregation("my_geohash_grid")
+    {
+        Field = Field<Project>(p => p.Location),
+        Precision = GeoHashPrecision.Precision3,
+        Size = 1000,
+        ShardSize = 100
+    }
 }
 ----
 

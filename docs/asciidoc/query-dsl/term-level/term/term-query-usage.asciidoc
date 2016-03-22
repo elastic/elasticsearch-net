@@ -7,6 +7,32 @@
 [[term-query-usage]]
 == Term Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Term(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("project description")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "project description"
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -19,18 +45,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new TermQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Value = "project description"
-		}
 ----
 

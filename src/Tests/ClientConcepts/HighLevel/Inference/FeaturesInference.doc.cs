@@ -8,14 +8,16 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FeaturesInference
 	{
-		/**== Features
+		/**[[features-inference]]
+		 * == Features Inference
 		 * Some URIs in Elasticsearch take a `Feature` enum.
 		 * Within NEST, route values on the URI are represented as classes that implement an interface, `IUrlParameter`.
 		 * Since enums _cannot_ implement interfaces in C#, a route parameter that would be of type `Feature` is represented using the `Features` class that
 		 * the `Feature` enum implicitly converts to.
 		 */
 
-		/** Using the `Features` constructor directly is possible but rather involved */
+		/**=== Constructor 
+		* Using the `Features` constructor directly is possible but rather involved */
 		[U] public void Serializes()
 		{
 			Features fieldString = Feature.Mappings | Feature.Aliases;
@@ -27,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		public void ImplicitConversion()
 		{
 			/** === Implicit conversion
-			* Here we new an GET index elasticsearch request whichs takes Indices and Features.
+			* Here we instantiate a GET index request whichs takes two features, settings and warmers.
 			* Notice how we can use the `Feature` enum directly.
 			*/
 			var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);

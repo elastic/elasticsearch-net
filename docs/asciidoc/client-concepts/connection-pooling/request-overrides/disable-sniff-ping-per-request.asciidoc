@@ -20,10 +20,10 @@ Let's set up the cluster and configure clients to **always** sniff on startup
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.SucceedAlways())
-	.SniffingConnectionPool()
-	.Settings(s => s.SniffOnStartup()) //<1>
+    .Nodes(10)
+    .ClientCalls(r => r.SucceedAlways())
+    .SniffingConnectionPool()
+    .Settings(s => s.SniffOnStartup()) <1>
 );
 ----
 <1> sniff on startup
@@ -38,24 +38,24 @@ And after that no sniff on startup will happen again
 [source,csharp]
 ----
 audit = await audit.TraceCalls(
-new ClientCall(r => r.DisableSniffing()) //<1>
-	{
-		{ PingSuccess, 9200 }, //<2>
-		{ HealthyResponse, 9200 }
-	},
+new ClientCall(r => r.DisableSniffing()) <1>
+    {
+        { PingSuccess, 9200 }, <2>
+        { HealthyResponse, 9200 }
+    },
 new ClientCall()
-	{
-		{ SniffOnStartup }, //<3>
-		{ SniffSuccess, 9200 },
-		{ PingSuccess, 9200 },
-		{ HealthyResponse, 9200 }
-	},
+    {
+        { SniffOnStartup }, <3>
+        { SniffSuccess, 9200 },
+        { PingSuccess, 9200 },
+        { HealthyResponse, 9200 }
+    },
 new ClientCall()
-	{ 
-		{ PingSuccess, 9201 },
-		{ HealthyResponse, 9201 }
-	}
-            );
+    { 
+        { PingSuccess, 9201 },
+        { HealthyResponse, 9201 }
+    }
+);
 ----
 <1> disable sniffing
 
@@ -68,19 +68,19 @@ Now, let's disable pinging on the request
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.SucceedAlways())
-	.SniffingConnectionPool()
-	.Settings(s => s.SniffOnStartup())
+    .Nodes(10)
+    .ClientCalls(r => r.SucceedAlways())
+    .SniffingConnectionPool()
+    .Settings(s => s.SniffOnStartup())
 );
 audit = await audit.TraceCall(
-	new ClientCall(r => r.DisablePing()) //<1>
-	{
-		{ SniffOnStartup },
-		{ SniffSuccess, 9200 }, //<2>
-		{ HealthyResponse, 9200 }
-	}
-            );
+    new ClientCall(r => r.DisablePing()) <1>
+    {
+        { SniffOnStartup },
+        { SniffSuccess, 9200 }, <2>
+        { HealthyResponse, 9200 }
+    }
+);
 ----
 <1> disable ping
 
@@ -91,18 +91,18 @@ Finally, let's demonstrate disabling both sniff and ping on the request
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(10)
-	.ClientCalls(r => r.SucceedAlways())
-	.SniffingConnectionPool()
-	.Settings(s => s.SniffOnStartup())
+    .Nodes(10)
+    .ClientCalls(r => r.SucceedAlways())
+    .SniffingConnectionPool()
+    .Settings(s => s.SniffOnStartup())
 );
 
 audit = await audit.TraceCall(
-	new ClientCall(r=>r.DisableSniffing().DisablePing()) //<1>
-	{
-		{ HealthyResponse, 9200 } //<2>
-	}
-            );
+    new ClientCall(r=>r.DisableSniffing().DisablePing()) <1>
+    {
+        { HealthyResponse, 9200 } <2>
+    }
+);
 ----
 <1> diable ping and sniff
 

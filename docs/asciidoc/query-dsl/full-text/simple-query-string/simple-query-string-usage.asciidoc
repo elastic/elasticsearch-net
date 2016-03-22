@@ -7,6 +7,48 @@
 [[simple-query-string-usage]]
 == Simple Query String Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SimpleQueryString(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
+    .Query("hello world")
+    .Analyzer("standard")
+    .DefaultOperator(Operator.Or)
+    .Flags(SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near)
+    .Locale("en_US")
+    .LowercaseExpendedTerms()
+    .Lenient()
+    .AnalyzeWildcard()
+    .MinimumShouldMatch("30%")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SimpleQueryStringQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Fields = Field<Project>(p=>p.Description).And("myOtherField"),
+    Query = "hello world",
+    Analyzer = "standard",
+    DefaultOperator = Operator.Or,
+    Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
+    Locale = "en_US",
+    LowercaseExpendedTerms = true,
+    Lenient = true,
+    AnalyzeWildcard = true,
+    MinimumShouldMatch = "30%"
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -29,26 +71,5 @@
     "minimum_should_match": "30%"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SimpleQueryStringQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Fields = Field<Project>(p=>p.Description).And("myOtherField"),
-Query = "hello world",
-Analyzer = "standard",
-DefaultOperator = Operator.Or,
-Flags = SimpleQueryStringFlags.And|SimpleQueryStringFlags.Near,
-Locale = "en_US",
-LowercaseExpendedTerms = true,
-Lenient = true,
-AnalyzeWildcard = true,
-MinimumShouldMatch = "30%"
-		}
 ----
 

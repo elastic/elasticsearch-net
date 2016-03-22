@@ -13,23 +13,23 @@
 ----
 s => s
 .Aggregations(a => a
-	.Nested("tags", n => n
-		.Path(p => p.Tags)
-		.Aggregations(aa => aa
-			.Terms("tag_names", t => t
-				.Field(p => p.Tags.Suffix("name"))
-				.Aggregations(aaa => aaa
-					.ReverseNested("tags_to_project", r => r
-						.Aggregations(aaaa => aaaa
-							.Terms("top_projects_per_tag", tt => tt
-								.Field(p => p.Name)
-							)
-						)
-					)
-				)
-			)
-		)
-	)
+    .Nested("tags", n => n
+        .Path(p => p.Tags)
+        .Aggregations(aa => aa
+            .Terms("tag_names", t => t
+                .Field(p => p.Tags.Suffix("name"))
+                .Aggregations(aaa => aaa
+                    .ReverseNested("tags_to_project", r => r
+                        .Aggregations(aaaa => aaaa
+                            .Terms("top_projects_per_tag", tt => tt
+                                .Field(p => p.Name)
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
 )
 ----
 
@@ -39,21 +39,21 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new NestedAggregation("tags")
-	{
-		Path = "tags",
-		Aggregations = new TermsAggregation("tag_names")
-		{
-			Field = "tags.name",
-			Aggregations = new ReverseNestedAggregation("tags_to_project")
-			{
-				Aggregations = new TermsAggregation("top_projects_per_tag")
-				{
-					Field = Field<Project>(p => p.Name)
-				}
-			}
-		}
-	}
+    Aggregations = new NestedAggregation("tags")
+    {
+        Path = "tags",
+        Aggregations = new TermsAggregation("tag_names")
+        {
+            Field = "tags.name",
+            Aggregations = new ReverseNestedAggregation("tags_to_project")
+            {
+                Aggregations = new TermsAggregation("top_projects_per_tag")
+                {
+                    Field = Field<Project>(p => p.Name)
+                }
+            }
+        }
+    }
 }
 ----
 

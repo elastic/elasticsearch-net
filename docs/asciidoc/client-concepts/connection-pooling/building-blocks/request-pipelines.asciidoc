@@ -34,10 +34,10 @@ to create it
 var requestPipelineFactory = new RequestPipelineFactory();
 
 var requestPipeline = requestPipelineFactory.Create(
-	settings, 
-	DateTimeProvider.Default, //<1>
-	new MemoryStreamFactory(), 
-	new SearchRequestParameters());
+    settings, 
+    DateTimeProvider.Default, <1>
+    new MemoryStreamFactory(), 
+    new SearchRequestParameters());
 requestPipeline.Should().BeOfType<RequestPipeline>();
 requestPipeline.GetType().Should().Implement<IDisposable>();
 ----

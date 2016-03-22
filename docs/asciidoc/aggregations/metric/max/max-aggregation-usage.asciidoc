@@ -13,9 +13,9 @@
 ----
 s => s
 .Aggregations(a => a
-	.Max("max_commits", m => m
-		.Field(p => p.NumberOfCommits)
-	)
+    .Max("max_commits", m => m
+        .Field(p => p.NumberOfCommits)
+    )
 )
 ----
 
@@ -25,7 +25,7 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits))
+    Aggregations = new MaxAggregation("max_commits", Field<Project>(p => p.NumberOfCommits))
 }
 ----
 

@@ -7,6 +7,38 @@
 [[numeric-range-query-usage]]
 == Numeric Range Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Range(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan(1.0)
+    .GreaterThanOrEquals(1.1)
+    .LessThan(2.1)
+    .LessThanOrEquals(2.0)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new NumericRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = 1.0,
+    GreaterThanOrEqualTo = 1.1,
+    LessThan = 2.1,
+    LessThanOrEqualTo = 2.0
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -22,21 +54,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new NumericRangeQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-GreaterThan = 1.0,
-GreaterThanOrEqualTo = 1.1,
-LessThan = 2.1,
-LessThanOrEqualTo = 2.0
-		}
 ----
 

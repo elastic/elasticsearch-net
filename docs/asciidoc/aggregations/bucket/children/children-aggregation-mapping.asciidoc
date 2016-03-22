@@ -5,7 +5,7 @@
 :imagesdir: ../../../images/
 
 [[child-aggregation-mapping]]
-== Child Aggregation Mapping
+== Child Aggregation Mapping 
 
 To use the child aggregation you have to make sure 
  a `_parent` mapping is in place, here we create the project
@@ -15,12 +15,13 @@ To use the child aggregation you have to make sure
 [source,csharp]
 ----
 var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c => c
-	.Mappings(map => map
-		.Map<Project>(tm => tm.AutoMap())
-		.Map<CommitActivity>(tm => tm
-			.Parent<Project>()
-		)
-	)
+    .Mappings(map => map
+        .Map<Project>(tm => tm.AutoMap())
+        .Map<CommitActivity>(tm => tm
+            .Parent<Project>() <1>
+        )
+    )
 );
 ----
+<1> Set the parent of `CommitActivity` to the `Project` type
 

@@ -62,21 +62,21 @@ var node = new Uri("http://mynode.example.com:8082/apiKey");
 var connectionPool = new SniffingConnectionPool(new[] { node });
 
 var config = new ConnectionConfiguration(connectionPool)
-	.DisableDirectStreaming()
-	.BasicAuthentication("user", "pass")
-	.RequestTimeout(TimeSpan.FromSeconds(5));
+    .DisableDirectStreaming()
+    .BasicAuthentication("user", "pass")
+    .RequestTimeout(TimeSpan.FromSeconds(5));
 ----
 
 The following is a list of available connection configuration options:
 
 [source,csharp]
 ----
-var client = new ElasticLowLevelClient();
-
 var config = new ConnectionConfiguration()
-	.DisableAutomaticProxyDetection() //<1>
-	.EnableHttpCompression() //<2>
-	.DisableDirectStreaming(); //<3>
+    .DisableAutomaticProxyDetection() <1>
+    .EnableHttpCompression() <2>
+    .DisableDirectStreaming(); <3>
+
+var client = new ElasticLowLevelClient(config);
 
 var result = client.Search<SearchResponse<object>>(new { size = 12 });
 ----
@@ -106,12 +106,12 @@ other configuration options
 [source,csharp]
 ----
 config = config
-	.GlobalQueryStringParameters(new NameValueCollection()) //<1>
-	.Proxy(new Uri("http://myproxy"), "username", "pass") //<2>
-	.RequestTimeout(TimeSpan.FromSeconds(4)) //<3>
-	.ThrowExceptions() //<4>
-	.PrettyJson() //<5>
-	.BasicAuthentication("username", "password");
+    .GlobalQueryStringParameters(new NameValueCollection()) <1>
+    .Proxy(new Uri("http://myproxy"), "username", "pass") <2>
+    .RequestTimeout(TimeSpan.FromSeconds(4)) <3>
+    .ThrowExceptions() <4>
+    .PrettyJson() <5>
+    .BasicAuthentication("username", "password");
 ----
 <1> Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 
@@ -188,7 +188,7 @@ var list = new List<string>();
 
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
-var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) //<1>
+var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) <1>
                 .DisableDirectStreaming()
                 .OnRequestCompleted(response =>
                 {
@@ -281,17 +281,17 @@ This can be much faster then registering them on JsonSerializerSettings.Converte
 ----
 public class MyJsonNetSerializer : JsonNetSerializer
 {
-	public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+    public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
 public int CallToModify { get; set; } = 0;
-	protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify;
+    protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify;
 public int CallToContractConverter { get; set; } = 0;
-	protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>
-	{
-		t => {
-			CallToContractConverter++;
-			return null;
-		}
-	};
+    protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>
+    {
+        t => {
+            CallToContractConverter++;
+            return null;
+        }
+    };
 
 }
 ----

@@ -7,6 +7,30 @@
 [[type-query-usage]]
 == Type Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Type(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Value<Developer>()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TypeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Value = Type<Developer>()
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -17,17 +41,5 @@
     "value": "developer"
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new TypeQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Value = Type<Developer>()
-		}
 ----
 

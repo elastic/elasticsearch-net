@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 #if !DOTNETCORE
 using AsciiDoc;
+using Nest.Litterateur.AsciiDoc;
 #endif
 
 namespace Nest.Litterateur.Documentation.Files
@@ -20,31 +21,11 @@ namespace Nest.Litterateur.Documentation.Files
 #if !DOTNETCORE
 			var document = Document.Load(FileLocation.FullName);
 
-			// check if this document has generated includes to other files
-			var includeAttribute = document.Attributes.FirstOrDefault(a => a.Name == "includes-from-dirs");
+			// make any modifications
+			var rawVisitor = new RawAsciidocVisitor(FileLocation);
+			document.Accept(rawVisitor);
 
-			if (includeAttribute == null)
-			{
-				this.FileLocation.CopyTo(docFileName.FullName, true);
-				return;
-			}
-
-			var thisFileUri = new Uri(docFileName.FullName);
-			var directories = includeAttribute.Value.Split(new [] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-			foreach (var directory in directories)
-			{
-				foreach (var file in Directory.EnumerateFiles(Path.Combine(Program.OutputDirPath, directory), "*.asciidoc", SearchOption.AllDirectories))
-				{
-					var fileInfo = new FileInfo(file);
-					var referencedFileUri = new Uri(fileInfo.FullName);
-					var relativePath = thisFileUri.MakeRelativeUri(referencedFileUri);
-					var include = new Include(relativePath.OriginalString);
-
-					document.Elements.Add(include);
-				}
-			}
-
+			// write out asciidoc to file
 			using (var visitor = new AsciiDocVisitor(docFileName.FullName))
 			{
 				document.Accept(visitor);

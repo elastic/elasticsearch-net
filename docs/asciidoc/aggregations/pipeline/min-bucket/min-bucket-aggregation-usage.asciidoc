@@ -14,18 +14,18 @@
 s => s
 .Size(0)
 .Aggregations(a => a
-	.DateHistogram("projects_started_per_month", dh => dh
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.Aggregations(aa => aa
-			.Sum("commits", sm => sm
-				.Field(p => p.NumberOfCommits)
-			)
-		)
-	)
-	.MinBucket("min_commits_per_month", aaa => aaa
-		.BucketsPath("projects_started_per_month>commits")
-	)
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+        )
+    )
+    .MinBucket("min_commits_per_month", aaa => aaa
+        .BucketsPath("projects_started_per_month>commits")
+    )
 )
 ----
 
@@ -34,16 +34,16 @@ s => s
 [source,csharp]
 ----
 new SearchRequest<Project>()
-		{
-Size = 0,
-Aggregations = new DateHistogramAggregation("projects_started_per_month")
 {
-	Field = "startedOn",
-	Interval = DateInterval.Month,
-	Aggregations = new SumAggregation("commits", "numberOfCommits")
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = new SumAggregation("commits", "numberOfCommits")
+    }
+    && new MinBucketAggregation("min_commits_per_month", "projects_started_per_month>commits")
 }
-&& new MinBucketAggregation("min_commits_per_month", "projects_started_per_month>commits")
-		}
 ----
 
 [source,javascript]

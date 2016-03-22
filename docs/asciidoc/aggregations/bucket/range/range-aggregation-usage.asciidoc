@@ -13,14 +13,14 @@
 ----
 s => s
 .Aggregations(a => a
-	.Range("commit_ranges", ra => ra
-		.Field(p => p.NumberOfCommits)
-		.Ranges(
-			r => r.To(100),
-			r => r.From(100).To(500),
-			r => r.From(500)
-		)
-	)
+    .Range("commit_ranges", ra => ra
+        .Field(p => p.NumberOfCommits)
+        .Ranges(
+            r => r.To(100),
+            r => r.From(100).To(500),
+            r => r.From(500)
+        )
+    )
 )
 ----
 
@@ -30,16 +30,16 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new RangeAggregation("commit_ranges")
-	{
-		Field = Field<Project>(p => p.NumberOfCommits),
-		Ranges = new List<Nest.Range>
-		{
-			{ new Nest.Range { To = 100 } },
-			{ new Nest.Range { From = 100, To = 500 } },
-			{ new Nest.Range { From = 500 } }
-		}
-	}
+    Aggregations = new RangeAggregation("commit_ranges")
+    {
+        Field = Field<Project>(p => p.NumberOfCommits),
+        Ranges = new List<Nest.Range>
+        {
+            { new Nest.Range { To = 100 } },
+            { new Nest.Range { From = 100, To = 500 } },
+            { new Nest.Range { From = 500 } }
+        }
+    }
 }
 ----
 

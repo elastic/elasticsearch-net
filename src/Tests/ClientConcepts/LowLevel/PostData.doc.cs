@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.LowLevel
 	{
 		/**== Post data
 		 * The low level client allows you to post a `string` or `byte[]` array directly. On top of this, 
-		 * if you pass a collection of `string`s or `object`s they will be serialized 
+		 * if you pass a collection of ``string``s or ``object``s they will be serialized 
 		 * using Elasticsearch's special bulk/multi format.
 		 */
 		private readonly string @string = "fromString";
@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		[U] public void ImplicitConversions()
 		{
-			/** Even though the argument for `PostData` on the low level client takes a `PostData<object>`,
+			/** Even though the argument for PostData on the low level client takes a `PostData<object>`,
 			* You can rely on implicit conversion to abstract the notion of PostData completely.
 			* You can implicitly convert from the following types
 			* - `string`
@@ -65,8 +65,7 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
 			
-			// and passing a `PostData<object>` object to a method taking `PostData<object>` should not wrap
-
+			/** and passing a `PostData<object>` object to a method taking `PostData<object>` should not wrap */
 			fromString = ImplicitlyConvertsFrom(fromString);
 			fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
 			fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
@@ -88,7 +87,6 @@ namespace Tests.ClientConcepts.LowLevel
 
 		private async Task AssertOn(IConnectionConfigurationValues settings)
 		{ 
-
 			/** Although each implicitly types behaves slightly differently */
 			await Post(() => @string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
 
@@ -107,10 +105,10 @@ namespace Tests.ClientConcepts.LowLevel
 			/** In all other cases postdata is serialized as is. */
 			await Post(() => @object, writes: objectJson, storesBytes: false, settings: settings);
 
-			/** If you want to maintain a copy of the request that went out use the following settings */
+			/** If you want to maintain a copy of the request that went out, use `DisableDirectStreaming` */
 			settings = new ConnectionSettings().DisableDirectStreaming();
 
-			/** by forcing `DisableDirectStreaming` serializing happens first in a private MemoryStream 
+			/** by forcing `DisableDirectStreaming` on connection settings, serialization happens first in a private `MemoryStream` 
 			* so we can get hold of the serialized bytes */
 			await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
 			

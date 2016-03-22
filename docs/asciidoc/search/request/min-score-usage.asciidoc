@@ -14,7 +14,7 @@
 s => s
 .MinScore(0.5)
 .Query(q => q
-	.Term(p => p.Name, "elasticsearch")
+    .Term(p => p.Name, "elasticsearch")
 )
 ----
 
@@ -24,12 +24,12 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	MinScore = 0.5,
-	Query = new TermQuery
-	{
-		Field = "name",
-		Value = "elasticsearch"
-	}
+    MinScore = 0.5,
+    Query = new TermQuery
+    {
+        Field = "name",
+        Value = "elasticsearch"
+    }
 }
 ----
 

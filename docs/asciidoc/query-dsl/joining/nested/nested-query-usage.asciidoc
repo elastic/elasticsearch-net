@@ -7,6 +7,34 @@
 [[nested-query-usage]]
 == Nested Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Nested(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .InnerHits(i=>i.Explain())
+    .Query(qq=>qq.MatchAll())
+    .Path(p=>p.CuratedTags)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new NestedQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    InnerHits = new InnerHits { Explain = true },
+    Query = new MatchAllQuery(),
+    Path = Field<Project>(p=>p.CuratedTags)
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -23,19 +51,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new NestedQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-InnerHits = new InnerHits { Explain = true },
-Query = new MatchAllQuery(),
-Path = Field<Project>(p=>p.CuratedTags)
-		}
 ----
 

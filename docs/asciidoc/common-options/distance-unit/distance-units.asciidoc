@@ -31,8 +31,8 @@ The factor is a double so always has at least one decimal place when serialized
 [source,csharp]
 ----
 Expect("25.0m")
-	.WhenSerializing(unitComposed)
-	.WhenSerializing(unitComposedWithUnits);
+    .WhenSerializing(unitComposed)
+    .WhenSerializing(unitComposedWithUnits);
 ----
 
 ==== Implicit conversion
@@ -47,8 +47,8 @@ Nest.Distance distanceString = "25";
 Nest.Distance distanceStringWithUnits = "25m";
 
 Expect(new Nest.Distance(25))
-	.WhenSerializing(distanceString)
-	.WhenSerializing(distanceStringWithUnits);
+    .WhenSerializing(distanceString)
+    .WhenSerializing(distanceStringWithUnits);
 ----
 
 ==== Supported units

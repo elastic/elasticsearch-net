@@ -13,48 +13,48 @@
 ----
 s => s
 .Query(q => q
-	.Match(m => m
-		.Field(f => f.Name.Suffix("standard"))
-		.Query("Upton Sons Shield Rice Rowe Roberts")
-	)
+    .Match(m => m
+        .Field(f => f.Name.Suffix("standard"))
+        .Query("Upton Sons Shield Rice Rowe Roberts")
+    )
 )
 .Highlight(h => h
-	.PreTags("<tag1>")
-	.PostTags("</tag1>")
-	.Fields(
-		fs => fs
-			.Field(p => p.Name.Suffix("standard"))
-			.Type(HighlighterType.Plain)
-			.ForceSource()
-			.FragmentSize(150)
-			.NumberOfFragments(3)
-			.NoMatchSize(150),
-		fs => fs
-			.Field(p => p.LeadDeveloper.FirstName)
-			.Type(HighlighterType.Fvh)
-			.PreTags("<name>")
-			.PostTags("</name>")
-			.HighlightQuery(q => q
-				.Match(m => m
-					.Field(p => p.LeadDeveloper.FirstName)
-					.Query("Kurt Edgardo Naomi Dariana Justice Felton")
-				)
-			),
-		fs => fs
-			.Field(p => p.State.Suffix("offsets"))
-			.Type(HighlighterType.Postings)
-			.PreTags("<state>")
-			.PostTags("</state>")
-			.HighlightQuery(q => q
-				.Terms(t => t
-					.Field(f => f.State.Suffix("offsets"))
-					.Terms(
-						StateOfBeing.Stable.ToString().ToLowerInvariant(), 
-						StateOfBeing.BellyUp.ToString().ToLowerInvariant()
-					)
-				)
-			)
-	)
+    .PreTags("<tag1>")
+    .PostTags("</tag1>")
+    .Fields(
+        fs => fs
+            .Field(p => p.Name.Suffix("standard"))
+            .Type(HighlighterType.Plain)
+            .ForceSource()
+            .FragmentSize(150)
+            .NumberOfFragments(3)
+            .NoMatchSize(150),
+        fs => fs
+            .Field(p => p.LeadDeveloper.FirstName)
+            .Type(HighlighterType.Fvh)
+            .PreTags("<name>")
+            .PostTags("</name>")
+            .HighlightQuery(q => q
+                .Match(m => m
+                    .Field(p => p.LeadDeveloper.FirstName)
+                    .Query("Kurt Edgardo Naomi Dariana Justice Felton")
+                )
+            ),
+        fs => fs
+            .Field(p => p.State.Suffix("offsets"))
+            .Type(HighlighterType.Postings)
+            .PreTags("<state>")
+            .PostTags("</state>")
+            .HighlightQuery(q => q
+                .Terms(t => t
+                    .Field(f => f.State.Suffix("offsets"))
+                    .Terms(
+                        StateOfBeing.Stable.ToString().ToLowerInvariant(), 
+                        StateOfBeing.BellyUp.ToString().ToLowerInvariant()
+                    )
+                )
+            )
+    )
 )
 ----
 
@@ -64,52 +64,52 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Query = new MatchQuery
-	{
-		Query = "Upton Sons Shield Rice Rowe Roberts",
-		Field = "name.standard"
-	},
-	Highlight = new Highlight
-	{
-		PreTags = new[] { "<tag1>" },
-		PostTags = new[] { "</tag1>" },
-		Fields = new Dictionary<Field, IHighlightField>
-		{
-			{ "name.standard", new HighlightField
-				{
-					Type = HighlighterType.Plain,
-					ForceSource = true,
-					FragmentSize = 150,
-					NumberOfFragments = 3,
-					NoMatchSize = 150
-				}
-			},
-			{ "leadDeveloper.firstName", new HighlightField
-				{
-					Type = HighlighterType.Fvh,
-					PreTags = new[] { "<name>"},
-					PostTags = new[] { "</name>"},
-					HighlightQuery = new MatchQuery
-					{
-						Field = "leadDeveloper.firstName",
-						Query = "Kurt Edgardo Naomi Dariana Justice Felton"
-					}
-				}
-			},
-			{ "state.offsets", new HighlightField
-				{
-					Type = HighlighterType.Postings,
-					PreTags = new[] { "<state>"},
-					PostTags = new[] { "</state>"},
-					HighlightQuery = new TermsQuery
-					{
-						Field = "state.offsets",
-						Terms = new [] { "stable", "bellyup" }
-					}
-				}
-			}
-		}
-	}
+    Query = new MatchQuery
+    {
+        Query = "Upton Sons Shield Rice Rowe Roberts",
+        Field = "name.standard"
+    },
+    Highlight = new Highlight
+    {
+        PreTags = new[] { "<tag1>" },
+        PostTags = new[] { "</tag1>" },
+        Fields = new Dictionary<Field, IHighlightField>
+        {
+            { "name.standard", new HighlightField
+                {
+                    Type = HighlighterType.Plain,
+                    ForceSource = true,
+                    FragmentSize = 150,
+                    NumberOfFragments = 3,
+                    NoMatchSize = 150
+                }
+            },
+            { "leadDeveloper.firstName", new HighlightField
+                {
+                    Type = HighlighterType.Fvh,
+                    PreTags = new[] { "<name>"},
+                    PostTags = new[] { "</name>"},
+                    HighlightQuery = new MatchQuery
+                    {
+                        Field = "leadDeveloper.firstName",
+                        Query = "Kurt Edgardo Naomi Dariana Justice Felton"
+                    }
+                }
+            },
+            { "state.offsets", new HighlightField
+                {
+                    Type = HighlighterType.Postings,
+                    PreTags = new[] { "<state>"},
+                    PostTags = new[] { "</state>"},
+                    HighlightQuery = new TermsQuery
+                    {
+                        Field = "state.offsets",
+                        Terms = new [] { "stable", "bellyup" }
+                    }
+                }
+            }
+        }
+    }
 }
 ----
 

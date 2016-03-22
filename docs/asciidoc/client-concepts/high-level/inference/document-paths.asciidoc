@@ -119,7 +119,7 @@ when comparing with the full blown constructor and passing document manually,
 ----
 request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
 {
-	Document = project
+    Document = project
 };
 ----
 

@@ -7,6 +7,34 @@
 [[missing-query-usage]]
 == Missing Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Missing(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .NullValue()
+    .Existence()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MissingQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    NullValue = true,
+    Existence = true
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -19,19 +47,5 @@
     "null_value": true
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new MissingQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-NullValue = true,
-Existence = true
-		}
 ----
 

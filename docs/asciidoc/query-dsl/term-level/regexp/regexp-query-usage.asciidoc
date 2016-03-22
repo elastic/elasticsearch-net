@@ -7,6 +7,36 @@
 [[regexp-query-usage]]
 == Regexp Query Usage
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Regexp(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("s.*y")
+    .Flags("INTERSECTION|COMPLEMENT|EMPTY")
+    .MaximumDeterminizedStates(20000)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new RegexpQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "s.*y",
+    Flags = "INTERSECTION|COMPLEMENT|EMPTY",
+    MaximumDeterminizedStates = 20000
+}
+----
+
 [source,javascript]
 .Example json output
 ----
@@ -21,20 +51,5 @@
     }
   }
 }
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new RegexpQuery
-		{
-Name = "named_query",
-Boost = 1.1,
-Field = "description",
-Value = "s.*y",
-Flags = "INTERSECTION|COMPLEMENT|EMPTY",
-MaximumDeterminizedStates = 20000
-		}
 ----
 

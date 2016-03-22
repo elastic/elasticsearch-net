@@ -8,7 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.DateRange
 {
-	/**== Date Range Aggregation
+	/**
 	 * A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
 	 * and `to` values can be expressed in `DateMath` expressions, and it is also possible to specify a date format by which the from and 
 	 * to response fields will be returned. 
@@ -81,7 +81,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 		{
 			/** === Handling Responses
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
 

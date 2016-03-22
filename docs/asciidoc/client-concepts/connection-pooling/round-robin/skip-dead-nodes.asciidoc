@@ -108,12 +108,12 @@ A cluster with 2 nodes where the second node fails on ping
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(4)
-	.ClientCalls(p => p.Succeeds(Always))
-	.ClientCalls(p => p.OnPort(9201).FailAlways())
-	.ClientCalls(p => p.OnPort(9203).FailAlways())
-	.StaticConnectionPool()
-	.Settings(p=>p.DisablePing())
+    .Nodes(4)
+    .ClientCalls(p => p.Succeeds(Always))
+    .ClientCalls(p => p.OnPort(9201).FailAlways())
+    .ClientCalls(p => p.OnPort(9203).FailAlways())
+    .StaticConnectionPool()
+    .Settings(p=>p.DisablePing())
 );
 ----
 
@@ -130,35 +130,35 @@ The next call goes to 9203 which fails so we should wrap over
 ----
 await audit.TraceCalls(
 new ClientCall { 
-		{ HealthyResponse, 9200},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0) }
-	},
+        { HealthyResponse, 9200},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0) }
+    },
 new ClientCall { 
-		{ BadResponse, 9201},
-		{ HealthyResponse, 9202},
+        { BadResponse, 9201},
+        { HealthyResponse, 9202},
 { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
-	},
+    },
 new ClientCall { 
-		{ BadResponse, 9203},
-		{ HealthyResponse, 9200},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
-	},
-	new ClientCall { 
-		{ HealthyResponse, 9202},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
-	},
-	new ClientCall { 
-		{ HealthyResponse, 9200},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
-	},
-	new ClientCall { 
-		{ HealthyResponse, 9202},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
-	},
-	new ClientCall {
-		{ HealthyResponse, 9200},
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
-	}
+        { BadResponse, 9203},
+        { HealthyResponse, 9200},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+    },
+    new ClientCall { 
+        { HealthyResponse, 9202},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+    },
+    new ClientCall { 
+        { HealthyResponse, 9200},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+    },
+    new ClientCall { 
+        { HealthyResponse, 9202},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+    },
+    new ClientCall {
+        { HealthyResponse, 9200},
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
+    }
 );
 ----
 
@@ -167,10 +167,10 @@ A cluster with 2 nodes where the second node fails on ping
 [source,csharp]
 ----
 var audit = new Auditor(() => Framework.Cluster
-	.Nodes(4)
-	.ClientCalls(p => p.Fails(Always))
-	.StaticConnectionPool()
-	.Settings(p=>p.DisablePing())
+    .Nodes(4)
+    .ClientCalls(p => p.Fails(Always))
+    .StaticConnectionPool()
+    .Settings(p=>p.DisablePing())
 );
 ----
 
@@ -184,37 +184,37 @@ nodes
 ----
 await audit.TraceCalls(
 new ClientCall { 
-		{ BadResponse, 9200},
-		{ BadResponse, 9201},
-		{ BadResponse, 9202},
-		{ BadResponse, 9203},
-		{ MaxRetriesReached },
-		{ pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
-	},
+        { BadResponse, 9200},
+        { BadResponse, 9201},
+        { BadResponse, 9202},
+        { BadResponse, 9203},
+        { MaxRetriesReached },
+        { pool => pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+    },
 new ClientCall { 
-		{ AllNodesDead },
-		{ Resurrection, 9201},
-		{ BadResponse, 9201},
-		{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
-	},
-	new ClientCall { 
-		{ AllNodesDead },
-		{ Resurrection, 9202},
-		{ BadResponse, 9202},
-		{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
-	},
-	new ClientCall { 
-		{ AllNodesDead },
-		{ Resurrection, 9203},
-		{ BadResponse, 9203},
-		{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
-	},
-	new ClientCall { 
-		{ AllNodesDead },
-		{ Resurrection, 9200},
-		{ BadResponse, 9200},
-		{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
-	}
+        { AllNodesDead },
+        { Resurrection, 9201},
+        { BadResponse, 9201},
+        { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+    },
+    new ClientCall { 
+        { AllNodesDead },
+        { Resurrection, 9202},
+        { BadResponse, 9202},
+        { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+    },
+    new ClientCall { 
+        { AllNodesDead },
+        { Resurrection, 9203},
+        { BadResponse, 9203},
+        { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+    },
+    new ClientCall { 
+        { AllNodesDead },
+        { Resurrection, 9200},
+        { BadResponse, 9200},
+        { pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(4) }
+    }
 );
 ----
 

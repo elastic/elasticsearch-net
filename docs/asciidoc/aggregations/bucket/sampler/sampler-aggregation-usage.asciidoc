@@ -13,15 +13,15 @@
 ----
 s => s
 .Aggregations(aggs => aggs
-	.Sampler("sample", sm => sm
-		.ShardSize(200)
-		.Field(p => p.Name)
-		.Aggregations(aa => aa
-			.SignificantTerms("significant_names", st => st
-				.Field(p => p.Name)
-			)
-		)
-	)
+    .Sampler("sample", sm => sm
+        .ShardSize(200)
+        .Field(p => p.Name)
+        .Aggregations(aa => aa
+            .SignificantTerms("significant_names", st => st
+                .Field(p => p.Name)
+            )
+        )
+    )
 )
 ----
 
@@ -31,15 +31,15 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new SamplerAggregation("sample")
-	{
-		ShardSize = 200,
-		Field = "name",
-		Aggregations = new SignificantTermsAggregation("significant_names")
-		{
-			Field = "name"
-		}
-	}
+    Aggregations = new SamplerAggregation("sample")
+    {
+        ShardSize = 200,
+        Field = "name",
+        Aggregations = new SignificantTermsAggregation("significant_names")
+        {
+            Field = "name"
+        }
+    }
 }
 ----
 

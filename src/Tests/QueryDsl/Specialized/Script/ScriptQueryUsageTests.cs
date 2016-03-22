@@ -23,9 +23,6 @@ namespace Tests.QueryDsl.Specialized.Script
 					param1 = 1
 				}
 			}
-
-
-
 		};
 
 		protected override QueryContainer QueryInitializer => new ScriptQuery

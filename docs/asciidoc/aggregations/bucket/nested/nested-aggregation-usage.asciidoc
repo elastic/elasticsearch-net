@@ -13,14 +13,14 @@
 ----
 s => s
 .Aggregations(a => a
-	.Nested("tags", n => n
-		.Path(p => p.Tags)
-		.Aggregations(aa => aa
-			.Terms("tag_names", t => t
-				.Field(p => p.Tags.Suffix("name"))
-			)
-		)
-	)
+    .Nested("tags", n => n
+        .Path(p => p.Tags)
+        .Aggregations(aa => aa
+            .Terms("tag_names", t => t
+                .Field(p => p.Tags.Suffix("name"))
+            )
+        )
+    )
 )
 ----
 
@@ -30,14 +30,14 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Aggregations = new NestedAggregation("tags")
-	{
-		Path = "tags",
-		Aggregations = new TermsAggregation("tag_names")
-		{
-			Field = "tags.name"
-		}
-	}
+    Aggregations = new NestedAggregation("tags")
+    {
+        Path = "tags",
+        Aggregations = new TermsAggregation("tag_names")
+        {
+            Field = "tags.name"
+        }
+    }
 }
 ----
 

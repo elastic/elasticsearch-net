@@ -4,16 +4,16 @@
 
 :imagesdir: ../../../images/
 
-[[date-histogram-aggregation]]
-== Date Histogram Aggregation
+[[date-histogram-aggregation-usage]]
+== Date Histogram Aggregation Usage
 
 A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
 From a functionality perspective, this histogram supports the same features as the normal histogram. 
 The main difference is that the interval can be specified by date/time expressions.
 
-When specifying a format and extended_bounds, in order for Elasticsearch to be able to parse
-the serialized DateTimes of extended_bounds correctly, the date_optional_time format is included
-as part of the format value.
+NOTE: When specifying a `format` **and** `extended_bounds`, in order for Elasticsearch to be able to parse
+the serialized ``DateTime`` of `extended_bounds` correctly, the `date_optional_time` format is included
+as part of the `format` value.
 
 Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregation.html[the elasticsearch documentation on Date Histogram Aggregation].
 
@@ -24,23 +24,23 @@ Be sure to read {ref_current}/search-aggregations-bucket-datehistogram-aggregati
 s => s
 .Size(0)
 .Aggregations(aggs => aggs
-	.DateHistogram("projects_started_per_month", date => date
-		.Field(p => p.StartedOn)
-		.Interval(DateInterval.Month)
-		.MinimumDocumentCount(2)
-		.Format("yyyy-MM-dd'T'HH:mm:ss")
-		.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
-		.Order(HistogramOrder.CountAscending)
-		.Missing(FixedDate)
-		.Aggregations(childAggs => childAggs
-			.Nested("project_tags", n => n
-				.Path(p => p.Tags)
-				.Aggregations(nestedAggs => nestedAggs
-					.Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
-				)
-			)
-		)
-	)
+    .DateHistogram("projects_started_per_month", date => date
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .MinimumDocumentCount(2)
+        .Format("yyyy-MM-dd'T'HH:mm:ss")
+        .ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+        .Order(HistogramOrder.CountAscending)
+        .Missing(FixedDate)
+        .Aggregations(childAggs => childAggs
+            .Nested("project_tags", n => n
+                .Path(p => p.Tags)
+                .Aggregations(nestedAggs => nestedAggs
+                    .Terms("tags", avg => avg.Field(p => p.Tags.First().Name))
+                )
+            )
+        )
+    )
 )
 ----
 
@@ -50,29 +50,29 @@ s => s
 ----
 new SearchRequest<Project>
 {
-	Size = 0,
-	Aggregations = new DateHistogramAggregation("projects_started_per_month")
-	{
-		Field = Field<Project>(p => p.StartedOn),
-		Interval = DateInterval.Month,
-		MinimumDocumentCount = 2,
-		Format = "yyyy-MM-dd'T'HH:mm:ss",
-		ExtendedBounds = new ExtendedBounds<DateTime>
-		{
-			Minimum = FixedDate.AddYears(-1),
-			Maximum = FixedDate.AddYears(1),
-		},
-		Order = HistogramOrder.CountAscending,
-		Missing = FixedDate,
-		Aggregations = new NestedAggregation("project_tags")
-		{
-			Path = Field<Project>(p => p.Tags),
-			Aggregations = new TermsAggregation("tags")
-			{
-				Field = Field<Project>(p => p.Tags.First().Name)
-			}
-		}
-	}
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = Field<Project>(p => p.StartedOn),
+        Interval = DateInterval.Month,
+        MinimumDocumentCount = 2,
+        Format = "yyyy-MM-dd'T'HH:mm:ss",
+        ExtendedBounds = new ExtendedBounds<DateTime>
+        {
+            Minimum = FixedDate.AddYears(-1),
+            Maximum = FixedDate.AddYears(1),
+        },
+        Order = HistogramOrder.CountAscending,
+        Missing = FixedDate,
+        Aggregations = new NestedAggregation("project_tags")
+        {
+            Path = Field<Project>(p => p.Tags),
+            Aggregations = new TermsAggregation("tags")
+            {
+                Field = Field<Project>(p => p.Tags.First().Name)
+            }
+        }
+    }
 }
 ----
 
@@ -119,7 +119,7 @@ new SearchRequest<Project>
 === Handling responses
 
 Using the `.Aggs` aggregation helper on `ISearchResponse<T>`, we can fetch our aggregation results easily 
-in the correct type. TODO: [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]
+in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
 ----

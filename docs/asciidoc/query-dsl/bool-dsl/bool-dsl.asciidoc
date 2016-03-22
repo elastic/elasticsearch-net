@@ -8,19 +8,19 @@
 == Bool Queries
 
 Writing boolean queries can grow verbose rather quickly when using the query DSL. For example,
-take a single {ref_current}/query-dsl-bool-query.html[`bool` query] with only two clauses
+take a single {ref_current}/query-dsl-bool-query.html[``bool`` query] with only two clauses
 
 [source,csharp]
 ----
 var searchResults = this.Client.Search<Project>(s => s
-	.Query(q => q
-		.Bool(b => b
-			.Should(
-				bs => bs.Term(p => p.Name, "x"),
-				bs => bs.Term(p => p.Name, "y")
-			)
-		)
-	)
+    .Query(q => q
+        .Bool(b => b
+            .Should(
+                bs => bs.Term(p => p.Name, "x"),
+                bs => bs.Term(p => p.Name, "y")
+            )
+        )
+    )
 );
 ----
 
@@ -38,7 +38,7 @@ The previous example now becomes the following with the fluent API
 [source,csharp]
 ----
 var searchResults = this.Client.Search<Project>(s => s
-	.Query(q => q.Term(p => p.Name, "x") || q.Term(p => p.Name, "y"))
+    .Query(q => q.Term(p => p.Name, "x") || q.Term(p => p.Name, "y"))
 );
 ----
 
@@ -48,8 +48,8 @@ or, using the object initializer syntax
 ----
 searchResults = this.Client.Search<Project>(new SearchRequest<Project>
 {
-	Query = new TermQuery { Field = "name", Value= "x" } 
-		|| new TermQuery { Field = Field<Project>(p=>p.Name), Value = "y" }
+    Query = new TermQuery { Field = "name", Value= "x" } 
+        || new TermQuery { Field = Field<Project>(p=>p.Name), Value = "y" }
 });
 ----
 
@@ -78,11 +78,40 @@ bool
    |___term
 ....
 
+[source,csharp]
+----
+Assert(
+    q => q.Query() && q.Query() && q.Query(),
+    Query && Query && Query,
+    c => c.Bool.Must.Should().HaveCount(3)
+    );
+----
+
 The bool DSL offers also a short hand notation to mark a query as a `must_not` using the `!` operator 
+
+[source,csharp]
+----
+Assert(q => !q.Query(), !Query, c => c.Bool.MustNot.Should().HaveCount(1));
+----
 
 And to mark a query as a `filter` using the `+` operator
 
+[source,csharp]
+----
+Assert(q => +q.Query(), +Query, c => c.Bool.Filter.Should().HaveCount(1));
+----
+
 Both of these can be combined with `&&` to form a single bool query  
+
+[source,csharp]
+----
+Assert(q => !q.Query() && !q.Query(), !Query && !Query, c => c.Bool.MustNot.Should().HaveCount(2));
+----
+
+[source,csharp]
+----
+Assert(q => +q.Query() && +q.Query(), +Query && +Query, c => c.Bool.Filter.Should().HaveCount(2));
+----
 
 === Combining/Merging bool queries
 
@@ -102,13 +131,13 @@ bool
 [source,csharp]
 ----
 Assert(
-	q => q.Query() && q.Query() && q.Query() && !q.Query(),
-	Query && Query && Query && !Query,
-	c=>
-	{
-		c.Bool.Must.Should().HaveCount(3);
-		c.Bool.MustNot.Should().HaveCount(1);
-	});
+    q => q.Query() && q.Query() && q.Query() && !q.Query(),
+    Query && Query && Query && !Query,
+    c=>
+    {
+        c.Bool.Must.Should().HaveCount(3);
+        c.Bool.MustNot.Should().HaveCount(1);
+    });
 
 c.Bool.Must.Should().HaveCount(3);
 
@@ -132,8 +161,67 @@ bool
    |___term
 ....
 
-You can still mix and match actual bool queries with the bool DSL e.g
-`bool(must=term, term, term) && !term` would still merge into a single `bool` query. 
+[source,csharp]
+----
+Assert(
+    q => q.Query() && q.Query() && q.Query() && !q.Query() && +q.Query() && +q.Query(),
+    Query && Query && Query && !Query && +Query && +Query,
+    c =>
+    {
+        c.Bool.Must.Should().HaveCount(3);
+        c.Bool.MustNot.Should().HaveCount(1);
+        c.Bool.Filter.Should().HaveCount(2);
+    });
+
+c.Bool.Must.Should().HaveCount(3);
+
+c.Bool.MustNot.Should().HaveCount(1);
+
+c.Bool.Filter.Should().HaveCount(2);
+----
+
+You can still mix and match actual bool queries with the bool DSL e.g`bool(must=term, term, term) && !term` would still merge into a single `bool` query. 
+
+[source,csharp]
+----
+Assert(
+    q => q.Bool(b => b.Must(mq => mq.Query(), mq => mq.Query(), mq => mq.Query())) && !q.Query(),
+    new BoolQuery { Must = new QueryContainer[] { Query, Query, Query } } && !Query,
+    c =>
+    {
+        c.Bool.Must.Should().HaveCount(3);
+        c.Bool.MustNot.Should().HaveCount(1);
+    });
+
+c.Bool.Must.Should().HaveCount(3);
+
+c.Bool.MustNot.Should().HaveCount(1);
+----
+
+[source,csharp]
+----
+Assert(
+    q => q.Query() && (q.Query() || q.Query() || q.Query()),
+    Query && (Query || Query || Query),
+    c =>
+    {
+        c.Bool.Must.Should().HaveCount(2);
+        var lastClause = c.Bool.Must.Last() as IQueryContainer;
+        lastClause.Should().NotBeNull();
+        lastClause.Bool.Should().NotBeNull();
+        lastClause.Bool.Should.Should().HaveCount(3);
+    });
+
+c.Bool.Must.Should().HaveCount(2);
+
+var lastClause = c.Bool.Must.Last() as IQueryContainer;
+
+lastClause.Should().NotBeNull();
+
+lastClause.Bool.Should().NotBeNull();
+
+lastClause.Bool.Should.Should().HaveCount(3);
+----
 
 TIP: You can add parentheses to force evaluation order
 
@@ -148,6 +236,33 @@ if NEST identified both sides of the OR operation as only containing `should` cl
 join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query. 
 Rewriting this to a single bool with 5 `should` clauses would break because only matching on `term5` or `term6` should still be a hit.
 
+[source,csharp]
+----
+Assert(
+    q => q.Bool(b => b
+        .Should(mq => mq.Query(), mq => mq.Query(), mq => mq.Query(), mq => mq.Query())
+        .MinimumShouldMatch(2)
+        )
+         || !q.Query() || q.Query(),
+    new BoolQuery
+    {
+        Should = new QueryContainer[] { Query, Query, Query, Query },
+        MinimumShouldMatch = 2
+    } || !Query || Query,
+    c =>
+    {
+        c.Bool.Should.Should().HaveCount(3);
+        var nestedBool = c.Bool.Should.First() as IQueryContainer;
+        nestedBool.Bool.Should.Should().HaveCount(4);
+    });
+
+c.Bool.Should.Should().HaveCount(3);
+
+var nestedBool = c.Bool.Should.First() as IQueryContainer;
+
+nestedBool.Bool.Should.Should().HaveCount(4);
+----
+
 === Locked bool queries
 
 NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set, 
@@ -155,7 +270,39 @@ NEST will treat these as locked
 
 Here we demonstrate that two locked `bool` queries are not combined
 
-neither are two `bool` queries where either the left or the right query is locked 
+[source,csharp]
+----
+Assert(
+    q => q.Bool(b => b.Name("leftBool").Should(mq => mq.Query()))
+         || q.Bool(b => b.Name("rightBool").Should(mq => mq.Query())),
+    new BoolQuery { Name = "leftBool", Should = new QueryContainer[] { Query } }
+    || new BoolQuery { Name = "rightBool", Should = new QueryContainer[] { Query } },
+    c => AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
+----
+
+neither are two `bool` queries where either right query is locked 
+
+[source,csharp]
+----
+Assert(
+    q => q.Bool(b => b.Should(mq => mq.Query()))
+         || q.Bool(b => b.Name("rightBool").Should(mq => mq.Query())),
+    new BoolQuery { Should = new QueryContainer[] { Query } }
+    || new BoolQuery { Name = "rightBool", Should = new QueryContainer[] { Query } },
+    c => AssertDoesNotJoinOntoLockedBool(c, "rightBool"));
+----
+
+or the left query is locked 
+
+[source,csharp]
+----
+Assert(
+    q => q.Bool(b => b.Name("leftBool").Should(mq => mq.Query()))
+         || q.Bool(b => b.Should(mq => mq.Query())),
+    new BoolQuery { Name = "leftBool", Should = new QueryContainer[] { Query } }
+    || new BoolQuery { Should = new QueryContainer[] { Query } },
+    c => AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
+----
 
 [source,csharp]
 ----
