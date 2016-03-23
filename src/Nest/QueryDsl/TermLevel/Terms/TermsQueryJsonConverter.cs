@@ -75,7 +75,7 @@ namespace Nest
 					case "minimum_should_match":
 						reader.Read();
 						var min = serializer.Deserialize<MinimumShouldMatch>(reader);
-						f.MinimumShouldMatch = min;	
+						f.MinimumShouldMatch = min;
 						break;
 					case "boost":
 						reader.Read();
@@ -131,7 +131,7 @@ namespace Nest
 			}
 			else if (reader.TokenType == JsonToken.StartArray)
 			{
-				var values = JArray.Load(reader).Values<string>();
+				var values = JArray.Load(reader).Values<object>();
 				termsQuery.Terms = values;
 			}
 		}
