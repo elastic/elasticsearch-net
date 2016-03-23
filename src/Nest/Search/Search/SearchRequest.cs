@@ -362,6 +362,8 @@ namespace Nest
 		public SearchDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
+		public SearchDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
