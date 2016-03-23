@@ -16,7 +16,7 @@ namespace Nest
 		[JsonProperty("missing")]
 		double? Missing { get; set; }
 	}
-	
+
 	public abstract class MetricAggregationBase : AggregationBase, IMetricAggregation
 	{
 		internal MetricAggregationBase() { }
@@ -31,15 +31,15 @@ namespace Nest
 		public double? Missing { get; set; }
 	}
 
-	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T> 
-		:  DescriptorBase<TMetricAggregation, TMetricAggregationInterface>, IMetricAggregation 
+	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
+		:  DescriptorBase<TMetricAggregation, TMetricAggregationInterface>, IMetricAggregation
 		where TMetricAggregation : MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
-			, TMetricAggregationInterface, IMetricAggregation 
+			, TMetricAggregationInterface, IMetricAggregation
 		where T : class
 		where TMetricAggregationInterface : class, IMetricAggregation
 	{
 		Field IMetricAggregation.Field { get; set; }
-		
+
 		IScript IMetricAggregation.Script { get; set; }
 
 		double? IMetricAggregation.Missing { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 
 		IDictionary<string, object> IAggregation.Meta { get; set; }
 
-		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
+		public TMetricAggregation Field(Field field) => Assign(a => a.Field = field);
 
 		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

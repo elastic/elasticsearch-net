@@ -8,7 +8,7 @@ namespace Nest
 	[ContractJsonConverter(typeof(AggregationJsonConverter<NestedAggregation>))]
 	public interface INestedAggregation : IBucketAggregation
 	{
-		[JsonProperty("path")] 
+		[JsonProperty("path")]
 		Field Path { get; set;}
 	}
 
@@ -23,14 +23,14 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Nested = this;
 	}
 
-	public class NestedAggregationDescriptor<T> 
+	public class NestedAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<NestedAggregationDescriptor<T>, INestedAggregation, T>
-			, INestedAggregation 
+			, INestedAggregation
 		where T : class
 	{
 		Field INestedAggregation.Path { get; set; }
 
-		public NestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public NestedAggregationDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 
 		public NestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
 	}

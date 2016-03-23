@@ -83,7 +83,7 @@ namespace Nest
 
 		public TDescriptor MultiValueMode(MultiValueMode? mode) => Assign(a => a.MultiValueMode = mode);
 
-		public TDescriptor Field(string field) => Assign(a => a.Field = field);
+		public TDescriptor Field(Field field) => Assign(a => a.Field = field);
 
 		public TDescriptor Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 	}

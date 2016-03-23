@@ -60,7 +60,7 @@ namespace Nest
 
 		IEnumerable<IRange> IGeoDistanceAggregation.Ranges { get; set; }
 
-		public GeoDistanceAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public GeoDistanceAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

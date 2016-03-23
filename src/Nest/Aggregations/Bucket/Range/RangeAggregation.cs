@@ -43,7 +43,7 @@ namespace Nest
 
 		IEnumerable<IRange> IRangeAggregation.Ranges { get; set; }
 
-		public RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public RangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

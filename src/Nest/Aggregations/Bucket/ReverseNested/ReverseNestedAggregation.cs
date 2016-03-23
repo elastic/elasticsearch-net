@@ -24,14 +24,14 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;
 	}
 
-	public class ReverseNestedAggregationDescriptor<T> 
+	public class ReverseNestedAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregation, T>
-			, IReverseNestedAggregation 
+			, IReverseNestedAggregation
 		where T : class
 	{
 		Field IReverseNestedAggregation.Path { get; set; }
 
-		public ReverseNestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public ReverseNestedAggregationDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 
 		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
 	}

@@ -43,7 +43,7 @@ namespace Nest
 
 		public TimestampFieldDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public TimestampFieldDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public TimestampFieldDescriptor<T> Path(Field path) => Assign(a => a.Path = path);
 
 		public TimestampFieldDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
@@ -51,6 +51,6 @@ namespace Nest
 
 		public TimestampFieldDescriptor<T> Default(string defaultValue) => Assign(a => a.Default = defaultValue);
 
-		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);	
+		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 	}
 }
