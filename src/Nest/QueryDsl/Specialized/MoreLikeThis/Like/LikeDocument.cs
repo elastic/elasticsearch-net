@@ -62,7 +62,7 @@ namespace Nest
 	public class LikeDocument<T> : LikeDocumentBase
 	{
 		protected override Type ClrType => typeof(T);
-		internal LikeDocument() { } 
+		internal LikeDocument() { }
 
 		public LikeDocument(Id id)
 		{
@@ -106,6 +106,8 @@ namespace Nest
 
 		public LikeDocumentDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public LikeDocumentDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
 		public LikeDocumentDescriptor<T> Document(T document) => Assign(a => a.Document = document);
 

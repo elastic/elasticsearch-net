@@ -124,7 +124,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class QueryStringQueryDescriptor<T> 
+	public class QueryStringQueryDescriptor<T>
 		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
 		, IQueryStringQuery where T : class
 	{
@@ -162,6 +162,8 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public QueryStringQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 

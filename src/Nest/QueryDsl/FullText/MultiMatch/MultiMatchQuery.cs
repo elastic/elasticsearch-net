@@ -85,8 +85,8 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MultiMatchQueryDescriptor<T> 
-		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery> 
+	public class MultiMatchQueryDescriptor<T>
+		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery>
 		, IMultiMatchQuery where T : class
 	{
 		protected override bool Conditionless => MultiMatchQuery.IsConditionless(this);
@@ -109,6 +109,8 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public MultiMatchQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
 		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
