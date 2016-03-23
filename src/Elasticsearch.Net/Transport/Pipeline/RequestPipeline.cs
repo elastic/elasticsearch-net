@@ -392,8 +392,7 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					audit.Exception = e;
-					e.RethrowKeepingStackTrace();
-					return null; //dead code due to call to RethrowKeepingStackTrace()
+					throw;
 				}
 			}
 		}
@@ -419,8 +418,7 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					audit.Exception = e;
-					e.RethrowKeepingStackTrace();
-					return null; //dead code due to call to RethrowKeepingStackTrace()
+					throw;
 				}
 			}
 		}

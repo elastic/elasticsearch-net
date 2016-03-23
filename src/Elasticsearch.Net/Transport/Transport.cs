@@ -83,10 +83,9 @@ namespace Elasticsearch.Net
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
-					catch (ResolveException resolveException)
+					catch (ResolveException)
 					{
-						resolveException.RethrowKeepingStackTrace();
-						return null; //dead code due to call to RethrowKeepingStackTrace()
+						throw;
 					}
 					catch (Exception killerException)
 					{
@@ -148,10 +147,9 @@ namespace Elasticsearch.Net
 						pipeline.MarkDead(node);
 						seenExceptions.Add(pipelineException);
 					}
-					catch (ResolveException resolveException)
+					catch (ResolveException)
 					{
-						resolveException.RethrowKeepingStackTrace();
-						return null; //dead code due to call to RethrowKeepingStackTrace()
+						throw;
 					}
 					catch (Exception killerException)
 					{
@@ -186,7 +184,7 @@ namespace Elasticsearch.Net
 			catch (PipelineException e) when (e.Recoverable)
 			{
 				pipeline.SniffOnConnectionFailure();
-				e.RethrowKeepingStackTrace();
+				throw;
 			}
 		}
 
@@ -199,7 +197,7 @@ namespace Elasticsearch.Net
 			catch (PipelineException e) when (e.Recoverable)
 			{
 				await pipeline.SniffOnConnectionFailureAsync().ConfigureAwait(false);
-				e.RethrowKeepingStackTrace();
+				throw;
 			}
 		}
 
