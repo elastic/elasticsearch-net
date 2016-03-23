@@ -41,7 +41,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
-		
+
 		[JsonProperty(PropertyName = "minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
@@ -77,7 +77,7 @@ namespace Nest
 		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
 	}
 
-	public class MoreLikeThisQueryDescriptor<T> 
+	public class MoreLikeThisQueryDescriptor<T>
 		: QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>
 		, IMoreLikeThisQuery where T : class
 	{
@@ -100,13 +100,15 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) => 
+		public MoreLikeThisQueryDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+
+		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) =>
 			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
-		public MoreLikeThisQueryDescriptor<T> StopWords(params string[] stopWords) => 
+		public MoreLikeThisQueryDescriptor<T> StopWords(params string[] stopWords) =>
 			Assign(a => a.StopWords = stopWords);
 
-		public MoreLikeThisQueryDescriptor<T> StopWords(StopWords stopWords) => 
+		public MoreLikeThisQueryDescriptor<T> StopWords(StopWords stopWords) =>
 			Assign(a => a.StopWords = stopWords);
 
 		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int? maxQueryTerms) => Assign(a => a.MaxQueryTerms = maxQueryTerms);

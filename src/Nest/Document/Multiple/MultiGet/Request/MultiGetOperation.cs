@@ -27,7 +27,7 @@ namespace Nest
 		public string Routing { get; set; }
 
 		bool IMultiGetOperation.CanBeFlattened =>
-			this.Index == null 
+			this.Index == null
 			&& this.Type == null
 			&& this.Routing == null
 			&& this.Source == null
@@ -106,11 +106,13 @@ namespace Nest
 		public MultiGetOperationDescriptor<T> Routing(string routing) => Assign(a => a.Routing = routing);
 
 		/// <summary>
-		/// Allows to selectively load specific fields for each document 
+		/// Allows to selectively load specific fields for each document
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
+
+		public MultiGetOperationDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
 	}
 }
