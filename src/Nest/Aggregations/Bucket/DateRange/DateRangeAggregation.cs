@@ -33,18 +33,18 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.DateRange = this;
 	}
 
-	public class DateRangeAggregationDescriptor<T> 
+	public class DateRangeAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<DateRangeAggregationDescriptor<T>, IDateRangeAggregation, T>
-			, IDateRangeAggregation 
+			, IDateRangeAggregation
 		where T : class
 	{
 		Field IDateRangeAggregation.Field { get; set; }
-		
+
 		string IDateRangeAggregation.Format { get; set; }
 
 		IEnumerable<IDateRangeExpression> IDateRangeAggregation.Ranges { get; set; }
 
-		public DateRangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public DateRangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

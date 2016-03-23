@@ -35,20 +35,20 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoHash = this;
 	}
 
-	public class GeoHashGridAggregationDescriptor<T> 
+	public class GeoHashGridAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<GeoHashGridAggregationDescriptor<T>, IGeoHashGridAggregation, T>
-			, IGeoHashGridAggregation 
+			, IGeoHashGridAggregation
 		where T : class
 	{
 		Field IGeoHashGridAggregation.Field { get; set; }
-		
+
 		int? IGeoHashGridAggregation.Size { get; set; }
 
 		int? IGeoHashGridAggregation.ShardSize { get; set; }
 
 		GeoHashPrecision? IGeoHashGridAggregation.Precision { get; set; }
 
-		public GeoHashGridAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public GeoHashGridAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public GeoHashGridAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

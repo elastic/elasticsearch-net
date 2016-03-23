@@ -29,16 +29,16 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.IpRange = this;
 	}
 
-	public class IpRangeAggregationDescriptor<T> : 
+	public class IpRangeAggregationDescriptor<T> :
 		BucketAggregationDescriptorBase<IpRangeAggregationDescriptor<T>,IIpRangeAggregation, T>
-			, IIpRangeAggregation 
+			, IIpRangeAggregation
 		where T : class
 	{
 		Field IIpRangeAggregation.Field { get; set; }
 
 		IEnumerable<IIpRange> IIpRangeAggregation.Ranges { get; set; }
 
-		public IpRangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public IpRangeAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public IpRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

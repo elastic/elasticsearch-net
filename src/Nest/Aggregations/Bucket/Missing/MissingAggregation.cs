@@ -23,14 +23,14 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Missing = this;
 	}
 
-	public class MissingAggregationDescriptor<T> 
+	public class MissingAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<MissingAggregationDescriptor<T>,IMissingAggregation, T>
-			, IMissingAggregation 
+			, IMissingAggregation
 		where T : class
 	{
 		Field IMissingAggregation.Field { get; set; }
 
-		public MissingAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public MissingAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public MissingAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 	}

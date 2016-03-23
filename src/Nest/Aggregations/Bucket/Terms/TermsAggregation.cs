@@ -68,15 +68,15 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
 	}
 
-	public class TermsAggregationDescriptor<T> 
+	public class TermsAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<TermsAggregationDescriptor<T>, ITermsAggregation, T>
-			, ITermsAggregation 
+			, ITermsAggregation
 		where T : class
 	{
 		Field ITermsAggregation.Field { get; set; }
-		
+
 		IScript ITermsAggregation.Script { get; set; }
-		
+
 		int? ITermsAggregation.Size { get; set; }
 
 		int? ITermsAggregation.ShardSize { get; set; }
@@ -97,7 +97,7 @@ namespace Nest
 
 		string ITermsAggregation.Missing { get; set; }
 
-		public TermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

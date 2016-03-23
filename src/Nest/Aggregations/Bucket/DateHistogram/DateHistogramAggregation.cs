@@ -58,7 +58,7 @@ namespace Nest
 		{
 			get
 			{
-				return !string.IsNullOrEmpty(_format) && 
+				return !string.IsNullOrEmpty(_format) &&
 					!_format.Contains("date_optional_time") &&
 					ExtendedBounds != null
 					? _format + "||date_optional_time"
@@ -123,7 +123,7 @@ namespace Nest
 
 		DateTime? IDateHistogramAggregation.Missing { get; set; }
 
-		public DateHistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public DateHistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

@@ -77,7 +77,7 @@ namespace Nest
 
 		double? IHistogramAggregation.Missing { get; set; }
 
-		public HistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public HistogramAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public HistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 

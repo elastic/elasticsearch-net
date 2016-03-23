@@ -17,10 +17,7 @@ namespace Nest
 	public class WildcardQuery<T> : WildcardQuery
 		where T : class
 	{
-		public WildcardQuery(Expression<Func<T, object>> field)
-		{
-			this.Field = field;
-		}
+		public WildcardQuery(Expression<Func<T, object>> field) { this.Field = field; }
 	}
 
 	public class WildcardQuery : FieldNameQueryBase, IWildcardQuery
@@ -32,8 +29,8 @@ namespace Nest
 		internal override void WrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
 
-	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>, 
-		IWildcardQuery 
+	public class WildcardQueryDescriptor<T> : TermQueryDescriptorBase<WildcardQueryDescriptor<T>, T>,
+		IWildcardQuery
 		where T : class
 	{
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }

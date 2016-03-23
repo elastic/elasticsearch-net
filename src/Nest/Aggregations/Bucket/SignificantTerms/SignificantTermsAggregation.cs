@@ -67,7 +67,7 @@ namespace Nest
 		public QueryContainer BackgroundFilter { get; set; }
 
 		internal SignificantTermsAggregation() { }
-		
+
 		public SignificantTermsAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.SignificantTerms = this;
@@ -104,7 +104,7 @@ namespace Nest
 
 		QueryContainer ISignificantTermsAggregation.BackgroundFilter { get; set; }
 
-		public SignificantTermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
 		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
@@ -112,10 +112,10 @@ namespace Nest
 
 		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint? hint) => Assign(a => a.ExecutionHint = hint);
 
-		public SignificantTermsAggregationDescriptor<T> Include(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> include) => 
+		public SignificantTermsAggregationDescriptor<T> Include(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> include) =>
 			Assign(a => a.Include = include?.Invoke(new FluentDictionary<string, string>()));
 
-		public SignificantTermsAggregationDescriptor<T> Exclude(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> exclude) => 
+		public SignificantTermsAggregationDescriptor<T> Exclude(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> exclude) =>
 			Assign(a => a.Exclude = exclude?.Invoke(new FluentDictionary<string, string>()));
 
 		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
