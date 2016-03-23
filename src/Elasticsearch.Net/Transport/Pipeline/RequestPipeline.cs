@@ -392,8 +392,7 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					audit.Exception = e;
-					e.RethrowKeepingStackTrace();
-					return null; //dead code due to call to RethrowKeepingStackTrace()
+					throw;
 				}
 			}
 		}
@@ -419,8 +418,7 @@ namespace Elasticsearch.Net
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					audit.Exception = e;
-					e.RethrowKeepingStackTrace();
-					return null; //dead code due to call to RethrowKeepingStackTrace()
+					throw;
 				}
 			}
 		}
@@ -467,8 +465,17 @@ namespace Elasticsearch.Net
 
 			if (response == null)
 			{
-				response = new ResponseBuilder<TReturn>(data) { Exception = clientException }.ToResponse();
+				response = new ResponseBuilder<TReturn>(data)
+				{
+					StatusCode = callDetails?.HttpStatusCode,
+					Exception = clientException
+				}.ToResponse();
 			}
+			if (callDetails?.ResponseBodyInBytes != null && response.ResponseBodyInBytes == null)
+				response.ResponseBodyInBytes = callDetails.ResponseBodyInBytes;
+
+			if (callDetails?.ServerError != null && response.ServerError == null)
+				response.ServerError = callDetails.ServerError;
 
 			response.AuditTrail = this.AuditTrail;
 		}

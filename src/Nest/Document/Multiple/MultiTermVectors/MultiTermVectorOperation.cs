@@ -29,8 +29,8 @@ namespace Nest
 		ITermVectorFilter Filter { get; set; }
 	}
 
-	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation 
-		where T : class 
+	public class MultiTermVectorOperation<T> : IMultiTermVectorOperation
+		where T : class
 	{
 		public MultiTermVectorOperation(Id id)
 		{
@@ -52,7 +52,7 @@ namespace Nest
 		public ITermVectorFilter Filter { get; set; }
 	}
 
-	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation 
+	public class MultiTermVectorOperationDescriptor<T> : DescriptorBase<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation>, IMultiTermVectorOperation
 		where T : class
 	{
 		IndexName IMultiTermVectorOperation.Index { get; set; } = typeof (T);
@@ -70,6 +70,8 @@ namespace Nest
 		public MultiTermVectorOperationDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
+		public MultiTermVectorOperationDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
+
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a=>a.Id = id);
 
 		public MultiTermVectorOperationDescriptor<T> Offsets(bool offsets = true) => Assign(a => a.Offsets = offsets);
@@ -82,7 +84,7 @@ namespace Nest
 
 		public MultiTermVectorOperationDescriptor<T> FieldStatistics(bool fieldStatistics = true) => Assign(a => a.FieldStatistics = fieldStatistics);
 
-		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) => 
+		public MultiTermVectorOperationDescriptor<T> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
 	}
 }

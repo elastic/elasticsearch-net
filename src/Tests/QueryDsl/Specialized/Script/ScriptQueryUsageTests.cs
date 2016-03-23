@@ -17,10 +17,10 @@ namespace Tests.QueryDsl.Specialized.Script
 			{
 				_name = "named_query",
 				boost = 1.1,
-				inline = "doc['num1'].value > param1",
-				@params = new
+				script = new
 				{
-					param1 = 1
+					inline = "doc['num1'].value > param1",
+					@params = new { param1 = 1 }
 				}
 			}
 		};

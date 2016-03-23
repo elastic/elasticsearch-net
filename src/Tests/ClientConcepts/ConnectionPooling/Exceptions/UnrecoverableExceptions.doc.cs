@@ -100,6 +100,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				(e) =>
 				{
 					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.HttpStatusCode.Should().Be(401);
 					e.Response.ResponseBodyInBytes.Should().BeNull();
 				}
 			);
@@ -123,6 +124,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				(e) =>
 				{
 					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.HttpStatusCode.Should().Be(401);
 					e.Response.ResponseBodyInBytes.Should().NotBeNull();
 					var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
 					responseString.Should().Contain("nginx/");
@@ -153,6 +155,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Exceptions
 				(e) =>
 				{
 					e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+					e.Response.HttpStatusCode.Should().Be(401);
 					e.Response.ResponseBodyInBytes.Should().NotBeNull();
 					var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
 					responseString.Should().Contain("nginx/");

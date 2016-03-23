@@ -94,7 +94,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				new ExponentialDecayFunction { Origin = 1.0, Decay =	0.5, Field = Field<Project>(p=>p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
 				new GaussDateDecayFunction { Origin = DateMath.Now, Field = Field<Project>(p=>p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
 				new LinearGeoDecayFunction { Origin = new GeoLocation(70, -70), Field = Field<Project>(p=>p.Location), Scale = Distance.Miles(1), MultiValueMode = MultiValueMode.Average },
-				new FieldValueFactorFunction	
+				new FieldValueFactorFunction
 				{
 					Field = "x", Factor = 1.1,	Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
 				},
