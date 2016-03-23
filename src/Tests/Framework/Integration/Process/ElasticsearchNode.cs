@@ -35,6 +35,7 @@ namespace Tests.Framework.Integration
 		private IDisposable _processListener;
 
 		public string Version { get; }
+		public Version ParsedVersion { get; }
 		public string Binary { get; }
 
 		private string RoamingFolder { get; }
@@ -101,7 +102,8 @@ namespace Tests.Framework.Integration
 			)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
-			this.Version = runningIntegrations ? elasticsearchVersion : "unit-test-version-should-not-appear-on-disk";
+			this.Version = runningIntegrations ? elasticsearchVersion : "0.0.0-unittest";
+			this.ParsedVersion = new Version(Regex.Replace(this.Version, @"(?:\-.+)$", ""));
 			this.RunningIntegrations = runningIntegrations;
 			this.Prefix = prefix.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
@@ -175,15 +177,19 @@ namespace Tests.Framework.Integration
 					}
 				}
 			}
-			var settings = new string[]
+
+			var settingMarker = this.ParsedVersion.Major >= 5 ? "-E " : "-D";
+
+			var settings = new []
 			{
-				$"-Des.cluster.name={this.ClusterName}",
-				$"-Des.node.name={this.NodeName}",
-				$"-Des.path.repo={this.RepositoryPath}",
-				$"-Des.script.inline=on",
-				$"-Des.script.indexed=on",
-				$"--node.testingcluster true"
-			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
+				$"es.cluster.name=\"{this.ClusterName}\"",
+				$"es.node.name={this.NodeName}",
+				$"es.path.repo=\"{this.RepositoryPath}\"",
+				$"es.script.inline=true",
+				$"es.script.indexed=true",
+				$"es.node.testingcluster=true"
+			}.Concat(additionalSettings ?? Enumerable.Empty<string>())
+			 .Select(s=> $"{settingMarker}{s}");
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
 
@@ -250,7 +256,7 @@ namespace Tests.Framework.Integration
 				if (!File.Exists(localZip))
 				{
 					Console.WriteLine($"Download elasticsearch: {this.Version} from {downloadUrl}");
-                    new WebClient().DownloadFile(downloadUrl, localZip);
+					new WebClient().DownloadFile(downloadUrl, localZip);
 					Console.WriteLine($"Downloaded elasticsearch: {this.Version}");
 				}
 
@@ -287,7 +293,10 @@ namespace Tests.Framework.Integration
 
 		private void InstallPlugins()
 		{
-			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "plugin") + ".bat";
+			var pluginCommand = "plugin";
+			if (this.ParsedVersion.Major >= 5) pluginCommand = "elasticsearch-plugin";
+
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", pluginCommand) + ".bat";
 			foreach (var plugin in SupportedPlugins)
 			{
 				var installPath = plugin.Key;
@@ -308,14 +317,15 @@ namespace Tests.Framework.Integration
 					{
 						var o = p.Start();
 						Console.WriteLine($"Calling: {pluginBat} install {command}");
-						o.Subscribe(e=>Console.WriteLine(e),
+						o.Subscribe(e => Console.WriteLine(e),
 							(e) =>
 							{
 								Console.WriteLine($"Failed installing elasticsearch plugin: {command}");
 								handle.Set();
 								throw e;
 							},
-							() => {
+							() =>
+							{
 								Console.WriteLine($"Finished installing elasticsearch plugin: {installPath} exit code: {p.ExitCode}");
 								handle.Set();
 							});
