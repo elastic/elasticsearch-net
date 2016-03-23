@@ -183,7 +183,12 @@ namespace Tests.Framework.Integration
 				$"-Des.script.inline=on",
 				$"-Des.script.indexed=on",
 				$"--node.testingcluster true"
-			}.Concat(additionalSettings ?? Enumerable.Empty<string>());
+			}
+			.Concat(additionalSettings ?? Enumerable.Empty<string>())
+			.OrderByDescending(s =>
+				s.StartsWith("-d", StringComparison.OrdinalIgnoreCase) ||
+				s.StartsWith("-p", StringComparison.OrdinalIgnoreCase))
+			.ThenBy(s => s);
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
 
