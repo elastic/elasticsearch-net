@@ -31,7 +31,7 @@ s => s
     )
     .GeoDistance(g => g
         .Field(p => p.Location)
-        .DistanceType(GeoDistanceType.SloppyArc)
+        .DistanceType(GeoDistanceType.Arc)
         .Order(SortOrder.Ascending)
         .Unit(DistanceUnit.Centimeters)
         .Mode(SortMode.Min)
@@ -144,7 +144,9 @@ new SearchRequest<Project>
           }
         ],
         "order": "asc",
-        "mode": "min"
+        "mode": "min",
+        "distance_type": "arc",
+        "unit": "cm"
       }
     },
     {

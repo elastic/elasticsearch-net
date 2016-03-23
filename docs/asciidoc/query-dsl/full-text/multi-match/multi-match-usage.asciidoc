@@ -85,3 +85,39 @@ new MultiMatchQuery
 }
 ----
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.MultiMatch(c => c
+    .Fields(f => f.Field(p=>p.Description, 2.2).Field("myOtherField^0.3"))
+    .Query("hello world")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MultiMatchQuery
+{
+    Fields = Field<Project>(p=>p.Description, 2.2).And("myOtherField^0.3"),
+    Query = "hello world",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "multi_match": {
+    "query": "hello world",
+    "fields": [
+      "description^2.2",
+      "myOtherField^0.3"
+    ]
+  }
+}
+----
+

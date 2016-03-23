@@ -19,7 +19,7 @@ If you simply new an `ElasticLowLevelClient`, it will be a non-failover connecti
 var client = new ElasticLowLevelClient();
 ----
 
-If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 
+If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then
 you will need to pass in some instance of `IConnectionConfigurationValues`.
 
 The easiest way to do this is:
@@ -49,7 +49,7 @@ var client = new ElasticLowLevelClient(config);
 ----
 
 Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
-Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover here>>.
+Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover>>.
 
 === Configuration Options
 
@@ -177,6 +177,24 @@ client.RootNodeInfoAsync();
 counter.Should().Be(2);
 ----
 
+[source,csharp]
+----
+var counter = 0;
+
+var client = TestClient.GetFixedReturnClient(new { }, 500, s => s
+    .ThrowExceptions()
+    .OnRequestCompleted(r => counter++)
+);
+
+Assert.Throws<ElasticsearchClientException>(() => client.RootNodeInfo());
+
+counter.Should().Be(1);
+
+Assert.ThrowsAsync<ElasticsearchClientException>(() => client.RootNodeInfoAsync());
+
+counter.Should().Be(2);
+----
+
 [[complex-logging]]
 Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
 to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
@@ -189,52 +207,57 @@ var list = new List<string>();
 var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
 var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) <1>
-                .DisableDirectStreaming()
-                .OnRequestCompleted(response =>
-                {
-                    // log out the request
-                    if (response.RequestBodyInBytes != null)
-                    {
-                        list.Add(
-                            $"{response.HttpMethod} {response.Uri} \n" +
-                            $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
-                    }
-                    else
-                    {
-                        list.Add($"{response.HttpMethod} {response.Uri}");
-                    }
+    .DefaultIndex("default-index")
+    .DisableDirectStreaming()
+    .OnRequestCompleted(response =>
+    {
+        // log out the request
+        if (response.RequestBodyInBytes != null)
+        {
+            list.Add(
+                $"{response.HttpMethod} {response.Uri} \n" +
+                $"{Encoding.UTF8.GetString(response.RequestBodyInBytes)}");
+        }
+        else
+        {
+            list.Add($"{response.HttpMethod} {response.Uri}");
+        }
 
-                    // log out the response
-                    if (response.ResponseBodyInBytes != null)
-                    {
-                        list.Add($"Status: {response.HttpStatusCode}\n" +
-                                 $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
-                                 $"{new string('-', 30)}\n");
-                    }
-                    else
-                    {
-                        list.Add($"Status: {response.HttpStatusCode}\n" +
-                                 $"{new string('-', 30)}\n");
-                    }
-                });
+        // log out the response
+        if (response.ResponseBodyInBytes != null)
+        {
+            list.Add($"Status: {response.HttpStatusCode}\n" +
+                     $"{Encoding.UTF8.GetString(response.ResponseBodyInBytes)}\n" +
+                     $"{new string('-', 30)}\n");
+        }
+        else
+        {
+            list.Add($"Status: {response.HttpStatusCode}\n" +
+                     $"{new string('-', 30)}\n");
+        }
+    });
 
 var client = new ElasticClient(settings);
 
 var syncResponse = client.Search<object>(s => s
-                .Scroll("2m")
-                .Sort(ss => ss
-                    .Ascending(SortSpecialField.DocumentIndexOrder)
-                )
-            );
+    .AllTypes()
+    .AllIndices()
+    .Scroll("2m")
+    .Sort(ss => ss
+        .Ascending(SortSpecialField.DocumentIndexOrder)
+    )
+);
 
 list.Count.Should().Be(2);
 
 var asyncResponse = await client.SearchAsync<object>(s => s
-                .Scroll("2m")
-                .Sort(ss => ss
-                    .Ascending(SortSpecialField.DocumentIndexOrder)
-                )
-            );
+    .AllTypes()
+    .AllIndices()
+    .Scroll("2m")
+    .Sort(ss => ss
+        .Ascending(SortSpecialField.DocumentIndexOrder)
+    )
+);
 
 list.Count.Should().Be(4);
 
@@ -270,7 +293,7 @@ therefore **we recommend doing some minimal introspection on the passed in certi
 
 Please be advised that this is an expert behavior but if you need to get to the nitty gritty this can be really useful
 
-Create a subclass of the `JsonNetSerializer` 		 
+Create a subclass of the `JsonNetSerializer` 
 
 Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
 

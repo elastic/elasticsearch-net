@@ -1,0 +1,88 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:imagesdir: ../../../images/
+
+[[index-name-inference]]
+== Index Name Inference
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .MapDefaultTypeIndices(m => m
+        .Add(typeof(Project), "projects")
+    );
+
+var resolver = new IndexNameResolver(settings);
+
+var index = resolver.Resolve<Project>();
+
+index.Should().Be("projects");
+----
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .DefaultIndex("defaultindex")
+    .MapDefaultTypeIndices(m => m
+        .Add(typeof(Project), "projects")
+    );
+
+var resolver = new IndexNameResolver(settings);
+
+var index = resolver.Resolve<Project>();
+
+index.Should().Be("projects");
+----
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .DefaultIndex("Default")
+    .MapDefaultTypeIndices(m => m
+        .Add(typeof(Project), "myProjects")
+    );
+
+var resolver = new IndexNameResolver(settings);
+
+var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
+
+e.Message.Should().Be($"Index names cannot contain uppercase characters: myProjects.");
+
+e = Assert.Throws<ResolveException>(() => resolver.Resolve<Tag>());
+
+e.Message.Should().Be($"Index names cannot contain uppercase characters: Default.");
+
+e = Assert.Throws<ResolveException>(() => resolver.Resolve("Foo"));
+
+e.Message.Should().Be($"Index names cannot contain uppercase characters: Foo.");
+----
+
+[source,csharp]
+----
+var settings = new ConnectionSettings();
+
+var resolver = new IndexNameResolver(settings);
+
+var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
+
+e.Message.Should().Contain("Index name is null");
+----
+
+[source,csharp]
+----
+var client = TestClient.GetInMemoryClient(s => new ConnectionSettings());
+
+var e = Assert.Throws<ResolveException>(() => client.Search<Project>());
+----
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .DefaultIndex("defaultindex");
+var resolver = new IndexNameResolver(settings);
+var index = resolver.Resolve<Project>();
+index.Should().Be("defaultindex");
+----
+

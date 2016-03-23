@@ -9,7 +9,7 @@
 
 === Implicit Conversions
 
-Several places in the Elasticsearch API expect an `Id` object to be passed. 
+Several places in the Elasticsearch API expect an `Id` object to be passed.
 This is a special box type that you can implicitly convert to from the following types
 
 * `Int32`
@@ -20,7 +20,7 @@ This is a special box type that you can implicitly convert to from the following
 
 * `Guid`
 
-Methods that take an `Id` can be passed any of these types and it will be implicitly converted to an `Id` 
+Methods that take an `Id` can be passed any of these types and it will be implicitly converted to an `Id`
 
 [source,csharp]
 ----
@@ -34,10 +34,10 @@ Expect("hello-world").WhenSerializing(idFromString);
 Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenSerializing(idFromGuid);
 ----
 
-=== Inferring from a Type 
+=== Inferring from a Type
 
 Sometimes a method takes an object and we need an Id from that object to build up a path.
-There is no implicit conversion from any object to Id but we can call `Id.From`. 
+There is no implicit conversion from any object to Id but we can call `Id.From`.
 
 Imagine your codebase has the following type that we want to index into Elasticsearch
 
@@ -67,7 +67,7 @@ Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenInferringIdOn(dto);
 ----
 
 Using the connection settings you can specify a different property that NEST should use to infer the document Id.
-Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property 
+Here we instruct NEST to infer the Id for `MyDTO` based on its `Name` property
 
 [source,csharp]
 ----
@@ -92,10 +92,10 @@ WithConnectionSettings(x => x
 ).Expect("y").WhenInferringIdOn(dto);
 ----
 
-=== Using the `ElasticsearchType` attribute 
+=== Using the `ElasticsearchType` attribute
 
-Another way is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty` 
-to the name of the property that should be used for the document id 
+Another way is to mark the type with an `ElasticsearchType` attribute, setting `IdProperty`
+to the name of the property that should be used for the document id
 
 [source,csharp]
 ----
@@ -117,9 +117,9 @@ var dto = new MyOtherDTO { Id = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E")
 Expect("x").WhenInferringIdOn(dto);
 ----
 
-=== Using Mapping inference on `ConnectionSettings` 
+=== Using Mapping inference on `ConnectionSettings`
 
-This attribute *is* cached statically/globally, however an inference rule on the `ConnectionSettings` for the type will 
+This attribute *is* cached statically/globally, however an inference rule on the `ConnectionSettings` for the type will
 still win over the attribute. Here we demonstrate this by creating a different `ConnectionSettings` instance
 that will infer the document id from the property `OtherName`:
 

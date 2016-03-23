@@ -9,7 +9,7 @@
 
 Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
 and Index, Type and Id seperately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path
-to your document more succintly 
+to your document more succintly
 
 === Creating new instances 
 
@@ -48,7 +48,7 @@ Expect(1).WhenSerializing(path.Id);
 
 === Creating from a document type instance
 
-if you have an instance of your document you can use it as well generate document paths 
+if you have an instance of your document you can use it as well generate document paths
 
 [source,csharp]
 ----
@@ -113,7 +113,7 @@ request = new IndexRequest<Project>(project) { };
 ----
 
 when comparing with the full blown constructor and passing document manually,
-`DocumentPath<T>`'s benefits become apparent. 
+`DocumentPath<T>`'s benefits become apparent.
 
 [source,csharp]
 ----

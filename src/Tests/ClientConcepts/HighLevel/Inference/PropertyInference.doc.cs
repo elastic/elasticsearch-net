@@ -23,8 +23,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			_client = cluster.Node.Client();
 		}
 
-		/**=== Using `.Suffix()` extension method on `object`
-		 * Property names resolve to the last token. An example using the `.Suffix()` extension
+		/**=== Appending suffixes to a Lambda expression body
+		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
+		 * you have a POCO property mapped as a {ref_current}/_multi_fields.html[multi_field]
+		 * and want to use strongly typed access based on the property, yet append a suffix to the
+		 * generated field name in order to access a particular `multi_field`.
+		 *
+		 * The `.Suffix()` extension method can be used for this purpose and when serializing expressions suffixed
+		 * in this way, the serialized field name resolves to the last token
 		 */
 		[U] public void PropertyNamesAreResolvedToLastToken()
 		{
@@ -32,8 +38,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/**=== `.ApplySuffix()` extension  method on Expression Delegates
-		 * And an example using the `.ApplySuffix()` extension on lambda expressions
+		/**=== Appending suffixes to a Lambda expression
+		 * Alternatively, suffixes can be applied to a lambda expression directly using
+		 * the `.ApplySuffix()` extension method. Again, the serialized field name
+		 * resolves to the last token
 		 */
 		[U]
 		public void PropertyNamesAreResolvedToLastTokenUsingApplySuffix()
@@ -43,12 +51,12 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("raw").WhenSerializing<PropertyName>(expression);
 		}
 
-		/**=== Property naming conventions
-		 *Property names cannot contain a `.` (dot), because of the potential for ambiguity with
-		 *a field that is mapped as a {ref_current}/_multi_fields.html[`multi_field`].
+		/**=== Naming conventions
+		 * Currently, the name of a field cannot contain a `.` in Elasticsearch due to the potential for ambiguity with
+		 * a field that is mapped as a {ref_current}/_multi_fields.html[multi_field].
 		 *
-		 *NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
-		 * in the case of dots in field names, returns a `400 Bad Response` with a server error indicating the reason.
+		 * In these cases, NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
+		 * in the case of a `.` in a field name, a `400 Bad Response` is returned with a server error indicating the reason
 		 */
 		[I] public void PropertyNamesContainingDotsCausesElasticsearchServerError()
 		{
@@ -70,7 +78,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** `DebugInformation` provides an audit trail of information to help diagnose the issue */
 			createIndexResponse.DebugInformation.Should().NotBeNullOrEmpty();
 
-			/** `ServerError` contains information from the response from Elasticsearch */
+			/** `ServerError` contains information about the response from Elasticsearch */
 			createIndexResponse.ServerError.Should().NotBeNull();
 			createIndexResponse.ServerError.Status.Should().Be(400);
 			createIndexResponse.ServerError.Error.Should().NotBeNull();
@@ -78,6 +86,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			var rootCause = createIndexResponse.ServerError.Error.RootCause[0];
 
+			/** We can see that the underlying reason is a `.` in the field name "name-with.dot" */
 			rootCause.Reason.Should().Be("Field name [name-with.dot] cannot contain '.'");
 			rootCause.Type.Should().Be("mapper_parsing_exception");
 		}

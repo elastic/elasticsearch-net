@@ -85,21 +85,6 @@ the `Exists` requests.
 ----
 var exceptions = new[] <1>
 {
-    typeof(CatAliasesRequest),
-    typeof(CatAllocationRequest),
-    typeof(CatCountRequest),
-    typeof(CatFielddataRequest),
-    typeof(CatHealthRequest),
-    typeof(CatHelpRequest),
-    typeof(CatIndicesRequest),
-    typeof(CatMasterRequest),
-    typeof(CatNodesRequest),
-    typeof(CatPendingTasksRequest),
-    typeof(CatPluginsRequest),
-    typeof(CatRecoveryRequest),
-    typeof(CatSegmentsRequest),
-    typeof(CatShardsRequest),
-    typeof(CatThreadPoolRequest),
     typeof(DocumentExistsRequest),
     typeof(DocumentExistsRequest<>),
     typeof(AliasExistsRequest),
@@ -115,7 +100,9 @@ var exceptions = new[] <1>
     typeof(SourceRequest<>),
     typeof(ValidateQueryRequest<>),
     typeof(GetAliasRequest),
+#pragma warning disable 612
     typeof(CatNodeattrsRequest),
+#pragma warning restore 612
     typeof(IndicesShardStoresRequest),
     typeof(RenderSearchTemplateRequest)
 };
@@ -128,6 +115,7 @@ var requests = new HashSet<string>(types
         !t.IsAbstract() &&
         typeof(IRequest).IsAssignableFrom(t) &&
         !typeof(IDescriptor).IsAssignableFrom(t)
+        && !t.Name.StartsWith("Cat")
         && !exceptions.Contains(t))
     .Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 );

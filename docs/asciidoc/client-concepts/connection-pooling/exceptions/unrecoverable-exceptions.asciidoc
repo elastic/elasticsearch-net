@@ -74,3 +74,106 @@ audit = await audit.TraceElasticsearchException(
 );
 ----
 
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Ping(r => r.SucceedAlways())
+    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+    .StaticConnectionPool()
+    .AllDefaults()
+);
+
+audit = await audit.TraceElasticsearchException(
+    new ClientCall {
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9200 },
+    },
+    (e) =>
+    {
+        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.ResponseBodyInBytes.Should().BeNull();
+    }
+);
+
+e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.ResponseBodyInBytes.Should().BeNull();
+----
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Ping(r => r.SucceedAlways())
+    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+    .StaticConnectionPool()
+    .Settings(s=>s.DisableDirectStreaming())
+);
+
+audit = await audit.TraceElasticsearchException(
+    new ClientCall {
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9200 },
+    },
+    (e) =>
+    {
+        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.ResponseBodyInBytes.Should().NotBeNull();
+        var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+        responseString.Should().Contain("nginx/");
+        e.DebugInformation.Should().Contain("nginx/");
+    }
+);
+
+e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.ResponseBodyInBytes.Should().NotBeNull();
+
+var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+
+responseString.Should().Contain("nginx/");
+
+e.DebugInformation.Should().Contain("nginx/");
+----
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Ping(r => r.SucceedAlways())
+    .ClientCalls(r => r.FailAlways(401).ReturnResponse(ResponseHtml))
+    .StaticConnectionPool()
+    .Settings(s=>s.DisableDirectStreaming().DefaultIndex("default-index"))
+    .ClientProxiesTo(
+        (c, r) => c.Get<Project>("1", s=>s.RequestConfiguration(r)),
+        async (c, r) => await c.GetAsync<Project>("1", s=>s.RequestConfiguration(r)) as IResponse
+    )
+);
+
+audit = await audit.TraceElasticsearchException(
+    new ClientCall {
+        { AuditEvent.PingSuccess, 9200 },
+        { AuditEvent.BadResponse, 9200 },
+    },
+    (e) =>
+    {
+        e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.ResponseBodyInBytes.Should().NotBeNull();
+        var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+        responseString.Should().Contain("nginx/");
+        e.DebugInformation.Should().Contain("nginx/");
+    }
+);
+
+e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.ResponseBodyInBytes.Should().NotBeNull();
+
+var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
+
+responseString.Should().Contain("nginx/");
+
+e.DebugInformation.Should().Contain("nginx/");
+----
+
