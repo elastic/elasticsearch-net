@@ -95,24 +95,6 @@ namespace Tests.CodeStandards
 		{
 			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
-				typeof(CatAliasesRequest),
-				typeof(CatAllocationRequest),
-				typeof(CatCountRequest),
-				typeof(CatFielddataRequest),
-				typeof(CatHealthRequest),
-				typeof(CatHelpRequest),
-				typeof(CatIndicesRequest),
-				typeof(CatMasterRequest),
-				typeof(CatNodesRequest),
-				typeof(CatPendingTasksRequest),
-				typeof(CatPluginsRequest),
-				typeof(CatRecoveryRequest),
-				typeof(CatSegmentsRequest),
-				typeof(CatShardsRequest),
-				typeof(CatThreadPoolRequest),
-				typeof(CatRepositoriesRequest),
-				typeof(CatSnapshotsRequest),
-				typeof(ForceMergeRequest),
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
 				typeof(AliasExistsRequest),
@@ -143,6 +125,7 @@ namespace Tests.CodeStandards
 					!t.IsAbstract() &&
 					typeof(IRequest).IsAssignableFrom(t) &&
 					!typeof(IDescriptor).IsAssignableFrom(t)
+					&& !t.Name.StartsWith("Cat")
 					&& !exceptions.Contains(t))
 				.Select(t => t.Name.Split('`')[0].Replace("Request", ""))
 			);

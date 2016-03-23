@@ -697,6 +697,10 @@
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\ShardSegmentRouting.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\ShardsSegment.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\ElasticClient-IndicesShardStores.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\ShardStoreJsonConverter.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresRequest.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\ElasticClient-IndicesStats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndexStats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStats.cs" />
@@ -1084,6 +1088,9 @@
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\ElasticClient-DeleteSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\ElasticClient-SearchTemplate.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\ElasticClient-RenderSearchTemplate.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateRequest.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateResponse.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\ElasticClient-GetSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateRequest.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />

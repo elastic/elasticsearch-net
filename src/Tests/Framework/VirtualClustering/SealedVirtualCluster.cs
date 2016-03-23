@@ -20,7 +20,7 @@ namespace Tests.Framework
 		}
 
 		private ConnectionSettings CreateSettings() =>
-			new ConnectionSettings(this._connectionPool, this._connection);
+			new ConnectionSettings(this._connectionPool, this._connection).DefaultIndex("default-index");
 
 		public VirtualizedCluster AllDefaults() =>
 			new VirtualizedCluster(this._cluster, this._connectionPool, this._dateTimeProvider, CreateSettings());

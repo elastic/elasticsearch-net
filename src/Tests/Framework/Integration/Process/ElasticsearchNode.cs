@@ -101,7 +101,7 @@ namespace Tests.Framework.Integration
 			)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
-			this.Version = elasticsearchVersion;
+			this.Version = runningIntegrations ? elasticsearchVersion : "unit-test-version-should-not-appear-on-disk";
 			this.RunningIntegrations = runningIntegrations;
 			this.Prefix = prefix.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);

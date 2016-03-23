@@ -542,9 +542,14 @@
     <Compile Include="Cat\CatRepositories\CatRepositoriesUrlTests.cs" />
     <Compile Include="Cat\CatSnapshots\CatSnapshotsApiTests.cs" />
     <Compile Include="Cat\CatSnapshots\CatSnapshotsUrlTests.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\IndexNameInference.doc.cs" />
     <Compile Include="Search\Request\ProfileUsageTests.cs" />
     <Compile Include="Indices\StatusManagement\ForceMerge\ForceMergeApiTests.cs" />
     <Compile Include="Indices\StatusManagement\ForceMerge\ForceMergeUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateApiTests.cs" />
+    <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresApiTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresUrlTests.cs" />
     <None Include="index.asciidoc" />
     <None Include="paket.references" />
     <None Include="tests.yaml" />

@@ -87,10 +87,11 @@ namespace Tests.ClientConcepts.Exceptions
 		[U]
 		public void DispatchIndicatesMissingRouteValues()
 		{
-			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"));
+			var settings = new ConnectionSettings(new Uri("http://doesntexist:9200"))
+				.DefaultIndex("default-index");
 			var client = new ElasticClient(settings);
 
-			Action dispatch = () => client.Index(new Project());
+			Action dispatch = () => client.Index(new Project(), i => i.Index(null));
 			var ce = dispatch.ShouldThrow<ArgumentException>();
 			ce.Should().NotBeNull();
 			ce.Which.Message.Should().Contain("index=<NULL>");

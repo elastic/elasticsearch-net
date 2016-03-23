@@ -2,17 +2,17 @@
 using Tests.Framework;
 using Tests.Framework.MockData;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence
+namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	public class IndicesPaths
 	{
 		/**== Indices paths
-		 * 
+		 *
 		 * Some API's in elasticsearch take one or many index name or a special "_all" marker to send the request to all the indices
 		 * In nest this is encoded using `Indices`
 		 */
 
-		/**=== Implicit Conversion 
+		/**=== Implicit Conversion
 		* Several types implicitly convert to `Indices` */
 		[U] public void ImplicitConversionFromString()
 		{
@@ -40,14 +40,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		}
 
 		/**=== Using `Nest.Indices`
-		* To ease creating ``Indice``s from expressions, there is a static `Nest.Indices` class you can use 
+		* To ease creating ``Indice``s from expressions, there is a static `Nest.Indices` class you can use
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
 			var all = Nest.Indices.All; //<1> Using "_all" indices
 			var many = Nest.Indices.Index("name1", "name2"); //<2> specifying multiple indices using strings
 			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>(); //<3> speciying multiple using types
-			var singleTyped = Nest.Indices.Index<Project>(); 
+			var singleTyped = Nest.Indices.Index<Project>();
 			var singleString = Nest.Indices.Index("name1");
 
 			var invalidSingleString = Nest.Indices.Index("name1, name2"); //<4> **invalid** single index name

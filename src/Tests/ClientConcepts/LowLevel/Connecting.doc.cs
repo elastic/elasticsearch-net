@@ -174,7 +174,9 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 		    var list = new List<string>();
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+
 			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` to make the actual request
+				.DefaultIndex("default-index")
                 .DisableDirectStreaming()
 				.OnRequestCompleted(response =>
 				{
@@ -207,6 +209,8 @@ namespace Tests.ClientConcepts.LowLevel
 			var client = new ElasticClient(settings);
 
             var syncResponse = client.Search<object>(s => s
+				.AllTypes()
+				.AllIndices()
                 .Scroll("2m")
                 .Sort(ss => ss
                     .Ascending(SortSpecialField.DocumentIndexOrder)
@@ -216,6 +220,8 @@ namespace Tests.ClientConcepts.LowLevel
             list.Count.Should().Be(2);
 
             var asyncResponse = await client.SearchAsync<object>(s => s
+				.AllTypes()
+				.AllIndices()
                 .Scroll("2m")
                 .Sort(ss => ss
                     .Ascending(SortSpecialField.DocumentIndexOrder)

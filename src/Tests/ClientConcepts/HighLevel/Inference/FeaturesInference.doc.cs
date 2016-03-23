@@ -4,7 +4,7 @@ using Tests.Framework;
 using static Nest.Indices;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence
+namespace Tests.ClientConcepts.HighLevel.Inference
 {
 	public class FeaturesInference
 	{
@@ -16,7 +16,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 		 * the `Feature` enum implicitly converts to.
 		 */
 
-		/**=== Constructor 
+		/**=== Constructor
 		* Using the `Features` constructor directly is possible but rather involved */
 		[U] public void Serializes()
 		{
@@ -24,7 +24,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("_mappings,_aliases")
 				.WhenSerializing(fieldString);
 		}
-		
+
 		[U]
 		public void ImplicitConversion()
 		{
@@ -33,6 +33,6 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			* Notice how we can use the `Feature` enum directly.
 			*/
 			var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);
-		} 
+		}
 	}
 }

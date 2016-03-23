@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using System;
 
 namespace Nest
 {
@@ -15,26 +16,37 @@ namespace Nest
 
 		public string Resolve(IndexName i)
 		{
-			if (i == null) return this.Resolve((Type)null);
-			return i.Name ?? this.Resolve(i.Type);
+			if (i == null || string.IsNullOrEmpty(i.Name))
+				return this.Resolve(i.Type);
+			ValidateIndexName(i.Name);
+			return i.Name;
 		}
 
 		public string Resolve(Type type)
 		{
+			var indexName = this._connectionSettings.DefaultIndex;
 			var defaultIndices = this._connectionSettings.DefaultIndices;
-
-			if (defaultIndices == null)
-				return this._connectionSettings.DefaultIndex;
-
-			if (type == null)
-				return this._connectionSettings.DefaultIndex;
-
-			string value;
-			if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrWhiteSpace(value))
-				return value;
-			return this._connectionSettings.DefaultIndex;
+			if (defaultIndices != null && type != null)
+			{
+				string value;
+				if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrEmpty(value))
+					indexName = value;
+			}
+			ValidateIndexName(indexName, type);
+			return indexName;
 		}
 
+		private void ValidateIndexName(string indexName, Type type = null)
+		{
+			if (string.IsNullOrWhiteSpace(indexName))
+				throw new ResolveException(
+					"Index name is null for the given type and no default index is set. "
+					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices() "
+					+ "or set a default index using ConnectionSettings.DefaultIndex()."
+				);
 
+			if (indexName.HasAny(c => char.IsUpper(c)))
+				throw new ResolveException($"Index names cannot contain uppercase characters: {indexName}.");
+		}
 	}
 }
