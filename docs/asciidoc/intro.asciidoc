@@ -23,22 +23,22 @@ Please read the getting started guide for both.
 * https://www.rijksmuseum.nl/en[rijksmuseum.nl] (Elasticsearch is the only datastorage hit for each page).
 
 * http://www.fogcreek.com/kiln/[Kiln] FogCreek's version control & code review tooling. 
-  They are so pleased with Elasticsearch thathttp://blog.fogcreek.com/kiln-powered-by-elasticsearch/[they made a video about how pleased they are!]
+  They are so pleased with Elasticsearch that http://blog.fogcreek.com/kiln-powered-by-elasticsearch/[they made a video about how pleased they are!]
 
 === Other resources
 
-http://twitter.com/joelabrahamsson[@joelabrahamsson] wrote a greathttp://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch[intro into elasticsearch on .NET]
+http://twitter.com/joelabrahamsson[@joelabrahamsson] wrote a great http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch[intro into elasticsearch on .NET]
 using NEST. 
 
-Also checkout thehttps://searchbox.io/[searchbox.io guys] rocking NESThttp://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on[on AppHarbor]
-with theirhttps://github.com/searchbox-io/.net-sample[demo project]
+Also checkout the https://searchbox.io/[searchbox.io guys] rocking NEST http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on[on AppHarbor]
+with their https://github.com/searchbox-io/.net-sample[demo project]
 
 === Questions, bugs, comments, requests
 
 All of these are more then welcome on the {github}/issues[github issues pages]! We try to at least reply within the same day.
 
 We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on stackoverflow] or 
-{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow], as well ashttps://discuss.elastic.co[discussions on our discourse site]
+{stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow], as well as https://discuss.elastic.co[discussions on our discourse site]
 
 === License
 

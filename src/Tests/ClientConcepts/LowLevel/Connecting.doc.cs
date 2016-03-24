@@ -172,6 +172,7 @@ namespace Tests.ClientConcepts.LowLevel
         }
 
         /** [[complex-logging]]
+		 * === Complex logging with OnRequestCompleted
 	     * Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
          * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
 		*/
@@ -257,11 +258,13 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 
 #if !DOTNETCORE
-			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true; //<1> NOTE: This does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for validation on Core CLR.
+			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true; 
 #endif
 			/**
 			 * However, this will accept **all** requests from the AppDomain to untrusted SSL sites, 
 			 * therefore **we recommend doing some minimal introspection on the passed in certificate.**
+			 *
+			 * IMPORTANT: Using `ServicePointManager` does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for certificate validation on Core CLR.
 			 */
 		}
 

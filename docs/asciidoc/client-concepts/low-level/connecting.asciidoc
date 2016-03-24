@@ -121,7 +121,7 @@ config = config
 
 <2> Sets proxy information on the connection.
 
-<3> Sets the global maximum time a connection may take. Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts (seehttp://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx[the MSDN documentation on `HttpWebRequest.Timeout` Property]).
+<3> Sets the global maximum time a connection may take. Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx[the MSDN documentation on `HttpWebRequest.Timeout` Property]).
 
 <4> As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to <<thrown-exceptions, throw exceptions>>. 
 
@@ -205,6 +205,8 @@ counter.Should().Be(2);
 ----
 
 [[complex-logging]]
+=== Complex logging with OnRequestCompleted
+
 Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
 to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
 
@@ -282,8 +284,8 @@ list.ShouldAllBeEquivalentTo(new []
 [[configuring-ssl]]
 === Configuring SSL
 
-SSL must be configured outside of the client using .NET's http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
-class and setting thehttp://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
+SSL must be configured outside of the client using .NET's  http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
+class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
 property.
 
 The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
@@ -295,6 +297,8 @@ ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain,
 
 However, this will accept **all** requests from the AppDomain to untrusted SSL sites, 
 therefore **we recommend doing some minimal introspection on the passed in certificate.**
+
+IMPORTANT: Using `ServicePointManager` does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for certificate validation on Core CLR.
 
 === Overriding default Json.NET behavior
 

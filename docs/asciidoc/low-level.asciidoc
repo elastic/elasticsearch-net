@@ -17,7 +17,7 @@ Install-Package Elasticsearch.Net
 ----
 
 
-Or by searching forhttps://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the Package Manager GUI.
+Or by searching for https://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the Package Manager GUI.
 
 --
 
