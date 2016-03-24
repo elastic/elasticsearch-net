@@ -5,7 +5,12 @@
 
 [partintro]
 --
-Something about the convenience types for working with time and distance units and date math expressions
+NEST has a number of types for working with Elasticsearch conventions for:
+
+- <<time-units, Time Units>>
+- <<distance-units, Distance Units>>
+- <<date-math-expressions, Date Math>>
+
 --
 
 include::{output-dir}/time-unit/time-units.asciidoc[]

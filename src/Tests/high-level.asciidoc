@@ -1,7 +1,7 @@
 ﻿:output-dir: client-concepts/high-level
 
 [[nest]]
-= Client Concepts - High Level
+= Client Concepts - NEST
 
 [partintro]
 --
@@ -21,10 +21,11 @@ the `.LowLevel` property on `ElasticClient`.
 
 There are a number of conventions that NEST uses for inference of
 
+- <<index-name-inference, Index Names>>
+- <<indices-paths, Building a URI path to one or more indices>>
 - <<field-inference, Field names>> and <<property-inference, Property names>>
 - <<ids-inference, Document IDs>>
 - <<document-paths, Building a URI path to a document>>
-- <<indices-paths, Building a URI path to one or more indices>>
 - <<features-inference, API features>>
 
 In addition to features such as
@@ -34,6 +35,10 @@ In addition to features such as
 
 --
 
+include::{output-dir}/inference/index-name-inference.asciidoc[]
+
+include::{output-dir}/inference/indices-paths.asciidoc[]
+
 include::{output-dir}/inference/field-inference.asciidoc[]
 
 include::{output-dir}/inference/property-inference.asciidoc[]
@@ -42,15 +47,11 @@ include::{output-dir}/inference/ids-inference.asciidoc[]
 
 include::{output-dir}/inference/document-paths.asciidoc[]
 
-include::{output-dir}/inference/indices-paths.asciidoc[]
-
 include::{output-dir}/inference/features-inference.asciidoc[]
 
 include::{output-dir}/mapping/auto-map.asciidoc[]
 
 include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
-
-include::connection-pooling.asciidoc[]
 
 
 

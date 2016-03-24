@@ -2,6 +2,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[script-query-usage]]
@@ -43,9 +45,11 @@ new ScriptQuery
   "script": {
     "_name": "named_query",
     "boost": 1.1,
-    "inline": "doc['num1'].value > param1",
-    "params": {
-      "param1": 1
+    "script": {
+      "inline": "doc['num1'].value > param1",
+      "params": {
+        "param1": 1
+      }
     }
   }
 }

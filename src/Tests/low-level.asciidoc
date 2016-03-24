@@ -1,7 +1,7 @@
 ﻿:output-dir: client-concepts/low-level
 
 [[elasticsearch-net]]
-= Client Concepts - Low Level
+= Client Concepts - Elasticsearch.Net
 
 [partintro]
 --
@@ -18,12 +18,11 @@ Install-Package Elasticsearch.Net
 Or by searching for https://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the Package Manager GUI.
 --
 
-
 include::{output-dir}/connecting.asciidoc[]
 
 include::{output-dir}/lifetimes.asciidoc[]
 
 include::{output-dir}/post-data.asciidoc[]
 
-
+include::connection-pooling.asciidoc[]
 

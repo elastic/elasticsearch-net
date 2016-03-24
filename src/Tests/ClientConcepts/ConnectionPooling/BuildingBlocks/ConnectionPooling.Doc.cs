@@ -9,7 +9,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class ConnectionPooling
 	{
-		/** == Connection Pooling
+		/**== Connection Pooling
 		 * Connection pooling is the internal mechanism that takes care of registering what nodes there are in the cluster and which
 		 * NEST can use to issue client calls on. There are 3 types of connection pool
 		 *

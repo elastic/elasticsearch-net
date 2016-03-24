@@ -2,6 +2,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[auto-map]]
@@ -909,7 +911,7 @@ Expect(expectedWithMaxRecursion).WhenSerializing((IPutMappingRequest)withMaxRecu
 
 It is also possible to apply a transformation on all or specific properties.
 
-AutoMap internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,
+AutoMap internally implements thehttps://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,
 does nothing and acts as a blank canvas for you to implement your own visiting methods.
 
 For instance, lets create a custom visitor that disables doc values for numeric and boolean types

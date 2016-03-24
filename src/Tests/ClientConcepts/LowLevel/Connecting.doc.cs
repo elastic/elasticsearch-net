@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var client = new ElasticLowLevelClient();
 		}
 		/**
-		 * If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then
+		 * If your Elasticsearch node does not live at `http://localhost:9200` but instead lives somewhere else, for example, `http://mynode.example.com:8082/apiKey`, then
 		 * you will need to pass in some instance of `IConnectionConfigurationValues`.
 		 *
 		 * The easiest way to do this is:
@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.LowLevel
 		/** 
 		 * This will still be a non-failover connection, meaning if that `node` goes down the operation will not be retried on any other nodes in the cluster.
 		 * 
-		 * To get a failover connection we have to pass an `IConnectionPool` instance instead of a `Uri`.
+		 * To get a failover connection we have to pass an <<connection-pooling, IConnectionPool>> instance instead of a `Uri`.
 		 */
 		public void InstantiatingAConnectionPoolClient()
 		{
@@ -55,12 +55,13 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** 
-		 * Here instead of directly passing `node`, we pass a `SniffingConnectionPool` which will use our `node` to find out the rest of the available cluster nodes.
+		 * Here instead of directly passing `node`, we pass a <<sniffing-connection-pool, SniffingConnectionPool>> 
+		 * which will use our `node` to find out the rest of the available cluster nodes.
 		 * Be sure to read more about <<connection-pooling, Connection Pooling and Cluster Failover>>.
 		 * 
 		 * === Configuration Options
 		 * 
-		 *  Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
+		 *Besides either passing a `Uri` or `IConnectionPool` to `ConnectionConfiguration`, you can also fluently control many more options. For instance:
 		 */
 
 		public void SpecifyingClientOptions()
@@ -69,9 +70,9 @@ namespace Tests.ClientConcepts.LowLevel
 			var connectionPool = new SniffingConnectionPool(new[] { node });
 
 			var config = new ConnectionConfiguration(connectionPool)
-				.DisableDirectStreaming()
-				.BasicAuthentication("user", "pass")
-				.RequestTimeout(TimeSpan.FromSeconds(5));
+				.DisableDirectStreaming() //<1> Additional options
+				.BasicAuthentication("user", "pass") //<1>
+				.RequestTimeout(TimeSpan.FromSeconds(5)); //<1>
 		}
 		/**
 		 * The following is a list of available connection configuration options:
@@ -104,33 +105,35 @@ namespace Tests.ClientConcepts.LowLevel
 				.ThrowExceptions() // <4> As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to <<thrown-exceptions, throw exceptions>>. 
 				.PrettyJson() // <5> forces all serialization to be indented and appends `pretty=true` to all the requests so that the responses are indented as well
 				.BasicAuthentication("username", "password"); // <6> sets the HTTP basic authentication credentials to specify with all requests.
-				/**
-			* NOTE: Basic authentication credentials can alternatively be specified on the node URI directly:
-				*/
+				
+			/**
+			* NOTE: Basic authentication credentials can alternatively be specified on the node URI directly: 
+			*/
 			var uri = new Uri("http://username:password@localhost:9200");
 			var settings = new ConnectionConfiguration(uri);
 
-				/**
+			/**
 			*...but this may become tedious when using connection pooling with multiple nodes.
-				*
+			*
 			* [[thrown-exceptions]]
 			* === Exceptions		
 			* There are three category of exceptions that may be thrown:
-				*  
-			* . `ElasticsearchClientException`: These are known exceptions, either an exception that occurred in the request pipeline
-				* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
-				* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
-				* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
-				* root causing exception.
-				*                                  
-			* . `UnexpectedElasticsearchClientException`:  These are unknown exceptions, for instance a response from Elasticsearch not
+			*  
+			* `ElasticsearchClientException`:: These are known exceptions, either an exception that occurred in the request pipeline
+			* (such as max retries or timeout reached, bad authentication, etc...) or Elasticsearch itself returned an error (could 
+			* not parse the request, bad query, missing field, etc...). If it is an Elasticsearch error, the `ServerError` property 
+			* on the response will contain the the actual error that was returned.  The inner exception will always contain the 
+			* root causing exception.
+			*                                  
+			* `UnexpectedElasticsearchClientException`:: These are unknown exceptions, for instance a response from Elasticsearch not
 			* properly deserialized.  These are usually bugs and {github}/issues[should be reported]. This exception also inherits from `ElasticsearchClientException`
-				* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
-				*
-			* . Development time exceptions: These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException` etc... that are thrown
-				* when an API in the client is misused.  These should not be handled as you want to know about them during development.
-				*
-				*/
+			* so an additional catch block isn't necessary, but can be helpful in distinguishing between the two.
+			*
+			* Development time exceptions:: These are CLR exceptions like `ArgumentException`, `ArgumentOutOfRangeException`, etc. and other exceptions like 
+			* `ResolveException` that are thrown when an API in the client is misused. 
+			* These should not be handled as you want to know about them during development.
+			*
+			*/
 		}
 
         /** === OnRequestCompleted
@@ -151,6 +154,9 @@ namespace Tests.ClientConcepts.LowLevel
             counter.Should().Be(2);
         }
 
+		/**
+		*`OnRequestCompleted` is called even when an exception is thrown
+		*/
         [U]
         public void OnRequestCompletedIsCalledWhenExceptionIsThrown()
         {
@@ -167,20 +173,19 @@ namespace Tests.ClientConcepts.LowLevel
 
         /** [[complex-logging]]
 	     * Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like 
-         * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()`
-         * to `true`
+         * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
 		*/
         [U]public async Task UsingOnRequestCompletedForLogging()
 		{
 		    var list = new List<string>();
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 
-			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` to make the actual request
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection()) // <1> Here we use `InMemoryConnection`; in reality you would use another type of `IConnection` that actually makes a request.
 				.DefaultIndex("default-index")
                 .DisableDirectStreaming()
 				.OnRequestCompleted(response =>
 				{
-                    // log out the request
+                    // log out the request and the request body, if available
                     if (response.RequestBodyInBytes != null)
                     {
                         list.Add(
@@ -192,7 +197,7 @@ namespace Tests.ClientConcepts.LowLevel
                         list.Add($"{response.HttpMethod} {response.Uri}");
                     }
 
-                    // log out the response
+                    // log out the response and the response body, if available
                     if (response.ResponseBodyInBytes != null)
                     {
                         list.Add($"Status: {response.HttpStatusCode}\n" +
@@ -252,7 +257,7 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 
 #if !DOTNETCORE
-			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true; //<1> NOTE: This does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for validation on Core CLR.
 #endif
 			/**
 			 * However, this will accept **all** requests from the AppDomain to untrusted SSL sites, 
@@ -260,17 +265,14 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 		}
 
-		/**
-		* === Overriding default Json.NET behavior
+		/**=== Overriding default Json.NET behavior
 		*
-		* Please be advised that this is an expert behavior but if you need to get to the nitty gritty this can be really useful
-		*
-		* Create a subclass of the `JsonNetSerializer` 
+		* Overriding the default Json.NET behaviour in NEST is an expert behavior but if you need to get to the nitty gritty, this can be really useful.
+		* First, create a subclass of the `JsonNetSerializer` 
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
 			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
-
 
 			/**
 			* Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
@@ -280,7 +282,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			/**
 			* You can inject contract resolved converters by implementing the ContractConverters property
-			* This can be much faster then registering them on JsonSerializerSettings.Converters
+			* This can be much faster then registering them on `JsonSerializerSettings.Converters`
 			*/
 			public int CallToContractConverter { get; set; } = 0;
 			protected override IList<Func<Type, JsonConverter>> ContractConverters => new List<Func<Type, JsonConverter>>

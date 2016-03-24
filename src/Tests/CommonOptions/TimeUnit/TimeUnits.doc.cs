@@ -7,12 +7,12 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.CommonOptions.TimeUnit
 {
-	public class TimeUnits 
+	public class TimeUnits
 	{
-		/** ==  Time units
-		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
-		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
-		 * 
+		/** == Time units
+		 * Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
+		 * as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
+		 *
 		 * === Using Time units in NEST
 		 * NEST uses `Time` to strongly type this and there are several ways to construct one.
 		 *
@@ -27,11 +27,11 @@ namespace Tests.CommonOptions.TimeUnit
 			var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
 
 			/**
-			* When serializing Time constructed from 
-			* - a string 
-			* - milliseconds (as a double) 
+			* When serializing Time constructed from
+			* - a string
+			* - milliseconds (as a double)
 			* - composition of factor and interval
-			* - a `TimeSpan` 
+			* - a `TimeSpan`
 			*
 			* the expression will be serialized to a time unit string composed of the factor and interval e.g. `2d`
 			*/
@@ -51,7 +51,7 @@ namespace Tests.CommonOptions.TimeUnit
 		}
 		/**
 		* ==== Implicit conversion
-		* Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time` 
+		* Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time`
 		*/
 		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
@@ -92,12 +92,12 @@ namespace Tests.CommonOptions.TimeUnit
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
 			(twoDays >= new Time("2d")).Should().BeTrue();
-			
+
 			twoDays.Should().BeLessThan(twoWeeks);
 			(twoDays < twoWeeks).Should().BeTrue();
 			(twoDays <= twoWeeks).Should().BeTrue();
 			(twoDays <= new Time("2d")).Should().BeTrue();
-			
+
 			/**
 			* And assert equality
 			*/

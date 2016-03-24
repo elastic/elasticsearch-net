@@ -129,6 +129,8 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 * <<term-query-usage,Term Query Usage>>
 
+* <<terms-list-query-usage,Terms List Query Usage>>
+
 * <<terms-lookup-query-usage,Terms Lookup Query Usage>>
 
 * <<terms-query-usage,Terms Query Usage>>

@@ -2,6 +2,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../images/
 
 [[lifetimes]]
@@ -18,9 +20,9 @@ application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`.
 In some applications it could make perfect sense to have multiple singleton `ElasticClient`'s registered with different
 connection settings. e.g if you have 2 functionally isolated Elasticsearch clusters.
 
-NOTE: Due to the semantic versioning of NEST and the alignment of versions to Elasticsearch, all instances of `ElasticClient` and thus
-Elasticsearch that are connected to must be on the same major version i.e. it is not possible to have both an `ElasticClient` to connect to
-Elasticsearch 1.x and 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
+NOTE: Due to the semantic versioning of Elasticsearch.Net and NEST and their alignment to versions of Elasticsearch, all instances of `ElasticClient` and
+Elasticsearch clusters that are connected to must be on the **same major version** i.e. it is not possible to have both an `ElasticClient` to connect to
+Elasticsearch 1.x _and_ 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
 
 Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
 

@@ -2,13 +2,15 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../images/
 
 [[time-units]]
 == Time units
 
-Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified 
-as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days. 
+Whenever durations need to be specified, eg for a timeout parameter, the duration can be specified
+as a whole number representing time in milliseconds, or as a time value like `2d` for 2 days.
 
 === Using Time units in NEST
 
@@ -26,15 +28,15 @@ var unitTimeSpan = new Time(TimeSpan.FromDays(2));
 var unitMilliseconds = new Time(1000 * 60 * 60 * 24 * 2);
 ----
 
-When serializing Time constructed from 
+When serializing Time constructed from
 
-* a string 
+* a string
 
-* milliseconds (as a double) 
+* milliseconds (as a double)
 
 * composition of factor and interval
 
-* a `TimeSpan` 
+* a `TimeSpan`
 
 the expression will be serialized to a time unit string composed of the factor and interval e.g. `2d`
 
@@ -60,7 +62,7 @@ unitString.Milliseconds.Should().Be(1000*60*60*24*2);
 
 ==== Implicit conversion
 
-Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time` 
+Alternatively to using the constructor, `string`, `TimeSpan` and `double` can be implicitly converted to `Time`
 
 [source,csharp]
 ----

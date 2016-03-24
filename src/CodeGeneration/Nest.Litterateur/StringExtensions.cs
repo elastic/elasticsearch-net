@@ -70,7 +70,7 @@ namespace Nest.Litterateur
 		}
 
 		public static string RemoveNumberOfLeadingTabsAfterNewline(this string input, int numberOfTabs)
-		{		
+		{
 			var firstTab = input.IndexOf("\t", StringComparison.OrdinalIgnoreCase);
 
 			if (firstTab == -1)
@@ -94,14 +94,14 @@ namespace Nest.Litterateur
 			{
 				numberOfTabs = count;
 			}
-			
+
 			return Regex.Replace(
 				Regex.Replace(
-					input, 
-					$"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})", 
+					input,
+					$"(?<tabs>[\n|\r\n]+\t{{{numberOfTabs}}})",
 					m => m.Value.Replace("\t", string.Empty)
 				),
-				$"(?<spaces>[\n|\r\n]+\\s{{{numberOfTabs * 4}}})", 
+				$"(?<spaces>[\n|\r\n]+\\s{{{numberOfTabs * 4}}})",
 				m => m.Value.Replace(" ", string.Empty)
 			);
 		}
@@ -112,8 +112,8 @@ namespace Nest.Litterateur
 		}
 
 #if !DOTNETCORE
-		// TODO: Hack of replacements for now. Resolved by referencing tests assembly when building compilation unit, but might
-		// want to put doc generation at same directory level as Tests to reference project directly.
+		// TODO: Hack of replacements in anonymous types that represent json. This can be resolved by referencing tests assembly when building the dynamic assembly,
+		// but might want to put doc generation at same directory level as Tests to reference project directly.
 		private static Dictionary<string, string> Substitutions = new Dictionary<string, string>
 		{
 			{ "FixedDate", "new DateTime(2015, 06, 06, 12, 01, 02, 123)" },
@@ -125,8 +125,10 @@ namespace Nest.Litterateur
 			                               "new { gender = \"Male\", id = 0, firstName = \"Martijn\", lastName = \"Laarman\" }," +
 										   "location = new { lat = 42.1523, lon = -80.321 }}" },
 			{ "_templateString", "\"{ \\\"match\\\": { \\\"text\\\": \\\"{{query_string}}\\\" } }\"" },
-			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" }
-		}; 
+			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" },
+			{ "ExpectedTerms", "new [] { \"term1\", \"term2\" }" },
+			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" }
+		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)
 		{
@@ -140,14 +142,14 @@ namespace Nest.Litterateur
 			var text =
 				$@"
 					using System;
-                    using System.Collections.Generic; 
+                    using System.Collections.Generic;
 					using System.ComponentModel;
-					using Newtonsoft.Json; 
+					using Newtonsoft.Json;
 					using Newtonsoft.Json.Linq;
 
 					namespace Temporary
 					{{
-						public class Json 
+						public class Json
 						{{
 							public string Write()
 							{{
@@ -165,7 +167,7 @@ namespace Nest.Litterateur
 				MetadataReference.CreateFromFile(typeof(object).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(Enumerable).GetTypeInfo().Assembly.Location),
 				MetadataReference.CreateFromFile(typeof(JsonConvert).GetTypeInfo().Assembly.Location),
-				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location), 
+				MetadataReference.CreateFromFile(typeof(ITypedList).GetTypeInfo().Assembly.Location),
 			};
 
 			var compilation =

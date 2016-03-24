@@ -2,15 +2,17 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[filter-aggregation-usage]]
 == Filter Aggregation Usage
 
-Defines a single bucket of all the documents in the current document set context that match a specified filter. 
+Defines a single bucket of all the documents in the current document set context that match a specified filter.
 Often this will be used to narrow down the current aggregation context to a specific set of documents.
 
-Be sure to read {ref_current}/search-aggregations-bucket-filter-aggregation.html[the elasticsearch documentation on Filter Aggregation]
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
 
 === Fluent DSL Example
 
@@ -69,7 +71,7 @@ new SearchRequest<Project>
 
 === Handling Responses
 
-Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
+Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 
 [source,csharp]
@@ -141,5 +143,67 @@ new SearchRequest<Project>
 ----
 response.IsValid.Should().BeTrue();
 response.Aggs.Filter("empty_filter").DocCount.Should().BeGreaterThan(0);
+----
+
+[[inline-script-filter]]
+[float]
+== Inline Script Filter
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(aggs => aggs
+    .Filter(_aggName, date => date
+        .Filter(f => f
+            .Script(b => b
+                .Inline(_ctxNumberofCommits)
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new FilterAggregation(_aggName)
+    {
+        Filter = new ScriptQuery
+        {
+            Inline = _ctxNumberofCommits
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "script_filter": {
+      "filter": {
+        "script": {
+          "script": {
+            "inline": "_source.numberOfCommits > 0"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+response.Aggs.Filter(_aggName).DocCount.Should().BeGreaterThan(0);
 ----
 

@@ -4,6 +4,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[transports]]
@@ -18,14 +20,14 @@ by implementing a custom `ITransport`, you can circumvent all of it and introduc
 Transport is generically typed to a type that implements `IConnectionConfigurationValues`
 This is the minimum `ITransport` needs to report back for the client to function.
 
-e.g in the low level client, transport is instantiated like this:
+e.g in the low level client, Elasticsearch.Net, transport is instantiated like this:
 
 [source,csharp]
 ----
 var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
 ----
 
-and in the high level client, like this: 
+and in the high level client, NEST, like this: 
 
 [source,csharp]
 ----
@@ -43,6 +45,9 @@ If you feel this need, {github}/issues[please let us know] as we'd love to learn
 ----
 var response = inMemoryTransport.Request<SearchResponse<Project>>(HttpMethod.GET, "/_search", new { query = new { match_all = new { } } });
 
-response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(HttpMethod.GET, "/_search", new { query = new { match_all = new { } } });
+response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(
+    HttpMethod.GET, 
+    "/_search", 
+    new { query = new { match_all = new { } } });
 ----
 

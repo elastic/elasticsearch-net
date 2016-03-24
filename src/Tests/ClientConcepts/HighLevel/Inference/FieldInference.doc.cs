@@ -21,7 +21,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	{
 		/**== Field Inference
 		 *
-		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
+		 * Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
 		 * NEST allows you to use C# expressions to strongly type these field path strings.
 		 *
 		 * These expressions are assigned to a type called `Field` and there are several ways to create an instance of one:

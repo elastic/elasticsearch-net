@@ -4,6 +4,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[keeping-track-of-nodes]]

@@ -2,10 +2,35 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[index-name-inference]]
 == Index Name Inference
+
+Many endpoints within the Elasticsearch API expect to receive one or more index names
+as part of the request in order to know what index/indices a request should operate on.
+
+NEST has a number of ways in which an index name can be specified
+
+=== Default Index name on ConnectionSettings
+
+A default index name can be specified on `ConnectionSettings` usinf `.DefaultIndex()`.
+This is the default index name to use when no other index name can be resolved for a request
+
+[source,csharp]
+----
+var settings = new ConnectionSettings()
+    .DefaultIndex("defaultindex");
+var resolver = new IndexNameResolver(settings);
+var index = resolver.Resolve<Project>();
+index.Should().Be("defaultindex");
+----
+
+=== Mapping an Index name for POCOs
+
+A index name can be mapped for CLR types using `.MapDefaultTypeIndices()` on `ConnectionSettings`.
 
 [source,csharp]
 ----
@@ -20,6 +45,11 @@ var index = resolver.Resolve<Project>();
 
 index.Should().Be("projects");
 ----
+
+=== Mapping an Index name for POCOs
+
+An index name for a POCO provided using `.MapDefaultTypeIndices()` **will take precedence** over
+the default index name
 
 [source,csharp]
 ----
@@ -36,6 +66,58 @@ var index = resolver.Resolve<Project>();
 index.Should().Be("projects");
 ----
 
+=== Explicitly specifying Index name on the request
+
+For API calls that expect an index name, the index name can be explicitly provided
+on the request
+
+[source,csharp]
+----
+Uri requestUri = null;
+
+var client = TestClient.GetInMemoryClient(s => s
+    .OnRequestCompleted(r => { requestUri = r.Uri; }));
+
+var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
+
+requestUri.Should().NotBeNull();
+
+requestUri.LocalPath.Should().StartWith("/some-other-index/");
+----
+<1> Provide the index name on the request
+
+When an index name is provided on a request, it **will take precedence** over the default
+index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()`
+
+[source,csharp]
+----
+var client = TestClient.GetInMemoryClient(s => 
+    new ConnectionSettings()
+        .DefaultIndex("defaultindex")
+        .MapDefaultTypeIndices(m => m
+            .Add(typeof(Project), "projects")
+        )
+);
+
+var response = client.Search<Project>(s => s.Index("some-other-index")); <1>
+
+response.ApiCall.Uri.Should().NotBeNull();
+
+response.ApiCall.Uri.LocalPath.Should().StartWith("/some-other-index/");
+----
+<1> Provide the index name on the request
+
+=== Naming Conventions
+
+Index names within Elasticsearch cannot contain upper case letters.
+NEST will check the index name at the point at which the index
+name needs to be resolved to make a request; if the index name contains
+upper case letters, a `ResolveException` will be thrown indicating
+the problem and the index name that caused the problem.
+
+In the following example, we create a connection settings withboth a default index
+name and an index name to use for the `Project` type.
+
 [source,csharp]
 ----
 var settings = new ConnectionSettings()
@@ -45,19 +127,48 @@ var settings = new ConnectionSettings()
     );
 
 var resolver = new IndexNameResolver(settings);
+----
 
+When resolving the index name for the `Project` type, a `ResolveException`
+is thrown, indicating that the index name "__myProjects__" contains upper case letters
+
+[source,csharp]
+----
 var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
 
 e.Message.Should().Be($"Index names cannot contain uppercase characters: myProjects.");
+----
 
+Similarly, when resolving the index name for the `Tag` type, which will use the default index
+name, a `ResolveException` is thrown indicating that the default index name contains upper case
+letters
+
+[source,csharp]
+----
 e = Assert.Throws<ResolveException>(() => resolver.Resolve<Tag>());
 
 e.Message.Should().Be($"Index names cannot contain uppercase characters: Default.");
+----
 
+Finally, when resolving an index name from a string, a `ResolveException` will be thrown
+if the string contains upper case letters
+
+[source,csharp]
+----
 e = Assert.Throws<ResolveException>(() => resolver.Resolve("Foo"));
 
 e.Message.Should().Be($"Index names cannot contain uppercase characters: Foo.");
 ----
+
+If no index name can be resolved for a request i.e. if
+
+* no default index name is set on connection settings
+
+* no index name is mapped for a POCO
+
+* no index name is explicitly specified on the request
+
+then a `ResolveException` will be thrown to indicate that the index name is `null`
 
 [source,csharp]
 ----
@@ -70,19 +181,14 @@ var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
 e.Message.Should().Contain("Index name is null");
 ----
 
+``ResolveException``s bubble out of the client and should be dealt with as <<thrown-exceptions, development time exceptions>>
+similar to `ArgumentException`, `ArgumentOutOfRangeException` and other exceptions that _usually_ indicate
+misuse of the client API
+
 [source,csharp]
 ----
 var client = TestClient.GetInMemoryClient(s => new ConnectionSettings());
 
 var e = Assert.Throws<ResolveException>(() => client.Search<Project>());
-----
-
-[source,csharp]
-----
-var settings = new ConnectionSettings()
-    .DefaultIndex("defaultindex");
-var resolver = new IndexNameResolver(settings);
-var index = resolver.Resolve<Project>();
-index.Should().Be("defaultindex");
 ----
 

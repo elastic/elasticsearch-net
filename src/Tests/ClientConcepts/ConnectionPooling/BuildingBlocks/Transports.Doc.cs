@@ -23,11 +23,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* Transport is generically typed to a type that implements `IConnectionConfigurationValues`
 			* This is the minimum `ITransport` needs to report back for the client to function.
 			*
-			* e.g in the low level client, transport is instantiated like this:
+			* e.g in the low level client, Elasticsearch.Net, transport is instantiated like this:
 			*/
 			var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
 
-			/** and in the high level client, like this: */
+			/** and in the high level client, NEST, like this: */
 			var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings());
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
@@ -39,7 +39,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* If you feel this need, {github}/issues[please let us know] as we'd love to learn why you've go down this route!
 			*/
 			var response = inMemoryTransport.Request<SearchResponse<Project>>(HttpMethod.GET, "/_search", new { query = new { match_all = new { } } });
-			response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(HttpMethod.GET, "/_search", new { query = new { match_all = new { } } });
+			response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(
+				HttpMethod.GET, 
+				"/_search", 
+				new { query = new { match_all = new { } } });
 		}
 	}
 }

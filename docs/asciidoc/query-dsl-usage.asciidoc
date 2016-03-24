@@ -122,6 +122,8 @@ include::../../docs/asciidoc/query-dsl/term-level/regexp/regexp-query-usage.asci
 
 include::../../docs/asciidoc/query-dsl/term-level/term/term-query-usage.asciidoc[]
 
+include::../../docs/asciidoc/query-dsl/term-level/terms/terms-list-query-usage.asciidoc[]
+
 include::../../docs/asciidoc/query-dsl/term-level/terms/terms-lookup-query-usage.asciidoc[]
 
 include::../../docs/asciidoc/query-dsl/term-level/terms/terms-query-usage.asciidoc[]

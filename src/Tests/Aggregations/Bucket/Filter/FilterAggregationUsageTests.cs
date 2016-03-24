@@ -68,7 +68,7 @@ namespace Tests.Aggregations.Bucket.Filter
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			/** === Handling Responses
-			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Aggs` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
 			*/
 			response.IsValid.Should().BeTrue();
@@ -81,8 +81,8 @@ namespace Tests.Aggregations.Bucket.Filter
 			tags.Buckets.Should().NotBeEmpty();
 		}
 	}
-	
-	/**[float] 
+
+	/**[float]
 	* == Empty Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
@@ -129,10 +129,13 @@ namespace Tests.Aggregations.Bucket.Filter
 		}
 	}
 
+	/**[float]
+	* == Inline Script Filter
+	*/
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		private string _ctxNumberofcommits = "_source.numberOfCommits > 0";
+		private string _ctxNumberofCommits = "_source.numberOfCommits > 0";
 		private string _aggName = "script_filter";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -144,7 +147,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					filter = new {
 						script = new {
 							script = new {
-								inline = _ctxNumberofcommits
+								inline = _ctxNumberofCommits
 							}
 						}
 					}
@@ -157,7 +160,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				.Filter(_aggName, date => date
 					.Filter(f => f
 						.Script(b => b
-							.Inline(_ctxNumberofcommits)
+							.Inline(_ctxNumberofCommits)
 						)
 					)
 				)
@@ -170,7 +173,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new ScriptQuery
 					{
-						Inline = _ctxNumberofcommits
+						Inline = _ctxNumberofCommits
 					}
 				}
 			};

@@ -2,10 +2,16 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[terms-query-usage]]
 == Terms Query Usage
+
+Filters documents that have fields that match any of the provided terms (not analyzed).
+
+Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-terms-query.html[Terms query] for more information.
 
 === Fluent DSL Example
 
@@ -31,7 +37,7 @@ new TermsQuery
     Name = "named_query",
     Boost = 1.1,
     Field = "description",
-    Terms = new [] { "term1", "term2" },
+    Terms = ExpectedTerms,
     DisableCoord = true,
     MinimumShouldMatch = 2
 }
@@ -52,5 +58,24 @@ new TermsQuery
     "minimum_should_match": 2
   }
 }
+----
+
+[[single-term-terms-query]]
+[float]
+== Single term Terms Query 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .DisableCoord()
+    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
+    .Terms("term1")
+)
 ----
 

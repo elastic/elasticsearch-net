@@ -2,6 +2,8 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[unrecoverable-exceptions]]
@@ -92,11 +94,14 @@ audit = await audit.TraceElasticsearchException(
     (e) =>
     {
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.HttpStatusCode.Should().Be(401);
         e.Response.ResponseBodyInBytes.Should().BeNull();
     }
 );
 
 e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.HttpStatusCode.Should().Be(401);
 
 e.Response.ResponseBodyInBytes.Should().BeNull();
 ----
@@ -119,6 +124,7 @@ audit = await audit.TraceElasticsearchException(
     (e) =>
     {
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.HttpStatusCode.Should().Be(401);
         e.Response.ResponseBodyInBytes.Should().NotBeNull();
         var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
         responseString.Should().Contain("nginx/");
@@ -127,6 +133,8 @@ audit = await audit.TraceElasticsearchException(
 );
 
 e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.HttpStatusCode.Should().Be(401);
 
 e.Response.ResponseBodyInBytes.Should().NotBeNull();
 
@@ -159,6 +167,7 @@ audit = await audit.TraceElasticsearchException(
     (e) =>
     {
         e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+        e.Response.HttpStatusCode.Should().Be(401);
         e.Response.ResponseBodyInBytes.Should().NotBeNull();
         var responseString = Encoding.UTF8.GetString(e.Response.ResponseBodyInBytes);
         responseString.Should().Contain("nginx/");
@@ -167,6 +176,8 @@ audit = await audit.TraceElasticsearchException(
 );
 
 e.FailureReason.Should().Be(PipelineFailure.BadAuthentication);
+
+e.Response.HttpStatusCode.Should().Be(401);
 
 e.Response.ResponseBodyInBytes.Should().NotBeNull();
 

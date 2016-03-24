@@ -2,12 +2,14 @@
 
 :github: https://github.com/elastic/elasticsearch-net
 
+:nuget: https://www.nuget.org/packages
+
 :imagesdir: ../../../images/
 
 [[field-inference]]
 == Field Inference
 
-Several places in the elasticsearch API expect the path to a field from your original source document as a string.
+Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
 NEST allows you to use C# expressions to strongly type these field path strings.
 
 These expressions are assigned to a type called `Field` and there are several ways to create an instance of one:
@@ -71,7 +73,7 @@ but for expressions this is still rather involved
 var fieldExpression = Infer.Field<Project>(p => p.Name);
 ----
 
-this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
+this can be even shortened even further using ahttps://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
 			`using static Nest.Infer;`
 
 [source,csharp]

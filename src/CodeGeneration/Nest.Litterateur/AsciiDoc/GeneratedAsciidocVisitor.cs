@@ -11,7 +11,7 @@ using AsciiDoc;
 namespace Nest.Litterateur.AsciiDoc
 {
 	/// <summary>
-	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries, 
+	/// Visits the "raw" asciidoc generated using Roslyn and adds attribute entries,
 	/// section titles, rearranges sections, etc.
 	/// </summary>
 	public class GeneratedAsciidocVisitor : NoopVisitor
@@ -61,6 +61,11 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
 			}
 
+			if (!document.Attributes.Any(a => a.Name == "nuget"))
+			{
+				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
+			}
+
 			  if (!document.Attributes.Any(a => a.Name == "imagesdir"))
 			{
 				var targetDirectory = new DirectoryInfo(Program.OutputDirPath).FullName;
@@ -103,7 +108,7 @@ namespace Nest.Litterateur.AsciiDoc
 				{
 					var element = elements[index];
 					var source = element as Source;
-					
+
 					if (source != null)
 					{
 						// remove empty source blocks
@@ -119,8 +124,8 @@ namespace Nest.Litterateur.AsciiDoc
 							continue;
 						}
 
-						if ((method.Value == "expectjson" || method.Value == "queryjson") && 
-							source.Attributes.Count > 1 && 
+						if ((method.Value == "expectjson" || method.Value == "queryjson") &&
+							source.Attributes.Count > 1 &&
 							source.Attributes[1].Name == "javascript")
 						{
 							exampleJson = source;
@@ -153,7 +158,7 @@ namespace Nest.Litterateur.AsciiDoc
 									_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
 									_newDocument.Elements.Add(objectInitializerExample);
 									objectInitializerExample = null;
-									
+
 									if (exampleJson != null)
 									{
 										_newDocument.Elements.Add(exampleJson);
@@ -176,7 +181,7 @@ namespace Nest.Litterateur.AsciiDoc
 								{
 									_newDocument.Elements.Add(new SectionTitle("Object Initializer Syntax Example", 3));
 									_newDocument.Elements.Add(objectInitializerExample);
-									
+
 									// Move the example json to after the initializer example
 									if (exampleJson != null)
 									{
@@ -210,14 +215,14 @@ namespace Nest.Litterateur.AsciiDoc
 
 		public override void Visit(Source source)
 		{
-			if (source.Attributes.Count > 1 && 
+			if (source.Attributes.Count > 1 &&
 				source.Attributes[1].Name == "javascript" &&
 				!source.Attributes.HasTitle)
 			{
 				source.Attributes.Add(new Title("Example json output"));
 			}
 
-			// remove method attributes as the elastic doc generation doesn't like them; it 
+			// remove method attributes as the elastic doc generation doesn't like them; it
 			// expects a linenumbering in the index 2 position of a source block
 			var methodAttribute = source.Attributes.FirstOrDefault(a => a.Name == "method");
 			if (methodAttribute != null)
@@ -225,7 +230,7 @@ namespace Nest.Litterateur.AsciiDoc
 				source.Attributes.Remove(methodAttribute);
 			}
 
-			// Replace tabs with spaces and remove comment escaping from output 
+			// Replace tabs with spaces and remove comment escaping from output
 			// (elastic docs generation does not like this callout format)
 			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
 
