@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[query-string-usage]]
 == Query String Usage
 

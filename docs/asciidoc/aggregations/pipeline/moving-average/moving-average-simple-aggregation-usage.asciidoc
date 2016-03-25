@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[moving-average-simple-aggregation-usage]]
 == Moving Average Simple Aggregation Usage
 

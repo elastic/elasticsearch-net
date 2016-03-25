@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../images/
-
 [[index-boost-usage]]
 == Index Boost Usage
 

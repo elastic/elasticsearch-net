@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[value-count-aggregation-usage]]
 == Value Count Aggregation Usage
 

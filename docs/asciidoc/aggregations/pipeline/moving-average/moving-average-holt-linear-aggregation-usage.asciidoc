@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[moving-average-holt-linear-aggregation-usage]]
 == Moving Average Holt Linear Aggregation Usage
 

@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[serial-differencing-aggregation-usage]]
 == Serial Differencing Aggregation Usage
 

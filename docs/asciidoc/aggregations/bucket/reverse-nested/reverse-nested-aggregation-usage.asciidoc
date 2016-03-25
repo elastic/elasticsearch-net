@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[reverse-nested-aggregation-usage]]
 == Reverse Nested Aggregation Usage
 

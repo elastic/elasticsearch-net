@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[fuzzy-numeric-query-usage]]
 == Fuzzy Numeric Query Usage
 

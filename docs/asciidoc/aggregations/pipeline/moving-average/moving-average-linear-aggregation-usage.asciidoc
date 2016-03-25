@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[moving-average-linear-aggregation-usage]]
 == Moving Average Linear Aggregation Usage
 

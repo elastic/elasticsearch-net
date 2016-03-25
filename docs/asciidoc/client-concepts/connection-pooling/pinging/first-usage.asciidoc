@@ -6,8 +6,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[pinging---first-usage]]
 == Pinging - First Usage
 

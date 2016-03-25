@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../../images/
-
 [[geo-multi-line-string-usage]]
 == Geo Multi Line String Usage
 

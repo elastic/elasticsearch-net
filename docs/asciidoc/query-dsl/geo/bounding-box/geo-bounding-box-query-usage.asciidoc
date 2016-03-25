@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[geo-bounding-box-query-usage]]
 == Geo Bounding Box Query Usage
 

@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[bool-dsl-complex-query-usage]]
 == Bool Dsl Complex Query Usage
 

@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[more-like-this-query-usage]]
 == More Like This Query Usage
 

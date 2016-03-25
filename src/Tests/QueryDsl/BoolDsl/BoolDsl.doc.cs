@@ -34,8 +34,8 @@ namespace Tests.QueryDsl.BoolDsl
 		/**Now, imagine multiple nested bools; you'll realise that this quickly becomes an exercise in _hadouken indenting_
 		*
 		*[[indent]]
-		*.hadouken indenting example
-		*image::{imagesdir}hadouken-indentation.jpg[dead indent]	
+		*.hadouken indenting
+		*image::hadouken-indentation.jpg[hadouken indenting]	
 		*
 		*=== Operator Overloading
 		*

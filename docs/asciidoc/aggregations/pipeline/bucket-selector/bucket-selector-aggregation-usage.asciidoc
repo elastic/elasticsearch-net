@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[bucket-selector-aggregation-usage]]
 == Bucket Selector Aggregation Usage
 

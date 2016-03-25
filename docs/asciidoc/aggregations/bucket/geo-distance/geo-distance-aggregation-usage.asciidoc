@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[geo-distance-aggregation-usage]]
 == Geo Distance Aggregation Usage
 

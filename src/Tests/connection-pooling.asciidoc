@@ -36,7 +36,7 @@ include::{round-robin}/skip-dead-nodes.asciidoc[]
 
 include::{round-robin}/volatile-updates.asciidoc[]
 
-include::{failover}/failing-over.asciidoc[]
+include::{failover}/falling-over.asciidoc[]
 
 include::{max-retries}/respects-max-retry.asciidoc[]
 

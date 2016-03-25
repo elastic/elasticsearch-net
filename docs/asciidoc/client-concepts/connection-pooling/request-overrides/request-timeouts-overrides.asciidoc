@@ -6,8 +6,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[request-timeouts]]
 == Request Timeouts
 

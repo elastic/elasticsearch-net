@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[terms-lookup-query-usage]]
 == Terms Lookup Query Usage
 

@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[ip-range-aggregation-usage]]
 == Ip Range Aggregation Usage
 

@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../../images/
-
 [[geo-polygon-usage]]
 == Geo Polygon Usage
 

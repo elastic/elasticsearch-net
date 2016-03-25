@@ -66,17 +66,6 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}
 
-			  if (!document.Attributes.Any(a => a.Name == "imagesdir"))
-			{
-				var targetDirectory = new DirectoryInfo(Program.OutputDirPath).FullName;
-				var currentDirectory = _destination.Directory.FullName;
-				var difference = currentDirectory.Replace(targetDirectory, string.Empty);
-				var count = difference.Count(c => c == '\\');
-				var imagesDir = string.Join(string.Empty, Enumerable.Repeat("../", count));
-
-				_newDocument.Attributes.Add(new AttributeEntry("imagesdir", $"{imagesDir}{Program.ImagesDir}/"));
-			}
-
 			// see if the document has some kind of top level title and add one with an anchor if not.
 			if (document.Title == null && document.Elements.Count > 0)
 			{

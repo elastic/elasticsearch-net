@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[terms-list-query-usage]]
 == Terms List Query Usage
 

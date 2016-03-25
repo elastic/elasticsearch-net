@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../images/
-
 [[post-filter-usage]]
 == Post Filter Usage
 

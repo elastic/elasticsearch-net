@@ -6,8 +6,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[disabling-sniffing-and-pinging-on-a-request-basis]]
 == Disabling sniffing and pinging on a request basis 
 

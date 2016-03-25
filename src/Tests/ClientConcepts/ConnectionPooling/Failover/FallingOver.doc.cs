@@ -9,8 +9,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 {
 	public class FallingOver
 	{
-		/** == Fail over
-		* When using connection pooling and the pool has sufficient nodes a request will be retried if 
+		/**[[falling-over]]
+		* == Fail over
+		* When using connection pooling and the pool has sufficient nodes a request will be retried if
 		* the call to a node throws an exception or returns a 502 or 503
 		*/
 
@@ -35,7 +36,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 		/** === 502 Bad Gateway
 		*
-		* Will be treated as an error that requires retrying 
+		* Will be treated as an error that requires retrying
 		*/
 		[U]
 		public async Task Http502FallsOver()
@@ -58,7 +59,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 
 		/** === 503 Service Unavailable
 		*
-		* Will be treated as an error that requires retrying 
+		* Will be treated as an error that requires retrying
 		*/
 		[U]
 		public async Task Http503FallsOver()

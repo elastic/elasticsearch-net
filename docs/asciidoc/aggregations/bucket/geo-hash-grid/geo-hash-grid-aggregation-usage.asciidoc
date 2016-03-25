@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[geo-hash-grid-aggregation-usage]]
 == Geo Hash Grid Aggregation Usage
 

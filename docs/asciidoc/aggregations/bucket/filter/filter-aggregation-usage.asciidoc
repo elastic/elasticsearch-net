@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[filter-aggregation-usage]]
 == Filter Aggregation Usage
 

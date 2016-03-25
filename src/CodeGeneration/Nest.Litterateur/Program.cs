@@ -4,8 +4,6 @@ namespace Nest.Litterateur
 {
 	public static class Program
 	{
-		public const string ImagesDir = "images";
-
 		static Program()
 		{
 			var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
@@ -20,8 +18,6 @@ namespace Nest.Litterateur
 				OutputDirPath = @"..\..\..\..\..\docs\asciidoc";
 			}
 		}
-
-		public static string ImagesDirPath => Path.Combine(OutputDirPath, ImagesDir);
 
 		public static string InputDirPath { get; }
 

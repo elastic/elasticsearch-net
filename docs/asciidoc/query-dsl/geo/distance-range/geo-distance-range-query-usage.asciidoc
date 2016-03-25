@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[geo-distance-range-query-usage]]
 == Geo Distance Range Query Usage
 

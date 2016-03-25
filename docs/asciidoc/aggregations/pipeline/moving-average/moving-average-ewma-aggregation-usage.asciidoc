@@ -4,8 +4,6 @@
 
 :nuget: https://www.nuget.org/packages
 
-:imagesdir: ../../../images/
-
 [[moving-average-ewma-aggregation-usage]]
 == Moving Average Ewma Aggregation Usage
 
