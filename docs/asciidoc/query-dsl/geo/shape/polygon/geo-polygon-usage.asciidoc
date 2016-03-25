@@ -1,0 +1,35 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-polygon-usage]]
+== Geo Polygon Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoShapePolygon(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Location)
+    .Coordinates(this._coordinates)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoShapePolygonQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p => p.Location),
+    Shape = new PolygonGeoShape(this._coordinates) { }
+}
+----
+

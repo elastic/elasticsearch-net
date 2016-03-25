@@ -1,0 +1,57 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[missing-aggregation-usage]]
+== Missing Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Missing("projects_without_a_description", m => m
+        .Field(p => p.Description)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new MissingAggregation("projects_without_a_description")
+    {
+        Field = Field<Project>(p => p.Description)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "projects_without_a_description": {
+      "missing": {
+        "field": "description"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsWithoutDesc = response.Aggs.Missing("projects_without_a_description");
+projectsWithoutDesc.Should().NotBeNull();
+----
+

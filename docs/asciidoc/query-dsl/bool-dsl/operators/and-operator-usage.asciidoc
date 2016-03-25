@@ -1,0 +1,96 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[and-operator-usage]]
+== And Operator Usage
+
+[source,csharp]
+----
+var lotsOfAnds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && Query, q => q);
+
+LotsOfAnds(lotsOfAnds);
+----
+
+[source,csharp]
+----
+QueryContainer container = null;
+
+container &= Query;
+
+LotsOfAnds(container);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+
+container &= Query;
+
+LotsOfAnds(container);
+----
+
+[source,csharp]
+----
+lotsOfAnds.Should().NotBeNull();
+
+lotsOfAnds.Bool.Should().NotBeNull();
+
+lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(100);
+----
+
+[source,csharp]
+----
+ReturnsBool(Query && Query, q => q.Query() && q.Query(), b =>
+{
+    b.Must.Should().NotBeEmpty().And.HaveCount(2);
+    b.Should.Should().BeNull();
+    b.MustNot.Should().BeNull();
+    b.Filter.Should().BeNull();
+});
+b.Must.Should().NotBeEmpty().And.HaveCount(2);
+b.Should.Should().BeNull();
+b.MustNot.Should().BeNull();
+b.Filter.Should().BeNull();
+ReturnsBool(Query && Query && ConditionlessQuery, q => q.Query() && q.Query() && q.ConditionlessQuery(), b =>
+{
+    b.Must.Should().NotBeEmpty().And.HaveCount(2);
+    b.Should.Should().BeNull();
+    b.MustNot.Should().BeNull();
+    b.Filter.Should().BeNull();
+});
+b.Must.Should().NotBeEmpty().And.HaveCount(2);
+b.Should.Should().BeNull();
+b.MustNot.Should().BeNull();
+b.Filter.Should().BeNull();
+ReturnsSingleQuery(Query && ConditionlessQuery, q => q.Query() && q.ConditionlessQuery(),
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsSingleQuery(ConditionlessQuery && Query, q => q.ConditionlessQuery() && q.Query(),
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsSingleQuery(Query && NullQuery, q => q.Query() && q.NullQuery(),
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsSingleQuery(NullQuery && Query, q=> q.NullQuery() && q.Query(), 
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsSingleQuery(ConditionlessQuery && ConditionlessQuery && ConditionlessQuery && Query,
+    q => q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.Query(),
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsSingleQuery(
+    NullQuery && NullQuery && ConditionlessQuery && Query, 
+    q=>q.NullQuery() && q.NullQuery() && q.ConditionlessQuery() && q.Query(),
+    c => c.Term.Value.Should().NotBeNull());
+ReturnsNull(NullQuery && ConditionlessQuery, q=> q.NullQuery() && q.ConditionlessQuery());
+ReturnsNull(ConditionlessQuery && NullQuery, q=>q.ConditionlessQuery() && q.NullQuery());
+ReturnsNull(ConditionlessQuery && ConditionlessQuery, q=>q.ConditionlessQuery() && q.ConditionlessQuery());
+ReturnsNull(
+    ConditionlessQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
+    q=>q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
+
+);
+ReturnsNull(
+    NullQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
+    q=>q.NullQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
+);
+----
+

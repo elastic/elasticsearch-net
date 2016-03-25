@@ -1,5 +1,11 @@
+using System;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+#if !DOTNETCORE
+using AsciiDoc;
+using Nest.Litterateur.AsciiDoc;
+#endif
 
 namespace Nest.Litterateur.Documentation.Files
 {
@@ -11,15 +17,30 @@ namespace Nest.Litterateur.Documentation.Files
 		{
 			//we simply do a copy of the markdown file
 			var docFileName = this.CreateDocumentationLocation();
+
+#if !DOTNETCORE
+			var document = Document.Load(FileLocation.FullName);
+
+			// make any modifications
+			var rawVisitor = new RawAsciidocVisitor(FileLocation);
+			document.Accept(rawVisitor);
+
+			// write out asciidoc to file
+			using (var visitor = new AsciiDocVisitor(docFileName.FullName))
+			{
+				document.Accept(visitor);
+			}
+#else
 			this.FileLocation.CopyTo(docFileName.FullName, true);
+#endif
 		}
 
 		protected override FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + this.Extension;
+			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "").PascalToHyphen() + this.Extension;
 
-			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputFolder, testInDocumenationFolder));
+			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
 			if (fileInfo.Directory != null)
 				Directory.CreateDirectory(fileInfo.Directory.FullName);

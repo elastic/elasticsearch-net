@@ -10,7 +10,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnStartupSniffing
 	{
-		/** == Sniffing on startup
+		/** :section-number: 7.3
+		* == Sniffing on startup
 		* 
 		* Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 		*/

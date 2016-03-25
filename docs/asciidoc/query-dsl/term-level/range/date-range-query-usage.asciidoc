@@ -1,0 +1,64 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[date-range-query-usage]]
+== Date Range Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.DateRange(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan(FixedDate)
+    .GreaterThanOrEquals(DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month))
+    .LessThan("01/01/2012")
+    .LessThanOrEquals(DateMath.Now)
+    .Format("dd/MM/yyyy||yyyy")
+    .TimeZone("+01:00")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new DateRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = FixedDate,
+    GreaterThanOrEqualTo = DateMath.Anchored(FixedDate).RoundTo(TimeUnit.Month),
+    LessThan = "01/01/2012",
+    LessThanOrEqualTo = DateMath.Now,
+    TimeZone = "+01:00",
+    Format = "dd/MM/yyyy||yyyy"
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "range": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "format": "dd/MM/yyyy||yyyy",
+      "gt": "2015-06-06T12:01:02.123",
+      "gte": "2015-06-06T12:01:02.123||/M",
+      "lt": "01/01/2012",
+      "lte": "now",
+      "time_zone": "+01:00"
+    }
+  }
+}
+----
+

@@ -1,0 +1,93 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[min-bucket-aggregation-usage]]
+== Min Bucket Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+        )
+    )
+    .MinBucket("min_commits_per_month", aaa => aaa
+        .BucketsPath("projects_started_per_month>commits")
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = new SumAggregation("commits", "numberOfCommits")
+    }
+    && new MinBucketAggregation("min_commits_per_month", "projects_started_per_month>commits")
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        }
+      }
+    },
+    "min_commits_per_month": {
+      "min_bucket": {
+        "buckets_path": "projects_started_per_month>commits"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+var minCommits = response.Aggs.MinBucket("min_commits_per_month");
+minCommits.Should().NotBeNull();
+minCommits.Value.Should().BeGreaterThan(0);
+minCommits.Keys.Should().NotBeNull();
+minCommits.Keys.Count.Should().BeGreaterOrEqualTo(1);
+key.Should().NotBeNullOrEmpty();
+----
+

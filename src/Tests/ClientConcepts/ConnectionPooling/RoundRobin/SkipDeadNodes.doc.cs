@@ -12,11 +12,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class SkippingDeadNodes
 	{
-		/** Round Robin - Skipping Dead Nodes
+		/** == Round Robin - Skipping Dead Nodes
+		*
 		 * When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
 		 */
 
-		/** == GetNext
+		/** === GetNext
 		* GetNext is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
 		* suffering from noisy neighboors advancing a global cursor.
@@ -51,7 +52,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9202);
 			}
-			/** After we marke the first node alive again we expect it to be hit again*/
+			/** After we marked the first node alive again, we expect it to be hit again*/
 			seeds.First().MarkAlive();
 			for (var i = 0; i < 20; i++)
 			{
@@ -76,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9202);
 			}
-			/** If we forward our clock 2 days the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
+			/** If we roll the clock forward two days, the node that was marked dead until tomorrow (or yesterday!) should be resurrected */
 			dateTimeProvider.ChangeTime(d => d.AddDays(2));
 			var n = pool.CreateView().First();
 			n.Uri.Port.Should().Be(9201);

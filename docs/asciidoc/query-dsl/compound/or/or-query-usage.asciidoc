@@ -1,0 +1,62 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[or-query-usage]]
+== Or Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Or(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Filters(
+        qq => qq.MatchAll(m => m.Name("query1")),
+        qq => qq.MatchAll(m => m.Name("query2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new OrQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Filters = new QueryContainer[] {
+        new MatchAllQuery() { Name = "query1" },
+        new MatchAllQuery() { Name = "query2" },
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "or": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "filters": [
+      {
+        "match_all": {
+          "_name": "query1"
+        }
+      },
+      {
+        "match_all": {
+          "_name": "query2"
+        }
+      }
+    ]
+  }
+}
+----
+

@@ -1,0 +1,64 @@
+:output-dir: client-concepts/connection-pooling
+
+:building-blocks: {output-dir}/building-blocks
+
+:sniffing: {output-dir}/sniffing
+
+:pinging: {output-dir}/pinging
+
+:round-robin: {output-dir}/round-robin
+
+:failover: {output-dir}/failover
+
+:max-retries: {output-dir}/max-retries
+
+:request-overrides: {output-dir}/request-overrides
+
+:exceptions: {output-dir}/exceptions
+
+include::{building-blocks}/connection-pooling.asciidoc[]
+
+include::{building-blocks}/request-pipelines.asciidoc[]
+
+include::{building-blocks}/transports.asciidoc[]
+
+include::{building-blocks}/keeping-track-of-nodes.asciidoc[]
+
+include::{building-blocks}/date-time-providers.asciidoc[]
+
+include::{sniffing}/on-startup.asciidoc[]
+
+include::{sniffing}/on-connection-failure.asciidoc[]
+
+include::{sniffing}/on-stale-cluster-state.asciidoc[]
+
+include::{sniffing}/role-detection.asciidoc[]
+
+include::{pinging}/first-usage.asciidoc[]
+
+include::{pinging}/revival.asciidoc[]
+
+include::{round-robin}/round-robin.asciidoc[]
+
+include::{round-robin}/skip-dead-nodes.asciidoc[]
+
+include::{round-robin}/volatile-updates.asciidoc[]
+
+include::{failover}/falling-over.asciidoc[]
+
+include::{max-retries}/respects-max-retry.asciidoc[]
+
+include::{request-overrides}/disable-sniff-ping-per-request.asciidoc[]
+
+include::{request-overrides}/request-timeouts-overrides.asciidoc[]
+
+include::{request-overrides}/respects-max-retry-overrides.asciidoc[]
+
+include::{request-overrides}/respects-allowed-status-code.asciidoc[]
+
+include::{request-overrides}/respects-force-node.asciidoc[]
+
+include::{exceptions}/unexpected-exceptions.asciidoc[]
+
+include::{exceptions}/unrecoverable-exceptions.asciidoc[]
+

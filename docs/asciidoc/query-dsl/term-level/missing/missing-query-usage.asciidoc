@@ -1,0 +1,51 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[missing-query-usage]]
+== Missing Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Missing(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .NullValue()
+    .Existence()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MissingQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    NullValue = true,
+    Existence = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "missing": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "existence": true,
+    "field": "description",
+    "null_value": true
+  }
+}
+----
+

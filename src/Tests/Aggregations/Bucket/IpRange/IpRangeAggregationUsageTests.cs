@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 				{
 					ip_range = new
 					{
-						field = Field<Project>(p => p.LeadDeveloper.IPAddress),
+						field = "leadDeveloper.iPAddress",
 						ranges = new object[]
 						{
 							new { to = "10.0.0.5" },

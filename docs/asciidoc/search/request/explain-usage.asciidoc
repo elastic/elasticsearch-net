@@ -1,0 +1,34 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[explain-usage]]
+== Explain Usage
+
+Enables explanation for each hit on how its score was computed.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Explain()
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project> { Explain = true }
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "explain": true
+}
+----
+

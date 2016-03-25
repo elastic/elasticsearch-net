@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.Cardinality
 				{
 					cardinality = new
 					{
-						field = Field<Project>(p => p.State),
+						field = "state",
 						precision_threshold = 100
 					}
 				}

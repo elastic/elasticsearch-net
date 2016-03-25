@@ -1,0 +1,85 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[percentiles-aggregation-usage]]
+== Percentiles Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Percentiles("commits_outlier", pr => pr
+        .Field(p => p.NumberOfCommits)
+        .Percents(95, 99, 99.9)
+        .Method(m => m
+            .HDRHistogram(hdr => hdr
+                .NumberOfSignificantValueDigits(3)
+            )
+        )
+        .Script("doc['numberOfCommits'].value * 1.2")
+        .Missing(0)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new PercentilesAggregation("commits_outlier", Field<Project>(p => p.NumberOfCommits))
+    {
+        Percents = new[] { 95, 99, 99.9 },
+        Method = new HDRHistogramMethod
+        {
+            NumberOfSignificantValueDigits = 3
+        },
+        Script = new InlineScript("doc['numberOfCommits'].value * 1.2"),
+        Missing = 0
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "commits_outlier": {
+      "percentiles": {
+        "field": "numberOfCommits",
+        "percents": [
+          95.0,
+          99.0,
+          99.9
+        ],
+        "hdr": {
+          "number_of_significant_value_digits": 3
+        },
+        "script": {
+          "inline": "doc['numberOfCommits'].value * 1.2"
+        },
+        "missing": 0.0
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commitsOutlier = response.Aggs.Percentiles("commits_outlier");
+commitsOutlier.Should().NotBeNull();
+commitsOutlier.Items.Should().NotBeNullOrEmpty();
+item.Value.Should().BeGreaterThan(0);
+----
+

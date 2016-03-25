@@ -1,0 +1,104 @@
+:output-dir: aggregations
+
+[[aggregations]]
+= Aggregations
+
+[partintro]
+--
+Aggregations are arguably one of the most powerful features of Elasticsearch and NEST
+exposes all of the available Aggregation types
+
+* <<children-aggregation-usage,Children Aggregation Usage>>
+
+* <<date-histogram-aggregation-usage,Date Histogram Aggregation Usage>>
+
+* <<date-range-aggregation-usage,Date Range Aggregation Usage>>
+
+* <<filter-aggregation-usage,Filter Aggregation Usage>>
+
+* <<filters-aggregation-usage,Filters Aggregation Usage>>
+
+* <<geo-distance-aggregation-usage,Geo Distance Aggregation Usage>>
+
+* <<geo-hash-grid-aggregation-usage,Geo Hash Grid Aggregation Usage>>
+
+* <<global-aggregation-usage,Global Aggregation Usage>>
+
+* <<histogram-aggregation-usage,Histogram Aggregation Usage>>
+
+* <<ip-range-aggregation-usage,Ip Range Aggregation Usage>>
+
+* <<missing-aggregation-usage,Missing Aggregation Usage>>
+
+* <<nested-aggregation-usage,Nested Aggregation Usage>>
+
+* <<range-aggregation-usage,Range Aggregation Usage>>
+
+* <<reverse-nested-aggregation-usage,Reverse Nested Aggregation Usage>>
+
+* <<sampler-aggregation-usage,Sampler Aggregation Usage>>
+
+* <<significant-terms-aggregation-usage,Significant Terms Aggregation Usage>>
+
+* <<terms-aggregation-usage,Terms Aggregation Usage>>
+
+* <<average-aggregation-usage,Average Aggregation Usage>>
+
+* <<cardinality-aggregation-usage,Cardinality Aggregation Usage>>
+
+* <<extended-stats-aggregation-usage,Extended Stats Aggregation Usage>>
+
+* <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
+
+* <<max-aggregation-usage,Max Aggregation Usage>>
+
+* <<min-aggregation-usage,Min Aggregation Usage>>
+
+* <<percentile-ranks-aggregation-usage,Percentile Ranks Aggregation Usage>>
+
+* <<percentiles-aggregation-usage,Percentiles Aggregation Usage>>
+
+* <<scripted-metric-aggregation-usage,Scripted Metric Aggregation Usage>>
+
+* <<stats-aggregation-usage,Stats Aggregation Usage>>
+
+* <<sum-aggregation-usage,Sum Aggregation Usage>>
+
+* <<top-hits-aggregation-usage,Top Hits Aggregation Usage>>
+
+* <<value-count-aggregation-usage,Value Count Aggregation Usage>>
+
+* <<average-bucket-aggregation-usage,Average Bucket Aggregation Usage>>
+
+* <<bucket-script-aggregation-usage,Bucket Script Aggregation Usage>>
+
+* <<bucket-selector-aggregation-usage,Bucket Selector Aggregation Usage>>
+
+* <<cumulative-sum-aggregation-usage,Cumulative Sum Aggregation Usage>>
+
+* <<derivative-aggregation-usage,Derivative Aggregation Usage>>
+
+* <<max-bucket-aggregation-usage,Max Bucket Aggregation Usage>>
+
+* <<min-bucket-aggregation-usage,Min Bucket Aggregation Usage>>
+
+* <<moving-average-ewma-aggregation-usage,Moving Average Ewma Aggregation Usage>>
+
+* <<moving-average-holt-linear-aggregation-usage,Moving Average Holt Linear Aggregation Usage>>
+
+* <<moving-average-holt-winters-aggregation-usage,Moving Average Holt Winters Aggregation Usage>>
+
+* <<moving-average-linear-aggregation-usage,Moving Average Linear Aggregation Usage>>
+
+* <<moving-average-simple-aggregation-usage,Moving Average Simple Aggregation Usage>>
+
+* <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
+
+* <<sum-bucket-aggregation-usage,Sum Bucket Aggregation Usage>>
+
+--
+
+include::{output-dir}/writing-aggregations.asciidoc[]
+
+include::aggregations-usage.asciidoc[]
+

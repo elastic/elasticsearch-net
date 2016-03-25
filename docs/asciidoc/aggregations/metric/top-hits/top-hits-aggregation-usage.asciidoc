@@ -1,0 +1,171 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[top-hits-aggregation-usage]]
+== Top Hits Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Terms("states", t => t
+        .Field(p => p.State)
+        .Aggregations(aa => aa
+            .TopHits("top_state_hits", th => th
+                .Sort(srt => srt
+                    .Field(p => p.StartedOn)
+                    .Order(SortOrder.Descending)
+                )
+                .Source(src => src
+                    .Include(fs => fs
+                        .Field(p => p.Name)
+                        .Field(p => p.StartedOn)
+                    )
+                )
+                .Size(1)
+                .Version()
+                .Explain()
+                .FielddataFields(fd => fd
+                    .Field(p => p.State)
+                    .Field(p => p.NumberOfCommits)
+                )
+                .Highlight(h => h
+                    .Fields(
+                        hf => hf.Field(p => p.Tags),
+                        hf => hf.Field(p => p.Description)
+                    )
+                )
+                .ScriptFields(sfs => sfs
+                    .ScriptField("commit_factor", sf => sf
+                        .Inline("doc['numberOfCommits'].value * 2")
+                    )
+                )
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State),
+        Aggregations = new TopHitsAggregation("top_state_hits")
+        {
+            Sort = new List<ISort>
+            {
+                {
+                    new SortField { Field = Field<Project>(p => p.StartedOn), Order = SortOrder.Descending }
+                }
+            },
+            Source = new SourceFilter
+            {
+                Include = new [] { "name", "startedOn" }
+            },
+            Size = 1,
+            Version = true,
+            Explain = true,
+            FielddataFields = new [] { "state", "numberOfCommits" },
+            Highlight = new Highlight
+            {
+                Fields = new Dictionary<Nest.Field, IHighlightField>
+                {
+                    { Field<Project>(p => p.Tags), new HighlightField() },
+                    { Field<Project>(p => p.Description), new HighlightField() }
+                }
+            },
+            ScriptFields = new ScriptFields
+            {
+                { "commit_factor", new ScriptField { Script = new InlineScript("doc['numberOfCommits'].value * 2") } }
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "states": {
+      "terms": {
+        "field": "state"
+      },
+      "aggs": {
+        "top_state_hits": {
+          "top_hits": {
+            "sort": [
+              {
+                "startedOn": {
+                  "order": "desc"
+                }
+              }
+            ],
+            "_source": {
+              "include": [
+                "name",
+                "startedOn"
+              ]
+            },
+            "size": 1,
+            "version": true,
+            "explain": true,
+            "fielddata_fields": [
+              "state",
+              "numberOfCommits"
+            ],
+            "highlight": {
+              "fields": {
+                "tags": {},
+                "description": {}
+              }
+            },
+            "script_fields": {
+              "commit_factor": {
+                "script": {
+                  "inline": "doc['numberOfCommits'].value * 2"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.Buckets.Should().NotBeNullOrEmpty();
+state.Key.Should().NotBeNullOrEmpty();
+state.DocCount.Should().BeGreaterThan(0);
+var topStateHits = state.TopHits("top_state_hits");
+topStateHits.Should().NotBeNull();
+topStateHits.Total.Should().BeGreaterThan(0);
+var hits = topStateHits.Hits<Project>();
+hits.Should().NotBeNullOrEmpty();
+hits.All(h => h.Explanation != null).Should().BeTrue();
+hits.All(h => h.Version.HasValue).Should().BeTrue();
+hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
+hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
+hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
+topStateHits.Documents<Project>().Should().NotBeEmpty();
+----
+

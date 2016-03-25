@@ -146,7 +146,7 @@ namespace Tests.Search.Request
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
 			inner_hits = new
 			{
@@ -238,7 +238,7 @@ namespace Tests.Search.Request
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
 			query = new
 			{

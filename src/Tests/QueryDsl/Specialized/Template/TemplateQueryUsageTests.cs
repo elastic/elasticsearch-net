@@ -23,8 +23,6 @@ namespace Tests.QueryDsl.Specialized.Template
 					query_string = "all about search"
 				}
 			}
-
-
 		};
 
 		protected override QueryContainer QueryInitializer => new TemplateQuery

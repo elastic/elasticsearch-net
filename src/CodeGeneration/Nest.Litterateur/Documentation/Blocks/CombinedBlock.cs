@@ -4,7 +4,7 @@ namespace Nest.Litterateur.Documentation.Blocks
 {
 	/// <summary>
 	/// Used to keep a line of code (could be multiple e.g fluent syntax) and its annotations in one logical unit.
-	/// So they do not suffer from reoordering based on line number when writing out the documentation
+	/// So they do not suffer from reordering based on line number when writing out the documentation
 	/// </summary>
 	public class CombinedBlock : IDocumentationBlock
 	{

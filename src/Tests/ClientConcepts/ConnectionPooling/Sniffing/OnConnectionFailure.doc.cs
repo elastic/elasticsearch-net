@@ -9,7 +9,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnConnectionFailure
 	{
-		/** == Sniffing on connection failure 
+		/** :section-number: 7.1
+		* == Sniffing on connection failure 
+		*
 		* Sniffing on connection is enabled by default when using a connection pool that allows reseeding. 
 		* The only IConnectionPool we ship that allows this is the SniffingConnectionPool.
 		*

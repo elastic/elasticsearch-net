@@ -1,0 +1,74 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[significant-terms-aggregation-usage]]
+== Significant Terms Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .SignificantTerms("significant_names", st => st
+        .Field(p => p.Name)
+        .MinimumDocumentCount(10)
+        .MutualInformation(mi => mi
+            .BackgroundIsSuperSet()
+            .IncludeNegatives()
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new SignificantTermsAggregation("significant_names")
+    {
+        Field = Field<Project>(p => p.Name),
+        MinimumDocumentCount = 10,
+        MutualInformation = new MutualInformationHeuristic
+        {
+            BackgroundIsSuperSet = true,
+            IncludeNegatives = true
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "significant_names": {
+      "significant_terms": {
+        "field": "name",
+        "min_doc_count": 10,
+        "mutual_information": {
+          "background_is_superset": true,
+          "include_negatives": true
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var sigNames = response.Aggs.SignificantTerms("significant_names");
+sigNames.Should().NotBeNull();
+sigNames.DocCount.Should().BeGreaterThan(0);
+----
+

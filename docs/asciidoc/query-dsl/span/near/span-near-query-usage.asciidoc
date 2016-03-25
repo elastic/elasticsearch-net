@@ -1,0 +1,85 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[span-near-query-usage]]
+== Span Near Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanNear(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Clauses(
+        c=>c.SpanTerm(st=>st.Field("field").Value("value1")),
+        c=>c.SpanTerm(st=>st.Field("field").Value("value2")),
+        c=>c.SpanTerm(st=>st.Field("field").Value("value3"))
+    )
+    .Slop(12)
+    .InOrder(false)
+    .CollectPayloads(false)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanNearQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Clauses = new List<ISpanQuery>
+    {
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value1" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value2" } },
+        new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field", Value = "value3" } }
+    },
+    Slop = 12,
+    InOrder = false,
+    CollectPayloads = false
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_near": {
+    "clauses": [
+      {
+        "span_term": {
+          "field": {
+            "value": "value1"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value2"
+          }
+        }
+      },
+      {
+        "span_term": {
+          "field": {
+            "value": "value3"
+          }
+        }
+      }
+    ],
+    "slop": 12,
+    "in_order": false,
+    "collect_payloads": false,
+    "_name": "named_query",
+    "boost": 1.1
+  }
+}
+----
+

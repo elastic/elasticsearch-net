@@ -1,0 +1,119 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[source-filtering-usage]]
+== Source Filtering Usage
+
+Allows to control how the _source field is returned  with every hit.
+By default operations return the contents of the _source field unless 
+ you have used the fields parameter or if the _source field is disabled.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Source(so => so
+    .Include(f => f
+        .Fields(
+            p => p.Name,
+            p => p.StartedOn
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Source = new SourceFilter
+    {
+        Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "_source": {
+    "include": [
+      "name",
+      "startedOn"
+    ]
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+document.Name.Should().NotBeNull();
+document.StartedOn.Should().NotBe(default(DateTime));
+document.Description.Should().BeNull();
+----
+
+[source,csharp]
+----
+internal class WithSourceFilterProperty
+{
+    [JsonProperty("_source")]
+    public ISourceFilter SourceFilter { get; set; }
+}
+----
+
+[source,csharp]
+----
+var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": false }");
+
+o.Should().NotBeNull();
+
+o.SourceFilter.Should().NotBeNull();
+
+o.SourceFilter.Exclude.Should().Contain("*");
+----
+
+[source,csharp]
+----
+var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": [\"obj.*\"] }");
+
+o.Should().NotBeNull();
+
+o.SourceFilter.Should().NotBeNull();
+
+o.SourceFilter.Include.Should().Contain("obj.*");
+----
+
+[source,csharp]
+----
+var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": \"obj.*\" }");
+
+o.Should().NotBeNull();
+
+o.SourceFilter.Should().NotBeNull();
+
+o.SourceFilter.Include.Should().Contain("obj.*");
+----
+
+[source,csharp]
+----
+var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"include\": [\"obj.*\"], \"exclude\": [\"foo.*\"] } }");
+
+o.Should().NotBeNull();
+
+o.SourceFilter.Should().NotBeNull();
+
+o.SourceFilter.Include.Should().Contain("obj.*");
+
+o.SourceFilter.Exclude.Should().Contain("foo.*");
+----
+

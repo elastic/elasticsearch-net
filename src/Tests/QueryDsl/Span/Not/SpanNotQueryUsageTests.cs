@@ -36,8 +36,20 @@ namespace Tests.QueryDsl.Joining.SpanNot
 			Dist = 12,
 			Post = 13,
 			Pre = 14,
-			Include = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya" } },
-			Exclude = new SpanQuery { SpanTerm = new SpanTermQuery { Field = "field1", Value = "hoya2" } },
+			Include = new SpanQuery
+			{
+				SpanTerm = new SpanTermQuery
+				{
+					Field = "field1", Value = "hoya"
+				}
+			},
+			Exclude = new SpanQuery
+			{
+				SpanTerm = new SpanTermQuery
+				{
+					Field = "field1", Value = "hoya2"
+				}
+			},
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q

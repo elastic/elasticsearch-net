@@ -1,0 +1,93 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[lifetimes]]
+== Lifetimes
+
+If you are using an IOC container its always useful to know the best practices around the lifetime of your objects 
+
+In general we advise folks to register their ElasticClient instances as singletons. The client is thread safe
+so sharing an instance between threads is fine. 
+
+Zooming in however the actual moving part that benefits the most from being static for most of the duration of your
+application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`. 
+
+In some applications it could make perfect sense to have multiple singleton `ElasticClient`'s registered with different
+connection settings. e.g if you have 2 functionally isolated Elasticsearch clusters.
+
+NOTE: Due to the semantic versioning of Elasticsearch.Net and NEST and their alignment to versions of Elasticsearch, all instances of `ElasticClient` and
+Elasticsearch clusters that are connected to must be on the **same major version** i.e. it is not possible to have both an `ElasticClient` to connect to
+Elasticsearch 1.x _and_ 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
+
+Let's demonstrate which components are disposed by creating our own derived `ConnectionSettings`, `IConnectionPool` and `IConnection` types
+
+[source,csharp]
+----
+class AConnectionSettings : ConnectionSettings
+{
+    public AConnectionSettings(IConnectionPool pool, IConnection connection)
+        : base(pool, connection)
+    { }
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
+}
+
+class AConnectionPool : SingleNodeConnectionPool
+{
+    public AConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null) : base(uri, dateTimeProvider) { }
+
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
+}
+
+class AConnection : InMemoryConnection
+{
+    public bool IsDisposed { get; private set; }
+    protected override void DisposeManagedResources()
+    {
+        this.IsDisposed = true;
+        base.DisposeManagedResources();
+    }
+}
+----
+
+`ConnectionSettings`, `IConnectionPool` and `IConnection` all explictily implement `IDisposable`
+
+[source,csharp]
+----
+var connection = new AConnection();
+var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
+var settings = new AConnectionSettings(connectionPool, connection);
+settings.IsDisposed.Should().BeFalse();
+connectionPool.IsDisposed.Should().BeFalse();
+connection.IsDisposed.Should().BeFalse();
+----
+
+Disposing `ConnectionSettings` will dispose the `IConnectionPool` and `IConnection` it has a hold of
+
+[source,csharp]
+----
+var connection = new AConnection();
+
+var connectionPool = new AConnectionPool(new Uri("http://localhost:9200"));
+
+var settings = new AConnectionSettings(connectionPool, connection);
+
+settings.IsDisposed.Should().BeTrue();
+
+connectionPool.IsDisposed.Should().BeTrue();
+
+connection.IsDisposed.Should().BeTrue();
+----
+

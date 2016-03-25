@@ -1,0 +1,65 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[dismax-query-usage]]
+== Dismax Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.DisMax(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .TieBreaker(1.11)
+    .Queries(
+        qq => qq.MatchAll(m => m.Name("query1")),
+        qq => qq.MatchAll(m => m.Name("query2"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new DisMaxQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    TieBreaker = 1.11,
+    Queries = new QueryContainer[] {
+        new MatchAllQuery() { Name = "query1" },
+        new MatchAllQuery() { Name = "query2" },
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "dis_max": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "queries": [
+      {
+        "match_all": {
+          "_name": "query1"
+        }
+      },
+      {
+        "match_all": {
+          "_name": "query2"
+        }
+      }
+    ],
+    "tie_breaker": 1.11
+  }
+}
+----
+

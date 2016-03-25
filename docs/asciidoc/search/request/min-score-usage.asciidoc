@@ -1,0 +1,50 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[min-score-usage]]
+== Min Score Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.MinScore(0.5)
+.Query(q => q
+    .Term(p => p.Name, "elasticsearch")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    MinScore = 0.5,
+    Query = new TermQuery
+    {
+        Field = "name",
+        Value = "elasticsearch"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "min_score": 0.5,
+  "query": {
+    "term": {
+      "name": {
+        "value": "elasticsearch"
+      }
+    }
+  }
+}
+----
+

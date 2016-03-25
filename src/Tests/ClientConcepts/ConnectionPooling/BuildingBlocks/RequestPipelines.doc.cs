@@ -8,32 +8,39 @@ using Tests.Framework;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
+	/** :section-number: 4.2 
+	* == Request Pipeline
+	* Every request is executed in the context of a `RequestPipeline` when using the 
+	* default `ITransport` implementation.
+	*/
 	public class RequestPipelines
-	{
-		/** = Request pipeline
-		* Every request is executed in the context of `RequestPipeline` when using the default `ITransport` implementation.
-		* 
-		*/
-
+	{ 
 		[U]
 		public void RequestPipeline()
 		{
 			var settings = TestClient.CreateSettings();
 
-			/** When calling Request(Async) on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
+			/** When calling Request/RequestAsync on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
 			var pipeline = new RequestPipeline(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
 			pipeline.GetType().Should().Implement<IDisposable>();
 
-			/** However the transport does not instantiate RequestPipeline directly, it uses a pluggable `IRequestPipelineFactory`*/
+			/** However the transport does not instantiate `RequestPipeline` directly; it uses a pluggable `IRequestPipelineFactory`
+			* to create it
+			*/
 			var requestPipelineFactory = new RequestPipelineFactory();
-			var requestPipeline = requestPipelineFactory.Create(settings, DateTimeProvider.Default, new MemoryStreamFactory(), new SearchRequestParameters());
+			var requestPipeline = requestPipelineFactory.Create(
+				settings, 
+				DateTimeProvider.Default, //<1> An <<date-time-providers,`IDateTimeProvider` implementation>>
+				new MemoryStreamFactory(), 
+				new SearchRequestParameters());
+
 			requestPipeline.Should().BeOfType<RequestPipeline>();
 			requestPipeline.GetType().Should().Implement<IDisposable>();
 
-			/** which can be passed to the transport when instantiating a client */
+			/** you can pass your own `IRequestPipeline` implementation to the transport when instantiating a client 
+			* allowing you to have requests executed on your own custom request pipeline
+			*/
 			var transport = new Transport<ConnectionSettings>(settings, requestPipelineFactory, DateTimeProvider.Default, new MemoryStreamFactory());
-
-			/** this allows you to have requests executed on your own custom request pipeline */
 		}
 
 		private IRequestPipeline CreatePipeline(
@@ -110,8 +117,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		}
 
 
-		/** A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout
-		* See the maxretry documentation for more details, here we assert that our request pipeline exposes this propertly
+		/** A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout.
+		* See the <<max-retries, max retry documentation>> for more details, here we assert that our request pipeline exposes this propertly
 		*/
 		[U]
 		public void IsTakingTooLong()

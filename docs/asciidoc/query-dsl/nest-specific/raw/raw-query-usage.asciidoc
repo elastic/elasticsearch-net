@@ -1,0 +1,34 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[raw-query-usage]]
+== Raw Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Raw(RawTermQuery)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new RawQuery(RawTermQuery)
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "term": {
+    "fieldname": "value"
+  }
+}
+----
+

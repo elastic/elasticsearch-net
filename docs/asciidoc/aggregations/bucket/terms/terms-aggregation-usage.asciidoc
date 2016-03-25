@@ -1,0 +1,111 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[terms-aggregation-usage]]
+== Terms Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Terms("states", st => st
+        .Field(p => p.State)
+        .MinimumDocumentCount(2)
+        .Size(5)
+        .ShardSize(100)
+        .ShowTermDocumentCountError()
+        .ExecutionHint(TermsAggregationExecutionHint.Map)
+        .Missing("n/a")
+        .Script("'State of Being: '+_value")
+        .Order(TermsOrder.TermAscending)
+        .Order(TermsOrder.CountDescending)
+        .Meta(m => m
+            .Add("foo", "bar")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new TermsAggregation("states")
+    {
+        Field = Field<Project>(p => p.State),
+        MinimumDocumentCount = 2,
+        Size = 5,
+        ShardSize = 100,
+        ShowTermDocumentCountError = true,
+        ExecutionHint = TermsAggregationExecutionHint.Map,
+        Missing = "n/a",
+        Script = new InlineScript("'State of Being: '+_value"),
+        Order = new List<TermsOrder>
+        {
+            TermsOrder.TermAscending,
+            TermsOrder.CountDescending
+        },
+        Meta = new Dictionary<string, object>
+        {
+            { "foo", "bar" }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "states": {
+      "meta": {
+        "foo": "bar"
+      },
+      "terms": {
+        "field": "state",
+        "min_doc_count": 2,
+        "size": 5,
+        "shard_size": 100,
+        "show_term_doc_error_count": true,
+        "execution_hint": "map",
+        "missing": "n/a",
+        "script": {
+          "inline": "'State of Being: '+_value"
+        },
+        "order": [
+          {
+            "_term": "asc"
+          },
+          {
+            "_count": "desc"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var states = response.Aggs.Terms("states");
+states.Should().NotBeNull();
+states.DocCountErrorUpperBound.Should().HaveValue();
+states.SumOtherDocCount.Should().HaveValue();
+item.Key.Should().NotBeNullOrEmpty();
+item.DocCount.Should().BeGreaterOrEqualTo(1);
+states.Meta.Should().NotBeNull().And.HaveCount(1);
+states.Meta["foo"].Should().Be("bar");
+----
+

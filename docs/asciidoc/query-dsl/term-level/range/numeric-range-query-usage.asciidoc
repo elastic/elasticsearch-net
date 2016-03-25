@@ -1,0 +1,58 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[numeric-range-query-usage]]
+== Numeric Range Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Range(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan(1.0)
+    .GreaterThanOrEquals(1.1)
+    .LessThan(2.1)
+    .LessThanOrEquals(2.0)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new NumericRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = 1.0,
+    GreaterThanOrEqualTo = 1.1,
+    LessThan = 2.1,
+    LessThanOrEqualTo = 2.0
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "range": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "gt": 1.0,
+      "gte": 1.1,
+      "lt": 2.1,
+      "lte": 2.0
+    }
+  }
+}
+----
+

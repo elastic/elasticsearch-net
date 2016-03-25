@@ -5,7 +5,7 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-
+    "Newtonsoft.Json": "8.0.2"
   },
   "commands": {
     "Nest.Litterateur": "Nest.Litterateur"
@@ -29,12 +29,14 @@
                 "System.Runtime": "",
                 "System.Runtime.Serialization": "",
                 "System.Threading.Tasks": "",
-                "System.Text.Encoding": ""
+                "System.Text.Encoding": "",
+                "System.IO":  ""
             },
-            "dependencies": {
-                "Microsoft.CSharp": "4.0.1-beta-23409",
-                "Microsoft.CodeAnalysis": "1.1.1"
-            }
+          "dependencies": {
+            "Microsoft.CSharp": "4.0.1-beta-23409",
+            "Microsoft.CodeAnalysis": "1.1.1",
+            "AsciiDoc": "1.0.0-*"
+          }
         },
         "dotnet5.1": {
             "compilationOptions": { "define": [ "DOTNETCORE" ] },
@@ -44,6 +46,7 @@
                 "System.Reflection": "4.1.0-beta-23225",
                 "System.Collections.Specialized": "4.0.0-beta-23109",
                 "System.Linq": "4.0.0-beta-23109",
+                "System.IO": "4.0.0-beta-23109",
                 "System.IO.FileSystem": "4.0.0-beta-23109",
                 "System.IO.Compression": "4.0.0-beta-23109",
                 "System.Runtime.Serialization.Primitives": "4.0.10-beta-23109",
