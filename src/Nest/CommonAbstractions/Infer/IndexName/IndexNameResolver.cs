@@ -18,7 +18,6 @@ namespace Nest
 		{
 			if (i == null || string.IsNullOrEmpty(i.Name))
 				return this.Resolve(i.Type);
-			ValidateIndexName(i.Name);
 			return i.Name;
 		}
 
@@ -32,21 +31,7 @@ namespace Nest
 				if (defaultIndices.TryGetValue(type, out value) && !string.IsNullOrEmpty(value))
 					indexName = value;
 			}
-			ValidateIndexName(indexName, type);
 			return indexName;
-		}
-
-		private void ValidateIndexName(string indexName, Type type = null)
-		{
-			if (string.IsNullOrWhiteSpace(indexName))
-				throw new ResolveException(
-					"Index name is null for the given type and no default index is set. "
-					+ "Map an index name using ConnectionSettings.MapDefaultTypeIndices() "
-					+ "or set a default index using ConnectionSettings.DefaultIndex()."
-				);
-
-			if (indexName.HasAny(c => char.IsUpper(c)))
-				throw new ResolveException($"Index names cannot contain uppercase characters: {indexName}.");
 		}
 	}
 }

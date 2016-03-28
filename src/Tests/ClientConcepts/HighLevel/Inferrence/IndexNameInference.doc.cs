@@ -48,41 +48,5 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			var index = resolver.Resolve<Project>();
 			index.Should().Be("projects");
 		}
-
-		[U]
-		public void UppercaseCharacterThrowsResolveException()
-		{
-			var settings = new ConnectionSettings()
-				.DefaultIndex("Default")
-				.MapDefaultTypeIndices(m => m
-					.Add(typeof(Project), "myProjects")
-				);
-
-			var resolver = new IndexNameResolver(settings);
-
-			var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: myProjects.");
-			e = Assert.Throws<ResolveException>(() => resolver.Resolve<Tag>());
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: Default.");
-			e = Assert.Throws<ResolveException>(() => resolver.Resolve("Foo"));
-			e.Message.Should().Be($"Index names cannot contain uppercase characters: Foo.");
-		}
-
-		[U]
-		public void NoIndexThrowsResolveException()
-		{
-			var settings = new ConnectionSettings();
-			var resolver = new IndexNameResolver(settings);
-			var e = Assert.Throws<ResolveException>(() => resolver.Resolve<Project>());
-			e.Message.Should().Contain("Index name is null");
-		}
-
-		[U]
-		public void ResolveExceptionBubblesOut()
-		{
-			var client = TestClient.GetInMemoryClient(s => new ConnectionSettings());
-			var e = Assert.Throws<ResolveException>(() => client.Search<Project>());
-
-		}
 	}
 }
