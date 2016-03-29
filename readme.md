@@ -254,7 +254,7 @@ This will execute the same request, but this time `myJson` will be serialized by
 * [redgate](http://www.red-gate.com) for supplying @Mpdreamz with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses
 * [jetBrains](http://www.jetbrains.com) for supplying @Mpdreamz with a dotTrace profiler and Resharper license
 * [CodeBetter](http://codebetter.com) for hosting the continuous integration for NEST
-* Everyone who has been awesome enough to contribute back to NEST (You're listed automatically on the [documentation page](http://nest.azurewebsites.net))
+* Everyone who has been awesome enough to contribute back to NEST (You're listed automatically on the [documentation page](https://github.com/elastic/elasticsearch-net/graphs/contributors))
 
 ## Copyright and License
 
