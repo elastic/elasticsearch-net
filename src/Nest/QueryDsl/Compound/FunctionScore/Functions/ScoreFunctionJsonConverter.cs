@@ -133,8 +133,11 @@ namespace Nest
 		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
-			writer.WritePropertyName("origin");
-			serializer.Serialize(writer, value.Origin);
+			if (value.Origin != null)
+			{
+				writer.WritePropertyName("origin");
+				serializer.Serialize(writer, value.Origin);
+			}
 			writer.WritePropertyName("scale");
 			serializer.Serialize(writer, value.Scale);
 			if (value.Offset != null)
@@ -165,11 +168,11 @@ namespace Nest
 		{
 			var jo = JObject.Load(reader);
 			QueryContainer filter = jo.Property("filter")?.Value.ToObject<QueryContainer>(serializer);
-			double? weight = jo.Property("weight")?.Value.ToObject<double?>();;
+			double? weight = jo.Property("weight")?.Value.ToObject<double?>(); ;
 			IScoreFunction function = null;
 			foreach (var prop in jo.Properties())
 			{
-				switch(prop.Name)
+				switch (prop.Name)
 				{
 					case "exp":
 					case "gauss":
@@ -221,7 +224,7 @@ namespace Nest
 			var origin = o.Property("origin")?.Value.Type;
 			if (origin == null) return null;
 			var subType = "numeric";
-			switch(origin)
+			switch (origin)
 			{
 				case JTokenType.String:
 					subType = "date";
