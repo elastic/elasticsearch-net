@@ -11,7 +11,7 @@ using System.Linq;
 namespace Tests.Search.Request
 {
 	/**
-	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well. 
+	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well.
 	 * The sort is defined on a per field level, with special field name for _score to sort by score.
 	 */
 
@@ -29,10 +29,8 @@ namespace Tests.Search.Request
 			var option = suggest.Options.First();
 			option.Text.Should().NotBeNullOrEmpty();
 			option.Score.Should().BeGreaterThan(0);
-			var payload = option.Payload<ProjectPayload>();
-			payload.Should().NotBeNull();
-			payload.Name.Should().Be(Project.Instance.Name);
-			payload.State.Should().NotBeNull();
+			option.Payload.Should().NotBeNull();
+			option.Payload.Value<int>("numberOfCommits").Should().BeGreaterThan(0);
 		}
 
 		protected override object ExpectJson =>
@@ -42,8 +40,10 @@ namespace Tests.Search.Request
 					{  "my-completion-suggest", new {
 					  completion = new {
 						analyzer = "simple",
-						context = new {
-						  color = Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First()
+						contexts = new {
+						  color = new [] {
+							  new { context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() }
+						  }
 						},
 						field = "suggest",
 						fuzzy = new {
@@ -53,10 +53,10 @@ namespace Tests.Search.Request
 						  transpositions = true,
 						  unicode_aware = false
 						},
-						shard_size = 7,
-						size = 8
+						size = 8,
+						payload = new [] { "numberOfCommits" }
 					  },
-					  text = Project.Instance.Name
+					  prefix = Project.Instance.Name
 					} },
 					{  "my-phrase-suggest", new {
 					  phrase = new {
@@ -87,8 +87,8 @@ namespace Tests.Search.Request
 						max_inspections = 2,
 						max_term_freq = 3.0,
 						min_doc_freq = 4.0,
-						min_word_len = 5,
-						prefix_len = 6,
+						min_word_length = 5,
+						prefix_length = 6,
 						shard_size = 7,
 						size = 8,
 						suggest_mode = "always"
@@ -115,8 +115,10 @@ namespace Tests.Search.Request
 					.Text("hello world")
 				)
 				.Completion("my-completion-suggest", c => c
-					.Context(ctx => ctx
-						.Add("color", Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First())
+					.Contexts(ctxs => ctxs
+						.Category("color",
+							ctx => ctx.Context(Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First())
+						)
 					)
 					.Fuzzy(f => f
 						.Fuzziness(Fuzziness.Auto)
@@ -127,9 +129,9 @@ namespace Tests.Search.Request
 					)
 					.Analyzer("simple")
 					.Field(p => p.Suggest)
-					.ShardSize(7)
 					.Size(8)
-					.Text(Project.Instance.Name)
+					.Prefix(Project.Instance.Name)
+					.Payload(fs => fs.Field(p => p.NumberOfCommits))
 				)
 				.Phrase("my-phrase-suggest", ph => ph
 					.Collate(c => c
@@ -164,8 +166,8 @@ namespace Tests.Search.Request
 							MaxInspections = 2,
 							MaxTermFrequency = 3,
 							MinDocFrequency = 4,
-							MinWordLen = 5,
-							PrefixLen = 6,
+							MinWordLength = 5,
+							PrefixLength = 6,
 							SuggestMode = SuggestMode.Always,
 							Analyzer = "standard",
 							Field = Field<Project>(p=>p.Name),
@@ -175,10 +177,13 @@ namespace Tests.Search.Request
 					} },
 					{ "my-completion-suggest", new SuggestBucket
 					{
-						Text = Project.Instance.Name,
+						Prefix = Project.Instance.Name,
 						Completion = new CompletionSuggester
 						{
-							Context = new Dictionary<string, object> { { "color",  Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First() } },
+							Contexts = new Dictionary<string, IList<ISuggestContextQuery>>
+							{
+								{ "color", new List<ISuggestContextQuery> { new CategorySuggestContextQuery { Context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() } } }
+							},
 							Fuzzy = new FuzzySuggester
 							{
 								Fuzziness = Fuzziness.Auto,
@@ -189,8 +194,8 @@ namespace Tests.Search.Request
 							},
 							Analyzer = "simple",
 							Field = Field<Project>(p=>p.Suggest),
-							ShardSize = 7,
-							Size = 8
+							Size = 8,
+							Payload = Fields<Project>("numberOfCommits")
 						}
 					} },
 					{ "my-phrase-suggest", new SuggestBucket

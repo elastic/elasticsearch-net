@@ -20,7 +20,7 @@ namespace Nest
 			switch(prop.Value.Value<string>())
 			{
 				case "geo":
-					var g = new GeoLocationSuggestContext();
+					var g = new GeoSuggestContext();
 					serializer.Populate(jo.CreateReader(), g);
 					return g;
 

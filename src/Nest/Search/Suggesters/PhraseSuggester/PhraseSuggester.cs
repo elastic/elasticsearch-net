@@ -9,33 +9,41 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggester>))]
 	public interface IPhraseSuggester : ISuggester
 	{
-		[JsonProperty(PropertyName = "gram_size")]
+		[JsonIgnore]
+		string Text { get; set; }
+
+		[JsonProperty("shard_size")]
+		int? ShardSize { get; set; }
+
+		[JsonProperty("gram_size")]
 		int? GramSize { get; set; }
 
-		[JsonProperty(PropertyName = "real_word_error_likelihood")]
+		[JsonProperty("real_word_error_likelihood")]
 		double? RealWordErrorLikelihood { get; set; }
 
-		[JsonProperty(PropertyName = "confidence")]
+		[JsonProperty("confidence")]
 		double? Confidence { get; set; }
 
-		[JsonProperty(PropertyName = "max_errors")]
+		[JsonProperty("max_errors")]
 		double? MaxErrors { get; set; }
 
-		[JsonProperty(PropertyName = "separator")]
+		[JsonProperty("separator")]
 		char? Separator { get; set; }
 
-		[JsonProperty(PropertyName = "direct_generator")]
+		[JsonProperty("direct_generator")]
 		IEnumerable<IDirectGenerator> DirectGenerator { get; set; }
 
-		[JsonProperty(PropertyName = "highlight")]
+		[JsonProperty("highlight")]
 		IPhraseSuggestHighlight Highlight { get; set; }
 
-		[JsonProperty(PropertyName = "collate")]
+		[JsonProperty("collate")]
 		IPhraseSuggestCollate Collate { get; set; }
 	}
 
 	public class PhraseSuggester : SuggesterBase, IPhraseSuggester
 	{
+		public string Text { get; set; }
+		public int? ShardSize { get; set; }
 		public int? GramSize { get; set; }
 		public double? RealWordErrorLikelihood { get; set; }
 		public double? Confidence { get; set; }
@@ -49,6 +57,8 @@ namespace Nest
 	public class PhraseSuggesterDescriptor<T> : SuggestDescriptorBase<PhraseSuggesterDescriptor<T>, IPhraseSuggester, T>, IPhraseSuggester
 		where T : class
 	{
+		string IPhraseSuggester.Text { get; set; }
+		int? IPhraseSuggester.ShardSize { get; set; }
 		int? IPhraseSuggester.GramSize { get; set; }
 		double? IPhraseSuggester.RealWordErrorLikelihood { get; set; }
 		double? IPhraseSuggester.Confidence { get; set; }
@@ -57,6 +67,10 @@ namespace Nest
 		IEnumerable<IDirectGenerator> IPhraseSuggester.DirectGenerator { get; set; }
 		IPhraseSuggestHighlight IPhraseSuggester.Highlight { get; set; }
 		IPhraseSuggestCollate IPhraseSuggester.Collate { get; set; }
+
+		public PhraseSuggesterDescriptor<T> Text(string text) => Assign(a => a.Text = text);
+
+		public PhraseSuggesterDescriptor<T> ShardSize(int? shardSize) => Assign(a => a.ShardSize = shardSize);
 
 		public PhraseSuggesterDescriptor<T> GramSize(int? gramSize) => Assign(a => a.GramSize = gramSize);
 
@@ -69,7 +83,7 @@ namespace Nest
 		public PhraseSuggesterDescriptor<T> DirectGenerator(params Func<DirectGeneratorDescriptor<T>, IDirectGenerator>[] generators) =>
 			Assign(a=>a.DirectGenerator = generators.Select(g => g(new DirectGeneratorDescriptor<T>())).ToList());
 
-		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) => 
+		public PhraseSuggesterDescriptor<T> RealWordErrorLikelihood(double? realWordErrorLikelihood) =>
 			Assign(a => a.RealWordErrorLikelihood = realWordErrorLikelihood);
 
 		public PhraseSuggesterDescriptor<T> Highlight(Func<PhraseSuggestHighlightDescriptor, IPhraseSuggestHighlight> selector) =>

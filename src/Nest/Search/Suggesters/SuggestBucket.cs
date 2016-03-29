@@ -9,6 +9,12 @@ namespace Nest
 		[JsonProperty("text")]
 		string Text { get; set; }
 
+		[JsonProperty("prefix")]
+		string Prefix { get; set; }
+
+		[JsonProperty("regex")]
+		string Regex { get; set; }
+
 		[JsonProperty("term")]
 		ITermSuggester Term { get; set; }
 
@@ -22,6 +28,10 @@ namespace Nest
 	public class SuggestBucket : ISuggestBucket
 	{
 		public string Text { get; set; }
+
+		public string Prefix { get; set; }
+
+		public string Regex { get; set; }
 
 		public ITermSuggester Term { get; set; }
 

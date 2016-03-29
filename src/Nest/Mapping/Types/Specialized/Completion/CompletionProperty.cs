@@ -1,5 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest
 {
@@ -12,9 +14,6 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("payloads")]
-		bool? Payloads { get; set; }
-
 		[JsonProperty("preserve_separators")]
 		bool? PreserveSeparators { get; set; }
 
@@ -24,8 +23,8 @@ namespace Nest
 		[JsonProperty("max_input_length")]
 		int? MaxInputLength { get; set; }
 
-		[JsonProperty("context")]
-		ISuggestContextMapping Context { get; set; }
+		[JsonProperty("contexts")]
+		IList<ISuggestContext> Contexts { get; set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -35,11 +34,10 @@ namespace Nest
 
 		public string SearchAnalyzer { get; set; }
 		public string Analyzer { get; set; }
-		public bool? Payloads { get; set; }
 		public bool? PreserveSeparators { get; set; }
 		public bool? PreservePositionIncrements { get; set; }
 		public int? MaxInputLength { get; set; }
-		public ISuggestContextMapping Context { get; set; }
+		public IList<ISuggestContext> Contexts { get; set; }
 	}
 
 	public class CompletionPropertyDescriptor<T>
@@ -48,11 +46,10 @@ namespace Nest
 	{
 		string ICompletionProperty.SearchAnalyzer { get; set; }
 		string ICompletionProperty.Analyzer { get; set; }
-		bool? ICompletionProperty.Payloads { get; set; }
 		bool? ICompletionProperty.PreserveSeparators { get; set; }
 		bool? ICompletionProperty.PreservePositionIncrements { get; set; }
 		int? ICompletionProperty.MaxInputLength { get; set; }
-		ISuggestContextMapping ICompletionProperty.Context { get; set; }
+		IList<ISuggestContext> ICompletionProperty.Contexts { get; set; }
 
 		public CompletionPropertyDescriptor() : base("completion") { }
 
@@ -60,8 +57,6 @@ namespace Nest
 			Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
 		public CompletionPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
-
-		public CompletionPropertyDescriptor<T> Payloads(bool payloads = true) => Assign(a => a.Payloads = payloads);
 
 		public CompletionPropertyDescriptor<T> PreserveSeparators(bool preserveSeparators = true) =>
 			Assign(a => a.PreserveSeparators = preserveSeparators);
@@ -71,8 +66,7 @@ namespace Nest
 
 		public CompletionPropertyDescriptor<T> MaxInputLength(int maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
 
-		public CompletionPropertyDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, IPromise<ISuggestContextMapping>> selector) => 
-			Assign(a => a.Context = selector?.Invoke(new SuggestContextMappingDescriptor<T>())?.Value);
-
+		public CompletionPropertyDescriptor<T> Contexts(Func<SuggestContextsDescriptor<T>, IPromise<IList<ISuggestContext>>> contexts) =>
+			Assign(a => a.Contexts = contexts?.Invoke(new SuggestContextsDescriptor<T>()).Value);
 	}
 }

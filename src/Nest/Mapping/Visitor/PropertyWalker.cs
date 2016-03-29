@@ -128,7 +128,7 @@ namespace Nest
 			if (type == typeof(GeoLocation))
 				return new GeoPointProperty();
 
-			if (type.IsGeneric() && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
+			if (type == typeof(CompletionField))
 				return new CompletionProperty();
 
 			return new ObjectProperty();

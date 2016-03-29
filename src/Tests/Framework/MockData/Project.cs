@@ -21,7 +21,7 @@ namespace Tests.Framework.MockData
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public SimpleGeoPoint Location { get; set; }
 		public int? NumberOfCommits { get; set; }
-		public CompletionField<ProjectPayload> Suggest { get; set; }
+		public CompletionField Suggest { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
@@ -35,20 +35,14 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
 				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
 				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
-				.RuleFor(p => p.Suggest, f => new CompletionField<ProjectPayload>
+				.RuleFor(p => p.Suggest, f => new CompletionField
 					{
 						Input = new[] { f.Person.Company.Name },
-						Output = f.Person.Company.Name + " - " + f.Person.Company.CatchPhrase,
-						Context = new Dictionary<string, IEnumerable<string>>
+						Contexts = new Dictionary<string, IEnumerable<string>>
 						{
 							{ "color", new [] { "red", "blue", "green", "violet", "yellow" }.Take(Gimme.Random.Number(1, 4)) }
-						},
-						Payload = new ProjectPayload
-						{
-							Name = f.Person.Company.Name,
-							State = f.PickRandom<StateOfBeing>()
 						}
-					}
+				}
 				)
 			;
 
