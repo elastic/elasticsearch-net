@@ -46,7 +46,7 @@
 
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#if NETFX_CORE
+#if NETFX_CORE || DOTNETCORE
 #define SIMPLE_JSON_TYPEINFO
 #endif
 using System;
@@ -62,7 +62,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Elasticsearch.Net.Serialization
+namespace Elasticsearch.Net
 {
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation
@@ -1219,9 +1219,9 @@ namespace Elasticsearch.Net.Serialization
 			SetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
 		}
 
-		protected virtual string MapClrMemberNameToJsonFieldName(string clrPropertyName)
+		protected virtual string MapClrMemberNameToJsonFieldName(string clrFieldName)
 		{
-			return clrPropertyName;
+			return clrFieldName;
 		}
 
 		internal virtual ReflectionUtils.ConstructorDelegate ContructorDelegateFactory(Type key)
@@ -1368,7 +1368,8 @@ namespace Elasticsearch.Net.Serialization
 						else
 						{
 							obj = ConstructorCache[type]();
-							foreach (KeyValuePair<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> setter in SetCache[type])
+							var cache = SetCache[type];
+							foreach (KeyValuePair<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>> setter in cache)
 							{
 								object jsonValue;
 								if (jsonObject.TryGetValue(setter.Key, out jsonValue))
@@ -1452,7 +1453,7 @@ namespace Elasticsearch.Net.Serialization
 		[SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification="Need to support .NET 2")]
 		protected virtual bool TrySerializeUnknownTypes(object input, out object output)
 		{
-			if (input == null) throw new ArgumentNullException("input");
+			if (input == null) throw new ArgumentNullException(nameof(input));
 			output = null;
 			Type type = input.GetType();
 			if (type.FullName == null)
@@ -1567,10 +1568,10 @@ namespace Elasticsearch.Net.Serialization
 		public delegate TValue ThreadSafeDictionaryValueFactory<TKey, TValue>(TKey key);
 
 #if SIMPLE_JSON_TYPEINFO
-            public static TypeInfo GetTypeInfo(Type type)
-            {
-                return type.GetTypeInfo();
-            }
+        public static TypeInfo GetTypeInfo(Type type)
+        {
+            return type.GetTypeInfo();
+        }
 #else
 		public static Type GetTypeInfo(Type type)
 		{
@@ -1732,7 +1733,7 @@ namespace Elasticsearch.Net.Serialization
 		public static IEnumerable<PropertyInfo> GetProperties(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return type.GetTypeInfo().DeclaredProperties;
+            return type.GetTypeInfo().DeclaredProperties;
 #else
 			return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1741,7 +1742,7 @@ namespace Elasticsearch.Net.Serialization
 		public static IEnumerable<FieldInfo> GetFields(Type type)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return type.GetTypeInfo().DeclaredFields;
+            return type.GetTypeInfo().DeclaredFields;
 #else
 			return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 #endif
@@ -1750,7 +1751,7 @@ namespace Elasticsearch.Net.Serialization
 		public static MethodInfo GetGetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return propertyInfo.GetMethod;
+            return propertyInfo.GetGetMethod(true);
 #else
 			return propertyInfo.GetGetMethod(true);
 #endif
@@ -1759,7 +1760,7 @@ namespace Elasticsearch.Net.Serialization
 		public static MethodInfo GetSetterMethodInfo(PropertyInfo propertyInfo)
 		{
 #if SIMPLE_JSON_TYPEINFO
-                return propertyInfo.SetMethod;
+            return propertyInfo.GetSetMethod(true);
 #else
 			return propertyInfo.GetSetMethod(true);
 #endif
@@ -1911,7 +1912,9 @@ namespace Elasticsearch.Net.Serialization
 			ParameterExpression value = Expression.Parameter(typeof(object), "value");
 			UnaryExpression instanceCast = (!IsValueType(propertyInfo.DeclaringType)) ? Expression.TypeAs(instance, propertyInfo.DeclaringType) : Expression.Convert(instance, propertyInfo.DeclaringType);
 			UnaryExpression valueCast = (!IsValueType(propertyInfo.PropertyType)) ? Expression.TypeAs(value, propertyInfo.PropertyType) : Expression.Convert(value, propertyInfo.PropertyType);
-			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(Expression.Call(instanceCast, setMethodInfo, valueCast), new ParameterExpression[] { instance, value }).Compile();
+			MethodCallExpression callExpression = Expression.Call(instanceCast, setMethodInfo, valueCast);
+			var parameterExpressions = new ParameterExpression[] { instance, value };
+			Action<object, object> compiled = Expression.Lambda<Action<object, object>>(callExpression, parameterExpressions).Compile();
 			return delegate(object source, object val) { compiled(source, val); };
 		}
 

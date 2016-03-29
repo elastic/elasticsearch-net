@@ -5,6 +5,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 {
 	public class ApiQueryParameters
 	{
+		public string OriginalQueryStringParamName { get; set; }
+		public string DeprecatedInFavorOf { get; set; }
 		public string Type { get; set; }
 		public string Description { get; set; }
 		public IEnumerable<string> Options { get; set; }
@@ -17,21 +19,36 @@ namespace CodeGeneration.LowLevelClient.Domain
 					return "bool";
 				case "list":
 					return "params string[]";
+				case "integer":
+					return "int";
 				case "number":
-					return new [] {"boost", "percen"}.Any(s=>paramName.ToLower().Contains(s)) 
-						? "double" : "int";
-				case "time":
+					return new [] {"boost", "percen", "score"}.Any(s=>paramName.ToLowerInvariant().Contains(s))
+						? "double"
+						: "long";
 				case "duration":
+				case "time":
+					return "TimeSpan";
 				case "text":
 				case "":
 				case null:
 					return "string";
 				case "enum":
-					return paramName.ToPascalCase() + "Options";
+					return paramName.ToPascalCase();
 				default:
 					return this.Type;
 			}
 		}
-		
+
+		public string HighLevelType(string paramName)
+		{
+			var csharpType = this.CsharpType(paramName);
+			switch (csharpType)
+			{
+				case "TimeSpan":
+					return "Time";
+				default:
+					return csharpType;
+			}
+		}
 	}
 }

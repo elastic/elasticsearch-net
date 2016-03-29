@@ -3,11 +3,12 @@ using System.Linq;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class ApiUrl
 	{
-		//these are aliases we much rather pass along inside the querystring
+		//these are aliases we much rather pass along inside the querystring (or body)
 		//allowing these will cause too many overloads being generated which helps noone
-		private static readonly string[] _blackList = { "{fields}", "{search_groups}", "{indexing_types}"};
+		public static readonly string[] BlackListRouteValues = { "{search_groups}", "{indexing_types}", "{body}", "{scroll_id}" };
 		private IEnumerable<string> _paths;
 
 		public string Path { get; set; }
@@ -16,14 +17,14 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			get
 			{
-				return _paths == null ? _paths : _paths
-					.Where(p => !_blackList.Any(p.Contains))
-					.ToList();
+				return _paths?.Where(p => !BlackListRouteValues.Any(p.Contains))
+					.ToList() ?? _paths;
 			}
 			set { _paths = value; }
 		}
 
 		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 		public IDictionary<string, ApiQueryParameters> Params { get; set; }
+
 	}
 }

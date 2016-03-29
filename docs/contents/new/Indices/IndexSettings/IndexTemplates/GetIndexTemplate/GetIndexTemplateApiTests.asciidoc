@@ -1,0 +1,9 @@
+[source, csharp]
+----
+d => d
+.Name(CallIsolatedValue)
+----
+[source, csharp]
+----
+new GetIndexTemplateRequest(CallIsolatedValue)
+----

@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d
+----
+[source, csharp]
+----
+new DeleteWarmerRequest(Index<Project>(), Names("warmer1", "warmer2"))
+----

@@ -1,0 +1,12 @@
+[source, csharp]
+----
+d => d
+.Text("hello world", "domination")
+----
+[source, csharp]
+----
+new AnalyzeRequest
+		{
+Text = new [] { "hello world", "domination" }
+		}
+----

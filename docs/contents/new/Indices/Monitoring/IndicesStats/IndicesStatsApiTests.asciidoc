@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d
+----
+[source, csharp]
+----
+new IndicesStatsRequest(Static.AllIndices)
+----

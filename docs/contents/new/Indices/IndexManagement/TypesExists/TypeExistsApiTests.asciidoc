@@ -1,0 +1,12 @@
+[source, csharp]
+----
+d => d
+.IgnoreUnavailable()
+----
+[source, csharp]
+----
+new TypeExistsRequest(AllIndices, Type<Project>().And<CommitActivity>())
+		{
+IgnoreUnavailable = true
+		}
+----

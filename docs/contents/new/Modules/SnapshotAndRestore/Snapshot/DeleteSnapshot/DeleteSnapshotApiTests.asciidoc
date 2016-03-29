@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d
+----
+[source, csharp]
+----
+new DeleteSnapshotRequest(_repos, _snapshot)
+----

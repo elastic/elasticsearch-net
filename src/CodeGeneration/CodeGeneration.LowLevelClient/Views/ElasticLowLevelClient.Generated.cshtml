@@ -1,0 +1,62 @@
+@using System.Collections.Generic
+@using System.Globalization
+@using System.Linq
+@using System.Text.RegularExpressions
+@using CodeGeneration.LowLevelClient.Domain
+@using CodeGeneration.LowLevelClient 
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+using static Elasticsearch.Net.HttpMethod;
+
+///Generated File Please Do Not Edit Manually
+@{
+	RestApiSpec model = Model;
+	<text>
+namespace Elasticsearch.Net
+{
+	///<summary>
+	///Raw operations with elasticsearch
+	///</summary>
+	public partial class ElasticLowLevelClient : IElasticLowLevelClient
+	{
+	</text>
+	foreach (var kv in model.Endpoints)
+	{
+		var identifier = kv.Key;
+		var endpoint = kv.Value;
+		var methods = endpoint.GetCsharpMethods().ToList();
+		foreach (var method in methods)
+		{
+			var url = method.Path.Split(new[] {'/'}, 2).Last();
+			int i = -1;
+			var patchedUrl = url;
+			if (!url.Contains("{task_id}"))
+			{
+				patchedUrl = Regex.Replace(url, @"{(\w+)}", "{$1.NotNull(\"$1\")}");
+			}
+			bool isAsync = method.ReturnType.StartsWith("Task<");
+			string requestMethod = isAsync ? "DoRequestAsync" : "DoRequest";
+		<text>///<summary>Represents a @method.HttpMethod on @method.Path 
+		///<para></para>Returns: @Raw(method.ReturnDescription) 
+	    ///<para>See also: @method.Documentation </para>	
+	    ///</summary></text>
+			foreach (var part in method.Parts)
+			{
+		<text>@Raw("///<param name=\"" + part.Name + "\">")@part.Description@Raw("</param>")</text>
+			}
+		<text>@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")</text>
+		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments))
+			where @method.CallTypeGeneric : class => this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(method.Allow404 ? ", allow404: true" :"")@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\"" : ""))));
+		</text>
+		}
+	}
+	<text>
+	  }
+	  }
+	</text>
+}

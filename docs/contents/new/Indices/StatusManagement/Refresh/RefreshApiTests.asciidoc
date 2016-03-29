@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d.AllowNoIndices()
+----
+[source, csharp]
+----
+new RefreshRequest(AllIndices) { AllowNoIndices = true }
+----

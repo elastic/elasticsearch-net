@@ -1,51 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
-		private readonly Uri _uri;
-		private bool _hasSeenStartup;
-		public int MaxRetries { get { return 0;  } }
+		public int MaxRetries => 0;
 
-		public bool AcceptsUpdates { get { return false; } }
+		public bool SupportsReseeding => false;
+		public bool SupportsPinging => false;
 
-		public bool HasSeenStartup
+		public void Reseed(IEnumerable<Node> nodes) { } //ignored
+		
+		public bool UsingSsl { get; }
+
+		public bool SniffedOnStartup { get { return true; } set {  } }
+
+		public IReadOnlyCollection<Node> Nodes { get; }
+
+		public DateTime LastUpdate { get; }
+
+		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
-			get { return _hasSeenStartup; }
+			var node = new Node(uri);
+			this.UsingSsl = node.Uri.Scheme == "https";
+			this.Nodes = new List<Node> { node };
+			this.LastUpdate = (dateTimeProvider ?? DateTimeProvider.Default).Now();
 		}
 
-		public SingleNodeConnectionPool(Uri uri)
-		{
-			//this makes sure that paths stay relative i.e if the root uri is:
-			//http://my-saas-provider.com/instance
-			if (!uri.OriginalString.EndsWith("/"))
-				uri = new Uri(uri.OriginalString + "/");
-			_uri = uri;
-		}
+		public IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null) => this.Nodes;
 
-		public Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
-		{
-			seed = 0;
-			shouldPingHint = false;
-			return _uri;
-		}
+		void IDisposable.Dispose() => this.DisposeManagedResources();
 
-		public void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadTimeout = null)
-		{
-
-		}
-
-		public void MarkAlive(Uri uri)
-		{
-			
-		}
-
-		public void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = false)
-		{
-		}
-
+		protected virtual void DisposeManagedResources() { }
 	}
 }

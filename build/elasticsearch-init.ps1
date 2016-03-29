@@ -1,1 +1,0 @@
-$DTE.ItemOperations.Navigate("http://nest.azurewebsites.net/elasticsearch-net/quick-start.html")

@@ -1,0 +1,19 @@
+[source, csharp]
+----
+s => s
+.Query(this.QueryFluent)
+----
+[source, csharp]
+----
+new SearchRequest<Project>
+{
+	Query = this.QueryInitializer
+}
+----
+[source, csharp]
+----
+this.Add(Tuple.Create<Action<IQuery>, Action<dynamic>>(
+				q=> when((TQuery)q), 
+				verbatim
+			));
+----

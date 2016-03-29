@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,27 +9,33 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Elasticsearch.Net</RootNamespace>
     <AssemblyName>Elasticsearch.Net</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <ResolveNuGetPackages>false</ResolveNuGetPackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\Elasticsearch.Net\bin\Net45\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Elasticsearch.Net\bin\Net45\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
+    <DocumentationFile>..\Elasticsearch.Net\bin\Net45\Release\Elasticsearch.Net.XML</DocumentationFile>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -48,76 +54,90 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\IRequestConfiguration.cs" />
-    <Compile Include="Connection\IRequestConnectionConfiguration.cs" />
-    <Compile Include="Connection\TransportRequestState.cs" />
-    <Compile Include="Domain\BaseRequestParameters.cs" />
-    <Compile Include="Domain\IHideObjectMembers.cs" />
-    <Compile Include="Domain\IRequestParameters.cs" />
-    <Compile Include="Domain\VoidResponse.cs" />
-    <Compile Include="Extensions\TaskExtensions.cs" />
-    <Compile Include="Providers\DateTimeProvider.cs" />
-    <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Connection\ConnectionError.cs" />
-    <Compile Include="Exceptions\ConnectionException.cs" />
-    <Compile Include="Connection\ConnectionConfiguration.cs" />
-    <Compile Include="ConnectionPool\EndpointState.cs" />
-    <Compile Include="Connection\ConnectionState.cs" />
+    <Compile Include="Auditing\Audit.cs" />
+    <Compile Include="Auditing\Auditable.cs" />
+    <Compile Include="Auditing\AuditEvent.cs" />
+    <Compile Include="Configuration\ConnectionConfiguration.cs" />
+    <Compile Include="Configuration\IConnectionConfigurationValues.cs" />
+    <Compile Include="Configuration\RequestConfiguration.cs" />
+    <Compile Include="Configuration\Security\BasicAuthorizationCredentials.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
-    <Compile Include="Providers\IDateTimeProvider.cs" />
+    <Compile Include="ConnectionPool\Node.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
-    <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
-    <Compile Include="Connection\Transport.cs" />
-    <Compile Include="Connection\ITransport.cs" />
-    <Compile Include="Domain\ElasticsearchResponse.cs" />
-    <Compile Include="Connection\ElasticsearchResponseTracer.cs" />
+    <Compile Include="ConnectionPool\StickyConnectionPool.cs" />
+    <Compile Include="Connection\HttpConnection-CoreFx.cs" />
+    <Compile Include="Connection\HttpConnection.cs" />
+    <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Connection\IConnection.cs" />
-    <Compile Include="Connection\IConnectionConfigurationValues.cs" />
-    <Compile Include="Connection\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
-    <Compile Include="ElasticsearchClient.Generated.cs" />
-    <Compile Include="Domain\DynamicDictionary.cs" />
-    <Compile Include="Domain\ElasticsearchDynamicValue.cs" />
-    <Compile Include="Exceptions\MaxRetryException.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="ElasticsearchClient.cs" />
-    <Compile Include="IElasticsearchClient.Generated.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CrossPlatform\Browsable.cs" />
+    <Compile Include="CrossPlatform\TypeExtensions.cs" />
     <Compile Include="Domain\Enums.Generated.cs" />
-    <Compile Include="Domain\FluentRequestParameters.cs" />
-    <Compile Include="Domain\RequestParameters.Generated.cs" />
-    <Compile Include="Properties\InternalsVisibleTo.cs" />
-    <Compile Include="Purify\IPurify.cs" />
-    <Compile Include="Purify\PurifierDotNet.cs" />
-    <Compile Include="Purify\PurifierMono.cs" />
+    <Compile Include="Domain\IHideObjectMembers.cs" />
+    <Compile Include="Domain\IPropertyMapping.cs" />
+    <Compile Include="Domain\RequestParameters\FluentRequestParameters.cs" />
+    <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
+    <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
+    <Compile Include="ElasticLowLevelClient.cs" />
+    <Compile Include="ElasticLowLevelClient.Generated.cs" />
+    <Compile Include="Exceptions\ElasticsearchClientException.cs" />
+    <Compile Include="Exceptions\ResolveException.cs" />
+    <Compile Include="Exceptions\UnexpectedElasticsearchClientException.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\Fluent.cs" />
+    <Compile Include="Extensions\FormattableString.cs" />
+    <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IElasticLowLevelClient.cs" />
+    <Compile Include="IElasticLowLevelClient.Generated.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\ClsCompliancy.cs" />
+    <Compile Include="Providers\DateTimeProvider.cs" />
+    <Compile Include="Providers\IDateTimeProvider.cs" />
+    <Compile Include="Providers\IMemoryStreamFactory.cs" />
+    <Compile Include="Providers\IRequestPipelineFactory.cs" />
     <Compile Include="Purify\Purify.cs" />
-    <Compile Include="Purify\UriInfo.cs" />
-    <Compile Include="Serialization\IStringifier.cs" />
+    <Compile Include="Responses\DynamicResponse.cs" />
+    <Compile Include="Responses\ElasticsearchDynamicValue.cs" />
+    <Compile Include="Responses\ElasticsearchResponse.cs" />
+    <Compile Include="Responses\IApiCallDetails.cs" />
+    <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
+    <Compile Include="Responses\ServerError.cs" />
+    <Compile Include="Responses\VoidResponse.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
+    <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
+    <Compile Include="Serialization\IUrlParameter.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
     <Compile Include="Serialization\SimpleJson.cs" />
-    <Compile Include="Serialization\Stringifier.cs" />
+    <Compile Include="Serialization\UrlFormatProvider.cs" />
+    <Compile Include="Transport\ITransport.cs" />
+    <Compile Include="Transport\Pipeline\IRequestPipeline.cs" />
+    <Compile Include="Transport\Pipeline\PipelineException.cs" />
+    <Compile Include="Transport\Pipeline\PipelineFailure.cs" />
+    <Compile Include="Transport\Pipeline\RequestData.cs" />
+    <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
+    <Compile Include="Transport\Pipeline\ResponseBuilder.cs" />
+    <Compile Include="Transport\PostData.cs" />
+    <Compile Include="Transport\Sniff\SniffResponse.cs" />
+    <Compile Include="Transport\Transport.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="paket.references" />
   </ItemGroup>
+  <!--   <ItemGroup>
+    <Folder Include="Domain\Response\" />
+  </ItemGroup> -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>IF NOT EXIST "$(SolutionDir)..\build\keys\keypair.snk" (CD "$(SolutionDir).." &amp;&amp; "build.bat" CreateKeysIfAbsent &amp;&amp; CD %25~dp0)
-</PreBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Import Project="..\..\.paket\paket.targets" />
 </Project>

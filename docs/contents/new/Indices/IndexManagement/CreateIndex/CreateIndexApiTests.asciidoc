@@ -1,0 +1,19 @@
+[source, csharp]
+----
+d => d
+.Settings(s => s
+	.NumberOfReplicas(1)
+	.NumberOfShards(1)
+)
+----
+[source, csharp]
+----
+new CreateIndexRequest(CallIsolatedValue)
+		{
+Settings = new Nest.IndexSettings()
+{
+	NumberOfReplicas = 1,
+	NumberOfShards = 1,
+}
+		}
+----

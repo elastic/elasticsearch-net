@@ -1,0 +1,85 @@
+@using System.Linq
+@using CodeGeneration.LowLevelClient.Domain
+@using CodeGeneration.LowLevelClient
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Elasticsearch.Net;
+using static Elasticsearch.Net.HttpMethod;
+
+//Generated File Please Do Not Edit Manually
+@{ RestApiSpec model = Model; }
+
+namespace Nest
+{
+	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
+	internal partial class LowLevelDispatch
+	{
+
+	@foreach (var kv in model.Endpoints)
+	{
+		var endpoint = kv.Value;
+		var endpointsException = string.Join(", ", endpoint.Url.Paths.Select(p=> "\"" + p + "\""));
+		var httpMethodsException = string.Join(", ", endpoint.RawDispatches.Select(p=> p.Key.ToUpper() ));
+		var peek = endpoint.GetCsharpMethods().FirstOrDefault();
+		if (peek == null)
+		{
+			<text>//NO METHOD FOR @endpoint.Url.Path</text>
+			continue;
+		}
+		var generate = new [] {
+			new { Name = endpoint.CsharpMethodName + "Dispatch<T>", Returns = "ElasticsearchResponse<T>" , Async = false},
+			new { Name = endpoint.CsharpMethodName + "DispatchAsync<T>", Returns = "Task<ElasticsearchResponse<T>>", Async = true },
+		};
+		foreach(var gen in generate)
+		{
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, @(Raw("PostData<object>")) body</text>}) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+			@foreach (var methodGroup in endpoint.RawDispatches)
+			{
+				var httpMethod = methodGroup.Key;
+				var dispatches = methodGroup.Value.ToList();
+				var totalDispatches = dispatches.Count();
+				var allWithIfChecks = dispatches.All(d => !string.IsNullOrEmpty(d.IfCheck));
+				var i = 0;
+				<text>case @httpMethod.ToUpper():
+				@foreach (var dispatch in dispatches)
+				{
+					var method = dispatch.CsharpMethod;
+					var name = method.FullName + ((gen.Async) ? "Async<T>" : "<T>");
+					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck); 
+					if (i == 0 && !hasIfCheck)
+					{
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					}
+					else
+					{
+						if (hasIfCheck)
+						{
+					<text>if (@Raw(dispatch.IfCheck)) return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+						}
+						else
+						{
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+						}
+					}
+					if (i == totalDispatches - 1 && allWithIfChecks)
+					{
+					<text>break;</text>
+					}
+				i++;
+				}</text>
+			}
+			}
+			throw InvalidDispatch("@(endpoint.CsharpMethodName)", p, new [] { @(httpMethodsException) }, @Raw(endpointsException));
+		}
+		</text>
+	} 
+	}
+	}	
+}

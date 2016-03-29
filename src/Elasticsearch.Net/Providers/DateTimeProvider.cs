@@ -1,27 +1,22 @@
 ﻿using System;
-using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net.Providers
+namespace Elasticsearch.Net
 {
 	public class DateTimeProvider : IDateTimeProvider
 	{
+		private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(60);
+		private static readonly TimeSpan MaximumTimeout = TimeSpan.FromMinutes(30);
 
-		public virtual DateTime Now()
-		{
-			return DateTime.UtcNow;
-		}
+		public static readonly DateTimeProvider Default = new DateTimeProvider();
 
-		public virtual DateTime DeadTime(Uri uri, int attempts, int? timeoutFactor = null, int? maxDeadTimeout = null)
+		public virtual DateTime Now() => DateTime.UtcNow;
+
+		public virtual DateTime DeadTime(int attempts, TimeSpan? timeoutFactor, TimeSpan? maxDeadTimeout)
 		{
-			var timeout = timeoutFactor.GetValueOrDefault(60 * 1000);
-			var maxTimeout = maxDeadTimeout.GetValueOrDefault(60 * 1000 * 30);
-			var seconds = Math.Min(timeout * 2 * Math.Pow(2, (attempts * 0.5 - 1)), maxTimeout);
-			return DateTime.UtcNow.AddMilliseconds(seconds);
-		}
-		
-		public virtual DateTime AliveTime(Uri uri, int attempts)
-		{
-			return new DateTime();
+			var timeout = timeoutFactor.GetValueOrDefault(DefaultTimeout);
+			var maxTimeout = maxDeadTimeout.GetValueOrDefault(MaximumTimeout);
+			var milliSeconds = Math.Min(timeout.TotalMilliseconds * 2 * Math.Pow(2, attempts * 0.5 - 1), maxTimeout.TotalMilliseconds);
+			return Now().AddMilliseconds(milliSeconds);
 		}
 	}
 }

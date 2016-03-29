@@ -1,0 +1,15 @@
+[source, csharp]
+----
+s => s
+.Fields(
+	f => f.Name, 
+	f => f.StartedOn
+)
+----
+[source, csharp]
+----
+new SearchRequest<Project>
+{
+	Fields = new FieldName [] { "name", "startedOn" }
+}
+----

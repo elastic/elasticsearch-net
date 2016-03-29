@@ -1,8 +1,0 @@
-  {
-  "elasticsearchprojects": {
-    "_ttl": {
-      "enabled": true,
-      "default": "1d"
-    }
-  }
-}

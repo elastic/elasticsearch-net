@@ -1,8 +1,0 @@
-  {
-  "elasticsearchprojects": {
-    "_boost": {
-      "name": "my_difficult_field_name",
-      "null_value": 0.9
-    }
-  }
-}

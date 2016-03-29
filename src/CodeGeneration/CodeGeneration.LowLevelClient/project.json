@@ -1,0 +1,26 @@
+{
+  "version": "2.0.5",
+  "compilationOptions": {
+    "warningsAsErrors": false,
+    "emitEntryPoint": true
+  },
+  "dependencies": {
+    "CsQuery": "1.3.5-beta5",
+    "Newtonsoft.Json": "8.0.2",
+    "RazorMachine": "2.6.1",
+    "ShellProgressBar": "1.2.0.0"
+  },
+  "commands": {
+    "CodeGeneration.LowLevelClient": "CodeGeneration.LowLevelClient"
+  },
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Runtime": "",
+        "System.Runtime.Serialization": "",
+        "System.Linq": "",
+        "System.Collections": ""
+      }
+    }
+  }
+}

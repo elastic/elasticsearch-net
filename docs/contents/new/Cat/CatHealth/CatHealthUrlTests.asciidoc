@@ -1,0 +1,9 @@
+[source, csharp]
+----
+await GET("/_cat/health")
+				.Fluent(c => c.CatHealth())
+				.Request(c => c.CatHealth(new CatHealthRequest()))
+				.FluentAsync(c => c.CatHealthAsync())
+				.RequestAsync(c => c.CatHealthAsync(new CatHealthRequest()))
+				;
+----

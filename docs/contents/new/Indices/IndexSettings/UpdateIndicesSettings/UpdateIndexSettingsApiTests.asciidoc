@@ -1,0 +1,17 @@
+[source, csharp]
+----
+d => d
+.IndexSettings(i => i
+	.BlocksWrite(false)
+)
+----
+[source, csharp]
+----
+new UpdateIndexSettingsRequest
+		{
+IndexSettings = new Nest.IndexSettings
+{
+	BlocksWrite = false
+}
+		}
+----

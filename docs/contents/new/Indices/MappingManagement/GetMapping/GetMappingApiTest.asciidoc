@@ -1,0 +1,12 @@
+[source, csharp]
+----
+d => d
+.IgnoreUnavailable()
+----
+[source, csharp]
+----
+new GetMappingRequest(Index<Project>(), Type<Project>())
+		{
+IgnoreUnavailable = true
+		}
+----

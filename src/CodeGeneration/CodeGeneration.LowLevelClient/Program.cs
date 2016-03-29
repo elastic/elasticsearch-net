@@ -1,40 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient
 {
-	class Program
+	public static class Program
 	{
 		static void Main(string[] args)
 		{
-			var useCache = (args.Length > 0 && args[0] == "cache");
+			var useCache = args.Length > 0 && args[0] == "cache";
+			var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-			var spec = ApiGenerator.GetRestSpec(useCache: useCache);
+			var generator = new ApiGenerator();
 
-			ApiGenerator.GenerateClientInterface(spec);
+			if (!useCache)
+				generator.GenerateEndpointFiles();
 
-			ApiGenerator.GenerateRequestParameters(spec);
-			ApiGenerator.GenerateRequestParametersExtensions(spec);
-			
-			ApiGenerator.GenerateDescriptors(spec);
+			var spec = generator.GetRestApiSpec();
 
-			ApiGenerator.GenerateEnums(spec);
+			generator.GenerateClientInterface(spec);
 
-			ApiGenerator.GenerateRawClient(spec);
-			
-			ApiGenerator.GenerateRawDispatch(spec);
+			generator.GenerateRequestParameters(spec);
 
-			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
+			generator.GenerateRequestParametersExtensions(spec);
 
-			var x  = GetT<string>();
+			generator.GenerateDescriptors(spec);
+
+			generator.GenerateRequests(spec);
+
+			generator.GenerateEnums(spec);
+
+			generator.GenerateRawClient(spec);
+
+			generator.GenerateRawDispatch(spec);
+
+			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count);
 		}
 
-
-		static T GetT<T>()
-		{
-			return default(T);
-		}
 	}
 }

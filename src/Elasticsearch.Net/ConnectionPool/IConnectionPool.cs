@@ -1,12 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Elasticsearch.Net.Connection;
 
-namespace Elasticsearch.Net.ConnectionPool
+namespace Elasticsearch.Net
 {
-	public interface IConnectionPool
+	public interface IConnectionPool : IDisposable
 	{
+		/// <summary>
+		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g 
+		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read `CreateView()` to completion
+		/// </summary>
+		IReadOnlyCollection<Node> Nodes { get; }
+
 		/// <summary>
 		/// Returns the default maximum retries for the connection pool implementation.
 		/// Most implementation default to number of nodes, note that this can be overidden
@@ -17,38 +21,33 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <summary>
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
-		bool AcceptsUpdates { get; }
-		
-		/// <summary>
-		/// Signals to the ITransport that this instance has already seen a startup
-		/// </summary>
-		bool HasSeenStartup { get; }
+		bool SupportsReseeding { get; }
+
+		bool SupportsPinging { get; }
+
+		DateTime LastUpdate { get; }
 
 		/// <summary>
-		/// Gets the next live Uri to perform the request on
+		/// Whether or not SSL is being using
 		/// </summary>
-		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a
-		///  predictable manner even when called in a multithreaded context</param>
-		/// <param name="seed">The seed this call started on</param>
-		/// <returns></returns>
-		Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint);
+		bool UsingSsl { get; }
 
 		/// <summary>
-		/// Mark the specified Uri as dead
+		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. its up to to the callee to set this in a threadsafe fashion
 		/// </summary>
-		void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadtimeout = null);
+		bool SniffedOnStartup { get; set; }
 
 		/// <summary>
-		/// Bring the specified uri back to life.
+		/// Creates a view with changing starting positions that wraps over on each call
+		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
+		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
-		/// <param name="uri"></param>
-		void MarkAlive(Uri uri);
-		
+		IEnumerable<Node> CreateView(Action<AuditEvent, Node> audit = null);
+
 		/// <summary>
-		/// Update the node list manually, usually done by ITransport when sniffing was needed.
+		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion
 		/// </summary>
-		/// <param name="newClusterState"></param>
-		/// <param name="fromStartupHint">hint that this update came from start up</param>
-		void UpdateNodeList(IList<Uri> newClusterState, bool fromStartupHint = true);
+		void Reseed(IEnumerable<Node> nodes);
+
 	}
 }

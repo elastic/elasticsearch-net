@@ -2,15 +2,15 @@
 using System.Reflection;
 
 [assembly: AssemblyTitleAttribute("Nest")]
-[assembly: AssemblyCopyrightAttribute("Elasticsearch 2014")]
-[assembly: AssemblyDescriptionAttribute("NEST - oficial high level elasticsearch client")]
+[assembly: AssemblyCopyrightAttribute("Elasticsearch 2016")]
+[assembly: AssemblyDescriptionAttribute("NEST - official high level elasticsearch client")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
-[assembly: AssemblyVersionAttribute("0.0.0")]
-[assembly: AssemblyFileVersionAttribute("0.1.0")]
-[assembly: AssemblyInformationalVersionAttribute("0.1.0")]
+[assembly: AssemblyVersionAttribute("2.0.0")]
+[assembly: AssemblyFileVersionAttribute("2.0.5")]
+[assembly: AssemblyInformationalVersionAttribute("2.0.5")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.0.0";
+        internal const string Version = "2.0.0";
     }
 }

@@ -1,0 +1,14 @@
+[source, csharp]
+----
+d => d
+.RenamePattern("nest-(.+)")
+.RenameReplacement("nest-restored-$1")
+----
+[source, csharp]
+----
+new RestoreRequest(_repositoryName, _snapshotName)
+		{
+RenamePattern = "nest-(.+)", 
+RenameReplacement = "nest-restored-$1"
+		}
+----

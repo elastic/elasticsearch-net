@@ -1,0 +1,16 @@
+[source, csharp]
+----
+s => s
+.FielddataFields(
+	f => f.Name,
+	f => f.LeadDeveloper,
+	f => f.StartedOn
+)
+----
+[source, csharp]
+----
+new SearchRequest<Project>
+{
+	FielddataFields = new Field[] { "name", "leadDeveloper", "startedOn" }
+}
+----

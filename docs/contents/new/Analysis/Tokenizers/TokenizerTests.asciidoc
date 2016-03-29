@@ -1,0 +1,19 @@
+
+
+
+[source, csharp]
+----
+s => s
+.Analysis(analysis => analysis
+)
+----
+
+[source, csharp]
+----
+new IndexSettings
+{
+	Analysis = new Analysis
+	{
+	}
+}
+----

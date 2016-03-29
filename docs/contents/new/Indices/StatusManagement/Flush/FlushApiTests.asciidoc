@@ -1,0 +1,8 @@
+[source, csharp]
+----
+d => d.AllowNoIndices()
+----
+[source, csharp]
+----
+new FlushRequest(AllIndices) { AllowNoIndices = true }
+----

@@ -1,0 +1,58 @@
+{
+  "version": "2.0.5",
+  "compilationOptions": {
+    "warningsAsErrors": false
+  },
+  "dependencies": {
+    "Bogus": "3.0.5-beta-2",
+    "DiffPlex": "2.0.0-alpha1",
+    "Elasticsearch.Net": { "target": "project" },
+    "FluentAssertions": "4.0.0",
+    "Nest": { "target": "project" },
+    "Newtonsoft.Json": "8.0.2",
+    "Rx-Main": "2.3.0-beta2",
+    "xunit": "2.1.0-rc1-build3168"
+  },
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "compilationOptions": {
+        "define": [ "RELEASE", "TRACE" ],
+        "optimize": true
+      }
+    }
+  },
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tools": "",
+        "System.IO.Compression.FileSystem": "",
+        "System.Reflection": "",
+        "System.Runtime": "",
+        "System.Linq": "",
+        "System.Threading.Tasks": ""
+      },
+      "dependencies": {
+        "xunit.runner.dnx": "2.1.0-rc1-build204"
+      }
+    },
+    "dnxcore50": {
+      "compilationOptions": { "define": [ "DOTNETCORE" ] },
+      "dependencies": {
+        "System.Collections": "4.0.11-beta-23225",
+        "System.Diagnostics.Tools": "4.0.1-beta-23225",
+        "System.Net.Http": "4.0.1-beta-23225",
+        "System.Reflection": "4.1.0-beta-23225",
+        "System.Runtime": "4.0.21-beta-23225",
+        "xunit.runner.dnx": "2.1.0-rc1-build204"
+      }
+    }
+  }
+}

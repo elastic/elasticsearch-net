@@ -4,17 +4,18 @@
 @using CodeGeneration.LowLevelClient
 
 @functions {
-	private string CreateEnum
-   (string o)
+	private string CreateEnum(string o, int? i)
 	{
-		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}", o, o.ToPascalCase());
+		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}{2}", o, o.ToPascalCase(true), i.HasValue ? " = 1 << " + i.Value : null);
 	}	
-	private string CreateCase
-		
-   (string e, string o)
+	private string CreateCase(string e, string o)
 	{
-		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(), o);
+		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(true), o);
 	}
+	private bool IsFlag(string name)
+    {
+        return name.EndsWith("Metric") || name.EndsWith("Feature");
+    }
 }
 using System;
 using System.Collections.Generic;
@@ -27,34 +28,55 @@ using System.Runtime.Serialization;
 ///Generated of commit @Model.Commit
 namespace Elasticsearch.Net
 {
-	
 	@foreach (EnumDescription e in Model.EnumsInTheSpec)
 	{
+		var isFlag = IsFlag(e.Name);
 	<text>
-	public enum @e.Name 
+	@(isFlag ? "[Flags]" : string.Empty)public enum @e.Name 
 	{
-		  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
+		@Raw(string.Join(",\r\n\t\t", e.Options.OrderBy(s=>s == "_all" ? 1 : 0).Select((s, i) => CreateEnum(s, isFlag ? (int?)i : null ))))
 	}
 	</text>
 	}
 
 	public static class KnownEnums
 	{
+		public static string UnknownEnum { get; } = "_UNKNOWN_ENUM_";
 		public static string Resolve(Enum e)
 		{
 			@foreach (EnumDescription e in Model.EnumsInTheSpec)
 			{
-			<text>
-			if (e is @e.Name)
+			var isFlag = IsFlag(e.Name);
+			<text>if (e is @e.Name)
+			{ </text>
+			if (isFlag)
 			{
-				switch((@e.Name)e)
+				<text>var list = new @(Raw("List<string>()"));</text>
+				foreach(var option in e.Options.OrderBy(s=>s == "_all" ? 1 : 0))
+				{
+					if (option != "_all")
+					{
+				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase(true)))) list.Add("@(option)");</text>
+					}
+					else 
+					{
+				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase(true)))) return "@(option)";</text>
+					}
+				}
+				<text>return string.Join(",", list);</text>
+			}
+			else 
+			{
+				<text>switch((@e.Name)e)
 				{
 					@Raw(string.Join("\r\n\t\t\t\t\t", e.Options.Select(o =>CreateCase(e.Name,o))))
-				}
+				}</text>
+			}
+			<text>
 			}
 			</text>
 			}
-			return "UNKNOWNENUM";
+			return UnknownEnum;
 		}
 	}
 }

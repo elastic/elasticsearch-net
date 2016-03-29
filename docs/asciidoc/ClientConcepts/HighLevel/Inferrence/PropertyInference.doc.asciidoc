@@ -1,0 +1,6 @@
+[source, csharp]
+----
+Expression<Func<Project, object>> expression = p => p.Name.Suffix("raw");
+Expect("raw").WhenSerializing<PropertyName>(expression);
+Assert.Throws<ArgumentException>(() => Expect("exception!").WhenSerializing<PropertyName>("name.raw"));
+----

@@ -1,0 +1,4 @@
+[source, csharp]
+----
+new GetFieldMappingRequest(Fields)
+----

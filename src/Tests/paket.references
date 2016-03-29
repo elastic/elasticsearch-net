@@ -1,0 +1,10 @@
+FluentAssertions
+Newtonsoft.Json
+xunit
+Rx-Core
+Rx-Interfaces
+Rx-Linq
+Rx-Main
+Rx-PlatformServices
+Bogus
+DiffPlex

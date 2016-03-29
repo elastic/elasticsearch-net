@@ -1,354 +1,203 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+using System.IO.Compression;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Providers;
-using PUrify;
 
-namespace Elasticsearch.Net.Connection
+// ReSharper disable VirtualMemberNeverOverriden.Global
+#if !DOTNETCORE
+namespace Elasticsearch.Net
 {
 	public class HttpConnection : IConnection
 	{
-		const int BUFFER_SIZE = 1024;
-
-		protected IConnectionConfigurationValues _ConnectionSettings { get; set; }
-		private Semaphore _ResourceLock;
-		private readonly bool _enableTrace;
-
 		static HttpConnection()
 		{
-			ServicePointManager.UseNagleAlgorithm = false;
-			ServicePointManager.Expect100Continue = false;
-			ServicePointManager.DefaultConnectionLimit = 10000;
+			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
+
+			//WebException's GetResponse is limitted to 65kb by default.
+			//Elasticsearch can be alot more chatty then that when dumping exceptions
+			//On error responses, so lets up the ante.
+
+			//Not available under mono
+			if (Type.GetType("Mono.Runtime") == null)
+				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
-		public HttpConnection(IConnectionConfigurationValues settings)
+		protected virtual HttpWebRequest CreateHttpWebRequest(RequestData requestData)
 		{
-			if (settings == null)
-				throw new ArgumentNullException("settings");
+			var request = this.CreateWebRequest(requestData);
+			this.SetBasicAuthenticationIfNeeded(request, requestData);
+			this.SetProxyIfNeeded(request, requestData);
+			this.AlterServicePoint(request.ServicePoint, requestData);
+			return request;
+		}
 
-			this._ConnectionSettings = settings;
-			if (settings.MaximumAsyncConnections > 0)
+		protected virtual HttpWebRequest CreateWebRequest(RequestData requestData)
+		{
+			var request = (HttpWebRequest)WebRequest.Create(requestData.Uri);
+
+			request.Accept = requestData.ContentType;
+			request.ContentType = requestData.ContentType;
+
+			request.MaximumResponseHeadersLength = -1;
+
+			request.Pipelined = requestData.Pipelined;
+
+			if (requestData.HttpCompression)
 			{
-				var semaphore = Math.Max(1, settings.MaximumAsyncConnections);
-				this._ResourceLock = new Semaphore(semaphore, semaphore);
+				request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+				request.Headers.Add("Accept-Encoding", "gzip,deflate");
+				request.Headers.Add("Content-Encoding", "gzip");
 			}
-			this._enableTrace = settings.TraceEnabled;
-		}
 
-		public virtual ElasticsearchResponse<Stream> GetSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.HeaderOnlyRequest(uri, "GET", requestSpecificConfig);
-		}
-		public virtual ElasticsearchResponse<Stream> HeadSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.HeaderOnlyRequest(uri, "HEAD", requestSpecificConfig);
-		}
+			if (requestData.Headers != null && requestData.Headers.HasKeys())
+				request.Headers.Add(requestData.Headers);
 
-		public virtual ElasticsearchResponse<Stream> PostSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.BodyRequest(uri, data, "POST", requestSpecificConfig);
-		}
-		public virtual ElasticsearchResponse<Stream> PutSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.BodyRequest(uri, data, "PUT", requestSpecificConfig);
-		}
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.HeaderOnlyRequest(uri, "DELETE", requestSpecificConfig);
-		}
-		public virtual ElasticsearchResponse<Stream> DeleteSync(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			return this.BodyRequest(uri, data, "DELETE", requestSpecificConfig);
-		}
-
-
-		private ElasticsearchResponse<Stream> HeaderOnlyRequest(Uri uri, string method, IRequestConnectionConfiguration requestSpecificConfig)
-		{
-			var r = this.CreateHttpWebRequest(uri, method, null, requestSpecificConfig);
-			return this.DoSynchronousRequest(r, requestSpecificConfig: requestSpecificConfig);
-		}
-
-		private ElasticsearchResponse<Stream> BodyRequest(Uri uri, byte[] data, string method, IRequestConnectionConfiguration requestSpecificConfig)
-		{
-			var r = this.CreateHttpWebRequest(uri, method, data, requestSpecificConfig);
-			return this.DoSynchronousRequest(r, data, requestSpecificConfig);
-		}
-
-		public virtual Task<ElasticsearchResponse<Stream>> Get(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "GET", null, requestSpecificConfig);
-			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
-		}
-		public virtual Task<ElasticsearchResponse<Stream>> Head(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "HEAD", null, requestSpecificConfig);
-			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
-		}
-		public virtual Task<ElasticsearchResponse<Stream>> Post(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "POST", data, requestSpecificConfig);
-			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
-		}
-
-		public virtual Task<ElasticsearchResponse<Stream>> Put(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "PUT", data, requestSpecificConfig);
-			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
-		}
-
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, byte[] data, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "DELETE", data, requestSpecificConfig);
-			return this.DoAsyncRequest(r, data, requestSpecificConfig: requestSpecificConfig);
-		}
-		public virtual Task<ElasticsearchResponse<Stream>> Delete(Uri uri, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var r = this.CreateHttpWebRequest(uri, "DELETE", null, requestSpecificConfig);
-			return this.DoAsyncRequest(r, requestSpecificConfig: requestSpecificConfig);
-		}
-
-		private static void ThreadTimeoutCallback(object state, bool timedOut)
-		{
-			if (timedOut)
-			{
-				HttpWebRequest request = state as HttpWebRequest;
-				if (request != null)
-				{
-					request.Abort();
-				}
-			}
-		}
-
-
-		protected virtual HttpWebRequest CreateHttpWebRequest(Uri uri, string method, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
-		{
-			var myReq = this.CreateWebRequest(uri, method, data, requestSpecificConfig);
-			this.SetBasicAuthorizationIfNeeded(myReq);
-			this.SetProxyIfNeeded(myReq);
-			return myReq;
-		}
-
-		private void SetProxyIfNeeded(HttpWebRequest myReq)
-		{
-			if (!string.IsNullOrEmpty(this._ConnectionSettings.ProxyAddress))
-			{
-				var proxy = new WebProxy();
-				var uri = new Uri(this._ConnectionSettings.ProxyAddress);
-				var credentials = new NetworkCredential(this._ConnectionSettings.ProxyUsername, this._ConnectionSettings.ProxyPassword);
-				proxy.Address = uri;
-				proxy.Credentials = credentials;
-				myReq.Proxy = proxy;
-			}
-			//myReq.Proxy = null;
-		}
-
-		private void SetBasicAuthorizationIfNeeded(HttpWebRequest myReq)
-		{
-			//TODO figure out a way to cache this;
-
-			//if (this._ConnectionSettings.UriSpecifiedBasicAuth)
-			//{
-			myReq.Headers["Authorization"] =
-				"Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(myReq.RequestUri.UserInfo));
-			//}
-		}
-
-		protected virtual HttpWebRequest CreateWebRequest(Uri uri, string method, byte[] data, IRequestConnectionConfiguration requestSpecificConfig)
-		{
-			//TODO append global querystring
-			//var url = this._CreateUriString(path);
-
-			var myReq = (HttpWebRequest)WebRequest.Create(uri);
-
-			myReq.Accept = "application/json";
-			myReq.ContentType = "application/json";
-			if (requestSpecificConfig != null && !string.IsNullOrWhiteSpace(requestSpecificConfig.AcceptsContentType))
-			{
-				myReq.Accept = requestSpecificConfig.AcceptsContentType;
-				myReq.ContentType = requestSpecificConfig.AcceptsContentType;
-			}
-			var timeout = this._ConnectionSettings.Timeout;
-			myReq.Timeout = timeout; // 1 minute timeout.
-			myReq.ReadWriteTimeout = timeout; // 1 minute timeout.
-			myReq.Method = method;
+			var timeout = (int)requestData.RequestTimeout.TotalMilliseconds;
+			request.Timeout = timeout;
+			request.ReadWriteTimeout = timeout;
 
 			//WebRequest won't send Content-Length: 0 for empty bodies
 			//which goes against RFC's and might break i.e IIS when used as a proxy.
 			//see: https://github.com/elasticsearch/elasticsearch-net/issues/562
-			var m = method.ToLower();
-			if (m != "head" && m != "get" && (data == null || data.Length == 0))
-				myReq.ContentLength = 0;
+			var m = requestData.Method.GetStringValue();
+			request.Method = m;
+			if (m != "head" && m != "get" && (requestData.PostData == null))
+				request.ContentLength = 0;
 
-			return myReq;
+			return request;
 		}
 
-		protected virtual ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
+		protected virtual void AlterServicePoint(ServicePoint requestServicePoint, RequestData requestData)
 		{
-			var path = request.RequestUri.ToString();
-			var method = request.Method;
+			requestServicePoint.UseNagleAlgorithm = false;
+			requestServicePoint.Expect100Continue = false;
+			requestServicePoint.ConnectionLimit = 10000;
+			//looking at http://referencesource.microsoft.com/#System/net/System/Net/ServicePoint.cs
+			//this method only sets internal values and wont actually cause timers and such to be reset
+			//So it should be idempotent if called with the same parameters
+			requestServicePoint.SetTcpKeepAlive(true, requestData.KeepAliveTime, requestData.KeepAliveInterval);
+		}
 
-			if (data != null)
+		protected virtual void SetProxyIfNeeded(HttpWebRequest request, RequestData requestData)
+		{
+			if (!requestData.ProxyAddress.IsNullOrEmpty())
 			{
-				using (var r = request.GetRequestStream())
-				{
-					r.Write(data, 0, data.Length);
-				}
+				var proxy = new WebProxy();
+				var uri = new Uri(requestData.ProxyAddress);
+				var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+				proxy.Address = uri;
+				proxy.Credentials = credentials;
+				request.Proxy = proxy;
 			}
+
+			if (requestData.DisableAutomaticProxyDetection)
+				request.Proxy = null;
+		}
+
+		protected virtual void SetBasicAuthenticationIfNeeded(HttpWebRequest request, RequestData requestData)
+		{
+			// Basic auth credentials take the following precedence (highest -> lowest):
+			// 1 - Specified on the request (highest precedence)
+			// 2 - Specified at the global IConnectionSettings level
+			// 3 - Specified with the URI (lowest precedence)
+
+			var userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+
+			if (requestData.BasicAuthorizationCredentials != null)
+				userInfo = requestData.BasicAuthorizationCredentials.ToString();
+
+			if (!userInfo.IsNullOrEmpty())
+				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+		}
+
+		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
+		{
+			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
+				var request = this.CreateHttpWebRequest(requestData);
+				var data = requestData.PostData;
+
+				if (data != null)
+				{
+					using (var stream = request.GetRequestStream())
+					{
+						if (requestData.HttpCompression)
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								data.Write(zipStream, requestData.ConnectionSettings);
+						else
+							data.Write(stream, requestData.ConnectionSettings);
+					}
+				}
+
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
 				var response = (HttpWebResponse)request.GetResponse();
-				var responseStream = response.GetResponseStream();
-				return WebToElasticsearchResponse(data, responseStream, response, method, path);
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
 			}
-			catch (WebException webException)
+			catch (WebException e)
 			{
-				return HandleWebException(data, webException, method, path);
+				HandleException(builder, e);
 			}
+
+			return builder.ToResponse();
 		}
 
-		private ElasticsearchResponse<Stream> HandleWebException(byte[] data, WebException webException, string method, string path)
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			ElasticsearchResponse<Stream> cs = null;
-			var httpEx = webException.Response as HttpWebResponse;
-			if (httpEx != null)
-			{
-				cs = WebToElasticsearchResponse(data, httpEx.GetResponseStream(), httpEx, method, path);
-				return cs;
-			}
-			cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, webException, method, path, data);
-			return cs;
-		}
-
-		private ElasticsearchResponse<Stream> WebToElasticsearchResponse(byte[] data, Stream responseStream, HttpWebResponse response, string method, string path)
-		{
-			ElasticsearchResponse<Stream> cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
-			cs.Response = responseStream;
-			return cs;
-		}
-
-		protected virtual Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConnectionConfiguration requestSpecificConfig = null)
-		{
-			var tcs = new TaskCompletionSource<ElasticsearchResponse<Stream>>();
-			if (this._ConnectionSettings.MaximumAsyncConnections <= 0
-			  || this._ResourceLock == null)
-				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
-
-			var timeout = this._ConnectionSettings.Timeout;
-			var path = request.RequestUri.ToString();
-			var method = request.Method;
-			if (!this._ResourceLock.WaitOne(timeout))
-			{
-				var m = "Could not start the operation before the timeout of " + timeout +
-				  "ms completed while waiting for the semaphore";
-				var cs = ElasticsearchResponse<Stream>.CreateError(this._ConnectionSettings, new TimeoutException(m), method, path, data);
-				tcs.SetResult(cs);
-				return tcs.Task;
-			}
+			var builder = new ResponseBuilder<TReturn>(requestData);
 			try
 			{
-				return this.CreateIterateTask(request, data, requestSpecificConfig, tcs);
-			}
-			finally
-			{
-				this._ResourceLock.Release();
-			}
-		}
+				var request = this.CreateHttpWebRequest(requestData);
+				var data = requestData.PostData;
 
-		private Task<ElasticsearchResponse<Stream>> CreateIterateTask(HttpWebRequest request, byte[] data, object requestSpecificConfig, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs)
-		{
-			this.Iterate(request, data, this._AsyncSteps(request, tcs, data, requestSpecificConfig), tcs);
-			return tcs.Task;
-		}
-
-		private IEnumerable<Task> _AsyncSteps(HttpWebRequest request, TaskCompletionSource<ElasticsearchResponse<Stream>> tcs, byte[] data, object requestSpecificConfig)
-		{
-			var timeout = this._ConnectionSettings.Timeout;
-
-			var state = new ConnectionState { Connection = request };
-
-			if (data != null)
-			{
-				var getRequestStream = Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream, request.EndGetRequestStream, null);
-				//ThreadPool.RegisterWaitForSingleObject((getRequestStream as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-				yield return getRequestStream;
-
-				var requestStream = getRequestStream.Result;
-				try
+				if (data != null)
 				{
-					var writeToRequestStream = Task.Factory.FromAsync(requestStream.BeginWrite, requestStream.EndWrite, data, 0, data.Length, state);
-					yield return writeToRequestStream;
-				}
-				finally
-				{
-					requestStream.Close();
-				}
-			}
-
-			// Get the response
-			var getResponse = Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse, request.EndGetResponse, null);
-			//ThreadPool.RegisterWaitForSingleObject((getResponse as IAsyncResult).AsyncWaitHandle, ThreadTimeoutCallback, request, timeout, true);
-			yield return getResponse;
-
-			var path = request.RequestUri.ToString();
-			var method = request.Method;
-
-			//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
-			//Either the stream or the response object needs to be closed but not both (although it won't)
-			//throw any errors if both are closed atleast one of them has to be Closed.
-			//Since we expose the stream we let closing the stream determining when to close the connection
-			var response = (HttpWebResponse)getResponse.Result;
-			var responseStream = response.GetResponseStream();
-			var cs = ElasticsearchResponse<Stream>.Create(this._ConnectionSettings, (int)response.StatusCode, method, path, data);
-			cs.Response = responseStream;
-			tcs.TrySetResult(cs);
-		}
-
-		public void Iterate<T>(HttpWebRequest request, byte[] data, IEnumerable<Task> asyncIterator, TaskCompletionSource<ElasticsearchResponse<T>> tcs)
-		{
-			var enumerator = asyncIterator.GetEnumerator();
-			Action<Task> recursiveBody = null;
-			recursiveBody = completedTask =>
-			{
-				if (completedTask != null && completedTask.IsFaulted)
-				{
-					//none of the individual steps in _AsyncSteps run in parallel for 1 request
-					//as this would be impossible we can assume Aggregate Exception.InnerException
-					var exception = completedTask.Exception.InnerException;
-
-					//cleanly exit from exceptions in stages if the exception is a webexception
-					if (exception is WebException)
+					using (var stream = await request.GetRequestStreamAsync().ConfigureAwait(false))
 					{
-						var path = request.RequestUri.ToString();
-						var method = request.Method;
-
-						var response = ElasticsearchResponse<T>.CreateError(this._ConnectionSettings, exception, method, path, data);
-						tcs.SetResult(response);
+						if (requestData.HttpCompression)
+							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
+								await data.WriteAsync(zipStream, requestData.ConnectionSettings).ConfigureAwait(false);
+						else
+							await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
 					}
-					else
-						tcs.TrySetException(exception);
-					enumerator.Dispose();
 				}
-				else if (enumerator.MoveNext())
-				{
-					enumerator.Current.ContinueWith(recursiveBody);
-				}
-				else enumerator.Dispose();
-			};
-			recursiveBody(null);
+
+				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
+				//Either the stream or the response object needs to be closed but not both although it won't
+				//throw any errors if both are closed atleast one of them has to be Closed.
+				//Since we expose the stream we let closing the stream determining when to close the connection
+				var response = (HttpWebResponse)(await request.GetResponseAsync().ConfigureAwait(false));
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
+			}
+			catch (WebException e)
+			{
+				HandleException(builder, e);
+			}
+
+			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
+		private void HandleException<TReturn>(ResponseBuilder<TReturn> builder, WebException exception)
+			where TReturn : class
+		{
+			builder.Exception = exception;
+			var response = exception.Response as HttpWebResponse;
+			if (response != null)
+			{
+				builder.StatusCode = (int)response.StatusCode;
+				builder.Stream = response.GetResponseStream();
+			}
+		}
 
+		void IDisposable.Dispose() => this.DisposeManagedResources();
 
+		protected virtual void DisposeManagedResources() { }
 	}
 }
+#endif
