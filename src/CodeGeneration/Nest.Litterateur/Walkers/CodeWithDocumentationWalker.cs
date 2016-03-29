@@ -9,12 +9,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Formatting;
-#if !DOTNETCORE
-using Microsoft.CodeAnalysis.MSBuild;
-#endif
-using Microsoft.CodeAnalysis.Text;
 using Nest.Litterateur.Documentation.Blocks;
 
 namespace Nest.Litterateur.Walkers
@@ -34,7 +28,7 @@ namespace Nest.Litterateur.Walkers
 		private readonly int? _lineNumberOverride;
 
 		/// <summary>
-		/// We want to support inlining /** */ documentations because its super handy 
+		/// We want to support inlining /** */ documentations because its super handy
 		/// to document fluent code, what ensues is total hackery
 		/// </summary>
 		/// <param name="classDepth">the depth of the class</param>
@@ -61,7 +55,7 @@ namespace Nest.Litterateur.Walkers
 #if !DOTNETCORE
 				if (_propertyOrMethodName == "ExpectJson" || _propertyOrMethodName == "QueryJson")
 				{
-					// try to get the json for the anonymous type. 
+					// try to get the json for the anonymous type.
 					// Only supports system types and Json.Net LINQ objects e.g. JObject
 					string json;
 					if (_code.TryGetJsonForAnonymousType(out json))
@@ -84,7 +78,7 @@ namespace Nest.Litterateur.Walkers
 
 				base.Visit(node);
 
-				var nodeHasLeadingTriva = node.HasLeadingTrivia && 
+				var nodeHasLeadingTriva = node.HasLeadingTrivia &&
 					node.GetLeadingTrivia().Any(c => c.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
 				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks, swap: nodeHasLeadingTriva);
 				this.Blocks.Add(new CombinedBlock(blocks, line));

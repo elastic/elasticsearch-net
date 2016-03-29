@@ -221,7 +221,7 @@ namespace Tests.Search.Suggesters
 
 		protected override void ExpectResponse(ISuggestResponse response)
 		{
-			/** === Handling Responses 
+			/** === Handling Responses
 			* Get the suggestions for a suggester by indexing into
 			* the `.Suggestions` on the response
 			*/

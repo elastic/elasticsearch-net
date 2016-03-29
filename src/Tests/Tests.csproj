@@ -152,10 +152,6 @@
     <Compile Include=".\ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include=".\ClientConcepts\ConnectionPooling\Pinging\FirstUsage.doc.cs" />
     <Compile Include=".\ClientConcepts\ConnectionPooling\Pinging\Revival.doc.cs" />
-    <Compile Include=".\ClientConcepts\ConnectionPooling\RequestOverrides\DisableSniffPingPerRequest.cs" />
-    <Compile Include=".\ClientConcepts\ConnectionPooling\RequestOverrides\RequestTimeoutsOverrides.cs" />
-    <Compile Include=".\ClientConcepts\ConnectionPooling\RequestOverrides\RespectsAllowedStatusCode.cs" />
-    <Compile Include=".\ClientConcepts\ConnectionPooling\RequestOverrides\RespectsForceNode.cs" />
     <Compile Include=".\ClientConcepts\ConnectionPooling\RequestOverrides\RespectsMaxRetryOverrides.doc.cs" />
     <Compile Include=".\ClientConcepts\ConnectionPooling\RoundRobin\RoundRobin.doc.cs" />
     <Compile Include=".\ClientConcepts\ConnectionPooling\RoundRobin\SkipDeadNodes.doc.cs" />
@@ -168,12 +164,6 @@
     <Compile Include=".\ClientConcepts\ConnectionPooling\Sticky\Sticky.doc.cs" />
     <Compile Include=".\ClientConcepts\Exceptions\ExceptionTests.cs" />
     <Compile Include=".\ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.doc.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\DocumentPaths.doc.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\FeaturesInference.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\FieldInference.doc.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\IdsInference.doc.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\IndicesPaths.doc.cs" />
-    <Compile Include=".\ClientConcepts\HighLevel\Inferrence\PropertyInference.doc.cs" />
     <Compile Include=".\ClientConcepts\HighLevel\Mapping\AutoMap.doc.cs" />
     <Compile Include=".\ClientConcepts\LowLevel\Connecting.doc.cs" />
     <Compile Include=".\ClientConcepts\LowLevel\DirectStreaming.cs" />
@@ -447,7 +437,6 @@
     <Compile Include=".\QueryDsl\FullText\SimpleQueryString\SimpleQueryStringUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\BoundingBox\GeoBoundingBoxQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\DistanceRange\GeoDistanceRangeQueryUsageTests.cs" />
-    <Compile Include=".\QueryDsl\Geo\Distance\DistanceUnits.doc.cs" />
     <Compile Include=".\QueryDsl\Geo\Distance\GeoDistanceQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\HashCell\GeoHashCellQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Polygon\GeoPolygonQueryUsageTests.cs" />
@@ -549,7 +538,6 @@
     <Compile Include=".\Search\SearchUsageTestBase.cs" />
     <Compile Include=".\Search\Search\SearchApiTests.cs" />
     <Compile Include=".\Search\Search\SearchUrlTests.cs" />
-    <Compile Include=".\Search\Suggesters\SuggestApiTest.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpApiTests.cs" />
@@ -560,7 +548,18 @@
     <Compile Include="Cat\CatRepositories\CatRepositoriesUrlTests.cs" />
     <Compile Include="Cat\CatSnapshots\CatSnapshotsApiTests.cs" />
     <Compile Include="Cat\CatSnapshots\CatSnapshotsUrlTests.cs" />
-    <Compile Include="ClientConcepts\HighLevel\Inferrence\IndexNameInference.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\DisableSniffPingPerRequest.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RequestTimeoutsOverrides.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsAllowedStatusCode.doc.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsForceNode.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\DocumentPaths.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\FeaturesInference.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\FieldInference.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\IdsInference.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\IndexNameInference.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\IndicesPaths.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inference\PropertyInference.doc.cs" />
+    <Compile Include="CommonOptions\DistanceUnit\DistanceUnits.doc.cs" />
     <Compile Include="QueryDsl\QueryDslIntegrationTestsBase.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsListQueryUsageTests.cs" />
     <Compile Include="Search\Request\ProfileUsageTests.cs" />
@@ -570,8 +569,19 @@
     <Compile Include="Search\SearchTemplate\RenderSearchTemplate\RenderSearchTemplateUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresApiTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresUrlTests.cs" />
+    <Compile Include="Search\Suggesters\SuggestApiTests.cs" />
+    <None Include="aggregations-usage.asciidoc" />
+    <None Include="aggregations.asciidoc" />
+    <None Include="client-concepts.asciidoc" />
+    <None Include="common-options.asciidoc" />
+    <None Include="connection-pooling.asciidoc" />
+    <None Include="high-level.asciidoc" />
     <None Include="index.asciidoc" />
+    <None Include="intro.asciidoc" />
+    <None Include="low-level.asciidoc" />
     <None Include="paket.references" />
+    <None Include="query-dsl-usage.asciidoc" />
+    <None Include="query-dsl.asciidoc" />
     <None Include="tests.yaml" />
   </ItemGroup>
   <ItemGroup>
@@ -1200,7 +1210,7 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.abstractions">
           <HintPath>..\..\packages\xunit.abstractions\lib\portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS\xunit.abstractions.dll</HintPath>
@@ -1222,7 +1232,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+    <When Condition="($(TargetFrameworkIdentifier) == 'WindowsPhoneApp') Or ($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')) Or ($(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5') Or ($(TargetFrameworkIdentifier) == 'WindowsPhone' And $(TargetFrameworkVersion) == 'v8.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
       <ItemGroup>
         <Reference Include="xunit.core">
           <HintPath>..\..\packages\xunit.extensibility.core\lib\portable-net45+win8+wp8+wpa81\xunit.core.dll</HintPath>
@@ -1273,6 +1283,15 @@
       <ItemGroup>
         <Reference Include="xunit.execution.dotnet">
           <HintPath>..\..\packages\xunit.extensibility.execution\lib\wp8\xunit.execution.dotnet.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
+      <ItemGroup>
+        <Reference Include="xunit.execution.dotnet">
+          <HintPath>..\..\packages\xunit.extensibility.execution\lib\wpa81\xunit.execution.dotnet.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
