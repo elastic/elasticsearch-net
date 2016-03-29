@@ -1,0 +1,66 @@
+:output-dir: client-concepts/high-level
+
+[[nest]]
+= Client Concepts - NEST
+
+[partintro]
+--
+The high level client, `ElasticClient`, provides a strongly typed query DSL that maps one-to-one with the Elasticsearch query DSL.
+
+It can be installed from the Package Manager Console inside Visual Studio using
+
+
+[source,shell]
+----
+Install-Package NEST
+----
+
+
+Or by searching for https://www.nuget.org/packages/NEST[NEST] in the Package Manager GUI. 
+
+NEST internally uses and still exposes the low level client, `ElasticLowLevelClient`, from <<elasticsearch-net,Elasticsearch.Net>> via
+the `.LowLevel` property on `ElasticClient`.
+
+There are a number of conventions that NEST uses for inference of
+
+
+* <<index-name-inference, Index Names>>
+
+* <<indices-paths, Building a URI path to one or more indices>>
+
+* <<field-inference, Field names>> and <<property-inference, Property names>>
+
+* <<ids-inference, Document IDs>>
+
+* <<document-paths, Building a URI path to a document>>
+
+* <<features-inference, API features>>
+
+
+In addition to features such as
+
+
+* <<auto-map, Auto Mapping C# types>>
+
+* <<covariant-search-results, Covariant Search Results>>
+
+--
+
+include::{output-dir}/inference/index-name-inference.asciidoc[]
+
+include::{output-dir}/inference/indices-paths.asciidoc[]
+
+include::{output-dir}/inference/field-inference.asciidoc[]
+
+include::{output-dir}/inference/property-inference.asciidoc[]
+
+include::{output-dir}/inference/ids-inference.asciidoc[]
+
+include::{output-dir}/inference/document-paths.asciidoc[]
+
+include::{output-dir}/inference/features-inference.asciidoc[]
+
+include::{output-dir}/mapping/auto-map.asciidoc[]
+
+include::{output-dir}/covariant-hits/covariant-search-results.asciidoc[]
+

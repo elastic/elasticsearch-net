@@ -1,0 +1,116 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[date-range-aggregation-usage]]
+== Date Range Aggregation Usage
+
+A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`
+and `to` values can be expressed in `DateMath` expressions, and it is also possible to specify a date format by which the from and
+to response fields will be returned.
+
+IMPORTANT: this aggregation includes the `from` value and excludes the `to` value for each range.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-daterange-aggregation.html[Date Range Aggregation]
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(aggs => aggs
+    .DateRange("projects_date_ranges", date => date
+        .Field(p => p.StartedOn)
+        .Ranges(
+            r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
+            r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+            r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+        )
+        .Aggregations(childAggs => childAggs
+            .Terms("project_tags", avg => avg.Field(p => p.Tags))
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new DateRangeAggregation("projects_date_ranges")
+    {
+        Field = Field<Project>(p => p.StartedOn),
+        Ranges = new List<DateRangeExpression>
+        {
+            new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now},
+            new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) },
+            new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") }
+        },
+        Aggregations =
+            new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "projects_date_ranges": {
+      "date_range": {
+        "field": "startedOn",
+        "ranges": [
+          {
+            "to": "now",
+            "from": "2015-06-06T12:01:02.123||+2d"
+          },
+          {
+            "to": "now+1d-30m/h"
+          },
+          {
+            "from": "2012-05-05||+1d-1m"
+          }
+        ]
+      },
+      "aggs": {
+        "project_tags": {
+          "terms": {
+            "field": "tags"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily
+in the correct type. <<aggs-vs-aggregations, Be sure to read more about .Aggs vs .Aggregations>>
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+
+var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
+dateHistogram.Should().NotBeNull();
+dateHistogram.Buckets.Should().NotBeNull();
+----
+
+We specified three ranges so we expect to have three of them in the response 
+
+=== Handling Responses
+
+[source,csharp]
+----
+dateHistogram.Buckets.Count.Should().Be(3);
+
+item.DocCount.Should().BeGreaterThan(0);
+----
+

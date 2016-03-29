@@ -1,0 +1,72 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[script-fields-usage]]
+== Script Fields Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.ScriptFields(sf=>sf
+    .ScriptField("test1", sc=>sc
+        .Inline("doc['my_field_name'].value * 2")
+    )
+    .ScriptField("test2", sc=>sc
+        .Inline("doc['my_field_name'].value * factor")
+        .Params(p=>p
+            .Add("factor", 2.0)
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    ScriptFields = new ScriptFields
+    {
+        { "test1", new ScriptField
+        {
+            Script = new InlineScript("doc['my_field_name'].value * 2")
+        } },
+        { "test2", new InlineScript("doc['my_field_name'].value * factor")
+        {
+            Params = new FluentDictionary<string, object>
+            {
+                { "factor", 2.0 }
+            }
+        } }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "script_fields": {
+    "test1": {
+      "script": {
+        "inline": "doc['my_field_name'].value * 2"
+      }
+    },
+    "test2": {
+      "script": {
+        "inline": "doc['my_field_name'].value * factor",
+        "params": {
+          "factor": 2.0
+        }
+      }
+    }
+  }
+}
+----
+

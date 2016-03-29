@@ -1,0 +1,78 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[sampler-aggregation-usage]]
+== Sampler Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(aggs => aggs
+    .Sampler("sample", sm => sm
+        .ShardSize(200)
+        .Field(p => p.Name)
+        .Aggregations(aa => aa
+            .SignificantTerms("significant_names", st => st
+                .Field(p => p.Name)
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new SamplerAggregation("sample")
+    {
+        ShardSize = 200,
+        Field = "name",
+        Aggregations = new SignificantTermsAggregation("significant_names")
+        {
+            Field = "name"
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "sample": {
+      "sampler": {
+        "shard_size": 200,
+        "field": "name"
+      },
+      "aggs": {
+        "significant_names": {
+          "significant_terms": {
+            "field": "name"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var sample = response.Aggs.Sampler("sample");
+sample.Should().NotBeNull();
+var sigTags = sample.SignificantTerms("significant_names");
+sigTags.Should().NotBeNull();
+----
+

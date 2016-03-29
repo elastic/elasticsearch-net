@@ -1,0 +1,193 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[highlighting-usage]]
+== Highlighting Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Query(q => q
+    .Match(m => m
+        .Field(f => f.Name.Suffix("standard"))
+        .Query("Upton Sons Shield Rice Rowe Roberts")
+    )
+)
+.Highlight(h => h
+    .PreTags("<tag1>")
+    .PostTags("</tag1>")
+    .Fields(
+        fs => fs
+            .Field(p => p.Name.Suffix("standard"))
+            .Type(HighlighterType.Plain)
+            .ForceSource()
+            .FragmentSize(150)
+            .NumberOfFragments(3)
+            .NoMatchSize(150),
+        fs => fs
+            .Field(p => p.LeadDeveloper.FirstName)
+            .Type(HighlighterType.Fvh)
+            .PreTags("<name>")
+            .PostTags("</name>")
+            .HighlightQuery(q => q
+                .Match(m => m
+                    .Field(p => p.LeadDeveloper.FirstName)
+                    .Query("Kurt Edgardo Naomi Dariana Justice Felton")
+                )
+            ),
+        fs => fs
+            .Field(p => p.State.Suffix("offsets"))
+            .Type(HighlighterType.Postings)
+            .PreTags("<state>")
+            .PostTags("</state>")
+            .HighlightQuery(q => q
+                .Terms(t => t
+                    .Field(f => f.State.Suffix("offsets"))
+                    .Terms(
+                        StateOfBeing.Stable.ToString().ToLowerInvariant(), 
+                        StateOfBeing.BellyUp.ToString().ToLowerInvariant()
+                    )
+                )
+            )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Query = new MatchQuery
+    {
+        Query = "Upton Sons Shield Rice Rowe Roberts",
+        Field = "name.standard"
+    },
+    Highlight = new Highlight
+    {
+        PreTags = new[] { "<tag1>" },
+        PostTags = new[] { "</tag1>" },
+        Fields = new Dictionary<Field, IHighlightField>
+        {
+            { "name.standard", new HighlightField
+                {
+                    Type = HighlighterType.Plain,
+                    ForceSource = true,
+                    FragmentSize = 150,
+                    NumberOfFragments = 3,
+                    NoMatchSize = 150
+                }
+            },
+            { "leadDeveloper.firstName", new HighlightField
+                {
+                    Type = HighlighterType.Fvh,
+                    PreTags = new[] { "<name>"},
+                    PostTags = new[] { "</name>"},
+                    HighlightQuery = new MatchQuery
+                    {
+                        Field = "leadDeveloper.firstName",
+                        Query = "Kurt Edgardo Naomi Dariana Justice Felton"
+                    }
+                }
+            },
+            { "state.offsets", new HighlightField
+                {
+                    Type = HighlighterType.Postings,
+                    PreTags = new[] { "<state>"},
+                    PostTags = new[] { "</state>"},
+                    HighlightQuery = new TermsQuery
+                    {
+                        Field = "state.offsets",
+                        Terms = new [] { "stable", "bellyup" }
+                    }
+                }
+            }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "match": {
+      "name.standard": {
+        "query": "Upton Sons Shield Rice Rowe Roberts"
+      }
+    }
+  },
+  "highlight": {
+    "pre_tags": [
+      "<tag1>"
+    ],
+    "post_tags": [
+      "</tag1>"
+    ],
+    "fields": {
+      "name.standard": {
+        "type": "plain",
+        "force_source": true,
+        "fragment_size": 150,
+        "number_of_fragments": 3,
+        "no_match_size": 150
+      },
+      "leadDeveloper.firstName": {
+        "type": "fvh",
+        "pre_tags": [
+          "<name>"
+        ],
+        "post_tags": [
+          "</name>"
+        ],
+        "highlight_query": {
+          "match": {
+            "leadDeveloper.firstName": {
+              "query": "Kurt Edgardo Naomi Dariana Justice Felton"
+            }
+          }
+        }
+      },
+      "state.offsets": {
+        "type": "postings",
+        "pre_tags": [
+          "<state>"
+        ],
+        "post_tags": [
+          "</state>"
+        ],
+        "highlight_query": {
+          "terms": {
+            "state.offsets": [
+              "stable",
+              "bellyup"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+highlight.Should().Contain("<tag1>");
+highlight.Should().Contain("</tag1>");
+highlight.Should().Contain("<name>");
+highlight.Should().Contain("</name>");
+highlight.Should().Contain("<state>");
+highlight.Should().Contain("</state>");
+Assert.True(false, $"highlights contains unexpected key {highlightHit.Key}");
+----
+

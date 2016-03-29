@@ -1,0 +1,91 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[derivative-aggregation-usage]]
+== Derivative Aggregation Usage
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+var commitsDerivative = item.Derivative("commits_derivative");
+commitsDerivative.Should().NotBeNull();
+commitsDerivative.Value.Should().NotBe(null);
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .Derivative("commits_derivative", d => d
+                .BucketsPath("commits")
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations =
+            new SumAggregation("commits", "numberOfCommits") &&
+            new DerivativeAggregation("commits_derivative", "commits")
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "commits_derivative": {
+          "derivative": {
+            "buckets_path": "commits"
+          }
+        }
+      }
+    }
+  }
+}
+----
+

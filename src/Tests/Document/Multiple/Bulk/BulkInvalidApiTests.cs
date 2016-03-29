@@ -41,7 +41,7 @@ namespace Tests.Document.Multiple.Bulk
 			response.Took.Should().BeGreaterThan(0);
 			response.Errors.Should().BeTrue();
 
-			//a delete not found is not an error (also in elasticsearch)
+			//a delete not found is not an error (also in Elasticsearch)
 			//if you do a single bulk delete on an unknown id .Errors will be false
 			response.ItemsWithErrors.Should().NotBeNull().And.HaveCount(1);
 			response.Items.Should().NotBeEmpty();
@@ -63,7 +63,7 @@ namespace Tests.Document.Multiple.Bulk
 			.Index(CallIsolatedValue)
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
-			
+
 
 		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
 		{

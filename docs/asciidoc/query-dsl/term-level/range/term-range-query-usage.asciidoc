@@ -1,0 +1,58 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[term-range-query-usage]]
+== Term Range Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.TermRange(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .GreaterThan("foo")
+    .GreaterThanOrEquals("foof")
+    .LessThan("bar")
+    .LessThanOrEquals("barb")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermRangeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    GreaterThan = "foo",
+    GreaterThanOrEqualTo = "foof",
+    LessThan = "bar",
+    LessThanOrEqualTo = "barb"
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "range": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "gt": "foo",
+      "gte": "foof",
+      "lt": "bar",
+      "lte": "barb"
+    }
+  }
+}
+----
+

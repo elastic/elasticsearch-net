@@ -1,0 +1,35 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[features-inference]]
+== Features Inference
+
+Some URIs in Elasticsearch take a `Feature` enum.
+Within NEST, route values on the URI are represented as classes that implement an interface, `IUrlParameter`.
+Since enums _cannot_ implement interfaces in C#, a route parameter that would be of type `Feature` is represented using the `Features` class that
+the `Feature` enum implicitly converts to.
+
+=== Constructor
+
+Using the `Features` constructor directly is possible but rather involved 
+
+[source,csharp]
+----
+Features fieldString = Feature.Mappings | Feature.Aliases;
+Expect("_mappings,_aliases")
+    .WhenSerializing(fieldString);
+----
+
+=== Implicit conversion
+
+Here we instantiate a GET index request whichs takes two features, settings and warmers.
+Notice how we can use the `Feature` enum directly.
+
+[source,csharp]
+----
+var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);
+----
+

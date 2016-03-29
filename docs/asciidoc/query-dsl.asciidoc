@@ -1,0 +1,147 @@
+:output-dir: query-dsl
+
+[[query-dsl]]
+= Query DSL
+
+[partintro]
+--
+NEST exposes all of the query DSL endpoints available in Elasticsearch
+
+* <<and-query-usage,And Query Usage>>
+
+* <<bool-dsl-complex-query-usage,Bool Dsl Complex Query Usage>>
+
+* <<bool-query-usage,Bool Query Usage>>
+
+* <<boosting-query-usage,Boosting Query Usage>>
+
+* <<constant-score-query-usage,Constant Score Query Usage>>
+
+* <<dismax-query-usage,Dismax Query Usage>>
+
+* <<filtered-query-usage,Filtered Query Usage>>
+
+* <<function-score-query-usage,Function Score Query Usage>>
+
+* <<indices-no-match-query-usage,Indices No Match Query Usage>>
+
+* <<indices-query-usage,Indices Query Usage>>
+
+* <<limit-query-usage,Limit Query Usage>>
+
+* <<not-query-usage,Not Query Usage>>
+
+* <<or-query-usage,Or Query Usage>>
+
+* <<common-terms-usage,Common Terms Usage>>
+
+* <<match-phrase-prefix-usage,Match Phrase Prefix Usage>>
+
+* <<match-phrase-usage,Match Phrase Usage>>
+
+* <<match-usage,Match Usage>>
+
+* <<multi-match-usage,Multi Match Usage>>
+
+* <<query-string-usage,Query String Usage>>
+
+* <<simple-query-string-usage,Simple Query String Usage>>
+
+* <<geo-bounding-box-query-usage,Geo Bounding Box Query Usage>>
+
+* <<geo-distance-query-usage,Geo Distance Query Usage>>
+
+* <<geo-distance-range-query-usage,Geo Distance Range Query Usage>>
+
+* <<geo-hash-cell-query-usage,Geo Hash Cell Query Usage>>
+
+* <<geo-polygon-query-usage,Geo Polygon Query Usage>>
+
+* <<geo-shape-circle-usage,Geo Shape Circle Usage>>
+
+* <<geo-envelope-usage,Geo Envelope Usage>>
+
+* <<geo-indexed-shape-usage,Geo Indexed Shape Usage>>
+
+* <<geo-line-string-usage,Geo Line String Usage>>
+
+* <<geo-multi-line-string-usage,Geo Multi Line String Usage>>
+
+* <<geo-multi-point-usage,Geo Multi Point Usage>>
+
+* <<geo-point-usage,Geo Point Usage>>
+
+* <<geo-polygon-usage,Geo Polygon Usage>>
+
+* <<has-child-query-usage,Has Child Query Usage>>
+
+* <<has-parent-query-usage,Has Parent Query Usage>>
+
+* <<nested-query-usage,Nested Query Usage>>
+
+* <<raw-combine-usage,Raw Combine Usage>>
+
+* <<raw-query-usage,Raw Query Usage>>
+
+* <<span-containing-query-usage,Span Containing Query Usage>>
+
+* <<span-first-query-usage,Span First Query Usage>>
+
+* <<span-multi-term-query-usage,Span Multi Term Query Usage>>
+
+* <<span-near-query-usage,Span Near Query Usage>>
+
+* <<span-not-query-usage,Span Not Query Usage>>
+
+* <<span-or-query-usage,Span Or Query Usage>>
+
+* <<span-term-query-usage,Span Term Query Usage>>
+
+* <<span-within-query-usage,Span Within Query Usage>>
+
+* <<more-like-this-query-usage,More Like This Query Usage>>
+
+* <<script-query-usage,Script Query Usage>>
+
+* <<template-query-usage,Template Query Usage>>
+
+* <<exists-query-usage,Exists Query Usage>>
+
+* <<fuzzy-date-query-usage,Fuzzy Date Query Usage>>
+
+* <<fuzzy-numeric-query-usage,Fuzzy Numeric Query Usage>>
+
+* <<fuzzy-query-usage,Fuzzy Query Usage>>
+
+* <<ids-query-usage,Ids Query Usage>>
+
+* <<missing-query-usage,Missing Query Usage>>
+
+* <<prefix-query-usage,Prefix Query Usage>>
+
+* <<date-range-query-usage,Date Range Query Usage>>
+
+* <<numeric-range-query-usage,Numeric Range Query Usage>>
+
+* <<term-range-query-usage,Term Range Query Usage>>
+
+* <<regexp-query-usage,Regexp Query Usage>>
+
+* <<term-query-usage,Term Query Usage>>
+
+* <<terms-list-query-usage,Terms List Query Usage>>
+
+* <<terms-lookup-query-usage,Terms Lookup Query Usage>>
+
+* <<terms-query-usage,Terms Query Usage>>
+
+* <<type-query-usage,Type Query Usage>>
+
+* <<wildcard-query-usage,Wildcard Query Usage>>
+
+--
+
+include::{output-dir}/bool-dsl/bool-dsl.asciidoc[]
+
+include::query-dsl-usage.asciidoc[]
+

@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 				{
 					significant_terms = new
 					{
-						field = Field<Project>(p => p.Name),
+						field = "name",
 						min_doc_count = 10,
 						mutual_information = new
 						{

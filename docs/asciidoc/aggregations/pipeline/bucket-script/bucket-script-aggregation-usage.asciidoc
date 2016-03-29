@@ -1,0 +1,143 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[bucket-script-aggregation-usage]]
+== Bucket Script Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .Filter("stable_state", f => f
+                .Filter(ff => ff
+                    .Term(p => p.State, "Stable")
+                )
+                .Aggregations(aaa => aaa
+                    .Sum("commits", sm => sm
+                        .Field(p => p.NumberOfCommits)    
+                    )
+                )
+            )
+            .BucketScript("stable_percentage", bs => bs
+                .BucketsPath(bp => bp
+                    .Add("totalCommits", "commits")
+                    .Add("stableCommits", "stable_state>commits")
+                )
+                .Script("stableCommits / totalCommits * 100")
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new FilterAggregation("stable_state")
+            {
+                Filter = new TermQuery
+                {
+                    Field = "state",
+                    Value = "Stable"
+                },
+                Aggregations = new SumAggregation("commits", "numberOfCommits")
+            } &&
+            new BucketScriptAggregation("stable_percentage", new MultiBucketsPath
+                {
+                    { "totalCommits", "commits" },
+                    { "stableCommits", "stable_state>commits" }
+                })
+            {
+                Script = (InlineScript)"stableCommits / totalCommits * 100"
+            }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "stable_state": {
+          "filter": {
+            "term": {
+              "state": {
+                "value": "Stable"
+              }
+            }
+          },
+          "aggs": {
+            "commits": {
+              "sum": {
+                "field": "numberOfCommits"
+              }
+            }
+          }
+        },
+        "stable_percentage": {
+          "bucket_script": {
+            "buckets_path": {
+              "totalCommits": "commits",
+              "stableCommits": "stable_state>commits"
+            },
+            "script": {
+              "inline": "stableCommits / totalCommits * 100"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+var stablePercentage = item.BucketScript("stable_percentage");
+stablePercentage.Should().NotBeNull();
+stablePercentage.Value.Should().HaveValue();
+----
+

@@ -1,0 +1,55 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[nested-query-usage]]
+== Nested Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Nested(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .InnerHits(i=>i.Explain())
+    .Query(qq=>qq.MatchAll())
+    .Path(p=>p.CuratedTags)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new NestedQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    InnerHits = new InnerHits { Explain = true },
+    Query = new MatchAllQuery(),
+    Path = Field<Project>(p=>p.CuratedTags)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "nested": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "query": {
+      "match_all": {}
+    },
+    "path": "curatedTags",
+    "inner_hits": {
+      "explain": true
+    }
+  }
+}
+----
+

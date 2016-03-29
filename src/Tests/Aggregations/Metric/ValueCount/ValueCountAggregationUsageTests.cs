@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.ValueCount
 				{
 					value_count = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits)
+						field = "numberOfCommits"
 					}
 				}
 			}

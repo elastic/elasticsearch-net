@@ -1,0 +1,61 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[descriptors]]
+== Descriptors
+
+Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
+
+[source,csharp]
+----
+var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
+var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
+                  where t.IsClass() 
+                    && t.Name.Contains("Descriptor") 
+                    && !notDescriptors.Contains(t.Name)
+                    && !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
+                  select t.FullName;
+descriptors.Should().BeEmpty();
+----
+
+Methods taking a func should have that func return an interface
+
+[source,csharp]
+----
+var descriptors =
+    from t in typeof(DescriptorBase<,>).Assembly().Types()
+    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    select t;
+
+var selectorMethods =
+    from d in descriptors
+    from m in d.GetMethods()
+    let parameters = m.GetParameters()
+    from p in parameters
+    let type = p.ParameterType
+    let isGeneric = type.IsGeneric()
+    where isGeneric
+    let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
+    where isFunc
+    let firstFuncArg = type.GetGenericArguments().First()
+    let secondFuncArg = type.GetGenericArguments().Last()
+    let isQueryFunc = firstFuncArg.IsGeneric() &&
+        firstFuncArg.GetGenericTypeDefinition() == typeof(QueryContainerDescriptor<>) &&
+        typeof(QueryContainer).IsAssignableFrom(secondFuncArg)
+    where !isQueryFunc
+    let isFluentDictionaryFunc =
+        firstFuncArg.IsGeneric() &&
+        firstFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>) &&
+        secondFuncArg.IsGeneric() &&
+        secondFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>)
+    where !isFluentDictionaryFunc
+    let lastArgIsNotInterface = !secondFuncArg.IsInterface()
+    where lastArgIsNotInterface
+    select $"{m.Name} on {m.DeclaringType.Name}";
+
+selectorMethods.Should().BeEmpty();
+----
+

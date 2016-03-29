@@ -1,0 +1,240 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[token-filter-usage]]
+== Token Filter Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+InitializerExample
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "analysis": {
+    "filter": {
+      "myAscii": {
+        "type": "asciifolding",
+        "preserveOriginal": true
+      },
+      "myCommonGrams": {
+        "type": "common_grams",
+        "common_words": [
+          "x",
+          "y",
+          "z"
+        ],
+        "ignore_case": true,
+        "query_mode": true
+      },
+      "mydp": {
+        "type": "delimited_payload_filter",
+        "delimiter": "-",
+        "encoding": "identity"
+      },
+      "dcc": {
+        "type": "dictionary_decompounder",
+        "word_list": [
+          "x",
+          "y",
+          "z"
+        ],
+        "min_word_size": 2,
+        "min_subword_size": 2,
+        "max_subword_size": 2,
+        "only_longest_match": true
+      },
+      "etf": {
+        "type": "edge_ngram",
+        "min_gram": 1,
+        "max_gram": 2
+      },
+      "elision": {
+        "type": "elision",
+        "articles": [
+          "a",
+          "b",
+          "c"
+        ]
+      },
+      "hunspell": {
+        "type": "hunspell",
+        "ignore_case": true,
+        "locale": "en_US",
+        "dictionary": "path_to_dict",
+        "dedup": true,
+        "longest_only": true
+      },
+      "hypdecomp": {
+        "type": "hyphenation_decompounder",
+        "word_list": [
+          "x",
+          "y",
+          "z"
+        ],
+        "min_word_size": 2,
+        "min_subword_size": 2,
+        "max_subword_size": 2,
+        "only_longest_match": true,
+        "hyphenation_patterns_path": "analysis/fop.xml"
+      },
+      "keeptypes": {
+        "type": "keep_types",
+        "types": [
+          "<NUM>",
+          "<SOMETHINGELSE>"
+        ]
+      },
+      "keepwords": {
+        "type": "keep",
+        "keep_words": [
+          "a",
+          "b",
+          "c"
+        ],
+        "keep_words_case": true
+      },
+      "marker": {
+        "type": "keyword_marker",
+        "keywords": [
+          "a",
+          "b"
+        ],
+        "ignore_case": true
+      },
+      "kstem": {
+        "type": "kstem"
+      },
+      "length": {
+        "type": "length",
+        "min": 10,
+        "max": 200
+      },
+      "limit": {
+        "type": "limit",
+        "max_token_count": 12,
+        "consume_all_tokens": true
+      },
+      "lc": {
+        "type": "lowercase"
+      },
+      "ngram": {
+        "type": "ngram",
+        "min_gram": 3,
+        "max_gram": 30
+      },
+      "pc": {
+        "type": "pattern_capture",
+        "patterns": [
+          "\\d",
+          "\\w"
+        ],
+        "preserve_original": true
+      },
+      "pr": {
+        "type": "pattern_replace",
+        "pattern": "(\\d|\\w)",
+        "replacement": "replacement"
+      },
+      "porter": {
+        "type": "porter_stem"
+      },
+      "rev": {
+        "type": "reverse"
+      },
+      "shing": {
+        "type": "shingle",
+        "min_shingle_size": 8,
+        "max_shingle_size": 12,
+        "output_unigrams": true,
+        "output_unigrams_if_no_shingles": true,
+        "token_separator": "|",
+        "filler_token": "x"
+      },
+      "snow": {
+        "type": "snowball",
+        "language": "Dutch"
+      },
+      "standard": {
+        "type": "standard"
+      },
+      "stem": {
+        "type": "stemmer",
+        "language": "arabic"
+      },
+      "stemo": {
+        "type": "stemmer_override",
+        "rules_path": "analysis/custom_stems.txt"
+      },
+      "stop": {
+        "type": "stop",
+        "stopwords": [
+          "x",
+          "y",
+          "z"
+        ],
+        "ignore_case": true,
+        "remove_trailing": true
+      },
+      "syn": {
+        "type": "synonym",
+        "synonyms_path": "analysis/stopwords.txt",
+        "format": "wordnet",
+        "synonyms": [
+          "x=>y",
+          "z=>s"
+        ],
+        "ignore_case": true,
+        "expand": true,
+        "tokenizer": "whitespace"
+      },
+      "trimmer": {
+        "type": "trim"
+      },
+      "truncer": {
+        "type": "truncate",
+        "length": 100
+      },
+      "uq": {
+        "type": "unique",
+        "only_on_same_position": true
+      },
+      "upper": {
+        "type": "uppercase"
+      },
+      "wd": {
+        "type": "word_delimiter",
+        "generate_word_parts": true,
+        "generate_number_parts": true,
+        "catenate_words": true,
+        "catenate_numbers": true,
+        "catenate_all": true,
+        "split_on_case_change": true,
+        "preserve_original": true,
+        "split_on_numerics": true,
+        "stem_english_possessive": true,
+        "protected_words": [
+          "x",
+          "y",
+          "z"
+        ]
+      }
+    }
+  }
+}
+----
+

@@ -1,0 +1,49 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[term-query-usage]]
+== Term Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Term(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Value("project description")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Value = "project description"
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "term": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "value": "project description"
+    }
+  }
+}
+----
+

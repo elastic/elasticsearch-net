@@ -20,7 +20,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 				{
 					percentile_ranks = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits),
+						field = "numberOfCommits",
 						values = new [] { 15.0, 30.0 },
 						tdigest = new
 						{

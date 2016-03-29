@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.Max
 				{
 					max = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits)
+						field = "numberOfCommits"
 					}
 				}
 			}

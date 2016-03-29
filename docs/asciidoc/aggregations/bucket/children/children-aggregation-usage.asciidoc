@@ -1,0 +1,70 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[children-aggregation-usage]]
+== Children Aggregation Usage
+
+A special single bucket aggregation that enables aggregating from buckets on parent document types to
+buckets on child documents.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation]
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(aggs => aggs
+    .Children<CommitActivity>("name_of_child_agg", child => child
+        .Aggregations(childAggs => childAggs
+            .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+            .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
+    {
+        Aggregations =
+            new AverageAggregation("average_per_child", "confidenceFactor") &&
+            new MaxAggregation("max_per_child", "confidenceFactor")
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "name_of_child_agg": {
+      "children": {
+        "type": "commits"
+      },
+      "aggs": {
+        "average_per_child": {
+          "avg": {
+            "field": "confidenceFactor"
+          }
+        },
+        "max_per_child": {
+          "max": {
+            "field": "confidenceFactor"
+          }
+        }
+      }
+    }
+  }
+}
+----
+

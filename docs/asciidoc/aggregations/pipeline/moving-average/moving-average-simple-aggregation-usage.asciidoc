@@ -1,0 +1,105 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[moving-average-simple-aggregation-usage]]
+== Moving Average Simple Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .MovingAverage("commits_moving_avg", mv => mv
+                .BucketsPath("commits")
+                .Window(30)
+                .Predict(10)
+                .Model(m => m
+                    .Simple()
+                )
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new MovingAverageAggregation("commits_moving_avg", "commits")
+            {
+                Window = 30,
+                Predict = 10,
+                Model = new SimpleModel()
+            }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "commits_moving_avg": {
+          "moving_avg": {
+            "buckets_path": "commits",
+            "model": "simple",
+            "window": 30,
+            "predict": 10,
+            "settings": {}
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+var movingAvg = item.Sum("commits_moving_avg");
+movingAvg.Should().NotBeNull();
+movingAvg.Value.Should().BeGreaterThan(0);
+----
+

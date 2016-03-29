@@ -1,0 +1,77 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[analyzer-usage]]
+== Analyzer Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+InitializerExample
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "analysis": {
+    "analyzer": {
+      "myCustom": {
+        "type": "custom",
+        "tokenizer": "ng",
+        "filter": [
+          "myAscii",
+          "kstem"
+        ],
+        "char_filter": [
+          "stripMe",
+          "patterned"
+        ]
+      },
+      "myKeyword": {
+        "type": "keyword"
+      },
+      "myPattern": {
+        "type": "pattern",
+        "pattern": "\\w"
+      },
+      "mySimple": {
+        "type": "simple"
+      },
+      "myLanguage": {
+        "type": "dutch"
+      },
+      "mySnow": {
+        "type": "snowball",
+        "language": "Dutch"
+      },
+      "myStandard": {
+        "type": "standard",
+        "max_token_length": 2
+      },
+      "myStop": {
+        "type": "stop",
+        "stopwords_path": "analysis/stopwords.txt"
+      },
+      "myWhiteSpace": {
+        "type": "whitespace"
+      },
+      "myWhiteSpace2": {
+        "type": "whitespace"
+      }
+    }
+  }
+}
+----
+

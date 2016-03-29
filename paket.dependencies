@@ -26,6 +26,10 @@ nuget Rx-Linq
 nuget Rx-Main
 nuget Rx-PlatformServices
 
+source https://api.nuget.org/v3/index.json
+
+nuget AsciiDocNet
+
 group build
 
     source https://www.nuget.org/api/v2

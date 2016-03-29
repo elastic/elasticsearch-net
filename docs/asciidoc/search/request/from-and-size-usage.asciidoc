@@ -1,0 +1,38 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[from-and-size-usage]]
+== From And Size Usage
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    From = 10,
+    Size = 12
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "from": 10,
+  "size": 12
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+    .From(10)
+    .Size(12)
+----
+

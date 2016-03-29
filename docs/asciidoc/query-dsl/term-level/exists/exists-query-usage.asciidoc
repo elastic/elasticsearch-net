@@ -1,0 +1,45 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[exists-query-usage]]
+== Exists Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Exists(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new ExistsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "exists": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "field": "description"
+  }
+}
+----
+

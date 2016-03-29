@@ -1,0 +1,50 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[profile-usage]]
+== Profile Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Profile()
+.Query(q => q
+    .Term(p => p.Name, "elasticsearch")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Profile = true,
+    Query = new TermQuery
+    {
+        Field = "name",
+        Value = "elasticsearch"
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "profile": true,
+  "query": {
+    "term": {
+      "name": {
+        "value": "elasticsearch"
+      }
+    }
+  }
+}
+----
+

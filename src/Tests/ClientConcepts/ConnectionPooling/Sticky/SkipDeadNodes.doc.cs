@@ -15,7 +15,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 		/** Sticky - Skipping Dead Nodes
 		 * When selecting nodes the connection pool will try and skip all the nodes that are marked dead.
 		*/
-
 		protected int NumberOfNodes = 3;
 
 		[U]

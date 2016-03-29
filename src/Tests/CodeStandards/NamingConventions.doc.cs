@@ -7,13 +7,13 @@ using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
-	/** # Naming Conventions
-	*
+	/** == Naming Conventions
+	* 
 	* NEST uses the following naming conventions (with _some_ exceptions).
 	*/
 	public class NamingConventions
 	{
-		/** ## Class Names
+		/** === Class Names
 		*
 		* Abstract class names should end with a `Base` suffix
 		*/
@@ -50,7 +50,7 @@ namespace Tests.CodeStandards
 			baseClassesNotAbstract.Should().BeEmpty();
 		}
 
-		/** ## Requests and Responses
+		/** === Requests and Responses
 		*
 		* Request class names should end with `Request`
 		*/
@@ -88,13 +88,12 @@ namespace Tests.CodeStandards
 		* Request and Response class names should be one to one in *most* cases.
 		* e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
 		* There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
-		* `Exists` requests.
+		* the `Exists` requests.
 		*/
 		[U]
 		public void ParityBetweenRequestsAndResponses()
 		{
-			// Add any exceptions to the rule here.
-			var exceptions = new[]
+			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),

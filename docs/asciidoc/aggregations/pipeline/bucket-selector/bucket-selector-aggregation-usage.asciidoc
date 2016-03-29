@@ -1,0 +1,105 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[bucket-selector-aggregation-usage]]
+== Bucket Selector Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .BucketSelector("commits_bucket_filter", bs => bs
+                .BucketsPath(bp => bp
+                    .Add("totalCommits", "commits")
+                )
+                .Script("totalCommits >= 500")
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
+                {
+                    { "totalCommits", "commits" },
+                })
+            {
+                Script = (InlineScript)"totalCommits >= 500"
+            }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "commits_bucket_filter": {
+          "bucket_selector": {
+            "buckets_path": {
+              "totalCommits": "commits"
+            },
+            "script": {
+              "inline": "totalCommits >= 500"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+var commits = item.Sum("commits");
+commits.Should().NotBeNull();
+commits.Value.Should().BeGreaterOrEqualTo(500);
+----
+

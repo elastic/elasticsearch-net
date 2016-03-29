@@ -14,8 +14,8 @@ namespace Tests.Analysis
 		: CrudTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
 		/**
-		* # Analysis crud
-		* 
+		* == Analysis crud
+		*
 		* In this example we will create an index with analysis settings, read those settings back, update the analysis settings
 		* and do another read after the update to assert our new analysis setting is applied.
 		* There is NO mechanism to delete an analysis setting in elasticsearch.
@@ -77,7 +77,7 @@ namespace Tests.Analysis
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
 
 		/**
-		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact 
+		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact
 		* store our html char filter called `stripMe`
 		*/
 		protected override void ExpectAfterCreate(IGetIndexSettingsResponse response)

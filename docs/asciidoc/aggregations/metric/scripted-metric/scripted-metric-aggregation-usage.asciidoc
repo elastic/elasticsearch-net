@@ -1,0 +1,75 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[scripted-metric-aggregation-usage]]
+== Scripted Metric Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .ScriptedMetric("sum_the_hard_way", sm => sm
+        .InitScript("_agg['commits'] = []")
+        .MapScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }")
+        .CombineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum")
+        .ReduceScript("sum = 0; for (a in _aggs) { sum += a }; return sum")
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new ScriptedMetricAggregation("sum_the_hard_way")
+    {
+        InitScript = new InlineScript("_agg['commits'] = []"),
+        MapScript = new InlineScript("if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"),
+        CombineScript = new InlineScript("sum = 0; for (c in _agg.commits) { sum += c }; return sum"),
+        ReduceScript = new InlineScript("sum = 0; for (a in _aggs) { sum += a }; return sum")
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "sum_the_hard_way": {
+      "scripted_metric": {
+        "init_script": {
+          "inline": "_agg['commits'] = []"
+        },
+        "map_script": {
+          "inline": "if (doc['state'].value == \"Stable\") { _agg.commits.add(doc['numberOfCommits']) }"
+        },
+        "combine_script": {
+          "inline": "sum = 0; for (c in _agg.commits) { sum += c }; return sum"
+        },
+        "reduce_script": {
+          "inline": "sum = 0; for (a in _aggs) { sum += a }; return sum"
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var sumTheHardWay = response.Aggs.ScriptedMetric("sum_the_hard_way");
+sumTheHardWay.Should().NotBeNull();
+sumTheHardWay.Value<int>().Should().BeGreaterThan(0);
+----
+
