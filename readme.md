@@ -119,7 +119,7 @@ var tweet = response.Source; // the original document
 
 ### Searching for documents
 
-NEST exposes a fluent interface and a [powerful query DSL](http://nest.azurewebsites.net/concepts/writing-queries.html) (NOTE: this documentation is for NEST 1.x - [documentation for 2.x is in progress](https://github.com/elastic/elasticsearch-net/tree/feature/documentation/docs/asciidoc))
+NEST exposes a fluent interface and a [powerful query DSL](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/query-dsl.html)
 
 ```csharp
 var response = client.Search<Tweet>(s => s
@@ -148,7 +148,7 @@ var response = client.Search<Tweet>(request);
 
 ### Falling back to Elasticsearch.Net
 
-NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/develop/src/Elasticsearch.Net) client that you can fall back to incase anything is missing:
+NEST also includes and exposes the low-level [Elasticsearch.Net](https://github.com/elasticsearch/elasticsearch-net/tree/master/src/Elasticsearch.Net) client that you can fall back to incase anything is missing:
 
 ```csharp
 //.LowLevel is of type IElasticLowLevelClient
@@ -168,8 +168,7 @@ var response = client.LowLevel.SearchPost("myindex","elasticsearchprojects", new
 });
 ```
 
-#### [Read the full documentation here](http://nest.azurewebsites.net/) 
-**(The documentation is terribly out of date at the moment, but we're in the process of [completely revamping them](https://github.com/elastic/elasticsearch-net/tree/feature/documentation/docs/asciidoc).  Please bare with us during the transition.)**
+#### [Read the full documentation here](https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/index.html) 
 
 #[Elasticsearch.Net](src/Elasticsearch.Net)
 
