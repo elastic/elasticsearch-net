@@ -27,7 +27,8 @@ In those cases we tend to pull your bits locally and write tests ourselves but t
 ## Branches
 
 - `1.x` for latest 1.x compatible client
-- `master` for 2.0 compatible client
+- `2.x` for 2.x compatible client
+- `master` for the latest client (currently _5.x alpha_)
 
 ## Git
 
@@ -35,7 +36,8 @@ We do not require rebased/squashed commits although we do very much appreciate i
 
 Please submit your [Pull Requests](https://help.github.com/articles/creating-a-pull-request/) to 
 
-- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for 2.0
+- [`master`](https://github.com/elastic/elasticsearch-net/tree/master) branch for 5.x
+- [`2.x`](https://github.com/elastic/elasticsearch-net/tree/2.x) branch for 2.x
 - [`1.x`](https://github.com/elastic/elasticsearch-net/tree/1.x) branch for 1.x
 
 #Building the solution
@@ -71,7 +73,27 @@ You can also compile the solution within Visual Studio if you prefer, but the bu
 
 ##Tests
 
-The `Tests` project contains both xunit unit and integration tests. A `tests.yaml` file within the root of the `Tests` project determines the test mode when running tests inside Visual Studio; the build script has a number of different build targets to run different types of tests, see the `Targets.fsx` script in the `scripts` project for the complete list.
+The `Tests` project contains both xunit unit and integration tests. A `tests.yaml` file within the root of the `Tests` project determines the test mode when running tests inside Visual Studio
+
+- `u` for unit tests
+- `i` for integration tests
+- `m` for mixed mode i.e. unit and integration tests
+
+The build script has a number of different build targets to run different types of tests, see the [`Targets.fsx` script in the `scripts` project](https://github.com/elastic/elasticsearch-net/blob/master/build/scripts/Targets.fsx) for the complete list, but the main ones are:
+
+### Compile and run unit tests
+
+```bash
+build.bat
+```
+with no target will run the `Build` target, compiling the solution and running unit tests
+
+### Quick Compile and run integration tests
+
+```bash
+build.bat Integrate [Elasticsearch Version Number e.g. 2.2.0]
+```
+will quick compile the solution and run integration tests against the target Elasticsearch version. The first time this is run for a version of Elasticsearch, it will download Elasticsearch and unzip Elasticsearch, install the plugins necessary to run the integration tests, and start the node. Because of this, the first run may take some time to start.
 
 ##Troubleshooting
 
