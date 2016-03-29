@@ -1,0 +1,93 @@
+[[reverse-nested-aggregation]]
+== Reverse Nested aggregation
+
+A special single bucket aggregation that enables aggregating on parent docs from nested documents.
+
+=== Fluent DSL
+
+[source,csharp]
+----
+var response = client.Search<ElasticSearchProject>(s => s
+    .Aggregations(a => a
+        .Nested("tags", n => n
+            .Path(p => p.Tags)
+            .Aggregations(aa => aa
+                .Terms("tag_names", t => t
+                    .Field(p => p.Tags.Suffix("name"))
+                    .Aggregations(aaa => aaa
+                        .ReverseNested("tags_to_project", r => r
+                            .Path("project")
+                            .Aggregations(aaaa => aaaa
+                                .Terms("top_projects_per_tag", tt => tt
+                                    .Field(p => p.Name)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+);
+----
+
+=== Object Initializer Syntax
+
+[source,csharp]
+----
+var request = new SearchRequest
+{
+    Aggregations = new Dictionary<string, IAggregationContainer>
+    {
+        { "tags", new AggregationContainer
+            {
+                Nested = new NestedAggregator
+                {
+                    Path = "tags"
+                },
+                Aggregations = new Dictionary<string, Nest.IAggregationContainer>
+                {
+                    {
+                        "tag_names", new AggregationContainer
+                        {
+                            Terms = new TermsAggregator
+                            {
+                                Field = "tags.name"
+                            },
+                            Aggregations = new Dictionary<string, Nest.IAggregationContainer>
+                            {
+                                {
+                                    "tags_to_projects", new AggregationContainer
+                                    {
+                                        ReverseNested = new ReverseNestedAggregator
+                                        {
+                                            Path = "project"
+                                        },
+                                        Aggregations = new Dictionary<string, Nest.IAggregationContainer>
+                                        {
+                                            {
+                                                "top_projects_per_tag", new AggregationContainer
+                                                {
+                                                    Terms = new TermsAggregator
+                                                    {
+                                                        Field = "name"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+----
+
+Refer to the {ref_current}/search-aggregations-bucket-reverse-nested-aggregation.html[original docs] fore more information.
+
+
+

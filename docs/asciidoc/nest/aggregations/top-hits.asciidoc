@@ -1,0 +1,12 @@
+[[top-hits-aggregation]]
+== Top Hits aggregation
+
+A top hits metric aggregation keeps track of the most relevant document being aggregated. 
+This aggregator is intended to be used as a sub aggregator, 
+so that the top matching documents can be aggregated per bucket.
+
+The top hits aggregation can effectively be used to group result sets by certain fields 
+via a bucket aggregation. One or more bucket aggregations determines by which properties a result set get sliced into.
+
+
+Refer to the {ref_current}/search-aggregations-metrics-top-hits-aggregation.html[original docs] for more information.

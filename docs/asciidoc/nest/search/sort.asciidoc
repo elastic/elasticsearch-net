@@ -1,0 +1,17 @@
+[[sort]]
+== Sort
+
+Apply a sort over the search results. Please note that sorting and boosting are mutually exclusive.
+
+[source,csharp]
+----
+.SortAscending(p=> p.Name.Suffix("sort"))
+----
+
+or
+
+[source,csharp]
+----
+.SortDescending("name.sort")
+----
+

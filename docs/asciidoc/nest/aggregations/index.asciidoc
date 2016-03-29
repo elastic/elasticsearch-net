@@ -1,0 +1,58 @@
+= Aggregations
+
+[partintro]
+--
+
+* <<avg-aggregation, Avg>>
+* <<cardinality-aggregation, Cardinality>>
+* <<date-histogram-aggregation, Date Histogram>>
+* <<date-range-aggregation, Date Range>>
+* <<extended-stats-aggregation, Extended Stats>>
+* <<filter-aggregation, Filter>>
+* <<geo-distance-aggregation, Geo Distance>>
+* <<geohash-grid-aggregation, Geohash Grid>>
+* <<global-aggregation, Global>>
+* <<histogram-aggregation, Histogram>>
+* <<ipv4-range-aggregation, IPv4 Range>>
+* <<max-aggregation, Max>>
+* <<min-aggregation, Min>>
+* <<missing-aggregation, Missing>>
+* <<percentiles-aggregation, Percentiles>>
+* <<percentile-ranks-aggregation, Percentile Ranks>>
+* <<range-aggregation, Range>>
+* <<nested-aggregation, Nested>>
+* <<reverse-nested-aggregation, Reverse Nested>>
+* <<significant-terms-aggregation, Significant Terms>>
+* <<stats-aggregation, Stats>>
+* <<sum-aggregation, Sum>>
+* <<terms-aggregation, Terms>>
+* <<top-hits-aggregation, Top Hits>>
+* <<value-count-aggregation, Value Count>>
+
+--
+
+include::avg.asciidoc[]
+include::cardinality.asciidoc[]
+include::date-histogram.asciidoc[]
+include::date-range.asciidoc[]
+include::extended-stats.asciidoc[]
+include::filter.asciidoc[]
+include::geo-distance.asciidoc[]
+include::geohash-grid.asciidoc[]
+include::global.asciidoc[]
+include::histogram.asciidoc[]
+include::ipv4.asciidoc[]
+include::max.asciidoc[]
+include::min.asciidoc[]
+include::missing.asciidoc[]
+include::percentiles.asciidoc[]
+include::percentile-ranks.asciidoc[]
+include::range.asciidoc[]
+include::nested.asciidoc[]
+include::reverse-nested.asciidoc[]
+include::significant-terms.asciidoc[]
+include::stats.asciidoc[]
+include::sum.asciidoc[]
+include::terms.asciidoc[]
+include::top-hits.asciidoc[]
+include::value-count.asciidoc[]

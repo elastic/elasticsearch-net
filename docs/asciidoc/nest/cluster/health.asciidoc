@@ -1,0 +1,30 @@
+[[health]]
+== Health
+
+Get cluster health simple
+
+[source,csharp]
+----
+var r = this._client.Health(HealthLevel.Cluster);
+----
+
+Cluster health for one (or more) indexes
+
+[source,csharp]
+----
+var r = this._client.Health(new[] { Test.Default.DefaultIndex }, HealthLevel.Cluster);
+----
+
+Advanced options are mapped as well
+
+[source,csharp]
+----
+var r = this._client.Health(new HealthParams
+{
+    CheckLevel = HealthLevel.Shards,
+    Timeout = "30s",
+    WaitForMinNodes = 1,
+    WaitForRelocatingShards = 0,
+    WaitForStatus = HealthStatus.Green
+});
+----

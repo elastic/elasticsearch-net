@@ -1,0 +1,16 @@
+[[elasticsearch-net-reference]]
+= Elasticsearch.Net and NEST:  the .NET clients
+
+include::introduction.asciidoc[]
+
+include::contributing.asciidoc
+
+include::building.asciidoc[]
+
+include::breaking-changes.asciidoc[]
+
+include::elasticsearch-net/index.asciidoc[]
+
+include::nest/index.asciidoc[]
+
+

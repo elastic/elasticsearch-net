@@ -1,0 +1,48 @@
+= Indices
+
+[partintro]
+--
+
+* <<aliasing, Aliases>>
+* <<analyze, Analyze>>
+* <<create-indices, Create Index>>
+* <<delete-indices, Delete Index>>
+* <<open-close, Open / Close Index>>
+* <<get-settings, Get Settings>>
+* <<get-mapping, Get Mapping>>
+* <<put-mapping, Put Mapping>>
+* <<delete-mapping, Delete Mapping>>
+* <<refresh, Refresh>>
+* <<optimize, Optimize>>
+* <<flush, Flush>>
+* <<snapshot, Snapshot>>
+* <<update-settings, Update Settings>>
+* <<templates, Templates>>
+* <<stats, Stats>>
+* <<status, Status>>
+* <<segments, Segments>>
+* <<clear-cache, Clear Cache>>
+* <<indices-exists, Indices Exists>>
+
+--
+
+include::aliases.asciidoc[]
+include::analyze.asciidoc[]
+include::create-indices.asciidoc[]
+include::delete-indices.asciidoc[]
+include::open-close.asciidoc[]
+include::get-settings.asciidoc[]
+include::get-mapping.asciidoc[]
+include::put-mapping.asciidoc[]
+include::delete-mapping.asciidoc[]
+include::refresh.asciidoc[]
+include::optimize.asciidoc[]
+include::flush.asciidoc[]
+include::snapshot.asciidoc[]
+include::update-settings.asciidoc[]
+include::templates.asciidoc[]
+include::stats.asciidoc[]
+include::status.asciidoc[]
+include::segments.asciidoc[]
+include::clear-cache.asciidoc[]
+include::indices-exists.asciidoc[]

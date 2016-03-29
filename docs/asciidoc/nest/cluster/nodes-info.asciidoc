@@ -1,0 +1,15 @@
+[[nodes-info]]
+== Nodes info
+
+[source,csharp]
+----
+var r = this._client.NodeInfo(NodesInfo.All);
+var node = r.Nodes.Values.First();
+----
+
+You can then traverse all the stats i.e:
+
+[source,csharp]
+----
+node.OS.CPU.Idle
+----

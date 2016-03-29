@@ -1,0 +1,29 @@
+[[elasticsearch-net]]
+= Elasticsearch.Net
+
+[partintro]
+--
+
+* <<elasticsearch-net-quick-start, Quickstart>>
+* <<elasticsearch-net-connecting, Connecting>>
+* <<security, Security>>
+* <<cluster-failover, Connection Pooling and Cluster Failover>>
+* <<building-requests, Building Requests>>
+* <<handling-responses, Handling Responses>>
+* <<errors, Errors>>
+
+--
+
+include::quick-start.asciidoc[]
+
+include::connecting.asciidoc[]
+
+include::security.asciidoc[]
+
+include::connection-pooling.asciidoc[]
+
+include::building-requests.asciidoc[]
+
+include::handling-responses.asciidoc[]
+
+include::errors.asciidoc[]

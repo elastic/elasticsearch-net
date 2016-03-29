@@ -1,0 +1,43 @@
+= Core
+
+[partintro]
+--
+
+* <<indexing, Index>>
+* <<delete, Delete>>
+* <<delete-by-query, Delete By Query>>
+* <<get, Get>>
+* <<multi-get, Multi Get>>
+* <<update, Update>>
+* <<search, Search>>
+* <<multi-search, Multi Search>>
+* <<percolate, Percolate>>
+* <<bulk, Bulk>>
+* <<count, Count>>
+* <<more-like-this, More Like This>>
+
+--
+
+include::indexing.asciidoc[]
+
+include::delete.asciidoc[]
+
+include::delete-by-query.asciidoc[]
+
+include::get.asciidoc[]
+
+include::multi-get.asciidoc[]
+
+include::update.asciidoc[]
+
+include::search.asciidoc[]
+
+include::multi-search.asciidoc[]
+
+include::percolate.asciidoc[]
+
+include::bulk.asciidoc[]
+
+include::count.asciidoc[]
+
+include::more-like-this.asciidoc[]

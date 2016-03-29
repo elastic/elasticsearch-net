@@ -1,0 +1,21 @@
+[[preference]]
+== Preference
+
+Signals on what node to execute the search
+
+You can call the following methods on `SearchDescriptor`
+
+[source,csharp]
+----
+.Preference("my_custom_preference")
+
+
+.ExecuteOnPrimary()
+
+
+.ExecuteOnLocalShard
+
+
+.ExecuteOnNode("mynodename")
+----
+

@@ -1,0 +1,47 @@
+[[histogram-aggregation]]
+== Histogram aggregation
+
+A multi-bucket values source based aggregation that can be applied on numeric values extracted from the documents.
+
+=== Fluent DSL
+
+[source,csharp]
+----
+var result = client.Search<ElasticsearchProject>(s => s
+    .Aggregations(a => a
+        .Histogram("my_histogram_agg", h => h
+            .Field(p => p.LOC)
+            .Interval(100)
+        )
+    )
+);
+
+var agg = result.Aggs.Histogram("my_histogram_agg");
+----
+
+=== Object Initializer Syntax
+
+[source,csharp]
+----
+var request = new SearchRequest
+{
+    Aggregations = new Dictionary<string, IAggregationContainer>
+    {
+        { "my_histogram_agg", new AggregationContainer
+            {
+                Histogram = new HistogramAggregator
+                {
+                    Field = "loc",
+                    Interval = 100
+                }
+            }
+        }
+    }
+};
+
+var result = client.Search<ElasticsearchProject>(request);
+
+var agg = result.Aggs.Histogram("my_histogram_agg");
+----
+
+Refer to the {ref_current}/search-aggregations-bucket-histogram-aggregation.html[original docs] for more information.

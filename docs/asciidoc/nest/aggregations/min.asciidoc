@@ -1,0 +1,45 @@
+[[min-aggregation]]
+== Min aggregation
+
+Returns the minimum value among numeric values extracted from the aggregated documents.
+
+=== Fluent DSL
+
+[source,csharp]
+----
+var result = client.Search<ElasticsearchProject>(s => s
+    .Aggregations(a => a
+        .Min("my_min_agg", m => m
+            .Field(p => p.IntValues)
+        )
+    )
+)
+
+var agg = result.Aggs.Min("min_aggregation");
+----
+
+=== Object Initializer Syntax
+
+[source,csharp]
+----
+var request = new SearchRequest
+{
+    Aggregations = new Dictionary<string, IAggregationContainer>
+    {
+        { "my_min_agg", new AggregationContainer
+            {
+                Min = new MinAggregator
+                {
+                    Field = "intValues"
+                }
+            }
+        }
+    }
+};
+
+var result = client.Search<ElasticsearchProject>(request);
+
+var agg = result.Aggs.Min("my_min_agg");
+----
+
+Refer to the {ref_current}/search-aggregations-metrics-min-aggregation.html[original docs] for more information.

@@ -1,0 +1,30 @@
+= Search
+
+[partintro]
+--
+
+* <<nest-basics, Basic Parameters>>
+* <<sort, Sort>>
+* <<highlighting, Highlighting>>
+* <<fields, Fields>>
+* <<script-fields, Script Fields>>
+* <<preference, Preference>>
+* <<search-type, Search Type>>
+* <<index-boost, Index Boost>>
+* <<scroll, Scroll>>
+* <<explain, Explain>>
+* <<version, Version>>
+
+--
+
+include::basics.asciidoc[]
+include::sort.asciidoc[]
+include::highlighting.asciidoc[]
+include::fields.asciidoc[]
+include::script-fields.asciidoc[]
+include::preference.asciidoc[]
+include::search-type.asciidoc[]
+include::index-boost.asciidoc[]
+include::scroll.asciidoc[]
+include::explain.asciidoc[]
+include::version.asciidoc[]

@@ -1,0 +1,11 @@
+[[named-filters]]
+== Named Filters
+
+Each filter allows you specify a name i.e 
+
+[source,csharp]
+----
+    .Filter(f=>f.Name("myfilter").Term(...))
+----
+
+This will allow you to see on each with which filter applied to it.

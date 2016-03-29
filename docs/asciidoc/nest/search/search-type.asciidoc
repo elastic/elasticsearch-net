@@ -1,0 +1,10 @@
+[[search-type]]
+== Search Types
+
+There are different execution paths that can be done when executing a distributed search.
+
+[source,csharp]
+----
+.SearchType(SearchType.Scan)
+----
+
