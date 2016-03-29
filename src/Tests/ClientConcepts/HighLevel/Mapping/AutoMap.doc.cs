@@ -9,7 +9,7 @@ using static Tests.Framework.RoundTripper;
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
 	/** # Auto mapping properties
-	 * 
+	 *
 	 * When creating a mapping (either when creating an index or via the put mapping API),
 	 * NEST offers a feature called AutoMap(), which will automagically infer the correct
 	 * Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
@@ -21,8 +21,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	{
 		/**
 		* For these examples, we'll define two POCOS.  A Company, which has a name
-		* and a collection of Employees.  And Employee, which has various properties of 
-		* different types, and itself has a collection of Employees. 
+		* and a collection of Employees.  And Employee, which has various properties of
+		* different types, and itself has a collection of Employees.
 		*/
 		public class Company
 		{
@@ -52,16 +52,16 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				.Mappings(ms => ms
 					.Map<Company>(m => m
 						.Properties(ps => ps
-							.String(s => s
+							.Text(s => s
 								.Name(c => c.Name)
 							)
 							.Object<Employee>(o => o
 								.Name(c => c.Employees)
 								.Properties(eps => eps
-									.String(s => s
+									.Text(s => s
 										.Name(e => e.FirstName)
 									)
-									.String(s => s
+									.Text(s => s
 										.Name(e => e.LastName)
 									)
 									.Number(n => n
@@ -89,7 +89,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							name = new
 							{
-								type = "string"
+								type = "text"
 							},
 							employees = new
 							{
@@ -98,11 +98,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									firstName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									lastName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									salary = new
 									{
@@ -122,7 +122,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		public void UsingAutoMap()
 		{
 			/** ## Simple Automapping
-			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property, 
+			* This is exactly where `AutoMap()` becomes useful. Instead of manually mapping each property,
 			* explicitly, we can instead call `.AutoMap()` for each of our mappings and let NEST do all the work
 			*/
 			var descriptor = new CreateIndexDescriptor("myindex")
@@ -132,12 +132,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/**
-			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			* In this example, 
-			* - Birthday was mapped as a date, 
+			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
+			* In this example,
+			* - Birthday was mapped as a date,
 			* - Hours was mapped as a long (ticks)
-			* - IsManager was mapped as a boolean, 
-			* - Salary as an integer 
+			* - IsManager was mapped as a boolean,
+			* - Salary as an integer
 			* - Employees as an object
 			* and the remaining string properties as strings.
 			*/
@@ -164,7 +164,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									hours = new
 									{
@@ -176,7 +176,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									salary = new
 									{
@@ -187,7 +187,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							name = new
 							{
-								type = "string"
+								type = "text"
 							}
 						}
 					},
@@ -206,7 +206,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							firstName = new
 							{
-								type = "string"
+								type = "text"
 							},
 							hours = new
 							{
@@ -218,7 +218,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							lastName = new
 							{
-								type = "string"
+								type = "text"
 							},
 							salary = new
 							{
@@ -235,7 +235,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		/** ## Automapping with overrides
 		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
 		* various options on your properties (analyzer, doc_values, etc...).  In that case, it's
-		* possible to use AutoMap() in conjuction with explicitly mapped properties.  
+		* possible to use AutoMap() in conjuction with explicitly mapped properties.
 		*/
 		[U]
 		public void OverridingAutoMappedProperties()
@@ -267,7 +267,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							name = new
 							{
-								type = "string"
+								type = "text"
 							},
 							employees = new
 							{
@@ -307,10 +307,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[ElasticsearchType(Name = "company")]
 		public class CompanyWithAttributes
 		{
-			[String(Analyzer = "keyword", NullValue = "null", Similarity = SimilarityOption.BM25)]
+			[Keyword(NullValue = "null", Similarity = SimilarityOption.BM25)]
 			public string Name { get; set; }
 
-			[String(Name = "office_hours")]
+			[Text(Name = "office_hours")]
 			public TimeSpan? HeadOfficeHours { get; set; }
 
 			[Object(Path = "employees", Store = false)]
@@ -320,10 +320,10 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		[ElasticsearchType(Name = "employee")]
 		public class EmployeeWithAttributes
 		{
-			[String(Name = "first_name")]
+			[Text(Name = "first_name")]
 			public string FirstName { get; set; }
 
-			[String(Name = "last_name")]
+			[Text(Name = "last_name")]
 			public string LastName { get; set; }
 
 			[Number(DocValues = false, IgnoreMalformed = true, Coerce = true)]
@@ -373,7 +373,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									hours = new
 									{
@@ -385,7 +385,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									salary = new
 									{
@@ -397,14 +397,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							name = new
 							{
-								analyzer = "keyword",
 								null_value = "null",
 								similarity = "BM25",
-								type = "string"
+								type = "keyword"
 							},
 							office_hours = new
 							{
-								type = "string"
+								type = "text"
 							}
 						}
 					},
@@ -434,7 +433,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									hours = new
 									{
@@ -446,7 +445,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									salary = new
 									{
@@ -457,7 +456,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							first_name = new
 							{
-								type = "string"
+								type = "text"
 							},
 							isManager = new
 							{
@@ -467,7 +466,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							last_name = new
 							{
-								type = "string"
+								type = "text"
 							},
 							salary = new
 							{
@@ -509,12 +508,11 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							.Default("10m")
 						)
 						.Properties(ps => ps
-							.String(s => s
+							.Text(s => s
 								.Name(e => e.FirstName)
 								.Fields(fs => fs
-									.String(ss => ss
+									.Keyword(ss => ss
 										.Name("firstNameRaw")
-										.Index(FieldIndexOption.NotAnalyzed)
 									)
 									.TokenCount(t => t
 										.Name("length")
@@ -549,14 +547,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							name = new
 							{
-								analyzer = "keyword",
 								null_value = "null",
 								similarity = "BM25",
-								type = "string"
+								type = "keyword"
 							},
 							office_hours = new
 							{
-								type = "string"
+								type = "text"
 							}
 						}
 					},
@@ -590,7 +587,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									hours = new
 									{
@@ -602,7 +599,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
-										type = "string"
+										type = "text"
 									},
 									salary = new
 									{
@@ -617,8 +614,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								{
 									firstNameRaw = new
 									{
-										index = "not_analyzed",
-										type = "string"
+										type = "keyword"
 									},
 									length = new
 									{
@@ -626,7 +622,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 										analyzer = "standard"
 									}
 								},
-								type = "string"
+								type = "text"
 							},
 							isManager = new
 							{
@@ -636,7 +632,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							last_name = new
 							{
-								type = "string"
+								type = "text"
 							},
 							salary = new
 							{
@@ -656,7 +652,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		{
 			public string Name { get; set; }
 
-			[String(Ignore = true)]
+			[Text(Ignore = true)]
 			public string PropertyToIgnore { get; set; }
 
 			public string AnotherPropertyToIgnore { get; set; }
@@ -666,7 +662,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/** == Ignoring Properties
-		 * Properties on a POCO can be ignored in a few ways:  
+		 * Properties on a POCO can be ignored in a few ways:
 		 */
 		/**
 		 * - Using the `Ignore` property on a derived `ElasticsearchPropertyAttribute` type applied to the property that should be ignored on the POCO
@@ -678,7 +674,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* - Using an ignore attribute applied to the POCO property that is understood by the `IElasticsearchSerializer` used and inspected inside of `CreatePropertyMapping()` on the serializer. In the case of the default `JsonNetSerializer`, this is the Json.NET `JsonIgnoreAttribute`
 		*/
 		/**
-		 * This example demonstrates all ways, using the attribute way to ignore the property `PropertyToIgnore`, the infer mapping way to ignore the 
+		 * This example demonstrates all ways, using the attribute way to ignore the property `PropertyToIgnore`, the infer mapping way to ignore the
 		 * property `AnotherPropertyToIgnore` and the json serializer specific attribute way to ignore the property `JsonIgnoredProperty`
 		 */
 		[U]
@@ -701,7 +697,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							name = new
 							{
-								type = "string"
+								type = "text"
 							}
 						}
 					}
@@ -876,7 +872,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		/** # Applying conventions through the Visitor pattern
 		 * It is also possible to apply a transformation on all or specific properties.
 		 *
-		 * AutoMap internally implements the visitor pattern.  The default visitor `NoopPropertyVisitor` does 
+		 * AutoMap internally implements the visitor pattern.  The default visitor `NoopPropertyVisitor` does
 		 * nothing, and acts as a blank canvas for you to implement your own visiting methods.
 		 *
 		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types.
@@ -906,7 +902,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					.Map<Employee>(m => m.AutoMap(new DisableDocValuesPropertyVisitor()))
 				);
 
-			/** and anytime it maps a property as a number (INumberProperty) or boolean (IBooleanProperty) 
+			/** and anytime it maps a property as a number (INumberProperty) or boolean (IBooleanProperty)
 			 * it will apply the transformation defined in each Visit() respectively, which in this example
 			 * disables doc values.
 			 */
@@ -952,12 +948,12 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		}
 
 		/** You can even take the visitor approach a step further, and instead of visiting on IProperty types, visit
-		 * directly on your POCO properties (PropertyInfo).  For example, lets create a visitor that maps all CLR types 
-		 * to an Elasticsearch string (IStringProperty).
+		 * directly on your POCO properties (PropertyInfo).  For example, lets create a visitor that maps all CLR types
+		 * to an Elasticsearch text datatype (ITextProperty).
 		 */
 		public class EverythingIsAStringPropertyVisitor : NoopPropertyVisitor
 		{
-			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new StringProperty();
+			public override IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => new TextProperty();
 		}
 
 		[U]
@@ -978,27 +974,27 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							birthday = new
 							{
-								type = "string"
+								type = "text"
 							},
 							employees = new
 							{
-								type = "string"
+								type = "text"
 							},
 							firstName = new
 							{
-								type = "string"
+								type = "text"
 							},
 							isManager = new
 							{
-								type = "string"
+								type = "text"
 							},
 							lastName = new
 							{
-								type = "string"
+								type = "text"
 							},
 							salary = new
 							{
-								type = "string"
+								type = "text"
 							}
 						}
 					}

@@ -1,27 +1,26 @@
 ﻿using System;
 using Nest;
 
-namespace Tests.Mapping.Types.Core.String
+namespace Tests.Mapping.Types.Core.Text
 {
-	public class StringTest
+	public class TextTest
 	{
-		[String(
+		[Text(
 			Analyzer = "myanalyzer",
 			Boost = 1.2,
-			DocValues = true,
-			IgnoreAbove = 50,
+			EagerGlobalOrdinals = true,
+			Fielddata = true,
 			IncludeInAll = false,
-			Index = FieldIndexOption.NotAnalyzed,
+			Index = true,
 			IndexOptions = IndexOptions.Offsets,
-			NullValue = "na",
-			PositionOffsetGap = 5,
+			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
-			Similarity = SimilarityOption.BM25,
-			Store = true,
-			TermVector = TermVectorOption.WithPositionsOffsets)]
+			SearchQuoteAnalyzer = "mysearchquoteanalyzer",
+			Similarity = SimilarityOption.Classic,
+			Store = true)]
 		public string Full { get; set; }
 
-		[String]
+		[Text]
 		public string Minimal { get; set; }
 
         public string Inferred { get; set; }
@@ -31,7 +30,7 @@ namespace Tests.Mapping.Types.Core.String
         public Guid Guid { get; set; }
 	}
 
-	public class StringMappingTests : TypeMappingTestBase<StringTest>
+	public class TextMappingTests : TypeMappingTestBase<TextTest>
 	{
 		protected override object ExpectJson => new
 		{
@@ -39,67 +38,65 @@ namespace Tests.Mapping.Types.Core.String
 			{
 				full = new
 				{
-					type = "string",
+					type = "text",
 					analyzer = "myanalyzer",
 					boost = 1.2,
-					doc_values = true,
-					ignore_above = 50,
+					eager_global_ordinals = true,
+					fielddata = true,
 					include_in_all = false,
-					index = "not_analyzed",
+					index = true,
 					index_options = "offsets",
-					null_value = "na",
-					position_offset_gap = 5,
+					position_increment_gap = 5,
 					search_analyzer = "mysearchanalyzer",
-					similarity = "BM25",
-					store = true,
-					term_vector = "with_positions_offsets"
+					search_quote_analyzer = "mysearchquoteanalyzer",
+					similarity = "classic",
+					store = true
 				},
 				minimal = new
 				{
-					type = "string"
-				},			
+					type = "text"
+				},
                 inferred = new
 				{
-					type = "string"
-				},			
+					type = "text"
+				},
                 @char = new
 				{
-					type = "string"
+					type = "text"
 				},
                 guid = new
 				{
-					type = "string"
+					type = "text"
 				}
 			}
 		};
 
-		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentProperties => p => p
-			.String(s => s
+		protected override Func<PropertiesDescriptor<TextTest>, IPromise<IProperties>> FluentProperties => p => p
+			.Text(t => t
 				.Name(o => o.Full)
 				.Analyzer("myanalyzer")
 				.Boost(1.2)
-				.DocValues()
-				.IgnoreAbove(50)
+				.EagerGlobalOrdinals()
+				.Fielddata()
 				.IncludeInAll(false)
-				.Index(FieldIndexOption.NotAnalyzed)
+				.Index()
 				.IndexOptions(IndexOptions.Offsets)
-				.NullValue("na")
-				.PositionOffsetGap(5)
+				.PositionIncrementGap(5)
 				.SearchAnalyzer("mysearchanalyzer")
-				.Similarity(SimilarityOption.BM25)
-				.Store(true)
-				.TermVector(TermVectorOption.WithPositionsOffsets)
+				.SearchQuoteAnalyzer("mysearchquoteanalyzer")
+				.Similarity(SimilarityOption.Classic)
+				.Store()
 			)
-			.String(s => s
+			.Text(s => s
 				.Name(o => o.Minimal)
 			)
-            .String(s => s
+            .Text(s => s
 				.Name(o => o.Inferred)
 			)
-            .String(s => s
+            .Text(s => s
 				.Name(o => o.Char)
 			)
-            .String(s => s
+            .Text(s => s
 				.Name(o => o.Guid)
 			);
 
@@ -109,7 +106,7 @@ namespace Tests.Mapping.Types.Core.String
 			{
 				full = new
 				{
-					type = "string",
+					type = "text",
 					norms = new
 					{
 						enabled = true,
@@ -118,8 +115,8 @@ namespace Tests.Mapping.Types.Core.String
 				}
 			}
 		};
-		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
-			.String(s => s
+		protected override Func<PropertiesDescriptor<TextTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
+			.Text(s => s
 				.Name(o => o.Full)
 				.Norms(n => n
 					.Enabled()

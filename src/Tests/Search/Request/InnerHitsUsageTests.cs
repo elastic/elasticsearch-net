@@ -90,7 +90,7 @@ namespace Tests.Search.Request
 		}
 
 		private PropertiesDescriptor<TRoyal> RoyalProps<TRoyal>(PropertiesDescriptor<TRoyal> props) where TRoyal : class, IRoyal =>
-			props.String(s => s.Name(p => p.Name).NotAnalyzed());
+			props.Text(s => s.Name(p => p.Name).Index(false));
 
 		private void IndexAll<TRoyal>(BulkDescriptor bulk, Func<IEnumerable<TRoyal>> create, string parent = null, Action<TRoyal> indexChildren = null)
 			where TRoyal : class, IRoyal

@@ -38,7 +38,7 @@ namespace Tests.Mapping.Types.Complex.Object
 					{
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					}
 				},
@@ -49,7 +49,7 @@ namespace Tests.Mapping.Types.Complex.Object
 					{
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					}
 				}

@@ -6,9 +6,9 @@ namespace Tests.Mapping.Types.Core.Date
 	public class DateTest
 	{
 		[Date(
-			DocValues = true, 
-			IndexName = "myindex", 
-			Similarity = SimilarityOption.Default, 
+			DocValues = true,
+			IndexName = "myindex",
+			Similarity = SimilarityOption.Classic,
 			Store = true,
 			Index = NonStringIndexOption.No,
 			Boost = 1.2,
@@ -38,7 +38,7 @@ namespace Tests.Mapping.Types.Core.Date
 					type = "date",
 					doc_values = true,
 					index_name = "myindex",
-					similarity = "default",
+					similarity = "classic",
 					store = true,
 					index = "no",
 					boost = 1.2,
@@ -68,7 +68,7 @@ namespace Tests.Mapping.Types.Core.Date
 				.Name(o => o.Full)
 				.DocValues()
 				.IndexName("myindex")
-				.Similarity(SimilarityOption.Default)
+				.Similarity(SimilarityOption.Classic)
 				.Store()
 				.Index(NonStringIndexOption.No)
 				.Boost(1.2)

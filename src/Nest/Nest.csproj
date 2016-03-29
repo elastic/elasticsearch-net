@@ -785,12 +785,14 @@
     <Compile Include="Mapping\Types\Core\Date\DateAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Date\DateProperty.cs" />
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
+    <Compile Include="Mapping\Types\Core\Keyword\KeywordAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Keyword\KeywordProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
-    <Compile Include="Mapping\Types\Core\String\IndexOptions.cs" />
-    <Compile Include="Mapping\Types\Core\String\StringAttribute.cs" />
-    <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
+    <Compile Include="Mapping\Types\Core\Text\IndexOptions.cs" />
+    <Compile Include="Mapping\Types\Core\Text\TextAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Text\TextProperty.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointAttribute.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointProperty.cs" />

@@ -55,7 +55,7 @@ namespace Tests.Document.Single.Index
 									.KeywordsField(d => d
 										.Name(n => n.Keywords)
 									)
-									.LanguageField((StringPropertyDescriptor<Attachment> d) => d
+									.LanguageField((TextPropertyDescriptor<Attachment> d) => d
 										.Name(n => n.Language)
 									)
 									.NameField(d => d

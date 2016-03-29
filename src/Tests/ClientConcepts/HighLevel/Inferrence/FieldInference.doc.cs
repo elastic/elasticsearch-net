@@ -19,10 +19,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 {
 	public class FieldInferrence
 	{
-		/** # Strongly typed field access 
-		 * 
+		/** # Strongly typed field access
+		 *
 		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
-		 * NEST allows you to use C# expressions to strongly type these field path strings. 
+		 * NEST allows you to use C# expressions to strongly type these field path strings.
 		 *
 		 * These expressions are assigned to a type called `Field` and there are several ways to create a instance of that type
 		 */
@@ -67,7 +67,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			var fieldExpression = Infer.Field<Project>(p => p.Name);
 
 			/** Using static imports in c# 6 this can be even shortened:
-				using static Nest.Static; 
+				using static Nest.Static;
 			*/
 			fieldExpression = Field<Project>(p => p.Name);
 			/** Now this is much much terser then our first example using the constructor! */
@@ -127,7 +127,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 
 
-			/** If you are using elasticearch's multifield mapping (you really should!) these "virtual" sub fields 
+			/** If you are using elasticearch's multifield mapping (you really should!) these "virtual" sub fields
 			* do not always map back on to your POCO, by calling .Suffix() you describe the sub fields that do not live in your c# objects
 			*/
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
@@ -149,9 +149,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
 		}
 
-		/** 
+		/**
 		* Suffixes can be appended to expressions. This is useful in cases where you want to apply the same suffix
-		* to a list of fields 
+		* to a list of fields
 		*/
 		[U]
 		public void AppendingSuffixToExpressions()
@@ -166,7 +166,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			};
 
 			/** append the suffix "raw" to each expression */
-			var fieldExpressions = 
+			var fieldExpressions =
 				expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
 
 			Expect("name.raw").WhenSerializing(fieldExpressions[0]);
@@ -175,13 +175,13 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("leadDeveloper.firstName.raw").WhenSerializing(fieldExpressions[3]);
 		}
 
-		/** Annotations 
-		* 
+		/** Annotations
+		*
 		* When using NEST's property attributes you can specify a new name for the properties
 		*/
 		public class BuiltIn
 		{
-			[String(Name = "naam")]
+			[Text(Name = "naam")]
 			public string Name { get; set; }
 		}
 		[U]
@@ -190,7 +190,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 		}
 
-		/** 
+		/**
 		* Starting with NEST 2.x we also ask the serializer if it can resolve the property to a name.
 		* Here we ask the default JsonNetSerializer and it takes JsonProperty into account
 		*/
@@ -205,12 +205,12 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 		}
 
-		/** 
-		* If both are specified NEST takes precedence though 
+		/**
+		* If both are specified NEST takes precedence though
 		*/
 		public class Both
 		{
-			[String(Name = "naam")]
+			[Text(Name = "naam")]
 			[JsonProperty("nameInJson")]
 			public string Name { get; set; }
 		}
@@ -293,14 +293,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			* Eventhough this property has a NEST property mapping and a JsonProperty attribute
 			* We are going to provide a hard rename for it on ConnectionSettings later that should win.
 			*/
-			[String(Name = "renamedIgnoresNest")]
+			[Text(Name = "renamedIgnoresNest")]
 			[JsonProperty("renamedIgnoresJsonProperty")]
 			public string RenamedOnConnectionSettings { get; set; }
 
 			/**
 			* This property has both a NEST attribute and a JsonProperty, NEST should win.
 			*/
-			[String(Name = "nestAtt")]
+			[Text(Name = "nestAtt")]
 			[JsonProperty("jsonProp")]
 			public string NestAttribute { get; set; }
 
@@ -312,14 +312,14 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			[JsonProperty("dontaskme")]
 			public string AskSerializer { get; set; }
 
-			/** We are going to register a DefaultFieldNameInferrer on ConnectionSettings 
-			* that will uppercase all properties. 
+			/** We are going to register a DefaultFieldNameInferrer on ConnectionSettings
+			* that will uppercase all properties.
 			*/
 			public string DefaultFieldNameInferrer { get; set; }
 
 		}
 
-		/** 
+		/**
 		* Here we create a custom converter that renames any property named `AskSerializer` to `ask`
 		*/
 		class CustomSerializer : JsonNetSerializer
@@ -350,9 +350,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 			usingSettings.Expect("jsonProp").ForField(Field<Precedence>(p => p.JsonProperty));
 			usingSettings.Expect("ask").ForField(Field<Precedence>(p => p.AskSerializer));
 			usingSettings.Expect("DEFAULTFIELDNAMEINFERRER").ForField(Field<Precedence>(p => p.DefaultFieldNameInferrer));
-			
+
 			/** The same rules apply when indexing an object */
-			usingSettings.Expect(new [] 
+			usingSettings.Expect(new []
 			{
 				"ask",
 				"DEFAULTFIELDNAMEINFERRER",
@@ -368,6 +368,6 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence
 				DefaultFieldNameInferrer = "shouting much?"
 			});
 
-		}	
+		}
 	}
 }

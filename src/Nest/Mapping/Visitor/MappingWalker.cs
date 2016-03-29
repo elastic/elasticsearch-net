@@ -24,7 +24,7 @@ namespace Nest
 			this._visitor.Visit(mapping);
 			this.Accept(mapping.Properties);
 		}
-			
+
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
@@ -35,11 +35,17 @@ namespace Nest
 				var type = field.Type;
 				switch (type.Name)
 				{
-					case "string":
-						var s = field as StringProperty;
+					case "text":
+						var s = field as TextProperty;
 						if (s == null) continue;
 						this._visitor.Visit(s);
 						this.Accept(s.Fields);
+						break;
+					case "keyword":
+						var k = field as KeywordProperty;
+						if (k == null) continue;
+						this._visitor.Visit(k);
+						this.Accept(k.Fields);
 						break;
 					case "float":
 					case "double":

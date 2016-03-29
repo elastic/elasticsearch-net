@@ -1,16 +1,17 @@
 ﻿namespace Nest
 {
+	// TODO validate if these mappings still apply to 5.0
 	public class AttachmentAttribute : ElasticsearchPropertyAttributeBase, IAttachmentProperty
 	{
-		IStringProperty IAttachmentProperty.AuthorField { get; set; }
+		ITextProperty IAttachmentProperty.AuthorField { get; set; }
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
-		IStringProperty IAttachmentProperty.ContentTypeField { get; set; }
+		ITextProperty IAttachmentProperty.ContentTypeField { get; set; }
 		IDateProperty IAttachmentProperty.DateField { get; set; }
-		IStringProperty IAttachmentProperty.FileField { get; set; }
-		IStringProperty IAttachmentProperty.KeywordsField { get; set; }
-		IStringProperty IAttachmentProperty.LanguageField { get; set; }
-		IStringProperty IAttachmentProperty.NameField { get; set; }
-		IStringProperty IAttachmentProperty.TitleField { get; set; }
+		ITextProperty IAttachmentProperty.FileField { get; set; }
+		ITextProperty IAttachmentProperty.KeywordsField { get; set; }
+		ITextProperty IAttachmentProperty.LanguageField { get; set; }
+		ITextProperty IAttachmentProperty.NameField { get; set; }
+		ITextProperty IAttachmentProperty.TitleField { get; set; }
 
 		public AttachmentAttribute() : base("attachment") { }
 	}

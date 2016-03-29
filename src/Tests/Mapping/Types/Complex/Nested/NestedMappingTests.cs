@@ -42,7 +42,7 @@ namespace Tests.Mapping.Types.Complex.Nested
 					{
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					}
 				},
@@ -53,7 +53,7 @@ namespace Tests.Mapping.Types.Complex.Nested
 					{
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					}
 				}

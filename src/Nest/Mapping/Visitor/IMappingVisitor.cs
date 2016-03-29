@@ -6,22 +6,21 @@ namespace Nest
 	{
 		int Depth { get; set; }
 		void Visit(TypeMapping mapping);
-		void Visit(StringProperty mapping);
-		[Obsolete("Use Visit(NumberProperty mapping) for number mappings")]
-		void Visit(NumberType mapping);
-		void Visit(DateProperty mapping);
-		void Visit(BooleanProperty mapping);
-		void Visit(BinaryProperty mapping);
-		void Visit(ObjectProperty mapping);
-		void Visit(NestedProperty mapping);
-		void Visit(IpProperty mapping);
-		void Visit(GeoPointProperty mapping);
-		void Visit(GeoShapeProperty mapping);
-		void Visit(AttachmentProperty mapping);
-		void Visit(NumberProperty mapping);
-		void Visit(CompletionProperty mapping);
-		void Visit(Murmur3HashProperty mapping);
-		void Visit(TokenCountProperty mapping);
+		void Visit(TextProperty property);
+		void Visit(KeywordProperty property);
+		void Visit(DateProperty property);
+		void Visit(BooleanProperty property);
+		void Visit(BinaryProperty property);
+		void Visit(ObjectProperty property);
+		void Visit(NestedProperty property);
+		void Visit(IpProperty property);
+		void Visit(GeoPointProperty property);
+		void Visit(GeoShapeProperty property);
+		void Visit(AttachmentProperty property);
+		void Visit(NumberProperty property);
+		void Visit(CompletionProperty property);
+		void Visit(Murmur3HashProperty property);
+		void Visit(TokenCountProperty property);
 	}
 
 	public class NoopMappingVisitor : IMappingVisitor
@@ -32,64 +31,63 @@ namespace Nest
 		{
 		}
 
-		public virtual void Visit(StringProperty mapping)
+		public virtual void Visit(TextProperty property)
 		{
 		}
 
-		[Obsolete("Use Visit(NumberProperty mapping) for number mappings")]
-		public virtual void Visit(NumberType mapping)
+		public virtual void Visit(KeywordProperty property)
 		{
 		}
 
-		public virtual void Visit(DateProperty mapping)
+		public virtual void Visit(DateProperty property)
 		{
 		}
 
-		public virtual void Visit(BooleanProperty mapping)
+		public virtual void Visit(BooleanProperty property)
 		{
 		}
 
-		public virtual void Visit(BinaryProperty mapping)
+		public virtual void Visit(BinaryProperty property)
 		{
 		}
 
-		public virtual void Visit(ObjectProperty mapping)
+		public virtual void Visit(ObjectProperty property)
 		{
 		}
 
-		public virtual void Visit(NestedProperty mapping)
+		public virtual void Visit(NestedProperty property)
 		{
 		}
 
-		public virtual void Visit(IpProperty mapping)
+		public virtual void Visit(IpProperty property)
 		{
 		}
 
-		public virtual void Visit(GeoPointProperty mapping)
+		public virtual void Visit(GeoPointProperty property)
 		{
 		}
 
-		public virtual void Visit(GeoShapeProperty mapping)
+		public virtual void Visit(GeoShapeProperty property)
 		{
 		}
 
-		public virtual void Visit(AttachmentProperty mapping)
+		public virtual void Visit(AttachmentProperty property)
 		{
 		}
 
-		public virtual void Visit(NumberProperty mapping)
+		public virtual void Visit(NumberProperty property)
 		{
 		}
 
-		public virtual void Visit(CompletionProperty mapping)
+		public virtual void Visit(CompletionProperty property)
 		{
 		}
 
-		public virtual void Visit(Murmur3HashProperty mapping)
+		public virtual void Visit(Murmur3HashProperty property)
 		{
 		}
 
-		public virtual void Visit(TokenCountProperty mapping)
+		public virtual void Visit(TokenCountProperty property)
 		{
 		}
 	}

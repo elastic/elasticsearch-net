@@ -56,9 +56,13 @@ namespace Nest
 		{
 		}
 
-		public virtual void Visit(IStringProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		public virtual void Visit(ITextProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
+		public virtual void Visit(IKeywordProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
+		{
+		}
+
 
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 
@@ -88,9 +92,13 @@ namespace Nest
 			if (numberType != null)
 				Visit(numberType, propertyInfo, attribute);
 
-			var stringType = type as IStringProperty;
-			if (stringType != null)
-				Visit(stringType, propertyInfo, attribute);
+			var textType = type as ITextProperty;
+			if (textType != null)
+				Visit(textType, propertyInfo, attribute);
+
+			var keywordType = type as IKeywordProperty;
+			if (keywordType != null)
+				Visit(textType, propertyInfo, attribute);
 
 			var attachmentType = type as IAttachmentProperty;
 			if (attachmentType != null)

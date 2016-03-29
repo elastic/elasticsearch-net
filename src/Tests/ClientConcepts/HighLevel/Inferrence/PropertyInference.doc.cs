@@ -41,7 +41,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.PropertyNames
 				.Mappings(m => m
 					.Map("type-with-dot", mm => mm
 						.Properties(p => p
-							.String(s => s
+							.Text(s => s
 								.Name("name-with.dot")
 							)
 						)

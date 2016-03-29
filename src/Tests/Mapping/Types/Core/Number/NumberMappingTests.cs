@@ -8,7 +8,7 @@ namespace Tests.Mapping.Types.Core.Number
 		[Number(
 			DocValues = true,
 			IndexName = "myindex",
-			Similarity = SimilarityOption.Default,
+			Similarity = SimilarityOption.Classic,
 			Store = true,
 			Index = NonStringIndexOption.No,
 			Boost = 1.5,
@@ -38,7 +38,7 @@ namespace Tests.Mapping.Types.Core.Number
 
         public ulong UnsignedLong { get; set; }
 
-        public float Float { get; set; } 
+        public float Float { get; set; }
 
         public double Double { get; set; }
 
@@ -59,7 +59,7 @@ namespace Tests.Mapping.Types.Core.Number
 					type = "double",
 					doc_values = true,
 					index_name = "myindex",
-					similarity = "default",
+					similarity = "classic",
 					store = true,
 					index = "no",
 					boost = 1.5,
@@ -83,7 +83,7 @@ namespace Tests.Mapping.Types.Core.Number
                 },
                 integer = new
                 {
-                    type = "integer"  
+                    type = "integer"
                 },
                 @long = new
                 {
@@ -108,7 +108,7 @@ namespace Tests.Mapping.Types.Core.Number
                 @float = new
                 {
                     type = "float"
-                },             
+                },
                 @double = new
                 {
                     type = "double"
@@ -129,7 +129,7 @@ namespace Tests.Mapping.Types.Core.Number
 	            .Name(o => o.Full)
 	            .DocValues()
 	            .IndexName("myindex")
-	            .Similarity(SimilarityOption.Default)
+	            .Similarity(SimilarityOption.Classic)
 	            .Store()
 	            .Index(NonStringIndexOption.No)
 	            .Boost(1.5)

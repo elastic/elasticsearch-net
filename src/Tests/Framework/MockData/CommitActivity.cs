@@ -16,7 +16,7 @@ namespace Tests.Framework.MockData
 		public Developer Committer { get; set; }
 		public TimeSpan? Duration { get; set; }
 
-		[String]
+		[Text]
 		[JsonConverter(typeof(StringTimeSpanConverter))]
 		public TimeSpan? StringDuration
 		{
@@ -35,7 +35,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Duration, p => p.Random.ArrayElement(new TimeSpan?[]
 				{
 					TimeSpan.MinValue,
-					TimeSpan.MaxValue, 
+					TimeSpan.MaxValue,
 					TimeSpan.FromMinutes(7.5),
 					TimeSpan.Zero,
 					null,

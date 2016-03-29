@@ -76,9 +76,9 @@ namespace Tests.Framework.Integration
 								.Match("*") //matches all fields
 								.MatchMappingType("string") //that are a string
 								.Mapping(tm => tm
-									.String(sm => sm //map as string
+									.Text(sm => sm //map as string
 										.Fields(f => f //with a multifield 'raw' that is not analyzed
-											.String(ssm => ssm.Name("raw").Index(FieldIndexOption.NotAnalyzed))
+											.Keyword(ssm => ssm.Name("raw"))
 										)
 									)
 								)
@@ -121,7 +121,7 @@ namespace Tests.Framework.Integration
 								.Name(p => p.Committer)
 								.Properties(DeveloperProperties)
 							)
-							.String(prop => prop.Name(p => p.ProjectName).NotAnalyzed())
+							.Text(prop => prop.Name(p => p.ProjectName).Index(false))
 						)
 					)
 				)
@@ -131,20 +131,20 @@ namespace Tests.Framework.Integration
 
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
 			.Properties(props => props
-				.String(s => s
+				.Text(s => s
 					.Name(p => p.Name)
-					.NotAnalyzed()
+					.Index(false)
 					.Fields(fs => fs
-						.String(ss => ss.Name("standard").Analyzer("standard"))
+						.Text(ss => ss.Name("standard").Analyzer("standard"))
 						.Completion(cm => cm.Name("suggest"))
 					)
 				)
 				.Date(d => d.Name(p => p.StartedOn))
-				.String(d => d
+				.Text(d => d
 					.Name(p => p.State)
-					.NotAnalyzed()
+					.Index(false)
 					.Fields(fs => fs
-						.String(st => st.Name("offsets").IndexOptions(IndexOptions.Offsets))
+						.Text(st => st.Name("offsets").IndexOptions(IndexOptions.Offsets))
 					)
 				)
 				.Nested<Tag>(mo => mo
@@ -168,17 +168,18 @@ namespace Tests.Framework.Integration
 			);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
-			.String(s => s
-				.Name(p => p.Name).NotAnalyzed()
+			.Text(s => s
+				.Name(p => p.Name)
+				.Index(false)
 				.Fields(f => f
-					.String(st => st.Name("vectors").TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+					.Text(st => st.Name("vectors").TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
 				)
 			);
 
 		private static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
-			.String(s => s.Name(p => p.OnlineHandle).NotAnalyzed())
-			.String(s => s.Name(p => p.Gender).NotAnalyzed())
-			.String(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+			.Text(s => s.Name(p => p.OnlineHandle).Index(false))
+			.Text(s => s.Name(p => p.Gender).Index(false))
+			.Text(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
 			.Ip(s => s.Name(p => p.IPAddress))
 			.GeoPoint(g => g.Name(p => p.Location).LatLon())
 			;

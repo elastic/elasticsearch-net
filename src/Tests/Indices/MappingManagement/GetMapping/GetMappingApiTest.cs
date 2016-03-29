@@ -151,9 +151,14 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			throw new InvalidOperationException("NumberType should never be called");
 		}
 
-		public void Visit(StringProperty mapping)
+		public void Visit(TextProperty mapping)
 		{
-			Increment("string");
+			Increment("text");
+		}
+
+		public void Visit(KeywordProperty mapping)
+		{
+			Increment("keyword");
 		}
 
 		public void Visit(TypeMapping mapping)

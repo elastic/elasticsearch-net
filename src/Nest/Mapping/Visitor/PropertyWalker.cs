@@ -87,7 +87,7 @@ namespace Nest
 			type = GetUnderlyingType(type);
 
 			if (type == typeof(string))
-				return new StringProperty();
+				return new TextProperty();
 
 			if (type.IsEnumType())
 				return new NumberProperty(NumberType.Integer);
@@ -121,7 +121,7 @@ namespace Nest
 						return new BooleanProperty();
 					case "Char":
 					case "Guid":
-						return new StringProperty();
+						return new TextProperty();
 				}
 			}
 

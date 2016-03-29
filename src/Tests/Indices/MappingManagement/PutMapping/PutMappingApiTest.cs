@@ -45,14 +45,14 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						},
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					},
 					type = "object"
 				},
 				description = new
 				{
-					type = "string"
+					type = "text"
 				},
 				lastActivity = new
 				{
@@ -64,7 +64,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					{
 						firstName = new
 						{
-							type = "string"
+							type = "text"
 						},
 						gender = new
 						{
@@ -76,15 +76,15 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						},
 						iPAddress = new
 						{
-							type = "string"
+							type = "text"
 						},
 						jobTitle = new
 						{
-							type = "string"
+							type = "text"
 						},
 						lastName = new
 						{
-							type = "string"
+							type = "text"
 						},
 						location = new
 						{
@@ -92,7 +92,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						},
 						nickname = new
 						{
-							type = "string"
+							type = "text"
 						}
 					},
 					type = "object"
@@ -118,8 +118,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				name = new
 				{
-					index = "not_analyzed",
-					type = "string"
+					index = false,
+					type = "text"
 				},
 				numberOfCommits = new
 				{
@@ -147,7 +147,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						},
 						name = new
 						{
-							type = "string"
+							type = "text"
 						}
 					},
 					type = "object"
@@ -160,9 +160,9 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.Index(CallIsolatedValue)
 			.AutoMap()
 			.Properties(prop => prop
-				.String(s => s
+				.Text(s => s
 					.Name(p => p.Name)
-					.NotAnalyzed()
+					.Index(false)
 				)
 				.Object<object>(o => o
 					.Name(p => p.Metadata)
@@ -179,24 +179,24 @@ namespace Tests.Indices.MappingManagement.PutMapping
 							Properties = new Properties<Tag>
 							{
 								{ p => p.Added, new DateProperty() },
-								{ p => p.Name, new StringProperty() },
+								{ p => p.Name, new TextProperty() },
 							}
 						}
 				},
-				{ p => p.Description, new StringProperty() },
+				{ p => p.Description, new TextProperty() },
 				{ p => p.LastActivity, new DateProperty() },
 				{ p => p.LeadDeveloper, new ObjectProperty
 						{
 							Properties = new Properties<Developer>
 							{
-								{ p => p.FirstName, new StringProperty() },
+								{ p => p.FirstName, new TextProperty() },
 								{ p => p.Gender, new NumberProperty(NumberType.Integer) },
 								{ p => p.Id, new NumberProperty(NumberType.Long) },
-								{ p => p.IPAddress, new StringProperty() },
-								{ p => p.JobTitle, new StringProperty() },
-								{ p => p.LastName, new StringProperty() },
+								{ p => p.IPAddress, new TextProperty() },
+								{ p => p.JobTitle, new TextProperty() },
+								{ p => p.LastName, new TextProperty() },
 								{ p => p.Location, new GeoPointProperty() },
-								{ p => p.OnlineHandle, new StringProperty() },
+								{ p => p.OnlineHandle, new TextProperty() },
 							}
 						}
 				},
@@ -210,7 +210,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 				},
 				{ p => p.Metadata, new ObjectProperty() },
-				{ p => p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  },
+				{ p => p.Name, new TextProperty { Index = false }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
 				{ p => p.StartedOn, new DateProperty() },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
@@ -220,7 +220,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 							Properties = new Properties<Tag>
 							{
 								{ p => p.Added, new DateProperty() },
-								{ p => p.Name, new StringProperty() },
+								{ p => p.Name, new TextProperty() },
 							}
 						}
 				},

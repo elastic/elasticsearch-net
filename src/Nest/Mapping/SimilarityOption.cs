@@ -7,8 +7,8 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum SimilarityOption
 	{
-		[EnumMember(Value = "default")]
-		Default,
+		[EnumMember(Value = "classic")]
+		Classic,
 		[EnumMember(Value = "BM25")]
 		BM25
 	}

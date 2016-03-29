@@ -67,9 +67,9 @@ namespace Tests.Cluster.ClusterState
 			rawFields.Mapping.Should().NotBeNull();
 			rawFields.Mapping.Fields.Should().NotBeEmpty().And.ContainKey("raw");
 
-			var rawField = rawFields.Mapping.Fields["raw"] as IStringProperty;
+			var rawField = rawFields.Mapping.Fields["raw"] as ITextProperty;
 			rawField.Should().NotBeNull();
-			rawField.Index.Should().Be(FieldIndexOption.NotAnalyzed);
+			rawField.Index.Should().Be(true);
 
 			var i = this.Client.Infer.IndexName(Index<Project>());
 			var t = this.Client.Infer.TypeName(Type<CommitActivity>());

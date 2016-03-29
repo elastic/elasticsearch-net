@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.BoolDsl
 					.Map<A>(m => m
 						.AutoMap()
 						.Properties(props => props
-							.String(s => s.Name(p => p.Option).NotAnalyzed())
+							.Text(s => s.Name(p => p.Option).Index(false))
 						)
 					)
 				)

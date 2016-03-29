@@ -6,9 +6,9 @@ namespace Tests.Mapping.Types.Core.Binary
 	public class BinaryTest
 	{
 		[Binary(
-			DocValues = true, 
-			IndexName = "myindex", 
-			Similarity = SimilarityOption.Default, 
+			DocValues = true,
+			IndexName = "myindex",
+			Similarity = SimilarityOption.Classic,
 			Store = true)]
 		public string Full { get; set; }
 
@@ -27,7 +27,7 @@ namespace Tests.Mapping.Types.Core.Binary
 					type = "binary",
 					doc_values = true,
 					index_name = "myindex",
-					similarity = "default",
+					similarity = "classic",
 					store = true
 				},
 				minimal = new
@@ -42,7 +42,7 @@ namespace Tests.Mapping.Types.Core.Binary
 				.Name(o => o.Full)
 				.DocValues()
 				.IndexName("myindex")
-				.Similarity(SimilarityOption.Default)
+				.Similarity(SimilarityOption.Classic)
 				.Store()
 			)
 			.Binary(b => b

@@ -21,11 +21,11 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 					{
 						author = new
 						{
-							type = "string"
+							type = "text"
 						},
 						content = new
 						{
-							type = "string"
+							type = "text"
 						},
 						content_length = new
 						{
@@ -33,7 +33,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 						},
 						content_type = new
 						{
-							type = "string"
+							type = "text"
 						},
 						date = new
 						{
@@ -41,21 +41,21 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 						},
 						keywords = new
 						{
-							type = "string"
+							type = "text"
 						},
 						language = new
 						{
-							type = "string",
+							type = "text",
 							doc_values = true,
-							index = "not_analyzed"
+							index = false
 						},
 						name = new
 						{
-							type = "string"
+							type = "text"
 						},
 						title = new
 						{
-							type = "string"
+							type = "text"
 						}
 					}
 				}
@@ -89,10 +89,10 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				.KeywordsField(d => d
 					.Name(n => n.Keywords)
 				)
-				.LanguageField((StringPropertyDescriptor<Framework.MockData.Attachment> d) => d
+				.LanguageField((TextPropertyDescriptor<Framework.MockData.Attachment> d) => d
 					.Name(n => n.Language)
 					.DocValues()
-					.NotAnalyzed()
+					.Index(false)
 				)
 				.NameField(d => d
 					.Name(n => n.Name)
