@@ -48,7 +48,6 @@
       </PropertyGroup>
     </When>
   </Choose>
-  <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -540,6 +539,9 @@
     <Compile Include=".\Search\Search\SearchUrlTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
+    <Compile Include="Aggregations\Pipeline\ExtendedStatsBucket\ExtendedStatsBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\PecentilesBucket\PercentilesBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\StatsBucket\StatsBucketAggregationUsageTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpApiTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpUrlTests.cs" />
     <Compile Include="Cat\CatNodeAttributes\CatNodeAttributesApiTests.cs" />
@@ -603,7 +605,8 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.png" />
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
+  <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
   <Import Project="..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">

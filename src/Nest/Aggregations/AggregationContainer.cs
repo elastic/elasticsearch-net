@@ -156,7 +156,16 @@ namespace Nest
 		[JsonProperty("sum_bucket")]
 		ISumBucketAggregation SumBucket { get; set; }
 
-		[JsonProperty("moving_avg")]
+        [JsonProperty("stats_bucket")]
+        IStatsBucketAggregation StatsBucket { get; set; }
+
+        [JsonProperty("extended_stats_bucket")]
+        IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
+
+        [JsonProperty("percentiles_bucket")]
+        IPercentilesBucketAggregation PercentilesBucket { get; set; }
+
+        [JsonProperty("moving_avg")]
 		IMovingAverageAggregation MovingAverage { get; set; }
 
 		[JsonProperty("cumulative_sum")]
@@ -244,7 +253,13 @@ namespace Nest
 
 		public ISumBucketAggregation SumBucket { get; set; }
 
-		public IMovingAverageAggregation MovingAverage { get; set; }
+        public IStatsBucketAggregation StatsBucket { get; set; }
+
+        public IExtendedStatsBucketAggregation ExtendedStatsBucket { get; set; }
+
+        public IPercentilesBucketAggregation PercentilesBucket { get; set; }
+
+        public IMovingAverageAggregation MovingAverage { get; set; }
 
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
 
@@ -351,7 +366,13 @@ namespace Nest
 
 		ISumBucketAggregation IAggregationContainer.SumBucket { get; set; }
 
-		IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
+        IStatsBucketAggregation IAggregationContainer.StatsBucket { get; set; }
+
+        IExtendedStatsBucketAggregation IAggregationContainer.ExtendedStatsBucket { get; set; }
+
+        IPercentilesBucketAggregation IAggregationContainer.PercentilesBucket { get; set; }
+
+        IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
 
 		ICumulativeSumAggregation IAggregationContainer.CumulativeSum { get; set; }
 
@@ -499,7 +520,19 @@ namespace Nest
 			Func<SumBucketAggregationDescriptor, ISumBucketAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.SumBucket = d);
 
-		public AggregationContainerDescriptor<T> MovingAverage(string name,
+        public AggregationContainerDescriptor<T> StatsBucket(string name,
+            Func<StatsBucketAggregationDescriptor, IStatsBucketAggregation> selector) =>
+            _SetInnerAggregation(name, selector, (a, d) => a.StatsBucket = d);
+
+        public AggregationContainerDescriptor<T> ExtendedStatsBucket(string name,
+            Func<ExtendedStatsBucketAggregationDescriptor, IExtendedStatsBucketAggregation> selector) =>
+            _SetInnerAggregation(name, selector, (a, d) => a.ExtendedStatsBucket = d);
+
+        public AggregationContainerDescriptor<T> PercentilesBucket(string name,
+            Func<PercentilesBucketAggregationDescriptor, IPercentilesBucketAggregation> selector) =>
+            _SetInnerAggregation(name, selector, (a, d) => a.PercentilesBucket = d);
+
+        public AggregationContainerDescriptor<T> MovingAverage(string name,
 			Func<MovingAverageAggregationDescriptor, IMovingAverageAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
 

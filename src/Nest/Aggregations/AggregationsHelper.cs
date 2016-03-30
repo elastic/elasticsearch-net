@@ -53,13 +53,19 @@ namespace Nest
 
 		public StatsAggregate Stats(string key) => this.TryGet<StatsAggregate>(key);
 
-		public ExtendedStatsAggregate ExtendedStats(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+        public StatsAggregate StatsBucket(string key) => this.TryGet<StatsAggregate>(key);
 
-		public GeoBoundsAggregate GeoBounds(string key) => this.TryGet<GeoBoundsAggregate>(key);
+        public ExtendedStatsAggregate ExtendedStats(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+
+        public ExtendedStatsAggregate ExtendedStatsBucket(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+
+        public GeoBoundsAggregate GeoBounds(string key) => this.TryGet<GeoBoundsAggregate>(key);
 
 		public PercentilesAggregate Percentiles(string key) => this.TryGet<PercentilesAggregate>(key);
 
-		public PercentilesAggregate PercentileRanks(string key) => this.TryGet<PercentilesAggregate>(key);
+        public PercentilesAggregate PercentilesBucket(string key) => this.TryGet<PercentilesAggregate>(key);
+
+        public PercentilesAggregate PercentileRanks(string key) => this.TryGet<PercentilesAggregate>(key);
 
 		public TopHitsAggregate TopHits(string key) => this.TryGet<TopHitsAggregate>(key);
 
