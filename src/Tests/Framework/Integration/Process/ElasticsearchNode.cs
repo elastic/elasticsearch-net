@@ -35,7 +35,7 @@ namespace Tests.Framework.Integration
 		private ObservableProcess _process;
 		private IDisposable _processListener;
 
-		public ElasticsearchBuildInfo BuildInfo { get; }
+		public ElasticsearchVersionInfo VersionInfo { get; }
 		public string Binary { get; }
 
 		private string RoamingFolder { get; }
@@ -102,18 +102,17 @@ namespace Tests.Framework.Integration
 			)
 		{
 			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
-			this.BuildInfo = GetBuildInfo(runningIntegrations ? elasticsearchVersion : "0.0.0-unittest");
+			this.VersionInfo = new ElasticsearchVersionInfo(runningIntegrations ? elasticsearchVersion : "0.0.0-unittest");
 			this.RunningIntegrations = runningIntegrations;
 			this.Prefix = prefix.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
 			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
 			this.NodeName = $"{this.Prefix}-node-{suffix}";
-
 			this.BootstrapWork = _blockingSubject;
 			var appData = GetApplicationDataDirectory();
-			this.RoamingFolder = Path.Combine(appData, "NEST", BuildInfo.SnapshotBuildNumber ?? BuildInfo.Version);
-			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + this.BuildInfo.Version);
-			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
+			this.RoamingFolder = Path.Combine(appData, "NEST", this.VersionInfo.Version + (this.VersionInfo.IsSnapshot ? $"-{VersionInfo.SnapshotIdentifier}" : string.Empty));
+			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + this.VersionInfo.Version);
+            this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
 			if (!runningIntegrations)
@@ -124,32 +123,6 @@ namespace Tests.Framework.Integration
 
 			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
-		}
-
-		private ElasticsearchBuildInfo GetBuildInfo(string version)
-		{
-			var buildInfo = new ElasticsearchBuildInfo
-			{
-				Version = version
-			};
-
-			var rootUrl = "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch";
-
-			if (buildInfo.Version.ToLower().Contains("snapshot"))
-			{
-				rootUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
-				var mavenMetadata = XElement.Load($"{rootUrl}/{buildInfo.Version}/maven-metadata.xml");
-				var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
-				var timestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
-				var buildNumber = snapshot.Descendants("buildNumber").FirstOrDefault().Value;
-				buildInfo.SnapshotBuildNumber = $"{timestamp}-{buildNumber}";
-				buildInfo.Zip = $"elasticsearch-{buildInfo.Version.Replace("SNAPSHOT", "")}{buildInfo.SnapshotBuildNumber}.zip";
-			}
-
-			buildInfo.Zip = buildInfo.Zip ?? $"elasticsearch-{buildInfo.Version}.zip";
-			buildInfo.DownloadUrl = $"{rootUrl}/{buildInfo.Version}/{buildInfo.Zip}";
-            buildInfo.ParsedVersion = new Version(Regex.Replace(buildInfo.Version, @"(?:\-.+)$", ""));
-			return buildInfo;
 		}
 
 		private string GetApplicationDataDirectory()
@@ -202,7 +175,7 @@ namespace Tests.Framework.Integration
 				}
 			}
 
-			var settingMarker = this.BuildInfo.ParsedVersion.Major >= 5 ? "-E " : "-D";
+			var settingMarker = this.VersionInfo.ParsedVersion.Major >= 5 ? "-E " : "-D";
 
 			var settings = new []
 			{
@@ -210,8 +183,7 @@ namespace Tests.Framework.Integration
 				$"es.node.name={this.NodeName}",
 				$"es.path.repo=\"{this.RepositoryPath}\"",
 				$"es.script.inline=true",
-				$"es.script.indexed=true",
-				$"es.node.testingcluster=true"
+				$"es.script.indexed=true"
 			}.Concat(additionalSettings ?? Enumerable.Empty<string>())
 			 .Select(s=> $"{settingMarker}{s}");
 
@@ -272,19 +244,19 @@ namespace Tests.Framework.Integration
 		{
 			lock (_lock)
 			{
-				var localZip = Path.Combine(this.RoamingFolder, this.BuildInfo.Zip);
+				var localZip = Path.Combine(this.RoamingFolder, this.VersionInfo.Zip);
 
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
-					Console.WriteLine($"Download elasticsearch: {this.BuildInfo.Version} from {this.BuildInfo.DownloadUrl}");
-					new WebClient().DownloadFile(this.BuildInfo.DownloadUrl, localZip);
-					Console.WriteLine($"Downloaded elasticsearch: {this.BuildInfo.Version}");
+					Console.WriteLine($"Download elasticsearch: {this.VersionInfo.Version} from {this.VersionInfo.DownloadUrl}");
+					new WebClient().DownloadFile(this.VersionInfo.DownloadUrl, localZip);
+					Console.WriteLine($"Downloaded elasticsearch: {this.VersionInfo.Version}");
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
-					Console.WriteLine($"Unzipping elasticsearch: {this.BuildInfo.Version} ...");
+					Console.WriteLine($"Unzipping elasticsearch: {this.VersionInfo.Version} ...");
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 
@@ -316,13 +288,13 @@ namespace Tests.Framework.Integration
 		private void InstallPlugins()
 		{
 			var pluginCommand = "plugin";
-			if (this.BuildInfo.ParsedVersion.Major >= 5) pluginCommand = "elasticsearch-plugin";
+			if (this.VersionInfo.ParsedVersion.Major >= 5) pluginCommand = "elasticsearch-plugin";
 
 			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", pluginCommand) + ".bat";
 			foreach (var plugin in SupportedPlugins)
 			{
 				var installPath = plugin.Key;
-				var command = plugin.Value(this.BuildInfo.Version);
+				var command = plugin.Value(this.VersionInfo.Version);
 				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", installPath);
 
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
