@@ -5,33 +5,19 @@
 [[introduction]]
 == Introduction
 
-You've reached the documentation page for `Elasticsearch.Net` and `NEST`. The two official .NET clients for Elasticsearch. So why two clients I hear you say?
+You've reached the documentation page for `Elasticsearch.Net` and `NEST`, The two official .NET clients for Elasticsearch. 
+
+=== Why two clients?
 
 `Elasticsearch.Net` is a very low level, dependency free, client that has no opinions about how you build and represent your requests and responses. It has abstracted 
-enough so that **all** the Elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build your json/request/response objects. It also comes with builtin, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is elastic so why not your client?
+enough so that **all** the Elasticsearch API endpoints are represented as methods but not too much to get in the way of how you want to build 
+your json/request/response objects. It also comes with built in, configurable/overridable, cluster failover retry mechanisms. Elasticsearch is _elastic_ so why not your client?
 
-`NEST` is a high level client that has the advantage of having mapped all the request and response objects, comes with a strongly typed query DSL that maps 1 to 1 with the Elasticsearch query DSL, and takes advantage of specific .NET features such as covariant results. NEST internally uses, and still exposes, the low level `Elasticsearch.Net` client.
+`NEST` is a high level client that has the advantage of having mapped all the request and response objects, 
+comes with a strongly typed query DSL that maps 1 to 1 with the Elasticsearch query DSL, and takes advantage of specific .NET features such as 
+<<covariant-search-results, covariant results>> and <<auto-map, auto mapping of POCOs>>. NEST internally uses and still exposes the low level `Elasticsearch.Net` client.
 
-Please read the getting started guide for both.
-
-=== Who's using Nest
-
-* {stackoverflow}[stackoverflow.com] (and the rest of the stackexchange family).
-
-* http://www.7digital.com[7digital.com] (run NEST on mono).
-
-* https://www.rijksmuseum.nl/en[rijksmuseum.nl] (Elasticsearch is the only datastorage hit for each page).
-
-* http://www.fogcreek.com/kiln/[Kiln] FogCreek's version control & code review tooling. 
-  They are so pleased with Elasticsearch that http://blog.fogcreek.com/kiln-powered-by-elasticsearch/[they made a video about how pleased they are!]
-
-=== Other resources
-
-http://twitter.com/joelabrahamsson[@joelabrahamsson] wrote a great http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch[intro into elasticsearch on .NET]
-using NEST. 
-
-Also checkout the https://searchbox.io/[searchbox.io guys] rocking NEST http://blog.appharbor.com/2012/06/19/searchbox-elasticsearch-is-now-an-add-on[on AppHarbor]
-with their https://github.com/searchbox-io/.net-sample[demo project]
+Please read the getting started guide for both <<elasticsearch-net,Elasticsearch.Net>> and <<nest,NEST>>.
 
 === Questions, bugs, comments, requests
 
@@ -39,24 +25,4 @@ All of these are more then welcome on the {github}/issues[github issues pages]! 
 
 We also monitor question tagged with {stackoverflow}/questions/tagged/nest['nest' on stackoverflow] or 
 {stackoverflow}/questions/tagged/elasticsearch-net['elasticsearch-net' on stackoverflow], as well as https://discuss.elastic.co[discussions on our discourse site]
-
-=== License
-
-....
-This software is licensed under the Apache 2 license, quoted below.
-
-    Copyright (c) 2014 Elasticsearch <http://www.elasticsearch.org>
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-....
 

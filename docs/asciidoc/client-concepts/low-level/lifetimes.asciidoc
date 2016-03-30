@@ -7,18 +7,18 @@
 [[lifetimes]]
 == Lifetimes
 
-If you are using an IOC container its always useful to know the best practices around the lifetime of your objects 
+If you are using an IOC container its always useful to know the best practices around the lifetime of your objects
 
 In general we advise folks to register their ElasticClient instances as singletons. The client is thread safe
-so sharing an instance between threads is fine. 
+so sharing an instance between threads is fine.
 
 Zooming in however the actual moving part that benefits the most from being static for most of the duration of your
-application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`. 
+application is `ConnectionSettings`; caches are __per__ `ConnectionSettings`.
 
 In some applications it could make perfect sense to have multiple singleton `ElasticClient`'s registered with different
 connection settings. e.g if you have 2 functionally isolated Elasticsearch clusters.
 
-NOTE: Due to the semantic versioning of Elasticsearch.Net and NEST and their alignment to versions of Elasticsearch, all instances of `ElasticClient` and
+IMPORTANT: Due to the semantic versioning of Elasticsearch.Net and NEST and their alignment to versions of Elasticsearch, all instances of `ElasticClient` and
 Elasticsearch clusters that are connected to must be on the **same major version** i.e. it is not possible to have both an `ElasticClient` to connect to
 Elasticsearch 1.x _and_ 2.x in the same application as the former would require NEST 1.x and the latter, NEST 2.x.
 
@@ -74,7 +74,7 @@ connectionPool.IsDisposed.Should().BeFalse();
 connection.IsDisposed.Should().BeFalse();
 ----
 
-Disposing `ConnectionSettings` will dispose the `IConnectionPool` and `IConnection` it has a hold of
+Disposing `ConnectionSettings` will also dispose the `IConnectionPool` and `IConnection` it uses
 
 [source,csharp]
 ----
