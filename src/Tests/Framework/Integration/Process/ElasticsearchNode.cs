@@ -135,17 +135,18 @@ namespace Tests.Framework.Integration
 
 			var rootUrl = "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch";
 
-			if (version == "latest")
+			if (buildInfo.Version.ToLower().Contains("snapshot"))
 			{
 				rootUrl = "https://oss.sonatype.org/content/repositories/snapshots/org/elasticsearch/distribution/zip/elasticsearch";
-				var mavenMetadata = XElement.Load($"{rootUrl}/maven-metadata.xml");
-				buildInfo.Version = mavenMetadata.Descendants("versioning").Descendants("latest").FirstOrDefault().Value;
-				mavenMetadata = XElement.Load($"{rootUrl}/{buildInfo.Version}/maven-metadata.xml");
-				var snapshotVersion = mavenMetadata.Descendants("snapshotVersions").Descendants("snapshotVersion").Where(sv => sv.Descendants("extension").FirstOrDefault().Value == "zip").FirstOrDefault();
-				buildInfo.SnapshotBuildNumber = snapshotVersion.Descendants("value").FirstOrDefault().Value;
+				var mavenMetadata = XElement.Load($"{rootUrl}/{buildInfo.Version}/maven-metadata.xml");
+				var snapshot = mavenMetadata.Descendants("versioning").Descendants("snapshot").FirstOrDefault();
+				var timestamp = snapshot.Descendants("timestamp").FirstOrDefault().Value;
+				var buildNumber = snapshot.Descendants("buildNumber").FirstOrDefault().Value;
+				buildInfo.SnapshotBuildNumber = $"{timestamp}-{buildNumber}";
+				buildInfo.Zip = $"elasticsearch-{buildInfo.Version.Replace("SNAPSHOT", "")}{buildInfo.SnapshotBuildNumber}.zip";
 			}
 
-			buildInfo.Zip = $"elasticsearch-{buildInfo.SnapshotBuildNumber ?? buildInfo.Version}.zip";
+			buildInfo.Zip = buildInfo.Zip ?? $"elasticsearch-{buildInfo.Version}.zip";
 			buildInfo.DownloadUrl = $"{rootUrl}/{buildInfo.Version}/{buildInfo.Zip}";
             buildInfo.ParsedVersion = new Version(Regex.Replace(buildInfo.Version, @"(?:\-.+)$", ""));
 			return buildInfo;
