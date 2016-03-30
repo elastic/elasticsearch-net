@@ -1,7 +1,14 @@
+[[aggregations]]
 = Aggregations
 
 [partintro]
 --
+
+The aggregations framework helps provide aggregated data based on a search query. 
+It is based on simple building blocks called aggregations, that can be composed in order 
+to build complex summaries of the data.
+
+Check out how to <<handling-aggregations,handle aggregations with NEST>> and take a look at the Aggegrations available
 
 * <<avg-aggregation, Avg>>
 * <<cardinality-aggregation, Cardinality>>
@@ -31,6 +38,7 @@
 
 --
 
+include::handling.asciidoc[]
 include::avg.asciidoc[]
 include::cardinality.asciidoc[]
 include::date-histogram.asciidoc[]

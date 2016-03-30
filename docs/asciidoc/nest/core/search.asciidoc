@@ -1,4 +1,4 @@
-[[search]]
+[[core-search]]
 == Search
 
 Search is _the_ call you'll probably use the most, as it exposes Elasticsearch's key functionality: **search!**

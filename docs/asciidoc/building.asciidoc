@@ -1,5 +1,6 @@
 :github: https://github.com/elastic/elasticsearch-net
 
+[[building]]
 == Building
 
 Building `Elasticsearch.Net` and `NEST` should be super straightforward. Just fork and clone {github}[the repository on github] 

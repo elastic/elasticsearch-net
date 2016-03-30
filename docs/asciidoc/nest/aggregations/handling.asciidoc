@@ -1,5 +1,5 @@
-[[aggregations]]
-== Aggregations
+[[handling-aggregations]]
+== Handling Aggregations
 
 For a good overview of what aggregations are, refer the {ref_current}/search-aggregations.html[Elasticsearch documentation] on the subject.
 

@@ -1,3 +1,4 @@
+[[core]]
 = Core
 
 [partintro]

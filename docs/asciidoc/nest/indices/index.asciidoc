@@ -1,3 +1,4 @@
+[[indices]]
 = Indices
 
 [partintro]
