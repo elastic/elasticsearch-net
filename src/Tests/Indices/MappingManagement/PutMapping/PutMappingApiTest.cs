@@ -160,9 +160,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.Index(CallIsolatedValue)
 			.AutoMap()
 			.Properties(prop => prop
-				.Text(s => s
+				.Keyword(s => s
 					.Name(p => p.Name)
-					.Index(false)
 				)
 				.Object<object>(o => o
 					.Name(p => p.Metadata)
