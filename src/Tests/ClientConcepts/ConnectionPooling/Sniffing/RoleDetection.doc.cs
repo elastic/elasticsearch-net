@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	public class RoleDetection
 	{
 		/** == Sniffing role detection
-		* 
+		*
 		* When we sniff the custer state we detect the role of the node whether its master eligible and holds data
 		* We use this information when selecting a node to perform an API call on.
 		*/
@@ -114,8 +114,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	{
 		protected override string[] ServerSettings => new[]
 		{
-			"-Des.node.data=false",
-			"-Des.node.master=true",
+			"es.node.data=false",
+			"es.node.master=true",
 		};
 	}
 
