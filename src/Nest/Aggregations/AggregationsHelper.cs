@@ -53,11 +53,17 @@ namespace Nest
 
 		public StatsAggregate Stats(string key) => this.TryGet<StatsAggregate>(key);
 
+		public StatsAggregate StatsBucket(string key) => this.TryGet<StatsAggregate>(key);
+
 		public ExtendedStatsAggregate ExtendedStats(string key) => this.TryGet<ExtendedStatsAggregate>(key);
+
+		public ExtendedStatsAggregate ExtendedStatsBucket(string key) => this.TryGet<ExtendedStatsAggregate>(key);
 
 		public GeoBoundsAggregate GeoBounds(string key) => this.TryGet<GeoBoundsAggregate>(key);
 
 		public PercentilesAggregate Percentiles(string key) => this.TryGet<PercentilesAggregate>(key);
+
+		public PercentilesAggregate PercentilesBucket(string key) => this.TryGet<PercentilesAggregate>(key);
 
 		public PercentilesAggregate PercentileRanks(string key) => this.TryGet<PercentilesAggregate>(key);
 
@@ -70,8 +76,8 @@ namespace Nest
 				return named;
 
 			var anonymous = this.TryGet<BucketAggregate>(key);
-			return anonymous != null 
-				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta } 
+			return anonymous != null
+				? new FiltersAggregate { Buckets = anonymous.Items.OfType<FiltersBucketItem>().ToList(), Meta = anonymous.Meta }
 				: null;
 		}
 
