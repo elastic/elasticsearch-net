@@ -24,14 +24,12 @@ namespace Tests.Mapping.Types.Core.Text
 		public string Minimal { get; set; }
 
         public string Inferred { get; set; }
-
-        public char Char { get; set; }
-
-        public Guid Guid { get; set; }
 	}
 
 	public class TextMappingTests : TypeMappingTestBase<TextTest>
 	{
+		protected override bool AutoMap => true;
+
 		protected override object ExpectJson => new
 		{
 			properties = new
@@ -58,15 +56,14 @@ namespace Tests.Mapping.Types.Core.Text
 				},
                 inferred = new
 				{
-					type = "text"
-				},
-                @char = new
-				{
-					type = "text"
-				},
-                guid = new
-				{
-					type = "text"
+					type = "text",
+					fields = new
+					{
+						keyword = new
+						{
+							type = "keyword"
+						}
+					}
 				}
 			}
 		};
@@ -89,15 +86,6 @@ namespace Tests.Mapping.Types.Core.Text
 			)
 			.Text(s => s
 				.Name(o => o.Minimal)
-			)
-            .Text(s => s
-				.Name(o => o.Inferred)
-			)
-            .Text(s => s
-				.Name(o => o.Char)
-			)
-            .Text(s => s
-				.Name(o => o.Guid)
 			);
 
 		protected override object ExpectJsonFluentOnly => new

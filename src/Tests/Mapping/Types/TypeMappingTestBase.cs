@@ -12,6 +12,8 @@ namespace Tests.Mapping.Types
 
 		protected virtual object ExpectJsonFluentOnly { get; }
 
+		protected virtual bool AutoMap => false;
+
 		protected abstract Func<PropertiesDescriptor<T>, IPromise<IProperties>> FluentProperties { get; }
 
 		protected virtual Func<PropertiesDescriptor<T>, IPromise<IProperties>> FluentOnlyProperties { get; }
@@ -24,8 +26,10 @@ namespace Tests.Mapping.Types
 		[U]
 		protected virtual void CodeBasedSerializes()
 		{
+			var descriptor = new PutMappingDescriptor<T>().Properties(FluentProperties);
+			if (this.AutoMap) descriptor.AutoMap();
 			Expect(ExpectJson)
-				.WhenSerializing(new PutMappingDescriptor<T>().Properties(FluentProperties) as IPutMappingRequest);
+				.WhenSerializing(descriptor as IPutMappingRequest);
 
 			if (ExpectJsonFluentOnly != null)
 			{

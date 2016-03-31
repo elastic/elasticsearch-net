@@ -19,10 +19,16 @@ namespace Tests.Mapping.Types.Core.Keyword
 
 		[Keyword]
 		public string Minimal { get; set; }
+
+        public char Char { get; set; }
+
+        public Guid Guid { get; set; }
 	}
 
 	public class KeywordMappingTest : TypeMappingTestBase<KeywordTest>
 	{
+		protected override bool AutoMap => true;
+
 		protected override object ExpectJson => new
 		{
 			properties = new
@@ -40,6 +46,14 @@ namespace Tests.Mapping.Types.Core.Keyword
 					search_analyzer = "searchanalyzer"
 				},
 				minimal = new
+				{
+					type = "keyword"
+				},
+				@char = new
+				{
+					type = "keyword"
+				},
+				@guid = new
 				{
 					type = "keyword"
 				}

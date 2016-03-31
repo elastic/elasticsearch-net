@@ -130,6 +130,7 @@ namespace Tests.Framework.Integration
 		}
 
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
+			.AutoMap()
 			.Properties(props => props
 				.Keyword(s => s
 					.Name(p => p.Name)

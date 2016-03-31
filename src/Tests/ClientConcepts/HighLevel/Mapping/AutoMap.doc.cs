@@ -164,6 +164,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									hours = new
@@ -176,6 +183,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									salary = new
@@ -187,6 +201,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							name = new
 							{
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword"
+									}
+								},
 								type = "text"
 							}
 						}
@@ -206,6 +227,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							firstName = new
 							{
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword"
+									}
+								},
 								type = "text"
 							},
 							hours = new
@@ -218,6 +246,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 							},
 							lastName = new
 							{
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword"
+									}
+								},
 								type = "text"
 							},
 							salary = new
@@ -228,6 +263,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					}
 				}
 			};
+
 
 			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 		}
@@ -267,7 +303,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							name = new
 							{
-								type = "text"
+								type = "text",
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword"
+									}
+								}
 							},
 							employees = new
 							{
@@ -373,6 +416,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									hours = new
@@ -385,6 +435,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									salary = new
@@ -433,6 +490,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									hours = new
@@ -445,6 +509,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									salary = new
@@ -479,6 +550,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					}
 				}
 			};
+
 
 			Expect(expected).WhenSerializing(descriptor as ICreateIndexRequest);
 		}
@@ -561,8 +633,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					{
 						_ttl = new
 						{
-							enabled = true,
-							@default = "10m"
+							@default = "10m",
+							enabled = true
 						},
 						properties = new
 						{
@@ -587,6 +659,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									firstName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									hours = new
@@ -599,6 +678,13 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									lastName = new
 									{
+										fields = new
+										{
+											keyword = new
+											{
+												type = "keyword"
+											}
+										},
 										type = "text"
 									},
 									salary = new
@@ -618,8 +704,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 									},
 									length = new
 									{
-										type = "token_count",
-										analyzer = "standard"
+										analyzer = "standard",
+										type = "token_count"
 									}
 								},
 								type = "text"
@@ -697,7 +783,14 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 						{
 							name = new
 							{
-								type = "text"
+								type = "text",
+								fields = new
+								{
+									keyword = new
+									{
+										type = "keyword"
+									}
+								}
 							}
 						}
 					}

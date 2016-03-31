@@ -160,12 +160,42 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.Index(CallIsolatedValue)
 			.AutoMap()
 			.Properties(prop => prop
+				.Object<Tag>(o => o
+					.Name(p => p.CuratedTags)
+					.AutoMap()
+					.Properties(ps => ps
+						.Text(t => t
+							.Name(tag => tag.Name)
+						)
+					)
+				)
+				.Text(t => t.Name(p => p.Description))
 				.Text(s => s
 					.Name(p => p.Name)
 					.Index(false)
 				)
+				.Object<Developer>(o => o
+					.Name(p => p.LeadDeveloper)
+					.AutoMap()
+					.Properties(ps => ps
+						.Text(t => t.Name(dv => dv.FirstName))
+						.Text(t => t.Name(dv => dv.IPAddress))
+						.Text(t => t.Name(dv => dv.JobTitle))
+						.Text(t => t.Name(dv => dv.LastName))
+						.Text(t => t.Name(dv => dv.OnlineHandle))
+					)
+				)
 				.Object<object>(o => o
 					.Name(p => p.Metadata)
+				)
+				.Object<Tag>(o => o
+					.AutoMap()
+					.Name(p => p.Tags)
+					.Properties(ps => ps
+						.Text(t => t
+							.Name(tag => tag.Name)
+						)
+					)
 				)
 			);
 

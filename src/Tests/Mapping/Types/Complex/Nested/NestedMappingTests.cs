@@ -42,7 +42,14 @@ namespace Tests.Mapping.Types.Complex.Nested
 					{
 						name = new
 						{
-							type = "text"
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword"
+								}
+							}
 						}
 					}
 				},
@@ -53,7 +60,14 @@ namespace Tests.Mapping.Types.Complex.Nested
 					{
 						name = new
 						{
-							type = "text"
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword"
+								}
+							}
 						}
 					}
 				}

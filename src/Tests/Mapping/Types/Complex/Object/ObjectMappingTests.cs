@@ -38,7 +38,14 @@ namespace Tests.Mapping.Types.Complex.Object
 					{
 						name = new
 						{
-							type = "text"
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword"
+								}
+							}
 						}
 					}
 				},
@@ -49,7 +56,14 @@ namespace Tests.Mapping.Types.Complex.Object
 					{
 						name = new
 						{
-							type = "text"
+							type = "text",
+							fields = new
+							{
+								keyword = new
+								{
+									type = "keyword"
+								}
+							}
 						}
 					}
 				}
