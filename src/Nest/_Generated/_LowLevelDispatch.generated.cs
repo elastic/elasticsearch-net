@@ -2504,6 +2504,28 @@ namespace Nest
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
+		internal ElasticsearchResponse<T> ReindexDispatch<T>(IRequest<ReindexRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.Reindex<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ReindexDispatchAsync<T>(IRequest<ReindexRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					return _lowLevel.ReindexAsync<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
+		}
+		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -2974,6 +2996,54 @@ namespace Nest
 			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
+		internal ElasticsearchResponse<T> TasksCancelDispatch<T>(IRequest<TasksCancelRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksCancel<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					return _lowLevel.TasksCancel<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> TasksCancelDispatchAsync<T>(IRequest<TasksCancelRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksCancelAsync<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					return _lowLevel.TasksCancelAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("TasksCancel", p, new [] { POST }, "/_tasks/_cancel", "/_tasks/{task_id}/_cancel");
+		}
+		
+		internal ElasticsearchResponse<T> TasksListDispatch<T>(IRequest<TasksListRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksList<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					return _lowLevel.TasksList<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("TasksList", p, new [] { GET }, "/_tasks", "/_tasks/{task_id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> TasksListDispatchAsync<T>(IRequest<TasksListRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.TasksListAsync<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					return _lowLevel.TasksListAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("TasksList", p, new [] { GET }, "/_tasks", "/_tasks/{task_id}");
+		}
+		
 		internal ElasticsearchResponse<T> TermvectorsDispatch<T>(IRequest<TermVectorsRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3032,6 +3102,32 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
+		}
+		
+		internal ElasticsearchResponse<T> UpdateByQueryDispatch<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> UpdateByQueryDispatchAsync<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
 	}	

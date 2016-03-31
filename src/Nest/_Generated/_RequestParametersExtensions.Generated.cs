@@ -107,6 +107,26 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return.</summary>
 		internal static TermVectorsRequestParameters _Fields<T>(this TermVectorsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
+		
+		///<summary>A comma-separated list of fields to return as part of a hit</summary>
+		internal static UpdateByQueryRequestParameters _Fields<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
+			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
+		
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		internal static UpdateByQueryRequestParameters _FielddataFields<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fielddata_fields) where T : class =>
+			qs.AddQueryString("fielddata_fields", fielddata_fields.Select(e=>(Field)e));
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		internal static UpdateByQueryRequestParameters _SourceExclude<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_exclude) where T : class =>
+			qs.AddQueryString("_source_exclude", source_exclude.Select(e=>(Field)e));
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		internal static UpdateByQueryRequestParameters _SourceInclude<T>(this UpdateByQueryRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
+			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
+		
+		///<summary>Specify which field to use for suggestions</summary>
+		internal static UpdateByQueryRequestParameters _SuggestField<T>(this UpdateByQueryRequestParameters qs, Expression<Func<T, object>> suggest_field) where T : class =>
+			qs.AddQueryString("suggest_field", (Field)suggest_field);
 	}
 }
  

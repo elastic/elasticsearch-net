@@ -156,6 +156,15 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	public enum Conflicts 
+	{
+		[EnumMember(Value = "abort")]
+		Abort,
+		[EnumMember(Value = "proceed")]
+		Proceed
+	}
+	
+	
 	[Flags]public enum ClusterStateMetric 
 	{
 		[EnumMember(Value = "blocks")]
@@ -459,6 +468,16 @@ namespace Elasticsearch.Net
 					case SuggestMode.Missing: return "missing";
 					case SuggestMode.Popular: return "popular";
 					case SuggestMode.Always: return "always";
+				}
+			
+			}
+			
+			if (e is Conflicts)
+			{ 
+				switch((Conflicts)e)
+				{
+					case Conflicts.Abort: return "abort";
+					case Conflicts.Proceed: return "proceed";
 				}
 			
 			}
