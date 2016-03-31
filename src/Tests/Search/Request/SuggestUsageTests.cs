@@ -116,7 +116,7 @@ namespace Tests.Search.Request
 				)
 				.Completion("my-completion-suggest", c => c
 					.Contexts(ctxs => ctxs
-						.Category("color",
+						.Context("color",
 							ctx => ctx.Context(Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First())
 						)
 					)
@@ -182,7 +182,7 @@ namespace Tests.Search.Request
 						{
 							Contexts = new Dictionary<string, IList<ISuggestContextQuery>>
 							{
-								{ "color", new List<ISuggestContextQuery> { new CategorySuggestContextQuery { Context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() } } }
+								{ "color", new List<ISuggestContextQuery> { new SuggestContextQuery { Context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() } } }
 							},
 							Fuzzy = new FuzzySuggester
 							{

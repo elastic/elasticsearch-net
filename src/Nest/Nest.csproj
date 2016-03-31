@@ -158,7 +158,7 @@
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregationJsonConverter.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
-    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />    
+    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitorScope.cs" />
@@ -1147,9 +1147,7 @@
     <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggester.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\CategorySuggestContext.cs" />
-    <Compile Include="Search\Suggesters\ContextSuggester\CategorySuggestContextQuery.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\GeoSuggestContext.cs" />
-    <Compile Include="Search\Suggesters\ContextSuggester\GeoSuggestContextQuery.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\SuggestContextJsonConverter.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\ISuggestContext.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\SuggestContextQuery.cs" />

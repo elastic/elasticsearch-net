@@ -66,19 +66,4 @@ namespace Nest
 
 		public CompletionSuggesterDescriptor<T> Payload(Fields payload) => Assign(a => a.Payload = payload);
 	}
-
-	public class SuggestContextQueriesDescriptor<T>
-		: DescriptorPromiseBase<SuggestContextQueriesDescriptor<T>, IDictionary<string, IList<ISuggestContextQuery>>>
-	{
-		public SuggestContextQueriesDescriptor() : base(new Dictionary<string, IList<ISuggestContextQuery>>()) { }
-
-		public SuggestContextQueriesDescriptor<T> Category(string name, params Func<CategorySuggestContextQueryDescriptor<T>, ISuggestContextQuery>[] categoryDescriptors) =>
-			AddContextQueries(name, categoryDescriptors?.Select(d => d?.Invoke(new CategorySuggestContextQueryDescriptor<T>())).ToList());
-
-		public SuggestContextQueriesDescriptor<T> GeoLocation(string name, params Func<GeoSuggestContextQueryDescriptor<T>, ISuggestContextQuery>[] geoDescriptors) =>
-			AddContextQueries(name, geoDescriptors?.Select(d => d?.Invoke(new GeoSuggestContextQueryDescriptor<T>())).ToList());
-
-		private SuggestContextQueriesDescriptor<T> AddContextQueries(string name, List<ISuggestContextQuery> contextQueries) =>
-			contextQueries == null ? this : this.Assign(a => a.Add(name, contextQueries));
-	}
 }
