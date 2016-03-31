@@ -380,7 +380,8 @@
     <Compile Include=".\Mapping\Types\Core\Date\DateMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Core\Number\NumberMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordMappingTests.cs" />
-    <Compile Include="Mapping\Types\Core\String\TextMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\Text\TextMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\String\StringMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Geo\GeoPoint\GeoPointMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Geo\GeoShape\GeoShapeMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Specialized\Attachment\AttachmentMappingTests.cs" />

@@ -6,6 +6,7 @@ namespace Nest
 	{
 		int Depth { get; set; }
 		void Visit(TypeMapping mapping);
+		void Visit(StringProperty property);
 		void Visit(TextProperty property);
 		void Visit(KeywordProperty property);
 		void Visit(DateProperty property);
@@ -27,68 +28,38 @@ namespace Nest
 	{
 		public virtual int Depth { get; set; }
 
-		public virtual void Visit(TypeMapping mapping)
-		{
-		}
+		public virtual void Visit(TypeMapping mapping) { }
 
-		public virtual void Visit(TextProperty property)
-		{
-		}
+		public virtual void Visit(StringProperty property ) { }
 
-		public virtual void Visit(KeywordProperty property)
-		{
-		}
+		public virtual void Visit(TextProperty property) { }
 
-		public virtual void Visit(DateProperty property)
-		{
-		}
+		public virtual void Visit(KeywordProperty property) { }
 
-		public virtual void Visit(BooleanProperty property)
-		{
-		}
+		public virtual void Visit(DateProperty property) { }
 
-		public virtual void Visit(BinaryProperty property)
-		{
-		}
+		public virtual void Visit(BooleanProperty property) { }
 
-		public virtual void Visit(ObjectProperty property)
-		{
-		}
+		public virtual void Visit(BinaryProperty property) { }
 
-		public virtual void Visit(NestedProperty property)
-		{
-		}
+		public virtual void Visit(NumberProperty property) { }
 
-		public virtual void Visit(IpProperty property)
-		{
-		}
+		public virtual void Visit(ObjectProperty property) { }
 
-		public virtual void Visit(GeoPointProperty property)
-		{
-		}
+		public virtual void Visit(NestedProperty property) { }
 
-		public virtual void Visit(GeoShapeProperty property)
-		{
-		}
+		public virtual void Visit(IpProperty property) { }
 
-		public virtual void Visit(AttachmentProperty property)
-		{
-		}
+		public virtual void Visit(GeoPointProperty property) { }
 
-		public virtual void Visit(NumberProperty property)
-		{
-		}
+		public virtual void Visit(GeoShapeProperty property) { }
 
-		public virtual void Visit(CompletionProperty property)
-		{
-		}
+		public virtual void Visit(AttachmentProperty property) { }
 
-		public virtual void Visit(Murmur3HashProperty property)
-		{
-		}
+		public virtual void Visit(CompletionProperty property) { }
 
-		public virtual void Visit(TokenCountProperty property)
-		{
-		}
+		public virtual void Visit(Murmur3HashProperty property) { }
+
+		public virtual void Visit(TokenCountProperty property) { }
 	}
 }

@@ -36,16 +36,22 @@ namespace Nest
 				switch (type.Name)
 				{
 					case "text":
-						var s = field as TextProperty;
-						if (s == null) continue;
-						this._visitor.Visit(s);
-						this.Accept(s.Fields);
+						var t = field as TextProperty;
+						if (t == null) continue;
+						this._visitor.Visit(t);
+						this.Accept(t.Fields);
 						break;
 					case "keyword":
 						var k = field as KeywordProperty;
 						if (k == null) continue;
 						this._visitor.Visit(k);
 						this.Accept(k.Fields);
+						break;
+					case "string":
+						var s = field as StringProperty;
+						if (s == null) continue;
+						this._visitor.Visit(s);
+						this.Accept(s.Fields);
 						break;
 					case "float":
 					case "double":

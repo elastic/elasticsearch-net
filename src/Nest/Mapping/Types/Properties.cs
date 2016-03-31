@@ -37,6 +37,7 @@ namespace Nest
 		where T : class
 		where TReturnType : class
 	{
+		TReturnType String(Func<StringPropertyDescriptor<T>, IStringProperty> selector);
 		TReturnType Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector);
 		TReturnType Keyword(Func<KeywordPropertyDescriptor<T>, IKeywordProperty> selector);
 		TReturnType Number(Func<NumberPropertyDescriptor<T>, INumberProperty> selector);
@@ -61,6 +62,8 @@ namespace Nest
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
 		public PropertiesDescriptor(IProperties properties) : base(properties ?? new Properties<T>()) { }
+
+		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) => SetProperty(selector);
 

@@ -81,6 +81,11 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			this.Counts[key].Should().Be(count);
 		}
 
+		public void Visit(StringProperty mapping)
+		{
+			Increment("string");
+		}
+
 		public void Visit(DateProperty mapping)
 		{
 			Increment("date");

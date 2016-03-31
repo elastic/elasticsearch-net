@@ -6,6 +6,9 @@ namespace Nest
 		DescriptorBase<SingleMappingDescriptor<T>, IPropertiesDescriptor<T, IProperty>>, IPropertiesDescriptor<T, IProperty>
 		where T : class
 	{
+		public IProperty String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) =>
+			selector?.Invoke(new StringPropertyDescriptor<T>());
+
 		public IProperty Text(Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			selector?.Invoke(new TextPropertyDescriptor<T>());
 

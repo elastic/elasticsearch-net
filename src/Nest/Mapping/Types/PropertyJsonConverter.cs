@@ -36,6 +36,8 @@ namespace Nest
 					return o.ToObject<TextProperty>();
 				case "keyword":
 					return o.ToObject<KeywordProperty>();
+				case "string":
+					return o.ToObject<StringProperty>();
 				case "float":
 				case "double":
 				case "byte":

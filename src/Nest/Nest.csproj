@@ -793,6 +793,8 @@
     <Compile Include="Mapping\Types\Core\Number\NumberAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
+    <Compile Include="Mapping\Types\Core\String\StringAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
     <Compile Include="Mapping\Types\Core\Text\IndexOptions.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextProperty.cs" />
