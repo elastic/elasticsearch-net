@@ -39,9 +39,6 @@ namespace Nest
 		[JsonProperty("collect_mode")]
 		TermsAggregationCollectMode? CollectMode { get; set; }
 
-		[JsonProperty("show_term_doc_error_count")]
-		bool? ShowTermDocumentCountError { get; set; }
-
 		[JsonProperty("missing")]
 		string Missing { get; set; }
 	}
@@ -58,7 +55,6 @@ namespace Nest
 		public TermsIncludeExclude Include { get; set; }
 		public TermsIncludeExclude Exclude { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
-		public bool? ShowTermDocumentCountError { get; set; }
 		public string Missing { get; set; }
 
 		internal TermsAggregation() { }
@@ -92,8 +88,6 @@ namespace Nest
 		TermsIncludeExclude ITermsAggregation.Exclude { get; set; }
 
 		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
-
-		bool? ITermsAggregation.ShowTermDocumentCountError { get; set; }
 
 		string ITermsAggregation.Missing { get; set; }
 
@@ -148,9 +142,6 @@ namespace Nest
 
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
 			Assign(a => a.CollectMode = collectMode);
-
-		public TermsAggregationDescriptor<T> ShowTermDocumentCountError(bool showTermDocCountError = true) =>
-			Assign(a => a.ShowTermDocumentCountError = showTermDocCountError);
 
 		public TermsAggregationDescriptor<T> Missing(string missing) => Assign(a => a.Missing = missing);
 	}

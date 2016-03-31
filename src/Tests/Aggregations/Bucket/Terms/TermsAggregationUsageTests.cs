@@ -28,7 +28,6 @@ namespace Tests.Aggregations.Bucket.Terms
 						min_doc_count = 2,
 						size = 5,
 						shard_size = 100,
-						show_term_doc_error_count = true,
 						execution_hint = "map",
 						missing = "n/a",
 						script = new
@@ -52,7 +51,6 @@ namespace Tests.Aggregations.Bucket.Terms
 					.MinimumDocumentCount(2)
 					.Size(5)
 					.ShardSize(100)
-					.ShowTermDocumentCountError()
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
 					.Script("'State of Being: '+_value")
@@ -73,7 +71,6 @@ namespace Tests.Aggregations.Bucket.Terms
 					MinimumDocumentCount = 2,
 					Size = 5,
 					ShardSize = 100,
-					ShowTermDocumentCountError = true,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
 					Script = new InlineScript("'State of Being: '+_value"),
