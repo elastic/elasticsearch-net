@@ -86,7 +86,7 @@ namespace CodeGeneration.LowLevelClient
 
 			WriteToEndpointsFolder("root.html", html);
 
-			var endpoints = dom[".js-directory-link"]
+			var endpoints = dom[".js-navigation-open"]
 				.Select(s => s.InnerText)
 				.Where(s => !string.IsNullOrEmpty(s) && s.EndsWith(".json"))
 				.ToList();
