@@ -133,9 +133,12 @@ namespace Nest
 		private bool WriteDateDecay(JsonWriter writer, IDecayFunction<DateMath, Time> value, JsonSerializer serializer)
 		{
 			if (value == null || value.Field.IsConditionless()) return false;
-			writer.WritePropertyName("origin");
-			serializer.Serialize(writer, value.Origin);
-			writer.WritePropertyName("scale");
+            if (value.Origin != null)
+            {
+                writer.WritePropertyName("origin");
+                serializer.Serialize(writer, value.Origin);
+            }
+            writer.WritePropertyName("scale");
 			serializer.Serialize(writer, value.Scale);
 			if (value.Offset != null)
 			{
