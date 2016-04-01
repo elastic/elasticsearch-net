@@ -522,6 +522,9 @@
     <Compile Include=".\Search\Search\SearchUrlTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
+    <Compile Include="Aggregations\Pipeline\ExtendedStatsBucket\ExtendedStatsBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\PercentilesBucket\PercentilesBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\StatsBucket\StatsBucketAggregationUsageTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpApiTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpUrlTests.cs" />
     <Compile Include="Cat\CatNodeAttributes\CatNodeAttributesApiTests.cs" />
@@ -564,6 +567,8 @@
     <None Include="paket.references" />
     <None Include="query-dsl-usage.asciidoc" />
     <None Include="query-dsl.asciidoc" />
+    <None Include="search-usage.asciidoc" />
+    <None Include="search.asciidoc" />
     <None Include="tests.yaml" />
   </ItemGroup>
   <ItemGroup>

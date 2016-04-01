@@ -72,6 +72,8 @@ include::../../docs/asciidoc/aggregations/pipeline/cumulative-sum/cumulative-sum
 
 include::../../docs/asciidoc/aggregations/pipeline/derivative/derivative-aggregation-usage.asciidoc[]
 
+include::../../docs/asciidoc/aggregations/pipeline/extended-stats-bucket/extended-stats-bucket-aggregation-usage.asciidoc[]
+
 include::../../docs/asciidoc/aggregations/pipeline/max-bucket/max-bucket-aggregation-usage.asciidoc[]
 
 include::../../docs/asciidoc/aggregations/pipeline/min-bucket/min-bucket-aggregation-usage.asciidoc[]
@@ -86,7 +88,11 @@ include::../../docs/asciidoc/aggregations/pipeline/moving-average/moving-average
 
 include::../../docs/asciidoc/aggregations/pipeline/moving-average/moving-average-simple-aggregation-usage.asciidoc[]
 
+include::../../docs/asciidoc/aggregations/pipeline/percentiles-bucket/percentiles-bucket-aggregation-usage.asciidoc[]
+
 include::../../docs/asciidoc/aggregations/pipeline/serial-differencing/serial-differencing-aggregation-usage.asciidoc[]
+
+include::../../docs/asciidoc/aggregations/pipeline/stats-bucket/stats-bucket-aggregation-usage.asciidoc[]
 
 include::../../docs/asciidoc/aggregations/pipeline/sum-bucket/sum-bucket-aggregation-usage.asciidoc[]
 

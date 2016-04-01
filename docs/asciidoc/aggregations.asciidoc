@@ -78,6 +78,8 @@ exposes all of the available Aggregation types
 
 * <<derivative-aggregation-usage,Derivative Aggregation Usage>>
 
+* <<extended-stats-bucket-aggregation-usage,Extended Stats Bucket Aggregation Usage>>
+
 * <<max-bucket-aggregation-usage,Max Bucket Aggregation Usage>>
 
 * <<min-bucket-aggregation-usage,Min Bucket Aggregation Usage>>
@@ -92,7 +94,11 @@ exposes all of the available Aggregation types
 
 * <<moving-average-simple-aggregation-usage,Moving Average Simple Aggregation Usage>>
 
+* <<percentiles-bucket-aggregation-usage,Percentiles Bucket Aggregation Usage>>
+
 * <<serial-differencing-aggregation-usage,Serial Differencing Aggregation Usage>>
+
+* <<stats-bucket-aggregation-usage,Stats Bucket Aggregation Usage>>
 
 * <<sum-bucket-aggregation-usage,Sum Bucket Aggregation Usage>>
 
