@@ -102,7 +102,7 @@ namespace Elasticsearch.Net
 						break;
 					}
 				}
-				if (response == null || !response.Success)
+				if ((response == null || !response.Success)&&requestData.Node!=null)// pipeline.BadResponse methond need a requestData.node ..but this is null...
 					pipeline.BadResponse(ref response, requestData, seenExceptions);
 
 				this.Settings.OnRequestCompleted?.Invoke(response);
