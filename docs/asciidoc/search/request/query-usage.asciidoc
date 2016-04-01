@@ -7,7 +7,7 @@
 [[query-usage]]
 == Query Usage
 
-The query element within the search request body allows to define a query using the Query DSL.
+The query element within the search request body allows to define a query using the <<query-dsl,Query DSL>>.
 
 === Fluent DSL Example
 

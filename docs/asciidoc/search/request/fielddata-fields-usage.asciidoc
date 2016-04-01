@@ -7,6 +7,10 @@
 [[fielddata-fields-usage]]
 == Fielddata Fields Usage
 
+Allows to return the field data representation of a field for each hit.
+
+See the Elasticsearch documentation on {ref_current}/search-request-fielddata-fields.html[Field Data Fields] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]

@@ -9,6 +9,8 @@
 
 Enables explanation for each hit on how its score was computed.
 
+See the Elasticsearch documentation on {ref_current}/search-explain.html[Explain] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]

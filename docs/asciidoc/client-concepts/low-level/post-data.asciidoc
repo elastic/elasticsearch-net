@@ -55,17 +55,7 @@ and passing a `PostData<object>` object to a method taking `PostData<object>` sh
 [source,csharp]
 ----
 fromString = ImplicitlyConvertsFrom(fromString);
-----
 
-[source,csharp]
-----
-await this.AssertOn(new ConnectionSettings());
-
-await this.AssertOn(new ConnectionConfiguration());
-----
-
-[source,csharp]
-----
 fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
 fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
 fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
@@ -75,92 +65,5 @@ fromByteArray.Type.Should().Be(PostType.ByteArray);
 fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
 fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 fromObject.Type.Should().Be(PostType.Serializable);
-----
-
-Although each implicitly types behaves slightly differently 
-
-[source,csharp]
-----
-await Post(() => @string, writes: Utf8Bytes(@string), storesBytes: true, settings: settings);
-
-await Post(() => bytes, writes: bytes, storesBytes: true, settings: settings);
-----
-
-When passing a list of strings we assume its a list of valid serialized json that we
-join with newline feeds making sure there is a trailing linefeed 
-
-[source,csharp]
-----
-await Post(() => listOfStrings, writes: multiStringJson, storesBytes: true, settings: settings);
-----
-
-When passing a list of object we assume its a list of objects we need to serialize
-individually to json and join with newline feeds making sure there is a trailing linefeed
-
-[source,csharp]
-----
-await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: false, settings: settings);
-----
-
-In all other cases postdata is serialized as is. 
-
-[source,csharp]
-----
-await Post(() => @object, writes: objectJson, storesBytes: false, settings: settings);
-----
-
-If you want to maintain a copy of the request that went out, use `DisableDirectStreaming` 
-
-[source,csharp]
-----
-settings = new ConnectionSettings().DisableDirectStreaming();
-----
-
-by forcing `DisableDirectStreaming` on connection settings, serialization happens first in a private `MemoryStream`
-so we can get hold of the serialized bytes 
-
-[source,csharp]
-----
-await Post(() => listOfObjects, writes: multiObjectJson, storesBytes: true, settings: settings);
-----
-
-this behavior can also be observed when serializing a simple object using `DisableDirectStreaming` 
-
-[source,csharp]
-----
-await Post(() => @object, writes: objectJson, storesBytes: true, settings: settings);
-----
-
-[source,csharp]
-----
-PostAssert(postData(), writes, storesBytes, settings);
-
-await PostAssertAsync(postData(), writes, storesBytes, settings);
-----
-
-[source,csharp]
-----
-postData.Write(ms, settings);
-
-var sentBytes = ms.ToArray();
-
-sentBytes.Should().Equal(writes);
-
-postData.WrittenBytes.Should().NotBeNull();
-
-postData.WrittenBytes.Should().BeNull();
-----
-
-[source,csharp]
-----
-await postData.WriteAsync(ms, settings);
-
-var sentBytes = ms.ToArray();
-
-sentBytes.Should().Equal(writes);
-
-postData.WrittenBytes.Should().NotBeNull();
-
-postData.WrittenBytes.Should().BeNull();
 ----
 

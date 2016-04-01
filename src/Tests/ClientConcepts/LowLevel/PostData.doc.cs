@@ -80,12 +80,14 @@ namespace Tests.ClientConcepts.LowLevel
 			fromObject.Type.Should().Be(PostType.Serializable);
 		}
 
+		//hide
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
 		{
 			await this.AssertOn(new ConnectionSettings());
 			await this.AssertOn(new ConnectionConfiguration());
 		}
 
+		//hide
 		private async Task AssertOn(IConnectionConfigurationValues settings)
 		{
 			/** Although each implicitly types behaves slightly differently */
@@ -117,12 +119,14 @@ namespace Tests.ClientConcepts.LowLevel
 			await Post(() => @object, writes: objectJson, storesBytes: true, settings: settings);
 		}
 
+		//hide
 		private static async Task Post(Func<PostData<object>> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			PostAssert(postData(), writes, storesBytes, settings);
 			await PostAssertAsync(postData(), writes, storesBytes, settings);
 		}
 
+		//hide
 		private static void PostAssert(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
@@ -137,6 +141,7 @@ namespace Tests.ClientConcepts.LowLevel
 			}
 		}
 
+		//hide
 		private static async Task PostAssertAsync(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
@@ -151,10 +156,13 @@ namespace Tests.ClientConcepts.LowLevel
 			}
 		}
 
+		//hide
 		private static byte[] Utf8Bytes(string s)
 		{
 			return string.IsNullOrEmpty(s) ? null : Encoding.UTF8.GetBytes(s);
 		}
+
+		//hide
 		private PostData<object> ImplicitlyConvertsFrom(PostData<object> postData) => postData;
 
 	}

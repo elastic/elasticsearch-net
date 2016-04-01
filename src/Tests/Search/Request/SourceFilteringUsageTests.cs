@@ -12,6 +12,8 @@ namespace Tests.Search.Request
 	/** Allows to control how the `_source` field is returned with every hit.
 	 * By default operations return the contents of the `_source` field unless
 	 * you have used the fields parameter or if the `_source` field is disabled.
+	 *
+	 * See the Elasticsearch documentation on {ref_current}/search-request-source-filtering.html[Source Filtering] for more detail.
 	 */
 	public class SourceFilteringUsageTests : SearchUsageTestBase
 	{
