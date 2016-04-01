@@ -8,7 +8,7 @@ namespace Nest
 	public interface IExtendedStatsBucketAggregation : IPipelineAggregation
 	{
 		[JsonProperty("sigma")]
-		int? Sigma { get; set; }
+		double? Sigma { get; set; }
 	}
 
 	public class ExtendedStatsBucketAggregation
@@ -20,7 +20,7 @@ namespace Nest
 			: base(name, bucketsPath)
 		{ }
 
-		public int? Sigma { get; set; }
+		public double? Sigma { get; set; }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ExtendedStatsBucket = this;
 	}
@@ -30,9 +30,9 @@ namespace Nest
 		, IExtendedStatsBucketAggregation
 	{
 
-		int? IExtendedStatsBucketAggregation.Sigma { get; set; }
+		double? IExtendedStatsBucketAggregation.Sigma { get; set; }
 
-		public ExtendedStatsBucketAggregationDescriptor Sigma(int? sigma) => Assign(a => a.Sigma = sigma);
+		public ExtendedStatsBucketAggregationDescriptor Sigma(double sigma) => Assign(a => a.Sigma = sigma);
 
 	}
 }

@@ -38,7 +38,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 					extended_stats_bucket = new
 					{
 						buckets_path = "projects_started_per_month>commits",
-						sigma = 2
+						sigma = 2.0
 					}
 				}
 			}
@@ -58,7 +58,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 				)
 				.ExtendedStatsBucket("extended_stats_commits_per_month", aaa => aaa
 					.BucketsPath("projects_started_per_month>commits")
-					.Sigma(2)
+					.Sigma(2.0)
 				)
 			);
 
@@ -73,7 +73,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 			}
 			&& new ExtendedStatsBucketAggregation("extended_stats_commits_per_month", "projects_started_per_month>commits")
 			{
-				Sigma = 2
+				Sigma = 2.0
 			}
 		};
 
