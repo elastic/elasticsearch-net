@@ -8,10 +8,11 @@ namespace Tests.Aggregations.Bucket.Children
 	{
 		private void MappingExample()
 		{
-			/** To use the child aggregation you have to make sure 
-			 *  a `_parent` mapping is in place, here we create the project
-			 *  index with two mapped types, `project` and `commitactivity` and 
-			 *  we add a `_parent` mapping from `commitactivity` to `parent` */
+			/** To use the {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation],
+			 * you have to make sure a `_parent` mapping is in place.
+			 *
+			 * Here we create the project index with two mapped types, `Project` and `CommitActivity` and
+			 * add a `_parent` mapping to `CommitActivity`, specifying the `Project` type as the parent */
 			var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c => c
 				.Mappings(map => map
 					.Map<Project>(tm => tm.AutoMap())

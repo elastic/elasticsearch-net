@@ -20,6 +20,32 @@ want to use each.
 
 This is the json output for each example
 
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "name_of_child_agg": {
+      "children": {
+        "type": "commits"
+      },
+      "aggs": {
+        "average_per_child": {
+          "avg": {
+            "field": "confidenceFactor"
+          }
+        },
+        "max_per_child": {
+          "max": {
+            "field": "confidenceFactor"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
 === Fluent DSL
 
 The fluent lambda syntax is the most terse way to write aggregations.

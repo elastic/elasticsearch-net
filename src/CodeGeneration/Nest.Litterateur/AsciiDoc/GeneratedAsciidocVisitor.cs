@@ -118,7 +118,8 @@ namespace Nest.Litterateur.AsciiDoc
 
 						if ((method.Value == "expectjson" || method.Value == "queryjson") &&
 							source.Attributes.Count > 1 &&
-							source.Attributes[1].Name == "javascript")
+							source.Attributes[1].Name == "javascript" &&
+							_destination.Name != "writing-aggregations.asciidoc")
 						{
 							exampleJson = source;
 							continue;
