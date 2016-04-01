@@ -18,8 +18,7 @@ namespace Tests.Aggregations.Bucket.Sampler
 				{
 					sampler = new
 					{
-						shard_size = 200,
-						field = "name"
+						shard_size = 200
 					},
 					aggs = new
 					{
@@ -39,7 +38,6 @@ namespace Tests.Aggregations.Bucket.Sampler
 			.Aggregations(aggs => aggs
 				.Sampler("sample", sm => sm
 					.ShardSize(200)
-					.Field(p => p.Name)
 					.Aggregations(aa => aa
 						.SignificantTerms("significant_names", st => st
 							.Field(p => p.Name)
@@ -54,7 +52,6 @@ namespace Tests.Aggregations.Bucket.Sampler
 				Aggregations = new SamplerAggregation("sample")
 				{
 					ShardSize = 200,
-					Field = "name",
 					Aggregations = new SignificantTermsAggregation("significant_names")
 					{
 						Field = "name"
