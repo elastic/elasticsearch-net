@@ -10,7 +10,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Bucket.Filter
 {
 	/**
-	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
+	 * Defines a single bucket of all the documents in the current document set context that match a specified filter.
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filter-aggregation.html[on this subject here]
@@ -39,7 +39,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					},
 					aggs = new
 					{
-						project_tags = new {terms = new {field = "curatedTags.name"}}
+						project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
 					}
 				}
 			}
@@ -50,7 +50,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				.Filter("bethels_projects", date => date
 					.Filter(q => q.Term(p => p.LeadDeveloper.FirstName, FirstNameToFind))
 					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 					)
 				)
 			);
@@ -62,7 +62,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new TermQuery {Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind},
 					Aggregations =
-						new TermsAggregation("project_tags") {Field = Field<Project>(p => p.CuratedTags.First().Name)}
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 				}
 			};
 
@@ -71,7 +71,7 @@ namespace Tests.Aggregations.Bucket.Filter
 			response.IsValid.Should().BeTrue();
 
 			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
 			var filterAgg = response.Aggs.Filter("bethels_projects");

@@ -22,7 +22,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 		{
 			var createIndex = this.Client.CreateIndex(this.Index, c=>c
 				.Mappings(mm=>mm
-					.Map<Project>(Seeder.MapProject)
+					.Map<Project>(m => m.Properties(Seeder.ProjectProperties))
 				)
 			);
 			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
@@ -41,7 +41,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 		);
 
 		protected override int ExpectStatusCode => 200;
-		protected override bool ExpectIsValid => true; 
+		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/{this.Index}/project/_mpercolate";
 
@@ -66,7 +66,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			Percolations = new List<IPercolateOperation>
 			{
 				new PercolateRequest<Project>(Project.Instance, this.Index),
-				new PercolateCountRequest<Project>(Project.Instance, this.Index) 
+				new PercolateCountRequest<Project>(Project.Instance, this.Index)
 			}
 		};
 

@@ -11,7 +11,7 @@ namespace Tests.Aggregations.Bucket.Filters
 {
 	/** == Named filters
 	 *
-	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 
+	 * Defines a multi bucket aggregations where each bucket is associated with a filter.
 	 * Each bucket will collect all documents that match its associated filter. For documents
 	 * that do not match any filter, these will be collected in the other bucket.
 	 *
@@ -40,7 +40,7 @@ namespace Tests.Aggregations.Bucket.Filters
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "curatedTags.name" } }
+						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
 					}
 				}
 			}
@@ -57,7 +57,7 @@ namespace Tests.Aggregations.Bucket.Filters
 						.Filter("very_active", f => f.Term(p => p.State, StateOfBeing.VeryActive))
 					)
 					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 					)
 				)
 			);
@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Bucket.Filters
 							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 				}
 			};
 
@@ -85,7 +85,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			response.IsValid.Should().BeTrue();
 
 			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
 			var filterAgg = response.Aggs.Filters("projects_by_state");
@@ -131,7 +131,7 @@ namespace Tests.Aggregations.Bucket.Filters
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "curatedTags.name" } }
+						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
 					}
 				}
 			}
@@ -147,7 +147,7 @@ namespace Tests.Aggregations.Bucket.Filters
 						f => f.Term(p => p.State, StateOfBeing.VeryActive)
 					)
 					.Aggregations(childAggs => childAggs
-						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+						.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name.Suffix("keyword")))
 					)
 				)
 			);
@@ -165,7 +165,7 @@ namespace Tests.Aggregations.Bucket.Filters
 							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
-						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name.Suffix("keyword")) }
 				}
 			};
 
@@ -174,7 +174,7 @@ namespace Tests.Aggregations.Bucket.Filters
 			response.IsValid.Should().BeTrue();
 
 			/**
-			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
 			var filterAgg = response.Aggs.Filters("projects_by_state");

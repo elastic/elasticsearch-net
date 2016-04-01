@@ -29,12 +29,12 @@ namespace Tests.Framework.Integration
 		// Sometimes we run against an manually started elasticsearch when
 		// writing tests to cut down on cluster startup times.
 		// If raw_fields exists assume this cluster is already seeded.
-		private bool AlreadySeeded() => this.Client.IndexTemplateExists("raw_fields").Exists;
+		private bool AlreadySeeded() => this.Client.IndexTemplateExists("nest_tests").Exists;
 
 		public void DeleteIndicesAndTemplates()
 		{
-			if (this.Client.IndexTemplateExists("raw_fields").Exists)
-				this.Client.DeleteIndexTemplate("raw_fields");
+			if (this.Client.IndexTemplateExists("nest_tests").Exists)
+				this.Client.DeleteIndexTemplate("nest_tests");
 			if (this.Client.IndexExists(Indices<Project>()).Exists)
 				this.Client.DeleteIndex(typeof(Project));
 			if (this.Client.IndexExists(Indices<Developer>()).Exists)
@@ -43,7 +43,7 @@ namespace Tests.Framework.Integration
 
 		public void CreateIndices()
 		{
-			CreateRawFieldsIndexTemplate();
+			CreateIndexTemplate();
 			CreateProjectIndex();
 			CreateDeveloperIndex();
 		}
@@ -61,32 +61,32 @@ namespace Tests.Framework.Integration
 			this.SeedIndexData();
 		}
 
-		private void CreateRawFieldsIndexTemplate()
+		private void CreateIndexTemplate()
 		{
-			var putTemplateResult = this.Client.PutIndexTemplate("raw_fields", p => p
+			var putTemplateResult = this.Client.PutIndexTemplate("nest_tests", p => p
 				.Template("*") //match on all created indices
 				.Settings(s => s
 					.NumberOfReplicas(0)
 					.NumberOfShards(2)
 				)
-				.Mappings(pm => pm
-					.Map("_default_", m => m
-						.DynamicTemplates(dt => dt
-							.DynamicTemplate("raw_field", dtt => dtt
-								.Match("*") //matches all fields
-								.MatchMappingType("string") //that are a string
-								.Mapping(tm => tm
-									.Text(sm => sm //map as string
-										.Fields(f => f //with a multifield 'raw' that is not analyzed
-											.Keyword(ssm => ssm.Name("raw"))
-										)
-									)
-								)
-							)
-						)
-					)
-				)
-				);
+				//.Mappings(pm => pm
+				//	.Map("_default_", m => m
+				//		.DynamicTemplates(dt => dt
+				//			.DynamicTemplate("raw_field", dtt => dtt
+				//				.Match("*") //matches all fields
+				//				.MatchMappingType("string") //that are a string
+				//				.Mapping(tm => tm
+				//					.Text(sm => sm //map as string
+				//						.Fields(f => f //with a multifield 'raw' that is not analyzed
+				//							.Keyword(ssm => ssm.Name("raw"))
+				//						)
+				//					)
+				//				)
+				//			)
+				//		)
+				//	)
+				//)
+			);
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
 
@@ -110,18 +110,26 @@ namespace Tests.Framework.Integration
 					.Alias("projects-alias")
 				)
 				.Mappings(map => map
-					.Map<Project>(MapProject)
+					.Map<Project>(m => m
+						.AutoMap()
+						.Properties(ProjectProperties)
+					)
 					.Map<CommitActivity>(m => m
+						.AutoMap()
 						.Parent<Project>()
 						.TimestampField(t => t
 							.Enabled()
 						)
 						.Properties(props => props
 							.Object<Developer>(o => o
+								.AutoMap()
 								.Name(p => p.Committer)
 								.Properties(DeveloperProperties)
 							)
-							.Text(prop => prop.Name(p => p.ProjectName).Index(false))
+							.Text(t => t
+								.Name(p => p.ProjectName)
+								.Index(false)
+							)
 						)
 					)
 				)
@@ -129,32 +137,44 @@ namespace Tests.Framework.Integration
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
 
-		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
-			.AutoMap()
-			.Properties(props => props
+		public static PropertiesDescriptor<Project> ProjectProperties(PropertiesDescriptor<Project> props) => props
 				.Keyword(s => s
 					.Name(p => p.Name)
 					.Fields(fs => fs
-						.Text(ss => ss.Name("standard").Analyzer("standard"))
-						.Completion(cm => cm.Name("suggest"))
+						.Text(ss => ss
+							.Name("standard")
+							.Analyzer("standard")
+						)
+						.Completion(cm => cm
+							.Name("suggest")
+						)
 					)
 				)
-				.Date(d => d.Name(p => p.StartedOn))
+				.Date(d => d
+					.Name(p => p.StartedOn)
+				)
 				.Keyword(d => d
 					.Name(p => p.State)
 					.Fields(fs => fs
-						.Text(st => st.Name("offsets").IndexOptions(IndexOptions.Offsets))
+						.Text(st => st
+							.Name("offsets")
+							.IndexOptions(IndexOptions.Offsets)
+						)
 					)
 				)
 				.Nested<Tag>(mo => mo
+					.AutoMap()
 					.Name(p => p.Tags)
 					.Properties(TagProperties)
 				)
 				.Object<Developer>(o => o
+					.AutoMap()
 					.Name(p => p.LeadDeveloper)
 					.Properties(DeveloperProperties)
 				)
-				.GeoPoint(g => g.Name(p => p.Location))
+				.GeoPoint(g => g
+					.Name(p => p.Location)
+				)
 				.Completion(cm => cm
 					.Name(p => p.Suggest)
 					.Contexts(cx => cx
@@ -162,23 +182,36 @@ namespace Tests.Framework.Integration
 							.Name("color")
 						)
 					)
-				)
-			);
+				);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
 			.Keyword(s => s
 				.Name(p => p.Name)
 				.Fields(f => f
-					.Text(st => st.Name("vectors").TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+					.Text(st => st
+						.Name("vectors")
+						.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
+					)
 				)
 			);
 
 		private static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
-			.Keyword(s => s.Name(p => p.OnlineHandle))
-			.Keyword(s => s.Name(p => p.Gender))
-			.Text(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
-			.Ip(s => s.Name(p => p.IPAddress))
-			.GeoPoint(g => g.Name(p => p.Location).LatLon())
-			;
+			.Keyword(s => s
+				.Name(p => p.OnlineHandle)
+			)
+			.Keyword(s => s
+				.Name(p => p.Gender)
+			)
+			.Text(s => s
+				.Name(p => p.FirstName)
+				.TermVector(TermVectorOption.WithPositionsOffsetsPayloads)
+			)
+			.Ip(s => s
+				.Name(p => p.IPAddress)
+			)
+			.GeoPoint(g => g
+				.Name(p => p.Location)
+				.LatLon()
+			);
 	}
 }

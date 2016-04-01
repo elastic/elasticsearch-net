@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Bucket.Missing
 				{
 					missing = new
 					{
-						field = "description"
+						field = "description.keyword"
 					}
 				}
 			}
@@ -28,7 +28,7 @@ namespace Tests.Aggregations.Bucket.Missing
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Aggregations(a => a
 				.Missing("projects_without_a_description", m => m
-					.Field(p => p.Description)
+					.Field(p => p.Description.Suffix("keyword"))
 				)
 			);
 
@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Bucket.Missing
 			{
 				Aggregations = new MissingAggregation("projects_without_a_description")
 				{
-					Field = Field<Project>(p => p.Description)
+					Field = Field<Project>(p => p.Description.Suffix("keyword"))
 				}
 			};
 
