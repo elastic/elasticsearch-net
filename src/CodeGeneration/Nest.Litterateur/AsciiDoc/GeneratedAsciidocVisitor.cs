@@ -56,7 +56,7 @@ namespace Nest.Litterateur.AsciiDoc
 
 			if (!document.Attributes.Any(a => a.Name == "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/current"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/2.3"));
 			}
 
 			if (!document.Attributes.Any(a => a.Name == "github"))
