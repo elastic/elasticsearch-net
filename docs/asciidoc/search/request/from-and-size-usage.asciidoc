@@ -7,6 +7,14 @@
 [[from-and-size-usage]]
 == From And Size Usage
 
+Pagination of results can be done by using the `from` and `size` parameters.
+
+`from` parameter:: 
+defines the offset from the first result you want to fetch.
+
+`size` parameter:: 
+allows you to configure the maximum amount of hits to be returned.
+
 === Object Initializer Syntax Example
 
 [source,csharp]

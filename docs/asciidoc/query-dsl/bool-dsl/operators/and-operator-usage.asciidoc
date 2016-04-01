@@ -17,28 +17,6 @@ LotsOfAnds(lotsOfAnds);
 [source,csharp]
 ----
 QueryContainer container = null;
-
-container &= Query;
-
-LotsOfAnds(container);
-----
-
-[source,csharp]
-----
-var container = new QueryContainer();
-
-container &= Query;
-
-LotsOfAnds(container);
-----
-
-[source,csharp]
-----
-lotsOfAnds.Should().NotBeNull();
-
-lotsOfAnds.Bool.Should().NotBeNull();
-
-lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
 [source,csharp]
@@ -92,5 +70,35 @@ ReturnsNull(
     NullQuery && ConditionlessQuery && ConditionlessQuery && ConditionlessQuery,
     q=>q.NullQuery() && q.ConditionlessQuery() && q.ConditionlessQuery() && q.ConditionlessQuery()
 );
+----
+
+[source,csharp]
+----
+foreach(var i in Enumerable.Range(0, 100))
+    container &= Query;
+
+LotsOfAnds(container);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+----
+
+[source,csharp]
+----
+foreach(var i in Enumerable.Range(0, 100))
+    container &= Query;
+
+LotsOfAnds(container);
+----
+
+[source,csharp]
+----
+lotsOfAnds.Should().NotBeNull();
+
+lotsOfAnds.Bool.Should().NotBeNull();
+
+lotsOfAnds.Bool.Must.Should().NotBeEmpty().And.HaveCount(100);
 ----
 

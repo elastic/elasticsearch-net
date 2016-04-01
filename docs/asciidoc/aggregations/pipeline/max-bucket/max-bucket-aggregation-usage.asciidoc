@@ -88,6 +88,8 @@ maxCommits.Should().NotBeNull();
 maxCommits.Value.Should().BeGreaterThan(0);
 maxCommits.Keys.Should().NotBeNull();
 maxCommits.Keys.Count.Should().BeGreaterOrEqualTo(1);
-key.Should().NotBeNull();
+
+foreach (var key in maxCommits.Keys)
+    key.Should().NotBeNull();
 ----
 

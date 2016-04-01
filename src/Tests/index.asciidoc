@@ -7,6 +7,8 @@ include::client-concepts.asciidoc[]
 
 include::common-options.asciidoc[]
 
+include::search.asciidoc[]
+
 include::query-dsl.asciidoc[]
 
 include::aggregations.asciidoc[]

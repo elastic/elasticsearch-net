@@ -91,6 +91,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 				port.Should().Be(9200 + (i++ % NumberOfNodes));
 		});
 
+		//hide
 		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
 			foreach(var n in pool.CreateView()) yield return n.Uri.Port;

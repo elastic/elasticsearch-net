@@ -103,8 +103,13 @@ var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.DocCountErrorUpperBound.Should().HaveValue();
 states.SumOtherDocCount.Should().HaveValue();
-item.Key.Should().NotBeNullOrEmpty();
-item.DocCount.Should().BeGreaterOrEqualTo(1);
+
+foreach (var item in states.Buckets)
+{
+    item.Key.Should().NotBeNullOrEmpty();
+    item.DocCount.Should().BeGreaterOrEqualTo(1);
+}
+
 states.Meta.Should().NotBeNull().And.HaveCount(1);
 states.Meta["foo"].Should().Be("bar");
 ----

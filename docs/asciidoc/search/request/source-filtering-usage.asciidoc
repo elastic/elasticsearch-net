@@ -7,9 +7,9 @@
 [[source-filtering-usage]]
 == Source Filtering Usage
 
-Allows to control how the _source field is returned  with every hit.
-By default operations return the contents of the _source field unless 
- you have used the fields parameter or if the _source field is disabled.
+Allows to control how the `_source` field is returned with every hit.
+By default operations return the contents of the `_source` field unless
+you have used the fields parameter or if the `_source` field is disabled.
 
 === Fluent DSL Example
 
@@ -57,63 +57,12 @@ new SearchRequest<Project>
 [source,csharp]
 ----
 response.IsValid.Should().BeTrue();
-document.Name.Should().NotBeNull();
-document.StartedOn.Should().NotBe(default(DateTime));
-document.Description.Should().BeNull();
-----
 
-[source,csharp]
-----
-internal class WithSourceFilterProperty
+foreach (var document in response.Documents)
 {
-    [JsonProperty("_source")]
-    public ISourceFilter SourceFilter { get; set; }
+    document.Name.Should().NotBeNull();
+    document.StartedOn.Should().NotBe(default(DateTime));
+    document.Description.Should().BeNull();
 }
-----
-
-[source,csharp]
-----
-var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": false }");
-
-o.Should().NotBeNull();
-
-o.SourceFilter.Should().NotBeNull();
-
-o.SourceFilter.Exclude.Should().Contain("*");
-----
-
-[source,csharp]
-----
-var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": [\"obj.*\"] }");
-
-o.Should().NotBeNull();
-
-o.SourceFilter.Should().NotBeNull();
-
-o.SourceFilter.Include.Should().Contain("obj.*");
-----
-
-[source,csharp]
-----
-var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": \"obj.*\" }");
-
-o.Should().NotBeNull();
-
-o.SourceFilter.Should().NotBeNull();
-
-o.SourceFilter.Include.Should().Contain("obj.*");
-----
-
-[source,csharp]
-----
-var o = base.Deserialize<WithSourceFilterProperty>("{ \"_source\": { \"include\": [\"obj.*\"], \"exclude\": [\"foo.*\"] } }");
-
-o.Should().NotBeNull();
-
-o.SourceFilter.Should().NotBeNull();
-
-o.SourceFilter.Include.Should().Contain("obj.*");
-
-o.SourceFilter.Exclude.Should().Contain("foo.*");
 ----
 

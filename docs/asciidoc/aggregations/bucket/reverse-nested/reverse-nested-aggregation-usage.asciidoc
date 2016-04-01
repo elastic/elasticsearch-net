@@ -99,13 +99,20 @@ var tags = response.Aggs.Nested("tags");
 tags.Should().NotBeNull();
 var tagNames = tags.Terms("tag_names");
 tagNames.Should().NotBeNull();
-tagName.Key.Should().NotBeNullOrEmpty();
-tagName.DocCount.Should().BeGreaterThan(0);
-var tagsToProjects = tagName.ReverseNested("tags_to_project");
-tagsToProjects.Should().NotBeNull();
-var topProjectsPerTag = tagsToProjects.Terms("top_projects_per_tag");
-topProjectsPerTag.Should().NotBeNull();
-topProject.Key.Should().NotBeNullOrEmpty();
-topProject.DocCount.Should().BeGreaterThan(0);
+
+foreach(var tagName in tagNames.Buckets)
+{
+    tagName.Key.Should().NotBeNullOrEmpty();
+    tagName.DocCount.Should().BeGreaterThan(0);
+    var tagsToProjects = tagName.ReverseNested("tags_to_project");
+    tagsToProjects.Should().NotBeNull();
+    var topProjectsPerTag = tagsToProjects.Terms("top_projects_per_tag");
+    topProjectsPerTag.Should().NotBeNull();
+    foreach(var topProject in topProjectsPerTag.Buckets)
+    {
+        topProject.Key.Should().NotBeNullOrEmpty();
+        topProject.DocCount.Should().BeGreaterThan(0);
+    }
+}
 ----
 

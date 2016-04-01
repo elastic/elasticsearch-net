@@ -7,6 +7,12 @@
 [[nested-query-usage]]
 == Nested Query Usage
 
+Nested query allows to query nested objects / docs (see {ref_current}/nested.html[nested mapping]).
+The query is executed against the nested objects / docs as if they were indexed as separate
+docs (they are, internally) and resulting in the root parent doc (or parent nested mapping).
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-nested-query.html[nested query] for more details.
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -16,8 +22,13 @@ q
     .Name("named_query")
     .Boost(1.1)
     .InnerHits(i=>i.Explain())
-    .Query(qq=>qq.MatchAll())
     .Path(p=>p.CuratedTags)
+    .Query(nq => nq
+        .Terms(t => t
+            .Field(f => f.CuratedTags.First().Name)
+            .Terms("lorem", "ipsum")
+        )
+    )
 )
 ----
 
@@ -30,8 +41,12 @@ new NestedQuery
     Name = "named_query",
     Boost = 1.1,
     InnerHits = new InnerHits { Explain = true },
-    Query = new MatchAllQuery(),
-    Path = Field<Project>(p=>p.CuratedTags)
+    Path = Field<Project>(p => p.CuratedTags),
+    Query = new TermsQuery
+    {
+        Field = Field<Project>(p => p.CuratedTags.First().Name),
+        Terms = new[] { "lorem", "ipsum" }
+    }
 }
 ----
 
@@ -43,7 +58,12 @@ new NestedQuery
     "_name": "named_query",
     "boost": 1.1,
     "query": {
-      "match_all": {}
+      "terms": {
+        "curatedTags.name": [
+          "lorem",
+          "ipsum"
+        ]
+      }
     },
     "path": "curatedTags",
     "inner_hits": {

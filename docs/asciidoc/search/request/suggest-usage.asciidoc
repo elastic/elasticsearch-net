@@ -7,26 +7,9 @@
 [[suggest-usage]]
 == Suggest Usage
 
-Allows to add one or more sort on specific fields. Each sort can be reversed as well. 
-The sort is defined on a per field level, with special field name for _score to sort by score.
+The suggest feature suggests similar looking terms based on a provided text by using a suggester.
 
-=== Handling Responses
-
-[source,csharp]
-----
-var myCompletionSuggest = response.Suggest["my-completion-suggest"];
-myCompletionSuggest.Should().NotBeNull();
-var suggest = myCompletionSuggest.First();
-suggest.Text.Should().Be(Project.Instance.Name);
-suggest.Length.Should().BeGreaterThan(0);
-var option = suggest.Options.First();
-option.Text.Should().NotBeNullOrEmpty();
-option.Score.Should().BeGreaterThan(0);
-var payload = option.Payload<ProjectPayload>();
-payload.Should().NotBeNull();
-payload.Name.Should().Be(Project.Instance.Name);
-payload.State.Should().NotBeNull();
-----
+See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Suggesters] for more detail.
 
 === Fluent DSL Example
 
@@ -50,7 +33,8 @@ s => s
     )
     .Completion("my-completion-suggest", c => c
         .Context(ctx => ctx
-            .Add("color", Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First())
+            .Add("color",
+                Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First())
         )
         .Fuzzy(f => f
             .Fuzziness(Fuzziness.Auto)
@@ -93,70 +77,79 @@ new SearchRequest<Project>
 {
     Suggest = new SuggestContainer
     {
-        { "my-term-suggest", new SuggestBucket
         {
-            Text = "hello world",
-            Term = new TermSuggester
+            "my-term-suggest", new SuggestBucket
             {
-                MaxEdits = 1,
-                MaxInspections = 2,
-                MaxTermFrequency = 3,
-                MinDocFrequency = 4,
-                MinWordLen = 5,
-                PrefixLen = 6,
-                SuggestMode = SuggestMode.Always,
-                Analyzer = "standard",
-                Field = Field<Project>(p=>p.Name),
-                ShardSize = 7,
-                Size = 8
-            }
-        } },
-        { "my-completion-suggest", new SuggestBucket
-        {
-            Text = Project.Instance.Name,
-            Completion = new CompletionSuggester
-            {
-                Context = new Dictionary<string, object> { { "color",  Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First() } },
-                Fuzzy = new FuzzySuggester
+                Text = "hello world",
+                Term = new TermSuggester
                 {
-                    Fuzziness = Fuzziness.Auto,
-                    MinLength = 1,
-                    PrefixLength = 2,
-                    Transpositions = true,
-                    UnicodeAware = false
-                },
-                Analyzer = "simple",
-                Field = Field<Project>(p=>p.Suggest),
-                ShardSize = 7,
-                Size = 8
+                    MaxEdits = 1,
+                    MaxInspections = 2,
+                    MaxTermFrequency = 3,
+                    MinDocFrequency = 4,
+                    MinWordLen = 5,
+                    PrefixLen = 6,
+                    SuggestMode = SuggestMode.Always,
+                    Analyzer = "standard",
+                    Field = Field<Project>(p=>p.Name),
+                    ShardSize = 7,
+                    Size = 8
+                }
             }
-        } },
-        { "my-phrase-suggest", new SuggestBucket
+        },
         {
-            Text = "hello world",
-            Phrase = new PhraseSuggester
+            "my-completion-suggest", new SuggestBucket
             {
-                Collate = new PhraseSuggestCollate
+                Text = Project.Instance.Name,
+                Completion = new CompletionSuggester
                 {
-                    Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+                    Context = new Dictionary<string, object>
                     {
-                        Params = new Dictionary<string, object>
-                        {
-                            { "field_name", "title" }
-                        }
+                        { "color",  Project.Projects.First().Suggest.Context.Values.SelectMany(v => v).First() }
                     },
-                    Prune = true
-                },
-                Confidence = 10.1,
-                DirectGenerator = new List<DirectGenerator>
-                {
-                    new DirectGenerator { Field = "description" }
-                },
-                GramSize = 1,
-                Field = "name",
-                RealWordErrorLikelihood = 0.5
+                    Fuzzy = new FuzzySuggester
+                    {
+                        Fuzziness = Fuzziness.Auto,
+                        MinLength = 1,
+                        PrefixLength = 2,
+                        Transpositions = true,
+                        UnicodeAware = false
+                    },
+                    Analyzer = "simple",
+                    Field = Field<Project>(p=>p.Suggest),
+                    ShardSize = 7,
+                    Size = 8
+                }
             }
-        } },
+        },
+        {
+            "my-phrase-suggest", new SuggestBucket
+            {
+                Text = "hello world",
+                Phrase = new PhraseSuggester
+                {
+                    Collate = new PhraseSuggestCollate
+                    {
+                        Query = new InlineScript("{ \"match\": { \"{{field_name}}\": \"{{suggestion}}\" }}")
+                        {
+                            Params = new Dictionary<string, object>
+                            {
+                                { "field_name", "title" }
+                            }
+                        },
+                        Prune = true
+                    },
+                    Confidence = 10.1,
+                    DirectGenerator = new List<DirectGenerator>
+                    {
+                        new DirectGenerator { Field = "description" }
+                    },
+                    GramSize = 1,
+                    Field = "name",
+                    RealWordErrorLikelihood = 0.5
+                }
+            }
+        },
     }
 }
 ----
@@ -226,5 +219,23 @@ new SearchRequest<Project>
     }
   }
 }
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+var myCompletionSuggest = response.Suggest["my-completion-suggest"];
+myCompletionSuggest.Should().NotBeNull();
+var suggest = myCompletionSuggest.First();
+suggest.Text.Should().Be(Project.Instance.Name);
+suggest.Length.Should().BeGreaterThan(0);
+var option = suggest.Options.First();
+option.Text.Should().NotBeNullOrEmpty();
+option.Score.Should().BeGreaterThan(0);
+var payload = option.Payload<ProjectPayload>();
+payload.Should().NotBeNull();
+payload.Name.Should().Be(Project.Instance.Name);
+payload.State.Should().NotBeNull();
 ----
 

@@ -31,23 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <Choose>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">
-      <PropertyGroup>
-        <__paket__xunit_core_props>win81\xunit.core</__paket__xunit_core_props>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
-      <PropertyGroup>
-        <__paket__xunit_core_props>wpa81\xunit.core</__paket__xunit_core_props>
-      </PropertyGroup>
-    </When>
-    <When Condition="($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
-      <PropertyGroup>
-        <__paket__xunit_core_props>portable-net45+win8+wp8+wpa81\xunit.core</__paket__xunit_core_props>
-      </PropertyGroup>
-    </When>
-  </Choose>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -539,9 +522,6 @@
     <Compile Include=".\Search\Search\SearchUrlTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryApiTests.cs" />
     <Compile Include=".\Search\Validate\ValidateQueryUrlTests.cs" />
-    <Compile Include="Aggregations\Pipeline\ExtendedStatsBucket\ExtendedStatsBucketAggregationUsageTests.cs" />
-    <Compile Include="Aggregations\Pipeline\PecentilesBucket\PercentilesBucketAggregationUsageTests.cs" />
-    <Compile Include="Aggregations\Pipeline\StatsBucket\StatsBucketAggregationUsageTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpApiTests.cs" />
     <Compile Include="Cat\CatHelp\CatHelpUrlTests.cs" />
     <Compile Include="Cat\CatNodeAttributes\CatNodeAttributesApiTests.cs" />
@@ -605,7 +585,24 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.png" />
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">
+      <PropertyGroup>
+        <__paket__xunit_core_props>win81\xunit.core</__paket__xunit_core_props>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(TargetFrameworkIdentifier) == 'WindowsPhoneApp'">
+      <PropertyGroup>
+        <__paket__xunit_core_props>wpa81\xunit.core</__paket__xunit_core_props>
+      </PropertyGroup>
+    </When>
+    <When Condition="($(TargetFrameworkIdentifier) == 'Xamarin.Mac') Or ($(TargetFrameworkProfile) == 'Profile7') Or ($(TargetFrameworkProfile) == 'Profile31') Or ($(TargetFrameworkProfile) == 'Profile32') Or ($(TargetFrameworkProfile) == 'Profile44') Or ($(TargetFrameworkProfile) == 'Profile49') Or ($(TargetFrameworkProfile) == 'Profile78') Or ($(TargetFrameworkProfile) == 'Profile84') Or ($(TargetFrameworkProfile) == 'Profile111') Or ($(TargetFrameworkProfile) == 'Profile151') Or ($(TargetFrameworkProfile) == 'Profile157') Or ($(TargetFrameworkProfile) == 'Profile259')">
+      <PropertyGroup>
+        <__paket__xunit_core_props>portable-net45+win8+wp8+wpa81\xunit.core</__paket__xunit_core_props>
+      </PropertyGroup>
+    </When>
+  </Choose>
   <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
   <Import Project="..\..\.paket\paket.targets" />
   <Choose>

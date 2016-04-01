@@ -154,18 +154,23 @@ response.IsValid.Should().BeTrue();
 var states = response.Aggs.Terms("states");
 states.Should().NotBeNull();
 states.Buckets.Should().NotBeNullOrEmpty();
-state.Key.Should().NotBeNullOrEmpty();
-state.DocCount.Should().BeGreaterThan(0);
-var topStateHits = state.TopHits("top_state_hits");
-topStateHits.Should().NotBeNull();
-topStateHits.Total.Should().BeGreaterThan(0);
-var hits = topStateHits.Hits<Project>();
-hits.Should().NotBeNullOrEmpty();
-hits.All(h => h.Explanation != null).Should().BeTrue();
-hits.All(h => h.Version.HasValue).Should().BeTrue();
-hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
-hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
-hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
-topStateHits.Documents<Project>().Should().NotBeEmpty();
+
+foreach(var state in states.Buckets)
+{
+    state.Key.Should().NotBeNullOrEmpty();
+    state.DocCount.Should().BeGreaterThan(0);
+    var topStateHits = state.TopHits("top_state_hits");
+    topStateHits.Should().NotBeNull();
+    topStateHits.Total.Should().BeGreaterThan(0);
+    var hits = topStateHits.Hits<Project>();
+    hits.Should().NotBeNullOrEmpty();
+    hits.All(h => h.Explanation != null).Should().BeTrue();
+    hits.All(h => h.Version.HasValue).Should().BeTrue();
+    //hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
+    hits.All(h => h.Fields.ValuesOf<StateOfBeing>("state").Any()).Should().BeTrue();
+    hits.All(h => h.Fields.ValuesOf<int>("numberOfCommits").Any()).Should().BeTrue();
+    hits.All(h => h.Fields.ValuesOf<int>("commit_factor").Any()).Should().BeTrue();
+    topStateHits.Documents<Project>().Should().NotBeEmpty();
+}
 ----
 

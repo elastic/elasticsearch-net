@@ -142,7 +142,11 @@ namespace Nest.Litterateur.AsciiDoc
 						{
 							case "fluent":
 							case "queryfluent":
-								_newDocument.Add(new SectionTitle("Fluent DSL Example", 3));
+								if (!LastSectionTitleMatches(text => text.StartsWith("Fluent DSL", StringComparison.OrdinalIgnoreCase)))
+								{
+									_newDocument.Add(new SectionTitle("Fluent DSL Example", 3));
+								}
+
 								_newDocument.Add(element);
 
 								if (objectInitializerExample != null)
@@ -187,7 +191,12 @@ namespace Nest.Litterateur.AsciiDoc
 								}
 								break;
 							case "expectresponse":
-								_newDocument.Add(new SectionTitle("Handling Responses", 3));
+								// Don't add the Handlng Response section title if it was the last title (it might be defined in the doc already)
+								if (!LastSectionTitleMatches(text => text.Equals("Handling Responses", StringComparison.OrdinalIgnoreCase)))
+								{
+									_newDocument.Add(new SectionTitle("Handling Responses", 3));
+								}
+
 								_newDocument.Add(element);
 								break;
 							default:
@@ -222,7 +231,7 @@ namespace Nest.Litterateur.AsciiDoc
 				source.Attributes.Remove(methodAttribute);
 			}
 
-			// Replace tabs with spaces and remove comment escaping from output
+			// Replace tabs with spaces and remove C# comment escaping from callouts
 			// (elastic docs generation does not like this callout format)
 			source.Text = Regex.Replace(source.Text.Replace("\t", "    "), @"//[ \t]*\<(\d+)\>.*", "<$1>");
 
@@ -269,6 +278,23 @@ namespace Nest.Litterateur.AsciiDoc
 			{
 				document.Attributes.Remove(directoryAttribute);
 			}
+		}
+
+		private bool LastSectionTitleMatches(Func<string, bool> predicate)
+		{
+			var lastSectionTitle = _newDocument.OfType<SectionTitle>().LastOrDefault(e => e.Level == 3);
+			if (lastSectionTitle != null && lastSectionTitle.Level == 3)
+			{
+				var builder = new StringBuilder();
+				using (var visitor = new AsciiDocVisitor(new StringWriter(builder)))
+				{
+					visitor.Visit(lastSectionTitle.Elements);
+				}
+
+				return predicate(builder.ToString());
+			}
+
+			return false;
 		}
 	}
 }

@@ -235,7 +235,12 @@ var filterAgg = response.Aggs.Filters("projects_by_state");
 filterAgg.Should().NotBeNull();
 var results = filterAgg.AnonymousBuckets();
 results.Count.Should().Be(4);
-singleBucket.DocCount.Should().BeGreaterThan(0);
+
+foreach (var singleBucket in results.Take(3))
+{
+    singleBucket.DocCount.Should().BeGreaterThan(0);
+}
+
 results.Last().DocCount.Should().Be(0); <1>
 ----
 <1> The last bucket is the _other bucket_

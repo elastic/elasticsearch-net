@@ -9,51 +9,6 @@
 
 [source,csharp]
 ----
-var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);
-
-LotsOfUnaryAdds(lotsOfUnaryAdds);
-----
-
-[source,csharp]
-----
-QueryContainer container = null;
-
-container &= +Query;
-
-LotsOfUnaryAdds(container);
-----
-
-[source,csharp]
-----
-var container = new QueryContainer();
-
-container &= +Query;
-
-LotsOfUnaryAdds(container);
-----
-
-[source,csharp]
-----
-lotsOfUnaryAdds.Should().NotBeNull();
-
-lotsOfUnaryAdds.Bool.Should().NotBeNull();
-
-lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
-----
-
-[source,csharp]
-----
-var container = new QueryContainer();
-
-container |= +Query;
-
-var c = container as IQueryContainer;
-
-c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
-----
-
-[source,csharp]
-----
 ReturnsBool(+Query && +Query, q => +q.Query() && +q.Query(), b =>
 {
     b.Filter.Should().NotBeEmpty().And.HaveCount(2);
@@ -81,8 +36,28 @@ b.Should.Should().NotBeEmpty().And.HaveCount(2);
 b.Must.Should().BeNull();
 b.MustNot.Should().BeNull();
 b.MustNot.Should().BeNull();
-q.Bool.Should().NotBeNull();
-q.Bool.Filter.Should().NotBeEmpty().And.HaveCount(1);
+
+foreach (IQueryContainer q in b.Should)
+{
+    q.Bool.Should().NotBeNull();
+    q.Bool.Filter.Should().NotBeEmpty().And.HaveCount(1);
+}
+----
+
+[source,csharp]
+----
+var lotsOfUnaryAdds = Enumerable.Range(0, 100).Aggregate(new QueryContainer(), (q, c) => q && +Query, q => q);
+
+LotsOfUnaryAdds(lotsOfUnaryAdds);
+----
+
+[source,csharp]
+----
+QueryContainer container = null;
+----
+
+[source,csharp]
+----
 ReturnsSingleQuery(+Query || +ConditionlessQuery, q => +q.Query() || +q.ConditionlessQuery(),
     c => c.Bool.Filter.Should().NotBeNull().And.HaveCount(1));
 ReturnsSingleQuery(+ConditionlessQuery || +Query, q => +q.ConditionlessQuery() || +q.Query(),
@@ -110,5 +85,50 @@ ReturnsNull(
     +NullQuery || +ConditionlessQuery || +ConditionlessQuery || +ConditionlessQuery,
     q => +q.NullQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery() || +q.ConditionlessQuery()
 );
+----
+
+[source,csharp]
+----
+foreach (var i in Enumerable.Range(0, 100))
+    container &= +Query;
+
+LotsOfUnaryAdds(container);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+----
+
+[source,csharp]
+----
+foreach (var i in Enumerable.Range(0, 100))
+    container &= +Query;
+
+LotsOfUnaryAdds(container);
+----
+
+[source,csharp]
+----
+lotsOfUnaryAdds.Should().NotBeNull();
+
+lotsOfUnaryAdds.Bool.Should().NotBeNull();
+
+lotsOfUnaryAdds.Bool.Filter.Should().NotBeEmpty().And.HaveCount(100);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+----
+
+[source,csharp]
+----
+foreach (var i in Enumerable.Range(0, 100))
+    container |= +Query;
+
+var c = container as IQueryContainer;
+
+c.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 

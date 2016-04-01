@@ -17,28 +17,6 @@ LotsOfOrs(lotsOfOrs);
 [source,csharp]
 ----
 QueryContainer container = null;
-
-container |= Query;
-
-LotsOfOrs(container);
-----
-
-[source,csharp]
-----
-var container = new QueryContainer();
-
-container |= Query;
-
-LotsOfOrs(container);
-----
-
-[source,csharp]
-----
-lotsOfOrs.Should().NotBeNull();
-
-lotsOfOrs.Bool.Should().NotBeNull();
-
-lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 
 [source,csharp]
@@ -103,5 +81,35 @@ ReturnsNull(
     NullQuery || ConditionlessQuery || ConditionlessQuery || ConditionlessQuery,
     q=>q.NullQuery() || q.ConditionlessQuery() || q.ConditionlessQuery() || q.ConditionlessQuery()
 );
+----
+
+[source,csharp]
+----
+foreach(var i in Enumerable.Range(0, 100))
+    container |= Query;
+
+LotsOfOrs(container);
+----
+
+[source,csharp]
+----
+var container = new QueryContainer();
+----
+
+[source,csharp]
+----
+foreach(var i in Enumerable.Range(0, 100))
+    container |= Query;
+
+LotsOfOrs(container);
+----
+
+[source,csharp]
+----
+lotsOfOrs.Should().NotBeNull();
+
+lotsOfOrs.Bool.Should().NotBeNull();
+
+lotsOfOrs.Bool.Should.Should().NotBeEmpty().And.HaveCount(100);
 ----
 

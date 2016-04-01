@@ -7,6 +7,11 @@
 [[highlighting-usage]]
 == Highlighting Usage
 
+Allows to highlight search results on one or more fields.
+The implementation uses either the lucene `highlighter`, `fast-vector-highlighter` or `postings-highlighter`.
+
+See the Elasticsearch documentation on {ref_current}/search-request-highlighting.html[highlighting] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -49,7 +54,7 @@ s => s
                 .Terms(t => t
                     .Field(f => f.State.Suffix("offsets"))
                     .Terms(
-                        StateOfBeing.Stable.ToString().ToLowerInvariant(), 
+                        StateOfBeing.Stable.ToString().ToLowerInvariant(),
                         StateOfBeing.BellyUp.ToString().ToLowerInvariant()
                     )
                 )
@@ -182,12 +187,40 @@ new SearchRequest<Project>
 [source,csharp]
 ----
 response.IsValid.Should().BeTrue();
-highlight.Should().Contain("<tag1>");
-highlight.Should().Contain("</tag1>");
-highlight.Should().Contain("<name>");
-highlight.Should().Contain("</name>");
-highlight.Should().Contain("<state>");
-highlight.Should().Contain("</state>");
-Assert.True(false, $"highlights contains unexpected key {highlightHit.Key}");
+
+foreach (var highlightsByDocumentId in response.Highlights)
+{
+    foreach (var highlightHit in highlightsByDocumentId.Value)
+    {
+        if (highlightHit.Key == "name.standard")
+        {
+            foreach (var highlight in highlightHit.Value.Highlights)
+            {
+                highlight.Should().Contain("<tag1>");
+                highlight.Should().Contain("</tag1>");
+            }
+        }
+        else if (highlightHit.Key == "leadDeveloper.firstName")
+        {
+            foreach (var highlight in highlightHit.Value.Highlights)
+            {
+                highlight.Should().Contain("<name>");
+                highlight.Should().Contain("</name>");
+            }
+        }
+        else if (highlightHit.Key == "state.offsets")
+        {
+            foreach (var highlight in highlightHit.Value.Highlights)
+            {
+                highlight.Should().Contain("<state>");
+                highlight.Should().Contain("</state>");
+            }
+        }
+        else
+        {
+            Assert.True(false, $"highlights contains unexpected key {highlightHit.Key}");
+        }
+    }
+}
 ----
 

@@ -49,6 +49,9 @@ namespace Nest.Litterateur.Walkers
 
 				var repeatedTabs = 2 + ClassDepth;
 				var language = Language.CSharp;
+
+
+
 				_code = node.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString();
 				_code = _code.RemoveNumberOfLeadingTabsAfterNewline(repeatedTabs);
 

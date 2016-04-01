@@ -24,7 +24,7 @@ var audit = new Auditor(() => Framework.Cluster
 );
 ----
 
-On the second request we specify a request timeout override to 60 seconds
+On the second request we specify a request timeout override to 80 seconds
 We should now see more nodes being tried.
 
 [source,csharp]
@@ -51,8 +51,9 @@ new ClientCall(r => r.RequestTimeout(TimeSpan.FromSeconds(80)))
 [[connect-timeouts]]
 == Connect Timeouts
 
-Connect timeouts can be overridden, webrequest/httpclient can not distinguish connect and retry timeouts however
-we use this separate configuration value for ping requests.
+Connect timeouts can be overridden on a per request basis. Whilst the underlying `WebRequest` (in the case of full CLR)
+and `HttpClient` (in the case of Core CLR) cannot distinguish between connect and retry timeouts,
+we use a separate configuration value for ping requests.
 
 we set up a 10 node cluster with a global time out of 20 seconds.
 Each call on a node takes 10 seconds. So we can only try this call on 2 nodes

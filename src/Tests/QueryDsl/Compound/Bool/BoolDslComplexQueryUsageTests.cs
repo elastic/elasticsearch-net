@@ -98,6 +98,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				// actual bool query
 				&& (base.QueryFluent(q)));
 
+		//hide
 		[U]
 		protected void AsssertShape()
 		{
@@ -105,6 +106,7 @@ namespace Tests.QueryDsl.Compound.Bool
 			//this.AssertShape(this.QueryFluent(new QueryContainerDescriptor<Project>()));
 		}
 
+		//hide
 		private void AssertShape(IQueryContainer container)
 		{
 			//top level bool

@@ -36,6 +36,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (node.ChildNodes().All(childNode => childNode is PropertyDeclarationSyntax || childNode is AttributeListSyntax))
 			{
 				// simple nested interface	
@@ -48,6 +50,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			++ClassDepth;
 			if (ClassDepth == 1)
 			{
@@ -78,6 +82,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			_propertyOrMethodName = node.Identifier.Text;
 			if (PropertyOrMethodNamesOfInterest.Contains(_propertyOrMethodName))
 			{
@@ -97,6 +103,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitArrowExpressionClause(ArrowExpressionClauseSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (!this.InsideFluentOrInitializerExample && !PropertyOrMethodNamesOfInterest.Contains(_propertyOrMethodName)) return;
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
 			if (syntaxNode == null) return;
@@ -108,6 +116,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitAccessorDeclaration(AccessorDeclarationSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (!this.InsideFluentOrInitializerExample) return;
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations() as BlockSyntax;
 			if (syntaxNode == null) return;
@@ -119,6 +129,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (this.ClassDepth == 1) this.InsideAutoIncludeMethodBlock = true;
 			_propertyOrMethodName = node.Identifier.Text;
 			base.VisitMethodDeclaration(node);
@@ -129,6 +141,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitExpressionStatement(ExpressionStatementSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (this.InsideAutoIncludeMethodBlock)
 			{
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
@@ -157,6 +171,8 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
 		{
+			if (node.ShouldBeHidden()) return;
+
 			if (this.InsideAutoIncludeMethodBlock)
 			{
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
@@ -181,6 +197,20 @@ namespace Nest.Litterateur.Walkers
 				}
 			}
 			base.VisitLocalDeclarationStatement(node);
+		}
+
+		public override void VisitForEachStatement(ForEachStatementSyntax node)
+		{
+			if (node.ShouldBeHidden()) return;
+
+			if (this.InsideAutoIncludeMethodBlock)
+			{
+				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+				var walker = new CodeWithDocumentationWalker(ClassDepth, line, _propertyOrMethodName);
+				walker.Visit(node);
+				this.Blocks.AddRange(walker.Blocks);
+			}
+			else base.VisitForEachStatement(node);
 		}
 
 		public override void VisitTrivia(SyntaxTrivia trivia)

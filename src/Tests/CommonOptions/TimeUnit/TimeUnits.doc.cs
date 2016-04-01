@@ -71,7 +71,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Time oneAndHalfYear = "1.5y";
 			Time twoWeeks = TimeSpan.FromDays(14);
 			Time twoDays = 1000*60*60*24*2;
-	
+
 			/**
 			* Milliseconds are calculated even when values are not passed as long...
 			*/
@@ -129,6 +129,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("1.16w").WhenSerializing<Union<DateInterval, Time>>((Time)TimeSpan.FromDays(8.1));
 		}
 
+		//hide
 		[U]
 		public void MillisecondsNeverSerializeToMonthsOrYears()
 		{
@@ -139,6 +140,7 @@ namespace Tests.CommonOptions.TimeUnit
 			Expect("102.86w").WhenSerializing(new Time(millisecondsInAMonth * 24));
 		}
 
+		//hide
 		[U]
 		public void ExpectedValues()
 		{
@@ -193,6 +195,7 @@ namespace Tests.CommonOptions.TimeUnit
 			);
 		}
 
+		//hide
 		private void Assert(double expectedFactor, Nest.TimeUnit expectedInterval, double expectedMilliseconds, string expectedSerialized, params Time[] times)
 		{
 			foreach (var time in times)

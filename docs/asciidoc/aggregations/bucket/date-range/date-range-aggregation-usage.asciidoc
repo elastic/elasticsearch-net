@@ -105,12 +105,13 @@ dateHistogram.Buckets.Should().NotBeNull();
 
 We specified three ranges so we expect to have three of them in the response 
 
-=== Handling Responses
-
 [source,csharp]
 ----
 dateHistogram.Buckets.Count.Should().Be(3);
 
-item.DocCount.Should().BeGreaterThan(0);
+foreach (var item in dateHistogram.Buckets)
+{
+    item.DocCount.Should().BeGreaterThan(0);
+}
 ----
 

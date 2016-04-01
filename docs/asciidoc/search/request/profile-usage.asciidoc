@@ -7,6 +7,17 @@
 [[profile-usage]]
 == Profile Usage
 
+WARNING: This functionality is experimental and may be changed or removed completely in a future release.
+
+The Profile API provides detailed timing information about the execution of individual components in a query.
+It gives the user insight into how queries are executed at a low level so that the user can understand
+why certain queries are slow, and take steps to improve their slow queries.
+
+The output from the Profile API is very verbose, especially for complicated queries executed across many shards.
+Pretty-printing the response is recommended to help understand the output
+
+See the Elasticsearch documentation on {ref_current}/search-profile.html[Profile API] for more detail.
+
 === Fluent DSL Example
 
 [source,csharp]

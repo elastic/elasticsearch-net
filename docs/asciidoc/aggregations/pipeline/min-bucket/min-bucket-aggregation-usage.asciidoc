@@ -88,6 +88,8 @@ minCommits.Should().NotBeNull();
 minCommits.Value.Should().BeGreaterThan(0);
 minCommits.Keys.Should().NotBeNull();
 minCommits.Keys.Count.Should().BeGreaterOrEqualTo(1);
-key.Should().NotBeNullOrEmpty();
+
+foreach (var key in minCommits.Keys)
+    key.Should().NotBeNullOrEmpty();
 ----
 

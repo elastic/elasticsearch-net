@@ -56,6 +56,7 @@ var timeouts = Enumerable.Range(0, 30)
     .Select(attempt => dateTimeProvider.DeadTime(attempt, timeout, maxTimeout))
     .ToList();
 
-increasedTimeout.Should().BeWithin(maxTimeout);
+foreach (var increasedTimeout in timeouts.Take(10))
+    increasedTimeout.Should().BeWithin(maxTimeout);
 ----
 

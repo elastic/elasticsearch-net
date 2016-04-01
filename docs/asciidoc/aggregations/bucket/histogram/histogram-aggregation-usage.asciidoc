@@ -64,6 +64,8 @@ new SearchRequest<Project>
 response.IsValid.Should().BeTrue();
 var commits = response.Aggs.Histogram("commits");
 commits.Should().NotBeNull();
-item.DocCount.Should().BeGreaterThan(0);
+
+foreach (var item in commits.Buckets)
+    item.DocCount.Should().BeGreaterThan(0);
 ----
 

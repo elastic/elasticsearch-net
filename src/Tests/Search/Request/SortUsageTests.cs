@@ -8,8 +8,8 @@ using static Nest.Infer;
 namespace Tests.Search.Request
 {
 	/**
-	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well. 
-	 * The sort is defined on a per field level, with special field name for _score to sort by score.
+	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well.
+	 * The sort is defined on a per field level, with special field name for `_score` to sort by score.
 	 */
 
 	public class SortUsageTests : SearchUsageTestBase
@@ -111,7 +111,8 @@ namespace Tests.Search.Request
 					new SortField { Field = "name", Order = SortOrder.Descending },
 					new SortField { Field = "_score", Order = SortOrder.Descending },
 					new SortField { Field = "_doc", Order = SortOrder.Ascending },
-					new SortField {
+					new SortField
+					{
 						Field = Field<Project>(p=>p.LastActivity),
 						Order = SortOrder.Descending,
 						Missing = "_last",
@@ -132,7 +133,7 @@ namespace Tests.Search.Request
 					new ScriptSort
 					{
 						Type = "number",
-						Order = SortOrder.Ascending, 
+						Order = SortOrder.Ascending,
 						Script =  new InlineScript("doc['numberOfCommits'].value * factor")
 						{
 							Params = new Dictionary<string, object>

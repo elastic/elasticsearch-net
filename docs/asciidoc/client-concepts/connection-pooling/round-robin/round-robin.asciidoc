@@ -63,10 +63,13 @@ var threadedStartPositions = new ConcurrentBag<int>();
 var threads = Enumerable.Range(0, 20)
     .Select(i => CreateThreadCallingGetNext(pool, threadedStartPositions))
     .ToList();
+----
 
-t.Start();
+[source,csharp]
+----
+foreach (var t in threads) t.Start();
 
-t.Join();
+foreach (var t in threads) t.Join();
 ----
 
 Each thread reported the first node it started off lets make sure we see each node twice as the first node

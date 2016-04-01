@@ -17,7 +17,8 @@ namespace Nest.Litterateur.AsciiDoc
 		private static readonly Dictionary<string, string> IncludeDirectories = new Dictionary<string, string>
 		{
 			{ "aggregations.asciidoc", "aggregations-usage.asciidoc" },
-			{ "query-dsl.asciidoc", "query-dsl-usage.asciidoc" }
+			{ "query-dsl.asciidoc", "query-dsl-usage.asciidoc" },
+			{ "search.asciidoc", "search-usage.asciidoc" },
 		};
 
 		public RawAsciidocVisitor(FileInfo destination)

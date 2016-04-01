@@ -7,20 +7,6 @@
 [[serial-differencing-aggregation-usage]]
 == Serial Differencing Aggregation Usage
 
-=== Handling Responses
-
-[source,csharp]
-----
-response.IsValid.Should().BeTrue();
-var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
-projectsPerMonth.Should().NotBeNull();
-projectsPerMonth.Buckets.Should().NotBeNull();
-projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-var commits = item.Sum("commits");
-commits.Should().NotBeNull();
-commits.Value.Should().NotBe(null);
-----
-
 === Fluent DSL Example
 
 [source,csharp]
@@ -91,6 +77,24 @@ new SearchRequest<Project>
       }
     }
   }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+projectsPerMonth.Should().NotBeNull();
+projectsPerMonth.Buckets.Should().NotBeNull();
+projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in projectsPerMonth.Buckets)
+{
+    var commits = item.Sum("commits");
+    commits.Should().NotBeNull();
+    commits.Value.Should().NotBe(null);
 }
 ----
 

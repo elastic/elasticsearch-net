@@ -25,8 +25,6 @@ This is the json output for each example
 The fluent lambda syntax is the most terse way to write aggregations.
 It benefits from types that are carried over to sub aggregations
 
-=== Fluent DSL Example
-
 [source,csharp]
 ----
 s => s

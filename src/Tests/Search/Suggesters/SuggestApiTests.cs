@@ -95,7 +95,6 @@ namespace Tests.Search.Suggesters
 				}
 			};
 
-		/** === Fluent DSL Example */
 		protected override Func<SuggestDescriptor<Project>, ISuggestRequest> Fluent => s => s
 				.Term("my-term-suggest", t => t
 					.MaxEdits(1)
@@ -146,7 +145,6 @@ namespace Tests.Search.Suggesters
 					.RealWordErrorLikelihood(0.5)
 				);
 
-		/** === Object Initializer Syntax Example */
 		protected override SuggestRequest Initializer =>
 			new SuggestRequest
 			{
@@ -223,7 +221,7 @@ namespace Tests.Search.Suggesters
 		{
 			/** === Handling Responses
 			* Get the suggestions for a suggester by indexing into
-			* the `.Suggestions` on the response
+			* the `.Suggestions` dictionary on the response
 			*/
 			var myCompletionSuggest = response.Suggestions["my-completion-suggest"];
 			myCompletionSuggest.Should().NotBeNull();

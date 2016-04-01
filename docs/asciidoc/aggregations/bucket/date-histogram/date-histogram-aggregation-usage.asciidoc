@@ -129,11 +129,17 @@ var dateHistogram = response.Aggs.DateHistogram("projects_started_per_month");
 dateHistogram.Should().NotBeNull();
 dateHistogram.Buckets.Should().NotBeNull();
 dateHistogram.Buckets.Count.Should().BeGreaterThan(10);
-item.Date.Should().NotBe(default(DateTime));
-item.DocCount.Should().BeGreaterThan(0);
-var nested = item.Nested("project_tags");
-nested.Should().NotBeNull();
-var nestedTerms = nested.Terms("tags");
-nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+
+foreach (var item in dateHistogram.Buckets)
+{
+    item.Date.Should().NotBe(default(DateTime));
+    item.DocCount.Should().BeGreaterThan(0);
+
+    var nested = item.Nested("project_tags");
+    nested.Should().NotBeNull();
+
+    var nestedTerms = nested.Terms("tags");
+    nestedTerms.Buckets.Count.Should().BeGreaterThan(0);
+}
 ----
 
