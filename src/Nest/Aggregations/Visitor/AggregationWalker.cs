@@ -73,6 +73,9 @@ namespace Nest.Aggregations.Visitor
 			AcceptAggregation(aggregation.Stats, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Sum, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.SumBucket, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.StatsBucket, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.ExtendedStatsBucket, visitor, (v, d) => v.Visit(d));
+			AcceptAggregation(aggregation.PercentilesBucket, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.Terms, visitor, (v, d) => { v.Visit(d); this.Accept(v, d.Aggregations); });
 			AcceptAggregation(aggregation.TopHits, visitor, (v, d) => v.Visit(d));
 			AcceptAggregation(aggregation.ValueCount, visitor, (v, d) => v.Visit(d));
