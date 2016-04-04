@@ -38,7 +38,7 @@ namespace Tests.Aggregations.Pipeline.ExtendedStatsBucket
 					extended_stats_bucket = new
 					{
 						buckets_path = "projects_started_per_month>commits",
-						sigma = 2
+						sigma = 2.0
 					}
 				}
 			}
