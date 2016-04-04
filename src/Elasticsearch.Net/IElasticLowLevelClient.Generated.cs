@@ -860,6 +860,56 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) where T : class;
 		
+		///<summary>Represents a GET on /_cluster/allocation/explain
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html </para>	
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> ClusterAllocationExplainGet<T>(Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_cluster/allocation/explain
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html </para>	
+		///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> ClusterAllocationExplainGetAsync<T>(Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_cluster/allocation/explain
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html </para>	
+		///</summary>
+		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> ClusterAllocationExplain<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_cluster/allocation/explain
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html </para>	
+		///</summary>
+		///<param name="body">The index, shard, and primary flag to explain. Empty means &#39;explain the first unassigned shard&#39;</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> ClusterAllocationExplainAsync<T>(PostData<object> body, Func<ClusterAllocationExplainRequestParameters, ClusterAllocationExplainRequestParameters> requestParameters = null) where T : class;
+		
 		///<summary>Represents a GET on /_cluster/settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -1457,7 +1507,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -1471,7 +1521,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
@@ -1485,7 +1535,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -1500,7 +1550,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
 		///</summary>
 		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="type">A comma-separated list of types to restrict the operation</param>
@@ -2362,34 +2412,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a DELETE on /{index}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
-		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesDeleteWarmer<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a DELETE on /{index}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</param>
-		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesDeleteWarmerAsync<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> requestParameters = null) where T : class;
-		
 		///<summary>Represents a HEAD on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -2958,110 +2980,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_aliases
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_aliases
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_aliases
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_aliases/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="name">A comma-separated list of alias names to filter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_aliases/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to filter aliases</param>
-		///<param name="name">A comma-separated list of alias names to filter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_aliases/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="name">A comma-separated list of alias names to filter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_aliases/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html </para>	
-		///</summary>
-		///<param name="name">A comma-separated list of alias names to filter</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) where T : class;
-		
 		///<summary>Represents a GET on /_mapping/field/{fields}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3482,140 +3400,6 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a GET on /_warmer
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_warmer
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_warmer
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_warmer
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) where T : class;
-		
 		///<summary>Represents a POST on /{index}/_open
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -3641,106 +3425,6 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma separated list of indices to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_optimize
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesOptimizeForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_optimize
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesOptimizeForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_optimize
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesOptimize<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_optimize
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesOptimizeAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_optimize
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesOptimizeGetForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_optimize
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesOptimizeGetForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_optimize
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesOptimizeGet<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_optimize
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesOptimizeGetAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4027,186 +3711,6 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmerForAll<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerForAllAsync<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /{index}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /{index}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmerPostForAll<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerPostForAllAsync<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_warmer/{name}
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</param>
-		///<param name="name">The name of the warmer</param>
-		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_recovery
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6258,6 +5762,32 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexRequestParameters, ReindexRequestParameters> requestParameters = null) where T : class;
 		
+		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html </para>	
+		///</summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> ReindexRethrottle<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html </para>	
+		///</summary>
+		///<param name="task_id">The task id to rethrottle</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> ReindexRethrottleAsync<T>(string task_id, Func<ReindexRethrottleRequestParameters, ReindexRethrottleRequestParameters> requestParameters = null) where T : class;
+		
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -6573,168 +6103,6 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExists<T>(PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExists<T>(string index, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(string index, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="type">A comma-separated list of types to restrict the results</param>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExists<T>(string index, string type, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="type">A comma-separated list of types to restrict the results</param>
-		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(string index, string type, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExistsGet<T>(Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExistsGet<T>(string index, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(string index, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_search/exists
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="type">A comma-separated list of types to restrict the results</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> SearchExistsGet<T>(string index, string type, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a GET on /{index}/{type}/_search/exists
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html </para>	
-		///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the results</param>
-		///<param name="type">A comma-separated list of types to restrict the results</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(string index, string type, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_search_shards
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7573,7 +6941,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html </para>	
 		///</summary>
-		///<param name="task_id">Cancel the task with specified id</param>
+		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null) where T : class;
 		
@@ -7586,7 +6954,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html </para>	
 		///</summary>
-		///<param name="task_id">Cancel the task with specified id</param>
+		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null) where T : class;
 		
@@ -7623,7 +6991,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html </para>	
 		///</summary>
-		///<param name="task_id">Return the task with specified id</param>
+		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> TasksList<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null) where T : class;
 		
@@ -7636,7 +7004,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html </para>	
 		///</summary>
-		///<param name="task_id">Return the task with specified id</param>
+		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TasksListAsync<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null) where T : class;
 		
@@ -7760,6 +7128,38 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> TermvectorsAsync<T>(string index, string type, string id, PostData<object> body, Func<TermVectorsRequestParameters, TermVectorsRequestParameters> requestParameters = null) where T : class;
 		
+		///<summary>Represents a POST on /{index}/{type}/{id}/_update
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html </para>	
+		///</summary>
+		///<param name="index">The name of the index</param>
+		///<param name="type">The type of the document</param>
+		///<param name="id">Document ID</param>
+		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a POST on /{index}/{type}/{id}/_update
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html </para>	
+		///</summary>
+		///<param name="index">The name of the index</param>
+		///<param name="type">The type of the document</param>
+		///<param name="id">Document ID</param>
+		///<param name="body">The request definition using either `script` or partial `doc`</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) where T : class;
+		
 		///<summary>Represents a POST on /{index}/_update_by_query
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7817,38 +7217,6 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_update
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html </para>	
-		///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) where T : class;
-		
-		///<summary>Represents a POST on /{index}/{type}/{id}/_update
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
-		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html </para>	
-		///</summary>
-		///<param name="index">The name of the index</param>
-		///<param name="type">The type of the document</param>
-		///<param name="id">Document ID</param>
-		///<param name="body">The request definition using either `script` or partial `doc`</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) where T : class;
 		
 	}
 }

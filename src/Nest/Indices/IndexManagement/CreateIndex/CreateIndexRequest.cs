@@ -8,7 +8,7 @@ namespace Nest
 	{
 	}
 
-	public partial class CreateIndexRequest 
+	public partial class CreateIndexRequest
 	{
 		//TODO Only here for ReadAsType new() constraint needs to be updated
 		public CreateIndexRequest() { }
@@ -17,21 +17,17 @@ namespace Nest
 
 		public IMappings Mappings { get; set; }
 
-		public IWarmers Warmers { get; set; }
-
 		public IAliases Aliases { get; set; }
 
 		public ISimilarities Similarity { get; set; }
 	}
 
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor 
+	public partial class CreateIndexDescriptor
 	{
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		IMappings IIndexState.Mappings { get; set; }
-
-		IWarmers IIndexState.Warmers { get; set; }
 
 		IAliases IIndexState.Aliases { get; set; }
 
@@ -41,7 +37,6 @@ namespace Nest
 		{
 			a.Settings = indexSettings.Settings;
 			a.Mappings = indexSettings.Mappings;
-			a.Warmers = indexSettings.Warmers;
 			a.Aliases = indexSettings.Aliases;
 		});
 
@@ -50,9 +45,6 @@ namespace Nest
 
 		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> selector) =>
 			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor())?.Value);
-
-		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> selector) =>
-			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor())?.Value);
 
 		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> selector) =>
 			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor())?.Value);

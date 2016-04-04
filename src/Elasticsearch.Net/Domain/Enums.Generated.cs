@@ -152,6 +152,15 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	public enum GroupBy 
+	{
+		[EnumMember(Value = "nodes")]
+		Nodes,
+		[EnumMember(Value = "parents")]
+		Parents
+	}
+	
+	
 	public enum Conflicts 
 	{
 		[EnumMember(Value = "abort")]
@@ -464,6 +473,16 @@ namespace Elasticsearch.Net
 					case SuggestMode.Missing: return "missing";
 					case SuggestMode.Popular: return "popular";
 					case SuggestMode.Always: return "always";
+				}
+			
+			}
+			
+			if (e is GroupBy)
+			{ 
+				switch((GroupBy)e)
+				{
+					case GroupBy.Nodes: return "nodes";
+					case GroupBy.Parents: return "parents";
 				}
 			
 			}

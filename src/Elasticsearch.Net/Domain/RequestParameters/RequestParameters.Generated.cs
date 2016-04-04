@@ -832,6 +832,28 @@ namespace Elasticsearch.Net
 		
 	}
 	
+	///<summary>Request parameters descriptor for ClusterAllocationExplain
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html
+	///</pre>
+	///</summary>
+	public class ClusterAllocationExplainRequestParameters : FluentRequestParameters<ClusterAllocationExplainRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
+		public ClusterAllocationExplainRequestParameters IncludeYesDecisions(bool include_yes_decisions) => this.AddQueryString("include_yes_decisions", include_yes_decisions);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterAllocationExplainRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterAllocationExplainRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
 	///<summary>Request parameters descriptor for ClusterGetSettings
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
@@ -1254,7 +1276,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for DeleteByQuery
 	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html
 	///</pre>
 	///</summary>
 	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters> 
@@ -2000,28 +2022,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for IndicesDeleteWarmer
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
-	///</pre>
-	///</summary>
-	public class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteWarmerRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public DeleteWarmerRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteWarmerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for IndicesExists
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html
@@ -2348,32 +2348,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html
-	///</pre>
-	///</summary>
-	public class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		
-		///<summary>Explicit operation timeout</summary>
-		public GetAliasesRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
-		
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasesRequestParameters Local(bool local) => this.AddQueryString("local", local);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public GetAliasesRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for IndicesGetFieldMappingForAll
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html
@@ -2556,40 +2530,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for IndicesGetWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
-	///</pre>
-	///</summary>
-	public class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetWarmerRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetWarmerRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetWarmerRequestParameters Local(bool local) => this.AddQueryString("local", local);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public GetWarmerRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetWarmerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for IndicesOpen
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html
@@ -2625,56 +2565,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public OpenIndexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for IndicesOptimizeForAll
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html
-	///</pre>
-	///</summary>
-	public class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public OptimizeRequestParameters Flush(bool flush) => this.AddQueryString("flush", flush);
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OptimizeRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OptimizeRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public OptimizeRequestParameters MaxNumSegments(long max_num_segments) => this.AddQueryString("max_num_segments", max_num_segments);
-		
-		
-		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public OptimizeRequestParameters OnlyExpungeDeletes(bool only_expunge_deletes) => this.AddQueryString("only_expunge_deletes", only_expunge_deletes);
-		
-		
-		///<summary>TODO: ?</summary>
-		public OptimizeRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
-		
-		
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public OptimizeRequestParameters WaitForMerge(bool wait_for_merge) => this.AddQueryString("wait_for_merge", wait_for_merge);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public OptimizeRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OptimizeRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2759,6 +2649,10 @@ namespace Elasticsearch.Net
 		public UpdateIndexSettingsRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
+		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
+		public UpdateIndexSettingsRequestParameters PreserveExisting(bool preserve_existing) => this.AddQueryString("preserve_existing", preserve_existing);
+		
+		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpdateIndexSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
@@ -2815,44 +2709,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for IndicesPutWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html
-	///</pre>
-	///</summary>
-	public class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public PutWarmerRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public PutWarmerRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutWarmerRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
-		public PutWarmerRequestParameters RequestCache(bool request_cache) => this.AddQueryString("request_cache", request_cache);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public PutWarmerRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutWarmerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3749,12 +3605,38 @@ namespace Elasticsearch.Net
 		public ReindexRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public ReindexRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		
+		
 		///<summary>The URL-encoded request definition</summary>
 		public ReindexRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ReindexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ReindexRethrottle
+	///<pre>
+	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
+	///</pre>
+	///</summary>
+	public class ReindexRethrottleRequestParameters : FluentRequestParameters<ReindexRethrottleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>The throttle to set on this request in sub-requests per second. 0 means set no throttle. As does &quot;unlimited&quot;. Otherwise it must be a float.</summary>
+		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ReindexRethrottleRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ReindexRethrottleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3881,76 +3763,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SearchRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for SearchExists
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html
-	///</pre>
-	///</summary>
-	public class SearchExistsRequestParameters : FluentRequestParameters<SearchExistsRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchExistsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchExistsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchExistsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public SearchExistsRequestParameters MinScore(double min_score) => this.AddQueryString("min_score", min_score);
-		
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchExistsRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
-		
-		
-		///<summary>Specific routing value</summary>
-		public SearchExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
-		
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public SearchExistsRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
-		
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchExistsRequestParameters AnalyzeWildcard(bool analyze_wildcard) => this.AddQueryString("analyze_wildcard", analyze_wildcard);
-		
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchExistsRequestParameters DefaultOperator(DefaultOperator default_operator) => this.AddQueryString("default_operator", default_operator);
-		
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchExistsRequestParameters Df(string df) => this.AddQueryString("df", df);
-		
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchExistsRequestParameters Lenient(bool lenient) => this.AddQueryString("lenient", lenient);
-		
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchExistsRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms) => this.AddQueryString("lowercase_expanded_terms", lowercase_expanded_terms);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public SearchExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4327,8 +4139,8 @@ namespace Elasticsearch.Net
 		public TasksCancelRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
 		
 		
-		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
-		public TasksCancelRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
+		public TasksCancelRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4365,12 +4177,16 @@ namespace Elasticsearch.Net
 		public TasksListRequestParameters ParentNode(string parent_node) => this.AddQueryString("parent_node", parent_node);
 		
 		
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public TasksListRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
+		public TasksListRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public TasksListRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		
+		
+		///<summary>Group tasks by nodes or parent/child relationships</summary>
+		public TasksListRequestParameters GroupBy(GroupBy group_by) => this.AddQueryString("group_by", group_by);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4445,6 +4261,80 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public TermVectorsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for Update
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html
+	///</pre>
+	///</summary>
+	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public UpdateRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		
+		
+		///<summary>The script language (default: groovy)</summary>
+		public UpdateRequestParameters Lang(string lang) => this.AddQueryString("lang", lang);
+		
+		
+		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
+		public UpdateRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
+		
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public UpdateRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
+		public UpdateRequestParameters RetryOnConflict(long retry_on_conflict) => this.AddQueryString("retry_on_conflict", retry_on_conflict);
+		
+		
+		///<summary>Specific routing value</summary>
+		public UpdateRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		
+		
+		///<summary>The URL-encoded script definition (instead of using request body)</summary>
+		public UpdateRequestParameters Script(string script) => this.AddQueryString("script", script);
+		
+		
+		///<summary>The id of a stored script</summary>
+		public UpdateRequestParameters ScriptId(string script_id) => this.AddQueryString("script_id", script_id);
+		
+		
+		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
+		public UpdateRequestParameters ScriptedUpsert(bool scripted_upsert) => this.AddQueryString("scripted_upsert", scripted_upsert);
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public UpdateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>Explicit timestamp for the document</summary>
+		public UpdateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
+		
+		
+		///<summary>Expiration time for the document</summary>
+		public UpdateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
+		
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public UpdateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		
+		///<summary>Specific version type</summary>
+		public UpdateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public UpdateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpdateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4613,12 +4503,16 @@ namespace Elasticsearch.Net
 		public UpdateByQueryRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
 		
-		///<summary>Size on the scroll request powering the update-by-query</summary>
+		///<summary>Size on the scroll request powering the update_by_query</summary>
 		public UpdateByQueryRequestParameters ScrollSize(int scroll_size) => this.AddQueryString("scroll_size", scroll_size);
 		
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public UpdateByQueryRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		
+		
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public UpdateByQueryRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4627,80 +4521,6 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpdateByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
-	///<summary>Request parameters descriptor for Update
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html
-	///</pre>
-	///</summary>
-	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
-		
-		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
-		
-		
-		///<summary>The script language (default: groovy)</summary>
-		public UpdateRequestParameters Lang(string lang) => this.AddQueryString("lang", lang);
-		
-		
-		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateRequestParameters Parent(string parent) => this.AddQueryString("parent", parent);
-		
-		
-		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
-		
-		
-		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateRequestParameters RetryOnConflict(long retry_on_conflict) => this.AddQueryString("retry_on_conflict", retry_on_conflict);
-		
-		
-		///<summary>Specific routing value</summary>
-		public UpdateRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateRequestParameters Script(string script) => this.AddQueryString("script", script);
-		
-		
-		///<summary>The id of a stored script</summary>
-		public UpdateRequestParameters ScriptId(string script_id) => this.AddQueryString("script_id", script_id);
-		
-		
-		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public UpdateRequestParameters ScriptedUpsert(bool scripted_upsert) => this.AddQueryString("scripted_upsert", scripted_upsert);
-		
-		
-		///<summary>Explicit operation timeout</summary>
-		public UpdateRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
-		
-		
-		///<summary>Explicit timestamp for the document</summary>
-		public UpdateRequestParameters Timestamp(TimeSpan timestamp) => this.AddQueryString("timestamp", timestamp.ToTimeUnit());
-		
-		
-		///<summary>Expiration time for the document</summary>
-		public UpdateRequestParameters Ttl(TimeSpan ttl) => this.AddQueryString("ttl", ttl.ToTimeUnit());
-		
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateRequestParameters Version(long version) => this.AddQueryString("version", version);
-		
-		
-		///<summary>Specific version type</summary>
-		public UpdateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public UpdateRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 }

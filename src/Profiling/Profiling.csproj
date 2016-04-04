@@ -154,7 +154,6 @@
     <Compile Include="Async\ScrollAsync.cs" />
     <Compile Include="Async\SearchAsync.cs" />
     <Compile Include="Async\SearchAsyncOperation.cs" />
-    <Compile Include="Async\SearchExistsAsync.cs" />
     <Compile Include="Async\SearchShardsAsync.cs" />
     <Compile Include="Async\SearchTemplateAsync.cs" />
     <Compile Include="Async\SegmentsAsync.cs" />

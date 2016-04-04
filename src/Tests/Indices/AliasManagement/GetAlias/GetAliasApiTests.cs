@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.GetAlias
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetAliasApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
+	public class GetAliasApiTests : ApiIntegrationTestBase<IGetAliasResponse, IGetAliasRequest, GetAliasDescriptor, GetAliasRequest>
 	{
 		private static readonly Names Names = Infer.Names("alias, x", "y");
 
@@ -27,7 +27,7 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_all/_alias/alias%2Cx%2Cy";
-		protected override void ExpectResponse(IGetAliasesResponse response)
+		protected override void ExpectResponse(IGetAliasResponse response)
 		{
 			response.Indices.Should().NotBeNull();
 		}

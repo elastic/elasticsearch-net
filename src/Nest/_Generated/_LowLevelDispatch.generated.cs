@@ -488,6 +488,34 @@ namespace Nest
 			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll");
 		}
 		
+		internal ElasticsearchResponse<T> ClusterAllocationExplainDispatch<T>(IRequest<ClusterAllocationExplainRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ClusterAllocationExplainGet<T>(u => p.RequestParameters);
+
+				case POST:
+					return _lowLevel.ClusterAllocationExplain<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ClusterAllocationExplain", p, new [] { GET, POST }, "/_cluster/allocation/explain");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ClusterAllocationExplainDispatchAsync<T>(IRequest<ClusterAllocationExplainRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ClusterAllocationExplainGetAsync<T>(u => p.RequestParameters);
+
+				case POST:
+					return _lowLevel.ClusterAllocationExplainAsync<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ClusterAllocationExplain", p, new [] { GET, POST }, "/_cluster/allocation/explain");
+		}
+		
 		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(IRequest<ClusterGetSettingsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1232,30 +1260,6 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(IRequest<DeleteWarmerRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesDeleteWarmer<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(IRequest<DeleteWarmerRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSetNoFallback(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesDeleteWarmerAsync<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
-		}
-		
 		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(IRequest<IndexExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1498,34 +1502,6 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(IRequest<GetAliasesRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesGetAliases<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetAliases<T>(p.RouteValues.Index,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesGetAliasesForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
-					return _lowLevel.IndicesGetAliasesForAll<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(IRequest<GetAliasesRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesGetAliasesAsync<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetAliasesAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesGetAliasesForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
-					return _lowLevel.IndicesGetAliasesForAllAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
-		}
-		
 		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(IRequest<GetFieldMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1660,36 +1636,6 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(IRequest<GetWarmerRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesGetWarmer<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesGetWarmer<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetWarmer<T>(p.RouteValues.Index,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesGetWarmerForAll<T>(p.RouteValues.Name,u => p.RequestParameters);
-					return _lowLevel.IndicesGetWarmerForAll<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(IRequest<GetWarmerRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesGetWarmerAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesGetWarmerAsync<T>(p.RouteValues.Index,p.RouteValues.Name,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesGetWarmerAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Name)) return _lowLevel.IndicesGetWarmerForAllAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
-					return _lowLevel.IndicesGetWarmerForAllAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
-		}
-		
 		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(IRequest<OpenIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1712,38 +1658,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
-		}
-		
-		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(IRequest<OptimizeRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesOptimize<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesOptimizeForAll<T>(u => p.RequestParameters);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesOptimizeGet<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesOptimizeGetForAll<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(IRequest<OptimizeRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesOptimizeAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesOptimizeForAllAsync<T>(u => p.RequestParameters);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.IndicesOptimizeGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesOptimizeGetForAllAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(IRequest<PutAliasRequestParameters> p , PostData<object> body) where T : class
@@ -1868,46 +1782,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
-		}
-		
-		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(IRequest<PutWarmerRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmer<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmer<T>(p.RouteValues.Index,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerForAll<T>(p.RouteValues.Name,body,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPost<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPost<T>(p.RouteValues.Index,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPostForAll<T>(p.RouteValues.Name,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(IRequest<PutWarmerRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case PUT:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerAsync<T>(p.RouteValues.Index,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerForAllAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPostAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPostAsync<T>(p.RouteValues.Index,p.RouteValues.Name,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.IndicesPutWarmerPostForAllAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(IRequest<RecoveryStatusRequestParameters> p ) where T : class
@@ -2151,7 +2025,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestDeletePipeline<T>(p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestDeletePipeline<T>(p.RouteValues.Id,u => p.RequestParameters);
 					break;
 
 			}
@@ -2163,7 +2037,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case DELETE:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestDeletePipelineAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestDeletePipelineAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
 					break;
 
 			}
@@ -2175,7 +2049,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestGetPipeline<T>(p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestGetPipeline<T>(p.RouteValues.Id,u => p.RequestParameters);
 					break;
 
 			}
@@ -2187,7 +2061,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestGetPipelineAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestGetPipelineAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
 					break;
 
 			}
@@ -2199,7 +2073,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestPutPipeline<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestPutPipeline<T>(p.RouteValues.Id,body,u => p.RequestParameters);
 					break;
 
 			}
@@ -2211,7 +2085,7 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case PUT:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.IngestPutPipelineAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Id)) return _lowLevel.IngestPutPipelineAsync<T>(p.RouteValues.Id,body,u => p.RequestParameters);
 					break;
 
 			}
@@ -2622,6 +2496,30 @@ namespace Nest
 			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
 		}
 		
+		internal ElasticsearchResponse<T> ReindexRethrottleDispatch<T>(IRequest<ReindexRethrottleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottle<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ReindexRethrottleDispatchAsync<T>(IRequest<ReindexRethrottleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.TaskId)) return _lowLevel.ReindexRethrottleAsync<T>(p.RouteValues.TaskId,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+		}
+		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -2716,42 +2614,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
-		}
-		
-		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(IRequest<SearchExistsRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchExists<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchExists<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					return _lowLevel.SearchExists<T>(body,u => p.RequestParameters);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchExistsGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchExistsGet<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.SearchExistsGet<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(IRequest<SearchExistsRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchExistsAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchExistsAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					return _lowLevel.SearchExistsAsync<T>(body,u => p.RequestParameters);
-
-				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.SearchExistsGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.SearchExistsGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
-					return _lowLevel.SearchExistsGetAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
 		}
 		
 		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(IRequest<SearchShardsRequestParameters> p ) where T : class
@@ -3176,32 +3038,6 @@ namespace Nest
 			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
-		internal ElasticsearchResponse<T> UpdateByQueryDispatch<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> UpdateByQueryDispatchAsync<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
-		}
-		
 		internal ElasticsearchResponse<T> UpdateDispatch<T>(IRequest<UpdateRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3224,6 +3060,32 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
+		}
+		
+		internal ElasticsearchResponse<T> UpdateByQueryDispatch<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.UpdateByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> UpdateByQueryDispatchAsync<T>(IRequest<UpdateByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.UpdateByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
 		}
 		
 	}	

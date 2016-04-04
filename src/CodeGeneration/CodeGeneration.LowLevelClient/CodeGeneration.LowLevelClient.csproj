@@ -59,7 +59,6 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Overrides\Allow404\ApiEndpointsThatAllow404.cs" />
     <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\FieldStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\IndicesStatsDescriptorOverrides.cs" />

@@ -305,8 +305,6 @@
     <Compile Include=".\Indices\AliasManagement\Alias\AliasUrlTests.cs" />
     <Compile Include=".\Indices\AliasManagement\DeleteAlias\AliasDeleteApiTests.cs" />
     <Compile Include=".\Indices\AliasManagement\DeleteAlias\DeleteAliasUrlTests.cs" />
-    <Compile Include=".\Indices\AliasManagement\GetAliases\GetAliasesApiTests.cs" />
-    <Compile Include=".\Indices\AliasManagement\GetAliases\GetAliasesUrlTests.cs" />
     <Compile Include=".\Indices\AliasManagement\GetAlias\GetAliasApiTests.cs" />
     <Compile Include=".\Indices\AliasManagement\GetAlias\GetAliasUrlTests.cs" />
     <Compile Include=".\Indices\AliasManagement\PutAlias\PutAliasApiTests.cs" />
@@ -356,21 +354,12 @@
     <Compile Include=".\Indices\StatusManagement\ClearCache\ClearCacheUrlTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Flush\FlushApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Flush\FlushUrlTests.cs" />
-    <Compile Include=".\Indices\StatusManagement\Optimize\OptimizeApiTests.cs" />
-    <Compile Include=".\Indices\StatusManagement\Optimize\OptimizeUrlTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Refresh\RefreshApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Refresh\RefreshUrlTests.cs" />
     <Compile Include=".\Indices\StatusManagement\SyncedFlush\SyncedFlushUrlTests.cs" />
     <Compile Include=".\Indices\StatusManagement\SyncedFlush\SyncedFushApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeApiTests.cs" />
     <Compile Include=".\Indices\StatusManagement\Upgrade\UpgradeUrlTests.cs" />
-    <Compile Include=".\Indices\Warmers\DeleteWarmer\DeleteWarmerApiTests.cs" />
-    <Compile Include=".\Indices\Warmers\DeleteWarmer\DeleteWarmerUrlTests.cs" />
-    <Compile Include=".\Indices\Warmers\GetWarmer\GetWarmerApiTests.cs" />
-    <Compile Include=".\Indices\Warmers\GetWarmer\GetWarmerUrlTests.cs" />
-    <Compile Include=".\Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
-    <Compile Include=".\Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
-    <Compile Include=".\Indices\Warmers\WarmerCrudTests.cs" />
     <Compile Include=".\Mapping\Metafields\MetafieldsMappingApiTestsBase.cs" />
     <Compile Include=".\Mapping\Metafields\Ttl\TypeMappingTestBase.cs" />
     <Compile Include=".\Mapping\Types\Complex\Nested\NestedMappingTests.cs" />
@@ -536,8 +525,6 @@
     <Compile Include=".\Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
     <Compile Include=".\Search\Scroll\Scroll\ScrollApiTests.cs" />
     <Compile Include=".\Search\Scroll\Scroll\ScrollUrlTests.cs" />
-    <Compile Include=".\Search\SearchExists\SearchExistsApiTests.cs" />
-    <Compile Include=".\Search\SearchExists\SearchExistsUrlTests.cs" />
     <Compile Include=".\Search\SearchShards\SearchShardsApiTests.cs" />
     <Compile Include=".\Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include=".\Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateApiTests.cs" />
@@ -599,7 +586,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.png" />
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />  
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props" Condition="Exists('..\..\packages\xunit.core\build\$(__paket__xunit_core_props).props')" Label="Paket" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">

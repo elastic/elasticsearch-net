@@ -6,7 +6,7 @@ namespace Nest
 	{
 	}
 
-	public partial class PutIndexTemplateRequest 
+	public partial class PutIndexTemplateRequest
 	{
 		public string Template { get; set; }
 
@@ -16,13 +16,11 @@ namespace Nest
 
 		public IMappings Mappings { get; set; }
 
-		public IWarmers Warmers { get; set; }
-
 		public IAliases Aliases { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutIndexTemplateDescriptor 
+	public partial class PutIndexTemplateDescriptor
 	{
 		string ITemplateMapping.Template { get; set; }
 
@@ -31,8 +29,6 @@ namespace Nest
 		IIndexSettings ITemplateMapping.Settings { get; set; }
 
 		IMappings ITemplateMapping.Mappings { get; set; }
-
-		IWarmers ITemplateMapping.Warmers { get; set; }
 
 		IAliases ITemplateMapping.Aliases { get; set; }
 
@@ -45,9 +41,6 @@ namespace Nest
 
 		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> mappingSelector) =>
 			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor())?.Value);
-
-		public PutIndexTemplateDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> warmerSelector) =>
-			Assign(a => a.Warmers = warmerSelector?.Invoke(new WarmersDescriptor())?.Value);
 
 		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> aliasDescriptor) =>
 			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor())?.Value);

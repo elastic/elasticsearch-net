@@ -16,9 +16,6 @@ namespace Nest
 		[JsonProperty("mappings")]
 		IMappings Mappings { get; set; }
 
-		[JsonProperty("warmers")]
-		IWarmers Warmers { get; set; }
-
 		[JsonProperty("aliases")]
 		IAliases Aliases { get; set; }
 	}
@@ -32,8 +29,6 @@ namespace Nest
 		public IIndexSettings Settings { get; set; }
 
 		public IMappings Mappings { get; set; }
-
-		public IWarmers Warmers { get; set; }
 
 		public IAliases Aliases { get; set; }
 	}
