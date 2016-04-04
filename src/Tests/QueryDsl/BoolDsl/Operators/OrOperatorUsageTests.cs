@@ -24,7 +24,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				b.MustNot.Should().BeNull();
 				b.Filter.Should().BeNull();
 			});
-			
+
 			ReturnsBool(Query || Query || ConditionlessQuery, q => q.Query() || q.Query() || q.ConditionlessQuery(), b =>
 			{
 				b.Should.Should().NotBeEmpty().And.HaveCount(2);
@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 			ReturnsSingleQuery(Query || NullQuery, q => q.Query() || q.NullQuery(),
 				c => c.Term.Value.Should().NotBeNull());
 
-			ReturnsSingleQuery(NullQuery || Query, q=> q.NullQuery() || q.Query(), 
+			ReturnsSingleQuery(NullQuery || Query, q=> q.NullQuery() || q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
 			ReturnsSingleQuery(ConditionlessQuery || ConditionlessQuery || ConditionlessQuery || Query,
@@ -50,7 +50,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 				c => c.Term.Value.Should().NotBeNull());
 
 			ReturnsSingleQuery(
-				NullQuery || NullQuery || ConditionlessQuery || Query, 
+				NullQuery || NullQuery || ConditionlessQuery || Query,
 				q=>q.NullQuery() || q.NullQuery() || q.ConditionlessQuery() || q.Query(),
 				c => c.Term.Value.Should().NotBeNull());
 
@@ -76,7 +76,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 		[U] public void CombiningManyUsingForeachInitializingWithNull()
 		{
-			QueryContainer container = null; 
+			QueryContainer container = null;
 			foreach(var i in Enumerable.Range(0, 100))
 				container |= Query;
 			LotsOfOrs(container);
@@ -84,7 +84,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 		[U] public void CombiningManyUsingForeachInitializingWithDefault()
 		{
-			var container = new QueryContainer(); 
+			var container = new QueryContainer();
 			foreach(var i in Enumerable.Range(0, 100))
 				container |= Query;
 			LotsOfOrs(container);
