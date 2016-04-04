@@ -140,6 +140,7 @@ namespace Tests.Framework.Integration
 		public static PropertiesDescriptor<Project> ProjectProperties(PropertiesDescriptor<Project> props) => props
 				.Keyword(s => s
 					.Name(p => p.Name)
+					.Store()
 					.Fields(fs => fs
 						.Text(ss => ss
 							.Name("standard")
@@ -182,6 +183,10 @@ namespace Tests.Framework.Integration
 							.Name("color")
 						)
 					)
+				)
+				.Number(n => n
+					.Name(p => p.NumberOfCommits)
+					.Store()
 				);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
