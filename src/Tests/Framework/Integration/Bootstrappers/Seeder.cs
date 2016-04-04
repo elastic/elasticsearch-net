@@ -130,6 +130,9 @@ namespace Tests.Framework.Integration
 		}
 
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
+			.TimestampField(t => t
+				.Enabled()
+			)
 			.Properties(props => props
 				.String(s => s
 					.Name(p => p.Name)
