@@ -47,6 +47,7 @@ namespace Tests.Framework
 			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
 			diff += approx + ";";
 
+
 			throw new Exception(diff);
 		}
 

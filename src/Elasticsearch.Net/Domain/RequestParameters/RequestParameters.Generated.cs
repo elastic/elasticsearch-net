@@ -3585,24 +3585,24 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
 	///</pre>
 	///</summary>
-	public class ReindexRequestParameters : FluentRequestParameters<ReindexRequestParameters> 
+	public class ReindexOnServerRequestParameters : FluentRequestParameters<ReindexOnServerRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public ReindexRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		public ReindexOnServerRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public ReindexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ReindexOnServerRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public ReindexRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		public ReindexOnServerRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public ReindexRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
+		public ReindexOnServerRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
@@ -3614,7 +3614,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ReindexOnServerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

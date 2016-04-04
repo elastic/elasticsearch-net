@@ -5747,7 +5747,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexRequestParameters, ReindexRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_reindex
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5760,7 +5760,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexRequestParameters, ReindexRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_reindex/{task_id}/_rethrottle
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

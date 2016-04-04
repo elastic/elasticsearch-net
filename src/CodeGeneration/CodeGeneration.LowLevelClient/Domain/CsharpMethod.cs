@@ -120,7 +120,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
 					generated = $"public {m}({par}) : this({cp.First().Key}, typeof({generic})){{}}";
-                }
+				}
 
 				var c = new Constructor { Generated = generated, Description = doc };
 				ctors.Add(c);

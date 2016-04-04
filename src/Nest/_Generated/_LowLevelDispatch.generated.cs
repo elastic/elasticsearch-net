@@ -2474,7 +2474,7 @@ namespace Nest
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ReindexDispatch<T>(IRequest<ReindexRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> ReindexDispatch<T>(IRequest<ReindexOnServerRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2485,7 +2485,7 @@ namespace Nest
 			throw InvalidDispatch("Reindex", p, new [] { POST }, "/_reindex");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ReindexDispatchAsync<T>(IRequest<ReindexRequestParameters> p , PostData<object> body) where T : class
+		internal Task<ElasticsearchResponse<T>> ReindexDispatchAsync<T>(IRequest<ReindexOnServerRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
