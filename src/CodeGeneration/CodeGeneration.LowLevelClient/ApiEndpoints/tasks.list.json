@@ -7,7 +7,7 @@
       "paths": ["/_tasks", "/_tasks/{task_id}"],
       "parts": {
         "task_id": {
-          "type": "number",
+          "type": "string",
           "description": "Return the task with specified id"
         }
       },
@@ -29,7 +29,7 @@
           "description": "Return tasks with specified parent node."
         },
         "parent_task": {
-          "type" : "number",
+          "type" : "string",
           "description" : "Return tasks with specified parent task id. Set to -1 to return all."
         },
         "wait_for_completion": {

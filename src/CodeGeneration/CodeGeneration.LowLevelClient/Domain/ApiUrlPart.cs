@@ -21,7 +21,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "id": return this.Type == "string" ? "Id" : "Ids";
 					case "node_id": return this.Type == "string" ? "NodeId" : "NodeIds";
 					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
-					case "field": 
+					case "field":
 					case "fields": return this.Type == "string" ? "Field" : "Fields";
 					case "index_metric": return "IndexMetrics";
 					case "metric": return "Metrics";
@@ -30,6 +30,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "snapshot":
 					case "lang":
 					case "name": return this.Type == "string" ? "Name" : "Names";
+					case "task_id": return "TaskId";
 					default: return this.Type + "_";
 				}
 			}

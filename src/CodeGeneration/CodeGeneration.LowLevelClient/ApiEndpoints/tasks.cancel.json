@@ -7,7 +7,7 @@
       "paths": ["/_tasks/_cancel", "/_tasks/{task_id}/_cancel"],
       "parts": {
         "task_id": {
-          "type": "number",
+          "type": "string",
           "description": "Cancel the task with specified id"
         }
       },
@@ -25,7 +25,7 @@
           "description": "Cancel tasks with specified parent node."
         },
         "parent_task": {
-          "type" : "number",
+          "type" : "string",
           "description" : "Cancel tasks with specified parent task id. Set to -1 to cancel all."
         }
       }

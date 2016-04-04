@@ -6558,7 +6558,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexRequestParameters, ReindexRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Reindex<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_reindex"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_reindex 
@@ -6572,7 +6572,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The search definition using the Query DSL and the prototype for the index request.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexRequestParameters, ReindexRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> ReindexAsync<T>(PostData<object> body, Func<ReindexOnServerRequestParameters, ReindexOnServerRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_reindex"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_render/template 
@@ -7990,7 +7990,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Cancel the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> TasksCancel<T>(number task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_tasks/{task_id}/_cancel 
@@ -8004,7 +8004,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Cancel the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(number task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_tasks 
@@ -8044,7 +8044,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Return the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> TasksList<T>(number task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> TasksList<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_tasks/{task_id} 
@@ -8058,7 +8058,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="task_id">Return the task with specified id</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> TasksListAsync<T>(number task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> TasksListAsync<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvectors 

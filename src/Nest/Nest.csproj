@@ -158,7 +158,7 @@
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregationJsonConverter.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
-    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />    
+    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitorScope.cs" />
@@ -360,6 +360,12 @@
     <Compile Include="Cluster\RootNodeInfo\ElasticClient-RootNodeInfo.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootNodeInfoRequest.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksCancel\ElasticClient-TasksCancel.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelRequest.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelResponse.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksList\ElasticClient-TasksList.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksList\TasksListRequest.cs" />
+    <Compile Include="Cluster\TaskManagement\TasksList\TasksListResponse.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettingsBase.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
@@ -413,6 +419,7 @@
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\TaskId\TaskId.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
@@ -457,7 +464,9 @@
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="Document\Multiple\BulkIndexByScrollFailure.cs" />
     <Compile Include="CommonOptions\Failures\ShardFailure.cs" />
+    <Compile Include="CommonOptions\Failures\Throwable.cs" />
     <Compile Include="CommonOptions\Fuzziness\Fuzziness.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\IFuzziness.cs" />
@@ -520,6 +529,12 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-Bulk.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />
+    <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
+    <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
+    <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryRequest.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryResponse.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\ElasticClient-DeleteByQuery.cs" />
@@ -537,6 +552,9 @@
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorOperation.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsRequest.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsResponse.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ElasticClient-ReindexOnServer.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerResponse.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerRequest.cs" />
     <Compile Include="Document\Multiple\Reindex\ElasticClient-Reindex.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
@@ -1198,6 +1216,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

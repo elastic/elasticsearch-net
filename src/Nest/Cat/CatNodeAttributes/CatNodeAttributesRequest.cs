@@ -12,7 +12,8 @@ namespace Nest
 	[Obsolete("Scheduled to be removed in 5.0.  Use CatNodeAttributesDescriptor instead.")]
 	public partial class CatNodeattrsDescriptor { }
 
-
+	// TODO add the following as attribute when we remove the obsolete version
+	//DescriptorFor "CatNodeattrs"
 	public interface ICatNodeAttributesRequest : ICatNodeattrsRequest { }
 	public class CatNodeAttributesRequest : CatNodeattrsRequest, ICatNodeAttributesRequest { }
 	public class CatNodeAttributesDescriptor : CatNodeattrsDescriptor, ICatNodeAttributesRequest { }

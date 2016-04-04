@@ -4034,13 +4034,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IReindexRequest : IRequest<ReindexRequestParameters> 
+	public partial interface IReindexOnServerRequest : IRequest<ReindexOnServerRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
-	public partial class ReindexRequest  : RequestBase<ReindexRequestParameters>, IReindexRequest
+	public partial class ReindexOnServerRequest  : RequestBase<ReindexOnServerRequestParameters>, IReindexOnServerRequest
 	{
-		protected IReindexRequest Self => this;
+		protected IReindexOnServerRequest Self => this;
 				///<summary>Should the effected indexes be refreshed?</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
@@ -4052,9 +4052,6 @@ namespace Nest
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -4945,20 +4942,20 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITasksCancelRequest : IRequest<TasksCancelRequestParameters> 
 	{
-		number_ TaskId { get; }
+		TaskId TaskId { get; }
 	 } 
 	///<summary>Request parameters for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html</pre></summary>
 	public partial class TasksCancelRequest  : RequestBase<TasksCancelRequestParameters>, ITasksCancelRequest
 	{
 		protected ITasksCancelRequest Self => this;
-		number_ ITasksCancelRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks/_cancel</summary>
 		public TasksCancelRequest() : base(){}
 		
 
 		/// <summary>/_tasks/{task_id}/_cancel</summary>
 ///<param name="task_id">Optional, accepts null</param>
-		public TasksCancelRequest(number_ task_id) : base(r=>r.Optional("task_id", task_id)){}
+		public TasksCancelRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -4971,7 +4968,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
-		public long ParentTask { get { return Q<long>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4979,27 +4976,25 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITasksListRequest : IRequest<TasksListRequestParameters> 
 	{
-		number_ TaskId { get; }
+		TaskId TaskId { get; }
 	 } 
 	///<summary>Request parameters for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html</pre></summary>
 	public partial class TasksListRequest  : RequestBase<TasksListRequestParameters>, ITasksListRequest
 	{
 		protected ITasksListRequest Self => this;
-		number_ ITasksListRequest.TaskId => Self.RouteValues.Get<number_>("task_id");
+		TaskId ITasksListRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
 			/// <summary>/_tasks</summary>
 		public TasksListRequest() : base(){}
 		
 
 		/// <summary>/_tasks/{task_id}</summary>
 ///<param name="task_id">Optional, accepts null</param>
-		public TasksListRequest(number_ task_id) : base(r=>r.Optional("task_id", task_id)){}
+		public TasksListRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
 		
 
 			///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
@@ -5015,7 +5010,7 @@ namespace Nest
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public long ParentTask { get { return Q<long>("parent_task"); } set { Q("parent_task", value); } }
+		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -5026,9 +5021,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters> 
@@ -5155,20 +5148,20 @@ namespace Nest
 		Types Type { get; }
 	 } 
 	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
-	public partial class UpdateByQueryRequest  : RequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
+	public partial class UpdateByQueryRequest<T>  : RequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
 	{
 		protected IUpdateByQueryRequest Self => this;
 		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 			/// <summary>/{index}/_update_by_query</summary>
-///<param name="index">Optional, accepts null</param>
-		public UpdateByQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
+///<param name="index">this parameter is required</param>
+		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
 		/// <summary>/{index}/{type}/_update_by_query</summary>
-///<param name="index">Optional, accepts null</param>		
+///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
-		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 		
 
 			///<summary>The analyzer to use for the query string</summary>
@@ -5286,7 +5279,7 @@ namespace Nest
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public integer ScrollSize { get { return Q<integer>("scroll_size"); } set { Q("scroll_size", value); } }
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
@@ -5297,9 +5290,151 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
+	///<summary>Request parameters for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class UpdateByQueryRequest  : RequestBase<UpdateByQueryRequestParameters>, IUpdateByQueryRequest
+	{
+		protected IUpdateByQueryRequest Self => this;
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_update_by_query</summary>
+///<param name="index">this parameter is required</param>
+		public UpdateByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_update_by_query</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="type">Optional, accepts null</param>
+		public UpdateByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		
+
+			///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
+		
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
+		
+		///<summary>A comma-separated list of fields to return as part of a hit</summary>
+		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
+		
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		
+		///<summary>Starting offset (default: 0)</summary>
+		public long From { get { return Q<long>("from"); } set { Q("from", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>What to do when the reindex hits version conflicts?</summary>
+		public Conflicts Conflicts { get { return Q<Conflicts>("conflicts"); } set { Q("conflicts", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
+		
+		///<summary>A comma-separated list of specific routing values</summary>
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public Time Scroll { get { return Q<Time>("scroll"); } set { Q("scroll", value.ToString()); } }
+		
+		///<summary>Search operation type</summary>
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
+		
+		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
+		public Time SearchTimeout { get { return Q<Time>("search_timeout"); } set { Q("search_timeout", value.ToString()); } }
+		
+		///<summary>Number of hits to return (default: 10)</summary>
+		public long Size { get { return Q<long>("size"); } set { Q("size", value); } }
+		
+		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		public  string[] Sort { get { return Q< string[]>("sort"); } set { Q("sort", value); } }
+		
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
+		
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public Fields SourceExclude { get { return Q<Fields>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public Fields SourceInclude { get { return Q<Fields>("_source_include"); } set { Q("_source_include", value); } }
+		
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public long TerminateAfter { get { return Q<long>("terminate_after"); } set { Q("terminate_after", value); } }
+		
+		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
+		
+		///<summary>Specify which field to use for suggestions</summary>
+		public Field SuggestField { get { return Q<Field>("suggest_field"); } set { Q("suggest_field", value); } }
+		
+		///<summary>Specify suggest mode</summary>
+		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
+		
+		///<summary>How many suggestions to return in response</summary>
+		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
+		
+		///<summary>The source text for which the suggestions should be returned</summary>
+		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
+		
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
+		public bool TrackScores { get { return Q<bool>("track_scores"); } set { Q("track_scores", value); } }
+		
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public bool Version { get { return Q<bool>("version"); } set { Q("version", value); } }
+		
+		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
+		public bool VersionType { get { return Q<bool>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
+		
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
+		
+		///<summary>Size on the scroll request powering the update_by_query</summary>
+		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
+		
+		///<summary>Should the request should block until the reindex is complete.</summary>
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters> 

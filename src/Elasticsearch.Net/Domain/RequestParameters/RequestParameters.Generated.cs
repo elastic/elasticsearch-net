@@ -3545,32 +3545,28 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
 	///</pre>
 	///</summary>
-	public class ReindexRequestParameters : FluentRequestParameters<ReindexRequestParameters> 
+	public class ReindexOnServerRequestParameters : FluentRequestParameters<ReindexOnServerRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Should the effected indexes be refreshed?</summary>
-		public ReindexRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		public ReindexOnServerRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
 		
 		
 		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
-		public ReindexRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public ReindexOnServerRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public ReindexRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
+		public ReindexOnServerRequestParameters Consistency(Consistency consistency) => this.AddQueryString("consistency", consistency);
 		
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
-		public ReindexRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public ReindexRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ReindexOnServerRequestParameters WaitForCompletion(bool wait_for_completion) => this.AddQueryString("wait_for_completion", wait_for_completion);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ReindexRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ReindexOnServerRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -4144,7 +4140,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
-		public TasksCancelRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		public TasksCancelRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4182,7 +4178,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
-		public TasksListRequestParameters ParentTask(long parent_task) => this.AddQueryString("parent_task", parent_task);
+		public TasksListRequestParameters ParentTask(string parent_task) => this.AddQueryString("parent_task", parent_task);
 		
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
@@ -4504,7 +4500,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryRequestParameters ScrollSize(integer scroll_size) => this.AddQueryString("scroll_size", scroll_size);
+		public UpdateByQueryRequestParameters ScrollSize(long scroll_size) => this.AddQueryString("scroll_size", scroll_size);
 		
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>

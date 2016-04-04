@@ -1,5 +1,5 @@
 ﻿# mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
+mode: m
 # the elasticsearch version that should be started
 elasticsearch_version: 2.3.0
 # whether we want to forcefully reseed on the node, if you are starting the tests with a node already running

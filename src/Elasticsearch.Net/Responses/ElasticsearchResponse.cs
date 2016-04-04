@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 		public bool SuccessOrKnownError =>
 			this.Success || (HttpStatusCode >= 400 && HttpStatusCode < 599
 				&& HttpStatusCode != 503 //service unavailable needs to be retried
-				&& HttpStatusCode != 502 //bad gateway needs to be retried 
+				&& HttpStatusCode != 502 //bad gateway needs to be retried
 			);
 
 		public Exception OriginalException { get; protected internal set; }
@@ -90,7 +90,8 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchResponse(int statusCode, IEnumerable<int> allowedStatusCodes)
 		{
-			this.Success = statusCode >= 200 && statusCode < 300 || allowedStatusCodes.Contains(statusCode);
+			var statusCodes = allowedStatusCodes as int[] ?? allowedStatusCodes.ToArray();
+			this.Success = statusCode >= 200 && statusCode < 300 || statusCodes.Contains(statusCode) || statusCodes.Contains(-1);
 			this.HttpStatusCode = statusCode;
 		}
 

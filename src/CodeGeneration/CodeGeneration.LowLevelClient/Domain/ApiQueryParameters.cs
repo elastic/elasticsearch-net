@@ -19,9 +19,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 					return "bool";
 				case "list":
 					return "params string[]";
+				case "integer":
 				case "number":
-					return new [] {"boost", "percen", "score"}.Any(s=>paramName.ToLowerInvariant().Contains(s)) 
-						? "double" 
+					return new [] {"boost", "percen", "score"}.Any(s=>paramName.ToLowerInvariant().Contains(s))
+						? "double"
 						: "long";
 				case "duration":
 				case "time":
@@ -36,7 +37,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					return this.Type;
 			}
 		}
-		
+
 		public string HighLevelType(string paramName)
 		{
 			var csharpType = this.CsharpType(paramName);
