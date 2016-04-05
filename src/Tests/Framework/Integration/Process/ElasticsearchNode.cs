@@ -25,10 +25,10 @@ namespace Tests.Framework.Integration
 		// <installpath> <> <plugin folder prefix>
 		private readonly Dictionary<string, Func<string, string>> SupportedPlugins = new Dictionary<string, Func<string, string>>
 		{
-			//{ "delete-by-query", _ => "delete-by-query" },
+			{ "delete-by-query", _ => "delete-by-query" },
 			//{ "cloud-azure", _ => "cloud-azure" },
-			//{ "mapper-attachments", MapperAttachmentPlugin.GetVersion },
-			//{ "mapper-murmur3", _ => "mapper-murmur3" },
+			{ "mapper-attachments", _ => "mapper-attachments" },
+			{ "mapper-murmur3", _ => "mapper-murmur3" }
 		};
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
