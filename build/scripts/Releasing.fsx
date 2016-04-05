@@ -1,7 +1,5 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
 #r @"FakeLib.dll"
-#r @"FSharp.Data.dll"
 #load @"Paths.fsx"
 #load @"Projects.fsx"
 #load @"Versioning.fsx"
@@ -14,9 +12,6 @@ open Projects
 open Versioning
 open Building
 open FSharp.Data
-
-// TODO: Use a complete project.json skeleton
-type ProjectJson = JsonProvider<"../../src/Nest/project.json">
 
 type Release() = 
     static let nugetPack = fun (projectName: ProjectName) ->
@@ -40,36 +35,6 @@ type Release() =
         traceFAKE "%s" dir
         MoveFile Paths.NugetOutput nugetOutFile
 
-    static let updateVersion project =
-        CreateDir Paths.NugetOutput
-        use file = File.Open (project, FileMode.Open)
-        let doc = ProjectJson.Load file
-
-        let newDoc = ProjectJson.Root(
-                        doc.Authors, 
-                        doc.Owners, 
-                        doc.ProjectUrl, 
-                        doc.LicenseUrl,
-                        doc.RequireLicenseAcceptance, 
-                        doc.IconUrl, 
-                        doc.Summary, 
-                        doc.Description, 
-                        doc.Title, 
-                        doc.Tags,
-                        doc.Repository,
-                        doc.Copyright,
-                        Versioning.FileVersion,
-                        doc.CompilationOptions,
-                        doc.Configurations,
-                        doc.Dependencies,
-                        doc.Commands,
-                        doc.Frameworks)
-        
-        file.Close ()
-        File.Delete project
-        use writer = new StreamWriter(File.Open (project, FileMode.Create))
-        newDoc.JsonValue.WriteTo(writer, JsonSaveOptions.None)
-
     static member PackAll() =
         DotNetProject.All
         |> Seq.map (fun p -> p.ProjectName)
@@ -80,7 +45,7 @@ type Release() =
                        ++ "src/Elasticsearch.Net/project.json"
 
         // update versions
-        projects |> Seq.iter updateVersion
+        Versioning.PatchProjectJsons()
 
         // build nuget packages
         projects
@@ -117,7 +82,6 @@ type Release() =
                     System.Text.Encoding.UTF8 
                     nuspec
 
-
             // Include PDB for each target framework
             let frameworkDirs = (sprintf "%s/lib" unzippedDir |> directoryInfo).GetDirectories()
             for frameworkDir in frameworkDirs do
@@ -132,6 +96,8 @@ type Release() =
             ZipHelper.Zip unzippedDir package !!(sprintf "%s/**/*.*" unzippedDir)
             DeleteDir unzippedDir
 
+            if (directoryExists Paths.NugetOutput = false) then CreateDir Paths.NugetOutput
+
             // move to nuget output
             MoveFile Paths.NugetOutput package
         )
@@ -143,4 +109,13 @@ type Release() =
             match success with
             | 0 -> traceFAKE "publish to myget succeeded" |> ignore
             | _ -> failwith "publish to myget failed" |> ignore
+        )
+
+    static member PatchReleaseNotes() =
+        !! "src/**/project.json"
+        |> Seq.iter(fun f -> 
+            RegexReplaceInFileWithEncoding 
+                "\"releaseNotes\"\\s?:\\s?\".*\"" 
+                (sprintf "\"releaseNotes\": \"See https://github.com/elastic/elasticsearch-net/releases/tag/%s\"" Versioning.FileVersion) 
+                (new System.Text.UTF8Encoding(false)) f
         )

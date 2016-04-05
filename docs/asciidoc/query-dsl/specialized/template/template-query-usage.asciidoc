@@ -1,0 +1,53 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[template-query-usage]]
+== Template Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Template(sn => sn
+    .Name("named_query")
+    .Boost(1.1)
+    .Inline(_templateString)
+    .Params(p=>p.Add("query_string", "all about search"))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TemplateQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Inline = _templateString,
+    Params = new Dictionary<string, object>
+    {
+        { "query_string", "all about search" }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "template": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "inline": "{ \"match\": { \"text\": \"{{query_string}}\" } }",
+    "params": {
+      "query_string": "all about search"
+    }
+  }
+}
+----
+

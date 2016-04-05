@@ -1,0 +1,45 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[limit-query-usage]]
+== Limit Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Limit(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Limit(100)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new LimitQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Limit = 100
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "limit": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "limit": 100
+  }
+}
+----
+

@@ -1,0 +1,56 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[ids-query-usage]]
+== Ids Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Ids(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Values(1, 2, 3, 4)
+    .Types(typeof(Project), typeof(Developer))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new IdsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Values = new List<Id> { 1, 2,3,4 },
+    Types = Type<Project>().And<Developer>()
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "ids": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "types": [
+      "project",
+      "developer"
+    ],
+    "values": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}
+----
+

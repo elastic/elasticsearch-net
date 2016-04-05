@@ -1,0 +1,46 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[from-and-size-usage]]
+== From And Size Usage
+
+Pagination of results can be done by using the `from` and `size` parameters.
+
+`from` parameter:: 
+defines the offset from the first result you want to fetch.
+
+`size` parameter:: 
+allows you to configure the maximum amount of hits to be returned.
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    From = 10,
+    Size = 12
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "from": 10,
+  "size": 12
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+    .From(10)
+    .Size(12)
+----
+

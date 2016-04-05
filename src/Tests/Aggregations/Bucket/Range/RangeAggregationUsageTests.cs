@@ -21,7 +21,7 @@ namespace Tests.Aggregations.Bucket.Range
 				{
 					range = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits),
+						field = "numberOfCommits",
 						ranges = new object[]
 						{
 							new { to = 100.0 },

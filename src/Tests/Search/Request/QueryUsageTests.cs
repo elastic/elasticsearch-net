@@ -6,9 +6,8 @@ using Tests.Framework.MockData;
 namespace Tests.Search.Request
 {
 	/**
-	 * The query element within the search request body allows to define a query using the Query DSL.
+	 * The query element within the search request body allows to define a query using the <<query-dsl,Query DSL>>.
 	 */
-
 	public class QueryUsageTests : SearchUsageTestBase
 	{
 		public QueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

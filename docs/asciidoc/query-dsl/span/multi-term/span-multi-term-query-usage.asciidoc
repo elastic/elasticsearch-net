@@ -1,0 +1,53 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[span-multi-term-query-usage]]
+== Span Multi Term Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanMultiTerm(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Match(sq=>sq
+        .Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanMultiTermQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Match = new PrefixQuery { Field = "name", Value = "pre-*" }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_multi": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "match": {
+      "prefix": {
+        "name": {
+          "value": "pre-*"
+        }
+      }
+    }
+  }
+}
+----
+

@@ -39,10 +39,9 @@ namespace Nest
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="path">The path we want to specify</param>
 		/// <param name="boost">An optional ^boost postfix, only make sense with certain queries</param>
-		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null) 
-			where T : class =>
-			Nest.Field.Create(path, boost);
+		public static Field Field<T>(Expression<Func<T, object>> path, double? boost = null)
+			where T : class => new Nest.Field(path, boost);
 
-		public static Field Field(string field, double? boost = null) => Nest.Field.Create(field, boost);
+		public static Field Field(string field, double? boost = null) => new Nest.Field(field, boost);
 	}
 }

@@ -1,0 +1,82 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[match-usage]]
+== Match Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Match(c => c
+    .Field(p => p.Description)
+    .Analyzer("standard")
+    .Boost(1.1)
+    .CutoffFrequency(0.001)
+    .Query("hello world")
+    .Fuzziness(Fuzziness.Auto)
+    .Lenient()
+    .FuzzyTranspositions()
+    .MaxExpansions(2)
+    .MinimumShouldMatch(2)
+    .PrefixLength(2)
+    .Operator(Operator.Or)
+    .FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+    .Slop(2)
+    .Name("named_query")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new MatchQuery
+{
+    Field = Field<Project>(p=>p.Description),
+    Analyzer = "standard",
+    Boost = 1.1,
+    Name = "named_query",
+    CutoffFrequency = 0.001,
+    Query = "hello world",
+    Fuzziness = Fuzziness.Auto,
+    FuzzyTranspositions = true,
+    MinimumShouldMatch = 2,
+    FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
+    MaxExpansions = 2,
+    Slop = 2,
+    Lenient = true,
+    Operator = Operator.Or,
+    PrefixLength = 2
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "match": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "query": "hello world",
+      "analyzer": "standard",
+      "fuzzy_rewrite": "constant_score_boolean",
+      "fuzziness": "AUTO",
+      "fuzzy_transpositions": true,
+      "cutoff_frequency": 0.001,
+      "prefix_length": 2,
+      "max_expansions": 2,
+      "slop": 2,
+      "lenient": true,
+      "minimum_should_match": 2,
+      "operator": "or"
+    }
+  }
+}
+----
+

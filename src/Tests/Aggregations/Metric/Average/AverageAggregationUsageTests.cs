@@ -12,6 +12,9 @@ namespace Tests.Aggregations.Metric.Average
 	{
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		/// <summary>
+		/// 
+		/// </summary>
 		protected override object ExpectJson => new
 		{
 			aggs = new
@@ -24,7 +27,7 @@ namespace Tests.Aggregations.Metric.Average
 					},
 					avg = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits),
+						field = "numberOfCommits",
 						missing = 10.0,
 						script = new
 						{

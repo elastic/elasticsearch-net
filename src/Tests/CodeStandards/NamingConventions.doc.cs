@@ -7,13 +7,13 @@ using Tests.Framework;
 
 namespace Tests.CodeStandards
 {
-	/** # Naming Conventions
-	*
+	/** == Naming Conventions
+	* 
 	* NEST uses the following naming conventions (with _some_ exceptions).
 	*/
 	public class NamingConventions
 	{
-		/** ## Class Names
+		/** === Class Names
 		*
 		* Abstract class names should end with a `Base` suffix
 		*/
@@ -24,13 +24,13 @@ namespace Tests.CodeStandards
 				typeof(DateMath)
 			};
 
-			var abstractClasses = typeof(IRequest).Assembly().GetTypes()
+			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
 				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			abstractClasses.Should().BeEmpty();
+			abstractClassesNotEndingInBase.Should().BeEmpty();
 		}
 
 		/**
@@ -50,7 +50,7 @@ namespace Tests.CodeStandards
 			baseClassesNotAbstract.Should().BeEmpty();
 		}
 
-		/** ## Requests and Responses
+		/** === Requests and Responses
 		*
 		* Request class names should end with `Request`
 		*/
@@ -58,14 +58,14 @@ namespace Tests.CodeStandards
 		public void RequestClassNamesEndWithRequest()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
-			var requests = types
+			var requestsNotEndingInRequest = types
 				.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
 				.Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			requests.Should().BeEmpty();
+			requestsNotEndingInRequest.Should().BeEmpty();
 		}
 
 		/**
@@ -75,26 +75,25 @@ namespace Tests.CodeStandards
 		public void ResponseClassNamesEndWithResponse()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
-			var responses = types
+			var responsesNotEndingInResponse = types
 				.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			responses.Should().BeEmpty();
+			responsesNotEndingInResponse.Should().BeEmpty();
 		}
 
 		/**
 		* Request and Response class names should be one to one in *most* cases.
 		* e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
 		* There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
-		* `Exists` requests.
+		* the `Exists` requests.
 		*/
 		[U]
 		public void ParityBetweenRequestsAndResponses()
 		{
-			// Add any exceptions to the rule here.
-			var exceptions = new[]
+			var exceptions = new[] // <1> _Exceptions to the rule_
 			{
 				typeof(DocumentExistsRequest),
 				typeof(DocumentExistsRequest<>),
@@ -109,6 +108,8 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
+				typeof(IndicesShardStoresRequest),
+				typeof(RenderSearchTemplateRequest),
 				//UNMAPPED
 				typeof(ReindexRequest),
 				typeof(IngestDeletePipelineRequest),

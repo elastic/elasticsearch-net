@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nest.Aggregations.Visitor
+namespace Nest
 {
-
 	public interface IAggregationVisitor
 	{
 		/// <summary>
@@ -64,6 +63,9 @@ namespace Nest.Aggregations.Visitor
 		void Visit(IMaxBucketAggregation aggregation);
 		void Visit(IMinBucketAggregation aggregation);
 		void Visit(ISumBucketAggregation aggregation);
+		void Visit(IStatsBucketAggregation aggregation);
+		void Visit(IExtendedStatsBucketAggregation aggregation);
+		void Visit(IPercentilesBucketAggregation aggregation);
 		void Visit(IMovingAverageAggregation aggregation);
 		void Visit(ICumulativeSumAggregation aggregation);
 		void Visit(ISerialDifferencingAggregation aggregation);
@@ -143,6 +145,18 @@ namespace Nest.Aggregations.Visitor
 		}
 
 		public virtual void Visit(ISumBucketAggregation aggregation)
+		{
+		}
+
+		public virtual void Visit(IStatsBucketAggregation aggregation)
+		{
+		}
+
+		public virtual void Visit(IExtendedStatsBucketAggregation aggregation)
+		{
+		}
+
+		public virtual void Visit(IPercentilesBucketAggregation aggregation)
 		{
 		}
 

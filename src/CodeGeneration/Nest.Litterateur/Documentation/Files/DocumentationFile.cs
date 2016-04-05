@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
+using Nest.Litterateur;
 
 namespace Nest.Litterateur.Documentation.Files
 {
@@ -26,7 +29,9 @@ namespace Nest.Litterateur.Documentation.Files
 					return new CSharpDocumentationFile(fileLocation);
 				case ".gif":
 				case ".jpg":
+				case ".jpeg":
 				case ".png":
+					return new ImageDocumentationFile(fileLocation);
 				case ".asciidoc":
 					return new RawDocumentationFile(fileLocation);
 			}
@@ -37,13 +42,19 @@ namespace Nest.Litterateur.Documentation.Files
 		protected virtual FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + ".asciidoc";
 
-			var documenationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputFolder, testInDocumenationFolder));
-			var fileInfo = new FileInfo(documenationTargetPath);
+			var testInDocumentationFolder = 
+				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "")
+				.TrimEnd(".doc")
+				.TrimEnd("Tests")
+				.PascalToHyphen() + ".asciidoc";
+
+			var documentationTargetPath = Path.GetFullPath(Path.Combine(Program.OutputDirPath, testInDocumentationFolder));
+			var fileInfo = new FileInfo(documentationTargetPath);
 			if (fileInfo.Directory != null)
 				Directory.CreateDirectory(fileInfo.Directory.FullName);
+
 			return fileInfo;
-		}
+		}		
 	}
 }

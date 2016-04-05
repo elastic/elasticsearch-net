@@ -28,7 +28,7 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new object[]
+		protected override object ExpectJson => new object[]
 		{
 			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
@@ -38,6 +38,32 @@ namespace Tests.Document.Multiple.Bulk
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
 		};
+
+		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
+			.Index<Project>(b => b.Document(Project.Instance))
+			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
+			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
+			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
+			
+
+		protected override BulkRequest Initializer => 
+			new BulkRequest(CallIsolatedValue)
+			{
+				Operations = new List<IBulkOperation>
+				{
+					new BulkIndexOperation<Project>(Project.Instance),
+					new BulkUpdateOperation<Project, object>(Project.Instance)
+					{
+						Doc = new { leadDeveloper = new { firstName = "martijn" } }
+					},
+					new BulkCreateOperation<Project>(Project.Instance)
+					{
+						Id = Project.Instance.Name + "1"
+					},
+					new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
+				}
+			};
 
 		protected override void ExpectResponse(IBulkResponse response)
 		{
@@ -58,33 +84,9 @@ namespace Tests.Document.Multiple.Bulk
 				item.Shards.Successful.Should().BeGreaterThan(0);
 			}
 
-			var p1 = this.Client.Source<Project>(Project.Instance.Name, p=>p.Index(CallIsolatedValue));
+			var p1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
 			p1.LeadDeveloper.FirstName.Should().Be("martijn");
 		}
 
-		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
-			.Index(CallIsolatedValue)
-			.Index<Project>(b => b.Document(Project.Instance))
-			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
-			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
-			
-
-		protected override BulkRequest Initializer => new BulkRequest(CallIsolatedValue)
-		{
-			Operations = new List<IBulkOperation>
-			{
-				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkUpdateOperation<Project, object>(Project.Instance)
-				{
-					Doc = new { leadDeveloper = new { firstName = "martijn" } }
-				},
-				new BulkCreateOperation<Project>(Project.Instance)
-				{
-					Id = Project.Instance.Name + "1"
-				},
-				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
-			}
-		};
 	}
 }

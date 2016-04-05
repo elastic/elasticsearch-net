@@ -7,9 +7,11 @@ namespace Tests.Search.Request
 {
 	public class FromAndSizeUsageTests : SearchUsageTestBase
 	{
-		/* Pagination 2 of results can be done by using the from and size parameters. 
-		 * The from parameter defines the offset from the first result you want to fetch. 
-		 * The size parameter allows you to configure the maximum amount of hits to be returned.
+		/**
+		 * Pagination of results can be done by using the `from` and `size` parameters.
+		 *
+		 * `from` parameter:: defines the offset from the first result you want to fetch.
+		 * `size` parameter:: allows you to configure the maximum amount of hits to be returned.
 		 */
 
 		public FromAndSizeUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

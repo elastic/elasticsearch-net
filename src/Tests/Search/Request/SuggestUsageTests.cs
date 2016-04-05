@@ -11,27 +11,13 @@ using System.Linq;
 namespace Tests.Search.Request
 {
 	/**
-	 * Allows to add one or more sort on specific fields. Each sort can be reversed as well.
-	 * The sort is defined on a per field level, with special field name for _score to sort by score.
+	 * The suggest feature suggests similar looking terms based on a provided text by using a suggester.
+	 *
+	 * See the Elasticsearch documentation on {ref_current}/search-suggesters.html[Suggesters] for more detail.
 	 */
-
 	public class SuggestUsageTests : SearchUsageTestBase
 	{
 		public SuggestUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void ExpectResponse(ISearchResponse<Project> response)
-		{
-			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
-			myCompletionSuggest.Should().NotBeNull();
-			var suggest = myCompletionSuggest.First();
-			suggest.Text.Should().Be(Project.Instance.Name);
-			suggest.Length.Should().BeGreaterThan(0);
-			var option = suggest.Options.First();
-			option.Text.Should().NotBeNullOrEmpty();
-			option.Score.Should().BeGreaterThan(0);
-			option.Payload.Should().NotBeNull();
-			option.Payload.Value<int>("numberOfCommits").Should().BeGreaterThan(0);
-		}
 
 		protected override object ExpectJson =>
 			new
@@ -41,7 +27,7 @@ namespace Tests.Search.Request
 					  completion = new {
 						analyzer = "simple",
 						contexts = new {
-						  color = new [] {
+						  color = new object[] {
 							  new { context = Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First() }
 						  }
 						},
@@ -226,5 +212,19 @@ namespace Tests.Search.Request
 					} },
 				}
 			};
+
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			var myCompletionSuggest = response.Suggest["my-completion-suggest"];
+			myCompletionSuggest.Should().NotBeNull();
+			var suggest = myCompletionSuggest.First();
+			suggest.Text.Should().Be(Project.Instance.Name);
+			suggest.Length.Should().BeGreaterThan(0);
+			var option = suggest.Options.First();
+			option.Text.Should().NotBeNullOrEmpty();
+			option.Score.Should().BeGreaterThan(0);
+			option.Payload.Should().NotBeNull();
+			option.Payload.Value<int>("numberOfCommits").Should().BeGreaterThan(0);
+		}
 	}
 }

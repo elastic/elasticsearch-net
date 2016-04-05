@@ -23,7 +23,7 @@ namespace Tests.QueryDsl.Compound.Bool
 					//first bool
 					new {
 						@bool = new {
-							must = new [] {
+							must = new object[] {
 								new { term = new { x = new { value = "y" } } },
 								new { term = new { x = new { value = "y" } } }
 							}
@@ -31,7 +31,7 @@ namespace Tests.QueryDsl.Compound.Bool
 					},
 					new {
 						@bool = new {
-							must = new [] {
+							must = new object[] {
 								new {
 									@bool = new {
 										must = new object[] {
@@ -41,17 +41,17 @@ namespace Tests.QueryDsl.Compound.Bool
 													should = new object[] {
 														new {
 															@bool = new {
-																filter = new [] { new { term = new { x = new { value = "y" } } } }
+																filter = new object[] { new { term = new { x = new { value = "y" } } } }
 															}
 														},
 														new {
 															@bool = new {
-																filter = new [] { new { term = new { x = new { value = "y" } } } }
+																filter = new object[] { new { term = new { x = new { value = "y" } } } }
 															}
 														},
 														new {
 															@bool = new {
-																must_not = new [] {
+																must_not = new object[] {
 																	new { term = new { x = new { value = "y" } } },
 																	new { term = new { x = new { value = "y" } } }
 																}
@@ -63,7 +63,7 @@ namespace Tests.QueryDsl.Compound.Bool
 											//simple nested or
 											new {
 												@bool = new {
-													should = new [] {
+													should = new object[] {
 														new { term = new { x = new { value = "y" } } },
 														new { term = new { x = new { value = "y" } } },
 														new { term = new { x = new { value = "y" } } }
@@ -110,6 +110,7 @@ namespace Tests.QueryDsl.Compound.Bool
 				// actual bool query
 				&& (base.QueryFluent(q)));
 
+		//hide
 		[U]
 		protected void AsssertShape()
 		{
@@ -117,6 +118,7 @@ namespace Tests.QueryDsl.Compound.Bool
 			//this.AssertShape(this.QueryFluent(new QueryContainerDescriptor<Project>()));
 		}
 
+		//hide
 		private void AssertShape(IQueryContainer container)
 		{
 			//top level bool

@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.Percentiles
 				{
 					percentiles = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits),
+						field = "numberOfCommits",
 						percents = new[] { 95.0, 99.0, 99.9 },
 						hdr = new
 						{

@@ -13,8 +13,9 @@ namespace Tests.Search.Request
 	{
 		/**
 		 * Enables explanation for each hit on how its score was computed.
+		 *
+		 * See the Elasticsearch documentation on {ref_current}/search-explain.html[Explain] for more detail.
 		 */
-
 		public ExplainUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson =>

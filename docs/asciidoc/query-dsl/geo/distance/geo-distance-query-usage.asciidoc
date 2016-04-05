@@ -1,0 +1,68 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-distance-query-usage]]
+== Geo Distance Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoDistance(g=>g
+    .Boost(1.1)
+    .Name("named_query")
+    .Field(p=>p.Location)
+    .DistanceType(GeoDistanceType.Arc)
+    .Coerce()
+    .Location(34, -34)
+    .Distance("200.0m")
+    .IgnoreMalformed()
+    .Optimize(GeoOptimizeBBox.Memory)
+    .ValidationMethod(GeoValidationMethod.Strict)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoDistanceQuery
+{
+    Boost = 1.1,
+    Name = "named_query",
+    Field = Infer.Field<Project>(p => p.Location),
+    DistanceType = GeoDistanceType.Arc,
+    Coerce = true,
+    Location = new GeoLocation(34,-34),
+    Distance = "200.0m",
+    IgnoreMalformed = true,
+    OptimizeBoundingBox = GeoOptimizeBBox.Memory,
+    ValidationMethod = GeoValidationMethod.Strict
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_distance": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "distance": "200.0m",
+    "optimize_bbox": "memory",
+    "distance_type": "arc",
+    "coerce": true,
+    "ignore_malformed": true,
+    "validation_method": "strict",
+    "location": {
+      "lat": 34.0,
+      "lon": -34.0
+    }
+  }
+}
+----
+

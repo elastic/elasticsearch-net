@@ -1,0 +1,173 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[inner-hits-usage]]
+== Inner Hits Usage
+
+The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
+return of documents that have matches in a different scope.
+In the parent/child case, parent document are returned based on matches in child documents or child document
+are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
+
+In both cases, the actual matches in the different scopes that caused a document to be returned is hidden.
+In many cases, it’s very useful to know _which_ inner nested objects (in the case of nested) or children/parent
+documents (in the case of parent/child) caused certain information to be returned.
+The inner hits feature can be used for this. This feature returns per search hit in the search response additional
+nested hits that caused a search hit to match in a different scope.
+
+Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
+
+See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
+
+[[global-inner-hits]]
+[float]
+== Global Inner Hits
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Index(Index)
+.InnerHits(ih => ih
+    .Type<Earl>("earls", g => g
+        .Size(5)
+        .InnerHits(iih => iih
+            .Type<Baron>("barons")
+        )
+        .FielddataFields(p => p.Name)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Duke>(Index, typeof(Duke))
+{
+    InnerHits = new NamedInnerHits
+    {
+        { "earls", new InnerHitsContainer
+        {
+            Type = new TypeInnerHit<Earl>
+            {
+                InnerHit = new GlobalInnerHit
+                {
+                    Size = 5,
+                    FielddataFields = new Field[]{ "name" },
+                    InnerHits = new NamedInnerHits
+                    {
+                        { "barons", new TypeInnerHit<Baron>() }
+                    }
+                }
+            }
+        } }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "inner_hits": {
+    "earls": {
+      "type": {
+        "earl": {
+          "fielddata_fields": [
+            "name"
+          ],
+          "inner_hits": {
+            "barons": {
+              "type": {
+                "baron": {}
+              }
+            }
+          },
+          "size": 5
+        }
+      }
+    }
+  }
+}
+----
+
+[[query-inner-hits]]
+[float]
+== Query Inner Hits
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Index(Index)
+.Query(q =>
+    q.HasChild<Prince>(hc => hc
+        .Query(hcq => hcq.MatchAll())
+        .InnerHits(ih => ih.Name("princes"))
+    ) || q.Nested(n => n
+        .Path(p => p.Foes)
+        .Query(nq => nq.MatchAll())
+        .InnerHits()
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<King>(Index, typeof(King))
+{
+    Query = new HasChildQuery
+    {
+        Type = typeof(Prince),
+        Query = new MatchAllQuery(),
+        InnerHits = new InnerHits { Name = "princes" }
+    } || new NestedQuery
+    {
+        Path = Field<King>(p => p.Foes),
+        Query = new MatchAllQuery(),
+        InnerHits = new InnerHits()
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "has_child": {
+            "type": "prince",
+            "query": {
+              "match_all": {}
+            },
+            "inner_hits": {
+              "name": "princes"
+            }
+          }
+        },
+        {
+          "nested": {
+            "query": {
+              "match_all": {}
+            },
+            "path": "foes",
+            "inner_hits": {}
+          }
+        }
+      ]
+    }
+  }
+}
+----
+

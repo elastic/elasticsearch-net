@@ -9,11 +9,12 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnConnectionFailure
 	{
-		/** == Sniffing on connection failure 
-		* Sniffing on connection is enabled by default when using a connection pool that allows reseeding. 
-		* The only IConnectionPool we ship that allows this is the SniffingConnectionPool.
+		/**== Sniffing on connection failure
 		*
-		* This can be very handy to force a refresh of the pools known healthy node by inspecting elasticsearch itself.
+		* Sniffing on connection is enabled by default when using a connection pool that allows reseeding.
+		* The only IConnectionPool we ship that allows this is the <<sniffing-connection-pool,SniffingConnectionPool>>.
+		*
+		* This can be very handy to force a refresh of the pools known healthy node by inspecting Elasticsearch itself.
 		* A sniff tries to get the nodes by asking each currently known node until one response.
 		*/
 
@@ -21,7 +22,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			/**
 			* Here we seed our connection with 5 known nodes 9200-9204 of which we think
-			* 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing 
+			* 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing
 			* a search on 9201. This should a sniff to be kicked off.
 			*/
 			var audit = new Auditor(() => Framework.Cluster
@@ -39,7 +40,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					.MasterEligible(9200, 9202)
 					.ClientCalls(r => r.OnPort(9201).Fails(Once))
 					/**
-					* After this second failure on 9201 another sniff will be returned a cluster that no 
+					* After this second failure on 9201 another sniff will be returned a cluster that no
 					* longer fails but looks completely different (9210-9212) we should be able to handle this
 					*/
 					.Sniff(s => s.SucceedAlways(Framework.Cluster
@@ -90,7 +91,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 
 		[U] public async Task DoesASniffAfterConnectionFailureOnPing()
 		{
-			/** Here we set up our cluster exactly the same as the previous setup 
+			/** Here we set up our cluster exactly the same as the previous setup
 			* Only we enable pinging (default is true) and make the ping fail
 			*/
 			var audit = new Auditor(() => Framework.Cluster

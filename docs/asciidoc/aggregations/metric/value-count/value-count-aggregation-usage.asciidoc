@@ -1,0 +1,55 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[value-count-aggregation-usage]]
+== Value Count Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .ValueCount("commit_count", c => c
+        .Field(p => p.NumberOfCommits)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new ValueCountAggregation("commit_count", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "commit_count": {
+      "value_count": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var commitCount = response.Aggs.ValueCount("commit_count");
+commitCount.Should().NotBeNull();
+commitCount.Value.Should().BeGreaterThan(0);
+----
+

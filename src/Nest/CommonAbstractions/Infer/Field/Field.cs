@@ -9,9 +9,12 @@ namespace Nest
 	[ContractJsonConverter(typeof(FieldJsonConverter))]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
-		public string Name { get; set; }
-		public Expression Expression { get; set; }
-		public PropertyInfo Property { get; set; }
+		public string Name { get; private set; }
+
+		public Expression Expression { get; private set; }
+
+		public PropertyInfo Property { get; private set; }
+
 		public double? Boost { get; set; }
 
 		private object ComparisonValue { get; set; }
@@ -21,26 +24,42 @@ namespace Nest
 
 		public Fields And(string field) => new Fields(new [] { this, field });
 
-		public static Field Create(string name, double? boost = null)
+		public Field(string name, double? boost = null)
 		{
-			if (name.IsNullOrEmpty()) return null;
-
-			double? b;
-			Field field = ParseFieldName(name, out b);
-			field.Boost = b ?? boost;
-			return field;
+			if (!name.IsNullOrEmpty())
+			{
+				double? b;
+				Name = ParseFieldName(name, out b);
+				Boost = b ?? boost;
+				ComparisonValue = Name;
+			}
 		}
 
-		public static Field Create(Expression expression, double? boost = null)
+		public Field(Expression expression, double? boost = null)
 		{
-			Field field = expression;
-			field.Boost = boost;
-			return field;
+			if (expression != null)
+			{
+				Expression = expression;
+				Boost = boost;
+				ComparisonValue = ComparisonValueFromExpression(expression);
+			}
+		}
+
+		public Field(PropertyInfo property, double? boost = null)
+		{
+			if (property != null)
+			{
+				Property = property;
+				Boost = boost;
+				ComparisonValue = property;
+			}
 		}
 
 		private static string ParseFieldName(string name, out double? boost)
 		{
 			boost = null;
+			if (name == null) return null;
+
 			var parts = name.Split(new [] { '^' }, StringSplitOptions.RemoveEmptyEntries);
 			if (parts.Length > 1)
 			{
@@ -50,43 +69,34 @@ namespace Nest
 			return name;
 		}
 
-		public static implicit operator Field(string name)
-		{
-			if (name.IsNullOrEmpty()) return null;
-
-			double? boost;
-			name = ParseFieldName(name, out boost);
-			return  new Field
-			{
-				Name = name,
-				ComparisonValue = name,
-				Boost = boost
-				
-			};
-		}
-
-		public static implicit operator Field(Expression expression)
+		private static object ComparisonValueFromExpression(Expression expression)
 		{
 			if (expression == null) return null;
 
 			var lambda = expression as LambdaExpression;
 			if (lambda == null)
-				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
+				return expression.ToString();
 
 			var memberExpression = lambda.Body as MemberExpression;
 			if (memberExpression == null)
-				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
-			
-			return new Field { Expression = expression, ComparisonValue = memberExpression}; 
+				return expression.ToString();
+
+			return memberExpression;
+		}
+
+		public static implicit operator Field(string name)
+		{
+			return name.IsNullOrEmpty() ? null : new Field(name);
+		}
+
+		public static implicit operator Field(Expression expression)
+		{
+			return expression == null ? null : new Field(expression);
 		}
 
 		public static implicit operator Field(PropertyInfo property)
 		{
-			return property == null ? null : new Field
-			{
-				Property = property,
-				ComparisonValue = property
-			};
+			return property == null ? null : new Field(property);
 		}
 
 		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;

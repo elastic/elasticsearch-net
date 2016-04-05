@@ -1,0 +1,58 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[has-parent-query-usage]]
+== Has Parent Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.HasParent<Developer>(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .InnerHits(i=>i.Explain())
+    .ScoreMode(ParentScoreMode.Score)
+    .Query(qq=>qq.MatchAll())
+    
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new HasParentQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Type = Infer.Type<Developer>(),
+    InnerHits = new InnerHits { Explain = true },
+    Query = new MatchAllQuery(),
+    ScoreMode = ParentScoreMode.Score
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "has_parent": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "type": "developer",
+    "score_mode": "score",
+    "query": {
+      "match_all": {}
+    },
+    "inner_hits": {
+      "explain": true
+    }
+  }
+}
+----
+

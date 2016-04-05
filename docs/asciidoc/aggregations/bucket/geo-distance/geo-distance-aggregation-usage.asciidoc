@@ -1,0 +1,89 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-distance-aggregation-usage]]
+== Geo Distance Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .GeoDistance("rings_around_amsterdam", g => g
+        .Field(p => p.Location)
+        .Origin(52.376, 4.894)
+        .Ranges(
+            r => r.To(100),
+            r => r.From(100).To(300),
+            r => r.From(300)
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
+    {
+        Field = Field((Project p) => p.Location),
+        Origin = "52.376, 4.894",
+        Ranges = new List<Nest.Range>
+        {
+            new Nest.Range { To = 100 },
+            new Nest.Range { From = 100, To = 300 },
+            new Nest.Range { From = 300 }
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "rings_around_amsterdam": {
+      "geo_distance": {
+        "field": "location",
+        "origin": {
+          "lat": 52.376,
+          "lon": 4.894
+        },
+        "ranges": [
+          {
+            "to": 100.0
+          },
+          {
+            "from": 100.0,
+            "to": 300.0
+          },
+          {
+            "from": 300.0
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var ringsAroundAmsterdam = response.Aggs.GeoDistance("rings_around_amsterdam");
+ringsAroundAmsterdam.Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.Where(r => r.Key == "*-100.0").FirstOrDefault().Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.Where(r => r.Key == "100.0-300.0").FirstOrDefault().Should().NotBeNull();
+ringsAroundAmsterdam.Buckets.Where(r => r.Key == "300.0-*").FirstOrDefault().Should().NotBeNull();
+----
+

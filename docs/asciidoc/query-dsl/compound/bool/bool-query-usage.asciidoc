@@ -1,0 +1,69 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[bool-query-usage]]
+== Bool Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Bool(b => b
+    .MustNot(m => m.MatchAll())
+    .Should(m => m.MatchAll())
+    .Must(m => m.MatchAll())
+    .Filter(f => f.MatchAll())
+    .MinimumShouldMatch(1)
+    .Boost(2))
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new BoolQuery()
+{
+    MustNot = new QueryContainer[] { new MatchAllQuery() },
+    Should = new QueryContainer[] { new MatchAllQuery() },
+    Must = new QueryContainer[] { new MatchAllQuery() },
+    Filter = new QueryContainer[] { new MatchAllQuery() },
+    MinimumShouldMatch = 1,
+    Boost = 2
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "must": [
+      {
+        "match_all": {}
+      }
+    ],
+    "must_not": [
+      {
+        "match_all": {}
+      }
+    ],
+    "should": [
+      {
+        "match_all": {}
+      }
+    ],
+    "filter": [
+      {
+        "match_all": {}
+      }
+    ],
+    "minimum_should_match": 1,
+    "boost": 2.0
+  }
+}
+----
+

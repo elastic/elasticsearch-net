@@ -10,10 +10,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class VolatileUpdates
 	{
-		/** 
-		 * 
-		 */
-
+		/**== Volatile Updates */
 		protected int NumberOfNodes = 10;
 		private Random Random = new Random();
 
@@ -38,9 +35,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			callStatic.ShouldNotThrow();
 		}
 
+		// hide
 		public void AssertCreateView(IConnectionPool pool)
 		{
-			/** 
+			/**
 			*/
 			var threads = Enumerable.Range(0, 50)
 				.Select(i => CreateReadAndUpdateThread(pool))
@@ -50,6 +48,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			foreach (var t in threads) t.Join();
 		}
 
+		//hide
 		public Thread CreateReadAndUpdateThread(IConnectionPool pool) => new Thread(() =>
 		{
 			for (var i = 0; i < 1000; i++)
@@ -62,6 +61,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 			}
 		});
 
+		//hide
 		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
 			foreach (var n in pool.CreateView()) yield return n.Uri.Port;

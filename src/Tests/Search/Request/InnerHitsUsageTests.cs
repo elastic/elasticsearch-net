@@ -15,6 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
+	//hide
 	public interface IRoyal
 	{
 		string Name { get; set; }
@@ -35,11 +36,13 @@ namespace Tests.Search.Request
 	{
 		public List<King> Foes { get; set; }
 	}
+
 	public class Prince : RoyalBase<Prince> { }
 	public class Duke : RoyalBase<Duke> { }
 	public class Earl : RoyalBase<Earl> { }
 	public class Baron : RoyalBase<Baron> { }
 
+	//hide
 	public class RoyalSeeder
 	{
 		private readonly IElasticClient _client;
@@ -109,6 +112,24 @@ namespace Tests.Search.Request
 		}
 	}
 
+	/**[[inner-hits-usage]]
+	*== Inner Hits Usage
+	*
+	* The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
+	* return of documents that have matches in a different scope.
+	* In the parent/child case, parent document are returned based on matches in child documents or child document
+	* are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
+	*
+	* In both cases, the actual matches in the different scopes that caused a document to be returned is hidden.
+	* In many cases, it’s very useful to know _which_ inner nested objects (in the case of nested) or children/parent
+	* documents (in the case of parent/child) caused certain information to be returned.
+	* The inner hits feature can be used for this. This feature returns per search hit in the search response additional
+	* nested hits that caused a search hit to match in a different scope.
+	*
+    * Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
+	*
+	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
+	*/
 	[Collection(IntegrationContext.OwnIndex)]
 	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
@@ -138,6 +159,9 @@ namespace Tests.Search.Request
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 
+	/**[float]
+	*== Global Inner Hits
+	*/
 	[Collection(IntegrationContext.OwnIndex)]
 	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
@@ -146,7 +170,7 @@ namespace Tests.Search.Request
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
 			inner_hits = new
 			{
@@ -230,6 +254,9 @@ namespace Tests.Search.Request
 		});
 	}
 
+	/**[float]
+	*== Query Inner Hits
+	*/
 	[Collection(IntegrationContext.OwnIndex)]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
@@ -238,7 +265,7 @@ namespace Tests.Search.Request
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson { get; } = new
+		protected override object ExpectJson => new
 		{
 			query = new
 			{

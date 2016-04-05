@@ -1,0 +1,70 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[source-filtering-usage]]
+== Source Filtering Usage
+
+Allows to control how the `_source` field is returned with every hit.
+By default operations return the contents of the `_source` field unless
+you have used the fields parameter or if the `_source` field is disabled.
+
+See the Elasticsearch documentation on {ref_current}/search-request-source-filtering.html[Source Filtering] for more detail.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Source(so => so
+    .Include(f => f
+        .Fields(
+            p => p.Name,
+            p => p.StartedOn
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Source = new SourceFilter
+    {
+        Include = Fields<Project>(p => p.Name, prop => prop.StartedOn)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "_source": {
+    "include": [
+      "name",
+      "startedOn"
+    ]
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+
+foreach (var document in response.Documents)
+{
+    document.Name.Should().NotBeNull();
+    document.StartedOn.Should().NotBe(default(DateTime));
+    document.Description.Should().BeNull();
+}
+----
+

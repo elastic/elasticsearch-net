@@ -1,0 +1,41 @@
+[[search]]
+= Search
+
+[partintro]
+--
+NEST exposes all of the search request parameters available in Elasticsearch
+
+* <<explain-usage,Explain Usage>>
+
+* <<fielddata-fields-usage,Fielddata Fields Usage>>
+
+* <<fields-usage,Fields Usage>>
+
+* <<from-and-size-usage,From And Size Usage>>
+
+* <<highlighting-usage,Highlighting Usage>>
+
+* <<index-boost-usage,Index Boost Usage>>
+
+* <<inner-hits-usage,Inner Hits Usage>>
+
+* <<min-score-usage,Min Score Usage>>
+
+* <<post-filter-usage,Post Filter Usage>>
+
+* <<profile-usage,Profile Usage>>
+
+* <<query-usage,Query Usage>>
+
+* <<script-fields-usage,Script Fields Usage>>
+
+* <<sort-usage,Sort Usage>>
+
+* <<source-filtering-usage,Source Filtering Usage>>
+
+* <<suggest-usage,Suggest Usage>>
+
+--
+
+include::search-usage.asciidoc[]
+

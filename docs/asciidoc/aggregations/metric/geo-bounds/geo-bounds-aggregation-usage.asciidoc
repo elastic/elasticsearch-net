@@ -1,0 +1,72 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-bounds-aggregation-usage]]
+== Geo Bounds Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .GeoBounds("viewport", gb => gb
+        .Field(p => p.Location)
+        .WrapLongitude(true)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new GeoBoundsAggregation("viewport", Field<Project>(p => p.Location))
+    {
+        WrapLongitude = true
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "viewport": {
+      "geo_bounds": {
+        "field": "location",
+        "wrap_longitude": true
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var viewport = response.Aggs.GeoBounds("viewport");
+viewport.Should().NotBeNull();
+viewport.Bounds.Should().NotBeNull();
+var bottomRight = viewport.Bounds.BottomRight;
+bottomRight.Should().NotBeNull();
+bottomRight.Lat.Should().HaveValue();
+GeoLocation.IsValidLatitude(bottomRight.Lat.Value).Should().BeTrue();
+bottomRight.Lon.Should().HaveValue();
+GeoLocation.IsValidLongitude(bottomRight.Lon.Value).Should().BeTrue();
+var topLeft = viewport.Bounds.TopLeft;
+topLeft.Should().NotBeNull();
+topLeft.Lat.Should().HaveValue();
+GeoLocation.IsValidLatitude(topLeft.Lat.Value).Should().BeTrue();
+topLeft.Lon.Should().HaveValue();
+GeoLocation.IsValidLongitude(topLeft.Lon.Value).Should().BeTrue();
+----
+

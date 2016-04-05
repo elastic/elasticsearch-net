@@ -1,8 +1,10 @@
 {
-    "projects": [ "src" ],
-    "sdk": {
-        "version": "1.0.0-rc1-update1",
-        "runtime": "clr",
-        "architecture": "x86"
-    }
+  "projects": [
+    "src"
+  ],
+  "sdk": {
+    "version": "1.0.0-rc1-update1",
+    "runtime": "clr",
+    "architecture": "x86"
+  }
 }

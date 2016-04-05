@@ -1,0 +1,69 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[post-data]]
+== Post data
+
+The low level client allows you to post a `string` or `byte[]` array directly. On top of this,
+if you pass a collection of `string` or `object` they will be serialized
+using Elasticsearch's special bulk/multi format.
+
+=== Implicit Conversion
+
+Even though the argument for PostData on the low level client takes a `PostData<object>`,
+You can rely on implicit conversion to abstract the notion of PostData completely.
+You can implicitly convert from the following types
+
+* `string`
+
+* `byte[]`
+
+* collection of `string`
+
+* collection of `object`
+
+* `object`
+
+[source,csharp]
+----
+var fromString = ImplicitlyConvertsFrom(@string);
+
+var fromByteArray = ImplicitlyConvertsFrom(bytes);
+var fromListOfString = ImplicitlyConvertsFrom(listOfStrings);
+var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
+var fromObject = ImplicitlyConvertsFrom(@object);
+----
+
+PostData bytes will always be set if it originated from `byte[]` 
+
+[source,csharp]
+----
+fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
+
+fromString.Type.Should().Be(PostType.LiteralString);
+fromByteArray.Type.Should().Be(PostType.ByteArray);
+fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+fromObject.Type.Should().Be(PostType.Serializable);
+----
+
+and passing a `PostData<object>` object to a method taking `PostData<object>` should not wrap 
+
+[source,csharp]
+----
+fromString = ImplicitlyConvertsFrom(fromString);
+
+fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
+fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
+fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
+fromObject = ImplicitlyConvertsFrom(fromObject);
+fromString.Type.Should().Be(PostType.LiteralString);
+fromByteArray.Type.Should().Be(PostType.ByteArray);
+fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+fromObject.Type.Should().Be(PostType.Serializable);
+----
+

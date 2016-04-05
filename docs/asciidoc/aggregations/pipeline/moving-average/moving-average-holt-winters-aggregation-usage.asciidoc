@@ -1,0 +1,117 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[moving-average-holt-winters-aggregation-usage]]
+== Moving Average Holt Winters Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Size(0)
+.Aggregations(a => a
+    .DateHistogram("projects_started_per_month", dh => dh
+        .Field(p => p.StartedOn)
+        .Interval(DateInterval.Month)
+        .Aggregations(aa => aa
+            .Sum("commits", sm => sm
+                .Field(p => p.NumberOfCommits)
+            )
+            .MovingAverage("commits_moving_avg", mv => mv
+                .BucketsPath("commits")
+                .Window(60)
+                .Model(m => m
+                    .HoltWinters(hw => hw
+                        .Type(HoltWintersType.Multiplicative)
+                        .Alpha(0.5f)
+                        .Beta(0.5f)
+                        .Gamma(0.5f)
+                        .Period(30)
+                        .Pad(false)
+                    )
+                )
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>()
+{
+    Size = 0,
+    Aggregations = new DateHistogramAggregation("projects_started_per_month")
+    {
+        Field = "startedOn",
+        Interval = DateInterval.Month,
+        Aggregations = 
+            new SumAggregation("commits", "numberOfCommits") &&
+            new MovingAverageAggregation("commits_moving_avg", "commits")
+            {
+                Window = 60,
+                Model = new HoltWintersModel
+                {
+                    Type = HoltWintersType.Multiplicative,
+                    Alpha = 0.5f,
+                    Beta = 0.5f,
+                    Gamma = 0.5f,
+                    Period = 30,
+                    Pad = false
+                }
+            }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "size": 0,
+  "aggs": {
+    "projects_started_per_month": {
+      "date_histogram": {
+        "field": "startedOn",
+        "interval": "month"
+      },
+      "aggs": {
+        "commits": {
+          "sum": {
+            "field": "numberOfCommits"
+          }
+        },
+        "commits_moving_avg": {
+          "moving_avg": {
+            "buckets_path": "commits",
+            "window": 60,
+            "model": "holt_winters",
+            "settings": {
+              "type": "mult",
+              "alpha": 0.5,
+              "beta": 0.5,
+              "gamma": 0.5,
+              "period": 30,
+              "pad": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+----
+

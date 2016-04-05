@@ -10,6 +10,14 @@ using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
+	/** Allows to selectively load specific stored fields for each document represented by a search hit.
+	*
+	* WARNING: The `fields` parameter is about fields that are explicitly marked as stored in the mapping, 
+	* which is off by default and generally not recommended. 
+	* Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
+	*
+	* See the Elasticsearch documentation on {ref_current}/search-request-fields.html[Fields] for more detail.
+	*/
 	public class FieldsUsageTests : SearchUsageTestBase
 	{
 		public FieldsUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

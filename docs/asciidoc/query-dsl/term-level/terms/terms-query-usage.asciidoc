@@ -1,0 +1,79 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[terms-query-usage]]
+== Terms Query Usage
+
+Filters documents that have fields that match any of the provided terms (not analyzed).
+
+Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-terms-query.html[Terms query] for more information.
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .DisableCoord()
+    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
+    .Terms("term1", "term2")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Terms = ExpectedTerms,
+    DisableCoord = true,
+    MinimumShouldMatch = 2
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "description": [
+      "term1",
+      "term2"
+    ],
+    "disable_coord": true,
+    "minimum_should_match": 2
+  }
+}
+----
+
+[[single-term-terms-query]]
+[float]
+== Single term Terms Query 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .DisableCoord()
+    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
+    .Terms("term1")
+)
+----
+
