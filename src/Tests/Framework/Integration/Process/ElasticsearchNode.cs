@@ -183,7 +183,8 @@ namespace Tests.Framework.Integration
 				$"es.node.name={this.NodeName}",
 				$"es.path.repo=\"{this.RepositoryPath}\"",
 				$"es.script.inline=true",
-				$"es.script.indexed=true"
+				$"es.script.indexed=true",
+				$"es.node.attr.testingcluster=true"
 			}.Concat(additionalSettings ?? Enumerable.Empty<string>())
 			 .Select(s=> $"{settingMarker}{s}");
 
