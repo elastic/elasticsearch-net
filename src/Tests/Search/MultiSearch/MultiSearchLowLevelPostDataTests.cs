@@ -28,7 +28,7 @@ namespace Tests.Search.MultiSearch
 		{
 			new {},
 			new { from = 0, size = 10, query = new { match_all = new {} } },
-			new { search_type = "count" },
+			new { search_type = "query_and_fetch" },
 			new {},
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
@@ -88,7 +88,7 @@ namespace Tests.Search.MultiSearch
 		public void AssertResponse(ElasticsearchResponse<dynamic> response)
 		{
 			response.Success.Should().BeTrue();
-	
+
 			var r = response.Body;
 
 			JArray responses = r.responses;
