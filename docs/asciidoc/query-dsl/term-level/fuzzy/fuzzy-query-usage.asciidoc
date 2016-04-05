@@ -1,0 +1,64 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[fuzzy-query-usage]]
+== Fuzzy Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Fuzzy(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .Fuzziness(Fuzziness.Auto)
+    .Value("ki")
+    .MaxExpansions(100)
+    .PrefixLength(3)
+    .Rewrite(RewriteMultiTerm.ConstantScore)
+    .Transpositions()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new FuzzyQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    Fuzziness = Fuzziness.Auto,
+    Value = "ki",
+    MaxExpansions = 100,
+    PrefixLength = 3,
+    Rewrite = RewriteMultiTerm.ConstantScore,
+    Transpositions = true
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "fuzzy": {
+    "description": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "fuzziness": "AUTO",
+      "max_expansions": 100,
+      "prefix_length": 3,
+      "rewrite": "constant_score",
+      "transpositions": true,
+      "value": "ki"
+    }
+  }
+}
+----
+

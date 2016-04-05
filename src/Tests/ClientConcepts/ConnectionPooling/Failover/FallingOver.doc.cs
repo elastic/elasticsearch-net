@@ -9,8 +9,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 {
 	public class FallingOver
 	{
-		/** == Fail over
-		* When using connection pooling and the pool has sufficient nodes a request will be retried if 
+		/**[[falling-over]]
+		* == Fail over
+		* When using connection pooling and the pool has sufficient nodes a request will be retried if
 		* the call to a node throws an exception or returns a 502 or 503
 		*/
 
@@ -33,8 +34,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 		}
 
-		/** 502 Bad Gateway
-		* Will be treated as an error that requires retrying 
+		/**[[bad-gateway]]
+		*=== 502 Bad Gateway
+		*
+		* Will be treated as an error that requires retrying
 		*/
 		[U]
 		public async Task Http502FallsOver()
@@ -55,8 +58,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 		}
 
-		/** 503 Service Unavailable
-		* Will be treated as an error that requires retrying 
+		/**[[service-unavailable]]
+		*=== 503 Service Unavailable
+		*
+		* Will be treated as an error that requires retrying
 		*/
 		[U]
 		public async Task Http503FallsOver()
@@ -78,7 +83,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 		}
 
 		/**
-		* If a call returns a valid http status code other then 502/503 the request won't be retried.
+		* If a call returns a valid http status code other than 502 or 503, the request won't be retried.
+		*
+		* IMPORTANT: Different requests may have different status codes that are deemed valid. For example,
+		* a *404 Not Found* response is a valid status code for an index exists request
 		*/
 		[U]
 		public async Task HttpTeapotDoesNotFallOver()

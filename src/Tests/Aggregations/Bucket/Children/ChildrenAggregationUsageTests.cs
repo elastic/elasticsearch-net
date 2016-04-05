@@ -10,9 +10,8 @@ namespace Tests.Aggregations.Bucket.Children
 	 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
 	 * buckets on child documents.
 	 *
-	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-children-aggregation.html[on this subject here]
+	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-children-aggregation.html[Children Aggregation]
 	 */
-
 	public class ChildrenAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ChildrenAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -54,29 +53,9 @@ namespace Tests.Aggregations.Bucket.Children
 			{
 				Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 				{
-					Aggregations = 
+					Aggregations =
 						new AverageAggregation("average_per_child", "confidenceFactor") &&
 						new MaxAggregation("max_per_child", "confidenceFactor")
-				}
-			};
-	}
-
-
-	// TODO : move this to a general documentation test explaining how to
-	// combine aggregations using boolean operators?
-
-	public class ChildrenAggregationDslUsage : ChildrenAggregationUsageTests
-	{
-		public ChildrenAggregationDslUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
-
-		protected override SearchRequest<Project> Initializer =>
-			new SearchRequest<Project>
-			{
-				Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
-				{
-					Aggregations =
-						new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
-						&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 				}
 			};
 	}

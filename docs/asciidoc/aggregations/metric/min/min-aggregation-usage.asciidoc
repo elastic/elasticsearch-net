@@ -1,0 +1,55 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[min-aggregation-usage]]
+== Min Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Min("min_commits", m => m
+        .Field(p => p.NumberOfCommits)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new MinAggregation("min_commits", Field<Project>(p => p.NumberOfCommits))
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "min_commits": {
+      "min": {
+        "field": "numberOfCommits"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var min = response.Aggs.Max("min_commits");
+min.Should().NotBeNull();
+min.Value.Should().BeGreaterThan(0);
+----
+

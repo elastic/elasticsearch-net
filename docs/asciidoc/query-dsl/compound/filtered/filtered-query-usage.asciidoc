@@ -1,0 +1,56 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[filtered-query-usage]]
+== Filtered Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Filtered(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Filter(qq => qq.MatchAll(m => m.Name("filter")))
+    .Query(qq => qq.MatchAll(m => m.Name("query")))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new FilteredQuery()
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Filter = new MatchAllQuery { Name ="filter" },
+    Query = new MatchAllQuery() { Name = "query" },
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "filtered": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "filter": {
+      "match_all": {
+        "_name": "filter"
+      }
+    },
+    "query": {
+      "match_all": {
+        "_name": "query"
+      }
+    }
+  }
+}
+----
+

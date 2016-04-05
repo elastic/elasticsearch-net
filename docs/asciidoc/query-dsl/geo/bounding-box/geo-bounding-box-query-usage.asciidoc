@@ -1,0 +1,75 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-bounding-box-query-usage]]
+== Geo Bounding Box Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoBoundingBox(g=>g
+    .Boost(1.1)
+    .Name("named_query")
+    .Field(p=>p.Location)
+    .BoundingBox(b=>b
+        .TopLeft(34, -34)
+        .BottomRight(-34, 34)
+    )
+    .Coerce()
+    .IgnoreMalformed()
+    .ValidationMethod(GeoValidationMethod.Strict)
+    .Type(GeoExecution.Indexed)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoBoundingBoxQuery
+{
+    Boost = 1.1,
+    Name = "named_query",
+    Field = Infer.Field<Project>(p => p.Location),
+    BoundingBox = new Nest.BoundingBox
+    {
+        TopLeft = new GeoLocation(34,-34),
+        BottomRight = new GeoLocation(-34,34),
+    },
+    Type = GeoExecution.Indexed,
+    Coerce = true,
+    IgnoreMalformed = true,
+    ValidationMethod = GeoValidationMethod.Strict
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_bounding_box": {
+    "type": "indexed",
+    "coerce": true,
+    "ignore_malformed": true,
+    "validation_method": "strict",
+    "_name": "named_query",
+    "boost": 1.1,
+    "location": {
+      "top_left": {
+        "lat": 34.0,
+        "lon": -34.0
+      },
+      "bottom_right": {
+        "lat": -34.0,
+        "lon": 34.0
+      }
+    }
+  }
+}
+----
+

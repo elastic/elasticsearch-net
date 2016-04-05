@@ -1,0 +1,60 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[cardinality-aggregation-usage]]
+== Cardinality Aggregation Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Cardinality("state_count", c => c
+        .Field(p => p.State)
+        .PrecisionThreshold(100)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new CardinalityAggregation("state_count", Field<Project>(p => p.State))
+    {
+        PrecisionThreshold = 100
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "state_count": {
+      "cardinality": {
+        "field": "state",
+        "precision_threshold": 100
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projectCount = response.Aggs.Cardinality("state_count");
+projectCount.Should().NotBeNull();
+projectCount.Value.Should().Be(3);
+----
+

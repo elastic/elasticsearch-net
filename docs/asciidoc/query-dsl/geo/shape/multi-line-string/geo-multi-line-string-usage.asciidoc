@@ -1,0 +1,35 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-multi-line-string-usage]]
+== Geo Multi Line String Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoShapeMultiLineString(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .Coordinates(this._coordinates)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoShapeMultiLineStringQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    Shape = new MultiLineStringGeoShape(this._coordinates)
+}
+----
+

@@ -1,0 +1,76 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[tokenizer-usage]]
+== Tokenizer Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+FluentExample
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+InitializerExample
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "analysis": {
+    "tokenizer": {
+      "endgen": {
+        "min_gram": 1,
+        "max_gram": 2,
+        "token_chars": [
+          "digit",
+          "letter"
+        ],
+        "type": "edge_ngram"
+      },
+      "ng": {
+        "min_gram": 1,
+        "max_gram": 2,
+        "token_chars": [
+          "digit",
+          "letter"
+        ],
+        "type": "ngram"
+      },
+      "path": {
+        "delimiter": "|",
+        "replacement": "-",
+        "buffer_size": 2048,
+        "reverse": true,
+        "skip": 1,
+        "type": "path_hierarchy"
+      },
+      "pattern": {
+        "pattern": "\\W+",
+        "flags": "CASE_INSENSITIVE",
+        "group": 1,
+        "type": "pattern"
+      },
+      "standard": {
+        "type": "standard"
+      },
+      "uax": {
+        "max_token_length": 12,
+        "type": "uax_url_email"
+      },
+      "whitespace": {
+        "type": "whitespace"
+      }
+    }
+  }
+}
+----
+

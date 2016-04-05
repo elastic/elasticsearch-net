@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.ExtendedStats
 				{
 					extended_stats = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits)
+						field = "numberOfCommits"
 					}
 				}
 			}

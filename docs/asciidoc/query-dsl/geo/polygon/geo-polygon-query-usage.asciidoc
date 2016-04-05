@@ -1,0 +1,67 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-polygon-query-usage]]
+== Geo Polygon Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoPolygon(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .IgnoreMalformed()
+    .Coerce()
+    .ValidationMethod(GeoValidationMethod.Strict)
+    .Points( new GeoLocation(45,-45), new GeoLocation(-34,34))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoPolygonQuery
+{
+    Boost = 1.1,
+    Name = "named_query",
+    ValidationMethod =    GeoValidationMethod.Strict,
+    Coerce = true,
+    IgnoreMalformed = true,
+    Points = new [] { new GeoLocation(45,-45), new GeoLocation(-34,34),  },
+    Field = Field<Project>(p=>p.Location)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_polygon": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "coerce": true,
+    "ignore_malformed": true,
+    "validation_method": "strict",
+    "location": {
+      "points": [
+        {
+          "lat": 45.0,
+          "lon": -45.0
+        },
+        {
+          "lat": -34.0,
+          "lon": 34.0
+        }
+      ]
+    }
+  }
+}
+----
+

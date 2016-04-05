@@ -1,0 +1,59 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[span-first-query-usage]]
+== Span First Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanFirst(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Match(sq=>sq
+        .SpanTerm(st=>st.Field(p=>p.Name).Value("value"))
+    )
+    .End(3)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanFirstQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    End = 3,
+    Match = new SpanQuery
+    {
+        SpanTerm = new SpanTermQuery { Field = "name", Value = "value" }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_first": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "match": {
+      "span_term": {
+        "name": {
+          "value": "value"
+        }
+      }
+    },
+    "end": 3
+  }
+}
+----
+

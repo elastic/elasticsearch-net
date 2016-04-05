@@ -1,0 +1,14 @@
+﻿:output-dir: aggregations
+
+[[aggregations]]
+= Aggregations
+
+[partintro]
+--
+Aggregations are arguably one of the most powerful features of Elasticsearch and NEST
+exposes all of the available Aggregation types
+--
+
+include::{output-dir}/writing-aggregations.asciidoc[]
+
+include::aggregations-usage.asciidoc[]

@@ -1,0 +1,36 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-shape-circle-usage]]
+== Geo Shape Circle Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoShapeCircle(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .Coordinates(this._coordinates)
+    .Radius("100m")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoShapeCircleQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" }
+}
+----
+

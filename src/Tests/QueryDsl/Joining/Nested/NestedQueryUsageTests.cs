@@ -1,10 +1,19 @@
-﻿using Nest;
+﻿using System.Linq;
+using Nest;
+using Newtonsoft.Json.Linq;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
 namespace Tests.QueryDsl.Joining.Nested
 {
+	/**
+	* Nested query allows to query nested objects / docs (see {ref_current}/nested.html[nested mapping]).
+	* The query is executed against the nested objects / docs as if they were indexed as separate
+	* docs (they are, internally) and resulting in the root parent doc (or parent nested mapping).
+	*
+	* See the Elasticsearch documentation on {ref_current}/query-dsl-nested-query.html[nested query] for more details.
+	*/
 	public class NestedUsageTests : QueryDslUsageTestsBase
 	{
 		public NestedUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -17,7 +26,10 @@ namespace Tests.QueryDsl.Joining.Nested
 				boost = 1.1,
 				query = new
 				{
-					match_all = new { }
+					terms = new JObject
+					{
+						{ "curatedTags.name", new JArray("lorem", "ipsum") }
+					}
 				},
 				path = "curatedTags",
 				inner_hits = new
@@ -32,8 +44,12 @@ namespace Tests.QueryDsl.Joining.Nested
 			Name = "named_query",
 			Boost = 1.1,
 			InnerHits = new InnerHits { Explain = true },
-			Query = new MatchAllQuery(),
-			Path = Field<Project>(p=>p.CuratedTags)
+			Path = Field<Project>(p => p.CuratedTags),
+			Query = new TermsQuery
+			{
+				Field = Field<Project>(p => p.CuratedTags.First().Name),
+				Terms = new[] { "lorem", "ipsum" }
+			}
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -41,8 +57,13 @@ namespace Tests.QueryDsl.Joining.Nested
 				.Name("named_query")
 				.Boost(1.1)
 				.InnerHits(i=>i.Explain())
-				.Query(qq=>qq.MatchAll())
 				.Path(p=>p.CuratedTags)
+				.Query(nq => nq
+					.Terms(t => t
+						.Field(f => f.CuratedTags.First().Name)
+						.Terms("lorem", "ipsum")
+					)
+				)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)

@@ -1,0 +1,45 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[type-query-usage]]
+== Type Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Type(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Value<Developer>()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TypeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Value = Type<Developer>()
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "type": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "value": "developer"
+  }
+}
+----
+

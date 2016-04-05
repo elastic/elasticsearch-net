@@ -19,7 +19,7 @@ namespace Tests.Aggregations.Metric.Min
 				{
 					min = new
 					{
-						field = Field<Project>(p => p.NumberOfCommits)
+						field = "numberOfCommits"
 					}
 				}
 			}

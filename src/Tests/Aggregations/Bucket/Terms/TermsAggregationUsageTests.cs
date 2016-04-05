@@ -24,7 +24,7 @@ namespace Tests.Aggregations.Bucket.Terms
 					},
 					terms = new
 					{
-						field = Field<Project>(p => p.State),
+						field = "state",
 						min_doc_count = 2,
 						size = 5,
 						shard_size = 100,

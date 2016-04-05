@@ -1,0 +1,251 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[request-pipeline]]
+== Request Pipeline
+
+Every request is executed in the context of a `RequestPipeline` when using the
+default <<transports,ITransport>> implementation.
+
+[source,csharp]
+----
+var settings = TestClient.CreateSettings();
+----
+
+When calling `Request()` or `RequestAsync()` on an `ITransport`,
+the whole coordination of the request is deferred to a new instance in a `using` block.
+
+[source,csharp]
+----
+var pipeline = new RequestPipeline(
+    settings,
+    DateTimeProvider.Default,
+    new MemoryStreamFactory(),
+    new SearchRequestParameters());
+
+pipeline.GetType().Should().Implement<IDisposable>();
+----
+
+An `ITransport` does not instantiate a `RequestPipeline` directly; it uses a pluggable `IRequestPipelineFactory`
+to create it
+
+[source,csharp]
+----
+var requestPipelineFactory = new RequestPipelineFactory();
+
+var requestPipeline = requestPipelineFactory.Create(
+    settings,
+    DateTimeProvider.Default, <1>
+    new MemoryStreamFactory(),
+    new SearchRequestParameters());
+requestPipeline.Should().BeOfType<RequestPipeline>();
+requestPipeline.GetType().Should().Implement<IDisposable>();
+----
+<1> An <<date-time-providers,`IDateTimeProvider` implementation>>
+
+You can pass your own `IRequestPipeline` implementation to the Transport when instantiating a client,
+allowing you to have requests executed on your own custom request pipeline
+
+[source,csharp]
+----
+var transport = new Transport<ConnectionSettings>(
+    settings,
+    requestPipelineFactory,
+    DateTimeProvider.Default,
+    new MemoryStreamFactory());
+----
+
+[source,csharp]
+----
+var pool = setupPool(new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) });
+
+var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
+
+settings = settingsSelector?.Invoke(settings) ?? settings;
+----
+
+=== Pipeline Behavior
+
+==== Sniffing on First usage
+
+[source,csharp]
+----
+var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First()));
+
+var staticPipeline = CreatePipeline(uris => new StaticConnectionPool(uris));
+
+var sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris));
+----
+
+Here we have setup three pipelines using three different connection pools. Let's see how they behave
+on first usage
+
+[source,csharp]
+----
+singleNodePipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
+
+staticPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
+
+sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeTrue();
+----
+
+We can see that only the cluster that supports reseeding will opt in to `FirstPoolUsageNeedsSniffing()`;
+You can however disable reseeding/sniffing on ConnectionSettings
+
+[source,csharp]
+----
+sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris), s => s.SniffOnStartup(false));
+
+sniffingPipeline.FirstPoolUsageNeedsSniffing.Should().BeFalse();
+----
+
+==== Sniffing on Connection Failure 
+
+[source,csharp]
+----
+var singleNodePipeline = CreatePipeline(uris => new SingleNodeConnectionPool(uris.First()));
+
+var staticPipeline = CreatePipeline(uris => new StaticConnectionPool(uris));
+
+var sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris));
+
+singleNodePipeline.SniffsOnConnectionFailure.Should().BeFalse();
+
+staticPipeline.SniffsOnConnectionFailure.Should().BeFalse();
+
+sniffingPipeline.SniffsOnConnectionFailure.Should().BeTrue();
+----
+
+Only the cluster that supports reseeding will opt in to SniffsOnConnectionFailure()
+You can however disable this on ConnectionSettings
+
+[source,csharp]
+----
+sniffingPipeline = CreatePipeline(uris => new SniffingConnectionPool(uris), s => s.SniffOnConnectionFault(false));
+
+sniffingPipeline.SniffsOnConnectionFailure.Should().BeFalse();
+----
+
+==== Sniffing on Stale cluster  
+
+[source,csharp]
+----
+var dateTime = new TestableDateTimeProvider();
+
+var singleNodePipeline = CreatePipeline(uris =>
+    new SingleNodeConnectionPool(uris.First(), dateTime), dateTimeProvider: dateTime);
+
+var staticPipeline = CreatePipeline(uris =>
+    new StaticConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime);
+
+var sniffingPipeline = CreatePipeline(uris =>
+    new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime);
+
+singleNodePipeline.SniffsOnStaleCluster.Should().BeFalse();
+
+staticPipeline.SniffsOnStaleCluster.Should().BeFalse();
+
+sniffingPipeline.SniffsOnStaleCluster.Should().BeTrue();
+
+singleNodePipeline.StaleClusterState.Should().BeFalse();
+
+staticPipeline.StaleClusterState.Should().BeFalse();
+
+sniffingPipeline.StaleClusterState.Should().BeFalse();
+----
+
+go one hour into the future 
+
+[source,csharp]
+----
+dateTime.ChangeTime(d => d.Add(TimeSpan.FromHours(2)));
+----
+
+connection pools that do not support reseeding never go stale 
+
+[source,csharp]
+----
+singleNodePipeline.StaleClusterState.Should().BeFalse();
+
+staticPipeline.StaleClusterState.Should().BeFalse();
+----
+
+the sniffing connection pool supports reseeding so the pipeline will signal the state is out of date 
+
+[source,csharp]
+----
+sniffingPipeline.StaleClusterState.Should().BeTrue();
+----
+
+=== Retrying requests
+
+A request pipeline also checks whether the overall time across multiple retries exceeds the request timeout.
+See the <<max-retries, max retry documentation>> for more details, here we assert that our request pipeline exposes this propertly
+
+[source,csharp]
+----
+var dateTime = new TestableDateTimeProvider();
+
+var singleNodePipeline = CreatePipeline(uris =>
+    new SingleNodeConnectionPool(uris.First(), dateTime), dateTimeProvider: dateTime);
+
+var staticPipeline = CreatePipeline(uris =>
+    new StaticConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime);
+
+var sniffingPipeline = CreatePipeline(uris =>
+    new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime);
+
+singleNodePipeline.IsTakingTooLong.Should().BeFalse();
+
+staticPipeline.IsTakingTooLong.Should().BeFalse();
+
+sniffingPipeline.IsTakingTooLong.Should().BeFalse();
+----
+
+go one hour into the future 
+
+[source,csharp]
+----
+dateTime.ChangeTime(d => d.Add(TimeSpan.FromHours(2)));
+----
+
+connection pools that do not support reseeding never go stale 
+
+[source,csharp]
+----
+singleNodePipeline.IsTakingTooLong.Should().BeTrue();
+
+staticPipeline.IsTakingTooLong.Should().BeTrue();
+----
+
+the sniffing connection pool supports reseeding so the pipeline will signal the state is out of date 
+
+[source,csharp]
+----
+sniffingPipeline.IsTakingTooLong.Should().BeTrue();
+----
+
+request pipeline exposes the DateTime it started, here we assert it started 2 hours in the past 
+
+[source,csharp]
+----
+(dateTime.Now() - singleNodePipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
+
+(dateTime.Now() - staticPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
+
+(dateTime.Now() - sniffingPipeline.StartedOn).Should().BePositive().And.BeCloseTo(TimeSpan.FromHours(2));
+----
+
+[source,csharp]
+----
+var dateTime = new TestableDateTimeProvider();
+
+var sniffingPipeline = CreatePipeline(uris =>
+    new SniffingConnectionPool(uris, dateTimeProvider: dateTime), dateTimeProvider: dateTime) as RequestPipeline;
+
+sniffingPipeline.SniffPath.Should().Be("_nodes/_all/settings?flat_settings&timeout=2s");
+----
+

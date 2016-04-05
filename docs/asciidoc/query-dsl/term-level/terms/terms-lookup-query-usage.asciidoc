@@ -1,0 +1,58 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[terms-lookup-query-usage]]
+== Terms Lookup Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Terms(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p => p.Description)
+    .TermsLookup<Developer>(e=>e.Path(p=>p.LastName).Id(12))
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermsQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = "description",
+    TermsLookup = new FieldLookup
+    {
+        Id = 12,
+        Index = Index<Developer>(),
+        Type = Type<Developer>(),
+        Path = Field<Developer>(p=>p.LastName)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "terms": {
+    "_name": "named_query",
+    "boost": 1.1,
+    "description": {
+      "id": 12,
+      "index": "devs",
+      "path": "lastName",
+      "type": "developer"
+    }
+  }
+}
+----
+

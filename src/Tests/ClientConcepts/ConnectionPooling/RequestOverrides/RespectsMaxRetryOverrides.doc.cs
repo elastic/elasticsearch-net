@@ -8,7 +8,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 {
 	public class RespectsMaxRetryOverrides
 	{
-		/** == MaxRetries
+		/**== Maximum Retries
+		*
 		* By default retry as many times as we have nodes. However retries still respect the request timeout.
 		* Meaning if you have a 100 node cluster and a request timeout of 20 seconds we will retry as many times as we can
 		* but give up after 20 seconds
@@ -36,8 +37,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 		}
 
 		/**
-		* When you have a 100 node cluster you might want to ensure a fixed number of retries. 
-		* Remember that the actual number of requests is initial attempt + set number of retries 
+		* When you have a 100 node cluster you might want to ensure a fixed number of retries.
+		* Remember that the actual number of requests is initial attempt + set number of retries
 		*/
 
 		[U]
@@ -61,9 +62,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.RequestOverrides
 			);
 		}
 
-		/** 
-		* This makes setting any retry setting on a single node connection pool a NOOP, this is by design! 
-		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
+		/**
+		* This makes setting any retry setting on a single node connection pool a NOOP, this is by design!
+		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and
 		* not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
 		*/
 		[U]

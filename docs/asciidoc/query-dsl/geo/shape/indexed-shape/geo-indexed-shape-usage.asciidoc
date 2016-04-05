@@ -1,0 +1,63 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-indexed-shape-usage]]
+== Geo Indexed Shape Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.GeoIndexedShape(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field(p=>p.Location)
+    .IndexedShape(p=>p
+        .Id(2)
+        .Path(pp=>pp.Location)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new GeoIndexedShapeQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Field = Field<Project>(p=>p.Location),
+    IndexedShape = new FieldLookup
+    {
+        Id = 2,
+        Index = Index<Project>(),
+        Type = Type<Project>(),
+        Path = Field<Project>(p=>p.Location)
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "geo_shape": {
+    "location": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "indexed_shape": {
+        "id": 2,
+        "type": "project",
+        "index": "project",
+        "path": "location"
+      }
+    }
+  }
+}
+----
+

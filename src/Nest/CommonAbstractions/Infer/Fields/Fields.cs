@@ -26,12 +26,12 @@ namespace Nest
 
 		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class
 		{
-			this.ListOfFields.Add(Field.Create(field, boost));
+			this.ListOfFields.Add(new Field(field, boost));
 			return this;
 		}
 		public Fields And(string field, double? boost = null)
 		{
-			this.ListOfFields.Add(Field.Create(field, boost));
+			this.ListOfFields.Add(new Field(field, boost));
 			return this;
 		}
 

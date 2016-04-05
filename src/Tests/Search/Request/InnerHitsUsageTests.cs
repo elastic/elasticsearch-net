@@ -15,6 +15,7 @@ using static Nest.Infer;
 
 namespace Tests.Search.Request
 {
+	//hide
 	public interface IRoyal
 	{
 		string Name { get; set; }
@@ -40,6 +41,7 @@ namespace Tests.Search.Request
 	public class Earl : RoyalBase<Earl> { }
 	public class Baron : RoyalBase<Baron> { }
 
+	//hide
 	public class RoyalSeeder
 	{
 		private readonly IElasticClient _client;
@@ -109,6 +111,24 @@ namespace Tests.Search.Request
 		}
 	}
 
+	/**[[inner-hits-usage]]
+	*== Inner Hits Usage
+	*
+	* The {ref_current}/mapping-parent-field.html[parent/child] and {ref_current}/nested.html[nested] features allow the
+	* return of documents that have matches in a different scope.
+	* In the parent/child case, parent document are returned based on matches in child documents or child document
+	* are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
+	*
+	* In both cases, the actual matches in the different scopes that caused a document to be returned is hidden.
+	* In many cases, it’s very useful to know _which_ inner nested objects (in the case of nested) or children/parent
+	* documents (in the case of parent/child) caused certain information to be returned.
+	* The inner hits feature can be used for this. This feature returns per search hit in the search response additional
+	* nested hits that caused a search hit to match in a different scope.
+	*
+	* Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
+	*
+	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
+	*/
 	[Collection(IntegrationContext.OwnIndex)]
 	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
@@ -138,6 +158,10 @@ namespace Tests.Search.Request
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 
+
+	/**[float]
+	*== Top Level Inner Hits
+	*/
 	[Collection(IntegrationContext.OwnIndex)]
 	public class TopLevelInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
@@ -166,21 +190,21 @@ namespace Tests.Search.Request
 			}
 		};
 
-	protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
-		.Index(Index)
-		.InnerHits(ih => ih
-			.Type<Earl>("earls", g => g
-				.Size(5)
-				.FielddataFields(p => p.Name)
-				.InnerHits(iih => iih
-					.Type<Baron>("barons")
+		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
+			.Index(Index)
+			.InnerHits(ih => ih
+				.Type<Earl>("earls", g => g
+					.Size(5)
+					.FielddataFields(p => p.Name)
+					.InnerHits(iih => iih
+						.Type<Baron>("barons")
+					)
 				)
-			)
-		);
+			);
 
-	protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
-	{
-		InnerHits = new TopLevelInnerHits
+		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
+		{
+			InnerHits = new TopLevelInnerHits
 			{
 				{ "earls", new TopLevelInnerHit
 					{
@@ -198,51 +222,54 @@ namespace Tests.Search.Request
 					}
 				}
 			}
-	};
-	[I]
-	public Task AssertResponse() => this.AssertOnAllResponses(r =>
-{
-	r.IsValid.Should().BeTrue();
-	r.Hits.Should().NotBeEmpty();
-	foreach (var hit in r.Hits)
-	{
-		hit.InnerHits.Should().NotBeEmpty();
-		hit.InnerHits.Should().ContainKey("earls");
-		var earlHits = hit.InnerHits["earls"].Hits;
-		earlHits.Total.Should().BeGreaterThan(0);
-		earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
-		foreach (var earlHit in earlHits.Hits)
-			earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
-		var earls = earlHits.Documents<Earl>();
-		earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
-		foreach (var earlHit in earlHits.Hits)
+		};
+		[I]
+		public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
-			var earl = earlHit.Source.As<Earl>().Name;
-			var baronHits = earlHit.InnerHits["barons"];
-			baronHits.Should().NotBeNull();
-			var baron = baronHits.Documents<Baron>().FirstOrDefault();
-			baron.Should().NotBeNull();
-			baron.Name.Should().NotBeNullOrWhiteSpace();
-		}
-	}
-});
-}
-
-[Collection(IntegrationContext.OwnIndex)]
-public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
-{
-	public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-	private static IndexName IndexName { get; } = RandomString();
-	protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
-
-	protected override object ExpectJson { get; } = new
-	{
-		query = new
-		{
-			@bool = new
+			r.IsValid.Should().BeTrue();
+			r.Hits.Should().NotBeEmpty();
+			foreach (var hit in r.Hits)
 			{
-				should = new object[] {
+				hit.InnerHits.Should().NotBeEmpty();
+				hit.InnerHits.Should().ContainKey("earls");
+				var earlHits = hit.InnerHits["earls"].Hits;
+				earlHits.Total.Should().BeGreaterThan(0);
+				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
+				foreach (var earlHit in earlHits.Hits)
+					earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
+				var earls = earlHits.Documents<Earl>();
+				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
+				foreach (var earlHit in earlHits.Hits)
+				{
+					var earl = earlHit.Source.As<Earl>().Name;
+					var baronHits = earlHit.InnerHits["barons"];
+					baronHits.Should().NotBeNull();
+					var baron = baronHits.Documents<Baron>().FirstOrDefault();
+					baron.Should().NotBeNull();
+					baron.Name.Should().NotBeNullOrWhiteSpace();
+				}
+			}
+		});
+	}
+
+	/**[float]
+	*== Query Inner Hits
+	*/
+	[Collection(IntegrationContext.OwnIndex)]
+	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
+	{
+		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		private static IndexName IndexName { get; } = RandomString();
+		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
+
+		protected override object ExpectJson { get; } = new
+		{
+			query = new
+			{
+				@bool = new
+				{
+					should = new object[] {
 					new {
 						has_child = new {
 							type = "prince",
@@ -258,51 +285,51 @@ public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 						}
 					}
 				}
+				}
 			}
-		}
-	};
+		};
 
-	protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
-		.Index(Index)
-		.Query(q =>
-			q.HasChild<Prince>(hc => hc
-				.Query(hcq => hcq.MatchAll())
-				.InnerHits(ih => ih.Name("princes"))
-			) || q.Nested(n => n
-				.Path(p => p.Foes)
-				.Query(nq => nq.MatchAll())
-				.InnerHits()
-			)
-		);
+		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
+			.Index(Index)
+			.Query(q =>
+				q.HasChild<Prince>(hc => hc
+					.Query(hcq => hcq.MatchAll())
+					.InnerHits(ih => ih.Name("princes"))
+				) || q.Nested(n => n
+					.Path(p => p.Foes)
+					.Query(nq => nq.MatchAll())
+					.InnerHits()
+				)
+			);
 
-	protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
-	{
-		Query = new HasChildQuery
+		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
 		{
-			Type = typeof(Prince),
-			Query = new MatchAllQuery(),
-			InnerHits = new InnerHits { Name = "princes" }
-		} || new NestedQuery
+			Query = new HasChildQuery
+			{
+				Type = typeof(Prince),
+				Query = new MatchAllQuery(),
+				InnerHits = new InnerHits { Name = "princes" }
+			} || new NestedQuery
+			{
+				Path = Field<King>(p => p.Foes),
+				Query = new MatchAllQuery(),
+				InnerHits = new InnerHits()
+			}
+		};
+
+		[I]
+		public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
-			Path = Field<King>(p => p.Foes),
-			Query = new MatchAllQuery(),
-			InnerHits = new InnerHits()
-		}
-	};
+			r.Hits.Should().NotBeEmpty();
+			foreach (var hit in r.Hits)
+			{
+				var princes = hit.InnerHits["princes"].Documents<Prince>();
+				princes.Should().NotBeEmpty();
 
-	[I]
-	public Task AssertResponse() => this.AssertOnAllResponses(r =>
-{
-	r.Hits.Should().NotBeEmpty();
-	foreach (var hit in r.Hits)
-	{
-		var princes = hit.InnerHits["princes"].Documents<Prince>();
-		princes.Should().NotBeEmpty();
-
-		var foes = hit.InnerHits["foes"].Documents<King>();
-		foes.Should().NotBeEmpty();
-	};
-});
-}
+				var foes = hit.InnerHits["foes"].Documents<King>();
+				foes.Should().NotBeEmpty();
+			};
+		});
+	}
 
 }

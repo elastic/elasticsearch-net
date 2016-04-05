@@ -1,0 +1,45 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[index-boost-usage]]
+== Index Boost Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.IndicesBoost(b => b
+    .Add("index1", 1.4)
+    .Add("index2", 1.3)
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    IndicesBoost = new Dictionary<IndexName, double>
+    {
+            { "index1", 1.4 },
+            { "index2", 1.3 }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "indices_boost": {
+    "index1": 1.4,
+    "index2": 1.3
+  }
+}
+----
+

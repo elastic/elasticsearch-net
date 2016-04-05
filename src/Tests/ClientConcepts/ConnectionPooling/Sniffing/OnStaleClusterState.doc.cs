@@ -10,14 +10,13 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnStaleClusterState
 	{
-		/** == Sniffing periodically
-		* 
+		/**== Sniffing periodically
+		*
 		* Connection pools that return true for `SupportsReseeding` can be configured to sniff periodically.
 		* In addition to sniffing on startup and sniffing on failures, sniffing periodically can benefit scenerio's where
 		* clusters are often scaled horizontally during peak hours. An application might have a healthy view of a subset of the nodes
 		* but without sniffing periodically it will never find the nodes that have been added to help out with load
 		*/
-
 		[U]
 		[SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()

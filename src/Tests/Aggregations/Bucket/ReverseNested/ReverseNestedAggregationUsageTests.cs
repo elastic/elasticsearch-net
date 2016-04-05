@@ -40,7 +40,7 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 										{
 											terms = new
 											{
-												field = Field<Project>(p => p.Name)
+												field = "name"
 											}
 										}
 									}

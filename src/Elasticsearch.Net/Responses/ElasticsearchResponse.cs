@@ -75,7 +75,7 @@ namespace Elasticsearch.Net
 		public bool SuccessOrKnownError =>
 			this.Success || (HttpStatusCode >= 400 && HttpStatusCode < 599
 				&& HttpStatusCode != 503 //service unavailable needs to be retried
-				&& HttpStatusCode != 502 //bad gateway needs to be retried 
+				&& HttpStatusCode != 502 //bad gateway needs to be retried
 			);
 
 		public Exception OriginalException { get; protected internal set; }
@@ -104,6 +104,6 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public override string ToString() =>  $"{(Success ? "S" : "Uns")}uccesful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
+		public override string ToString() =>  $"{(Success ? "S" : "Uns")}uccessful low level call on {HttpMethod.GetStringValue()}: {Uri.PathAndQuery}";
 	}
 }

@@ -1,0 +1,49 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/current
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[span-term-query-usage]]
+== Span Term Query Usage
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.SpanTerm(c => c
+    .Name("named_query")
+    .Boost(1.1)
+    .Field("user")
+    .Value("kimchy")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SpanTermQuery
+{
+    Name = "named_query",
+    Boost = 1.1,
+    Value = "kimchy",
+    Field = "user"
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "span_term": {
+    "user": {
+      "_name": "named_query",
+      "boost": 1.1,
+      "value": "kimchy"
+    }
+  }
+}
+----
+

@@ -1,0 +1,6 @@
+﻿:includes-from-dirs: query-dsl/compound,query-dsl/geo,query-dsl/joining,query-dsl/nest-specific,query-dsl/span,query-dsl/specialized,query-dsl/term-level
+
+
+
+
+
