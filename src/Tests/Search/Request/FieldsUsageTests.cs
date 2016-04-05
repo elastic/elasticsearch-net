@@ -24,19 +24,19 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			fields = new[] { "name", "startedOn" }
+			fields = new[] { "name", "numberOfCommits" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Fields(fs => fs
 				.Field(p => p.Name)
-				.Field(p => p.StartedOn)
+				.Field(p => p.NumberOfCommits)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
+				Fields = Fields<Project>(p => p.Name, p => p.NumberOfCommits)
 			};
 
 		[I] protected Task FieldsAreReturned() => this.AssertOnAllResponses(r =>
@@ -49,8 +49,8 @@ namespace Tests.Search.Request
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();
 
-				var dateTime = fieldValues.ValueOf<Project, DateTime>(p => p.StartedOn);
-				dateTime.Should().BeAfter(default(DateTime));
+				var numCommits = fieldValues.ValueOf<Project, int?>(p => p.NumberOfCommits);
+				numCommits.Should().BeGreaterThan(0);
 			}
 		});
 	}

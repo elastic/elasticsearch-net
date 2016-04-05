@@ -36,7 +36,6 @@ namespace Tests.Search.Request
 	{
 		public List<King> Foes { get; set; }
 	}
-
 	public class Prince : RoyalBase<Prince> { }
 	public class Duke : RoyalBase<Duke> { }
 	public class Earl : RoyalBase<Earl> { }
@@ -126,7 +125,7 @@ namespace Tests.Search.Request
 	* The inner hits feature can be used for this. This feature returns per search hit in the search response additional
 	* nested hits that caused a search hit to match in a different scope.
 	*
-    * Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
+	* Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter.
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
@@ -159,35 +158,34 @@ namespace Tests.Search.Request
 		protected override SearchDescriptor<TRoyal> NewDescriptor() => new SearchDescriptor<TRoyal>().Index(Index);
 	}
 
+
 	/**[float]
-	*== Global Inner Hits
+	*== Top Level Inner Hits
 	*/
 	[Collection(IntegrationContext.OwnIndex)]
-	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
+	public class TopLevelInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public GlobalInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public TopLevelInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
+		protected override IndexName Index => TopLevelInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson => new
+		protected override object ExpectJson { get; } = new
 		{
 			inner_hits = new
 			{
 				earls = new
 				{
-					type = new
+					type = "earl",
+					fielddata_fields = new[] { "name" },
+					inner_hits = new
 					{
-						earl = new
+						barons = new
 						{
-							fielddata_fields = new[] { "name" },
-							inner_hits = new
-							{
-								barons = new { type = new { baron = new { } } }
-							},
-							size = 5
+							type = "baron"
 						}
-					}
+					},
+					size = 5
 				}
 			}
 		};
@@ -197,36 +195,36 @@ namespace Tests.Search.Request
 			.InnerHits(ih => ih
 				.Type<Earl>("earls", g => g
 					.Size(5)
+					.FielddataFields(p => p.Name)
 					.InnerHits(iih => iih
 						.Type<Baron>("barons")
 					)
-					.FielddataFields(p => p.Name)
 				)
 			);
 
 		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
 		{
-			InnerHits = new NamedInnerHits
+			InnerHits = new TopLevelInnerHits
 			{
-				{ "earls", new InnerHitsContainer
-				{
-					Type = new TypeInnerHit<Earl>
+				{ "earls", new TopLevelInnerHit
 					{
-						InnerHit = new GlobalInnerHit
+						Type = typeof(Earl),
+						Size = 5,
+						FielddataFields = new Field[] { "name"},
+						InnerHits = new TopLevelInnerHits
 						{
-							Size = 5,
-							FielddataFields = new Field[]{ "name" },
-							InnerHits = new NamedInnerHits
-							{
-								{ "barons", new TypeInnerHit<Baron>() }
+							{ "barons", new TopLevelInnerHit
+								{
+									Type = typeof(Baron)
+								}
 							}
 						}
 					}
-				} }
+				}
 			}
 		};
-
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		[I]
+		public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
 			r.IsValid.Should().BeTrue();
 			r.Hits.Should().NotBeEmpty();
@@ -265,7 +263,7 @@ namespace Tests.Search.Request
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
 
-		protected override object ExpectJson => new
+		protected override object ExpectJson { get; } = new
 		{
 			query = new
 			{
@@ -319,7 +317,8 @@ namespace Tests.Search.Request
 			}
 		};
 
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		[I]
+		public Task AssertResponse() => this.AssertOnAllResponses(r =>
 		{
 			r.Hits.Should().NotBeEmpty();
 			foreach (var hit in r.Hits)
