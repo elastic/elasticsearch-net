@@ -14,28 +14,57 @@ These expressions are assigned to a type called `Field` and there are several wa
 
 === Constructor
 
-Using the constructor directly is possible but rather involved 
+Using the constructor directly is possible _but_ rather involved 
 
 [source,csharp]
 ----
 var fieldString = new Field { Name = "name" };
+var fieldProperty = new Field { Property = typeof(Project).GetProperty(nameof(Project.Name)) };
+Expression<Func<Project, object>> expression = p => p.Name;
+var fieldExpression = new Field { Expression = expression };
+Expect("name")
+    .WhenSerializing(fieldExpression)
+    .WhenSerializing(fieldString)
+    .WhenSerializing(fieldProperty);
 ----
 
-This is more cumbersome when using C# expressions since they cannot be instantiated easily
+When using the constructor and passing a value for `Name`, `Property` or `Expression`,`ComparisonValue` is also set on the `Field` instance; this is used when
+
+* determining `Field` equality
+
+* getting the hash code for a `Field` instance
 
 [source,csharp]
 ----
+var fieldStringWithBoostTwo = new Field { Name = "name^2" };
+
+var fieldStringWithBoostThree = new Field { Name = "name^3" };
+
 Expression<Func<Project, object>> expression = p => p.Name;
 
-var fieldExpression = Field.Create(expression);
-Expect("name")
-    .WhenSerializing(fieldExpression)
-    .WhenSerializing(fieldString);
+var fieldExpression = new Field { Expression = expression };
+
+var fieldProperty = new Field { Property = typeof(Project).GetProperty(nameof(Project.Name)) };
+
+fieldStringWithBoostTwo.GetHashCode().Should().NotBe(0);
+
+fieldStringWithBoostThree.GetHashCode().Should().NotBe(0);
+
+fieldExpression.GetHashCode().Should().NotBe(0);
+
+fieldProperty.GetHashCode().Should().NotBe(0);
+
+fieldStringWithBoostTwo.Should().Be(fieldStringWithBoostThree); <1>
 ----
+<1> <<field-name-with-boost,Fields can constructed with a name that contains a boost>>
+
+No more than one of `Name`, `Expression` or `Property` should be set (with a non-null value) when using the constructor
+to prevent ambiguity over which property should be used when resolving the path to a field that will be sent to Elasticsearch
 
 === Implicit Conversion
 
-Therefore you can also implicitly convert strings and expressions to a `Field` 
+As you can see from the previous examples, using the constructor is rather involved and cumbersome.
+Becuase of this, you can also implicitly convert strings and expressions to a `Field` 
 
 [source,csharp]
 ----
@@ -54,6 +83,34 @@ Expect("name")
     .WhenSerializing(fieldExpression)
     .WhenSerializing(fieldString);
 ----
+
+[[field-name-with-boost]]
+=== Field Names with Boost
+
+When specifying a `Field` name, the name can include a boost value; NEST will split the name and boost
+value and set the `Boost` property
+
+[source,csharp]
+----
+Field fieldString = "name^2";
+
+Field fieldStringConstructor = new Field { Name = "name^2" };
+
+Field fieldStringCreate = Field.Create("name^2", 3); <1>
+
+fieldString.Name.Should().Be("name");
+
+fieldStringConstructor.Name.Should().Be("name");
+
+fieldStringCreate.Name.Should().Be("name");
+
+fieldString.Boost.Should().Be(2);
+
+fieldStringConstructor.Boost.Should().Be(2);
+
+fieldStringCreate.Boost.Should().Be(2);
+----
+<1> NEST will take the boost from the name
 
 [[nest-infer]]
 === Using Nest.Infer
@@ -89,7 +146,7 @@ Expect("name")
     .WhenSerializing(fieldExpression);
 ----
 
-You can also specify boosts in the field using a string 
+You can specify boosts in the field using a string 
 
 [source,csharp]
 ----
