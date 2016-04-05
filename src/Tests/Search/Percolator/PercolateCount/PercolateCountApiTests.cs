@@ -40,7 +40,8 @@ namespace Tests.Search.Percolator.PercolateCount
 				{
 					startedOn = new
 					{
-						gt = "2014/01/01"
+						gt = "2014/01/01",
+						format = "yyyy/MM/dd"
 					}
 				}
 			}
@@ -48,7 +49,6 @@ namespace Tests.Search.Percolator.PercolateCount
 
 		protected override void ExpectResponse(IPercolateCountResponse response)
 		{
-			response.Took.Should().BeGreaterThan(0);
 			response.Took.Should().BeGreaterThan(0);
 		}
 
@@ -58,6 +58,7 @@ namespace Tests.Search.Percolator.PercolateCount
 				.DateRange(r => r
 					.Field(p => p.StartedOn)
 					.GreaterThan("2014/01/01")
+					.Format("yyyy/MM/dd")
 				)
 			);
 
@@ -67,7 +68,8 @@ namespace Tests.Search.Percolator.PercolateCount
 			Query = new QueryContainer(new DateRangeQuery
 			{
 				Field = "startedOn",
-				GreaterThan = "2014/01/01"
+				GreaterThan = "2014/01/01",
+				Format = "yyyy/MM/dd"
 			})
 		};
 	}
