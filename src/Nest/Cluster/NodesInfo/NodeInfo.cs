@@ -14,7 +14,7 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 
 		[JsonProperty(PropertyName = "host")]
-		public string Hostname { get; internal set; }
+		public string Host { get; internal set; }
 
 		[JsonProperty(PropertyName = "ip")]
 		public string Ip { get; internal set; }
@@ -22,8 +22,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "version")]
 		public string Version { get; internal set; }
 
-		[JsonProperty(PropertyName = "build")]
-		public string Build { get; internal set; }
+		[JsonProperty(PropertyName = "build_hash")]
+		public string BuildHash { get; internal set; }
 
 		[JsonProperty(PropertyName = "http_address")]
 		public string HttpAddress { get; internal set; }
@@ -56,6 +56,9 @@ namespace Nest
 
 		[JsonProperty("plugins")]
 		public List<PluginStats> Plugins { get; internal set; }
+
+		[JsonProperty("roles")]
+		public List<NodeRole> Roles { get; internal set; }
 	}
 
 	[JsonObject]
@@ -119,15 +122,14 @@ namespace Nest
 	[JsonObject]
 	public class NodeProcessInfo
 	{
-		[JsonProperty(PropertyName = "refresh_interval")]
-		public string RefreshInterval { get; internal set; }
-
 		[JsonProperty(PropertyName = "refresh_interval_in_millis")]
 		public long RefreshIntervalInMilliseconds { get; internal set; }
 
 		[JsonProperty(PropertyName = "id")]
 		public long Id { get; internal set; }
 
+		[JsonProperty(PropertyName = "mlockall")]
+		public bool MlockAll { get; internal set; }
 	}
 
 	[JsonObject]

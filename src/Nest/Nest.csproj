@@ -348,6 +348,7 @@
     <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsResponse.cs" />
     <Compile Include="Cluster\NodesInfo\ElasticClient-NodesInfo.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfo.cs" />
+    <Compile Include="Cluster\NodesInfo\NodeRole.cs" />
     <Compile Include="Cluster\NodesInfo\NodesInfoRequest.cs" />
     <Compile Include="Cluster\NodesInfo\NodesInfoResponse.cs" />
     <Compile Include="Cluster\NodesStats\ElasticClient-NodesStats.cs" />

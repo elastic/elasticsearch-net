@@ -47,11 +47,12 @@ namespace Tests.Cluster.NodesInfo
 			node.Should().NotBeNull();
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
-			node.Hostname.Should().NotBeNullOrWhiteSpace();
+			node.Host.Should().NotBeNullOrWhiteSpace();
 			node.Ip.Should().NotBeNullOrWhiteSpace();
 			node.Version.Should().NotBeNullOrWhiteSpace();
-			node.Build.Should().NotBeNullOrWhiteSpace();
+			node.BuildHash.Should().NotBeNullOrWhiteSpace();
 			node.HttpAddress.Should().NotBeNullOrWhiteSpace();
+			node.Roles.Should().NotBeNullOrEmpty();
 		}
 
 		protected void Assert(NodeOperatingSystemInfo os)
@@ -78,6 +79,7 @@ namespace Tests.Cluster.NodesInfo
 		{
 			process.Id.Should().BeGreaterThan(0);
 			process.RefreshIntervalInMilliseconds.Should().BeGreaterThan(0);
+			process.MlockAll.Should().Be(false);
 		}
 
 		protected void Assert(NodeJvmInfo jvm)
