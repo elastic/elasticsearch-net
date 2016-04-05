@@ -110,3 +110,12 @@ type Release() =
             | 0 -> traceFAKE "publish to myget succeeded" |> ignore
             | _ -> failwith "publish to myget failed" |> ignore
         )
+
+    static member PatchReleaseNotes() =
+        !! "src/**/project.json"
+        |> Seq.iter(fun f -> 
+            RegexReplaceInFileWithEncoding 
+                "\"releaseNotes\"\\s?:\\s?\".*\"" 
+                (sprintf "\"releaseNotes\": \"See https://github.com/elastic/elasticsearch-net/releases/tag/%s\"" Versioning.FileVersion) 
+                (new System.Text.UTF8Encoding(false)) f
+        )

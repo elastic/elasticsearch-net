@@ -25,6 +25,7 @@
   },
   "copyright": "2014-2016 Elasticsearch BV",
   "version": "2.1.1",
+  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases",
   "compilationOptions": {
     "warningsAsErrors": false
   },

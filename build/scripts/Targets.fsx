@@ -66,7 +66,8 @@ Target "Version" <| fun _ ->
     Versioning.PatchProjectJsons()
 
 Target "Release" <| fun _ -> 
-    Release.PackAllDnx()
+    Release.PatchReleaseNotes()
+    Release.PackAllDnx()   
     Sign.ValidateNugetDllAreSignedCorrectly()
     Versioning.ValidateArtifacts()
 
