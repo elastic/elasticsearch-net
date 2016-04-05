@@ -1095,12 +1095,9 @@
     <Compile Include="Search\Search\Hits\HitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
-    <Compile Include="Search\Search\InnerHits\GlobalInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\TopLevelInnerHit.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
-    <Compile Include="Search\Search\InnerHits\InnerHitsContainer.cs" />
-    <Compile Include="Search\Search\InnerHits\NamedInnerHits.cs" />
-    <Compile Include="Search\Search\InnerHits\PathInnerHit.cs" />
-    <Compile Include="Search\Search\InnerHits\TypeInnerHit.cs" />
+    <Compile Include="Search\Search\InnerHits\TopLevelInnerHits.cs" />
     <Compile Include="Search\Search\Profile\Collector.cs" />
     <Compile Include="Search\Search\Profile\Profile.cs" />
     <Compile Include="Search\Search\Profile\QueryBreakdown.cs" />

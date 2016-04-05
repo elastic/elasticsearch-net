@@ -139,12 +139,12 @@ namespace Tests.Search.Request
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
-	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
+	public class TopLevelInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public GlobalInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public TopLevelInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => GlobalInnerHitsApiTests.IndexName;
+		protected override IndexName Index => TopLevelInnerHitsApiTests.IndexName;
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -152,99 +152,97 @@ namespace Tests.Search.Request
 			{
 				earls = new
 				{
-					type = new
+					type = "earl",
+					fielddata_fields = new[] { "name" },
+					inner_hits = new
 					{
-						earl = new
+						barons = new
 						{
-							fielddata_fields = new[] { "name" },
-							inner_hits = new
-							{
-								barons = new { type = new { baron = new { } } }
-							},
-							size = 5
+							type = "baron"
 						}
-					}
+					},
+					size = 5
 				}
 			}
 		};
 
-		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
-			.Index(Index)
-			.InnerHits(ih => ih
-				.Type<Earl>("earls", g => g
-					.Size(5)
-					.InnerHits(iih => iih
-						.Type<Baron>("barons")
-					)
-					.FielddataFields(p => p.Name)
+	protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
+		.Index(Index)
+		.InnerHits(ih => ih
+			.Type<Earl>("earls", g => g
+				.Size(5)
+				.FielddataFields(p => p.Name)
+				.InnerHits(iih => iih
+					.Type<Baron>("barons")
 				)
-			);
+			)
+		);
 
-		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
-		{
-			InnerHits = new NamedInnerHits
+	protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
+	{
+		InnerHits = new TopLevelInnerHits
 			{
-				{ "earls", new InnerHitsContainer
-				{
-					Type = new TypeInnerHit<Earl>
+				{ "earls", new TopLevelInnerHit
 					{
-						InnerHit = new GlobalInnerHit
+						Type = typeof(Earl),
+						Size = 5,
+						FielddataFields = new Field[] { "name"},
+						InnerHits = new TopLevelInnerHits
 						{
-							Size = 5,
-							FielddataFields = new Field[]{ "name" },
-							InnerHits = new NamedInnerHits
-							{
-								{ "barons", new TypeInnerHit<Baron>() }
+							{ "barons", new TopLevelInnerHit
+								{
+									Type = typeof(Baron)
+								}
 							}
 						}
 					}
-				} }
-			}
-		};
-
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
-		{
-			r.IsValid.Should().BeTrue();
-			r.Hits.Should().NotBeEmpty();
-			foreach (var hit in r.Hits)
-			{
-				hit.InnerHits.Should().NotBeEmpty();
-				hit.InnerHits.Should().ContainKey("earls");
-				var earlHits = hit.InnerHits["earls"].Hits;
-				earlHits.Total.Should().BeGreaterThan(0);
-				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
-				foreach (var earlHit in earlHits.Hits)
-					earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
-				var earls = earlHits.Documents<Earl>();
-				earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
-				foreach (var earlHit in earlHits.Hits)
-				{
-					var earl = earlHit.Source.As<Earl>().Name;
-					var baronHits = earlHit.InnerHits["barons"];
-					baronHits.Should().NotBeNull();
-					var baron = baronHits.Documents<Baron>().FirstOrDefault();
-					baron.Should().NotBeNull();
-					baron.Name.Should().NotBeNullOrWhiteSpace();
 				}
 			}
-		});
-	}
-
-	[Collection(IntegrationContext.OwnIndex)]
-	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
+	};
+	[I]
+	public Task AssertResponse() => this.AssertOnAllResponses(r =>
+{
+	r.IsValid.Should().BeTrue();
+	r.Hits.Should().NotBeEmpty();
+	foreach (var hit in r.Hits)
 	{
-		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
-
-		protected override object ExpectJson { get; } = new
+		hit.InnerHits.Should().NotBeEmpty();
+		hit.InnerHits.Should().ContainKey("earls");
+		var earlHits = hit.InnerHits["earls"].Hits;
+		earlHits.Total.Should().BeGreaterThan(0);
+		earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
+		foreach (var earlHit in earlHits.Hits)
+			earlHit.Fields.ValuesOf<string>("name").Should().NotBeEmpty();
+		var earls = earlHits.Documents<Earl>();
+		earls.Should().NotBeEmpty().And.OnlyContain(earl => !string.IsNullOrWhiteSpace(earl.Name));
+		foreach (var earlHit in earlHits.Hits)
 		{
-			query = new
+			var earl = earlHit.Source.As<Earl>().Name;
+			var baronHits = earlHit.InnerHits["barons"];
+			baronHits.Should().NotBeNull();
+			var baron = baronHits.Documents<Baron>().FirstOrDefault();
+			baron.Should().NotBeNull();
+			baron.Name.Should().NotBeNullOrWhiteSpace();
+		}
+	}
+});
+}
+
+[Collection(IntegrationContext.OwnIndex)]
+public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
+{
+	public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+	private static IndexName IndexName { get; } = RandomString();
+	protected override IndexName Index => QueryInnerHitsApiTests.IndexName;
+
+	protected override object ExpectJson { get; } = new
+	{
+		query = new
+		{
+			@bool = new
 			{
-				@bool = new
-				{
-					should = new object[] {
+				should = new object[] {
 					new {
 						has_child = new {
 							type = "prince",
@@ -260,50 +258,51 @@ namespace Tests.Search.Request
 						}
 					}
 				}
-				}
 			}
-		};
+		}
+	};
 
-		protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
-			.Index(Index)
-			.Query(q =>
-				q.HasChild<Prince>(hc => hc
-					.Query(hcq => hcq.MatchAll())
-					.InnerHits(ih => ih.Name("princes"))
-				) || q.Nested(n => n
-					.Path(p => p.Foes)
-					.Query(nq => nq.MatchAll())
-					.InnerHits()
-				)
-			);
+	protected override Func<SearchDescriptor<King>, ISearchRequest> Fluent => s => s
+		.Index(Index)
+		.Query(q =>
+			q.HasChild<Prince>(hc => hc
+				.Query(hcq => hcq.MatchAll())
+				.InnerHits(ih => ih.Name("princes"))
+			) || q.Nested(n => n
+				.Path(p => p.Foes)
+				.Query(nq => nq.MatchAll())
+				.InnerHits()
+			)
+		);
 
-		protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
+	protected override SearchRequest<King> Initializer => new SearchRequest<King>(Index, typeof(King))
+	{
+		Query = new HasChildQuery
 		{
-			Query = new HasChildQuery
-			{
-				Type = typeof(Prince),
-				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits { Name = "princes" }
-			} || new NestedQuery
-			{
-				Path = Field<King>(p => p.Foes),
-				Query = new MatchAllQuery(),
-				InnerHits = new InnerHits()
-			}
-		};
-
-		[I] public Task AssertResponse() => this.AssertOnAllResponses(r =>
+			Type = typeof(Prince),
+			Query = new MatchAllQuery(),
+			InnerHits = new InnerHits { Name = "princes" }
+		} || new NestedQuery
 		{
-			r.Hits.Should().NotBeEmpty();
-			foreach (var hit in r.Hits)
-			{
-				var princes = hit.InnerHits["princes"].Documents<Prince>();
-				princes.Should().NotBeEmpty();
+			Path = Field<King>(p => p.Foes),
+			Query = new MatchAllQuery(),
+			InnerHits = new InnerHits()
+		}
+	};
 
-				var foes = hit.InnerHits["foes"].Documents<King>();
-				foes.Should().NotBeEmpty();
-			};
-		});
-	}
+	[I]
+	public Task AssertResponse() => this.AssertOnAllResponses(r =>
+{
+	r.Hits.Should().NotBeEmpty();
+	foreach (var hit in r.Hits)
+	{
+		var princes = hit.InnerHits["princes"].Documents<Prince>();
+		princes.Should().NotBeEmpty();
+
+		var foes = hit.InnerHits["foes"].Documents<King>();
+		foes.Should().NotBeEmpty();
+	};
+});
+}
 
 }
