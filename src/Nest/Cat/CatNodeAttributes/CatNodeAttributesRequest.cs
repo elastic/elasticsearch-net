@@ -1,5 +1,5 @@
 ﻿using System;
-#pragma warning disable 612
+#pragma warning disable 612, 618
 
 namespace Nest
 {
@@ -17,3 +17,5 @@ namespace Nest
 	public class CatNodeAttributesRequest : CatNodeattrsRequest, ICatNodeAttributesRequest { }
 	public class CatNodeAttributesDescriptor : CatNodeattrsDescriptor, ICatNodeAttributesRequest { }
 }
+
+#pragma warning restore 612, 618

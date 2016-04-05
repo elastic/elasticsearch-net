@@ -72,15 +72,54 @@ Query && Query
           "must": [
             {
               "bool": {
-                "should": [
+                "must": [
                   {
                     "bool": {
-                      "filter": [
+                      "should": [
                         {
-                          "term": {
-                            "x": {
-                              "value": "y"
-                            }
+                          "bool": {
+                            "filter": [
+                              {
+                                "term": {
+                                  "x": {
+                                    "value": "y"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "bool": {
+                            "filter": [
+                              {
+                                "term": {
+                                  "x": {
+                                    "value": "y"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "bool": {
+                            "must_not": [
+                              {
+                                "term": {
+                                  "x": {
+                                    "value": "y"
+                                  }
+                                }
+                              },
+                              {
+                                "term": {
+                                  "x": {
+                                    "value": "y"
+                                  }
+                                }
+                              }
+                            ]
                           }
                         }
                       ]
@@ -88,20 +127,14 @@ Query && Query
                   },
                   {
                     "bool": {
-                      "filter": [
+                      "should": [
                         {
                           "term": {
                             "x": {
                               "value": "y"
                             }
                           }
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "bool": {
-                      "must_not": [
+                        },
                         {
                           "term": {
                             "x": {
@@ -117,27 +150,6 @@ Query && Query
                           }
                         }
                       ]
-                    }
-                  },
-                  {
-                    "term": {
-                      "x": {
-                        "value": "y"
-                      }
-                    }
-                  },
-                  {
-                    "term": {
-                      "x": {
-                        "value": "y"
-                      }
-                    }
-                  },
-                  {
-                    "term": {
-                      "x": {
-                        "value": "y"
-                      }
                     }
                   }
                 ]

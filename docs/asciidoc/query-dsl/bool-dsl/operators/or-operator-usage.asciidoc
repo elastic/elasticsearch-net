@@ -60,13 +60,13 @@ ReturnsSingleQuery(ConditionlessQuery || Query, q => q.ConditionlessQuery() || q
     c => c.Term.Value.Should().NotBeNull());
 ReturnsSingleQuery(Query || NullQuery, q => q.Query() || q.NullQuery(),
     c => c.Term.Value.Should().NotBeNull());
-ReturnsSingleQuery(NullQuery || Query, q=> q.NullQuery() || q.Query(), 
+ReturnsSingleQuery(NullQuery || Query, q=> q.NullQuery() || q.Query(),
     c => c.Term.Value.Should().NotBeNull());
 ReturnsSingleQuery(ConditionlessQuery || ConditionlessQuery || ConditionlessQuery || Query,
     q => q.ConditionlessQuery() || q.ConditionlessQuery() || q.ConditionlessQuery() || q.Query(),
     c => c.Term.Value.Should().NotBeNull());
 ReturnsSingleQuery(
-    NullQuery || NullQuery || ConditionlessQuery || Query, 
+    NullQuery || NullQuery || ConditionlessQuery || Query,
     q=>q.NullQuery() || q.NullQuery() || q.ConditionlessQuery() || q.Query(),
     c => c.Term.Value.Should().NotBeNull());
 ReturnsNull(NullQuery || ConditionlessQuery, q=> q.NullQuery() || q.ConditionlessQuery());

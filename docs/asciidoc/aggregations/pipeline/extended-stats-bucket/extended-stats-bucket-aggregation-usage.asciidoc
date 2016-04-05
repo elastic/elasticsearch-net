@@ -72,7 +72,7 @@ new SearchRequest<Project>()
     "extended_stats_commits_per_month": {
       "extended_stats_bucket": {
         "buckets_path": "projects_started_per_month>commits",
-        "sigma": 2
+        "sigma": 2.0
       }
     }
   }

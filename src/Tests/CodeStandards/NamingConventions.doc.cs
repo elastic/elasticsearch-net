@@ -24,13 +24,13 @@ namespace Tests.CodeStandards
 				typeof(DateMath)
 			};
 
-			var abstractClasses = typeof(IRequest).Assembly().GetTypes()
+			var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
 				.Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			abstractClasses.Should().BeEmpty();
+			abstractClassesNotEndingInBase.Should().BeEmpty();
 		}
 
 		/**
@@ -58,14 +58,14 @@ namespace Tests.CodeStandards
 		public void RequestClassNamesEndWithRequest()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
-			var requests = types
+			var requestsNotEndingInRequest = types
 				.Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
 				.Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			requests.Should().BeEmpty();
+			requestsNotEndingInRequest.Should().BeEmpty();
 		}
 
 		/**
@@ -75,13 +75,13 @@ namespace Tests.CodeStandards
 		public void ResponseClassNamesEndWithResponse()
 		{
 			var types = typeof(IRequest).Assembly().GetTypes();
-			var responses = types
+			var responsesNotEndingInResponse = types
 				.Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
 				.Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 
-			responses.Should().BeEmpty();
+			responsesNotEndingInResponse.Should().BeEmpty();
 		}
 
 		/**
@@ -110,9 +110,9 @@ namespace Tests.CodeStandards
 				typeof(SourceRequest<>),
 				typeof(ValidateQueryRequest<>),
 				typeof(GetAliasRequest),
-#pragma warning disable 612
+#pragma warning disable 612, 618
 				typeof(CatNodeattrsRequest),
-#pragma warning restore 612
+#pragma warning restore 612, 618
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest)
 			};
