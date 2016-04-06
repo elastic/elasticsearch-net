@@ -10,7 +10,7 @@ namespace Nest
 
 	public class SingleBucketsPath : IBucketsPath
 	{
-		internal string BucketsPath { get; private set; }
+		public string BucketsPath { get; private set; }
 
 		public SingleBucketsPath(string bucketsPath)
 		{
@@ -45,7 +45,7 @@ namespace Nest
 
 	public class BucketsPathJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => 
+		public override bool CanConvert(Type objectType) =>
 			typeof(SingleBucketsPath) == objectType || typeof(MultiBucketsPath) == objectType;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
