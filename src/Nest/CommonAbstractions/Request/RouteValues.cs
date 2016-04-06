@@ -24,6 +24,7 @@ namespace Nest
 		public string Metric => GetResolved("metric");
 		public string IndexMetric => GetResolved("index_metric");
 		public string Lang => GetResolved("lang");
+		public string TaskId => GetResolved("task_id");
 
 		private string GetResolved(string route)
 		{
@@ -68,6 +69,6 @@ namespace Nest
 		{
 			this._resolved.Remove(route);
 			this._routeValues.Remove(route);
-		}	
+		}
 	}
 }

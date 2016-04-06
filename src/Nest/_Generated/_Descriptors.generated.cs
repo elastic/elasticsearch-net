@@ -1715,9 +1715,9 @@ namespace Nest
 		public AnalyzeDescriptor Tokenizer(string tokenizer) => AssignParam(p=>p.Tokenizer(tokenizer));
 
 		///<summary>With `true`, outputs more advanced details. (default: false)</summary>
-		public AnalyzeDescriptor Detail(bool detail = true) => AssignParam(p=>p.Detail(detail));
+		public AnalyzeDescriptor Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
 
-		///<summary>A comma-separated list of token attributes to output, this parameter works only with `detail=true`</summary>
+		///<summary>A comma-separated list of token attributes to output, this parameter works only with `explain=true`</summary>
 		public AnalyzeDescriptor Attributes(params string[] attributes) => AssignParam(p=>p.Attributes(attributes));
 
 		///<summary>Format of the output</summary>
@@ -2702,7 +2702,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesOptimizeForAll <pre>https://www.elastic.co/guide/en/elasticsearch/reference/2.1/indices-optimize.html</pre></summary>
+	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
 	public partial class OptimizeDescriptor  : RequestDescriptorBase<OptimizeDescriptor,OptimizeRequestParameters, IOptimizeRequest>, IOptimizeRequest
 	{ 
 		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -3822,6 +3822,27 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for Reindex <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class ReindexOnServerDescriptor  : RequestDescriptorBase<ReindexOnServerDescriptor,ReindexOnServerRequestParameters, IReindexOnServerRequest>, IReindexOnServerRequest
+	{ 
+			
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public ReindexOnServerDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public ReindexOnServerDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public ReindexOnServerDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+
+		///<summary>Should the request should block until the reindex is complete.</summary>
+		public ReindexOnServerDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ReindexOnServerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
@@ -3952,7 +3973,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchExists <pre>https://www.elastic.co/guide/en/elasticsearch/reference/2.1/search-exists.html</pre></summary>
+	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsDescriptor<T>  : RequestDescriptorBase<SearchExistsDescriptor<T>,SearchExistsRequestParameters, ISearchExistsRequest>, ISearchExistsRequest
 	{ 
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -4405,6 +4426,76 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for TasksCancel <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html</pre></summary>
+	public partial class TasksCancelDescriptor  : RequestDescriptorBase<TasksCancelDescriptor,TasksCancelRequestParameters, ITasksCancelRequest>, ITasksCancelRequest
+	{ 
+		TaskId ITasksCancelRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_tasks/_cancel</summary>
+		public TasksCancelDescriptor() : base(){}
+		
+
+			///<summary>Cancel the task with specified id</summary>
+		public TasksCancelDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+
+	
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public TasksCancelDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+
+		///<summary>A comma-separated list of actions that should be cancelled. Leave empty to cancel all.</summary>
+		public TasksCancelDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
+
+		///<summary>Cancel tasks with specified parent node.</summary>
+		public TasksCancelDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
+
+		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
+		public TasksCancelDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+
+		///<summary>The URL-encoded request definition</summary>
+		public TasksCancelDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TasksCancelDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for TasksList <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html</pre></summary>
+	public partial class TasksListDescriptor  : RequestDescriptorBase<TasksListDescriptor,TasksListRequestParameters, ITasksListRequest>, ITasksListRequest
+	{ 
+		TaskId ITasksListRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_tasks</summary>
+		public TasksListDescriptor() : base(){}
+		
+
+			///<summary>Return the task with specified id</summary>
+		public TasksListDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+
+	
+		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</summary>
+		public TasksListDescriptor NodeId(params string[] node_id) => AssignParam(p=>p.NodeId(node_id));
+
+		///<summary>A comma-separated list of actions that should be returned. Leave empty to return all.</summary>
+		public TasksListDescriptor Actions(params string[] actions) => AssignParam(p=>p.Actions(actions));
+
+		///<summary>Return detailed task information (default: false)</summary>
+		public TasksListDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
+
+		///<summary>Return tasks with specified parent node.</summary>
+		public TasksListDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
+
+		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
+		public TasksListDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
+
+		///<summary>Wait for the matching tasks to complete (default: false)</summary>
+		public TasksListDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+
+		///<summary>The URL-encoded request definition</summary>
+		public TasksListDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TasksListDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
@@ -4569,6 +4660,183 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for UpdateByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class UpdateByQueryDescriptor<T>  : RequestDescriptorBase<UpdateByQueryDescriptor<T>,UpdateByQueryRequestParameters, IUpdateByQueryRequest>, IUpdateByQueryRequest
+	{ 
+		Indices IUpdateByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IUpdateByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_update_by_query</summary>
+///<param name="index"> this parameter is required</param>
+		public UpdateByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public UpdateByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public UpdateByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public UpdateByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public UpdateByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public UpdateByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public UpdateByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
+
+	
+		///<summary>The analyzer to use for the query string</summary>
+		public UpdateByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
+
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public UpdateByQueryDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
+
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public UpdateByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
+
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public UpdateByQueryDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
+
+		///<summary>Specify whether to return detailed information about score computation as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
+
+		///<summary>A comma-separated list of fields to return as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+			
+		///<summary>A comma-separated list of fields to return as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._Fields(fields));
+
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		public UpdateByQueryDescriptor<T> FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
+			
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		public UpdateByQueryDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._FielddataFields(fields));
+
+		///<summary>Starting offset (default: 0)</summary>
+		public UpdateByQueryDescriptor<T> From(long from) => AssignParam(p=>p.From(from));
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public UpdateByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public UpdateByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>What to do when the reindex hits version conflicts?</summary>
+		public UpdateByQueryDescriptor<T> Conflicts(Conflicts conflicts) => AssignParam(p=>p.Conflicts(conflicts));
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public UpdateByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public UpdateByQueryDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
+
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public UpdateByQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
+
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public UpdateByQueryDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+
+		///<summary>Query in the Lucene query string syntax</summary>
+		public UpdateByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
+
+		///<summary>A comma-separated list of specific routing values</summary>
+		public UpdateByQueryDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
+		public UpdateByQueryDescriptor<T> Scroll(Time scroll) => AssignParam(p=>p.Scroll(scroll.ToTimeSpan()));
+
+		///<summary>Search operation type</summary>
+		public UpdateByQueryDescriptor<T> SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
+
+		///<summary>Explicit timeout for each search request. Defaults to no timeout.</summary>
+		public UpdateByQueryDescriptor<T> SearchTimeout(Time search_timeout) => AssignParam(p=>p.SearchTimeout(search_timeout.ToTimeSpan()));
+
+		///<summary>Number of hits to return (default: 10)</summary>
+		public UpdateByQueryDescriptor<T> Size(long size) => AssignParam(p=>p.Size(size));
+
+		///<summary>A comma-separated list of &lt;field&gt;:&lt;direction&gt; pairs</summary>
+		public UpdateByQueryDescriptor<T> Sort(params string[] sort) => AssignParam(p=>p.Sort(sort));
+
+		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
+		public UpdateByQueryDescriptor<T> SourceEnabled(params string[] source_enabled) => AssignParam(p=>p.SourceEnabled(source_enabled));
+
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public UpdateByQueryDescriptor<T> SourceExclude(params string[] source_exclude) => AssignParam(p=>p.SourceExclude(source_exclude));
+			
+		///<summary>A list of fields to exclude from the returned _source field</summary>
+		public UpdateByQueryDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._SourceExclude(fields));
+
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public UpdateByQueryDescriptor<T> SourceInclude(params string[] source_include) => AssignParam(p=>p.SourceInclude(source_include));
+			
+		///<summary>A list of fields to extract and return from the _source field</summary>
+		public UpdateByQueryDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
+			AssignParam(p=>p._SourceInclude(fields));
+
+		///<summary>The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.</summary>
+		public UpdateByQueryDescriptor<T> TerminateAfter(long terminate_after) => AssignParam(p=>p.TerminateAfter(terminate_after));
+
+		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
+		public UpdateByQueryDescriptor<T> Stats(params string[] stats) => AssignParam(p=>p.Stats(stats));
+
+		///<summary>Specify which field to use for suggestions</summary>
+		public UpdateByQueryDescriptor<T> SuggestField(string suggest_field) => AssignParam(p=>p.SuggestField(suggest_field));
+
+		///<summary>Specify which field to use for suggestions</summary>
+		public UpdateByQueryDescriptor<T> SuggestField(Expression<Func<T, object>> field)  =>
+			AssignParam(p=>p._SuggestField(field));
+
+		///<summary>Specify suggest mode</summary>
+		public UpdateByQueryDescriptor<T> SuggestMode(SuggestMode suggest_mode) => AssignParam(p=>p.SuggestMode(suggest_mode));
+
+		///<summary>How many suggestions to return in response</summary>
+		public UpdateByQueryDescriptor<T> SuggestSize(long suggest_size) => AssignParam(p=>p.SuggestSize(suggest_size));
+
+		///<summary>The source text for which the suggestions should be returned</summary>
+		public UpdateByQueryDescriptor<T> SuggestText(string suggest_text) => AssignParam(p=>p.SuggestText(suggest_text));
+
+		///<summary>Time each individual bulk request should wait for shards that are unavailable.</summary>
+		public UpdateByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Whether to calculate and return scores even if they are not used for sorting</summary>
+		public UpdateByQueryDescriptor<T> TrackScores(bool track_scores = true) => AssignParam(p=>p.TrackScores(track_scores));
+
+		///<summary>Specify whether to return document version as part of a hit</summary>
+		public UpdateByQueryDescriptor<T> Version(bool version = true) => AssignParam(p=>p.Version(version));
+
+		///<summary>Should the document increment the version number (internal) on hit or not (reindex)</summary>
+		public UpdateByQueryDescriptor<T> VersionType(bool version_type = true) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public UpdateByQueryDescriptor<T> RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
+
+		///<summary>Should the effected indexes be refreshed?</summary>
+		public UpdateByQueryDescriptor<T> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+
+		///<summary>Explicit write consistency setting for the operation</summary>
+		public UpdateByQueryDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+
+		///<summary>Size on the scroll request powering the update_by_query</summary>
+		public UpdateByQueryDescriptor<T> ScrollSize(long scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
+
+		///<summary>Should the request should block until the reindex is complete.</summary>
+		public UpdateByQueryDescriptor<T> WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+
+		///<summary>The URL-encoded request definition</summary>
+		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpdateByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }

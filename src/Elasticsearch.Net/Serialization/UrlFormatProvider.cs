@@ -46,12 +46,12 @@ namespace Elasticsearch.Net
 
 			return AttemptTheRightToString(valueType);
 		}
-		
+
 		public string AttemptTheRightToString(object value)
 		{
 			var explicitImplementation = this.QueryStringValueType(value as IUrlParameter);
 			if (explicitImplementation != null) return explicitImplementation;
-			
+
 
 			return value.ToString();
 		}
