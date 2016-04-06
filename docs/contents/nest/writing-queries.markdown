@@ -201,7 +201,7 @@ and then
 This again becomes tedious and verbose rather quickly as well. Therefore, NEST allows you to write the previous query as:
 
     .Query(q=>
-        q.Term(p=>p.Name, userInput.Name);
+        q.Term(p=>p.Name, userInput.Name)
         && q.Term("followers.firstName", userInput.FirstName)
         && q.Range(r=>r.OnField(p=>p.Loc).From(userInput.Loc))
     )
@@ -224,7 +224,7 @@ This conditionless behavior is turned on by default but can be turned of like so
 However queries themselves can opt back in or out.
 
     .Query(q=>
-        q.Strict().Term(p=>p.Name, userInput.Name);
+        q.Strict().Term(p=>p.Name, userInput.Name)
         && q.Term("followers.firstName", userInput.FirstName)
         && q.Strict(false).Range(r=>r.OnField(p=>p.Loc).From(userInput.Loc))
     )
@@ -233,7 +233,7 @@ In this example if `userInput.Name` is null or empty it will result in a `DslExc
 
 Please note that conditionless query logic propagates:
 
-    q.Strict().Term(p=>p.Name, userInput.Name);
+    q.Strict().Term(p=>p.Name, userInput.Name)
     && q.Term("followers.firstName", userInput.FirstName)
     && q.Filtered(fq => fq
         .Query(qff => 
