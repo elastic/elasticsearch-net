@@ -125,6 +125,6 @@ You can control which propery holds the Id:
         public Guid CrazyGuidId { get; set; }
     }
 
-This will cause the the id inferring to happen on `CrazyGuid` instead of `Id`.
+This will cause the id inferring to happen on `CrazyGuid` instead of `Id`.
 
 
