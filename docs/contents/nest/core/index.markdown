@@ -10,7 +10,7 @@ menuitem: index
 
 Indexing is as simple as:
 
-	var post = new Post() { Id = 12, ... }
+	var post = new Post() { Id = 12, ... };
 	var status = client.Index<Post>(post);
 
 Of course C# is smart enough to infer `Post` so
