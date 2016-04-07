@@ -1442,7 +1442,7 @@ namespace Nest
 		Indices Index { get; }
 		Types Type { get; }
 	 } 
-	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
+	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest<T>  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
@@ -1483,17 +1483,17 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
+	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		protected IDeleteByQueryRequest Self => this;
@@ -1534,11 +1534,11 @@ namespace Nest
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -4967,7 +4967,7 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent node.</summary>
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
-		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
+		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -5009,7 +5009,7 @@ namespace Nest
 		///<summary>Return tasks with specified parent node.</summary>
 		public string ParentNode { get { return Q<string>("parent_node"); } set { Q("parent_node", value); } }
 		
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public string ParentTask { get { return Q<string>("parent_task"); } set { Q("parent_task", value); } }
 		
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
