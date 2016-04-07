@@ -1,6 +1,6 @@
 {
   "delete_by_query": {
-    "documentation": "https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html",
+    "documentation": "https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html",
     "methods": ["DELETE"],
     "url": {
       "path": "/{index}/_query",
@@ -52,10 +52,6 @@
         "routing": {
           "type" : "string",
           "description" : "Specific routing value"
-        },
-        "source": {
-          "type" : "string",
-          "description" : "The URL-encoded query definition (instead of using the request body)"
         },
         "timeout": {
           "type" : "time",

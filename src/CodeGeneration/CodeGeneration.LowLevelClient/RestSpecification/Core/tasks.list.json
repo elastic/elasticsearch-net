@@ -8,7 +8,7 @@
       "parts": {
         "task_id": {
           "type": "string",
-          "description": "Return the task with specified id"
+          "description": "Return the task with specified id (node_id:task_number)"
         }
       },
       "params": {
@@ -30,7 +30,7 @@
         },
         "parent_task": {
           "type" : "string",
-          "description" : "Return tasks with specified parent task id. Set to -1 to return all."
+          "description" : "Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all."
         },
         "wait_for_completion": {
           "type": "boolean",

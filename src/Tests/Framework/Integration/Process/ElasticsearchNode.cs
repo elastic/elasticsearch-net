@@ -28,6 +28,8 @@ namespace Tests.Framework.Integration
 			{ "cloud-azure", _ => "cloud-azure" },
 			{ "mapper-attachments", MapperAttachmentPlugin.GetVersion },
 			{ "mapper-murmur3", _ => "mapper-murmur3" },
+			{ "license", _ => "license" },
+			{ "graph", _ => "graph" },
 		};
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
