@@ -1,0 +1,19 @@
+{
+  "shield.get_role": {
+    "documentation": "Retrieve one or more roles from the native shield realm",
+    "methods": [ "GET" ],
+    "url": {
+      "path": "/_shield/role/{name}",
+      "paths": [ "/_shield/role/{name}", "/_shield/role" ],
+      "parts": {
+        "name": {
+          "type" : "string",
+          "description" : "Role name",
+          "required" : false
+        }
+      },
+      "params": {}
+    },
+    "body": null
+  }
+}

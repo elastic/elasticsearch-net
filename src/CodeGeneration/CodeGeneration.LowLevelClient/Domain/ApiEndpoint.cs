@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using CodeGeneration.LowLevelClient.Overrides.Allow404;
+using CodeGeneration.LowLevelClient.Overrides.Descriptors;
+using CodeGeneration.LowLevelClient.Overrides.Global;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
@@ -37,7 +44,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 	public class ApiEndpoint
 	{
-		public ApiGenerator Generator { get; set; }
 		public string CsharpMethodName { get; set; }
 		public string Documentation { get; set; }
 		public IEnumerable<string> Methods { get; set; }
@@ -172,7 +178,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						Generator.PatchMethod(apiMethod);
+						PatchMethod(apiMethod);
 
 						args = args.Concat(new[]
 						{
@@ -198,7 +204,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						Generator.PatchMethod(apiMethod);
+						PatchMethod(apiMethod);
 						yield return apiMethod;
 
 						//No need for deserialization state when returning dynamicdictionary
@@ -231,7 +237,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						Generator.PatchMethod(apiMethod);
+						PatchMethod(apiMethod);
 						yield return apiMethod;
 
 						apiMethod = new CsharpMethod
@@ -252,11 +258,112 @@ namespace CodeGeneration.LowLevelClient.Domain
 							Parts = parts,
 							Url = this.Url
 						};
-						Generator.PatchMethod(apiMethod);
+						PatchMethod(apiMethod);
 						yield return apiMethod;
 					}
 				}
 			}
 		}
+
+
+		//Patches a method name for the exceptions (IndicesStats needs better unique names for all the url endpoints)
+		//or to get rid of double verbs in an method name i,e ClusterGetSettingsGet > ClusterGetSettings
+		public static void PatchMethod(CsharpMethod method)
+		{
+			Func<string, bool> ms = s => method.FullName.StartsWith(s);
+			Func<string, bool> pc = s => method.Path.Contains(s);
+
+			if (ms("Indices") && !pc("{index}"))
+				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+
+			if (ms("Nodes") && !pc("{node_id}"))
+				method.FullName = (method.FullName + "ForAll").Replace("AsyncForAll", "ForAllAsync");
+
+			//remove duplicate occurance of the HTTP method name
+			var m = method.HttpMethod.ToPascalCase();
+			method.FullName =
+				Regex.Replace(method.FullName, m, a => a.Index != method.FullName.IndexOf(m, StringComparison.Ordinal) ? "" : m);
+
+			foreach (var param in GlobalQueryParameters.Parameters)
+			{
+				if (!method.Url.Params.ContainsKey(param.Key))
+					method.Url.Params.Add(param.Key, param.Value);
+			}
+
+			string manualOverride;
+			var key = method.QueryStringParamName.Replace("RequestParameters", "");
+			if (CodeConfiguration.MethodNameOverrides.TryGetValue(key, out manualOverride))
+				method.QueryStringParamName = manualOverride + "RequestParameters";
+
+			method.DescriptorType = method.QueryStringParamName.Replace("RequestParameters", "Descriptor");
+			method.RequestType = method.QueryStringParamName.Replace("RequestParameters", "Request");
+			string requestGeneric;
+			if (CodeConfiguration.KnownRequests.TryGetValue("I" + method.RequestType, out requestGeneric))
+				method.RequestTypeGeneric = requestGeneric;
+			else method.RequestTypeUnmapped = true;
+
+			method.Allow404 = ApiEndpointsThatAllow404.Endpoints.Contains(method.DescriptorType.Replace("Descriptor", ""));
+
+			string generic;
+			if (CodeConfiguration.KnownDescriptors.TryGetValue(method.DescriptorType, out generic))
+				method.DescriptorTypeGeneric = generic;
+			else method.Unmapped = true;
+
+			try
+			{
+				IEnumerable<string> skipList = new List<string>();
+				IDictionary<string, string> renameList = new Dictionary<string, string>();
+
+				var typeName = "CodeGeneration.LowLevelClient.Overrides.Descriptors." + method.DescriptorType + "Overrides";
+				var type = CodeConfiguration.Assembly.GetType(typeName);
+				if (type != null)
+				{
+					var overrides = Activator.CreateInstance(type) as IDescriptorOverrides;
+					if (overrides != null)
+					{
+						skipList = overrides.SkipQueryStringParams ?? skipList;
+						renameList = overrides.RenameQueryStringParams ?? renameList;
+					}
+				}
+
+				var globalQueryStringRenames = new Dictionary<string, string>
+				{
+					{"_source", "source_enabled"},
+					{"_source_include", "source_include"},
+					{"_source_exclude", "source_exclude"},
+					{"q", "query_on_query_string"},
+				};
+
+				foreach (var kv in globalQueryStringRenames)
+					if (!renameList.ContainsKey(kv.Key))
+						renameList[kv.Key] = kv.Value;
+
+				var patchedParams = new Dictionary<string, ApiQueryParameters>();
+				foreach (var kv in method.Url.Params)
+				{
+					if (kv.Value.OriginalQueryStringParamName.IsNullOrEmpty())
+						kv.Value.OriginalQueryStringParamName = kv.Key;
+					if (skipList.Contains(kv.Key))
+						continue;
+
+					string newName;
+					if (!renameList.TryGetValue(kv.Key, out newName))
+					{
+						patchedParams.Add(kv.Key, kv.Value);
+						continue;
+					}
+
+					patchedParams.Add(newName, kv.Value);
+				}
+
+				method.Url.Params = patchedParams;
+			}
+			// ReSharper disable once EmptyGeneralCatchClause
+			catch
+			{
+			}
+
+		}
+
 	}
 }
