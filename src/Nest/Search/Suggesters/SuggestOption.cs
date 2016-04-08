@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Nest
 {
@@ -22,5 +23,8 @@ namespace Nest
 
 		[JsonProperty("payload")]
 		public FieldValues Payload { get; internal set; }
+
+		[JsonProperty("contexts")]
+		public IDictionary<string, IEnumerable<Context>> Contexts { get; internal set; }
 	}
 }

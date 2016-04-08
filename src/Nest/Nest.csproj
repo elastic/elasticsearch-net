@@ -1125,6 +1125,7 @@
     <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggester.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\CategorySuggestContext.cs" />
+    <Compile Include="Search\Suggesters\ContextSuggester\Context.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\GeoSuggestContext.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\SuggestContextJsonConverter.cs" />
     <Compile Include="Search\Suggesters\ContextSuggester\ISuggestContext.cs" />

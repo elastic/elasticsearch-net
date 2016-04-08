@@ -240,6 +240,11 @@ namespace Tests.Search.Suggesters
 			option.Score.Should().BeGreaterThan(0);
 			option.Payload.Should().NotBeNull();
 			option.Payload.Value<int>(Field<Project>(p => p.NumberOfCommits)).Should().BeGreaterThan(0);
+			option.Contexts.Should().NotBeNull().And.NotBeEmpty();
+			option.Contexts.Should().ContainKey("color");
+			var colorContexts = option.Contexts["color"];
+			colorContexts.Should().NotBeNull().And.HaveCount(1);
+			colorContexts.First().Category.Should().Be((Project.Projects.First().Suggest.Contexts.Values.SelectMany(v => v).First()));
 		}
 	}
 }

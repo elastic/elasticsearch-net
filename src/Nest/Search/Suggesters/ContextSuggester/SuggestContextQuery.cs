@@ -12,7 +12,7 @@ namespace Nest
 	public interface ISuggestContextQuery
 	{
 		[JsonProperty("context")]
-		Union<string, GeoLocation> Context { get; set; }
+		Context Context { get; set; }
 
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 	{
 		public double? Boost { get; set; }
 
-		public Union<string, GeoLocation> Context { get; set; }
+		public Context Context { get; set; }
 
 		public Union<Distance[], int[]> Neighbours { get; set; }
 
@@ -44,7 +44,7 @@ namespace Nest
 		: DescriptorBase<SuggestContextQueryDescriptor<T>, ISuggestContextQuery>, ISuggestContextQuery
 	{
 		double? ISuggestContextQuery.Boost { get; set; }
-		Union<string, GeoLocation> ISuggestContextQuery.Context { get; set; }
+		Context ISuggestContextQuery.Context { get; set; }
 		Union<Distance[], int[]> ISuggestContextQuery.Neighbours { get; set; }
 		Union<Distance, int> ISuggestContextQuery.Precision { get; set; }
 		bool? ISuggestContextQuery.Prefix { get; set; }

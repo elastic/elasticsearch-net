@@ -20,8 +20,11 @@ namespace Nest
 			{
 				if (prop.Name == "_shards")
 					response.Shards = prop.Value.ToObject<ShardsMetaData>();
-				else 
-					response.Suggestions.Add(prop.Name, prop.Value.ToObject<Suggest[]>());
+				else
+				{
+					var value = prop.Value.ToObject<Suggest[]>(serializer);
+					response.Suggestions.Add(prop.Name, value);
+				}
 			}
 
 			return response;
