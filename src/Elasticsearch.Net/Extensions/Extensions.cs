@@ -87,7 +87,6 @@ namespace Elasticsearch.Net
 			return items.GroupBy(property).Select(x => x.First());
 		}
 
-		private static readonly long _year = (long)TimeSpan.FromDays(365).TotalMilliseconds;
 		private static readonly long _week = (long)TimeSpan.FromDays(7).TotalMilliseconds;
 		private static readonly long _day = (long)TimeSpan.FromDays(1).TotalMilliseconds;
 		private static readonly long _hour = (long)TimeSpan.FromHours(1).TotalMilliseconds;
@@ -97,15 +96,10 @@ namespace Elasticsearch.Net
 		internal static string ToTimeUnit(this TimeSpan timeSpan)
 		{
 			var ms = timeSpan.TotalMilliseconds;
-			var interval = "ms";
+			string interval;
 			double factor = 0;
 
-			if (ms >= _year)
-			{
-				factor = ms / _year;
-				interval = "y";
-			}
-			else if (ms >= _week)
+			if (ms >= _week)
 			{
 				factor = ms / _week;
 				interval = "w";
