@@ -38,7 +38,7 @@ namespace Nest
 		All = 1 << 12,
 	}
 
-	public class SimpleQueryStringFlagsJsonConverter : JsonConverter
+	internal class SimpleQueryStringFlagsJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

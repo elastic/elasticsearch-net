@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class ScriptJsonConverter : JsonConverter
+	internal class ScriptJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(IScript).IsAssignableFrom(objectType);
 		public override bool CanRead => true;

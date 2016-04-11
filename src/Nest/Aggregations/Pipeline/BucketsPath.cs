@@ -43,7 +43,7 @@ namespace Nest
 		public MultiBucketsPathDescriptor Add(string name, string bucketsPath) => Assign(name, bucketsPath);
 	}
 
-	public class BucketsPathJsonConverter : JsonConverter
+	internal class BucketsPathJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) =>
 			typeof(SingleBucketsPath) == objectType || typeof(MultiBucketsPath) == objectType;

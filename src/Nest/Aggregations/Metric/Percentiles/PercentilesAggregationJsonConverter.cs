@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class PercentilesAggregationJsonConverter : JsonConverter
+	internal class PercentilesAggregationJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(IPercentilesAggregation);
 
@@ -107,7 +107,7 @@ namespace Nest
 				writer.WritePropertyName("field");
 				writer.WriteValue(settings.Inferrer.Field(metric.Field));
 			}
-			
+
 			if (metric.Script != null)
 			{
 				writer.WritePropertyName("script");

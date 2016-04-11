@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class ScoreFunctionJsonConverter : JsonConverter
+	internal class ScoreFunctionJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;

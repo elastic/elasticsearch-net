@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class PercentileRanksAggregationJsonConverter : PercentilesAggregationJsonConverter
+	internal class PercentileRanksAggregationJsonConverter : PercentilesAggregationJsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(IPercentileRanksAggregation);
 

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class SourceFilterJsonConverter : JsonConverter
+	internal class SourceFilterJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => false;

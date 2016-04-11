@@ -15,7 +15,7 @@ namespace Nest
 		IDictionary<TKey, TValue> IDictionaryResponse<TKey, TValue>.BackingDictionary { get; set; }
 	}
 
-	public class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
+	internal class DictionaryResponseJsonConverter<TResponse, TKey, TValue> : JsonConverter
 		where TResponse : IDictionaryResponse<TKey, TValue>, new()
 	{
 		public override bool CanConvert(Type objectType) => true;
@@ -28,7 +28,7 @@ namespace Nest
 			var dict = new Dictionary<TKey, TValue>();
 			serializer.Populate(reader, dict);
 			response.BackingDictionary = dict;
-			return response; 
+			return response;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }
