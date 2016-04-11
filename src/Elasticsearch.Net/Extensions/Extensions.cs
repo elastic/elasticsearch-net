@@ -97,15 +97,10 @@ namespace Elasticsearch.Net
 		internal static string ToTimeUnit(this TimeSpan timeSpan)
 		{
 			var ms = timeSpan.TotalMilliseconds;
-			var interval = "ms";
+			string interval;
 			double factor = 0;
 
-			if (ms >= _year)
-			{
-				factor = ms / _year;
-				interval = "y";
-			}
-			else if (ms >= _week)
+			if (ms >= _week)
 			{
 				factor = ms / _week;
 				interval = "w";
