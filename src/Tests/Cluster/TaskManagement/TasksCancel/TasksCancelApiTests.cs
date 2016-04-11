@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Tests.Cluster.TaskManagement.TasksCancel
 {
+	// TODO Unit tests will fail in mixed mode because SetupTaskIds isn't setup
 	[Collection(IntegrationContext.OwnIndex)]
 	public class TasksCancelApiTests : ApiIntegrationTestBase<ITasksCancelResponse, ITasksCancelRequest, TasksCancelDescriptor, TasksCancelRequest>
 	{
@@ -54,16 +55,17 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/_reindex?refresh=true";
-
+		protected override string UrlPath => $"/_tasks/{Uri.EscapeDataString(this.TaskId.ToString())}/_cancel";
 		protected override bool SupportsDeserialization => false;
 
+		private TaskId TaskId => TestClient.Configuration.RunIntegrationTests ? this.SetupTaskIds[CallIsolatedValue] : "foo:1";
+
 		protected override Func<TasksCancelDescriptor, ITasksCancelRequest> Fluent => d => d
-			.TaskId(this.SetupTaskIds[CallIsolatedValue]);
+			.TaskId(this.TaskId);
 
-		protected override TasksCancelRequest Initializer => new TasksCancelRequest(this.SetupTaskIds[CallIsolatedValue]);
+		protected override TasksCancelRequest Initializer => new TasksCancelRequest(this.TaskId);
 
+		// TODO this test is flaky, sometimes SetupTaskIds is empty
 		protected override void ExpectResponse(ITasksCancelResponse response)
 		{
 			response.NodeFailures.Should().BeNullOrEmpty();
