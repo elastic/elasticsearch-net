@@ -129,7 +129,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.Name(o => o.Full)
 				.DocValues()
 				.IndexName("myindex")
-				.Similarity(SimilarityOption.Default)
+				.Similarity(SimilarityOption.Classic)
 				.Store()
 				.Index(NonStringIndexOption.No)
 				.Boost(1.5)

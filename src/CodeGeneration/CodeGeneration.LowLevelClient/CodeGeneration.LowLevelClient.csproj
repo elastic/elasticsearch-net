@@ -39,6 +39,7 @@
       <Paket>True</Paket>
     </Content>
     <Content Include="RestSpecification\Core\root.html" />
+    <Content Include="RestSpecification\DeleteByQuery\root.html" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -107,7 +108,6 @@
     <None Include="RestSpecification\Core\count.json" />
     <None Include="RestSpecification\Core\count_percolate.json" />
     <None Include="RestSpecification\Core\delete.json" />
-    <None Include="RestSpecification\Core\delete_by_query.json" />
     <None Include="RestSpecification\Core\delete_script.json" />
     <None Include="RestSpecification\Core\delete_template.json" />
     <None Include="RestSpecification\Core\exists.json" />
@@ -125,7 +125,6 @@
     <None Include="RestSpecification\Core\indices.delete.json" />
     <None Include="RestSpecification\Core\indices.delete_alias.json" />
     <None Include="RestSpecification\Core\indices.delete_template.json" />
-    <None Include="RestSpecification\Core\indices.delete_warmer.json" />
     <None Include="RestSpecification\Core\indices.exists.json" />
     <None Include="RestSpecification\Core\indices.exists_alias.json" />
     <None Include="RestSpecification\Core\indices.exists_template.json" />
@@ -135,20 +134,16 @@
     <None Include="RestSpecification\Core\indices.forcemerge.json" />
     <None Include="RestSpecification\Core\indices.get.json" />
     <None Include="RestSpecification\Core\indices.get_alias.json" />
-    <None Include="RestSpecification\Core\indices.get_aliases.json" />
     <None Include="RestSpecification\Core\indices.get_field_mapping.json" />
     <None Include="RestSpecification\Core\indices.get_mapping.json" />
     <None Include="RestSpecification\Core\indices.get_settings.json" />
     <None Include="RestSpecification\Core\indices.get_template.json" />
     <None Include="RestSpecification\Core\indices.get_upgrade.json" />
-    <None Include="RestSpecification\Core\indices.get_warmer.json" />
     <None Include="RestSpecification\Core\indices.open.json" />
-    <None Include="RestSpecification\Core\indices.optimize.json" />
     <None Include="RestSpecification\Core\indices.put_alias.json" />
     <None Include="RestSpecification\Core\indices.put_mapping.json" />
     <None Include="RestSpecification\Core\indices.put_settings.json" />
     <None Include="RestSpecification\Core\indices.put_template.json" />
-    <None Include="RestSpecification\Core\indices.put_warmer.json" />
     <None Include="RestSpecification\Core\indices.recovery.json" />
     <None Include="RestSpecification\Core\indices.refresh.json" />
     <None Include="RestSpecification\Core\indices.segments.json" />
@@ -173,7 +168,6 @@
     <None Include="RestSpecification\Core\render_search_template.json" />
     <None Include="RestSpecification\Core\scroll.json" />
     <None Include="RestSpecification\Core\search.json" />
-    <None Include="RestSpecification\Core\search_exists.json" />
     <None Include="RestSpecification\Core\search_shards.json" />
     <None Include="RestSpecification\Core\search_template.json" />
     <None Include="RestSpecification\Core\snapshot.create.json" />
@@ -191,6 +185,7 @@
     <None Include="RestSpecification\Core\termvectors.json" />
     <None Include="RestSpecification\Core\update.json" />
     <None Include="RestSpecification\Core\update_by_query.json" />
+    <None Include="RestSpecification\DeleteByQuery\delete_by_query.json" />
     <None Include="RestSpecification\XPack\Graph\graph.explore.json" />
     <None Include="RestSpecification\XPack\License\license.get.json" />
     <None Include="RestSpecification\XPack\License\license.post.json" />

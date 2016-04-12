@@ -53,6 +53,9 @@ namespace Nest
 		public BulkDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
 
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public BulkDescriptor Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+
 		///<summary>The URL-encoded request definition</summary>
 		public BulkDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -73,6 +76,9 @@ namespace Nest
 		public CatAliasesDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatAliasesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -108,6 +114,9 @@ namespace Nest
 		public CatAllocationDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatAllocationDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
@@ -152,6 +161,9 @@ namespace Nest
 		public CatCountDescriptor AllIndices() => this.Index(Indices.All);
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatCountDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -190,6 +202,9 @@ namespace Nest
 		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatFielddataDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
@@ -220,6 +235,9 @@ namespace Nest
 	public partial class CatHealthDescriptor  : RequestDescriptorBase<CatHealthDescriptor,CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatHealthDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -279,6 +297,9 @@ namespace Nest
 		public CatIndicesDescriptor AllIndices() => this.Index(Indices.All);
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatIndicesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
@@ -312,6 +333,9 @@ namespace Nest
 	public partial class CatMasterDescriptor  : RequestDescriptorBase<CatMasterDescriptor,CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatMasterDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -336,32 +360,32 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsDescriptor  : RequestDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters, ICatNodeattrsRequest>, ICatNodeattrsRequest
+	public partial class CatNodeAttributesDescriptor  : RequestDescriptorBase<CatNodeAttributesDescriptor,CatNodeAttributesRequestParameters, ICatNodeAttributesRequest>, ICatNodeAttributesRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatNodeAttributesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodeattrsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+		public CatNodeAttributesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodeattrsDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public CatNodeAttributesDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodeattrsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
+		public CatNodeAttributesDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatNodeattrsDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
+		public CatNodeAttributesDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodeattrsDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
+		public CatNodeAttributesDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatNodeattrsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public CatNodeAttributesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodeattrsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public CatNodeAttributesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -369,6 +393,9 @@ namespace Nest
 	public partial class CatNodesDescriptor  : RequestDescriptorBase<CatNodesDescriptor,CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatNodesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -396,6 +423,9 @@ namespace Nest
 	public partial class CatPendingTasksDescriptor  : RequestDescriptorBase<CatPendingTasksDescriptor,CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatPendingTasksDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -423,6 +453,9 @@ namespace Nest
 	public partial class CatPluginsDescriptor  : RequestDescriptorBase<CatPluginsDescriptor,CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatPluginsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -464,6 +497,9 @@ namespace Nest
 		public CatRecoveryDescriptor AllIndices() => this.Index(Indices.All);
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatRecoveryDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
@@ -491,6 +527,9 @@ namespace Nest
 	public partial class CatRepositoriesDescriptor  : RequestDescriptorBase<CatRepositoriesDescriptor,CatRepositoriesRequestParameters, ICatRepositoriesRequest>, ICatRepositoriesRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatRepositoriesDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public CatRepositoriesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -532,6 +571,9 @@ namespace Nest
 		public CatSegmentsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatSegmentsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
 
@@ -567,6 +609,9 @@ namespace Nest
 		public CatShardsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatShardsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -600,6 +645,9 @@ namespace Nest
 		
 
 		
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatSnapshotsDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public CatSnapshotsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -627,6 +675,9 @@ namespace Nest
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
 			
+		///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public CatThreadPoolDescriptor Format(string format) => AssignParam(p=>p.Format(format));
+
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -669,6 +720,24 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	public partial class ClusterAllocationExplainDescriptor  : RequestDescriptorBase<ClusterAllocationExplainDescriptor,ClusterAllocationExplainRequestParameters, IClusterAllocationExplainRequest>, IClusterAllocationExplainRequest
+	{ 
+			
+		///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
+		public ClusterAllocationExplainDescriptor IncludeYesDecisions(bool include_yes_decisions = true) => AssignParam(p=>p.IncludeYesDecisions(include_yes_decisions));
+
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterAllocationExplainDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterAllocationExplainDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
 	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{ 
@@ -681,6 +750,9 @@ namespace Nest
 
 		///<summary>Explicit operation timeout</summary>
 		public ClusterGetSettingsDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>Whether to return all default clusters setting.</summary>
+		public ClusterGetSettingsDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterGetSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1602,6 +1674,9 @@ namespace Nest
 		///<summary>Specific version type</summary>
 		public IndexDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public IndexDescriptor<TDocument> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+
 		///<summary>The URL-encoded request definition</summary>
 		public IndexDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -1885,38 +1960,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class DeleteWarmerDescriptor  : RequestDescriptorBase<DeleteWarmerDescriptor,DeleteWarmerRequestParameters, IDeleteWarmerRequest>, IDeleteWarmerRequest
-	{ 
-		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index"> this parameter is required</param>		
-///<param name="name"> this parameter is required</param>
-		public DeleteWarmerDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
-		
-
-			///<summary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
-		public DeleteWarmerDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
-
-		///<summary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
-		public DeleteWarmerDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
-		public DeleteWarmerDescriptor AllIndices() => this.Index(Indices.All);
-
-	
-		///<summary>Specify timeout for connection to master</summary>
-		public DeleteWarmerDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
-
-		///<summary>The URL-encoded request definition</summary>
-		public DeleteWarmerDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteWarmerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2242,6 +2285,9 @@ namespace Nest
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
 		public GetIndexDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public GetIndexDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
+
 		///<summary>The URL-encoded request definition</summary>
 		public GetIndexDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -2289,42 +2335,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class GetAliasesDescriptor  : RequestDescriptorBase<GetAliasesDescriptor,GetAliasesRequestParameters, IGetAliasesRequest>, IGetAliasesRequest
-	{ 
-		Indices IGetAliasesRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_aliases</summary>
-		public GetAliasesDescriptor() : base(){}
-		
-
-			///<summary>A comma-separated list of index names to filter aliases</summary>
-		public GetAliasesDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of index names to filter aliases</summary>
-		public GetAliasesDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of index names to filter aliases</summary>
-		public GetAliasesDescriptor AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of alias names to filter</summary>
-		public GetAliasesDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
-
-	
-		///<summary>Explicit operation timeout</summary>
-		public GetAliasesDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
-
-		///<summary>The URL-encoded request definition</summary>
-		public GetAliasesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2469,6 +2479,9 @@ namespace Nest
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
 		public GetIndexSettingsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
 
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public GetIndexSettingsDescriptor IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
+
 		///<summary>The URL-encoded request definition</summary>
 		public GetIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -2544,58 +2557,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class GetWarmerDescriptor  : RequestDescriptorBase<GetWarmerDescriptor,GetWarmerRequestParameters, IGetWarmerRequest>, IGetWarmerRequest
-	{ 
-		Indices IGetWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
-		Types IGetWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_warmer</summary>
-		public GetWarmerDescriptor() : base(){}
-		
-
-			///<summary>A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public GetWarmerDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public GetWarmerDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public GetWarmerDescriptor AllIndices() => this.Index(Indices.All);
-
-		///<summary>The name of the warmer (supports wildcards); leave empty to get all warmers</summary>
-		public GetWarmerDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
-
-		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
-		public GetWarmerDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
-		public GetWarmerDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
-		///<summary>A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</summary>
-		public GetWarmerDescriptor AllTypes() => this.Type(Types.All);
-
-	
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetWarmerDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetWarmerDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
-
-		///<summary>The URL-encoded request definition</summary>
-		public GetWarmerDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetWarmerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
 	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
@@ -2635,56 +2596,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public OpenIndexDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
-	public partial class OptimizeDescriptor  : RequestDescriptorBase<OptimizeDescriptor,OptimizeRequestParameters, IOptimizeRequest>, IOptimizeRequest
-	{ 
-		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_optimize</summary>
-		public OptimizeDescriptor() : base(){}
-		
-
-			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public OptimizeDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public OptimizeDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public OptimizeDescriptor AllIndices() => this.Index(Indices.All);
-
-	
-		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public OptimizeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OptimizeDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OptimizeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public OptimizeDescriptor MaxNumSegments(long max_num_segments) => AssignParam(p=>p.MaxNumSegments(max_num_segments));
-
-		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public OptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true) => AssignParam(p=>p.OnlyExpungeDeletes(only_expunge_deletes));
-
-		///<summary>TODO: ?</summary>
-		public OptimizeDescriptor OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
-
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true) => AssignParam(p=>p.WaitForMerge(wait_for_merge));
-
-		///<summary>The URL-encoded request definition</summary>
-		public OptimizeDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OptimizeDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2796,6 +2707,9 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public UpdateIndexSettingsDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
+		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
+		public UpdateIndexSettingsDescriptor PreserveExisting(bool preserve_existing = true) => AssignParam(p=>p.PreserveExisting(preserve_existing));
+
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -2843,59 +2757,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class PutWarmerDescriptor  : RequestDescriptorBase<PutWarmerDescriptor,PutWarmerRequestParameters, IPutWarmerRequest>, IPutWarmerRequest
-	{ 
-		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
-		Types IPutWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_warmer/{name}</summary>
-///<param name="name"> this parameter is required</param>
-		public PutWarmerDescriptor(Name name) : base(r=>r.Required("name", name)){}
-		
-
-			///<summary>A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</summary>
-		public PutWarmerDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</summary>
-		public PutWarmerDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of index names to register the warmer for; use `_all` or omit to perform the operation on all indices</summary>
-		public PutWarmerDescriptor AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</summary>
-		public PutWarmerDescriptor Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</summary>
-		public PutWarmerDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
-		///<summary>A comma-separated list of document types to register the warmer for; leave empty to perform the operation on all types</summary>
-		public PutWarmerDescriptor AllTypes() => this.Type(Types.All);
-
-	
-		///<summary>Specify timeout for connection to master</summary>
-		public PutWarmerDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutWarmerDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
-		public PutWarmerDescriptor RequestCache(bool request_cache = true) => AssignParam(p=>p.RequestCache(request_cache));
-
-		///<summary>The URL-encoded request definition</summary>
-		public PutWarmerDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutWarmerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3263,6 +3124,110 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public RootNodeInfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestDeletePipelineDescriptor  : RequestDescriptorBase<IngestDeletePipelineDescriptor,IngestDeletePipelineRequestParameters, IIngestDeletePipelineRequest>, IIngestDeletePipelineRequest
+	{ 
+		Id IIngestDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public IngestDeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestDeletePipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>Explicit operation timeout</summary>
+		public IngestDeletePipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public IngestDeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestDeletePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestGetPipelineDescriptor  : RequestDescriptorBase<IngestGetPipelineDescriptor,IngestGetPipelineRequestParameters, IIngestGetPipelineRequest>, IIngestGetPipelineRequest
+	{ 
+		Id IIngestGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public IngestGetPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestGetPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public IngestGetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestGetPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestPutPipelineDescriptor  : RequestDescriptorBase<IngestPutPipelineDescriptor,IngestPutPipelineRequestParameters, IIngestPutPipelineRequest>, IIngestPutPipelineRequest
+	{ 
+		Id IIngestPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id"> this parameter is required</param>
+		public IngestPutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		
+
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public IngestPutPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+
+		///<summary>Explicit operation timeout</summary>
+		public IngestPutPipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public IngestPutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestPutPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
+	
+	}
+	
+	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestSimulateDescriptor  : RequestDescriptorBase<IngestSimulateDescriptor,IngestSimulateRequestParameters, IIngestSimulateRequest>, IIngestSimulateRequest
+	{ 
+		Id IIngestSimulateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/_simulate</summary>
+		public IngestSimulateDescriptor() : base(){}
+		
+
+			///<summary>Pipeline ID</summary>
+		public IngestSimulateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+
+	
+		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
+		public IngestSimulateDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
+
+		///<summary>The URL-encoded request definition</summary>
+		public IngestSimulateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IngestSimulateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
@@ -3774,8 +3739,37 @@ namespace Nest
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public ReindexOnServerDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public ReindexOnServerDescriptor RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ReindexOnServerDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
+	{ 
+		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_reindex/{task_id}/_rethrottle</summary>
+		public ReindexRethrottleDescriptor() : base(){}
+		
+
+			///<summary>The task id to rethrottle</summary>
+		public ReindexRethrottleDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
+
+	
+		///<summary>The throttle to set on this request in sub-requests per second. 0 means set no throttle. As does &quot;unlimited&quot;. Otherwise it must be a float.</summary>
+		public ReindexRethrottleDescriptor RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
+
+		///<summary>The URL-encoded request definition</summary>
+		public ReindexRethrottleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ReindexRethrottleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+
+		//TODO THIS METHOD IS UNMAPPED!
+		
 	
 	}
 	
@@ -3906,81 +3900,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SearchDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
-	public partial class SearchExistsDescriptor<T>  : RequestDescriptorBase<SearchExistsDescriptor<T>,SearchExistsRequestParameters, ISearchExistsRequest>, ISearchExistsRequest
-	{ 
-		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/exists</summary>
-		public SearchExistsDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))){}
-		
-
-			///<summary>A comma-separated list of indices to restrict the results</summary>
-		public SearchExistsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of indices to restrict the results</summary>
-		public SearchExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of indices to restrict the results</summary>
-		public SearchExistsDescriptor<T> AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of types to restrict the results</summary>
-		public SearchExistsDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>A comma-separated list of types to restrict the results</summary>
-		public SearchExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
-		///<summary>A comma-separated list of types to restrict the results</summary>
-		public SearchExistsDescriptor<T> AllTypes() => this.Type(Types.All);
-
-	
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchExistsDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchExistsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public SearchExistsDescriptor<T> MinScore(double min_score) => AssignParam(p=>p.MinScore(min_score));
-
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchExistsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
-
-		///<summary>Specific routing value</summary>
-		public SearchExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
-
-		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
-
-		///<summary>The analyzer to use for the query string</summary>
-		public SearchExistsDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
-
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchExistsDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
-
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchExistsDescriptor<T> DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
-
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchExistsDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
-
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchExistsDescriptor<T> Lenient(bool lenient = true) => AssignParam(p=>p.Lenient(lenient));
-
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchExistsDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
-
-		///<summary>The URL-encoded request definition</summary>
-		public SearchExistsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchExistsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4424,6 +4343,9 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public TasksListDescriptor WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
 
+		///<summary>Group tasks by nodes or parent/child relationships</summary>
+		public TasksListDescriptor GroupBy(GroupBy group_by) => AssignParam(p=>p.GroupBy(group_by));
+
 		///<summary>The URL-encoded request definition</summary>
 		public TasksListDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -4471,9 +4393,6 @@ namespace Nest
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public TermVectorsDescriptor<TDocument> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
-
-		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public TermVectorsDescriptor<TDocument> Dfs(bool dfs = true) => AssignParam(p=>p.Dfs(dfs));
 
 		///<summary>A comma-separated list of fields to return.</summary>
 		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -4678,6 +4597,9 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public UpdateByQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => AssignParam(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
+		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
+		public UpdateByQueryDescriptor<T> Pipeline(string pipeline) => AssignParam(p=>p.Pipeline(pipeline));
+
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public UpdateByQueryDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
@@ -4763,10 +4685,13 @@ namespace Nest
 		public UpdateByQueryDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public UpdateByQueryDescriptor<T> ScrollSize(long scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
+		public UpdateByQueryDescriptor<T> ScrollSize(int scroll_size) => AssignParam(p=>p.ScrollSize(scroll_size));
 
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public UpdateByQueryDescriptor<T> WaitForCompletion(bool wait_for_completion = true) => AssignParam(p=>p.WaitForCompletion(wait_for_completion));
+
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public UpdateByQueryDescriptor<T> RequestsPerSecond(float requests_per_second) => AssignParam(p=>p.RequestsPerSecond(requests_per_second));
 
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));

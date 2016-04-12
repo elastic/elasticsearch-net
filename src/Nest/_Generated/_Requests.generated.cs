@@ -184,6 +184,9 @@ namespace Nest
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
 		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -211,7 +214,10 @@ namespace Nest
 		public CatAliasesRequest(Names name) : base(r=>r.Optional("name", name)){}
 		
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -253,7 +259,10 @@ namespace Nest
 		public CatAllocationRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 		
 
-			///<summary>The unit in which to display byte values</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -298,7 +307,10 @@ namespace Nest
 		public CatCountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -340,7 +352,10 @@ namespace Nest
 		public CatFielddataRequest(Fields fields) : base(r=>r.Optional("fields", fields)){}
 		
 
-			///<summary>The unit in which to display byte values</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -374,7 +389,10 @@ namespace Nest
 	public partial class CatHealthRequest  : RequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
 		protected ICatHealthRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -438,7 +456,10 @@ namespace Nest
 		public CatIndicesRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>The unit in which to display byte values</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -475,7 +496,10 @@ namespace Nest
 	public partial class CatMasterRequest  : RequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
 		protected ICatMasterRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -499,14 +523,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodeattrsRequest : IRequest<CatNodeattrsRequestParameters> 
+	public partial interface ICatNodeAttributesRequest : IRequest<CatNodeAttributesRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsRequest  : RequestBase<CatNodeattrsRequestParameters>, ICatNodeattrsRequest
+	public partial class CatNodeAttributesRequest  : RequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
-		protected ICatNodeattrsRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		protected ICatNodeAttributesRequest Self => this;
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -527,9 +554,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters> 
@@ -539,7 +564,10 @@ namespace Nest
 	public partial class CatNodesRequest  : RequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
 		protected ICatNodesRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -570,7 +598,10 @@ namespace Nest
 	public partial class CatPendingTasksRequest  : RequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
 		protected ICatPendingTasksRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -601,7 +632,10 @@ namespace Nest
 	public partial class CatPluginsRequest  : RequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
 		protected ICatPluginsRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -643,7 +677,10 @@ namespace Nest
 		public CatRecoveryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>The unit in which to display byte values</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -674,7 +711,10 @@ namespace Nest
 	public partial class CatRepositoriesRequest  : RequestBase<CatRepositoriesRequestParameters>, ICatRepositoriesRequest
 	{
 		protected ICatRepositoriesRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -716,7 +756,10 @@ namespace Nest
 		public CatSegmentsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>Comma-separated list of column names to display</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
@@ -752,7 +795,10 @@ namespace Nest
 		public CatShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -790,7 +836,10 @@ namespace Nest
 		public CatSnapshotsRequest(Names repository) : base(r=>r.Required("repository", repository)){}
 		
 
-			///<summary>Set to true to ignore unavailable snapshots</summary>
+			///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Set to true to ignore unavailable snapshots</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -821,7 +870,10 @@ namespace Nest
 	public partial class CatThreadPoolRequest  : RequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
 		protected ICatThreadPoolRequest Self => this;
-				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
+		public string Format { get { return Q<string>("format"); } set { Q("format", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -953,6 +1005,27 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IClusterAllocationExplainRequest : IRequest<ClusterAllocationExplainRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
+	public partial class ClusterAllocationExplainRequest  : RequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
+	{
+		protected IClusterAllocationExplainRequest Self => this;
+				///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
+		public bool IncludeYesDecisions { get { return Q<bool>("include_yes_decisions"); } set { Q("include_yes_decisions", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> 
 	{
 	 } 
@@ -968,6 +1041,9 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>Whether to return all default clusters setting.</summary>
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1821,35 +1897,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters> 
-	{
-		Indices Index { get; }
-		Names Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class DeleteWarmerRequest  : RequestBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-		protected IDeleteWarmerRequest Self => this;
-		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="name">this parameter is required</param>
-		public DeleteWarmerRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
-		
-
-			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> 
 	{
 		Id Id { get; }
@@ -2145,52 +2192,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters> 
-	{
-		Indices Index { get; }
-		Names Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class GetAliasesRequest  : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
-	{
-		protected IGetAliasesRequest Self => this;
-		Indices IGetAliasesRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_aliases</summary>
-		public GetAliasesRequest() : base(){}
-		
-
-		/// <summary>/{index}/_aliases</summary>
-///<param name="index">Optional, accepts null</param>
-		public GetAliasesRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/_aliases/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public GetAliasesRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
-		
-
-		/// <summary>/_aliases/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetAliasesRequest(Names name) : base(r=>r.Optional("name", name)){}
-		
-
-			///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2344,6 +2345,9 @@ namespace Nest
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -2401,6 +2405,9 @@ namespace Nest
 		
 		///<summary>Whether to return version and creation date values in human-readable format.</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Whether to return all default setting for each of the indices.</summary>
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2746,67 +2753,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters> 
-	{
-		Indices Index { get; }
-		Names Name { get; }
-		Types Type { get; }
-	 } 
-	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class GetWarmerRequest  : RequestBase<GetWarmerRequestParameters>, IGetWarmerRequest
-	{
-		protected IGetWarmerRequest Self => this;
-		Indices IGetWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IGetWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
-		Types IGetWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_warmer</summary>
-		public GetWarmerRequest() : base(){}
-		
-
-		/// <summary>/{index}/_warmer</summary>
-///<param name="index">Optional, accepts null</param>
-		public GetWarmerRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public GetWarmerRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
-		
-
-		/// <summary>/_warmer/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetWarmerRequest(Names name) : base(r=>r.Optional("name", name)){}
-		
-
-		/// <summary>/{index}/{type}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>		
-///<param name="name">Optional, accepts null</param>
-		public GetWarmerRequest(Indices index, Types type, Names name) : base(r=>r.Optional("index", index).Optional("type", type).Optional("name", name)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2903,6 +2849,9 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The pipeline id to preprocess incoming documents with</summary>
+		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3040,6 +2989,128 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIngestDeletePipelineRequest : IRequest<IngestDeletePipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestDeletePipelineRequest  : RequestBase<IngestDeletePipelineRequestParameters>, IIngestDeletePipelineRequest
+	{
+		protected IIngestDeletePipelineRequest Self => this;
+		Id IIngestDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public IngestDeletePipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIngestGetPipelineRequest : IRequest<IngestGetPipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestGetPipelineRequest  : RequestBase<IngestGetPipelineRequestParameters>, IIngestGetPipelineRequest
+	{
+		protected IIngestGetPipelineRequest Self => this;
+		Id IIngestGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public IngestGetPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIngestPutPipelineRequest : IRequest<IngestPutPipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestPutPipelineRequest  : RequestBase<IngestPutPipelineRequestParameters>, IIngestPutPipelineRequest
+	{
+		protected IIngestPutPipelineRequest Self => this;
+		Id IIngestPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public IngestPutPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIngestSimulateRequest : IRequest<IngestSimulateRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class IngestSimulateRequest  : RequestBase<IngestSimulateRequestParameters>, IIngestSimulateRequest
+	{
+		protected IIngestSimulateRequest Self => this;
+		Id IIngestSimulateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/_simulate</summary>
+		public IngestSimulateRequest() : base(){}
+		
+
+		/// <summary>/_ingest/pipeline/{id}/_simulate/</summary>
+///<param name="id">Optional, accepts null</param>
+		public IngestSimulateRequest(Id id) : base(r=>r.Optional("id", id)){}
+		
+
+			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
+		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters> 
@@ -3464,57 +3535,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOptimizeRequest : IRequest<OptimizeRequestParameters> 
-	{
-		Indices Index { get; }
-	 } 
-	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
-	public partial class OptimizeRequest  : RequestBase<OptimizeRequestParameters>, IOptimizeRequest
-	{
-		protected IOptimizeRequest Self => this;
-		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_optimize</summary>
-		public OptimizeRequest() : base(){}
-		
-
-		/// <summary>/{index}/_optimize</summary>
-///<param name="index">Optional, accepts null</param>
-		public OptimizeRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q("max_num_segments", value); } }
-		
-		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
-		
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
-		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPercolateCountRequest<TDocument> : IRequest<PercolateCountRequestParameters> 
 	{
 		IndexName Index { get; }
@@ -3901,61 +3921,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters> 
-	{
-		Indices Index { get; }
-		Name Name { get; }
-		Types Type { get; }
-	 } 
-	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class PutWarmerRequest  : RequestBase<PutWarmerRequestParameters>, IPutWarmerRequest
-	{
-		protected IPutWarmerRequest Self => this;
-		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
-		Types IPutWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_warmer/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Name name) : base(r=>r.Required("name", name)){}
-		
-
-		/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Indices index, Name name) : base(r=>r.Optional("index", index).Required("name", name)){}
-		
-
-		/// <summary>/{index}/{type}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>		
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Indices index, Types type, Name name) : base(r=>r.Optional("index", index).Optional("type", type).Required("name", name)){}
-		
-
-			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
 	{
 		Indices Index { get; }
@@ -4053,10 +4018,41 @@ namespace Nest
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IReindexRethrottleRequest : IRequest<ReindexRethrottleRequestParameters> 
+	{
+		TaskId TaskId { get; }
+	 } 
+	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	public partial class ReindexRethrottleRequest  : RequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
+	{
+		protected IReindexRethrottleRequest Self => this;
+		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
+			/// <summary>/_reindex/{task_id}/_rethrottle</summary>
+///<param name="task_id">Optional, accepts null</param>
+		public ReindexRethrottleRequest(TaskId task_id) : base(r=>r.Optional("task_id", task_id)){}
+		
+
+			///<summary>The throttle to set on this request in sub-requests per second. 0 means set no throttle. As does &quot;unlimited&quot;. Otherwise it must be a float.</summary>
+		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		//TODO THIS METHOD IS UNMAPPED!
+	
+	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
@@ -4142,151 +4138,6 @@ namespace Nest
 	{
 		protected IScrollRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters> 
-	{
-		Indices Index { get; }
-		Types Type { get; }
-	 } 
-	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
-	public partial class SearchExistsRequest<T>  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
-	{
-		protected ISearchExistsRequest Self => this;
-		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/exists</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SearchExistsRequest() : this(typeof(T), typeof(T)) {}
-		
-
-		/// <summary>/{index}/_search/exists</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/{type}/_search/exists</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public SearchExistsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
-	public partial class SearchExistsRequest  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
-	{
-		protected ISearchExistsRequest Self => this;
-		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/exists</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SearchExistsRequest() {}
-		
-
-		/// <summary>/{index}/_search/exists</summary>
-///<param name="index">Optional, accepts null</param>
-		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-		/// <summary>/{index}/{type}/_search/exists</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>
-		public SearchExistsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
-		
-
-			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -5015,6 +4866,9 @@ namespace Nest
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
+		///<summary>Group tasks by nodes or parent/child relationships</summary>
+		public GroupBy GroupBy { get { return Q<GroupBy>("group_by"); } set { Q("group_by", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -5061,9 +4915,6 @@ namespace Nest
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
-		
-		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
 		public Fields Fields { get { return Q<Fields>("fields"); } set { Q("fields", value); } }
@@ -5206,6 +5057,9 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
+		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
+		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
+		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
@@ -5279,10 +5133,13 @@ namespace Nest
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
+		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -5350,6 +5207,9 @@ namespace Nest
 		///<summary>Specify whether query terms should be lowercased</summary>
 		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
+		///<summary>Ingest pipeline to set on index requests made by this action. (default: none)</summary>
+		public string Pipeline { get { return Q<string>("pipeline"); } set { Q("pipeline", value); } }
+		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
@@ -5423,10 +5283,13 @@ namespace Nest
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Size on the scroll request powering the update_by_query</summary>
-		public long ScrollSize { get { return Q<long>("scroll_size"); } set { Q("scroll_size", value); } }
+		public int ScrollSize { get { return Q<int>("scroll_size"); } set { Q("scroll_size", value); } }
 		
 		///<summary>Should the request should block until the reindex is complete.</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
+		
+		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
+		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -5457,6 +5320,9 @@ namespace Nest
 
 			///<summary>Specify timeout for connection to master</summary>
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Whether to update existing settings. If set to `true` existing settings on an index remain unchanged, the default is `false`</summary>
+		public bool PreserveExisting { get { return Q<bool>("preserve_existing"); } set { Q("preserve_existing", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }

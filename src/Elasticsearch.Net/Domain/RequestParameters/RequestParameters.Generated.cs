@@ -1274,60 +1274,6 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for DeleteByQuery
-	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html
-	///</pre>
-	///</summary>
-	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters> 
-	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
-		
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryRequestParameters DefaultOperator(DefaultOperator default_operator) => this.AddQueryString("default_operator", default_operator);
-		
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryRequestParameters Df(string df) => this.AddQueryString("df", df);
-		
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
-		
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
-		
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
-		
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
-		
-		
-		///<summary>Specific routing value</summary>
-		public DeleteByQueryRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
-		
-		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public DeleteByQueryRequestParameters Source(string source) => this.AddQueryString("source", source);
-		
-		
-		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
-		
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
-		
-	}
-	
 	///<summary>Request parameters descriptor for DeleteScript
 	///<pre>
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
@@ -3606,11 +3552,7 @@ namespace Elasticsearch.Net
 		
 		
 		///<summary>The throttle for this request in sub-requests per second. 0 means set no throttle.</summary>
-		public ReindexRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
-		
-		
-		///<summary>The URL-encoded request definition</summary>
-		public ReindexRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ReindexOnServerRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
