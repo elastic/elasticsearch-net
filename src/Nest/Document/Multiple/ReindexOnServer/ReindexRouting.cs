@@ -1,5 +1,4 @@
 using System;
-using System.ServiceModel.Security;
 using Newtonsoft.Json;
 
 namespace Nest
