@@ -13,7 +13,7 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 	{
 		private Names Names => Infer.Names(CallIsolatedValue + "-alias");
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 				client.CreateIndex(index, c=>c
