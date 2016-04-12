@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
+using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
@@ -23,6 +24,11 @@ namespace Tests.Framework
 		{
 			SetupSerialization();
 		}
+
+		protected SerializationTestBase(IIntegrationCluster cluster)
+		{
+		}
+
 
 		protected void SetupSerialization()
 		{
@@ -125,10 +131,10 @@ namespace Tests.Framework
 			//first serialize to string and assert it looks like this.ExpectedJson
 			string serialized;
 			if (!this.SerializesAndMatches(o, iteration, out serialized)) return default(T);
-			
+
 			if (!this.SupportsDeserialization) return default(T);
 
-			//deserialize serialized json back again 
+			//deserialize serialized json back again
 			var oAgain = this.Deserialize<T>(serialized);
 			//now use deserialized `o` and serialize again making sure
 			//it still looks like this.ExpectedJson
