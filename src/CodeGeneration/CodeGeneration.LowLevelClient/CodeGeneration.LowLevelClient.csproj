@@ -39,6 +39,7 @@
       <Paket>True</Paket>
     </Content>
     <Content Include="RestSpecification\Core\root.html" />
+    <Content Include="RestSpecification\DeleteByQuery\root.html" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -108,7 +109,6 @@
     <None Include="RestSpecification\Core\count.json" />
     <None Include="RestSpecification\Core\count_percolate.json" />
     <None Include="RestSpecification\Core\delete.json" />
-    <None Include="RestSpecification\Core\delete_by_query.json" />
     <None Include="RestSpecification\Core\delete_script.json" />
     <None Include="RestSpecification\Core\delete_template.json" />
     <None Include="RestSpecification\Core\exists.json" />
@@ -192,6 +192,7 @@
     <None Include="RestSpecification\Core\termvectors.json" />
     <None Include="RestSpecification\Core\update.json" />
     <None Include="RestSpecification\Core\update_by_query.json" />
+    <None Include="RestSpecification\DeleteByQuery\delete_by_query.json" />
     <None Include="RestSpecification\XPack\Graph\graph.explore.json" />
     <None Include="RestSpecification\XPack\License\license.get.json" />
     <None Include="RestSpecification\XPack\License\license.post.json" />
