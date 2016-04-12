@@ -8,7 +8,7 @@ using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
-	public abstract class ApiIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer> 
+	public abstract class ApiIntegrationTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: ApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
@@ -29,8 +29,7 @@ namespace Tests.Framework
 		[I] protected async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
-		[I] protected async Task ReturnsExpectedResponse() =>
-			await this.AssertOnAllResponses(r => ExpectResponse(r));
+		[I] protected async Task ReturnsExpectedResponse() => await this.AssertOnAllResponses(ExpectResponse);
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{

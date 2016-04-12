@@ -11,7 +11,7 @@ namespace Tests.Indices.AliasManagement.PutAlias
 	[Collection(IntegrationContext.Indexing)]
 	public class PutAliasApiTests : ApiIntegrationTestBase<IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values) client.CreateIndex(index);
 		}

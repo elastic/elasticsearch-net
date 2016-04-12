@@ -14,7 +14,7 @@ namespace Tests.Indices.AliasManagement.AliasExists
 	{
 		public AliasExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 				client.CreateIndex(index, c=>c

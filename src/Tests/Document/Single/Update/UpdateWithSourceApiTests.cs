@@ -18,7 +18,7 @@ namespace Tests.Document.Single.Update
 	{
 		public UpdateWithSourceApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var id in values.Values)
 				this.Client.Index(Project.Instance, i=>i.Id(id));

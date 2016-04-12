@@ -13,7 +13,7 @@ namespace Tests.Indices.AliasManagement.Alias
 	{
 		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 				client.CreateIndex(index);

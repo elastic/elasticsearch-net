@@ -18,7 +18,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 
 		private static string IndexWithUnassignedShards = "nest-" + RandomString();
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			client.CreateIndex(IndexWithUnassignedShards, s => s
 				.Settings(settings => settings
