@@ -68,7 +68,7 @@ namespace Nest
 
 		public TDescriptor Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
 
-		public TDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+		public TDescriptor Index(NonStringIndexOption index = NonStringIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
 
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
 
@@ -86,7 +86,7 @@ namespace Nest
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}
 
-	public class NumberPropertyDescriptor<T> 
+	public class NumberPropertyDescriptor<T>
 		: NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
 		where T : class
 	{

@@ -123,11 +123,13 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				numberOfCommits = new
 				{
-					type = "integer"
+					type = "integer",
+					index = "not_analyzed"
 				},
 				startedOn = new
 				{
-					type = "date"
+					type = "date",
+					index = "no"
 				},
 				state = new
 				{
@@ -160,6 +162,15 @@ namespace Tests.Indices.MappingManagement.PutMapping
 			.Index(CallIsolatedValue)
 			.AutoMap()
 			.Properties(prop => prop
+				.Number(n => n
+					.Name(p => p.NumberOfCommits)
+					.Type(NumberType.Integer)
+					.Index()
+				)
+				.Date(dt => dt
+					.Name(p => p.StartedOn)
+					.Index(NonStringIndexOption.No)
+				)
 				.String(s => s
 					.Name(p => p.Name)
 					.NotAnalyzed()
@@ -211,8 +222,8 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				{ p => p.Metadata, new ObjectProperty() },
 				{ p => p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  },
-				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
-				{ p => p.StartedOn, new DateProperty() },
+				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) { Index = NonStringIndexOption.NotAnalyzed } },
+				{ p => p.StartedOn, new DateProperty { Index = NonStringIndexOption.No } },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
 				{ p => p.Tags, new ObjectProperty

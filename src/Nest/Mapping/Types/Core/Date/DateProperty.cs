@@ -20,13 +20,13 @@ namespace Nest
 
 		[JsonProperty("precision_step")]
 		int? PrecisionStep { get; set; }
-		
+
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
-		
+
 		[JsonProperty("format")]
 		string Format { get; set; }
-		
+
 		[JsonProperty("numeric_resolution")]
         NumericResolutionUnit? NumericResolution { get; set; }
 
@@ -49,7 +49,7 @@ namespace Nest
 		public INumericFielddata Fielddata { get; set; }
 	}
 
-	public class DatePropertyDescriptor<T> 
+	public class DatePropertyDescriptor<T>
 		: PropertyDescriptorBase<DatePropertyDescriptor<T>, IDateProperty, T>, IDateProperty
 		where T : class
 	{
@@ -65,7 +65,7 @@ namespace Nest
 
 		public DatePropertyDescriptor() : base("date") { }
 
-		public DatePropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+		public DatePropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
 		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);

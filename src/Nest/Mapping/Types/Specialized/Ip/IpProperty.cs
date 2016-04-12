@@ -44,7 +44,7 @@ namespace Nest
 
 		public IpPropertyDescriptor() : base("ip") { }
 
-		public IpPropertyDescriptor<T> Index(NonStringIndexOption? index) => Assign(a => a.Index = index);
+		public IpPropertyDescriptor<T> Index(NonStringIndexOption? index = NonStringIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
 
 		public IpPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
