@@ -14,7 +14,7 @@
 		string IStringProperty.SearchAnalyzer { get; set; }
 		bool? IStringProperty.IncludeInAll { get; set; }
 		int? IStringProperty.IgnoreAbove { get; set; }
-		int? IStringProperty.PositionOffsetGap { get; set; }
+		int? IStringProperty.PositionIncrementGap { get; set; }
 		IStringFielddata IStringProperty.Fielddata { get; set; }
 
 		public string Analyzer { get { return Self.Analyzer; } set { Self.Analyzer = value; } }
@@ -24,7 +24,7 @@
 		public FieldIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }
 		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
-		public int PositionOffsetGap { get { return Self.PositionOffsetGap.GetValueOrDefault(); } set { Self.PositionOffsetGap = value; } }
+		public int PositionIncrementGap { get { return Self.PositionIncrementGap.GetValueOrDefault(); } set { Self.PositionIncrementGap = value; } }
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault(); } set { Self.TermVector = value; } }
 

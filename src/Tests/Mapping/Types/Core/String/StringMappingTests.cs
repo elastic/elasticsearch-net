@@ -14,7 +14,7 @@ namespace Tests.Mapping.Types.Core.String
 			Index = FieldIndexOption.NotAnalyzed,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
-			PositionOffsetGap = 5,
+			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
@@ -42,7 +42,7 @@ namespace Tests.Mapping.Types.Core.String
 					index = "not_analyzed",
 					index_options = "offsets",
 					null_value = "na",
-					position_offset_gap = 5,
+					position_increment_gap = 5,
 					search_analyzer = "mysearchanalyzer",
 					similarity = "BM25",
 					store = true,
@@ -66,7 +66,7 @@ namespace Tests.Mapping.Types.Core.String
 				.Index(FieldIndexOption.NotAnalyzed)
 				.IndexOptions(IndexOptions.Offsets)
 				.NullValue("na")
-				.PositionOffsetGap(5)
+				.PositionIncrementGap(5)
 				.SearchAnalyzer("mysearchanalyzer")
 				.Similarity(SimilarityOption.BM25)
 				.Store(true)
