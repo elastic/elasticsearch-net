@@ -45,7 +45,7 @@ namespace Tests.Framework
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage)
+		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster)
 		{
 			this._usage = usage;
 			this.Cluster = cluster;
@@ -83,9 +83,9 @@ namespace Tests.Framework
 				if (TestClient.Configuration.RunIntegrationTests)
 				{
 					this.IntegrationSetup(client, _uniqueValues);
+					this._usage.CalledSetup = true;
 				}
 
-				this._usage.CalledSetup = true;
 
 				var dict = new Dictionary<ClientMethod, IResponse>();
 				_uniqueValues.CurrentView = ClientMethod.Fluent;
