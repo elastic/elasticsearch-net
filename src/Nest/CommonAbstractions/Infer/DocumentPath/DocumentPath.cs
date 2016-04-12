@@ -37,11 +37,13 @@ namespace Nest
 
 		public DocumentPath<T> Index(IndexName index)
 		{
+			if (index == null) return this;
 			Self.Index = index;
 			return this;
 		}
 		public DocumentPath<T> Type(TypeName type)
 		{
+			if (type == null) return this;
 			Self.Type = type;
 			return this;
 		}

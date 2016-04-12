@@ -35,12 +35,13 @@ namespace Nest
 
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
-			if (routeValue == null)
+			if (routeValue == null && !required)
 			{
 				if (this._routeValues.ContainsKey(name))
 					this._routeValues.Remove(name);
 				return this;
 			}
+			else if (routeValue == null) return this;
 
 			this._routeValues[name] = routeValue;
 			return this;
