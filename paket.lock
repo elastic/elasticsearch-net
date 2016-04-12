@@ -2,6 +2,7 @@ NUGET
   remote: http://api.nuget.org/v3/index.json
   specs:
     AsciiDocNet (1.0.0-alpha2)
+    ShellProgressBar (3.0)
   remote: https://www.nuget.org/api/v2
   specs:
     Bogus (3.0.5-beta-2)
@@ -350,9 +351,6 @@ NUGET
       System.Threading.Tasks (>= 4.0) - framework: dnxcore50
       xunit.abstractions (>= 2.0) - framework: dnxcore50
       xunit.extensibility.core (2.1) - framework: >= net45, dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.0, wpav8.1
-  remote: http://api.nuget.org/v3/index.json
-  specs:
-    ShellProgressBar (3.0)
 
 GROUP build
 NUGET
