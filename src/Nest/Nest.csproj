@@ -532,6 +532,7 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
+    <Compile Include="Document\Multiple\ReindexOnServer\ReindexRoutingJsonConverter.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexSource.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />

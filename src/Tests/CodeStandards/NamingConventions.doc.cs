@@ -8,7 +8,7 @@ using Tests.Framework;
 namespace Tests.CodeStandards
 {
 	/** == Naming Conventions
-	* 
+	*
 	* NEST uses the following naming conventions (with _some_ exceptions).
 	*/
 	public class NamingConventions
@@ -111,13 +111,13 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				//UNMAPPED
-				typeof(ReindexRequest),
 				typeof(IngestDeletePipelineRequest),
 				typeof(IngestGetPipelineRequest),
 				typeof(IngestPutPipelineRequest),
 				typeof(IngestSimulateRequest),
-				typeof(TasksCancelRequest),
-				typeof(TasksListRequest),
+				typeof(ClusterAllocationExplainRequest),
+				typeof(ReindexRethrottleRequest),
+				//typeof(ReindexRequest),
 				typeof(UpdateByQueryRequest)
 			};
 
