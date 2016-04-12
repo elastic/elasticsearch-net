@@ -240,16 +240,18 @@ namespace CodeGeneration.LowLevelClient.Domain
 					paramName = paramName.ToLowerInvariant();
 
 				var routeValue = paramName;
+				var routeSetter = p.Required ? "Required" : "Optional";
+
 				if (paramName == "metric") routeValue = "(Metrics)metric";
 				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)indexMetric";
 
-				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {routeValue}));";
+				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				if (paramName == "index" || paramName == "type")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
-					code += $"=> Assign(a=>a.RouteValues.Optional(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
+					code += $"=> Assign(a=>a.RouteValues.{routeSetter}(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
 					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
@@ -268,7 +270,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				if (paramName == "fields" && p.Type == "list")
 				{
 					code = $"public {returnType} Fields<T>(params Expression<Func<T, object>>[] fields) ";
-					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (Fields)fields));";
+					code += $"=> Assign(a => a.RouteValues.{routeSetter}(\"fields\", (Fields)fields));";
 					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
