@@ -1088,70 +1088,6 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
-	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest>, IDeleteByQueryRequest
-	{ 
-		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_query</summary>
-///<param name="index"> this parameter is required</param>
-		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
-		
-
-			///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
-
-		///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
-
-		///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
-		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
-
-		///<summary>A comma-separated list of types to restrict the operation</summary>
-		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
-
-		///<summary>A comma-separated list of types to restrict the operation</summary>
-		public DeleteByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
-
-		///<summary>A comma-separated list of types to restrict the operation</summary>
-		public DeleteByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
-
-	
-		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
-
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
-
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
-
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
-
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
-
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
-
-		///<summary>Specific routing value</summary>
-		public DeleteByQueryDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
-
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
@@ -4434,7 +4370,7 @@ namespace Nest
 		public TasksCancelDescriptor() : base(){}
 		
 
-			///<summary>Cancel the task with specified id</summary>
+			///<summary>Cancel the task with specified task id (node_id:task_number)</summary>
 		public TasksCancelDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
@@ -4447,7 +4383,7 @@ namespace Nest
 		///<summary>Cancel tasks with specified parent node.</summary>
 		public TasksCancelDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
-		///<summary>Cancel tasks with specified parent task id. Set to -1 to cancel all.</summary>
+		///<summary>Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.</summary>
 		public TasksCancelDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
 
 		///<summary>The URL-encoded request definition</summary>
@@ -4466,7 +4402,7 @@ namespace Nest
 		public TasksListDescriptor() : base(){}
 		
 
-			///<summary>Return the task with specified id</summary>
+			///<summary>Return the task with specified id (node_id:task_number)</summary>
 		public TasksListDescriptor TaskId(TaskId taskId) => Assign(a=>a.RouteValues.Optional("task_id", taskId));
 
 	
@@ -4482,7 +4418,7 @@ namespace Nest
 		///<summary>Return tasks with specified parent node.</summary>
 		public TasksListDescriptor ParentNode(string parent_node) => AssignParam(p=>p.ParentNode(parent_node));
 
-		///<summary>Return tasks with specified parent task id. Set to -1 to return all.</summary>
+		///<summary>Return tasks with specified parent task id (node_id:task_number). Set to -1 to return all.</summary>
 		public TasksListDescriptor ParentTask(string parent_task) => AssignParam(p=>p.ParentTask(parent_task));
 
 		///<summary>Wait for the matching tasks to complete (default: false)</summary>
@@ -4837,6 +4773,70 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpdateByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html</pre></summary>
+	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest>, IDeleteByQueryRequest
+	{ 
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_query</summary>
+///<param name="index"> this parameter is required</param>
+		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+			///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+
+		///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>A comma-separated list of types to restrict the operation</summary>
+		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>A comma-separated list of types to restrict the operation</summary>
+		public DeleteByQueryDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+
+		///<summary>A comma-separated list of types to restrict the operation</summary>
+		public DeleteByQueryDescriptor<T> AllTypes() => this.Type(Types.All);
+
+	
+		///<summary>The analyzer to use for the query string</summary>
+		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
+
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => AssignParam(p=>p.DefaultOperator(default_operator));
+
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public DeleteByQueryDescriptor<T> Df(string df) => AssignParam(p=>p.Df(df));
+
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+
+		///<summary>Query in the Lucene query string syntax</summary>
+		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
+
+		///<summary>Specific routing value</summary>
+		public DeleteByQueryDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Explicit operation timeout</summary>
+		public DeleteByQueryDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteByQueryDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }

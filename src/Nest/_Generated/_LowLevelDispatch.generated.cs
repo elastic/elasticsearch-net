@@ -746,32 +746,6 @@ namespace Nest
 			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(IRequest<DeleteByQueryRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(IRequest<DeleteByQueryRequestParameters> p , PostData<object> body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
-					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
-		}
-		
 		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(IRequest<DeleteScriptRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -3128,6 +3102,32 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("UpdateByQuery", p, new [] { POST }, "/{index}/_update_by_query", "/{index}/{type}/_update_by_query");
+		}
+		
+		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(IRequest<DeleteByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQuery<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQuery<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(IRequest<DeleteByQueryRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.DeleteByQueryAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.DeleteByQueryAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
 	}	

@@ -1553,68 +1553,6 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
-		///<summary>Represents a DELETE on /{index}/_query 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
-		
-		///<summary>Represents a DELETE on /{index}/_query 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
-		
-		///<summary>Represents a DELETE on /{index}/{type}/_query 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of types to restrict the operation</param>
-		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
-		
-		///<summary>Represents a DELETE on /{index}/{type}/_query 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html </para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
-		///<param name="type">A comma-separated list of types to restrict the operation</param>
-		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
-		
 		///<summary>Represents a DELETE on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -7988,7 +7926,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html </para>	
 	    ///</summary>
-		///<param name="task_id">Cancel the task with specified id</param>
+		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> TasksCancel<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
@@ -8002,7 +7940,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-cancel.html </para>	
 	    ///</summary>
-		///<param name="task_id">Cancel the task with specified id</param>
+		///<param name="task_id">Cancel the task with specified task id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TasksCancelAsync<T>(string task_id, Func<TasksCancelRequestParameters, TasksCancelRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_tasks/{task_id.NotNull("task_id")}/_cancel"), null, _params(requestParameters));
@@ -8042,7 +7980,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html </para>	
 	    ///</summary>
-		///<param name="task_id">Return the task with specified id</param>
+		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> TasksList<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
@@ -8056,7 +7994,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/tasks-list.html </para>	
 	    ///</summary>
-		///<param name="task_id">Return the task with specified id</param>
+		///<param name="task_id">Return the task with specified id (node_id:task_number)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TasksListAsync<T>(string task_id, Func<TasksListRequestParameters, TasksListRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_tasks/{task_id.NotNull("task_id")}"), null, _params(requestParameters));
@@ -8284,6 +8222,68 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> UpdateByQueryAsync<T>(string index, string type, PostData<object> body, Func<UpdateByQueryRequestParameters, UpdateByQueryRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_update_by_query"), body, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /{index}/_query 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
+		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /{index}/_query 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
+		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /{index}/{type}/_query 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of types to restrict the operation</param>
+		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /{index}/{type}/_query 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-delete-by-query.html </para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</param>
+		///<param name="type">A comma-separated list of types to restrict the operation</param>
+		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
 		
 	
 	  }
