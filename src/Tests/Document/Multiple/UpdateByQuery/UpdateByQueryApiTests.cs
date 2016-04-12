@@ -23,7 +23,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 
 		public UpdateByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
@@ -131,7 +131,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 	{
 		public UpdateByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{

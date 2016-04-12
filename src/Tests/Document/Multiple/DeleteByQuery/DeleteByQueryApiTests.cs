@@ -17,7 +17,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 	{
 		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
@@ -44,7 +44,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new 
+		protected override object ExpectJson { get; } = new
 		{
 			query = new
 			{
@@ -66,7 +66,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 					.Values(Project.Projects.First().Name, "x")
 				)
 			);
-			
+
 		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.Indices)
 		{
 			IgnoreUnavailable = true,

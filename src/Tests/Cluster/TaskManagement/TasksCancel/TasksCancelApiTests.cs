@@ -13,7 +13,9 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 	[Collection(IntegrationContext.OwnIndex)]
 	public class TasksCancelApiTests : ApiIntegrationTestBase<ITasksCancelResponse, ITasksCancelRequest, TasksCancelDescriptor, TasksCancelRequest>
 	{
-		public class Test
+		private TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>("taskId") : "foo:1";
+
+		private class Test
 		{
 			public long Id { get; set; }
 			public string Flag { get; set; }
@@ -21,17 +23,18 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 
 		public TasksCancelApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected IDictionary<string, TaskId> SetupTaskIds { get; } = new Dictionary<string, TaskId>();
-
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
 				client.IndexMany(Enumerable.Range(0, 10000).Select(i => new Test { Id = i + 1, Flag = "bar" }), index);
 				client.Refresh(index);
 			}
-			foreach (var index in values.Values)
+			foreach (var view in values.Views)
 			{
+				values.CurrentView = view;
+				var index = values.Value;
+
 				var reindex = client.ReindexOnServer(r => r
 					.Source(s => s.Index(index))
 					.Destination(s => s.Index($"{index}-clone"))
@@ -41,7 +44,7 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 				var taskId = reindex.Task;
 				var taskInfo = client.TasksList(new TasksListRequest(taskId));
 				taskInfo.IsValid.Should().BeTrue();
-				this.SetupTaskIds[index] = taskId;
+				values.ExtendedValue("taskId", taskId);
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
@@ -54,22 +57,21 @@ namespace Tests.Cluster.TaskManagement.TasksCancel
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => $"/_reindex?refresh=true";
-
+		protected override string UrlPath => $"/_tasks/{Uri.EscapeDataString(this.TaskId.ToString())}/_cancel";
 		protected override bool SupportsDeserialization => false;
 
-		protected override Func<TasksCancelDescriptor, ITasksCancelRequest> Fluent => d => d
-			.TaskId(this.SetupTaskIds[CallIsolatedValue]);
 
-		protected override TasksCancelRequest Initializer => new TasksCancelRequest(this.SetupTaskIds[CallIsolatedValue]);
+		protected override Func<TasksCancelDescriptor, ITasksCancelRequest> Fluent => d => d
+			.TaskId(this.TaskId);
+
+		protected override TasksCancelRequest Initializer => new TasksCancelRequest(this.TaskId);
 
 		protected override void ExpectResponse(ITasksCancelResponse response)
 		{
 			response.NodeFailures.Should().BeNullOrEmpty();
 			response.Nodes.Should().NotBeEmpty();
 			var tasks = response.Nodes.First().Value.Tasks;
-			tasks.Should().NotBeEmpty().And.ContainKey(this.SetupTaskIds[CallIsolatedValue]);
+			tasks.Should().NotBeEmpty().And.ContainKey(this.TaskId);
 		}
 	}
 }

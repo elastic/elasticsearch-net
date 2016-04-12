@@ -12,7 +12,7 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 	{
 		public CloseIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values) client.CreateIndex(index);
 			client.ClusterHealth(f => f.WaitForStatus(WaitForStatus.Yellow));

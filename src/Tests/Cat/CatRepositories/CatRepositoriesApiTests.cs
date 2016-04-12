@@ -17,10 +17,10 @@ namespace Tests.Cat.CatRepositories
 
 		public CatRepositoriesApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values)
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
-			var repositoryLocation = Path.Combine(this._cluster.Node.RepositoryPath, RandomString());
+			var repositoryLocation = Path.Combine(this.Cluster.Node.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(RepositoryName, cr => cr
 				.FileSystem(fs => fs

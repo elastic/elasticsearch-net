@@ -136,7 +136,7 @@ namespace Tests.Search.Request
 		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected abstract IndexName Index { get; }
-		protected override void BeforeAllCalls(IElasticClient client, IDictionary<ClientMethod, string> values) => new RoyalSeeder(this.Client, Index).Seed();
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
 
 		protected override ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings
 			.DisableDirectStreaming();
