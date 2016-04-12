@@ -19,7 +19,7 @@ namespace Nest
 		[JsonProperty("fielddata")]
 		INumericFielddata Fielddata { get; set; }
 	}
-	
+
 	public class BooleanProperty : PropertyBase, IBooleanProperty
 	{
 		public BooleanProperty() : base("boolean") { }
@@ -42,7 +42,7 @@ namespace Nest
 		public BooleanPropertyDescriptor() : base("boolean") { }
 
 		public BooleanPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
-		public BooleanPropertyDescriptor<T> Index(NonStringIndexOption index) => Assign(a => a.Index = index);
+		public BooleanPropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.NotAnalyzed) => Assign(a => a.Index = index);
 		public BooleanPropertyDescriptor<T> NullValue(bool nullValue) => Assign(a => a.NullValue = nullValue);
 		public BooleanPropertyDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
