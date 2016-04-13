@@ -4515,4 +4515,30 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
+	
+	///<summary>Request parameters descriptor for GraphExplore
+	///<pre>
+	///https://www.elastic.co/guide/en/graph/current/explore.html
+	///</pre>
+	///</summary>
+	public class GraphExploreRequestParameters : FluentRequestParameters<GraphExploreRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Specific routing value</summary>
+		public GraphExploreRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public GraphExploreRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GraphExploreRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GraphExploreRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
 }

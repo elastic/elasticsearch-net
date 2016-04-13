@@ -566,6 +566,8 @@
     <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresApiTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesShardStores\IndicesShardStoresUrlTests.cs" />
     <Compile Include="Search\Suggesters\SuggestApiTests.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreApiTests.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreUrlTests.cs" />
     <None Include="aggregations-usage.asciidoc" />
     <None Include="aggregations.asciidoc" />
     <None Include="client-concepts.asciidoc" />
