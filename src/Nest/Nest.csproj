@@ -1185,6 +1185,16 @@
     <Compile Include="Search\Validate\ValidateQueryRequest.cs" />
     <Compile Include="Search\Validate\ValidateQueryResponse.cs" />
     <Compile Include="Search\Validate\ValidationExplanation.cs" />
+    <Compile Include="XPack\Graph\Explore\ElasticClient-GraphExplore.cs" />
+    <Compile Include="XPack\Graph\Explore\Response\GraphConnection.cs" />
+    <Compile Include="XPack\Graph\Explore\Response\GraphVertex.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphExploreControls.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreRequest.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreResponse.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphVertexDefinition.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphVertexInclude.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\Hop.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\SampleDiversity.cs" />
     <Compile Include="_Generated\_Descriptors.generated.cs" />
     <Compile Include="_Generated\_LowLevelDispatch.generated.cs" />
     <Compile Include="_Generated\_RequestParametersExtensions.Generated.cs" />
@@ -1216,6 +1226,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
