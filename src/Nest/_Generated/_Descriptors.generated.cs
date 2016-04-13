@@ -4839,4 +4839,47 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
+	
+	///<summary>descriptor for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	public partial class GraphExploreDescriptor<T>  : RequestDescriptorBase<GraphExploreDescriptor<T>,GraphExploreRequestParameters, IGraphExploreRequest>, IGraphExploreRequest
+	{ 
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_graph/explore</summary>
+///<param name="index"> this parameter is required</param>
+		public GraphExploreDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+			///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public GraphExploreDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public GraphExploreDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<summary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+		public GraphExploreDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public GraphExploreDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Optional("type", type));
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public GraphExploreDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (Types)typeof(TOther)));
+
+		///<summary>A comma-separated list of document types to search; leave empty to perform the operation on all types</summary>
+		public GraphExploreDescriptor<T> AllTypes() => this.Type(Types.All);
+
+	
+		///<summary>Specific routing value</summary>
+		public GraphExploreDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+
+		///<summary>Explicit operation timeout</summary>
+		public GraphExploreDescriptor<T> Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+
+		///<summary>The URL-encoded request definition</summary>
+		public GraphExploreDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GraphExploreDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
 }

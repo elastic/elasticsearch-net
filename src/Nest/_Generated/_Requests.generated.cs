@@ -2807,6 +2807,73 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters> 
+	{
+		Indices Index { get; }
+		Types Type { get; }
+	 } 
+	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	public partial class GraphExploreRequest<T>  : RequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
+	{
+		protected IGraphExploreRequest Self => this;
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_graph/explore</summary>
+///<param name="index">this parameter is required</param>
+		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_graph/explore</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="type">Optional, accepts null</param>
+		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		
+
+			///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for GraphExplore <pre>https://www.elastic.co/guide/en/graph/current/explore.html</pre></summary>
+	public partial class GraphExploreRequest  : RequestBase<GraphExploreRequestParameters>, IGraphExploreRequest
+	{
+		protected IGraphExploreRequest Self => this;
+		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_graph/explore</summary>
+///<param name="index">this parameter is required</param>
+		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_graph/explore</summary>
+///<param name="index">this parameter is required</param>		
+///<param name="type">Optional, accepts null</param>
+		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
+		
+
+			///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
 	{
 		Indices Index { get; }

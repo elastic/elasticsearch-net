@@ -3130,5 +3130,41 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
+		internal ElasticsearchResponse<T> GraphExploreDispatch<T>(IRequest<GraphExploreRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.GraphExploreGet<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreGet<T>(p.RouteValues.Index,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.GraphExplore<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExplore<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("GraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore", "/{index}/{type}/_graph/explore");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> GraphExploreDispatchAsync<T>(IRequest<GraphExploreRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.GraphExploreGetAsync<T>(p.RouteValues.Index,p.RouteValues.Type,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreGetAsync<T>(p.RouteValues.Index,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type)) return _lowLevel.GraphExploreAsync<T>(p.RouteValues.Index,p.RouteValues.Type,body,u => p.RequestParameters);
+					if (AllSetNoFallback(p.RouteValues.Index)) return _lowLevel.GraphExploreAsync<T>(p.RouteValues.Index,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("GraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore", "/{index}/{type}/_graph/explore");
+		}
+		
 	}	
 }
