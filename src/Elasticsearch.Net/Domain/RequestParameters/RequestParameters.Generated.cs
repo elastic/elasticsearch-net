@@ -4603,4 +4603,170 @@ namespace Elasticsearch.Net
 		public PostLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
+	
+	///<summary>Request parameters descriptor for ShieldAuthenticate
+	///<pre>
+	///Retrieve details about the currently authenticated user
+	///</pre>
+	///</summary>
+	public class AuthenticateRequestParameters : FluentRequestParameters<AuthenticateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public AuthenticateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AuthenticateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldClearCachedRealms
+	///<pre>
+	///Clears the internal user caches for specified realms
+	///</pre>
+	///</summary>
+	public class ClearCachedRealmsRequestParameters : FluentRequestParameters<ClearCachedRealmsRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		public ClearCachedRealmsRequestParameters Usernames(params string[] usernames) => this.AddQueryString("usernames", usernames);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ClearCachedRealmsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearCachedRealmsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldClearCachedRoles
+	///<pre>
+	///Clears the internal caches for specified roles
+	///</pre>
+	///</summary>
+	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ClearCachedRolesRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearCachedRolesRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldDeleteRole
+	///<pre>
+	///Remove a role from the native shield realm
+	///</pre>
+	///</summary>
+	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldDeleteUser
+	///<pre>
+	///Remove a user from the native shield realm
+	///</pre>
+	///</summary>
+	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldGetRole
+	///<pre>
+	///Retrieve one or more roles from the native shield realm
+	///</pre>
+	///</summary>
+	public class GetRoleRequestParameters : FluentRequestParameters<GetRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldGetUser
+	///<pre>
+	///Retrieve one or more users from the native shield realm
+	///</pre>
+	///</summary>
+	public class GetUserRequestParameters : FluentRequestParameters<GetUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldPutRole
+	///<pre>
+	///Update or create a role for the native shield realm
+	///</pre>
+	///</summary>
+	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutRoleRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for ShieldPutUser
+	///<pre>
+	///Update or create a user for the native shield realm
+	///</pre>
+	///</summary>
+	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutUserRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutUserRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
 }

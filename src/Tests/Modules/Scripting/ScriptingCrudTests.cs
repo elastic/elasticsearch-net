@@ -10,7 +10,7 @@ namespace Tests.Modules.Scripting
 	public class ScriptingCrudTests
 		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
 	{
-		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			CreateInitializer,
@@ -23,7 +23,7 @@ namespace Tests.Modules.Scripting
 
 		private string _lang = "groovy";
 
-		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(_lang, id) {Script = "1+1"};
+		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = "1+1" };
 		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
@@ -33,7 +33,7 @@ namespace Tests.Modules.Scripting
 			fluentAsync: (s, c, f) => c.GetScriptAsync(_lang, s, f),
 			request: (s, c, r) => c.GetScript(r),
 			requestAsync: (s, c, r) => c.GetScriptAsync(r)
-        );
+		);
 
 		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(_lang, id);
 		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
@@ -49,7 +49,7 @@ namespace Tests.Modules.Scripting
 
 		private string _updatedScript = "2+2";
 
-		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = _updatedScript};
+		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = _updatedScript };
 		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(

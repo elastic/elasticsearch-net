@@ -13,7 +13,7 @@ using System.Net.Http;
 namespace Elasticsearch.Net
 {
 	/// <summary>
-	/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+	/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
 	/// to elasticsearch
 	/// </summary>
 	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 		public static readonly TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
@@ -33,12 +33,12 @@ namespace Elasticsearch.Net
 		{ }
 
 		/// <summary>
-		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+		/// ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
 		/// to elasticsearch
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
-			// ReSharper disable once IntroduceOptionalParameters.Global 
+			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, null, null)
 		{ }
 
@@ -208,7 +208,7 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
-		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
 		public T ThrowExceptions(bool alwaysThrow = true) => Assign(a => a._throwExceptions = alwaysThrow);
@@ -252,7 +252,7 @@ namespace Elasticsearch.Net
 		public T DeadTimeout(TimeSpan timeout) => Assign(a => a._deadTimeout = timeout);
 
 		/// <summary>
-		/// Sets the maximum time a node can be marked dead. 
+		/// Sets the maximum time a node can be marked dead.
 		/// Different implementations of IConnectionPool may choose a different default.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds</param>
@@ -279,7 +279,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
 		public T PrettyJson(bool b = true) => Assign(a =>
@@ -310,7 +310,7 @@ namespace Elasticsearch.Net
 		{
 			this._basicAuthCredentials = new BasicAuthenticationCredentials
 			{
-				UserName = userName,
+				Username = userName,
 				Password = password
 			};
 			return (T)this;

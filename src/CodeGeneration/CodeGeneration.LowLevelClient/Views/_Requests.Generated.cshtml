@@ -43,7 +43,7 @@ namespace Nest
 	<text> } </text>
 	}
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : RequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : PlainRequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
 		protected @(Raw(method.InterfaceType)) Self => this;
 	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))

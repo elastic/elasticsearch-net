@@ -28,10 +28,12 @@ namespace Tests.Framework.Integration
 			{ "mapper-murmur3", _ => "mapper-murmur3" },
 			{ "license", _ => "license" },
 			{ "graph", _ => "graph" },
+			{ "shield", _ => "shield" },
 		};
 		private string[] DefaultNodeSettings { get; }
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
+		private readonly bool _shieldEnabled;
 		private ObservableProcess _process;
 		private IDisposable _processListener;
 
@@ -44,7 +46,6 @@ namespace Tests.Framework.Integration
 
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
-		public string Prefix { get; set; }
 		public string ClusterName { get; }
 		public string NodeName { get; }
 		public string RepositoryPath { get; private set; }
@@ -101,26 +102,27 @@ namespace Tests.Framework.Integration
 			string elasticsearchVersion,
 			bool runningIntegrations,
 			bool doNotSpawnIfAlreadyRunning,
-			string prefix
+			string name,
+			bool shieldEnabled
 			)
 		{
-			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
-			this.VersionInfo = new ElasticsearchVersionInfo(runningIntegrations ? elasticsearchVersion : "0.0.0-unittest");
-			this.RunningIntegrations = runningIntegrations;
-			this.Prefix = prefix.ToLowerInvariant();
+			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
+			this._shieldEnabled = shieldEnabled;
+
+			var prefix = name.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
-			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
-			this.NodeName = $"{this.Prefix}-node-{suffix}";
+			this.ClusterName = $"{prefix}-cluster-{suffix}";
+			this.NodeName = $"{prefix}-node-{suffix}";
+
+			this.VersionInfo = new ElasticsearchVersionInfo(runningIntegrations ? elasticsearchVersion : "0.0.0-unittest");
+			this.Version = this.VersionInfo.Version + (this.VersionInfo.IsSnapshot ? $"-{VersionInfo.SnapshotIdentifier}" : string.Empty);
+			this.RunningIntegrations = runningIntegrations;
 
 			this.BootstrapWork = _blockingSubject;
 
 			var appData = GetApplicationDataDirectory();
-
-			this.Version = this.VersionInfo.Version + (this.VersionInfo.IsSnapshot ? $"-{VersionInfo.SnapshotIdentifier}" : string.Empty);
-
 			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + this.VersionInfo.Version);
-
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
@@ -132,7 +134,8 @@ namespace Tests.Framework.Integration
 				$"es.path.repo={this.RepositoryPath}",
 				$"es.script.inline=on",
 				$"es.script.indexed=on",
-				$"es.node.{attr}testingcluster=true"
+				$"es.node.{attr}testingcluster=true",
+				$"es.shield.enabled=" + (shieldEnabled ? "true" : "false")
 			};
 
 			if (!runningIntegrations)
@@ -144,12 +147,14 @@ namespace Tests.Framework.Integration
 			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
 		}
+		private ConnectionSettings ClusterSettings(ConnectionSettings s, Func<ConnectionSettings, ConnectionSettings> settings) =>
+			AddBasicAuthentication(AppendClusterNameToHttpHeaders(settings(s)));
 
 		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
 		{
 			var port = this.Started ? this.Port : 9200;
 			settings = settings ?? (s => s);
-			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port, createPool);
+			var client = TestClient.GetClient(s => ClusterSettings(s, settings), port, createPool);
 			return client;
 		}
 
@@ -158,8 +163,8 @@ namespace Tests.Framework.Integration
 			var port = this.Started ? this.Port : 9200;
 			settings = settings ?? (s => s);
 			var client = forceInMemory
-				? TestClient.GetInMemoryClient(s => AppendClusterNameToHttpHeaders(settings(s)), port)
-				: TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port);
+				? TestClient.GetInMemoryClient(s => ClusterSettings(s, settings), port)
+				: TestClient.GetClient(s => ClusterSettings(s, settings), port);
 			return client;
 		}
 
@@ -172,7 +177,7 @@ namespace Tests.Framework.Integration
 			var settingMarker = this.VersionInfo.ParsedVersion.Major >= 5 ? "-E " : "-D";
 			var settings = DefaultNodeSettings
 				.Concat(additionalSettings ?? Enumerable.Empty<string>())
-				.Select(s=> $"{settingMarker}{s}")
+				.Select(s => $"{settingMarker}{s}")
 				.ToList();
 
 			var easyRunBat = Path.Combine(this.RoamingFolder, $"run-{typeOfCluster.ToLowerInvariant()}.bat");
@@ -233,7 +238,6 @@ namespace Tests.Framework.Integration
 
 			return Observable.Empty<ElasticsearchMessage>();
 		}
-
 
 		private void ValidateLicense()
 		{
@@ -330,6 +334,7 @@ namespace Tests.Framework.Integration
 					File.WriteAllText(easyRunBat, @"bin\elasticsearch.bat ");
 				}
 				InstallPlugins();
+				EnsureShieldAdmin();
 
 				//hunspell config
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
@@ -337,9 +342,7 @@ namespace Tests.Framework.Integration
 				if (!File.Exists(hunspellPrefix + ".dic"))
 				{
 					Directory.CreateDirectory(hunspellFolder);
-					//File.Create(hunspellPrefix + ".dic");
 					File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
-					//File.Create(hunspellPrefix + ".aff");
 					File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
 				}
 
@@ -380,7 +383,7 @@ namespace Tests.Framework.Integration
 					{
 						var o = p.Start();
 						Console.WriteLine($"Calling: {pluginBat} install {command}");
-						o.Subscribe(e => Console.WriteLine(e),
+						o.Subscribe(Console.WriteLine,
 							(e) =>
 							{
 								Console.WriteLine($"Failed installing elasticsearch plugin: {command}");
@@ -401,6 +404,29 @@ namespace Tests.Framework.Integration
 			}
 		}
 
+		private void EnsureShieldAdmin()
+		{
+			if (!this._shieldEnabled) return;
+
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "shield", "esusers") + ".bat";
+			foreach (var cred in ShieldInformation.AllUsers)
+			{
+				var processInfo = new ProcessStartInfo
+				{
+					FileName = pluginBat,
+					Arguments = $"useradd {cred.Username} -p {cred.Password} -r {cred.Role}",
+					CreateNoWindow = true,
+					UseShellExecute = false,
+					RedirectStandardOutput = false,
+					RedirectStandardError = false,
+					RedirectStandardInput = false
+				};
+				var p = Process.Start(processInfo);
+				p.WaitForExit();
+			}
+		}
+
+
 		private string GetApplicationDataDirectory()
 		{
 #if DOTNETCORE
@@ -410,6 +436,11 @@ namespace Tests.Framework.Integration
 #endif
 		}
 
+		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings)
+		{
+			if (!_shieldEnabled) return settings;
+			return settings.BasicAuthentication("es_admin", "es_admin");
+		}
 		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
 		{
 			IConnectionConfigurationValues values = settings;
