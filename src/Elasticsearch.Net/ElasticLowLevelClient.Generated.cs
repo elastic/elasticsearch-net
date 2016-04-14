@@ -8405,6 +8405,86 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> GraphExploreAsync<T>(string index, string type, PostData<object> body, Func<GraphExploreRequestParameters, GraphExploreRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_graph/explore"), body, _params(requestParameters));
 		
+		///<summary>Represents a DELETE on /_license 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> LicenseDelete<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(DELETE, Url($"_license"), null, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /_license 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> LicenseDeleteAsync<T>(Func<DeleteLicenseRequestParameters, DeleteLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_license"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_license 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> LicenseGet<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_license"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_license 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> LicenseGetAsync<T>(Func<GetLicenseRequestParameters, GetLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_license"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_license 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="body">licenses to be installed</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> LicensePost<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_license"), body, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_license 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+	    ///</summary>
+		///<param name="body">licenses to be installed</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> LicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_license"), body, _params(requestParameters));
+		
 	
 	  }
 	  }
