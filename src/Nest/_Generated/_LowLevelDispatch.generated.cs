@@ -3166,5 +3166,71 @@ namespace Nest
 			throw InvalidDispatch("GraphExplore", p, new [] { GET, POST }, "/{index}/_graph/explore", "/{index}/{type}/_graph/explore");
 		}
 		
+		internal ElasticsearchResponse<T> LicenseDeleteDispatch<T>(IRequest<DeleteLicenseRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.LicenseDelete<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicenseDelete", p, new [] { DELETE }, "/_license");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> LicenseDeleteDispatchAsync<T>(IRequest<DeleteLicenseRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					return _lowLevel.LicenseDeleteAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicenseDelete", p, new [] { DELETE }, "/_license");
+		}
+		
+		internal ElasticsearchResponse<T> LicenseGetDispatch<T>(IRequest<GetLicenseRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.LicenseGet<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicenseGet", p, new [] { GET }, "/_license");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> LicenseGetDispatchAsync<T>(IRequest<GetLicenseRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.LicenseGetAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicenseGet", p, new [] { GET }, "/_license");
+		}
+		
+		internal ElasticsearchResponse<T> LicensePostDispatch<T>(IRequest<PostLicenseRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.LicensePost<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicensePost", p, new [] { PUT }, "/_license");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> LicensePostDispatchAsync<T>(IRequest<PostLicenseRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					return _lowLevel.LicensePostAsync<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("LicensePost", p, new [] { PUT }, "/_license");
+		}
+		
 	}	
 }

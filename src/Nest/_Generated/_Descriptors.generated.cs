@@ -4882,4 +4882,46 @@ namespace Nest
 		public GraphExploreDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
+	
+	///<summary>descriptor for LicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class DeleteLicenseDescriptor  : RequestDescriptorBase<DeleteLicenseDescriptor,DeleteLicenseRequestParameters, IDeleteLicenseRequest>, IDeleteLicenseRequest
+	{ 
+			
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for LicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class GetLicenseDescriptor  : RequestDescriptorBase<GetLicenseDescriptor,GetLicenseRequestParameters, IGetLicenseRequest>, IGetLicenseRequest
+	{ 
+			
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetLicenseDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+
+		///<summary>The URL-encoded request definition</summary>
+		public GetLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for LicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class PostLicenseDescriptor  : RequestDescriptorBase<PostLicenseDescriptor,PostLicenseRequestParameters, IPostLicenseRequest>, IPostLicenseRequest
+	{ 
+			
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public PostLicenseDescriptor Acknowledge(bool acknowledge = true) => AssignParam(p=>p.Acknowledge(acknowledge));
+
+		///<summary>The URL-encoded request definition</summary>
+		public PostLicenseDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PostLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
 }

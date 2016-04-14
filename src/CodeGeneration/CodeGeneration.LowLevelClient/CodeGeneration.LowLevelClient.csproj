@@ -194,6 +194,7 @@
     <None Include="RestSpecification\Core\update_by_query.json" />
     <None Include="RestSpecification\DeleteByQuery\delete_by_query.json" />
     <None Include="RestSpecification\XPack\Graph\graph.explore.json" />
+    <None Include="RestSpecification\XPack\License\license.delete.json" />
     <None Include="RestSpecification\XPack\License\license.get.json" />
     <None Include="RestSpecification\XPack\License\license.post.json" />
     <None Include="RestSpecification\XPack\Shield\shield.authenticate.json" />

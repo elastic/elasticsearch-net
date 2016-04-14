@@ -1604,6 +1604,22 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteLicenseRequest : IRequest<DeleteLicenseRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for LicenseDelete <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class DeleteLicenseRequest  : RequestBase<DeleteLicenseRequestParameters>, IDeleteLicenseRequest
+	{
+		protected IDeleteLicenseRequest Self => this;
+				///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
@@ -2436,6 +2452,25 @@ namespace Nest
 		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetLicenseRequest : IRequest<GetLicenseRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for LicenseGet <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class GetLicenseRequest  : RequestBase<GetLicenseRequestParameters>, IGetLicenseRequest
+	{
+		protected IGetLicenseRequest Self => this;
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -3735,6 +3770,25 @@ namespace Nest
 	{
 		protected IPingRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPostLicenseRequest : IRequest<PostLicenseRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for LicensePost <pre>https://www.elastic.co/guide/en/shield/current/license-management.html</pre></summary>
+	public partial class PostLicenseRequest  : RequestBase<PostLicenseRequestParameters>, IPostLicenseRequest
+	{
+		protected IPostLicenseRequest Self => this;
+				///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public bool Acknowledge { get { return Q<bool>("acknowledge"); } set { Q("acknowledge", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>

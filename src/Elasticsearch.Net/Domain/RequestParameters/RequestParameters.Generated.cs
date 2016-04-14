@@ -4541,4 +4541,66 @@ namespace Elasticsearch.Net
 		public GraphExploreRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
+	
+	///<summary>Request parameters descriptor for LicenseDelete
+	///<pre>
+	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///</pre>
+	///</summary>
+	public class DeleteLicenseRequestParameters : FluentRequestParameters<DeleteLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for LicenseGet
+	///<pre>
+	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///</pre>
+	///</summary>
+	public class GetLicenseRequestParameters : FluentRequestParameters<GetLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetLicenseRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for LicensePost
+	///<pre>
+	///https://www.elastic.co/guide/en/shield/current/license-management.html
+	///</pre>
+	///</summary>
+	public class PostLicenseRequestParameters : FluentRequestParameters<PostLicenseRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+		public PostLicenseRequestParameters Acknowledge(bool acknowledge) => this.AddQueryString("acknowledge", acknowledge);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PostLicenseRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PostLicenseRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
 }

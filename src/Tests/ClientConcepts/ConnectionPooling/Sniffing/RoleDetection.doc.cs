@@ -15,7 +15,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	public class RoleDetection
 	{
 		/**== Sniffing role detection
-		* 
+		*
 		* When we sniff the cluster state, we detect the role of the node, whether it's master eligible and holds data.
 		* We use this information when selecting a node to perform an API call on.
 		*/
@@ -158,7 +158,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		private RequestPipeline CreatePipeline()
 		{
 			this._settings =
-				this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+				this._cluster.Node.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
 				new SearchRequestParameters());
 			return pipeline;
