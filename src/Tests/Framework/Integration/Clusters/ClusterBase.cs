@@ -20,7 +20,7 @@ namespace Tests.Framework.Integration
 				this.Boostrap();
 				handle.Set();
 			});
-			this.ConsoleOut = this.Node.Start(this.ServerSettings);
+			this.ConsoleOut = this.Node.Start(name, this.ServerSettings);
 		}
 
 		protected virtual string[] ServerSettings { get; } = new string[] { };
@@ -29,9 +29,6 @@ namespace Tests.Framework.Integration
 
 		public void Dispose() => this.Node?.Dispose();
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null) => this.Node.Client(settings);
-
-		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings) =>
-			this.Node.Client(createPool, settings);
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false) => this.Node.Client(settings, forceInMemory);
 	}
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Tests.Framework.Integration
@@ -25,7 +22,7 @@ namespace Tests.Framework.Integration
 
 			this.Zip = this.Zip ?? $"elasticsearch-{this.Version}.zip";
 			this.DownloadUrl = $"{this.RootUrl}/{this.Version}/{this.Zip}";
-            this.ParsedVersion = new Version(Regex.Replace(this.Version, @"(?:\-.+)$", ""));
+			this.ParsedVersion = new Version(Regex.Replace(this.Version, @"(?:\-.+)$", ""));
 		}
 
 		public string DownloadUrl { get; set; }

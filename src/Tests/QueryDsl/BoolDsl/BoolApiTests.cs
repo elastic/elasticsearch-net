@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.BoolDsl
 
 		public override void Boostrap()
 		{
-			var client = this.Node.Client();
+			var client = this.Client();
 			var index = client.CreateIndex(Index<A>(), i => i
 				.Mappings(map => map
 					.Map<A>(m => m
@@ -80,7 +80,7 @@ namespace Tests.QueryDsl.BoolDsl
 			var documents = A.Documents.Where(programmatic).ToList();
 			documents.Count().Should().Be(expectedCount, " filtering the documents in memory did not yield the expected count");
 
-			var client = this._cluster.Node.Client();
+			var client = this._cluster.Client();
 
 			var fluent = client.Search<A>(s => s.Query(fluentQuery));
 			var fluentAsync = await client.SearchAsync<A>(s => s.Query(fluentQuery));
