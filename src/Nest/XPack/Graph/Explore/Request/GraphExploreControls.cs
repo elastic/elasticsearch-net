@@ -33,6 +33,7 @@ namespace Nest
 		[JsonProperty("sample_diversity")]
 		public SampleDiversity SampleDiversity { get; set; }
 	}
+
 	public class GraphExploreControlsDescriptor<T> : DescriptorBase<GraphExploreControlsDescriptor<T>, IGraphExploreControls>,  IGraphExploreControls
 		where T : class
 	{

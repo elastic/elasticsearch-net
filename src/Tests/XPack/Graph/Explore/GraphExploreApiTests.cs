@@ -58,6 +58,10 @@ namespace Tests.XPack.Graph.Explore
 						}
 					}
 				}
+			},
+			controls = new {
+				use_significance = true,
+				sample_size = 5
 			}
 		};
 
@@ -85,6 +89,10 @@ namespace Tests.XPack.Graph.Explore
 						)
 					)
 				)
+			)
+			.Controls(c=>c
+				.UseSignificance()
+				.SampleSize(5)
 			)
 		;
 
@@ -120,8 +128,12 @@ namespace Tests.XPack.Graph.Explore
 
 				}
 
+			},
+			Controls = new GraphExploreControls
+			{
+				UseSignificance = true,
+				SampleSize = 5
 			}
-
 		};
 
 		protected override void ExpectResponse(IGraphExploreResponse response)
