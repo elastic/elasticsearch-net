@@ -21,16 +21,12 @@ namespace Nest
 
 	public class GraphExploreControls : IGraphExploreControls
 	{
-		[JsonProperty("use_significance")]
 		public bool? UseSignificance { get; set; }
 
-		[JsonProperty("sample_size")]
 		public int? SampleSize { get; set; }
 
-		[JsonProperty("timeout")]
 		public Time Timeout { get; set; }
 
-		[JsonProperty("sample_diversity")]
 		public SampleDiversity SampleDiversity { get; set; }
 	}
 
