@@ -65,8 +65,8 @@
 		void Visit(ITermRangeQuery query);
 		void Visit(ITemplateQuery query);
 
-		void Visit(ILimitQuery query);
 #pragma warning disable 618
+		void Visit(ILimitQuery query);
 		void Visit(IFilteredQuery query);
 		void Visit(INotQuery query);
 		void Visit(IOrQuery query);
@@ -129,6 +129,7 @@
 		public virtual void Visit(IOrQuery query) { }
 
 		public virtual void Visit(IAndQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IGeoIndexedShapeQuery query) { }
 
@@ -141,13 +142,15 @@
 		public virtual void Visit(INumericRangeQuery query) { }
 
         public virtual void Visit(ITermRangeQuery query) { }
-#pragma warning restore 618
 
 		public virtual void Visit(IFunctionScoreQuery query) { }
 
 		public virtual void Visit(IFuzzyQuery query) { }
+
 		public virtual void Visit(IFuzzyStringQuery query) { }
+
 		public virtual void Visit(IFuzzyNumericQuery query) { }
+
 		public virtual void Visit(IFuzzyDateQuery query) { }
 
 		public virtual void Visit(IGeoShapeQuery query) { }

@@ -8,6 +8,15 @@ namespace Tests.QueryDsl.Compound.Filtered
 {
 	public class FilteredQueryUsageTests : QueryDslUsageTestsBase
 	{
+		/**
+		* The filtered query is used to combine a query which will be used for scoring with another
+		* query which will only be used for filtering the result set.
+		*
+		* WARNING: Deprecated in 2.0.0-beta1. Use the <<bool-queries, bool query>> instead with a
+		* `must` clause for the query and a `filter` clause for the filter.
+		*
+		* See the Elasticsearch documentation on {ref_current}/query-dsl-filtered-query.html[filtered query] for more details.
+		*/
 		public FilteredQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new

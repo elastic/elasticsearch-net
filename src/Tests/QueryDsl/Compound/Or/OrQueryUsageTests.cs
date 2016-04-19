@@ -7,6 +7,13 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.Compound.Or
 {
+	/**
+	* A query that matches documents using the `OR` boolean operator on other queries.
+	*
+	* WARNING: Deprecated in 2.0.0-beta1. Use the <<bool-queries, bool query>> instead.
+	*
+	* See the Elasticsearch documentation on {ref_current}/query-dsl-or-query.html[or query] for more details.
+	*/
 	public class OrQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public OrQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

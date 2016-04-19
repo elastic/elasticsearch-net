@@ -33,7 +33,7 @@ namespace Nest
 		public bool IsVerbatim { get; set; }
 		public bool IsConditionless { get; set; }
 		public bool IsStrict { get; set; }
-		
+
 		public virtual void Visit(IQueryContainer baseQuery)
 		{
 			this.IsConditionless = baseQuery.IsConditionless;
@@ -53,8 +53,8 @@ namespace Nest
 		}
 		private void Write(string queryType, Field field = null)
 		{
-			this.Write(queryType, field == null 
-				? null 
+			this.Write(queryType, field == null
+				? null
 				: new Dictionary<string, string> {{"field", this._infer.Field(field)}});
 		}
 
@@ -68,9 +68,8 @@ namespace Nest
 
 		public virtual void Visit(IDisMaxQuery query) => Write("dis_max");
 
-		public void Visit(ILimitQuery query) => Write("limit");
-
 #pragma warning disable 618
+		public void Visit(ILimitQuery query) => Write("limit");
 
 		public virtual void Visit(IFilteredQuery query) => Write("filtered");
 
@@ -79,7 +78,6 @@ namespace Nest
 		public void Visit(IOrQuery query)=> Write("or");
 
 		public void Visit(IAndQuery query)=> Write("and");
-
 #pragma warning restore 618
 
 		public void Visit(IGeoIndexedShapeQuery query) => Write("geo_indexed_shape");

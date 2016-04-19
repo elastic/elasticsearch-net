@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TtlField>))]
+	[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 	public interface ITtlField : IFieldMapping
 	{
 		[JsonProperty("enabled")]
@@ -12,13 +14,15 @@ namespace Nest
 		Time Default { get; set; }
 	}
 
+	[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 	public class TtlField : ITtlField
 	{
 		public bool? Enabled { get; set; }
 		public Time Default { get; set; }
 	}
 
-	public class TtlFieldDescriptor 
+	[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
+	public class TtlFieldDescriptor
 		: DescriptorBase<TtlFieldDescriptor, ITtlField>, ITtlField
 	{
 		bool? ITtlField.Enabled { get; set; }

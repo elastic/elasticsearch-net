@@ -9,6 +9,13 @@ namespace Tests.QueryDsl.Compound.Not
 {
 	public class NotQueryUsageTests : QueryDslUsageTestsBase
 	{
+		/**
+		* A query that filters out matched documents using a query.
+		*
+		* WARNING: Deprecated in 2.1.0. Use the <<bool-queries, bool query>> with `must_not` clause instead.
+		*
+		* See the Elasticsearch documentation on {ref_current}/query-dsl-not-query.html[not query] for more details.
+		*/
 		public NotQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new

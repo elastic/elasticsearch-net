@@ -7,6 +7,13 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.Compound.And
 {
+	/**
+	* A query that matches documents using the `AND` boolean operator on other queries.
+	*
+	* WARNING: Deprecated in 2.0.0-beta1. Use the <<bool-queries, bool query>> instead.
+	*
+	* See the Elasticsearch documentation on {ref_current}/query-dsl-and-query.html[and query] for more details.
+	*/
 	public class AndQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public AndQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

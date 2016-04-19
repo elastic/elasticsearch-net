@@ -11,7 +11,7 @@ namespace Nest
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	public partial class PutMappingRequest 
+	public partial class PutMappingRequest
 	{
 		// Needed for ReadAsType
 		internal PutMappingRequest() { }
@@ -49,12 +49,17 @@ namespace Nest
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
 		/// <inheritdoc/>
-		public ITimestampField TimestampField { get; set; }
-		/// <inheritdoc/>
 		public IList<IMappingTransform> Transform { get; set; }
+
+#pragma warning disable 618
 		/// <inheritdoc/>
+		[Obsolete("use a normal date field and set its value explicitly")]
+		public ITimestampField TimestampField { get; set; }
+
+		/// <inheritdoc/>
+		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 		public ITtlField TtlField { get; set; }
-		/// <inheritdoc/>
+#pragma warning restore 618
 	}
 
 	public partial class PutMappingRequest<T> where T : class
@@ -94,11 +99,17 @@ namespace Nest
 		/// <inheritdoc/>
 		public ISourceField SourceField { get; set; }
 		/// <inheritdoc/>
-		public ITimestampField TimestampField { get; set; }
-		/// <inheritdoc/>
 		public IList<IMappingTransform> Transform { get; set; }
+
+#pragma warning disable 618
 		/// <inheritdoc/>
+		[Obsolete("use a normal date field and set its value explicitly")]
+		public ITimestampField TimestampField { get; set; }
+
+		/// <inheritdoc/>
+		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 		public ITtlField TtlField { get; set; }
+#pragma warning restore 618
 	}
 
 	[DescriptorFor("IndicesPutMapping")]
@@ -125,12 +136,19 @@ namespace Nest
 		IRoutingField ITypeMapping.RoutingField { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
-		ITimestampField ITypeMapping.TimestampField { get; set; }
+
 		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
+
+#pragma warning disable 618
+		[Obsolete("use a normal date field and set its value explicitly")]
+		ITimestampField ITypeMapping.TimestampField { get; set; }
+
+		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 		ITtlField ITypeMapping.TtlField { get; set; }
+#pragma warning restore 618
 
 		/// <summary>
-		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
+		/// Convenience method to map as much as it can based on <see cref="ElasticsearchTypeAttribute"/> attributes set on the type.
 		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etcetera)</pre>
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
@@ -197,13 +215,17 @@ namespace Nest
 		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) => Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
+		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
+
+#pragma warning disable 618
+		/// <inheritdoc/>
+		[Obsolete("use a normal date field and set its value explicitly")]
 		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampFieldSelector) => Assign(a => a.TimestampField = timestampFieldSelector?.Invoke(new TimestampFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesFieldSelector) => Assign(a => a.FieldNamesField = fieldNamesFieldSelector.Invoke(new FieldNamesFieldDescriptor<T>()));
-
-		/// <inheritdoc/>
+		[Obsolete("will be replaced with a different implementation in a future version of Elasticsearch")]
 		public PutMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldSelector) => Assign(a => a.TtlField = ttlFieldSelector?.Invoke(new TtlFieldDescriptor()));
+#pragma warning restore 618
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));

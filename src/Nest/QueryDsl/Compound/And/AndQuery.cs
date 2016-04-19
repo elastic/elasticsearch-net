@@ -7,14 +7,14 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AndQuery>))]
-	[Obsolete("Use the bool query instead.")]
+	[Obsolete("Use the bool query with a must clause query instead. The bool query should not have other clauses to be semantically correct")]
 	public interface IAndQuery : IQuery
 	{
 		[JsonProperty("filters")]
 		IEnumerable<QueryContainer> Filters { get; set; }
 	}
 
-	[Obsolete("Use the bool query instead.")]
+	[Obsolete("Use the bool query with a must clause query instead. The bool query should not have other clauses to be semantically correct")]
 	public class AndQuery : QueryBase, IAndQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -27,8 +27,8 @@ namespace Nest
 		}
 	}
 
-	[Obsolete("Use the bool query instead.")]
-	public class AndQueryDescriptor<T> 
+	[Obsolete("Use the bool query with a must clause instead. The bool query should not have other clauses to be semantically correct")]
+	public class AndQueryDescriptor<T>
 		: QueryDescriptorBase<AndQueryDescriptor<T>, IAndQuery>
 		, IAndQuery where T : class
 	{

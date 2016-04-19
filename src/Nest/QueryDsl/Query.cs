@@ -89,9 +89,6 @@ namespace Nest
 		public static QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
 			new QueryContainerDescriptor<T>().Indices(selector);
 
-		public static QueryContainer Limit(Func<LimitQueryDescriptor<T>, ILimitQuery> selector) =>
-			new QueryContainerDescriptor<T>().Limit(selector);
-
 		public static QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().Match(selector);
 
@@ -204,17 +201,21 @@ namespace Nest
 		public static QueryContainer Filtered(Func<FilteredQueryDescriptor<T>, IFilteredQuery> selector) =>
 			new QueryContainerDescriptor<T>().Filtered(selector);
 
-		[Obsolete("Use the bool query instead")]
+		[Obsolete("Use the bool query instead with a should clause for the query")]
 		public static QueryContainer Or(Func<OrQueryDescriptor<T>, IOrQuery> selector) =>
 			new QueryContainerDescriptor<T>().Or(selector);
 
-		[Obsolete("Use the should clause on the bool query instead, note that this bool query should not have other clauses to be semantically correct")]
+		[Obsolete("Use the bool query with a must clause query instead. The bool query should not have other clauses to be semantically correct")]
 		public static QueryContainer And(Func<AndQueryDescriptor<T>, IAndQuery> selector) =>
 			new QueryContainerDescriptor<T>().And(selector);
 
-		[Obsolete("Use the bool query with must_not clause instead..")]
+		[Obsolete("Use the bool query with must_not clause instead")]
 		public static QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
 			new QueryContainerDescriptor<T>().Not(selector);
+
+		[Obsolete("Use TerminateAfter (terminate_after parameter) on the request instead")]
+		public static QueryContainer Limit(Func<LimitQueryDescriptor<T>, ILimitQuery> selector) =>
+			new QueryContainerDescriptor<T>().Limit(selector);
 #pragma warning restore 618
 	}
 }

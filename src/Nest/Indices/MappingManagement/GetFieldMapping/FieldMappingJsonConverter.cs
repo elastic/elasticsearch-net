@@ -41,8 +41,10 @@ namespace Nest
 					if (name == "_routing") mapping = po.ToObject<RoutingField>();
 					if (name == "_index") mapping = po.ToObject<IndexField>();
 					if (name == "_size") mapping = po.ToObject<SizeField>();
+#pragma warning disable 618
 					if (name == "_timestamp") mapping = po.ToObject<TimestampField>();
 					if (name == "_ttl") mapping = po.ToObject<TtlField>();
+#pragma warning restore 618
 					if (name == "_parent") mapping = po.ToObject<ParentField>();
 					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
 				}

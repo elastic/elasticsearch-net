@@ -14,8 +14,10 @@ namespace Tests.Mapping.Types.Core.String
 			Index = FieldIndexOption.NotAnalyzed,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
+#pragma warning disable 618
 			// Purposely setting this obsolete property to ensure it serializes as position_increment_gap
 			PositionOffsetGap = 5,
+#pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,

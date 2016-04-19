@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using Elasticsearch.Net;
 using static Nest.Infer;
 
+#pragma warning disable 618
+
 namespace Tests.Mapping.Metafields.Ttl
 {
 	public class TtlMetafieldApiTest : MetafieldsMappingApiTestsBase
@@ -27,7 +29,7 @@ namespace Tests.Mapping.Metafields.Ttl
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
-			TtlField = new TtlField {  Default = TimeSpan.FromMinutes(30), Enabled = true } 
+			TtlField = new TtlField {  Default = TimeSpan.FromMinutes(30), Enabled = true }
 		};
 	}
 }

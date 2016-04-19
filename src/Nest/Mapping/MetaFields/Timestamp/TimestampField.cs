@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimestampField>))]
+	[Obsolete("use a normal date field and set its value explicitly")]
 	public interface ITimestampField : IFieldMapping
 	{
 		[JsonProperty("enabled")]
@@ -23,6 +24,7 @@ namespace Nest
 		bool? IgnoreMissing { get; set; }
 	}
 
+	[Obsolete("use a normal date field and set its value explicitly")]
 	public class TimestampField : ITimestampField
 	{
 		public bool Enabled { get; set; }
@@ -32,7 +34,7 @@ namespace Nest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-
+	[Obsolete("use a normal date field and set its value explicitly")]
 	public class TimestampFieldDescriptor<T> : DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
 	{
 		bool ITimestampField.Enabled { get; set;}
@@ -51,6 +53,6 @@ namespace Nest
 
 		public TimestampFieldDescriptor<T> Default(string defaultValue) => Assign(a => a.Default = defaultValue);
 
-		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);	
+		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);
 	}
 }

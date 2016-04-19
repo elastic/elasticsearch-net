@@ -7,14 +7,14 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<NotQuery>))]
-	[Obsolete("Use the bool query with must_not clause instead.")]
+	[Obsolete("Use the bool query with must_not clause instead")]
 	public interface INotQuery : IQuery
 	{
 		[JsonProperty("filters")]
 		IEnumerable<QueryContainer> Filters { get; set; }
 	}
 
-	[Obsolete("Use the bool query with must_not clause instead.")]
+	[Obsolete("Use the bool query with must_not clause instead")]
 	public class NotQuery : QueryBase, INotQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -27,8 +27,8 @@ namespace Nest
 		}
 	}
 
-	[Obsolete("Use the bool query with must_not clause instead.")]
-	public class NotQueryDescriptor<T> 
+	[Obsolete("Use the bool query with must_not clause instead")]
+	public class NotQueryDescriptor<T>
 		: QueryDescriptorBase<NotQueryDescriptor<T>, INotQuery>
 		, INotQuery where T : class
 	{

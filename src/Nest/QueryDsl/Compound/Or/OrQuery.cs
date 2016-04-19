@@ -7,14 +7,14 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<OrQuery>))]
-	[Obsolete("Use the bool query instead.")]
+	[Obsolete("Use the bool query instead with a should clause for the query")]
 	public interface IOrQuery : IQuery
 	{
 		[JsonProperty("filters")]
 		IEnumerable<QueryContainer> Filters { get; set; }
 	}
 
-	[Obsolete("Use the bool query instead.")]
+	[Obsolete("Use the bool query instead with a should clause for the query")]
 	public class OrQuery : QueryBase, IOrQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -27,8 +27,8 @@ namespace Nest
 		}
 	}
 
-	[Obsolete("Use the bool query instead.")]
-	public class OrQueryDescriptor<T> 
+	[Obsolete("Use the bool query instead with a should clause for the query")]
+	public class OrQueryDescriptor<T>
 		: QueryDescriptorBase<OrQueryDescriptor<T>, IOrQuery>
 		, IOrQuery where T : class
 	{

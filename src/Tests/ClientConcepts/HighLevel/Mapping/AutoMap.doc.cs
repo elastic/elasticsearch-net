@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 
+#pragma warning disable 618
+
 namespace Tests.ClientConcepts.HighLevel.Mapping
 {
 	/**

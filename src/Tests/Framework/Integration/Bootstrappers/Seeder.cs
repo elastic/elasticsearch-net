@@ -111,11 +111,14 @@ namespace Tests.Framework.Integration
 				)
 				.Mappings(map => map
 					.Map<Project>(MapProject)
+#pragma warning disable 618
 					.Map<CommitActivity>(m => m
 						.Parent<Project>()
+
 						.TimestampField(t => t
 							.Enabled()
 						)
+#pragma warning restore 618
 						.Properties(props => props
 							.Object<Developer>(o => o
 								.Name(p => p.Committer)
@@ -129,10 +132,13 @@ namespace Tests.Framework.Integration
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
 
+#pragma warning disable 618
 		public static TypeMappingDescriptor<Project> MapProject(TypeMappingDescriptor<Project> m) => m
+
 			.TimestampField(t => t
 				.Enabled()
 			)
+#pragma warning restore 618
 			.Properties(props => props
 				.String(s => s
 					.Name(p => p.Name)
