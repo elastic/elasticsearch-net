@@ -32,16 +32,6 @@ namespace Nest
 					writer.WritePropertyName(field);
 					serializer.Serialize(writer, t.TermsLookup);
 				}
-				if (t.DisableCoord.HasValue)
-				{
-					writer.WritePropertyName("disable_coord");
-					writer.WriteValue(t.DisableCoord.Value);
-				}
-				if (t.MinimumShouldMatch != null)
-				{
-					writer.WritePropertyName("minimum_should_match");
-					serializer.Serialize(writer, t.MinimumShouldMatch);
-				}
 				if (t.Boost.HasValue)
 				{
 					writer.WritePropertyName("boost");
@@ -68,15 +58,6 @@ namespace Nest
 				var property = reader.Value as string;
 				switch (property)
 				{
-					case "disable_coord":
-						reader.Read();
-						f.DisableCoord = reader.Value as bool?;
-						break;
-					case "minimum_should_match":
-						reader.Read();
-						var min = serializer.Deserialize<MinimumShouldMatch>(reader);
-						f.MinimumShouldMatch = min;
-						break;
 					case "boost":
 						reader.Read();
 						f.Boost = reader.Value as double?;

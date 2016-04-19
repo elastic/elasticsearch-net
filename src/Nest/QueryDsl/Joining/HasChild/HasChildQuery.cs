@@ -16,6 +16,9 @@ namespace Nest
 		[JsonProperty("min_children")]
 		int? MinChildren { get; set; }
 
+		/// <summary>
+		/// Specify how many child documents are allowed to match.
+		/// </summary>
 		[JsonProperty("max_children")]
 		int? MaxChildren { get; set; }
 
@@ -25,13 +28,17 @@ namespace Nest
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
 	}
-	
+
 	public class HasChildQuery : QueryBase, IHasChildQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public TypeName Type { get; set; }
 		public ChildScoreMode? ScoreMode { get; set; }
 		public int? MinChildren { get; set; }
+
+		/// <summary>
+		/// Specify how many child documents are allowed to match.
+		/// </summary>
 		public int? MaxChildren { get; set; }
 		public QueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
@@ -40,7 +47,7 @@ namespace Nest
 		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
 	}
 
-	public class HasChildQueryDescriptor<T> 
+	public class HasChildQueryDescriptor<T>
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
 		, IHasChildQuery where T : class
 	{
@@ -48,6 +55,10 @@ namespace Nest
 		TypeName IHasChildQuery.Type { get; set; }
 		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
 		int? IHasChildQuery.MinChildren { get; set; }
+
+		/// <summary>
+		/// Specify how many child documents are allowed to match.
+		/// </summary>
 		int? IHasChildQuery.MaxChildren { get; set; }
 		QueryContainer IHasChildQuery.Query { get; set; }
 		IInnerHits IHasChildQuery.InnerHits { get; set; }
@@ -57,7 +68,7 @@ namespace Nest
 			((IHasChildQuery)this).Type = TypeName.Create<T>();
 		}
 
-		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
 
 		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
@@ -66,6 +77,9 @@ namespace Nest
 
 		public HasChildQueryDescriptor<T> MinChildren(int? minChildren) => Assign(a => a.MinChildren = minChildren);
 
+		/// <summary>
+		/// Specify how many child documents are allowed to match.
+		/// </summary>
 		public HasChildQueryDescriptor<T> MaxChildren(int? maxChildren) => Assign(a => a.MaxChildren = maxChildren);
 
 		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>

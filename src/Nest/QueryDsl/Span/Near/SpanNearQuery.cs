@@ -18,8 +18,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "in_order")]
 		bool? InOrder { get; set; }
 
+#pragma warning disable 618
 		[JsonProperty(PropertyName = "collect_payloads")]
+		[Obsolete("Payloads will be loaded when needed")]
 		bool? CollectPayloads { get; set; }
+#pragma warning restore 618
 	}
 
 	public class SpanNearQuery : QueryBase, ISpanNearQuery
@@ -28,13 +31,17 @@ namespace Nest
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }
+
+#pragma warning disable 618
+		[Obsolete("Payloads will be loaded when needed")]
 		public bool? CollectPayloads { get; set; }
+#pragma warning restore 618
 
 		internal override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
 		internal static bool IsConditionless(ISpanNearQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
-	public class SpanNearQueryDescriptor<T> 
+	public class SpanNearQueryDescriptor<T>
 		: QueryDescriptorBase<SpanNearQueryDescriptor<T>, ISpanNearQuery>
 		, ISpanNearQuery where T : class
 	{
@@ -42,7 +49,11 @@ namespace Nest
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 		int? ISpanNearQuery.Slop { get; set; }
 		bool? ISpanNearQuery.InOrder { get; set; }
+
+#pragma warning disable 618
+		[Obsolete("Payloads will be loaded when needed")]
 		bool? ISpanNearQuery.CollectPayloads { get; set; }
+#pragma warning restore 618
 
 		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) => Clauses(selectors.ToList());
 
@@ -56,6 +67,9 @@ namespace Nest
 
 		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder) => Assign(a => a.InOrder = inOrder);
 
+#pragma warning disable 618
+		[Obsolete("Payloads will be loaded when needed")]
 		public SpanNearQueryDescriptor<T> CollectPayloads(bool? collectPayloads) => Assign(a => a.CollectPayloads = collectPayloads);
+#pragma warning restore 618
 	}
 }

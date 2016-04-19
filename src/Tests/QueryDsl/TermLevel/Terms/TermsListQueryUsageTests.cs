@@ -19,9 +19,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			{
 				_name = "named_query",
 				boost = 1.1,
-				description = new[] { "term1", "term2" },
-				disable_coord = true,
-				minimum_should_match = 2
+				description = new[] { "term1", "term2" }
 			}
 		};
 
@@ -30,9 +28,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Name = "named_query",
 			Boost = 1.1,
 			Field = "description",
-			Terms = new List<string> { "term1", "term2" },
-			DisableCoord = true,
-			MinimumShouldMatch = 2
+			Terms = new List<string> { "term1", "term2" }
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -40,8 +36,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Description)
-				.DisableCoord()
-				.MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
 				.Terms(new List<string> { "term1", "term2" })
 			);
 	}
@@ -59,7 +53,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				_name = "named_query",
 				boost = 1.1,
 				description = new[] { new [] { "term1", "term2" } },
-				disable_coord = true,
 			}
 		};
 
@@ -68,8 +61,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Name = "named_query",
 			Boost = 1.1,
 			Field = "description",
-			Terms = _terms,
-			DisableCoord = true,
+			Terms = _terms
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -77,7 +69,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.Description)
-				.DisableCoord()
 				.Terms(_terms)
 			);
 
@@ -99,8 +90,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			{
 				_name = "named_query",
 				boost = 1.1,
-				numberOfCommits = new[] { new [] { "term1", "term2" } },
-				disable_coord = true,
+				numberOfCommits = new[] { new [] { "term1", "term2" } }
 			}
 		};
 
@@ -110,7 +100,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			Boost = 1.1,
 			Field = "numberOfCommits",
 			Terms = _terms,
-			DisableCoord = true,
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -118,7 +107,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p => p.NumberOfCommits)
-				.DisableCoord()
 				.Terms(_terms)
 			);
 
