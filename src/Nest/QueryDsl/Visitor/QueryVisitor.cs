@@ -65,12 +65,8 @@
 		void Visit(ITermRangeQuery query);
 		void Visit(ITemplateQuery query);
 
-		void Visit(ILimitQuery query);
 #pragma warning disable 618
-		void Visit(IFilteredQuery query);
 		void Visit(INotQuery query);
-		void Visit(IOrQuery query);
-		void Visit(IAndQuery query);
 #pragma warning restore 618
 
 		void Visit(ISpanFirstQuery query);
@@ -120,15 +116,7 @@
 		public virtual void Visit(IDisMaxQuery query) { }
 
 #pragma warning disable 618
-		public virtual void Visit(ILimitQuery query) { }
-
-		public virtual void Visit(IFilteredQuery query) { }
-
 		public virtual void Visit(INotQuery query) { }
-
-		public virtual void Visit(IOrQuery query) { }
-
-		public virtual void Visit(IAndQuery query) { }
 
 		public virtual void Visit(IGeoIndexedShapeQuery query) { }
 

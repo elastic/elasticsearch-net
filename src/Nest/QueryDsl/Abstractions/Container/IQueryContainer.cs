@@ -4,7 +4,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(QueryContainerJsonConverter))]
-	public interface IQueryContainer 
+	public interface IQueryContainer
 	{
 		[JsonIgnore]
 		bool IsConditionless { get; }
@@ -14,10 +14,10 @@ namespace Nest
 
 		[JsonIgnore]
 		bool IsVerbatim { get; set; }
-		
+
 		[JsonIgnore]
 		IRawQuery RawQuery { get; set; }
-		
+
 		[JsonProperty("bool")]
 		IBoolQuery Bool { get; set; }
 
@@ -38,9 +38,6 @@ namespace Nest
 
 		[JsonProperty("ids")]
 		IIdsQuery Ids { get; set; }
-
-		[JsonProperty("limit")]
-		ILimitQuery Limit { get; set; }
 
 		[JsonProperty("constant_score")]
 		IConstantScoreQuery ConstantScore { get; set; }
@@ -77,7 +74,7 @@ namespace Nest
 
 		[JsonProperty("has_parent")]
 		IHasParentQuery HasParent { get; set; }
-		
+
 		[JsonProperty("span_term")]
 		ISpanTermQuery SpanTerm { get; set; }
 
@@ -151,15 +148,6 @@ namespace Nest
 		ITypeQuery Type { get; set; }
 
 #pragma warning disable 618
-		[JsonProperty("filtered")]
-		IFilteredQuery Filtered { get; set; }
-
-		[JsonProperty("and")]
-		IAndQuery And { get; set; }
-
-		[JsonProperty("or")]
-		IOrQuery Or { get; set; }
-
 		[JsonProperty("not")]
 		INotQuery Not { get; set; }
 #pragma warning restore 618

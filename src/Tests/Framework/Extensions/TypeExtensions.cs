@@ -20,7 +20,7 @@ namespace Tests.Framework
 			return t.IsInterface;
 #endif
 		}
-		
+
 		internal static bool IsGeneric(this Type type)
 		{
 #if DOTNETCORE
@@ -102,7 +102,14 @@ namespace Tests.Framework
 #endif
 		}
 
-
+		internal static bool IsVisible(this Type t)
+		{
+#if DOTNETCORE
+			return t.GetTypeInfo().IsVisible;
+#else
+			return t.IsVisible;
+#endif
+		}
 
 	}
 }

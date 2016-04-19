@@ -7,8 +7,6 @@
 --
 NEST exposes all of the query DSL endpoints available in Elasticsearch
 
-* <<and-query-usage,And Query Usage>>
-
 * <<bool-dsl-complex-query-usage,Bool Dsl Complex Query Usage>>
 
 * <<bool-query-usage,Bool Query Usage>>
@@ -18,8 +16,6 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 * <<constant-score-query-usage,Constant Score Query Usage>>
 
 * <<dismax-query-usage,Dismax Query Usage>>
-
-* <<filtered-query-usage,Filtered Query Usage>>
 
 * <<common-terms-usage,Common Terms Usage>>
 
@@ -41,11 +37,7 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 * <<indices-query-usage,Indices Query Usage>>
 
-* <<limit-query-usage,Limit Query Usage>>
-
 * <<not-query-usage,Not Query Usage>>
-
-* <<or-query-usage,Or Query Usage>>
 
 * <<geo-bounding-box-query-usage,Geo Bounding Box Query Usage>>
 

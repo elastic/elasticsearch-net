@@ -13,21 +13,21 @@ namespace Nest
 			VisitQuery(qd.MoreLikeThis, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MultiMatch, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.CommonTerms, visitor, (v, d) => v.Visit(d));
-			VisitQuery(qd.Fuzzy, visitor, (v, d) => 
+			VisitQuery(qd.Fuzzy, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IFuzzyStringQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as IFuzzyNumericQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as IFuzzyDateQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
-			VisitQuery(qd.Range, visitor, (v, d) => 
+			VisitQuery(qd.Range, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IDateRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as INumericRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 				VisitQuery(d as ITermRangeQuery, visitor, (vv, dd) => v.Visit(dd));
 			});
-			VisitQuery(qd.GeoShape, visitor, (v, d) => 
+			VisitQuery(qd.GeoShape, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				VisitQuery(d as IGeoIndexedShapeQuery, visitor, (vv, dd) => v.Visit(dd));
@@ -59,21 +59,10 @@ namespace Nest
 			VisitQuery(qd.GeoDistance, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoBoundingBox, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.GeoHashCell, visitor, (v, d) => v.Visit(d));
-			VisitQuery(qd.Limit, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 
 			VisitQuery(qd.Not, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				Accept(v, d.Filters);
-			});
-			VisitQuery(qd.And, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				Accept(v, d.Filters);
-			});
-			VisitQuery(qd.Or, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				Accept(v, d.Filters);
@@ -103,12 +92,6 @@ namespace Nest
 			{
 				v.Visit(d);
 				Accept(v, d.Queries);
-			});
-			VisitQuery(qd.Filtered, visitor, (v, d) =>
-			{
-				visitor.Visit(d);
-				Accept(v, d.Query);
-				Accept(v, d.Filter);
 			});
 			VisitQuery(qd.FunctionScore, visitor, (v, d) =>
 			{
