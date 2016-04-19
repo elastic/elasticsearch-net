@@ -12,13 +12,14 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	public class DynamicResponse : 
-		DynamicObject, 
-		IEquatable<DynamicResponse>, 
-		IEnumerable<string>, 
+	public class DynamicResponse :
+		DynamicObject,
+		IEquatable<DynamicResponse>,
+		IEnumerable<string>,
 		IDictionary<string, object>
 	{
-		protected readonly IDictionary<string, dynamic> BackingDictionary = new Dictionary<string, dynamic>(StringComparer.OrdinalIgnoreCase);
+		protected readonly IDictionary<string, dynamic> BackingDictionary =
+			new Dictionary<string, dynamic>(StringComparer.OrdinalIgnoreCase);
 
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
@@ -34,11 +35,9 @@ namespace Elasticsearch.Net
 		public static DynamicResponse Create(IDictionary<string, object> values)
 		{
 			var instance = new DynamicResponse();
-			
+
 			foreach (var key in values.Keys)
-			{
 				instance[key] = values[key];
-			}
 
 			return instance;
 		}
@@ -62,9 +61,7 @@ namespace Elasticsearch.Net
 		public override bool TryGetMember(GetMemberBinder binder, out object result)
 		{
 			if (!BackingDictionary.TryGetValue(binder.Name, out result))
-			{
 				result = new ElasticsearchDynamicValue(null);
-			}
 
 			return true;
 		}
@@ -108,9 +105,7 @@ namespace Elasticsearch.Net
 
 				dynamic member;
 				if (!BackingDictionary.TryGetValue(name, out member))
-				{
 					member = new ElasticsearchDynamicValue(null);
-				}
 
 				return member;
 			}
@@ -129,12 +124,8 @@ namespace Elasticsearch.Net
 		/// <param name="other">An <see cref="DynamicResponse"/> instance to compare with this instance.</param>
 		public bool Equals(DynamicResponse other)
 		{
-			if (ReferenceEquals(null, other))
-			{
-				return false;
-			}
-
-			return ReferenceEquals(this, other) || Equals(other.BackingDictionary, this.BackingDictionary);
+			return !ReferenceEquals(null, other) &&
+			       (ReferenceEquals(this, other) || Equals(other.BackingDictionary, this.BackingDictionary));
 		}
 
 		/// <summary>
@@ -145,16 +136,12 @@ namespace Elasticsearch.Net
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(null, obj))
-			{
 				return false;
-			}
 
 			if (ReferenceEquals(this, obj))
-			{
 				return true;
-			}
 
-			return obj.GetType() == typeof(DynamicResponse) && this.Equals((DynamicResponse)obj);
+			return obj.GetType() == typeof (DynamicResponse) && this.Equals((DynamicResponse) obj);
 		}
 
 		/// <summary>
@@ -216,8 +203,7 @@ namespace Elasticsearch.Net
 		/// <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
 		public bool TryGetValue(string key, out dynamic value)
 		{
-			if (this.BackingDictionary.TryGetValue(key, out value)) return true;
-			return false;
+			return this.BackingDictionary.TryGetValue(key, out value);
 		}
 
 		/// <summary>
@@ -229,10 +215,7 @@ namespace Elasticsearch.Net
 		/// Gets the number of elements contained in the <see cref="DynamicResponse"/>.
 		/// </summary>
 		/// <returns>The number of elements contained in the <see cref="DynamicResponse"/>.</returns>
-		public int Count
-		{
-			get { return this.BackingDictionary.Count; }
-		}
+		public int Count => this.BackingDictionary.Count;
 
 		/// <summary>
 		/// Determines whether the <see cref="DynamicResponse"/> contains a specific value.
@@ -242,8 +225,7 @@ namespace Elasticsearch.Net
 		/// <param name="item">The object to locate in the <see cref="DynamicResponse"/>.</param>
 		public bool Contains(KeyValuePair<string, dynamic> item)
 		{
-			var dynamicValueKeyValuePair =
-				GetDynamicKeyValuePair(item);
+			var dynamicValueKeyValuePair = GetDynamicKeyValuePair(item);
 
 			return this.BackingDictionary.Contains(dynamicValueKeyValuePair);
 		}
@@ -262,10 +244,7 @@ namespace Elasticsearch.Net
 		/// Gets a value indicating whether the <see cref="DynamicResponse"/> is read-only.
 		/// </summary>
 		/// <returns>Always returns <see langword="false" />.</returns>
-		public bool IsReadOnly
-		{
-			get { return false; }
-		}
+		public bool IsReadOnly => false;
 
 		/// <summary>
 		/// Removes the element with the specified key from the <see cref="DynamicResponse"/>.
@@ -285,8 +264,7 @@ namespace Elasticsearch.Net
 		/// <param name="item">The object to remove from the <see cref="DynamicResponse"/>.</param>
 		public bool Remove(KeyValuePair<string, dynamic> item)
 		{
-			var dynamicValueKeyValuePair =
-				GetDynamicKeyValuePair(item);
+			var dynamicValueKeyValuePair = GetDynamicKeyValuePair(item);
 
 			return this.BackingDictionary.Remove(dynamicValueKeyValuePair);
 		}
@@ -295,16 +273,11 @@ namespace Elasticsearch.Net
 		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicResponse"/>.
 		/// </summary>
 		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicResponse"/>.</returns>
-		public ICollection<dynamic> Values
-		{
-			get { return this.BackingDictionary.Values; }
-		}
+		public ICollection<dynamic> Values => this.BackingDictionary.Values;
 
 		private static KeyValuePair<string, dynamic> GetDynamicKeyValuePair(KeyValuePair<string, dynamic> item)
 		{
-			var dynamicValueKeyValuePair =
-				new KeyValuePair<string, dynamic>(item.Key, new ElasticsearchDynamicValue(item.Value));
-			return dynamicValueKeyValuePair;
+			return new KeyValuePair<string, dynamic>(item.Key, new ElasticsearchDynamicValue(item.Value));
 		}
 
 		private static string GetNeutralKey(string key)

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
 using System;
 
 namespace Elasticsearch.Net
@@ -20,7 +19,7 @@ namespace Elasticsearch.Net
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		public Transport(TConnectionSettings configurationValues)
 			: this(configurationValues, null, null, null)
-		{ }
+		{}
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes
@@ -47,10 +46,12 @@ namespace Elasticsearch.Net
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 		}
 
-		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null,
+			IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = this.PipelineProvider.Create(this.Settings,
+				this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
 				pipeline.FirstPoolUsage(this.Settings.BootstrapLock);
 
@@ -111,10 +112,12 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path,
+			PostData<object> data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
-			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
+			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider,
+				this.MemoryStreamFactory, requestParameters))
 			{
 				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock).ConfigureAwait(false);
 
@@ -200,6 +203,5 @@ namespace Elasticsearch.Net
 				throw;
 			}
 		}
-
 	}
 }
