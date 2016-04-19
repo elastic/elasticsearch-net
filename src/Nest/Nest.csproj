@@ -921,12 +921,10 @@
     <Compile Include="QueryDsl\Abstractions\Query\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryBase.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
-    <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Boosting\BoostingQuery.cs" />
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\Dismax\DismaxQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Filtered\FilteredQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\DecayFunctionBase.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\ExponentialDecayFunctionBase.cs" />
@@ -946,9 +944,7 @@
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
-    <Compile Include="QueryDsl\Compound\Limit\LimitQuery.cs" />
     <Compile Include="QueryDsl\Compound\Not\NotQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Or\OrQuery.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhraseQuery.cs" />
