@@ -6,7 +6,9 @@ using Tests.Framework.MockData;
 
 namespace Tests.QueryDsl.TermLevel.Terms
 {
-	/** 
+#pragma warning disable 618 // DisableCoord and MinimumShouldMatch
+
+	/**
 	* Filters documents that have fields that match any of the provided terms (not analyzed).
 	*
 	* Be sure to read the Elasticsearch documentation on {ref_current}/query-dsl-terms-query.html[Terms query] for more information.
@@ -59,7 +61,7 @@ namespace Tests.QueryDsl.TermLevel.Terms
 	}
 
 	/**[float]
-	*== Single term Terms Query 
+	*== Single term Terms Query
 	*/
 	public class SingleTermTermsQueryUsageTests : TermsQueryUsageTests
 	{
@@ -77,6 +79,4 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Terms("term1")
 			);
 	}
-
-
 }

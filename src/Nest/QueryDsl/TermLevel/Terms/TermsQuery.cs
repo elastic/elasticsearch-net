@@ -10,7 +10,9 @@ namespace Nest
 	[JsonConverter(typeof(TermsQueryJsonConverter))]
 	public interface ITermsQuery : IFieldNameQuery
 	{
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
 		IFieldLookup TermsLookup { get; set; }
@@ -19,7 +21,9 @@ namespace Nest
 	public class TermsQuery : FieldNameQueryBase, ITermsQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		public bool? DisableCoord { get; set; }
 		public IEnumerable<object> Terms { get; set; }
 		public IFieldLookup TermsLookup { get; set; }
@@ -54,7 +58,9 @@ namespace Nest
 		, ITermsQuery where T : class
 	{
 		protected override bool Conditionless => TermsQuery.IsConditionless(this);
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		MinimumShouldMatch ITermsQuery.MinimumShouldMatch { get; set; }
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
 		IFieldLookup ITermsQuery.TermsLookup { get; set; }
@@ -62,8 +68,10 @@ namespace Nest
 		public TermsQueryDescriptor<T> TermsLookup<TOther>(Func<FieldLookupDescriptor<TOther>, IFieldLookup> selector)
 			where TOther : class => Assign(a => a.TermsLookup = selector(new FieldLookupDescriptor<TOther>()));
 
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		public TermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minMatch) => Assign(a => a.MinimumShouldMatch = minMatch);
 
+		[Obsolete("Will be removed in 5.0. Use bool query instead")]
 		public TermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 
 		public TermsQueryDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Terms = terms?.Cast<object>());
