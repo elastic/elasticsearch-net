@@ -1,4 +1,5 @@
-﻿using Nest.Resolvers.Converters;
+﻿using System;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -8,6 +9,8 @@ namespace Nest
 	{
 		bool Auto { get;  }
 		int? EditDistance { get;  }
+
+		[Obsolete("Deprecated in Elasticsearch 2.0")]
 		double? Ratio { get;  }
 	}
 }

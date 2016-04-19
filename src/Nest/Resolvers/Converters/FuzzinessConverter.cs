@@ -15,8 +15,10 @@ namespace Nest.Resolvers.Converters
 		{
 			var v = value as IFuzziness;
 			if (v.Auto) writer.WriteValue("AUTO"); 
-			else if (v.EditDistance.HasValue) writer.WriteValue(v.EditDistance.Value); 
+			else if (v.EditDistance.HasValue) writer.WriteValue(v.EditDistance.Value);
+#pragma warning disable 618
 			else if (v.Ratio.HasValue) writer.WriteValue(v.Ratio.Value);
+#pragma warning restore 618
 			else writer.WriteNull(); 
 		}
 
@@ -32,7 +34,9 @@ namespace Nest.Resolvers.Converters
 			if (reader.TokenType == JsonToken.Float)
 			{
 				var ratio = (reader.Value as double?).GetValueOrDefault(0);
+#pragma warning disable 618
 				return Fuzziness.Ratio(ratio);
+#pragma warning restore 618
 			}
 			return null;
 		}

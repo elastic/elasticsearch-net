@@ -93,7 +93,9 @@ namespace Nest.Tests.Unit.Search.Suggest
 			var completionSuggestDescriptor = new CompletionSuggestDescriptor<ElasticsearchProject>()
 				.OnField("suggest")
 				.Text("n")
+#pragma warning disable 618
 				.Fuzzy(f => f.Fuzziness(0.4));
+#pragma warning restore 618
 
 			var json = TestElasticClient.Serialize(completionSuggestDescriptor);
 

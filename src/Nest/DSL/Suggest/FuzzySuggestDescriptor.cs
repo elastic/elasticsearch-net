@@ -59,6 +59,8 @@ namespace Nest
 			Self.Fuzziness = Nest.Fuzziness.EditDistance(editDistance);
 			return this;
 		}
+
+		[Obsolete("Deprecated in Elasticsearch 2.0")]
 		public FuzzySuggestDescriptor<T> Fuzziness(double ratio)
 		{
 			Self.Fuzziness = Nest.Fuzziness.Ratio(ratio);
