@@ -6,7 +6,7 @@ namespace Nest
 	{
 		IDateProperty Self => this;
 
-		NonStringIndexOption? IDateProperty.Index { get; set; }
+		bool? IDateProperty.Index { get; set; }
 		double? IDateProperty.Boost { get; set; }
 		DateTime? IDateProperty.NullValue { get; set; }
 		bool? IDateProperty.IncludeInAll { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 		NumericResolutionUnit? IDateProperty.NumericResolution { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
 
-		public NonStringIndexOption Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
+		public bool Index { get { return Self.Index.GetValueOrDefault(); } set { Self.Index = value; } }
 		public double Boost { get { return Self.Boost.GetValueOrDefault(); } set { Self.Boost = value; } }
 		public DateTime NullValue { get { return Self.NullValue.GetValueOrDefault(); } set { Self.NullValue = value; } }
 		public bool IncludeInAll { get { return Self.IncludeInAll.GetValueOrDefault(); } set { Self.IncludeInAll = value; } }
@@ -26,5 +26,5 @@ namespace Nest
 		public NumericResolutionUnit NumericResolution { get { return Self.NumericResolution.GetValueOrDefault(); } set { Self.NumericResolution = value; } }
 
 		public DateAttribute() : base("date") { }
-	}	
+	}
 }

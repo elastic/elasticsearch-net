@@ -10,7 +10,7 @@ namespace Tests.Mapping.Types.Core.Number
 			IndexName = "myindex",
 			Similarity = SimilarityOption.Classic,
 			Store = true,
-			Index = NonStringIndexOption.No,
+			Index = false,
 			Boost = 1.5,
 			NullValue = 0.0,
 			IncludeInAll = false,
@@ -61,7 +61,7 @@ namespace Tests.Mapping.Types.Core.Number
 					index_name = "myindex",
 					similarity = "classic",
 					store = true,
-					index = "no",
+					index = false,
 					boost = 1.5,
 					null_value = 0.0,
 					include_in_all = false,
@@ -131,7 +131,7 @@ namespace Tests.Mapping.Types.Core.Number
 				.IndexName("myindex")
 				.Similarity(SimilarityOption.Classic)
 				.Store()
-				.Index(NonStringIndexOption.No)
+				.Index(false)
 				.Boost(1.5)
 				.NullValue(0.0)
 				.IncludeInAll(false)

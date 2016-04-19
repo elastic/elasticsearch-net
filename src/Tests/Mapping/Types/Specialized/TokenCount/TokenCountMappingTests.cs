@@ -6,7 +6,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 	public class TokenCountTest
 	{
 		[TokenCount(
-			Index = NonStringIndexOption.No,
+			Index = false,
 			Boost = 1.2,
 			NullValue = 0,
 			IncludeInAll = true,
@@ -28,7 +28,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 				full = new
 				{
 					type = "token_count",
-					index = "no",
+					index = false,
 					boost = 1.2,
 					null_value = 0.0,
 					include_in_all = true,
@@ -46,7 +46,7 @@ namespace Tests.Mapping.Types.Specialized.TokenCount
 		protected override Func<PropertiesDescriptor<TokenCountTest>, IPromise<IProperties>> FluentProperties => p => p
 			.TokenCount(t => t
 				.Name(o => o.Full)
-				.Index(NonStringIndexOption.No)
+				.Index(false)
 				.Boost(1.2)
 				.NullValue(0)
 				.IncludeInAll()

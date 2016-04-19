@@ -6,7 +6,7 @@ namespace Nest
 	public interface IIpProperty : IProperty
 	{
 		[JsonProperty("index")]
-		NonStringIndexOption? Index { get; set; }
+		bool? Index { get; set; }
 
 		[JsonProperty("precision_step")]
 		int? PrecisionStep { get; set; }
@@ -27,7 +27,7 @@ namespace Nest
 
 		public double? Boost { get; set; }
 		public bool? IncludeInAll { get; set; }
-		public NonStringIndexOption? Index { get; set; }
+		public bool? Index { get; set; }
 		public string NullValue { get; set; }
 		public int? PrecisionStep { get; set; }
 	}
@@ -36,7 +36,7 @@ namespace Nest
 		: PropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
 		where T : class
 	{
-		NonStringIndexOption? IIpProperty.Index { get; set; }
+		bool? IIpProperty.Index { get; set; }
 		int? IIpProperty.PrecisionStep { get; set; }
 		double? IIpProperty.Boost { get; set; }
 		string IIpProperty.NullValue { get; set; }
@@ -44,7 +44,7 @@ namespace Nest
 
 		public IpPropertyDescriptor() : base("ip") { }
 
-		public IpPropertyDescriptor<T> Index(NonStringIndexOption? index) => Assign(a => a.Index = index);
+		public IpPropertyDescriptor<T> Index(bool index) => Assign(a => a.Index = index);
 
 		public IpPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 

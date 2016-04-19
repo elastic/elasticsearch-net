@@ -6,7 +6,7 @@ namespace Tests.Mapping.Types.Specialized.Ip
 	public class IpTest
 	{
 		[Ip(
-			Index = NonStringIndexOption.No,
+			Index = false,
 			PrecisionStep = 4,
 			Boost = 1.3,
 			NullValue = "127.0.0.1",
@@ -26,7 +26,7 @@ namespace Tests.Mapping.Types.Specialized.Ip
 				full = new
 				{
 					type = "ip",
-					index = "no",
+					index = false,
 					precision_step = 4,
 					boost = 1.3,
 					null_value = "127.0.0.1",
@@ -42,7 +42,7 @@ namespace Tests.Mapping.Types.Specialized.Ip
 		protected override Func<PropertiesDescriptor<IpTest>, IPromise<IProperties>> FluentProperties => p => p
 			.Ip(s => s
 				.Name(o => o.Full)
-				.Index(NonStringIndexOption.No)
+				.Index(false)
 				.PrecisionStep(4)
 				.Boost(1.3)
 				.NullValue("127.0.0.1")

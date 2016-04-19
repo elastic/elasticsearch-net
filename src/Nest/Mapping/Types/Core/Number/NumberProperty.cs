@@ -7,7 +7,7 @@ namespace Nest
 	public interface INumberProperty : IProperty
 	{
 		[JsonProperty("index")]
-		NonStringIndexOption? Index { get; set; }
+		bool? Index { get; set; }
 
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
@@ -37,7 +37,7 @@ namespace Nest
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }
 		protected NumberProperty(string type) : base(type) { }
 
-		public NonStringIndexOption? Index { get; set; }
+		public bool? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
@@ -53,11 +53,11 @@ namespace Nest
 		where TInterface : class, INumberProperty
 		where T : class
 	{
-		public NumberPropertyDescriptorBase() : base("double") { }
+		protected NumberPropertyDescriptorBase() : base("double") { }
 
 		protected NumberPropertyDescriptorBase(string type) : base(type) { }
 
-		NonStringIndexOption? INumberProperty.Index { get; set; }
+		bool? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
 		double? INumberProperty.NullValue { get; set; }
 		bool? INumberProperty.IncludeInAll { get; set; }
@@ -68,7 +68,7 @@ namespace Nest
 
 		public TDescriptor Type(NumberType type) => Assign(a => a.Type = type.GetStringValue());
 
-		public TDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+		public TDescriptor Index(bool index) => Assign(a => a.Index = index);
 
 		public TDescriptor Boost(double boost) => Assign(a => a.Boost = boost);
 
@@ -86,7 +86,7 @@ namespace Nest
 			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}
 
-	public class NumberPropertyDescriptor<T> 
+	public class NumberPropertyDescriptor<T>
 		: NumberPropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
 		where T : class
 	{

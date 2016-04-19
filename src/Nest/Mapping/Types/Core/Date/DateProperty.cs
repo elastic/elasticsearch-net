@@ -7,7 +7,7 @@ namespace Nest
 	public interface IDateProperty : IProperty
 	{
 		[JsonProperty("index")]
-		NonStringIndexOption? Index { get; set; }
+		bool? Index { get; set; }
 
 		[JsonProperty("boost")]
         double? Boost { get; set; }
@@ -20,13 +20,13 @@ namespace Nest
 
 		[JsonProperty("precision_step")]
 		int? PrecisionStep { get; set; }
-		
+
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
-		
+
 		[JsonProperty("format")]
 		string Format { get; set; }
-		
+
 		[JsonProperty("numeric_resolution")]
         NumericResolutionUnit? NumericResolution { get; set; }
 
@@ -38,7 +38,7 @@ namespace Nest
 	{
 		public DateProperty() : base("date") { }
 
-		public NonStringIndexOption? Index { get; set; }
+		public bool? Index { get; set; }
 		public double? Boost { get; set; }
 		public DateTime? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
@@ -49,11 +49,11 @@ namespace Nest
 		public INumericFielddata Fielddata { get; set; }
 	}
 
-	public class DatePropertyDescriptor<T> 
+	public class DatePropertyDescriptor<T>
 		: PropertyDescriptorBase<DatePropertyDescriptor<T>, IDateProperty, T>, IDateProperty
 		where T : class
 	{
-		NonStringIndexOption? IDateProperty.Index { get; set; }
+		bool? IDateProperty.Index { get; set; }
 		double? IDateProperty.Boost { get; set; }
 		DateTime? IDateProperty.NullValue { get; set; }
 		bool? IDateProperty.IncludeInAll { get; set; }
@@ -65,7 +65,7 @@ namespace Nest
 
 		public DatePropertyDescriptor() : base("date") { }
 
-		public DatePropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+		public DatePropertyDescriptor<T> Index(bool index) => Assign(a => a.Index = index);
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);
 		public DatePropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
