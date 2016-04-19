@@ -56,7 +56,7 @@ namespace Tests.Mapping.Types.Core.Number
 			{
 				full = new
 				{
-					type = "double",
+					type = "float",
 					doc_values = true,
 					index_name = "myindex",
 					similarity = "classic",
@@ -71,7 +71,7 @@ namespace Tests.Mapping.Types.Core.Number
 				},
 				minimal = new
 				{
-					type = "double"
+					type = "float"
 				},
 				@byte = new
 				{
@@ -176,13 +176,14 @@ namespace Tests.Mapping.Types.Core.Number
 			)
 			.Number(d => d
 				.Name(o => o.Float)
-				.Type(NumberType.Float)
 			)
 			.Number(d => d
 				.Name(o => o.Double)
+				.Type(NumberType.Double)
 			)
 			.Number(d => d
 				.Name(o => o.Decimal)
+				.Type(NumberType.Double)
 			)
 			.Number(d => d
 				.Name(o => o.TimeSpan)

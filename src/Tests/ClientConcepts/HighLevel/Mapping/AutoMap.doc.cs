@@ -11,7 +11,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 	/**
 	* [[auto-map]]
 	* == Auto mapping properties
-	 * 
+	 *
 	 * When creating a mapping (either when creating an index or via the put mapping API),
 	* NEST offers a feature called `.AutoMap()`, which will automagically infer the correct
 	 * Elasticsearch datatypes of the POCO properties you are mapping.  Alternatively, if
@@ -134,8 +134,8 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 				);
 
 			/**
-			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-			* In this example, 
+			* Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
+			* In this example,
 			* - Birthday was mapped as a `date`,
 			* - Hours was mapped as a `long` (ticks)
 			* - IsManager was mapped as a `bool`,
@@ -551,7 +551,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 								coerce = true,
 								doc_values = false,
 								ignore_malformed = true,
-								type = "double"
+								type = "float"
 							}
 						}
 					}

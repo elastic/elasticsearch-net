@@ -33,7 +33,7 @@ namespace Nest
 
 	public class NumberProperty : PropertyBase, INumberProperty
 	{
-		public NumberProperty() : base(NumberType.Double.GetStringValue()) { }
+		public NumberProperty() : base(NumberType.Float.GetStringValue()) { }
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }
 		protected NumberProperty(string type) : base(type) { }
 
@@ -53,7 +53,7 @@ namespace Nest
 		where TInterface : class, INumberProperty
 		where T : class
 	{
-		protected NumberPropertyDescriptorBase() : base("double") { }
+		protected NumberPropertyDescriptorBase() : base("float") { }
 
 		protected NumberPropertyDescriptorBase(string type) : base(type) { }
 

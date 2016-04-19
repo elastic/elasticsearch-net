@@ -1,5 +1,9 @@
 ﻿namespace Nest
 {
+	/// <summary>
+	/// Maps a property as a number type. If no type is specified,
+	/// the default type is float (single precision floating point).
+	/// </summary>
 	public class NumberAttribute : ElasticsearchPropertyAttributeBase, INumberProperty
 	{
 		INumberProperty Self => this;
@@ -23,6 +27,6 @@
 
 		public NumberAttribute(NumberType type) : base(type.GetStringValue()) { }
 		protected NumberAttribute(string type) : base(type) { }
-		public NumberAttribute() : base(NumberType.Double.GetStringValue()) { }
+		public NumberAttribute() : base(NumberType.Float.GetStringValue()) { }
 	}
 }

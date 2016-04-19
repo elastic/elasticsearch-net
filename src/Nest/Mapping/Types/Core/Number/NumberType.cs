@@ -7,8 +7,6 @@ namespace Nest
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum NumberType
 	{
-		[EnumMember(Value = "default")]
-		Default,
 		[EnumMember(Value = "float")]
 		Float,
 		[EnumMember(Value = "double")]
