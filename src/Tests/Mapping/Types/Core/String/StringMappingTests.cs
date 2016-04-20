@@ -15,7 +15,7 @@ namespace Tests.Mapping.Types.Core.String
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
 			// Purposely setting this obsolete property to ensure it serializes as position_increment_gap
-			PositionOffsetGap = 5,
+			PositionIncrementGap = 5,
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
@@ -25,11 +25,11 @@ namespace Tests.Mapping.Types.Core.String
 		[String]
 		public string Minimal { get; set; }
 
-        public string Inferred { get; set; }
+		public string Inferred { get; set; }
 
-        public char Char { get; set; }
+		public char Char { get; set; }
 
-        public Guid Guid { get; set; }
+		public Guid Guid { get; set; }
 	}
 
 	public class StringMappingTests : TypeMappingTestBase<StringTest>
@@ -59,15 +59,15 @@ namespace Tests.Mapping.Types.Core.String
 				{
 					type = "string"
 				},
-                inferred = new
+				inferred = new
 				{
 					type = "string"
 				},
-                @char = new
+				@char = new
 				{
 					type = "string"
 				},
-                guid = new
+				guid = new
 				{
 					type = "string"
 				}
@@ -94,13 +94,13 @@ namespace Tests.Mapping.Types.Core.String
 			.String(s => s
 				.Name(o => o.Minimal)
 			)
-            .String(s => s
+			.String(s => s
 				.Name(o => o.Inferred)
 			)
-            .String(s => s
+			.String(s => s
 				.Name(o => o.Char)
 			)
-            .String(s => s
+			.String(s => s
 				.Name(o => o.Guid)
 			);
 

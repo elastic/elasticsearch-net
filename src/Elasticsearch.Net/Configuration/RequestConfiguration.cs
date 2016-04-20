@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	public interface IRequestConfiguration 
+	public interface IRequestConfiguration
 	{
 		/// <summary>
 		/// The timeout for this specific request, takes precedence over the global timeout settings
@@ -20,7 +20,7 @@ namespace Elasticsearch.Net
 		/// Force a difference content type header on the request
 		/// </summary>
 		string ContentType { get; set; }
-		
+
 		/// <summary>
 		/// This will override whatever is set on the connection configuration or whatever default the connectionpool has.
 		/// </summary>
@@ -32,13 +32,13 @@ namespace Elasticsearch.Net
 		Uri ForceNode { get; set; }
 
 		/// <summary>
-		/// Forces no sniffing to occur on the request no matter what configuration is in place 
+		/// Forces no sniffing to occur on the request no matter what configuration is in place
 		/// globally
 		/// </summary>
 		bool? DisableSniff { get; set; }
 
 		/// <summary>
-		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with 
+		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with
 		/// low connect timeout will be tried first in normal circumstances
 		/// </summary>
 		bool? DisablePing { get; set; }
@@ -63,6 +63,12 @@ namespace Elasticsearch.Net
 		/// The cancellation token to use to internally to cancel async operations
 		/// </summary>
 		CancellationToken CancellationToken { get; set; }
+
+		/// <summary>
+		/// Submit the request on behalf in the context of a different shield user
+		/// <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// </summary>
+		string RunAs { get; set; }
 	}
 
 	public class RequestConfiguration : IRequestConfiguration
@@ -78,33 +84,55 @@ namespace Elasticsearch.Net
 		public BasicAuthenticationCredentials BasicAuthenticationCredentials { get; set; }
 		public bool EnableHttpPipelining { get; set; } = true;
 		public CancellationToken CancellationToken { get; set; }
+		/// <summary>
+		/// Submit the request on behalf in the context of a different user
+		/// https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// </summary>
+		public string RunAs { get; set; }
 	}
 
 	public class RequestConfigurationDescriptor : IRequestConfiguration
 	{
+
 		private IRequestConfiguration Self => this;
-
 		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
-
 		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
-	
 		string IRequestConfiguration.ContentType { get; set; }
-		
 		int? IRequestConfiguration.MaxRetries { get; set; }
-		
 		Uri IRequestConfiguration.ForceNode { get; set; }
-		
 		bool? IRequestConfiguration.DisableSniff { get; set; }
-		
 		bool? IRequestConfiguration.DisablePing { get; set; }
-		
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
-
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
-
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
-
 		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
+		string IRequestConfiguration.RunAs { get; set; }
+
+		public RequestConfigurationDescriptor(IRequestConfiguration config)
+		{
+			Self.RequestTimeout = config?.RequestTimeout;
+			Self.PingTimeout = config?.PingTimeout;
+			Self.ContentType = config?.ContentType;
+			Self.MaxRetries = config?.MaxRetries;
+			Self.ForceNode = config?.ForceNode;
+			Self.DisableSniff = config?.DisableSniff;
+			Self.DisablePing = config?.DisablePing;
+			Self.AllowedStatusCodes = config?.AllowedStatusCodes;
+			Self.BasicAuthenticationCredentials = config?.BasicAuthenticationCredentials;
+			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
+			Self.CancellationToken = config?.CancellationToken ?? default(CancellationToken);
+			Self.RunAs = config?.RunAs;
+		}
+
+		/// <summary>
+		/// Submit the request on behalf in the context of a different shield user
+		/// <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+		/// </summary>
+		public RequestConfigurationDescriptor RunAs(string username)
+		{
+			Self.RunAs = username;
+			return this;
+		}
 
 		public RequestConfigurationDescriptor RequestTimeout(TimeSpan requestTimeout)
 		{
@@ -168,7 +196,7 @@ namespace Elasticsearch.Net
 		{
 			if (Self.BasicAuthenticationCredentials == null)
 				Self.BasicAuthenticationCredentials = new BasicAuthenticationCredentials();
-			Self.BasicAuthenticationCredentials.UserName = userName;
+			Self.BasicAuthenticationCredentials.Username = userName;
 			Self.BasicAuthenticationCredentials.Password = password;
 			return this;
 		}

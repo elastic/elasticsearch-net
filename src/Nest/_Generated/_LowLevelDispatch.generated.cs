@@ -3232,5 +3232,235 @@ namespace Nest
 			throw InvalidDispatch("LicensePost", p, new [] { PUT }, "/_license");
 		}
 		
+		internal ElasticsearchResponse<T> ShieldAuthenticateDispatch<T>(IRequest<AuthenticateRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ShieldAuthenticate<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldAuthenticate", p, new [] { GET }, "/_shield/authenticate");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldAuthenticateDispatchAsync<T>(IRequest<AuthenticateRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.ShieldAuthenticateAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldAuthenticate", p, new [] { GET }, "/_shield/authenticate");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldClearCachedRealmsDispatch<T>(IRequest<ClearCachedRealmsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.ShieldClearCachedRealms<T>(p.RouteValues.Realms,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldClearCachedRealms", p, new [] { POST }, "/_shield/realm/{realms}/_clear_cache");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldClearCachedRealmsDispatchAsync<T>(IRequest<ClearCachedRealmsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Realms)) return _lowLevel.ShieldClearCachedRealmsAsync<T>(p.RouteValues.Realms,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldClearCachedRealms", p, new [] { POST }, "/_shield/realm/{realms}/_clear_cache");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldClearCachedRolesDispatch<T>(IRequest<ClearCachedRolesRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRoles<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST }, "/_shield/role/{name}/_clear_cache");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldClearCachedRolesDispatchAsync<T>(IRequest<ClearCachedRolesRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRolesAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST }, "/_shield/role/{name}/_clear_cache");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldDeleteRoleDispatch<T>(IRequest<DeleteRoleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldDeleteRole<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldDeleteRole", p, new [] { DELETE }, "/_shield/role/{name}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldDeleteRoleDispatchAsync<T>(IRequest<DeleteRoleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldDeleteRoleAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldDeleteRole", p, new [] { DELETE }, "/_shield/role/{name}");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldDeleteUserDispatch<T>(IRequest<DeleteUserRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldDeleteUser<T>(p.RouteValues.Username,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldDeleteUser", p, new [] { DELETE }, "/_shield/user/{username}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldDeleteUserDispatchAsync<T>(IRequest<DeleteUserRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case DELETE:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldDeleteUserAsync<T>(p.RouteValues.Username,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldDeleteUser", p, new [] { DELETE }, "/_shield/user/{username}");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldGetRoleDispatch<T>(IRequest<GetRoleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.ShieldGetRole<T>(p.RouteValues.Name,u => p.RequestParameters);
+					return _lowLevel.ShieldGetRole<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldGetRole", p, new [] { GET }, "/_shield/role/{name}", "/_shield/role");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldGetRoleDispatchAsync<T>(IRequest<GetRoleRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Name)) return _lowLevel.ShieldGetRoleAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
+					return _lowLevel.ShieldGetRoleAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldGetRole", p, new [] { GET }, "/_shield/role/{name}", "/_shield/role");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldGetUserDispatch<T>(IRequest<GetUserRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.ShieldGetUser<T>(p.RouteValues.Username,u => p.RequestParameters);
+					return _lowLevel.ShieldGetUser<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldGetUser", p, new [] { GET }, "/_shield/user/{username}", "/_shield/user");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldGetUserDispatchAsync<T>(IRequest<GetUserRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.RouteValues.Username)) return _lowLevel.ShieldGetUserAsync<T>(p.RouteValues.Username,u => p.RequestParameters);
+					return _lowLevel.ShieldGetUserAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("ShieldGetUser", p, new [] { GET }, "/_shield/user/{username}", "/_shield/user");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldPutRoleDispatch<T>(IRequest<PutRoleRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldPutRole<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldPutRolePost<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldPutRole", p, new [] { PUT, POST }, "/_shield/role/{name}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldPutRoleDispatchAsync<T>(IRequest<PutRoleRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldPutRoleAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldPutRolePostAsync<T>(p.RouteValues.Name,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldPutRole", p, new [] { PUT, POST }, "/_shield/role/{name}");
+		}
+		
+		internal ElasticsearchResponse<T> ShieldPutUserDispatch<T>(IRequest<PutUserRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldPutUser<T>(p.RouteValues.Username,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldPutUserPost<T>(p.RouteValues.Username,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldPutUser", p, new [] { PUT, POST }, "/_shield/user/{username}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> ShieldPutUserDispatchAsync<T>(IRequest<PutUserRequestParameters> p , PostData<object> body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldPutUserAsync<T>(p.RouteValues.Username,body,u => p.RequestParameters);
+					break;
+
+				case POST:
+					if (AllSetNoFallback(p.RouteValues.Username)) return _lowLevel.ShieldPutUserPostAsync<T>(p.RouteValues.Username,body,u => p.RequestParameters);
+					break;
+
+			}
+			throw InvalidDispatch("ShieldPutUser", p, new [] { PUT, POST }, "/_shield/user/{username}");
+		}
+		
 	}	
 }

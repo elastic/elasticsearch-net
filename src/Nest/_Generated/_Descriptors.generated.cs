@@ -4924,4 +4924,167 @@ namespace Nest
 		public PostLicenseDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
+	
+	///<summary>descriptor for ShieldAuthenticate <pre>Retrieve details about the currently authenticated user</pre></summary>
+	public partial class AuthenticateDescriptor  : RequestDescriptorBase<AuthenticateDescriptor,AuthenticateRequestParameters, IAuthenticateRequest>, IAuthenticateRequest
+	{ 
+			
+		///<summary>The URL-encoded request definition</summary>
+		public AuthenticateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AuthenticateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldClearCachedRealms <pre>Clears the internal user caches for specified realms</pre></summary>
+	public partial class ClearCachedRealmsDescriptor  : RequestDescriptorBase<ClearCachedRealmsDescriptor,ClearCachedRealmsRequestParameters, IClearCachedRealmsRequest>, IClearCachedRealmsRequest
+	{ 
+		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
+			/// <summary>/_shield/realm/{realms}/_clear_cache</summary>
+///<param name="realms"> this parameter is required</param>
+		public ClearCachedRealmsDescriptor(Names realms) : base(r=>r.Required("realms", realms)){}
+		
+
+		
+		///<summary>Comma-separated list of usernames to clear from the cache</summary>
+		public ClearCachedRealmsDescriptor Usernames(params string[] usernames) => AssignParam(p=>p.Usernames(usernames));
+
+		///<summary>The URL-encoded request definition</summary>
+		public ClearCachedRealmsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearCachedRealmsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldClearCachedRoles <pre>Clears the internal caches for specified roles</pre></summary>
+	public partial class ClearCachedRolesDescriptor  : RequestDescriptorBase<ClearCachedRolesDescriptor,ClearCachedRolesRequestParameters, IClearCachedRolesRequest>, IClearCachedRolesRequest
+	{ 
+		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_shield/role/{name}/_clear_cache</summary>
+///<param name="name"> this parameter is required</param>
+		public ClearCachedRolesDescriptor(Names name) : base(r=>r.Required("name", name)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ClearCachedRolesDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearCachedRolesDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldDeleteRole <pre>Remove a role from the native shield realm</pre></summary>
+	public partial class DeleteRoleDescriptor  : RequestDescriptorBase<DeleteRoleDescriptor,DeleteRoleRequestParameters, IDeleteRoleRequest>, IDeleteRoleRequest
+	{ 
+		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_shield/role/{name}</summary>
+///<param name="name"> this parameter is required</param>
+		public DeleteRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldDeleteUser <pre>Remove a user from the native shield realm</pre></summary>
+	public partial class DeleteUserDescriptor  : RequestDescriptorBase<DeleteUserDescriptor,DeleteUserRequestParameters, IDeleteUserRequest>, IDeleteUserRequest
+	{ 
+		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_shield/user/{username}</summary>
+///<param name="username"> this parameter is required</param>
+		public DeleteUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldGetRole <pre>Retrieve one or more roles from the native shield realm</pre></summary>
+	public partial class GetRoleDescriptor  : RequestDescriptorBase<GetRoleDescriptor,GetRoleRequestParameters, IGetRoleRequest>, IGetRoleRequest
+	{ 
+		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_shield/role/{name}</summary>
+		public GetRoleDescriptor() : base(){}
+		
+
+			///<summary>Role name</summary>
+		public GetRoleDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+
+	
+		///<summary>The URL-encoded request definition</summary>
+		public GetRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
+	public partial class GetUserDescriptor  : RequestDescriptorBase<GetUserDescriptor,GetUserRequestParameters, IGetUserRequest>, IGetUserRequest
+	{ 
+		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+			/// <summary>/_shield/user/{username}</summary>
+		public GetUserDescriptor() : base(){}
+		
+
+			///<summary>A comma-separated list of usernames</summary>
+		public GetUserDescriptor Username(Names username) => Assign(a=>a.RouteValues.Optional("username", username));
+
+	
+		///<summary>The URL-encoded request definition</summary>
+		public GetUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldPutRole <pre>Update or create a role for the native shield realm</pre></summary>
+	public partial class PutRoleDescriptor  : RequestDescriptorBase<PutRoleDescriptor,PutRoleRequestParameters, IPutRoleRequest>, IPutRoleRequest
+	{ 
+		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_shield/role/{name}</summary>
+///<param name="name"> this parameter is required</param>
+		public PutRoleDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutRoleDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutRoleDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for ShieldPutUser <pre>Update or create a user for the native shield realm</pre></summary>
+	public partial class PutUserDescriptor  : RequestDescriptorBase<PutUserDescriptor,PutUserRequestParameters, IPutUserRequest>, IPutUserRequest
+	{ 
+		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_shield/user/{username}</summary>
+///<param name="username"> this parameter is required</param>
+		public PutUserDescriptor(Name username) : base(r=>r.Required("username", username)){}
+		
+
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutUserDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutUserDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
 }

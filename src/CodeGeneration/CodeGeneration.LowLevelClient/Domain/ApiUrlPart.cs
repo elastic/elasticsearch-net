@@ -29,7 +29,12 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "repository":
 					case "snapshot":
 					case "lang":
-					case "name": return this.Type == "string" ? "Name" : "Names";
+					case "username":
+					case "usernames":
+					case "realm":
+					case "realms":
+					case "name":
+						return this.Type == "string" ? "Name" : "Names";
 					case "task_id": return "TaskId";
 					default: return this.Type + "_";
 				}

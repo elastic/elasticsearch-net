@@ -83,6 +83,7 @@ namespace Tests.Framework
 		public static UrlTester GET(string url) =>  new UrlTester(HttpMethod.GET, url);
 		public static UrlTester HEAD(string url) =>  new UrlTester(HttpMethod.HEAD, url);
 		public static UrlTester DELETE(string url) =>  new UrlTester(HttpMethod.DELETE, url);
+		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 	}
 
 	public class IntermediateUrlTester
