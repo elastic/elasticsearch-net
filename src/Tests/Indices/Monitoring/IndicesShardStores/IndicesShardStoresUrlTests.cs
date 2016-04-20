@@ -11,7 +11,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 	{
 		[U] public async Task Urls()
 		{
-			await GET($"/_shard_stores")
+			await GET("/_shard_stores")
 				.Fluent(c => c.IndicesShardStores())
 				.Request(c => c.IndicesShardStores(new IndicesShardStoresRequest()))
 				.FluentAsync(c => c.IndicesShardStoresAsync())
@@ -19,7 +19,7 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 				;
 
 			var index = "index1,index2";
-			await GET($"/index1%2Cindex2/_shard_stores")
+			await GET("/index1%2Cindex2/_shard_stores")
 				.Fluent(c => c.IndicesShardStores(s=>s.Index(index)))
 				.Request(c => c.IndicesShardStores(new IndicesShardStoresRequest(index)))
 				.FluentAsync(c => c.IndicesShardStoresAsync(s=>s.Index(index)))
