@@ -767,8 +767,6 @@
     <Compile Include="Mapping\MetaFields\Source\SourceField.cs" />
     <Compile Include="Mapping\MetaFields\Timestamp\TimestampField.cs" />
     <Compile Include="Mapping\MetaFields\Ttl\TtlField.cs" />
-    <Compile Include="Mapping\Norms\Norms.cs" />
-    <Compile Include="Mapping\Norms\NormsLoading.cs" />
     <Compile Include="Mapping\PropertyMapping.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />

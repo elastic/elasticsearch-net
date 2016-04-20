@@ -17,7 +17,8 @@ namespace Tests.Mapping.Types.Core.Text
 			SearchAnalyzer = "mysearchanalyzer",
 			SearchQuoteAnalyzer = "mysearchquoteanalyzer",
 			Similarity = SimilarityOption.Classic,
-			Store = true)]
+			Store = true,
+			Norms = false)]
 		public string Full { get; set; }
 
 		[Text]
@@ -48,7 +49,8 @@ namespace Tests.Mapping.Types.Core.Text
 					search_analyzer = "mysearchanalyzer",
 					search_quote_analyzer = "mysearchquoteanalyzer",
 					similarity = "classic",
-					store = true
+					store = true,
+					norms = false
 				},
 				minimal = new
 				{
@@ -83,6 +85,7 @@ namespace Tests.Mapping.Types.Core.Text
 				.SearchQuoteAnalyzer("mysearchquoteanalyzer")
 				.Similarity(SimilarityOption.Classic)
 				.Store()
+				.Norms(false)
 			)
 			.Text(s => s
 				.Name(o => o.Minimal)
@@ -95,21 +98,14 @@ namespace Tests.Mapping.Types.Core.Text
 				full = new
 				{
 					type = "text",
-					norms = new
-					{
-						enabled = true,
-						loading = "lazy"
-					}
+					norms = true
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<TextTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.Text(s => s
 				.Name(o => o.Full)
-				.Norms(n => n
-					.Enabled()
-					.Loading(NormsLoading.Lazy)
-				)
+				.Norms()
 			);
 	}
 }

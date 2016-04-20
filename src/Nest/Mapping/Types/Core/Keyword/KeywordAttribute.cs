@@ -16,7 +16,7 @@ namespace Nest
 		bool? IKeywordProperty.IncludeInAll { get; set; }
 		bool? IKeywordProperty.Index { get; set; }
 		IndexOptions? IKeywordProperty.IndexOptions { get; set; }
-		INorms IKeywordProperty.Norms { get; set; }
+		bool? IKeywordProperty.Norms { get; set; }
 		string IKeywordProperty.NullValue { get; set; }
 		string IKeywordProperty.SearchAnalyzer { get; set; }
 
@@ -28,6 +28,7 @@ namespace Nest
 		public IndexOptions IndexOptions { get { return Self.IndexOptions.GetValueOrDefault(); } set { Self.IndexOptions = value; } }
 		public string NullValue { get { return Self.NullValue; } set { Self.NullValue = value; } }
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
+		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
 
 		public KeywordAttribute() : base("keyword") { }
 	}

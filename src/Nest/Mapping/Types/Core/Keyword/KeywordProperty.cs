@@ -28,9 +28,8 @@ namespace Nest
 		[JsonProperty("index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		// TODO should this be bool?
 		[JsonProperty("norms")]
-		INorms Norms { get; set; }
+		bool? Norms { get; set; }
 
 		[JsonProperty("null_value")]
 		string NullValue { get; set; }
@@ -49,7 +48,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
-		public INorms Norms { get; set; }
+		public bool? Norms { get; set; }
 		public string NullValue { get; set; }
 		public string SearchAnalyzer { get; set; }
 	}
@@ -64,7 +63,7 @@ namespace Nest
 		bool? IKeywordProperty.IncludeInAll{ get; set; }
 		bool? IKeywordProperty.Index{ get; set; }
 		IndexOptions? IKeywordProperty.IndexOptions{ get; set; }
-		INorms IKeywordProperty.Norms{ get; set; }
+		bool? IKeywordProperty.Norms{ get; set; }
 		string IKeywordProperty.NullValue{ get; set; }
 		string IKeywordProperty.SearchAnalyzer{ get; set; }
 
@@ -76,7 +75,7 @@ namespace Nest
 		public KeywordPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public KeywordPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public KeywordPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
-		public KeywordPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector) => Assign(a => a.Norms = selector?.Invoke(new NormsDescriptor()));
+		public KeywordPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
 		public KeywordPropertyDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 		public KeywordPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 	}

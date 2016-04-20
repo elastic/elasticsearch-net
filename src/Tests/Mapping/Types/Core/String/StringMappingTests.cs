@@ -18,7 +18,8 @@ namespace Tests.Mapping.Types.Core.String
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
-			TermVector = TermVectorOption.WithPositionsOffsets)]
+			TermVector = TermVectorOption.WithPositionsOffsets,
+			Norms = false)]
 		public string Full { get; set; }
 
 		[String]
@@ -46,7 +47,8 @@ namespace Tests.Mapping.Types.Core.String
 					search_analyzer = "mysearchanalyzer",
 					similarity = "BM25",
 					store = true,
-					term_vector = "with_positions_offsets"
+					term_vector = "with_positions_offsets",
+					norms = false
 				},
 				minimal = new
 				{
@@ -71,6 +73,7 @@ namespace Tests.Mapping.Types.Core.String
 				.Similarity(SimilarityOption.BM25)
 				.Store(true)
 				.TermVector(TermVectorOption.WithPositionsOffsets)
+				.Norms(false)
 			)
 			.String(s => s
 				.Name(o => o.Minimal)
@@ -83,21 +86,14 @@ namespace Tests.Mapping.Types.Core.String
 				full = new
 				{
 					type = "string",
-					norms = new
-					{
-						enabled = true,
-						loading = "lazy"
-					}
+					norms = true
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.String(s => s
 				.Name(o => o.Full)
-				.Norms(n => n
-					.Enabled()
-					.Loading(NormsLoading.Lazy)
-				)
+				.Norms()
 			);
 	}
 }
