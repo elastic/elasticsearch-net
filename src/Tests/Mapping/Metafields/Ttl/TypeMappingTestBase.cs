@@ -22,12 +22,12 @@ namespace Tests.Mapping.Metafields.Ttl
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d.Index(CallIsolatedValue)
 			.TtlField(ttl => ttl
 				.Default("30m")
-				.Enable()
+				.Enabled()
 			);
 
 		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>(CallIsolatedValue, Type<Project>())
 		{
-			TtlField = new TtlField {  Default = TimeSpan.FromMinutes(30), Enabled = true } 
+			TtlField = new TtlField {  Default = TimeSpan.FromMinutes(30), Enabled = true }
 		};
 	}
 }

@@ -583,7 +583,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 					.Map<EmployeeWithAttributes>(m => m
 						.AutoMap()
 						.TtlField(ttl => ttl
-							.Enable()
+							.Enabled()
 							.Default("10m")
 						)
 						.Properties(ps => ps

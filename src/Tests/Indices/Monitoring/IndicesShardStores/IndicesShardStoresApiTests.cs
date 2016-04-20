@@ -66,7 +66,8 @@ namespace Tests.Indices.Monitoring.IndicesShardStores
 			shardStore.Id.Should().NotBeNullOrWhiteSpace();
 			shardStore.Name.Should().NotBeNullOrWhiteSpace();
 			shardStore.TransportAddress.Should().NotBeNullOrWhiteSpace();
-			shardStore.Version.Should().BeGreaterThan(0);
+			shardStore.LegacyVersion.Should().Be(null);
+			shardStore.AllocationId.Should().NotBeNullOrWhiteSpace();
 			shardStore.Allocation.Should().Be(ShardStoreAllocation.Primary);
 		});
 	}
