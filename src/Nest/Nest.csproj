@@ -502,7 +502,6 @@
     <Compile Include="CommonOptions\Stats\SearchStats.cs" />
     <Compile Include="CommonOptions\Stats\SegmentsStats.cs" />
     <Compile Include="CommonOptions\Stats\StoreStats.cs" />
-    <Compile Include="CommonOptions\Stats\SuggestStats.cs" />
     <Compile Include="CommonOptions\Stats\TranslogStats.cs" />
     <Compile Include="CommonOptions\Stats\WarmerStats.cs" />
     <Compile Include="CommonOptions\TimeUnit\Time.cs" />

@@ -11,15 +11,15 @@ namespace Nest
 
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
-		
+
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; internal set; }
 
 		[JsonProperty("host")]
-		public string Host { get; internal set; } 
+		public string Host { get; internal set; }
 
 		[JsonProperty("ip")]
-		public IEnumerable<string> Ip { get; internal set; } 
+		public IEnumerable<string> Ip { get; internal set; }
 
 		[JsonProperty("indices")]
 		public IndexStats Indices { get; internal set; }
@@ -81,17 +81,41 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class OperatingSystemStats 
+	public class OperatingSystemStats
 	{
 		[JsonProperty("timestamp")]
 		public long Timestamp { get; internal set; }
-		[JsonProperty("load_average")]
-		public float LoadAverage { get; internal set; }
 
 		[JsonProperty("mem")]
 		public ExtendedMemoryStats Memory { get; internal set; }
 		[JsonProperty("swap")]
 		public MemoryStats Swap { get; internal set; }
+
+		[JsonProperty("cpu")]
+		public CPUStats Cpu { get; internal set; }
+
+		[JsonObject]
+		public class CPUStats
+		{
+			[JsonProperty("load_average")]
+			public LoadAverageStats LoadAverage { get; internal set; }
+
+			[JsonProperty("percent")]
+			public float Percent { get; internal set; }
+
+			[JsonObject]
+			public class LoadAverageStats
+			{
+				[JsonProperty("1m")]
+				public float? OneMinute { get; internal set; }
+
+				[JsonProperty("5m")]
+				public float? FiveMinute { get; internal set; }
+
+				[JsonProperty("15m")]
+				public float? FifteenMinute { get; internal set; }
+			}
+		}
 
 		[JsonObject]
 		public class MemoryStats
@@ -176,7 +200,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class NodeJvmStats 
+	public class NodeJvmStats
 	{
 		[JsonProperty("timestamp")]
 		public long Timestamp { get; internal set; }
@@ -194,7 +218,7 @@ namespace Nest
 		[JsonProperty("buffer_pools")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
-	
+
 		[JsonProperty("classes")]
 		public JvmClassesStats Classes { get; internal set; }
 
@@ -270,7 +294,7 @@ namespace Nest
 		}
 
 		[JsonObject]
-		public class GarbageCollectionStats 
+		public class GarbageCollectionStats
 		{
 			[JsonProperty("collectors")]
 			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
