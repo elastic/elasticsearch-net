@@ -17,10 +17,6 @@ namespace Nest
 		[JsonProperty("numeric_detection")]
 		bool? NumericDetection { get; set; }
 
-		[JsonProperty("transform")]
-		[JsonConverter(typeof(MappingTransformCollectionJsonConverter))]
-		IList<IMappingTransform> Transform { get; set; }
-
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
@@ -105,8 +101,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<IMappingTransform> Transform { get; set; }
-		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 	}
 
@@ -131,7 +125,6 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 		ITimestampField ITypeMapping.TimestampField { get; set; }
-		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 
 		/// <summary>
@@ -192,13 +185,6 @@ namespace Nest
 		public TypeMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transforms) => Assign(a => a.Transform = transforms.ToListOrNullIfEmpty());
-
-		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> Transform(Func<MappingTransformsDescriptor, IPromise<IList<IMappingTransform>>> selector) =>
-			Assign(a => a.Transform = selector?.Invoke(new MappingTransformsDescriptor())?.Value);
-
-		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingFieldSelector) => Assign(a => a.RoutingField = routingFieldSelector?.Invoke(new RoutingFieldDescriptor<T>()));
 
 		/// <inheritdoc/>
@@ -213,7 +199,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) => 
+		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IPromise<IProperties>> propertiesSelector) =>
 			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties))?.Value);
 
 		/// <inheritdoc/>

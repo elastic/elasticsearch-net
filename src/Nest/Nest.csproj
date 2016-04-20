@@ -770,8 +770,6 @@
     <Compile Include="Mapping\PropertyMapping.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />
-    <Compile Include="Mapping\Transform\MappingTransform.cs" />
-    <Compile Include="Mapping\Transform\MappingTransformJsonConverter.cs" />
     <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\Types\Complex\Nested\NestedAttribute.cs" />
     <Compile Include="Mapping\Types\Complex\Nested\NestedProperty.cs" />
