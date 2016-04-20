@@ -11,10 +11,12 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNode Node { get; }
 		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
 
+		protected virtual bool EnableShield => false;
+
 		protected ClusterBase()
 		{
 			var name = this.GetType().Name.Replace("Cluster", "");
-			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name);
+			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name, EnableShield);
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
 				this.Boostrap();

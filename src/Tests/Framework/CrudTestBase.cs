@@ -74,7 +74,7 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<Integration.ClientMethod, IResponse>();
+				var dict = new Dictionary<ClientMethod, IResponse>();
 				dict.Add(Integration.ClientMethod.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
 				dict.Add(Integration.ClientMethod.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
 				dict.Add(Integration.ClientMethod.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
@@ -90,7 +90,7 @@ namespace Tests.Framework
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
 			where TResponse : class, IResponse
 		{
-			//hack to make sure these are resolved in the right order, calling twice yields cached results so 
+			//hack to make sure these are resolved in the right order, calling twice yields cached results so
 			//should be fast
 			await this._createResponse;
 			this.WaitForYellow();

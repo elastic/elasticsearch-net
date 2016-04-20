@@ -49,6 +49,8 @@ namespace Elasticsearch.Net
 				request.Headers.Add("Accept-Encoding", "gzip,deflate");
 				request.Headers.Add("Content-Encoding", "gzip");
 			}
+			if (!requestData.RunAs.IsNullOrEmpty())
+				request.Headers.Add("es-shield-runas-user", requestData.RunAs);
 
 			if (requestData.Headers != null && requestData.Headers.HasKeys())
 				request.Headers.Add(requestData.Headers);

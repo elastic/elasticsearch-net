@@ -8485,6 +8485,372 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> LicensePostAsync<T>(PostData<object> body, Func<PostLicenseRequestParameters, PostLicenseRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_license"), body, _params(requestParameters));
 		
+		///<summary>Represents a GET on /_shield/authenticate 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve details about the currently authenticated user </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldAuthenticate<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_shield/authenticate"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/authenticate 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve details about the currently authenticated user </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldAuthenticateAsync<T>(Func<AuthenticateRequestParameters, AuthenticateRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_shield/authenticate"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/realm/{realms}/_clear_cache 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal user caches for specified realms </para>	
+	    ///</summary>
+		///<param name="realms">Comma-separated list of realms to clear</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldClearCachedRealms<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_shield/realm/{realms.NotNull("realms")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/realm/{realms}/_clear_cache 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal user caches for specified realms </para>	
+	    ///</summary>
+		///<param name="realms">Comma-separated list of realms to clear</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldClearCachedRealmsAsync<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_shield/realm/{realms.NotNull("realms")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/role/{name}/_clear_cache 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal caches for specified roles </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldClearCachedRoles<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_shield/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/role/{name}/_clear_cache 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal caches for specified roles </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_shield/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /_shield/role/{name} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Remove a role from the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldDeleteRole<T>(string name, Func<DeleteRoleRequestParameters, DeleteRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(DELETE, Url($"_shield/role/{name.NotNull("name")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /_shield/role/{name} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Remove a role from the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldDeleteRoleAsync<T>(string name, Func<DeleteRoleRequestParameters, DeleteRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_shield/role/{name.NotNull("name")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /_shield/user/{username} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Remove a user from the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldDeleteUser<T>(string username, Func<DeleteUserRequestParameters, DeleteUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(DELETE, Url($"_shield/user/{username.NotNull("username")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a DELETE on /_shield/user/{username} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Remove a user from the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldDeleteUserAsync<T>(string username, Func<DeleteUserRequestParameters, DeleteUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_shield/user/{username.NotNull("username")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/role/{name} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldGetRole<T>(string name, Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_shield/role/{name.NotNull("name")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/role/{name} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldGetRoleAsync<T>(string name, Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_shield/role/{name.NotNull("name")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/role 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldGetRole<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_shield/role"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/role 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more roles from the native shield realm </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldGetRoleAsync<T>(Func<GetRoleRequestParameters, GetRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_shield/role"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/user/{username} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more users from the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">A comma-separated list of usernames</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldGetUser<T>(string username, Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_shield/user/{username.NotNull("username")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/user/{username} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more users from the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">A comma-separated list of usernames</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldGetUserAsync<T>(string username, Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_shield/user/{username.NotNull("username")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/user 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more users from the native shield realm </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldGetUser<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_shield/user"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_shield/user 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Retrieve one or more users from the native shield realm </para>	
+	    ///</summary>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldGetUserAsync<T>(Func<GetUserRequestParameters, GetUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_shield/user"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_shield/role/{name} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a role for the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldPutRole<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_shield/role/{name.NotNull("name")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_shield/role/{name} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a role for the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldPutRoleAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_shield/role/{name.NotNull("name")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/role/{name} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a role for the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldPutRolePost<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_shield/role/{name.NotNull("name")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/role/{name} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a role for the native shield realm </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="body">The role to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldPutRolePostAsync<T>(string name, PostData<object> body, Func<PutRoleRequestParameters, PutRoleRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_shield/role/{name.NotNull("name")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_shield/user/{username} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a user for the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="body">The user to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldPutUser<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_shield/user/{username.NotNull("username")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_shield/user/{username} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a user for the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="body">The user to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldPutUserAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_shield/user/{username.NotNull("username")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/user/{username} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a user for the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="body">The user to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> ShieldPutUserPost<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(POST, Url($"_shield/user/{username.NotNull("username")}"), body, _params(requestParameters));
+		
+		///<summary>Represents a POST on /_shield/user/{username} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Update or create a user for the native shield realm </para>	
+	    ///</summary>
+		///<param name="username">The username of the User</param>
+		///<param name="body">The user to add</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> ShieldPutUserPostAsync<T>(string username, PostData<object> body, Func<PutUserRequestParameters, PutUserRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(POST, Url($"_shield/user/{username.NotNull("username")}"), body, _params(requestParameters));
+		
 	
 	  }
 	  }

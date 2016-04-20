@@ -227,8 +227,10 @@ namespace Elasticsearch.Net
 				ForceNode = this.RequestConfiguration?.ForceNode,
 				CancellationToken = this.RequestConfiguration?.CancellationToken ?? default(CancellationToken)
 			};
+			IRequestParameters requestParameters = new RootNodeInfoRequestParameters { };
+			requestParameters.RequestConfiguration = requestOverrides;
 
-			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory) { Node = node };
+			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestParameters, this._memoryStreamFactory) { Node = node };
 		}
 
 		public void Ping(Node node)
@@ -317,7 +319,7 @@ namespace Elasticsearch.Net
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
+						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
@@ -350,7 +352,7 @@ namespace Elasticsearch.Net
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
+						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, (IRequestParameters)null, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
