@@ -7,6 +7,8 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
+#pragma warning disable 618 // DisableCoord and MinimumShouldMatch
+
 namespace Tests.QueryDsl.TermLevel.Terms
 {
 	public class TermsListQueryUsageTests : QueryDslUsageTestsBase
@@ -80,7 +82,6 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.DisableCoord()
 				.Terms(_terms)
 			);
-
 	}
 
 	public class TermsListOfListStringAgainstNumericFieldIntegrationTests : QueryDslIntegrationTestsBase
@@ -132,7 +133,5 @@ namespace Tests.QueryDsl.TermLevel.Terms
 			var rootCause = rootCauses.First();
 			rootCause.Type.Should().Be("number_format_exception");
 		});
-
 	}
-
 }

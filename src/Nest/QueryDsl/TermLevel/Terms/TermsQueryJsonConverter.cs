@@ -32,6 +32,7 @@ namespace Nest
 					writer.WritePropertyName(field);
 					serializer.Serialize(writer, t.TermsLookup);
 				}
+#pragma warning disable 618
 				if (t.DisableCoord.HasValue)
 				{
 					writer.WritePropertyName("disable_coord");
@@ -42,6 +43,7 @@ namespace Nest
 					writer.WritePropertyName("minimum_should_match");
 					serializer.Serialize(writer, t.MinimumShouldMatch);
 				}
+#pragma warning restore 618
 				if (t.Boost.HasValue)
 				{
 					writer.WritePropertyName("boost");
@@ -68,6 +70,7 @@ namespace Nest
 				var property = reader.Value as string;
 				switch (property)
 				{
+#pragma warning disable 618
 					case "disable_coord":
 						reader.Read();
 						f.DisableCoord = reader.Value as bool?;
@@ -77,6 +80,7 @@ namespace Nest
 						var min = serializer.Deserialize<MinimumShouldMatch>(reader);
 						f.MinimumShouldMatch = min;
 						break;
+#pragma warning restore 618
 					case "boost":
 						reader.Read();
 						f.Boost = reader.Value as double?;
