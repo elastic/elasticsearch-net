@@ -7,14 +7,14 @@
       "paths": [ "/_shield/realm/{realms}/_clear_cache" ],
       "parts": {
         "realms": {
-          "type" : "string",
+          "type" : "list",
           "description" : "Comma-separated list of realms to clear",
           "required" : true
         }
       },
       "params": {
         "usernames": {
-          "type" : "string",
+          "type" : "list",
           "description" : "Comma-separated list of usernames to clear from the cache",
           "required" : false
         }

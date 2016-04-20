@@ -60,7 +60,7 @@
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="Configuration\IConnectionConfigurationValues.cs" />
     <Compile Include="Configuration\RequestConfiguration.cs" />
-    <Compile Include="Configuration\Security\BasicAuthorizationCredentials.cs" />
+    <Compile Include="Configuration\Security\BasicAuthenticationCredentials.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="ConnectionPool\Node.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />

@@ -14,16 +14,24 @@ namespace Tests.Mapping.Types.Core.String
 			Index = FieldIndexOption.NotAnalyzed,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
+#pragma warning disable 618
+			// Purposely setting this obsolete property to ensure it serializes as position_increment_gap
 			PositionIncrementGap = 5,
+#pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
-			TermVector = TermVectorOption.WithPositionsOffsets,
-			Norms = false)]
+			TermVector = TermVectorOption.WithPositionsOffsets)]
 		public string Full { get; set; }
 
 		[String]
 		public string Minimal { get; set; }
+
+		public string Inferred { get; set; }
+
+		public char Char { get; set; }
+
+		public Guid Guid { get; set; }
 	}
 
 	public class StringMappingTests : TypeMappingTestBase<StringTest>
@@ -47,10 +55,21 @@ namespace Tests.Mapping.Types.Core.String
 					search_analyzer = "mysearchanalyzer",
 					similarity = "BM25",
 					store = true,
-					term_vector = "with_positions_offsets",
-					norms = false
+					term_vector = "with_positions_offsets"
 				},
 				minimal = new
+				{
+					type = "string"
+				},
+				inferred = new
+				{
+					type = "string"
+				},
+				@char = new
+				{
+					type = "string"
+				},
+				guid = new
 				{
 					type = "string"
 				}
@@ -73,10 +92,18 @@ namespace Tests.Mapping.Types.Core.String
 				.Similarity(SimilarityOption.BM25)
 				.Store(true)
 				.TermVector(TermVectorOption.WithPositionsOffsets)
-				.Norms(false)
 			)
 			.String(s => s
 				.Name(o => o.Minimal)
+			)
+			.String(s => s
+				.Name(o => o.Inferred)
+			)
+			.String(s => s
+				.Name(o => o.Char)
+			)
+			.String(s => s
+				.Name(o => o.Guid)
 			);
 
 		protected override object ExpectJsonFluentOnly => new
@@ -86,14 +113,21 @@ namespace Tests.Mapping.Types.Core.String
 				full = new
 				{
 					type = "string",
-					norms = true
+					norms = new
+					{
+						enabled = true,
+						loading = "lazy"
+					}
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.String(s => s
 				.Name(o => o.Full)
-				.Norms()
+				.Norms(n => n
+					.Enabled()
+					.Loading(NormsLoading.Lazy)
+				)
 			);
 	}
 }
