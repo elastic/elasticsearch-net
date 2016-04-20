@@ -990,7 +990,6 @@
     <Compile Include="QueryDsl\Joining\HasChild\ChildScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQuery.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
-    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
