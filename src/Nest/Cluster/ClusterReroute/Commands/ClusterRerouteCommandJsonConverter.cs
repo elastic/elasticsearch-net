@@ -16,13 +16,18 @@ namespace Nest
 			IClusterRerouteCommand command = null;
 			var o = JObject.Load(reader);
 			var child = o.Children<JProperty>().FirstOrDefault();
-			if (child == null) return null;
-			var v = child.Children<JObject>().FirstOrDefault();
+			var v = child?.Children<JObject>().FirstOrDefault();
 			if (v == null) return null;
 			switch (child.Name)
 			{
-				case "allocate":
-					command = v.ToObject<AllocateClusterRerouteCommand>(ElasticContractResolver.Empty);
+				case "allocate_replica":
+					command = v.ToObject<AllocateReplicaClusterRerouteCommand>(ElasticContractResolver.Empty);
+					break;
+				case "allocate_empty_primary":
+					command = v.ToObject<AllocateEmptyPrimaryRerouteCommand>(ElasticContractResolver.Empty);
+					break;
+				case "allocate_stale_primary":
+					command = v.ToObject<AllocateStalePrimaryRerouteCommand>(ElasticContractResolver.Empty);
 					break;
 				case "move":
 					command = v.ToObject<MoveClusterRerouteCommand>(ElasticContractResolver.Empty);

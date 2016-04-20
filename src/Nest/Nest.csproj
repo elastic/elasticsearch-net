@@ -314,7 +314,7 @@
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteRequest.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteResponse.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteState.cs" />
-    <Compile Include="Cluster\ClusterReroute\Commands\AllocateClusterRerouteCommand.cs" />
+    <Compile Include="Cluster\ClusterReroute\Commands\AllocateClusterRerouteCommandBase.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\CancelClusterRerouteCommand.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\ClusterRerouteCommandJsonConverter.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\IClusterRerouteCommand.cs" />
