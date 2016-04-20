@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+#pragma warning disable 618 // IMappingTransform
+
 namespace Nest
 {
 	internal class MappingTransformCollectionJsonConverter : JsonConverter
