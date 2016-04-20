@@ -68,10 +68,6 @@ namespace Nest
 
 		public virtual void Visit(IDisMaxQuery query) => Write("dis_max");
 
-#pragma warning disable 618
-		public void Visit(INotQuery query)=> Write("not");
-#pragma warning restore 618
-
 		public void Visit(IGeoIndexedShapeQuery query) => Write("geo_indexed_shape");
 
 		public void Visit(ISpanContainingQuery query) => Write("span_containing");

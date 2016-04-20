@@ -30,8 +30,6 @@ include::../../docs/asciidoc/query-dsl/compound/indices/indices-no-match-query-u
 
 include::../../docs/asciidoc/query-dsl/compound/indices/indices-query-usage.asciidoc[]
 
-include::../../docs/asciidoc/query-dsl/compound/not/not-query-usage.asciidoc[]
-
 include::../../docs/asciidoc/query-dsl/geo/bounding-box/geo-bounding-box-query-usage.asciidoc[]
 
 include::../../docs/asciidoc/query-dsl/geo/distance/geo-distance-query-usage.asciidoc[]

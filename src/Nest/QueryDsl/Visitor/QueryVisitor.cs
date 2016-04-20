@@ -64,11 +64,6 @@
 		void Visit(INumericRangeQuery query);
 		void Visit(ITermRangeQuery query);
 		void Visit(ITemplateQuery query);
-
-#pragma warning disable 618
-		void Visit(INotQuery query);
-#pragma warning restore 618
-
 		void Visit(ISpanFirstQuery query);
 		void Visit(ISpanNearQuery query);
 		void Visit(ISpanNotQuery query);
@@ -115,9 +110,6 @@
 
 		public virtual void Visit(IDisMaxQuery query) { }
 
-#pragma warning disable 618
-		public virtual void Visit(INotQuery query) { }
-
 		public virtual void Visit(IGeoIndexedShapeQuery query) { }
 
 		public virtual void Visit(ISpanContainingQuery query) { }
@@ -129,7 +121,6 @@
 		public virtual void Visit(INumericRangeQuery query) { }
 
         public virtual void Visit(ITermRangeQuery query) { }
-#pragma warning restore 618
 
 		public virtual void Visit(IFunctionScoreQuery query) { }
 

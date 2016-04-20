@@ -386,7 +386,6 @@
     <Compile Include=".\QueryDsl\Compound\FunctionScore\FunctionScoreQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Compound\Indices\IndicesNoMatchQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Compound\Indices\IndicesQueryUsageTests.cs" />
-    <Compile Include=".\QueryDsl\Compound\Not\NotQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\CommonTerms\CommonTermsUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\Match\MatchPhrasePrefixUsageTests.cs" />
     <Compile Include="QueryDsl\Compound\FullText\Match\MatchPhraseUsageTests.cs" />

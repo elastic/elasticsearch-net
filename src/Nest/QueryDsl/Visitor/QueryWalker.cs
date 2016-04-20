@@ -62,11 +62,6 @@ namespace Nest
 			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 
-			VisitQuery(qd.Not, visitor, (v, d) =>
-			{
-				v.Visit(d);
-				Accept(v, d.Filters);
-			});
 			VisitQuery(qd.Bool, visitor, (v, d) =>
 			{
 				v.Visit(d);

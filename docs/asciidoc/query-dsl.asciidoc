@@ -37,8 +37,6 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 * <<indices-query-usage,Indices Query Usage>>
 
-* <<not-query-usage,Not Query Usage>>
-
 * <<geo-bounding-box-query-usage,Geo Bounding Box Query Usage>>
 
 * <<geo-distance-query-usage,Geo Distance Query Usage>>

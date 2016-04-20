@@ -944,7 +944,6 @@
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
-    <Compile Include="QueryDsl\Compound\Not\NotQuery.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhraseQuery.cs" />

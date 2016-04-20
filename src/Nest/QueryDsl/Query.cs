@@ -195,11 +195,5 @@ namespace Nest
 
 		public static QueryContainer Wildcard(Func<WildcardQueryDescriptor<T>, IWildcardQuery> selector) =>
 			new QueryContainerDescriptor<T>().Wildcard(selector);
-
-#pragma warning disable 618
-		[Obsolete("Use the bool query with must_not clause instead..")]
-		public static QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
-			new QueryContainerDescriptor<T>().Not(selector);
-#pragma warning restore 618
 	}
 }

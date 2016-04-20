@@ -277,13 +277,6 @@ namespace Nest
 			this.Assign(selector, (query, container) => container.HasParent = query);
 
 		/// <summary>
-		/// A query that filters out matched documents using a query.
-		/// </summary>
-		[Obsolete("Use the bool query with must_not clause instead..")]
-		public QueryContainer Not(Func<NotQueryDescriptor<T>, INotQuery> selector) =>
-			this.Assign(selector, (query, container) => container.Not = query);
-
-		/// <summary>
 		/// A query that generates the union of documents produced by its subqueries, and that scores each document
 		/// with the maximum score for that document as produced by any subquery, plus a tie breaking increment for
 		/// any additional matching subqueries.

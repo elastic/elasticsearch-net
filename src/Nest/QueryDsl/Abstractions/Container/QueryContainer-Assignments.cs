@@ -15,9 +15,6 @@ namespace Nest
 		private IIdsQuery _ids;
 		private IConstantScoreQuery _constantScore;
 		private IDisMaxQuery _disMax;
-#pragma warning disable 618
-		private INotQuery _not;
-#pragma warning restore 618
 		private IMultiMatchQuery _multiMatch;
 		private IMatchQuery _match;
 		private IFuzzyQuery _fuzzy;
@@ -76,10 +73,6 @@ namespace Nest
 
 		IConstantScoreQuery IQueryContainer.ConstantScore { get { return _constantScore; } set { _constantScore = Set(value); } }
 		IDisMaxQuery IQueryContainer.DisMax { get { return _disMax; } set { _disMax = Set(value); } }
-
-#pragma warning disable 618
-		INotQuery IQueryContainer.Not { get { return _not; } set { _not = Set(value); } }
-#pragma warning restore 618
 		IMultiMatchQuery IQueryContainer.MultiMatch { get { return _multiMatch; } set { _multiMatch = Set(value); } }
 		IMatchQuery IQueryContainer.Match { get { return _match; } set { _match = Set(value); } }
 		IFuzzyQuery IQueryContainer.Fuzzy { get { return _fuzzy; } set { _fuzzy = Set(value); } }
