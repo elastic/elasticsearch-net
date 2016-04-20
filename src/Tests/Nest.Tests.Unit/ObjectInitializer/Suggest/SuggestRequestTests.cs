@@ -33,7 +33,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.Suggest
 						ShardSize = 10,
 						Fuzzy = new FuzzySuggester
 						{
+#pragma warning disable 618
 							Fuzziness = Fuzziness.Ratio(0.3),
+#pragma warning restore 618
 							PrefixLength = 4
 						}
 					} 
