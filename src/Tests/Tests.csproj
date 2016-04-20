@@ -555,6 +555,14 @@
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryUrlTests.cs" />
     <Compile Include="Framework\Integration\CallUniqueValues.cs" />
     <Compile Include="Framework\Integration\ClientMethod.cs" />
+    <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
+    <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
+    <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
+    <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
+    <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
+    <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesApiTests.cs" />
+    <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesUrlTests.cs" />
+    <Compile Include="XPack\Security\ShieldInformation.cs" />
     <Compile Include="QueryDsl\BoolDsl\Operators\CombinatorialUsageTests.cs" />
     <Compile Include="QueryDsl\QueryDslIntegrationTestsBase.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsListQueryUsageTests.cs" />
@@ -568,6 +576,24 @@
     <Compile Include="Search\Suggesters\SuggestApiTests.cs" />
     <Compile Include="XPack\Graph\Explore\GraphExploreApiTests.cs" />
     <Compile Include="XPack\Graph\Explore\GraphExploreUrlTests.cs" />
+    <Compile Include="XPack\License\DeleteLicense\DeleteLicenseUrlTests.cs" />
+    <Compile Include="XPack\License\GetLicense\GetLicenseApiTests.cs" />
+    <Compile Include="XPack\License\GetLicense\GetLicenseUrlTests.cs" />
+    <Compile Include="XPack\License\PostLicense\PostLicenseUrlTests.cs" />
+    <Compile Include="XPack\License\PostLicense\PostLicenseApiTests.cs" />
+    <Compile Include="XPack\Security\Authenticate\AuthenticateApiTests.cs" />
+    <Compile Include="XPack\Security\Authenticate\AuthenticateUrlTests.cs" />
+    <Compile Include="XPack\Security\ShieldCluster.cs" />
+    <Compile Include="XPack\Security\Role\DeleteRole\DeleteRoleUrlTests.cs" />
+    <Compile Include="XPack\Security\Role\GetRole\GetRoleUrlTests.cs" />
+    <Compile Include="XPack\Security\Role\PutRole\PutRoleApiTests.cs" />
+    <Compile Include="XPack\Security\Role\PutRole\PutRoleUrlTests.cs" />
+    <Compile Include="XPack\Security\Role\RoleCrudTests.cs" />
+    <Compile Include="XPack\Security\User\DeleteUser\DeleteUserUrlTests.cs" />
+    <Compile Include="XPack\Security\User\GetUser\GetUserUrlTests.cs" />
+    <Compile Include="XPack\Security\User\PutUser\PutUserApiTests.cs" />
+    <Compile Include="XPack\Security\User\PutUser\PutUserUrlTests.cs" />
+    <Compile Include="XPack\Security\User\UserCrudTests.cs" />
     <None Include="aggregations-usage.asciidoc" />
     <None Include="aggregations.asciidoc" />
     <None Include="client-concepts.asciidoc" />
@@ -604,6 +630,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">

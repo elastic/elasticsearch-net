@@ -28,6 +28,7 @@ namespace Elasticsearch.Net
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
 		public string ContentType { get; }
+		public string RunAs { get; }
 
 		public NameValueCollection Headers { get; }
 		public string ProxyAddress { get; }
@@ -41,17 +42,23 @@ namespace Elasticsearch.Net
 		public IConnectionConfigurationValues ConnectionSettings { get; }
 		public IMemoryStreamFactory MemoryStreamFactory { get; }
 
+		[Obsolete("this constructor is scheduled to be removed in the next major version")]
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory)
+#pragma warning disable CS0618 // Type or member is obsolete
 			: this(method, path, data, global, (IRequestConfiguration)null, memoryStreamFactory)
+#pragma warning restore CS0618 // Type or member is obsolete
 		{ }
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
+#pragma warning disable CS0618 // Type or member is obsolete
 			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
+#pragma warning restore CS0618 // Type or member is obsolete
 		{
 			this.CustomConverter = local?.DeserializationOverride;
 			this.Path = this.CreatePathWithQueryStrings(path, this.ConnectionSettings, local);
 		}
 
+		[Obsolete("this constructor is scheduled to become private in the next major version")]
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestConfiguration local, IMemoryStreamFactory memoryStreamFactory)
 		{
 			this.ConnectionSettings = global;
@@ -64,9 +71,10 @@ namespace Elasticsearch.Net
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
 			this.Headers = global.Headers;
+			this.RunAs = local?.RunAs;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
-			this.PingTimeout = 
+			this.PingTimeout =
 				local?.PingTimeout
 				?? global?.PingTimeout
 				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
@@ -97,25 +105,26 @@ namespace Elasticsearch.Net
 			var tempUri = new Uri("http://localhost:9200/" + path).Purify();
 			if (tempUri.Query.IsNullOrEmpty())
 				path += queryString;
-			else 
+			else
 				path += "&" + queryString.Substring(1, queryString.Length - 1);
 			return path;
 		}
 
-		protected bool Equals(RequestData other) => 
-			RequestTimeout.Equals(other.RequestTimeout) 
-			&& PingTimeout.Equals(other.PingTimeout) 
-			&& KeepAliveTime == other.KeepAliveTime 
-			&& KeepAliveInterval == other.KeepAliveInterval 
-			&& Pipelined == other.Pipelined 
-			&& HttpCompression == other.HttpCompression 
-			&& Equals(Headers, other.Headers) 
-			&& string.Equals(ProxyAddress, other.ProxyAddress) 
-			&& string.Equals(ProxyUsername, other.ProxyUsername) 
-			&& string.Equals(ProxyPassword, other.ProxyPassword) 
-			&& DisableAutomaticProxyDetection == other.DisableAutomaticProxyDetection 
-			&& Equals(BasicAuthorizationCredentials, other.BasicAuthorizationCredentials) 
-			&& Equals(ConnectionSettings, other.ConnectionSettings) 
+		protected bool Equals(RequestData other) =>
+			RequestTimeout.Equals(other.RequestTimeout)
+			&& PingTimeout.Equals(other.PingTimeout)
+			&& KeepAliveTime == other.KeepAliveTime
+			&& KeepAliveInterval == other.KeepAliveInterval
+			&& Pipelined == other.Pipelined
+			&& HttpCompression == other.HttpCompression
+			&& Equals(Headers, other.Headers)
+			&& string.Equals(RunAs, other.RunAs)
+			&& string.Equals(ProxyAddress, other.ProxyAddress)
+			&& string.Equals(ProxyUsername, other.ProxyUsername)
+			&& string.Equals(ProxyPassword, other.ProxyPassword)
+			&& DisableAutomaticProxyDetection == other.DisableAutomaticProxyDetection
+			&& Equals(BasicAuthorizationCredentials, other.BasicAuthorizationCredentials)
+			&& Equals(ConnectionSettings, other.ConnectionSettings)
 			&& Equals(MemoryStreamFactory, other.MemoryStreamFactory);
 
 		public override bool Equals(object obj)
@@ -134,6 +143,7 @@ namespace Elasticsearch.Net
 				hashCode = (hashCode*397) ^ PingTimeout.GetHashCode();
 				hashCode = (hashCode*397) ^ KeepAliveTime;
 				hashCode = (hashCode*397) ^ KeepAliveInterval;
+				hashCode = (hashCode*397) ^ (RunAs?.GetHashCode() ?? 0);
 				hashCode = (hashCode*397) ^ Pipelined.GetHashCode();
 				hashCode = (hashCode*397) ^ HttpCompression.GetHashCode();
 				hashCode = (hashCode*397) ^ (Headers?.GetHashCode() ?? 0);

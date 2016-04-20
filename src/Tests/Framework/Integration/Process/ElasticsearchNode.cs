@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
@@ -30,13 +28,17 @@ namespace Tests.Framework.Integration
 			{ "mapper-murmur3", _ => "mapper-murmur3" },
 			{ "license", _ => "license" },
 			{ "graph", _ => "graph" },
+			{ "shield", _ => "shield" },
 		};
+		private string[] DefaultNodeSettings { get; }
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
+		private readonly bool _shieldEnabled;
 		private ObservableProcess _process;
 		private IDisposable _processListener;
 
-		public string Version { get; }
+		public string Version { get; set; }
+		public ElasticsearchVersionInfo VersionInfo { get; }
 		public string Binary { get; }
 
 		private string RoamingFolder { get; }
@@ -44,12 +46,13 @@ namespace Tests.Framework.Integration
 
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
-		public string Prefix { get; set; }
 		public string ClusterName { get; }
 		public string NodeName { get; }
 		public string RepositoryPath { get; private set; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
+
+		private TimeSpan HandleTimeout { get; } = TimeSpan.FromMinutes(1);
 
 #if DOTNETCORE
 		// Investigate  problem with ManualResetEvent on CoreClr
@@ -99,24 +102,41 @@ namespace Tests.Framework.Integration
 			string elasticsearchVersion,
 			bool runningIntegrations,
 			bool doNotSpawnIfAlreadyRunning,
-			string prefix
+			string name,
+			bool shieldEnabled
 			)
 		{
-			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
-			this.Version = runningIntegrations ? elasticsearchVersion : "unit-test-version-should-not-appear-on-disk";
-			this.RunningIntegrations = runningIntegrations;
-			this.Prefix = prefix.ToLowerInvariant();
+			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
+			this._shieldEnabled = shieldEnabled;
+
+			var prefix = name.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
-			this.ClusterName = $"{this.Prefix}-cluster-{suffix}";
-			this.NodeName = $"{this.Prefix}-node-{suffix}";
+			this.ClusterName = $"{prefix}-cluster-{suffix}";
+			this.NodeName = $"{prefix}-node-{suffix}";
+
+			this.VersionInfo = new ElasticsearchVersionInfo(runningIntegrations ? elasticsearchVersion : "0.0.0-unittest");
+			this.Version = this.VersionInfo.Version + (this.VersionInfo.IsSnapshot ? $"-{VersionInfo.SnapshotIdentifier}" : string.Empty);
+			this.RunningIntegrations = runningIntegrations;
 
 			this.BootstrapWork = _blockingSubject;
 
 			var appData = GetApplicationDataDirectory();
 			this.RoamingFolder = Path.Combine(appData, "NEST", this.Version);
-			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
+			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + this.VersionInfo.Version);
 			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
+
+			var attr = this.VersionInfo.ParsedVersion.Major >= 5 ? "attr." : "";
+			this.DefaultNodeSettings = new[]
+			{
+				$"es.cluster.name={this.ClusterName}",
+				$"es.node.name={this.NodeName}",
+				$"es.path.repo={this.RepositoryPath}",
+				$"es.script.inline=on",
+				$"es.script.indexed=on",
+				$"es.node.{attr}testingcluster=true",
+				$"es.shield.enabled=" + (shieldEnabled ? "true" : "false")
+			};
 
 			if (!runningIntegrations)
 			{
@@ -127,70 +147,54 @@ namespace Tests.Framework.Integration
 			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
 		}
+		private ConnectionSettings ClusterSettings(ConnectionSettings s, Func<ConnectionSettings, ConnectionSettings> settings) =>
+			AddBasicAuthentication(AppendClusterNameToHttpHeaders(settings(s)));
 
-		private string GetApplicationDataDirectory()
+		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
 		{
-#if DOTNETCORE
-			return Environment.GetEnvironmentVariable("APPDATA");
-#else
-			return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-#endif
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+			var client = TestClient.GetClient(s => ClusterSettings(s, settings), port, createPool);
+			return client;
 		}
 
-		public IObservable<ElasticsearchMessage> Start(string[] additionalSettings = null)
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false)
+		{
+			var port = this.Started ? this.Port : 9200;
+			settings = settings ?? (s => s);
+			var client = forceInMemory
+				? TestClient.GetInMemoryClient(s => ClusterSettings(s, settings), port)
+				: TestClient.GetClient(s => ClusterSettings(s, settings), port);
+			return client;
+		}
+
+		public IObservable<ElasticsearchMessage> Start(string typeOfCluster, string[] additionalSettings = null)
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
-			var timeout = TimeSpan.FromMinutes(1);
+
+			var settingMarker = this.VersionInfo.ParsedVersion.Major >= 5 ? "-E " : "-D";
+			var settings = DefaultNodeSettings
+				.Concat(additionalSettings ?? Enumerable.Empty<string>())
+				.Select(s => $"{settingMarker}{s}")
+				.ToList();
+
+			var easyRunBat = Path.Combine(this.RoamingFolder, $"run-{typeOfCluster.ToLowerInvariant()}.bat");
+			if (!File.Exists(easyRunBat))
+			{
+				var badSettings = new[] { "node.name", "cluster.name" };
+				var batSettings = string.Join(" ", settings.Where(s => !badSettings.Any(s.Contains)));
+				File.WriteAllText(easyRunBat, $@"elasticsearch-{this.Version}\bin\elasticsearch.bat {batSettings}");
+			}
 
 #if DOTNETCORE
 			var handle = new Signal(false);
 #else
 			var handle = new ManualResetEvent(false);
 #endif
-
-			if (_doNotSpawnIfAlreadyRunning)
-			{
-				var client = TestClient.GetClient();
-				var alreadyUp = client.RootNodeInfo();
-				if (alreadyUp.IsValid)
-				{
-					var checkPlugins = client.CatPlugins();
-
-					if (checkPlugins.IsValid)
-					{
-						foreach (var supportedPlugin in SupportedPlugins)
-						{
-							if (!checkPlugins.Records.Any(r => r.Component.Equals(supportedPlugin.Key)))
-								throw new Exception($"Already running elasticsearch does not have supported plugin {supportedPlugin.Key} installed.");
-						}
-
-						this.Started = true;
-						this.Port = 9200;
-						this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
-						this._blockingSubject.OnNext(handle);
-						if (!handle.WaitOne(timeout, true))
-							throw new Exception($"Could not launch tests on already running elasticsearch within {timeout}");
-
-						return Observable.Empty<ElasticsearchMessage>();
-					}
-				}
-			}
-			var settings = new string[]
-			{
-				$"-Des.cluster.name={this.ClusterName}",
-				$"-Des.node.name={this.NodeName}",
-				$"-Des.path.repo={this.RepositoryPath}",
-				$"-Des.script.inline=on",
-				$"-Des.script.indexed=on",
-				$"--node.testingcluster true"
-			}
-			.Concat(additionalSettings ?? Enumerable.Empty<string>())
-			.OrderByDescending(s =>
-				s.StartsWith("-d", StringComparison.OrdinalIgnoreCase) ||
-				s.StartsWith("-p", StringComparison.OrdinalIgnoreCase))
-			.ThenBy(s => s);
+			var alreadyRunning = UseAlreadyRunningInstance(handle);
+			if (alreadyRunning != null) return alreadyRunning;
 
 			this._process = new ObservableProcess(this.Binary, settings.ToArray());
 
@@ -198,13 +202,72 @@ namespace Tests.Framework.Integration
 				.Select(consoleLine => new ElasticsearchMessage(consoleLine));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
-			if (!handle.WaitOne(timeout, true))
+			if (handle.WaitOne(this.HandleTimeout, true)) return observable;
+
+			this.Stop();
+			throw new Exception($"Could not start elasticsearch within {this.HandleTimeout}");
+		}
+
+#if DOTNETCORE
+		private IObservable<ElasticsearchMessage> UseAlreadyRunningInstance(Signal handle)
+#else
+		private IObservable<ElasticsearchMessage> UseAlreadyRunningInstance(ManualResetEvent handle)
+#endif
+		{
+			if (!_doNotSpawnIfAlreadyRunning) return null;
+
+			var client = TestClient.GetClient();
+			var alreadyUp = client.RootNodeInfo();
+
+			if (!alreadyUp.IsValid) return null;
+
+			var checkPlugins = client.CatPlugins();
+
+			var missingPlugins = SupportedPlugins.Keys.Except(checkPlugins.Records.Select(r => r.Component)).ToList();
+			if (missingPlugins.Any())
+				throw new Exception($"Already running elasticsearch missed the following plugin(s): {string.Join(", ", missingPlugins)}.");
+
+			this.Started = true;
+			this.Port = 9200;
+			this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
+			this._blockingSubject.OnNext(handle);
+			if (!handle.WaitOne(this.HandleTimeout, true))
+				throw new Exception($"Could not launch tests on already running elasticsearch within {this.HandleTimeout}");
+
+			ValidateLicense();
+
+			return Observable.Empty<ElasticsearchMessage>();
+		}
+
+		private void ValidateLicense()
+		{
+			var client = TestClient.GetClient();
+			var license = client.GetLicense();
+			if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
+
+			var exceptionMessageStart = "Server has license plugin installed, ";
+			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
+			if (!string.IsNullOrWhiteSpace(licenseFile))
 			{
-				this.Stop();
-				throw new Exception($"Could not start elasticsearch within {timeout}");
+				var putLicense = client.PostLicense(new PostLicenseRequest { License = License.LoadFromDisk(licenseFile) });
+				if (!putLicense.IsValid)
+					throw new Exception("Server has invalid license and the ES_LICENSE_FILE failed to register\r\n" + putLicense.DebugInformation);
+
+				license = client.GetLicense();
+				if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
+				exceptionMessageStart += " but the installed license is invalid and we attempted to register ES_LICENSE_FILE ";
 			}
 
-			return observable;
+			if (license.ApiCall.Success && license.License == null)
+				throw new Exception($"{exceptionMessageStart}  but the license was deleted!");
+
+			if (license.License.Status == LicenseStatus.Expired)
+				throw new Exception($"{exceptionMessageStart} but the license has expired!");
+
+			if (license.License.Status == LicenseStatus.Invalid)
+				throw new Exception($"{exceptionMessageStart} but the license is invalid!");
+
+
 		}
 
 #if DOTNETCORE
@@ -249,25 +312,29 @@ namespace Tests.Framework.Integration
 		{
 			lock (_lock)
 			{
-				var zip = $"elasticsearch-{this.Version}.zip";
-				var downloadUrl = $"https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/{this.Version}/{zip}";
-				var localZip = Path.Combine(this.RoamingFolder, zip);
+				var localZip = Path.Combine(this.RoamingFolder, this.VersionInfo.Zip);
 
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
-					Console.WriteLine($"Download elasticsearch: {this.Version} from {downloadUrl}");
-                    new WebClient().DownloadFile(downloadUrl, localZip);
-					Console.WriteLine($"Downloaded elasticsearch: {this.Version}");
+					Console.WriteLine($"Download elasticsearch: {this.VersionInfo.Version} from {this.VersionInfo.DownloadUrl}");
+					new WebClient().DownloadFile(this.VersionInfo.DownloadUrl, localZip);
+					Console.WriteLine($"Downloaded elasticsearch: {this.VersionInfo.Version}");
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
-					Console.WriteLine($"Unzipping elasticsearch: {this.Version} ...");
+					Console.WriteLine($"Unzipping elasticsearch: {this.VersionInfo.Version} ...");
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 
+				var easyRunBat = Path.Combine(this.RoamingClusterFolder, "run.bat");
+				if (!File.Exists(easyRunBat))
+				{
+					File.WriteAllText(easyRunBat, @"bin\elasticsearch.bat ");
+				}
 				InstallPlugins();
+				EnsureShieldAdmin();
 
 				//hunspell config
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
@@ -275,9 +342,7 @@ namespace Tests.Framework.Integration
 				if (!File.Exists(hunspellPrefix + ".dic"))
 				{
 					Directory.CreateDirectory(hunspellFolder);
-					//File.Create(hunspellPrefix + ".dic");
 					File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
-					//File.Create(hunspellPrefix + ".aff");
 					File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
 				}
 
@@ -294,11 +359,14 @@ namespace Tests.Framework.Integration
 
 		private void InstallPlugins()
 		{
-			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "plugin") + ".bat";
+			var pluginCommand = "plugin";
+			if (this.VersionInfo.ParsedVersion.Major >= 5) pluginCommand = "elasticsearch-plugin";
+
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", pluginCommand) + ".bat";
 			foreach (var plugin in SupportedPlugins)
 			{
 				var installPath = plugin.Key;
-				var command = plugin.Value(this.Version);
+				var command = plugin.Value(this.VersionInfo.Version);
 				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "plugins", installPath);
 
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
@@ -315,14 +383,15 @@ namespace Tests.Framework.Integration
 					{
 						var o = p.Start();
 						Console.WriteLine($"Calling: {pluginBat} install {command}");
-						o.Subscribe(e=>Console.WriteLine(e),
+						o.Subscribe(Console.WriteLine,
 							(e) =>
 							{
 								Console.WriteLine($"Failed installing elasticsearch plugin: {command}");
 								handle.Set();
 								throw e;
 							},
-							() => {
+							() =>
+							{
 								Console.WriteLine($"Finished installing elasticsearch plugin: {installPath} exit code: {p.ExitCode}");
 								handle.Set();
 							});
@@ -335,22 +404,43 @@ namespace Tests.Framework.Integration
 			}
 		}
 
-		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
+		private void EnsureShieldAdmin()
 		{
-			var port = this.Started ? this.Port : 9200;
-			settings = settings ?? (s => s);
-			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port, createPool);
-			return client;
+			if (!this._shieldEnabled) return;
+
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "shield", "esusers") + ".bat";
+			foreach (var cred in ShieldInformation.AllUsers)
+			{
+				var processInfo = new ProcessStartInfo
+				{
+					FileName = pluginBat,
+					Arguments = $"useradd {cred.Username} -p {cred.Password} -r {cred.Role}",
+					CreateNoWindow = true,
+					UseShellExecute = false,
+					RedirectStandardOutput = false,
+					RedirectStandardError = false,
+					RedirectStandardInput = false
+				};
+				var p = Process.Start(processInfo);
+				p.WaitForExit();
+			}
 		}
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
+
+		private string GetApplicationDataDirectory()
 		{
-			var port = this.Started ? this.Port : 9200;
-			settings = settings ?? (s => s);
-			var client = TestClient.GetClient(s => AppendClusterNameToHttpHeaders(settings(s)), port);
-			return client;
+#if DOTNETCORE
+			return Environment.GetEnvironmentVariable("APPDATA");
+#else
+			return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+#endif
 		}
 
+		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings)
+		{
+			if (!_shieldEnabled) return settings;
+			return settings.BasicAuthentication("es_admin", "es_admin");
+		}
 		private ConnectionSettings AppendClusterNameToHttpHeaders(ConnectionSettings settings)
 		{
 			IConnectionConfigurationValues values = settings;
@@ -387,13 +477,15 @@ namespace Tests.Framework.Integration
 				Console.WriteLine($"attempting to delete cluster data: {dataFolder}");
 				Directory.Delete(dataFolder, true);
 			}
-			//var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
-			//var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
-			//foreach (var f in files)
-			//{
-			//	Console.WriteLine($"attempting to delete log file: {f}");
-			//	File.Delete(f);
-			//}
+
+			var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
+			var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
+			foreach (var f in files)
+			{
+				Console.WriteLine($"attempting to delete log file: {f}");
+				File.Delete(f);
+			}
+
 			if (Directory.Exists(this.RepositoryPath))
 			{
 				Console.WriteLine("attempting to delete repositories");
@@ -406,102 +498,4 @@ namespace Tests.Framework.Integration
 			this.Stop();
 		}
 	}
-
-	public class ElasticsearchMessage
-	{
-		/*
-[2015-05-26 20:05:07,681][INFO ][node                     ] [Nick Fury] version[1.5.2], pid[7704], build[62ff986/2015-04-27T09:21:06Z]
-[2015-05-26 20:05:07,681][INFO ][node                     ] [Nick Fury] initializing ...
-[2015-05-26 20:05:07,681][INFO ][plugins                  ] [Nick Fury] loaded [], sites []
-[2015-05-26 20:05:10,790][INFO ][node                     ] [Nick Fury] initialized
-[2015-05-26 20:05:10,821][INFO ][node                     ] [Nick Fury] starting ...
-[2015-05-26 20:05:11,041][INFO ][transport                ] [Nick Fury] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.194.146:9300]}
-[2015-05-26 20:05:11,056][INFO ][discovery                ] [Nick Fury] elasticsearch-martijnl/yuiyXva3Si6sQE5tY_9CHg
-[2015-05-26 20:05:14,103][INFO ][cluster.service          ] [Nick Fury] new_master [Nick Fury][yuiyXva3Si6sQE5tY_9CHg][WIN-DK60SLEMH8C][inet[/192.168.194.146:9300]], reason: zen-disco-join (elected_as_master)
-[2015-05-26 20:05:14,134][INFO ][gateway                  ] [Nick Fury] recovered [0] indices into cluster_state
-[2015-05-26 20:05:14,150][INFO ][http                     ] [Nick Fury] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.194.146:9200]}
-[2015-05-26 20:05:14,150][INFO ][node                     ] [Nick Fury] started
-*/
-
-		public DateTime Date { get; }
-		public string Level { get; }
-		public string Section { get; }
-		public string Node { get; }
-		public string Message { get; }
-
-
-		private static readonly Regex ConsoleLineParser =
-			new Regex(@"\[(?<date>.*?)\]\[(?<level>.*?)\]\[(?<section>.*?)\] \[(?<node>.*?)\] (?<message>.+)");
-
-		public ElasticsearchMessage(string consoleLine)
-		{
-			Console.WriteLine(consoleLine);
-			if (string.IsNullOrEmpty(consoleLine)) return;
-			var match = ConsoleLineParser.Match(consoleLine);
-			if (!match.Success) return;
-			var dateString = match.Groups["date"].Value.Trim();
-			Date = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss,fff", CultureInfo.CurrentCulture);
-			Level = match.Groups["level"].Value.Trim();
-			Section = match.Groups["section"].Value.Trim().Replace("org.elasticsearch.", "");
-			Node = match.Groups["node"].Value.Trim();
-			Message = match.Groups["message"].Value.Trim();
-		}
-
-		private static readonly Regex InfoParser =
-			new Regex(@"version\[(?<version>.*)\], pid\[(?<pid>.*)\], build\[(?<build>.+)\]");
-
-		public bool TryParseNodeInfo(out ElasticsearchNodeInfo nodeInfo)
-		{
-			nodeInfo = null;
-			if (this.Section != "node") return false;
-
-			var match = InfoParser.Match(this.Message);
-			if (!match.Success) return false;
-
-			var version = match.Groups["version"].Value.Trim();
-			var pid = match.Groups["pid"].Value.Trim();
-			var build = match.Groups["build"].Value.Trim();
-			nodeInfo = new ElasticsearchNodeInfo(version, pid, build);
-			return true;
-		}
-
-		public bool TryGetStartedConfirmation()
-		{
-			if (this.Section != "node") return false;
-			return this.Message == "started";
-		}
-
-		private static readonly Regex PortParser =
-			new Regex(@"bound_address(es)? {.+\:(?<port>\d+)}");
-
-		public bool TryGetPortNumber(out int port)
-		{
-			port = 0;
-			if (this.Section != "http") return false;
-
-			var match = PortParser.Match(this.Message);
-			if (!match.Success) return false;
-
-			var portString = match.Groups["port"].Value.Trim();
-			port = int.Parse(portString);
-			return true;
-		}
-	}
-
-	public class ElasticsearchNodeInfo
-	{
-		public string Version { get; }
-		public int? Pid { get; }
-		public string Build { get; }
-
-		public ElasticsearchNodeInfo(string version, string pid, string build)
-		{
-			this.Version = version;
-			if (!string.IsNullOrEmpty(pid))
-				Pid = int.Parse(pid);
-			Build = build;
-		}
-
-	}
-
 }

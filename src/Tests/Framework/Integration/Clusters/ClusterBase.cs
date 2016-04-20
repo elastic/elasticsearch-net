@@ -11,16 +11,18 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNode Node { get; }
 		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
 
+		protected virtual bool EnableShield => false;
+
 		protected ClusterBase()
 		{
 			var name = this.GetType().Name.Replace("Cluster", "");
-			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name);
+			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name, EnableShield);
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
 				this.Boostrap();
 				handle.Set();
 			});
-			this.ConsoleOut = this.Node.Start(this.ServerSettings);
+			this.ConsoleOut = this.Node.Start(name, this.ServerSettings);
 		}
 
 		protected virtual string[] ServerSettings { get; } = new string[] { };
@@ -29,9 +31,6 @@ namespace Tests.Framework.Integration
 
 		public void Dispose() => this.Node?.Dispose();
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null) => this.Node.Client(settings);
-
-		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings) =>
-			this.Node.Client(createPool, settings);
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false) => this.Node.Client(settings, forceInMemory);
 	}
 }

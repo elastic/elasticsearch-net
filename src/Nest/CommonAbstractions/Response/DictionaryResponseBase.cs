@@ -28,7 +28,7 @@ namespace Nest
 			var dict = new Dictionary<TKey, TValue>();
 			serializer.Populate(reader, dict);
 			response.BackingDictionary = dict;
-			return response; 
+			return response;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }

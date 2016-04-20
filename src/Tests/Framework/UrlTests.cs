@@ -27,30 +27,30 @@ namespace Tests.Framework
 
 		protected override object ExpectJson => null;
 
-		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settings = null) 
+		internal UrlTester(HttpMethod method, string expectedUrl, Func<ConnectionSettings, ConnectionSettings> settings = null)
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
 			this._connectionSettingsModifier = (settings ?? (c =>c.PrettyJson(false)));
 		}
 
-			
-		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call) 
+
+		public UrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call)
 			where TResponse : IResponse => WhenCalling(call, "fluent");
 
-		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) 
+		public Task<UrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
 			where TResponse : IResponse => WhenCallingAsync(call, "fluent async");
 
-		public UrlTester Request<TResponse>(Func<IElasticClient, TResponse> call) 
+		public UrlTester Request<TResponse>(Func<IElasticClient, TResponse> call)
 			where TResponse : IResponse => WhenCalling(call, "request");
 
-		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call) 
+		public Task<UrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
 			where TResponse : IResponse => WhenCallingAsync(call, "request async");
 
 		public UrlTester LowLevel(Func<IElasticLowLevelClient, IApiCallDetails> call)
 		{
 			var callDetails = call(this.GetClient().LowLevel);
-			return Assert("lowleve", callDetails);
+			return Assert("lowlevel", callDetails);
 		}
 
 		internal UrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
@@ -83,6 +83,7 @@ namespace Tests.Framework
 		public static UrlTester GET(string url) =>  new UrlTester(HttpMethod.GET, url);
 		public static UrlTester HEAD(string url) =>  new UrlTester(HttpMethod.HEAD, url);
 		public static UrlTester DELETE(string url) =>  new UrlTester(HttpMethod.DELETE, url);
+		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 	}
 
 	public class IntermediateUrlTester

@@ -11,13 +11,14 @@ namespace Nest
 		HttpMethod HttpMethod { get; }
 
 		RouteValues RouteValues { get; }
+
 	}
 
 	public interface IRequest<TParameters> : IRequest
 		where TParameters : IRequestParameters, new()
 	{
 		/// <summary>
-		/// Used to describe request parameters not part of the body. e.q query string or 
+		/// Used to describe request parameters not part of the body. e.q query string or
 		/// connection configuration overrides
 		/// </summary>
 		TParameters RequestParameters { get; set; }
@@ -37,7 +38,6 @@ namespace Nest
 
 		protected virtual HttpMethod HttpMethod => RequestState.RequestParameters.DefaultHttpMethod;
 
-
 		[JsonIgnore]
 		HttpMethod IRequest.HttpMethod => this.HttpMethod;
 
@@ -47,11 +47,28 @@ namespace Nest
 		[JsonIgnore]
 		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
-
 		protected TOut Q<TOut>(string name) => RequestState.RequestParameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) => RequestState.RequestParameters.AddQueryStringValue(name, value);
+
 	}
+
+	public abstract class PlainRequestBase<TParameters> : RequestBase<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+		protected PlainRequestBase() { }
+		protected PlainRequestBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
+
+		/// <summary>
+		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
+		/// </summary>
+		public IRequestConfiguration RequestConfiguration
+		{
+			get { return RequestState.RequestParameters.RequestConfiguration;  }
+			set { RequestState.RequestParameters.RequestConfiguration = value; }
+		}
+	}
+
 
 	public abstract class RequestDescriptorBase<TDescriptor, TParameters, TInterface> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
@@ -63,6 +80,7 @@ namespace Nest
 		protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { _descriptor = (TDescriptor)this;  }
 
 		protected TInterface Self => _descriptor;
+		protected IRequestConfiguration RequestConfig => ((IRequestParameters)RequestState.RequestParameters).RequestConfiguration;
 
 		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign(_descriptor, assign);
 

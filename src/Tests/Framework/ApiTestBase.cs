@@ -33,7 +33,8 @@ namespace Tests.Framework
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
 
-		protected IElasticClient Client => this.Cluster.Client(GetConnectionSettings);
+		protected virtual bool ForceInMemory => true;
+		protected IElasticClient Client => this.Cluster.Client(GetConnectionSettings, this.ForceInMemory);
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
@@ -44,6 +45,8 @@ namespace Tests.Framework
 
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
+
+
 
 		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster)
 		{
