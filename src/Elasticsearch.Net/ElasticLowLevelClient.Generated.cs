@@ -208,7 +208,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -221,7 +221,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -235,7 +235,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAliases<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -249,7 +249,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -262,7 +262,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -275,7 +275,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -289,7 +289,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAllocation<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -303,7 +303,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -316,7 +316,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatCount<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -329,7 +329,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -343,7 +343,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatCount<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -357,7 +357,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -370,7 +370,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatFielddata<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -383,7 +383,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata/{fields} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -397,7 +397,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatFielddata<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/fielddata/{fields.NotNull("fields")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/fielddata/{fields.NotNull("fields")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata/{fields} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -411,7 +411,7 @@ namespace Elasticsearch.Net
 		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/fielddata/{fields.NotNull("fields")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/fielddata/{fields.NotNull("fields")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/health 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -424,7 +424,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/health 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -437,7 +437,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -450,7 +450,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -463,7 +463,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -476,7 +476,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -489,7 +489,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -503,7 +503,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatIndices<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -517,7 +517,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/master 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -530,7 +530,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/master 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -543,7 +543,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodeattrs 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -556,7 +556,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatNodeattrs<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/nodeattrs"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/nodeattrs"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodeattrs 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -569,7 +569,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatNodeattrsAsync<T>(Func<CatNodeAttributesRequestParameters, CatNodeAttributesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/nodeattrs"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/nodeattrs"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodes 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -582,7 +582,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodes 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -595,7 +595,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/pending_tasks 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -608,7 +608,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/pending_tasks 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -621,7 +621,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/plugins 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -634,7 +634,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatPlugins<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/plugins 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -647,7 +647,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatPluginsAsync<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -660,7 +660,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -673,7 +673,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -687,7 +687,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatRecovery<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -701,7 +701,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/repositories 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -714,7 +714,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatRepositories<T>(Func<CatRepositoriesRequestParameters, CatRepositoriesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/repositories"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/repositories"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/repositories 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -727,7 +727,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatRepositoriesAsync<T>(Func<CatRepositoriesRequestParameters, CatRepositoriesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/repositories"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/repositories"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -740,7 +740,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatSegments<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -753,7 +753,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -767,7 +767,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatSegments<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -781,7 +781,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -794,7 +794,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatShards<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -807,7 +807,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -821,7 +821,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatShards<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -835,7 +835,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/snapshots/{repository} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -849,7 +849,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatSnapshots<T>(string repository, Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/snapshots/{repository.NotNull("repository")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/snapshots/{repository.NotNull("repository")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/snapshots/{repository} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -863,7 +863,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">Name of repository from which to fetch the snapshot information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatSnapshotsAsync<T>(string repository, Func<CatSnapshotsRequestParameters, CatSnapshotsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/snapshots/{repository.NotNull("repository")}"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/snapshots/{repository.NotNull("repository")}"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/thread_pool 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -876,7 +876,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequest<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/thread_pool 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -889,7 +889,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain"));
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain", accept: "text/plain"));
 		
 		///<summary>Represents a DELETE on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

@@ -17,12 +17,6 @@ namespace Nest
 		internal string _p { get; set; }
 		public string Pid => this._p ?? this._pid;
 
-		[JsonProperty("host")]
-		internal string _host { get; set; }
-		[JsonProperty("h")]
-		internal string _h { get; set; }
-		public string Host => this._h ?? this._host;
-
 		[JsonProperty("ip")]
 		internal string _ip { get; set; }
 		[JsonProperty("i")]

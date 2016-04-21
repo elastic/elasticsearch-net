@@ -28,6 +28,7 @@ namespace Elasticsearch.Net
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
 		public string ContentType { get; }
+		public string Accept { get; }
 
 		public NameValueCollection Headers { get; }
 		public string ProxyAddress { get; }
@@ -63,10 +64,11 @@ namespace Elasticsearch.Net
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
 			this.HttpCompression = global.EnableHttpCompression;
 			this.ContentType = local?.ContentType ?? MimeType;
+			this.Accept = local?.Accept ?? MimeType;
 			this.Headers = global.Headers;
 
 			this.RequestTimeout = local?.RequestTimeout ?? global.RequestTimeout;
-			this.PingTimeout = 
+			this.PingTimeout =
 				local?.PingTimeout
 				?? global?.PingTimeout
 				?? (global.ConnectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
@@ -97,25 +99,25 @@ namespace Elasticsearch.Net
 			var tempUri = new Uri("http://localhost:9200/" + path).Purify();
 			if (tempUri.Query.IsNullOrEmpty())
 				path += queryString;
-			else 
+			else
 				path += "&" + queryString.Substring(1, queryString.Length - 1);
 			return path;
 		}
 
-		protected bool Equals(RequestData other) => 
-			RequestTimeout.Equals(other.RequestTimeout) 
-			&& PingTimeout.Equals(other.PingTimeout) 
-			&& KeepAliveTime == other.KeepAliveTime 
-			&& KeepAliveInterval == other.KeepAliveInterval 
-			&& Pipelined == other.Pipelined 
-			&& HttpCompression == other.HttpCompression 
-			&& Equals(Headers, other.Headers) 
-			&& string.Equals(ProxyAddress, other.ProxyAddress) 
-			&& string.Equals(ProxyUsername, other.ProxyUsername) 
-			&& string.Equals(ProxyPassword, other.ProxyPassword) 
-			&& DisableAutomaticProxyDetection == other.DisableAutomaticProxyDetection 
-			&& Equals(BasicAuthorizationCredentials, other.BasicAuthorizationCredentials) 
-			&& Equals(ConnectionSettings, other.ConnectionSettings) 
+		protected bool Equals(RequestData other) =>
+			RequestTimeout.Equals(other.RequestTimeout)
+			&& PingTimeout.Equals(other.PingTimeout)
+			&& KeepAliveTime == other.KeepAliveTime
+			&& KeepAliveInterval == other.KeepAliveInterval
+			&& Pipelined == other.Pipelined
+			&& HttpCompression == other.HttpCompression
+			&& Equals(Headers, other.Headers)
+			&& string.Equals(ProxyAddress, other.ProxyAddress)
+			&& string.Equals(ProxyUsername, other.ProxyUsername)
+			&& string.Equals(ProxyPassword, other.ProxyPassword)
+			&& DisableAutomaticProxyDetection == other.DisableAutomaticProxyDetection
+			&& Equals(BasicAuthorizationCredentials, other.BasicAuthorizationCredentials)
+			&& Equals(ConnectionSettings, other.ConnectionSettings)
 			&& Equals(MemoryStreamFactory, other.MemoryStreamFactory);
 
 		public override bool Equals(object obj)

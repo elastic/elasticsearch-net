@@ -36,7 +36,7 @@ namespace Elasticsearch.Net
 		{
 			var request = (HttpWebRequest)WebRequest.Create(requestData.Uri);
 
-			request.Accept = requestData.ContentType;
+			request.Accept = requestData.Accept;
 			request.ContentType = requestData.ContentType;
 
 			request.MaximumResponseHeadersLength = -1;

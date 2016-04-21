@@ -5,6 +5,9 @@ namespace Nest
 	[JsonObject]
 	public class CatRecoveryRecord : ICatRecord
 	{
+		[JsonProperty("index")]
+		public string Index { get; set; }
+
 		[JsonProperty("shard")]
 		public string Shard  { get; set; }
 
@@ -32,24 +35,34 @@ namespace Nest
 		[JsonProperty("files")]
 		public string Files { get; set; }
 
+		[JsonProperty("files_recovered")]
+		public string FilesRecovered { get; set; }
+
 		[JsonProperty("files_percent")]
 		public string FilesPercent { get; set; }
+
+		[JsonProperty("files_total")]
+		public string FilesTotal { get; set; }
 
 		[JsonProperty("bytes")]
 		public string Bytes { get; set; }
 
+		[JsonProperty("bytes_recovered")]
+		public string BytesRecovered { get; set; }
+
 		[JsonProperty("bytes_percent")]
 		public string BytesPercent { get; set; }
 
-		[JsonProperty("translog")]
-		public long? Translog { get; set; }
+		[JsonProperty("bytes_total")]
+		public string BytesTotal { get; set; }
 
-		[JsonProperty("translog_percent")]
-		public string TranslogPercent { get; set; }
+		[JsonProperty("translog_ops")]
+		public long? TranslogOps { get; set; }
 
-		[JsonProperty("total_translog")]
-		public long? TotalTranslog { get; set; }
+		[JsonProperty("translog_ops_percent")]
+		public string TranslogOpsPercent { get; set; }
 
-
+		[JsonProperty("translog_ops_recovered")]
+		public long? TranslogOpsRecovered { get; set; }
 	}
 }

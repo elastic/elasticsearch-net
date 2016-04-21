@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Elasticsearch.Net
 {
-	public interface IRequestConfiguration 
+	public interface IRequestConfiguration
 	{
 		/// <summary>
 		/// The timeout for this specific request, takes precedence over the global timeout settings
@@ -17,10 +17,15 @@ namespace Elasticsearch.Net
 		TimeSpan? PingTimeout { get; set;  }
 
 		/// <summary>
-		/// Force a difference content type header on the request
+		/// Force a different Content-Type header on the request
 		/// </summary>
 		string ContentType { get; set; }
-		
+
+		/// <summary>
+		/// Force a different Accept header on the request
+		/// </summary>
+		string Accept { get; set; }
+
 		/// <summary>
 		/// This will override whatever is set on the connection configuration or whatever default the connectionpool has.
 		/// </summary>
@@ -32,13 +37,13 @@ namespace Elasticsearch.Net
 		Uri ForceNode { get; set; }
 
 		/// <summary>
-		/// Forces no sniffing to occur on the request no matter what configuration is in place 
+		/// Forces no sniffing to occur on the request no matter what configuration is in place
 		/// globally
 		/// </summary>
 		bool? DisableSniff { get; set; }
 
 		/// <summary>
-		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with 
+		/// Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with
 		/// low connect timeout will be tried first in normal circumstances
 		/// </summary>
 		bool? DisablePing { get; set; }
@@ -70,6 +75,7 @@ namespace Elasticsearch.Net
 		public TimeSpan? RequestTimeout { get; set; }
 		public TimeSpan? PingTimeout { get; set; }
 		public string ContentType { get; set; }
+		public string Accept { get; set; }
 		public int? MaxRetries { get; set; }
 		public Uri ForceNode { get; set; }
 		public bool? DisableSniff { get; set; }
@@ -87,17 +93,19 @@ namespace Elasticsearch.Net
 		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
 
 		TimeSpan? IRequestConfiguration.PingTimeout { get; set; }
-	
+
 		string IRequestConfiguration.ContentType { get; set; }
-		
+
+		string IRequestConfiguration.Accept { get; set; }
+
 		int? IRequestConfiguration.MaxRetries { get; set; }
-		
+
 		Uri IRequestConfiguration.ForceNode { get; set; }
-		
+
 		bool? IRequestConfiguration.DisableSniff { get; set; }
-		
+
 		bool? IRequestConfiguration.DisablePing { get; set; }
-		
+
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
@@ -118,9 +126,15 @@ namespace Elasticsearch.Net
 			return this;
 		}
 
-		public RequestConfigurationDescriptor AcceptContentType(string acceptContentTypeHeader)
+		public RequestConfigurationDescriptor ContentType(string contentTypeHeader)
 		{
-			Self.ContentType = acceptContentTypeHeader;
+			Self.ContentType = contentTypeHeader;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor Accept(string acceptHeader)
+		{
+			Self.Accept = acceptHeader;
 			return this;
 		}
 
