@@ -19,6 +19,7 @@ namespace Nest
 		public override bool IsValid => base.IsValid && !this.Errors && !this.ItemsWithErrors.HasAny();
 		protected override void DebugIsValid(StringBuilder sb)
 		{
+			if (this.Items == null) return;
 			sb.AppendLine($"# Invalid Bulk items:");
 			foreach(var i in Items.Select((item, i) => new { item, i}).Where(i=>!i.item.IsValid))
 				sb.AppendLine($"  operation[{i.i}]: {i.item}");

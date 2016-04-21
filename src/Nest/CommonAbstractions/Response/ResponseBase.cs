@@ -43,16 +43,16 @@ namespace Nest
 			get
 			{
 				var sb = new StringBuilder();
-				sb.Append($"{(!IsValid ? "Inv" : "V")}alid NEST response built from a ");
-				sb.AppendLine(ApiCall?.ToString().ToCamelCase() ?? "null ApiCall which is highly exceptional, please open a bug if you see this");
+				sb.Append($"{(!this.IsValid ? "Inv" : "V")}alid NEST response built from a ");
+				sb.AppendLine(this.ApiCall?.ToString().ToCamelCase() ?? "null ApiCall which is highly exceptional, please open a bug if you see this");
 				if (!this.IsValid) this.DebugIsValid(sb);
-				ResponseStatics.DebugInformationBuilder(ApiCall, sb);
+				if (this.ApiCall != null) ResponseStatics.DebugInformationBuilder(ApiCall, sb);
 				return sb.ToString();
 			}
 		}
 		protected virtual void DebugIsValid(StringBuilder sb) { }
 
-		public override string ToString() =>  $"{(!IsValid ? "Inv" : "V")}alid NEST response built from a {this.ApiCall?.ToString().ToCamelCase()}";
+		public override string ToString() =>  $"{(!this.IsValid ? "Inv" : "V")}alid NEST response built from a {this.ApiCall?.ToString().ToCamelCase()}";
 
 	}
 }
