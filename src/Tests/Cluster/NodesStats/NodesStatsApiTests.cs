@@ -52,6 +52,7 @@ namespace Tests.Cluster.NodesStats
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
 			node.Host.Should().NotBeNullOrWhiteSpace();
 			node.Ip.Should().NotBeEmpty();
+			node.Roles.Should().NotBeNullOrEmpty();
 		}
 
 		protected void Assert(IndexStats index)

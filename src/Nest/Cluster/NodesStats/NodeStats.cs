@@ -21,6 +21,13 @@ namespace Nest
 		[JsonProperty("ip")]
 		public IEnumerable<string> Ip { get; internal set; }
 
+		/// <summary>
+		/// All of the different roles that the node fulfills. An empty
+		/// collection means that the node is a coordinating only node.
+		/// </summary>
+		[JsonProperty("roles")]
+		public IEnumerable<NodeRole> Roles { get; internal set; }
+
 		[JsonProperty("indices")]
 		public IndexStats Indices { get; internal set; }
 

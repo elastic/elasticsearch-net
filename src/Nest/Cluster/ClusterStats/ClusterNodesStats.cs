@@ -23,9 +23,9 @@ namespace Nest
 
 		[JsonProperty("fs")]
 		public ClusterFileSystem FileSystem { get; internal set; }
-		
+
 		[JsonProperty("plugins")]
-		public List<PluginStats> Plugins { get; internal set; } 
+		public List<PluginStats> Plugins { get; internal set; }
 	}
 
 	[JsonObject]
@@ -80,7 +80,7 @@ namespace Nest
 		public string VmVendor { get; internal set; }
 
 		[JsonProperty("count")]
-		public int Count { get; internal set; }	
+		public int Count { get; internal set; }
 	}
 
 	[JsonObject]
@@ -135,20 +135,11 @@ namespace Nest
 		[JsonProperty("available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
-		[JsonProperty("mem")]
-		public ClusterOperatingSystemMemory Memory { get; internal set; }
+		[JsonProperty("allocated_processors")]
+		public int AllocatedProcessors { get; internal set; }
 
 		[JsonProperty("names")]
 		public List<ClusterOperatingSystemName> Names { get; internal set; }
-	}
-
-	[JsonObject]
-	public class ClusterOperatingSystemMemory
-	{
-		[JsonProperty("total")]
-		public string Total { get; internal set; }
-		[JsonProperty("total_in_bytes")]
-		public long TotalInBytes { get; internal set; }
 	}
 
 	[JsonObject]
@@ -167,16 +158,16 @@ namespace Nest
 		[JsonProperty("total")]
 		public int Total { get; internal set; }
 
-		[JsonProperty("master_only")]
-		public int MasterOnly { get; internal set; }
+		[JsonProperty("coordinating_only")]
+		public int CoordinatingOnly { get; internal set; }
 
-		[JsonProperty("data_only")]
-		public int DataOnly { get; internal set; }
+		[JsonProperty("master")]
+		public int Master { get; internal set; }
 
-		[JsonProperty("master_data")]
-		public int MasterData { get; internal set; }
+		[JsonProperty("data")]
+		public int Data { get; internal set; }
 
-		[JsonProperty("client")]
-		public int Client { get; internal set; }
+		[JsonProperty("ingest")]
+		public int Ingest { get; internal set; }
 	}
 }
