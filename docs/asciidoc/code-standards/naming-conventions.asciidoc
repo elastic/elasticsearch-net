@@ -128,3 +128,35 @@ requests.Except(responses).Should().BeEmpty();
 ----
 <1> _Exceptions to the rule_
 
+[source,csharp]
+----
+var exceptions = new List<Type>
+{
+    typeof(IElasticClient).Assembly().GetType("Elasticsearch.Net.DotNetCoreTypeExtensions"),
+    typeof(AggregationWalker),
+    typeof(AggregationVisitor),
+    typeof(IAggregationVisitor),
+    typeof(IElasticClient).Assembly().GetType("System.AssemblyVersionInformation")
+};
+
+var types = typeof(IElasticClient).Assembly().GetTypes();
+
+var typesNotInNestNamespace = types
+    .Where(t => !exceptions.Contains(t))
+    .Where(t => t.Namespace != "Nest")
+    .ToList();
+
+typesNotInNestNamespace.Should().BeEmpty();
+----
+
+[source,csharp]
+----
+var types = typeof(IElasticLowLevelClient).Assembly().GetTypes();
+
+var typesNotInNestNamespace = types
+    .Where(t => t.Namespace != "Elasticsearch.Net")
+    .ToList();
+
+typesNotInNestNamespace.Should().BeEmpty();
+----
+

@@ -5,7 +5,7 @@
 :nuget: https://www.nuget.org/packages
 
 [[property-inference]]
-== Property Name Inference 
+== Property Name Inference
 
 === Appending suffixes to a Lambda expression body
 

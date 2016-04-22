@@ -260,6 +260,7 @@ namespace Tests.Framework.Integration
 #else
 			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
 #endif
+
 			if (!string.IsNullOrWhiteSpace(licenseFile))
 			{
 				var putLicense = client.PostLicense(new PostLicenseRequest { License = License.LoadFromDisk(licenseFile) });

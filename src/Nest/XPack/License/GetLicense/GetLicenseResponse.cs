@@ -82,6 +82,7 @@ namespace Nest
 			[JsonProperty("license")]
 			public License License { get; set; }
 		}
+
 		public static License LoadFromDisk(string path)
 		{
 			var contents = File.ReadAllText(path);
