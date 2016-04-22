@@ -255,7 +255,11 @@ namespace Tests.Framework.Integration
 			if (license.IsValid && license.License.Status == LicenseStatus.Active) return;
 
 			var exceptionMessageStart = "Server has license plugin installed, ";
+#if DOTNETCORE
+			var licenseFile = string.Empty;
+#else
 			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
+#endif
 			if (!string.IsNullOrWhiteSpace(licenseFile))
 			{
 				var putLicense = client.PostLicense(new PostLicenseRequest { License = License.LoadFromDisk(licenseFile) });
