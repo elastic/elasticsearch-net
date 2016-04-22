@@ -529,7 +529,6 @@
     <Compile Include="Framework\Integration\ClientMethod.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesApiTests.cs" />

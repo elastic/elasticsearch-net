@@ -113,21 +113,14 @@ namespace Tests.Mapping.Types.Core.String
 				full = new
 				{
 					type = "string",
-					norms = new
-					{
-						enabled = true,
-						loading = "lazy"
-					}
+					norms = true
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.String(s => s
 				.Name(o => o.Full)
-				.Norms(n => n
-					.Enabled()
-					.Loading(NormsLoading.Lazy)
-				)
+				.Norms()
 			);
 	}
 }

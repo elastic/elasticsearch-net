@@ -543,7 +543,7 @@ namespace Nest
 	{
 	 } 
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeAttributesRequest  : RequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
+	public partial class CatNodeAttributesRequest  : PlainRequestBase<CatNodeAttributesRequestParameters>, ICatNodeAttributesRequest
 	{
 		protected ICatNodeAttributesRequest Self => this;
 				///<summary>a short version of the Accept header, e.g. json, yaml</summary>
@@ -1074,7 +1074,7 @@ namespace Nest
 	{
 	 } 
 	///<summary>Request parameters for ClusterAllocationExplain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-allocation-explain.html</pre></summary>
-	public partial class ClusterAllocationExplainRequest  : RequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
+	public partial class ClusterAllocationExplainRequest  : PlainRequestBase<ClusterAllocationExplainRequestParameters>, IClusterAllocationExplainRequest
 	{
 		protected IClusterAllocationExplainRequest Self => this;
 				///<summary>Return &#39;YES&#39; decisions in explanation (default: false)</summary>
@@ -2024,35 +2024,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters> 
-	{
-		Indices Index { get; }
-		Names Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class DeleteWarmerRequest  : PlainRequestBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-		protected IDeleteWarmerRequest Self => this;
-		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index">this parameter is required</param>		
-///<param name="name">this parameter is required</param>
-		public DeleteWarmerRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
-		
-
-			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> 
 	{
 		Id Id { get; }
@@ -2955,6 +2926,33 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetUserRequest : IRequest<GetUserRequestParameters> 
+	{
+		Names Username { get; }
+	 } 
+	///<summary>Request parameters for ShieldGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
+	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
+	{
+		protected IGetUserRequest Self => this;
+		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
+			/// <summary>/_shield/user/{username}</summary>
+///<param name="username">Optional, accepts null</param>
+		public GetUserRequest(Names username) : base(r=>r.Optional("username", username)){}
+		
+
+		/// <summary>/_shield/user</summary>
+		public GetUserRequest() : base(){}
+		
+
+			///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGraphExploreRequest : IRequest<GraphExploreRequestParameters> 
 	{
 		Indices Index { get; }
@@ -3265,7 +3263,7 @@ namespace Nest
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestDeletePipelineRequest  : RequestBase<IngestDeletePipelineRequestParameters>, IIngestDeletePipelineRequest
+	public partial class IngestDeletePipelineRequest  : PlainRequestBase<IngestDeletePipelineRequestParameters>, IIngestDeletePipelineRequest
 	{
 		protected IIngestDeletePipelineRequest Self => this;
 		Id IIngestDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3296,7 +3294,7 @@ namespace Nest
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestGetPipelineRequest  : RequestBase<IngestGetPipelineRequestParameters>, IIngestGetPipelineRequest
+	public partial class IngestGetPipelineRequest  : PlainRequestBase<IngestGetPipelineRequestParameters>, IIngestGetPipelineRequest
 	{
 		protected IIngestGetPipelineRequest Self => this;
 		Id IIngestGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3324,7 +3322,7 @@ namespace Nest
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestPutPipelineRequest  : RequestBase<IngestPutPipelineRequestParameters>, IIngestPutPipelineRequest
+	public partial class IngestPutPipelineRequest  : PlainRequestBase<IngestPutPipelineRequestParameters>, IIngestPutPipelineRequest
 	{
 		protected IIngestPutPipelineRequest Self => this;
 		Id IIngestPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3355,7 +3353,7 @@ namespace Nest
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestSimulateRequest  : RequestBase<IngestSimulateRequestParameters>, IIngestSimulateRequest
+	public partial class IngestSimulateRequest  : PlainRequestBase<IngestSimulateRequestParameters>, IIngestSimulateRequest
 	{
 		protected IIngestSimulateRequest Self => this;
 		Id IIngestSimulateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -4255,61 +4253,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters> 
-	{
-		Indices Index { get; }
-		Name Name { get; }
-		Types Type { get; }
-	 } 
-	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
-	public partial class PutWarmerRequest  : PlainRequestBase<PutWarmerRequestParameters>, IPutWarmerRequest
-	{
-		protected IPutWarmerRequest Self => this;
-		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
-		Types IPutWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_warmer/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Name name) : base(r=>r.Required("name", name)){}
-		
-
-		/// <summary>/{index}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Indices index, Name name) : base(r=>r.Optional("index", index).Required("name", name)){}
-		
-
-		/// <summary>/{index}/{type}/_warmer/{name}</summary>
-///<param name="index">Optional, accepts null</param>		
-///<param name="type">Optional, accepts null</param>		
-///<param name="name">this parameter is required</param>
-		public PutWarmerRequest(Indices index, Types type, Name name) : base(r=>r.Optional("index", index).Optional("type", type).Required("name", name)){}
-		
-
-			///<summary>Specify timeout for connection to master</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
 	{
 		Indices Index { get; }
@@ -4421,7 +4364,7 @@ namespace Nest
 		TaskId TaskId { get; }
 	 } 
 	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
-	public partial class ReindexRethrottleRequest  : RequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
+	public partial class ReindexRethrottleRequest  : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");
