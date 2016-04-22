@@ -151,6 +151,8 @@ namespace Tests.Framework.Integration
 
 		public IElasticClient Client(Func<Uri, IConnectionPool> createPool, Func<ConnectionSettings, ConnectionSettings> settings)
 		{
+			if (!this.Started && TestClient.Configuration.RunIntegrationTests)
+				throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
 			var port = this.Started ? this.Port : 9200;
 			settings = settings ?? (s => s);
 			var client = TestClient.GetClient(s => ClusterSettings(s, settings), port, createPool);
@@ -159,7 +161,14 @@ namespace Tests.Framework.Integration
 
 		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false)
 		{
+			if (!this.Started && TestClient.Configuration.RunIntegrationTests)
+				throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
 			var port = this.Started ? this.Port : 9200;
+			return GetPrivateClient(settings, forceInMemory, port);
+		}
+
+		private IElasticClient GetPrivateClient(Func<ConnectionSettings, ConnectionSettings> settings, bool forceInMemory, int port)
+		{
 			settings = settings ?? (s => s);
 			var client = forceInMemory
 				? TestClient.GetInMemoryClient(s => ClusterSettings(s, settings), port)
@@ -287,11 +296,12 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				var healthyCluster = this.Client().ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
+				var healthyCluster = this.GetPrivateClient(null, false, this.Port)
+					.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow).Timeout(TimeSpan.FromSeconds(30)));
 				if (healthyCluster.IsValid)
 				{
-					this._blockingSubject.OnNext(handle);
 					this.Started = true;
+					this._blockingSubject.OnNext(handle);
 				}
 				else
 				{
@@ -450,12 +460,11 @@ namespace Tests.Framework.Integration
 
 		public void Stop()
 		{
-			if (!this.RunningIntegrations || !this.Started) return;
 
+			var hasStarted = this.Started;
 			this.Started = false;
 
-			Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
-			Console.WriteLine($"Node started: {this.Started} on port: {this.Port} using PID: {this.Info?.Pid}");
+			Console.WriteLine($"Stopping... node has started {hasStarted} ran integrations: {this.RunningIntegrations}");
 
 			this._process?.Dispose();
 			this._processListener?.Dispose();
@@ -468,6 +477,9 @@ namespace Tests.Framework.Integration
 				esProcess.WaitForExit(5000);
 				esProcess.Close();
 			}
+
+			if (!this.RunningIntegrations || !hasStarted) return;
+			Console.WriteLine($"Node started on port: {this.Port} using PID: {this.Info?.Pid}");
 
 			if (this._doNotSpawnIfAlreadyRunning) return;
 			var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
