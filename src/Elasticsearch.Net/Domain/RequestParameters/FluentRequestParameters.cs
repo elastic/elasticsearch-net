@@ -9,7 +9,7 @@ namespace Elasticsearch.Net
 	/// You can always pass a simple NameValueCollection if you want.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class FluentRequestParameters<T> : IRequestParameters 
+	public abstract class FluentRequestParameters<T> : IRequestParameters
 		where T : FluentRequestParameters<T>
 	{
 		private IRequestParameters Self => this;
@@ -45,10 +45,10 @@ namespace Elasticsearch.Net
 
 		public T RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> selector)
 		{
-			Self.RequestConfiguration = selector?.Invoke(new RequestConfigurationDescriptor()) ?? Self.RequestConfiguration;
+			Self.RequestConfiguration = selector?.Invoke(new RequestConfigurationDescriptor(Self.RequestConfiguration)) ?? Self.RequestConfiguration;
 			return (T)this;
 		}
-		
+
 		public T DeserializationOverride(Func<IApiCallDetails, Stream, object> customResponseCreator)
 		{
 			Self.DeserializationOverride = customResponseCreator;

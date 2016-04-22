@@ -22,9 +22,9 @@ Inner hits can be used by defining an `inner_hits` definition on a `nested`, `ha
 
 See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 
-[[global-inner-hits]]
+[[top-level-inner-hits]]
 [float]
-== Global Inner Hits
+== Top Level Inner Hits
 
 === Fluent DSL Example
 
@@ -35,10 +35,10 @@ s => s
 .InnerHits(ih => ih
     .Type<Earl>("earls", g => g
         .Size(5)
+        .FielddataFields(p => p.Name)
         .InnerHits(iih => iih
             .Type<Baron>("barons")
         )
-        .FielddataFields(p => p.Name)
     )
 )
 ----
@@ -49,50 +49,24 @@ s => s
 ----
 new SearchRequest<Duke>(Index, typeof(Duke))
 {
-    InnerHits = new NamedInnerHits
+    InnerHits = new TopLevelInnerHits
     {
-        { "earls", new InnerHitsContainer
-        {
-            Type = new TypeInnerHit<Earl>
+        { "earls", new TopLevelInnerHit
             {
-                InnerHit = new GlobalInnerHit
+                Type = typeof(Earl),
+                Size = 5,
+                FielddataFields = new Field[] { "name"},
+                InnerHits = new TopLevelInnerHits
                 {
-                    Size = 5,
-                    FielddataFields = new Field[]{ "name" },
-                    InnerHits = new NamedInnerHits
-                    {
-                        { "barons", new TypeInnerHit<Baron>() }
+                    { "barons", new TopLevelInnerHit
+                        {
+                            Type = typeof(Baron)
+                        }
                     }
                 }
             }
-        } }
-    }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "inner_hits": {
-    "earls": {
-      "type": {
-        "earl": {
-          "fielddata_fields": [
-            "name"
-          ],
-          "inner_hits": {
-            "barons": {
-              "type": {
-                "baron": {}
-              }
-            }
-          },
-          "size": 5
         }
-      }
     }
-  }
 }
 ----
 
@@ -135,39 +109,6 @@ new SearchRequest<King>(Index, typeof(King))
         Query = new MatchAllQuery(),
         InnerHits = new InnerHits()
     }
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "query": {
-    "bool": {
-      "should": [
-        {
-          "has_child": {
-            "type": "prince",
-            "query": {
-              "match_all": {}
-            },
-            "inner_hits": {
-              "name": "princes"
-            }
-          }
-        },
-        {
-          "nested": {
-            "query": {
-              "match_all": {}
-            },
-            "path": "foes",
-            "inner_hits": {}
-          }
-        }
-      ]
-    }
-  }
 }
 ----
 

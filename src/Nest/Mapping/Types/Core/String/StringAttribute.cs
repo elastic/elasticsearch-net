@@ -8,7 +8,7 @@
 		TermVectorOption? IStringProperty.TermVector { get; set; }
 		double? IStringProperty.Boost { get; set; }
 		string IStringProperty.NullValue { get; set; }
-		INorms IStringProperty.Norms { get; set; }
+		bool? IStringProperty.Norms { get; set; }
 		IndexOptions? IStringProperty.IndexOptions { get; set; }
 		string IStringProperty.Analyzer { get; set; }
 		string IStringProperty.SearchAnalyzer { get; set; }
@@ -27,6 +27,7 @@
 		public int PositionIncrementGap { get { return Self.PositionIncrementGap.GetValueOrDefault(); } set { Self.PositionIncrementGap = value; } }
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public TermVectorOption TermVector { get { return Self.TermVector.GetValueOrDefault(); } set { Self.TermVector = value; } }
+		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
 
 		public StringAttribute() : base("string") { }
 	}

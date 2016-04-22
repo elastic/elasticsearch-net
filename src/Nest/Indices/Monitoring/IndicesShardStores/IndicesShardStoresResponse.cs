@@ -41,10 +41,13 @@ namespace Nest
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; set; }
 
-		[JsonProperty("version")]
-		public long Version { get; set; }
+		[JsonProperty("legacy_version")]
+		public long? LegacyVersion { get; set; }
 
-		[JsonProperty("store_exeption")]
+		[JsonProperty("allocation_id")]
+		public string AllocationId { get; set; }
+
+		[JsonProperty("store_exception")]
 		public ShardStoreException StoreException { get; set; }
 
 		[JsonProperty("allocation")]

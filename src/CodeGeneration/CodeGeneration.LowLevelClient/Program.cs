@@ -28,7 +28,7 @@ namespace CodeGeneration.LowLevelClient
 			if (redownloadCoreSpecification)
 				RestSpecDownloader.Download(downloadBranch);
 
-			ApiGenerator.Generate("Core", "DeleteByQuery");
+			ApiGenerator.Generate("Core", "DeleteByQuery", "Graph", "License", "Shield");
 			//ApiGenerator.Generate("Core", "Graph", "License");
 			//ApiGenerator.Generate(); //generates everything under ApiSpecification
 		}

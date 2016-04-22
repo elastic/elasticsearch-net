@@ -16,8 +16,6 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .DisableCoord()
-    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
     .Terms(new List<string> { "term1", "term2" })
 )
 ----
@@ -31,9 +29,7 @@ new TermsQuery
     Name = "named_query",
     Boost = 1.1,
     Field = "description",
-    Terms = new List<string> { "term1", "term2" },
-    DisableCoord = true,
-    MinimumShouldMatch = 2
+    Terms = new List<string> { "term1", "term2" }
 }
 ----
 
@@ -47,9 +43,7 @@ new TermsQuery
     "description": [
       "term1",
       "term2"
-    ],
-    "disable_coord": true,
-    "minimum_should_match": 2
+    ]
   }
 }
 ----
@@ -63,7 +57,6 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .DisableCoord()
     .Terms(_terms)
 )
 ----
@@ -77,8 +70,7 @@ new TermsQuery
     Name = "named_query",
     Boost = 1.1,
     Field = "description",
-    Terms = _terms,
-    DisableCoord = true,
+    Terms = _terms
 }
 ----
 
@@ -94,8 +86,7 @@ new TermsQuery
         "term1",
         "term2"
       ]
-    ],
-    "disable_coord": true
+    ]
   }
 }
 ----
@@ -109,7 +100,6 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.NumberOfCommits)
-    .DisableCoord()
     .Terms(_terms)
 )
 ----
@@ -124,7 +114,6 @@ new TermsQuery
     Boost = 1.1,
     Field = "numberOfCommits",
     Terms = _terms,
-    DisableCoord = true,
 }
 ----
 
@@ -140,8 +129,7 @@ new TermsQuery
         "term1",
         "term2"
       ]
-    ],
-    "disable_coord": true
+    ]
   }
 }
 ----

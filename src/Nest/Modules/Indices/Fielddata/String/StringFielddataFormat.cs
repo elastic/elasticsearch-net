@@ -6,8 +6,6 @@ namespace Nest
 	{
 		[EnumMember(Value = "paged_bytes")]
 		PagedBytes,
-		[EnumMember(Value = "doc_values")]
-		DocValues,
 		[EnumMember(Value = "disabled")]
 		Disabled
 	}

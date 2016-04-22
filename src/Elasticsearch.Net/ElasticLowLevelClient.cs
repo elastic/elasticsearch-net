@@ -38,7 +38,7 @@ namespace Elasticsearch.Net
 
 		string Url(FormattableString formattable) => formattable.ToString(_formatter);
 
-		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false, string contentType = null)
+		private TRequestParams _params<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404 = false, string contentType = null, string accept = null)
 			where TRequestParams : class, IRequestParameters, new()
 		{
 			var requestParams = requestParameters?.Invoke(new TRequestParams());
@@ -50,6 +50,8 @@ namespace Elasticsearch.Net
 				requestParams.RequestConfiguration.AllowedStatusCodes = new[] { 404 };
 			if (!contentType.IsNullOrEmpty() && requestParams.RequestConfiguration.ContentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
+			if (!accept.IsNullOrEmpty() && requestParams.RequestConfiguration.Accept.IsNullOrEmpty())
+				requestParams.RequestConfiguration.Accept = accept;
 			return requestParams;
 		}
 

@@ -37,7 +37,7 @@ namespace Tests.Cluster.ClusterStats
 		{
 			nodes.Should().NotBeNull();
 			nodes.Count.Should().NotBeNull();
-			nodes.Count.MasterData.Should().BeGreaterOrEqualTo(1);
+			nodes.Count.Master.Should().BeGreaterOrEqualTo(1);
 
 			nodes.FileSystem.Should().NotBeNull();
 			nodes.FileSystem.AvailableInBytes.Should().BeGreaterThan(0);
@@ -61,7 +61,7 @@ namespace Tests.Cluster.ClusterStats
 
 			nodes.OperatingSystem.Should().NotBeNull();
 			nodes.OperatingSystem.AvailableProcessors.Should().BeGreaterThan(0);
-			nodes.OperatingSystem.Memory.Should().NotBeNull();
+			nodes.OperatingSystem.AllocatedProcessors.Should().BeGreaterThan(0);
 
 			nodes.OperatingSystem.Names.Should().NotBeEmpty();
 

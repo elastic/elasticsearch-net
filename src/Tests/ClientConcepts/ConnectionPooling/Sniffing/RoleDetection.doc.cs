@@ -158,7 +158,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		private RequestPipeline CreatePipeline()
 		{
 			this._settings =
-				this._cluster.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
+				this._cluster.Node.Client(u => new SniffingConnectionPool(new[] {u}), c => c.PrettyJson()).ConnectionSettings;
 			var pipeline = new RequestPipeline(this._settings, DateTimeProvider.Default, new MemoryStreamFactory(),
 				new SearchRequestParameters());
 			return pipeline;

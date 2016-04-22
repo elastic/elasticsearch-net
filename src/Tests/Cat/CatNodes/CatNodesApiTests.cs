@@ -12,8 +12,8 @@ namespace Tests.Cat.CatNodes
 	{
 		public CatNodesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CatNodes(),
-			fluentAsync: (client, f) => client.CatNodesAsync(),
+			fluent: (client, f) => client.CatNodes(f),
+			fluentAsync: (client, f) => client.CatNodesAsync(f),
 			request: (client, r) => client.CatNodes(r),
 			requestAsync: (client, r) => client.CatNodesAsync(r)
 		);

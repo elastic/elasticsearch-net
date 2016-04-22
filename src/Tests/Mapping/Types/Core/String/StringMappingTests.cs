@@ -14,7 +14,10 @@ namespace Tests.Mapping.Types.Core.String
 			Index = FieldIndexOption.NotAnalyzed,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
+#pragma warning disable 618
+			// Purposely setting this obsolete property to ensure it serializes as position_increment_gap
 			PositionIncrementGap = 5,
+#pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
@@ -23,6 +26,12 @@ namespace Tests.Mapping.Types.Core.String
 
 		[String]
 		public string Minimal { get; set; }
+
+		public string Inferred { get; set; }
+
+		public char Char { get; set; }
+
+		public Guid Guid { get; set; }
 	}
 
 	public class StringMappingTests : TypeMappingTestBase<StringTest>
@@ -51,6 +60,20 @@ namespace Tests.Mapping.Types.Core.String
 				minimal = new
 				{
 					type = "string"
+				},
+				inferred = new {
+					type = "text",
+					fields = new {
+						keyword = new { type = "keyword" }
+					}
+				},
+				@char = new
+				{
+					type = "keyword"
+				},
+				guid = new
+				{
+					type = "keyword"
 				}
 			}
 		};
@@ -74,6 +97,15 @@ namespace Tests.Mapping.Types.Core.String
 			)
 			.String(s => s
 				.Name(o => o.Minimal)
+			)
+			.String(s => s
+				.Name(o => o.Inferred)
+			)
+			.String(s => s
+				.Name(o => o.Char)
+			)
+			.String(s => s
+				.Name(o => o.Guid)
 			);
 
 		protected override object ExpectJsonFluentOnly => new
@@ -83,21 +115,14 @@ namespace Tests.Mapping.Types.Core.String
 				full = new
 				{
 					type = "string",
-					norms = new
-					{
-						enabled = true,
-						loading = "lazy"
-					}
+					norms = true
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<StringTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.String(s => s
 				.Name(o => o.Full)
-				.Norms(n => n
-					.Enabled()
-					.Loading(NormsLoading.Lazy)
-				)
+				.Norms()
 			);
 	}
 }

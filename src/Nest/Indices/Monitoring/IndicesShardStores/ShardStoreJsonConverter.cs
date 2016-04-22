@@ -11,8 +11,6 @@ namespace Nest
 		private readonly VerbatimDictionaryKeysJsonConverter _dictionaryConverter =
 		new VerbatimDictionaryKeysJsonConverter();
 
-		private readonly PropertyJsonConverter _elasticTypeConverter = new PropertyJsonConverter();
-
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
 		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, IFieldMapping>);
@@ -42,14 +40,17 @@ namespace Nest
 					case "transport_address":
 						r.TransportAddress = p.Value.Value<string>();
 						break;
-					case "version":
-						r.Version = p.Value.Value<long>();
+					case "legacy_version":
+						r.LegacyVersion = p.Value.Value<long?>();
 						break;
 					case "store_exception":
 						r.StoreException = p.Value.ToObject<ShardStoreException>();
 						break;
 					case "allocation":
 						r.Allocation = p.Value.ToObject<ShardStoreAllocation>();
+						break;
+					case "allocation_id":
+						r.AllocationId = p.Value.Value<string>();
 						break;
 					case "attributes":
 						r.Attributes = p.Value.ToObject<Dictionary<string, object>>();

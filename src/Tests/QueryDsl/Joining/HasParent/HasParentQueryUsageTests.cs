@@ -15,7 +15,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 				_name = "named_query",
 				boost = 1.1,
 				type = "developer",
-				score_mode = "score",
+				score = true,
 				query = new
 				{
 					match_all = new { }
@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 			Type = Infer.Type<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			Query = new MatchAllQuery(),
-			ScoreMode = ParentScoreMode.Score
+			Score = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -42,9 +42,9 @@ namespace Tests.QueryDsl.Joining.HasParent
 				.Name("named_query")
 				.Boost(1.1)
 				.InnerHits(i=>i.Explain())
-				.ScoreMode(ParentScoreMode.Score)
+				.Score(true)
 				.Query(qq=>qq.MatchAll())
-				
+
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasParentQuery>(a => a.HasParent)

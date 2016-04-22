@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		public PropertyNames(IndexingCluster cluster) : base(cluster)
 		{
-			_client = cluster.Node.Client();
+			_client = cluster.Client();
 		}
 
 		/**=== Appending suffixes to a Lambda expression body
@@ -43,8 +43,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		 * the `.ApplySuffix()` extension method. Again, the serialized field name
 		 * resolves to the last token
 		 */
-		[U]
-		public void PropertyNamesAreResolvedToLastTokenUsingAppendSuffix()
+		[U] public void PropertyNamesAreResolvedToLastTokenUsingAppendSuffix()
 		{
 			Expression<Func<Project, object>> expression = p => p.Name;
 			expression = expression.AppendSuffix("raw");

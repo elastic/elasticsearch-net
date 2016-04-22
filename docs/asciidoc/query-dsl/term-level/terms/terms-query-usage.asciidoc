@@ -20,8 +20,6 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .DisableCoord()
-    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
     .Terms("term1", "term2")
 )
 ----
@@ -36,8 +34,6 @@ new TermsQuery
     Boost = 1.1,
     Field = "description",
     Terms = ExpectedTerms,
-    DisableCoord = true,
-    MinimumShouldMatch = 2
 }
 ----
 
@@ -51,16 +47,14 @@ new TermsQuery
     "description": [
       "term1",
       "term2"
-    ],
-    "disable_coord": true,
-    "minimum_should_match": 2
+    ]
   }
 }
 ----
 
 [[single-term-terms-query]]
 [float]
-== Single term Terms Query 
+== Single term Terms Query
 
 === Fluent DSL Example
 
@@ -71,8 +65,6 @@ q
     .Name("named_query")
     .Boost(1.1)
     .Field(p => p.Description)
-    .DisableCoord()
-    .MinimumShouldMatch(MinimumShouldMatch.Fixed(2))
     .Terms("term1")
 )
 ----

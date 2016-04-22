@@ -18,7 +18,7 @@ namespace Nest
 		bool? ITextProperty.IncludeInAll { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
-		INorms ITextProperty.Norms { get; set; }
+		bool? ITextProperty.Norms { get; set; }
 		int? ITextProperty.PositionIncrementGap { get; set; }
 		string ITextProperty.SearchAnalyzer { get; set; }
 		string ITextProperty.SearchQuoteAnalyzer { get; set; }
@@ -34,6 +34,7 @@ namespace Nest
 		public int PositionIncrementGap { get { return Self.PositionIncrementGap.GetValueOrDefault(); } set { Self.PositionIncrementGap = value; } }
 		public string SearchAnalyzer { get { return Self.SearchAnalyzer; } set { Self.SearchAnalyzer = value; } }
 		public string SearchQuoteAnalyzer { get { return Self.SearchQuoteAnalyzer; } set { Self.SearchQuoteAnalyzer = value; } }
+		public bool Norms { get { return Self.Norms.GetValueOrDefault(true); } set { Self.Norms = value; } }
 
 		public TextAttribute() : base("text") { }
 	}

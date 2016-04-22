@@ -101,13 +101,13 @@ var exceptions = new[] <1>
     typeof(IndicesShardStoresRequest),
     typeof(RenderSearchTemplateRequest),
     //UNMAPPED
-    typeof(ReindexRequest),
     typeof(IngestDeletePipelineRequest),
     typeof(IngestGetPipelineRequest),
     typeof(IngestPutPipelineRequest),
     typeof(IngestSimulateRequest),
-    typeof(TasksCancelRequest),
-    typeof(TasksListRequest),
+    typeof(ClusterAllocationExplainRequest),
+    typeof(ReindexRethrottleRequest),
+    //typeof(ReindexRequest),
     typeof(UpdateByQueryRequest)
 };
 

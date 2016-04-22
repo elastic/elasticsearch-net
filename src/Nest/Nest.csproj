@@ -314,7 +314,7 @@
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteRequest.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteResponse.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteState.cs" />
-    <Compile Include="Cluster\ClusterReroute\Commands\AllocateClusterRerouteCommand.cs" />
+    <Compile Include="Cluster\ClusterReroute\Commands\AllocateClusterRerouteCommandBase.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\CancelClusterRerouteCommand.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\ClusterRerouteCommandJsonConverter.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\IClusterRerouteCommand.cs" />
@@ -502,7 +502,6 @@
     <Compile Include="CommonOptions\Stats\SearchStats.cs" />
     <Compile Include="CommonOptions\Stats\SegmentsStats.cs" />
     <Compile Include="CommonOptions\Stats\StoreStats.cs" />
-    <Compile Include="CommonOptions\Stats\SuggestStats.cs" />
     <Compile Include="CommonOptions\Stats\TranslogStats.cs" />
     <Compile Include="CommonOptions\Stats\WarmerStats.cs" />
     <Compile Include="CommonOptions\TimeUnit\Time.cs" />
@@ -767,14 +766,9 @@
     <Compile Include="Mapping\MetaFields\Source\SourceField.cs" />
     <Compile Include="Mapping\MetaFields\Timestamp\TimestampField.cs" />
     <Compile Include="Mapping\MetaFields\Ttl\TtlField.cs" />
-    <Compile Include="Mapping\NonStringIndexOption.cs" />
-    <Compile Include="Mapping\Norms\Norms.cs" />
-    <Compile Include="Mapping\Norms\NormsLoading.cs" />
     <Compile Include="Mapping\PropertyMapping.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />
-    <Compile Include="Mapping\Transform\MappingTransform.cs" />
-    <Compile Include="Mapping\Transform\MappingTransformJsonConverter.cs" />
     <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\Types\Complex\Nested\NestedAttribute.cs" />
     <Compile Include="Mapping\Types\Complex\Nested\NestedProperty.cs" />
@@ -922,12 +916,10 @@
     <Compile Include="QueryDsl\Abstractions\Query\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryBase.cs" />
     <Compile Include="QueryDsl\Abstractions\Query\QueryDescriptorBase.cs" />
-    <Compile Include="QueryDsl\Compound\And\AndQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Boosting\BoostingQuery.cs" />
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\Dismax\DismaxQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Filtered\FilteredQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\DecayFunctionBase.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\Decay\ExponentialDecayFunctionBase.cs" />
@@ -947,9 +939,6 @@
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
-    <Compile Include="QueryDsl\Compound\Limit\LimitQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Not\NotQuery.cs" />
-    <Compile Include="QueryDsl\Compound\Or\OrQuery.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhraseQuery.cs" />
@@ -996,7 +985,6 @@
     <Compile Include="QueryDsl\Joining\HasChild\ChildScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQuery.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
-    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
@@ -1169,6 +1157,59 @@
     <Compile Include="Search\Validate\ValidateQueryRequest.cs" />
     <Compile Include="Search\Validate\ValidateQueryResponse.cs" />
     <Compile Include="Search\Validate\ValidationExplanation.cs" />
+    <Compile Include="XPack\Graph\Explore\ElasticClient-GraphExplore.cs" />
+    <Compile Include="XPack\Graph\Explore\Response\GraphConnection.cs" />
+    <Compile Include="XPack\Graph\Explore\Response\GraphVertex.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphExploreControls.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreRequest.cs" />
+    <Compile Include="XPack\Graph\Explore\GraphExploreResponse.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphVertexDefinition.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\GraphVertexInclude.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\Hop.cs" />
+    <Compile Include="XPack\Graph\Explore\Request\SampleDiversity.cs" />
+    <Compile Include="XPack\License\DeleteLicense\ElasticClient-DeleteLicense.cs" />
+    <Compile Include="XPack\License\GetLicense\ElasticClient-GetLicense.cs" />
+    <Compile Include="XPack\License\GetLicense\GetLicenseRequest.cs" />
+    <Compile Include="XPack\License\GetLicense\GetLicenseResponse.cs" />
+    <Compile Include="XPack\License\GetLicense\LicenseStatus.cs" />
+    <Compile Include="XPack\License\GetLicense\LicenseType.cs" />
+    <Compile Include="XPack\License\DeleteLicense\DeleteLicenseRequest.cs" />
+    <Compile Include="XPack\License\DeleteLicense\DeleteLicenseResponse.cs" />
+    <Compile Include="XPack\License\PostLicense\ElasticClient-PostLicense.cs" />
+    <Compile Include="XPack\License\PostLicense\LicenseAcknowledgement.cs" />
+    <Compile Include="XPack\License\PostLicense\PostLicenseRequest.cs" />
+    <Compile Include="XPack\License\PostLicense\PostLicenseResponse.cs" />
+    <Compile Include="XPack\Shield\Authenticate\ElasticClient-Authenticate.cs" />
+    <Compile Include="XPack\Shield\Authenticate\AuthenticateRequest.cs" />
+    <Compile Include="XPack\Shield\Authenticate\AuthenticateResponse.cs" />
+    <Compile Include="XPack\Shield\ClearCachedRealms\ClearCachedRealmsRequest.cs" />
+    <Compile Include="XPack\Shield\ClearCachedRealms\ClearCachedRealmsResponse.cs" />
+    <Compile Include="XPack\Shield\ClearCachedRealms\ElasticClient-ClearCachedRealms.cs" />
+    <Compile Include="XPack\Shield\Role\ClearCachedRoles\ClearCachedRolesRequest.cs" />
+    <Compile Include="XPack\Shield\Role\ClearCachedRoles\ClearCachedRolesResponse.cs" />
+    <Compile Include="XPack\Shield\Role\ClearCachedRoles\ElasticClient-ClearCachedRoles.cs" />
+    <Compile Include="XPack\Shield\ShieldNode.cs" />
+    <Compile Include="XPack\Shield\ShieldNodeStatus.cs" />
+    <Compile Include="XPack\Shield\Role\DeleteRole\DeleteRoleRequest.cs" />
+    <Compile Include="XPack\Shield\Role\DeleteRole\DeleteRoleResponse.cs" />
+    <Compile Include="XPack\Shield\Role\DeleteRole\ElasticClient-DeleteRole.cs" />
+    <Compile Include="XPack\Shield\Role\GetRole\ElasticClient-GetRole.cs" />
+    <Compile Include="XPack\Shield\Role\GetRole\GetRoleRequest.cs" />
+    <Compile Include="XPack\Shield\Role\GetRole\GetRoleResponse.cs" />
+    <Compile Include="XPack\Shield\Role\GetRole\Role.cs" />
+    <Compile Include="XPack\Shield\Role\PutRole\ElasticClient-PutRole.cs" />
+    <Compile Include="XPack\Shield\Role\PutRole\IndicesPrivileges.cs" />
+    <Compile Include="XPack\Shield\Role\PutRole\PutRoleRequest.cs" />
+    <Compile Include="XPack\Shield\Role\PutRole\PutRoleResponse.cs" />
+    <Compile Include="XPack\Shield\User\DeleteUser\ElasticClient-DeleteUser.cs" />
+    <Compile Include="XPack\Shield\User\DeleteUser\DeleteUserRequest.cs" />
+    <Compile Include="XPack\Shield\User\DeleteUser\DeleteUserResponse.cs" />
+    <Compile Include="XPack\Shield\User\GetUser\ElasticClient-GetUser.cs" />
+    <Compile Include="XPack\Shield\User\GetUser\GetUserResponse.cs" />
+    <Compile Include="XPack\Shield\User\GetUser\GetUserRequest.cs" />
+    <Compile Include="XPack\Shield\User\PutUser\PutUserRequest.cs" />
+    <Compile Include="XPack\Shield\User\PutUser\PutUserResponse.cs" />
+    <Compile Include="XPack\Shield\User\PutUser\ElasticClient-PutUser.cs" />
     <Compile Include="_Generated\_Descriptors.generated.cs" />
     <Compile Include="_Generated\_LowLevelDispatch.generated.cs" />
     <Compile Include="_Generated\_RequestParametersExtensions.Generated.cs" />
@@ -1237,7 +1278,7 @@
         </Reference>
       </ItemGroup>
     </When>
-    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1')">
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2')">
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>

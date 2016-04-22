@@ -28,6 +28,13 @@ namespace Nest
 		[JsonProperty(PropertyName = "http_address")]
 		public string HttpAddress { get; internal set; }
 
+		/// <summary>
+		/// All of the different roles that the node fulfills. An empty
+		/// collection means that the node is a coordinating only node.
+		/// </summary>
+		[JsonProperty("roles")]
+		public List<NodeRole> Roles { get; internal set; }
+
 		[JsonProperty(PropertyName = "settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public DynamicResponse Settings { get; internal set; }
@@ -56,9 +63,6 @@ namespace Nest
 
 		[JsonProperty("plugins")]
 		public List<PluginStats> Plugins { get; internal set; }
-
-		[JsonProperty("roles")]
-		public List<NodeRole> Roles { get; internal set; }
 	}
 
 	[JsonObject]

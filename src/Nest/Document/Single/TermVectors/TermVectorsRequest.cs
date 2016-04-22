@@ -9,7 +9,7 @@ namespace Nest
 		where TDocument : class
 	{
 		/// <summary>
-		/// An optional document to get termvectors for instead of using an already indexed document
+		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
 		[JsonProperty("doc")]
 		TDocument Document { get; set; }
@@ -26,6 +26,9 @@ namespace Nest
 	{
 		HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
 
+		/// <summary>
+		/// An optional document to get term vectors for instead of using an already indexed document
+		/// </summary>
 		public TDocument Document { get; set; }
 
 		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
@@ -45,12 +48,18 @@ namespace Nest
 	{
 		HttpMethod IRequest.HttpMethod => (Self.Document != null || Self.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
 
+		/// <summary>
+		/// An optional document to get term vectors for instead of using an already indexed document
+		/// </summary>
 		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
 
 		IPerFieldAnalyzer ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
 
 		ITermVectorFilter ITermVectorsRequest<TDocument>.Filter { get; set; }
 
+		/// <summary>
+		/// An optional document to get term vectors for instead of using an already indexed document
+		/// </summary>
 		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
 
 		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector) =>

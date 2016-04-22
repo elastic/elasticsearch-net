@@ -40,9 +40,8 @@ namespace Nest
 		[JsonProperty("index_options")]
 		IndexOptions? IndexOptions { get; set; }
 
-		// TODO should this be bool?
 		[JsonProperty("norms")]
-		INorms Norms { get; set; }
+		bool? Norms { get; set; }
 
 		[JsonProperty("position_increment_gap")]
 		int? PositionIncrementGap { get; set; }
@@ -62,7 +61,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public bool? Index { get; set; }
 		public IndexOptions? IndexOptions { get; set; }
-		public INorms Norms { get; set; }
+		public bool? Norms { get; set; }
 		public int? PositionIncrementGap { get; set; }
 		public string Analyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
@@ -81,7 +80,7 @@ namespace Nest
 		bool? ITextProperty.IncludeInAll { get; set; }
 		bool? ITextProperty.Index { get; set; }
 		IndexOptions? ITextProperty.IndexOptions { get; set; }
-		INorms ITextProperty.Norms { get; set; }
+		bool? ITextProperty.Norms { get; set; }
 		int? ITextProperty.PositionIncrementGap { get; set; }
 		string ITextProperty.Analyzer { get; set; }
 		string ITextProperty.SearchAnalyzer { get; set; }
@@ -98,7 +97,7 @@ namespace Nest
 		public TextPropertyDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 		public TextPropertyDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
 		public TextPropertyDescriptor<T> IndexOptions(IndexOptions indexOptions) => Assign(a => a.IndexOptions = indexOptions);
-		public TextPropertyDescriptor<T> Norms(Func<NormsDescriptor, INorms> selector) => Assign(a => a.Norms = selector?.Invoke(new NormsDescriptor()));
+		public TextPropertyDescriptor<T> Norms(bool enabled = true) => Assign(a => a.Norms = enabled);
 		public TextPropertyDescriptor<T> PositionIncrementGap(int positionIncrementGap) => Assign(a => a.PositionIncrementGap = positionIncrementGap);
 		public TextPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 		public TextPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);

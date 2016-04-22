@@ -25,6 +25,8 @@ namespace Nest
 		public string IndexMetric => GetResolved("index_metric");
 		public string Lang => GetResolved("lang");
 		public string TaskId => GetResolved("task_id");
+		public string Realms => GetResolved("realms");
+		public string Username => GetResolved("username");
 
 		private string GetResolved(string route)
 		{

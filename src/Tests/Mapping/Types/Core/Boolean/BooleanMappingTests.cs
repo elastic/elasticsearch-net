@@ -6,9 +6,10 @@ namespace Tests.Mapping.Types.Core.Boolean
 	public class BooleanTest
 	{
 		[Boolean(
-			DocValues = false, 
-			IndexName = "myindex", 
+			DocValues = false,
+			IndexName = "myindex",
 			Similarity = SimilarityOption.BM25,
+			Index = false,
 			Store = true)]
 		public bool Full { get; set; }
 
@@ -28,7 +29,8 @@ namespace Tests.Mapping.Types.Core.Boolean
 					doc_values = false,
 					index_name = "myindex",
 					similarity = "BM25",
-					store = true
+					store = true,
+					index = false,
 				},
 				minimal = new
 				{
@@ -43,6 +45,7 @@ namespace Tests.Mapping.Types.Core.Boolean
 				.DocValues(false)
 				.IndexName("myindex")
 				.Similarity(SimilarityOption.BM25)
+				.Index(false)
 				.Store(true)
 			)
 			.Boolean(s => s

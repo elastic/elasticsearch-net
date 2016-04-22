@@ -128,16 +128,8 @@ namespace Nest
 		public AttachmentPropertyDescriptor<T> ContentTypeField(Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			SetMetadataField(selector, "content_type");
 
-		[Obsolete("Use ContentLengthField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector)")]
-		public AttachmentPropertyDescriptor<T> ContentLengthField(Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
-			SetMetadataField(selector, "content_length");
-
 		public AttachmentPropertyDescriptor<T> ContentLengthField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
 			SetMetadataField(selector, "content_length");
-
-		[Obsolete("Use LanguageField(Func<TextPropertyDescriptor<T>, ITextProperty> selector)")]
-		public AttachmentPropertyDescriptor<T> LanguageField(Func<NumberPropertyDescriptor<T>, INumberProperty> selector) =>
-			SetMetadataField(selector, "language");
 
 		public AttachmentPropertyDescriptor<T> LanguageField(Func<TextPropertyDescriptor<T>, ITextProperty> selector) =>
 			SetMetadataField(selector, "language");

@@ -37,11 +37,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request) =>
 			this.Dispatcher.Dispatch<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse>(
-				request,
-				(p,d) => {
-					p.RequestParameters.RequestConfiguration(f => f.AllowedStatusCodes(-1));
-					return this.LowLevelDispatch.UpdateByQueryDispatch<UpdateByQueryResponse>(p, d);
-				}
+				this.ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				this.LowLevelDispatch.UpdateByQueryDispatch<UpdateByQueryResponse>
 			);
 
 		/// <inheritdoc/>
@@ -51,11 +48,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request) =>
 			this.Dispatcher.DispatchAsync<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse, IUpdateByQueryResponse>(
-				request,
-				(p,d) => {
-					p.RequestParameters.RequestConfiguration(f => f.AllowedStatusCodes(-1));
-					return this.LowLevelDispatch.UpdateByQueryDispatchAsync<UpdateByQueryResponse>(p, d);
-				}
+				this.ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				this.LowLevelDispatch.UpdateByQueryDispatchAsync<UpdateByQueryResponse>
 			);
 	}
 }

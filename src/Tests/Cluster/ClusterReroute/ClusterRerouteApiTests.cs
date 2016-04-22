@@ -28,10 +28,21 @@ namespace Tests.Cluster.ClusterReroute
 		protected override string UrlPath => "/_cluster/reroute";
 
 		protected override Func<ClusterRerouteDescriptor, IClusterRerouteRequest> Fluent => c => c
-			.Allocate(a => a
+			.AllocateEmptyPrimary(a => a
 				.Index<Project>()
 				.Node("x")
-				.AllowPrimary(false)
+				.Shard(0)
+				.AcceptDataLoss(true)
+			)
+			.AllocateStalePrimary(a => a
+				.Index<Project>()
+				.Node("x")
+				.Shard(0)
+				.AcceptDataLoss(true)
+			)
+		    .AllocateReplica(a => a
+				.Index<Project>()
+				.Node("x")
 				.Shard(0)
 			)
 			.Move(a => a
@@ -50,7 +61,9 @@ namespace Tests.Cluster.ClusterReroute
 		{
 			Commands = new List<IClusterRerouteCommand>
 			{
-				new AllocateClusterRerouteCommand { AllowPrimary = false, Index = IndexName.From<Project>(), Node = "x", Shard = 0},
+				new AllocateEmptyPrimaryRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0, AcceptDataLoss = true },
+				new AllocateStalePrimaryRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0, AcceptDataLoss = true },
+				new AllocateReplicaClusterRerouteCommand { Index = IndexName.From<Project>(), Node = "x", Shard = 0 },
 				new MoveClusterRerouteCommand { Index = IndexName.From<Project>(), FromNode = "x", ToNode = "y", Shard = 0},
 				new CancelClusterRerouteCommand() { Index = "project", Node = "x", Shard = 1}
 			}
@@ -60,7 +73,22 @@ namespace Tests.Cluster.ClusterReroute
 		{
 			commands = new []
 			{
-				new Dictionary<string, object> { { "allocate", new
+				new Dictionary<string, object> { { "allocate_empty_primary", new
+				{
+					allow_primary = true,
+					index = "project",
+					node = "x",
+					shard = 0,
+					accept_data_loss = true
+				} } },
+				new Dictionary<string, object> { { "allocate_stale_primary", new
+				{
+					index = "project",
+					node = "x",
+					shard = 0,
+					accept_data_loss = true
+				} } },
+				new Dictionary<string, object> { { "allocate_replica", new
 				{
 					allow_primary = false,
 					index = "project",

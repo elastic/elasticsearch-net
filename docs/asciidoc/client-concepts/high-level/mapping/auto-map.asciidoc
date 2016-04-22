@@ -134,8 +134,8 @@ var descriptor = new CreateIndexDescriptor("myindex")
     );
 ----
 
-Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.  
-In this example, 
+Observe that NEST has inferred the Elasticsearch types based on the CLR type of our POCO properties.
+In this example,
 
 * Birthday was mapped as a `date`,
 
@@ -562,7 +562,7 @@ var expected = new
                     coerce = true,
                     doc_values = false,
                     ignore_malformed = true,
-                    type = "double"
+                    type = "float"
                 }
             }
         }

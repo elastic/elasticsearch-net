@@ -4,6 +4,8 @@ using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
+#pragma warning disable 618 // Uses CollectPayloads
+
 namespace Tests.QueryDsl.Joining.SpanNear
 {
 	public class SpanNearUsageTests : QueryDslUsageTestsBase

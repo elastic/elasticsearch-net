@@ -6,8 +6,6 @@ namespace Nest
 	{
 		[EnumMember(Value = "array")]
 		Array,
-		[EnumMember(Value = "doc_values")]
-		DocValues,
 		[EnumMember(Value = "disabled")]
 		Disabled
 	}

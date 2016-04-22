@@ -13,7 +13,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 			Index = false,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "null",
-			SearchAnalyzer = "searchanalyzer"
+			SearchAnalyzer = "searchanalyzer",
+			Norms = false
 		)]
 		public string Full { get; set; }
 
@@ -43,7 +44,8 @@ namespace Tests.Mapping.Types.Core.Keyword
 					index = false,
 					index_options = "offsets",
 					null_value = "null",
-					search_analyzer = "searchanalyzer"
+					search_analyzer = "searchanalyzer",
+					norms = false
 				},
 				minimal = new
 				{
@@ -71,6 +73,7 @@ namespace Tests.Mapping.Types.Core.Keyword
 				.IndexOptions(IndexOptions.Offsets)
 				.NullValue("null")
 				.SearchAnalyzer("searchanalyzer")
+				.Norms(false)
 			)
 			.Keyword(s => s
 				.Name(o => o.Minimal)
@@ -83,21 +86,14 @@ namespace Tests.Mapping.Types.Core.Keyword
 				full = new
 				{
 					type = "keyword",
-					norms = new
-					{
-						enabled = true,
-						loading = "lazy"
-					}
+					norms = true
 				}
 			}
 		};
 		protected override Func<PropertiesDescriptor<KeywordTest>, IPromise<IProperties>> FluentOnlyProperties => p => p
 			.Keyword(s => s
 				.Name(o => o.Full)
-				.Norms(n => n
-					.Enabled()
-					.Loading(NormsLoading.Lazy)
-				)
+				.Norms()
 			);
 	}
 }

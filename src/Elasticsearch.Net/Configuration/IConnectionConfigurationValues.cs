@@ -11,10 +11,10 @@ namespace Elasticsearch.Net
 
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }
-		
+
 		/// <summary> The connection implementation to use when talking with elasticsearch </summary>
 		IConnection Connection { get; }
-		
+
 		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>
 		IElasticsearchSerializer Serializer { get; }
 
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 		/// The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
 		/// </summary>
 		TimeSpan? DeadTimeout { get; }
-		
+
 		/// <summary>
 		/// The maximum ammount of time a node is allowed to marked dead
 		/// </summary>
@@ -63,16 +63,16 @@ namespace Elasticsearch.Net
 		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
-		
+
 		/// <summary>
 		/// When set will force all connections through this proxy
 		/// </summary>
 		string ProxyAddress { get; }
 		string ProxyUsername { get; }
 		string ProxyPassword { get; }
-		
+
 		/// <summary>
-		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
 		bool PrettyJson { get; }
@@ -97,10 +97,10 @@ namespace Elasticsearch.Net
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an exception
-		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+		/// on the client when a call resulted in an exception on either the client or the Elasticsearch server.
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
 		/// </summary>
-		bool ThrowExceptions { get;  }
+		bool ThrowExceptions { get; }
 
 		/// <summary>
 		/// Sniff the cluster state immediatly on startup
@@ -137,17 +137,17 @@ namespace Elasticsearch.Net
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
 		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; }
-		
+
 		/// <summary>
 		/// KeepAliveTime - specifies the timeout, in milliseconds, with no
-        /// activity until the first keep-alive packet is sent. 
+		/// activity until the first keep-alive packet is sent.
 		/// </summary>
 		TimeSpan? KeepAliveTime { get; }
 
 		/// <summary>
 		/// KeepAliveInterval - specifies the interval, in milliseconds, between
-        /// when successive keep-alive packets are sent if no acknowledgement is
-        /// received. 
+		/// when successive keep-alive packets are sent if no acknowledgement is
+		/// received.
 		/// </summary>
 		TimeSpan? KeepAliveInterval { get; }
 	}

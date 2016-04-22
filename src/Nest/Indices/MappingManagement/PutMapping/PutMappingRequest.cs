@@ -11,7 +11,7 @@ namespace Nest
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	public partial class PutMappingRequest 
+	public partial class PutMappingRequest
 	{
 		// Needed for ReadAsType
 		internal PutMappingRequest() { }
@@ -50,8 +50,6 @@ namespace Nest
 		public ISourceField SourceField { get; set; }
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
-		/// <inheritdoc/>
-		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
@@ -96,8 +94,6 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<IMappingTransform> Transform { get; set; }
-		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 	}
 
@@ -126,7 +122,6 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 		ITimestampField ITypeMapping.TimestampField { get; set; }
-		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 
 		/// <summary>
@@ -182,13 +177,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Transform(IEnumerable<IMappingTransform> transforms) => Assign(a => a.Transform = transforms.ToListOrNullIfEmpty());
-
-		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Transform(Func<MappingTransformsDescriptor, IPromise<IList<IMappingTransform>>> selector) =>
-			Assign(a => a.Transform = selector?.Invoke(new MappingTransformsDescriptor())?.Value);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceFieldSelector) => Assign(a => a.SourceField = sourceFieldSelector?.Invoke(new SourceFieldDescriptor()));

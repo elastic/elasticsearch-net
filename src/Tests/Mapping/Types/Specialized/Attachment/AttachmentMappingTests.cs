@@ -29,7 +29,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 						},
 						content_length = new
 						{
-							type = "double"
+							type = "float"
 						},
 						content_type = new
 						{
@@ -69,7 +69,6 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 
 		protected override Func<PropertiesDescriptor<Framework.MockData.Attachment>, IPromise<IProperties>> FluentProperties => p => p
 			.Attachment(a => a
-				//.Fields(s => s)
 				.Name(n => n.File)
 				.AuthorField(d => d
 					.Name(n => n.Author)
@@ -77,7 +76,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				.FileField(d => d
 					.Name(n => n.File)
 				)
-				.ContentLengthField((NumberPropertyDescriptor<Framework.MockData.Attachment> d) => d
+				.ContentLengthField(d => d
 					.Name(n => n.ContentLength)
 				)
 				.ContentTypeField(d => d
@@ -89,7 +88,7 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				.KeywordsField(d => d
 					.Name(n => n.Keywords)
 				)
-				.LanguageField((TextPropertyDescriptor<Framework.MockData.Attachment> d) => d
+				.LanguageField(d => d
 					.Name(n => n.Language)
 					.DocValues()
 					.Index(false)

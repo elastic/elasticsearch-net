@@ -52,6 +52,7 @@ namespace Tests.Cluster.NodesStats
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
 			node.Host.Should().NotBeNullOrWhiteSpace();
 			node.Ip.Should().NotBeEmpty();
+			node.Roles.Should().NotBeNullOrEmpty();
 		}
 
 		protected void Assert(IndexStats index)
@@ -88,7 +89,7 @@ namespace Tests.Cluster.NodesStats
 			index.Store.Should().NotBeNull();
 			index.Store.SizeInBytes.Should().BeGreaterThan(0);
 
-			index.Suggest.Should().NotBeNull();
+			index.Search.Should().NotBeNull();
 			index.Translog.Should().NotBeNull();
 			index.Warmer.Should().NotBeNull();
 		}
@@ -98,7 +99,7 @@ namespace Tests.Cluster.NodesStats
 			os.Should().NotBeNull();
 
 			os.Timestamp.Should().BeGreaterThan(0);
-			os.LoadAverage.Should().NotBe(0);
+			os.Cpu.Percent.Should().BeGreaterThan(0);
 
 			os.Memory.Should().NotBeNull();
 			os.Memory.TotalInBytes.Should().BeGreaterThan(0);
@@ -113,7 +114,7 @@ namespace Tests.Cluster.NodesStats
 			os.Swap.UsedInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ProcessStats process)	
+		protected void Assert(ProcessStats process)
 		{
 			process.Should().NotBeNull();
 
@@ -126,7 +127,7 @@ namespace Tests.Cluster.NodesStats
 			process.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ScriptStats script)	
+		protected void Assert(ScriptStats script)
 		{
 			script.Should().NotBeNull();
 		}
@@ -181,7 +182,7 @@ namespace Tests.Cluster.NodesStats
 		}
 
 		protected void Assert(NodeJvmStats jvm)
-		{	
+		{
 			jvm.Should().NotBeNull();
 
 			jvm.Timestamp.Should().BeGreaterThan(0);
