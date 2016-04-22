@@ -27,9 +27,7 @@ namespace Tests.Framework.Integration
 			//{ "cloud-azure", _ => "cloud-azure" },
 			{ "mapper-attachments", _ => "mapper-attachments" },
 			{ "mapper-murmur3", _ => "mapper-murmur3" },
-			{ "license", _ => "license" },
-			{ "graph", _ => "graph" },
-			{ "shield", _ => "shield" },
+			{ "x-pack", _ => "x-pack" },
 		};
 		private string[] DefaultNodeSettings { get; }
 
@@ -131,8 +129,8 @@ namespace Tests.Framework.Integration
 				$"es.cluster.name={this.ClusterName}",
 				$"es.node.name={this.NodeName}",
 				$"es.path.repo={this.RepositoryPath}",
-				$"es.script.inline=on",
-				$"es.script.indexed=on",
+				$"es.script.inline=true",
+				$"es.script.indexed=true",
 				$"es.node.{attr}testingcluster=true",
 				$"es.shield.enabled=" + (shieldEnabled ? "true" : "false")
 			};
@@ -421,7 +419,10 @@ namespace Tests.Framework.Integration
 		{
 			if (!this._shieldEnabled) return;
 
-			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "shield", "esusers") + ".bat";
+			var folder = this.VersionInfo.ParsedVersion.Major >= 5 ? "x-pack" : "shield";
+			var plugin = this.VersionInfo.ParsedVersion.Major >= 5 ? "users" : "esusers";
+
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", folder, plugin) + ".bat";
 			foreach (var cred in ShieldInformation.AllUsers)
 			{
 				var processInfo = new ProcessStartInfo
