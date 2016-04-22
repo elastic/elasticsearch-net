@@ -11,9 +11,9 @@ namespace Tests.Document.Multiple.Bulk
 		[U] public async Task Urls()
 		{
 			await POST("/_bulk")
-				.Fluent(c => c.Bulk())
+				.Fluent(c => c.Bulk(b=>b))
 				.Request(c => c.Bulk(new BulkRequest()))
-				.FluentAsync(c => c.BulkAsync())
+				.FluentAsync(c => c.BulkAsync(b=>b))
 				.RequestAsync(c => c.BulkAsync(new BulkRequest()))
 				;
 
