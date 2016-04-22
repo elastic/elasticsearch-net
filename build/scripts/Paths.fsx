@@ -288,16 +288,16 @@ module Tooling =
             match (runtime, hasClr, hasCoreClr) with
             | (Core, _, Some c) ->
                 let proc = c.Process exe
-                execProcess proc arguments
+                execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
             | (Desktop, Some d, _) ->
                 let proc = d.Process exe
-                execProcess proc arguments
+                execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
             | (Both, Some d, Some c) ->
                 let proc = d.Process exe
                 let result = execProcess proc arguments 
                 if result <> 0 then failwith (sprintf "Failed to run dnx tooling for %s args: %A" proc arguments)
                 let proc = c.Process exe
-                execProcess proc arguments 
+                execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
             | _ -> failwith "Tried to run dnx tooling in unknown state"
             |> ignore
 

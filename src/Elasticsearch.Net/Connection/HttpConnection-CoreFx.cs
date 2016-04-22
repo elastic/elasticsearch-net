@@ -30,46 +30,46 @@ namespace Elasticsearch.Net
 		private readonly object _lock = new object();
 		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
 
-	    private string DefaultContentType => "application/json";
+		private string DefaultContentType => "application/json";
 
 		public HttpConnection() { }
-		
+
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var hashCode = requestData.GetHashCode();
 			HttpClient client;
 			if (this._clients.TryGetValue(hashCode, out client)) return client;
-			lock(_lock)
+			lock (_lock)
 			{
 				if (this._clients.TryGetValue(hashCode, out client)) return client;
 
-			    var handler = new HttpClientHandler
-			    {
-			        AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
-			    };
+				var handler = new HttpClientHandler
+				{
+					AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
+				};
 
-                if (!requestData.ProxyAddress.IsNullOrEmpty())
-                {
-                    var uri = new Uri(requestData.ProxyAddress);
-                    var proxy = new WebProxy(uri);
-                    var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
-                    proxy.Credentials = credentials;
-                    handler.Proxy = proxy;
-                }
+				if (!requestData.ProxyAddress.IsNullOrEmpty())
+				{
+					var uri = new Uri(requestData.ProxyAddress);
+					var proxy = new WebProxy(uri);
+					var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+					proxy.Credentials = credentials;
+					handler.Proxy = proxy;
+				}
 
-                if (requestData.DisableAutomaticProxyDetection)
-                    handler.Proxy = null;
+				if (requestData.DisableAutomaticProxyDetection)
+					handler.Proxy = null;
 
-                client = new HttpClient(handler, false)
-			    {
-			        Timeout = requestData.RequestTimeout
-			    };
+				client = new HttpClient(handler, false)
+				{
+					Timeout = requestData.RequestTimeout
+				};
 
-			    client.DefaultRequestHeaders.ExpectContinue = false;
+				client.DefaultRequestHeaders.ExpectContinue = false;
 
-                //TODO add headers
-                //client.DefaultRequestHeaders = 
-                this._clients.TryAdd(hashCode, client);
+				//TODO add headers
+				//client.DefaultRequestHeaders =
+				this._clients.TryAdd(hashCode, client);
 				return client;
 			}
 
@@ -122,12 +122,26 @@ namespace Elasticsearch.Net
 			var method = ConvertHttpMethod(requestData.Method);
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
 
-			foreach(string key in requestData.Headers)
+			foreach (string key in requestData.Headers)
 			{
 				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
 			}
 
 			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.ContentType));
+
+			if (!requestData.RunAs.IsNullOrEmpty())
+				requestMessage.Headers.Add("es-shield-runas-user", requestData.RunAs);
+
+			string userInfo = null;
+			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
+				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			else if (requestData.BasicAuthorizationCredentials != null)
+				userInfo = requestData.BasicAuthorizationCredentials.ToString();
+			if (!userInfo.IsNullOrEmpty())
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+			}
 
 			var data = requestData.PostData;
 
@@ -153,18 +167,10 @@ namespace Elasticsearch.Net
 			else
 			{
 				// Set content in order to set a Content-Type header.
-                // Content gets diposed so can't be shared instance
+				// Content gets diposed so can't be shared instance
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
-
 			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
-
-			if (!string.IsNullOrWhiteSpace(requestData.Uri.UserInfo))
-			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(requestMessage.RequestUri.UserInfo));
-				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-			}
-
 			return requestMessage;
 		}
 
@@ -186,7 +192,7 @@ namespace Elasticsearch.Net
 
 		protected virtual void DisposeManagedResources()
 		{
-			foreach(var c in _clients)
+			foreach (var c in _clients)
 				c.Value.Dispose();
 		}
 	}
