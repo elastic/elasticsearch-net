@@ -17,7 +17,7 @@ Here we seed our connection with 5 known nodes 9200-9204 of which we think
 9202, 9203, 9204 are master eligible nodes. Our virtualized cluster will throw once when doing
 a search on 9201. This should a sniff to be kicked off.
 
-When the call fails on 9201 the sniff succeeds and returns a new cluster of healty nodes
+When the call fails on 9201 the sniff succeeds and returns a new cluster of healthy nodes
 this cluster only has 3 nodes and the known masters are 9200 and 9202 but a search on 9201
 still fails once
 

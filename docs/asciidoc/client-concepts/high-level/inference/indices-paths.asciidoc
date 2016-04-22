@@ -61,7 +61,7 @@ var invalidSingleString = Nest.Indices.Index("name1, name2"); <4>
 
 <2> specifying multiple indices using strings
 
-<3> speciying multiple using types
+<3> specifying multiple using types
 
 <4> an **invalid** single index name
 

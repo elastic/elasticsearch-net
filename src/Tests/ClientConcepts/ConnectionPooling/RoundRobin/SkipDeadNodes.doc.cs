@@ -19,7 +19,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 		* === GetNext
 		* GetNext is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 		* over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
-		* suffering from noisy neighboors advancing a global cursor.
+		* suffering from noisy neighbours advancing a global cursor.
 		*/
 		protected int NumberOfNodes = 3;
 

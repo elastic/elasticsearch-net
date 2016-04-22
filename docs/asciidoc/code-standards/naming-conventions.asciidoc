@@ -130,20 +130,28 @@ requests.Except(responses).Should().BeEmpty();
 
 [source,csharp]
 ----
+var nestAssembly = typeof(IElasticClient).Assembly();
+
 var exceptions = new List<Type>
 {
-    typeof(IElasticClient).Assembly().GetType("Elasticsearch.Net.DotNetCoreTypeExtensions"),
+    nestAssembly.GetType("Elasticsearch.Net.DotNetCoreTypeExtensions"),
     typeof(AggregationWalker),
     typeof(AggregationVisitor),
     typeof(IAggregationVisitor),
-    typeof(IElasticClient).Assembly().GetType("System.AssemblyVersionInformation")
+    nestAssembly.GetType("System.AssemblyVersionInformation"),
+#if DOTNETCORE
+    typeof(SynchronizedCollection<>),
+    nestAssembly.GetType("System.ComponentModel.Browsable")
+#endif
 };
 
-var types = typeof(IElasticClient).Assembly().GetTypes();
+var types = nestAssembly.GetTypes();
 
 var typesNotInNestNamespace = types
     .Where(t => !exceptions.Contains(t))
     .Where(t => t.Namespace != "Nest")
+    .Where(t => !t.Name.StartsWith("<"))
+    .Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
     .ToList();
 
 typesNotInNestNamespace.Should().BeEmpty();
@@ -151,12 +159,51 @@ typesNotInNestNamespace.Should().BeEmpty();
 
 [source,csharp]
 ----
-var types = typeof(IElasticLowLevelClient).Assembly().GetTypes();
+var elasticsearchNetAssembly = typeof(IElasticLowLevelClient).Assembly();
 
-var typesNotInNestNamespace = types
+var exceptions = new List<Type>
+{
+    elasticsearchNetAssembly.GetType("System.AssemblyVersionInformation"),
+    elasticsearchNetAssembly.GetType("System.FormattableString"),
+    elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+    elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+IPurifier"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
+#if DOTNETCORE
+    elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
+#endif
+};
+
+var types = elasticsearchNetAssembly.GetTypes();
+
+var typesNotIElasticsearchNetNamespace = types
+    .Where(t => !exceptions.Contains(t))
     .Where(t => t.Namespace != "Elasticsearch.Net")
+    .Where(t => !t.Name.StartsWith("<"))
+    .Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
     .ToList();
 
-typesNotInNestNamespace.Should().BeEmpty();
+typesNotIElasticsearchNetNamespace.Should().BeEmpty();
+----
+
+[source,csharp]
+----
+bool nextMustBeStartChar = true;
+
+var character = value[index];
+
+var unicodeCategory = char.GetUnicodeCategory(character);
+
+nextMustBeStartChar = false;
+
+nextMustBeStartChar = false;
+----
+
+[source,csharp]
+----
+nextMustBeStartChar = true;
 ----
 

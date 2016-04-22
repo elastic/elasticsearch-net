@@ -25,7 +25,7 @@ Expect("_mappings,_aliases")
 
 === Implicit conversion
 
-Here we instantiate a GET index request whichs takes two features, settings and warmers.
+Here we instantiate a GET index request which takes two features, settings and warmers.
 Notice how we can use the `Feature` enum directly.
 
 [source,csharp]

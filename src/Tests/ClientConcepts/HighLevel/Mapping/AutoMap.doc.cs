@@ -241,7 +241,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		* == Auto mapping with overrides
 		* In most cases, you'll want to map more than just the vanilla datatypes and also provide
 		* various options for your properties (analyzer to use, whether to enable doc_values, etc...).
-		* In that case, it's possible to use `.AutoMap()` in conjuction with explicitly mapped properties.
+		* In that case, it's possible to use `.AutoMap()` in conjunction with explicitly mapped properties.
 		*/
 		[U]
 		public void OverridingAutoMappedProperties()

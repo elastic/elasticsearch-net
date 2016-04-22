@@ -31,7 +31,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				.ClientCalls(r => r.SucceedAlways())
 				.ClientCalls(r => r.OnPort(9201).Fails(Once))
 				/**
-				* When the call fails on 9201 the sniff succeeds and returns a new cluster of healty nodes
+				* When the call fails on 9201 the sniff succeeds and returns a new cluster of healthy nodes
 				* this cluster only has 3 nodes and the known masters are 9200 and 9202 but a search on 9201
 				* still fails once
 				*/

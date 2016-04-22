@@ -114,7 +114,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Implicit Conversion
 		* As you can see from the previous examples, using the constructor is rather involved and cumbersome.
-		* Becuase of this, you can also implicitly convert strings and expressions to a `Field` */
+		* Because of this, you can also implicitly convert strings and expressions to a `Field` */
 		[U]
 		public void ImplicitConversion()
 		{
@@ -371,7 +371,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
 			/**
-			* Here we have to similary shaped expressions on coming from A and on from B
+			* Here we have two similarly shaped expressions, one coming from A and one from B
 			* that will resolve to the same field name, as expected
 			*/
 
@@ -396,7 +396,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldNameOnA.Should().Be("d.name");
 			fieldNameOnB.Should().Be("c.name");
 
-			/** however we didn't break inferrence on the first client instance using its separate connection settings */
+			/** however we didn't break inference on the first client instance using its separate connection settings */
 			fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
 			fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
@@ -410,7 +410,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* . A hard rename of the property on connection settings using `.Rename()`
 		* . A NEST property mapping
-		* . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonPropery attribute.
+		* . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
 		* . Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
 		*
 		* The following example class will demonstrate this precedence

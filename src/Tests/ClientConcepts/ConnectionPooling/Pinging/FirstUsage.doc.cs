@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 					} }
 				},
 				/** The 2nd call does a ping on 9201 because its used for the first time.
-				* It fails and so we ping 9202 which also fails. We then ping 9203 becuase
+				* It fails and so we ping 9202 which also fails. We then ping 9203 because
 				* we haven't used it before and it succeeds */
 				new ClientCall {
 					{ PingFailure, 9201},

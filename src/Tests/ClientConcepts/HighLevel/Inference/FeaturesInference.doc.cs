@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public void ImplicitConversion()
 		{
 			/** === Implicit conversion
-			* Here we instantiate a GET index request whichs takes two features, settings and warmers.
+			* Here we instantiate a GET index request which takes two features, settings and warmers.
 			* Notice how we can use the `Feature` enum directly.
 			*/
 			var request = new GetIndexRequest(All, Feature.Settings | Feature.Warmers);
