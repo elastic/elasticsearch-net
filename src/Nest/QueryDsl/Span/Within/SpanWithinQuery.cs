@@ -21,7 +21,7 @@ namespace Nest
 		public ISpanQuery Little { get; set; }
 		public ISpanQuery Big { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanWithin = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanWithin = this;
 		internal static bool IsConditionless(ISpanWithinQuery q)
 		{
 			var exclude = q.Little as IQuery;

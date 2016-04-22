@@ -73,7 +73,7 @@ namespace Nest
 		public IEnumerable<Like> Like { get; set; }
 		public IEnumerable<Like> Unlike { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
 		internal static bool IsConditionless(IMoreLikeThisQuery q) => q.Fields.IsConditionless() || (!q.Like.HasAny() || q.Like.All(Nest.Like.IsConditionless));
 	}
 

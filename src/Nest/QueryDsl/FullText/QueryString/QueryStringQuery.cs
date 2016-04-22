@@ -119,7 +119,7 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.QueryString = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.QueryString = this;
 		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 

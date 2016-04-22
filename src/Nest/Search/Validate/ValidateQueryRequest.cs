@@ -30,6 +30,6 @@ namespace Nest
 	{
 		QueryContainer IValidateQueryRequest.Query { get; set; }
 
-		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

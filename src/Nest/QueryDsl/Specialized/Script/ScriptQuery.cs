@@ -35,7 +35,7 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Script = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Script = this;
 		internal static bool IsConditionless(IScriptQuery q) =>
 			q.Inline.IsNullOrEmpty() && q.Id == null && q.File.IsNullOrEmpty();
 

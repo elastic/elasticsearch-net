@@ -52,7 +52,7 @@ namespace Nest
 		public bool? AnalyzeWildcard { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 

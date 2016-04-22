@@ -15,7 +15,7 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public IPolygonGeoShape Shape { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoShape = this;
 		internal static bool IsConditionless(IGeoShapePolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 

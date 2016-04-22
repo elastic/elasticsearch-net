@@ -16,6 +16,9 @@ namespace Nest
 		bool IsVerbatim { get; set; }
 
 		[JsonIgnore]
+		bool IsWritable { get; }
+
+		[JsonIgnore]
 		IRawQuery RawQuery { get; set; }
 
 		[JsonProperty("bool")]

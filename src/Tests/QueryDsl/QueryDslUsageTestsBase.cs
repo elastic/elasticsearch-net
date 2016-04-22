@@ -33,11 +33,17 @@ namespace Tests.QueryDsl
 
 		[U]
 		public void FluentIsNotConditionless() =>
-			((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
+			AssertIsNotConditionless(this.QueryFluent(new QueryContainerDescriptor<Project>()));
+
 
 		[U]
-		public void InitializerIsNotConditionless() =>
-			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
+		public void InitializerIsNotConditionless() => AssertIsNotConditionless(this.QueryInitializer);
+
+		private void AssertIsNotConditionless(IQueryContainer c)
+		{
+			if (!c.IsVerbatim)
+				c.IsConditionless.Should().BeFalse();
+		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Query(this.QueryFluent);

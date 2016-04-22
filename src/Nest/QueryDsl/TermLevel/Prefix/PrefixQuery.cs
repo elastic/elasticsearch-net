@@ -18,7 +18,7 @@ namespace Nest
 		public object Value { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Prefix = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Prefix = this;
 	}
 
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 

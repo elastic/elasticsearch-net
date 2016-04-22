@@ -17,12 +17,25 @@ namespace Nest
 
 		[JsonIgnore]
 		bool Conditionless { get; }
+
+		[JsonIgnore]
+		bool IsVerbatim { get; set; }
+
+		[JsonIgnore]
+		bool IsStrict { get; set; }
+
+		[JsonIgnore]
+		bool IsWritable { get; }
 	}
-	
+
 	public abstract class QueryBase : IQuery
 	{
 		public string Name { get; set; }
 		public double? Boost { get; set; }
+		public bool IsVerbatim { get; set; }
+		public bool IsStrict { get; set; }
+		public bool IsWritable => this.IsVerbatim || !this.Conditionless;
+
 		bool IQuery.Conditionless => this.Conditionless;
 		protected abstract bool Conditionless { get; }
 
@@ -36,11 +49,11 @@ namespace Nest
 
 		public static QueryBase operator |(QueryBase leftQuery, QueryBase rightQuery) => Combine(leftQuery, rightQuery, (l,r) => l || r);
 
-		public static QueryBase operator !(QueryBase query) => query == null || ((IQuery)query).Conditionless
+		public static QueryBase operator !(QueryBase query) => query == null || !query.IsWritable
 			? null
 			: new BoolQuery { MustNot = new QueryContainer[] {query}};
 
-		public static QueryBase operator +(QueryBase query) => query == null || ((IQuery)query).Conditionless
+		public static QueryBase operator +(QueryBase query) => query == null || !query.IsWritable
 			? null
 			: new BoolQuery { Filter = new QueryContainer[] {query}};
 
@@ -64,14 +77,29 @@ namespace Nest
 		private static bool IfEitherIsEmptyReturnTheOtherOrEmpty(QueryBase leftQuery, QueryBase rightQuery, out QueryBase query)
 		{
 			var combined = new [] {leftQuery, rightQuery};
-			var any = combined.Any(bf => bf == null || ((IQuery) bf).Conditionless); 
-			query = any ?  combined.FirstOrDefault(bf => bf != null && !((IQuery)bf).Conditionless) : null;
-			return any;
+			var anyEmpty = combined.Any(q => q == null || !q.IsWritable);
+			query = anyEmpty ? combined.FirstOrDefault(q => q != null && q.IsWritable) : null;
+			return anyEmpty;
 		}
 
-		public static implicit operator QueryContainer(QueryBase query) => 
-			query == null || query.Conditionless ? null : new QueryContainer(query);
+		public static implicit operator QueryContainer(QueryBase query)
+		{
+			if (query == null)
+				return null;
+			if (query.IsWritable)
+				return new QueryContainer(query);
+			if (query.IsStrict)
+				throw new ArgumentException("Query is conditionless but strict is turned on");
+			return null;
+		}
 
-		internal abstract void WrapInContainer(IQueryContainer container);
+		internal void WrapInContainer(IQueryContainer container)
+		{
+			container.IsVerbatim = this.IsVerbatim;
+			container.IsStrict = this.IsStrict;
+			InternalWrapInContainer(container);
+		}
+
+		internal abstract void InternalWrapInContainer(IQueryContainer container);
 	}
 }

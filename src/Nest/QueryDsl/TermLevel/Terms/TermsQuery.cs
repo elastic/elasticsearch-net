@@ -28,7 +28,7 @@ namespace Nest
 		public IEnumerable<object> Terms { get; set; }
 		public IFieldLookup TermsLookup { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Terms = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Terms = this;
 		internal static bool IsConditionless(ITermsQuery q)
 		{
 			return q.Field.IsConditionless()

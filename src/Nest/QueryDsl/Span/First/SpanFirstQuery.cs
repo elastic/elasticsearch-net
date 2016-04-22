@@ -20,7 +20,7 @@ namespace Nest
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanFirst = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanFirst = this;
 		internal static bool IsConditionless(ISpanFirstQuery q) => q.Match == null || q.Match.Conditionless;
 	}
 

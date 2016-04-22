@@ -38,7 +38,7 @@ namespace Nest
 		Types IReindexSource.Type { get; set; }
 
 		public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
-			Assign(a => a.Query = querySelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public ReindexSourceDescriptor Sort<T>(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) where T : class =>
 			Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);

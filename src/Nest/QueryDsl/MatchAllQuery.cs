@@ -17,7 +17,7 @@ namespace Nest
 
 		protected override bool Conditionless => false;
 
-		internal override void WrapInContainer(IQueryContainer container)
+		internal override void InternalWrapInContainer(IQueryContainer container)
 		{
 			container.MatchAll = this;
 		}

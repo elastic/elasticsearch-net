@@ -52,7 +52,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
 
 		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => 
 			q.Field == null || q.Location == null 
