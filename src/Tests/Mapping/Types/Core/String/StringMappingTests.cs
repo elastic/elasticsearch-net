@@ -61,17 +61,19 @@ namespace Tests.Mapping.Types.Core.String
 				{
 					type = "string"
 				},
-				inferred = new
-				{
-					type = "string"
+				inferred = new {
+					type = "text",
+					fields = new {
+						keyword = new { type = "keyword" }
+					}
 				},
 				@char = new
 				{
-					type = "string"
+					type = "keyword"
 				},
 				guid = new
 				{
-					type = "string"
+					type = "keyword"
 				}
 			}
 		};
