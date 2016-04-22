@@ -34,7 +34,8 @@ namespace Tests.Cat.CatSnapshots
 				throw new Exception("Setup: failed to create snapshot repository");
 
 			var createIndex = this.Client.CreateIndex(SnapshotIndexName);
-			client.Snapshot(RepositoryName, SnapshotName, s=>s.WaitForCompletion());
+			this.Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow));
+			client.Snapshot(RepositoryName, SnapshotName, s=>s.WaitForCompletion().Index(SnapshotIndexName));
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(

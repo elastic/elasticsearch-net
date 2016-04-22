@@ -114,8 +114,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	{
 		protected override string[] ServerSettings => new[]
 		{
-			"-Des.node.data=false",
-			"-Des.node.master=true",
+			"es.node.data=false",
+			"es.node.master=true",
 		};
 	}
 

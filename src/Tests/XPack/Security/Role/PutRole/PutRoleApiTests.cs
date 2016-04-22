@@ -41,7 +41,7 @@ namespace Tests.XPack.Shield.Role.PutRole
 			run_as = new [] { "user" },
 			indices = new [] {
 				new {
-					names = "project",
+					names = new [] { "project" },
 					privileges = new [] { "all" },
 					fields = new [] { "name", "description" },
 					query = new { match_all = new {} }
