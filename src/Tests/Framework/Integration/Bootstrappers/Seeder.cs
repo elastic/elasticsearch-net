@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.MockData;
@@ -187,6 +188,9 @@ namespace Tests.Framework.Integration
 				.Number(n => n
 					.Name(p => p.NumberOfCommits)
 					.Store()
+				)
+				.Object<Dictionary<string,Metadata>>(o => o
+					.Name(p => p.Metadata)
 				);
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props

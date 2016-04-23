@@ -44,9 +44,10 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			response.Accept(visitor);
 
 			visitor.CountsShouldContainKeyAndCountBe("type", 1);
-			visitor.CountsShouldContainKeyAndCountBe("object", 2);
+			visitor.CountsShouldContainKeyAndCountBe("object", 3);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
-			visitor.CountsShouldContainKeyAndCountBe("string", 17);
+			visitor.CountsShouldContainKeyAndCountBe("text", 8);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
 			visitor.CountsShouldContainKeyAndCountBe("number", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
@@ -149,11 +150,6 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void Visit(BooleanProperty mapping)
 		{
 			Increment("boolean");
-		}
-
-		public void Visit(NumberType mapping)
-		{
-			throw new InvalidOperationException("NumberType should never be called");
 		}
 
 		public void Visit(TextProperty mapping)

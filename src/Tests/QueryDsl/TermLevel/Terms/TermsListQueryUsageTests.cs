@@ -46,6 +46,9 @@ namespace Tests.QueryDsl.TermLevel.Terms
 
 		private List<List<string>> _terms = new List<List<string>> { new List<string> { "term1", "term2" } };
 
+		protected override int ExpectStatusCode => 400;
+		protected override bool ExpectIsValid => false;
+
 		protected override object QueryJson => new
 		{
 			terms = new
@@ -72,6 +75,18 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Terms(_terms)
 			);
 
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeFalse();
+
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(400);
+			response.ServerError.Error.Should().NotBeNull();
+			var rootCauses = response.ServerError.Error.RootCause;
+			rootCauses.Should().NotBeNullOrEmpty();
+			var rootCause = rootCauses.First();
+			rootCause.Type.Should().Be("parsing_exception");
+		}
 	}
 
 	public class TermsListOfListStringAgainstNumericFieldIntegrationTests : QueryDslIntegrationTestsBase
@@ -110,16 +125,16 @@ namespace Tests.QueryDsl.TermLevel.Terms
 				.Terms(_terms)
 			);
 
-		[I] public Task AsserResponse() => AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			r.ServerError.Should().NotBeNull();
-			r.ServerError.Status.Should().Be(400);
-			r.ServerError.Error.Should().NotBeNull();
-			var rootCauses = r.ServerError.Error.RootCause;
+			response.ServerError.Should().NotBeNull();
+			response.ServerError.Status.Should().Be(400);
+			response.ServerError.Error.Should().NotBeNull();
+			var rootCauses = response.ServerError.Error.RootCause;
 			rootCauses.Should().NotBeNullOrEmpty();
 			var rootCause = rootCauses.First();
-			rootCause.Type.Should().Be("number_format_exception");
-		});
+			rootCause.Type.Should().Be("parsing_exception");
+		}
 
 	}
 
