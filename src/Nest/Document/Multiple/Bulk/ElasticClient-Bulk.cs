@@ -15,13 +15,13 @@ namespace Nest
 		IBulkResponse Bulk(IBulkRequest request);
 
 		/// <inheritdoc/>
-		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector = null);
+		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IBulkResponse> BulkAsync(IBulkRequest request);
 
 		/// <inheritdoc/>
-		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector = null);
+		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector);
 
 	}
 

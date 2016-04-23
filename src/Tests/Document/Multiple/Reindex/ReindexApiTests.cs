@@ -27,9 +27,9 @@ namespace Tests.Document.Multiple.Reindex
 	[Collection(IntegrationContext.Reindex)]
 	public class ReindexApiTests : SerializationTestBase
 	{
-		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;
-		private readonly IObservable<IReindexResponse<Project>> _reindexSingleTypeResult;
-		private readonly IElasticClient _client;
+		//private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;
+		//private readonly IObservable<IReindexResponse<Project>> _reindexSingleTypeResult;
+		//private readonly IElasticClient _client;
 
 		public ReindexApiTests(ReindexCluster cluster, EndpointUsage usage)
 		{

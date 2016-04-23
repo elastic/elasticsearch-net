@@ -14,10 +14,7 @@ namespace Tests.Mapping.Types.Core.String
 			Index = FieldIndexOption.NotAnalyzed,
 			IndexOptions = IndexOptions.Offsets,
 			NullValue = "na",
-#pragma warning disable 618
-			// Purposely setting this obsolete property to ensure it serializes as position_increment_gap
 			PositionIncrementGap = 5,
-#pragma warning restore 618
 			SearchAnalyzer = "mysearchanalyzer",
 			Similarity = SimilarityOption.BM25,
 			Store = true,
@@ -61,10 +58,15 @@ namespace Tests.Mapping.Types.Core.String
 				{
 					type = "string"
 				},
-				inferred = new {
+				inferred = new
+				{
 					type = "text",
-					fields = new {
-						keyword = new { type = "keyword" }
+					fields = new
+					{
+						keyword = new
+						{
+							type = "keyword"
+						}
 					}
 				},
 				@char = new
@@ -98,13 +100,18 @@ namespace Tests.Mapping.Types.Core.String
 			.String(s => s
 				.Name(o => o.Minimal)
 			)
-			.String(s => s
+			.Text(s => s
 				.Name(o => o.Inferred)
+				.Fields(f => f
+					.Keyword(k => k
+						.Name("keyword")
+					)
+				)
 			)
-			.String(s => s
+			.Keyword(s => s
 				.Name(o => o.Char)
 			)
-			.String(s => s
+			.Keyword(s => s
 				.Name(o => o.Guid)
 			);
 
