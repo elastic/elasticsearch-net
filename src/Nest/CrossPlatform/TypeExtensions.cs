@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Elasticsearch.Net
+namespace Nest
 {
 	internal static class DotNetCoreTypeExtensions
 	{
@@ -69,5 +69,25 @@ namespace Elasticsearch.Net
 				return TypeCode.Object;
 #endif
 		}
+
+#if DOTNETCORE
+		internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
+#endif
+
+		internal static bool IsEnumType(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().IsEnum;
+#else
+			return type.IsEnum;
+#endif
+		}
+
+#if DOTNETCORE
+		internal static IEnumerable<Type> GetInterfaces(this Type type)
+		{
+			return type.GetTypeInfo().ImplementedInterfaces;
+		}
+#endif
 	}
 }
