@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Diagnostics;
-using Elasticsearch.Net;
+using Nest;
 
 namespace System.Collections.Generic
 {

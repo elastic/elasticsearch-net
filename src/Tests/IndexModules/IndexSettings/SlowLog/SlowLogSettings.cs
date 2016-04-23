@@ -5,7 +5,7 @@ using Tests.Framework;
 
 namespace Tests.IndexModules.IndexSettings.SlowLog
 {
-	public class Index_TranslogSettings
+	public class SlowLogSettings
 	{
 		/**
 		 */
@@ -31,7 +31,7 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 				{"index.indexing.slowlog.source", 100},
 			};
 			/**
-			 * 
+			 *
 			 */
 			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.SlowLog(sl => sl

@@ -151,7 +151,11 @@ namespace Tests.CodeStandards
 
 			var exceptions = new List<Type>
 			{
-				nestAssembly.GetType("System.AssemblyVersionInformation")
+				nestAssembly.GetType("System.AssemblyVersionInformation"),
+#if DOTNETCORE
+				typeof(SynchronizedCollection<>),
+				nestAssembly.GetType("System.ComponentModel.Browsable")
+#endif
 			};
 
 			var types = nestAssembly.GetTypes();
@@ -180,7 +184,10 @@ namespace Tests.CodeStandards
 				elasticsearchNetAssembly.GetType("Purify.Purifier+IPurifier"),
 				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
 				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
-				elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo")
+				elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
+#if DOTNETCORE
+				elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
+#endif
 			};
 
 			var types = elasticsearchNetAssembly.GetTypes();

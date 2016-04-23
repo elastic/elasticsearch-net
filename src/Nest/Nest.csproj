@@ -607,7 +607,6 @@
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogDurability.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogFlushSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
-    <Compile Include="IndexModules\IndexSettings\Translog\TranslogWriteMode.cs" />
     <Compile Include="IndexModules\Similarity\BM25Similarity.cs" />
     <Compile Include="IndexModules\Similarity\DefaultSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\DFR\DFRAfterEffect.cs" />

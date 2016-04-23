@@ -124,6 +124,7 @@ namespace Tests.Framework.Integration
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
 			var attr = this.VersionInfo.ParsedVersion.Major >= 5 ? "attr." : "";
+
 			this.DefaultNodeSettings = new[]
 			{
 				$"es.cluster.name={this.ClusterName}",
@@ -210,9 +211,9 @@ namespace Tests.Framework.Integration
 
 			if (handle.WaitOne(this.HandleTimeout, true)) return observable;
 
-			this.Stop();
+				this.Stop();
 			throw new Exception($"Could not start elasticsearch within {this.HandleTimeout}");
-		}
+			}
 
 #if DOTNETCORE
 		private IObservable<ElasticsearchMessage> UseAlreadyRunningInstance(Signal handle)

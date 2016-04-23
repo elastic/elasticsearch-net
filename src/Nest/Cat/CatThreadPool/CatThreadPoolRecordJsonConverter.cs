@@ -7,27 +7,23 @@ namespace Nest
 {
 	internal class CatThreadPoolRecordJsonConverter : JsonConverter
 	{
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
+		public override bool CanWrite => false;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
 		}
 
-		private static readonly string[] _threadPoolShortHands = new[]
-		{
+		private static readonly string[] _threadPoolShortHands = {
 			"b", "f", "g", "ge", "i", "ma", "m", "o", "p", "r", "s", "sn", "su", "w"
 		};
 
-		private static readonly string[] _fieldShortHands = new[]
-		{
+		private static readonly string[] _fieldShortHands = {
 			"t", "a", "s", "q", "qs", "r", "l", "c", "mi", "ma", "k"
 		};
-		private static IEnumerable<Tuple<string, string>> _combinations =
-			_threadPoolShortHands.SelectMany<string, string, Tuple<string, string>>(t => _fieldShortHands, Tuple.Create);
+
+		private static readonly IEnumerable<Tuple<string, string>> _combinations =
+			_threadPoolShortHands.SelectMany(t => _fieldShortHands, Tuple.Create);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
@@ -136,11 +132,6 @@ namespace Nest
 					if (o.Snapshot == null) o.Snapshot = new CatThreadPool();
 					this.SetFieldValue(o.Snapshot, field, value);
 					return;
-				case "suggest":
-				case "su":
-					if (o.Suggest == null) o.Suggest = new CatThreadPool();
-					this.SetFieldValue(o.Suggest, field, value);
-					return;
 				case "warmer":
 				case "w":
 					if (o.Warmer == null) o.Warmer = new CatThreadPool();
@@ -162,47 +153,47 @@ namespace Nest
 		{
 			switch(field)
 			{
-				case "type": 
+				case "type":
 				case "t":
 					pool.Type = value;
 					return;
-				case "active": 
+				case "active":
 				case "a":
 					pool.Active = value;
 					return;
-				case "size": 
+				case "size":
 				case "s":
 					pool.Size = value;
 					return;
-				case "queue": 
+				case "queue":
 				case "q":
 					pool.Queue = value;
 					return;
-				case "queueSize": 
+				case "queueSize":
 				case "qs":
 					pool.QueueSize = value;
 					return;
-				case "rejected": 
+				case "rejected":
 				case "r":
 					pool.Rejected = value;
 					return;
-				case "largest": 
+				case "largest":
 				case "l":
 					pool.Largest = value;
 					return;
-				case "completed": 
+				case "completed":
 				case "c":
 					pool.Completed = value;
 					return;
-				case "min": 
+				case "min":
 				case "mi":
 					pool.Min = value;
 					return;
-				case "max": 
+				case "max":
 				case "ma":
 					pool.Max = value;
 					return;
-				case "keepAlive": 
+				case "keepAlive":
 				case "k":
 					pool.KeepAlive = value;
 					return;

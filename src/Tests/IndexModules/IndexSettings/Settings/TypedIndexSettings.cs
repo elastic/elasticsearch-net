@@ -27,6 +27,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				{"index.blocks.metadata", true},
 				{"index.priority", 11},
 				{"index.recovery.initial_shards", "full-1"},
+				{"index.requests.cache.enable", true},
 				{"index.routing.allocation.total_shards_per_node", 10 },
 				{"index.unassigned.node_left.delayed_timeout", "1m" },
 				{"index.number_of_shards", 1},
@@ -34,7 +35,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 			};
 
 			/**
-			 * 
+			 *
 			 */
 			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Setting("any.setting", "can be set")
@@ -50,6 +51,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.BlocksWrite()
 				.Priority(11)
 				.RecoveryInitialShards(RecoveryInitialShards.FullMinusOne)
+				.RequestsCacheEnabled()
 				.TotalShardsPerNode(10)
 				.UnassignedNodeLeftDelayedTimeout(TimeSpan.FromMinutes(1))
 				.RefreshInterval(-1)
@@ -75,6 +77,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					BlocksWrite = true,
 					Priority = 11,
 					RecoveryInitialShards = RecoveryInitialShards.FullMinusOne,
+					RequestsCacheEnabled = true,
 					RoutingAllocationTotalShardsPerNode = 10,
 					UnassignedNodeLeftDelayedTimeout = "1m",
 					RefreshInterval = -1,

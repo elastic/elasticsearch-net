@@ -10,30 +10,30 @@ namespace Nest
 		public const string BlocksWrite = "index.blocks.write";
 		public const string BlocksMetadata = "index.blocks.metadata";
 		public const string Priority = "index.priority";
-		public const string TranslogFlushTreshHoldOps = "index.translog.flush_threshold_ops";
+
 		public const string TranslogFlushThresholdSize = "index.translog.flush_threshold_size";
 		public const string TranslogFlushThresholdPeriod = "index.translog.flush_threshold_period";
-		public const string TranslogInterval = "index.translog.interval";
-		public const string TranslogFsType = "index.translog.fs.type";
 		public const string TranslogDurability = "index.translog.durability";
 		public const string TranslogSyncInterval = "index.translog.sync_interval";
-		public const string RequestCacheEnable = "index.requests.cache.enable";
 
-		public const string RoutingAllocationInclude = "index.routing.allocation.include";//
-		public const string RoutingAllocationExclude = "index.routing.allocation.exclude";//
-		public const string RoutingAllocationRequire = "index.routing.allocation.require";//
-		public const string RoutingAllocationEnable = "index.routing.allocation.enable";//
+		public const string RequestsCacheEnable = "index.requests.cache.enable";
+
+		public const string RoutingAllocationInclude = "index.routing.allocation.include";
+		public const string RoutingAllocationExclude = "index.routing.allocation.exclude";
+		public const string RoutingAllocationRequire = "index.routing.allocation.require";
+		public const string RoutingAllocationEnable = "index.routing.allocation.enable";
 		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";//
 		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";//
 		public const string RoutingAllocationDisableReplicaAllocation = "index.routing.allocation.disable_replica_allocation";//
 		public const string RoutingAllocationTotalShardsPerNode = "index.routing.allocation.total_shards_per_node";
+
 		public const string RecoveryInitialShards = "index.recovery.initial_shards";
+
 		public const string UnassignedNodeLeftDelayedTimeout = "index.unassigned.node_left.delayed_timeout";
 
-		public const string TtlDisablePurge = "index.ttl.disable_purge";//
-		public const string CompoundFormat = "index.compound_format";//
-		public const string CompoundOnFlush = "index.compound_on_flush";//
-		public const string WarmersEnabled = "index.warmer.enabled";
+		public const string TtlDisablePurge = "index.ttl.disable_purge";
+		public const string CompoundFormat = "index.compound_format";
+		public const string CompoundOnFlush = "index.compound_on_flush";
 		public const string Analysis = "analysis";
 
 		public const string MergePolicyExpungeDeletesAllowed = "index.merge.policy.expunge_deletes_allowed";
@@ -67,5 +67,6 @@ namespace Nest
 		public const string SlowlogIndexingLevel = "index.indexing.slowlog.level";
 		public const string SlowlogIndexingSource = "index.indexing.slowlog.source";
 
+		public const string StoreType = "index.store.type";
 	}
 }

@@ -18,11 +18,6 @@ namespace Nest
 		/// Whether or not to fsync and commit the translog after every index, delete, update, or bulk request
 		/// </summary>
 		TranslogDurability? Durability { get; set; }
-
-		/// <summary>
-		///Whether to buffer writes to the transaction log in memory or not. 
-		/// </summary>
-		TranslogWriteMode? FileSystemType { get; set; }
 	}
 
 	public class TranslogSettings : ITranslogSettings
@@ -33,8 +28,6 @@ namespace Nest
 		public Time SyncInterval { get; set; }
 		/// <inheritdoc/>
 		public TranslogDurability? Durability { get; set; }
-		/// <inheritdoc/>
-		public TranslogWriteMode? FileSystemType { get; set; }
 	}
 
 	public class TranslogSettingsDescriptor: DescriptorBase<TranslogSettingsDescriptor, ITranslogSettings>, ITranslogSettings
@@ -42,7 +35,6 @@ namespace Nest
 		ITranslogFlushSettings ITranslogSettings.Flush { get; set; }
 		Time ITranslogSettings.SyncInterval { get; set; }
 		TranslogDurability? ITranslogSettings.Durability { get; set; }
-		TranslogWriteMode? ITranslogSettings.FileSystemType { get; set; }
 
 		/// <inheritdoc/>
 		public TranslogSettingsDescriptor Flush(Func<TranslogFlushSettingsDescriptor, ITranslogFlushSettings> selector) =>
@@ -55,10 +47,5 @@ namespace Nest
 		/// <inheritdoc/>
 		public TranslogSettingsDescriptor SyncInterval(Time time) =>
 			Assign(a => a.SyncInterval = time);
-
-		/// <inheritdoc/>
-		public TranslogSettingsDescriptor FileSystemType(TranslogWriteMode? writeMode) =>
-			Assign(a => a.FileSystemType = writeMode);
-
 	}
 }

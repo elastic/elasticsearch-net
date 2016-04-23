@@ -16,9 +16,8 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;
-			;
-			if (ds == null) return;
 
+			if (ds == null) return;
 			IDictionary d = ds;
 
 			d[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
@@ -29,23 +28,18 @@ namespace Nest
 			d[UpdatableIndexSettings.BlocksWrite] = ds.BlocksWrite;
 			d[UpdatableIndexSettings.BlocksMetadata] = ds.BlocksMetadata;
 			d[UpdatableIndexSettings.Priority] = ds.Priority;
-			d[UpdatableIndexSettings.WarmersEnabled] = ds.WarmersEnabled;
-			d[UpdatableIndexSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
 			d[UpdatableIndexSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
-			d[UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode] =
-				ds.RoutingAllocationTotalShardsPerNode;
+			d[UpdatableIndexSettings.RequestsCacheEnable] = ds.RequestsCacheEnabled;
+			d[UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode] = ds.RoutingAllocationTotalShardsPerNode;
 			d[UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
 
 			var translog = ds.Translog;
 			d[UpdatableIndexSettings.TranslogSyncInterval] = translog?.SyncInterval;
 			d[UpdatableIndexSettings.TranslogDurability] = translog?.Durability;
-			d[UpdatableIndexSettings.TranslogFsType] = translog?.FileSystemType;
 
 			var flush = ds.Translog?.Flush;
 			d[UpdatableIndexSettings.TranslogFlushThresholdSize] = flush?.ThresholdSize;
-			d[UpdatableIndexSettings.TranslogFlushTreshHoldOps] = flush?.ThresholdOps;
 			d[UpdatableIndexSettings.TranslogFlushThresholdPeriod] = flush?.ThresholdPeriod;
-			d[UpdatableIndexSettings.TranslogInterval] = flush?.Interval;
 
 			d[UpdatableIndexSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
 			d[UpdatableIndexSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
@@ -83,9 +77,11 @@ namespace Nest
 
 			var indexSettings = value as IIndexSettings;
 			d["index.number_of_shards"] = indexSettings?.NumberOfShards;
-			d["index.store.type"] = indexSettings?.FileSystemStorageImplementation;
+			d[UpdatableIndexSettings.NumberOfReplicas] = indexSettings?.NumberOfReplicas;
+			d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
 
-			d["analysis"] = ds.Analysis;
+			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
+
 			base.WriteJson(writer, d, serializer);
 		}
 
@@ -95,7 +91,8 @@ namespace Nest
 			newObject = newObject ?? new JObject();
 			foreach (var property in original.Properties())
 			{
-				if (property.Value is JObject && property.Name != "analysis") Flatten(property.Value.Value<JObject>(), property.Name + ".", newObject);
+				if (property.Value is JObject && property.Name != UpdatableIndexSettings.Analysis)
+					Flatten(property.Value.Value<JObject>(), property.Name + ".", newObject);
 				else newObject.Add(prefix + property.Name, property.Value);
 			}
 			return newObject;
@@ -123,10 +120,9 @@ namespace Nest
 			Set<bool?>(s, settings, UpdatableIndexSettings.BlocksWrite, v => s.BlocksWrite = v);
 			Set<bool?>(s, settings, UpdatableIndexSettings.BlocksMetadata, v => s.BlocksMetadata = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.Priority, v => s.Priority = v);
-			Set<bool?>(s, settings, UpdatableIndexSettings.WarmersEnabled, v => s.WarmersEnabled = v);
-			Set<bool?>(s, settings, UpdatableIndexSettings.RequestCacheEnable, v => s.RequestCacheEnabled = v);
 			Set<Union<int, RecoveryInitialShards>>(s, settings, UpdatableIndexSettings.RecoveryInitialShards,
 				v => s.RecoveryInitialShards = v);
+			Set<bool?>(s, settings, UpdatableIndexSettings.RequestsCacheEnable, v => s.RequestsCacheEnabled = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode,
 				v => s.RoutingAllocationTotalShardsPerNode = v);
 			Set<Time>(s, settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout,
@@ -135,13 +131,10 @@ namespace Nest
 			var t = s.Translog = new TranslogSettings();
 			Set<Time>(s, settings, UpdatableIndexSettings.TranslogSyncInterval, v => t.SyncInterval = v);
 			Set<TranslogDurability?>(s, settings, UpdatableIndexSettings.TranslogDurability, v => t.Durability = v);
-			Set<TranslogWriteMode?>(s, settings, UpdatableIndexSettings.TranslogFsType, v => t.FileSystemType = v);
 
 			var tf = s.Translog.Flush = new TranslogFlushSettings();
 			Set<string>(s, settings, UpdatableIndexSettings.TranslogFlushThresholdSize, v => tf.ThresholdSize = v);
-			Set<int?>(s, settings, UpdatableIndexSettings.TranslogFlushTreshHoldOps, v => tf.ThresholdOps = v);
 			Set<Time>(s, settings, UpdatableIndexSettings.TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
-			Set<Time>(s, settings, UpdatableIndexSettings.TranslogInterval, v => tf.Interval = v);
 
 			s.Merge = new MergeSettings();
 			var p = s.Merge.Policy = new MergePolicySettings();
@@ -188,14 +181,14 @@ namespace Nest
 			Set<LogLevel?>(s, settings, UpdatableIndexSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(s, settings, UpdatableIndexSettings.SlowlogIndexingSource, v => indexing.Source = v);
 			Set<int?>(s, settings, "index.number_of_shards", v => s.NumberOfShards = v);
-			Set<FileSystemStorageImplementation?>(s, settings, "index.store.type", v => s.FileSystemStorageImplementation = v,
+			Set<FileSystemStorageImplementation?>(s, settings, UpdatableIndexSettings.StoreType, v => s.FileSystemStorageImplementation = v,
 				serializer);
 
 			IDictionary dict = s;
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
-				if (kv.Key == "analysis" || kv.Key == "index.analysis")
+				if (kv.Key == UpdatableIndexSettings.Analysis || kv.Key == "index.analysis")
 					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
 				else
 				{
