@@ -46,7 +46,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sticky
 				node = pool.CreateView().First();
 				node.Uri.Port.Should().Be(9201);
 			}
-			/** After we marke the first node alive again we expect it to be hit again*/
+			/** After we mark the first node alive again we expect it to be hit again*/
 			seeds.First().MarkAlive();
 			for (var i = 0; i < 20; i++)
 			{

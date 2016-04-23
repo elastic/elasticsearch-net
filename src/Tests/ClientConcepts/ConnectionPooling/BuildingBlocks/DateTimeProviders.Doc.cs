@@ -29,8 +29,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 		[U] public void DeadTimeoutCalculation()
 		{
 			var dateTimeProvider = DateTimeProvider.Default;
-			/**
-			* The default timeout calculation is: `min(timeout * 2 ^ (attempts * 0.5 -1), maxTimeout)`, where the
+			/**  
+			* The default timeout calculation is: `min(timeout * 2 ^ (attempts * 0.5 -1), maxTimeout)`, where the 
 			* default values for `timeout` and `maxTimeout` are
 			*/
 			var timeout = TimeSpan.FromMinutes(1);
@@ -40,8 +40,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			* Plotting these defaults looks as followed:
 			*
 			*[[timeout]]
-			*.Default formula, y-axis time in minutes, x-axis number of attempts to revive
-			*image::timeoutplot.png[dead timeout]
+			*.Default formula, x-axis number of attempts to revive, y-axis time in minutes
+			*image::timeoutplot.png[dead timeout]	
 			*
 			* The goal here is that whenever a node is resurrected and is found to still be offline, we send it
 			* _back to the doghouse_ for an ever increasingly long period, until we hit a bounded maximum.
@@ -52,7 +52,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 
 			foreach (var increasedTimeout in timeouts.Take(10))
 				increasedTimeout.Should().BeWithin(maxTimeout);
-
+			
 		}
 
 	}

@@ -20,9 +20,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	public class FieldInference
 	{
 		/**== Field Inference
-		 * 
+		 *
 		 * Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
-		 * NEST allows you to use C# expressions to strongly type these field path strings. 
+		 * NEST allows you to use C# expressions to strongly type these field path strings.
 		 *
 		 * These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
 		 */
@@ -133,7 +133,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			/** You can specify boosts in the field using a string */
 			fieldString = "name^2.1";
 			fieldString.Boost.Should().Be(2.1);
-			
+
 			/** As well as using `Nest.Infer.Field` */
 			fieldExpression = Field<Project>(p => p.Name, 2.1);
 			Expect("name^2.1")
@@ -229,7 +229,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
 		}
 
-		/** 
+		/**
 		* Suffixes can also be appended to expressions using `.AppendSuffix()`. This is useful in cases where you want to apply the same suffix
 		* to a list of fields.
 		*/
@@ -246,7 +246,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			};
 
 			/** and we want to append the suffix "raw" to each */
-			var fieldExpressions = 
+			var fieldExpressions =
 				expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
 
 			Expect("name.raw").WhenSerializing(fieldExpressions[0]);
@@ -256,7 +256,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		/**=== Attribute based naming
-		* 
+		*
 		* Using NEST's property attributes you can specify a new name for the properties
 		*/
 		public class BuiltIn
@@ -270,7 +270,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("naam").WhenSerializing(Field<BuiltIn>(p => p.Name));
 		}
 
-		/** 
+		/**
 		* Starting with NEST 2.x, we also ask the serializer if it can resolve a property to a name.
 		* Here we ask the default `JsonNetSerializer` to resolve a property name and it takes
 		* the `JsonPropertyAttribute` into account
@@ -286,7 +286,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("nameInJson").WhenSerializing(Field<SerializerSpecific>(p => p.Name));
 		}
 
-		/** 
+		/**
 		* If both a NEST property attribute and a serializer specific attribute are present on a property,
 		* **NEST attributes take precedence**
 		*/
@@ -330,7 +330,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
 			/**
-			* Here we have to similary shaped expressions on coming from A and on from B
+			* Here we have two similarly shaped expressions, one coming from A and one from B
 			* that will resolve to the same field name, as expected
 			*/
 
@@ -355,7 +355,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			fieldNameOnA.Should().Be("d.name");
 			fieldNameOnB.Should().Be("c.name");
 
-			/** however we didn't break inferrence on the first client instance using its separate connection settings */
+			/** however we didn't break inference on the first client instance using its separate connection settings */
 			fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
 			fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 
@@ -369,7 +369,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*
 		* . A hard rename of the property on connection settings using `.Rename()`
 		* . A NEST property mapping
-		* . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonPropery attribute.
+		* . Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
 		* . Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
 		*
 		* The following example class will demonstrate this precedence
@@ -393,7 +393,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			public string DefaultFieldNameInferrer { get; set; } //<5>  We are going to register a DefaultFieldNameInferrer on ConnectionSettings that will uppercase all properties.
 		}
 
-		/** 
+		/**
 		* Here we create a custom serializer that renames any property named `AskSerializer` to `ask`
 		*/
 		class CustomSerializer : JsonNetSerializer

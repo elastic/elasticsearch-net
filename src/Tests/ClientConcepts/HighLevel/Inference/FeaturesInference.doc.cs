@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public void ImplicitConversion()
 		{
 			/**
-			* Here we new an GET index elasticsearch request whichs takes Indices and Features.
+			* Here we new an GET index elasticsearch request which takes Indices and Features.
 			* Notice how we can use the Feature enum directly.
 			*/
 			var request = new GetIndexRequest(All, Feature.Settings);

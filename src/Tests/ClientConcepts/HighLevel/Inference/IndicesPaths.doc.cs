@@ -47,7 +47,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var all = Nest.Indices.All; //<1> Using `_all` indices
 			var many = Nest.Indices.Index("name1", "name2"); //<2> specifying multiple indices using strings
-			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>(); //<3> speciying multiple using types
+			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>(); //<3> specifying multiple using types
 			var singleTyped = Nest.Indices.Index<Project>();
 			var singleString = Nest.Indices.Index("name1");
 

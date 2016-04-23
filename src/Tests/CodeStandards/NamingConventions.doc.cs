@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -139,6 +142,130 @@ namespace Tests.CodeStandards
 				.Select(t => t.Name.Split('`')[0].Replace("Response", ""));
 
 			requests.Except(responses).Should().BeEmpty();
+		}
+
+		[U]
+		public void AllNestTypesAreInNestNamespace()
+		{
+			var nestAssembly = typeof(IElasticClient).Assembly();
+
+			var exceptions = new List<Type>
+			{
+				nestAssembly.GetType("System.AssemblyVersionInformation")
+			};
+
+			var types = nestAssembly.GetTypes();
+			var typesNotInNestNamespace = types
+				.Where(t => !exceptions.Contains(t))
+				.Where(t => t.Namespace != "Nest")
+				.Where(t => !t.Name.StartsWith("<"))
+				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
+				.ToList();
+
+			typesNotInNestNamespace.Should().BeEmpty();
+		}
+
+		[U]
+		public void AllElasticsearchNetTypesAreInElasticsearchNetNamespace()
+		{
+			var elasticsearchNetAssembly = typeof(IElasticLowLevelClient).Assembly();
+
+			var exceptions = new List<Type>
+			{
+				elasticsearchNetAssembly.GetType("System.AssemblyVersionInformation"),
+				elasticsearchNetAssembly.GetType("System.FormattableString"),
+				elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+				elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+				elasticsearchNetAssembly.GetType("Purify.Purifier"),
+				elasticsearchNetAssembly.GetType("Purify.Purifier+IPurifier"),
+				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
+				elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
+				elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo")
+			};
+
+			var types = elasticsearchNetAssembly.GetTypes();
+			var typesNotIElasticsearchNetNamespace = types
+				.Where(t => !exceptions.Contains(t))
+				.Where(t => t.Namespace != "Elasticsearch.Net")
+				.Where(t => !t.Name.StartsWith("<"))
+				.Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
+				.ToList();
+
+			typesNotIElasticsearchNetNamespace.Should().BeEmpty();
+		}
+
+		/// implementation from System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(string value)
+		private static bool IsValidTypeNameOrIdentifier(string value, bool isTypeName)
+		{
+			bool nextMustBeStartChar = true;
+			if (value.Length == 0)
+				return false;
+			for (int index = 0; index < value.Length; ++index)
+			{
+				var character = value[index];
+#if DOTNETCORE
+				var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
+#else
+				var unicodeCategory = char.GetUnicodeCategory(character);
+#endif
+				switch (unicodeCategory)
+				{
+					case UnicodeCategory.UppercaseLetter:
+					case UnicodeCategory.LowercaseLetter:
+					case UnicodeCategory.TitlecaseLetter:
+					case UnicodeCategory.ModifierLetter:
+					case UnicodeCategory.OtherLetter:
+					case UnicodeCategory.LetterNumber:
+						nextMustBeStartChar = false;
+						break;
+					case UnicodeCategory.NonSpacingMark:
+					case UnicodeCategory.SpacingCombiningMark:
+					case UnicodeCategory.DecimalDigitNumber:
+					case UnicodeCategory.ConnectorPunctuation:
+						if (nextMustBeStartChar && (int)character != 95)
+							return false;
+						nextMustBeStartChar = false;
+						break;
+					default:
+						if (!isTypeName || !IsSpecialTypeChar(character, ref nextMustBeStartChar))
+							return false;
+						break;
+				}
+			}
+			return true;
+		}
+
+		private static bool IsSpecialTypeChar(char ch, ref bool nextMustBeStartChar)
+		{
+			if ((uint)ch <= 62U)
+			{
+				switch (ch)
+				{
+					case '$':
+					case '&':
+					case '*':
+					case '+':
+					case ',':
+					case '-':
+					case '.':
+					case ':':
+					case '<':
+					case '>':
+						break;
+					default:
+						goto label_6;
+				}
+			}
+			else if ((int)ch != 91 && (int)ch != 93)
+			{
+				if ((int)ch == 96)
+					return true;
+				goto label_6;
+			}
+			nextMustBeStartChar = true;
+			return true;
+			label_6:
+			return false;
 		}
 	}
 }
