@@ -75,7 +75,6 @@ namespace Tests.Cluster.ClusterReroute
 			{
 				new Dictionary<string, object> { { "allocate_empty_primary", new
 				{
-					allow_primary = true,
 					index = "project",
 					node = "x",
 					shard = 0,
@@ -90,7 +89,6 @@ namespace Tests.Cluster.ClusterReroute
 				} } },
 				new Dictionary<string, object> { { "allocate_replica", new
 				{
-					allow_primary = false,
 					index = "project",
 					node = "x",
 					shard = 0

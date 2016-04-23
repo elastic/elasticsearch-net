@@ -16,15 +16,10 @@ namespace Nest
 
 	public interface IAllocateReplicaClusterRerouteCommand : IAllocateClusterRerouteCommand
 	{
-		[JsonProperty("allow_primary")]
-		bool AllowPrimary { get; }
 	}
 
 	public interface IAllocateEmptyPrimaryRerouteCommand : IAllocateClusterRerouteCommand
 	{
-		[JsonProperty("allow_primary")]
-		bool AllowPrimary { get; }
-
 		[JsonProperty("accept_data_loss")]
 		bool AcceptDataLoss { get; set; }
 	}
@@ -49,15 +44,11 @@ namespace Nest
 	public class AllocateReplicaClusterRerouteCommand : AllocateClusterRerouteCommandBase, IAllocateReplicaClusterRerouteCommand
 	{
 		public override string Name => "allocate_replica";
-
-		public bool AllowPrimary => false;
 	}
 
 	public class AllocateEmptyPrimaryRerouteCommand : AllocateClusterRerouteCommandBase, IAllocateEmptyPrimaryRerouteCommand
 	{
 		public override string Name => "allocate_empty_primary";
-
-		public  bool AllowPrimary => true;
 
 		public bool AcceptDataLoss { get; set; }
 	}
@@ -97,16 +88,12 @@ namespace Nest
 		: AllocateClusterRerouteCommandDescriptorBase<AllocateReplicaClusterRerouteCommandDescriptor, IAllocateReplicaClusterRerouteCommand>, IAllocateReplicaClusterRerouteCommand
 	{
 		public override string Name => "allocate_replica";
-
-		bool IAllocateReplicaClusterRerouteCommand.AllowPrimary => false;
 	}
 
 	public class AllocateEmptyPrimaryRerouteCommandDescriptor
 		: AllocateClusterRerouteCommandDescriptorBase<AllocateEmptyPrimaryRerouteCommandDescriptor, IAllocateEmptyPrimaryRerouteCommand>, IAllocateEmptyPrimaryRerouteCommand
 	{
 		public override string Name => "allocate_empty_primary";
-
-		bool IAllocateEmptyPrimaryRerouteCommand.AllowPrimary => true;
 
 		bool IAllocateEmptyPrimaryRerouteCommand.AcceptDataLoss { get; set; }
 
