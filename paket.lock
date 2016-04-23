@@ -1,7 +1,10 @@
 NUGET
-  remote: https://www.nuget.org/api/v2
+  remote: http://api.nuget.org/v3/index.json
   specs:
     AsciiDocNet (1.0.0-alpha3)
+    ShellProgressBar (3.0)
+  remote: https://www.nuget.org/api/v2
+  specs:
     Bogus (3.0.5-beta-2)
       Newtonsoft.Json (>= 8.0.2) - framework: >= net40, dnx451, dnxcore50
       System.ComponentModel (>= 4.0.1-beta-23516) - framework: dnxcore50
