@@ -19,7 +19,7 @@ namespace Nest
 		public FielddataStats Fielddata { get; internal set; }
 
 		[JsonProperty("percolate")]
-		public PercolateStats Percolate { get; internal set; }
+		public PercolatorStats Percolate { get; internal set; }
 
 		[JsonProperty("query_cache")]
 		public QueryCacheStats QueryCache { get; internal set; }
