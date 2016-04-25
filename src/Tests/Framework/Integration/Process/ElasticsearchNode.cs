@@ -14,6 +14,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using System.Xml.Linq;
+using Tests.XPack.Security;
 
 namespace Tests.Framework.Integration
 {

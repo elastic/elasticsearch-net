@@ -6,7 +6,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.XPack.Shield.Authenticate
+namespace Tests.XPack.Security.Authenticate
 {
 	[Collection(IntegrationContext.Shield)]
 	public class AuthenticateApiTests : ApiIntegrationTestBase<IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>

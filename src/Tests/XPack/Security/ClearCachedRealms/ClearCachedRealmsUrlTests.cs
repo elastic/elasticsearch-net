@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.ClearCachedRealms
+namespace Tests.XPack.Security.ClearCachedRealms
 {
 	public class ClearCachedRealmsUrlTests : IUrlTests
 	{

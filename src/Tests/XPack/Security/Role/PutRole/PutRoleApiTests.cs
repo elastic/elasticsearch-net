@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,7 +9,7 @@ using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 
-namespace Tests.XPack.Shield.Role.PutRole
+namespace Tests.XPack.Security.Role.PutRole
 {
 	[Collection(IntegrationContext.Shield)]
 	public class PutRoleApiTests : ApiIntegrationTestBase<IPutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>

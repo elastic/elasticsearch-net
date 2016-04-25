@@ -6,9 +6,8 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
 
-namespace Tests.XPack.Shield.Role
+namespace Tests.XPack.Security.Role
 {
 	[Collection(IntegrationContext.Shield)]
 	public class RoleCrudTests
@@ -37,8 +36,8 @@ namespace Tests.XPack.Shield.Role
 			{
 				new IndicesPrivileges
 				{
-					Fields = Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
-					Names = Indices<Project>(),
+					Fields = Infer.Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
+					Names = Infer.Indices<Project>(),
 					Privileges = new [] { "all" },
 					Query = new MatchAllQuery()
 				}
@@ -52,7 +51,7 @@ namespace Tests.XPack.Shield.Role
 						.Field(p => p.Name)
 						.Field(p => p.Description)
 					)
-					.Names(Indices<Project>())
+					.Names(Infer.Indices<Project>())
 					.Privileges("all")
 					.Query(q => q.MatchAll())
 				)
@@ -87,8 +86,8 @@ namespace Tests.XPack.Shield.Role
 			{
 				new IndicesPrivileges
 				{
-					Fields = Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
-					Names = Indices<Project>(),
+					Fields = Infer.Fields<Project>(p=>p.Name).And<Project>(p=>p.Description),
+					Names = Infer.Indices<Project>(),
 					Privileges = new [] { "all" },
 					Query = new MatchAllQuery()
 				}
@@ -103,7 +102,7 @@ namespace Tests.XPack.Shield.Role
 						.Field(p => p.Name)
 						.Field(p => p.Description)
 					)
-					.Names(Indices<Project>())
+					.Names(Infer.Indices<Project>())
 					.Privileges("all")
 					.Query(q => q.MatchAll())
 				)

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
 
-namespace Tests.XPack.Shield.Role.ClearCachedRealms
+namespace Tests.XPack.Security.ClearCachedRealms
 {
 	[Collection(IntegrationContext.Shield)]
 	public class ClearCachedRealmsApiTests : ApiIntegrationTestBase<IClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor, ClearCachedRealmsRequest>

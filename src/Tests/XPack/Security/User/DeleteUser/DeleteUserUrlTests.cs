@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.User.DeleteUser
+namespace Tests.XPack.Security.User.DeleteUser
 {
 	public class DeleteUserUrlTests : IUrlTests
 	{

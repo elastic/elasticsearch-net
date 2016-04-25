@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.Role.ClearCachedRoles
+namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
 	public class ClearCachedRolesUrlTests : IUrlTests
 	{

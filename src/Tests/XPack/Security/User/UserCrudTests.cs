@@ -5,7 +5,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.XPack.Shield.User
+namespace Tests.XPack.Security.User
 {
 	[Collection(IntegrationContext.Shield)]
 	public class UserCrudTests

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -8,7 +7,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.XPack.Shield.User.PutUser
+namespace Tests.XPack.Security.User.PutUser
 {
 	[Collection(IntegrationContext.Shield)]
 	public class PutUserApiTests : ApiIntegrationTestBase<IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
