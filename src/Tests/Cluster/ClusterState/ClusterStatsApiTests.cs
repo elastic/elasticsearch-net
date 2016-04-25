@@ -101,7 +101,6 @@ namespace Tests.Cluster.ClusterState
 			shard.Index.Should().NotBeNullOrWhiteSpace();
 			shard.Node.Should().NotBeNullOrWhiteSpace();
 			shard.State.Should().NotBeNullOrWhiteSpace();
-			shard.Version.Should().BeGreaterThan(0);
 		}
 
 		protected void Assert(RoutingNodesState routingNodes, string master)
@@ -118,7 +117,6 @@ namespace Tests.Cluster.ClusterState
 			node.Index.Should().NotBeNullOrWhiteSpace();
 			node.Node.Should().NotBeNullOrWhiteSpace();
 			node.State.Should().NotBeNullOrWhiteSpace();
-			node.Version.Should().BeGreaterThan(0);
 		}
 	}
 }

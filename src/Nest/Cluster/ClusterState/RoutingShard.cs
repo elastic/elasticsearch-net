@@ -25,9 +25,6 @@ namespace Nest
 		[JsonProperty("shard")]
 		public int Shard { get; internal set; }
 
-		[JsonProperty("version")]
-		public long Version { get; internal set; }
-
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
 	}
