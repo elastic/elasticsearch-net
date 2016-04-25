@@ -2,11 +2,13 @@
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
+	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17516")]
 	public class MovingAverageLinearAggregationUsageTests : AggregationUsageTestBase
 	{
 		public MovingAverageLinearAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -75,7 +77,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = 
+				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new MovingAverageAggregation("commits_moving_avg", "commits")
 					{

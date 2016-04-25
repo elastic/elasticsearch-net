@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -10,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Bucket.Filter
 {
 	/**
-	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
+	 * Defines a single bucket of all the documents in the current document set context that match a specified filter.
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
@@ -87,6 +88,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	* When the collection of filters is empty or all are conditionless, NEST will serialize them
 	* to an empty object.
 	*/
+	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17518")]
 	public class EmptyFilterAggregationUsageTests : AggregationUsageTestBase
 	{
 		public EmptyFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

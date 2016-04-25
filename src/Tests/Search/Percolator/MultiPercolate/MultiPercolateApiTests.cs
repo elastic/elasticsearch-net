@@ -26,7 +26,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 				)
 			);
 			this.Client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
-			this.Client.Index(Project.Instance, s => s.Index(this.Index));
+			this.Client.Index(Project.Instance, s => s.Index(this.Index).Refresh());
 			var registerPercolator = this.Client.RegisterPercolator<Project>("match_all", r => r
 				.Index(this.Index)
 				.Query(q => q.MatchAll())

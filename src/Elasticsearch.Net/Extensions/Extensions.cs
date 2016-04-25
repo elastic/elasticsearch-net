@@ -15,7 +15,7 @@ namespace Elasticsearch.Net
 			var knownEnum = KnownEnums.Resolve(enumValue);
 			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
 
-			//TODO measure performance and cache 
+			//TODO measure performance and cache
 			var type = enumValue.GetType();
 #if DOTNETCORE
 			var info = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
@@ -32,7 +32,7 @@ namespace Elasticsearch.Net
 #else
 		internal static string Utf8String(this byte[] bytes) => bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 #endif
-	
+
 		internal static byte[] Utf8Bytes(this string s)
 		{
 			return s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
@@ -81,7 +81,7 @@ namespace Elasticsearch.Net
 		{
 			return string.IsNullOrEmpty(value);
 		}
-		
+
 		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
 		{
 			return items.GroupBy(property).Select(x => x.First());

@@ -2,11 +2,13 @@
 using System.Linq;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
+	[SkipVersion("5.0.0-alpha1", "https://github.com/elastic/elasticsearch/issues/17516")]
 	public class MovingAverageSimpleAggregationUsageTests : AggregationUsageTestBase
 	{
 		public MovingAverageSimpleAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -77,7 +79,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = 
+				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new MovingAverageAggregation("commits_moving_avg", "commits")
 					{
@@ -96,7 +98,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Buckets.Should().NotBeNull();
 			projectsPerMonth.Buckets.Count.Should().BeGreaterThan(0);
-	
+
 			// average not calculated for the first bucket
 			foreach(var item in projectsPerMonth.Buckets.Skip(1))
 			{
