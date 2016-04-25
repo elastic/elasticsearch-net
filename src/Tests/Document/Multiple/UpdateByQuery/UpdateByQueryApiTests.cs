@@ -42,8 +42,8 @@ namespace Tests.Document.Multiple.UpdateByQuery
 				this.Client.Map<Test>(m => m
 					.Index(index)
 					.Properties(props => props
-						.String(s => s.Name(p => p.Text))
-						.String(s => s.Name(p => p.Flag).Analyzer("keyword"))
+						.Text(s => s.Name(p => p.Text))
+						.Keyword(s => s.Name(p => p.Flag))
 					)
 				);
 
