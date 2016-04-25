@@ -53,8 +53,6 @@ namespace Tests.XPack.Shield.Role.ClearCachedRoles
 			var node = response.Nodes.First().Value;
 			node.Should().NotBeNull();
 			node.Name.Should().StartWith("shield-node-");
-			node.Status.Should().NotBeNull();
-			node.Status.Success.Should().BeTrue();
 		}
 	}
 

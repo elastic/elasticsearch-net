@@ -33,7 +33,7 @@ namespace Tests.XPack.Shield.Role.ClearCachedRealms
 		protected override bool SupportsDeserialization => false;
 
 		//callisolated value can sometimes start with a digit which is not allowed for rolenames
-		private string Realm => $"realm-{CallIsolatedValue}";
+		private string Realm => $"default_file";
 
 		protected override ClearCachedRealmsRequest Initializer => new ClearCachedRealmsRequest(this.Realm);
 
@@ -48,12 +48,6 @@ namespace Tests.XPack.Shield.Role.ClearCachedRealms
 			var node = response.Nodes.First().Value;
 			node.Should().NotBeNull();
 			node.Name.Should().StartWith("shield-node-");
-			node.Status.Should().NotBeNull();
-			node.Status.Success.Should().BeFalse();
-			node.Status.Type.Should().Be("failed_node_exception");
-			node.Status.Reason.Should().Contain("Failed node");
-			node.Status.CausedBy.Should().NotBeNull();
-			node.Status.CausedBy.Reason.Should().Contain("could not find active realm");
 		}
 	}
 
