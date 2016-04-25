@@ -152,6 +152,10 @@ namespace Tests.Framework.Integration
 						)
 					)
 				)
+				.Text(s=>s
+					.Name(p=>p.Description)
+					.Fielddata()
+				)
 				.Date(d => d
 					.Name(p => p.StartedOn)
 				)

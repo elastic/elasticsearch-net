@@ -48,7 +48,7 @@ namespace Tests.XPack.Graph.Explore
 					vertices = new [] {
 						new
 						{
-							field = "numberOfCommits",
+							field = "name",
 							size = 500,
 							min_doc_count = 20,
 							shard_min_doc_count = 1,
@@ -79,7 +79,7 @@ namespace Tests.XPack.Graph.Explore
 				.Connections(cc=>cc
 					.Query(q=>q.MatchAll())
 					.Vertices(v=>v
-						.Vertex(p=>p.NumberOfCommits, gv=>gv
+						.Vertex(p=>p.Name, gv=>gv
 							.MinimumDocumentCount(20)
 							.ShardMinimumDocumentCount(1)
 							.Size(500)
@@ -118,7 +118,7 @@ namespace Tests.XPack.Graph.Explore
 					{
 						new GraphVertexDefinition
 						{
-							Field = Field<Project>(p=>p.NumberOfCommits),
+							Field = Field<Project>(p=>p.Name),
 							MinimumDocumentCount = 20,
 							ShardMinimumDocumentCount = 1,
 							Size = 500,
