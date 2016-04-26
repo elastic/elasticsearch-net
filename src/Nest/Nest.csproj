@@ -752,6 +752,10 @@
     <Compile Include="Ingest\GetPipeline\ElasticClient-GetPipeline.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineRequest.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineResponse.cs" />
+    <Compile Include="Ingest\Processor.cs" />
+    <Compile Include="Ingest\ProcessorsDescriptor.cs" />
+    <Compile Include="Ingest\Processors\ConvertProcessor.cs" />
+    <Compile Include="Ingest\Processors\AppendProcessor.cs" />
     <Compile Include="Ingest\SimulatePipeline\ElasticClient-SimulatePipeline.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineRequest.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePiipelineResponse.cs" />
@@ -1252,6 +1256,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
