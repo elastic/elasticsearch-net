@@ -15,7 +15,7 @@ namespace Nest
 	public abstract class ProcessorBase : IProcessor
 	{
 		string IProcessor.Name => this.Name;
-		protected virtual string Name { get; }
+		protected abstract string Name { get; }
 
 		public IEnumerable<IProcessor> OnFailure { get; set; }
 	}
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		IEnumerable<IProcessor> IProcessor.OnFailure { get; set; }
 		string IProcessor.Name => this.Name;
-		protected virtual string Name { get; }
+		protected abstract string Name { get; }
 
 		/// <inheritdoc/>
 		public TProcessorDescriptor OnFailure(IEnumerable<IProcessor> processors) => Assign(a => a.OnFailure = processors.ToListOrNullIfEmpty());

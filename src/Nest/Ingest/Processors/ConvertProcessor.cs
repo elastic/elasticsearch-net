@@ -9,12 +9,15 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IConvertProcessor : IProcessor
 	{
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
 		[JsonProperty("target_field")]
 		Field TargetField { get; set; }
+
 		[JsonProperty("type")]
 		ConvertProcessorType? Type { get; set; }
 	}

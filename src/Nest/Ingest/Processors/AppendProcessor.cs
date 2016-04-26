@@ -7,10 +7,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IAppendProcessor : IProcessor
 	{
 		[JsonProperty("field")]
 		Field Field { get; set; }
+
 		[JsonProperty("values")]
 		IEnumerable<object> Values { get; set; }
 	}
@@ -34,12 +36,12 @@ namespace Nest
 		public AppendProcessorDescriptor<T> Field(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);
 
-		public AppendProcessorDescriptor<T> Terms<TValue>(IEnumerable<TValue> terms) => Assign(a => a.Values = terms?.Cast<object>());
+		public AppendProcessorDescriptor<T> Values<TValue>(IEnumerable<TValue> values) => Assign(a => a.Values = values?.Cast<object>());
 
-		public AppendProcessorDescriptor<T> Terms<TValue>(params TValue[] terms) => Assign(a => {
-			if(terms?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
-				a.Values = (terms.First() as IEnumerable)?.Cast<object>();
-			else a.Values = terms?.Cast<object>();
+		public AppendProcessorDescriptor<T> Values<TValue>(params TValue[] values) => Assign(a => {
+			if(values?.Length == 1 && typeof(IEnumerable).IsAssignableFrom(typeof(TValue)) && typeof(TValue) != typeof(string))
+				a.Values = (values.First() as IEnumerable)?.Cast<object>();
+			else a.Values = values?.Cast<object>();
 		});
 	}
 
