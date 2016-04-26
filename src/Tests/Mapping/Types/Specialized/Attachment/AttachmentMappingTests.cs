@@ -46,7 +46,6 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 						language = new
 						{
 							type = "text",
-							doc_values = true,
 							index = false
 						},
 						name = new
@@ -90,7 +89,6 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 				)
 				.LanguageField(d => d
 					.Name(n => n.Language)
-					.DocValues()
 					.Index(false)
 				)
 				.NameField(d => d

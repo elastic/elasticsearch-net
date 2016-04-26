@@ -34,6 +34,11 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
+			.InferMappingFor<PercolatedQuery>(map => map
+				.IndexName("queries")
+				// TODO: required to have this type name for 5.0.0-alpha1. Change for alpha2
+				.TypeName(".percolator")
+			)
 			//We try and fetch the test name during integration tests when running fiddler to send the name
 			//as the TestMethod header, this allows us to quickly identify which test sent which request
 			.GlobalHeaders(new NameValueCollection

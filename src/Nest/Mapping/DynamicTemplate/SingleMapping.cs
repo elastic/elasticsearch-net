@@ -53,5 +53,8 @@ namespace Nest
 
 		public IProperty TokenCount(Func<TokenCountPropertyDescriptor<T>, ITokenCountProperty> selector) =>
 			selector?.Invoke(new TokenCountPropertyDescriptor<T>());
+
+		public IProperty Percolator(Func<PercolatorPropertyDescriptor<T>, IPercolatorProperty> selector) =>
+			selector?.Invoke(new PercolatorPropertyDescriptor<T>());
 	}
 }

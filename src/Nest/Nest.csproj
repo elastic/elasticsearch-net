@@ -746,6 +746,7 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchPropertyAttributeBase.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchTypeAttribute.cs" />
     <Compile Include="Mapping\DynamicMapping.cs" />
@@ -773,6 +774,7 @@
     <Compile Include="Mapping\Types\Complex\Nested\NestedProperty.cs" />
     <Compile Include="Mapping\Types\Complex\Object\ObjectAttribute.cs" />
     <Compile Include="Mapping\Types\Complex\Object\ObjectProperty.cs" />
+    <Compile Include="Mapping\Types\CorePropertyBase.cs" />
     <Compile Include="Mapping\Types\Core\Binary\BinaryAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Binary\BinaryProperty.cs" />
     <Compile Include="Mapping\Types\Core\Boolean\BooleanAttribute.cs" />
@@ -785,6 +787,8 @@
     <Compile Include="Mapping\Types\Core\Number\NumberAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
+    <Compile Include="Mapping\Types\Core\Percolator\PercolatorAttribute.cs" />
+    <Compile Include="Mapping\Types\Core\Percolator\PercolatorProperty.cs" />
     <Compile Include="Mapping\Types\Core\String\StringAttribute.cs" />
     <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
     <Compile Include="Mapping\Types\Core\Text\IndexOptions.cs" />
@@ -800,6 +804,7 @@
     <Compile Include="Mapping\Types\Properties.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
     <Compile Include="Mapping\Types\PropertyBase.cs" />
+    <Compile Include="Mapping\Types\CorePropertyDescriptorBase.cs" />
     <Compile Include="Mapping\Types\PropertyDescriptorBase.cs" />
     <Compile Include="Mapping\Types\PropertyJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentAttribute.cs" />
@@ -1005,6 +1010,7 @@
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\Like.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\LikeDocument.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
+    <Compile Include="QueryDsl\Specialized\Percolate\PercolateQuery.cs" />
     <Compile Include="QueryDsl\Specialized\Script\ScriptQuery.cs" />
     <Compile Include="QueryDsl\Specialized\Script\ScriptQueryConverter.cs" />
     <Compile Include="QueryDsl\Specialized\Template\TemplateQuery.cs" />

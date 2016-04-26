@@ -54,17 +54,17 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(attributeEntry);
 			}
 
-			if (!document.Attributes.Any(a => a.Name == "ref_current"))
+			if (document.Attributes.All(a => a.Name != "ref_current"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/current"));
+				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/master"));
 			}
 
-			if (!document.Attributes.Any(a => a.Name == "github"))
+			if (document.Attributes.All(a => a.Name != "github"))
 			{
 				_newDocument.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
 			}
 
-			if (!document.Attributes.Any(a => a.Name == "nuget"))
+			if (document.Attributes.All(a => a.Name != "nuget"))
 			{
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}

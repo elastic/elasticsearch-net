@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IStringProperty : IProperty
+	public interface IStringProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
 		FieldIndexOption? Index { get; set; }
@@ -43,7 +43,7 @@ namespace Nest
 		IStringFielddata Fielddata { get; set; }
 	}
 
-	public class StringProperty : PropertyBase, IStringProperty
+	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
 		public StringProperty() : base("string") { }
 
@@ -62,7 +62,7 @@ namespace Nest
 	}
 
 	public class StringPropertyDescriptor<T>
-		: PropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
+		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
 		where T : class
 	{
 		FieldIndexOption? IStringProperty.Index { get; set; }

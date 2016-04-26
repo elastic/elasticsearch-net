@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial interface IPercolateRequest<TDocument> : IPercolateOperation
 		where TDocument : class
 	{
@@ -12,6 +13,7 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial class PercolateRequest<TDocument>
 		where TDocument : class
 	{
@@ -23,12 +25,12 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
-		
+
 		public int? Size { get; set; }
 
 		/// <summary>
-		/// Whether the _score is included for each match. The _score is based on the query and represents 
-		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated) 
+		/// Whether the _score is included for each match. The _score is based on the query and represents
+		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated)
 		/// matched the query. The <see cref="Query"/> option is required for this option.
 		/// </summary>
 		public bool? TrackScores { get; set; }
@@ -39,10 +41,10 @@ namespace Nest
 		public TDocument Document { get; set; }
 
 		/// <summary>
-		/// Define a sort specification like in the search API. Currently only sorting _score reverse 
-		/// (default relevancy) is supported. Other sort fields will throw an exception. 
-		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/> 
-		/// the score is based on the query and represents how the query matched to the percolate query’s metadata 
+		/// Define a sort specification like in the search API. Currently only sorting _score reverse
+		/// (default relevancy) is supported. Other sort fields will throw an exception.
+		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/>
+		/// the score is based on the query and represents how the query matched to the percolate query’s metadata
 		/// and not how the document being percolated matched to the query.
 		/// </summary>
 		public IList<ISort> Sort { get; set; }
@@ -57,6 +59,7 @@ namespace Nest
 		}
 	}
 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial class PercolateDescriptor<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
@@ -68,7 +71,7 @@ namespace Nest
 
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
-		
+
 		TDocument IPercolateRequest<TDocument>.Document { get; set; }
 		IList<ISort> IPercolateOperation.Sort { get; set; }
 		AggregationDictionary IPercolateOperation.Aggregations { get; set; }
@@ -76,13 +79,13 @@ namespace Nest
 		string IPercolateOperation.MultiPercolateName => "percolate";
 
 		/// <summary>
-		/// The object to perculate
+		/// The object to percolate
 		/// </summary>
 		public PercolateDescriptor<TDocument> Document(TDocument @object) => Assign(a => a.Document = @object);
 
 		/// <summary>
-		/// Whether the _score is included for each match. The _score is based on the query and represents 
-		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated) 
+		/// Whether the _score is included for each match. The _score is based on the query and represents
+		/// how the query matched the percolate query’s metadata, not how the document (that is being percolated)
 		/// matched the query. The <see cref="Query"/> option is required for this option.
 		/// </summary>
 		public PercolateDescriptor<TDocument> TrackScores(bool? trackScores = true) => Assign(a => a.TrackScores = trackScores);
@@ -91,7 +94,7 @@ namespace Nest
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<TDocument>())?.Aggregations);
 
 		/// <summary>
-		/// Allow to highlight search results on one or more fields. 
+		/// Allow to highlight search results on one or more fields.
 		/// </summary>
 		public PercolateDescriptor<TDocument> Highlight(Func<HighlightDescriptor<TDocument>, IHighlight> highlightDescriptor) =>
 			Assign(a => a.Highlight = highlightDescriptor?.Invoke(new HighlightDescriptor<TDocument>()));
@@ -99,10 +102,10 @@ namespace Nest
 		public PercolateDescriptor<TDocument> Size(int? size) => Assign(a => a.Size = size);
 
 		/// <summary>
-		/// Define a sort specification like in the search API. Currently only sorting _score reverse 
-		/// (default relevancy) is supported. Other sort fields will throw an exception. 
-		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/> 
-		/// the score is based on the query and represents how the query matched to the percolate query’s metadata 
+		/// Define a sort specification like in the search API. Currently only sorting _score reverse
+		/// (default relevancy) is supported. Other sort fields will throw an exception.
+		/// The <see cref="Size"/> and <see cref="Query"/> option are required for this setting. Like <see cref="TrackScores"/>
+		/// the score is based on the query and represents how the query matched to the percolate query’s metadata
 		/// and not how the document being percolated matched to the query.
 		/// </summary>
 		public PercolateDescriptor<TDocument> Sort(Func<SortDescriptor<TDocument>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<TDocument>())?.Value);

@@ -180,6 +180,8 @@ namespace Nest
 
 		public void Visit(IScriptQuery filter) => Write("script");
 
-		public void Visit(IRawQuery filter) => Write("script");
+		public void Visit(IRawQuery filter) => Write("raw");
+
+		public void Visit(IPercolateQuery filter) => Write("percolate");
 	}
 }

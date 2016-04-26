@@ -8,6 +8,8 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
+#pragma warning disable 618 // testing deprecated percolate APIs
+
 namespace Tests.Search.Percolator.RegisterPercolator
 {
 	[Collection(IntegrationContext.Indexing)]
@@ -39,7 +41,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 		protected override string UrlPath => $"/{CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
 
 		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(this.CallIsolatedValue);
-		
+
 		protected override object ExpectJson => new
 		{
 			query = new

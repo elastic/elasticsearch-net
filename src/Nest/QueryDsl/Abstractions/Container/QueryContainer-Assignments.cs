@@ -49,7 +49,8 @@ namespace Nest
 		private IExistsQuery _exists;
 		private IMissingQuery _missing;
 		private ITypeQuery _type;
-		private IRawQuery _rawQuery;
+		private IRawQuery _raw;
+		private IPercolateQuery _percolate;
 		private IQueryContainer Self => this;
 
 		internal IQuery ContainedQuery { get; set; }
@@ -62,7 +63,7 @@ namespace Nest
 			return value;
 		}
 
-		IRawQuery IQueryContainer.RawQuery { get { return _rawQuery; } set { _rawQuery = Set(value); } }
+		IRawQuery IQueryContainer.RawQuery { get { return _raw; } set { _raw = Set(value); } }
 		IBoolQuery IQueryContainer.Bool { get { return _b; } set { _b = Set(value); } }
 		IMatchAllQuery IQueryContainer.MatchAll { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
 		ITermQuery IQueryContainer.Term { get { return _term; } set { _term = Set(value); } }
@@ -107,8 +108,6 @@ namespace Nest
 		IExistsQuery IQueryContainer.Exists { get { return _exists; } set { _exists = Set(value); } }
 		IMissingQuery IQueryContainer.Missing { get { return _missing; } set { _missing = Set(value); } }
 		ITypeQuery IQueryContainer.Type { get { return _type; } set { _type = Set(value); } }
-
-
+		IPercolateQuery IQueryContainer.Percolate { get { return _percolate; } set { _percolate = Set(value); } }
 	}
-
 }

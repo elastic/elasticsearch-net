@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
 	public interface IRegisterPercolatorResponse : IResponse
 	{
 		bool Created { get; }
@@ -12,6 +14,7 @@ namespace Nest
 	}
 
 	[JsonObject]
+	[Obsolete("Deprecated. Will be removed in the next major release. Index a document containing a field mapped with percolator type")]
 	public class RegisterPercolatorResponse : ResponseBase, IRegisterPercolatorResponse
 	{
 		[JsonProperty(PropertyName = "created")]

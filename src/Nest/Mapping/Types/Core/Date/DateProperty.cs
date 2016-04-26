@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IDateProperty : IProperty
+	public interface IDateProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
 		bool? Index { get; set; }
@@ -34,7 +34,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class DateProperty : PropertyBase, IDateProperty
+	public class DateProperty : DocValuesPropertyBase, IDateProperty
 	{
 		public DateProperty() : base("date") { }
 
@@ -50,7 +50,7 @@ namespace Nest
 	}
 
 	public class DatePropertyDescriptor<T>
-		: PropertyDescriptorBase<DatePropertyDescriptor<T>, IDateProperty, T>, IDateProperty
+		: DocValuesPropertyDescriptorBase<DatePropertyDescriptor<T>, IDateProperty, T>, IDateProperty
 		where T : class
 	{
 		bool? IDateProperty.Index { get; set; }

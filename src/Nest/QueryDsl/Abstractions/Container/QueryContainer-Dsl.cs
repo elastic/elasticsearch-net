@@ -4,7 +4,7 @@ namespace Nest
 {
 	internal static class QueryContainerExtensions
 	{
-		public static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
+		internal static bool IsConditionless(this QueryContainer q) => q == null || q.IsConditionless;
 	}
 
 	public partial class QueryContainer : IQueryContainer, IDescriptor
@@ -21,25 +21,25 @@ namespace Nest
 		public QueryContainer()
 		{
 		}
-	
+
 		public QueryContainer(QueryBase query) : this()
 		{
 			query?.WrapInContainer(this);
 		}
-	
+
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
-				? queryContainer 
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+				? queryContainer
 				: leftContainer.CombineAsMust(rightContainer);
 		}
-		
+
 		public static QueryContainer operator |(QueryContainer leftContainer, QueryContainer rightContainer)
 		{
 			QueryContainer queryContainer;
-			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer) 
-				? queryContainer 
+			return IfEitherIsEmptyReturnTheOtherOrEmpty(leftContainer, rightContainer, out queryContainer)
+				? queryContainer
 				: leftContainer.CombineAsShould(rightContainer);
 		}
 
