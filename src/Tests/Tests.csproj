@@ -332,6 +332,14 @@
     <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateApiTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateUrlTests.cs" />
+    <Compile Include="Ingest\DeletePipeline\DeletePipelineApiTests.cs" />
+    <Compile Include="Ingest\DeletePipeline\DeletePipelineUrlTests.cs" />
+    <Compile Include="Ingest\GetPipeline\GetPipelineApiTests.cs" />
+    <Compile Include="Ingest\GetPipeline\GetPipelineUrlTests.cs" />
+    <Compile Include="Ingest\PutPipeline\PutPipelineApiTests.cs" />
+    <Compile Include="Ingest\PutPipeline\PutPipelineUrlTests.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SImulatePipelineApiTests.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineUrlTests.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\String\StringMappingTests.cs" />
@@ -601,6 +609,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">

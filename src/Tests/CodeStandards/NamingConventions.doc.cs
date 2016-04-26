@@ -114,10 +114,6 @@ namespace Tests.CodeStandards
 				typeof(IndicesShardStoresRequest),
 				typeof(RenderSearchTemplateRequest),
 				//UNMAPPED
-				typeof(IngestDeletePipelineRequest),
-				typeof(IngestGetPipelineRequest),
-				typeof(IngestPutPipelineRequest),
-				typeof(IngestSimulateRequest),
 				typeof(ClusterAllocationExplainRequest),
 				typeof(ReindexRethrottleRequest),
 				//typeof(ReindexRequest),

@@ -4281,7 +4281,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestDeletePipeline<T>(string id, Func<IngestDeletePipelineRequestParameters, IngestDeletePipelineRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestDeletePipeline<T>(string id, Func<DeletePipelineRequestParameters, DeletePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4294,7 +4294,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestDeletePipelineAsync<T>(string id, Func<IngestDeletePipelineRequestParameters, IngestDeletePipelineRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestDeletePipelineAsync<T>(string id, Func<DeletePipelineRequestParameters, DeletePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4307,7 +4307,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestGetPipeline<T>(string id, Func<IngestGetPipelineRequestParameters, IngestGetPipelineRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestGetPipeline<T>(string id, Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4320,7 +4320,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Comma separated list of pipeline ids. Wildcards supported</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestGetPipelineAsync<T>(string id, Func<IngestGetPipelineRequestParameters, IngestGetPipelineRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestGetPipelineAsync<T>(string id, Func<GetPipelineRequestParameters, GetPipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4334,7 +4334,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestPutPipeline<T>(string id, PostData<object> body, Func<IngestPutPipelineRequestParameters, IngestPutPipelineRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestPutPipeline<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_ingest/pipeline/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4348,7 +4348,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The ingest definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestPutPipelineAsync<T>(string id, PostData<object> body, Func<IngestPutPipelineRequestParameters, IngestPutPipelineRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestPutPipelineAsync<T>(string id, PostData<object> body, Func<PutPipelineRequestParameters, PutPipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_ingest/pipeline/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4360,7 +4360,7 @@ namespace Elasticsearch.Net
 		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestSimulateGet<T>(Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestSimulateGet<T>(Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_ingest/pipeline/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4372,9 +4372,9 @@ namespace Elasticsearch.Net
 		///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html </para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate/
+		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -4385,9 +4385,9 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestSimulateGet<T>(string id, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestSimulateGet<T>(string id, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate/
+		///<summary>Represents a GET on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -4398,7 +4398,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Pipeline ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(string id, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestSimulateGetAsync<T>(string id, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_ingest/pipeline/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4411,7 +4411,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestSimulate<T>(PostData<object> body, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestSimulate<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_ingest/pipeline/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4424,9 +4424,9 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(PostData<object> body, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate/
+		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -4438,9 +4438,9 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IngestSimulate<T>(string id, PostData<object> body, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IngestSimulate<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate/
+		///<summary>Represents a POST on /_ingest/pipeline/{id}/_simulate
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -4452,7 +4452,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Pipeline ID</param>
 		///<param name="body">The simulate definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(string id, PostData<object> body, Func<IngestSimulateRequestParameters, IngestSimulateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IngestSimulateAsync<T>(string id, PostData<object> body, Func<SimulatePipelineRequestParameters, SimulatePipelineRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
