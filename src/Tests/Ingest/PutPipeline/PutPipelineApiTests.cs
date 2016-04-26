@@ -33,12 +33,8 @@ namespace Tests.Ingest.PutPipeline
 
 		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);
 
-		protected override Func<PutPipelineDescriptor, IPutPipelineRequest> Fluent => d => d
-			.Pipeline("1+1");
+		protected override Func<PutPipelineDescriptor, IPutPipelineRequest> Fluent => d => d;
 
-		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id)
-		{
-			Pipeline = "1+1"
-		};
+		protected override PutPipelineRequest Initializer => new PutPipelineRequest(_id);
 	}
 }
