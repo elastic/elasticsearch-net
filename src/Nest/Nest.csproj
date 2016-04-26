@@ -758,9 +758,7 @@
     <Compile Include="Ingest\Processors\TrimProcessor.cs" />
     <Compile Include="Ingest\Processors\SplitProcessor.cs" />
     <Compile Include="Ingest\Processors\SetProcessor.cs" />
-    <Compile Include="Ingest\Processors\AppendProcessor.cs" />
     <Compile Include="Ingest\Processors\RenameProcessor.cs" />
-    <Compile Include="Ingest\Processors\ConvertProcessor.cs" />
     <Compile Include="Ingest\Processors\RemoveProcessor.cs" />
     <Compile Include="Ingest\Processors\LowercaseProcessor.cs" />
     <Compile Include="Ingest\Processors\JoinProcessor.cs" />
@@ -769,6 +767,8 @@
     <Compile Include="Ingest\Processors\ForeachProcessor.cs" />
     <Compile Include="Ingest\Processors\FailProcessor.cs" />
     <Compile Include="Ingest\Processors\DateProcessor.cs" />
+    <Compile Include="Ingest\Processors\ConvertProcessor.cs" />
+    <Compile Include="Ingest\Processors\AppendProcessor.cs" />
     <Compile Include="Ingest\SimulatePipeline\ElasticClient-SimulatePipeline.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineRequest.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePiipelineResponse.cs" />
@@ -1269,6 +1269,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

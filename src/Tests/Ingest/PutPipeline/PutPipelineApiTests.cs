@@ -28,7 +28,6 @@ namespace Tests.Ingest.PutPipeline
 
 		protected override object ExpectJson { get; } = new
 		{
-			script = "1+1"
 		};
 
 		protected override PutPipelineDescriptor NewDescriptor() => new PutPipelineDescriptor(_id);
