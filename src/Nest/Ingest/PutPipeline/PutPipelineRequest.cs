@@ -4,18 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IPutPipelineRequest
-	{
-		[JsonProperty("description")]
-		string Description { get; set; }
-
-		[JsonProperty("processors")]
-		IEnumerable<IProcessor> Processors { get; set; }
-
-		[JsonProperty("on_failure")]
-		IEnumerable<IProcessor> OnFailure { get; set; }
-
-	}
+	public partial interface IPutPipelineRequest : IPipeline { }
 
 	public partial class PutPipelineRequest
 	{
@@ -27,9 +16,9 @@ namespace Nest
 	[DescriptorFor("IngestPutPipeline")]
 	public partial class PutPipelineDescriptor
 	{
-		string IPutPipelineRequest.Description { get; set; }
-		IEnumerable<IProcessor> IPutPipelineRequest.Processors { get; set; }
-		IEnumerable<IProcessor> IPutPipelineRequest.OnFailure { get; set; }
+		string IPipeline.Description { get; set; }
+		IEnumerable<IProcessor> IPipeline.Processors { get; set; }
+		IEnumerable<IProcessor> IPipeline.OnFailure { get; set; }
 
 		/// <inheritdoc/>
 		public PutPipelineDescriptor Description(string description) => Assign(a => a.Description = description);

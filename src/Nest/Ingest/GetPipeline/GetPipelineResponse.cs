@@ -1,16 +1,20 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Nest
 {
 	public interface IGetPipelineResponse : IResponse
 	{
-		string Pipeline { get; }
+		Pipeline Source { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GetPipelineResponse : ResponseBase, IGetPipelineResponse
 	{
-		[JsonProperty("script")]
-		public string Pipeline { get; set; }
+		[JsonProperty("_source")]
+		public Pipeline Source { get; internal set; }
+
+		[JsonProperty("_version")]
+		public int Version { get; internal set; }
 	}
 }

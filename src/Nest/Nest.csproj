@@ -752,6 +752,7 @@
     <Compile Include="Ingest\GetPipeline\ElasticClient-GetPipeline.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineRequest.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineResponse.cs" />
+    <Compile Include="Ingest\Pipeline.cs" />
     <Compile Include="Ingest\Processor.cs" />
     <Compile Include="Ingest\ProcessorsDescriptor.cs" />
     <Compile Include="Ingest\Processors\UppercaseProcessor.cs" />
@@ -770,8 +771,9 @@
     <Compile Include="Ingest\Processors\ConvertProcessor.cs" />
     <Compile Include="Ingest\Processors\AppendProcessor.cs" />
     <Compile Include="Ingest\SimulatePipeline\ElasticClient-SimulatePipeline.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineDocument.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineRequest.cs" />
-    <Compile Include="Ingest\SimulatePipeline\SimulatePiipelineResponse.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineResponse.cs" />
     <Compile Include="Ingest\PutPipeline\ElasticClient-PutPipeline.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineRequest.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineResponse.cs" />
