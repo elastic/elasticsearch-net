@@ -34,6 +34,7 @@ namespace Tests.Framework.Integration
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
 		private readonly bool _shieldEnabled;
+		private readonly bool _skipPluginVerification;
 		private ObservableProcess _process;
 		private IDisposable _processListener;
 
@@ -103,11 +104,13 @@ namespace Tests.Framework.Integration
 			bool runningIntegrations,
 			bool doNotSpawnIfAlreadyRunning,
 			string name,
-			bool shieldEnabled
+			bool shieldEnabled,
+			bool skipPluginVerification
 			)
 		{
 			this._doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this._shieldEnabled = shieldEnabled;
+			this._skipPluginVerification = skipPluginVerification;
 
 			var prefix = name.ToLowerInvariant();
 			var suffix = Guid.NewGuid().ToString("N").Substring(0, 6);
@@ -212,9 +215,9 @@ namespace Tests.Framework.Integration
 
 			if (handle.WaitOne(this.HandleTimeout, true)) return observable;
 
-				this.Stop();
+			this.Stop();
 			throw new Exception($"Could not start elasticsearch within {this.HandleTimeout}");
-			}
+		}
 
 #if DOTNETCORE
 		private IObservable<ElasticsearchMessage> UseAlreadyRunningInstance(Signal handle)
@@ -229,11 +232,13 @@ namespace Tests.Framework.Integration
 
 			if (!alreadyUp.IsValid) return null;
 
-			var checkPlugins = client.CatPlugins();
-
-			var missingPlugins = SupportedPlugins.Keys.Except(checkPlugins.Records.Select(r => r.Component)).ToList();
-			if (missingPlugins.Any())
-				throw new Exception($"Already running elasticsearch missed the following plugin(s): {string.Join(", ", missingPlugins)}.");
+			if (!_skipPluginVerification)
+			{
+				var checkPlugins = client.CatPlugins();
+				var missingPlugins = SupportedPlugins.Keys.Except(checkPlugins.Records.Select(r => r.Component)).ToList();
+				if (missingPlugins.Any())
+					throw new Exception($"Already running elasticsearch missed the following plugin(s): {string.Join(", ", missingPlugins)}.");
+			}
 
 			this.Started = true;
 			this.Port = 9200;
@@ -246,6 +251,8 @@ namespace Tests.Framework.Integration
 
 			return Observable.Empty<ElasticsearchMessage>();
 		}
+
+		private static object _licenseLock = new object();
 
 		private void ValidateLicense()
 		{
@@ -278,8 +285,6 @@ namespace Tests.Framework.Integration
 
 			if (license.License.Status == LicenseStatus.Invalid)
 				throw new Exception($"{exceptionMessageStart} but the license is invalid!");
-
-
 		}
 
 #if DOTNETCORE

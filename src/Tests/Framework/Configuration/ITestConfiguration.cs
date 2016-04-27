@@ -10,9 +10,9 @@ namespace Tests.Framework.Configuration
 	{
 		TestMode Mode { get; }
 		string ElasticsearchVersion { get; }
-		bool ForceReseed { get; } 
+		bool ForceReseed { get; }
 		bool DoNotSpawnIfAlreadyRunning { get; }
-
+		bool SkipPluginVerification { get; }
 		bool RunIntegrationTests { get; }
 		bool RunUnitTests { get; }
 	}

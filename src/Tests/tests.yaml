@@ -1,8 +1,16 @@
-﻿# mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
-# the elasticsearch version that should be started
-elasticsearch_version: 5.0.0-alpha1
-# whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
+﻿# Dictates what types of tests should be run.
+# Can be "u" (unit tests), "i" (integration tests) or "m" (mixed: run both unit and integration tests)
+mode: m
+
+# The elasticsearch version that should be started
+elasticsearch_version: 5.0.0-alpha2-SNAPSHOT
+
+# Whether we want to forcefully reseed on the node, if you are starting the tests with a node already running
 force_reseed: true
-# do not spawn nodes as part of the test setup but rely on a manually started es node being up
+
+# Do not spawn nodes as part of the test setup but instead rely on a manually started ES node being up
 do_not_spawn: true
+
+# Skip verification of installed plugins on an already running node.  
+# Useful for quickly running integration tests that do not rely on any plugins being installed.
+skip_plugin_verification: true

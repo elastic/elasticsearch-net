@@ -12,6 +12,7 @@ namespace Tests.Framework.Configuration
 		public override bool ForceReseed { get; protected set; } = true;
 		public override string ElasticsearchVersion { get; protected set; }
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
+		public override bool SkipPluginVerification { get; protected set; } = false;
 
 		public EnvironmentConfiguration()
 		{

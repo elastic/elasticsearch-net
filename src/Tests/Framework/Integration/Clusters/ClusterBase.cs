@@ -16,12 +16,22 @@ namespace Tests.Framework.Integration
 		protected ClusterBase()
 		{
 			var name = this.GetType().Name.Replace("Cluster", "");
-			this.Node = new ElasticsearchNode(TestClient.Configuration.ElasticsearchVersion, TestClient.Configuration.RunIntegrationTests, DoNotSpawnIfAlreadyRunning, name, EnableShield);
+
+			this.Node = new ElasticsearchNode(
+				TestClient.Configuration.ElasticsearchVersion,
+				TestClient.Configuration.RunIntegrationTests,
+				DoNotSpawnIfAlreadyRunning,
+				name,
+				EnableShield,
+				TestClient.Configuration.SkipPluginVerification
+			);
+
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
 				this.Boostrap();
 				handle.Set();
 			});
+
 			this.ConsoleOut = this.Node.Start(name, this.ServerSettings);
 		}
 
