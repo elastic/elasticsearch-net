@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await GET("/_cat/nodes")
-				.Fluent(c => c.CatNodes())
-				.Request(c => c.CatNodes(new CatNodesRequest()))
-				.FluentAsync(c => c.CatNodesAsync())
-				.RequestAsync(c => c.CatNodesAsync(new CatNodesRequest()))
-				;
-----

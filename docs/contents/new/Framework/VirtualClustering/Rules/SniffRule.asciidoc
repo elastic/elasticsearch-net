@@ -1,8 +1,0 @@
-[source, csharp]
-----
-Self.Times = times;
-Self.Succeeds = false;
-Self.Times = times;
-Self.Succeeds = true;
-Self.NewClusterState = cluster;
-----

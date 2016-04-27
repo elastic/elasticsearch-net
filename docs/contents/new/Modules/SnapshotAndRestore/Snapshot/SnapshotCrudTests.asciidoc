@@ -1,6 +1,0 @@
-[source, csharp]
-----
-response.Snapshots.Should().HaveCount(1);
-var snapshot = response.Snapshots.FirstOrDefault();
-snapshot.Should().NotBeNull();
-----

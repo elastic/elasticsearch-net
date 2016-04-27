@@ -1,8 +1,0 @@
-[source, csharp]
-----
-var sut = this.AssertSerializesAndRoundTrips(actual);
-this.GetClient().Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
-Sut = this.AssertSerializesAndRoundTrips(actual);
-assert(this.Sut);
-assert((TOther)this.Sut);
-----

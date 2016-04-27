@@ -1,7 +1,0 @@
-[source, csharp]
-----
-response.Version.Should().NotBeNull();
-response.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();
-response.Tagline.Should().NotBeNullOrWhiteSpace();
-response.Name.Should().NotBeNullOrWhiteSpace();
-----

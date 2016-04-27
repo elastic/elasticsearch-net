@@ -1,8 +1,0 @@
-[source, csharp]
-----
-d => d.Recycler()
-----
-[source, csharp]
-----
-new ClearCacheRequest(AllIndices) { Recycler = true }
-----

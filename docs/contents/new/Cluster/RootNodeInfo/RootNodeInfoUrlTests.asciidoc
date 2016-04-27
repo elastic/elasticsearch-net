@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await GET("/")
-				.Fluent(c => c.RootNodeInfo())
-				.Request(c => c.RootNodeInfo(new RootNodeInfoRequest()))
-				.FluentAsync(c => c.RootNodeInfoAsync())
-				.RequestAsync(c => c.RootNodeInfoAsync(new RootNodeInfoRequest()))
-				;
-----
