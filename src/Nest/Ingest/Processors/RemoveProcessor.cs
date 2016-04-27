@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ProcessorJsonConverter<RemoveProcessor>))]
 	public interface IRemoveProcessor : IProcessor
 	{
 		[JsonProperty("field")]

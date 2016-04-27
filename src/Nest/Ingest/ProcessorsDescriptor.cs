@@ -19,8 +19,8 @@ namespace Nest
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new DateProcessorDescriptor<T>())));
 
 
-		public ProcessorsDescriptor Fail<T>(Func<FailProcessorDescriptor<T>, IFailProcessor> selector) where T : class  =>
-			Assign(a => a.AddIfNotNull(selector?.Invoke(new FailProcessorDescriptor<T>())));
+		public ProcessorsDescriptor Fail(Func<FailProcessorDescriptor, IFailProcessor> selector) =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new FailProcessorDescriptor())));
 
 
 		public ProcessorsDescriptor Foreach<T>(Func<ForeachProcessorDescriptor<T>, IForeachProcessor> selector) where T : class  =>

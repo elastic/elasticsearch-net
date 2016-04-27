@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ProcessorJsonConverter<DateProcessor>))]
 	public interface IDateProcessor : IProcessor
 	{
 		[JsonProperty("field")]
@@ -17,8 +18,8 @@ namespace Nest
 		[JsonProperty("target_field")]
 		Field TargetField { get; set; }
 
-		[JsonProperty("match_formats")]
-		string MatchFormats { get; set; }
+		[JsonProperty("formats")]
+		IEnumerable<string> Formats { get; set; }
 
 		[JsonProperty("timezone")]
 		string Timezone { get; set; }
@@ -33,13 +34,13 @@ namespace Nest
 
 		public Field Field { get; set; }
 
-		public string Locale { get; set; }
-
-		public string MatchFormats { get; set; }
-
 		public Field TargetField { get; set; }
 
+		public IEnumerable<string> Formats { get; set; }
+
 		public string Timezone { get; set; }
+
+		public string Locale { get; set; }
 	}
 
 	public class DateProcessorDescriptor<T>
@@ -49,14 +50,10 @@ namespace Nest
 		protected override string Name => "date";
 
 		Field IDateProcessor.Field { get; set; }
-
-		string IDateProcessor.Locale { get; set; }
-
-		string IDateProcessor.MatchFormats { get; set; }
-
 		Field IDateProcessor.TargetField { get; set; }
-
+		IEnumerable<string> IDateProcessor.Formats { get; set; }
 		string IDateProcessor.Timezone { get; set; }
+		string IDateProcessor.Locale { get; set; }
 
 		public DateProcessorDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
 
@@ -68,7 +65,9 @@ namespace Nest
 		public DateProcessorDescriptor<T> TargetField(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.TargetField = objectPath);
 
-		public DateProcessorDescriptor<T> MatchFormats(string matchFormats) => Assign(a => a.MatchFormats = matchFormats);
+		public DateProcessorDescriptor<T> Formats(IEnumerable<string> matchFormats) => Assign(a => a.Formats = matchFormats);
+
+		public DateProcessorDescriptor<T> Formats(params string[] matchFormats) => Assign(a => a.Formats = matchFormats);
 
 		public DateProcessorDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
 

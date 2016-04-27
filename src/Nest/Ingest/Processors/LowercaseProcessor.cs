@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ProcessorJsonConverter<LowercaseProcessor>))]
 	public interface ILowercaseProcessor : IProcessor
 	{
 		[JsonProperty("field")]

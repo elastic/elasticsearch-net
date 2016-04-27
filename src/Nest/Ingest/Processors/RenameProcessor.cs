@@ -10,6 +10,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ProcessorJsonConverter<RenameProcessor>))]
 	public interface IRenameProcessor : IProcessor
 	{
 		[JsonProperty("field")]
@@ -30,7 +31,7 @@ namespace Nest
 		: ProcessorDescriptorBase<RenameProcessorDescriptor<T>, IRenameProcessor>, IRenameProcessor
 		where T : class
 	{
-		protected override string Name => "convert";
+		protected override string Name => "rename";
 		Field IRenameProcessor.Field { get; set; }
 		Field IRenameProcessor.TargetField { get; set; }
 

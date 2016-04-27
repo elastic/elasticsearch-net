@@ -754,6 +754,7 @@
     <Compile Include="Ingest\GetPipeline\GetPipelineResponse.cs" />
     <Compile Include="Ingest\Pipeline.cs" />
     <Compile Include="Ingest\Processor.cs" />
+    <Compile Include="Ingest\ProcessorJsonConverter.cs" />
     <Compile Include="Ingest\ProcessorsDescriptor.cs" />
     <Compile Include="Ingest\Processors\UppercaseProcessor.cs" />
     <Compile Include="Ingest\Processors\TrimProcessor.cs" />

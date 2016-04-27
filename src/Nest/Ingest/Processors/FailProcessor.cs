@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ProcessorJsonConverter<FailProcessor>))]
 	public interface IFailProcessor : IProcessor
 	{
 		[JsonProperty("message")]
@@ -21,14 +22,13 @@ namespace Nest
 		public string Message { get; set; }
 	}
 
-	public class FailProcessorDescriptor<T>
-		: ProcessorDescriptorBase<FailProcessorDescriptor<T>, IFailProcessor>, IFailProcessor
-		where T : class
+	public class FailProcessorDescriptor
+		: ProcessorDescriptorBase<FailProcessorDescriptor, IFailProcessor>, IFailProcessor
 	{
 		protected override string Name => "fail";
 
 		string IFailProcessor.Message { get; set; }
 
-		public FailProcessorDescriptor<T> Message(string message) => Assign(a => a.Message = message);
+		public FailProcessorDescriptor Message(string message) => Assign(a => a.Message = message);
 	}
 }
