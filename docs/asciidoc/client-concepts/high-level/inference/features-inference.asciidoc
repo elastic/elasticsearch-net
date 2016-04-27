@@ -23,7 +23,7 @@ Expect("_mappings,_aliases")
     .WhenSerializing(fieldString);
 ----
 
-Here we new an GET index elasticsearch request whichs takes Indices and Features.
+Here we new an GET index elasticsearch request which takes Indices and Features.
 Notice how we can use the Feature enum directly.
 
 [source,csharp]

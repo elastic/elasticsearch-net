@@ -22,7 +22,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	*/
 	public class IndexNameInference
 	{
-		/**=== Default Index name on ConnectionSettings
+		/**=== Default Index name on Connection Settings
 		* A default index name can be specified on `ConnectionSettings` using `.DefaultIndex()`.
 		* This is the default index name to use when no other index name can be resolved for a request
 		*/
