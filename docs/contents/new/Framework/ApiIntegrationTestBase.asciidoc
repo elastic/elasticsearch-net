@@ -1,9 +1,0 @@
-[source, csharp]
-----
-Activator.CreateInstance<TInitializer>()
-----
-[source, csharp]
-----
-ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
-assert(r);
-----

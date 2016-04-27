@@ -1,6 +1,0 @@
-[source, csharp]
-----
-var because = $
-"thats the port specified on the {(this.Count() + 1).ToOrdinal()} audit";
-this.Add(new Pair(key, a => a.Node.Uri.Port.Should().Be(port, because)));
-----

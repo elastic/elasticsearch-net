@@ -1,4 +1,0 @@
-[source, csharp]
-----
-response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
-----
