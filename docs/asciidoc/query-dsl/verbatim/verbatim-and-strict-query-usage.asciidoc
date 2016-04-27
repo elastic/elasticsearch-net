@@ -1,0 +1,300 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[verbatim-and-strict-query-usage]]
+== Verbatim And Strict Query Usage
+
+`IsVerbatim` should be set on individual queries to take effect 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Bool(b => b
+    .Must(qt => qt
+        .Term(t => t
+            .Verbatim()
+            .Field(p => p.Description)
+            .Value("")
+        ), qt => qt
+        .Term(t => t
+            .Field(p => p.Name)
+            .Value("foo")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermQuery
+{
+    IsVerbatim = true,
+    Field = "description",
+    Value = ""
+}
+&& new TermQuery
+{
+    Field = "name",
+    Value = "foo"
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "must": [
+      {
+        "term": {
+          "description": {
+            "value": ""
+          }
+        }
+      },
+      {
+        "term": {
+          "name": {
+            "value": "foo"
+          }
+        }
+      }
+    ]
+  }
+}
+----
+
+Setting `IsStrict` on the outer query container does not cascade 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Strict()
+.Bool(b => b
+    .Must(qt => qt
+        .Term(t => t
+            .Field(p => p.Description)
+            .Value("")
+        ), qt => qt
+        .Term(t => t
+            .Field(p => p.Name)
+            .Value("foo")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+IQueryContainer query = new QueryContainer(new BoolQuery
+{
+    Must = new List<QueryContainer>
+    {
+        new TermQuery
+        {
+            Field = "description",
+            Value = ""
+        },
+        new TermQuery
+        {
+            Field = "name",
+            Value = "foo"
+        }
+    }
+});
+query.IsStrict = true;
+return (QueryContainer)query;
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "must": [
+      {
+        "term": {
+          "name": {
+            "value": "foo"
+          }
+        }
+      }
+    ]
+  }
+}
+----
+
+Setting `IsVerbatim` on the outer query container does not cascade 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Verbatim()
+.Bool(b => b
+    .Must(qt => qt
+        .Term(t => t
+            .Field(p => p.Description)
+            .Value("")
+        ), qt => qt
+        .Term(t => t
+            .Field(p => p.Name)
+            .Value("foo")
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+IQueryContainer query = new QueryContainer(new BoolQuery
+{
+    Must = new List<QueryContainer>
+    {
+        new TermQuery
+        {
+            Field = "description",
+            Value = ""
+        },
+        new TermQuery
+        {
+            Field = "name",
+            Value = "foo"
+        }
+    }
+});
+query.IsVerbatim = true;
+return (QueryContainer)query;
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "must": [
+      {
+        "term": {
+          "name": {
+            "value": "foo"
+          }
+        }
+      }
+    ]
+  }
+}
+----
+
+Setting `IsVerbatim` on a compound query is still supported though 
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Bool(b => b
+    .Verbatim()
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new BoolQuery
+{
+    IsVerbatim = true,
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {}
+}
+----
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Term(t => t
+    .Verbatim()
+    .Field(p => p.Description)
+    .Value("")
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new TermQuery
+{
+    IsVerbatim = true,
+    Field = "description",
+    Value = ""
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "term": {
+    "description": {
+      "value": ""
+    }
+  }
+}
+----
+
+[source,csharp]
+----
+var e = Assert.Throws<ArgumentException>(() =>
+    new SearchDescriptor<Project>()
+        .Query(q => q
+            .Term(t => t
+                .Strict()
+                .Field("myfield")
+                .Value("")
+            )
+        )
+);
+
+e.Message.Should().Be("Query is conditionless but strict is turned on");
+----
+
+[source,csharp]
+----
+var e = Assert.Throws<ArgumentException>(() =>
+    new SearchRequest<Project>
+    {
+        Query = new TermQuery
+        {
+            IsStrict = true,
+            Field = "myfield",
+            Value = ""
+        }
+    }
+);
+
+e.Message.Should().Be("Query is conditionless but strict is turned on");
+----
+

@@ -10,6 +10,8 @@ NEST exposes all of the query DSL endpoints available in Elasticsearch
 
 include::{output-dir}/bool-dsl/bool-dsl.asciidoc[]
 
+include::{output-dir}/verbatim/verbatim-and-strict-query-usage.asciidoc[]
+
 include::query-dsl-usage.asciidoc[]
 
 
