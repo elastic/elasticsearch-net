@@ -102,6 +102,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryWaitForCompletionApiTests : UpdateByQueryApiTests
 	{
 		public UpdateByQueryWaitForCompletionApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -128,6 +129,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 	}
 
 	[Collection(IntegrationContext.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryWithFailuresApiTests : UpdateByQueryApiTests
 	{
 		public UpdateByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
