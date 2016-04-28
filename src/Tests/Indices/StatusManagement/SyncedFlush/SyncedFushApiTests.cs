@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.SyncedFlush
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SyncedFlushApiTests : ApiIntegrationTestBase<ISyncedFlushResponse, ISyncedFlushRequest, SyncedFlushDescriptor, SyncedFlushRequest>
 	{
 		public SyncedFlushApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

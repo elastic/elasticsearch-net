@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Cluster.NodesHotThreads
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class NodesHotThreadsApiTests : ApiIntegrationTestBase<INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest>
 	{
 		public NodesHotThreadsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

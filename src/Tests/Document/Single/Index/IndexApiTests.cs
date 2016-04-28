@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Tests.Document.Single.Index
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class IndexApiTests :
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
@@ -23,12 +23,9 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
-			
 		};
 
-		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
+		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Index<Project>(this.Document, f),
@@ -75,17 +72,15 @@ namespace Tests.Document.Single.Index
 
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexIntegrationTests : SimpleIntegration
+	[Collection(TypeOfCluster.Indexing)]
+	public class IndexIntegrationTests : IntegrationDocumentationTestBase
 	{
-		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster)
-		{
-		}
+		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster) { }
 
 		[I]
 		public void OpTypeCreate()
 		{
-			var indexName = this.RandomString();
+			var indexName = RandomString();
 			var project = Project.Generator.Generate(1).First();
 			var indexResult = this.Client.Index(project, f => f
 				.Index(indexName)
@@ -111,7 +106,7 @@ namespace Tests.Document.Single.Index
 		[I]
 		public void Index()
 		{
-			var indexName = this.RandomString();
+			var indexName = RandomString();
 			var commitActivity = CommitActivity.Generator.Generate(1).First();
 			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 			indexResult.IsValid.Should().BeTrue();
@@ -131,12 +126,10 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexJObjectIntegrationTests : SimpleIntegration
+	[Collection(TypeOfCluster.Indexing)]
+	public class IndexJObjectIntegrationTests : IntegrationDocumentationTestBase
 	{
-		public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster)
-		{
-		}
+		public IndexJObjectIntegrationTests(IndexingCluster cluster) : base(cluster) { }
 
 		[I]
 		public void Index()
@@ -185,8 +178,8 @@ namespace Tests.Document.Single.Index
 		}
 	}
 
-	[Collection(IntegrationContext.Indexing)]
-	public class IndexAnonymousTypesIntegrationTests : SimpleIntegration
+	[Collection(TypeOfCluster.Indexing)]
+	public class IndexAnonymousTypesIntegrationTests : IntegrationDocumentationTestBase
 	{
 		public IndexAnonymousTypesIntegrationTests(IndexingCluster cluster) : base(cluster) { }
 

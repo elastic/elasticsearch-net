@@ -57,7 +57,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			Func<IEnumerable<Uri>, IConnectionPool> setupPool, Func<ConnectionSettings, ConnectionSettings> settingsSelector = null, IDateTimeProvider dateTimeProvider = null)
 		{
 			var pool = setupPool(new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) });
-			var settings = new ConnectionSettings(pool, TestClient.CreateConnection());
+			var settings = new ConnectionSettings(pool, new InMemoryConnection());
 			settings = settingsSelector?.Invoke(settings) ?? settings;
 			return new FixedPipelineFactory(settings, dateTimeProvider ?? DateTimeProvider.Default).Pipeline;
 		}

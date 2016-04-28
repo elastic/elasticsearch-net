@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class IndexTemplateCrudTests
 		: CrudTestBase<IPutIndexTemplateResponse, IGetIndexTemplateResponse, IPutIndexTemplateResponse, IDeleteIndexTemplateResponse>
 	{

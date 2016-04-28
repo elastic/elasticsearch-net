@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.XPack.License.PostLicense
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class PostLicenseApiTests : ApiTestBase<IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
 	{
 		public PostLicenseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

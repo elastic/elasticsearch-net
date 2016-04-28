@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class MultiSearchLowLevelPostDataTests
 	{
 		private IElasticClient _client;

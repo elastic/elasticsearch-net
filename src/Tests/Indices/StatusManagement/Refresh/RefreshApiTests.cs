@@ -8,7 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Refresh
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class RefreshApiTests : ApiIntegrationTestBase<IRefreshResponse, IRefreshRequest, RefreshDescriptor, RefreshRequest>
 	{
 		public RefreshApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

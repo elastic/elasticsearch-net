@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.Analyze
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class AnalyzeApiTests 
 		: ApiIntegrationTestBase<IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{

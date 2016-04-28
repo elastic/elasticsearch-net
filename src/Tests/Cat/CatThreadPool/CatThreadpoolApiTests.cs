@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Cat.CatThreadPool
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatThreadPoolApiTests : ApiIntegrationTestBase<ICatResponse<CatThreadPoolRecord>, ICatThreadPoolRequest, CatThreadPoolDescriptor, CatThreadPoolRequest>
 	{
 		public CatThreadPoolApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

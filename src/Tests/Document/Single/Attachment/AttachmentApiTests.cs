@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Tests.Document.Single.Index
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class AttachmentApiTests :
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Attachment>, IndexDescriptor<Attachment>, IndexRequest<Attachment>>
 	{

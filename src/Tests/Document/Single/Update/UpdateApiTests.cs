@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Document.Single.Update
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class UpdateApiTests : ApiIntegrationTestBase<IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
 		public UpdateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

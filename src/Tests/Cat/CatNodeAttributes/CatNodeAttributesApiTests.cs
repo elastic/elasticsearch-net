@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatNodeAttributes
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatNodeAttributesApiTests : ApiIntegrationTestBase<ICatResponse<CatNodeAttributesRecord>, ICatNodeAttributesRequest, CatNodeAttributesDescriptor, CatNodeAttributesRequest>
 	{
 		public CatNodeAttributesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

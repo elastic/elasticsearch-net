@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Tests.Document.Single.Update
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class UpdateWithSourceApiTests : ApiIntegrationTestBase<IUpdateResponse<Project>, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
 		public UpdateWithSourceApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

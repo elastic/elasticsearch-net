@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Search.FieldStats
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class FieldStatsApiTests
 		: ApiIntegrationTestBase<IFieldStatsResponse, IFieldStatsRequest, FieldStatsDescriptor, FieldStatsRequest>
 	{

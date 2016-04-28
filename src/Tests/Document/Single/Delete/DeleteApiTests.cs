@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Document.Single.Delete
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteApiTests : ApiIntegrationTestBase<IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

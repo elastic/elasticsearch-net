@@ -8,7 +8,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteIndexApiTests
 		: ApiIntegrationTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
@@ -34,7 +34,7 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override DeleteIndexRequest Initializer => new DeleteIndexRequest(CallIsolatedValue);
 	}
 
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteAllIndicesApiTests : ApiTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteAllIndicesApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

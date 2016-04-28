@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Search.Explain
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ExplainApiTests
 		: ApiIntegrationTestBase<IExplainResponse<Project>, IExplainRequest<Project>, ExplainDescriptor<Project>, ExplainRequest<Project>>
 	{

@@ -13,15 +13,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	/**[[property-inference]]
 	* == Property Name Inference
 	*/
-	[Collection(IntegrationContext.Indexing)]
-	public class PropertyNames : SimpleIntegration
+	[Collection(TypeOfCluster.Indexing)]
+	public class PropertyNames : IntegrationDocumentationTestBase
 	{
-		private IElasticClient _client;
-
-		public PropertyNames(IndexingCluster cluster) : base(cluster)
-		{
-			_client = cluster.Client();
-		}
+		public PropertyNames(IndexingCluster cluster) : base(cluster) { }
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
@@ -59,7 +54,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		 */
 		[I] public void PropertyNamesContainingDotsCausesElasticsearchServerError()
 		{
-			var createIndexResponse = _client.CreateIndex("random-" + Guid.NewGuid().ToString().ToLowerInvariant(), c => c
+			var createIndexResponse = this.Client.CreateIndex("random-" + Guid.NewGuid().ToString().ToLowerInvariant(), c => c
 				.Mappings(m => m
 					.Map("type-with-dot", mm => mm
 						.Properties(p => p

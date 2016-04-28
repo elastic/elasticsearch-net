@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.User.PutUser
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class PutUserApiTests : ApiIntegrationTestBase<IPutUserResponse, IPutUserRequest, PutUserDescriptor, PutUserRequest>
 	{
 		public PutUserApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -75,7 +75,7 @@ namespace Tests.XPack.Security.User.PutUser
 		}
 	}
 
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class PutUserRunAsApiTests : PutUserApiTests
 	{
 		public PutUserRunAsApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

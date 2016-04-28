@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.QueryDsl
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public abstract class QueryDslIntegrationTestsBase : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected QueryDslIntegrationTestsBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

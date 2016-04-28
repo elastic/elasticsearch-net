@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class DeleteSearchTemplateApiTests : ApiTestBase<IDeleteSearchTemplateResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
 	{
 		public DeleteSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

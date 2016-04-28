@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesRecovery
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class RecoveryStatusApiTests : ApiIntegrationTestBase<IRecoveryStatusResponse, IRecoveryStatusRequest, RecoveryStatusDescriptor, RecoveryStatusRequest>
 	{
 		public RecoveryStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

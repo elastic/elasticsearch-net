@@ -9,7 +9,7 @@ using static Elasticsearch.Net.HttpMethod;
 
 namespace Tests.XPack.License.GetLicense
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class GetLicenseApiTests : ApiIntegrationTestBase<IGetLicenseResponse, IGetLicenseRequest, GetLicenseDescriptor, GetLicenseRequest>
 	{
 		public GetLicenseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.Search.Search
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiTests : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		public SearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -102,7 +102,7 @@ namespace Tests.Search.Search
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiFieldsTests : SearchApiTests
 	{
 		public SearchApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -187,7 +187,7 @@ namespace Tests.Search.Search
 		}
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiContainingConditionlessQueryContainerTests : SearchApiTests
 	{
 		public SearchApiContainingConditionlessQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -268,7 +268,7 @@ namespace Tests.Search.Search
 		}
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiNullQueryContainerTests : SearchApiTests
 	{
 		public SearchApiNullQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -300,7 +300,7 @@ namespace Tests.Search.Search
 		}
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SearchApiNullQueriesInQueryContainerTests : SearchApiTests
 	{
 		public SearchApiNullQueriesInQueryContainerTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

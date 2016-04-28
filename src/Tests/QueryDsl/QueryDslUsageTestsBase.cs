@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
@@ -10,7 +9,7 @@ using Xunit;
 
 namespace Tests.QueryDsl
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public abstract class QueryDslUsageTestsBase : ApiTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected QueryDslUsageTestsBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -31,12 +30,10 @@ namespace Tests.QueryDsl
 
 		protected override object ExpectJson => new { query = this.QueryJson };
 
-		[U]
-		public void FluentIsNotConditionless() =>
+		[U] public void FluentIsNotConditionless() =>
 			((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
 
-		[U]
-		public void InitializerIsNotConditionless() =>
+		[U] public void InitializerIsNotConditionless() =>
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -50,10 +47,9 @@ namespace Tests.QueryDsl
 
 		protected virtual ConditionlessWhen ConditionlessWhen => null;
 
-		protected QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
+		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
-		[U]
-		public void SeenByVisitor()
+		[U] public void SeenByVisitor()
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.CreateSettings());
 			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
@@ -63,8 +59,7 @@ namespace Tests.QueryDsl
 		}
 
 
-		[U]
-		public void ConditionlessWhenExpectedToBe()
+		[U] public void ConditionlessWhenExpectedToBe()
 		{
 			if (ConditionlessWhen == null) return;
 			foreach (var when in ConditionlessWhen)
@@ -78,8 +73,7 @@ namespace Tests.QueryDsl
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
-		[U]
-		public void NullQueryDoesNotCauseANullReferenceException()
+		[U] public void NullQueryDoesNotCauseANullReferenceException()
 		{
 			Action query = () => this.Client.Search<Project>(s => s
 					.Query(q => q
@@ -104,34 +98,6 @@ namespace Tests.QueryDsl
 			);
 
 			query.ShouldNotThrow();
-		}
-	}
-
-	public abstract class ConditionlessWhen : List<Action<QueryContainer>>
-	{
-	}
-	public class ConditionlessWhen<TQuery> : ConditionlessWhen where TQuery : IQuery
-	{
-		private readonly Func<IQueryContainer, TQuery> _dispatch;
-
-		public ConditionlessWhen(Func<IQueryContainer, TQuery> dispatch)
-		{
-			_dispatch = dispatch;
-		}
-
-		public void Add(Action<TQuery> when)
-		{
-			this.Add(q => Assert(q, when));
-		}
-
-		private void Assert(IQueryContainer c, Action<TQuery> when)
-		{
-			TQuery q = this._dispatch(c);
-			q.Conditionless.Should().BeFalse();
-			c.IsConditionless.Should().BeFalse();
-			when(q);
-			q.Conditionless.Should().BeTrue();
-			c.IsConditionless.Should().BeTrue();
 		}
 	}
 }

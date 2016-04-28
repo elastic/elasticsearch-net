@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Cluster.TaskManagement.TasksList
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class TasksListApiTests : ApiIntegrationTestBase<ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

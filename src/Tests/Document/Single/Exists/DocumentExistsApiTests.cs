@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Document.Single.Exists
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DocumentExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>
 	{
 		public DocumentExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

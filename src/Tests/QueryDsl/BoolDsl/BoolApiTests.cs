@@ -24,7 +24,7 @@ namespace Tests.QueryDsl.BoolDsl
 		public static QueryContainer O(this QueryContainerDescriptor<A> q, E option) => q.Term(p => p.Option, option);
 	}
 
-	[CollectionDefinition(IntegrationContext.Bool)]
+	[CollectionDefinition(TypeOfCluster.Bool)]
 	public class BoolCluster : ClusterBase, ICollectionFixture<BoolCluster>
 	{
 		[JsonConverter(typeof(StringEnumConverter))]
@@ -39,7 +39,7 @@ namespace Tests.QueryDsl.BoolDsl
 			public static IList<A> Documents => Enumerable.Range(0, 20).Select(i => new A { Id = i + 1, Option = Options[i % 2] }).ToList();
 		}
 
-		public override void Boostrap()
+		protected override void Boostrap()
 		{
 			var client = this.Client();
 			var index = client.CreateIndex(Index<A>(), i => i
@@ -58,7 +58,7 @@ namespace Tests.QueryDsl.BoolDsl
 		}
 	}
 
-	[Collection(IntegrationContext.Bool)]
+	[Collection(TypeOfCluster.Bool)]
 	public class BoolsInPractice
 	{
 

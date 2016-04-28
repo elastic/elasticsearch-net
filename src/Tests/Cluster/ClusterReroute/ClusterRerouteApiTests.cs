@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterReroute
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterRerouteApiTests : ApiIntegrationTestBase<IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor, ClusterRerouteRequest>
 	{
 

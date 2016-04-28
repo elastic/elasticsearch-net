@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.GetSnapshot
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class GetSnapshotApiTests : ApiTestBase<IGetSnapshotResponse, IGetSnapshotRequest, GetSnapshotDescriptor, GetSnapshotRequest>
 	{
 		public GetSnapshotApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

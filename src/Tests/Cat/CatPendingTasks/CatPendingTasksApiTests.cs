@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Cat.CatPendingTasks
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatPendingTasksApiTests : ApiIntegrationTestBase<ICatResponse<CatPendingTasksRecord>, ICatPendingTasksRequest, CatPendingTasksDescriptor, CatPendingTasksRequest>
 	{
 		public CatPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

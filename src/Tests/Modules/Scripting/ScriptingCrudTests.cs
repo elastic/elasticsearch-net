@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Modules.Scripting
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class ScriptingCrudTests
 		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
 	{

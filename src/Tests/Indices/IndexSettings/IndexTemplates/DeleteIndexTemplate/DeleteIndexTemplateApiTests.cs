@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteIndexTemplateApiTests 
 		: ApiTestBase<IDeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest>
 	{

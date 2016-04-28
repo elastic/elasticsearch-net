@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.CreateIndex
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class CreateIndexApiTests : ApiIntegrationTestBase<ICreateIndexResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterPendingTasks
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterPendingTasksApiTests : ApiIntegrationTestBase<IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor, ClusterPendingTasksRequest>
 	{
 		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

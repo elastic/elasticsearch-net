@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.QueryDsl.Specialized.Script
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ScriptQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public ScriptQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
