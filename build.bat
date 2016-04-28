@@ -12,7 +12,7 @@ REM - elasticsearch_versions can be multiple separated with a semi-colon ';'
 if errorlevel 1 (
   exit /b %errorlevel%
 )
-.paket\paket.exe install
+.paket\paket.exe restore
 if errorlevel 1 (
   exit /b %errorlevel%
 )
@@ -23,7 +23,7 @@ SET ESVERSIONS=
 SET DNXVERSION="default"
 SET SKIPTESTS=0
 SET APIKEY=
-
+SET FEED="elasticsearch-net"
 
 IF /I "%1"=="skiptests" (
 	set SKIPTESTS="1"
@@ -51,8 +51,7 @@ IF /I "%1%"=="integrate" (
 
 IF /I "%1%"=="canary" (
 	IF NOT [%2]==[] (set APIKEY="%2")
-	IF /I "%3"=="skiptests" (set SKIPTESTS=1)
-	IF /I "%2"=="skiptests" (set SKIPTESTS=1)
+	IF NOT [%3]==[] (set FEED="%3")
 )
 
-"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%"
+"packages\build\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" "esversions=%ESVERSIONS%" "skiptests=%SKIPTESTS%" "apiKey=%APIKEY%" "feed=%FEED%"
