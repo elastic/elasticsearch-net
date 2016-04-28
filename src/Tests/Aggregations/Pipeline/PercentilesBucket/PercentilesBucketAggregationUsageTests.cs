@@ -1,11 +1,13 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Pipeline.PercentilesBucket
 {
+	[SkipVersion("<2.2.0", "")]
 	public class PercentilesBucketAggregationUsageTests : AggregationUsageTestBase
 	{
 		public PercentilesBucketAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

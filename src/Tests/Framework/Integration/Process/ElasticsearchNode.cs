@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
+using Tests.XPack.Security;
 
 namespace Tests.Framework.Integration
 {

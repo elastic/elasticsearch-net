@@ -13,6 +13,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[Collection(IntegrationContext.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test

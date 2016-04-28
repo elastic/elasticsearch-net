@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.Role.PutRole
+namespace Tests.XPack.Security.Role.PutRole
 {
 	public class PutRoleUrlTests : IUrlTests
 	{

@@ -1,12 +1,14 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Metric.ExtendedStats
 {
+	[SkipVersion("<2.2.0", "")]
 	public class ExtendedStatsAggregationUsageTests : AggregationUsageTestBase
 	{
 		public ExtendedStatsAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

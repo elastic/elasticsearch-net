@@ -6,6 +6,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.XPack.License.PostLicense
 {
+	[SkipVersion("<2.3.0", "")]
 	public class PostLicenseUrlTests : IUrlTests
 	{
 		[U] public async Task Urls()

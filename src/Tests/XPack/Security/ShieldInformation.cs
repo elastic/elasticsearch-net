@@ -1,4 +1,4 @@
-namespace Tests.Framework.Integration
+namespace Tests.XPack.Security
 {
 	public class ShieldInformation
 	{

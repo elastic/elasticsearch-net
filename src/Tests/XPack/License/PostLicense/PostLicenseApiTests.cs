@@ -9,6 +9,7 @@ using Xunit;
 namespace Tests.XPack.License.PostLicense
 {
 	[Collection(IntegrationContext.ReadOnly)]
+	[SkipVersion("<2.3.0", "")]
 	public class PostLicenseApiTests : ApiTestBase<IPostLicenseResponse, IPostLicenseRequest, PostLicenseDescriptor, PostLicenseRequest>
 	{
 		public PostLicenseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

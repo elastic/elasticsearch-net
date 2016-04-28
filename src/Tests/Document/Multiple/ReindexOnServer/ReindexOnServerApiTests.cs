@@ -13,6 +13,7 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.ReindexOnServer
 {
 	[Collection(IntegrationContext.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		public class Test

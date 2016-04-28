@@ -21,6 +21,7 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-profile.html[Profile API] for more detail.
 	*/
+	[SkipVersion("<2.2.0", "")]
 	public class ProfileUsageTests : SearchUsageTestBase
 	{
 		public ProfileUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

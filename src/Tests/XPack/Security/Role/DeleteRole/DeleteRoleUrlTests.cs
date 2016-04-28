@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.Role.DeleteRole
+namespace Tests.XPack.Security.Role.DeleteRole
 {
 	public class DeleteRoleUrlTests : IUrlTests
 	{

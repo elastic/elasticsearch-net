@@ -5,9 +5,10 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.XPack.Shield.User
+namespace Tests.XPack.Security.User
 {
 	[Collection(IntegrationContext.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class UserCrudTests
 		: CrudTestBase<IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
 	{

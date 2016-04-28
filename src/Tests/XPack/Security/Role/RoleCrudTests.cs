@@ -8,9 +8,10 @@ using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 
-namespace Tests.XPack.Shield.Role
+namespace Tests.XPack.Security.Role
 {
 	[Collection(IntegrationContext.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class RoleCrudTests
 		: CrudTestBase<IPutRoleResponse, IGetRoleResponse, IPutRoleResponse, IDeleteRoleResponse>
 	{

@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Infer;
 
-namespace Tests.XPack.Shield.Role.ClearCachedRoles
+namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
 	[Collection(IntegrationContext.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class ClearCachedRolesApiTests : ApiIntegrationTestBase<IClearCachedRolesResponse, IClearCachedRolesRequest, ClearCachedRolesDescriptor, ClearCachedRolesRequest>
 	{
 		public ClearCachedRolesApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

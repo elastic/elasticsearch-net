@@ -3,7 +3,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.XPack.Shield.Authenticate
+namespace Tests.XPack.Security.Authenticate
 {
 	public class AuthenticateUrlTests : IUrlTests
 	{
