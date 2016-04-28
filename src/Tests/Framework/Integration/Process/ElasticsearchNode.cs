@@ -252,8 +252,6 @@ namespace Tests.Framework.Integration
 			return Observable.Empty<ElasticsearchMessage>();
 		}
 
-		private static object _licenseLock = new object();
-
 		private void ValidateLicense()
 		{
 			var client = TestClient.GetClient();

@@ -7,7 +7,7 @@ namespace Nest
 	public partial interface ISimulatePipelineRequest
 	{
 		[JsonProperty("pipeline")]
-		Pipeline Pipeline { get; set; }
+		IPipeline Pipeline { get; set; }
 
 		[JsonProperty("docs")]
 		IEnumerable<ISimulatePipelineDocument> Documents { get; set; }
@@ -15,7 +15,7 @@ namespace Nest
 
 	public partial class SimulatePipelineRequest
 	{
-		public Pipeline Pipeline { get; set; }
+		public IPipeline Pipeline { get; set; }
 
 		public IEnumerable<ISimulatePipelineDocument> Documents { get; set; }
 	}
@@ -23,11 +23,11 @@ namespace Nest
 	[DescriptorFor("IngestSimulate")]
 	public partial class SimulatePipelineDescriptor
 	{
-		Pipeline ISimulatePipelineRequest.Pipeline { get; set; }
+		IPipeline ISimulatePipelineRequest.Pipeline { get; set; }
 
 		IEnumerable<ISimulatePipelineDocument> ISimulatePipelineRequest.Documents { get; set; }
 
-		public SimulatePipelineDescriptor Pipeline(Func<PipelineDescriptor, Pipeline> pipeline) =>
+		public SimulatePipelineDescriptor Pipeline(Func<PipelineDescriptor, IPipeline> pipeline) =>
 			Assign(a => a.Pipeline = pipeline?.Invoke(new PipelineDescriptor()));
 
 		public SimulatePipelineDescriptor Documents(IEnumerable<ISimulatePipelineDocument> documents) => Assign(a => a.Documents = documents);

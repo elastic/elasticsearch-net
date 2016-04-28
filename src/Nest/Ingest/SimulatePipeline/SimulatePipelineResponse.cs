@@ -30,9 +30,6 @@ namespace Nest
 
 		[JsonProperty("doc")]
 		public DocumentSimulation Document { get; internal set; }
-
-		[JsonProperty("_ingest")]
-		public Ingest Ingest { get; internal set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -60,13 +57,16 @@ namespace Nest
 		public long? Ttl { get; internal set; }
 
 		[JsonProperty("_source")]
-		public object Source { get; internal set; }
+		public ILazyDocument Source { get; internal set; }
+
+		[JsonProperty("_ingest")]
+		public Ingest Ingest { get; internal set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
 	public class Ingest
 	{
-		[JsonProperty("_timestamp")]
-		public long? Timestamp { get; internal set; }
+		[JsonProperty("timestamp")]
+		public DateTime Timestamp { get; internal set; }
 	}
 }
