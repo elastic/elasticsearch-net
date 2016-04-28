@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface, T> 
+	public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>
 		: QueryDescriptorBase<TDescriptor, TInterface>, IFieldNameQuery
 		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface
 		where TInterface : class, IFieldNameQuery

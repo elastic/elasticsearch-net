@@ -17,7 +17,6 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			//TODO move to own cluster collection with its own bootstrap
 			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr

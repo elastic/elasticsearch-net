@@ -27,7 +27,6 @@ namespace Tests.QueryDsl.BoolDsl
 	[CollectionDefinition(IntegrationContext.Bool)]
 	public class BoolCluster : ClusterBase, ICollectionFixture<BoolCluster>
 	{
-		//TODO discuss make this default?
 		[JsonConverter(typeof(StringEnumConverter))]
 		public enum E { Option1, Option2 }
 
