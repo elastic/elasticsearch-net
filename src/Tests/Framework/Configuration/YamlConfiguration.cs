@@ -10,7 +10,6 @@ namespace Tests.Framework.Configuration
 		public override string ElasticsearchVersion { get; protected set; } = "2.0.0";
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
-		public override bool SkipPluginVerification { get; protected set; } = false;
 
 
 		public YamlConfiguration(string configurationFile)
@@ -18,14 +17,13 @@ namespace Tests.Framework.Configuration
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
-				.Where(l=> !string.IsNullOrEmpty(l) && !l.Trim().StartsWith("#"))
+				.Where(l=>!l.Trim().StartsWith("#"))
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
 			this.ElasticsearchVersion = config["elasticsearch_version"];
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
 			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
-			this.SkipPluginVerification = bool.Parse(config["skip_plugin_verification"]);
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);

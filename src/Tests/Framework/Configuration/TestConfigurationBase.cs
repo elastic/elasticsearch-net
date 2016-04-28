@@ -10,9 +10,8 @@ namespace Tests.Framework.Configuration
 	{
 		public abstract bool DoNotSpawnIfAlreadyRunning { get; protected set; }
 		public abstract string ElasticsearchVersion { get; protected set; }
-		public abstract bool ForceReseed { get; protected set; }
+		public abstract bool ForceReseed { get; protected set; } 
 		public abstract TestMode Mode { get; protected set; }
-		public abstract bool SkipPluginVerification { get; protected set; }
 
 		public virtual bool RunIntegrationTests => Mode == TestMode.Mixed || Mode == TestMode.Integration;
 		public virtual bool RunUnitTests => Mode == TestMode.Mixed || Mode == TestMode.Unit;
