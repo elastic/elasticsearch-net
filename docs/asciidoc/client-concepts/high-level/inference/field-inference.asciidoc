@@ -8,7 +8,7 @@
 == Field Inference
 
 Several places in the Elasticsearch API expect the path to a field from your original source document as a string.
-NEST allows you to use C# expressions to strongly type these field path strings. 
+NEST allows you to use C# expressions to strongly type these field path strings.
 
 These expressions are assigned to a type called `Field` and there are several ways to create an instance of one
 
@@ -311,7 +311,7 @@ and we want to append the suffix "raw" to each
 
 [source,csharp]
 ----
-var fieldExpressions = 
+var fieldExpressions =
     expressions.Select<Expression<Func<Project, object>>, Field>(e => e.AppendSuffix("raw")).ToList();
 
 Expect("name.raw").WhenSerializing(fieldExpressions[0]);
@@ -411,7 +411,7 @@ var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
 var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
 ----
 
-Here we have to similary shaped expressions on coming from A and on from B
+Here we have two similarly shaped expressions, one coming from A and one from B
 that will resolve to the same field name, as expected
 
 [source,csharp]
@@ -444,7 +444,7 @@ fieldNameOnA.Should().Be("d.name");
 fieldNameOnB.Should().Be("c.name");
 ----
 
-however we didn't break inferrence on the first client instance using its separate connection settings 
+however we didn't break inference on the first client instance using its separate connection settings 
 
 [source,csharp]
 ----
@@ -466,7 +466,7 @@ To wrap up, the precedence in which field names are inferred is:
 
 . A NEST property mapping
 
-. Ask the serializer if the property has a verbatim value e.g it has an explicit JsonPropery attribute.
+. Ask the serializer if the property has a verbatim value e.g it has an explicit JsonProperty attribute.
 
 . Pass the MemberInfo's Name to the DefaultFieldNameInferrer which by default camelCases
 

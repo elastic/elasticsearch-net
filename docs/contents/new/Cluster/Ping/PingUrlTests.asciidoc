@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await HEAD("/")
-				.Fluent(c => c.Ping())
-				.Request(c => c.Ping(new PingRequest()))
-				.FluentAsync(c => c.PingAsync())
-				.RequestAsync(c => c.PingAsync(new PingRequest()))
-				;
-----

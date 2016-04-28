@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await GET("/_cat/master")
-				.Fluent(c => c.CatMaster())
-				.Request(c => c.CatMaster(new CatMasterRequest()))
-				.FluentAsync(c => c.CatMasterAsync())
-				.RequestAsync(c => c.CatMasterAsync(new CatMasterRequest()))
-				;
-----

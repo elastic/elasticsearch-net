@@ -14,7 +14,7 @@ round robin over the `live` nodes to evenly distribute request load over all kno
 
 `GetNext` is implemented in a lock free thread safe fashion, meaning each callee gets returned its own cursor to advance
 over the internal list of nodes. This to guarantee each request that needs to fall over tries all the nodes without
-suffering from noisy neighboors advancing a global cursor.
+suffering from noisy neighbours advancing a global cursor.
 
 [source,csharp]
 ----

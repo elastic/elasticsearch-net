@@ -1,4 +1,0 @@
-[source, csharp]
-----
-var port = this.Node.Started ? this.Node.Port : 9200;
-----

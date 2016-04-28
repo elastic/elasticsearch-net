@@ -1,8 +1,0 @@
-[source, csharp]
-----
-response.HotThreads.Should().NotBeEmpty();
-var t = response.HotThreads.First();
-t.NodeId.Should().NotBeNullOrWhiteSpace();
-t.NodeName.Should().NotBeNullOrWhiteSpace();
-t.Hosts.Should().NotBeEmpty();
-----

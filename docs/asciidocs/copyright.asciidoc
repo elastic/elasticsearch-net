@@ -1,6 +1,0 @@
-== Copyright and License
-
-This software is Copyright (c) 2013-2014 by Elasticsearch BV.
-
-This is free software, licensed under:
-https://github.com/elasticsearch/elasticsearch-net/blob/develop/license.txt[The Apache License Version 2.0].

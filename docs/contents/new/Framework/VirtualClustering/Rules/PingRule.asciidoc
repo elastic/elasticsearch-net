@@ -1,7 +1,0 @@
-[source, csharp]
-----
-Self.Times = times;
-Self.Succeeds = true;
-Self.Times = times;
-Self.Succeeds = false;
-----

@@ -1,4 +1,0 @@
-[source, csharp]
-----
-new CloseIndexRequest(CallIsolatedValue)
-----

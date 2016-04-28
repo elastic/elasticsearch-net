@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await GET("/_cat/plugins")
-				.Fluent(c => c.CatPlugins())
-				.Request(c => c.CatPlugins(new CatPluginsRequest()))
-				.FluentAsync(c => c.CatPluginsAsync())
-				.RequestAsync(c => c.CatPluginsAsync(new CatPluginsRequest()))
-				;
-----

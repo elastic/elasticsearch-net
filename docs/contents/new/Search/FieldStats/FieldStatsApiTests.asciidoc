@@ -1,8 +1,0 @@
-[source, csharp]
-----
-null
-----
-[source, csharp]
-----
-new FieldStatsRequest(typeof(Project))
-----
