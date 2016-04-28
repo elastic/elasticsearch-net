@@ -10,6 +10,7 @@ using Xunit;
 namespace Tests.Cluster.TaskManagement.TasksList
 {
 	[Collection(IntegrationContext.ReadOnly)]
+	[SkipVersion("<2.3.0", "")]
 	public class TasksListApiTests : ApiIntegrationTestBase<ITasksListResponse, ITasksListRequest, TasksListDescriptor, TasksListRequest>
 	{
 		public TasksListApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

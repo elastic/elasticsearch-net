@@ -11,6 +11,7 @@ using Xunit;
 namespace Tests.Cat.CatSnapshots
 {
 	[Collection(IntegrationContext.Indexing)]
+	[SkipVersion("<2.1.0", "")]
 	public class CatSnapshotsApiTests : ApiIntegrationTestBase<ICatResponse<CatSnapshotsRecord>, ICatSnapshotsRequest, CatSnapshotsDescriptor, CatSnapshotsRequest>
 	{
 		private static readonly string SnapshotName = RandomString();

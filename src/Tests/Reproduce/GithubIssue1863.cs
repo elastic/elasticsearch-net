@@ -13,6 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Reproduce
 {
 	[Collection(IntegrationContext.ReadOnly)]
+	[SkipVersion("<2.1.0", "")]
 	public class GithubIssue1863
 	{
 		[I]

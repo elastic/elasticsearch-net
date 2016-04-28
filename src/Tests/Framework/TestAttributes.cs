@@ -12,7 +12,7 @@ using System.Reflection;
 #if DOTNETCORE
 namespace SemVer
 {
-	//TODO incredibly ugly but on .net core we only support exact matches
+	//TODO incredibly ugly but on .net core we always skip tests marked with SkipVersion
 	//We'll need to submit a PR to https://github.com/adamreeve/semver.net once .net core is
 	//in more stable waters
 
@@ -23,7 +23,9 @@ namespace SemVer
 		{
 			this._range = range;
 		}
-		public bool IsSatisfied(SemVer.Version version) => version?.Parsed == this._range;
+		//if a test has a skip range skip alwyas on CoreCLR since we can not as of yet
+		//validate ranges
+		public bool IsSatisfied(SemVer.Version version) => this._range != null;
 	}
 	public class Version
 	{

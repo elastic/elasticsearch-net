@@ -294,7 +294,7 @@ module Tooling =
                 execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
             | (Both, Some d, Some c) ->
                 let proc = d.Process exe
-                let result = execProcess proc arguments 
+                let result = execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
                 if result <> 0 then failwith (sprintf "Failed to run dnx tooling for %s args: %A" proc arguments)
                 let proc = c.Process exe
                 execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
