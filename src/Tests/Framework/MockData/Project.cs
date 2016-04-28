@@ -22,6 +22,7 @@ namespace Tests.Framework.MockData
 		public SimpleGeoPoint Location { get; set; }
 		public int? NumberOfCommits { get; set; }
 		public CompletionField Suggest { get; set; }
+		public IEnumerable<string> Branches { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
