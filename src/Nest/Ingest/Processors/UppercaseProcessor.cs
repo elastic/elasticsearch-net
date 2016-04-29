@@ -19,6 +19,7 @@ namespace Nest
 	public class UppercaseProcessor : ProcessorBase, IUppercaseProcessor
 	{
 		protected override string Name => "uppercase";
+		[JsonProperty("field")]
 		public Field Field { get; set; }
 	}
 

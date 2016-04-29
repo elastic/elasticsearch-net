@@ -56,9 +56,9 @@ namespace Tests.Ingest.PutPipeline
 				{
 					date = new
 					{
-						field = "startedOn",
+						match_field = "startedOn",
 						target_field = "timestamp",
-						formats = new [] { "dd/MM/yyyy hh:mm:ss" },
+						match_formats = new [] { "dd/MM/yyyy hh:mm:ss" },
 						timezone = "Europe/Amsterdam"
 					}
 				},
@@ -135,7 +135,7 @@ namespace Tests.Ingest.PutPipeline
 					rename = new
 					{
 						field = "leadDeveloper",
-						target_field = "projectLead"
+						to = "projectLead"
 					}
 				},
 				new

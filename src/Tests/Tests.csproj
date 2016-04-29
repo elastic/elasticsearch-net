@@ -321,6 +321,7 @@
     <Compile Include=".\Mapping\Types\Core\Number\NumberMappingTests.cs" />
     <Compile Include="Aggregations\AggregationVisitorTests.cs" />
     <Compile Include="CodeStandards\Serialization\Converters.doc.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexApiTests.cs" />

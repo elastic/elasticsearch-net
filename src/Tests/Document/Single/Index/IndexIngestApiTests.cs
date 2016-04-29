@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
+using Nest;
+using Newtonsoft.Json.Linq;
+using Tests.Framework;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
+using Xunit;
+
+namespace Tests.Document.Single.Index
+{
+	[Collection(IntegrationContext.Indexing)]
+	public class IndexIngestApiTests :
+		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	{
+		private string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			client.PutPipeline(new PutPipelineRequest(this.PipelineId)
+			{
+				Description = "Index pipeline test",
+				Processors = new List<IProcessor>
+				{
+					new RenameProcessor
+					{
+						TargetField = "lastSeen",
+						Field = "lastActivity"
+					}
+				}
+			});
+
+
+
+		}
+
+		private Project Document => new Project
+		{
+			State = StateOfBeing.Stable,
+			Name = CallIsolatedValue,
+			StartedOn = FixedDate,
+			LastActivity = FixedDate,
+			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
+		};
+
+		public IndexIngestApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Index<Project>(this.Document, f),
+			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
+			request: (client, r) => client.Index(r),
+			requestAsync: (client, r) => client.IndexAsync(r)
+			);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 201;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+
+		protected override string UrlPath
+			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson =>
+			new
+			{
+				name = CallIsolatedValue,
+				state = "Stable",
+				startedOn = FixedDate,
+				lastActivity = FixedDate,
+				curatedTags = new[] {new {name = "x", added = FixedDate}},
+			};
+
+		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
+
+		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
+			.Consistency(Consistency.Quorum)
+			.OpType(OpType.Index)
+			.Refresh()
+			.Pipeline(this.PipelineId)
+			.Routing("route");
+
+		protected override IndexRequest<Project> Initializer =>
+			new IndexRequest<Project>(this.Document)
+			{
+				Refresh = true,
+				OpType = OpType.Index,
+				Consistency = Consistency.Quorum,
+				Routing = "route",
+				Pipeline = this.PipelineId
+			};
+
+	}
+
+}
