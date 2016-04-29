@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(PipelineJsonConverter))]
 	public interface IPipeline
 	{
 		[JsonProperty("description")]

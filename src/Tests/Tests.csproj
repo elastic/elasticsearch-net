@@ -336,6 +336,7 @@
     <Compile Include="Ingest\DeletePipeline\DeletePipelineUrlTests.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineApiTests.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineUrlTests.cs" />
+    <Compile Include="Ingest\PipelineCrudTests.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineApiTests.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineUrlTests.cs" />
     <Compile Include="Ingest\SimulatePipeline\SImulatePipelineApiTests.cs" />

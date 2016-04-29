@@ -753,6 +753,7 @@
     <Compile Include="Ingest\GetPipeline\GetPipelineRequest.cs" />
     <Compile Include="Ingest\GetPipeline\GetPipelineResponse.cs" />
     <Compile Include="Ingest\Pipeline.cs" />
+    <Compile Include="Ingest\PipelineJsonConverter.cs" />
     <Compile Include="Ingest\Processor.cs" />
     <Compile Include="Ingest\ProcessorJsonConverter.cs" />
     <Compile Include="Ingest\ProcessorsDescriptor.cs" />
