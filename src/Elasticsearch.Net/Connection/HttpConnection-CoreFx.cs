@@ -30,10 +30,6 @@ namespace Elasticsearch.Net
 		private readonly object _lock = new object();
 		private readonly ConcurrentDictionary<int, HttpClient> _clients = new ConcurrentDictionary<int, HttpClient>();
 
-		private string DefaultContentType => "application/json";
-
-		public HttpConnection() { }
-
 		private HttpClient GetClient(RequestData requestData)
 		{
 			var hashCode = requestData.GetHashCode();
@@ -127,7 +123,7 @@ namespace Elasticsearch.Net
 				requestMessage.Headers.TryAddWithoutValidation(key, requestData.Headers.GetValues(key));
 			}
 
-			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.ContentType));
+			requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(requestData.Accept));
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add("es-shield-runas-user", requestData.RunAs);

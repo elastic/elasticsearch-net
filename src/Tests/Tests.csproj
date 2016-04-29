@@ -321,6 +321,7 @@
     <Compile Include=".\Mapping\Types\Core\Number\NumberMappingTests.cs" />
     <Compile Include="Aggregations\AggregationVisitorTests.cs" />
     <Compile Include="CodeStandards\Serialization\Converters.doc.cs" />
+    <Compile Include="Framework\MockData\PercolatedQuery.cs" />
     <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
@@ -343,6 +344,7 @@
     <Compile Include="Ingest\SimulatePipeline\SImulatePipelineApiTests.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineUrlTests.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordMappingTests.cs" />
+    <Compile Include="Mapping\Types\Core\Percolator\PercolatorMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\String\StringMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Geo\GeoPoint\GeoPointMappingTests.cs" />
@@ -539,6 +541,7 @@
     <Compile Include="Framework\Integration\ClientMethod.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
+    <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesApiTests.cs" />

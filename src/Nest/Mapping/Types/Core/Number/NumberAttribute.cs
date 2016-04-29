@@ -4,7 +4,7 @@
 	/// Maps a property as a number type. If no type is specified,
 	/// the default type is float (single precision floating point).
 	/// </summary>
-	public class NumberAttribute : ElasticsearchPropertyAttributeBase, INumberProperty
+	public class NumberAttribute : ElasticsearchDocValuesPropertyAttributeBase, INumberProperty
 	{
 		INumberProperty Self => this;
 

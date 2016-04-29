@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IKeywordProperty : IProperty
+	public interface IKeywordProperty : IDocValuesProperty
 	{
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 		string SearchAnalyzer { get; set; }
 	}
 
-	public class KeywordProperty : PropertyBase, IKeywordProperty
+	public class KeywordProperty : DocValuesPropertyBase, IKeywordProperty
 	{
 		public KeywordProperty() : base("keyword") { }
 
@@ -54,7 +54,7 @@ namespace Nest
 	}
 
 	public class KeywordPropertyDescriptor<T>
-		: PropertyDescriptorBase<KeywordPropertyDescriptor<T>, IKeywordProperty, T>, IKeywordProperty
+		: DocValuesPropertyDescriptorBase<KeywordPropertyDescriptor<T>, IKeywordProperty, T>, IKeywordProperty
 		where T : class
 	{
 		double? IKeywordProperty.Boost { get; set; }

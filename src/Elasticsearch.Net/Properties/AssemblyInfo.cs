@@ -6,11 +6,11 @@ using System.Reflection;
 [assembly: AssemblyDescriptionAttribute("Elasticsearch.Net - official low level elasticsearch client")]
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
-[assembly: AssemblyVersionAttribute("2.0.0")]
-[assembly: AssemblyFileVersionAttribute("2.0.5")]
-[assembly: AssemblyInformationalVersionAttribute("2.0.5")]
+[assembly: AssemblyVersionAttribute("5.0.0")]
+[assembly: AssemblyFileVersionAttribute("5.0.0")]
+[assembly: AssemblyInformationalVersionAttribute("5.0.0-alpha1")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "2.0.0";
+        internal const string Version = "5.0.0";
     }
 }

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Nest
 {
-	[AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 	public class ElasticsearchTypeAttribute : Attribute
 	{
 		private static readonly ConcurrentDictionary<Type, ElasticsearchTypeAttribute> CachedTypeLookups =

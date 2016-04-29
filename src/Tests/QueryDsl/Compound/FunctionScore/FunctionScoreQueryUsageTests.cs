@@ -8,6 +8,13 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Compound.FunctionScore
 {
+	/*
+	* The function_score allows you to modify the score of documents that are retrieved by a query.
+	* This can be useful if, for example, a score function is computationally expensive and it is
+	* sufficient to compute the score on a filtered set of documents.
+	*
+	* See the Elasticsearch documentation on {ref_current}/query-dsl-function-score-query.html[function score query] for more details.
+	*/
 	public class FunctionScoreQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public FunctionScoreQueryUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -94,7 +101,7 @@ namespace Tests.QueryDsl.Compound.FunctionScore
 				new ExponentialDecayFunction { Origin = 1.0, Decay =	0.5, Field = Field<Project>(p=>p.NumberOfCommits), Scale = 0.1, Weight = 2.1 },
 				new GaussDateDecayFunction { Origin = DateMath.Now, Field = Field<Project>(p=>p.LastActivity), Decay = 0.5, Scale = TimeSpan.FromDays(1) },
 				new LinearGeoDecayFunction { Origin = new GeoLocation(70, -70), Field = Field<Project>(p=>p.Location), Scale = Distance.Miles(1), MultiValueMode = MultiValueMode.Average },
-				new FieldValueFactorFunction	
+				new FieldValueFactorFunction
 				{
 					Field = "x", Factor = 1.1,	Missing = 0.1, Modifier = FieldValueFactorModifier.Ln
 				},

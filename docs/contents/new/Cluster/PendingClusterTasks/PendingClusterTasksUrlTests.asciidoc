@@ -1,9 +1,0 @@
-[source, csharp]
-----
-await GET("/_cluster/pending_tasks")
-				.Fluent(c => c.ClusterPendingTasks())
-				.Request(c => c.ClusterPendingTasks(new ClusterPendingTasksRequest()))
-				.FluentAsync(c => c.ClusterPendingTasksAsync())
-				.RequestAsync(c => c.ClusterPendingTasksAsync(new ClusterPendingTasksRequest()))
-				;
-----

@@ -1,8 +1,0 @@
-[source, csharp]
-----
-var callDetails = call(this.GetClient()).CallDetails;
-var callDetails = (await call(this.GetClient())).CallDetails;
-var url = callDetails.Uri.PathAndQuery;
-url.Should().Be(this.ExpectedUrl, $"when calling the {typeOfCall} Api");
-callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
-----

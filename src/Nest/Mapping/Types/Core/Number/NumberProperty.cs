@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface INumberProperty : IProperty
+	public interface INumberProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
 		bool? Index { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class NumberProperty : PropertyBase, INumberProperty
+	public class NumberProperty : DocValuesPropertyBase, INumberProperty
 	{
 		public NumberProperty() : base(NumberType.Float.GetStringValue()) { }
 		public NumberProperty(NumberType type) : base(type.GetStringValue()) { }
@@ -48,7 +48,7 @@ namespace Nest
 	}
 
 	public abstract class NumberPropertyDescriptorBase<TDescriptor, TInterface, T>
-		: PropertyDescriptorBase<TDescriptor, TInterface, T>, INumberProperty
+		: DocValuesPropertyDescriptorBase<TDescriptor, TInterface, T>, INumberProperty
 		where TDescriptor : NumberPropertyDescriptorBase<TDescriptor, TInterface, T>, TInterface
 		where TInterface : class, INumberProperty
 		where T : class

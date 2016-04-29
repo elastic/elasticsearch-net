@@ -6,15 +6,14 @@ namespace Nest
 {
 	public class TaskId : IUrlParameter, IEquatable<TaskId>
 	{
-
 		public string NodeId { get; }
 		public long TaskNumber { get; }
 		public string FullyQualifiedId => $"{NodeId}:{TaskNumber.ToString(CultureInfo.InvariantCulture)}";
 
 		/// <summary>
-		/// A task id exists in the form <node_id>:<task_id>
+		/// A task id exists in the form [node_id]:[task_id]
 		/// </summary>
-		/// <param name="taskId"></param>
+		/// <param name="taskId">the task identifier</param>
 		public TaskId(string taskId)
 		{
 			if (string.IsNullOrWhiteSpace(taskId))

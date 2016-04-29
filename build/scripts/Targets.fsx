@@ -37,13 +37,13 @@ Target "Clean" <| fun _ -> CleanDir Paths.BuildOutput
 
 Target "BuildApp" <| fun _ -> Build.Compile()
 
-Target "Test"  <| fun _ -> Tests.RunUnitTests()
+Target "Test" <| fun _ -> Tests.RunUnitTests()
     
-Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
+Target "QuickTest" <| fun _ -> Tests.RunUnitTests()
 
-Target "Integrate"  <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "")
+Target "Integrate" <| fun _ -> Tests.RunIntegrationTests() (getBuildParamOrDefault "esversions" "")
 
-Target "WatchTests"  <| fun _ -> 
+Target "WatchTests" <| fun _ -> 
     traceFAKE "Starting quick test (incremental compile then test)"
     use watcher = (!! "src/Tests/**/*.cs").And("src/Tests/**/*.md") |> WatchChanges (fun changes -> 
             printfn "%A" changes
@@ -59,7 +59,7 @@ Target "Profile" <| fun _ -> Profiler.Run()
 
 Target "Benchmark" <| fun _ -> Benchmarker.Run()
 
-Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
+Target "QuickCompile" <| fun _ -> Build.QuickCompile()
 
 Target "Version" <| fun _ -> 
     Versioning.PatchAssemblyInfos()
@@ -74,7 +74,8 @@ Target "Release" <| fun _ ->
 Target "Canary" <| fun _ -> 
     trace "Running canary build" 
     let apiKey = (getBuildParam "apikey");
-    if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey
+    let feed = (getBuildParamOrDefault "feed" "elasticsearch-net");
+    if (not (String.IsNullOrWhiteSpace apiKey) || apiKey = "ignore") then Release.PublishCanaryBuild apiKey feed
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 

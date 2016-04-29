@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITextProperty : IProperty
+	public interface ITextProperty : ICoreProperty
 	{
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
@@ -50,7 +50,7 @@ namespace Nest
 		TermVectorOption? TermVector { get; set; }
 	}
 
-	public class TextProperty : PropertyBase, ITextProperty
+	public class TextProperty : CorePropertyBase, ITextProperty
 	{
 		public TextProperty() : base("text") { }
 
@@ -70,7 +70,7 @@ namespace Nest
 	}
 
 	public class TextPropertyDescriptor<T>
-		: PropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
+		: CorePropertyDescriptorBase<TextPropertyDescriptor<T>, ITextProperty, T>, ITextProperty
 		where T : class
 	{
 		double? ITextProperty.Boost { get; set; }

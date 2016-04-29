@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IGeoShapeProperty : IProperty
+	public interface IGeoShapeProperty : IDocValuesProperty
 	{
 		[JsonProperty("tree")]
 		GeoTree? Tree { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		bool? PointsOnly { get; set; }
 	}
 
-	public class GeoShapeProperty : PropertyBase, IGeoShapeProperty
+	public class GeoShapeProperty : DocValuesPropertyBase, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
 
@@ -42,7 +42,7 @@ namespace Nest
 	}
 
 	public class GeoShapePropertyDescriptor<T>
-		: PropertyDescriptorBase<GeoShapePropertyDescriptor<T>, IGeoShapeProperty, T>, IGeoShapeProperty
+		: DocValuesPropertyDescriptorBase<GeoShapePropertyDescriptor<T>, IGeoShapeProperty, T>, IGeoShapeProperty
 		where T : class
 	{
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
@@ -63,7 +63,7 @@ namespace Nest
 
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);
 
-		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double distanceErrorPercentage) => 
+		public GeoShapePropertyDescriptor<T> DistanceErrorPercentage(double distanceErrorPercentage) =>
 			Assign(a => a.DistanceErrorPercentage = distanceErrorPercentage);
 
 		public GeoShapePropertyDescriptor<T> PointsOnly(bool pointsOnly = true) => Assign(a => a.PointsOnly = pointsOnly);

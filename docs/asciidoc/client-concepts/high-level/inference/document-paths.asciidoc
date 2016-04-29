@@ -8,8 +8,8 @@
 == Document Paths
 
 Many API's in Elasticsearch describe a path to a document. In NEST, besides generating a constructor that takes
-and Index, Type and Id seperately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path
-to your document more succintly
+and Index, Type and Id separately, we also generate a constructor taking a `DocumentPath` that allows you to describe the path
+to your document more succinctly
 
 === Creating new instances 
 

@@ -1,9 +1,0 @@
-[source, csharp]
-----
-Self.Times = times;
-Self.Succeeds = false;
-Self.Return = errorState;
-Self.Times = times;
-Self.Succeeds = true;
-Self.Return = validResponseCode;
-----

@@ -459,7 +459,9 @@ namespace Nest
 			this.Assign(selector, (query, container) => container.Regexp = query);
 
 		/// <summary>
-		/// Function score query
+		/// The function_score query allows you to modify the score of documents that are retrieved by a query.
+		/// This can be useful if, for example, a score function is computationally expensive and it is
+		/// sufficient to compute the score on a filtered set of documents.
 		/// </summary>
 		/// <returns></returns>
 		public QueryContainer FunctionScore(Func<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery> selector) =>
@@ -482,5 +484,12 @@ namespace Nest
 
 		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
 
+		/// <summary>
+		/// percolate query can be used to match queries stored in an index.
+		/// The percolate query itself contains the document that will be used as query
+		/// to match with the stored queries.
+		/// </summary>
+		public QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
+			this.Assign(selector, (query, container) => container.Percolate = query);
 	}
 }

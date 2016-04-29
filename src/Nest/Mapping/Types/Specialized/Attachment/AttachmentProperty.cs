@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IAttachmentProperty : IProperty
+	public interface IAttachmentProperty : IDocValuesProperty
 	{
 		IDateProperty DateField { get; set; }
 		ITextProperty TitleField { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 		ITextProperty LanguageField { get; set; }
 	}
 
-	public class AttachmentProperty : PropertyBase, IAttachmentProperty
+	public class AttachmentProperty : DocValuesPropertyBase, IAttachmentProperty
 	{
 		public AttachmentProperty() : base("attachment") { }
 
@@ -80,7 +80,7 @@ namespace Nest
 	}
 
 	public class AttachmentPropertyDescriptor<T>
-		: PropertyDescriptorBase<AttachmentPropertyDescriptor<T>, IAttachmentProperty, T>, IAttachmentProperty
+		: DocValuesPropertyDescriptorBase<AttachmentPropertyDescriptor<T>, IAttachmentProperty, T>, IAttachmentProperty
 		where T : class
 	{
 		IDateProperty IAttachmentProperty.DateField { get; set; }

@@ -105,9 +105,6 @@ namespace Tests.QueryDsl
 
 			query.ShouldNotThrow();
 		}
-
-		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
-
 	}
 
 	public abstract class ConditionlessWhen : List<Action<QueryContainer>>

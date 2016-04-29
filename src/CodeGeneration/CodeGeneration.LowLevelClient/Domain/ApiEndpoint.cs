@@ -129,7 +129,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 								case "enum":
 									return this.PascalCase(p.Name) + p.Name;
 								case "number":
-									// TODO should we support long or some numeric type here?
 									return "string " + p.Name;
 								default:
 									return p.Type + " " + p.Name;

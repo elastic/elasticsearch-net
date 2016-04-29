@@ -1,9 +1,0 @@
-= Elasticsearch.Net & NEST
-
-include::elasticsearch-net.asciidoc[]
-
-include::nest.asciidoc[]
-
-include::contributing.asciidoc[]
-
-include::copyright.asciidoc[]

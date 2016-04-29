@@ -91,6 +91,20 @@ new TermsQuery
 }
 ----
 
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeFalse();
+response.ServerError.Should().NotBeNull();
+response.ServerError.Status.Should().Be(400);
+response.ServerError.Error.Should().NotBeNull();
+var rootCauses = response.ServerError.Error.RootCause;
+rootCauses.Should().NotBeNullOrEmpty();
+var rootCause = rootCauses.First();
+rootCause.Type.Should().Be("parsing_exception");
+----
+
 === Fluent DSL Example
 
 [source,csharp]
@@ -132,5 +146,18 @@ new TermsQuery
     ]
   }
 }
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.ServerError.Should().NotBeNull();
+response.ServerError.Status.Should().Be(400);
+response.ServerError.Error.Should().NotBeNull();
+var rootCauses = response.ServerError.Error.RootCause;
+rootCauses.Should().NotBeNullOrEmpty();
+var rootCause = rootCauses.First();
+rootCause.Type.Should().Be("parsing_exception");
 ----
 

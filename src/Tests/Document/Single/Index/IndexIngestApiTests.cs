@@ -16,11 +16,11 @@ namespace Tests.Document.Single.Index
 	public class IndexIngestApiTests :
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
-		private string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
-			client.PutPipeline(new PutPipelineRequest(this.PipelineId)
+			client.PutPipeline(new PutPipelineRequest(PipelineId)
 			{
 				Description = "Index pipeline test",
 				Processors = new List<IProcessor>
@@ -32,9 +32,6 @@ namespace Tests.Document.Single.Index
 					}
 				}
 			});
-
-
-
 		}
 
 		private Project Document => new Project
@@ -62,7 +59,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route";
+			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route&pipeline={PipelineId}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -82,7 +79,7 @@ namespace Tests.Document.Single.Index
 			.Consistency(Consistency.Quorum)
 			.OpType(OpType.Index)
 			.Refresh()
-			.Pipeline(this.PipelineId)
+			.Pipeline(PipelineId)
 			.Routing("route");
 
 		protected override IndexRequest<Project> Initializer =>
@@ -92,7 +89,7 @@ namespace Tests.Document.Single.Index
 				OpType = OpType.Index,
 				Consistency = Consistency.Quorum,
 				Routing = "route",
-				Pipeline = this.PipelineId
+				Pipeline = PipelineId
 			};
 
 	}

@@ -24,8 +24,8 @@
     "url": "https://github.com/elastic/elasticsearch-net"
   },
   "copyright": "2014-2016 Elasticsearch BV",
-  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases",
-  "version": "2.0.5",
+  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.0-alpha1",
+  "version": "5.0.0-alpha1",
   "compilationOptions": {
     "warningsAsErrors": false
   },

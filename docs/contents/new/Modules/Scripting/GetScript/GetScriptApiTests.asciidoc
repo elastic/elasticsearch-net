@@ -1,8 +1,0 @@
-[source, csharp]
-----
-d => d
-----
-[source, csharp]
-----
-new GetScriptRequest(_language, _name)
-----

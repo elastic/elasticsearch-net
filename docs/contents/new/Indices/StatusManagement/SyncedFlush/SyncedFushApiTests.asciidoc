@@ -1,8 +1,0 @@
-[source, csharp]
-----
-d => d.AllowNoIndices()
-----
-[source, csharp]
-----
-new SyncedFlushRequest(AllIndices) { AllowNoIndices = true }
-----

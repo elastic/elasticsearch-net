@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IObjectProperty : IProperty
+	public interface IObjectProperty : ICoreProperty
 	{
 		[JsonProperty("dynamic")]
 		DynamicMapping? Dynamic { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 		IProperties Properties { get; set; }
 	}
 
-	public class ObjectProperty : PropertyBase, IObjectProperty
+	public class ObjectProperty : CorePropertyBase, IObjectProperty
 	{
 		public ObjectProperty() : base("object") { }
 
@@ -44,7 +44,7 @@ namespace Nest
 	}
 
 	public abstract class ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>
-		: PropertyDescriptorBase<TDescriptor, TInterface, TParent>, IObjectProperty
+		: CorePropertyDescriptorBase<TDescriptor, TInterface, TParent>, IObjectProperty
 		where TDescriptor : ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>, TInterface
 		where TInterface : class, IObjectProperty
 		where TParent : class
@@ -58,7 +58,7 @@ namespace Nest
 		string IObjectProperty.Path { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
-		public ObjectPropertyDescriptorBase() : this("object") { }
+		protected ObjectPropertyDescriptorBase() : this("object") { }
 
 		protected ObjectPropertyDescriptorBase(string type) : base(type)
 		{

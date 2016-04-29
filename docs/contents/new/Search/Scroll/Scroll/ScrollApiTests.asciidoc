@@ -1,8 +1,0 @@
-[source, csharp]
-----
-null
-----
-[source, csharp]
-----
-new ScrollRequest("scroll-id", "1m")
-----

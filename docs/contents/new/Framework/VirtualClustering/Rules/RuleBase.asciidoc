@@ -1,6 +1,0 @@
-[source, csharp]
-----
-Self.OnPort = port;
-Self.Takes = (d) => d.Add(span);
-Self.Takes = takes;
-----
