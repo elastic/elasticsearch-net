@@ -45,7 +45,7 @@ new SearchRequest<Project>()
     {
         Field = "startedOn",
         Interval = DateInterval.Month,
-        Aggregations = 
+        Aggregations =
             new SumAggregation("commits", "numberOfCommits") &&
             new MovingAverageAggregation("commits_moving_avg", "commits")
             {
