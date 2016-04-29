@@ -98,6 +98,7 @@
     <None Include="RestSpecification\Core\cat.snapshots.json" />
     <None Include="RestSpecification\Core\cat.thread_pool.json" />
     <None Include="RestSpecification\Core\clear_scroll.json" />
+    <None Include="RestSpecification\Core\cluster.allocation_explain.json" />
     <None Include="RestSpecification\Core\cluster.get_settings.json" />
     <None Include="RestSpecification\Core\cluster.health.json" />
     <None Include="RestSpecification\Core\cluster.pending_tasks.json" />
@@ -153,6 +154,10 @@
     <None Include="RestSpecification\Core\indices.upgrade.json" />
     <None Include="RestSpecification\Core\indices.validate_query.json" />
     <None Include="RestSpecification\Core\info.json" />
+    <None Include="RestSpecification\Core\ingest.delete_pipeline.json" />
+    <None Include="RestSpecification\Core\ingest.get_pipeline.json" />
+    <None Include="RestSpecification\Core\ingest.put_pipeline.json" />
+    <None Include="RestSpecification\Core\ingest.simulate.json" />
     <None Include="RestSpecification\Core\mget.json" />
     <None Include="RestSpecification\Core\mpercolate.json" />
     <None Include="RestSpecification\Core\msearch.json" />
@@ -165,6 +170,7 @@
     <None Include="RestSpecification\Core\put_script.json" />
     <None Include="RestSpecification\Core\put_template.json" />
     <None Include="RestSpecification\Core\reindex.json" />
+    <None Include="RestSpecification\Core\reindex.rethrottle.json" />
     <None Include="RestSpecification\Core\render_search_template.json" />
     <None Include="RestSpecification\Core\scroll.json" />
     <None Include="RestSpecification\Core\search.json" />

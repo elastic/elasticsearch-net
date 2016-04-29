@@ -3005,24 +3005,24 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 	///</pre>
 	///</summary>
-	public class IngestDeletePipelineRequestParameters : FluentRequestParameters<IngestDeletePipelineRequestParameters> 
+	public class DeletePipelineRequestParameters : FluentRequestParameters<DeletePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestDeletePipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public DeletePipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public IngestDeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public DeletePipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IngestDeletePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DeletePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestDeletePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DeletePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3031,20 +3031,20 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 	///</pre>
 	///</summary>
-	public class IngestGetPipelineRequestParameters : FluentRequestParameters<IngestGetPipelineRequestParameters> 
+	public class GetPipelineRequestParameters : FluentRequestParameters<GetPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestGetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public GetPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IngestGetPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestGetPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3053,24 +3053,24 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 	///</pre>
 	///</summary>
-	public class IngestPutPipelineRequestParameters : FluentRequestParameters<IngestPutPipelineRequestParameters> 
+	public class PutPipelineRequestParameters : FluentRequestParameters<PutPipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestPutPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
+		public PutPipelineRequestParameters MasterTimeout(TimeSpan master_timeout) => this.AddQueryString("master_timeout", master_timeout.ToTimeUnit());
 		
 		
 		///<summary>Explicit operation timeout</summary>
-		public IngestPutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
+		public PutPipelineRequestParameters Timeout(TimeSpan timeout) => this.AddQueryString("timeout", timeout.ToTimeUnit());
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IngestPutPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public PutPipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestPutPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public PutPipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -3079,20 +3079,20 @@ namespace Elasticsearch.Net
 	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html
 	///</pre>
 	///</summary>
-	public class IngestSimulateRequestParameters : FluentRequestParameters<IngestSimulateRequestParameters> 
+	public class SimulatePipelineRequestParameters : FluentRequestParameters<SimulatePipelineRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
-		public IngestSimulateRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
+		public SimulatePipelineRequestParameters Verbose(bool verbose) => this.AddQueryString("verbose", verbose);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
-		public IngestSimulateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public SimulatePipelineRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestSimulateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public SimulatePipelineRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

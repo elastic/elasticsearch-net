@@ -402,6 +402,7 @@
     <Compile Include="CommonAbstractions\Infer\Field\FieldJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Field\FieldResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\Id.cs" />
+    <Compile Include="CommonAbstractions\Infer\Id\IdExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexName.cs" />
@@ -747,6 +748,40 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
+    <Compile Include="Ingest\DeletePipeline\DeletePipelineRequest.cs" />
+    <Compile Include="Ingest\DeletePipeline\DeletePipelineResponse.cs" />
+    <Compile Include="Ingest\DeletePipeline\ElasticClient-DeletePipeline.cs" />
+    <Compile Include="Ingest\GetPipeline\ElasticClient-GetPipeline.cs" />
+    <Compile Include="Ingest\GetPipeline\GetPipelineRequest.cs" />
+    <Compile Include="Ingest\GetPipeline\GetPipelineResponse.cs" />
+    <Compile Include="Ingest\Pipeline.cs" />
+    <Compile Include="Ingest\PipelineJsonConverter.cs" />
+    <Compile Include="Ingest\Processor.cs" />
+    <Compile Include="Ingest\ProcessorJsonConverter.cs" />
+    <Compile Include="Ingest\ProcessorsDescriptor.cs" />
+    <Compile Include="Ingest\Processors\UppercaseProcessor.cs" />
+    <Compile Include="Ingest\Processors\TrimProcessor.cs" />
+    <Compile Include="Ingest\Processors\SplitProcessor.cs" />
+    <Compile Include="Ingest\Processors\SetProcessor.cs" />
+    <Compile Include="Ingest\Processors\RenameProcessor.cs" />
+    <Compile Include="Ingest\Processors\RemoveProcessor.cs" />
+    <Compile Include="Ingest\Processors\LowercaseProcessor.cs" />
+    <Compile Include="Ingest\Processors\JoinProcessor.cs" />
+    <Compile Include="Ingest\Processors\GsubProcessor.cs" />
+    <Compile Include="Ingest\Processors\GrokProcessor.cs" />
+    <Compile Include="Ingest\Processors\ForeachProcessor.cs" />
+    <Compile Include="Ingest\Processors\FailProcessor.cs" />
+    <Compile Include="Ingest\Processors\DateProcessor.cs" />
+    <Compile Include="Ingest\Processors\ConvertProcessor.cs" />
+    <Compile Include="Ingest\Processors\AppendProcessor.cs" />
+    <Compile Include="Ingest\SimulatePipeline\ElasticClient-SimulatePipeline.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineDocument.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineRequest.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineResponse.cs" />
+    <Compile Include="Ingest\PutPipeline\ElasticClient-PutPipeline.cs" />
+    <Compile Include="Ingest\PutPipeline\PutPipelineRequest.cs" />
+    <Compile Include="Ingest\PutPipeline\PutPipelineResponse.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticsearchDocValuesPropertyAttributeBase.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchPropertyAttributeBase.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchTypeAttribute.cs" />
     <Compile Include="Mapping\DynamicMapping.cs" />
@@ -794,6 +829,8 @@
     <Compile Include="Mapping\Types\Core\Text\IndexOptions.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextAttribute.cs" />
     <Compile Include="Mapping\Types\Core\Text\TextProperty.cs" />
+    <Compile Include="Mapping\Types\DocValuesPropertyBase.cs" />
+    <Compile Include="Mapping\Types\DocValuesPropertyDescriptorBase.cs" />
     <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointAttribute.cs" />
     <Compile Include="Mapping\Types\Geo\GeoPoint\GeoPointProperty.cs" />
@@ -1247,6 +1284,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

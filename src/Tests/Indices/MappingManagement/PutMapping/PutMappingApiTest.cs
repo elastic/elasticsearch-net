@@ -35,6 +35,17 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			properties = new
 			{
+				branches = new
+				{
+					fields = new
+					{
+						keyword = new
+						{
+							type = "keyword"
+						}
+					},
+					type = "text"
+				},
 				curatedTags = new
 				{
 					properties = new
@@ -203,7 +214,14 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			Properties = new Properties<Project>
 			{
-
+				{ p => p.Branches, new TextProperty
+						{
+							Fields = new Properties
+							{
+								{ "keyword", new KeywordProperty() }
+							}
+						}
+				},
 				{ p => p.CuratedTags, new ObjectProperty
 						{
 							Properties = new Properties<Tag>
