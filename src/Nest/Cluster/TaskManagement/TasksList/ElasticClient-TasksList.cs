@@ -7,9 +7,9 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Does a request to the root of an elasticsearch node
+		/// Retrieve information about the tasks currently executing on one or more nodes in the cluster.
 		/// </summary>
-		/// <param name="selector">A descriptor to further describe the root operation</param>
+		/// <param name="selector">A descriptor to further describe the tasks to retrieve information for</param>
 		ITasksListResponse TasksList(Func<TasksListDescriptor, ITasksListRequest> selector = null);
 
 		/// <inheritdoc/>
