@@ -37,6 +37,7 @@ namespace Tests.XPack.Security.Authenticate
 	}
 
 	[Collection(IntegrationContext.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class AuthenticateRequestConfigurationApiTests : AuthenticateApiTests
 	{
 		public AuthenticateRequestConfigurationApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
