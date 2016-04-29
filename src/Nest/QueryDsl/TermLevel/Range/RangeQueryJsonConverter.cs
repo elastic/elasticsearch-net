@@ -25,22 +25,22 @@ namespace Nest
 			var field = firstProp.Name;
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
-			
+
 
 			var isNumeric = !jo.Properties().Any(p=>p.Name == "format" || p.Name == "time_zone")
 				&& jo.Properties().Any(p=> _rangeKeys.Contains(p.Name) && (p.Value.Type  == JTokenType.Integer || p.Value.Type == JTokenType.Float));
-						
+
 
 			IRangeQuery fq;
 			if (isNumeric)
 			{
 				fq = FromJson.ReadAs<NumericRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
 			}
-			else 
+			else
 			{
 				fq = FromJson.ReadAs<DateRangeQuery>(jo.CreateReader(), objectType, existingValue, serializer);
 			}
-			
+
 			fq.Name = GetPropValue<string>(jo, "_name");
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Field = field;
@@ -48,18 +48,11 @@ namespace Nest
 			return fq;
 		}
 
-		public TReturn GetPropObject<TReturn>(JObject jObject, string field)
+		private static TReturn GetPropValue<TReturn>(JObject jObject, string field)
 		{
 			JToken jToken = null;
-			return !jObject.TryGetValue(field, out jToken) 
-				? default(TReturn) 
-				: jToken.ToObject<TReturn>();
-		}
-		public TReturn GetPropValue<TReturn>(JObject jObject, string field)
-		{
-			JToken jToken = null;
-			return !jObject.TryGetValue(field, out jToken) 
-				? default(TReturn) 
+			return !jObject.TryGetValue(field, out jToken)
+				? default(TReturn)
 				: jToken.Value<TReturn>();
 		}
 	}

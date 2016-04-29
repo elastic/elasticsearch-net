@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial interface IPercolateCountRequest<TDocument> : IPercolateOperation
 		where TDocument : class
 	{
@@ -12,6 +13,7 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial class PercolateCountRequest<TDocument> where TDocument : class
 	{
 		public string MultiPercolateName => "count";
@@ -42,6 +44,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("CountPercolate")]
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public partial class PercolateCountDescriptor<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
@@ -59,7 +62,7 @@ namespace Nest
 
 		string IPercolateOperation.MultiPercolateName => "count";
 
-		IRequestParameters IPercolateOperation.GetRequestParameters() => 
+		IRequestParameters IPercolateOperation.GetRequestParameters() =>
 			this.Self.RequestParameters;
 
 		/// <summary>

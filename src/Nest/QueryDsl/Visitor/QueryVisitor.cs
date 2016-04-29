@@ -74,7 +74,6 @@
 		void Visit(ISpanContainingQuery query);
 		void Visit(ISpanWithinQuery query);
 		void Visit(ISpanMultiTermQuery query);
-
 		void Visit(IGeoIndexedShapeQuery query);
 		void Visit(IGeoShapeQuery query);
 		void Visit(IGeoShapeMultiPointQuery query);
@@ -86,6 +85,7 @@
 		void Visit(IGeoShapeEnvelopeQuery query);
 		void Visit(IGeoShapeCircleQuery query);
 		void Visit(IRawQuery query);
+		void Visit(IPercolateQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -125,8 +125,11 @@
 		public virtual void Visit(IFunctionScoreQuery query) { }
 
 		public virtual void Visit(IFuzzyQuery query) { }
+
 		public virtual void Visit(IFuzzyStringQuery query) { }
+
 		public virtual void Visit(IFuzzyNumericQuery query) { }
+
 		public virtual void Visit(IFuzzyDateQuery query) { }
 
 		public virtual void Visit(IGeoShapeQuery query) { }
@@ -218,5 +221,7 @@
 		public virtual void Visit(IExistsQuery query) { }
 
 		public virtual void Visit(IRawQuery query) { }
+
+		public virtual void Visit(IPercolateQuery query) { }
 	}
 }

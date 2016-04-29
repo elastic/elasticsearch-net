@@ -9,13 +9,15 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(RegisterPercolatorJsonConverter))]
-	public interface IRegisterPercolatorRequest : IRequest<IndexRequestParameters> 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
+	public interface IRegisterPercolatorRequest : IRequest<IndexRequestParameters>
 	{
 		IDictionary<string, object> Metadata { get; set; }
 
 		QueryContainer Query { get; set; }
 	}
 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
 	public class RegisterPercolatorRequest : RequestBase<IndexRequestParameters>, IRegisterPercolatorRequest
 	{
 		internal RegisterPercolatorRequest() { }
@@ -23,17 +25,18 @@ namespace Nest
 		public IDictionary<string, object> Metadata { get; set; }
 		public QueryContainer Query { get; set; }
 
-		public RegisterPercolatorRequest(IndexName index, Name name) 
+		public RegisterPercolatorRequest(IndexName index, Name name)
 			: base(r=>r.Required("index", index).Required("type", (TypeName)".percolator").Required("id", name)) { }
 	}
 
-	public class RegisterPercolatorDescriptor<T> 
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
+	public class RegisterPercolatorDescriptor<T>
 		: RequestDescriptorBase<RegisterPercolatorDescriptor<T>, IndexRequestParameters, IRegisterPercolatorRequest>, IRegisterPercolatorRequest
 		where T : class
 	{
 		internal RegisterPercolatorDescriptor() { }
 
-		public RegisterPercolatorDescriptor(Name name) 
+		public RegisterPercolatorDescriptor(Name name)
 			: base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
 
 		public RegisterPercolatorDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));

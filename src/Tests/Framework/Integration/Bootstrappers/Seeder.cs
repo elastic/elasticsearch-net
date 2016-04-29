@@ -40,6 +40,8 @@ namespace Tests.Framework.Integration
 				this.Client.DeleteIndex(typeof(Project));
 			if (this.Client.IndexExists(Indices<Developer>()).Exists)
 				this.Client.DeleteIndex(typeof(Developer));
+			if (this.Client.IndexExists(Indices<PercolatedQuery>()).Exists)
+				this.Client.DeleteIndex(typeof(PercolatedQuery));
 		}
 
 		public void CreateIndices()
@@ -47,13 +49,19 @@ namespace Tests.Framework.Integration
 			CreateIndexTemplate();
 			CreateProjectIndex();
 			CreateDeveloperIndex();
+			CreatePercolatorIndex();
 		}
 
 		private void SeedIndexData()
 		{
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
-			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
+			this.Client.Index(new PercolatedQuery
+			{
+				Id = "1",
+				Query = new QueryContainer(new MatchAllQuery())
+			});
+			this.Client.Refresh(Nest.Indices.Index(typeof(Project), typeof(Developer), typeof(PercolatedQuery)));
 		}
 
 		private void CreateIndicesAndSeedIndexData()
@@ -136,6 +144,20 @@ namespace Tests.Framework.Integration
 				)
 				);
 			createProjectIndex.IsValid.Should().BeTrue();
+		}
+
+		private void CreatePercolatorIndex()
+		{
+			var createPercolatedIndex = this.Client.CreateIndex(typeof(PercolatedQuery), c => c
+				.Mappings(map => map
+					.Map<PercolatedQuery>(m => m
+						.AutoMap()
+						.Properties(PercolatedQueryProperties)
+					)
+				)
+			);
+
+			createPercolatedIndex.IsValid.Should().BeTrue();
 		}
 
 		public static PropertiesDescriptor<Project> ProjectProperties(PropertiesDescriptor<Project> props) => props
@@ -225,6 +247,11 @@ namespace Tests.Framework.Integration
 			.GeoPoint(g => g
 				.Name(p => p.Location)
 				.LatLon()
+			);
+
+		public static PropertiesDescriptor<PercolatedQuery> PercolatedQueryProperties(PropertiesDescriptor<PercolatedQuery> props) => props
+			.Percolator(pp => pp
+				.Name(n => n.Query)
 			);
 	}
 }

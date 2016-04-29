@@ -1,7 +1,7 @@
 ﻿namespace Nest
 {
 	// TODO validate if these mappings still apply to 5.0
-	public class AttachmentAttribute : ElasticsearchPropertyAttributeBase, IAttachmentProperty
+	public class AttachmentAttribute : ElasticsearchDocValuesPropertyAttributeBase, IAttachmentProperty
 	{
 		ITextProperty IAttachmentProperty.AuthorField { get; set; }
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }

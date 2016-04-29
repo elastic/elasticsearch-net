@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
 	internal class MultiPercolateJsonConverter : JsonConverter
 	{
 		public override bool CanRead => false;

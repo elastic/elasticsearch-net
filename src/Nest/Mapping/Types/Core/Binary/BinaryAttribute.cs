@@ -3,8 +3,8 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class BinaryAttribute : ElasticsearchPropertyAttributeBase, IBinaryProperty
+	public class BinaryAttribute : ElasticsearchDocValuesPropertyAttributeBase, IBinaryProperty
 	{
 		public BinaryAttribute() : base("binary") { }
-	}	
+	}
 }

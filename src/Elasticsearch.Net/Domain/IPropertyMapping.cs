@@ -33,6 +33,5 @@ namespace Elasticsearch.Net
 		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
 		/// </summary>
 		public bool Ignore { get; set; }
-
 	}
 }

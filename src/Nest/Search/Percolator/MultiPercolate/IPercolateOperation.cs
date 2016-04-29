@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
 	public interface IPercolateOperation
 	{
 		[JsonIgnore]

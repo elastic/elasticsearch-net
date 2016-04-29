@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IIpProperty : IProperty
+	public interface IIpProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
 		bool? Index { get; set; }
@@ -21,7 +21,7 @@ namespace Nest
 		bool? IncludeInAll { get; set; }
 	}
 
-	public class IpProperty : PropertyBase, IIpProperty
+	public class IpProperty : DocValuesPropertyBase, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
 
@@ -33,7 +33,7 @@ namespace Nest
 	}
 
 	public class IpPropertyDescriptor<T>
-		: PropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
+		: DocValuesPropertyDescriptorBase<IpPropertyDescriptor<T>, IIpProperty, T>, IIpProperty
 		where T : class
 	{
 		bool? IIpProperty.Index { get; set; }

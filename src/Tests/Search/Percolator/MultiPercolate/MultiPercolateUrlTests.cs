@@ -4,6 +4,8 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
+#pragma warning disable 618 // testing deprecated percolate APIs
+
 namespace Tests.Search.Percolator.MultiPercolate
 {
 	public class MultiPercolateUrlTests

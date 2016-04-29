@@ -3,9 +3,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IBooleanProperty : IProperty
+	public interface IBooleanProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
 		bool? Index { get; set; }
@@ -20,7 +19,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class BooleanProperty : PropertyBase, IBooleanProperty
+	public class BooleanProperty : DocValuesPropertyBase, IBooleanProperty
 	{
 		public BooleanProperty() : base("boolean") { }
 
@@ -31,7 +30,7 @@ namespace Nest
 	}
 
 	public class BooleanPropertyDescriptor<T>
-		: PropertyDescriptorBase<BooleanPropertyDescriptor<T>, IBooleanProperty, T>, IBooleanProperty
+		: DocValuesPropertyDescriptorBase<BooleanPropertyDescriptor<T>, IBooleanProperty, T>, IBooleanProperty
 		where T : class
 	{
 		double? IBooleanProperty.Boost { get; set; }

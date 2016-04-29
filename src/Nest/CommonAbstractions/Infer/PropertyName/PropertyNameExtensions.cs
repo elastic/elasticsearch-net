@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public static class PropertyNameExtensions
+	internal static class PropertyNameExtensions
 	{
 		internal static bool IsConditionless(this PropertyName property)
 		{
