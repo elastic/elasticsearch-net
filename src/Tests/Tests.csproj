@@ -320,6 +320,8 @@
     <Compile Include=".\Mapping\Types\Core\Date\DateMappingTests.cs" />
     <Compile Include=".\Mapping\Types\Core\Number\NumberMappingTests.cs" />
     <Compile Include="Aggregations\AggregationVisitorTests.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainApiTests.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainUrlTests.cs" />
     <Compile Include="CodeStandards\Serialization\Converters.doc.cs" />
     <Compile Include="Framework\MockData\PercolatedQuery.cs" />
     <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
