@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ChildrenAggregation>))]
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public interface IChildrenAggregation : IBucketAggregation
 	{
 		[JsonProperty("type")]
@@ -26,7 +27,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
 	}
 
-	public class ChildrenAggregationDescriptor<T> 
+	public class ChildrenAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
 	{

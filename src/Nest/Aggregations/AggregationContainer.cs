@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Nest
 {
@@ -279,6 +281,7 @@ namespace Nest
 			aggregator.WrapInContainer(container);
 			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
+			InjectMetadata(aggregator);
 			container.Meta = aggregator.Meta;
 			return container;
 		}
@@ -287,6 +290,15 @@ namespace Nest
 		{
 			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
 			new AggregationWalker().Walk(this, visitor);
+		}
+
+		internal static void InjectMetadata(IAggregation aggregation)
+		{
+			if (aggregation.Meta == null)
+				aggregation.Meta = new Dictionary<string, object>();
+			if (aggregation.Meta.ContainsKey(AggregationMetadata.Key))
+				throw new ArgumentException($"Metadata key: {AggregationMetadata.Key} is reserved. Please choose another.");
+			aggregation.Meta.Add(AggregationMetadata.Key, AggregationMetadata.Value(aggregation));
 		}
 	}
 
@@ -385,200 +397,206 @@ namespace Nest
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Average = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Average = d);
 
 		public AggregationContainerDescriptor<T> DateHistogram(string name,
 			Func<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
+			SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
 
 		public AggregationContainerDescriptor<T> Percentiles(string name,
 			Func<PercentilesAggregationDescriptor<T>, IPercentilesAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
 
 		public AggregationContainerDescriptor<T> PercentileRanks(string name,
 			Func<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
+			SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
 
 		public AggregationContainerDescriptor<T> DateRange(string name,
 			Func<DateRangeAggregationDescriptor<T>, IDateRangeAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.DateRange = d);
+			SetInnerAggregation(name, selector, (a, d) => a.DateRange = d);
 
 		public AggregationContainerDescriptor<T> ExtendedStats(string name,
 			Func<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.ExtendedStats = d);
+			SetInnerAggregation(name, selector, (a, d) => a.ExtendedStats = d);
 
 		public AggregationContainerDescriptor<T> Filter(string name,
 			Func<FilterAggregationDescriptor<T>, IFilterAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
 
-		public AggregationContainerDescriptor<T> Filters(string name,
-			Func<FiltersAggregationDescriptor<T>, IFiltersAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
+		public AggregationContainerDescriptor<T> AnonymousFilters(string name,
+			Func<AnonymousFiltersAggregationDescriptor<T>, IAnonymousFiltersAggregation> selector) =>
+			SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
+
+		public AggregationContainerDescriptor<T> NamedFilters(string name,
+			Func<NamedFiltersAggregationDescriptor<T>, INamedFiltersAggregation> selector) =>
+			SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
 
 		public AggregationContainerDescriptor<T> GeoDistance(string name,
 			Func<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
+			SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
 
 		public AggregationContainerDescriptor<T> GeoHash(string name,
 			Func<GeoHashGridAggregationDescriptor<T>, IGeoHashGridAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
+			SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
 
 		public AggregationContainerDescriptor<T> GeoBounds(string name,
 			Func<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
+			SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
 
 		public AggregationContainerDescriptor<T> Histogram(string name,
 			Func<HistogramAggregationDescriptor<T>, IHistogramAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
 
 		public AggregationContainerDescriptor<T> Global(string name,
 			Func<GlobalAggregationDescriptor<T>, IGlobalAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Global = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Global = d);
 
 		public AggregationContainerDescriptor<T> IpRange(string name,
 			Func<IpRangeAggregationDescriptor<T>, IIpRangeAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
+			SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
 
 		public AggregationContainerDescriptor<T> Max(string name,
 			Func<MaxAggregationDescriptor<T>, IMaxAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Max = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Max = d);
 
 		public AggregationContainerDescriptor<T> Min(string name,
 			Func<MinAggregationDescriptor<T>, IMinAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Min = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Min = d);
 
 		public AggregationContainerDescriptor<T> Cardinality(string name,
 			Func<CardinalityAggregationDescriptor<T>, ICardinalityAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
 
 		public AggregationContainerDescriptor<T> Missing(string name,
 			Func<MissingAggregationDescriptor<T>, IMissingAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
 
 		public AggregationContainerDescriptor<T> Nested(string name,
 			Func<NestedAggregationDescriptor<T>, INestedAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 
 		public AggregationContainerDescriptor<T> ReverseNested(string name,
 			Func<ReverseNestedAggregationDescriptor<T>, IReverseNestedAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
+			SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
 
 		public AggregationContainerDescriptor<T> Range(string name,
 			Func<RangeAggregationDescriptor<T>, IRangeAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Range = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Range = d);
 
 		public AggregationContainerDescriptor<T> Stats(string name,
 			Func<StatsAggregationDescriptor<T>, IStatsAggregator> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
 
 		public AggregationContainerDescriptor<T> Sum(string name,
 			Func<SumAggregationDescriptor<T>, ISumAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 
 		public AggregationContainerDescriptor<T> Terms(string name,
 			Func<TermsAggregationDescriptor<T>, ITermsAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
 		public AggregationContainerDescriptor<T> SignificantTerms(string name,
 			Func<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
+			SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
 
 		public AggregationContainerDescriptor<T> ValueCount(string name,
 			Func<ValueCountAggregationDescriptor<T>, IValueCountAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
+			SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
 
 		public AggregationContainerDescriptor<T> TopHits(string name,
 			Func<TopHitsAggregationDescriptor<T>, ITopHitsAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+			SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
 
 		public AggregationContainerDescriptor<T> Children<TChild>(string name,
 			Func<ChildrenAggregationDescriptor<TChild>, IChildrenAggregation> selector) where TChild : class =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Children = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Children = d);
 
 		public AggregationContainerDescriptor<T> ScriptedMetric(string name,
 			Func<ScriptedMetricAggregationDescriptor<T>, IScriptedMetricAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
+			SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
 
 		public AggregationContainerDescriptor<T> AverageBucket(string name,
 			Func<AverageBucketAggregationDescriptor, IAverageBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.AverageBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.AverageBucket = d);
 
 		public AggregationContainerDescriptor<T> Derivative(string name,
 			Func<DerivativeAggregationDescriptor, IDerivativeAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Derivative = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Derivative = d);
 
 		public AggregationContainerDescriptor<T> MaxBucket(string name,
 			Func<MaxBucketAggregationDescriptor, IMaxBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.MaxBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.MaxBucket = d);
 
 		public AggregationContainerDescriptor<T> MinBucket(string name,
 			Func<MinBucketAggregationDescriptor, IMinBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.MinBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.MinBucket = d);
 
 		public AggregationContainerDescriptor<T> SumBucket(string name,
 			Func<SumBucketAggregationDescriptor, ISumBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.SumBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.SumBucket = d);
 
 		public AggregationContainerDescriptor<T> StatsBucket(string name,
 			Func<StatsBucketAggregationDescriptor, IStatsBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.StatsBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.StatsBucket = d);
 
 		public AggregationContainerDescriptor<T> ExtendedStatsBucket(string name,
 			Func<ExtendedStatsBucketAggregationDescriptor, IExtendedStatsBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.ExtendedStatsBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.ExtendedStatsBucket = d);
 
 		public AggregationContainerDescriptor<T> PercentilesBucket(string name,
 			Func<PercentilesBucketAggregationDescriptor, IPercentilesBucketAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.PercentilesBucket = d);
+			SetInnerAggregation(name, selector, (a, d) => a.PercentilesBucket = d);
 
 		public AggregationContainerDescriptor<T> MovingAverage(string name,
 			Func<MovingAverageAggregationDescriptor, IMovingAverageAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
+			SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
 
 		public AggregationContainerDescriptor<T> CumulativeSum(string name,
 			Func<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.CumulativeSum = d);
+			SetInnerAggregation(name, selector, (a, d) => a.CumulativeSum = d);
 
 		public AggregationContainerDescriptor<T> SerialDifferencing(string name,
 			Func<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.SerialDifferencing = d);
+			SetInnerAggregation(name, selector, (a, d) => a.SerialDifferencing = d);
 
 		public AggregationContainerDescriptor<T> BucketScript(string name,
 			Func<BucketScriptAggregationDescriptor, IBucketScriptAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.BucketScript = d);
+			SetInnerAggregation(name, selector, (a, d) => a.BucketScript = d);
 
 		public AggregationContainerDescriptor<T> BucketSelector(string name,
 			Func<BucketSelectorAggregationDescriptor, IBucketSelectorAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.BucketSelector = d);
+			SetInnerAggregation(name, selector, (a, d) => a.BucketSelector = d);
 
 		public AggregationContainerDescriptor<T> Sampler(string name,
 			Func<SamplerAggregationDescriptor<T>, ISamplerAggregation> selector) =>
-			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
+			SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
 		/// </summary>
-		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregator, TAggregatorInterface>(
+		private AggregationContainerDescriptor<T> SetInnerAggregation<TAggregation, TAggregationInterface>(
 			string key,
-			Func<TAggregator, TAggregatorInterface> selector
-			, Action<IAggregationContainer, TAggregatorInterface> assignToProperty
+			Func<TAggregation, TAggregationInterface> selector
+			, Action<IAggregationContainer, TAggregationInterface> assignToProperty
 		)
-			where TAggregator : IAggregation, TAggregatorInterface, new()
-			where TAggregatorInterface : IAggregation
+			where TAggregation : IAggregation, TAggregationInterface, new()
+			where TAggregationInterface : IAggregation
 		{
-			var aggregator = selector(new TAggregator());
+			var aggregation = selector(new TAggregation());
+
+			AggregationContainer.InjectMetadata(aggregation);
 
 			//create new isolated container for new aggregator and assign to the right property
-			var container = new AggregationContainer() { Meta = aggregator.Meta };
+			var container = new AggregationContainer() { Meta = aggregation.Meta };
 
-			assignToProperty(container, aggregator);
+			assignToProperty(container, aggregation);
 
 			//create aggregations dictionary on `this` if it does not exist already
 			IAggregationContainer self = this;
 			if (self.Aggregations == null) self.Aggregations = new Dictionary<string, IAggregationContainer>();
 
 			//if the aggregator is a bucket aggregator (meaning it contains nested aggregations);
-			var bucket = aggregator as IBucketAggregation;
+			var bucket = aggregation as IBucketAggregation;
 			if (bucket != null && bucket.Aggregations.HasAny())
 			{
 				//make sure we copy those aggregations to the isolated container's

@@ -2,6 +2,8 @@
 
 namespace Nest
 {
+	// TODO rename this dropping the *Bucket suffix?
+	// Can be confusing since it conflicts with our aggregation naming conventions
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SuggestBucket>))]
 	public interface ISuggestBucket

@@ -1,17 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class RangeBucket : BucketBase, IBucket
 	{
-		public RangeBucket() { }
-		public RangeBucket(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		[JsonProperty("key")]
+		public string Key { get; internal set; }
 
-		public string Key { get; set; }
-		public double? From { get; set; }
-		public string FromAsString { get; set; }
-		public double? To { get; set; }
-		public string ToAsString { get; set; }
-		public long DocCount { get; set; }
+		[JsonProperty("from")]
+		public double? From { get; internal set; }
+
+		[JsonProperty("from_as_string")]
+		public string FromAsString { get; internal set; }
+
+		[JsonProperty("to")]
+		public double? To { get; internal set; }
+
+		[JsonProperty("to_as_string")]
+		public string ToAsString { get; internal set; }
+
+		[JsonProperty("doc_count")]
+		public long DocCount { get; internal set; }
+
+		internal override bool Matches(JToken source) => source.Value<string>() == this.Key;
 	}
 }

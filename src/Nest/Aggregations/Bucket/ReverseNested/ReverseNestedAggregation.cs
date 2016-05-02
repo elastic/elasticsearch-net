@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ReverseNestedAggregation>))]
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public interface IReverseNestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")]

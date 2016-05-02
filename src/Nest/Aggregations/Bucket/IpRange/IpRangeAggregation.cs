@@ -8,6 +8,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<IpRangeAggregation>))]
+	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
 	public interface IIpRangeAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

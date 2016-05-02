@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
+	[AggregateType(typeof(MultiBucketAggregate<DateHistogramBucket>))]
 	public interface IDateHistogramAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

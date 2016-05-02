@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<PercentilesBucketAggregation>))]
+	[AggregateType(typeof(PercentilesAggregate))]
 	public interface IPercentilesBucketAggregation : IPipelineAggregation
 	{
 		[JsonProperty("percents")]

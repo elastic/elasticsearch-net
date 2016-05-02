@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<TermsAggregation>))]
+	[AggregateType(typeof(TermsAggregate))]
 	public interface ITermsAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

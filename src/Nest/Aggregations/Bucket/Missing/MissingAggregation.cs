@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<MissingAggregation>))]
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public interface IMissingAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

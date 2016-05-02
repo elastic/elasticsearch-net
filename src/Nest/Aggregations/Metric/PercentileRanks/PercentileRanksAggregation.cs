@@ -5,6 +5,7 @@ using System.Linq;
 namespace Nest
 {
 	[ContractJsonConverter(typeof(PercentileRanksAggregationJsonConverter))]
+	[AggregateType(typeof(PercentilesAggregate))]
 	public interface IPercentileRanksAggregation : IMetricAggregation
 	{
 		IEnumerable<double> Values { get; set; }
@@ -23,7 +24,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.PercentileRanks = this;
 	}
 
-	public class PercentileRanksAggregationDescriptor<T> 
+	public class PercentileRanksAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation, T>, IPercentileRanksAggregation
 		where T : class
 	{

@@ -4,6 +4,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<CardinalityAggregation>))]
+	[AggregateType(typeof(ValueAggregate))]
 	public interface ICardinalityAggregation : IMetricAggregation
 	{
 		[JsonProperty("precision_threshold")]
@@ -25,9 +26,9 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
-	public class CardinalityAggregationDescriptor<T> 
+	public class CardinalityAggregationDescriptor<T>
 		: MetricAggregationDescriptorBase<CardinalityAggregationDescriptor<T>, ICardinalityAggregation, T>
-			, ICardinalityAggregation 
+			, ICardinalityAggregation
 		where T : class
 	{
 		int? ICardinalityAggregation.PrecisionThreshold { get; set; }
