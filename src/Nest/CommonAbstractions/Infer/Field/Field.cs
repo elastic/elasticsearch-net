@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using System.Linq;
 
 namespace Nest
 {
@@ -12,6 +13,8 @@ namespace Nest
 		private string _name;
 		private Expression _expression;
 		private PropertyInfo _property;
+
+		private Type Type { get; set; }
 
 		public string Name
 		{
@@ -31,8 +34,11 @@ namespace Nest
 			set
 			{
 				_expression = value;
-				var comparisonValue = ComparisonValueFromExpression(value);
+				Type type;
+				var comparisonValue = ComparisonValueFromExpression(value, out type);
+				Type = type;
 				SetComparisonValue(comparisonValue);
+				CacheableExpression = !new HasConstantExpressionVisitor(value).Found;
 			}
 		}
 
@@ -43,12 +49,15 @@ namespace Nest
 			{
 				_property = value;
 				SetComparisonValue(value);
+				Type = value.DeclaringType;
 			}
 		}
 
 		public double? Boost { get; set; }
 
 		private object ComparisonValue { get; set; }
+
+		public bool CacheableExpression { get; private set; }
 
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
@@ -82,31 +91,32 @@ namespace Nest
 			if (parts.Length > 1)
 			{
 				name = parts[0];
-				boost = Double.Parse(parts[1], CultureInfo.InvariantCulture);
+				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			}
 			return name;
 		}
 
-		private static object ComparisonValueFromExpression(Expression expression)
+		private static object ComparisonValueFromExpression(Expression expression, out Type type)
 		{
+			type = null;
+
 			if (expression == null) return null;
 
 			var lambda = expression as LambdaExpression;
 			if (lambda == null)
 				return expression.ToString();
 
-			var memberExpression = lambda.Body as MemberExpression;
-			if (memberExpression == null)
-				return expression.ToString();
+			type = lambda.Parameters.FirstOrDefault()?.Type;
 
-			return memberExpression;
+			var memberExpression = lambda.Body as MemberExpression;
+			return memberExpression?.ToString() ?? expression.ToString();
 		}
 
 		public static implicit operator Field(string name)
 		{
 			return name.IsNullOrEmpty() ? null : new Field
 			{
-				Name = name
+				Name = name,
 			};
 		}
 
@@ -126,7 +136,12 @@ namespace Nest
 			};
 		}
 
-		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
+		public override int GetHashCode()
+		{
+			var hashCode = ComparisonValue?.GetHashCode() ?? 0;
+			hashCode = (hashCode * 397) ^ (Type?.GetHashCode() ?? 0);
+			return hashCode;
+		}
 
 		bool IEquatable<Field>.Equals(Field other) => Equals(other);
 
