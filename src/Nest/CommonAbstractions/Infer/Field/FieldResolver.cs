@@ -37,6 +37,10 @@ namespace Nest
 		{
 			if (field.IsConditionless()) return null;
 			if (!field.Name.IsNullOrEmpty()) return field.Name;
+			if (field.Expression != null && !field.CachableExpression)
+			{
+				return this.Resolve(field.Expression, field.Property);
+			}
 
 			string f;
 			if (this.Fields.TryGetValue(field, out f))

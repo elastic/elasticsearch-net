@@ -22,6 +22,8 @@ namespace Nest
 
 		private object ComparisonValue { get; }
 
+		public bool CachableExpression { get; }
+
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
 
@@ -44,6 +46,7 @@ namespace Nest
 			Type type;
 			ComparisonValue = ComparisonValueFromExpression(expression, out type);
 			Type = type;
+			CachableExpression = !new HasConstantExpressionVisitor(expression).Found;
 		}
 
 		public Field(PropertyInfo property, double? boost = null)
