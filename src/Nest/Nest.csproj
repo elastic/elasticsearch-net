@@ -851,6 +851,7 @@
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionAttribute.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionProperty.cs" />
+    <Compile Include="Mapping\Types\Specialized\Generic\GenericProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\IpAttribute.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\IpProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Murmur3Hash\Murmur3HashAttribute.cs" />
