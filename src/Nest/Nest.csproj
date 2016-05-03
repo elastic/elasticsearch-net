@@ -299,6 +299,9 @@
     <Compile Include="Cat\CatThreadPool\ElasticClient-CatThreadpool.cs" />
     <Compile Include="Cat\ElasticClient-Cat.cs" />
     <Compile Include="Cat\ICatRecord.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainRequest.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ClusterAllocationExplainResponse.cs" />
+    <Compile Include="Cluster\ClusterAllocationExplain\ElasticClient-ClusterAllocationExplain.cs" />
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthRequest.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
@@ -848,6 +851,7 @@
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionAttribute.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionProperty.cs" />
+    <Compile Include="Mapping\Types\Specialized\Generic\GenericProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\IpAttribute.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\IpProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Murmur3Hash\Murmur3HashAttribute.cs" />
