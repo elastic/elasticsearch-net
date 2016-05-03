@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -13,11 +14,13 @@ namespace Nest
 
 		public Expression Expression { get; private set; }
 
+		private Type Type { get; }
+
 		public PropertyInfo Property { get; private set; }
 
 		public double? Boost { get; set; }
 
-		private object ComparisonValue { get; set; }
+		private object ComparisonValue { get; }
 
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
@@ -26,33 +29,30 @@ namespace Nest
 
 		public Field(string name, double? boost = null)
 		{
-			if (!name.IsNullOrEmpty())
-			{
-				double? b;
-				Name = ParseFieldName(name, out b);
-				Boost = b ?? boost;
-				ComparisonValue = Name;
-			}
+			if (name.IsNullOrEmpty()) return;
+			double? b;
+			Name = ParseFieldName(name, out b);
+			Boost = b ?? boost;
+			ComparisonValue = Name;
 		}
 
 		public Field(Expression expression, double? boost = null)
 		{
-			if (expression != null)
-			{
-				Expression = expression;
-				Boost = boost;
-				ComparisonValue = ComparisonValueFromExpression(expression);
-			}
+			if (expression == null) return;
+			Expression = expression;
+			Boost = boost;
+			Type type;
+			ComparisonValue = ComparisonValueFromExpression(expression, out type);
+			Type = type;
 		}
 
 		public Field(PropertyInfo property, double? boost = null)
 		{
-			if (property != null)
-			{
-				Property = property;
-				Boost = boost;
-				ComparisonValue = property;
-			}
+			if (property == null) return;
+			Property = property;
+			Boost = boost;
+			ComparisonValue = property;
+			Type = property.DeclaringType;
 		}
 
 		private static string ParseFieldName(string name, out double? boost)
@@ -64,24 +64,23 @@ namespace Nest
 			if (parts.Length > 1)
 			{
 				name = parts[0];
-				boost = Double.Parse(parts[1], CultureInfo.InvariantCulture);
+				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			}
 			return name;
 		}
 
-		private static object ComparisonValueFromExpression(Expression expression)
+		private static object ComparisonValueFromExpression(Expression expression, out Type type)
 		{
-			if (expression == null) return null;
+			type = null;
 
 			var lambda = expression as LambdaExpression;
 			if (lambda == null)
 				return expression.ToString();
 
-			var memberExpression = lambda.Body as MemberExpression;
-			if (memberExpression == null)
-				return expression.ToString();
+			type = lambda.Parameters.FirstOrDefault()?.Type;
 
-			return memberExpression;
+			var memberExpression = lambda.Body as MemberExpression;
+			return memberExpression?.ToString() ?? expression.ToString();
 		}
 
 		public static implicit operator Field(string name)
@@ -99,7 +98,12 @@ namespace Nest
 			return property == null ? null : new Field(property);
 		}
 
-		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
+		public override int GetHashCode()
+		{
+			var hashCode = ComparisonValue?.GetHashCode() ?? 0;
+			hashCode = (hashCode*397) ^ (Type?.GetHashCode() ?? 0);
+			return hashCode;
+		}
 
 		bool IEquatable<Field>.Equals(Field other) => Equals(other);
 

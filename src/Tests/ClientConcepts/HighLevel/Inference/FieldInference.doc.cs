@@ -45,6 +45,37 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 				.WhenSerializing(fieldProperty);
 		}
 
+		public class TestableFieldResolver : FieldResolver
+		{
+			public TestableFieldResolver(IConnectionSettingsValues settings) : base(settings) { }
+
+			public long CachedFields => Fields.Count;
+			public long CachedProperties => Properties.Count;
+		}
+
+		[U] public void CachingFieldsShouldNotLeak()
+		{
+			var resolver = new TestableFieldResolver(new ConnectionSettings());
+
+			var field1 = Field<CommitActivity>(p => p.Id);
+			var field2 = Field<CommitActivity>(p => p.Id);
+
+			resolver.Resolve(field1);
+			resolver.Resolve(field2);
+			resolver.CachedFields.Should().Be(1,
+				"resolved the same field twice albeit with different object references");
+
+			var field3 = Field<CommitActivity>(p => p.Id, 2.2);
+			resolver.Resolve(field3);
+			resolver.CachedFields.Should().Be(1,
+				"resolved the same field three times once with boosting which should have no baring on cache, suffixed independantly");
+
+			var field4 = Field<Person>(p => p.Id);
+			resolver.Resolve(field4);
+			resolver.CachedFields.Should().Be(2,
+				"same expression but on a different type");
+		}
+
 		[U]
 		public void UsingConstructorAlsoSetsComparisonValue()
 		{

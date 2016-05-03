@@ -17,8 +17,8 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _settings;
 
-		private readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
-		private readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+		protected readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
+		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
