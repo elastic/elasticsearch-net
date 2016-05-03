@@ -2,6 +2,7 @@
 using Nest;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,6 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.CachedFields.Should().Be(1);
 			}
 
-			//
 			[U]
 			public void ExpressionWithSuffix()
 			{
@@ -48,6 +48,35 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.Resolve(Field<Project>(p => p.Name.Suffix("raw")));
 				resolver.CachedFields.Should().Be(2);
 				resolver.Resolve(Field<Project>(p => p.Name.Suffix("raw"), 1.1));
+				resolver.CachedFields.Should().Be(2);
+			}
+
+			[U]
+			public void ExpressionWithVariableSuffix()
+			{
+				var suffix = "raw";
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
+				resolver.CachedFields.Should().Be(1);
+				suffix = "foo";
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
+				resolver.CachedFields.Should().Be(2);
+			}
+
+			[U]
+			public void ExpressionWithDictionarySuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var d = new Dictionary<string, string> { { "key1", "raw" }, { "key2", "foo" } };
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
+				resolver.CachedFields.Should().Be(1);
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d["key1"])));
+				resolver.CachedFields.Should().Be(1);
+				key = "key2";
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
+				resolver.CachedFields.Should().Be(2);
+				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d["key2"])));
 				resolver.CachedFields.Should().Be(2);
 			}
 
@@ -142,6 +171,62 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.CachedProperties.Should().Be(1);
 				resolver.Resolve((PropertyName)typeof(CommitActivity).GetProperty(nameof(CommitActivity.Id)));
 				resolver.CachedProperties.Should().Be(2);
+			}
+		}
+
+		public class CachePerformance
+		{
+			public class HitTiming
+			{
+				public Field Field { get; set; }
+				public double FirstHit { get; set; }
+				public double CachedHit { get; set; }
+
+				public override string ToString() => $"First hit took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
+			}
+
+			private List<HitTiming> _timings = new List<HitTiming>();
+			private Stopwatch _stopwatch;
+			private FieldResolver _resolver;
+
+			[U]
+			public void CachedVsNonCached()
+			{
+
+				_resolver = new FieldResolver(new ConnectionSettings());
+				_stopwatch = Stopwatch.StartNew();
+
+				AddTiming(Field<Project>(p => p.Name));
+				AddTiming(Field<Project>(p => p.Description));
+				AddTiming(Field<Project>(p => p.NumberOfCommits));
+				AddTiming(Field<Project>(p => p.LastActivity));
+				AddTiming(Field<Project>(p => p.LeadDeveloper));
+				AddTiming(Field<Project>(p => p.Metadata));
+				AddTiming(Field<Project>(p => p.Tags));
+				AddTiming(Field<Project>(p => p.CuratedTags));
+
+				AddTiming(Field<CommitActivity>(p => p.Id));
+				AddTiming(Field<CommitActivity>(p => p.Message));
+				AddTiming(Field<CommitActivity>(p => p.ProjectName));
+				AddTiming(Field<CommitActivity>(p => p.StringDuration));
+			}
+
+			private void AddTiming(Field field)
+			{
+				var timing = new HitTiming { Field = field };
+				_timings.Add(timing);
+
+				_stopwatch = Stopwatch.StartNew();
+
+				_resolver.Resolve(field);
+				timing.FirstHit = _stopwatch.Elapsed.TotalMilliseconds;
+
+				_stopwatch.Restart();
+
+				_resolver.Resolve(field);
+				timing.CachedHit = _stopwatch.Elapsed.TotalMilliseconds;
+
+				_stopwatch.Stop();
 			}
 		}
 	}
