@@ -13,7 +13,7 @@ namespace Nest
 		private IHighLevelToLowLevelDispatcher Dispatcher => this;
 
 		private LowLevelDispatch LowLevelDispatch { get; }
-	
+
 		private ITransport<IConnectionSettingsValues> Transport { get; }
 
 		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
@@ -24,7 +24,7 @@ namespace Nest
 
 		public ElasticClient() : this(new ConnectionSettings(new Uri("http://localhost:9200"))) { }
 		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
-		public ElasticClient(IConnectionSettingsValues connectionSettings) 
+		public ElasticClient(IConnectionSettingsValues connectionSettings)
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
 
 		public ElasticClient(ITransport<IConnectionSettingsValues> transport)
@@ -40,8 +40,8 @@ namespace Nest
 		}
 
 		TResponse IHighLevelToLowLevelDispatcher.Dispatch<TRequest, TQueryString, TResponse>(
-			TRequest request, 
-			Func<TRequest, PostData<object>, 
+			TRequest request,
+			Func<TRequest, PostData<object>,
 			ElasticsearchResponse<TResponse>> dispatch
 			) => this.Dispatcher.Dispatch<TRequest,TQueryString,TResponse>(request, null, dispatch);
 
@@ -58,19 +58,17 @@ namespace Nest
 		}
 
 		Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest descriptor, 
+			TRequest descriptor,
 			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest request, 
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
+			TRequest request,
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
 			Func<TRequest, PostData<object>, Task<ElasticsearchResponse<TResponse>>> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
-			request.RequestParameters.DeserializationOverride(responseGenerator);
-
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 			var response = await dispatch(request, request).ConfigureAwait(false);
 			return ResultsSelector(response);
@@ -80,7 +78,7 @@ namespace Nest
 			where TResponse : ResponseBase =>
 			c.Body ?? CreateInvalidInstance<TResponse>(c);
 
-		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response) 
+		private static TResponse CreateInvalidInstance<TResponse>(IApiCallDetails response)
 			where TResponse : ResponseBase
 		{
 			var r = typeof(TResponse).CreateInstance<TResponse>();

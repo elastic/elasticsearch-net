@@ -15,7 +15,12 @@ namespace Nest
 		public void Accept(IGetMappingResponse response)
 		{
 			if (response == null) return;
-			this.Accept(response.Mapping);
+
+			foreach (var indexMapping in response.IndexTypeMappings)
+			foreach (var typeMapping in indexMapping.Value)
+			{
+				this.Accept(typeMapping.Value);
+			}
 		}
 
 		public void Accept(TypeMapping mapping)
@@ -24,7 +29,7 @@ namespace Nest
 			this._visitor.Visit(mapping);
 			this.Accept(mapping.Properties);
 		}
-			
+
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
