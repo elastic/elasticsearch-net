@@ -57,13 +57,10 @@ namespace Nest
 				(p, d, c) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p, c)
 			);
 
-		//TODO this is too geared towards getting a single mapping
 		private GetMappingResponse DeserializeGetMappingResponse(IApiCallDetails response, IGetMappingRequest d, Stream stream)
 		{
-			var dict = response.Success
-				? Serializer.Deserialize<GetRootObjectMappingWrapping>(stream)
-				: null;
-			return new GetMappingResponse(response, dict);
+			var dict = Serializer.Deserialize<GetRootObjectMappingWrapping>(stream);
+			return new GetMappingResponse(dict);
 		}
 
 	}
