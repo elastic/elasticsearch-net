@@ -56,11 +56,13 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			{
 				var suffix = "raw";
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
-				resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
-				resolver.CachedFields.Should().Be(1);
+				var resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
+				resolved.Should().EndWith("raw");
+				resolver.CachedFields.Should().Be(0);
 				suffix = "foo";
-				resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
-				resolver.CachedFields.Should().Be(2);
+				resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
+				resolved.Should().EndWith("foo");
+				resolver.CachedFields.Should().Be(0);
 			}
 
 			[U]
@@ -69,15 +71,18 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
 				var key = "key1";
 				var d = new Dictionary<string, string> { { "key1", "raw" }, { "key2", "foo" } };
-				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
-				resolver.CachedFields.Should().Be(1);
+				var resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
+				resolved.Should().EndWith("raw");
+				resolver.CachedFields.Should().Be(0);
 				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d["key1"])));
-				resolver.CachedFields.Should().Be(1);
+				resolver.CachedFields.Should().Be(0);
+
 				key = "key2";
-				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
-				resolver.CachedFields.Should().Be(2);
+				resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(d[key])));
+				resolved.Should().EndWith("foo");
+				resolver.CachedFields.Should().Be(0);
 				resolver.Resolve(Field<Project>(p => p.Name.Suffix(d["key2"])));
-				resolver.CachedFields.Should().Be(2);
+				resolver.CachedFields.Should().Be(0);
 			}
 
 			[U]
@@ -196,6 +201,9 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				_resolver = new FieldResolver(new ConnectionSettings());
 				_stopwatch = Stopwatch.StartNew();
 
+				AddTiming(Field<Project>(p => p.Metadata["fixed"]));
+				var x = "dynamic";
+				AddTiming(Field<Project>(p => p.Metadata[x]));
 				AddTiming(Field<Project>(p => p.Name));
 				AddTiming(Field<Project>(p => p.Description));
 				AddTiming(Field<Project>(p => p.NumberOfCommits));
@@ -209,6 +217,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				AddTiming(Field<CommitActivity>(p => p.Message));
 				AddTiming(Field<CommitActivity>(p => p.ProjectName));
 				AddTiming(Field<CommitActivity>(p => p.StringDuration));
+				//throw new Exception(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
 			}
 
 			private void AddTiming(Field field)
