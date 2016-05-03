@@ -43,5 +43,10 @@ namespace Nest
 			where T : class => new Nest.Field(path, boost);
 
 		public static Field Field(string field, double? boost = null) => new Nest.Field(field, boost);
+
+		public static PropertyName Property(string property) => property;
+
+		public static PropertyName Property<T>(Expression<Func<T, object>> path)
+			where T : class => path;
 	}
 }
