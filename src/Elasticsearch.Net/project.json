@@ -24,8 +24,8 @@
     "url": "https://github.com/elastic/elasticsearch-net"
   },
   "copyright": "2014-2016 Elasticsearch BV",
-  "version": "2.3.0",
-  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.3.0",
+  "version": "2.3.1",
+  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.3.1",
   "compilationOptions": {
     "warningsAsErrors": false
   },
