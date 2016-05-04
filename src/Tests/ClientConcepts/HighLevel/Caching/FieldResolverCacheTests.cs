@@ -80,6 +80,15 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			}
 
 			[U]
+			public void StringInequality()
+			{
+				Field first = "Name";
+				Field second = "name";
+
+				first.Should().NotBe(second);
+			}
+
+			[U]
 			public void Expression()
 			{
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
@@ -159,8 +168,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolved.Should().Contain(key);
 			}
 
-			[U]
-			public void ExpressionWithDictionaryItemConstantExpression()
+			[U] public void ExpressionWithDictionaryItemConstantExpression()
 			{
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
 				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"]));
@@ -169,6 +177,19 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"]));
 				resolver.CachedFields.Should().Be(2);
 				resolved.Should().Contain("key2");
+			}
+
+			[U] public void ExpressionWithDictionaryItemConstantExpressionAndVariableSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var suffix = "x";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Contain("key1").And.EndWith(".x");
+				suffix = "y";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"].Suffix(suffix)));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Contain("key2").And.EndWith(".y");
 			}
 
 			[U]
@@ -217,7 +238,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.Resolve((Field)typeof(Project).GetProperty(nameof(Project.Name)));
 				resolver.CachedFields.Should().Be(1);
 				resolver.Resolve((Field)typeof(Project).GetProperty(nameof(Project.Name)));
-				resolver.CachedFields.Should().Be(1);;
+				resolver.CachedFields.Should().Be(1);
 			}
 
 			[U]
@@ -280,6 +301,14 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				first.Should().Be(second);
 			}
 
+			[U]
+			public void PropertyInfoInequality()
+			{
+				PropertyName first = typeof(Project).GetProperty(nameof(Project.Name));
+				PropertyName second = typeof(Project).GetProperty(nameof(Project.NumberOfCommits));
+
+				first.Should().NotBe(second);
+			}
 			[U]
 			public void StringEquality()
 			{
@@ -381,7 +410,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			public class HitTiming
 			{
 				public string Name { get; set; }
-				public Field Field { get; set; }
+				public Func<Field> Field { get; set; }
 				public double FirstHit { get; set; }
 				public double CachedHit { get; set; }
 
@@ -397,39 +426,39 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			{
 				_resolver = new FieldResolver(new ConnectionSettings());
 
-				AddTiming(Field<Project>(p => p.Metadata["fixed"]));
+				AddTiming(()=>Field<Project>(p => p.Metadata["fixed"]));
 				var x = "dynamic";
-				AddTiming(Field<Project>(p => p.Metadata[x]));
-				AddTiming(Field<Project>(p => p.Name));
-				AddTiming(Field<Project>(p => p.Description));
-				AddTiming(Field<Project>(p => p.NumberOfCommits));
-				AddTiming(Field<Project>(p => p.LastActivity));
-				AddTiming(Field<Project>(p => p.LeadDeveloper));
-				AddTiming(Field<Project>(p => p.Metadata));
-				AddTiming(Field<Project>(p => p.Tags));
-				AddTiming(Field<Project>(p => p.CuratedTags));
+				AddTiming(()=>Field<Project>(p => p.Metadata[x]));
+				AddTiming(()=>Field<Project>(p => p.Name));
+				AddTiming(()=>Field<Project>(p => p.Description));
+				AddTiming(()=>Field<Project>(p => p.NumberOfCommits));
+				AddTiming(()=>Field<Project>(p => p.LastActivity));
+				AddTiming(()=>Field<Project>(p => p.LeadDeveloper));
+				AddTiming(()=>Field<Project>(p => p.Metadata));
+				AddTiming(()=>Field<Project>(p => p.Tags));
+				AddTiming(()=>Field<Project>(p => p.CuratedTags));
 
-				AddTiming(Field<CommitActivity>(p => p.Id));
-				AddTiming(Field<CommitActivity>(p => p.Message));
-				AddTiming(Field<CommitActivity>(p => p.ProjectName));
-				AddTiming(Field<CommitActivity>(p => p.StringDuration));
+				AddTiming(()=>Field<CommitActivity>(p => p.Id));
+				AddTiming(()=>Field<CommitActivity>(p => p.Message));
+				AddTiming(()=>Field<CommitActivity>(p => p.ProjectName));
+				AddTiming(()=>Field<CommitActivity>(p => p.StringDuration));
 
 				output.WriteLine(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
 			}
 
-			private void AddTiming(Field field)
+			private void AddTiming(Func<Field> field)
 			{
 				var timing = new HitTiming { Field = field };
 				_timings.Add(timing);
 
 				_stopwatch = Stopwatch.StartNew();
 
-				timing.Name = _resolver.Resolve(field);
+				timing.Name = _resolver.Resolve(field());
 				timing.FirstHit = _stopwatch.Elapsed.TotalMilliseconds;
 
 				_stopwatch.Restart();
 
-				_resolver.Resolve(field);
+				_resolver.Resolve(field());
 				timing.CachedHit = _stopwatch.Elapsed.TotalMilliseconds;
 
 				_stopwatch.Stop();
