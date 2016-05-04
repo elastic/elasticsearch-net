@@ -31,11 +31,11 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null)
-			where T : class => 
+			where T : class =>
 			this.GetMapping(selector.InvokeOrDefault(new GetMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IGetMappingResponse GetMapping(IGetMappingRequest request) => 
+		public IGetMappingResponse GetMapping(IGetMappingRequest request) =>
 			this.Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
 				request,
 				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
@@ -48,21 +48,17 @@ namespace Nest
 			this.GetMappingAsync(selector.InvokeOrDefault(new GetMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request) => 
+		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest request) =>
 			this.Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				request,
 				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, request, s)),
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p)
 			);
-		
-		//TODO this is too geared towards getting a single mapping
+
 		private GetMappingResponse DeserializeGetMappingResponse(IApiCallDetails response, IGetMappingRequest d, Stream stream)
 		{
-			var dict = response.Success
-				? Serializer.Deserialize<GetRootObjectMappingWrapping>(stream)
-				: null;
-			return new GetMappingResponse(response, dict);
+			var dict = Serializer.Deserialize<GetRootObjectMappingWrapping>(stream);
+			return new GetMappingResponse(dict);
 		}
-
 	}
 }
