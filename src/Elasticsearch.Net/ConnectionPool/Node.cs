@@ -23,6 +23,9 @@ namespace Elasticsearch.Net
 		/// <summary> When set this signals the transport that a ping before first usage would be wise</summary>
 		public bool IsResurrected { get; set; }
 
+		/// <summary>Whether HTTP is enabled on the node or not</summary>
+		public bool HttpEnabled { get; set; } = true;
+
 		/// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
 		public bool HoldsData { get; set; }
 
