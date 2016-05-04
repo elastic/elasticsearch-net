@@ -77,6 +77,39 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			};
 			await audit.TraceStartup();
 		}
+
+		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task SkipsNodesThatDisableHttp()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.Sniff(s => s.SucceedAlways()
+					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
+				)
+				.SniffingConnectionPool()
+				.AllDefaults()
+			)
+			{
+				AssertPoolBeforeCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(10);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+					pool.Nodes.Where(n => n.HttpEnabled).Should().HaveCount(10);
+					pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
+				},
+
+				AssertPoolAfterCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(7, "we filtered the node that stores no data");
+					pool.Nodes.Should().NotContain(n=>n.Uri.Port == 9201);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+				}
+			};
+			await audit.TraceStartup();
+		}
+
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsFqdn()
 		{
