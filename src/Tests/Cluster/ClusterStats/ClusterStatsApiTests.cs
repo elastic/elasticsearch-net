@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterStats
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterStatsApiTests : ApiIntegrationTestBase<IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
 	{
 		public ClusterStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

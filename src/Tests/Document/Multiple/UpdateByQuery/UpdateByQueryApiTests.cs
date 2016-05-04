@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
 {
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test
@@ -100,7 +100,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		}
 	}
 
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class UpdateByQueryWaitForCompletionApiTests : UpdateByQueryApiTests
 	{
 		public UpdateByQueryWaitForCompletionApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -126,7 +126,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		}
 	}
 
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class UpdateByQueryWithFailuresApiTests : UpdateByQueryApiTests
 	{
 		public UpdateByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

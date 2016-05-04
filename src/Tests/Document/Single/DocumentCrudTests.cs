@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Document.Single
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DocumentCrudTests : CrudTestBase<IIndexResponse, IGetResponse<Project>, IUpdateResponse<Project>, IDeleteResponse>
 	{
 		public DocumentCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

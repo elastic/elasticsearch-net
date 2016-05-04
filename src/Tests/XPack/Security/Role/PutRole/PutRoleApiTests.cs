@@ -11,7 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.XPack.Security.Role.PutRole
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class PutRoleApiTests : ApiIntegrationTestBase<IPutRoleResponse, IPutRoleRequest, PutRoleDescriptor, PutRoleRequest>
 	{
 		public PutRoleApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -88,7 +88,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		}
 	}
 
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class PutRoleRunAsApiTests : PutRoleApiTests
 	{
 		public PutRoleRunAsApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

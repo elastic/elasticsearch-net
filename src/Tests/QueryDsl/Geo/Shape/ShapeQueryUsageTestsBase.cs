@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Tests.QueryDsl
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public abstract class ShapeQueryUsageTestsBase : QueryDslUsageTestsBase
 	{
 		public ShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.User
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class UserCrudTests
 		: CrudTestBase<IPutUserResponse, IGetUserResponse, IPutUserResponse, IDeleteUserResponse>
 	{

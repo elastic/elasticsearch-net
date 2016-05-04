@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Tests.Ingest.PutPipeline
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class PutPipelineApiTests
 		: ApiIntegrationTestBase<IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{

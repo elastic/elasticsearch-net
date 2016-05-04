@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatAliases
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatAliasesApiTests : ApiIntegrationTestBase<ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
 	{
 		public CatAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

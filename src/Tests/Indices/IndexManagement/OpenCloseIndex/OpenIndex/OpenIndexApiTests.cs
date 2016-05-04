@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class OpenIndexApiTests 
 		: ApiIntegrationTestBase<IOpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{

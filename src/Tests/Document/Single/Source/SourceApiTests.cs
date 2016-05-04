@@ -7,8 +7,8 @@ using Xunit;
 
 namespace Tests.Document.Single.Source
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SourceIntegrationTests : SimpleIntegration
+	[Collection(TypeOfCluster.ReadOnly)]
+	public class SourceIntegrationTests : IntegrationDocumentationTestBase
 	{
 		public SourceIntegrationTests(ReadOnlyCluster cluster) : base(cluster) { }
 

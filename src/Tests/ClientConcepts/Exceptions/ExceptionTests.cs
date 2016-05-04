@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.ClientConcepts.Exceptions
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class ExceptionTests
 	{
 		private readonly int _port;
@@ -22,7 +22,7 @@ namespace Tests.ClientConcepts.Exceptions
 		//[I]
 		public void ServerTestWhenThrowExceptionsEnabled()
 		{
-			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"))
+			var settings = new ConnectionSettings(TestClient.CreateNode(_port))
 				.ThrowExceptions();
 			var client = new ElasticClient(settings);
 			var exception = Assert.Throws<ElasticsearchClientException>(() => client.GetMapping<Project>(s => s.Index("doesntexist")));
@@ -56,7 +56,7 @@ namespace Tests.ClientConcepts.Exceptions
 		//[I]
 		public void ServerTestWhenThrowExceptionsDisabled()
 		{
-			var settings = new ConnectionSettings(new Uri($"http://{TestClient.Host}:{_port}"));
+			var settings = new ConnectionSettings(TestClient.CreateNode(_port));
 			var client = new ElasticClient(settings);
 			var response = client.GetMapping<Project>(s => s.Index("doesntexist"));
 #if DOTNETCORE

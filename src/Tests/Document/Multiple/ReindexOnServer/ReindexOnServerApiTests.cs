@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexOnServer
 {
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class ReindexOnServerApiTests : ApiIntegrationTestBase<IReindexOnServerResponse, IReindexOnServerRequest, ReindexOnServerDescriptor, ReindexOnServerRequest>
 	{
 		public class Test

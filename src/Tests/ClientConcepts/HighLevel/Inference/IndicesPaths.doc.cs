@@ -3,10 +3,11 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockData;
+using static Nest.Indices;
 
 namespace Tests.ClientConcepts.HighLevel.Inference
 {
-	public class IndicesPaths
+	public class IndicesPaths : DocumentationTestBase
 	{
 		/**== Indices paths
 		*
@@ -53,36 +54,31 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
-			var client = TestClient.GetInMemoryClient();
-
-			var singleString = Nest.Indices.Index("name1"); // <1> specifying a single index using a string
-			var singleTyped = Nest.Indices.Index<Project>(); //<2> specifying a single index using a type
+			var singleString = Index("name1"); // <1> specifying a single index using a string
+			var singleTyped = Index<Project>(); //<2> specifying a single index using a type
 
 			ISearchRequest singleStringRequest = new SearchDescriptor<Project>().Index(singleString);
 			ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(singleTyped);
 
-			((IUrlParameter)singleStringRequest.Index).GetString(client.ConnectionSettings).Should().Be("name1");
-			((IUrlParameter)singleTypedRequest.Index).GetString(client.ConnectionSettings).Should().Be("project");
+			((IUrlParameter)singleStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1");
+			((IUrlParameter)singleTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project");
 
-			var invalidSingleString = Nest.Indices.Index("name1, name2"); //<3> an **invalid** single index name
+			var invalidSingleString = Index("name1, name2"); //<3> an **invalid** single index name
 		}
 
 		/**==== Specifying multiple indices
 		* Similarly to a single index, multiple indices can be specified using multiple CLR types and multiple strings
 		*/
-		[U]
-		public void MultipleIndices()
+		[U] public void MultipleIndices()
 		{
-			var client = TestClient.GetInMemoryClient();
-
-			var manyStrings = Nest.Indices.Index("name1", "name2"); //<1> specifying multiple indices using strings
-			var manyTypes = Nest.Indices.Index<Project>().And<Developer>(); //<2> specifying multiple indices using types
+			var manyStrings = Index("name1", "name2"); //<1> specifying multiple indices using strings
+			var manyTypes = Index<Project>().And<Developer>(); //<2> specifying multiple indices using types
 
 			ISearchRequest manyStringRequest = new SearchDescriptor<Project>().Index(manyStrings);
 			ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyTypes);
 
-			((IUrlParameter)manyStringRequest.Index).GetString(client.ConnectionSettings).Should().Be("name1,name2");
-			((IUrlParameter)manyTypedRequest.Index).GetString(client.ConnectionSettings).Should().Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
+			((IUrlParameter)manyStringRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("name1,name2");
+			((IUrlParameter)manyTypedRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("project,devs"); // <3> The index names here come from the Connection Settings passed to `TestClient`. See the documentation on <<index-name-inference, Index Name Inference>> for more details.
 		}
 
 		/**==== Specifying All Indices
@@ -96,17 +92,14 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void IndicesAllAndAllIndicesSpecifiedWhenUsingStaticUsingDirective()
 		{
-			var client = TestClient.GetInMemoryClient();
-
-			var indicesAll = Nest.Indices.All;
-			var allIndices = Nest.Indices.AllIndices;
+			var indicesAll = All;
+			var allIndices = AllIndices;
 
 			ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
 			ISearchRequest allIndicesRequest = new SearchDescriptor<Project>().Index(allIndices);
 
-			((IUrlParameter)indicesAllRequest.Index).GetString(client.ConnectionSettings).Should().Be("_all");
-			((IUrlParameter)allIndicesRequest.Index).GetString(client.ConnectionSettings).Should().Be("_all");
+			((IUrlParameter)indicesAllRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
+			((IUrlParameter)allIndicesRequest.Index).GetString(this.Client.ConnectionSettings).Should().Be("_all");
 		}
-
 	}
 }

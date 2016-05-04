@@ -13,10 +13,10 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.Reindex
 {
 	// TODO re-implement these tests once Reindex is implemented
-	[CollectionDefinition(IntegrationContext.Reindex)]
+	[CollectionDefinition(TypeOfCluster.Reindex)]
 	public class ReindexCluster : ClusterBase, ICollectionFixture<ReindexCluster>, IClassFixture<EndpointUsage>
 	{
-		public override void Boostrap()
+		protected override void Boostrap()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();
@@ -24,7 +24,7 @@ namespace Tests.Document.Multiple.Reindex
 		}
 	}
 
-	[Collection(IntegrationContext.Reindex)]
+	[Collection(TypeOfCluster.Reindex)]
 	public class ReindexApiTests : SerializationTestBase
 	{
 		//private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;

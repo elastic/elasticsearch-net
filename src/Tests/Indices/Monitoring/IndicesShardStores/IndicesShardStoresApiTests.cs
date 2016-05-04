@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesShardStores
 {
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class IndicesShardStoresApiTests : ApiIntegrationTestBase<IIndicesShardStoresResponse, IIndicesShardStoresRequest, IndicesShardStoresDescriptor, IndicesShardStoresRequest>
 	{
 		public IndicesShardStoresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

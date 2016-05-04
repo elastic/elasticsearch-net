@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterHealth
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterHealthApiTests : ApiIntegrationTestBase<IClusterHealthResponse, IClusterHealthRequest, ClusterHealthDescriptor, ClusterHealthRequest>
 	{
 		public ClusterHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

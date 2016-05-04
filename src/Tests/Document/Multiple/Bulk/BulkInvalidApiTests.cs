@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class BulkInvalidApiTests : ApiIntegrationTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkInvalidApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

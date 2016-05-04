@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatMaster
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatMasterApiTests : ApiIntegrationTestBase<ICatResponse<CatMasterRecord>, ICatMasterRequest, CatMasterDescriptor, CatMasterRequest>
 	{
 		public CatMasterApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

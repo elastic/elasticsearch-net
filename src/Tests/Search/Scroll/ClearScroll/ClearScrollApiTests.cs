@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Search.Scroll.ClearScroll
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClearScrollApiTests : ApiIntegrationTestBase<IClearScrollResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

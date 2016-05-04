@@ -25,7 +25,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* In this example, we have a document stored with a `query` field that is mapped as a `percolator` type. This field
 	* contains a `match` query.
 	*/
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PercolateQueryUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
@@ -137,7 +137,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	*
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PercolateQueryExistingDocumentUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();

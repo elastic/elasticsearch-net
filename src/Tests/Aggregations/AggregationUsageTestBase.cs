@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Aggregations
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public abstract class AggregationUsageTestBase 
 		: ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{

@@ -25,7 +25,6 @@ nuget Rx-Interfaces
 nuget Rx-Linq 
 nuget Rx-Main
 nuget Rx-PlatformServices
-nuget SemanticVersioning
 
 source https://api.nuget.org/v3/index.json
 

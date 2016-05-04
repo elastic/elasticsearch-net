@@ -12,7 +12,7 @@ using Tests.Framework.MockData;
 
 namespace Tests.Reproduce
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class GithubIssue1863
 	{
 		[I]

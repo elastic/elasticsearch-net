@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.Alias
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class AliasApiTests : ApiIntegrationTestBase<IBulkAliasResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

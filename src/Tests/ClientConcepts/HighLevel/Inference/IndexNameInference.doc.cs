@@ -20,14 +20,13 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	*
 	* NEST has a number of ways in which an index name can be specified
 	*/
-	public class IndexNameInference
+	public class IndexNameInference : DocumentationTestBase
 	{
 		/**=== Default Index name on Connection Settings
 		* A default index name can be specified on `ConnectionSettings` using `.DefaultIndex()`.
 		* This is the default index name to use when no other index name can be resolved for a request
 		*/
-		[U]
-		public void DefaultIndexIsInferred()
+		[U] public void DefaultIndexIsInferred()
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex");
@@ -39,8 +38,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**=== Mapping an Index name for POCOs
 		* A index name can be mapped for CLR types using `.MapDefaultTypeIndices()` on `ConnectionSettings`.
 		*/
-		[U]
-		public void ExplicitMappingIsInferred()
+		[U] public void ExplicitMappingIsInferred()
 		{
 			var settings = new ConnectionSettings()
 				.MapDefaultTypeIndices(m => m
@@ -55,8 +53,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* An index name for a POCO provided using `.MapDefaultTypeIndices()` **will take precedence** over
 		* the default index name
 		*/
-		[U]
-		public void ExplicitMappingTakesPrecedence()
+		[U] public void ExplicitMappingTakesPrecedence()
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("defaultindex")
@@ -72,11 +69,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		* For API calls that expect an index name, the index name can be explicitly provided
 		* on the request
 		*/
-		[U]
-		public void ExplicitIndexOnRequest()
+		[U] public void ExplicitIndexOnRequest()
 		{
 			Uri requestUri = null;
-			var client = TestClient.GetInMemoryClient(s => s
+			var client = TestClient.GetClient(s => s
 				.OnRequestCompleted(r => { requestUri = r.Uri; }));
 
 			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
@@ -88,10 +84,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/** When an index name is provided on a request, it **will take precedence** over the default
 		* index name and any index name specified for the POCO type using `.MapDefaultTypeIndices()`
 		*/
-		[U]
-		public void ExplicitIndexOnRequestTakesPrecedence()
+		[U] public void ExplicitIndexOnRequestTakesPrecedence()
 		{
-			var client = TestClient.GetInMemoryClient(s =>
+			var client = TestClient.GetClient(s =>
 				new ConnectionSettings()
 					.DefaultIndex("defaultindex")
 					.MapDefaultTypeIndices(m => m
@@ -106,8 +101,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U]
-		public void UppercaseCharacterThrowsResolveException()
+		[U] public void UppercaseCharacterThrowsResolveException()
 		{
 			var settings = new ConnectionSettings()
 				.DefaultIndex("Default")
@@ -126,8 +120,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U]
-		public void NoIndexThrowsResolveException()
+		[U] public void NoIndexThrowsResolveException()
 		{
 			var settings = new ConnectionSettings();
 			var resolver = new IndexNameResolver(settings);
@@ -136,12 +129,10 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		}
 
 		//hide
-		[U]
-		public void ResolveExceptionBubblesOut()
+		[U] public void ResolveExceptionBubblesOut()
 		{
-			var client = TestClient.GetInMemoryClient(s => new ConnectionSettings());
+			var client = TestClient.GetClient(s => new ConnectionSettings());
 			var e = Assert.Throws<ResolveException>(() => client.Search<Project>());
-
 		}
 	}
 }

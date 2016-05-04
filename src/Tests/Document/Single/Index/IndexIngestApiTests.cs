@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Tests.Document.Single.Index
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class IndexIngestApiTests :
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{

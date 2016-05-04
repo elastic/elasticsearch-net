@@ -8,7 +8,7 @@ using FluentAssertions;
 
 namespace Tests.Search.Validate
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ValidateQueryApiTests 
 		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
@@ -27,7 +27,7 @@ namespace Tests.Search.Validate
 		protected override string UrlPath => "/project/project/_validate/query";
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ValidateInvalidQueryApiTests 
 		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{

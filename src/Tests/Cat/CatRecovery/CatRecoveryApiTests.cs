@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Cat.CatRecovery
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatRecoveryApiTests : ApiIntegrationTestBase<ICatResponse<CatRecoveryRecord>, ICatRecoveryRequest, CatRecoveryDescriptor, CatRecoveryRequest>
 	{
 		public CatRecoveryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

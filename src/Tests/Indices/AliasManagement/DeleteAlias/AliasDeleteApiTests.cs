@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteAliasApiTests : ApiIntegrationTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
 		private Names Names => Infer.Names(CallIsolatedValue + "-alias");

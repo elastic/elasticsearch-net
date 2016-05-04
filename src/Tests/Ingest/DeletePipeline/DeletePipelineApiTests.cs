@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Ingest.DeletePipeline
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class DeletePipelineApiTests : ApiTestBase<IDeletePipelineResponse, IDeletePipelineRequest, DeletePipelineDescriptor, DeletePipelineRequest>
 	{
 		public DeletePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

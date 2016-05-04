@@ -13,7 +13,7 @@ using Xunit;
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class MultiPercolateApiTests : ApiIntegrationTestBase<IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
 		public MultiPercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

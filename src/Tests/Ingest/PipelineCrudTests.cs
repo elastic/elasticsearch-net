@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Tests.Ingest
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PipelineCrudTests
 		: CrudTestBase<IPutPipelineResponse, IGetPipelineResponse, IPutPipelineResponse, IDeletePipelineResponse>
 	{

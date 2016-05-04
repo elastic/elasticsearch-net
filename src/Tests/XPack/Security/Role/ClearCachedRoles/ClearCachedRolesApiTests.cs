@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.Role.ClearCachedRoles
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class ClearCachedRolesApiTests : ApiIntegrationTestBase<IClearCachedRolesResponse, IClearCachedRolesRequest, ClearCachedRolesDescriptor, ClearCachedRolesRequest>
 	{
 		public ClearCachedRolesApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.PutAlias
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PutAliasApiTests : ApiIntegrationTestBase<IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)

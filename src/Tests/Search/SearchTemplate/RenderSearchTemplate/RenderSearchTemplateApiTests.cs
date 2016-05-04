@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate.RenderSearchTemplate
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class RenderSearchTemplateApiTests : ApiIntegrationTestBase<IRenderSearchTemplateResponse, IRenderSearchTemplateRequest, RenderSearchTemplateDescriptor, RenderSearchTemplateRequest>
 	{
 		public RenderSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

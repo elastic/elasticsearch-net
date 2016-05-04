@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class DeleteRepositoryApiTests : ApiTestBase<IDeleteRepositoryResponse, IDeleteRepositoryRequest, DeleteRepositoryDescriptor, DeleteRepositoryRequest>
 	{
 		public DeleteRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

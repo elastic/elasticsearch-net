@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.Role
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class RoleCrudTests
 		: CrudTestBase<IPutRoleResponse, IGetRoleResponse, IPutRoleResponse, IDeleteRoleResponse>
 	{
