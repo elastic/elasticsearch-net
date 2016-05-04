@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions.Common;
 using Tests.Framework;
 using Tests.Framework.MockData;
+using Xunit.Abstractions;
 using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Caching
@@ -22,8 +25,60 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			public long CachedProperties => Properties.Count;
 		}
 
+		private class TestFieldDocument
+		{
+			public Project ProjectA { get; set; }
+			public Project ProjectB { get; set; }
+		}
+
+		private class FirstTestFieldDocument
+		{
+			public Project Project { get; set; }
+		}
+
+		private class SecondTestFieldDocument
+		{
+			public Project Project { get; set; }
+		}
+
 		public class Fields
 		{
+			[U]
+			public void ExpressionEquality()
+			{
+				Field first = Field<Project>(p => p.Name);
+				Field second = Field<Project>(p => p.Name);
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void ExpressionEqualityWithDifferentParams()
+			{
+				Field first = Field<Project>(p => p.Name);
+				Field second = Field<Project>(project => project.Name);
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void PropertyInfoEquality()
+			{
+				Field first = typeof(Project).GetProperty(nameof(Project.Name));
+				Field second = typeof(Project).GetProperty(nameof(Project.Name));
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void StringEquality()
+			{
+				Field first = "Name";
+				Field second = "Name";
+
+				first.Should().Be(second);
+			}
+
 			[U]
 			public void Expression()
 			{
@@ -32,8 +87,21 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.CachedFields.Should().Be(1);
 				resolver.Resolve(Field<Project>(p => p.Name));
 				resolver.CachedFields.Should().Be(1);
-				// Boost values should have no baring on cached field names
+				// Boost values should have no bearing on cached field names
 				resolver.Resolve(Field<Project>(p => p.Name, 1.1));
+				resolver.CachedFields.Should().Be(1);
+			}
+
+			[U]
+			public void ExpressionWithDifferentParameters()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Field<Project>(p => p.Name));
+				resolver.CachedFields.Should().Be(1);
+				resolver.Resolve(Field<Project>(d => d.Name));
+				resolver.CachedFields.Should().Be(1);
+				// Boost values should have no bearing on cached field names
+				resolver.Resolve(Field<Project>(e => e.Name, 1.1));
 				resolver.CachedFields.Should().Be(1);
 			}
 
@@ -52,6 +120,18 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			}
 
 			[U]
+			public void ExpressionWithConstantSuffix()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix("raw")));
+				resolver.CachedFields.Should().Be(1);
+				resolved.Should().EndWith("raw");
+				resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix("foo")));
+				resolver.CachedFields.Should().Be(2);
+				resolved.Should().EndWith("foo");
+			}
+
+			[U]
 			public void ExpressionWithVariableSuffix()
 			{
 				var suffix = "raw";
@@ -63,6 +143,32 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolved = resolver.Resolve(Field<Project>(p => p.Name.Suffix(suffix)));
 				resolved.Should().EndWith("foo");
 				resolver.CachedFields.Should().Be(0);
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemVariableExpression()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var key = "key1";
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key]));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Contain(key);
+				key = "key2";
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata[key]));
+				resolver.CachedFields.Should().Be(0);
+				resolved.Should().Contain(key);
+			}
+
+			[U]
+			public void ExpressionWithDictionaryItemConstantExpression()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				var resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key1"]));
+				resolver.CachedFields.Should().Be(1);
+				resolved.Should().Contain("key1");
+				resolved = resolver.Resolve(Field<Project>(p => p.Metadata["key2"]));
+				resolver.CachedFields.Should().Be(2);
+				resolved.Should().Contain("key2");
 			}
 
 			[U]
@@ -123,10 +229,66 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.Resolve((Field)typeof(CommitActivity).GetProperty(nameof(CommitActivity.Id)));
 				resolver.CachedFields.Should().Be(2);
 			}
+
+			[U]
+			public void SamePropertyTypesOnDifferentTypes()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Field<FirstTestFieldDocument>(c => c.Project.Name));
+				resolver.CachedFields.Should().Be(1);
+				resolver.Resolve(Field<SecondTestFieldDocument>(c => c.Project.Name));
+				resolver.CachedFields.Should().Be(2);
+			}
+
+			[U]
+			public void SamePropertyTypesWithDifferentNames()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Field<TestFieldDocument>(c => c.ProjectA));
+				resolver.CachedFields.Should().Be(1);
+				resolver.Resolve(Field<TestFieldDocument>(c => c.ProjectB));
+				resolver.CachedFields.Should().Be(2);
+			}
 		}
 
 		public class PropertyNames
 		{
+			[U]
+			public void ExpressionEquality()
+			{
+				PropertyName first = Property<Project>(p => p.Name);
+				PropertyName second = Property<Project>(p => p.Name);
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void ExpressionEqualityWithDifferentParameters()
+			{
+				PropertyName first = Property<Project>(p => p.Name);
+				PropertyName second = Property<Project>(project => project.Name);
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void PropertyInfoEquality()
+			{
+				PropertyName first = typeof(Project).GetProperty(nameof(Project.Name));
+				PropertyName second = typeof(Project).GetProperty(nameof(Project.Name));
+
+				first.Should().Be(second);
+			}
+
+			[U]
+			public void StringEquality()
+			{
+				PropertyName first = "Name";
+				PropertyName second = "Name";
+
+				first.Should().Be(second);
+			}
+
 			[U]
 			public void Expression()
 			{
@@ -138,12 +300,22 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 			}
 
 			[U]
+			public void ExpressionWithDifferentParameter()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Property<Project>(p => p.Name));
+				resolver.CachedProperties.Should().Be(1);
+				resolver.Resolve(Property<Project>(d => d.Name));
+				resolver.CachedProperties.Should().Be(1);
+			}
+
+			[U]
 			public void EquivalentExpressionsOnDifferentTypes()
 			{
 				var resolver = new TestableFieldResolver(new ConnectionSettings());
 				resolver.Resolve(Property<CommitActivity>(c => c.Id));
 				resolver.CachedProperties.Should().Be(1);
-				resolver.Resolve(Property<Person>(p => p.Id));
+				resolver.Resolve(Property<Person>(c => c.Id));
 				resolver.CachedProperties.Should().Be(2);
 			}
 
@@ -175,29 +347,55 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				resolver.Resolve((PropertyName)typeof(CommitActivity).GetProperty(nameof(CommitActivity.Id)));
 				resolver.CachedProperties.Should().Be(2);
 			}
+
+			[U]
+			public void SamePropertyTypesOnDifferentTypes()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Property<FirstTestFieldDocument>(c => c.Project.Name));
+				resolver.CachedProperties.Should().Be(1);
+				resolver.Resolve(Property<SecondTestFieldDocument>(c => c.Project.Name));
+				resolver.CachedProperties.Should().Be(2);
+			}
+
+			[U]
+			public void SamePropertyTypesWithDifferentNames()
+			{
+				var resolver = new TestableFieldResolver(new ConnectionSettings());
+				resolver.Resolve(Property<TestFieldDocument>(c => c.ProjectA));
+				resolver.CachedProperties.Should().Be(1);
+				resolver.Resolve(Property<TestFieldDocument>(c => c.ProjectB));
+				resolver.CachedProperties.Should().Be(2);
+			}
 		}
 
 		public class CachePerformance
 		{
+			private readonly ITestOutputHelper output;
+
+			public CachePerformance(ITestOutputHelper output)
+			{
+				this.output = output;
+			}
+
 			public class HitTiming
 			{
+				public string Name { get; set; }
 				public Field Field { get; set; }
 				public double FirstHit { get; set; }
 				public double CachedHit { get; set; }
 
-				public override string ToString() => $"First hit took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
+				public override string ToString() => $"First hit for {Name} took {FirstHit}ms, Cached hit took {CachedHit}ms ({FirstHit / CachedHit}x faster).";
 			}
 
-			private List<HitTiming> _timings = new List<HitTiming>();
+			private readonly List<HitTiming> _timings = new List<HitTiming>();
 			private Stopwatch _stopwatch;
 			private FieldResolver _resolver;
 
 			[U]
 			public void CachedVsNonCached()
 			{
-
 				_resolver = new FieldResolver(new ConnectionSettings());
-				_stopwatch = Stopwatch.StartNew();
 
 				AddTiming(Field<Project>(p => p.Metadata["fixed"]));
 				var x = "dynamic";
@@ -215,7 +413,8 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 				AddTiming(Field<CommitActivity>(p => p.Message));
 				AddTiming(Field<CommitActivity>(p => p.ProjectName));
 				AddTiming(Field<CommitActivity>(p => p.StringDuration));
-				//throw new Exception(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
+
+				output.WriteLine(_timings.Aggregate(new StringBuilder().AppendLine(), (sb, s) => sb.AppendLine(s.ToString()), sb => sb.ToString()));
 			}
 
 			private void AddTiming(Field field)
@@ -225,7 +424,7 @@ namespace Tests.ClientConcepts.HighLevel.Caching
 
 				_stopwatch = Stopwatch.StartNew();
 
-				_resolver.Resolve(field);
+				timing.Name = _resolver.Resolve(field);
 				timing.FirstHit = _stopwatch.Elapsed.TotalMilliseconds;
 
 				_stopwatch.Restart();

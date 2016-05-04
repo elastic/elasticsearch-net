@@ -537,7 +537,6 @@
     <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RequestTimeoutsOverrides.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsAllowedStatusCode.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RequestOverrides\RespectsForceNode.doc.cs" />
-    <Compile Include="ClientConcepts\HighLevel\Caching\FieldResolverCacheBusterTests.cs" />
     <Compile Include="ClientConcepts\HighLevel\Caching\FieldResolverCacheTests.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inference\DocumentPaths.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inference\FeaturesInference.doc.cs" />

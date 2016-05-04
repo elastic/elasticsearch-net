@@ -13,8 +13,8 @@ namespace Nest
 		private string _name;
 		private Expression _expression;
 		private PropertyInfo _property;
-
-		private Type Type { get; set; }
+		private Type _type;
+		private object _comparisonValue;
 
 		public string Name
 		{
@@ -35,8 +35,8 @@ namespace Nest
 			{
 				_expression = value;
 				Type type;
-				var comparisonValue = ComparisonValueFromExpression(value, out type);
-				Type = type;
+				var comparisonValue = value.ComparisonValueFromExpression(out type);
+				_type = type;
 				SetComparisonValue(comparisonValue);
 				CacheableExpression = !new HasConstantExpressionVisitor(value).Found;
 			}
@@ -49,13 +49,11 @@ namespace Nest
 			{
 				_property = value;
 				SetComparisonValue(value);
-				Type = value.DeclaringType;
+				_type = value.DeclaringType;
 			}
 		}
 
 		public double? Boost { get; set; }
-
-		private object ComparisonValue { get; set; }
 
 		public bool CacheableExpression { get; private set; }
 
@@ -77,6 +75,8 @@ namespace Nest
 
 		public static Field Create(Expression expression, double? boost = null)
 		{
+			if (expression == null) return null;
+
 			Field field = expression;
 			field.Boost = boost;
 			return field;
@@ -94,22 +94,6 @@ namespace Nest
 				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			}
 			return name;
-		}
-
-		private static object ComparisonValueFromExpression(Expression expression, out Type type)
-		{
-			type = null;
-
-			if (expression == null) return null;
-
-			var lambda = expression as LambdaExpression;
-			if (lambda == null)
-				return expression.ToString();
-
-			type = lambda.Parameters.FirstOrDefault()?.Type;
-
-			var memberExpression = lambda.Body as MemberExpression;
-			return memberExpression?.ToString() ?? expression.ToString();
 		}
 
 		public static implicit operator Field(string name)
@@ -138,19 +122,37 @@ namespace Nest
 
 		public override int GetHashCode()
 		{
-			var hashCode = ComparisonValue?.GetHashCode() ?? 0;
-			hashCode = (hashCode * 397) ^ (Type?.GetHashCode() ?? 0);
-			return hashCode;
+			unchecked
+			{
+				var hashCode = _comparisonValue?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
+				return hashCode;
+			}
 		}
 
-		bool IEquatable<Field>.Equals(Field other) => Equals(other);
+		bool IEquatable<Field>.Equals(Field other)
+		{
+			return _type != null
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+				: other != null && _comparisonValue.Equals(other._comparisonValue);
+		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as Field;
-			if (other == null)
-				return false;
-			return ComparisonValue.Equals(other.ComparisonValue);
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+			return ((IEquatable<Field>)this).Equals(obj as Field);
+		}
+
+		public static bool operator ==(Field x, Field y)
+		{
+			return Equals(x, y);
+		}
+
+		public static bool operator !=(Field x, Field y)
+		{
+			return !(x == y);
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
@@ -164,10 +166,10 @@ namespace Nest
 
 		private void SetComparisonValue(object value)
 		{
-			if (ComparisonValue != null && value != null)
-				throw new InvalidOperationException($"{nameof(ComparisonValue)} already has a value");
+			if (_comparisonValue != null && value != null)
+				throw new InvalidOperationException($"{nameof(_comparisonValue)} already has a value");
 
-			ComparisonValue = value;
+			_comparisonValue = value;
 		}
 	}
 }
