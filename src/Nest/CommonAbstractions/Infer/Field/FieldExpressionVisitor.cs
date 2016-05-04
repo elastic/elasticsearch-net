@@ -12,11 +12,61 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-    internal class FieldExpressionVisitor : ExpressionVisitor
-    {
-		private Stack<string> _stack = new Stack<string>();
+	internal class HasConstantExpressionVisitor : ExpressionVisitor
+	{
+		public bool Found { get; private set; }
 
-		private IConnectionSettingsValues _settings;
+		public HasConstantExpressionVisitor(Expression e)
+		{
+			this.Visit(e);
+		}
+
+		public override Expression Visit(Expression node)
+		{
+			if (!Found)
+				return base.Visit(node);
+			return node;
+		}
+
+		protected override Expression VisitMethodCall(MethodCallExpression node)
+		{
+			if (node.Method.Name == "Suffix" && node.Arguments.Any())
+			{
+				var lastArg = node.Arguments.Last();
+				var constantExpression = lastArg as ConstantExpression;
+				this.Found = constantExpression == null;
+				return node;
+			}
+			else if (node.Method.Name == "get_Item" && node.Arguments.Any())
+			{
+				var t = node.Object.Type;
+				var isDict =
+					typeof(IDictionary).IsAssignableFrom(t)
+					|| typeof(IDictionary<,>).IsAssignableFrom(t)
+					|| (t.IsGeneric() && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+
+				if (!isDict)
+					return base.VisitMethodCall(node);
+				var lastArg = node.Arguments.Last();
+				var constantExpression = lastArg as ConstantExpression;
+				this.Found = constantExpression == null;
+				return node;
+			}
+			return base.VisitMethodCall(node);
+		}
+
+		protected override Expression VisitConstant(ConstantExpression node)
+		{
+			this.Found = true;
+			return node;
+		}
+	}
+
+	internal class FieldExpressionVisitor : ExpressionVisitor
+    {
+		private readonly Stack<string> _stack = new Stack<string>();
+
+		private readonly IConnectionSettingsValues _settings;
 
 		public FieldExpressionVisitor(IConnectionSettingsValues settings)
 		{

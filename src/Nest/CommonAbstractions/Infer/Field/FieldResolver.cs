@@ -17,8 +17,8 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _settings;
 
-		private readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
-		private readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
+		protected readonly ConcurrentDictionary<Field, string> Fields = new ConcurrentDictionary<Field, string>();
+		protected readonly ConcurrentDictionary<PropertyName, string> Properties = new ConcurrentDictionary<PropertyName, string>();
 
 		public FieldResolver(IConnectionSettingsValues settings)
 		{
@@ -37,25 +37,34 @@ namespace Nest
 		{
 			if (field.IsConditionless()) return null;
 			if (!field.Name.IsNullOrEmpty()) return field.Name;
+			if (field.Expression != null && !field.CacheableExpression)
+			{
+				return this.Resolve(field.Expression, field.Property);
+			}
 
-			string f;
-			if (this.Fields.TryGetValue(field, out f))
-				return f;
+			string fieldName;
+			if (this.Fields.TryGetValue(field, out fieldName))
+				return fieldName;
 
-			f = this.Resolve(field.Expression, field.Property);
-			this.Fields.TryAdd(field, f);
-			return f;
+			fieldName = this.Resolve(field.Expression, field.Property);
+			this.Fields.TryAdd(field, fieldName);
+			return fieldName;
 		}
 
 		public string Resolve(PropertyName property)
 		{
 			if (property.IsConditionless()) return null;
-			if (!property.Name.IsNullOrEmpty())
-				return property.Name;
+			if (!property.Name.IsNullOrEmpty()) return property.Name;
+
+			if (property.Expression != null && !property.CacheableExpression)
+			{
+				return this.Resolve(property.Expression, property.Property);
+			}
 
 			string propertyName;
 			if (this.Properties.TryGetValue(property, out propertyName))
 				return propertyName;
+
 			propertyName = this.Resolve(property.Expression, property.Property, true);
 			this.Properties.TryAdd(property, propertyName);
 			return propertyName;

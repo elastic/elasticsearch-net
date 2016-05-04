@@ -161,8 +161,11 @@ namespace Nest
 		public static QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
 			new QueryContainerDescriptor<T>().SpanWithin(selector);
 
+#pragma warning disable 618
+		[Obsolete("Scheduled to be removed in 5.0.  Setting Strict() at the container level does is a noop and must be set on each individual query.")]
 		public static QueryContainerDescriptor<T> Strict(bool strict = true) =>
 			new QueryContainerDescriptor<T>().Strict(strict);
+#pragma warning restore 618
 
 		public static QueryContainer Template(Func<TemplateQueryDescriptor<T>, ITemplateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Template(selector);

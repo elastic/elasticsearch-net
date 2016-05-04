@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
+using System.Linq;
 
 namespace Nest
 {
@@ -12,6 +13,8 @@ namespace Nest
 		private string _name;
 		private Expression _expression;
 		private PropertyInfo _property;
+		private Type _type;
+		private object _comparisonValue;
 
 		public string Name
 		{
@@ -31,8 +34,11 @@ namespace Nest
 			set
 			{
 				_expression = value;
-				var comparisonValue = ComparisonValueFromExpression(value);
+				Type type;
+				var comparisonValue = value.ComparisonValueFromExpression(out type);
+				_type = type;
 				SetComparisonValue(comparisonValue);
+				CacheableExpression = !new HasConstantExpressionVisitor(value).Found;
 			}
 		}
 
@@ -43,12 +49,13 @@ namespace Nest
 			{
 				_property = value;
 				SetComparisonValue(value);
+				_type = value.DeclaringType;
 			}
 		}
 
 		public double? Boost { get; set; }
 
-		private object ComparisonValue { get; set; }
+		public bool CacheableExpression { get; private set; }
 
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
@@ -68,6 +75,8 @@ namespace Nest
 
 		public static Field Create(Expression expression, double? boost = null)
 		{
+			if (expression == null) return null;
+
 			Field field = expression;
 			field.Boost = boost;
 			return field;
@@ -82,31 +91,16 @@ namespace Nest
 			if (parts.Length > 1)
 			{
 				name = parts[0];
-				boost = Double.Parse(parts[1], CultureInfo.InvariantCulture);
+				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			}
 			return name;
-		}
-
-		private static object ComparisonValueFromExpression(Expression expression)
-		{
-			if (expression == null) return null;
-
-			var lambda = expression as LambdaExpression;
-			if (lambda == null)
-				return expression.ToString();
-
-			var memberExpression = lambda.Body as MemberExpression;
-			if (memberExpression == null)
-				return expression.ToString();
-
-			return memberExpression;
 		}
 
 		public static implicit operator Field(string name)
 		{
 			return name.IsNullOrEmpty() ? null : new Field
 			{
-				Name = name
+				Name = name,
 			};
 		}
 
@@ -126,16 +120,39 @@ namespace Nest
 			};
 		}
 
-		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var hashCode = _comparisonValue?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
+				return hashCode;
+			}
+		}
 
-		bool IEquatable<Field>.Equals(Field other) => Equals(other);
+		bool IEquatable<Field>.Equals(Field other)
+		{
+			return _type != null
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+				: other != null && _comparisonValue.Equals(other._comparisonValue);
+		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as Field;
-			if (other == null)
-				return false;
-			return ComparisonValue.Equals(other.ComparisonValue);
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+			return ((IEquatable<Field>)this).Equals(obj as Field);
+		}
+
+		public static bool operator ==(Field x, Field y)
+		{
+			return Equals(x, y);
+		}
+
+		public static bool operator !=(Field x, Field y)
+		{
+			return !(x == y);
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
@@ -149,10 +166,10 @@ namespace Nest
 
 		private void SetComparisonValue(object value)
 		{
-			if (ComparisonValue != null && value != null)
-				throw new InvalidOperationException($"{nameof(ComparisonValue)} already has a value");
+			if (_comparisonValue != null && value != null)
+				throw new InvalidOperationException($"{nameof(_comparisonValue)} already has a value");
 
-			ComparisonValue = value;
+			_comparisonValue = value;
 		}
 	}
 }

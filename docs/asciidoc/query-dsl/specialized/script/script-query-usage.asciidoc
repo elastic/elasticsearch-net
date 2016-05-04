@@ -18,7 +18,6 @@ See the Elasticsearch documentation on {ref_current}/query-dsl-script-query.html
 q
 .Script(sn => sn
     .Name("named_query")
-    .Boost(1.1)
     .Inline(_templateString)
     .Params(p => p.Add("param1", 50))
 )
@@ -31,7 +30,6 @@ q
 new ScriptQuery
 {
     Name = "named_query",
-    Boost = 1.1,
     Inline = _templateString,
     Params = new Dictionary<string, object>
     {
@@ -46,7 +44,6 @@ new ScriptQuery
 {
   "script": {
     "_name": "named_query",
-    "boost": 1.1,
     "script": {
       "inline": "doc['numberOfCommits'].value > param1",
       "params": {
