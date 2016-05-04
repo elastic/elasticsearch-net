@@ -48,6 +48,7 @@ namespace Tests.Framework.Integration
 
 			var attr = this.Version.Major >= 5 ? "attr." : "";
 			var indexedOrStored = this.Version > new ElasticsearchVersion("5.0.0-alpha1") ? "stored" : "indexed";
+			var shieldOrSecurity = this.Version > new ElasticsearchVersion("5.0.0-alpha1") ? "security" : "shield";
 
 			this.DefaultNodeSettings = new List<string>
 			{
@@ -60,7 +61,7 @@ namespace Tests.Framework.Integration
 			};
 
 			if (!this.Version.IsSnapshot)
-				this.DefaultNodeSettings.Add($"es.shield.enabled=" + (this._config.ShieldEnabled ? "true" : "false"));
+				this.DefaultNodeSettings.Add($"es.xpack.{shieldOrSecurity}.enabled=" + (this._config.ShieldEnabled ? "true" : "false"));
 
 			if (this._config.RunIntegrationTests) return;
 			this.Port = 9200;
