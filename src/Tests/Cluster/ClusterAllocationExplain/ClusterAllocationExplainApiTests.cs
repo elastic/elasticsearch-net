@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterAllocationExplain
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterAllocationExplainApiTests : ApiIntegrationTestBase<IClusterAllocationExplainResponse, IClusterAllocationExplainRequest, ClusterAllocationExplainDescriptor, ClusterAllocationExplainRequest>
 	{
 		public ClusterAllocationExplainApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
