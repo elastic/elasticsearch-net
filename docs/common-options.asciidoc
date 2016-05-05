@@ -7,7 +7,6 @@
 --
 NEST has a number of types for working with Elasticsearch conventions for:
 
-
 * <<time-units, Time Units>>
 
 * <<distance-units, Distance Units>>

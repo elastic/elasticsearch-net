@@ -47,7 +47,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Naming conventions
 		 * Currently, the name of a field cannot contain a `.` in Elasticsearch due to the potential for ambiguity with
-		 * a field that is mapped as a {ref_current}/_multi_fields.html[multi_field].
+		 * a field that is mapped as a {ref_current}/mapping-types.html#_multi_fields[multi_field].
 		 *
 		 * In these cases, NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
 		 * in the case of a `.` in a field name, a `400 Bad Response` is returned with a server error indicating the reason
