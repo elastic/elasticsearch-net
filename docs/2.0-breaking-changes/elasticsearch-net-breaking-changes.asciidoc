@@ -12,14 +12,14 @@ This document rudimentally documents the breaking changes from 1.x to 2.x; Our 2
 
 The first thing you might notice is that the dependency graph for the client has changed slightly.  It has also been renamed from `IElasticsearchClient` to `ILowLevelElasticClient`, to align better with the high level (NEST) client and better differentiate itself.
 
-----
+....
 `IElasticLowLevelClient`  
  ├─`ITransport`  
  ├──`IConnectionConfiguration`  
  ├───`IConnectionPool`  
  ├───`IConnection`  
  └───`Func<IConnectionConfiguration, IElasticsearchSerializer>`  
-----
+....
 
 a client can still be `new`'ed with no arguments
 

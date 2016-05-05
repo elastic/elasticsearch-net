@@ -5,8 +5,8 @@
 --
 There are a number of breaking changes when going from 1.x to 2.x
 
-<<elasticsearch-net-breaking-changes, Elasticsearch.Net Breaking Changes>>
-<<nest-breaking-changes, NEST Breaking Changes>>
+* <<elasticsearch-net-breaking-changes, Elasticsearch.Net Breaking Changes>>
+* <<nest-breaking-changes, NEST Breaking Changes>>
 --
 
 include::2.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
