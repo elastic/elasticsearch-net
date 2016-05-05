@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
-		 * you have a POCO property mapped as a {ref_current}/_multi_fields.html[multi_field]
+		 * you have a POCO property mapped as a {ref_current}/mapping-types.html#_multi_fields[multi_field]
 		 * and want to use strongly typed access based on the property, yet append a suffix to the
 		 * generated field name in order to access a particular `multi_field`.
 		 *
