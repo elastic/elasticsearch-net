@@ -65,7 +65,7 @@ Our implementation of <<transports,`ITransport`>> can be injected with a custom 
 
 <<transports,`Transport`>> is in control of managing our request pipelining, asking connection pools for other nodes to fall over to and marking nodes dead or alive.
 
-Each individual moving part is further explained in the <<elasticsearch-net-reference, documentation>>
+Each individual moving part is further explained in the index.html[documentation].
 
 === ConnectionSettings Changes
 

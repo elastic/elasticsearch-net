@@ -2,7 +2,7 @@
 
 :stackoverflow: http://stackoverflow.com
 
-[nest-breaking-changes]
+[[nest-breaking-changes]]
 == NEST breaking changes
 
 This document rudimentally documents the breaking changes from 1.x to 2.x; Our 2.0 refactor comprises 1000+ commits and nearly six months of work, so if we missed anything
@@ -65,8 +65,7 @@ Our implementation of <<transports,`ITransport`>> can be injected with a custom 
 
 <<transports,`Transport`>> is in control of managing our request pipelining, asking connection pools for other nodes to fall over to and marking nodes dead or alive.
 
-
-Each individual moving part is further explained in the <<elasticsearch-net-reference, documentation>>
+Each individual moving part is further explained in the index.html[documentation].
 
 === Inferred types
 
@@ -279,7 +278,7 @@ public class MyJsonNetSerializer : JsonNetSerializer
 }
 ----
 
-==== Renamed Types
+=== Renamed Types
 
 [source,diff]
 ----
