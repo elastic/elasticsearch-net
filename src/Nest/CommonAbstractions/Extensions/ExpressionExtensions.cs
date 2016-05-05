@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace Nest
 {
@@ -43,6 +45,27 @@ namespace Nest
 			{
 				return node;
 			}
+		}
+
+		private static readonly Regex ExpressionRegex = new Regex(@"^\s*(.*)\s*\=\>\s*\1\.");
+		private static readonly Regex MemberExpressionRegex = new Regex(@"^[^\.]*\.");
+
+		internal static object ComparisonValueFromExpression(this Expression expression, out Type type)
+		{
+			type = null;
+
+			if (expression == null) return null;
+
+			var lambda = expression as LambdaExpression;
+			if (lambda == null)
+				return ExpressionRegex.Replace(expression.ToString(), string.Empty);
+
+			type = lambda.Parameters.FirstOrDefault()?.Type;
+
+			var memberExpression = lambda.Body as MemberExpression;
+			return memberExpression != null
+				? MemberExpressionRegex.Replace(memberExpression.ToString(), string.Empty)
+				: ExpressionRegex.Replace(expression.ToString(), string.Empty);
 		}
 	}
 }
