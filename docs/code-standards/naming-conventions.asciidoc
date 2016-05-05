@@ -1,0 +1,205 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/master
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[naming-conventions]]
+== Naming Conventions
+
+NEST uses the following naming conventions (with _some_ exceptions).
+
+=== Class Names
+
+Abstract class names should end with a `Base` suffix
+
+[source,csharp]
+----
+var exceptions = new[]
+{
+    typeof(DateMath)
+};
+var abstractClassesNotEndingInBase = typeof(IRequest).Assembly().GetTypes()
+    .Where(t => t.IsClass() && t.IsAbstract() && !t.IsSealed() && !exceptions.Contains(t))
+    .Where(t => !t.Name.Split('`')[0].EndsWith("Base"))
+    .Select(t => t.Name.Split('`')[0])
+    .ToList();
+abstractClassesNotEndingInBase.Should().BeEmpty();
+----
+
+Class names that end with `Base` suffix are abstract
+
+[source,csharp]
+----
+var exceptions = new[] { typeof(DateMath) };
+
+var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
+    .Where(t => t.IsClass() && !exceptions.Contains(t))
+    .Where(t => t.Name.Split('`')[0].EndsWith("Base"))
+    .Where(t => !t.IsAbstractClass())
+    .Select(t => t.Name.Split('`')[0])
+    .ToList();
+
+baseClassesNotAbstract.Should().BeEmpty();
+----
+
+=== Requests and Responses
+
+Request class names should end with `Request`
+
+[source,csharp]
+----
+var types = typeof(IRequest).Assembly().GetTypes();
+
+var requestsNotEndingInRequest = types
+    .Where(t => typeof(IRequest).IsAssignableFrom(t) && !t.IsAbstract())
+    .Where(t => !typeof(IDescriptor).IsAssignableFrom(t))
+    .Where(t => !t.Name.Split('`')[0].EndsWith("Request"))
+    .Select(t => t.Name.Split('`')[0])
+    .ToList();
+
+requestsNotEndingInRequest.Should().BeEmpty();
+----
+
+Response class names should end with `Response`
+
+[source,csharp]
+----
+var types = typeof(IRequest).Assembly().GetTypes();
+
+var responsesNotEndingInResponse = types
+    .Where(t => typeof(IResponse).IsAssignableFrom(t) && !t.IsAbstract())
+    .Where(t => !t.Name.Split('`')[0].EndsWith("Response"))
+    .Select(t => t.Name.Split('`')[0])
+    .ToList();
+
+responsesNotEndingInResponse.Should().BeEmpty();
+----
+
+Request and Response class names should be one to one in *most* cases.
+e.g. `ValidateRequest` => `ValidateResponse`, and not `ValidateQueryRequest` => `ValidateResponse`
+There are a few exceptions to this rule, most notably the `Cat` prefixed requests and
+the `Exists` requests.
+
+[source,csharp]
+----
+var exceptions = new[] <1>
+{
+    typeof(DocumentExistsRequest),
+    typeof(DocumentExistsRequest<>),
+    typeof(AliasExistsRequest),
+    typeof(IndexExistsRequest),
+    typeof(TypeExistsRequest),
+    typeof(IndexTemplateExistsRequest),
+    typeof(SearchTemplateRequest),
+    typeof(SearchTemplateRequest<>),
+    typeof(ScrollRequest),
+    typeof(SourceRequest),
+    typeof(SourceRequest<>),
+    typeof(ValidateQueryRequest<>),
+    typeof(GetAliasRequest),
+    typeof(IndicesShardStoresRequest),
+    typeof(RenderSearchTemplateRequest),
+    //UNMAPPED
+    typeof(ClusterAllocationExplainRequest),
+    typeof(ReindexRethrottleRequest),
+    //typeof(ReindexRequest),
+    typeof(UpdateByQueryRequest)
+};
+
+var types = typeof(IRequest).Assembly().GetTypes();
+
+var requests = new HashSet<string>(types
+    .Where(t =>
+        t.IsClass() &&
+        !t.IsAbstract() &&
+        typeof(IRequest).IsAssignableFrom(t) &&
+        !typeof(IDescriptor).IsAssignableFrom(t)
+        && !t.Name.StartsWith("Cat")
+        && !exceptions.Contains(t))
+    .Select(t => t.Name.Split('`')[0].Replace("Request", ""))
+);
+
+var responses = types
+    .Where(t => t.IsClass() && !t.IsAbstract() && typeof(IResponse).IsAssignableFrom(t))
+    .Select(t => t.Name.Split('`')[0].Replace("Response", ""));
+
+requests.Except(responses).Should().BeEmpty();
+----
+<1> _Exceptions to the rule_
+
+[source,csharp]
+----
+var nestAssembly = typeof(IElasticClient).Assembly();
+
+var exceptions = new List<Type>
+{
+    nestAssembly.GetType("System.AssemblyVersionInformation"),
+#if DOTNETCORE
+    typeof(SynchronizedCollection<>),
+    nestAssembly.GetType("System.ComponentModel.Browsable")
+#endif
+};
+
+var types = nestAssembly.GetTypes();
+
+var typesNotInNestNamespace = types
+    .Where(t => !exceptions.Contains(t))
+    .Where(t => t.Namespace != "Nest")
+    .Where(t => !t.Name.StartsWith("<"))
+    .Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
+    .ToList();
+
+typesNotInNestNamespace.Should().BeEmpty();
+----
+
+[source,csharp]
+----
+var elasticsearchNetAssembly = typeof(IElasticLowLevelClient).Assembly();
+
+var exceptions = new List<Type>
+{
+    elasticsearchNetAssembly.GetType("System.AssemblyVersionInformation"),
+    elasticsearchNetAssembly.GetType("System.FormattableString"),
+    elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+    elasticsearchNetAssembly.GetType("System.Runtime.CompilerServices.FormattableStringFactory"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+IPurifier"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierDotNet"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+PurifierMono"),
+    elasticsearchNetAssembly.GetType("Purify.Purifier+UriInfo"),
+#if DOTNETCORE
+    elasticsearchNetAssembly.GetType("System.ComponentModel.Browsable")
+#endif
+};
+
+var types = elasticsearchNetAssembly.GetTypes();
+
+var typesNotIElasticsearchNetNamespace = types
+    .Where(t => !exceptions.Contains(t))
+    .Where(t => t.Namespace != "Elasticsearch.Net")
+    .Where(t => !t.Name.StartsWith("<"))
+    .Where(t => IsValidTypeNameOrIdentifier(t.Name, true))
+    .ToList();
+
+typesNotIElasticsearchNetNamespace.Should().BeEmpty();
+----
+
+[source,csharp]
+----
+bool nextMustBeStartChar = true;
+
+var character = value[index];
+
+var unicodeCategory = char.GetUnicodeCategory(character);
+
+nextMustBeStartChar = false;
+
+nextMustBeStartChar = false;
+----
+
+[source,csharp]
+----
+nextMustBeStartChar = true;
+----
+
