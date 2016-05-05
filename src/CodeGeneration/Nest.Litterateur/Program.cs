@@ -10,12 +10,12 @@ namespace Nest.Litterateur
 			if (currentDirectory.Name == "Nest.Litterateur" && currentDirectory.Parent.Name == "CodeGeneration")
 			{
 				InputDirPath = @"..\..\Tests";
-				OutputDirPath = @"..\..\..\docs\asciidoc";
+				OutputDirPath = @"..\..\..\docs";
 			}
 			else
 			{
 				InputDirPath = @"..\..\..\..\..\src\Tests";
-				OutputDirPath = @"..\..\..\..\..\docs\asciidoc";
+				OutputDirPath = @"..\..\..\..\..\docs";
 			}
 		}
 

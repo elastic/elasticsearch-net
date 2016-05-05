@@ -3,6 +3,8 @@
 
 include::intro.asciidoc[]
 
+include::breaking-changes.asciidoc[]
+
 include::client-concepts.asciidoc[]
 
 include::common-options.asciidoc[]

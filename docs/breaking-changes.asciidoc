@@ -1,0 +1,4 @@
+include::2.0-breaking-changes/elasticsearch-net-breaking-changes.asciidoc[]
+
+include::2.0-breaking-changes/nest-breaking-changes.asciidoc[]
+

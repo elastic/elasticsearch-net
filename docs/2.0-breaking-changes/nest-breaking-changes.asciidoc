@@ -1,0 +1,3219 @@
+:github: https://github.com/elastic/elasticsearch-net
+
+:stackoverflow: http://stackoverflow.com
+
+[nest-breaking-changes]
+== NEST breaking changes
+
+This document rudimentally documents the breaking changes from 1.x to 2.x; Our 2.0 refactor comprises 1000+ commits and nearly six months of work, so if we missed anything
+{github}/issues[feel free to give us a shout]!
+
+=== Dependency graph changes
+
+The first thing you might notice is that the dependency graph for the client has changed slightly
+
+----
+`IElasticClient`  
+ ├─`ITransport`  
+ ├──`IConnectionSettings`  
+ ├───`IConnectionPool`  
+ ├───`IConnection`  
+ └───`Func<IConnectionSettings, IElasticsearchSerializer>`  
+----
+
+a client can still be `new`'ed with no arguments
+
+[source,csharp]
+----
+var client = new ElasticClient();
+----
+
+Wich will default to a <<connection-pooling,`SingleNodeConnectionPool`>> talking to `http://localhost:9200`
+
+The next most common overload of the constructor is the one taking `ConnectionSettings`
+
+[source,csharp]
+----
+var client = new ElasticClient(connectionSettings);
+----
+
+There are many overloads to the constructor of <<connecting,`ConnectionSettings`>> that allow you to inject a custom connection or serializer factory if needed
+What they all have in common is that you have to specify an <<connection-pooling,`IConnectionPool`>> implementation e.g
+
+[source,csharp]
+----
+var pool = new StaticConnectionPool(nodes);
+var settings = new ConnectionSettings(pool);
+var client = new ElasticClient(settings);
+----
+
+Another big change in Elasticsearch.NET 2.0 is that internally we deal with `Node`'s and not `Uri`'s. However `nodes` in the above example can be either
+an `IEnumerable<Uri>` or `IEnumerable<Node>`.
+
+For the super advanced use cases a custom `ITransport` can be injected.
+
+[source,csharp]
+----
+var pool = new StaticConnectionPool(nodes);
+var settings = new ConnectionSettings(pool);
+var transport = new Transport(pool);
+var client = new ElasticClient(pool);
+----
+
+This is what we call internally if you use the previous `ElasticClient` constructor.
+Our implementation of <<transports,`ITransport`>> can be injected with a custom <<request-pipeline,`IRequestPipelineFactory`>>, <<date-time-providers,`IDateTimeProvider`>> and `IMemoryStreamFactory`.
+
+<<transports,`Transport`>> is in control of managing our request pipelining, asking connection pools for other nodes to fall over to and marking nodes dead or alive.
+
+
+Each individual moving part is further explained in the <<elasticsearch-net-reference, documentation>>
+
+=== Inferred types
+
+Many places that only took a string now take a more strongly typed object, <<`Id`,ids-inference>>, <<field-inference,`Field`>>, <<field-inference,`Fields`>>, <<index-name-inference,`Index`>>, <<indices-paths,`Indices`>>, `Type`, `Types`, <<document-paths,`DocumentPath<T>`>>. It's good to know that in most cases you can still implicitly convert to them from `string`, `long`, `Guid` where it makes sense.
+
+If you are using `C# 6` you can also staticly import `using static Nest.Infer`. This will allow you to write 
+
+[source,csharp]
+----
+Field<Project>(p=>p.Name) 
+----
+
+any where that takes a `Field`
+
+[source,csharp]
+----
+Field<Project>(p=>p.Name).And(p=>p.Description).And("field")
+----
+
+anywhere that takes `Fields` 
+
+[source,csharp]
+----
+Index<Project>() 
+----
+
+for `Index` and so on and so forth.
+
+If you are using the fluent API, using these is not required (but still possible), as the fluent API is already expression based.
+
+=== Filters are **GONE**
+
+In `Elasticsearch 2.0` https://www.elastic.co/guide/en/elasticsearch/reference/2.3/breaking_20_query_dsl_changes.html#_queries_and_filters_merged[queries and filter constructs have merged into one concept called queries], `NEST 2.0` reflects this, so if you are looking for the `AndFilter` it is now
+called the `AndQuery` but beware that some of these filters have been obsoleted and chances are high https://www.elastic.co/blog/all-about-elasticsearch-filter-bitsets[you were using them wrong!].
+
+=== Isolated descriptors
+
+In `NEST 1.x` we took pride in being a 1 to 1 mapping with the Elasticsearch API, however in some cases we hid the real depth of parameters.
+
+Example in `NEST 1.x` you could add sorts on `Search()` using:
+
+[source,csharp]
+----
+client.Search<Project>(s=>s
+  .SortAscending(...)
+  .SortScript(...)
+)
+----
+
+in `NEST 2.x` you have to stoop down a level first
+
+[source,csharp]
+----
+client.Search<Project>(s=>s
+  .Sort(ss=>ss
+    .Field()
+    .Script()
+    .Ascending()
+    .GeoDistance()
+  )
+)
+----
+
+This encapsulates all of the sort options properly and adheres stricter to the 1-to-1 mapping. NEST 1.x did also contain this full descriptor however the mix and matching of the convenience methods of the parent meant that some fluent methods were additive whilst others overwrote what was previously set. With NEST 2.0, this discrepancy is gone!
+
+This happens in more places e.g index settings and mappings.
+
+=== Aggregator
+
+If you are using the object initializer syntax `*Aggregator` is now `*Aggregation`
+
+=== Attribute-based mapping
+
+The single `ElasticPropertyAttribute` has been broken up into individual attributes per property type.
+
+For instance, the following:
+
+[source,csharp]
+----
+[ElasticType(Name = "othername", IdProperty = "MyId")]
+public class Foo
+{
+  [ElasticProperty(Type = FieldType.String)]
+  public Guid MyId { get; set; }
+
+  [ElasticProperty(Type = FieldType.String)]
+  public string Name { get; set; }
+
+  [ElasticProperty(Type = FieldType.String, Analyzer = "myanalyzer", TermVector = TermVectorOption.WithOffsets)]
+  public string Description { get; set; }
+
+  [ElasticProperty(Type = FieldType.Date, Format = "mmmddyyyy")]
+  public DateTime Date { get; set; }
+
+  [ElasticProperty(Type = FieldType.Integer, Coerce = true)]
+  public int Number { get; set; }
+
+  [ElasticProperty(Type = FieldType.Nested, IncludeInParent = true)]
+  public List<Bar> Bars { get; set; }
+}
+----
+
+becomes
+
+[source,csharp]
+----
+[ElasticsearchType(Name = "othername", IdProperty = "MyId")]
+public class Foo
+{
+  [String]
+  public Guid MyId { get; set; }
+
+  [String]
+  public string Name { get; set; }
+
+  [String(Analyzer = "myanalyzer", TermVector = TermVectorOption.WithOffsets)]
+  public string Description { get; set; }
+
+  [Date(Format = "mmddyyyy")]
+  public DateTime Date { get; set; }
+
+  [Number(NumberType.Integer, Coerce = true, DocValues = true)]
+  public int Number { get; set; }
+
+  [Nested(IncludeInParent = true)]
+  public List<Bar> Bars { get; set; }
+}
+----
+
+Aside from a simpler and cleaner API, this allows each attribute to only reflect the options that are available for the particular type instead of exposing options that may not be relevant (as `ElasticPropertyAttribute` did).
+
+`MapFromAttributes()` has also been renamed to `AutoMap()` to better reflect that it doesn't only depend on properties being marked with attributes.  It will also infer the type based on the CLR type if no attribute is present.
+
+=== `TimeSpan` automapped as `long` (ticks)
+
+`System.TimeSpan` is now automatically mapped as a `long` representing the number of ticks within the timeSpan, allowing for range  in addition to term queries. NEst 1.x automatically mapped `TimeSpan` as a string and whilst NEST 2.0 is able to deserialize strings into `TimeSpan` instances as before, it will not automatically serialize `TimeSpan` ***into*** strings when indexing. In order to achieve this, you will need to register a json converter, either by deriving from `JsonNetSerializer` and overriding `ContractConverters` or by attributing the property with `[JsonConverter(typeof(ConverterTypeName))]`. A example of a converter for serializing/deserializing string values for `TimeSpan` is
+
+[source,csharp]
+----
+public class StringTimeSpanConverter : JsonConverter
+{
+	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+	{
+		if (value == null)
+			writer.WriteNull();
+		else
+		{
+			var timeSpan = (TimeSpan)value;
+			writer.WriteValue(timeSpan.ToString());
+		}
+	}
+
+	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+	{
+		if (reader.TokenType == JsonToken.Null)
+		{
+			if (!objectType.IsGenericType || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
+				throw new JsonSerializationException($"Cannot convert null value to {objectType}.");
+
+			return null;
+		}
+		if (reader.TokenType == JsonToken.String)
+		{
+			return TimeSpan.Parse((string)reader.Value);
+		}
+
+		throw new JsonSerializationException($"Cannot convert token of type {reader.TokenType} to {objectType}.");
+	}
+
+	public override bool CanConvert(Type objectType) => objectType == typeof(TimeSpan) || objectType == typeof(TimeSpan?);
+}
+----
+
+=== Serialization settings
+
+Serialization settings are now configurable through `ConnectionSettings` constructor taking a factory function that returns an instance of `IElasticsearchSerializer`.
+
+
+[source,csharp]
+----
+var setting = new ConnectionSettings(/** settings */);
+
+setting.AddContractJsonConverters(type => new MyPrettyConverter(), type => new SomeOtherConverter());
+setting.SetJsonSerializerSettingsModifier(settings => settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+----
+
+becomes
+
+[source,csharp]
+----
+var settings = new ConnectionSettings(connectionPool, connectionSettings => new MyJsonNetSerializer(connectionSettings))
+
+public class MyJsonNetSerializer : JsonNetSerializer
+{
+	public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+	{
+	}
+
+	protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+	{
+		settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+	}
+
+	protected override IList<Func<Type, JsonConverter>> ContractConverters => 
+		new List<Func<Type, JsonConverter>>
+		{
+			type => new MyPrettyConverter(),
+			type => new SomeOtherConverter()
+		};
+}
+----
+
+==== Renamed Types
+
+[source,diff]
+----
+- class AggregationDescriptor`1
++ class AggregationContainerDescriptor`1
+
+- class AliasRequest
++ class BulkAliasRequest
+
+- class AllFieldMapping
++ class AllField
+
+- class AllocateClusteRerouteCommand
++ class AllocateClusterRerouteCommand
+
+- class AnalysisSettings
++ class Analysis
+
+- class AndFilter
++ class AndQuery
+
+- class AverageAggregator
++ class AverageAggregation
+
+- class AzureRepositoryDescriptor
++ class AzureRepositorySettingsDescriptor
+
+- class BoolFilter
++ class BoolQuery
+
+- class CardinalityAggregator
++ class CardinalityAggregation
+
+- class ChildrenAggregator
++ class ChildrenAggregation
+
+- class DateHistogramAggregator
++ class DateHistogramAggregation
+
+- class DateRangeAggregator
++ class DateRangeAggregation
+
+- enum DynamicMappingOption
++ enum DynamicMapping
+
+- class ExistsFilter
++ class ExistsQuery
+
+- class ExtendedStatsAggregator
++ class ExtendedStatsAggregation
+
+- enum FieldDataLoading
++ enum FielddataLoading
+
+- class FieldDataStats
++ class FielddataStats
+
+- class FileSystemRepositoryDescriptor
++ class FileSystemRepositorySettingsDescriptor
+
+- class FilterAggregator
++ class FilterAggregation
+
+- class FiltersAggregator
++ class FiltersAggregation
+
+- class GeoBoundingBoxFilter
++ class GeoBoundingBoxQuery
+
+- class GeoBoundsAggregator
++ class GeoBoundsAggregation
+
+- class GeoDistanceAggregator
++ class GeoDistanceAggregation
+
+- class GeoDistanceFilter
++ class GeoDistanceQuery
+
+- class GeoDistanceRangeFilter
++ class GeoDistanceRangeQuery
+
+- class GeoHashCellFilter
++ class GeoHashCellQuery
+
+- class GeoIndexedShapeFilter
++ class GeoIndexedShapeQuery
+
+- class GeoPolygonFilter
++ class GeoPolygonQuery
+
+- class GeoShapeCircleFilter
++ class GeoShapeCircleQuery
+
+- class GeoShapeEnvelopeFilter
++ class GeoShapeEnvelopeQuery
+
+- class GeoShapeLineStringFilter
++ class GeoShapeLineStringQuery
+
+- class GeoShapeMultiLineStringFilter
++ class GeoShapeMultiLineStringQuery
+
+- class GeoShapeMultiPointFilter
++ class GeoShapeMultiPointQuery
+
+- class GeoShapeMultiPolygonFilter
++ class GeoShapeMultiPolygonQuery
+
+- class GeoShapePointFilter
++ class GeoShapePointQuery
+
+- class GeoShapePolygonFilter
++ class GeoShapePolygonQuery
+
+- class GlobalAggregator
++ class GlobalAggregation
+
+- class HasChildFilter
++ class HasChildQuery
+
+- class HasParentFilter
++ class HasParentQuery
+
+- class HdfsRepositoryDescriptor
++ class HdfsRepositorySettingsDescriptor
+
+- class HistogramAggregator
++ class HistogramAggregation
+
+- interface IAndFilter
++ interface IAndQuery
+
+- interface IAverageAggregator
++ interface IAverageAggregation
+
+- interface IBoolFilter
++ interface IBoolQuery
+
+- interface IBucketAggregator
++ interface IBucketAggregation
+
+- interface ICardinalityAggregator
++ interface ICardinalityAggregation
+
+- interface IChildrenAggregator
++ interface IChildrenAggregation
+
+- interface IDateHistogramAggregator
++ interface IDateHistogramAggregation
+
+- interface IDateRangeAggregator
++ interface IDateRangeAggregation
+
+- class IdsFilter
++ class IdsQuery
+
+- class IdsFilterDescriptor
++ class IdsQueryDescriptor
+
+- interface IExistsFilter
++ interface IExistsQuery
+
+- interface IExtendedStatsAggregator
++ interface IExtendedStatsAggregation
+
+- interface IFieldNameFilter
++ interface IFieldNameQuery
+
+- interface IFilter
++ interface IQuery
+
+- interface IFilterAggregator
++ interface IFilterAggregation
+
+- interface IFiltersAggregator
++ interface IFiltersAggregation
+
+- interface IGeoBoundingBoxFilter
++ interface IGeoBoundingBoxQuery
+
+- interface IGeoBoundsAggregator
++ interface IGeoBoundsAggregation
+
+- interface IGeoDistanceAggregator
++ interface IGeoDistanceAggregation
+
+- interface IGeoDistanceFilter
++ interface IGeoDistanceQuery
+
+- interface IGeoDistanceRangeFilter
++ interface IGeoDistanceRangeQuery
+
+- interface IGeoHashCellFilter
++ interface IGeoHashCellQuery
+
+- interface IGeoIndexedShapeFilter
++ interface IGeoIndexedShapeQuery
+
+- interface IGeoPolygonFilter
++ interface IGeoPolygonQuery
+
+- interface IGeoShapeCircleFilter
++ interface IGeoShapeCircleQuery
+
+- interface IGeoShapeEnvelopeFilter
++ interface IGeoShapeEnvelopeQuery
+
+- interface IGeoShapeLineStringFilter
++ interface IGeoShapeLineStringQuery
+
+- interface IGeoShapeMultiLineStringFilter
++ interface IGeoShapeMultiLineStringQuery
+
+- interface IGeoShapeMultiPointFilter
++ interface IGeoShapeMultiPointQuery
+
+- interface IGeoShapeMultiPolygonFilter
++ interface IGeoShapeMultiPolygonQuery
+
+- interface IGeoShapePointFilter
++ interface IGeoShapePointQuery
+
+- interface IGeoShapePolygonFilter
++ interface IGeoShapePolygonQuery
+
+- interface IGlobalAggregator
++ interface IGlobalAggregation
+
+- interface IHasChildFilter
++ interface IHasChildQuery
+
+- interface IHasParentFilter
++ interface IHasParentQuery
+
+- interface IHistogramAggregator
++ interface IHistogramAggregation
+
+- interface IIdsFilter
++ interface IIdsQuery
+
+- interface IIndicesFilter
++ interface IIndicesQuery
+
+- interface ILimitFilter
++ interface ILimitQuery
+
+- interface IMatchAllFilter
++ interface IMatchAllQuery
+
+- interface IMaxAggregator
++ interface IMaxAggregation
+
+- interface IMetricAggregator
++ interface IMetricAggregation
+
+- interface IMinAggregator
++ interface IMinAggregation
+
+- interface IMissingAggregator
++ interface IMissingAggregation
+
+- interface IMissingFilter
++ interface IMissingQuery
+
+- class IndicesFilter
++ class IndicesQuery
+
+- interface INestedAggregator
++ interface INestedAggregation
+
+- interface INestedFilter
++ interface INestedQuery
+
+- interface INotFilter
++ interface INotQuery
+
+- interface IOrFilter
++ interface IOrQuery
+
+- interface IPercentilesAggregator
++ interface IPercentilesAggregation
+
+- interface IPrefixFilter
++ interface IPrefixQuery
+
+- interface IRangeAggregator
++ interface IRangeAggregation
+
+- interface IRangeFilter
++ interface IRangeQuery
+
+- interface IRegexpFilter
++ interface IRegexpQuery
+
+- interface IRepository
++ interface ISnapshotRepository
+
+- interface IReverseNestedAggregator
++ interface IReverseNestedAggregation
+
+- interface IScriptedMetricAggregator
++ interface IScriptedMetricAggregation
+
+- interface IScriptFilter
++ interface IScriptQuery
+
+- interface ISignificantTermsAggregator
++ interface ISignificantTermsAggregation
+
+- interface ISumAggregator
++ interface ISumAggregation
+
+- interface ITermFilter
++ interface ITermQuery
+
+- interface ITermsAggregator
++ interface ITermsAggregation
+
+- interface ITermsFilter
++ interface ITermsQuery
+
+- interface ITopHitsAggregator
++ interface ITopHitsAggregation
+
+- interface ITypeFilter
++ interface ITypeQuery
+
+- interface IValueCountAggregator
++ interface IValueCountAggregation
+
+- class LimitFilter
++ class LimitQuery
+
+- class MatchAllFilter
++ class MatchAllQuery
+
+- class MatchAllFilterDescriptor
++ class MatchAllQueryDescriptor
+
+- class MaxAggregator
++ class MaxAggregation
+
+- class MinAggregator
++ class MinAggregation
+
+- class MissingAggregator
++ class MissingAggregation
+
+- class MissingFilter
++ class MissingQuery
+
+- class NestedAggregator
++ class NestedAggregation
+
+- class NestedFilter
++ class NestedQuery
+
+- class NotFilter
++ class NotQuery
+
+- class OrFilter
++ class OrQuery
+
+- class PercentilesAggregator
++ class PercentilesAggregation
+
+- class PrefixFilter
++ class PrefixQuery
+
+- class RangeAggregator
++ class RangeAggregation
+
+- class RawFilter
++ class RawQuery
+
+- class ReadOnlyUrlRepositoryDescriptor
++ class ReadOnlyUrlRepositorySettingsDescriptor
+
+- class RegexpFilter
++ class RegexpQuery
+
+- class ReverseNestedAggregator
++ class ReverseNestedAggregation
+
+- class S3RepositoryDescriptor
++ class S3RepositorySettingsDescriptor
+
+- class ScriptFilter
++ class ScriptQuery
+
+- class SignificantTermsAggregator
++ class SignificantTermsAggregation
+
+- class StatsAggregator
++ class StatsAggregation
+
+- class SuggestOption
++ class Suggest
+
+- class SumAggregator
++ class SumAggregation
+
+- class TermFilter
++ class TermQuery
+
+- class TermsAggregator
++ class TermsAggregation
+
+- class TermsFilter
++ class TermsQuery
+
+- enum TermVectorOption
++ enum TermVector
+
+- class TopHitsAggregator
++ class TopHitsAggregation
+
+- class TypeFilter
++ class TypeQuery
+
+- class TypeFilterDescriptor
++ class TypeQueryDescriptor
+
+- class ValueCountAggregator
++ class ValueCountAggregation
+----
+
+==== Removed Types
+
+[source,diff]
+----
+- class AbortBenchmarkDescriptor
+- class AbortBenchmarkRequest
+- class AcknowledgedResponse
+- class AggregationConverter
+- class AliasExtensions
+- class AllFieldMappingDescriptor
+- class AnalysisSettingsConverter
+- class AnalyzerCollectionConverter
+- class AnalyzerFieldMapping
+- class AnalyzerFieldMappingDescriptor`1
+- class AndFilterDescriptor
+- class AsciiFoldingTokenFilter
+- class AttachmentMapping
+- class AttachmentMappingDescriptor`1
+- class BaseFacetDescriptor`2
+- class BasePathDescriptor`2
+- class BasePathRequest`1
+- class BaseRequest`1
+- class BaseResponse
+- class BaseSuggestDescriptor`1
+- class BinaryMapping
+- class BinaryMappingDescriptor`1
+- class BoolBaseFilterDescriptor
+- class BoolBaseQueryDescriptor
+- class BooleanMapping
+- class BooleanMappingDescriptor`1
+- class BoolFilterDescriptor`1
+- class BoostFactorFunction`1
+- class BoostFieldMapping
+- class BoostFieldMappingDescriptor`1
+- class BucketAggregationBaseDescriptor`2
+- class BucketAggregator
+- class BucketWithDocCount
+- class BucketWithDocCount`1
+- class BulkOperationDescriptorBase
+- class BulkOperationResponseItem
+- class BulkOperationResponseItemConverter
+- class CategorySuggestDescriptor`1
+- class CatFielddataRecordConverter
+- class CatThreadPoolRecordConverter
+- class CharFilterCollectionConverter
+- enum ChildScoreType
+- class ClusterCpu
+- class ClusterOs
+- class ClusterOsMemory
+- class ClusterRerouteCommandCollectionConverter
+- class ClusterSettingsDescriptor
+- class ClusterSettingsRequest
+- class CommonGramsTokenFilter
+- class CompletionMapping
+- class CompletionMappingDescriptor`1
+- class CompletionSuggestDescriptor`1
+- class CompositeJsonConverter`2
+- class CompoundWordTokenFilter
+- class ConditionlessFilterDescriptor`1
+- class ConnectionSettings`1
+- class CoordinatedRequestObserver`1
+- class CorePropertiesDescriptor`1
+- class CountExtensions
+- class CreateAliasDescriptor
+- class CreateAliasOperation
+- class CreateIndexExtensions
+- class CreateWarmerDescriptor
+- class CustomBoostFactorQuery
+- class CustomBoostFactorQueryDescriptor`1
+- class CustomFiltersScoreQueryDescriptor`1
+- class CustomJsonConverter
+- class CustomScoreQuery
+- class CustomScoreQueryDescriptor`1
+- class DateEntry
+- class DateExpressionRange
+- class DateHistogramFacet
+- class DateHistogramFacetDescriptor`1
+- class DateHistogramFacetRequest
+- class DateMapping
+- class DateMappingDescriptor`1
+- class DateRange
+- class DateRangeFacet
+- enum DateRounding
+- class DeleteAliasDescriptor`1
+- class DeleteByQueryIndices
+- class DeleteExtensions
+- class DeleteIndexExtensions
+- class DeleteMappingDescriptor`1
+- class DeleteMappingRequest
+- class DeleteMappingRequest`1
+- class DeleteTemplateDescriptor
+- class DeleteTemplateRequest
+- class DelimitedPayloadTokenFilter
+- class DescriptorForAttribute
+- class DictionaryDecompounderTokenFilter
+- class DictionaryKeysAreNotPropertyNamesJsonConverter
+- class DismaxQuery
+- class DismaxQueryJsonConverter
+- class DispatchException
+- class Document
+- class DocumentConverter
+- class DocumentOptionalPathBase`1
+- class DocumentOptionalPathBase`2
+- class DocumentOptionalPathDescriptor`3
+- class DocumentPathBase`1
+- class DocumentPathBase`2
+- class DocumentPathDescriptor`3
+- class DslException
+- class DynamicMappingOptionConverter
+- class DynamicTemplatesConverter
+- class DynamicTemplatesDescriptor`1
+- class EdgeNGramTokenFilter
+- class ElasticAttributes
+- class ElasticCoreTypeConverter
+- class ElasticInferrer
+- class ElasticPropertyAttribute
+- class ElasticsearchPathInfo`1
+- class ElasticTypeAttribute
+- class ElasticTypeConverter
+- class ElasticTypesConverter
+- class ElisionTokenFilter
+- class EmptyResponse
+- class ExistsExtensions
+- class ExistsFilterDescriptor
+- class ExpFunction`1
+- class ExplainDescriptor
+- class ExplainGet`1
+- class ExplainRequest
+- class ExpressionVisitor
+- class ExternalFieldDeclaration
+- class ExternalFieldDeclarationDescriptor`1
+- class Facet
+- class FacetContainer
+- class FacetConverter
+- class FacetItem
+- class FacetRequest
+- class FieldDataFilter
+- class FieldDataFilterDescriptor
+- class FieldDataFrequencyFilter
+- class FieldDataFrequencyFilterDescriptor
+- class FieldDataMapping
+- enum FieldDataNonStringFormat
+- class FieldDataNonStringMapping
+- class FieldDataNonStringMappingDescriptor
+- class FieldDataRegexFilter
+- class FieldDataRegexFilterDescriptor
+- enum FieldDataStringFormat
+- class FieldDataStringMapping
+- class FieldDataStringMappingDescriptor
+- enum FieldIndexOption
+- class FieldMappingConverter
+- class FieldNameFilterConverter`1
+- class FieldNameQueryConverter`1
+- class FieldNamesFieldMapping
+- class FieldNamesFieldMappingDescriptor`1
+- class FieldSelection`1
+- class FieldValueFactor`1
+- class FieldValueFactorDescriptor`1
+- class Filter`1
+- class FilterAggregatorConverter
+- class FilterBase
+- class FilterCacheStats
+- class FilterContainer
+- class FilterDescriptor`1
+- class FilterFacet
+- class FiltersAggregatorConverter
+- class FilterScoreQuery
+- class FilterScoreQueryDescriptor`1
+- class FixedIndexTypePathBase`1
+- class FixedIndexTypePathDescriptor`2
+- class FluentFieldList`1
+- class ForceStringReader
+- class FunctionScoreDecayFieldDescriptor
+- class FunctionScoreDecayFunction`1
+- class FunctionScoreFunction`1
+- class FunctionScoreFunctionsDescriptor`1
+- class FuzzinessConverter
+- class FuzzyLikeThisQuery
+- class FuzzyLikeThisQueryDescriptor`1
+- class FuzzyQueryJsonConverter
+- class FuzzyStringQuery
+- class GaussFunction`1
+- class GenericMapping
+- class GenericMappingDescriptor`1
+- class GeoBoundingBoxFilterDescriptor
+- class GeoBoundingFilterConverter
+- enum GeoDistance
+- class GeoDistanceFacet
+- class GeoDistanceFacetDescriptor`1
+- class GeoDistanceFacetRequest
+- class GeoDistanceFilterConverter
+- class GeoDistanceFilterDescriptor
+- class GeoDistanceRange
+- class GeoDistanceRangeFilterConverter
+- class GeoDistanceRangeFilterDescriptor
+- class GeoHashAggregationDescriptor`1
+- class GeoHashAggregator
+- class GeoHashCellFilterConverter
+- class GeoHashCellFilterDescriptor
+- class GeoIndexedShapeFilterDescriptor
+- class GeoLocationSuggestDescriptor`1
+- class GeoPointMapping
+- class GeoPointMappingDescriptor`1
+- class GeoPolygonFilterDescriptor
+- class GeoPolygonFilterJsonReader
+- class GeoPrecision
+- class GeoPrecisionConverter
+- enum GeoPrecisionUnit
+- class GeoShape
+- class GeoShapeCircleFilterDescriptor
+- class GeoShapeConverterBase
+- class GeoShapeEnvelopeFilterDescriptor
+- class GeoShapeFilterJsonReader
+- class GeoShapeLineStringFilterDescriptor
+- class GeoShapeMapping
+- class GeoShapeMappingDescriptor`1
+- class GeoShapeMultiLineStringFilterDescriptor
+- class GeoShapeMultiPointFilterDescriptor
+- class GeoShapeMultiPolygonFilterDescriptor
+- class GeoShapePointFilterDescriptor
+- class GeoShapePolygonFilterDescriptor
+- class GeoShapeQueryJsonReader
+- enum GeoUnit
+- class GetExtensions
+- class GetFieldMappingRequest`1
+- class GetFromUpdate
+- enum GetIndexFeature
+- class GetMappingRequest`1
+- class GetRepositoryResponseConverter
+- class GetTemplateDescriptor
+- class GetTemplateRequest
+- class GlobalStatsResponse
+- class HasChildFilterDescriptor`1
+- class HasParentFilterDescriptor`1
+- class HealthResponse
+- class HfdsRepository
+- class HighlightRequest
+- class HistogramFacet
+- class HistogramFacetDescriptor`1
+- class HistogramFacetItem
+- class HistogramFacetRequest
+- class HtmlStripCharFilter
+- class HunspellTokenFilter
+- class HyphenationDecompounderTokenFilter
+- interface IAggregationDescriptor
+- interface IAliasRequest
+- interface IAllFieldMapping
+- interface IAnalysisSetting
+- interface IAnalyzerFieldMapping
+- interface IBoostFieldMapping
+- interface IBucketWithCountAggregation
+- interface IClusterSettingsRequest
+- interface ICreateAliasOperation
+- interface ICustomBoostFactorQuery
+- interface ICustomFiltersScoreQuery
+- interface ICustomJson
+- interface ICustomJsonReader`1
+- interface ICustomScoreQuery
+- interface IDateHistogramFacetRequest
+- class IdCacheStats
+- interface IDeleteMappingRequest
+- interface IDeleteMappingRequest`1
+- interface IDeleteTemplateRequest
+- class IdFieldMapping
+- class IdFieldMappingDescriptor
+- interface IDocument
+- interface IDocumentOptionalPath`1
+- interface IDocumentOptionalPath`2
+- class IdsQueryProperDescriptor
+- interface IElasticCoreType
+- interface IElasticPropertyAttribute
+- interface IElasticPropertyVisitor
+- interface IElasticsearchPathInfo
+- interface IElasticType
+- interface IEmptyResponse
+- interface IExplainRequest
+- interface IExternalFieldDeclaration
+- interface IFacet
+- interface IFacet`1
+- interface IFacetContainer
+- interface IFacetDescriptor`1
+- interface IFacetRequest
+- interface IFieldNamesFieldMapping
+- interface IFieldSelection`1
+- interface IFilterContainer
+- interface IFilterScoreQuery
+- interface IFixedIndexTypePath`1
+- interface IFunctionScoreFunction
+- interface IFuzzyLikeThisQuery
+- interface IGeoDistanceFacetRequest
+- interface IGeoHashAggregator
+- interface IGeoShapeBaseFilter
+- interface IGetFieldMappingRequest`1
+- interface IGetMappingRequest`1
+- interface IGetTemplateRequest
+- interface IGlobalStatsResponse
+- interface IHealthResponse
+- interface IHighlightRequest
+- interface IHistogramFacetRequest
+- interface IIdFieldMapping
+- interface IIndexFieldMapping
+- interface IIndexNamePath`1
+- interface IIndexOptionalNamePath`1
+- interface IIndexOptionalPath`1
+- interface IIndexPath`1
+- interface IIndexSettingsResponse
+- interface IIndexTypePath`1
+- interface IIndicesOperationResponse
+- interface IIndicesOptionalExplicitAllPath`1
+- interface IIndicesOptionalPath`1
+- interface IIndicesOptionalTypesNamePath`1
+- interface IIndicesOptionalTypesOptionalFieldsPath`1
+- interface IIndicesOptionalTypesOptionalFieldsPath`2
+- interface IIndicesStatusRequest
+- interface IIndicesTypePath`1
+- interface IInfoRequest
+- interface IIp4RangeAggregator
+- interface IMoreLikeThisRequest
+- interface IMoreLikeThisRequest`1
+- interface IMultiTermVectorDocumentDescriptor
+- interface IMultiTermVectorHit
+- interface IMultiTermVectorResponse
+- interface INamePath`1
+- class IndexAliases
+- class IndexDocStats
+- class IndexedGeoShape
+- class IndexFieldMapping
+- class IndexFieldMappingDescriptor
+- class IndexMetadata
+- class IndexNameMarker
+- class IndexNameMarkerConverter
+- class IndexNameMarkerExtensions
+- class IndexNamePathBase`1
+- class IndexNamePathBase`2
+- class IndexNamePathDescriptor`3
+- class IndexOptionalNamePathBase`1
+- class IndexOptionalNamePathDescriptor`2
+- class IndexOptionalPathBase`1
+- class IndexOptionalPathDescriptorBase`2
+- class IndexPathBase`1
+- class IndexPathDescriptorBase`2
+- class IndexSettingsConverter
+- class IndexSettingsResponse
+- class IndexSettingsResponseConverter
+- class IndexSizeStats
+- class IndexStatus
+- class IndexTypePathBase`1
+- class IndexTypePathBase`2
+- class IndexTypePathDescriptor`2
+- class IndexTypePathDescriptor`3
+- class IndicesExistsAliasDescriptor
+- class IndicesExistsAliasRequest
+- class IndicesExistsTemplateDescriptor
+- class IndicesExistsTemplateRequest
+- class IndicesExistsTypeDescriptor
+- class IndicesExistsTypeRequest
+- class IndicesFilterDescriptor`1
+- class IndicesOperationResponse
+- class IndicesOptionalExplicitAllPathBase`1
+- class IndicesOptionalExplicitAllPathDescriptor`2
+- class IndicesOptionalPathBase`1
+- class IndicesOptionalPathDescriptor`2
+- class IndicesOptionalTypesNamePathBase`1
+- class IndicesOptionalTypesNamePathDescriptor`2
+- class IndicesOptionalTypesOptionalFieldsPathBase`1
+- class IndicesOptionalTypesOptionalFieldsPathBase`2
+- class IndicesOptionalTypesOptionalFieldsPathDescriptor`3
+- class IndicesRecoveryDescriptor
+- class IndicesRecoveryRequest
+- class IndicesResponse
+- class IndicesShardsIndexStats
+- class IndicesShardsIndexStatsMetrics
+- class IndicesShardsStats
+- class IndicesStatusDescriptor
+- class IndicesStatusRequest
+- class IndicesTypePathBase`1
+- class IndicesTypePathBase`2
+- class IndicesTypePathDescriptor`3
+- interface INestSerializable
+- interface INestSerializer
+- class InfoDescriptor
+- class InfoRequest
+- interface INodeIdOptionalPath`1
+- interface INodeInfoResponse
+- interface INodesShutdownRequest
+- interface INodesShutdownResponse
+- interface INodeStatsResponse
+- class Ip4Range
+- class Ip4RangeAggregationDescriptor`1
+- class Ip4RangeAggregator
+- interface IPathInfo`1
+- interface IPercentileRanksAggregaor
+- class IPMapping
+- class IPMappingDescriptor`1
+- interface IPropertyMapping
+- interface IPutTemplateRequest
+- interface IQueryFilter
+- interface IQueryPath`1
+- interface IQueryPath`2
+- interface IRangeFacetRequest`1
+- interface IRegisterPercolateResponse
+- interface IRepositoryOptionalPath`1
+- interface IRepositoryPath`1
+- interface IRepositorySnapshotOptionalPath`1
+- interface IRepositorySnapshotPath`1
+- interface IRootInfoResponse
+- interface IRoutingFieldMapping
+- interface ISearchTemplateRequest`1
+- interface ISizeFieldMapping
+- interface ISourceFieldMapping
+- interface ISourceFilter
+- interface ISpecialField
+- interface IStatisticalFacetRequest
+- interface IStatsAggregator
+- interface IStatusResponse
+- interface IStringFuzzyQuery
+- interface ITemplateExistsRequest
+- interface ITemplateResponse
+- interface ITermFacetRequest
+- interface ITermsBaseFilter
+- interface ITermsLookupFilter
+- interface ITermsStatsFacetRequest
+- interface ITermvectorRequest
+- interface ITermvectorRequest`1
+- interface ITermVectorResponse
+- interface ITimestampFieldMapping
+- interface ITopChildrenQuery
+- interface ITtlFieldMapping
+- interface ITypeFieldMapping
+- interface IUnregisterPercolateResponse
+- interface IUnregisterPercolatorRequest`1
+- interface IUpdateResponse
+- interface IUpdateSettingsRequest
+- interface IWarmerResponse
+- class JVM
+- class KeepTypesTokenFilter
+- class KeepWordsTokenFilter
+- class KeyItem
+- class KeywordMarkerTokenFilter
+- class KeywordRepeatTokenFilter
+- class KStemTokenFilter
+- class LengthTokenFilter
+- class LimitFilterDescriptor
+- class LimitTokenCountTokenFilter
+- class LinearFunction`1
+- class ListBenchmarksDescriptor
+- class ListBenchmarksRequest
+- class LMJelinekSimilarity
+- class LowercaseTokenFilter
+- class MappingCharFilter
+- class MappingTransformConverter
+- class MatchQueryJsonConverter
+- class MetricAggregationBaseDescriptor`2
+- class MetricAggregator
+- class MissingFilterDescriptor
+- class MoreLikeThisDescriptor`1
+- class MoreLikeThisQueryDocumentsDescriptor`1
+- class MoreLikeThisRequest
+- class MoreLikeThisRequest`1
+- class MpercolateDescriptor
+- class MpercolateRequest
+- class MultiFieldMapping
+- class MultiFieldMappingDescriptor`1
+- class MultiFieldMappingPath
+- class MultiGetHitConverter
+- class MultiHit`1
+- class MultiSearchConverter
+- class MultiTermVectorDocument
+- class MultiTermVectorDocumentDescriptor`1
+- class MultiTermVectorHit
+- class MultiTermVectorResponse
+- class MultiTermVectorsDescriptor`1
+- class Murmur3HashMapping
+- class MurmurHashMappingDescriptor`1
+- class NamePathBase`1
+- class NamePathDescriptor`2
+- class NestedFilterDescriptor`1
+- class NestedObjectMapping
+- class NestedObjectMappingDescriptor`2
+- enum NestedScore
+- class NestSerializer
+- class NetworkStats
+- class NgramTokenFilter
+- class NodeIdOptionalDescriptor`2
+- class NodeIdOptionalPathBase`1
+- class NodeInfoHTTP
+- class NodeInfoJVM
+- class NodeInfoOS
+- class NodeInfoProcess
+- class NodeInfoResponse
+- class NodeInfoThreadPoolThreadInfo
+- class NodesShutdownDescriptor
+- class NodesShutdownRequest
+- class NodesShutdownResponse
+- class NodeStatsIndexes
+- class NodeStatsResponse
+- class NoMatchFilterContainer
+- class NoMatchFilterConverter
+- class NoMatchQueryConverter
+- enum NonStringIndexOption
+- class NormsMapping
+- class NotFilterDescriptor
+- class NumberMapping
+- class NumberMappingDescriptor`1
+- class ObjectMapping
+- class ObjectMappingDescriptor`2
+- class OpenCloseIndexExtensions
+- class OrFilterDescriptor
+- class OSStats
+- class ParentFieldMapping
+- enum ParentScoreType
+- class ParentTypeMapping
+- enum PathInfoHttpMethod
+- class PatternCaptureTokenFilter
+- class PatternReplaceCharFilter
+- class PatternReplaceTokenFilter
+- class PhoneticTokenFilter
+- class PhraseSuggestDescriptor`1
+- class PlainFilter
+- class PlainQuery
+- class PorterStemTokenFilter
+- class PrefixFilterConverter
+- class PrefixFilterDescriptor
+- class Property
+- class PropertyMapping
+- class PropertyNameMarker
+- class PropertyNameMarkerConverter
+- class PropertyNameMarkerExtensions
+- class PropertyNameResolver
+- class PropertyPathMarker
+- class PropertyPathMarkerConverter
+- class PropertyPathMarkerExtensions
+- class PutTemplateDescriptor
+- class PutTemplateRequest
+- class QueryDescriptor`1
+- class QueryFacet
+- class QueryFilter
+- class QueryFilterDescriptor
+- class QueryFilterWalker
+- class QueryPathBase`1
+- class QueryPathBase`2
+- class QueryPathDescriptorBase`3
+- class RandomScoreFunction`1
+- class Range`1
+- enum RangeExecution
+- class RangeFacet
+- class RangeFacetDescriptor`2
+- class RangeFacetRequest`1
+- class RangeFilter
+- class RangeFilterDescriptor`1
+- class RangeFilterJsonConverter
+- class RangeFilterJsonReader
+- class RangeQuery
+- class RangeQueryDescriptor`1
+- class ReadAsTypeConverter`1
+- class RegexpFilterDescriptor`1
+- class RegexpFilterJsonReader
+- class RegisterPercolateResponse
+- class ReindexException
+- class ReindexObserver
+- class RepositoryOptionalPathBase`1
+- class RepositoryOptionalPathDescriptor`2
+- class RepositoryPathBase`1
+- class RepositoryPathDescriptor`2
+- class RepositorySnapshotOptionalPathBase`1
+- class RepositorySnapshotOptionalPathDescriptor`2
+- class RepositorySnapshotPathBase`1
+- class RepositorySnapshotPathDescriptor`2
+- class RestoreException
+- class ReverseTokenFilter
+- class RootInfoResponse
+- class RootObjectMapping
+- enum RoutingAllocationEnableOption
+- class RoutingFieldMapping
+- class RoutingFieldMappingDescriptor`1
+- class ScriptedMetricsAggregator
+- class ScriptFilterDescriptor
+- class ScriptScoreFunction`1
+- class ScrollExtensions
+- class SearchShardsDescriptor
+- class SearchSourceDescriptor`1
+- class SerializerExtensions
+- class ShardsFailureReason
+- class ShardsOperationResponse
+- class ShardsSegmentConverter
+- class ShingleTokenFilter
+- class SimilarityBase
+- class SimilarityCollectionConverter
+- class SimilarityDescriptor
+- class SimilaritySettings
+- class SimilaritySettingsConverter
+- class SizeFieldMapping
+- class SizeFieldMappingDescriptor
+- class SnapshotException
+- class SnapshotGetRepositoryDescriptor
+- class SnapshotGetRepositoryRequest
+- class SnapshotRepository
+- class SnowballTokenFilter
+- class Sort
+- class SortCollectionConverter
+- class SortDescriptorBase`2
+- class SourceExtensions
+- class SourceFieldMapping
+- class SourceFieldMappingDescriptor
+- class SourceFilter
+- class SpanNotQuery`1
+- class SpanQuery`1
+- class SpanTermQueryConverter
+- class StandardTokenFilter
+- class StatisticalFacet
+- class StatisticalFacetDescriptor`1
+- class StatisticalFacetRequest
+- class Stats
+- class StatsContainer
+- class StatusResponse
+- class StemmerOverrideTokenFilter
+- class StemmerTokenFilter
+- class StopTokenFilter
+- class StringMapping
+- class StringMappingDescriptor`1
+- class Suggester
+- class SuggestField
+- class SuggestResponseConverter
+- class SynonymTokenFilter
+- class TemplateExistsDescriptor
+- class TemplateExistsRequest
+- class TemplateQueryDescriptor
+- class TemplateResponse
+- class TermFacet
+- class TermFacetDescriptor`1
+- class TermFacetRequest
+- class TermFilterConverter
+- class TermFilterDescriptor
+- class TermItem
+- enum TermsExecution
+- class TermsFilterConverter
+- class TermsFilterDescriptor
+- class TermsIncludeExcludeConverter
+- class TermsLookupFilter
+- class TermsLookupFilterDescriptor
+- class TermsQueryDescriptor`2
+- class TermsQueryJsonConverter
+- class TermsStatsFacetDescriptor`1
+- class TermsStatsFacetRequest
+- enum TermsStatsOrder
+- class TermStats
+- class TermStatsFacet
+- class TermSuggestDescriptor`1
+- class TermvectorDescriptor`1
+- class TermvectorRequest
+- class TermvectorRequest`1
+- class TermVectorResponse
+- class TimestampFieldMapping
+- class TimestampFieldMappingDescriptor`1
+- class TokenFilterCollectionConverter
+- class TokenizerCollectionConverter
+- class TopChildrenQuery
+- class TopChildrenQueryDescriptor`1
+- enum TopChildrenScore
+- class TrimTokenFilter
+- class TruncateTokenFilter
+- class TtlFieldMapping
+- class TtlFieldMappingDescriptor
+- class TypeFieldMapping
+- class TypeFieldMappingDescriptor
+- class TypeMappingProperty
+- class TypeMappingWriter
+- class TypeNameMarker
+- class TypeNameMarkerConverter
+- class TypeNameMarkerExtensions
+- class TypeStats
+- class UniqueTokenFilter
+- class UnixDateTimeConverter
+- class UnregisterPercolateResponse
+- class UpdatableSettings
+- class UpdateRequest`1
+- class UpdateResponse
+- class UpdateSettingsDescriptor
+- class UpdateSettingsRequest
+- class UpgradeStatusResponseConverter
+- class UppercaseTokenFilter
+- class UptimeStats
+- class UriExtensions
+- class UriJsonConverter
+- class WarmerMapping
+- class WarmerMappingConverter
+- class WarmerResponse
+- class WeightFunction`1
+- class WordDelimiterTokenFilter
+- class WritePropertiesFromAttributeVisitor
+- class YesNoBoolConverter
+----
+
+==== Member Changes
+
+[source,diff]
+----
+class AggregationsHelper
+-     method: PercentilesRank
+-     method: TopHitsMetric
+class AliasAddOperation
+-     prop: FilterDescriptor
+class AliasDescriptor
+-     method: Add
+-     method: FilterPath
+-     method: MasterTimeout
+-     method: Remove
+-     method: Source
+-     method: Timeout
+class AliasExistsRequest
+-     prop: Index
+-     prop: Name
+- class AllFieldMapping
++ class AllField
+-     prop: IndexAnalyzer
+class AnalyzeDescriptor
+-     method: IndexQueryString
+class AnalyzeRequest
+-     prop: IndexQueryString
+-     prop: Indices
+class AnalyzeResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+- class AndFilter
++ class AndQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+- class AverageAggregator
++ class AverageAggregation
+-     prop: Language
+-     prop: Params
+- class AzureRepositoryDescriptor
++ class AzureRepositorySettingsDescriptor
+-     method: ConcurrentStreams
+class BM25Similarity
+-     prop: Normalization
+-     prop: NormalizationH1C
+-     prop: NormalizationH2C
+-     prop: NormalizationH3C
+-     prop: NormalizationZZ
+- class BoolFilter
++ class BoolQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class BulkCreateOperation`1
+-     prop: ClrType
+-     prop: Operation
+-     method: GetBody
+-     method: GetIdForOperation
+class BulkDeleteOperation`1
+-     prop: ClrType
+-     prop: Operation
+-     method: GetBody
+-     method: GetIdForOperation
+class BulkDescriptor
+-     method: Replication
+-     method: TypeQueryString
+class BulkIndexDescriptor`1
+-     method: Percolate
+class BulkIndexOperation`1
+-     prop: ClrType
+-     prop: Operation
+-     method: GetBody
+-     method: GetIdForOperation
+class BulkOperationBase
+-     prop: ClrType
+-     prop: Operation
+-     method: GetBody
+-     method: GetIdForOperation
+class BulkRequest
+-     prop: Index
+-     prop: Replication
+-     prop: Type
+-     prop: TypeQueryString
+class BulkResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class BulkUpdateOperation`2
+-     prop: ClrType
+-     prop: Operation
+-     method: GetBody
+-     method: GetIdForOperation
+- class CardinalityAggregator
++ class CardinalityAggregation
+-     prop: Language
+-     prop: Params
+class CatFielddataRequest
+-     prop: Fields
+class CatResponse`1
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClearCacheDescriptor
+-     method: Filter
+-     method: FilterCache
+-     method: FilterKeys
+-     method: Id
+-     method: IdCache
+-     method: IndexQueryString
+-     method: QueryCache
+class ClearCacheRequest
+-     prop: Filter
+-     prop: FilterCache
+-     prop: FilterKeys
+-     prop: Id
+-     prop: IdCache
+-     prop: IndexQueryString
+-     prop: Indices
+-     prop: QueryCache
+class ClearScrollRequest
+-     prop: ScrollId
+class CloseIndexRequest
+-     prop: Index
+class ClusterFileSystem
+-     prop: DiskIoOps
+-     prop: DiskQueue
+-     prop: DiskReads
+-     prop: DiskReadSize
+-     prop: DiskReadSizeInBytes
+-     prop: DiskWrites
+-     prop: DiskWriteSize
+-     prop: DiskWriteSizeInBytes
+class ClusterGetSettingsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClusterHealthRequest
+-     prop: Indices
+class ClusterNodesStats
+-     prop: Os
+class ClusterPendingTasksResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClusterPutSettingsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClusterRerouteDescriptor
+-     method: Commands
+class ClusterRerouteResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClusterStateDescriptor
+-     method: Metrics
+class ClusterStateRequest
+-     prop: Indices
+-     prop: Metrics
+class ClusterStateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ClusterStatsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class CommonTermsQueryDescriptor`1
+-     method: OnField
++     method: Field
+class ConstantScoreQuery
+-     prop: IsConditionless
+-     prop: Query
+class ConstantScoreQueryDescriptor`1
+-     method: Query
+class CountDescriptor`1
+-     method: Q
+class CountRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class CountRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class CountResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class CreateIndexDescriptor
+-     method: AddAlias
+-     method: AddMapping
+-     method: AddWarmer
+-     method: Analysis
+-     method: DeleteWarmer
+-     method: NumberOfReplicas
+-     method: NumberOfShards
+-     method: RemoveMapping
+class CreateIndexRequest
+-     prop: Index
+-     prop: IndexSettings
+class CreateRepositoryRequest
+-     prop: RepositoryName
+class CustomAnalyzer
+-     prop: Alias
+class DateHistogramAggregationDescriptor`1
+-     method: Params
+-     method: PostOffset
+-     method: PostZone
+-     method: PreOffset
+-     method: PreZone
+-     method: PreZoneAdjustLargeInterval
+- class DateHistogramAggregator
++ class DateHistogramAggregation
+-     prop: PostOffset
+-     prop: PostZone
+-     prop: PreOffset
+-     prop: PreZone
+-     prop: PreZoneAdjustLargeInterval
+class DefaultSimilarity
+-     prop: Normalization
+-     prop: NormalizationH1C
+-     prop: NormalizationH2C
+-     prop: NormalizationH3C
+-     prop: NormalizationZZ
+class DeleteAliasRequest
+-     prop: Index
+-     prop: Name
+class DeleteAliasResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class DeleteByQueryDescriptor`1
+-     method: Consistency
+-     method: Q
+-     method: Replication
+class DeleteByQueryRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Consistency
+-     prop: Indices
+-     prop: Q
+-     prop: Replication
+-     prop: Types
+class DeleteByQueryRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Consistency
+-     prop: Indices
+-     prop: Q
+-     prop: Replication
+-     prop: Types
+class DeleteDescriptor`1
+-     method: Replication
+class DeleteIndexRequest
+-     prop: AllIndices
+-     prop: Indices
+class DeleteRepositoryRequest
+-     prop: RepositoryName
+class DeleteRequest
+-     prop: Id
+-     prop: Index
+-     prop: Replication
+-     prop: Type
+class DeleteRequest`1
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Replication
+-     prop: Type
+class DeleteResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Indices
+-     prop: Infer
+class DeleteScriptDescriptor
+-     method: Id
+-     method: Lang
+class DeleteScriptRequest
+-     prop: Id
+-     prop: Lang
+class DeleteScriptResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class DeleteSearchTemplateRequest
+-     prop: Name
+class DeleteSearchTemplateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class DeleteSnapshotRequest
+-     prop: Repository
+-     prop: Snapshot
+class DeleteWarmerRequest
+-     prop: AllIndices
+-     prop: Indices
+-     prop: Name
+-     prop: Types
+class DirectGeneratorDescriptor`1
+-     method: OnField
++     method: Field
+class DocumentExistsRequest
+-     prop: Id
+-     prop: Index
+-     prop: Type
+class DocumentExistsRequest`1
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Type
+class DynamicTemplateDescriptor`1
+-     method: Name
+class EdgeNGramTokenizer
+-     prop: Side
+class ElasticClient
+-     prop: Connection
+-     method: ClusterSettings
++     method: ClusterPutSettings
+-     method: ClusterSettingsAsync
++     method: ClusterPutSettingsAsync
+-     method: DeleteMapping
+-     method: DeleteMappingAsync
+-     method: DeleteTemplate
++     method: DeleteSearchTemplate
+-     method: DeleteTemplateAsync
++     method: DeleteSearchTemplateAsync
+-     method: DeleteTemplateAync
+-     method: DoRequest
+-     method: DoRequestAsync
+-     method: GetTemplate
++     method: GetSearchTemplate
+-     method: GetTemplateAsync
++     method: GetSearchTemplateAsync
+-     method: MoreLikeThis
+-     method: MoreLikeThisAsync
+-     method: NodesShutdown
+-     method: NodesShutdownAsync
+-     method: PutTemplate
++     method: PutSearchTemplate
+-     method: PutTemplateAsync
++     method: PutSearchTemplateAsync
+-     method: Status
+-     method: StatusAsync
+-     method: TemplateExists
+-     method: TemplateExistsAsync
+-     method: TermVector
+-     method: TermVectorAsync
+-     method: UpdateSettings
++     method: UpdateIndexSettings
+-     method: UpdateSettingsAsync
++     method: UpdateIndexSettingsAsync
+- class ExistsFilter
++ class ExistsQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class ExistsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ExplainDescriptor`1
+-     method: EnableSource
+-     method: Q
+class ExplainRequest`1
+-     prop: EnableSource
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Q
+-     prop: Type
+class ExplainResponse`1
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Fields
+-     prop: Infer
+-     prop: Source
+- class ExtendedStatsAggregator
++ class ExtendedStatsAggregation
+-     prop: Language
+-     prop: Params
+class FieldStatsRequest
+-     prop: AllIndices
+-     prop: Indices
+class FieldStatsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+- class FileSystemRepositoryDescriptor
++ class FileSystemRepositorySettingsDescriptor
+-     method: SnapshortBytesPerSecondMaximum
+class FiltersAggregationDescriptor`1
+-     method: Filters
+class FlushDescriptor
+-     method: Full
+class FlushRequest
+-     prop: AllIndices
+-     prop: Indices
+class FunctionScoreQuery
+-     prop: Filter
++     prop: Query
+-     prop: RandomScore
+-     prop: ScriptScore
+-     prop: Weight
+-     prop: WeightAsDouble
+class FunctionScoreQueryDescriptor`1
+-     method: Filter
+-     method: RandomScore
+-     method: ScriptScore
+-     method: Weight
+class FuzzyDateQuery
+-     prop: UnicodeAware
+class FuzzyDateQueryDescriptor`1
+-     method: OnField
++     method: Field
+-     method: UnicodeAware
+class FuzzyNumericQuery
+-     prop: UnicodeAware
+class FuzzyNumericQueryDescriptor`1
+-     method: OnField
++     method: Field
+-     method: UnicodeAware
+class FuzzyQueryDescriptor`1
+-     method: OnField
++     method: Field
+-     method: UnicodeAware
+- class GeoBoundingBoxFilter
++ class GeoBoundingBoxQuery
+-     prop: BottomRight
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: GeoExecution
+-     prop: TopLeft
+- class GeoBoundsAggregator
++ class GeoBoundsAggregation
+-     prop: Language
+-     prop: Params
+- class GeoDistanceFilter
++ class GeoDistanceQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Unit
+- class GeoDistanceRangeFilter
++ class GeoDistanceRangeQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: From
+-     prop: IncludeLower
+-     prop: IncludeUpper
+-     prop: To
+-     prop: Unit
+class GeoDistanceSort
+-     prop: PinLocation
++     prop: Points
+- class GeoHashCellFilter
++ class GeoHashCellQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Unit
+- class GeoIndexedShapeFilter
++ class GeoIndexedShapeQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoLocation
+-     prop: Longtitude
+- class GeoPolygonFilter
++ class GeoPolygonQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+- class GeoShapeCircleFilter
++ class GeoShapeCircleQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeCircleQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapeEnvelopeFilter
++ class GeoShapeEnvelopeQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeEnvelopeQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapeLineStringFilter
++ class GeoShapeLineStringQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeLineStringQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapeMultiLineStringFilter
++ class GeoShapeMultiLineStringQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeMultiLineStringQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapeMultiPointFilter
++ class GeoShapeMultiPointQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeMultiPointQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapeMultiPolygonFilter
++ class GeoShapeMultiPolygonQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapeMultiPolygonQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapePointFilter
++ class GeoShapePointQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapePointQueryDescriptor`1
+-     method: OnField
++     method: Field
+- class GeoShapePolygonFilter
++ class GeoShapePolygonQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Relation
+class GeoShapePolygonQueryDescriptor`1
+-     method: OnField
++     method: Field
+class GetAliasesRequest
+-     prop: Indices
+class GetAliasesResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetAliasRequest
+-     prop: Indices
+class GetDescriptor`1
+-     method: EnableSource
+class GetFieldMappingRequest
+-     prop: Fields
+-     prop: Indices
+-     prop: Types
+class GetFieldMappingResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetIndexDescriptor
+-     method: Features
+class GetIndexRequest
+-     prop: AllIndices
+-     prop: Features
+-     prop: Indices
+class GetIndexResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetIndexSettingsRequest
+-     prop: Index
+class GetMappingRequest
+-     prop: Index
+-     prop: Type
+class GetMappingResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetRepositoryRequest
+-     prop: RepositoryName
+class GetRepositoryResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetRequest
+-     prop: EnableSource
+-     prop: Id
+-     prop: Index
+-     prop: Type
+class GetRequest`1
+-     prop: EnableSource
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Type
+class GetResponse`1
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+-     method: FieldValue
+class GetScriptDescriptor
+-     method: Id
+-     method: Lang
+class GetScriptRequest
+-     prop: Id
+-     prop: Lang
+class GetScriptResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetSearchTemplateRequest
+-     prop: Name
+class GetSearchTemplateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetSnapshotRequest
+-     prop: Repository
+-     prop: Snapshot
+class GetSnapshotResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class GetWarmerRequest
+-     prop: AllIndices
+-     prop: Indices
+-     prop: Name
+-     prop: Types
+- class HasChildFilter
++ class HasChildQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Filter
+-     prop: FilterName
+class HasChildQuery
+-     prop: ScoreType
++     prop: ScoreMode
+class HasChildQueryDescriptor`1
+-     method: Score
+- class HasParentFilter
++ class HasParentQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Filter
+-     prop: FilterName
+class HasParentQuery
+-     prop: ScoreType
++     prop: ScoreMode
+class HasParentQueryDescriptor`1
+-     method: Score
+class Highlight
+-     prop: DocumentId
+-     prop: Field
+-     prop: Highlights
+class HighlightDescriptor`1
+-     method: OnFields
++     method: Fields
+class HighlightField
+-     prop: HighlightQuery
+class HighlightFieldDescriptor`1
+-     method: HighlightQuery
+-     method: OnField
++     method: Field
+class HistogramAggregationDescriptor`1
+-     method: Params
+- class HistogramAggregator
++ class HistogramAggregation
+-     prop: Params
+class HistogramItem
+-     prop: Date
+class HotThreadInformation
+-     prop: Node
+interface IBoolQuery
+-     prop: Boost
+interface IClearScrollRequest
+-     prop: ScrollId
+interface IClusterStateRequest
+-     prop: Metrics
+interface ICommonTermsQuery
+-     prop: Boost
+-     prop: Field
+interface IConnectionSettingsValues
+-     prop: ContractConverters
+-     prop: DefaultPropertyNameInferrer
+-     prop: ModifyJsonSerializerSettings
+interface IConstantScoreQuery
+-     prop: Boost
+-     prop: Query
+interface ICreateIndexRequest
+-     prop: IndexSettings
+- interface IDateHistogramAggregator
++ interface IDateHistogramAggregation
+-     prop: PostOffset
+-     prop: PostZone
+-     prop: PreOffset
+-     prop: PreZone
+-     prop: PreZoneAdjustLargeInterval
+interface IDeleteResponse
+-     prop: Indices
+interface IDisMaxQuery
+-     prop: Boost
+class IdResolver
+-     method: GetIdFor
+- class IdsFilter
++ class IdsQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Type
+class IdsQuery
+-     prop: Type
+class IdsQueryDescriptor
+-     prop: Boost
+-     prop: Name
+-     prop: Type
+-     prop: Values
+interface IElasticClient
+-     prop: Connection
+-     method: ClusterSettings
++     method: ClusterPutSettings
+-     method: ClusterSettingsAsync
++     method: ClusterPutSettingsAsync
+-     method: DeleteMapping
+-     method: DeleteMappingAsync
+-     method: DeleteTemplate
++     method: DeleteSearchTemplate
+-     method: DeleteTemplateAsync
++     method: DeleteSearchTemplateAsync
+-     method: DeleteTemplateAync
+-     method: DoRequest
+-     method: DoRequestAsync
+-     method: GetTemplate
++     method: GetSearchTemplate
+-     method: GetTemplateAsync
++     method: GetSearchTemplateAsync
+-     method: MoreLikeThis
+-     method: MoreLikeThisAsync
+-     method: NodesShutdown
+-     method: NodesShutdownAsync
+-     method: PutTemplate
++     method: PutSearchTemplate
+-     method: PutTemplateAsync
++     method: PutSearchTemplateAsync
+-     method: Status
+-     method: StatusAsync
+-     method: TemplateExists
+-     method: TemplateExistsAsync
+-     method: TermVector
+-     method: TermVectorAsync
+-     method: UpdateSettings
++     method: UpdateIndexSettings
+-     method: UpdateSettingsAsync
++     method: UpdateIndexSettingsAsync
+interface IExplainResponse`1
+-     prop: Fields
+-     prop: Source
+interface IFieldNameQuery
+-     method: GetFieldName
+-     method: SetFieldName
+interface IFieldSort
+-     prop: Field
+- interface IFilter
++ interface IQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: IsConditionless
+-     prop: IsStrict
+-     prop: IsVerbatim
+interface IFilteredQuery
+-     prop: Boost
+interface IFunctionScoreQuery
+-     prop: Boost
+-     prop: Filter
+-     prop: RandomScore
+-     prop: ScriptScore
+-     prop: Weight
+-     prop: WeightAsDouble
+interface IFuzzyDateQuery
+-     prop: Value
+interface IFuzzyNumericQuery
+-     prop: Value
+interface IFuzzyQuery
+-     prop: Boost
+-     prop: Field
+-     prop: Fuzziness
+-     prop: UnicodeAware
+- interface IGeoBoundingBoxFilter
++ interface IGeoBoundingBoxQuery
+-     prop: BottomRight
+-     prop: Field
+-     prop: GeoExecution
+-     prop: TopLeft
+- interface IGeoDistanceFilter
++ interface IGeoDistanceQuery
+-     prop: Field
+-     prop: Unit
+- interface IGeoDistanceRangeFilter
++ interface IGeoDistanceRangeQuery
+-     prop: Field
+-     prop: From
+-     prop: IncludeLower
+-     prop: IncludeUpper
+-     prop: To
+-     prop: Unit
+interface IGeoDistanceSort
+-     prop: PinLocation
++     prop: Points
+- interface IGeoHashCellFilter
++ interface IGeoHashCellQuery
+-     prop: Field
+-     prop: Unit
+interface IGeoShapeCircleQuery
+-     prop: Boost
+interface IGeoShapeEnvelopeQuery
+-     prop: Boost
+interface IGeoShapeLineStringQuery
+-     prop: Boost
+interface IGeoShapeMultiLineStringQuery
+-     prop: Boost
+interface IGeoShapeMultiPointQuery
+-     prop: Boost
+interface IGeoShapeMultiPolygonQuery
+-     prop: Boost
+interface IGeoShapePointQuery
+-     prop: Boost
+interface IGeoShapePolygonQuery
+-     prop: Boost
+interface IGeoShapeQuery
+-     prop: Field
+interface IGetIndexRequest
+-     prop: Features
+- interface IHasChildFilter
++ interface IHasChildQuery
+-     prop: Filter
+interface IHasChildQuery
+-     prop: Boost
+-     prop: ScoreType
+- interface IHasParentFilter
++ interface IHasParentQuery
+-     prop: Filter
+interface IHasParentQuery
+-     prop: Boost
+-     prop: ScoreType
+interface IHighlightField
+-     prop: HighlightQuery
+- interface IHistogramAggregator
++ interface IHistogramAggregation
+-     prop: Params
+- interface IIdsFilter
++ interface IIdsQuery
+-     prop: Type
+interface IIdsQuery
+-     prop: Boost
+-     prop: Type
+- interface IIndicesFilter
++ interface IIndicesQuery
+-     prop: Filter
+-     prop: Index
+-     prop: NoMatchFilter
+interface IIndicesQuery
+-     prop: Boost
+-     prop: Score
+interface IIndicesStatsRequest
+-     prop: Metrics
+- interface ILimitFilter
++ interface ILimitQuery
+-     prop: Value
+interface IMatchAllQuery
+-     prop: Boost
+interface IMatchQuery
+-     prop: Boost
+-     prop: Field
+-     prop: Rewrite
+- interface IMetricAggregator
++ interface IMetricAggregation
+-     prop: Language
+-     prop: Params
+interface IMoreLikeThisQuery
+-     prop: Boost
+-     prop: Documents
+-     prop: Ids
+-     prop: LikeText
+-     prop: TermMatchPercentage
+interface IMultiGetOperation
+-     prop: Document
+-     prop: PerFieldAnalyzer
+interface IMultiGetRequest
+-     prop: GetOperations
+interface IMultiMatchQuery
+-     prop: Boost
+-     prop: Rewrite
+class IndexDescriptor`1
+-     method: Replication
+class IndexExistsRequest
+-     prop: Index
+class IndexNameResolver
+-     method: GetIndexForType
+class IndexRequest`1
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Replication
+-     prop: Type
+class IndexResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class IndexSettings
+-     prop: Aliases
+-     prop: AsExpando
+-     prop: Mappings
+-     prop: Settings
+-     prop: Similarity
+-     prop: Warmers
+- class IndicesFilter
++ class IndicesQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Filter
+-     prop: FilterName
+-     prop: Index
+-     prop: NoMatchFilter
+-     prop: Score
+class IndicesQuery
+-     prop: Score
+class IndicesStats
+-     prop: Completion
+-     prop: Count
+-     prop: Docs
+-     prop: FieldData
+-     prop: FilterCache
+-     prop: IdCache
+-     prop: Percolate
+-     prop: Segments
+-     prop: Shards
+-     prop: Store
+class IndicesStatsDescriptor
+-     method: Metrics
+class IndicesStatsRequest
+-     prop: Indices
+-     prop: Metrics
+- interface INestedFilter
++ interface INestedQuery
+-     prop: Filter
+-     prop: Join
+-     prop: Score
+interface INestedQuery
+-     prop: Boost
+-     prop: Filter
+-     prop: Score
+interface INodesInfoRequest
+-     prop: Metrics
+interface INodesStatsRequest
+-     prop: IndexMetrics
+-     prop: Metrics
+- interface INotFilter
++ interface INotQuery
+-     prop: Filter
+- interface IPercentilesAggregator
++ interface IPercentilesAggregation
+-     prop: Compression
+-     prop: Field
+-     prop: Params
+-     prop: Percentages
+-     prop: Script
+interface IPercolateOperation
+-     prop: Facets
+-     prop: Id
+interface IPhraseSuggestCollate
+-     prop: Filter
+-     prop: Params
+-     prop: Preference
+- interface IPrefixFilter
++ interface IPrefixQuery
+-     prop: Prefix
+interface IPutAliasRequest
+-     prop: IndexRouting
+-     prop: SearchRouting
+interface IPutMappingRequest
+-     prop: Mapping
+interface IPutWarmerRequest
+-     prop: SearchDescriptor
++     prop: Search
+interface IQuery
+-     prop: IsConditionless
+interface IQueryContainer
+-     prop: CustomBoostFactor
+-     prop: CustomFiltersScore
+-     prop: CustomScore
+-     prop: FuzzyLikeThis
+-     prop: MatchAllQuery
++     prop: MatchAll
+-     prop: TopChildren
+interface IQueryStringQuery
+-     prop: Boost
+-     prop: FuzzyMinimumSimilarity
+-     prop: MinimumShouldMatchPercentage
+- interface IRangeAggregator
++ interface IRangeAggregation
+-     prop: Params
+- interface IRangeFilter
++ interface IRangeQuery
+-     prop: Execution
+-     prop: Format
+-     prop: GreaterThan
+-     prop: GreaterThanOrEqualTo
+-     prop: LowerThan
+-     prop: LowerThanOrEqualTo
+-     prop: TimeZone
+interface IRangeQuery
+-     prop: Boost
+-     prop: Cache
+-     prop: Field
+-     prop: Format
+-     prop: GreaterThan
+-     prop: GreaterThanOrEqualTo
+-     prop: LowerThan
+-     prop: LowerThanOrEqualTo
+-     prop: TimeZone
+interface IRegexpQuery
+-     prop: Boost
+-     prop: Field
+interface IRegisterPercolatorRequest
+-     prop: MetaData
++     prop: Metadata
+- interface IRepository
++ interface ISnapshotRepository
+-     prop: Settings
+interface IRequest
+-     prop: RequestConfiguration
+interface IResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+- interface IScriptedMetricAggregator
++ interface IScriptedMetricAggregation
+-     prop: CombineScriptFile
+-     prop: CombineScriptId
+-     prop: InitScriptFile
+-     prop: InitScriptId
+-     prop: MapScriptFile
+-     prop: MapScriptId
+-     prop: ReduceParams
+-     prop: ReduceScriptFile
+-     prop: ReduceScriptId
+- interface IScriptFilter
++ interface IScriptQuery
+-     prop: Script
+-     prop: ScriptFile
+-     prop: ScriptId
+interface IScriptSort
+-     prop: File
+-     prop: Language
+-     prop: Params
+interface IScrollRequest
+-     prop: TypeSelector
+interface ISearchRequest
+-     prop: ClrType
+-     prop: Facets
+-     prop: Filter
+-     prop: QueryString
+-     prop: TypeSelector
+interface ISearchResponse`1
+-     prop: ElapsedMilliseconds
++     prop: Took
+-     prop: Facets
+-     prop: FieldSelections
+-     method: Facet
+-     method: FacetItems
+interface ISearchTemplateRequest
+-     prop: ClrType
+-     prop: TypeSelector
+interface ISimpleQueryStringQuery
+-     prop: Boost
+-     prop: DefaultField
+interface ISpanFirstQuery
+-     prop: Boost
+interface ISpanMultiTermQuery
+-     prop: Boost
+interface ISpanNearQuery
+-     prop: Boost
+interface ISpanNotQuery
+-     prop: Boost
+interface ISpanOrQuery
+-     prop: Boost
+interface ISpanQuery
+-     prop: SpanTermQueryDescriptor
++     prop: SpanTerm
+interface ITemplateQuery
+-     prop: Boost
+-     prop: Query
+- interface ITermFilter
++ interface ITermQuery
+-     prop: Boost
+interface ITermQuery
+-     prop: Boost
+-     prop: Field
+- interface ITermsAggregator
++ interface ITermsAggregation
+-     prop: Params
+interface ITermsQuery
+-     prop: Boost
+-     prop: ExternalField
++     prop: TermsLookup
+-     prop: Field
+- interface ITopHitsAggregator
++ interface ITopHitsAggregation
+-     prop: FieldDataFields
++     prop: FielddataFields
+interface IUpdateRequest`2
+-     prop: DetectNoop
+- class LimitFilter
++ class LimitQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Value
+class LMDirichletSimilarity
+-     prop: Normalization
+-     prop: NormalizationH1C
+-     prop: NormalizationH2C
+-     prop: NormalizationH3C
+-     prop: NormalizationZZ
+- class MatchAllFilter
++ class MatchAllQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class MatchQuery
+-     prop: Rewrite
+-     prop: Type
+class MatchQueryDescriptor`1
+-     method: OnField
++     method: Field
+-     method: Rewrite
+- class MaxAggregator
++ class MaxAggregation
+-     prop: Language
+-     prop: Params
+- class MinAggregator
++ class MinAggregation
+-     prop: Language
+-     prop: Params
+- class MissingFilter
++ class MissingQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class MoreLikeThisQuery
+-     prop: Documents
++     prop: Like
+-     prop: Ids
++     prop: Like
+-     prop: LikeText
++     prop: Like
+class MoreLikeThisQueryDescriptor`1
+-     method: Documents
+-     method: DocumentsExplicit
+-     method: Ids
+-     method: LikeText
+-     method: OnFields
++     method: Fields
+-     method: TermMatchPercentage
+class MultiGetDescriptor
+-     method: EnableSource
+class MultiGetHit`1
+-     prop: FieldSelection
+class MultiGetOperation`1
+-     prop: PerFieldAnalyzer
+class MultiGetOperationDescriptor`1
+-     method: Document
+-     method: PerFieldAnalyzer
+class MultiGetRequest
+-     prop: EnableSource
+-     prop: GetOperations
+-     prop: Index
+-     prop: Type
+class MultiGetResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class MultiMatchQuery
+-     prop: Rewrite
+class MultiMatchQueryDescriptor`1
+-     method: OnFields
++     method: Fields
+-     method: OnFieldsWithBoost
+-     method: Rewrite
+-     method: UseDisMax
+class MultiPercolateRequest
+-     prop: Index
+-     prop: Type
+class MultiPercolateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class MultiSearchRequest
+-     prop: Index
+-     prop: Type
+class MultiSearchResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class MultiTermVectorsRequest
+-     prop: Index
+-     prop: Type
+- class NestedFilter
++ class NestedQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Filter
+-     prop: FilterName
+-     prop: Join
+-     prop: Score
+class NestedQuery
+-     prop: Filter
+-     prop: Score
+class NestedQueryDescriptor`1
+-     method: Filter
+-     method: Score
+class NodeInfo
+-     prop: HTTP
++     prop: Http
+-     prop: JVM
++     prop: Jvm
+-     prop: OS
++     prop: OperatingSystem
+class NodesHotThreadsDescriptor
+-     prop: NodeId
+class NodesHotThreadsRequest
+-     prop: NodeId
+class NodesHotThreadsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class NodesInfoDescriptor
+-     method: Metrics
+class NodesInfoRequest
+-     prop: Metrics
+-     prop: NodeId
+class NodesStatsDescriptor
+-     method: IndexMetrics
+-     method: Metrics
+class NodesStatsRequest
+-     prop: IndexMetrics
+-     prop: Metrics
+-     prop: NodeId
+class NodeStats
+-     prop: Hostname
+-     prop: HTTP
++     prop: Http
+-     prop: JVM
++     prop: Jvm
+-     prop: Network
+-     prop: OS
++     prop: OperatingSystem
+class NoMatchQueryContainer
+-     prop: IsConditionless
+-     prop: IsStrict
+-     prop: IsVerbatim
+- class NotFilter
++ class NotQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Filter
+-     prop: FilterName
+class OpenIndexRequest
+-     prop: Index
+class OptimizeDescriptor
+-     method: Force
+class OptimizeRequest
+-     prop: Force
+-     prop: Indices
+- class OrFilter
++ class OrQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class PercentileRanksAggregation
+-     prop: Language
+-     prop: Params
+class PercentilesAggregationDescriptor`1
+-     method: Compression
+-     method: Params
+-     method: Percentages
+- class PercentilesAggregator
++ class PercentilesAggregation
+-     prop: Compression
+-     prop: Params
+-     prop: Percentages
+class PercolateCountDescriptor`1
+-     method: Object
+-     method: QueryString
+-     method: SortAscending
+-     method: SortDescending
+-     method: SortGeoDistance
+-     method: SortScript
+class PercolateCountRequest`1
+-     prop: Facets
+-     prop: Id
+-     prop: Index
+-     prop: Type
+class PercolateCountResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PercolateDescriptor`1
+-     method: QueryString
+-     method: SortAscending
+-     method: SortDescending
+-     method: SortGeoDistance
+-     method: SortScript
+class PercolateRequest`1
+-     prop: Facets
+-     prop: Id
+-     prop: Index
+-     prop: Type
+class PercolateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PhraseSuggestCollate
+-     prop: Filter
+-     prop: Params
+-     prop: Preference
+class PhraseSuggestCollateDescriptor`1
+-     method: Filter
+-     method: Params
+-     method: Preference
+class PingResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PluginStats
+-     prop: Url
+- class PrefixFilter
++ class PrefixQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Prefix
+class PropertiesDescriptor`1
+-     prop: Properties
+-     method: Generic
+-     method: IP
+-     method: MultiField
+-     method: NestedObject
+-     method: Remove
+class PutAliasDescriptor
+-     method: IndexRouting
+-     method: SearchRouting
+class PutAliasRequest
+-     prop: Index
+-     prop: IndexRouting
+-     prop: Name
+-     prop: SearchRouting
+class PutAliasResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PutMappingDescriptor`1
+-     method: AnalyzerField
+-     method: BoostField
+-     method: Enabled
+-     method: IdField
+-     method: IgnoreConflicts
+-     method: IncludeInAll
+-     method: IndexAnalyzer
+-     method: InitializeUsing
+-     method: MapFromAttributes
+-     method: Path
+-     method: SetParent
+-     method: TypeField
+class PutMappingRequest
+-     prop: AllIndices
+-     prop: IgnoreConflicts
+-     prop: Indices
+-     prop: Mapping
+-     prop: Type
+class PutMappingRequest`1
+-     prop: AllIndices
+-     prop: IgnoreConflicts
+-     prop: Indices
+-     prop: Mapping
+-     prop: Type
+class PutScriptDescriptor
+-     method: Id
+-     method: Lang
+class PutScriptRequest
+-     prop: Id
+-     prop: Lang
+class PutScriptResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PutSearchTemplateRequest
+-     prop: Name
+class PutSearchTemplateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class PutWarmerRequest
+-     prop: AllIndices
+-     prop: Indices
+-     prop: Name
+-     prop: SearchDescriptor
++     prop: Search
+-     prop: Types
+class QueryContainer
+-     prop: IsConditionless
+-     prop: IsStrict
+-     prop: IsVerbatim
+-     method: GetCustomJson
+class QueryStringQuery
+-     prop: FuzzyMinimumSimilarity
+-     prop: MinimumShouldMatchPercentage
+class QueryStringQueryDescriptor`1
+-     method: FuzzyMinimumSimilarity
+-     method: MinimumShouldMatchPercentage
+-     method: OnFields
++     method: Fields
+-     method: OnFieldsWithBoost
+class Range
+-     prop: Count
+-     prop: Max
+-     prop: Mean
+-     prop: Min
+-     prop: Total
+-     prop: TotalCount
+class RangeAggregationDescriptor`1
+-     method: Params
+- class RangeAggregator
++ class RangeAggregation
+-     prop: Params
+class RecoveryStatusRequest
+-     prop: Indices
+class RecoveryStatusResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class RefreshRequest
+-     prop: Indices
+- class RegexpFilter
++ class RegexpQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class RegexpQueryDescriptor`1
+-     method: OnField
++     method: Field
+class RegisterPercolatorDescriptor`1
+-     method: AddMetadata
+-     method: GetCustomJson
+class RegisterPercolatorRequest
+-     prop: Index
+-     prop: MetaData
++     prop: Metadata
+-     prop: Name
+-     method: GetCustomJson
+class ReindexDescriptor`1
+-     method: FromIndex
+-     method: NewIndexName
+-     method: ToIndex
+class RescoreQueryDescriptor`1
+-     prop: Self
+class RestoreRequest
+-     prop: Repository
+-     prop: Snapshot
+class RestoreResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ScriptedHeuristic
+-     prop: Lang
+-     prop: Params
+class ScriptedHeuristicDescriptor
+-     method: Lang
+-     method: Params
+class ScriptedMetricAggregationDescriptor`1
+-     method: CombineScriptFile
+-     method: CombineScriptId
+-     method: InitScriptFile
+-     method: InitScriptId
+-     method: MapScriptFile
+-     method: MapScriptId
+-     method: ReduceParams
+-     method: ReduceScriptFile
+-     method: ReduceScriptId
+- class ScriptFilter
++ class ScriptQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+-     prop: Script
+-     prop: ScriptFile
+-     prop: ScriptId
+class ScriptSort
+-     prop: File
+-     prop: Params
+class SearchDescriptor`1
+-     method: FacetDateHistogram
+-     method: FacetFilter
+-     method: FacetGeoDistance
+-     method: FacetHistogram
+-     method: FacetQuery
+-     method: FacetRange
+-     method: FacetStatistical
+-     method: FacetTerm
+-     method: FacetTermsStats
+-     method: Filter
+-     method: FilterRaw
+-     method: QueryCache
+-     method: QueryRaw
+-     method: QueryString
+-     method: SortAscending
+-     method: SortDescending
+-     method: SortGeoDistance
+-     method: SortMulti
+-     method: SortScript
+-     method: Strict
+-     method: SuggestCompletion
+-     method: SuggestPhrase
+-     method: SuggestTerm
+class SearchExistsDescriptor`1
+-     method: Q
+class SearchExistsRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class SearchExistsRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class SearchRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Facets
+-     prop: Filter
++     prop: PostFilter
+-     prop: Indices
+-     prop: QueryCache
+-     prop: QueryString
+-     prop: Types
+class SearchRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: ClrType
+-     prop: Facets
+-     prop: Filter
++     prop: PostFilter
+-     prop: Indices
+-     prop: QueryCache
+-     prop: QueryString
+-     prop: Types
+class SearchResponse`1
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: ElapsedMilliseconds
++     prop: Took
+-     prop: Facets
+-     prop: FieldSelections
+-     prop: Infer
+-     method: Facet
+-     method: FacetItems
+class SearchShardsRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Types
+class SearchShardsRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Types
+class SearchShardsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class SearchTemplateRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Types
+class SearchTemplateRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: ClrType
+-     prop: Indices
+-     prop: Types
+class SegmentsRequest
+-     prop: Indices
+class SegmentsResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class SignificantTermsAggregationDescriptor`1
+-     method: Exclude
+-     method: ExecutionHint
+-     method: Include
+class SimpleQueryStringQuery
+-     prop: DefaultField
+class SimpleQueryStringQueryDescriptor`1
+-     method: DefaultField
+-     method: OnFields
++     method: Fields
+-     method: OnFieldsWithBoost
+class SingleMappingDescriptor`1
+-     method: Generic
+-     method: IP
+-     method: MultiField
+-     method: NestedObject
+class Snapshot
+-     prop: Version
+-     prop: VersionId
+class SnapshotRequest
+-     prop: Repository
+-     prop: Snapshot
+class SnapshotResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class SnapshotStatusRequest
+-     prop: Repository
+-     prop: Snapshot
+class SnapshotStatusResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class SortDescriptor`1
+-     method: Sort
+-     method: SortAscending
+-     method: SortDescending
+-     method: SortGeoDistance
+-     method: SortScript
+class SortFieldDescriptor`1
+-     method: NestedAvg
+-     method: NestedMax
+-     method: NestedMin
+-     method: NestedSum
+-     method: OnField
++     method: Field
+class SortGeoDistanceDescriptor`1
+-     method: OnField
++     method: Field
+class SortScriptDescriptor`1
+-     prop: Self
+-     method: File
+-     method: Language
+-     method: Params
+class SourceDescriptor`1
+-     method: EnableSource
+class SourceRequest
+-     prop: EnableSource
+-     prop: Id
+-     prop: Index
+-     prop: Type
+class SourceRequest`1
+-     prop: EnableSource
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Type
+class SpanFirstQueryDescriptor`1
+-     method: MatchTerm
+class SpanMultiTermQuery
+-     prop: IsConditionless
+class SpanQuery
+-     prop: Name
+-     prop: SpanTermQueryDescriptor
++     prop: SpanTerm
+class StandardTokenizer
+-     prop: MaximumTokenLength
++     prop: MaxTokenLength
+- class StatsAggregator
++ class StatsAggregation
+-     prop: Language
+-     prop: Params
+- class SuggestOption
++ class Suggest
+-     prop: Frequency
+-     prop: Payload
+-     prop: Score
+class SuggestRequest
+-     prop: AllIndices
+-     prop: Indices
+class SuggestResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+- class SumAggregator
++ class SumAggregation
+-     prop: Language
+-     prop: Params
+class SyncedFlushRequest
+-     prop: AllIndices
+-     prop: Indices
+class TemplateQuery
+-     prop: IsConditionless
+-     prop: Query
+- class TermFilter
++ class TermQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class TermQueryDescriptorBase`2
+-     method: GetFieldName
+-     method: OnField
++     method: Field
+-     method: SetFieldName
+class TermsAggregationDescriptor`1
+-     method: Params
+- class TermsAggregator
++ class TermsAggregation
+-     prop: Params
+- class TermsFilter
++ class TermsQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: Execution
+-     prop: FilterName
+class TermsQuery
+-     prop: ExternalField
++     prop: TermsLookup
+class TopHitsAggregationDescriptor`1
+-     method: FieldDataFields
+- class TopHitsAggregator
++ class TopHitsAggregation
+-     prop: FieldDataFields
++     prop: FielddataFields
+-     prop: Language
+-     prop: Params
+class TypeExistsRequest
+-     prop: Index
+-     prop: Type
+- class TypeFilter
++ class TypeQuery
+-     prop: Cache
+-     prop: CacheKey
+-     prop: FilterName
+class TypeMapping
+-     prop: Mapping
+-     prop: TypeName
+class TypeNameResolver
+-     method: GetTypeNameFor
+class UaxEmailUrlTokenizer
+-     prop: MaximumTokenLength
++     prop: MaxTokenLength
+class UnregisterPercolatorRequest
+-     prop: Index
+-     prop: Name
+class UpdateDescriptor`2
+-     method: Id
+-     method: Replication
+class UpdateRequest`2
+-     prop: Id
+-     prop: IdFrom
+-     prop: Index
+-     prop: Replication
+-     prop: Type
+class UpgradeRequest
+-     prop: Indices
+class UpgradeResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class UpgradeStatusRequest
+-     prop: Indices
+class UpgradeStatusResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+class ValidateQueryDescriptor`1
+-     method: Q
+class ValidateQueryRequest
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class ValidateQueryRequest`1
+-     prop: AllIndices
+-     prop: AllTypes
+-     prop: Indices
+-     prop: Q
+-     prop: Types
+class ValidateResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+- class ValueCountAggregator
++ class ValueCountAggregation
+-     prop: Language
+-     prop: Params
+class VerifyRepositoryRequest
+-     prop: RepositoryName
+class VerifyRepositoryResponse
+-     prop: ConnectionStatus
++     prop: ApiCall
+-     prop: Infer
+----

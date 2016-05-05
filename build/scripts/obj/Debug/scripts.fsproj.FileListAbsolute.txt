@@ -1,0 +1,7 @@
+D:\dev\git\elasticsearch-net-2.x\build\scripts\bin\Debug\scripts.XML
+D:\dev\git\elasticsearch-net-2.x\build\scripts\bin\Debug\scripts.dll
+D:\dev\git\elasticsearch-net-2.x\build\scripts\bin\Debug\scripts.pdb
+D:\dev\git\elasticsearch-net-2.x\build\scripts\bin\Debug\FSharp.Core.dll
+D:\dev\git\elasticsearch-net-2.x\build\scripts\bin\Debug\FSharp.Core.xml
+D:\dev\git\elasticsearch-net-2.x\build\scripts\obj\Debug\scripts.dll
+D:\dev\git\elasticsearch-net-2.x\build\scripts\obj\Debug\scripts.pdb
