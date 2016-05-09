@@ -7,11 +7,12 @@ namespace Nest
 	public interface IReindexRethrottleResponse : IResponse
 	{
 		[JsonProperty("nodes")]
-		IEnumerable<ReindexNode> Nodes { get; set; }
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		Dictionary<string, ReindexNode> Nodes { get; set; }
 	}
 
 	public class ReindexRethrottleResponse : ResponseBase, IReindexRethrottleResponse
 	{
-		public IEnumerable<ReindexNode> Nodes { get; set; }
+		public Dictionary<string, ReindexNode> Nodes { get; set; }
 	}
 }
