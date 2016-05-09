@@ -7,9 +7,11 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
+#pragma warning disable 618 // testing deprecated percolate APIs
+
 namespace Tests.Search.Percolator.PercolateCount
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class PercolateCountApiTests
 		: ApiIntegrationTestBase<IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{
@@ -74,7 +76,7 @@ namespace Tests.Search.Percolator.PercolateCount
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class PercolateCountExistingDocApiTests
 		: ApiIntegrationTestBase<IPercolateCountResponse, IPercolateCountRequest<Project>, PercolateCountDescriptor<Project>, PercolateCountRequest<Project>>
 	{

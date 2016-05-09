@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class SearchTemplateCrudTests
 		: CrudTestBase<IPutSearchTemplateResponse, IGetSearchTemplateResponse, IPutSearchTemplateResponse, IDeleteSearchTemplateResponse>
 	{

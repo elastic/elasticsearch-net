@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Modules.Scripting.DeleteScript
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class DeleteScriptApiTests : ApiTestBase<IDeleteScriptResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>
 	{
 		public DeleteScriptApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

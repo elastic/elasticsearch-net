@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatPlugins
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatPluginsApiTests : ApiIntegrationTestBase<ICatResponse<CatPluginsRecord>, ICatPluginsRequest, CatPluginsDescriptor, CatPluginsRequest>
 	{
 		public CatPluginsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

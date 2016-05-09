@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
 		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

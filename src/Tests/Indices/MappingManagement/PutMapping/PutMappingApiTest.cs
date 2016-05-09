@@ -10,7 +10,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PutMappingApiTests : ApiIntegrationTestBase<IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		public PutMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -35,6 +35,17 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			properties = new
 			{
+				branches = new
+				{
+					fields = new
+					{
+						keyword = new
+						{
+							type = "keyword"
+						}
+					},
+					type = "text"
+				},
 				curatedTags = new
 				{
 					properties = new
@@ -203,7 +214,14 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			Properties = new Properties<Project>
 			{
-
+				{ p => p.Branches, new TextProperty
+						{
+							Fields = new Properties
+							{
+								{ "keyword", new KeywordProperty() }
+							}
+						}
+				},
 				{ p => p.CuratedTags, new ObjectProperty
 						{
 							Properties = new Properties<Tag>

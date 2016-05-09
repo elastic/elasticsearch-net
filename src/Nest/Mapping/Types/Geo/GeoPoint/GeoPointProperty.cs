@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IGeoPointProperty : IProperty
+	public interface IGeoPointProperty : IDocValuesProperty
 	{
 		[JsonProperty("lat_lon")]
 		bool? LatLon { get; set; }
@@ -43,7 +43,7 @@ namespace Nest
 		IGeoPointFielddata Fielddata { get; set; }
 	}
 
-	public class GeoPointProperty : PropertyBase, IGeoPointProperty
+	public class GeoPointProperty : DocValuesPropertyBase, IGeoPointProperty
 	{
 		public GeoPointProperty() : base("geo_point") { }
 
@@ -62,7 +62,7 @@ namespace Nest
 	}
 
 	public class GeoPointPropertyDescriptor<T>
-		: PropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
+		: DocValuesPropertyDescriptorBase<GeoPointPropertyDescriptor<T>, IGeoPointProperty, T>, IGeoPointProperty
 		where T : class
 	{
 		bool? IGeoPointProperty.LatLon { get; set; }
@@ -79,7 +79,7 @@ namespace Nest
 		IGeoPointFielddata IGeoPointProperty.Fielddata { get; set; }
 
 		public GeoPointPropertyDescriptor() : base("geo_point") { }
-		
+
 		public GeoPointPropertyDescriptor<T> LatLon(bool latLon = true) => Assign(a => a.LatLon = latLon);
 
 		public GeoPointPropertyDescriptor<T> GeoHash(bool geoHash = true) => Assign(a => a.GeoHash = geoHash);

@@ -14,7 +14,7 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var dict = value as DynamicTemplateContainer;
-			if (dict == null || !dict.HasAny()) return;
+			if (!dict.HasAny()) return;
 			writer.WriteStartArray();
 			foreach (var p in dict)
 			{

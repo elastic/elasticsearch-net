@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class CloseIndexApiTests : ApiIntegrationTestBase<ICloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
 	{
 		public CloseIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public class TextAttribute : ElasticsearchPropertyAttributeBase, ITextProperty
+	public class TextAttribute : ElasticsearchCorePropertyAttributeBase, ITextProperty
 	{
 		ITextProperty Self => this;
 

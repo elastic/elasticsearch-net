@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	// TODO: Write a unit test for these using reflection to make sure all queries are covered
 	public static class Query<T> where T : class
 	{
 		public static QueryContainer Bool(Func<BoolQueryDescriptor<T>, IBoolQuery> selector) =>
@@ -112,6 +111,9 @@ namespace Nest
 
 		public static QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Nested(selector);
+
+		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
+			new QueryContainerDescriptor<T>().Percolate(selector);
 
 		public static QueryContainer Prefix(Expression<Func<T, object>> fieldDescriptor, string value, double? boost = null, RewriteMultiTerm? rewrite = null, string name = null) =>
 			new QueryContainerDescriptor<T>().Prefix(fieldDescriptor, value, boost, rewrite, name);

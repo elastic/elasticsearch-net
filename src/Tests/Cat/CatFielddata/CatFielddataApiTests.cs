@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cat.CatFielddata
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class CatFielddataApiTests : ApiIntegrationTestBase<ICatResponse<CatFielddataRecord>, ICatFielddataRequest, CatFielddataDescriptor, CatFielddataRequest>
 	{
 		public CatFielddataApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

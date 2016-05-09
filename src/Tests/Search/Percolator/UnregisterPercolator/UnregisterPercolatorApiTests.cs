@@ -7,14 +7,16 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
+#pragma warning disable 618 // testing deprecated percolate APIs
+
 namespace Tests.Search.Percolator.UnregisterPercolator
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class UnregisterPercolatorApiTests : ApiIntegrationTestBase<IUnregisterPercolatorResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
 		public UnregisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-		
+
 		}
 
 		protected override void OnBeforeCall(IElasticClient client)

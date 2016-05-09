@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Cluster.NodesStats
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class NodesStatsApiTests : ApiIntegrationTestBase<INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
 	{
 		public NodesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

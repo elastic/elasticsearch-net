@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.ForceMerge
 {
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class ForceMergeApiTests : ApiIntegrationTestBase<IForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor, ForceMergeRequest>
 	{
 		public ForceMergeApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class StringAttribute : ElasticsearchPropertyAttributeBase, IStringProperty
+	public class StringAttribute : ElasticsearchDocValuesPropertyAttributeBase, IStringProperty
 	{
 		IStringProperty Self => this;
 

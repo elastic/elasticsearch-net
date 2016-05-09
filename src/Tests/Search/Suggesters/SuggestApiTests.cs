@@ -15,7 +15,7 @@ namespace Tests.Search.Suggesters
 	/** == Suggest API
 
 	*/
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class SuggestApiTests
 		: ApiIntegrationTestBase<ISuggestResponse, ISuggestRequest, SuggestDescriptor<Project>, SuggestRequest>
 	{

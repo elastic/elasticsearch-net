@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.Cat.CatRepositories
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class CatRepositoriesApiTests : ApiIntegrationTestBase<ICatResponse<CatRepositoriesRecord>, ICatRepositoriesRequest, CatRepositoriesDescriptor, CatRepositoriesRequest>
 	{
 		private static readonly string RepositoryName = RandomString();
@@ -20,7 +20,7 @@ namespace Tests.Cat.CatRepositories
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			if (!TestClient.Configuration.RunIntegrationTests) return;
-			var repositoryLocation = Path.Combine(this.Cluster.Node.RepositoryPath, RandomString());
+			var repositoryLocation = Path.Combine(this.Cluster.Node.FileSystem.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(RepositoryName, cr => cr
 				.FileSystem(fs => fs

@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.XPack.Graph.Explore
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class GraphExploreApiTests : ApiIntegrationTestBase<IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
 	{
 		public GraphExploreApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

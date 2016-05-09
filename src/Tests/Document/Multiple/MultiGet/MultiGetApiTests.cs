@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiGet
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class MultiGetSimplifiedApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetSimplifiedApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -62,7 +62,7 @@ namespace Tests.Document.Multiple.MultiGet
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class MultiGetApiTests : ApiIntegrationTestBase<IMultiGetResponse, IMultiGetRequest, MultiGetDescriptor, MultiGetRequest>
 	{
 		public MultiGetApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

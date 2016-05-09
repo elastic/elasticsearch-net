@@ -9,7 +9,7 @@ using static Tests.Framework.Promisify;
 namespace Tests.Analysis
 {
 
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class AnalysisCrudTests
 		: CrudTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{

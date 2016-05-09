@@ -32,13 +32,11 @@ namespace Nest
 			if (field.IsNullOrEmpty()) return;
 
 			writer.WriteStartObject();
-			{
-				writer.WritePropertyName(field);
-				{
-					this.Reserialize(writer, value, serializer);
-				}
-				writer.WriteEndObject();
-			}
+			writer.WritePropertyName(field);
+
+			this.Reserialize(writer, value, serializer);
+
+			writer.WriteEndObject();
 		}
 	}
 }

@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.Upgrade
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class UpgradeApiTests : ApiIntegrationTestBase<IUpgradeResponse, IUpgradeRequest, UpgradeDescriptor, UpgradeRequest>
 	{
 		public UpgradeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

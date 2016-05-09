@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.ClearCachedRealms
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class ClearCachedRealmsApiTests : ApiIntegrationTestBase<IClearCachedRealmsResponse, IClearCachedRealmsRequest, ClearCachedRealmsDescriptor, ClearCachedRealmsRequest>
 	{
 		public ClearCachedRealmsApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

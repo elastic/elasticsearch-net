@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class ClusterPutSettingsApiTests : ApiIntegrationTestBase<IClusterPutSettingsResponse, IClusterPutSettingsRequest, ClusterPutSettingsDescriptor, ClusterPutSettingsRequest>
 	{
 		public ClusterPutSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

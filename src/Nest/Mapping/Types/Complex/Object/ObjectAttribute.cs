@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class ObjectAttribute : ElasticsearchPropertyAttributeBase, IObjectProperty
+	public class ObjectAttribute : ElasticsearchCorePropertyAttributeBase, IObjectProperty
 	{
 		IObjectProperty Self => this;
 
@@ -20,5 +20,5 @@ namespace Nest
 		public ObjectAttribute() : base("object") { }
 		protected ObjectAttribute(string typeName) : base(typeName) { }
 		protected ObjectAttribute(Type type) : base(type) { }
-	}	
+	}
 }

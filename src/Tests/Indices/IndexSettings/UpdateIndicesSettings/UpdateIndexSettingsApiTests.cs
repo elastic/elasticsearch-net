@@ -9,7 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<IUpdateIndexSettingsResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

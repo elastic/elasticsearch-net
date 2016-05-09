@@ -53,15 +53,15 @@ namespace Nest
 					Fuzziness = GetPropValue<double?>(jo, "fuzziness")
 				};
 			}
-			else return null; 
+			else return null;
 
-			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length"); 
+			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");
 			fq.MaxExpansions = GetPropValue<int?>(jo, "max_expansions");
 			fq.Transpositions = GetPropValue<bool?>(jo, "transpositions");
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())
 				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
-			
+
 			fq.Name = GetPropValue<string>(jo, "_name");
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Field = field;
@@ -69,18 +69,19 @@ namespace Nest
 			return fq;
 		}
 
-		public TReturn GetPropObject<TReturn>(JObject jObject, string field)
+		private TReturn GetPropObject<TReturn>(JObject jObject, string field)
 		{
-			JToken jToken = null;
-			return !jObject.TryGetValue(field, out jToken) 
-				? default(TReturn) 
+			JToken jToken;
+			return !jObject.TryGetValue(field, out jToken)
+				? default(TReturn)
 				: jToken.ToObject<TReturn>();
 		}
-		public TReturn GetPropValue<TReturn>(JObject jObject, string field)
+
+		private TReturn GetPropValue<TReturn>(JObject jObject, string field)
 		{
-			JToken jToken = null;
-			return !jObject.TryGetValue(field, out jToken) 
-				? default(TReturn) 
+			JToken jToken;
+			return !jObject.TryGetValue(field, out jToken)
+				? default(TReturn)
 				: jToken.Value<TReturn>();
 		}
 	}

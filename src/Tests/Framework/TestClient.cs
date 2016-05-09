@@ -9,6 +9,7 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.Configuration;
 using Tests.Framework.MockData;
+using Tests.Framework.Versions;
 
 namespace Tests.Framework
 {
@@ -16,31 +17,10 @@ namespace Tests.Framework
 	{
 		public static ITestConfiguration Configuration = LoadConfiguration();
 
-		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		private static readonly bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
+		private static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
 
-		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
-			.DefaultIndex("default-index")
-			.PrettyJson()
-			.InferMappingFor<Project>(map => map
-				.IndexName("project")
-				.IdProperty(p => p.Name)
-			)
-			.InferMappingFor<CommitActivity>(map => map
-				.IndexName("project")
-				.TypeName("commits")
-			)
-			.InferMappingFor<Developer>(map => map
-				.IndexName("devs")
-				.Ignore(p => p.PrivateValue)
-				.Rename(p => p.OnlineHandle, "nickname")
-			)
-			//We try and fetch the test name during integration tests when running fiddler to send the name
-			//as the TestMethod header, this allows us to quickly identify which test sent which request
-			.GlobalHeaders(new NameValueCollection
-			{
-				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
-			});
-
+		public static Uri CreateNode(int? port = null) => new UriBuilder("http", Host, port.GetValueOrDefault(9200)).Uri;
 
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
@@ -59,22 +39,11 @@ namespace Tests.Framework
 		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: true));
 
-		public static IElasticClient GetInMemoryClient(Func<ConnectionSettings, ConnectionSettings> modifySettings, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
+		public static IElasticClient GetInMemoryClientWithSerializerFactory(Func<ConnectionSettings, ConnectionSettings> modifySettings, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory) =>
 			new ElasticClient(CreateSettings(modifySettings, forceInMemory: true, serializerFactory: serializerFactory));
 
-		public static IElasticClient GetClient(
-			Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200, Func<Uri, IConnectionPool> createPool = null) =>
 			new ElasticClient(CreateSettings(modifySettings, port, forceInMemory: false, createPool: createPool));
-
-		public static Uri CreateNode(int? port = null) =>
-			new UriBuilder("http", Host, port.GetValueOrDefault(9200)).Uri;
-
-		public static string Host => (RunningFiddler) ? "ipv4.fiddler" : "localhost";
-
-		public static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
-			Configuration.RunIntegrationTests && !forceInMemory
-				? ((IConnection)new HttpConnection())
-				: new InMemoryConnection();
 
 		public static IElasticClient GetFixedReturnClient(
 			object response,
@@ -107,7 +76,45 @@ namespace Tests.Framework
 			return new ElasticClient(settings);
 		}
 
-		public static string ExpensiveTestNameForIntegrationTests()
+		private static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
+			Configuration.RunIntegrationTests && !forceInMemory
+				? ((IConnection)new HttpConnection())
+				: new InMemoryConnection();
+
+		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
+			.DefaultIndex("default-index")
+			.PrettyJson()
+			.InferMappingFor<Project>(map => map
+				.IndexName("project")
+				.IdProperty(p => p.Name)
+			)
+			.InferMappingFor<CommitActivity>(map => map
+				.IndexName("project")
+				.TypeName("commits")
+			)
+			.InferMappingFor<Developer>(map => map
+				.IndexName("devs")
+				.Ignore(p => p.PrivateValue)
+				.Rename(p => p.OnlineHandle, "nickname")
+			)
+			.InferMappingFor<PercolatedQuery>(PercolatorInferrence)
+			//We try and fetch the test name during integration tests when running fiddler to send the name
+			//as the TestMethod header, this allows us to quickly identify which test sent which request
+			.GlobalHeaders(new NameValueCollection
+			{
+				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
+			});
+
+		private static IClrTypeMapping<PercolatedQuery> PercolatorInferrence(ClrTypeMappingDescriptor<PercolatedQuery> map)
+		{
+			var typeName = Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1") ? ".percolator" : "query";
+			return map
+				.IndexName("queries")
+				.TypeName(typeName);
+		}
+
+
+		private static string ExpensiveTestNameForIntegrationTests()
 		{
 			if (!(RunningFiddler && Configuration.RunIntegrationTests)) return "ignore";
 

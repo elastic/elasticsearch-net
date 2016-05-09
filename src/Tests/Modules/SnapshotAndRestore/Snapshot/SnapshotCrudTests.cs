@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class SnapshotCrudTests
 		: CrudTestBase<ISnapshotResponse, IGetSnapshotResponse, IAcknowledgedResponse, IDeleteSnapshotResponse>
 	{
@@ -17,7 +17,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		public SnapshotCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
-			_repositoryLocation = Path.Combine(cluster.Node.RepositoryPath, RandomString());
+			_repositoryLocation = Path.Combine(cluster.Node.FileSystem.RepositoryPath, RandomString());
 
 			var create = this.Client.CreateRepository(_repositoryName, cr => cr
 				.FileSystem(fs => fs

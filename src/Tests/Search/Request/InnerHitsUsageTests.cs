@@ -129,7 +129,7 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
@@ -162,7 +162,7 @@ namespace Tests.Search.Request
 	/**[float]
 	*== Top Level Inner Hits
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class TopLevelInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
 		public TopLevelInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -255,7 +255,7 @@ namespace Tests.Search.Request
 	/**[float]
 	*== Query Inner Hits
 	*/
-	[Collection(IntegrationContext.OwnIndex)]
+	[Collection(TypeOfCluster.OwnIndex)]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
 		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

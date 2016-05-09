@@ -1994,7 +1994,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> IngestDeletePipelineDispatch<T>(IRequest<IngestDeletePipelineRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IngestDeletePipelineDispatch<T>(IRequest<DeletePipelineRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2006,7 +2006,7 @@ namespace Nest
 			throw InvalidDispatch("IngestDeletePipeline", p, new [] { DELETE }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestDeletePipelineDispatchAsync<T>(IRequest<IngestDeletePipelineRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestDeletePipelineDispatchAsync<T>(IRequest<DeletePipelineRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2018,7 +2018,7 @@ namespace Nest
 			throw InvalidDispatch("IngestDeletePipeline", p, new [] { DELETE }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IngestGetPipelineDispatch<T>(IRequest<IngestGetPipelineRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IngestGetPipelineDispatch<T>(IRequest<GetPipelineRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2030,7 +2030,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestGetPipelineDispatchAsync<T>(IRequest<IngestGetPipelineRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestGetPipelineDispatchAsync<T>(IRequest<GetPipelineRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2042,7 +2042,7 @@ namespace Nest
 			throw InvalidDispatch("IngestGetPipeline", p, new [] { GET }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IngestPutPipelineDispatch<T>(IRequest<IngestPutPipelineRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> IngestPutPipelineDispatch<T>(IRequest<PutPipelineRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2054,7 +2054,7 @@ namespace Nest
 			throw InvalidDispatch("IngestPutPipeline", p, new [] { PUT }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestPutPipelineDispatchAsync<T>(IRequest<IngestPutPipelineRequestParameters> p , PostData<object> body) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestPutPipelineDispatchAsync<T>(IRequest<PutPipelineRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2066,7 +2066,7 @@ namespace Nest
 			throw InvalidDispatch("IngestPutPipeline", p, new [] { PUT }, "/_ingest/pipeline/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IngestSimulateDispatch<T>(IRequest<IngestSimulateRequestParameters> p , PostData<object> body) where T : class
+		internal ElasticsearchResponse<T> IngestSimulateDispatch<T>(IRequest<SimulatePipelineRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2079,10 +2079,10 @@ namespace Nest
 					return _lowLevel.IngestSimulate<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate/");
+			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IngestSimulateDispatchAsync<T>(IRequest<IngestSimulateRequestParameters> p , PostData<object> body) where T : class
+		internal Task<ElasticsearchResponse<T>> IngestSimulateDispatchAsync<T>(IRequest<SimulatePipelineRequestParameters> p , PostData<object> body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2095,7 +2095,7 @@ namespace Nest
 					return _lowLevel.IngestSimulateAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate/");
+			throw InvalidDispatch("IngestSimulate", p, new [] { GET, POST }, "/_ingest/pipeline/_simulate", "/_ingest/pipeline/{id}/_simulate");
 		}
 		
 		internal ElasticsearchResponse<T> MgetDispatch<T>(IRequest<MultiGetRequestParameters> p , PostData<object> body) where T : class

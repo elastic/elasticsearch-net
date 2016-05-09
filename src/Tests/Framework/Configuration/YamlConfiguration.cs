@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Tests.Framework.Versions;
 
 namespace Tests.Framework.Configuration
 {
 	public class YamlConfiguration : TestConfigurationBase
 	{
-		public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = true;
-		public override string ElasticsearchVersion { get; protected set; } = "2.0.0";
+		public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = true;
+		public override ElasticsearchVersion ElasticsearchVersion { get; protected set; }
 		public override bool ForceReseed { get; protected set; } = true;
 		public override TestMode Mode { get; protected set; } = TestMode.Unit;
 
@@ -21,9 +22,9 @@ namespace Tests.Framework.Configuration
 				.ToDictionary(ConfigName, ConfigValue);
 
 			this.Mode = GetTestMode(config["mode"]);
-			this.ElasticsearchVersion = config["elasticsearch_version"];
+			this.ElasticsearchVersion = new ElasticsearchVersion(config["elasticsearch_version"]);
 			this.ForceReseed = bool.Parse(config["force_reseed"]);
-			this.DoNotSpawnIfAlreadyRunning = bool.Parse(config["do_not_spawn"]);
+			this.TestAgainstAlreadyRunningElasticsearch = bool.Parse(config["test_against_already_running_elasticsearch"]);
 		}
 
 		private static string ConfigName(string configLine) => Parse(configLine, 0);

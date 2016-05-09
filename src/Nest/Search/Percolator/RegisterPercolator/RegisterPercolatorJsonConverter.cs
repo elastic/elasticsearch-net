@@ -7,6 +7,7 @@ using System.Reflection;
 
 namespace Nest
 {
+	[Obsolete("Deprecated. Will be removed in the next major release. Index a document with a percolator type")]
 	internal class RegisterPercolatorJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(IRegisterPercolatorRequest);

@@ -30,18 +30,18 @@ namespace Elasticsearch.Net
 		public bool MasterEligible { get; set; }
 
 		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
-		public string Id { get; set; } 
+		public string Id { get; set; }
 
 		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
-		public string Name { get; set; } 
+		public string Name { get; set; }
 
 		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
 		public int FailedAttempts { get; private set; }
-		
+
 		/// <summary> When marked dead this reflects the date that the node has to be taken out of rotation till</summary>
 		public DateTime DeadUntil { get; private set; }
 
-		public bool IsAlive { get; private set; }
+		public virtual bool IsAlive { get; private set; }
 
 		public void MarkDead(DateTime untill)
 		{
@@ -56,7 +56,7 @@ namespace Elasticsearch.Net
 			this.FailedAttempts = 0;
 			this.IsAlive = true;
 			this.IsResurrected = false;
-			this.DeadUntil = default(DateTime); 
+			this.DeadUntil = default(DateTime);
 		}
 
 		public Uri CreatePath(string path) => new Uri(this.Uri, path).Purify();
@@ -90,7 +90,7 @@ namespace Elasticsearch.Net
 			if (ReferenceEquals(this, other)) return true;
 			return this.Uri == other.Uri;
 		}
-		
+
 		public override bool Equals(object obj)
 		{
 			if (ReferenceEquals(null, obj)) return false;

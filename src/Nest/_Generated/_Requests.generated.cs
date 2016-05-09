@@ -1761,6 +1761,35 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeletePipelineRequest : IRequest<DeletePipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class DeletePipelineRequest  : PlainRequestBase<DeletePipelineRequestParameters>, IDeletePipelineRequest
+	{
+		protected IDeletePipelineRequest Self => this;
+		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public DeletePipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
@@ -2654,6 +2683,32 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetPipelineRequest : IRequest<GetPipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class GetPipelineRequest  : PlainRequestBase<GetPipelineRequestParameters>, IGetPipelineRequest
+	{
+		protected IGetPipelineRequest Self => this;
+		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public GetPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
@@ -3256,128 +3311,6 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIngestDeletePipelineRequest : IRequest<IngestDeletePipelineRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestDeletePipelineRequest  : PlainRequestBase<IngestDeletePipelineRequestParameters>, IIngestDeletePipelineRequest
-	{
-		protected IIngestDeletePipelineRequest Self => this;
-		Id IIngestDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public IngestDeletePipelineRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIngestGetPipelineRequest : IRequest<IngestGetPipelineRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestGetPipelineRequest  : PlainRequestBase<IngestGetPipelineRequestParameters>, IIngestGetPipelineRequest
-	{
-		protected IIngestGetPipelineRequest Self => this;
-		Id IIngestGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public IngestGetPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIngestPutPipelineRequest : IRequest<IngestPutPipelineRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestPutPipelineRequest  : PlainRequestBase<IngestPutPipelineRequestParameters>, IIngestPutPipelineRequest
-	{
-		protected IIngestPutPipelineRequest Self => this;
-		Id IIngestPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public IngestPutPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
-		
-
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
-		
-		///<summary>Explicit operation timeout</summary>
-		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIngestSimulateRequest : IRequest<IngestSimulateRequestParameters> 
-	{
-		Id Id { get; }
-	 } 
-	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestSimulateRequest  : PlainRequestBase<IngestSimulateRequestParameters>, IIngestSimulateRequest
-	{
-		protected IIngestSimulateRequest Self => this;
-		Id IIngestSimulateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_ingest/pipeline/_simulate</summary>
-		public IngestSimulateRequest() : base(){}
-		
-
-		/// <summary>/_ingest/pipeline/{id}/_simulate/</summary>
-///<param name="id">Optional, accepts null</param>
-		public IngestSimulateRequest(Id id) : base(r=>r.Optional("id", id)){}
-		
-
-			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
-		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters> 
@@ -4140,6 +4073,35 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutPipelineRequest : IRequest<PutPipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class PutPipelineRequest  : PlainRequestBase<PutPipelineRequestParameters>, IPutPipelineRequest
+	{
+		protected IPutPipelineRequest Self => this;
+		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public PutPipelineRequest(Id id) : base(r=>r.Required("id", id)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public Time MasterTimeout { get { return Q<Time>("master_timeout"); } set { Q("master_timeout", value.ToString()); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public Time Timeout { get { return Q<Time>("timeout"); } set { Q("timeout", value.ToString()); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutRoleRequest : IRequest<PutRoleRequestParameters> 
 	{
 		Name Name { get; }
@@ -4848,6 +4810,36 @@ namespace Nest
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Includes detailed memory usage by Lucene.</summary>
+		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface ISimulatePipelineRequest : IRequest<SimulatePipelineRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
+	public partial class SimulatePipelineRequest  : PlainRequestBase<SimulatePipelineRequestParameters>, ISimulatePipelineRequest
+	{
+		protected ISimulatePipelineRequest Self => this;
+		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_ingest/pipeline/_simulate</summary>
+		public SimulatePipelineRequest() : base(){}
+		
+
+		/// <summary>/_ingest/pipeline/{id}/_simulate</summary>
+///<param name="id">Optional, accepts null</param>
+		public SimulatePipelineRequest(Id id) : base(r=>r.Optional("id", id)){}
+		
+
+			///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
 		public bool Verbose { get { return Q<bool>("verbose"); } set { Q("verbose", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>

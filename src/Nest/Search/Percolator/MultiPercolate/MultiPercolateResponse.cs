@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
@@ -7,12 +8,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
 	public interface IMultiPercolateResponse : IResponse
 	{
 		IEnumerable<PercolateResponse> Responses { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
+	[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
 	public class MultiPercolateResponse : ResponseBase, IMultiPercolateResponse
 	{
 		public override bool IsValid => base.IsValid && this.Responses.All(r => r.IsValid);
@@ -29,7 +32,7 @@ namespace Nest
 
 		IEnumerable<PercolateResponse> IMultiPercolateResponse.Responses => this.Responses;
 
-		private IEnumerable<PercolateResponse> _allResponses() 
+		private IEnumerable<PercolateResponse> _allResponses()
 		{
 			foreach (var r in this.AllResponses)
 			{

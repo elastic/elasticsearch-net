@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.XPack.Security.Authenticate
 {
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class AuthenticateApiTests : ApiIntegrationTestBase<IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
 	{
 		public AuthenticateApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -35,7 +35,7 @@ namespace Tests.XPack.Security.Authenticate
 		}
 	}
 
-	[Collection(IntegrationContext.Shield)]
+	[Collection(TypeOfCluster.Shield)]
 	public class AuthenticateRequestConfigurationApiTests : AuthenticateApiTests
 	{
 		public AuthenticateRequestConfigurationApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

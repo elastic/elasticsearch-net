@@ -11,9 +11,11 @@ using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Infer;
 
+#pragma warning disable 618 // testing deprecated percolate APIs
+
 namespace Tests.Search.Percolator.Percolate
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class PercolateApiTests : ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
 		public PercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -98,7 +100,7 @@ namespace Tests.Search.Percolator.Percolate
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class PercolateExistingDocApiTests : ApiTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
 		public PercolateExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -6,7 +6,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ICompletionProperty : IProperty
+	public interface ICompletionProperty : IDocValuesProperty
 	{
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class CompletionProperty : PropertyBase, ICompletionProperty
+	public class CompletionProperty : DocValuesPropertyBase, ICompletionProperty
 	{
 		public CompletionProperty() : base("completion") { }
 
@@ -41,7 +41,7 @@ namespace Nest
 	}
 
 	public class CompletionPropertyDescriptor<T>
-		: PropertyDescriptorBase<CompletionPropertyDescriptor<T>, ICompletionProperty, T>, ICompletionProperty
+		: DocValuesPropertyDescriptorBase<CompletionPropertyDescriptor<T>, ICompletionProperty, T>, ICompletionProperty
 		where T : class
 	{
 		string ICompletionProperty.SearchAnalyzer { get; set; }

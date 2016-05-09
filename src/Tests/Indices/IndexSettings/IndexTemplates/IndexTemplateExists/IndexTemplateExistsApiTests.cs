@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.IndexTemplateExists
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class IndexTemplateExistsApiTests : ApiTestBase<IExistsResponse, IIndexTemplateExistsRequest, IndexTemplateExistsDescriptor, IndexTemplateExistsRequest>
 	{
 		public IndexTemplateExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

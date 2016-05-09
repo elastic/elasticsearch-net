@@ -8,56 +8,83 @@ namespace Nest
 	[ContractJsonConverter(typeof(PropertyNameJsonConverter))]
 	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
-		public string Name { get; set; }
-		public Expression Expression { get; set; }
-		public PropertyInfo Property { get; set; }
+		public string Name { get; }
+		public Expression Expression { get; }
+		public PropertyInfo Property { get; }
+		public bool CacheableExpression { get; }
 
-		private object ComparisonValue;
+		private readonly object _comparisonValue;
+		private readonly Type _type;
+
+		public PropertyName(string name)
+		{
+			Name = name;
+			_comparisonValue = name;
+		}
+
+		public PropertyName(Expression expression)
+		{
+			Type type;
+			Expression = expression;
+			CacheableExpression = !new HasConstantExpressionVisitor(expression).Found;
+			_comparisonValue = expression.ComparisonValueFromExpression(out type);
+			_type = type;
+		}
+
+		public PropertyName(PropertyInfo property)
+		{
+			Property = property;
+			_comparisonValue = property;
+		}
 
 		public static implicit operator PropertyName(string name)
 		{
-			return name == null ? null : new PropertyName
-			{
-				Name = name,
-				ComparisonValue = name
-			};
+			return name == null ? null : new PropertyName(name);
 		}
 
 		public static implicit operator PropertyName(Expression expression)
 		{
-			return expression == null ? null : new PropertyName
-			{
-				Expression = expression,
-				ComparisonValue = ((expression as LambdaExpression)?.Body as MemberExpression)?.Member.Name ?? expression.ToString()
-			};
+			return expression == null ? null : new PropertyName(expression);
 		}
 
 		public static implicit operator PropertyName(PropertyInfo property)
 		{
-			return property == null ? null : new PropertyName
-			{
-				Property = property,
-				ComparisonValue = property
-			};
+			return property == null ? null : new PropertyName(property);
 		}
 
 		public override int GetHashCode()
 		{
-			return ComparisonValue?.GetHashCode() ?? 0;	
+			unchecked
+			{
+				var hashCode = _comparisonValue?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
+				return hashCode;
+			}
 		}
 
-		bool IEquatable<PropertyName>.Equals(PropertyName other)
+		public bool Equals(PropertyName other)
 		{
-			return Equals(other);
+			return _type != null
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+				: other != null && _comparisonValue.Equals(other._comparisonValue);
 		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as PropertyName;
-			if (other == null)
-				return false;
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+			return this.Equals(obj as PropertyName);
+		}
 
-			return ComparisonValue.Equals(other.ComparisonValue);
+		public static bool operator ==(PropertyName x, PropertyName y)
+		{
+			return Equals(x, y);
+		}
+
+		public static bool operator !=(PropertyName x, PropertyName y)
+		{
+			return !(x == y);
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)

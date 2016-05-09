@@ -3128,106 +3128,94 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IngestDeletePipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestDeletePipelineDescriptor  : RequestDescriptorBase<IngestDeletePipelineDescriptor,IngestDeletePipelineRequestParameters, IIngestDeletePipelineRequest>, IIngestDeletePipelineRequest
+	public partial class DeletePipelineDescriptor  : RequestDescriptorBase<DeletePipelineDescriptor,DeletePipelineRequestParameters, IDeletePipelineRequest>, IDeletePipelineRequest
 	{ 
-		Id IIngestDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+		Id IDeletePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public IngestDeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public DeletePipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestDeletePipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public DeletePipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Explicit operation timeout</summary>
-		public IngestDeletePipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public DeletePipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IngestDeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeletePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestDeletePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public DeletePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for IngestGetPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestGetPipelineDescriptor  : RequestDescriptorBase<IngestGetPipelineDescriptor,IngestGetPipelineRequestParameters, IIngestGetPipelineRequest>, IIngestGetPipelineRequest
+	public partial class GetPipelineDescriptor  : RequestDescriptorBase<GetPipelineDescriptor,GetPipelineRequestParameters, IGetPipelineRequest>, IGetPipelineRequest
 	{ 
-		Id IIngestGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+		Id IGetPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public IngestGetPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public GetPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestGetPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public GetPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IngestGetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestGetPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public GetPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for IngestPutPipeline <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestPutPipelineDescriptor  : RequestDescriptorBase<IngestPutPipelineDescriptor,IngestPutPipelineRequestParameters, IIngestPutPipelineRequest>, IIngestPutPipelineRequest
+	public partial class PutPipelineDescriptor  : RequestDescriptorBase<PutPipelineDescriptor,PutPipelineRequestParameters, IPutPipelineRequest>, IPutPipelineRequest
 	{ 
-		Id IIngestPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
+		Id IPutPipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/{id}</summary>
 ///<param name="id"> this parameter is required</param>
-		public IngestPutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
+		public PutPipelineDescriptor(Id id) : base(r=>r.Required("id", id)){}
 		
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public IngestPutPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
+		public PutPipelineDescriptor MasterTimeout(Time master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout.ToTimeSpan()));
 
 		///<summary>Explicit operation timeout</summary>
-		public IngestPutPipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
+		public PutPipelineDescriptor Timeout(Time timeout) => AssignParam(p=>p.Timeout(timeout.ToTimeSpan()));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IngestPutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutPipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestPutPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public PutPipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for IngestSimulate <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/ingest.html</pre></summary>
-	public partial class IngestSimulateDescriptor  : RequestDescriptorBase<IngestSimulateDescriptor,IngestSimulateRequestParameters, IIngestSimulateRequest>, IIngestSimulateRequest
+	public partial class SimulatePipelineDescriptor  : RequestDescriptorBase<SimulatePipelineDescriptor,SimulatePipelineRequestParameters, ISimulatePipelineRequest>, ISimulatePipelineRequest
 	{ 
-		Id IIngestSimulateRequest.Id => Self.RouteValues.Get<Id>("id");
+		Id ISimulatePipelineRequest.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/_ingest/pipeline/_simulate</summary>
-		public IngestSimulateDescriptor() : base(){}
+		public SimulatePipelineDescriptor() : base(){}
 		
 
 			///<summary>Pipeline ID</summary>
-		public IngestSimulateDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public SimulatePipelineDescriptor Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
 		///<summary>Verbose mode. Display data output for each processor in executed pipeline</summary>
-		public IngestSimulateDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
+		public SimulatePipelineDescriptor Verbose(bool verbose = true) => AssignParam(p=>p.Verbose(verbose));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IngestSimulateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public SimulatePipelineDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IngestSimulateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public SimulatePipelineDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

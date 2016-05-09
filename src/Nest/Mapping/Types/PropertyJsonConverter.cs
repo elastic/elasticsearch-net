@@ -6,10 +6,7 @@ namespace Nest
 {
 	internal class PropertyJsonConverter : JsonConverter
 	{
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
+		public override bool CanWrite => false;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -18,14 +15,14 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			JObject o = JObject.Load(reader);
+			var jObject = JObject.Load(reader);
 			JToken typeToken;
 			JToken propertiesToken;
 			var type = string.Empty;
-			var hasType = o.TryGetValue("type", out typeToken);
+			var hasType = jObject.TryGetValue("type", out typeToken);
 			if (hasType)
 				type = typeToken.Value<string>().ToLowerInvariant();
-			else if (o.TryGetValue("properties", out propertiesToken))
+			else if (jObject.TryGetValue("properties", out propertiesToken))
 				type = "object";
 
 			serializer.TypeNameHandling = TypeNameHandling.None;
@@ -33,42 +30,44 @@ namespace Nest
 			switch (type)
 			{
 				case "text":
-					return o.ToObject<TextProperty>();
+					return jObject.ToObject<TextProperty>();
 				case "keyword":
-					return o.ToObject<KeywordProperty>();
+					return jObject.ToObject<KeywordProperty>();
 				case "string":
-					return o.ToObject<StringProperty>();
+					return jObject.ToObject<StringProperty>();
 				case "float":
 				case "double":
 				case "byte":
 				case "short":
 				case "integer":
 				case "long":
-					return o.ToObject<NumberProperty>();
+					return jObject.ToObject<NumberProperty>();
 				case "date":
-					return o.ToObject<DateProperty>();
+					return jObject.ToObject<DateProperty>();
 				case "boolean":
-					return o.ToObject<BooleanProperty>();
+					return jObject.ToObject<BooleanProperty>();
 				case "binary":
-					return o.ToObject<BinaryProperty>();
+					return jObject.ToObject<BinaryProperty>();
 				case "object":
-					return o.ToObject<ObjectProperty>();
+					return jObject.ToObject<ObjectProperty>();
 				case "nested":
-					return o.ToObject<NestedProperty>();
+					return jObject.ToObject<NestedProperty>();
 				case "ip":
-					return o.ToObject<IpProperty>();
+					return jObject.ToObject<IpProperty>();
 				case "geo_point":
-					return o.ToObject<GeoPointProperty>();
+					return jObject.ToObject<GeoPointProperty>();
 				case "geo_shape":
-					return o.ToObject<GeoShapeProperty>();
+					return jObject.ToObject<GeoShapeProperty>();
 				case "attachment":
-					return o.ToObject<AttachmentProperty>();
+					return jObject.ToObject<AttachmentProperty>();
 				case "completion":
-					return o.ToObject<CompletionProperty>();
+					return jObject.ToObject<CompletionProperty>();
 				case "token_count":
-					return o.ToObject<TokenCountProperty>();
+					return jObject.ToObject<TokenCountProperty>();
 				case "murmur3":
-					return o.ToObject<Murmur3HashProperty>();
+					return jObject.ToObject<Murmur3HashProperty>();
+				case "percolator":
+					return jObject.ToObject<PercolatorProperty>();
 			}
 
 			return null;

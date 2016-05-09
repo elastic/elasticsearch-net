@@ -16,7 +16,6 @@ namespace Tests.Framework
 
 		private bool _sniffReturnsFqdn = false;
 		public bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
-			
 
 		public IReadOnlyList<Node> Nodes => _nodes;
 

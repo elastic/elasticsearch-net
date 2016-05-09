@@ -6,7 +6,7 @@ namespace Profiling
     {
         public override bool RunIntegrationTests => true;
 
-        public override bool DoNotSpawnIfAlreadyRunning { get; protected set; } = true;
+        public override bool TestAgainstAlreadyRunningElasticsearch { get; protected set; } = true;
 
         public ProfilingTestConfiguration() 
             : base(@"..\..\..\..\Tests\tests.yaml")

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Bulk
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(TypeOfCluster.Indexing)]
 	public class BulkApiTests : ApiIntegrationTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

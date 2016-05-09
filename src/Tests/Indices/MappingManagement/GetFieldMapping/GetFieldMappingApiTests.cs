@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
-	[Collection(IntegrationContext.ReadOnly)]
+	[Collection(TypeOfCluster.ReadOnly)]
 	public class GetFieldMappingApiTests 
 		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Elasticsearch.Net;
@@ -9,15 +10,18 @@ namespace Nest
 	[ContractJsonConverter(typeof(FieldJsonConverter))]
 	public class Field : IEquatable<Field>, IUrlParameter
 	{
-		public string Name { get; private set; }
+		private readonly object _comparisonValue;
+		private readonly Type _type;
 
-		public Expression Expression { get; private set; }
+		public string Name { get; }
 
-		public PropertyInfo Property { get; private set; }
+		public Expression Expression { get; }
+
+		public PropertyInfo Property { get; }
 
 		public double? Boost { get; set; }
 
-		private object ComparisonValue { get; set; }
+		public bool CachableExpression { get; }
 
 		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
 			new Fields(new [] { this, field });
@@ -26,33 +30,31 @@ namespace Nest
 
 		public Field(string name, double? boost = null)
 		{
-			if (!name.IsNullOrEmpty())
-			{
-				double? b;
-				Name = ParseFieldName(name, out b);
-				Boost = b ?? boost;
-				ComparisonValue = Name;
-			}
+			if (name.IsNullOrEmpty()) return;
+			double? b;
+			Name = ParseFieldName(name, out b);
+			Boost = b ?? boost;
+			_comparisonValue = Name;
 		}
 
 		public Field(Expression expression, double? boost = null)
 		{
-			if (expression != null)
-			{
-				Expression = expression;
-				Boost = boost;
-				ComparisonValue = ComparisonValueFromExpression(expression);
-			}
+			if (expression == null) return;
+			Expression = expression;
+			Boost = boost;
+			Type type;
+			_comparisonValue = expression.ComparisonValueFromExpression(out type);
+			_type = type;
+			CachableExpression = !new HasConstantExpressionVisitor(expression).Found;
 		}
 
 		public Field(PropertyInfo property, double? boost = null)
 		{
-			if (property != null)
-			{
-				Property = property;
-				Boost = boost;
-				ComparisonValue = property;
-			}
+			if (property == null) return;
+			Property = property;
+			Boost = boost;
+			_comparisonValue = property;
+			_type = property.DeclaringType;
 		}
 
 		private static string ParseFieldName(string name, out double? boost)
@@ -64,24 +66,9 @@ namespace Nest
 			if (parts.Length > 1)
 			{
 				name = parts[0];
-				boost = Double.Parse(parts[1], CultureInfo.InvariantCulture);
+				boost = double.Parse(parts[1], CultureInfo.InvariantCulture);
 			}
 			return name;
-		}
-
-		private static object ComparisonValueFromExpression(Expression expression)
-		{
-			if (expression == null) return null;
-
-			var lambda = expression as LambdaExpression;
-			if (lambda == null)
-				return expression.ToString();
-
-			var memberExpression = lambda.Body as MemberExpression;
-			if (memberExpression == null)
-				return expression.ToString();
-
-			return memberExpression;
 		}
 
 		public static implicit operator Field(string name)
@@ -99,16 +86,39 @@ namespace Nest
 			return property == null ? null : new Field(property);
 		}
 
-		public override int GetHashCode() => ComparisonValue?.GetHashCode() ?? 0;
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				var hashCode = _comparisonValue?.GetHashCode() ?? 0;
+				hashCode = (hashCode * 397) ^ (_type?.GetHashCode() ?? 0);
+				return hashCode;
+			}
+		}
 
-		bool IEquatable<Field>.Equals(Field other) => Equals(other);
+		public bool Equals(Field other)
+		{
+			return _type != null
+				? other != null && _type == other._type && _comparisonValue.Equals(other._comparisonValue)
+				: other != null && _comparisonValue.Equals(other._comparisonValue);
+		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as Field;
-			if (other == null)
-				return false;
-			return ComparisonValue.Equals(other.ComparisonValue);
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != GetType()) return false;
+			return this.Equals(obj as Field);
+		}
+
+		public static bool operator ==(Field x, Field y)
+		{
+			return Equals(x, y);
+		}
+
+		public static bool operator !=(Field x, Field y)
+		{
+			return !(x == y);
 		}
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
