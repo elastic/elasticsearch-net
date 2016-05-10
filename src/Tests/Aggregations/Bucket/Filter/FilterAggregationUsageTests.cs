@@ -11,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Bucket.Filter
 {
 	/**
-	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
+	 * Defines a single bucket of all the documents in the current document set context that match a specified filter.
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
