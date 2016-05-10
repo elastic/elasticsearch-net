@@ -292,13 +292,27 @@ namespace Nest
 			new AggregationWalker().Walk(this, visitor);
 		}
 
+		internal static ConcurrentDictionary<Type, Type> _aggregateNameCache = new ConcurrentDictionary<Type, Type>();
 		internal static void InjectMetadata(IAggregation aggregation)
 		{
-			if (aggregation.Meta == null)
-				aggregation.Meta = new Dictionary<string, object>();
-			if (aggregation.Meta.ContainsKey(AggregationMetadata.Key))
-				throw new ArgumentException($"Metadata key: {AggregationMetadata.Key} is reserved. Please choose another.");
-			aggregation.Meta.Add(AggregationMetadata.GetMetadataEntry(aggregation));
+			aggregation.Meta = aggregation.Meta ?? new Dictionary<string, object>();
+			var typeKey = "_type";
+			if (aggregation.Meta.ContainsKey(typeKey))
+				throw new ArgumentException($"Metadata key: {typeKey} is reserved. Please choose another.");
+			var aggregationType = aggregation.GetType();
+			Type aggregateType;
+			if (!_aggregateNameCache.TryGetValue(aggregationType, out aggregateType))
+			{
+				var attribute = aggregationType.GetTypeInfo().GetInterfaces()
+					.Where(t => typeof(IAggregation).IsAssignableFrom(t))
+					.SelectMany(t => t.GetCustomAttributes(typeof(AggregateTypeAttribute)))
+					.FirstOrDefault() as AggregateTypeAttribute;
+				if (attribute == null)
+					throw new Exception($"{aggregationType} is missing the required AggregateType attribute.");
+				aggregateType = attribute.Type;
+				_aggregateNameCache.TryAdd(aggregationType, aggregateType);
+			}
+			aggregation.Meta.Add(typeKey, aggregateType.FullName);
 		}
 	}
 

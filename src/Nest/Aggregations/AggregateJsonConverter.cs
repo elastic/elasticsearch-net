@@ -23,19 +23,20 @@ namespace Nest
 
 		private IAggregate ReadAggregate(JObject jObject, JsonSerializer serializer)
 		{
+			var typeKey = "_type";
 			var metaProperty = jObject.Property("meta");
 			if (metaProperty == null)
 				throw new Exception("Cannot deserialize aggregation result. The response is missing metadata.");
 
 			var meta = metaProperty.Value.ToObject<Dictionary<string, object>>();
-			if (!meta.ContainsKey(AggregationMetadata.Key))
-				throw new Exception($"Cannot deserialize aggregation result. Metadata is missing key: {AggregationMetadata.Key}.");
+			if (!meta.ContainsKey(typeKey))
+				throw new Exception($"Cannot deserialize aggregation result. Metadata is missing key: {typeKey}.");
 
-			var type = (string)meta[AggregationMetadata.Key];
+			var type = (string)meta[typeKey];
 			// Remove the injected metadata so that we don't dirty the users results
-			meta.Remove(AggregationMetadata.Key);
+			meta.Remove(typeKey);
 
-			var aggregate = jObject.ToObject(AggregationMetadata.Map[type]) as IAggregate;
+			var aggregate = jObject.ToObject(Type.GetType(type)) as IAggregate;
 			aggregate.Meta = meta.HasAny() ? meta : null;
 
 			var topHits = aggregate as TopHitsAggregate;

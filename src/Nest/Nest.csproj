@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="Aggregations\Aggregate.cs" />
     <Compile Include="Aggregations\AggregateJsonConverter.cs" />
-    <Compile Include="Aggregations\AggregationMetadata.cs" />
     <Compile Include="Aggregations\AggregateTypeAttribute.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\AggregationContainer.cs" />
