@@ -22,6 +22,8 @@ namespace Nest
 
 		public static implicit operator Fields(Expression[] fields) => new Fields(fields.Select(f => (Field)f));
 
+		public static implicit operator Fields(Field[] fields) => new Fields(fields);
+
 		public static implicit operator Fields(Field field) => new Fields(new[] { field });
 
 		public Fields And<T>(Expression<Func<T, object>> field, double? boost = null) where T : class
@@ -40,20 +42,27 @@ namespace Nest
 			this.ListOfFields.AddRange(fields.Select(f => (Field)f));
 			return this;
 		}
+
 		public Fields And(params string[] fields)
 		{
 			this.ListOfFields.AddRange(fields.Select(f => (Field)f));
 			return this;
 		}
 
+		public Fields And(params Field[] fields)
+		{
+			this.ListOfFields.AddRange(fields);
+			return this;
+		}
+
 		public IEnumerator<Field> GetEnumerator()
 		{
-			return ((IEnumerable<Field>)this.ListOfFields).GetEnumerator();
+			return this.ListOfFields.GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			return ((IEnumerable<Field>)this.ListOfFields).GetEnumerator();
+			return GetEnumerator();
 		}
 	}
 }
