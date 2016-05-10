@@ -298,7 +298,7 @@ namespace Nest
 				aggregation.Meta = new Dictionary<string, object>();
 			if (aggregation.Meta.ContainsKey(AggregationMetadata.Key))
 				throw new ArgumentException($"Metadata key: {AggregationMetadata.Key} is reserved. Please choose another.");
-			aggregation.Meta.Add(AggregationMetadata.Key, AggregationMetadata.Value(aggregation));
+			aggregation.Meta.Add(AggregationMetadata.GetMetadataEntry(aggregation));
 		}
 	}
 

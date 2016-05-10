@@ -25,22 +25,22 @@ namespace Nest
 		{
 			var metaProperty = jObject.Property("meta");
 			if (metaProperty == null)
-				throw new Exception("Cannot deserialization aggregation result. The response is missing metadata.");
+				throw new Exception("Cannot deserialize aggregation result. The response is missing metadata.");
 
 			var meta = metaProperty.Value.ToObject<Dictionary<string, object>>();
 			if (!meta.ContainsKey(AggregationMetadata.Key))
-				throw new Exception($"Cannot deserialization aggregation result. Metadata is missing {AggregationMetadata.Key}.");
+				throw new Exception($"Cannot deserialize aggregation result. Metadata is missing key: {AggregationMetadata.Key}.");
 
-			var type = meta[AggregationMetadata.Key] as string;
+			var type = (string)meta[AggregationMetadata.Key];
 			// Remove the injected metadata so that we don't dirty the users results
 			meta.Remove(AggregationMetadata.Key);
 
 			var aggregate = jObject.ToObject(AggregationMetadata.Map[type]) as IAggregate;
 			aggregate.Meta = meta.HasAny() ? meta : null;
 
-			var lazy = aggregate as ILazyDeserialize;
-			if (lazy != null)
-				lazy.Serializer = serializer;
+			var topHits = aggregate as TopHitsAggregate;
+			if (topHits != null)
+				topHits.Serializer = serializer;
 
 			var bucketAggregate = aggregate as BucketAggregateBase;
 			if (bucketAggregate != null)
@@ -72,7 +72,7 @@ namespace Nest
 
 			foreach (var bucket in multiBucketAggregate.Buckets)
 			{
-				var bucketsProperty = jObject.Properties().Where(p => p.Name == "buckets").FirstOrDefault();
+				var bucketsProperty = jObject.Properties().FirstOrDefault(p => p.Name == "buckets");
 				if (bucketsProperty != null)
 				{
 					var bucketsArray = bucketsProperty.Value.ToObject<JArray>().Select(b => b.ToObject<JObject>());
@@ -93,7 +93,7 @@ namespace Nest
 			foreach (var property in properties.Where(p => p.Value.Type == JTokenType.Object))
 			{
 				var jObject = property.Value.ToObject<JObject>();
-				var meta = jObject.Properties().Where(p => p.Name == "meta").FirstOrDefault();
+				var meta = jObject.Properties().FirstOrDefault(p => p.Name == "meta");
 				if (meta != null)
 				{
 					var aggregate = ReadAggregate(jObject, serializer);

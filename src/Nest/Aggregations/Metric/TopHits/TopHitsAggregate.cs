@@ -6,12 +6,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class TopHitsAggregate : MetricAggregateBase, ILazyDeserialize
+	public class TopHitsAggregate : MetricAggregateBase
 	{
 		[JsonProperty("hits")]
 		private TopHitsProxy _hits { get; set; }
 
-		JsonSerializer ILazyDeserialize.Serializer { get; set; }
+		internal JsonSerializer Serializer { get; set; }
 
 		public long Total { get { return _hits.Total; } }
 		public double? MaxScore { get { return _hits.MaxScore; } }
@@ -19,7 +19,7 @@ namespace Nest
 		public IEnumerable<Hit<T>> Hits<T>(JsonSerializer serializer = null)
 			where T : class
 		{
-			var s = serializer ?? ((ILazyDeserialize)this).Serializer;
+			var s = serializer ?? this.Serializer;
 			return s != null
 				? _hits.Hits.Select(h => h.ToObject<Hit<T>>(s))
 				: _hits.Hits.Select(h => h.ToObject<Hit<T>>());
