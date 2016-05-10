@@ -40,7 +40,7 @@ namespace Nest
 		void Visit(IPercentilesAggregation aggregation);
 		void Visit(IDateRangeAggregation aggregation);
 		void Visit(IFilterAggregation aggregation);
-		void Visit(IFiltersAggregation aggregation);
+		void Visit(IAnonymousFiltersAggregation aggregation);
 		void Visit(IGeoDistanceAggregation aggregation);
 		void Visit(IGeoHashGridAggregation aggregation);
 		void Visit(IGeoBoundsAggregation aggregation);
@@ -100,7 +100,7 @@ namespace Nest
 		{
 		}
 
-		public virtual void Visit(IFiltersAggregation aggregation)
+		public virtual void Visit(IAnonymousFiltersAggregation aggregation)
 		{
 		}
 

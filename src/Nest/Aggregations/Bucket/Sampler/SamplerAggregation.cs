@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<SamplerAggregation>))]
+	[AggregateType(typeof(SingleBucketAggregate))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
 		[JsonProperty("shard_size")]

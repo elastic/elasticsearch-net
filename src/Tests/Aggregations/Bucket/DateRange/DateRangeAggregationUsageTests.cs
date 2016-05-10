@@ -27,6 +27,10 @@ namespace Tests.Aggregations.Bucket.DateRange
 			{
 				projects_date_ranges = new
 				{
+					meta = new
+					{
+						_type = typeof(MultiBucketAggregate<RangeBucket>).FullName
+					},
 					date_range = new
 					{
 						field = "startedOn",
@@ -39,7 +43,17 @@ namespace Tests.Aggregations.Bucket.DateRange
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "tags" } }
+						project_tags = new
+						{
+							meta = new
+							{
+								_type = typeof(TermsAggregate).FullName
+							},
+							terms = new
+							{
+								field = "tags"
+							}
+						}
 					}
 				}
 			}

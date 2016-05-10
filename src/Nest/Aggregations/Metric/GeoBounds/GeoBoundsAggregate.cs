@@ -1,18 +1,19 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+
+namespace Nest
 {
 	public class GeoBoundsAggregate : MetricAggregateBase
 	{
-		public GeoBoundsAggregate()
-		{
-			Bounds = new GeoBounds();
-		}
-
-		public GeoBounds Bounds { get; set; }
+		[JsonProperty("bounds")]
+		public GeoBounds Bounds { get; internal set; }
 	}
 
 	public class GeoBounds
 	{
-		public LatLon TopLeft { get; set; }
-		public LatLon BottomRight { get; set; }
+		[JsonProperty("top_left")]
+		public LatLon TopLeft { get; internal set; }
+
+		[JsonProperty("bottom_right")]
+		public LatLon BottomRight { get; internal set; }
 	}
 }

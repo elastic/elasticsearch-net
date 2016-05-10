@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Aggregations\Aggregate.cs" />
     <Compile Include="Aggregations\AggregateJsonConverter.cs" />
+    <Compile Include="Aggregations\AggregateTypeAttribute.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\AggregationContainer.cs" />
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
@@ -71,8 +72,11 @@
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeExpression.cs" />
-    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregate.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\NamedFiltersAggregate.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\NamedFiltersAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\AnonymousFiltersAggregate.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\AnonymousFiltersAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainer.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationJsonConverter.cs" />
@@ -126,7 +130,7 @@
     <Compile Include="Aggregations\Metric\Percentiles\Methods\TDigestMethod.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationJsonConverter.cs" />
-    <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetricAggregate.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregate.cs" />
     <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregate.cs" />
     <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregation.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsAggregate.cs" />
@@ -135,7 +139,7 @@
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregate.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregation.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregation.cs" />
-    <Compile Include="Aggregations\Metric\ValueMetricAggregate.cs" />
+    <Compile Include="Aggregations\Metric\ValueAggregate.cs" />
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregation.cs" />
@@ -157,7 +161,7 @@
     <Compile Include="Aggregations\Pipeline\MovingAverage\Models\SimpleModel.cs" />
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregationJsonConverter.cs" />
-    <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
+    <Compile Include="Aggregations\Pipeline\PipelineAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Aggregations\Visitor\AggregationVisitor.cs" />

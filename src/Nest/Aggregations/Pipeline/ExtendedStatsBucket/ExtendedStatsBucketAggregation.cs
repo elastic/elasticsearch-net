@@ -5,6 +5,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsBucketAggregation>))]
+	[AggregateType(typeof(ExtendedStatsAggregate))]
 	public interface IExtendedStatsBucketAggregation : IPipelineAggregation
 	{
 		[JsonProperty("sigma")]

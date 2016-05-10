@@ -88,8 +88,8 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 
 			var commitsOutlier = response.Aggs.PercentilesBucket("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
-			commitsOutlier.Items.Should().NotBeNullOrEmpty();
-			foreach (var item in commitsOutlier.Items)
+			commitsOutlier.Values.Should().NotBeNull().And.NotBeEmpty();
+			foreach (var item in commitsOutlier.Values)
 				item.Value.Should().BeGreaterThan(0);
 		}
 	}

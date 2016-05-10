@@ -1,11 +1,13 @@
 ﻿
 using System;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public class ScriptedMetricAggregate : MetricAggregateBase
 	{
+		[JsonProperty("value")]
 		internal object _Value { get; set; }
 
 		/// <summary>

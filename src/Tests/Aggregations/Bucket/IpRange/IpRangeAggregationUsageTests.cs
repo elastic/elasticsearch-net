@@ -5,9 +5,11 @@ using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
+using Tests.Framework;
 
 namespace Tests.Aggregations.Bucket.IpRange
 {
+	[SkipVersion("5.0.0-alpha2", "https://github.com/elastic/elasticsearch/pull/17859")]
 	public class IpRangeAggregationUsageTests : AggregationUsageTestBase
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -24,7 +26,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 						ranges = new object[]
 						{
 							new { to = "10.0.0.5" },
-							new { from = "10.0.0.5" } 
+							new { from = "10.0.0.5" }
 						}
 					}
 				}

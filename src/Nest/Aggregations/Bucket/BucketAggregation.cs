@@ -17,28 +17,28 @@ namespace Nest
 		protected BucketAggregationBase(string name) : base(name) { }
 	}
 
-	public abstract class BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
+	public abstract class BucketAggregationDescriptorBase<TBucketAggregationDescriptor, TBucketAggregationInterface, T>
 		: IBucketAggregation, IDescriptor
-		where TBucketAggregation : BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
+		where TBucketAggregationDescriptor : BucketAggregationDescriptorBase<TBucketAggregationDescriptor, TBucketAggregationInterface, T>
 			, TBucketAggregationInterface, IBucketAggregation
 		where T : class
 		where TBucketAggregationInterface : class, IBucketAggregation
 	{
 		AggregationDictionary IBucketAggregation.Aggregations { get; set; }
-		
-		protected TBucketAggregation Assign(Action<TBucketAggregationInterface> assigner) =>
-			Fluent.Assign(((TBucketAggregation)this), assigner);
 
-		protected TBucketAggregationInterface Self => (TBucketAggregation)this;
+		protected TBucketAggregationDescriptor Assign(Action<TBucketAggregationInterface> assigner) =>
+			Fluent.Assign(((TBucketAggregationDescriptor)this), assigner);
+
+		protected TBucketAggregationInterface Self => (TBucketAggregationDescriptor)this;
 
 		string IAggregation.Name { get; set; }
 
 		IDictionary<string, object> IAggregation.Meta { get; set; }
 
-		public TBucketAggregation Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
+		public TBucketAggregationDescriptor Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
 			Assign(a => a.Aggregations = selector?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
 
-		public TBucketAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+		public TBucketAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 

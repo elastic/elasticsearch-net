@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Nest
 {
@@ -26,6 +27,7 @@ namespace Nest
 
 			return queryParameters;
 		}
+
 		internal static string ToCamelCase(this string s)
 		{
 			if (string.IsNullOrEmpty(s))
@@ -40,7 +42,5 @@ namespace Nest
 
 			return camelCase;
 		}
-
-
 	}
 }

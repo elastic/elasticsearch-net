@@ -30,6 +30,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = typeof(MultiBucketAggregate<DateHistogramBucket>).FullName
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -48,6 +52,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					{
 						project_tags = new
 						{
+							meta = new
+							{
+								_type = typeof(SingleBucketAggregate).FullName
+							},
 							nested = new
 							{
 								path = "tags"
@@ -56,6 +64,10 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 							{
 								tags = new
 								{
+									meta = new
+									{
+										_type = typeof(TermsAggregate).FullName
+									},
 									terms = new { field = "tags.name" }
 								}
 							}

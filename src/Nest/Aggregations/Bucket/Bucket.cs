@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,6 @@ namespace Nest
 
 	public abstract class BucketBase : AggregationsHelper, IBucket
 	{
-		protected BucketBase() { }
-		protected BucketBase(IDictionary<string, IAggregate> aggregations) : base(aggregations) { }
+		internal abstract bool Matches(JToken source);
 	}
 }

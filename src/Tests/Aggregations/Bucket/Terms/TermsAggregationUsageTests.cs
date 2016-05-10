@@ -93,6 +93,7 @@ namespace Tests.Aggregations.Bucket.Terms
 			states.Should().NotBeNull();
 			states.DocCountErrorUpperBound.Should().HaveValue();
 			states.SumOtherDocCount.Should().HaveValue();
+			states.Buckets.Should().NotBeNullOrEmpty();
 			foreach (var item in states.Buckets)
 			{
 				item.Key.Should().NotBeNullOrEmpty();

@@ -22,15 +22,27 @@ namespace Tests.Aggregations.Bucket.Children
 			{
 				name_of_child_agg = new
 				{
+					meta = new
+					{
+						_type = typeof(SingleBucketAggregate).FullName
+					},
 					children = new { type = "commits" },
 					aggs = new
 					{
 						average_per_child = new
 						{
+							meta = new
+							{
+								_type = typeof(ValueAggregate).FullName
+							},
 							avg = new { field = "confidenceFactor" }
 						},
 						max_per_child = new
 						{
+							meta = new
+							{
+								_type = typeof(ValueAggregate).FullName
+							},
 							max = new { field = "confidenceFactor" }
 						}
 					}

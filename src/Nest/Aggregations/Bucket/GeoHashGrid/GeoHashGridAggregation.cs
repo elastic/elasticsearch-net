@@ -6,6 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoHashGridAggregation>))]
+	[AggregateType(typeof(MultiBucketAggregate<KeyedBucket>))]
 	public interface IGeoHashGridAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]

@@ -5,6 +5,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
+	[AggregateType(typeof(ValueAggregate))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{
 		IMovingAverageModel Model { get; set; }

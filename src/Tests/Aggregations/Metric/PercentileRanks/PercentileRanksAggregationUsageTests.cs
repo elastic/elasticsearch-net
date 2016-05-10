@@ -71,9 +71,7 @@ namespace Tests.Aggregations.Metric.PercentileRanks
 			response.IsValid.Should().BeTrue();
 			var commitsOutlier = response.Aggs.PercentileRanks("commits_outlier");
 			commitsOutlier.Should().NotBeNull();
-			commitsOutlier.Items.Should().NotBeNullOrEmpty();
-			foreach (var item in commitsOutlier.Items)
-				item.Should().NotBeNull();
+			commitsOutlier.Values.Should().NotBeNull().And.NotBeEmpty();
 		}
 	}
 }
