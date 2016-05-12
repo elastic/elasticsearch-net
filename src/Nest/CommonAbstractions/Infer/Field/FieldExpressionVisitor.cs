@@ -65,9 +65,9 @@ namespace Nest
 
     internal class FieldExpressionVisitor : ExpressionVisitor
     {
-		private Stack<string> _stack = new Stack<string>();
+		private readonly Stack<string> _stack = new Stack<string>();
 
-		private IConnectionSettingsValues _settings;
+		private readonly IConnectionSettingsValues _settings;
 
 		public FieldExpressionVisitor(IConnectionSettingsValues settings)
 		{

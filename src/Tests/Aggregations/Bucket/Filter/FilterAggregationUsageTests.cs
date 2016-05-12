@@ -11,7 +11,7 @@ using static Nest.Infer;
 namespace Tests.Aggregations.Bucket.Filter
 {
 	/**
-	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 
+	 * Defines a single bucket of all the documents in the current document set context that match a specified filter.
 	 * Often this will be used to narrow down the current aggregation context to a specific set of documents.
 	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-bucket-filter-aggregation.html[Filter Aggregation]
@@ -139,7 +139,7 @@ namespace Tests.Aggregations.Bucket.Filter
 	//reproduce of https://github.com/elastic/elasticsearch-net/issues/1931
 	public class InlineScriptFilterAggregationUsageTests : AggregationUsageTestBase
 	{
-		private string _ctxNumberofcommits = "_source.numberOfCommits > 0";
+		private string _ctxNumberofCommits = "_source.numberOfCommits > 0";
 		private string _aggName = "script_filter";
 
 		public InlineScriptFilterAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -151,7 +151,7 @@ namespace Tests.Aggregations.Bucket.Filter
 					filter = new {
 						script = new {
 							script = new {
-								inline = _ctxNumberofcommits
+								inline = _ctxNumberofCommits
 							}
 						}
 					}
@@ -164,7 +164,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				.Filter(_aggName, date => date
 					.Filter(f => f
 						.Script(b => b
-							.Inline(_ctxNumberofcommits)
+							.Inline(_ctxNumberofCommits)
 						)
 					)
 				)
@@ -177,7 +177,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				{
 					Filter = new ScriptQuery
 					{
-						Inline = _ctxNumberofcommits
+						Inline = _ctxNumberofCommits
 					}
 				}
 			};

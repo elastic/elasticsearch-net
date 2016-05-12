@@ -22,7 +22,7 @@ namespace Nest.Litterateur.Documentation.Files
 			var document = Document.Load(FileLocation.FullName);
 
 			// make any modifications
-			var rawVisitor = new RawAsciidocVisitor(FileLocation);
+			var rawVisitor = new RawAsciidocVisitor(docFileName);
 			document.Accept(rawVisitor);
 
 			// write out asciidoc to file

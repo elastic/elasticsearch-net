@@ -20,7 +20,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where
-		 * you have a POCO property mapped as a {ref_current}/_multi_fields.html[multi_field]
+		 * you have a POCO property mapped as a {ref_current}/mapping-types.html#_multi_fields[multi_field]
 		 * and want to use strongly typed access based on the property, yet append a suffix to the
 		 * generated field name in order to access a particular `multi_field`.
 		 *
@@ -47,7 +47,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 		/**=== Naming conventions
 		 * Currently, the name of a field cannot contain a `.` in Elasticsearch due to the potential for ambiguity with
-		 * a field that is mapped as a {ref_current}/_multi_fields.html[multi_field].
+		 * a field that is mapped as a {ref_current}/mapping-types.html#_multi_fields[multi_field].
 		 *
 		 * In these cases, NEST allows the call to go to Elasticsearch, deferring the naming conventions to the server side and,
 		 * in the case of a `.` in a field name, a `400 Bad Response` is returned with a server error indicating the reason
