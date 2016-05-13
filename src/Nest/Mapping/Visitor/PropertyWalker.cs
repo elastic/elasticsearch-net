@@ -131,6 +131,9 @@ namespace Nest
 			if (type.IsGeneric() && type.GetGenericTypeDefinition() == typeof(CompletionField<>))
 				return new CompletionProperty();
 
+			if (type == typeof(Attachment))
+				return new AttachmentProperty();
+
 			return new ObjectProperty();
 		}
 
