@@ -242,7 +242,6 @@
     <Compile Include="Framework\EndpointTests\Clusters\TypeOfCluster.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchNode.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\ObservableProcess.cs" />
-    <Compile Include=".\Framework\MockData\Attachment.cs" />
     <Compile Include=".\Framework\MockData\CommitActivity.cs" />
     <Compile Include=".\Framework\MockData\Developer.cs" />
     <Compile Include=".\Framework\MockData\Gender.cs" />

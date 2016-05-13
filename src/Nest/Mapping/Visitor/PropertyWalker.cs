@@ -137,6 +137,9 @@ namespace Nest
 			if (type == typeof(CompletionField))
 				return new CompletionProperty();
 
+			if (type == typeof(Attachment))
+				return new AttachmentProperty();
+
 			return new ObjectProperty();
 		}
 

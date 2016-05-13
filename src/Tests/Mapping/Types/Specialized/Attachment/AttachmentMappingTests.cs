@@ -8,13 +8,13 @@ using Tests.Framework.MockData;
 
 namespace Tests.Mapping.Types.Specialized.Attachment
 {
-	public class AttachmentMappingTests : TypeMappingTestBase<Tests.Framework.MockData.Attachment>
+	public class AttachmentMappingTests : TypeMappingTestBase<Nest.Attachment>
 	{
 		protected override object ExpectJson => new
 		{
 			properties = new
 			{
-				file = new
+				content = new
 				{
 					type = "attachment",
 					fields = new
@@ -66,14 +66,14 @@ namespace Tests.Mapping.Types.Specialized.Attachment
 			// TODO: Implement
 		}
 
-		protected override Func<PropertiesDescriptor<Framework.MockData.Attachment>, IPromise<IProperties>> FluentProperties => p => p
+		protected override Func<PropertiesDescriptor<Nest.Attachment>, IPromise<IProperties>> FluentProperties => p => p
 			.Attachment(a => a
-				.Name(n => n.File)
+				.Name(n => n.Content)
 				.AuthorField(d => d
 					.Name(n => n.Author)
 				)
 				.FileField(d => d
-					.Name(n => n.File)
+					.Name(n => n.Content)
 				)
 				.ContentLengthField(d => d
 					.Name(n => n.ContentLength)
