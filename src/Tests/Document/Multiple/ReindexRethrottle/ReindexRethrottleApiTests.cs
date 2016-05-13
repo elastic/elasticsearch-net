@@ -80,10 +80,10 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.ReindexRethrottle(f),
-			fluentAsync: (client, f) => client.ReindexRethrottleAsync(f),
-			request: (client, r) => client.ReindexRethrottle(r),
-			requestAsync: (client, r) => client.ReindexRethrottleAsync(r)
+			fluent: (client, f) => client.Rethrottle(f),
+			fluentAsync: (client, f) => client.RethrottleAsync(f),
+			request: (client, r) => client.Rethrottle(r),
+			requestAsync: (client, r) => client.RethrottleAsync(r)
 		);
 
 		protected override bool ExpectIsValid => true;

@@ -13,10 +13,10 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		[U] public async Task Urls()
 		{
 			await POST($"/_reindex/rhtoNesNR4aXVIY2bRR4GQ%3A13056/_rethrottle")
-				.Fluent(c => c.ReindexRethrottle(f=>f.TaskId(_taskId)))
-				.Request(c => c.ReindexRethrottle(new ReindexRethrottleRequest(_taskId)))
-				.FluentAsync(c => c.ReindexRethrottleAsync(f=>f.TaskId(_taskId)))
-				.RequestAsync(c => c.ReindexRethrottleAsync(new ReindexRethrottleRequest(_taskId)))
+				.Fluent(c => c.Rethrottle(f=>f.TaskId(_taskId)))
+				.Request(c => c.Rethrottle(new ReindexRethrottleRequest(_taskId)))
+				.FluentAsync(c => c.RethrottleAsync(f=>f.TaskId(_taskId)))
+				.RequestAsync(c => c.RethrottleAsync(new ReindexRethrottleRequest(_taskId)))
 				;
 
 		}
