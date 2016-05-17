@@ -94,7 +94,7 @@ namespace Tests.Ingest.SimulatePipeline
 			response.IsValid.Should().BeTrue();
 			response.Documents.Should().NotBeNull().And.HaveCount(3);
 
-			var simulation = response.Documents.Where(d => d.Document.Id == Project.Instance.Name).FirstOrDefault();
+			var simulation = response.Documents.FirstOrDefault(d => d.Document.Id == Project.Instance.Name);
 			simulation.Should().NotBeNull();
 			simulation.Document.Ingest.Should().NotBeNull();
 			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
@@ -102,14 +102,14 @@ namespace Tests.Ingest.SimulatePipeline
 			project.Should().NotBeNull();
 			project.Name.Should().Be("BUZZ");
 
-			simulation = response.Documents.Where(d => d.Document.Id == "otherid").FirstOrDefault();
+			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "otherid");
 			simulation.Should().NotBeNull();
 			simulation.Document.Ingest.Should().NotBeNull();
 			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
 			project = simulation.Document.Source.As<Project>();
 			project.Name.Should().Be("BUZZ");
 
-			simulation = response.Documents.Where(d => d.Document.Id == "2").FirstOrDefault();
+			simulation = response.Documents.FirstOrDefault(d => d.Document.Id == "2");
 			simulation.Document.Ingest.Should().NotBeNull();
 			simulation.Document.Ingest.Timestamp.Should().NotBe(default(DateTime));
 			var anotherType = simulation.Document.Source.As<AnotherType>();

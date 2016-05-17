@@ -24,44 +24,76 @@ namespace Tests.Document.Multiple.Bulk
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/{CallIsolatedValue}/_bulk";
+		protected override string UrlPath => $"/{CallIsolatedValue}/_bulk?pipeline=default-pipeline";
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			var pipelineResponse = client.PutPipeline("default-pipeline", p => p
+				.Processors(pr => pr
+					.Set<Project>(t => t.Field(f => f.Description).Value("Default"))
+				)
+			);
+
+			if (!pipelineResponse.IsValid)
+				throw new Exception("Failed to set up pipeline required for bulk");
+
+			pipelineResponse = client.PutPipeline("pipeline", p => p
+				.Processors(pr => pr
+					.Set<Project>(t => t.Field(f => f.Description).Value("Overridden"))
+				)
+			);
+
+			if (!pipelineResponse.IsValid)
+				throw new Exception("Failed to set up pipeline required for bulk");
+
+			base.IntegrationSetup(client, values);
+		}
+
 		protected override object ExpectJson => new object[]
 		{
-			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name } } },
+			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name, pipeline="pipeline" } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
 			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
 			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "1" } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
+			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "2" } } },
+			Project.InstanceAnonymous,
 		};
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
-			.Index<Project>(b => b.Document(Project.Instance))
+			.Pipeline("default-pipeline")
+			.Index<Project>(b => b.Document(Project.Instance).Pipeline("pipeline"))
 			.Update<Project, object>(b => b.Doc(new { leadDeveloper = new { firstName = "martijn" } }).Id(Project.Instance.Name))
 			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "1"))
-			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"));
-			
+			.Delete<Project>(b=>b.Id(Project.Instance.Name + "1"))
+			.Create<Project>(b => b.Document(Project.Instance).Id(Project.Instance.Name + "2"));
 
-		protected override BulkRequest Initializer => 
+
+		protected override BulkRequest Initializer =>
 			new BulkRequest(CallIsolatedValue)
 			{
+				Pipeline = "default-pipeline",
 				Operations = new List<IBulkOperation>
 				{
-					new BulkIndexOperation<Project>(Project.Instance),
+					new BulkIndexOperation<Project>(Project.Instance) { Pipeline = "pipeline" },
 					new BulkUpdateOperation<Project, object>(Project.Instance)
 					{
 						Doc = new { leadDeveloper = new { firstName = "martijn" } }
 					},
 					new BulkCreateOperation<Project>(Project.Instance)
 					{
-						Id = Project.Instance.Name + "1"
+						Id = Project.Instance.Name + "1",
 					},
 					new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
+						new BulkCreateOperation<Project>(Project.Instance)
+					{
+						Id = Project.Instance.Name + "2",
+					},
 				}
 			};
 
@@ -84,9 +116,12 @@ namespace Tests.Document.Multiple.Bulk
 				item.Shards.Successful.Should().BeGreaterThan(0);
 			}
 
-			var p1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
-			p1.LeadDeveloper.FirstName.Should().Be("martijn");
-		}
+			var project1 = this.Client.Source<Project>(Project.Instance.Name, p => p.Index(CallIsolatedValue));
+			project1.LeadDeveloper.FirstName.Should().Be("martijn");
+			project1.Description.Should().Be("Overridden");
 
+			var project2 = this.Client.Source<Project>(Project.Instance.Name + "2", p => p.Index(CallIsolatedValue));
+			project2.Description.Should().Be("Default");
+		}
 	}
 }

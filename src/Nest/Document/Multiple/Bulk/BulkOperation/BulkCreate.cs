@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -6,12 +7,17 @@ namespace Nest
 		where T : class
 	{
 		T Document { get; set; }
+
+		[JsonProperty("pipeline")]
+		string Pipeline { get; set; }
 	}
 
 	public class BulkCreateOperation<T> : BulkOperationBase, IBulkCreateOperation<T>
 		where T : class
 	{
 		public T Document { get; set; }
+
+		public string Pipeline { get; set; }
 
 		public BulkCreateOperation(T document)
 		{
@@ -28,7 +34,7 @@ namespace Nest
 	}
 
 
-	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase<BulkCreateDescriptor<T>, IBulkCreateOperation<T>>, IBulkCreateOperation<T> 
+	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase<BulkCreateDescriptor<T>, IBulkCreateOperation<T>>, IBulkCreateOperation<T>
 		where T : class
 	{
 		protected override string BulkOperationType => "create";
@@ -40,9 +46,16 @@ namespace Nest
 
 		T IBulkCreateOperation<T>.Document { get; set; }
 
+		string IBulkCreateOperation<T>.Pipeline { get; set; }
+
 		/// <summary>
 		/// The object to update, if id is not manually set it will be inferred from the object
 		/// </summary>
 		public BulkCreateDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
+
+		/// <summary>
+		/// The pipeline id to preprocess documents with
+		/// </summary>
+		public BulkCreateDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
 	}
 }
