@@ -7,8 +7,8 @@
 [[indices-paths]]
 == Indices paths
 
-Some APIs in Elasticsearch take one or many index name or a special `_all` marker to send the request to all the indices
-In nest this is encoded using `Indices`.
+Some APIs in Elasticsearch take one or many index name or a special `_all` marker to send the request to all the indices.
+In NEST this is encoded using `Indices`.
 
 === Implicit Conversion
 
@@ -103,7 +103,8 @@ Elasticsearch allows searching across multiple indices using the special `_all` 
 
 NEST exposes `_all` with `Indices.All` and `Indices.AllIndices`. Why expose it in two ways, you ask?
 Well, you may be using both `Nest.Indices` and `Nest.Types` in the same file and you may also be using C#6
-static imports too; in this scenario, `All` becomes ambiguous between `Indices.All` and `Types.All`, so the`_all` marker is exposed as `Indices.AllIndices` to alleviate this ambiguity
+static imports too; in this scenario, `All` becomes ambiguous between `Indices.All` and `Types.All`, so the
+`_all` marker is exposed as `Indices.AllIndices` to alleviate this ambiguity
 
 [source,csharp]
 ----
