@@ -52,7 +52,7 @@ namespace Nest
 		IHighlight Highlight { get; set; }
 
 		[JsonProperty(PropertyName = "rescore")]
-		IRescore Rescore { get; set; }
+		IList<IRescore> Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
 		Fields Fields { get; set; }
@@ -116,7 +116,7 @@ namespace Nest
 		public QueryContainer PostFilter { get; set; }
 		public ITopLevelInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
-		public IRescore Rescore { get; set; }
+		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public IHighlight Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
@@ -159,7 +159,7 @@ namespace Nest
 		public QueryContainer PostFilter { get; set; }
 		public ITopLevelInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
-		public IRescore Rescore { get; set; }
+		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
 		public IHighlight Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
@@ -211,7 +211,7 @@ namespace Nest
 		IList<ISort> ISearchRequest.Sort { get; set; }
 		ISuggestContainer ISearchRequest.Suggest { get; set; }
 		IHighlight ISearchRequest.Highlight { get; set; }
-		IRescore ISearchRequest.Rescore { get; set; }
+		IList<IRescore> ISearchRequest.Rescore { get; set; }
 		QueryContainer ISearchRequest.Query { get; set; }
 		QueryContainer ISearchRequest.PostFilter { get; set; }
 		Fields ISearchRequest.Fields { get; set; }
@@ -411,13 +411,15 @@ namespace Nest
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 
 		/// <summary>
-		/// Allows you to specify a rescore query
+		/// Allows you to specify one or more queries to use for rescoring
 		/// </summary>
-		public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector) =>
-			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoreDescriptor<T>()));
+		public SearchDescriptor<T> Rescore(Func<RescoringDescriptor<T>, IPromise<IList<IRescore>>> rescoreSelector) =>
+			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoringDescriptor<T>()).Value);
 
+		/// <summary>
+		/// Specify the concrete types to deserialize to when returning covariant search results
+		/// </summary>
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			Assign(a => a.TypeSelector = typeSelector);
-
 	}
 }

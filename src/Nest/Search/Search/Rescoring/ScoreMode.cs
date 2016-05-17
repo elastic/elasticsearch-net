@@ -9,8 +9,6 @@ namespace Nest
     {
 		[EnumMember(Value = "avg")]
         Average,
-		[EnumMember(Value = "first")]
-        First,
 		[EnumMember(Value = "max")]
         Max,
 		[EnumMember(Value = "min")]
@@ -19,7 +17,5 @@ namespace Nest
         Multiply,
 		[EnumMember(Value = "total")]
         Total,
-		[EnumMember(Value = "sum")]
-		Sum
     }
 }
