@@ -130,7 +130,7 @@ var fieldExpression = Infer.Field<Project>(p => p.Name);
 ----
 
 this can be even shortened even further using a https://msdn.microsoft.com/en-us/library/sf0df423.aspx#Anchor_0[static import in C# 6] i.e.
-			`using static Nest.Infer;`
+			 `using static Nest.Infer;`
 
 [source,csharp]
 ----

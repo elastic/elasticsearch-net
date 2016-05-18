@@ -414,7 +414,12 @@ namespace Nest
 		/// Allows you to specify a rescore query
 		/// </summary>
 		public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector) =>
-			Assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoreDescriptor<T>()));
+			Assign(a =>
+			{
+				a.Rescore = a.Rescore != null 
+					? new MultiRescore { a.Rescore, rescoreSelector?.Invoke(new RescoreDescriptor<T>()) } 
+					: rescoreSelector?.Invoke(new RescoreDescriptor<T>());
+			});
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			Assign(a => a.TypeSelector = typeSelector);

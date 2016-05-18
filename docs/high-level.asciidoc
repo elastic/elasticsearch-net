@@ -6,23 +6,17 @@
 [partintro]
 --
 The high level client, `ElasticClient`, provides a strongly typed query DSL that maps one-to-one with the Elasticsearch query DSL.
-
 It can be installed from the Package Manager Console inside Visual Studio using
-
 
 [source,shell]
 ----
 Install-Package NEST
 ----
 
-
 Or by searching for https://www.nuget.org/packages/NEST[NEST] in the Package Manager GUI. 
-
 NEST internally uses and still exposes the low level client, `ElasticLowLevelClient`, from <<elasticsearch-net,Elasticsearch.Net>> via
 the `.LowLevel` property on `ElasticClient`.
-
 There are a number of conventions that NEST uses for inference of
-
 
 * <<index-name-inference, Index Names>>
 
@@ -36,9 +30,7 @@ There are a number of conventions that NEST uses for inference of
 
 * <<features-inference, API features>>
 
-
 In addition to features such as
-
 
 * <<auto-map, Auto Mapping C# types>>
 

@@ -5,7 +5,6 @@
 --
 There are a number of breaking changes when going from 1.x to 2.x
 
-
 * <<elasticsearch-net-breaking-changes, Elasticsearch.Net Breaking Changes>>
 
 * <<nest-breaking-changes, NEST Breaking Changes>>
