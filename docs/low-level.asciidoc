@@ -7,15 +7,12 @@
 --
 The low level client, `ElasticLowLevelClient`, is a low level, dependency free client that has no 
 opinions about how you build and represent your requests and responses. 
-
 It can be installed from the Package Manager Console inside Visual Studio using
-
 
 [source,shell]
 ----
 Install-Package Elasticsearch.Net
 ----
-
 
 Or by searching for https://www.nuget.org/packages/Elasticsearch.Net[Elasticsearch.Net] in the Package Manager GUI.
 

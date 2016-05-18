@@ -1,4 +1,4 @@
-﻿:includes-from-dirs: search/request
+﻿:includes-from-dirs: search/request,search/search/rescoring
 
 
 

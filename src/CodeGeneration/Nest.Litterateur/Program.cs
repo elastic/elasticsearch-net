@@ -14,8 +14,8 @@ namespace Nest.Litterateur
 			}
 			else
 			{
-				InputDirPath = @"..\..\..\..\..\src\Tests";
-				OutputDirPath = @"..\..\..\..\..\docs";
+				InputDirPath = @"..\..\..\..\..\..\src\Tests";
+				OutputDirPath = @"..\..\..\..\..\..\docs";
 			}
 		}
 
