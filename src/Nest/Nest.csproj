@@ -60,7 +60,6 @@
     <Compile Include="Aggregations\AggregateJsonConverter.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\AggregationContainer.cs" />
-    <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\Bucket.cs" />
     <Compile Include="Aggregations\Bucket\BucketAggregate.cs" />
