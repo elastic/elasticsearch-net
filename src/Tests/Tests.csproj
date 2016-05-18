@@ -550,6 +550,8 @@
     <Compile Include="Cluster\TaskManagement\TasksList\TasksListApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\TasksList\TasksListUrlTests.cs" />
     <Compile Include="CommonOptions\DistanceUnit\DistanceUnits.doc.cs" />
+    <Compile Include="Document\Multiple\MultiGet\GetManyApiTests.cs" />
+    <Compile Include="Document\Multiple\MultiGet\GetManyUrlTests.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerUrlTests.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexOnServerApiTests.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryApiTests.cs" />
