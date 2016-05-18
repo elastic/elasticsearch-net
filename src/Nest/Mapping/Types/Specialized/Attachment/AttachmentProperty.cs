@@ -10,7 +10,7 @@ namespace Nest
 		IDateProperty DateField { get; set; }
 		ITextProperty TitleField { get; set; }
 		ITextProperty NameField { get; set; }
-		ITextProperty FileField { get; set; }
+		ITextProperty ContentField { get; set; }
 		ITextProperty AuthorField { get; set; }
 		ITextProperty KeywordsField { get; set; }
 		ITextProperty ContentTypeField { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 			set { Dictionary["date"] = value; }
 		}
 
-		public ITextProperty FileField
+		public ITextProperty ContentField
 		{
 			get { return Dictionary["content"] as ITextProperty; }
 			set { Dictionary["content"] = value; }
@@ -86,7 +86,7 @@ namespace Nest
 		IDateProperty IAttachmentProperty.DateField { get; set; }
 		ITextProperty IAttachmentProperty.TitleField { get; set; }
 		ITextProperty IAttachmentProperty.NameField { get; set; }
-		ITextProperty IAttachmentProperty.FileField { get; set; }
+		ITextProperty IAttachmentProperty.ContentField { get; set; }
 		ITextProperty IAttachmentProperty.AuthorField { get; set; }
 		ITextProperty IAttachmentProperty.KeywordsField { get; set; }
 		ITextProperty IAttachmentProperty.ContentTypeField { get; set; }
