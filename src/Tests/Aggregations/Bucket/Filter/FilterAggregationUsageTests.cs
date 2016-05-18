@@ -30,6 +30,10 @@ namespace Tests.Aggregations.Bucket.Filter
 			{
 				bethels_projects = new
 				{
+					meta = new
+					{
+						_type = "filter"
+					},
 					filter = new
 					{
 						term = new Dictionary<string, object>
@@ -39,7 +43,17 @@ namespace Tests.Aggregations.Bucket.Filter
 					},
 					aggs = new
 					{
-						project_tags = new {terms = new {field = "curatedTags.name.keyword"}}
+						project_tags = new
+						{
+							meta = new
+							{
+								_type = "terms"
+							},
+							terms = new
+							{
+								field = "curatedTags.name.keyword"
+							}
+						}
 					}
 				}
 			}
@@ -101,6 +115,10 @@ namespace Tests.Aggregations.Bucket.Filter
 			{
 				empty_filter = new
 				{
+					meta = new
+					{
+						_type = "filter"
+					},
 					filter = new {}
 				}
 			}
@@ -146,11 +164,20 @@ namespace Tests.Aggregations.Bucket.Filter
 
 		protected override object ExpectJson => new
 		{
-			aggs = new {
-				script_filter = new {
-					filter = new {
-						script = new {
-							script = new {
+			aggs = new
+			{
+				script_filter = new
+				{
+					meta = new
+					{
+						_type = "filter"
+					},
+					filter = new
+					{
+						script = new
+						{
+							script = new
+							{
 								inline = _ctxNumberofcommits
 							}
 						}

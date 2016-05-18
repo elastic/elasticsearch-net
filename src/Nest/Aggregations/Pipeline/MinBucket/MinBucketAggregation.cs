@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MinBucketAggregation>))]
-	[AggregateType(typeof(KeyedValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<MinBucketAggregation>))]
 	public interface IMinBucketAggregation : IPipelineAggregation { }
 
 	public class MinBucketAggregation
 		: PipelineAggregationBase, IMinBucketAggregation
 	{
+		public override string TypeName => "min_bucket";
+
 		internal MinBucketAggregation () { }
 
 		public MinBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -22,5 +23,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<MinBucketAggregationDescriptor, IMinBucketAggregation, SingleBucketsPath>
 		, IMinBucketAggregation
 	{
+		public override string TypeName => "min_bucket";
 	}
 }

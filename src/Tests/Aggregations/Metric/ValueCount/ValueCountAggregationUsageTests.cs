@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.ValueCount
 			{
 				commit_count = new
 				{
+					meta = new
+					{
+						_type = "value_count"
+					},
 					value_count = new
 					{
 						field = "numberOfCommits"

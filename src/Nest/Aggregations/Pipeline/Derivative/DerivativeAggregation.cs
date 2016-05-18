@@ -3,12 +3,13 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<DerivativeAggregation>))]
-	[AggregateType(typeof(ValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<DerivativeAggregation>))]
 	public interface IDerivativeAggregation : IPipelineAggregation { }
 
 	public class DerivativeAggregation : PipelineAggregationBase, IDerivativeAggregation
 	{
+		public override string TypeName => "derivative";
+
 		internal DerivativeAggregation() { }
 
 		public DerivativeAggregation(string name, SingleBucketsPath bucketsPath)
@@ -19,5 +20,8 @@ namespace Nest
 
 	public class DerivativeAggregationDescriptor
 		: PipelineAggregationDescriptorBase<DerivativeAggregationDescriptor, IDerivativeAggregation, SingleBucketsPath>
-		, IDerivativeAggregation { }
+		, IDerivativeAggregation
+	{
+		public override string TypeName => "derivative";
+	}
 }

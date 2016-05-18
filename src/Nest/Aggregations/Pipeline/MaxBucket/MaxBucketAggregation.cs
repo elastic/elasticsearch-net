@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MaxBucketAggregation>))]
-	[AggregateType(typeof(KeyedValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<MaxBucketAggregation>))]
 	public interface IMaxBucketAggregation : IPipelineAggregation { }
 
 	public class MaxBucketAggregation
 		: PipelineAggregationBase, IMaxBucketAggregation
 	{
+		public override string TypeName => "max_bucket";
+
 		internal MaxBucketAggregation () { }
 
 		public MaxBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -22,5 +23,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<MaxBucketAggregationDescriptor, IMaxBucketAggregation, SingleBucketsPath>
 		, IMaxBucketAggregation
 	{
+		public override string TypeName => "max_bucket";
 	}
 }

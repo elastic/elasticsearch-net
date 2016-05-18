@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Stats
 			{
 				commit_stats = new
 				{
+					meta = new
+					{
+						_type = "stats"
+					},
 					stats = new
 					{
 						field = "numberOfCommits"

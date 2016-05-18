@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<CumulativeSumAggregation>))]
-	[AggregateType(typeof(ValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<CumulativeSumAggregation>))]
 	public interface ICumulativeSumAggregation : IPipelineAggregation { }
 
 	public class CumulativeSumAggregation
 		: PipelineAggregationBase, ICumulativeSumAggregation
 	{
+		public override string TypeName => "cumulative_sum";
+
 		internal CumulativeSumAggregation () { }
 
 		public CumulativeSumAggregation(string name, SingleBucketsPath bucketsPath)
@@ -22,5 +23,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<CumulativeSumAggregationDescriptor, ICumulativeSumAggregation, SingleBucketsPath>
 		, ICumulativeSumAggregation
 	{
+		public override string TypeName => "cumulative_sum";
 	}
 }

@@ -19,6 +19,10 @@ namespace Tests.Aggregations.Bucket.Range
 			{
 				commit_ranges = new
 				{
+					meta = new
+					{
+						_type = "range"
+					},
 					range = new
 					{
 						field = "numberOfCommits",

@@ -24,7 +24,7 @@ namespace Tests.Aggregations.Bucket.Children
 				{
 					meta = new
 					{
-						_type = typeof(SingleBucketAggregate).FullName
+						_type = "children"
 					},
 					children = new { type = "commits" },
 					aggs = new
@@ -33,7 +33,7 @@ namespace Tests.Aggregations.Bucket.Children
 						{
 							meta = new
 							{
-								_type = typeof(ValueAggregate).FullName
+								_type = "avg"
 							},
 							avg = new { field = "confidenceFactor" }
 						},
@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Bucket.Children
 						{
 							meta = new
 							{
-								_type = typeof(ValueAggregate).FullName
+								_type = "max"
 							},
 							max = new { field = "confidenceFactor" }
 						}

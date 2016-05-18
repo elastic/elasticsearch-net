@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 			{
 				my_geohash_grid = new
 				{
+					meta = new
+					{
+						_type = "geohash_grid"
+					},
 					geohash_grid = new
 					{
 						field = "location",

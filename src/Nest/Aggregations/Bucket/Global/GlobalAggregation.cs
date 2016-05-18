@@ -4,12 +4,13 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GlobalAggregation>))]
-	[AggregateType(typeof(SingleBucketAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<GlobalAggregation>))]
 	public interface IGlobalAggregation : IBucketAggregation { }
 
 	public class GlobalAggregation : BucketAggregationBase, IGlobalAggregation
 	{
+		public override string TypeName => "global";
+
 		internal GlobalAggregation() { }
 
 		public GlobalAggregation(string name) : base(name) { }
@@ -20,5 +21,8 @@ namespace Nest
 	public class GlobalAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<GlobalAggregationDescriptor<T>, IGlobalAggregation, T>
 			, IGlobalAggregation
-		where T : class { }
+		where T : class
+	{
+		public override string TypeName => "global";
+	}
 }

@@ -16,6 +16,10 @@ namespace Tests.Aggregations.Metric.ScriptedMetric
 			{
 				sum_the_hard_way = new
 				{
+					meta = new
+					{
+						_type = "scripted_metric"
+					},
 					scripted_metric = new
 					{
 						init_script = new

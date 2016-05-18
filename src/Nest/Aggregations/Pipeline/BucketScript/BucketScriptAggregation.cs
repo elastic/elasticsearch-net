@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<BucketScriptAggregation>))]
-	[AggregateType(typeof(ValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<BucketScriptAggregation>))]
 	public interface IBucketScriptAggregation : IPipelineAggregation
 	{
 		[JsonProperty("script")]
@@ -15,6 +14,8 @@ namespace Nest
 	public class BucketScriptAggregation
 		: PipelineAggregationBase, IBucketScriptAggregation
 	{
+		public override string TypeName => "bucket_script";
+
 		public IScript Script { get; set; }
 
 		internal BucketScriptAggregation () { }
@@ -29,6 +30,8 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<BucketScriptAggregationDescriptor, IBucketScriptAggregation, MultiBucketsPath>
 		, IBucketScriptAggregation
 	{
+		public override string TypeName => "bucket_script";
+
 		IScript IBucketScriptAggregation.Script { get; set; }
 
 		public BucketScriptAggregationDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);

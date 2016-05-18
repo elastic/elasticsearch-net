@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<NamedFiltersAggregation>))]
-	[AggregateType(typeof(NamedFiltersAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<NamedFiltersAggregation>))]
 	public interface INamedFiltersAggregation : IFiltersAggregation
 	{
 		[JsonProperty("filters")]
@@ -16,6 +15,8 @@ namespace Nest
 
 	public class NamedFiltersAggregation : FiltersAggregationBase, INamedFiltersAggregation
 	{
+		public override string TypeName => "named_filters";
+
 		public INamedFiltersContainer Filters { get; set; }
 
 		public NamedFiltersAggregation(string name) : base(name) { }
@@ -28,6 +29,8 @@ namespace Nest
 		, INamedFiltersAggregation
 		where T : class
 	{
+		public override string TypeName => "named_filters";
+
 		INamedFiltersContainer INamedFiltersAggregation.Filters { get; set; }
 
 		public NamedFiltersAggregationDescriptor<T> Filters(Func<NamedFiltersContainerDescriptor<T>, IPromise<INamedFiltersContainer>> selector) =>

@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Sum
 			{
 				commits_sum = new
 				{
+					meta = new
+					{
+						_type = "sum"
+					},
 					sum = new
 					{
 						field = "numberOfCommits"

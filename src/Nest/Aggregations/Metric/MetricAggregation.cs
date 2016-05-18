@@ -32,21 +32,17 @@ namespace Nest
 	}
 
 	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
-		:  DescriptorBase<TMetricAggregation, TMetricAggregationInterface>, IMetricAggregation
+		:  AggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>, IMetricAggregation
 		where TMetricAggregation : MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T>
 			, TMetricAggregationInterface, IMetricAggregation
-		where T : class
 		where TMetricAggregationInterface : class, IMetricAggregation
+		where T : class
 	{
 		Field IMetricAggregation.Field { get; set; }
 
 		IScript IMetricAggregation.Script { get; set; }
 
 		double? IMetricAggregation.Missing { get; set; }
-
-		string IAggregation.Name { get; set; }
-
-		IDictionary<string, object> IAggregation.Meta { get; set; }
 
 		public TMetricAggregation Field(Field field) => Assign(a => a.Field = field);
 
@@ -58,8 +54,5 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public TMetricAggregation Missing(double missing) => Assign(a => a.Missing = missing);
-
-		public TMetricAggregation Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
-			Assign(a => a.Meta = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

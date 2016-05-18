@@ -3,7 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SerialDifferencingAggregation>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SerialDifferencingAggregation>))]
 	public interface ISerialDifferencingAggregation : IPipelineAggregation
 	{
 		[JsonProperty("lag")]
@@ -12,6 +12,8 @@ namespace Nest
 
 	public class SerialDifferencingAggregation : PipelineAggregationBase, ISerialDifferencingAggregation
 	{
+		public override string TypeName => "serial_diff";
+
 		public int? Lag { get; set; }
 
 		internal SerialDifferencingAggregation() { }
@@ -27,6 +29,8 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation, SingleBucketsPath>
 		, ISerialDifferencingAggregation
 	{
+		public override string TypeName => "serial_diff";
+
 		int? ISerialDifferencingAggregation.Lag { get; set; }
 
 		public SerialDifferencingAggregationDescriptor Lag(int lag) => Assign(a => a.Lag = lag);

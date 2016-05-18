@@ -32,7 +32,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 				{
 					meta = new
 					{
-						_type = typeof(MultiBucketAggregate<DateHistogramBucket>).FullName
+						_type = "date_histogram"
 					},
 					date_histogram = new
 					{
@@ -54,7 +54,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 						{
 							meta = new
 							{
-								_type = typeof(SingleBucketAggregate).FullName
+								_type = "nested"
 							},
 							nested = new
 							{
@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 								{
 									meta = new
 									{
-										_type = typeof(TermsAggregate).FullName
+										_type = "terms"
 									},
 									terms = new { field = "tags.name" }
 								}

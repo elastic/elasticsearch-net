@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System;
 
 namespace Nest
 {
@@ -10,18 +11,41 @@ namespace Nest
 	public interface IAggregation
 	{
 		string Name { get; set; }
+		string TypeName { get; }
 		IDictionary<string, object> Meta { get; set; }
 	}
 
 	public abstract class AggregationBase : IAggregation
 	{
 		string IAggregation.Name { get; set; }
+		public abstract string TypeName { get; }
 
-		public IDictionary<string, object> Meta { get; set; }
+		private IDictionary<string, object> _meta;
+		public IDictionary<string, object> Meta
+		{
+			get { return _meta; }
+			set { _meta = NewMeta(this.TypeName, value); }
+		}
 
-		internal AggregationBase() { }
+		internal static IDictionary<string, object> NewMeta(string typeName, IDictionary<string, object> value = null)
+		{
+			var meta = new Dictionary<string, object> { { "_type", typeName } };
+			if (value != null)
+			{
+				if (value.ContainsKey("_type"))
+					throw new ArgumentException("_type is a reserved metadata key.");
+				foreach (var kv in value)
+					meta.Add(kv.Key, kv.Value);
+			}
+			return meta;
+		}
 
-		protected AggregationBase(string name)
+		internal AggregationBase()
+		{
+			_meta = NewMeta(this.TypeName);
+		}
+
+		protected AggregationBase(string name) : this()
 		{
 			((IAggregation)this).Name = name;
 		}
@@ -40,9 +64,42 @@ namespace Nest
 		}
 	}
 
+	public abstract class AggregationDescriptorBase<TAggregationDescriptor, TAggregationInterface, T>
+		: DescriptorBase<TAggregationDescriptor, TAggregationInterface>, IAggregation
+		where TAggregationDescriptor : AggregationDescriptorBase<TAggregationDescriptor, TAggregationInterface, T>
+			, TAggregationInterface, IAggregation
+		where TAggregationInterface : class, IAggregation
+		where T : class
+
+	{
+		string IAggregation.Name { get; set; }
+		private IDictionary<string, object> _meta { get; set; }
+		IDictionary<string, object> IAggregation.Meta
+		{
+			get { return _meta; }
+			set { _meta = AggregationBase.NewMeta(Self.TypeName, value); }
+		}
+
+		public abstract string TypeName { get; }
+
+		public AggregationDescriptorBase()
+		{
+			_meta = AggregationBase.NewMeta(Self.TypeName);
+		}
+
+		public TAggregationDescriptor Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		{
+			var value = selector?.Invoke(new FluentDictionary<string, object>());
+			_meta = AggregationBase.NewMeta(Self.TypeName, value);
+			return (TAggregationDescriptor)this;
+		}
+	}
+
 	internal class AggregationCombinator : AggregationBase, IAggregation
 	{
 		internal List<AggregationBase> Aggregations { get; } = new List<AggregationBase>();
+
+		public override string TypeName { get; }
 
 		internal override void WrapInContainer(AggregationContainer container) { }
 

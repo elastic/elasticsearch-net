@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoDistanceAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<GeoDistanceAggregation>))]
 	public interface IGeoDistanceAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -29,6 +28,8 @@ namespace Nest
 
 	public class GeoDistanceAggregation : BucketAggregationBase, IGeoDistanceAggregation
 	{
+		public override string TypeName => "geo_distance";
+
 		public Field Field { get; set; }
 
 		public GeoLocation Origin { get; set; }
@@ -51,6 +52,8 @@ namespace Nest
 			, IGeoDistanceAggregation
 		where T : class
 	{
+		public override string TypeName => "geo_distance";
+
 		Field IGeoDistanceAggregation.Field { get; set; }
 
 		GeoLocation IGeoDistanceAggregation.Origin { get; set; }

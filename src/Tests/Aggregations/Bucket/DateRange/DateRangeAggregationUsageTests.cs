@@ -29,7 +29,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 				{
 					meta = new
 					{
-						_type = typeof(MultiBucketAggregate<RangeBucket>).FullName
+						_type = "date_range"
 					},
 					date_range = new
 					{
@@ -47,7 +47,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 						{
 							meta = new
 							{
-								_type = typeof(TermsAggregate).FullName
+								_type = "terms"
 							},
 							terms = new
 							{

@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<IpRangeAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<IpRangeAggregation>))]
 	public interface IIpRangeAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -20,6 +19,8 @@ namespace Nest
 
 	public class IpRangeAggregation : BucketAggregationBase, IIpRangeAggregation
 	{
+		public override string TypeName => "ip_range";
+
 		public Field Field { get; set; }
 		public IEnumerable<IIpRange> Ranges { get; set; }
 
@@ -35,6 +36,8 @@ namespace Nest
 			, IIpRangeAggregation
 		where T : class
 	{
+		public override string TypeName => "ip_range";
+
 		Field IIpRangeAggregation.Field { get; set; }
 
 		IEnumerable<IIpRange> IIpRangeAggregation.Ranges { get; set; }

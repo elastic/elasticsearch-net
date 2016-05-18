@@ -35,7 +35,7 @@ namespace Tests.Aggregations
 				{
 					meta = new
 					{
-						_type = typeof(SingleBucketAggregate).FullName
+						_type = "children"
 					},
 					children = new
 					{
@@ -47,7 +47,7 @@ namespace Tests.Aggregations
 						{
 							meta = new
 							{
-								_type = typeof(ValueAggregate).FullName
+								_type = "avg"
 							},
 							avg = new
 							{
@@ -58,7 +58,7 @@ namespace Tests.Aggregations
 						{
 							meta = new
 							{
-								_type = typeof(ValueAggregate).FullName
+								_type = "max"
 							},
 							max = new
 							{

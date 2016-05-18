@@ -40,6 +40,10 @@ namespace Tests.Search.Search
 			{
 				startDates = new
 				{
+					meta = new
+					{
+						_type = "terms"
+					},
 					terms = new
 					{
 						field = "startedOn"
@@ -119,6 +123,10 @@ namespace Tests.Search.Search
 			{
 				startDates = new
 				{
+					meta = new
+					{
+						_type = "terms"
+					},
 					terms = new
 					{
 						field = "startedOn"

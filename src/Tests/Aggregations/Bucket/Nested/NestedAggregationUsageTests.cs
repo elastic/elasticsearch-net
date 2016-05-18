@@ -16,6 +16,10 @@ namespace Tests.Aggregations.Bucket.Nested
 			{
 				tags = new
 				{
+					meta = new
+					{
+						_type = "nested"
+					},
 					nested = new
 					{
 						path = "tags",
@@ -24,6 +28,10 @@ namespace Tests.Aggregations.Bucket.Nested
 					{
 						tag_names = new
 						{
+							meta = new
+							{
+								_type = "terms"
+							},
 							terms = new
 							{
 								field = "tags.name"

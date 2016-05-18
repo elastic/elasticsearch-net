@@ -7,8 +7,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<AnonymousFiltersAggregation>))]
-	[AggregateType(typeof(AnonymousFiltersAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<AnonymousFiltersAggregation>))]
 	public interface IAnonymousFiltersAggregation : IFiltersAggregation
 	{
 		[JsonProperty("filters")]
@@ -17,6 +16,8 @@ namespace Nest
 
 	public class AnonymousFiltersAggregation : FiltersAggregationBase, IAnonymousFiltersAggregation
 	{
+		public override string TypeName => "anonymous_filters";
+
 		public List<QueryContainer> Filters { get; set; }
 
 		public AnonymousFiltersAggregation(string name) : base(name) { }
@@ -29,6 +30,8 @@ namespace Nest
 		, IAnonymousFiltersAggregation
 		where T : class
 	{
+		public override string TypeName => "anonymous_filters";
+
 		List<QueryContainer> IAnonymousFiltersAggregation.Filters { get; set; }
 
 		public AnonymousFiltersAggregationDescriptor<T> Filters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>

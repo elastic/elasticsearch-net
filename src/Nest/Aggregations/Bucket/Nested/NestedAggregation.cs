@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<NestedAggregation>))]
-	[AggregateType(typeof(SingleBucketAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<NestedAggregation>))]
 	public interface INestedAggregation : IBucketAggregation
 	{
 		[JsonProperty("path")]
@@ -15,6 +14,8 @@ namespace Nest
 
 	public class NestedAggregation : BucketAggregationBase, INestedAggregation
 	{
+		public override string TypeName => "nested";
+
 		public Field Path { get; set; }
 
 		internal NestedAggregation() { }
@@ -29,6 +30,8 @@ namespace Nest
 			, INestedAggregation
 		where T : class
 	{
+		public override string TypeName => "nested";
+
 		Field INestedAggregation.Path { get; set; }
 
 		public NestedAggregationDescriptor<T> Path(Field path) => Assign(a => a.Path = path);

@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Max
 			{
 				max_commits = new
 				{
+					meta = new
+					{
+						_type = "max"
+					},
 					max = new
 					{
 						field = "numberOfCommits"

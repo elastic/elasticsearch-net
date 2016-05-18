@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ScriptedMetricAggregation>))]
-	[AggregateType(typeof(ScriptedMetricAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ScriptedMetricAggregation>))]
 	public interface IScriptedMetricAggregation : IMetricAggregation
 	{
 		[JsonProperty("init_script")]
@@ -27,6 +26,8 @@ namespace Nest
 
 	public class ScriptedMetricAggregation : MetricAggregationBase, IScriptedMetricAggregation
 	{
+		public override string TypeName => "scripted_metric";
+
 		public IScript InitScript { get; set; }
 		public IScript MapScript { get; set; }
 		public IScript CombineScript { get; set; }
@@ -44,6 +45,8 @@ namespace Nest
 		, IScriptedMetricAggregation
 		where T : class
 	{
+		public override string TypeName => "scripted_metric";
+
 		IScript IScriptedMetricAggregation.InitScript { get; set; }
 		IScript IScriptedMetricAggregation.MapScript { get; set; }
 		IScript IScriptedMetricAggregation.CombineScript { get; set; }

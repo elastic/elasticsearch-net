@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Bucket.Histogram
 			{
 				commits = new
 				{
+					meta = new
+					{
+						_type = "histogram"
+					},
 					histogram = new
 					{
 						field = "numberOfCommits",

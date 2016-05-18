@@ -5,7 +5,6 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(FilterAggregationJsonConverter))]
-	[AggregateType(typeof(SingleBucketAggregate))]
 	public interface IFilterAggregation : IBucketAggregation
 	{
 		[JsonProperty("filter")]
@@ -14,6 +13,8 @@ namespace Nest
 
 	public class FilterAggregation : BucketAggregationBase, IFilterAggregation
 	{
+		public override string TypeName => "filter";
+
 		public QueryContainer Filter { get; set; }
 
 		internal FilterAggregation() { }
@@ -28,6 +29,8 @@ namespace Nest
 			, IFilterAggregation
 		where T : class
 	{
+		public override string TypeName => "filter";
+
 		QueryContainer IFilterAggregation.Filter { get; set; }
 
 		public FilterAggregationDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>

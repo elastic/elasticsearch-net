@@ -5,7 +5,6 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[ContractJsonConverter(typeof(MovingAverageAggregationJsonConverter))]
-	[AggregateType(typeof(ValueAggregate))]
 	public interface IMovingAverageAggregation : IPipelineAggregation
 	{
 		IMovingAverageModel Model { get; set; }
@@ -22,6 +21,8 @@ namespace Nest
 
 	public class MovingAverageAggregation : PipelineAggregationBase, IMovingAverageAggregation
 	{
+		public override string TypeName => "moving_avg";
+
 		public bool? Minimize { get; set; }
 		public IMovingAverageModel Model { get; set; }
 		public int? Window { get; set; }
@@ -40,6 +41,8 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<MovingAverageAggregationDescriptor, IMovingAverageAggregation, SingleBucketsPath>
 		, IMovingAverageAggregation
 	{
+		public override string TypeName => "moving_avg";
+
 		bool? IMovingAverageAggregation.Minimize { get; set; }
 		IMovingAverageModel IMovingAverageAggregation.Model { get; set; }
 		int? IMovingAverageAggregation.Window { get; set; }

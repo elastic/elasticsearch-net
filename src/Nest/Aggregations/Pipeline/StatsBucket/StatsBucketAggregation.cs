@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<StatsBucketAggregation>))]
-	[AggregateType(typeof(StatsAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<StatsBucketAggregation>))]
 	public interface IStatsBucketAggregation : IPipelineAggregation { }
 
 	public class StatsBucketAggregation
 		: PipelineAggregationBase, IStatsBucketAggregation
 	{
+		public override string TypeName => "stats_bucket";
+
 		internal StatsBucketAggregation() { }
 
 		public StatsBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -23,5 +24,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<StatsBucketAggregationDescriptor, IStatsBucketAggregation, SingleBucketsPath>
 		, IStatsBucketAggregation
 	{
+		public override string TypeName => "stats_bucket";
 	}
 }

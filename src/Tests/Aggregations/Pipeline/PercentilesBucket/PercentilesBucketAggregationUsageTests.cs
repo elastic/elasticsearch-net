@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -26,6 +30,10 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -35,6 +43,10 @@ namespace Tests.Aggregations.Pipeline.PercentilesBucket
 				},
 				commits_outlier = new
 				{
+					meta = new
+					{
+						_type = "percentiles_bucket"
+					},
 					percentiles_bucket = new
 					{
 						buckets_path = "projects_started_per_month>commits",

@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ExtendedStatsBucketAggregation>))]
-	[AggregateType(typeof(ExtendedStatsAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ExtendedStatsBucketAggregation>))]
 	public interface IExtendedStatsBucketAggregation : IPipelineAggregation
 	{
 		[JsonProperty("sigma")]
@@ -15,6 +14,8 @@ namespace Nest
 	public class ExtendedStatsBucketAggregation
 		: PipelineAggregationBase, IExtendedStatsBucketAggregation
 	{
+		public override string TypeName => "extended_stats_bucket";
+
 		internal ExtendedStatsBucketAggregation() { }
 
 		public ExtendedStatsBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -30,6 +31,7 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<ExtendedStatsBucketAggregationDescriptor, IExtendedStatsBucketAggregation, SingleBucketsPath>
 		, IExtendedStatsBucketAggregation
 	{
+		public override string TypeName => "extended_stats_bucket";
 
 		double? IExtendedStatsBucketAggregation.Sigma { get; set; }
 

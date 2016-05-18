@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<AverageBucketAggregation>))]
-	[AggregateType(typeof(ValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<AverageBucketAggregation>))]
 	public interface IAverageBucketAggregation : IPipelineAggregation { }
 
 	public class AverageBucketAggregation
 		: PipelineAggregationBase, IAverageBucketAggregation
 	{
+		public override string TypeName => "avg_bucket";
+
 		internal AverageBucketAggregation () { }
 
 		public AverageBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -22,5 +23,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<AverageBucketAggregationDescriptor, IAverageBucketAggregation, SingleBucketsPath>
 		, IAverageBucketAggregation
 	{
+		public override string TypeName => "avg_bucket";
 	}
 }

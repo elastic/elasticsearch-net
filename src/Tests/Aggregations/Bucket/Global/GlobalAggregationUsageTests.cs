@@ -17,11 +17,19 @@ namespace Tests.Aggregations.Bucket.Global
 			{
 				all_projects = new
 				{
+					meta = new
+					{
+						_type = "global"
+					},
 					global = new {},
 					aggs = new
 					{
 						names = new
 						{
+							meta = new
+							{
+								_type = "terms"
+							},
 							terms = new
 							{
 								field = "name"

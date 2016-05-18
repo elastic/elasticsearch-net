@@ -20,6 +20,10 @@ namespace Tests.Aggregations.Bucket.IpRange
 			{
 				ip_ranges = new
 				{
+					meta = new
+					{
+						_type = "ip_range"
+					},
 					ip_range = new
 					{
 						field = "leadDeveloper.iPAddress",

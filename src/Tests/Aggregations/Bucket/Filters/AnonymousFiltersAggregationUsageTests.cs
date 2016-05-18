@@ -16,12 +16,18 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public AnonymousFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson => new
 		{
 			aggs = new
 			{
 				projects_by_state = new
 				{
+					meta = new
+					{
+						_type = "anonymous_filters"
+					},
 					filters = new
 					{
 						other_bucket = true,
@@ -33,7 +39,14 @@ namespace Tests.Aggregations.Bucket.Filters
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
+						project_tags = new
+						{
+							meta = new
+							{
+								_type = "terms"
+							},
+							terms = new { field = "curatedTags.name.keyword" }
+						}
 					}
 				}
 			}
@@ -98,12 +111,18 @@ namespace Tests.Aggregations.Bucket.Filters
 		{
 			public Conditionless(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+			protected override bool SupportsDeserialization => false;
+
 			protected override object ExpectJson => new
 			{
 				aggs = new
 				{
 					conditionless_filters = new
 					{
+						meta = new
+						{
+							_type = "anonymous_filters"
+						},
 						filters = new
 						{
 							filters = new object[] { }
@@ -147,12 +166,18 @@ namespace Tests.Aggregations.Bucket.Filters
 		{
 			public Empty(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+			protected override bool SupportsDeserialization => false;
+
 			protected override object ExpectJson => new
 			{
 				aggs = new
 				{
 					empty_filters = new
 					{
+						meta = new
+						{
+							_type = "anonymous_filters"
+						},
 						filters = new
 						{
 							filters = new object[] { }

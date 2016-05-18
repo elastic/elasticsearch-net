@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Percentiles
 			{
 				commits_outlier = new
 				{
+					meta = new
+					{
+						_type = "percentiles"
+					},
 					percentiles = new
 					{
 						field = "numberOfCommits",

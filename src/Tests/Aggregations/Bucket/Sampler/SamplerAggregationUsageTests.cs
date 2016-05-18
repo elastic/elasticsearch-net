@@ -16,6 +16,10 @@ namespace Tests.Aggregations.Bucket.Sampler
 			{
 				sample = new
 				{
+					meta = new
+					{
+						_type = "sampler"
+					},
 					sampler = new
 					{
 						shard_size = 200
@@ -24,6 +28,10 @@ namespace Tests.Aggregations.Bucket.Sampler
 					{
 						significant_names = new
 						{
+							meta = new
+							{
+								_type = "significant_terms"
+							},
 							significant_terms = new
 							{
 								field = "name"

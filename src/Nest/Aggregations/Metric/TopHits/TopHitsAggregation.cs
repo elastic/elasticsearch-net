@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<TopHitsAggregation>))]
-	[AggregateType(typeof(TopHitsAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<TopHitsAggregation>))]
 	public interface ITopHitsAggregation : IMetricAggregation
 	{
 		[JsonProperty("from")]
@@ -40,6 +39,8 @@ namespace Nest
 
 	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
 	{
+		public override string TypeName => "top_hits";
+
 		public int? From { get; set; }
 		public int? Size { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -62,6 +63,8 @@ namespace Nest
 			, ITopHitsAggregation
 		where T : class
 	{
+		public override string TypeName => "top_hits";
+
 		int? ITopHitsAggregation.From { get; set; }
 
 		int? ITopHitsAggregation.Size { get; set; }

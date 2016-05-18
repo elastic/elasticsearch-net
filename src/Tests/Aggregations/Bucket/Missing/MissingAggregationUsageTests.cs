@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Bucket.Missing
 			{
 				projects_without_a_description = new
 				{
+					meta = new
+					{
+						_type = "missing"
+					},
 					missing = new
 					{
 						field = "description.keyword"

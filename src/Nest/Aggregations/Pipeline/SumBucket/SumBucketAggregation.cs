@@ -3,13 +3,14 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SumBucketAggregation>))]
-	[AggregateType(typeof(ValueAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SumBucketAggregation>))]
 	public interface ISumBucketAggregation : IPipelineAggregation { }
 
 	public class SumBucketAggregation
 		: PipelineAggregationBase, ISumBucketAggregation
 	{
+		public override string TypeName => "sum_bucket";
+
 		internal SumBucketAggregation () { }
 
 		public SumBucketAggregation(string name, SingleBucketsPath bucketsPath)
@@ -22,5 +23,6 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<SumBucketAggregationDescriptor, ISumBucketAggregation, SingleBucketsPath>
 		, ISumBucketAggregation
 	{
+		public override string TypeName => "sum_bucket";
 	}
 }

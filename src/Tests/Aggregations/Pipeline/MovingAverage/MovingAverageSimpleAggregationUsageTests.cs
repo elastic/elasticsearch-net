@@ -20,6 +20,10 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -29,6 +33,10 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -36,6 +44,10 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 						},
 						commits_moving_avg = new
 						{
+							meta = new
+							{
+								_type = "moving_avg"
+							},
 							moving_avg = new
 							{
 								buckets_path = "commits",

@@ -19,6 +19,10 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 			{
 				rings_around_amsterdam = new
 				{
+					meta = new
+					{
+						_type = "geo_distance"
+					},
 					geo_distance = new
 					{
 						field = "location",

@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 // ReSharper disable UnusedMember.Global
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<ChildrenAggregation>))]
-	[AggregateType(typeof(SingleBucketAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<ChildrenAggregation>))]
 	public interface IChildrenAggregation : IBucketAggregation
 	{
 		[JsonProperty("type")]
@@ -16,6 +16,8 @@ namespace Nest
 	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
 		public TypeName Type { get; set; }
+
+		public override string TypeName => "children";
 
 		internal ChildrenAggregation() { }
 
@@ -31,6 +33,8 @@ namespace Nest
 		: BucketAggregationDescriptorBase<ChildrenAggregationDescriptor<T>, IChildrenAggregation, T>, IChildrenAggregation
 		where T : class
 	{
+		public override string TypeName => "children";
+
 		TypeName IChildrenAggregation.Type { get; set; } = typeof(T);
 
 		public ChildrenAggregationDescriptor<T> Type(TypeName type) =>

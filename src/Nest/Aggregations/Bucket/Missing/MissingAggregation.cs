@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<MissingAggregation>))]
-	[AggregateType(typeof(SingleBucketAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<MissingAggregation>))]
 	public interface IMissingAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -15,6 +14,8 @@ namespace Nest
 
 	public class MissingAggregation : BucketAggregationBase, IMissingAggregation
 	{
+		public override string TypeName => "missing";
+
 		public Field Field { get; set; }
 
 		internal MissingAggregation() { }
@@ -29,6 +30,8 @@ namespace Nest
 			, IMissingAggregation
 		where T : class
 	{
+		public override string TypeName => "missing";
+
 		Field IMissingAggregation.Field { get; set; }
 
 		public MissingAggregationDescriptor<T> Field(Field field) => Assign(a => a.Field = field);

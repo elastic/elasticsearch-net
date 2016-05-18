@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Pipeline.MaxBucket
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -26,6 +30,10 @@ namespace Tests.Aggregations.Pipeline.MaxBucket
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -35,6 +43,10 @@ namespace Tests.Aggregations.Pipeline.MaxBucket
 				},
 				min_commits_per_month = new
 				{
+					meta = new
+					{
+						_type = "min_bucket"
+					},
 					min_bucket = new
 					{
 						buckets_path = "projects_started_per_month>commits"

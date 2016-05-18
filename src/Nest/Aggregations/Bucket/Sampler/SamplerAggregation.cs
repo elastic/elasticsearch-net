@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SamplerAggregation>))]
-	[AggregateType(typeof(SingleBucketAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SamplerAggregation>))]
 	public interface ISamplerAggregation : IBucketAggregation
 	{
 		[JsonProperty("shard_size")]
@@ -24,6 +23,8 @@ namespace Nest
 
 	public class SamplerAggregation : BucketAggregationBase, ISamplerAggregation
 	{
+		public override string TypeName => "sampler";
+
 		public SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 		public int? MaxDocsPerValue { get; set; }
 		public IScript Script { get; set; }
@@ -40,6 +41,8 @@ namespace Nest
 		: BucketAggregationDescriptorBase<SamplerAggregationDescriptor<T>, ISamplerAggregation, T>, ISamplerAggregation
 		where T : class
 	{
+		public override string TypeName => "sampler";
+
 		SamplerAggregationExecutionHint? ISamplerAggregation.ExecutionHint { get; set; }
 		int? ISamplerAggregation.MaxDocsPerValue { get; set; }
 		IScript ISamplerAggregation.Script { get; set; }

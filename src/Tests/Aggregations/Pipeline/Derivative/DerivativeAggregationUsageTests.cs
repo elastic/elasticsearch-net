@@ -18,6 +18,10 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -27,6 +31,10 @@ namespace Tests.Aggregations.Pipeline.Derivative
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -34,6 +42,10 @@ namespace Tests.Aggregations.Pipeline.Derivative
 						},
 						commits_derivative = new
 						{
+							meta = new
+							{
+								_type = "derivative"
+							},
 							derivative = new
 							{
 								buckets_path = "commits"

@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<SignificantTermsAggregation>))]
-	[AggregateType(typeof(SignificantTermsAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<SignificantTermsAggregation>))]
 	public interface ISignificantTermsAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -53,6 +52,8 @@ namespace Nest
 
 	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
 	{
+		public override string TypeName => "significant_terms";
+
 		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
@@ -79,6 +80,8 @@ namespace Nest
 			, ISignificantTermsAggregation
 		where T : class
 	{
+		public override string TypeName => "significant_terms";
+
 		Field ISignificantTermsAggregation.Field { get; set; }
 
 		int? ISignificantTermsAggregation.Size { get; set; }

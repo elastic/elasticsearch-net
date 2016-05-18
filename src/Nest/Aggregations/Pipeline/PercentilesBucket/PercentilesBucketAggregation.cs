@@ -6,8 +6,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<PercentilesBucketAggregation>))]
-	[AggregateType(typeof(PercentilesAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesBucketAggregation>))]
 	public interface IPercentilesBucketAggregation : IPipelineAggregation
 	{
 		[JsonProperty("percents")]
@@ -17,6 +16,8 @@ namespace Nest
 	public class PercentilesBucketAggregation
 		: PipelineAggregationBase, IPercentilesBucketAggregation
 	{
+		public override string TypeName => "percentiles_bucket";
+
 		public IEnumerable<double> Percents { get; set; }
 
 		internal PercentilesBucketAggregation() { }
@@ -32,6 +33,8 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<PercentilesBucketAggregationDescriptor, IPercentilesBucketAggregation, SingleBucketsPath>
 		, IPercentilesBucketAggregation
 	{
+		public override string TypeName => "percentiles_bucket";
+
 		IEnumerable<double> IPercentilesBucketAggregation.Percents { get; set; }
 
 		public PercentilesBucketAggregationDescriptor Percents(IEnumerable<double> percentages) =>

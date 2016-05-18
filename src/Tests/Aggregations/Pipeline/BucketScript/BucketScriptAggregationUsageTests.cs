@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -26,6 +30,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -33,6 +41,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 						},
 						stable_state = new
 						{
+							meta = new
+							{
+								_type = "filter"
+							},
 							filter = new
 							{
 								term = new
@@ -47,6 +59,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 							{
 								commits = new
 								{
+									meta = new
+									{
+										_type = "sum"
+									},
 									sum = new
 									{
 										field = "numberOfCommits"
@@ -56,6 +72,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 						},
 						stable_percentage = new
 						{
+							meta = new
+							{
+								_type = "bucket_script"
+							},
 							bucket_script = new
 							{
 								buckets_path = new
@@ -90,7 +110,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 							)
 							.Aggregations(aaa => aaa
 								.Sum("commits", sm => sm
-									.Field(p => p.NumberOfCommits)	
+									.Field(p => p.NumberOfCommits)
 								)
 							)
 						)
@@ -112,7 +132,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = 
+				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new FilterAggregation("stable_state")
 					{

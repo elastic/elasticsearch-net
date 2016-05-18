@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<HistogramAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<HistogramBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<HistogramAggregation>))]
 	public interface IHistogramAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -39,6 +38,8 @@ namespace Nest
 
 	public class HistogramAggregation : BucketAggregationBase, IHistogramAggregation
 	{
+		public override string TypeName => "histogram";
+
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
 		public double? Interval { get; set; }
@@ -60,6 +61,8 @@ namespace Nest
 		: BucketAggregationDescriptorBase<HistogramAggregationDescriptor<T>, IHistogramAggregation, T>, IHistogramAggregation
 		where T : class
 	{
+		public override string TypeName => "histogram";
+
 		Field IHistogramAggregation.Field { get; set; }
 
 		IScript IHistogramAggregation.Script { get; set; }

@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.GeoBounds
 			{
 				viewport = new
 				{
+					meta = new
+					{
+						_type = "geo_bounds"
+					},
 					geo_bounds = new
 					{
 						field = "location",

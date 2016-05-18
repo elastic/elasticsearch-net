@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Min
 			{
 				min_commits = new
 				{
+					meta = new
+					{
+						_type = "min"
+					},
 					min = new
 					{
 						field = "numberOfCommits"

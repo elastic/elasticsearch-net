@@ -9,7 +9,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 	public class BucketSelectorAggregationUsageTests : AggregationUsageTestBase
 	{
 		public BucketSelectorAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-		
+
 		protected override object ExpectJson => new
 		{
 			size = 0,
@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -26,6 +30,10 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -33,6 +41,10 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 						},
 						commits_bucket_filter = new
 						{
+							meta = new
+							{
+								_type = "bucket_selector"
+							},
 							bucket_selector = new
 							{
 								buckets_path = new
@@ -69,7 +81,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 					)
 				)
 			);
-		
+
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
 			Size = 0,
@@ -77,7 +89,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = 
+				Aggregations =
 					new SumAggregation("commits", "numberOfCommits") &&
 					new BucketSelectorAggregation("commits_bucket_filter", new MultiBucketsPath
 						{

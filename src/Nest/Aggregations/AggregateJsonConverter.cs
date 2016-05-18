@@ -10,7 +10,51 @@ namespace Nest
 {
 	internal class AggregateJsonConverter : JsonConverter
 	{
-				public override bool CanConvert(Type objectType) => objectType == typeof(IAggregate);
+		private static Dictionary<string, Type> _aggregateTypes = new Dictionary<string, Type>
+		{
+			{ "min", typeof(ValueAggregate) },
+			{ "max", typeof(ValueAggregate) },
+			{ "sum", typeof(ValueAggregate) },
+			{ "cardinality", typeof(ValueAggregate) },
+			{ "avg", typeof(ValueAggregate) },
+			{ "value_count", typeof(ValueAggregate) },
+			{ "avg_bucket", typeof(ValueAggregate) },
+			{ "derivative", typeof(ValueAggregate) },
+			{ "sum_bucket", typeof(ValueAggregate) },
+			{ "moving_avg", typeof(ValueAggregate) },
+			{ "cumulative_sum", typeof(ValueAggregate) },
+			{ "bucket_script", typeof(ValueAggregate) },
+			{ "max_bucket", typeof(KeyedValueAggregate) },
+			{ "min_bucket", typeof(KeyedValueAggregate) },
+			{ "scripted_metric", typeof(ScriptedMetricAggregate) },
+			{ "stats", typeof(StatsAggregate) },
+			{ "stats_bucket", typeof(StatsAggregate) },
+			{ "extended_stats", typeof(ExtendedStatsAggregate) },
+			{ "extended_stats_bucket", typeof(ExtendedStatsAggregate) },
+			{ "geo_bounds", typeof(GeoBoundsAggregate) },
+			{ "percentiles", typeof(PercentilesAggregate) },
+			{ "top_hits", typeof(TopHitsAggregate) },
+			{ "named_filters", typeof(NamedFiltersAggregate) },
+			{ "anonymous_filters", typeof(AnonymousFiltersAggregate) },
+			{ "global", typeof(SingleBucketAggregate) },
+			{ "filter", typeof(SingleBucketAggregate) },
+			{ "missing", typeof(SingleBucketAggregate) },
+			{ "nested", typeof(SingleBucketAggregate) },
+			{ "reverse_nested", typeof(SingleBucketAggregate) },
+			{ "children", typeof(SingleBucketAggregate) },
+			{ "sampler", typeof(SingleBucketAggregate) },
+			{ "significant_terms", typeof(SignificantTermsAggregate) },
+			{ "terms", typeof(TermsAggregate) },
+			{ "histogram", typeof(MultiBucketAggregate<HistogramBucket>) },
+			{ "geohash_grid", typeof(MultiBucketAggregate<KeyedBucket>) },
+			{ "range", typeof(MultiBucketAggregate<RangeBucket>) },
+			{ "date_range", typeof(MultiBucketAggregate<RangeBucket>) },
+			{ "ip_range", typeof(MultiBucketAggregate<RangeBucket>) },
+			{ "geo_distance", typeof(MultiBucketAggregate<RangeBucket>) },
+			{ "date_histogram", typeof(MultiBucketAggregate<DateHistogramBucket>) },
+		};
+
+		public override bool CanConvert(Type objectType) => objectType == typeof(IAggregate);
 
 		public override bool CanWrite => false;
 
@@ -36,7 +80,7 @@ namespace Nest
 			// Remove the injected metadata so that we don't dirty the users results
 			meta.Remove(typeKey);
 
-			var aggregate = jObject.ToObject(Type.GetType(type)) as IAggregate;
+			var aggregate = jObject.ToObject(_aggregateTypes[type]) as IAggregate;
 			aggregate.Meta = meta.HasAny() ? meta : null;
 
 			var topHits = aggregate as TopHitsAggregate;

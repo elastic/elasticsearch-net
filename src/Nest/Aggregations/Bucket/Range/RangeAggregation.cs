@@ -7,8 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<RangeAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<RangeBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<RangeAggregation>))]
 	public interface IRangeAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -23,6 +22,8 @@ namespace Nest
 
 	public class RangeAggregation : BucketAggregationBase, IRangeAggregation
 	{
+		public override string TypeName => "range";
+
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
 		public IEnumerable<IRange> Ranges { get; set; }
@@ -38,6 +39,8 @@ namespace Nest
 		: BucketAggregationDescriptorBase<RangeAggregationDescriptor<T>, IRangeAggregation, T>, IRangeAggregation
 		where T : class
 	{
+		public override string TypeName => "range";
+
 		Field IRangeAggregation.Field { get; set; }
 
 		IScript IRangeAggregation.Script { get; set; }

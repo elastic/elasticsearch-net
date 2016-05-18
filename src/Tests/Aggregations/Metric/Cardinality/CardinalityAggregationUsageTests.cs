@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Metric.Cardinality
 			{
 				state_count = new
 				{
+					meta = new
+					{
+						_type = "cardinality"
+					},
 					cardinality = new
 					{
 						field = "state",

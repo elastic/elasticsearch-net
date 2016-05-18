@@ -19,6 +19,10 @@ namespace Tests.Aggregations.Metric.TopHits
 			{
 				states = new
 				{
+					meta = new
+					{
+						_type = "terms"
+					},
 					terms = new
 					{
 						field = "state",
@@ -27,6 +31,10 @@ namespace Tests.Aggregations.Metric.TopHits
 					{
 						top_state_hits = new
 						{
+							meta = new
+							{
+								_type = "top_hits"
+							},
 							top_hits = new
 							{
 								sort = new object[]

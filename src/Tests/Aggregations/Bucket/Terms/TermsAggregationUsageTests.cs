@@ -20,6 +20,7 @@ namespace Tests.Aggregations.Bucket.Terms
 				{
 					meta = new
 					{
+						_type = "terms",
 						foo = "bar"
 					},
 					terms = new

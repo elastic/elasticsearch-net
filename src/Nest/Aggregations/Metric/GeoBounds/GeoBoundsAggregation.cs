@@ -3,8 +3,7 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoBoundsAggregation>))]
-	[AggregateType(typeof(GeoBoundsAggregate))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<GeoBoundsAggregation>))]
 	public interface IGeoBoundsAggregation : IMetricAggregation
 	{
 		[JsonProperty("wrap_longitude")]
@@ -13,6 +12,8 @@ namespace Nest
 
 	public class GeoBoundsAggregation : MetricAggregationBase, IGeoBoundsAggregation
 	{
+		public override string TypeName => "geo_bounds";
+
 		public bool? WrapLongitude { get; set; }
 
 		internal GeoBoundsAggregation() { }
@@ -27,6 +28,8 @@ namespace Nest
 			, IGeoBoundsAggregation
 		where T : class
 	{
+		public override string TypeName => "geo_bounds";
+
 		bool? IGeoBoundsAggregation.WrapLongitude { get; set; }
 
 		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true) =>

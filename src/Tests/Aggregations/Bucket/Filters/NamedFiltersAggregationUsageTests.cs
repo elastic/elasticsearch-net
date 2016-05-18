@@ -24,12 +24,18 @@ namespace Tests.Aggregations.Bucket.Filters
 	{
 		public NamedFiltersAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson => new
 		{
 			aggs = new
 			{
 				projects_by_state = new
 				{
+					meta = new
+					{
+						_type = "named_filters"
+					},
 					filters = new
 					{
 						other_bucket = true,
@@ -43,7 +49,17 @@ namespace Tests.Aggregations.Bucket.Filters
 					},
 					aggs = new
 					{
-						project_tags = new { terms = new { field = "curatedTags.name.keyword" } }
+						project_tags = new
+						{
+							meta = new
+							{
+								_type = "terms"
+							},
+							terms = new
+							{
+								field = "curatedTags.name.keyword"
+							}
+						}
 					}
 				}
 			}

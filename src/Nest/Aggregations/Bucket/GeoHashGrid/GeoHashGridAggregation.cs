@@ -5,8 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<GeoHashGridAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<KeyedBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<GeoHashGridAggregation>))]
 	public interface IGeoHashGridAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -24,6 +23,8 @@ namespace Nest
 
 	public class GeoHashGridAggregation : BucketAggregationBase, IGeoHashGridAggregation
 	{
+		public override string TypeName => "geohash_grid";
+
 		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
@@ -41,6 +42,8 @@ namespace Nest
 			, IGeoHashGridAggregation
 		where T : class
 	{
+		public override string TypeName => "geohash_grid";
+
 		Field IGeoHashGridAggregation.Field { get; set; }
 
 		int? IGeoHashGridAggregation.Size { get; set; }

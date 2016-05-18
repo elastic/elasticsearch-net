@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 			{
 				projects_started_per_month = new
 				{
+					meta = new
+					{
+						_type = "date_histogram"
+					},
 					date_histogram = new
 					{
 						field = "startedOn",
@@ -26,6 +30,10 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 					{
 						commits = new
 						{
+							meta = new
+							{
+								_type = "sum"
+							},
 							sum = new
 							{
 								field = "numberOfCommits"
@@ -33,6 +41,10 @@ namespace Tests.Aggregations.Pipeline.CumulativeSum
 						},
 						cumulative_commits = new
 						{
+							meta = new
+							{
+								_type = "cumulative_sum"
+							},
 							cumulative_sum = new
 							{
 								buckets_path = "commits"

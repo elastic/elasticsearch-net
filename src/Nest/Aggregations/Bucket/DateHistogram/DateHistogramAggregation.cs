@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[ContractJsonConverter(typeof(AggregationJsonConverter<DateHistogramAggregation>))]
-	[AggregateType(typeof(MultiBucketAggregate<DateHistogramBucket>))]
+	[ContractJsonConverter(typeof(ReadAsTypeJsonConverter<DateHistogramAggregation>))]
 	public interface IDateHistogramAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
@@ -49,6 +48,8 @@ namespace Nest
 
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
+		public override string TypeName => "date_histogram";
+
 		private string _format;
 		public Field Field { get; set; }
 		public IScript Script { get; set; }
@@ -88,6 +89,8 @@ namespace Nest
 			, IDateHistogramAggregation
 		where T : class
 	{
+		public override string TypeName => "date_histogram";
+
 		private string _format;
 		Field IDateHistogramAggregation.Field { get; set; }
 

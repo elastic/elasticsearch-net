@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 			{
 				tags = new
 				{
+					meta = new
+					{
+						_type = "nested"
+					},
 					nested = new
 					{
 						path = "tags",
@@ -25,6 +29,10 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 					{
 						tag_names = new
 						{
+							meta = new
+							{
+								_type = "terms"
+							},
 							terms = new
 							{
 								field = "tags.name"
@@ -33,11 +41,19 @@ namespace Tests.Aggregations.Bucket.ReverseNested
 							{
 								tags_to_project = new
 								{
+									meta = new
+									{
+										_type = "reverse_nested"
+									},
 									reverse_nested = new {},
 									aggs = new
 									{
 										top_projects_per_tag = new
 										{
+											meta = new
+											{
+												_type = "terms"
+											},
 											terms = new
 											{
 												field = "name"

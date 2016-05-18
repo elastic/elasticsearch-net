@@ -5,7 +5,6 @@ using System.Linq;
 namespace Nest
 {
 	[ContractJsonConverter(typeof(PercentileRanksAggregationJsonConverter))]
-	[AggregateType(typeof(PercentilesAggregate))]
 	public interface IPercentileRanksAggregation : IMetricAggregation
 	{
 		IEnumerable<double> Values { get; set; }
@@ -14,6 +13,8 @@ namespace Nest
 
 	public class PercentileRanksAggregation : MetricAggregationBase, IPercentileRanksAggregation
 	{
+		public override string TypeName => "percentile_ranks";
+
 		public IEnumerable<double> Values { get; set; }
 		public IPercentilesMethod Method { get; set; }
 
@@ -28,6 +29,8 @@ namespace Nest
 		: MetricAggregationDescriptorBase<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation, T>, IPercentileRanksAggregation
 		where T : class
 	{
+		public override string TypeName => "percentile_ranks";
+
 		IEnumerable<double> IPercentileRanksAggregation.Values { get; set; }
 
 		IPercentilesMethod IPercentileRanksAggregation.Method { get; set; }

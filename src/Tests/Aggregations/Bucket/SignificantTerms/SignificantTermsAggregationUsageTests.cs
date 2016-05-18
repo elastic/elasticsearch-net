@@ -17,6 +17,10 @@ namespace Tests.Aggregations.Bucket.SignificantTerms
 			{
 				significant_names = new
 				{
+					meta = new
+					{
+						_type = "significant_terms"
+					},
 					significant_terms = new
 					{
 						field = "name",
