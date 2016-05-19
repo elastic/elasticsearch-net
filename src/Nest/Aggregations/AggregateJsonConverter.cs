@@ -33,6 +33,8 @@ namespace Nest
 			{ "extended_stats_bucket", typeof(ExtendedStatsAggregate) },
 			{ "geo_bounds", typeof(GeoBoundsAggregate) },
 			{ "percentiles", typeof(PercentilesAggregate) },
+			{ "percentiles_bucket", typeof(PercentilesAggregate) },
+			{ "percentile_ranks", typeof(PercentilesAggregate) },
 			{ "top_hits", typeof(TopHitsAggregate) },
 			{ "named_filters", typeof(NamedFiltersAggregate) },
 			{ "anonymous_filters", typeof(AnonymousFiltersAggregate) },
