@@ -250,7 +250,8 @@ various options for your properties (analyzer to use, whether to enable doc_valu
 In that case, it's possible to use `.AutoMap()` in conjunction with explicitly mapped properties.
 
 Here we are using `.AutoMap()` to automatically map our company type, but then we're
-overriding our employee property and making it a `nested` type, since by default,`.AutoMap()` will infer objects as `object`.
+overriding our employee property and making it a `nested` type, since by default,
+`.AutoMap()` will infer objects as `object`.
 
 [source,csharp]
 ----
@@ -916,7 +917,7 @@ It is also possible to apply a transformation on all or specific properties.
 `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,
 does nothing and acts as a blank canvas for you to implement your own visiting methods.
 
-For instance, lets create a custom visitor that disables doc values for numeric and boolean types
+For instance, let's create a custom visitor that disables doc values for numeric and boolean types
 (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 
 [source,csharp]
