@@ -19,6 +19,7 @@ namespace Nest
 
 		public INamedFiltersContainer Filters { get; set; }
 
+		internal NamedFiltersAggregation() { }
 		public NamedFiltersAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Filters = this;

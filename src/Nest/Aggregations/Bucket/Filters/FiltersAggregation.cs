@@ -20,6 +20,7 @@ namespace Nest
 
 	public abstract class FiltersAggregationBase : BucketAggregationBase, IFiltersAggregation
 	{
+		internal FiltersAggregationBase() { }
 		public FiltersAggregationBase(string name) : base(name) { }
 
 		public bool? OtherBucket { get; set; }

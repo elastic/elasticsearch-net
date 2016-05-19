@@ -20,6 +20,7 @@ namespace Nest
 
 		public List<QueryContainer> Filters { get; set; }
 
+		internal AnonymousFiltersAggregation() { }
 		public AnonymousFiltersAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Filters = this;
