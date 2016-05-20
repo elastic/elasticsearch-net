@@ -67,7 +67,7 @@ bool
                |___term
 ....
 
-As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and
+As you can imagine this becomes unwieldy quite fast the more complex a query becomes. NEST can spot these and
 join them together to become a single bool query
 
 ....
@@ -87,7 +87,7 @@ Assert(
     );
 ----
 
-The bool DSL offers also a short hand notation to mark a query as a `must_not` using the `!` operator 
+The bool DSL offers also a shorthand notation to mark a query as a `must_not` using the `!` operator 
 
 [source,csharp]
 ----
@@ -180,7 +180,8 @@ c.Bool.MustNot.Should().HaveCount(1);
 c.Bool.Filter.Should().HaveCount(2);
 ----
 
-You can still mix and match actual bool queries with the bool DSL e.g`bool(must=term, term, term) && !term` would still merge into a single `bool` query.
+You can still mix and match actual bool queries with the bool DSL e.g.
+`bool(must=term, term, term) && !term` would still merge into a single `bool` query.
 
 [source,csharp]
 ----
@@ -232,7 +233,7 @@ There is another subtle situation where NEST will not blindly merge 2 bool queri
 
 `bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6`
 
-if NEST identified both sides of the OR operation as only containing `should` clauses and it would
+If NEST identified both sides of the OR operation as only containing `should` clauses and it would
 join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query.
 Rewriting this to a single bool with 5 `should` clauses would break because only matching on `term5` or `term6` should still be a hit.
 
@@ -265,7 +266,7 @@ nestedBool.Bool.Should.Should().HaveCount(4);
 
 === Locked bool queries
 
-NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set,
+NEST will not combine `bool` queries if any of the query metadata is set e.g. if metadata such as `boost` or `name` are set,
 NEST will treat these as locked
 
 Here we demonstrate that two locked `bool` queries are not combined
