@@ -161,8 +161,11 @@ namespace Nest
 			foreach (T item in enumerable) handler(item);
 		}
 
-		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
-			enumerable.HasAny() ? enumerable.ToList() : null;
+		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
+		{
+			var list = enumerable?.ToList();
+			return list.HasAny() ? list : null;
+		}
 
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
 		{
