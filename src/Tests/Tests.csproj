@@ -570,6 +570,7 @@
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
+    <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
