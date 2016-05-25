@@ -2,6 +2,9 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using System;
+using Tests.Framework;
+using FluentAssertions;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
@@ -75,5 +78,21 @@ namespace Tests.QueryDsl.Compound.Bool
 				q.Filter = new [] { ConditionlessQuery };
 			},
 		};
+
+		[U]
+		public void NullQueryDoesNotCauseANullReferenceException()
+		{
+			Action query = () => this.Client.Search<Project>(s => s
+					.Query(q => q
+						.Bool(b => b
+							.Filter(f => f
+								.Term(t => t.Name, null)
+							)
+						)
+					)
+				);
+
+			query.ShouldNotThrow();
+		}
 	}
 }

@@ -279,6 +279,85 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
+	public class CompoundVerbatimInnerQueryUsageTests : QueryDslUsageTestsBase
+	{
+		public CompoundVerbatimInnerQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object QueryJson => new
+		{
+			@bool = new
+			{
+				filter = new []
+				{
+					new
+					{
+						@bool = new
+						{
+							must = new []
+							{
+								new
+								{
+									exists = new
+									{
+										field = "numberOfCommits"
+									}
+								}
+							},
+							must_not = new []
+							{
+								new
+								{
+									term = new
+									{
+										name = new
+										{
+											value = ""
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		};
+
+
+
+		protected override QueryContainer QueryInitializer => new BoolQuery
+		{
+			Filter = new QueryContainer[] {
+				!new TermQuery
+				{
+					IsVerbatim = true,
+					Field = "name",
+					Value = ""
+				} &&
+				new ExistsQuery
+				{
+					Field = "numberOfCommits"
+				}
+			}
+		};
+
+
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.Bool(b => b
+				.Filter(f => !f
+					.Term(t => t
+						.Verbatim()
+						.Field(p => p.Name)
+						.Value("")
+					) && f
+					.Exists(e => e
+						.Field(p => p.NumberOfCommits)
+					)
+				)
+			);
+	}
+
 	public class StrictQueryUsageTests
 	{
 		[U]

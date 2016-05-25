@@ -21,10 +21,7 @@ namespace Nest
 		public IEnumerable<QueryContainer> Filters { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Or = this;
-		internal static bool IsConditionless(IOrQuery q)
-		{
-			return !q.Filters.HasAny() || q.Filters.All(f => f.IsConditionless);
-		}
+		internal static bool IsConditionless(IOrQuery q) => q.Filters.NotWritable();
 	}
 
 	[Obsolete("Use the bool query instead with a should clause for the query")]
