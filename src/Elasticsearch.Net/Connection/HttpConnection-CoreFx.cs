@@ -117,7 +117,14 @@ namespace Elasticsearch.Net
 			return await builder.ToResponseAsync().ConfigureAwait(false);
 		}
 
-		private static HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
+		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
+		{
+			var request = this.CreateRequestMessage(requestData);
+			SetBasicAuthenticationIfNeeded(request, requestData);
+			return request;
+		}
+
+		protected virtual HttpRequestMessage CreateRequestMessage(RequestData requestData)
 		{
 			var method = ConvertHttpMethod(requestData.Method);
 			var requestMessage = new HttpRequestMessage(method, requestData.Uri);
@@ -131,17 +138,6 @@ namespace Elasticsearch.Net
 
 			if (!requestData.RunAs.IsNullOrEmpty())
 				requestMessage.Headers.Add("es-shield-runas-user", requestData.RunAs);
-
-			string userInfo = null;
-			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
-				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
-			else if (requestData.BasicAuthorizationCredentials != null)
-				userInfo = requestData.BasicAuthorizationCredentials.ToString();
-			if (!userInfo.IsNullOrEmpty())
-			{
-				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
-				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
-			}
 
 			var data = requestData.PostData;
 
@@ -173,6 +169,21 @@ namespace Elasticsearch.Net
 			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
 			return requestMessage;
 		}
+
+		protected virtual void SetBasicAuthenticationIfNeeded(HttpRequestMessage requestMessage, RequestData requestData)
+		{
+			string userInfo = null;
+			if (!requestData.Uri.UserInfo.IsNullOrEmpty())
+				userInfo = Uri.UnescapeDataString(requestData.Uri.UserInfo);
+			else if (requestData.BasicAuthorizationCredentials != null)
+				userInfo = requestData.BasicAuthorizationCredentials.ToString();
+			if (!userInfo.IsNullOrEmpty())
+			{
+				var credentials = Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
+				requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Basic", credentials);
+			}
+		}
+
 
 		private static System.Net.Http.HttpMethod ConvertHttpMethod(HttpMethod httpMethod)
 		{
