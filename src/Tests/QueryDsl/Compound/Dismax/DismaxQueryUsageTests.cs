@@ -2,6 +2,9 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.Framework;
+using System;
+using FluentAssertions;
 
 #pragma warning disable 618 //Testing an obsolete method
 
@@ -53,5 +56,21 @@ namespace Tests.QueryDsl.Compound.Dismax
 			q => q.Queries = Enumerable.Empty<QueryContainer>(),
 			q => q.Queries = new [] { ConditionlessQuery },
 		};
+
+		[U]
+		public void NullQueryDoesNotCauseANullReferenceException()
+		{
+			Action query = () => this.Client.Search<Project>(s => s
+				.Query(q => q
+					.DisMax(dm => dm
+						.Queries(
+							dmq => dmq.Term(t => t.Name, null)
+						)
+					)
+				)
+			);
+
+			query.ShouldNotThrow();
+		}
 	}
 }
