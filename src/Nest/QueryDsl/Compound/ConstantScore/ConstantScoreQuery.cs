@@ -21,17 +21,17 @@ namespace Nest
 		public QueryContainer Filter { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.ConstantScore = this;
-		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.IsConditionless();
+		internal static bool IsConditionless(IConstantScoreQuery q) => q.Filter.NotWritable();
 	}
 
-	public class ConstantScoreQueryDescriptor<T> 
+	public class ConstantScoreQueryDescriptor<T>
 		: QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>
 		, IConstantScoreQuery where T : class
 	{
 		protected override bool Conditionless => ConstantScoreQuery.IsConditionless(this);
 		QueryContainer IConstantScoreQuery.Filter { get; set; }
 
-		public ConstantScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+		public ConstantScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

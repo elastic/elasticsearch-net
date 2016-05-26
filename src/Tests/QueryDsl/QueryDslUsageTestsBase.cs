@@ -84,36 +84,7 @@ namespace Tests.QueryDsl
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
-		[U]
-		public void NullQueryDoesNotCauseANullReferenceException()
-		{
-			Action query = () => this.Client.Search<Project>(s => s
-					.Query(q => q
-						.Bool(b => b
-							.Filter(f => f
-								.Term(t => t.Name, null)
-							)
-						)
-					)
-				);
-
-			query.ShouldNotThrow();
-
-			query = () => this.Client.Search<Project>(s => s
-				.Query(q => q
-					.DisMax(dm => dm
-						.Queries(
-							dmq => dmq.Term(t => t.Name, null)
-						)
-					)
-				)
-			);
-
-			query.ShouldNotThrow();
-		}
-
 		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
-
 	}
 
 	public abstract class ConditionlessWhen : List<Action<QueryContainer>>

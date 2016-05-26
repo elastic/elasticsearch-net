@@ -95,21 +95,8 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Bool = this;
 
 		protected override bool Conditionless => IsConditionless(this);
-		internal static bool IsConditionless(IBoolQuery q)
-		{
-			var musts = q.Must == null || q.Must.All(qq => qq.IsConditionless());
-			if (!musts) return false;
-
-			var shoulds = q.Should == null || q.Should.All(qq => qq.IsConditionless());
-			if (!shoulds) return false;
-
-			var filters = q.Filter == null || q.Filter.All(qq => qq.IsConditionless());
-			if (!filters) return false;
-
-			var mustNots = q.MustNot == null || q.MustNot.All(qq => qq.IsConditionless());
-
-			return mustNots;
-		}
+		internal static bool IsConditionless(IBoolQuery q) =>
+			q.Must.NotWritable() && q.MustNot.NotWritable() && q.Should.NotWritable() && q.Filter.NotWritable();
 	}
 
 	public class BoolQueryDescriptor<T>
