@@ -47,5 +47,17 @@ namespace Tests.QueryDsl.Compound.Indices
 			q => q.Query = null,
 			q => q.Query = ConditionlessQuery
 		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IIndicesQuery>(p => p.Indices)
+		{
+			q => {
+				q.Query = VerbatimQuery;
+				q.NoMatchQuery = null;
+			},
+			q => {
+				q.Query = null;
+				q.NoMatchQuery = VerbatimQuery;
+			}
+		};
 	}
 }

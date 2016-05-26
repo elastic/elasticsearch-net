@@ -51,11 +51,15 @@ namespace Tests.QueryDsl
 				Query = this.QueryInitializer
 			};
 
+		protected virtual NotConditionlessWhen NotConditionlessWhen => null;
 		protected virtual ConditionlessWhen ConditionlessWhen => null;
 
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
-		[U] public void SeenByVisitor()
+		protected QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
+
+		[U]
+		public void SeenByVisitor()
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.CreateSettings());
 			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
@@ -79,6 +83,45 @@ namespace Tests.QueryDsl
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
+		[U]
+		public void NotConditionlessWhenExpectedToBe()
+		{
+			if (NotConditionlessWhen == null) return;
+			foreach (var when in NotConditionlessWhen)
+			{
+				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+				when(query);
+				query = this.QueryInitializer;
+				when(query);
+			}
+		}
+
 		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
+	}
+
+	public abstract class NotConditionlessWhen : List<Action<QueryContainer>>
+	{
+	}
+	public class NotConditionlessWhen<TQuery> : NotConditionlessWhen where TQuery : IQuery
+	{
+		private readonly Func<IQueryContainer, TQuery> _dispatch;
+
+		public NotConditionlessWhen(Func<IQueryContainer, TQuery> dispatch)
+		{
+			_dispatch = dispatch;
+		}
+
+		public void Add(Action<TQuery> when)
+		{
+			this.Add(q => Assert(q, when));
+		}
+
+		private void Assert(IQueryContainer c, Action<TQuery> when)
+		{
+			TQuery q = this._dispatch(c);
+			when(q);
+			q.Conditionless.Should().BeFalse();
+			c.IsConditionless.Should().BeFalse();
+		}
 	}
 }

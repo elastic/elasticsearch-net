@@ -57,6 +57,12 @@ namespace Tests.QueryDsl.Compound.Dismax
 			q => q.Queries = new [] { ConditionlessQuery },
 		};
 
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IDisMaxQuery>(a => a.DisMax)
+		{
+			q => q.Queries = new [] { VerbatimQuery },
+			q => q.Queries = new [] { VerbatimQuery, ConditionlessQuery },
+		};
+
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
