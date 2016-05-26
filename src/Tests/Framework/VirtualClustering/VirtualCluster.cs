@@ -16,7 +16,6 @@ namespace Tests.Framework
 
 		private bool _sniffReturnsFqdn = false;
 		public bool SniffShouldReturnFqnd => _sniffReturnsFqdn;
-			
 
 		public IReadOnlyList<Node> Nodes => _nodes;
 
@@ -42,6 +41,12 @@ namespace Tests.Framework
 		{
 			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
 				node.HoldsData = false;
+			return this;
+		}
+		public VirtualCluster HttpDisabled(params int[] ports)
+		{
+			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
+				node.HttpEnabled = false;
 			return this;
 		}
 

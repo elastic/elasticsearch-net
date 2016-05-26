@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Elasticsearch.Net
@@ -14,7 +15,7 @@ namespace Elasticsearch.Net
 
 		public IEnumerable<Node> ToNodes(bool forceHttp = false)
 		{
-			foreach (var kv in nodes)
+			foreach (var kv in nodes.Where(n=>n.Value.HttpEnabled))
 			{
 				yield return new Node(this.ParseToUri(kv.Value.http_address, forceHttp))
 				{
@@ -22,12 +23,14 @@ namespace Elasticsearch.Net
 					Id = kv.Key,
 					MasterEligible = kv.Value.MasterEligible,
 					HoldsData = kv.Value.HoldsData,
+					HttpEnabled = kv.Value.HttpEnabled,
 				};
 			}
 		}
 
 		private Uri ParseToUri(string httpAdress, bool forceHttp)
 		{
+			if (httpAdress.IsNullOrEmpty()) return null;
 			var suffix = forceHttp ? "s" : string.Empty;
 			var match = AddressRe.Match(httpAdress);
 			if (!match.Success) throw new Exception($"Can not parse http_address: {httpAdress} to Uri");
@@ -56,6 +59,15 @@ namespace Elasticsearch.Net
 
 		internal bool MasterEligible => !((this.settings?.ContainsKey("node.master")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.master"]) == false);
 		internal bool HoldsData => !((this.settings?.ContainsKey("node.data")).GetValueOrDefault(false) && Convert.ToBoolean(this.settings["node.data"]) == false);
+		internal bool HttpEnabled
+		{
+			get
+			{
+				if (this.settings == null) return true;
+				if (!this.settings.ContainsKey("http.enabled")) return true;
+				return Convert.ToBoolean(this.settings["http.enabled"]) ;
+			}
+		}
 	}
 
 }

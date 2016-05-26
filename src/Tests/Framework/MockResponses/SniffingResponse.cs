@@ -30,14 +30,16 @@ namespace Tests.Framework.MockResponses
 			select new { id, name, node })
 			.ToDictionary(kv => kv.id, kv => CreateNodeResponse(kv.node, kv.name, randomFqdn));
 
+		private static Random Random = new Random(1337);
 		private static object CreateNodeResponse(Node node, string name, bool randomFqdn)
 		{
 			var fqdn = randomFqdn ? $"fqdn{node.Uri.Port}/" : "";
+
 			var nodeResponse = new
 			{
 				name = name,
 				transport_address = $"127.0.0.1:{node.Uri.Port + 1000}]",
-				http_address = $"{fqdn}127.0.0.1:{node.Uri.Port}",
+				http_address = node.HttpEnabled ? $"{fqdn}127.0.0.1:{node.Uri.Port}" : null,
 				host = Guid.NewGuid().ToString("N").Substring(0, 8),
 				ip = "127.0.0.1",
 				version = TestClient.Configuration.ElasticsearchVersion,
@@ -49,6 +51,7 @@ namespace Tests.Framework.MockResponses
 			};
 			if (!node.MasterEligible) nodeResponse.settings.Add("node.master", false);
 			if (!node.HoldsData) nodeResponse.settings.Add("node.data", false);
+			if (!node.HttpEnabled) nodeResponse.settings.Add("http.enabled", false);
 			return nodeResponse;
 		}
 
