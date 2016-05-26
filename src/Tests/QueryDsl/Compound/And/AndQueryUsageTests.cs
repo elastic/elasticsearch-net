@@ -55,5 +55,12 @@ namespace Tests.QueryDsl.Compound.And
 		{
 			{ q=>q.Filters = null }, { q=> q.Filters = Enumerable.Empty<QueryContainer>() }, { q=>q.Filters = new [] { ConditionlessQuery } }
 		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IAndQuery>(a => a.And)
+		{
+			q => q.Filters = new [] { VerbatimQuery },
+			q => q.Filters = new [] { ConditionlessQuery, VerbatimQuery }
+		};
+
 	}
 }

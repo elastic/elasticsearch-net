@@ -58,5 +58,21 @@ namespace Tests.QueryDsl.Compound.Filtered
 				q.Query =  ConditionlessQuery;
 			},
 		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IFilteredQuery>(a => a.Filtered)
+		{
+			q=> {
+				q.Filter = VerbatimQuery;
+				q.Query = null;
+			},
+			q => {
+				q.Filter =  null;
+				q.Query =  VerbatimQuery;
+			},
+			q => {
+				q.Filter =  null;
+				q.Query = new BoolQuery { Must = new [] { VerbatimQuery } };
+			},
+		};
 	}
 }

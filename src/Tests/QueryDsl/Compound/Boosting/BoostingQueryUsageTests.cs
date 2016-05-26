@@ -57,5 +57,22 @@ namespace Tests.QueryDsl.Compound.Boosting
 				q.PositiveQuery =  ConditionlessQuery;
 			},
 		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoostingQuery>(a => a.Boosting)
+		{
+			q=> {
+				q.NegativeQuery = VerbatimQuery;
+				q.PositiveQuery = VerbatimQuery;
+			},
+			q => {
+				q.NegativeQuery =  null;
+				q.PositiveQuery =  VerbatimQuery;
+			},
+			q => {
+				q.NegativeQuery =  VerbatimQuery;
+				q.PositiveQuery =  null;
+			}
+		};
+
 	}
 }

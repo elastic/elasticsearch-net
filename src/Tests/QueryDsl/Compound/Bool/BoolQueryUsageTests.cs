@@ -79,6 +79,34 @@ namespace Tests.QueryDsl.Compound.Bool
 			},
 		};
 
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoolQuery>(a => a.Bool)
+		{
+			q => {
+				q.MustNot = new [] { VerbatimQuery };
+				q.Should = null;
+				q.Must = null;
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = new [] { VerbatimQuery };
+				q.Must = null;
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = new [] { VerbatimQuery };
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = null;
+				q.Filter = new [] { VerbatimQuery };
+			},
+		};
+
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
