@@ -540,7 +540,7 @@
     <Compile Include="Document\Multiple\DeleteByQuery\ElasticClient-DeleteByQuery.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-MultiGet.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
-    <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
+    <Compile Include="Document\Multiple\MultiGet\ElasticClient-GetMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\IMultiGetOperation.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetRequest.cs" />
