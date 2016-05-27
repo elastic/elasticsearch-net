@@ -115,4 +115,72 @@ namespace Tests.Framework
 		public static UrlTester DELETE(string url) =>  new UrlTester(HttpMethod.DELETE, url);
 		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
 	}
+
+	public static class CapturingUrlTesterExtensions
+	{
+		public static async Task<CapturingUrlTester> RequestAsync<TResponse>(this Task<CapturingUrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
+			=> await (await tester).WhenCallingAsync(call, "request async");
+
+		public static async Task<CapturingUrlTester> FluentAsync<TResponse>(this Task<CapturingUrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
+			=> await (await tester).WhenCallingAsync(call, "fluent async");
+	}
+
+	public class CapturingUrlTester : SerializationTestBase
+	{
+		protected string ExpectedUrl { get; set; }
+		protected HttpMethod ExpectedHttpMethod { get; set; }
+		protected IApiCallDetails CallDetails { get; set; }
+
+		protected override object ExpectJson => null;
+
+		protected override IElasticClient Client => TestClient.GetInMemoryClient(c => c
+				.PrettyJson(false)
+				.OnRequestCompleted(h => CallDetails = h));
+
+		internal CapturingUrlTester(HttpMethod method, string expectedUrl)
+		{
+			this.ExpectedHttpMethod = method;
+			this.ExpectedUrl = expectedUrl;
+		}
+
+		public CapturingUrlTester Fluent<TResponse>(Func<IElasticClient, TResponse> call) => WhenCalling(call, "fluent");
+
+		public Task<CapturingUrlTester> FluentAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
+			=> WhenCallingAsync(call, "fluent async");
+
+		public CapturingUrlTester Request<TResponse>(Func<IElasticClient, TResponse> call)
+			=> WhenCalling(call, "request");
+
+		public Task<CapturingUrlTester> RequestAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call)
+			=> WhenCallingAsync(call, "request async");
+
+		internal CapturingUrlTester WhenCalling<TResponse>(Func<IElasticClient, TResponse> call, string typeOfCall)
+		{
+			call(this.Client);
+			return Assert(typeOfCall, CallDetails);
+		}
+
+		internal async Task<CapturingUrlTester> WhenCallingAsync<TResponse>(Func<IElasticClient, Task<TResponse>> call, string typeOfCall)
+		{
+			await call(this.Client);
+			return Assert(typeOfCall, CallDetails);
+		}
+
+		private CapturingUrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
+		{
+			var url = callDetails.Uri.PathAndQuery;
+			url.Should().Be(this.ExpectedUrl, $"when calling the {typeOfCall} Api");
+			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
+			return this;
+		}
+
+		public static CapturingUrlTester ExpectUrl(HttpMethod method, string url) => new CapturingUrlTester(method, url);
+		public static CapturingUrlTester POST(string url) => new CapturingUrlTester(HttpMethod.POST, url);
+		public static CapturingUrlTester PUT(string url) => new CapturingUrlTester(HttpMethod.PUT, url);
+		public static CapturingUrlTester GET(string url) => new CapturingUrlTester(HttpMethod.GET, url);
+		public static CapturingUrlTester HEAD(string url) => new CapturingUrlTester(HttpMethod.HEAD, url);
+		public static CapturingUrlTester DELETE(string url) => new CapturingUrlTester(HttpMethod.DELETE, url);
+
+		public static string EscapeUriString(string s) => Uri.EscapeDataString(s);
+	}
 }
