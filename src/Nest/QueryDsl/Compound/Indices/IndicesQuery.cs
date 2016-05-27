@@ -35,13 +35,13 @@ namespace Nest
 		public QueryContainer NoMatchQuery { get; set; }
 		public Indices Indices { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Indices = this;
-		internal static bool IsConditionless(IIndicesQuery q) => 
-			q.Indices == null || (q.NoMatchQuery.IsConditionless() && q.Query.IsConditionless());
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Indices = this;
+		internal static bool IsConditionless(IIndicesQuery q) =>
+			q.Indices == null || q.NoMatchQuery.NotWritable() && q.Query.NotWritable();
 	}
 
-	public class IndicesQueryDescriptor<T> 
-		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery> 
+	public class IndicesQueryDescriptor<T>
+		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery>
 		, IIndicesQuery where T : class
 	{
 		protected override bool Conditionless => IndicesQuery.IsConditionless(this);
@@ -49,20 +49,20 @@ namespace Nest
 		QueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		Indices IIndicesQuery.Indices { get; set; }
 
-		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public IndicesQueryDescriptor<T> Query<TOther>(Func<QueryContainerDescriptor<TOther>, QueryContainer> selector) where TOther : class => 
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<TOther>()));
+		public IndicesQueryDescriptor<T> Query<TOther>(Func<QueryContainerDescriptor<TOther>, QueryContainer> selector) where TOther : class =>
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<TOther>()));
 
 		public IndicesQueryDescriptor<T> NoMatchQuery(NoMatchShortcut shortcut) =>
 			Assign(a => a.NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut });
 
 		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.NoMatchQuery = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.NoMatchQuery = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
-		public IndicesQueryDescriptor<T> NoMatchQuery<TOther>(Func<QueryContainerDescriptor<TOther>, QueryContainer> selector) where TOther : class => 
-			Assign(a => a.NoMatchQuery = selector?.InvokeQuery(new QueryContainerDescriptor<TOther>()));
+		public IndicesQueryDescriptor<T> NoMatchQuery<TOther>(Func<QueryContainerDescriptor<TOther>, QueryContainer> selector) where TOther : class =>
+			Assign(a => a.NoMatchQuery = selector?.Invoke(new QueryContainerDescriptor<TOther>()));
 
 		public IndicesQueryDescriptor<T> Indices(Indices indices) => Assign(a => a.Indices = indices);
 		public IndicesQueryDescriptor<T> Indices(params IndexName[] indices) => Assign(a => a.Indices = indices);

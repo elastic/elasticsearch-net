@@ -33,7 +33,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
 
 		internal static bool IsConditionless(IGeoBoundingBoxQuery q) =>
 			q.Field.IsConditionless() || q.BoundingBox?.BottomRight == null || q.BoundingBox?.TopLeft == null;

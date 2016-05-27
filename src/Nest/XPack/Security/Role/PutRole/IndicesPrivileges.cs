@@ -61,7 +61,7 @@ namespace Nest
 		public IndicesPrivilegesDescriptor<T> Fields(Fields fields) => Assign(a => a.Fields = fields);
 
 		public IndicesPrivilegesDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 
 	}
 }

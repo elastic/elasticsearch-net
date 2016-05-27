@@ -24,7 +24,7 @@ namespace Nest
 		public Union<int, Distance> Precision { get; set; }
 		public bool? Neighbors { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
 
 		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location == null || q.Field == null;
 	}

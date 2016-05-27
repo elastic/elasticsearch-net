@@ -31,10 +31,16 @@ namespace Tests.QueryDsl
 		protected override object ExpectJson => new { query = this.QueryJson };
 
 		[U] public void FluentIsNotConditionless() =>
-			((IQueryContainer)this.QueryFluent(new QueryContainerDescriptor<Project>())).IsConditionless.Should().BeFalse();
+			AssertIsNotConditionless(this.QueryFluent(new QueryContainerDescriptor<Project>()));
 
 		[U] public void InitializerIsNotConditionless() =>
-			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
+			AssertIsNotConditionless(this.QueryInitializer);
+
+		private void AssertIsNotConditionless(IQueryContainer c)
+		{
+			if (!c.IsVerbatim)
+				c.IsConditionless.Should().BeFalse();
+		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Query(this.QueryFluent);
@@ -45,11 +51,15 @@ namespace Tests.QueryDsl
 				Query = this.QueryInitializer
 			};
 
+		protected virtual NotConditionlessWhen NotConditionlessWhen => null;
 		protected virtual ConditionlessWhen ConditionlessWhen => null;
 
 		protected readonly QueryContainer ConditionlessQuery = new QueryContainer(new TermQuery { });
 
-		[U] public void SeenByVisitor()
+		protected QueryContainer VerbatimQuery = new QueryContainer(new TermQuery { IsVerbatim = true });
+
+		[U]
+		public void SeenByVisitor()
 		{
 			var visitor = new DslPrettyPrintVisitor(TestClient.CreateSettings());
 			var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
@@ -73,31 +83,19 @@ namespace Tests.QueryDsl
 			((IQueryContainer)this.QueryInitializer).IsConditionless.Should().BeFalse();
 		}
 
-		[U] public void NullQueryDoesNotCauseANullReferenceException()
+		[U]
+		public void NotConditionlessWhenExpectedToBe()
 		{
-			Action query = () => this.Client.Search<Project>(s => s
-					.Query(q => q
-						.Bool(b => b
-							.Filter(f => f
-								.Term(t => t.Name, null)
-							)
-						)
-					)
-				);
-
-			query.ShouldNotThrow();
-
-			query = () => this.Client.Search<Project>(s => s
-				.Query(q => q
-					.DisMax(dm => dm
-						.Queries(
-							dmq => dmq.Term(t => t.Name, null)
-						)
-					)
-				)
-			);
-
-			query.ShouldNotThrow();
+			if (NotConditionlessWhen == null) return;
+			foreach (var when in NotConditionlessWhen)
+			{
+				var query = this.QueryFluent(new QueryContainerDescriptor<Project>());
+				when(query);
+				query = this.QueryInitializer;
+				when(query);
+			}
 		}
+
+		private void IsConditionless(IQueryContainer q, bool be) => q.IsConditionless.Should().Be(be);
 	}
 }

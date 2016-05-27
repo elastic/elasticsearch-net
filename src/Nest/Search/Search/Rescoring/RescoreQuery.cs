@@ -44,7 +44,7 @@ namespace Nest
 		public virtual RescoreQueryDescriptor<T> ScoreMode(ScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 
 		public virtual RescoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query) =>
-			Assign(a => a.Query = query?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = query?.Invoke(new QueryContainerDescriptor<T>()));
 		
 	}
 }

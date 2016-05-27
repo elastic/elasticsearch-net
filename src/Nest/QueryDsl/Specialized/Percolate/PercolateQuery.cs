@@ -71,7 +71,7 @@ namespace Nest
 	{
 		protected override bool Conditionless => IsConditionless(this);
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Percolate = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Percolate = this;
 
 		internal static bool IsConditionless(IPercolateQuery q)
 		{

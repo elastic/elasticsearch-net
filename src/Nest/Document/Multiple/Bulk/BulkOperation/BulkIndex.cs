@@ -3,15 +3,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIndexOperation<T> : IBulkOperation
+	public interface IBulkIndexOperation<T> : IBulkOperation
 	{
-		[JsonProperty(PropertyName = "_percolate")]
+		[JsonProperty("_percolate")]
 		string Percolate { get; set; }
+
+		[JsonProperty("pipeline")]
+		string Pipeline { get; set; }
 
 		T Document { get; set; }
 	}
 
-	public class BulkIndexOperation<T> : BulkOperationBase, IIndexOperation<T>
+	public class BulkIndexOperation<T> : BulkOperationBase, IBulkIndexOperation<T>
 		where T : class
 	{
 		public BulkIndexOperation(T document)
@@ -29,18 +32,20 @@ namespace Nest
 
 		public string Percolate { get; set; }
 
+		public string Pipeline { get; set; }
+
 		public T Document { get; set; }
 	}
 
 
-	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase<BulkIndexDescriptor<T>, IIndexOperation<T>>, IIndexOperation<T> 
+	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase<BulkIndexDescriptor<T>, IBulkIndexOperation<T>>, IBulkIndexOperation<T>
 		where T : class
 	{
 		protected override string BulkOperationType => "index";
 		protected override Type BulkOperationClrType => typeof(T);
-
-		string IIndexOperation<T>.Percolate { get; set; }
-		T IIndexOperation<T>.Document { get; set; }
+		string IBulkIndexOperation<T>.Percolate { get; set; }
+		string IBulkIndexOperation<T>.Pipeline { get; set; }
+		T IBulkIndexOperation<T>.Document { get; set; }
 
 		protected override object GetBulkOperationBody() => Self.Document;
 
@@ -51,5 +56,11 @@ namespace Nest
 		/// </summary>
 		public BulkIndexDescriptor<T> Document(T @object) => Assign(a => a.Document = @object);
 
+		/// <summary>
+		/// The pipeline id to preprocess documents with
+		/// </summary>
+		public BulkIndexDescriptor<T> Pipeline(string pipeline) => Assign(a => a.Pipeline = pipeline);
+
+		public BulkIndexDescriptor<T> Percolate(string percolate) => Assign(a => a.Percolate = percolate);
 	}
 }

@@ -37,7 +37,7 @@ namespace Nest
 		public bool? CollectPayloads { get; set; }
 #pragma warning restore 618
 
-		internal override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.SpanNear = this;
 		internal static bool IsConditionless(ISpanNearQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 

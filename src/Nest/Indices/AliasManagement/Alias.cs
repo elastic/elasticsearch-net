@@ -38,6 +38,6 @@ namespace Nest
 		public AliasDescriptor IndexRouting(string indexRouting) => Assign(a => a.IndexRouting = indexRouting);
 		public AliasDescriptor SearchRouting(string searchRouting) => Assign(a => a.SearchRouting = searchRouting);
 		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector) where T : class => 
-			Assign(a => a.Filter = filterSelector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

@@ -22,7 +22,7 @@ namespace Nest
 		public Types Types { get; set; }
 		public IEnumerable<Id> Values { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Ids = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Ids = this;
 		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny();
 	}
 

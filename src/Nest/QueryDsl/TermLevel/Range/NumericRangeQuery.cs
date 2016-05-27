@@ -25,7 +25,7 @@ namespace Nest
 		public double? GreaterThan { get; set; }
 		public double? LessThan { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Range = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Range = this;
 
 		internal static bool IsConditionless(INumericRangeQuery q)
 		{

@@ -15,6 +15,10 @@ namespace Nest
 {
 	internal static class Extensions
 	{
+		internal static bool NotWritable(this QueryContainer q) => q == null || !q.IsWritable;
+
+		internal static bool NotWritable(this IEnumerable<QueryContainer> qs) => qs == null || qs.All(q => q.NotWritable());
+
 		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
 			where T : class, TReturn where TReturn : class =>
 			func?.Invoke(@default) ?? @default;
@@ -22,26 +26,6 @@ namespace Nest
 		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
 			where T1 : class, TReturn where TReturn : class =>
 			func?.Invoke(@default, param2) ?? @default;
-
-		internal static QueryContainer InvokeQuery<T>(
-			this Func<QueryContainerDescriptor<T>, QueryContainer> f,
-			QueryContainerDescriptor<T> container)
-			where T : class
-		{
-			var c = f.Invoke(container);
-			//if query is not conditionless or is verbatim: return a container that holds the query
-			if (c != null && (!c.IsConditionless || c.IsVerbatim))
-				return c;
-
-			//query is conditionless but the container is marked as strict, throw exception
-			if (c != null && c.IsStrict)
-				throw new ArgumentException("Query is conditionless but strict is turned on");
-
-			//query is conditionless return an empty container that can later be rewritten
-			return null;
-		}
-
-		internal static bool IsNullOrConditionless(this QueryContainer c) => c == null || c.IsConditionless;
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
@@ -181,8 +165,11 @@ namespace Nest
 			foreach (T item in enumerable) handler(item);
 		}
 
-		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
-			enumerable.HasAny() ? enumerable.ToList() : null;
+		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable)
+		{
+			var list = enumerable?.ToList();
+			return list.HasAny() ? list : null;
+		}
 
 		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
 		{

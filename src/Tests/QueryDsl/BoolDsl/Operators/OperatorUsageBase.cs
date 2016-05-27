@@ -13,13 +13,13 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 
 		protected void ReturnsNull(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector)
 		{
-			combined.Should().BeNull(); selector.InvokeQuery(new QueryContainerDescriptor<Project>()).Should().BeNull();
+			combined.Should().BeNull(); selector.Invoke(new QueryContainerDescriptor<Project>()).Should().BeNull();
 		}
 
 		protected void ReturnsBool(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector, Action<IBoolQuery> boolQueryAssert)
 		{
 			ReturnsBool(combined, boolQueryAssert);
-			ReturnsBool(selector.InvokeQuery(new QueryContainerDescriptor<Project>()), boolQueryAssert);
+			ReturnsBool(selector.Invoke(new QueryContainerDescriptor<Project>()), boolQueryAssert);
 		}
 
 		private void ReturnsBool(QueryContainer combined, Action<IBoolQuery> boolQueryAssert)
@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.BoolDsl.Operators
 		protected void ReturnsSingleQuery(QueryContainer combined, Func<QueryContainerDescriptor<Project>, QueryContainer> selector, Action<IQueryContainer> containerAssert)
 		{
 			ReturnsSingleQuery(combined, containerAssert);
-			ReturnsSingleQuery(selector.InvokeQuery(new QueryContainerDescriptor<Project>()), containerAssert);
+			ReturnsSingleQuery(selector.Invoke(new QueryContainerDescriptor<Project>()), containerAssert);
 		}
 
 		private void ReturnsSingleQuery(QueryContainer combined, Action<IQueryContainer> containerAssert)

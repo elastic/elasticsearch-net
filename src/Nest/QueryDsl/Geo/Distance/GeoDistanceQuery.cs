@@ -41,7 +41,7 @@ namespace Nest
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
 
-		internal override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistance = this;
 
 		internal static bool IsConditionless(IGeoDistanceQuery q) => 
 			q.Location == null || q.Distance == null || q.Field.IsConditionless();

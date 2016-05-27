@@ -23,7 +23,7 @@ namespace Nest
 		public string Flags { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Regexp = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Regexp = this;
 		internal static bool IsConditionless(IRegexpQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 

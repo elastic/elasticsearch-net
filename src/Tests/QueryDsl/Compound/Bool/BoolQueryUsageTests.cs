@@ -2,6 +2,9 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using System;
+using Tests.Framework;
+using FluentAssertions;
 
 namespace Tests.QueryDsl.Compound.Bool
 {
@@ -75,5 +78,49 @@ namespace Tests.QueryDsl.Compound.Bool
 				q.Filter = new [] { ConditionlessQuery };
 			},
 		};
+
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IBoolQuery>(a => a.Bool)
+		{
+			q => {
+				q.MustNot = new [] { VerbatimQuery };
+				q.Should = null;
+				q.Must = null;
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = new [] { VerbatimQuery };
+				q.Must = null;
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = new [] { VerbatimQuery };
+				q.Filter = null;
+			},
+			q => {
+				q.MustNot = null;
+				q.Should = null;
+				q.Must = null;
+				q.Filter = new [] { VerbatimQuery };
+			},
+		};
+
+		[U]
+		public void NullQueryDoesNotCauseANullReferenceException()
+		{
+			Action query = () => this.Client.Search<Project>(s => s
+					.Query(q => q
+						.Bool(b => b
+							.Filter(f => f
+								.Term(t => t.Name, null)
+							)
+						)
+					)
+				);
+
+			query.ShouldNotThrow();
+		}
 	}
 }

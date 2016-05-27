@@ -568,9 +568,13 @@
     <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
     <Compile Include="QueryDsl\ConditionlessWhen.cs" />
+    <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
+    <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
+    <Compile Include="Reproduce\GithubIssue2101.cs" />
+    <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
     <Compile Include="XPack\Security\Role\ClearCachedRoles\ClearCachedRolesApiTests.cs" />
@@ -643,6 +647,7 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">

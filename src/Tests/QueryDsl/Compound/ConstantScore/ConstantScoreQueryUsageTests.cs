@@ -45,5 +45,9 @@ namespace Tests.QueryDsl.Compound.ConstantScore
 			q => q.Filter = null ,
 			q => q.Filter =  ConditionlessQuery,
 		};
+		protected override NotConditionlessWhen NotConditionlessWhen => new NotConditionlessWhen<IConstantScoreQuery>(a => a.ConstantScore)
+		{
+			q => q.Filter = VerbatimQuery
+		};
 	}
 }

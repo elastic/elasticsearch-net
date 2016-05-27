@@ -43,6 +43,12 @@ namespace Tests.Framework
 				node.HoldsData = false;
 			return this;
 		}
+		public VirtualCluster HttpDisabled(params int[] ports)
+		{
+			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
+				node.HttpEnabled = false;
+			return this;
+		}
 
 		public VirtualCluster Ping(Func<PingRule, IRule> selector)
 		{

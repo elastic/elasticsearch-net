@@ -16,7 +16,7 @@ namespace Nest
 		bool? OtherBucket { get; set; }
 
 		[JsonProperty("other_bucket_key")]
-		string OtherBucketKey { get; set; } 
+		string OtherBucketKey { get; set; }
 	}
 
 	public class FiltersAggregation : BucketAggregationBase, IFiltersAggregation
@@ -24,8 +24,8 @@ namespace Nest
 		public Union<INamedFiltersContainer, List<QueryContainer>> Filters { get; set; }
 
 		/// <summary>
-		/// Gets or sets whether to add a bucket to the response which will contain all documents 
-		/// that do not match any of the given filters. 
+		/// Gets or sets whether to add a bucket to the response which will contain all documents
+		/// that do not match any of the given filters.
 		/// When set to <c>true</c>, the other bucket will be returned either in a bucket
 		/// (named "_other_" by default) if named filters are being used,
 		///  or as the last bucket if anonymous filters are being used
@@ -35,7 +35,7 @@ namespace Nest
 		public bool? OtherBucket { get; set; }
 
 		/// <summary>
-		/// Gets or sets the key for the other bucket to a value other than the default "_other_". 
+		/// Gets or sets the key for the other bucket to a value other than the default "_other_".
 		/// Setting this parameter will implicitly set the <see cref="OtherBucket"/> parameter to true
 		/// </summary>
 		public string OtherBucketKey { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Filters = this;
 	}
 
-	public class FiltersAggregationDescriptor<T> 
+	public class FiltersAggregationDescriptor<T>
 		: BucketAggregationDescriptorBase<FiltersAggregationDescriptor<T>, IFiltersAggregation, T>
 		, IFiltersAggregation
 		where T : class
@@ -59,13 +59,13 @@ namespace Nest
 		string IFiltersAggregation.OtherBucketKey{ get; set; }
 
 		/// <summary>
-		/// Adds a bucket to the response which will contain all documents 
-		/// that do not match any of the given filters. 
+		/// Adds a bucket to the response which will contain all documents
+		/// that do not match any of the given filters.
 		/// When set to <c>true</c>, the other bucket will be returned either in a bucket
 		/// (named "_other_" by default) if named filters are being used,
 		///  or as the last bucket if anonymous filters are being used
 		/// When set to <c>false</c>, does not compute
-		/// the other bucket. 
+		/// the other bucket.
 		/// </summary>
 		/// <param name="otherBucket">whether to set the other bucket</param>
 		/// <returns>the <see cref="FiltersAggregationDescriptor{T}"/></returns>
@@ -73,7 +73,7 @@ namespace Nest
 			Assign(a => a.OtherBucket = otherBucket);
 
 		/// <summary>
-		/// Sets the key for the other bucket to a value other than the default "_other_". 
+		/// Sets the key for the other bucket to a value other than the default "_other_".
 		/// Setting this parameter will implicitly set the <see cref="OtherBucket"/> parameter to true
 		/// </summary>
 		/// <param name="otherBucketKey">the name for the other bucket</param>
@@ -85,10 +85,10 @@ namespace Nest
 			Assign(a => a.Filters = new Union<INamedFiltersContainer, List<QueryContainer>>(selector?.Invoke(new NamedFiltersContainerDescriptor<T>())?.Value));
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToList());
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToList());
 
 		public FiltersAggregationDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, QueryContainer>> selectors) =>
-			Assign(a => a.Filters = selectors.Select(s=>s?.InvokeQuery(new QueryContainerDescriptor<T>())).ToList());
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToList());
 
 	}
 }

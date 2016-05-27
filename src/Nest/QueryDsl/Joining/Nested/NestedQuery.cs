@@ -30,7 +30,7 @@ namespace Nest
 		public Field Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		internal override void WrapInContainer(IQueryContainer c) => c.Nested = this;
+		internal override void InternalWrapInContainer(IQueryContainer c) => c.Nested = this;
 		internal static bool IsConditionless(INestedQuery q) => q.Path == null || q.Query.IsConditionless();
 	}
 
@@ -46,7 +46,7 @@ namespace Nest
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
 		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
-			Assign(a => a.Query = selector?.InvokeQuery(new QueryContainerDescriptor<T>()));
+			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 
