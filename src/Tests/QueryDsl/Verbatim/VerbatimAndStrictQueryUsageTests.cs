@@ -12,7 +12,25 @@ using Xunit;
 
 namespace Tests.QueryDsl.Verbatim
 {
-	/** `IsVerbatim` should be set on individual queries to take effect */
+	/**[[verbatim-and-strict-query-usage]]
+	 * == Verbatim and Strict Query Usage
+	 * NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,
+	 * `null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
+	 * query is part of a compound query then the query will not be part of the json query dsl sent to Elasticsearch.
+	 *
+	 * Conditionless behavior can be controlled on individual queries by using Strict and Verbatim queries
+	 *
+	 * Strict:: Individual queries can be marked as strict meaning that if they are conditionless, an exception is thrown.
+	 * This is useful for when a query must have an input value.
+	 *
+	 * Verbatim:: Individual queries can be marked as verbatim meaning that the query should be sent to Elasticsearch **as is**,
+	 * even if it is conditionless.
+	 *
+	 * [float]
+	 * == Verbatim Usage
+	 *
+	 * `IsVerbatim` should be set on individual queries to take effect
+	 */
 	public class CompoundVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -78,7 +96,10 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
-	/** Setting `IsStrict` on the outer query container does not cascade */
+	/**[float]
+	 * == Non-Cascading Strict Outer Queries
+	 * Setting `IsStrict` on the outer query container does not cascade
+	 */
 	public class QueryContainerStrictQueryUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -149,7 +170,10 @@ namespace Tests.QueryDsl.Verbatim
 #pragma warning restore 618
 	}
 
-	/** Setting `IsVerbatim` on the outer query container does not cascade */
+	/**[float]
+	 * == Non-Cascading Verbatim Outer Queries
+	 * Setting `IsVerbatim` on the outer query container does not cascade
+	 */
 	public class QueryContainerVerbatimQueryUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -220,7 +244,10 @@ namespace Tests.QueryDsl.Verbatim
 #pragma warning restore 618
 	}
 
-	/** Setting `IsVerbatim` on a compound query is still supported though */
+	/**[float]
+	 * == Verbatim Single Queries
+	 * Setting `IsVerbatim` on a single query is still supported though
+	 */
 	public class QueryContainerVerbatimSupportedUsageTests : QueryDslUsageTestsBase
 	{
 		protected override bool SupportsDeserialization => false;
@@ -279,6 +306,11 @@ namespace Tests.QueryDsl.Verbatim
 			);
 	}
 
+	/**[float]
+	 * == Verbatim Compound Queries
+	 * Similarly to verbatim single queries, setting `IsVerbatim` on a single query that is part
+	 * of a compound query is also supported
+	 */
 	public class CompoundVerbatimInnerQueryUsageTests : QueryDslUsageTestsBase
 	{
 		public CompoundVerbatimInnerQueryUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -363,6 +395,7 @@ namespace Tests.QueryDsl.Verbatim
 		[U]
 		public void FluentThrows()
 		{
+			//hide
 			var e = Assert.Throws<ArgumentException>(() =>
 				new SearchDescriptor<Project>()
 					.Query(q => q
@@ -373,12 +406,14 @@ namespace Tests.QueryDsl.Verbatim
 						)
 					)
 			);
+			//hide
 			e.Message.Should().Be("Query is conditionless but strict is turned on");
 		}
 
 		[U]
 		public void InitializerThrows()
 		{
+			//hide
 			var e = Assert.Throws<ArgumentException>(() =>
 				new SearchRequest<Project>
 				{
@@ -390,6 +425,7 @@ namespace Tests.QueryDsl.Verbatim
 					}
 				}
 			);
+			//hide
 			e.Message.Should().Be("Query is conditionless but strict is turned on");
 		}
 	}

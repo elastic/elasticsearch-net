@@ -5,9 +5,28 @@
 :nuget: https://www.nuget.org/packages
 
 [[verbatim-and-strict-query-usage]]
-== Verbatim And Strict Query Usage
+== Verbatim and Strict Query Usage
 
-`IsVerbatim` should be set on individual queries to take effect 
+NEST has the concept of conditionless queries; if the input to a query is determined to be __empty__, for example,`null` or `""` for a string input, then the query will not be serialized and sent to Elasticsearch. If a conditionless
+query is part of a compound query then the query will not be part of the json query dsl sent to Elasticsearch.
+
+Conditionless behavior can be controlled on individual queries by using Strict and Verbatim queries
+
+Strict::
+
+Individual queries can be marked as strict meaning that if they are conditionless, an exception is thrown.
+This is useful for when a query must have an input value.
+
+Verbatim::
+
+Individual queries can be marked as verbatim meaning that the query should be sent to Elasticsearch **as is**,
+even if it is conditionless.
+
+[[verbatim-usage]]
+[float]
+== Verbatim Usage
+
+`IsVerbatim` should be set on individual queries to take effect
 
 === Fluent DSL Example
 
@@ -71,7 +90,11 @@ new TermQuery
 }
 ----
 
-Setting `IsStrict` on the outer query container does not cascade 
+[[non-cascading-strict-outer-queries]]
+[float]
+== Non-Cascading Strict Outer Queries
+
+Setting `IsStrict` on the outer query container does not cascade
 
 === Fluent DSL Example
 
@@ -135,7 +158,11 @@ return (QueryContainer)query;
 }
 ----
 
-Setting `IsVerbatim` on the outer query container does not cascade 
+[[non-cascading-verbatim-outer-queries]]
+[float]
+== Non-Cascading Verbatim Outer Queries
+
+Setting `IsVerbatim` on the outer query container does not cascade
 
 === Fluent DSL Example
 
@@ -199,7 +226,11 @@ return (QueryContainer)query;
 }
 ----
 
-Setting `IsVerbatim` on a compound query is still supported though 
+[[verbatim-single-queries]]
+[float]
+== Verbatim Single Queries
+
+Setting `IsVerbatim` on a single query is still supported though
 
 === Fluent DSL Example
 
@@ -265,36 +296,81 @@ new TermQuery
 }
 ----
 
+[[verbatim-compound-queries]]
+[float]
+== Verbatim Compound Queries
+
+Similarly to verbatim single queries, setting `IsVerbatim` on a single query that is part
+of a compound query is also supported
+
+=== Fluent DSL Example
+
 [source,csharp]
 ----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchDescriptor<Project>()
-        .Query(q => q
-            .Term(t => t
-                .Strict()
-                .Field("myfield")
-                .Value("")
-            )
+q
+.Bool(b => b
+    .Filter(f => !f
+        .Term(t => t
+            .Verbatim()
+            .Field(p => p.Name)
+            .Value("")
+        ) && f
+        .Exists(e => e
+            .Field(p => p.NumberOfCommits)
         )
-);
-
-e.Message.Should().Be("Query is conditionless but strict is turned on");
+    )
+)
 ----
+
+=== Object Initializer Syntax Example
 
 [source,csharp]
 ----
-var e = Assert.Throws<ArgumentException>(() =>
-    new SearchRequest<Project>
-    {
-        Query = new TermQuery
+new BoolQuery
+{
+    Filter = new QueryContainer[] {
+        !new TermQuery
         {
-            IsStrict = true,
-            Field = "myfield",
+            IsVerbatim = true,
+            Field = "name",
             Value = ""
+        } &&
+        new ExistsQuery
+        {
+            Field = "numberOfCommits"
         }
     }
-);
+}
+----
 
-e.Message.Should().Be("Query is conditionless but strict is turned on");
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "filter": [
+      {
+        "bool": {
+          "must": [
+            {
+              "exists": {
+                "field": "numberOfCommits"
+              }
+            }
+          ],
+          "must_not": [
+            {
+              "term": {
+                "name": {
+                  "value": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ----
 

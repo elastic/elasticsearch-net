@@ -66,6 +66,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
+			//hide
 			Action query = () => this.Client.Search<Project>(s => s
 				.Query(q => q
 					.DisMax(dm => dm
@@ -76,6 +77,7 @@ namespace Tests.QueryDsl.Compound.Dismax
 				)
 			);
 
+			//hide
 			query.ShouldNotThrow();
 		}
 	}

@@ -110,6 +110,7 @@ namespace Tests.QueryDsl.Compound.Bool
 		[U]
 		public void NullQueryDoesNotCauseANullReferenceException()
 		{
+			//hide
 			Action query = () => this.Client.Search<Project>(s => s
 					.Query(q => q
 						.Bool(b => b
@@ -119,7 +120,7 @@ namespace Tests.QueryDsl.Compound.Bool
 						)
 					)
 				);
-
+			//hide
 			query.ShouldNotThrow();
 		}
 	}
