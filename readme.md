@@ -25,7 +25,7 @@ Repository for both **NEST** and **Elasticsearch.Net**, the two official [elasti
     	<td><a href="http://elasticdotnettemp.westeurope.cloudapp.azure.com/project.html?projectId=Nest1x_BuildAndUnitTest&tab=projectOverview"><img src="http://elasticdotnettemp.westeurope.cloudapp.azure.com/app/rest/builds/buildType:(Nest_BuildAndUnitTest_RunBuildBat)/statusIcon.svg"></a></td>
     	<td><a href="https://www.myget.org/gallery/elasticsearch-net-legacy"><img src="https://www.myget.org/BuildSource/Badge/elasticsearch-net-legacy?identifier=46420967-3fd2-4104-b600-fab20d2b0d62"></a></td>
     	<td>
-    	<a href="https://www.nuget.org/packages/NEST/1.8.0"><img src="https://img.shields.io/badge/nuget-v1.8.0-blue.svg?style=flat-square">
+    	<a href="https://www.nuget.org/packages/NEST/1.8.1"><img src="https://img.shields.io/badge/nuget-v1.8.1-blue.svg?style=flat-square">
     	</td>
     </tr>
     <tr>
