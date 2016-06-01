@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using Elasticsearch.Net;
@@ -52,15 +53,23 @@ namespace Nest.Tests.Integration
 
 			//this test will fail if fiddler is enabled since the proxy 
 			//will report a statuscode of 502 instead of -1
-			Assert.Throws<WebException>(() =>
+			TestDelegate action = () =>
 			{
 				var settings = new ConnectionSettings(new Uri("http://youdontownthis.domain.do.you"), "index");
 				var client = new ElasticClient(settings);
 				result = client.RootNodeInfo();
 				Assert.False(result.IsValid);
 				Assert.NotNull(result.ConnectionStatus);
-			});
-		
+			};
+
+			if (Process.GetProcessesByName("fiddler").Any())
+			{
+				action();
+			}
+			else
+			{
+				Assert.Throws<WebException>(action);
+			}
 		}
 		[Test]
 		public void TestConnectSuccessWithUri()

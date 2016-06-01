@@ -68,7 +68,7 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 				this.Do(()=> _client.ClusterState("master_node"));
 
 				//set node_id = _response.master_node; 
-				var node_id = _response.master_node;
+				string node_id = _response.master_node;
 
 				//do cluster.reroute 
 				_body = new {
@@ -77,7 +77,8 @@ namespace Elasticsearch.Net.Integration.Yaml.ClusterReroute2
 							cancel= new {
 								index= "test_index",
 								shard= "9",
-								node= node_id
+								node= node_id,
+								allow_primary = "false"
 							}
 						}
 					}

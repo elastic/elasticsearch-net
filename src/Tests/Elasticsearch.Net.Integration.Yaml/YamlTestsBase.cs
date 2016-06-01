@@ -363,9 +363,9 @@ namespace Elasticsearch.Net.Integration.Yaml
 		{
 			var json = _client.Serializer.Serialize(value);
 			var otherJson = _client.Serializer.Serialize(oo);
-			var nJson = JObject.Parse(Encoding.UTF8.GetString(json)).ToString();
-			var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson)).ToString();
-			Assert.AreEqual(nJson, nOtherJson);
+			var nJson = JObject.Parse(Encoding.UTF8.GetString(json));
+			var nOtherJson = JObject.Parse(Encoding.UTF8.GetString(otherJson));
+			Assert.IsTrue(JToken.DeepEquals(nJson, nOtherJson));
 			return true;
 		}
 	}

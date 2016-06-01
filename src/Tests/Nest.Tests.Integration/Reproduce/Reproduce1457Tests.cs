@@ -52,6 +52,52 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 			return new
 			{
+				filter = new {
+					version_pad2 = new {
+						pattern = "(\\.|^)(\\d{2})(?=\\.|$)",
+						type = "pattern_replace",
+						replacement = "$1000$2"
+					},
+					version_pad3 = new {
+						type = "pattern_replace",
+						pattern = "(\\.|^)(\\d{3})(?=\\.|$)",
+						replacement = "$100$2"
+					},
+					version_pad1 = new {
+						pattern = "(\\.|^)(\\d{1})(?=\\.|$)",
+						type = "pattern_replace",
+						replacement = "$10000$2"
+					},
+					version_pad4 = new {
+						type = "pattern_replace",
+						pattern = "(\\.|^)(\\d{4})(?=\\.|$)",
+						replacement = "$10$2"
+					},
+					version = new {
+						type = "pattern_capture",
+						patterns = new[] {
+							"^(\\d+)\\.",
+							"^(\\d+\\.\\d+)",
+							"^(\\d+\\.\\d+\\.\\d+)"
+						}
+					},
+					typename = new {
+						type = "pattern_capture",
+						patterns = new[] { 
+							"\\.(\\w+)"
+						}
+					},
+					email = new {
+						type = "pattern_capture",
+						patterns = new[] {
+							"(\\w+)",
+							"(\\p{L}+)",
+							"(\\d+)",
+							"(.+)@",
+							"@(.+)"
+						}
+					}
+				},
 				analyzer = new
 				{
 					comma_whitespace = new
