@@ -24,7 +24,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 				lowercase_expanded_terms = true,
 				enable_position_increments = true,
 				fuzzy_max_expansions = 3,
-				fuziness = "AUTO",
+				fuzziness = "AUTO",
 				fuzzy_prefix_length = 2,
 				analyze_wildcard = true,
 				auto_generate_phrase_queries = true,
@@ -95,7 +95,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 				.FuzzyMaxExpansions(3)
 				.FuzzyRewrite(RewriteMultiTerm.ConstantScore)
 				.Rewrite(RewriteMultiTerm.ConstantScore)
-				.Fuziness(Fuzziness.Auto)
+				.Fuzziness(Fuzziness.Auto)
 				.TieBreaker(1.2)
 				.AnalyzeWildcard()
 				.MinimumShouldMatch(2)
