@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using FluentAssertions;
+using Tests.Document.Multiple.Reindex;
 using Tests.Framework;
 using Xunit;
 using Tests.Framework.Integration;
@@ -15,10 +16,17 @@ namespace Tests.Reproduce
 	[Collection(TypeOfCluster.ReadOnly)]
 	public class GithubIssue1863
 	{
+		private readonly ReadOnlyCluster _cluster;
+
+		public GithubIssue1863(ReadOnlyCluster cluster)
+		{
+			_cluster = cluster;
+		}
+
 		[I]
 		public void ConcreteTypeConverterThrowsExceptionOnNullScore()
 		{
-			var client = TestClient.GetClient();
+			var client = _cluster.Client(s => s);
 			var response = client.Search<Project>(s => s
 				.ConcreteTypeSelector((d,h) => typeof(Project))
 				.Sort(srt => srt.Ascending(p => p.StartedOn))
