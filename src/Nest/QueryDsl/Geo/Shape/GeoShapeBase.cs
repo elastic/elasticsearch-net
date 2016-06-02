@@ -8,7 +8,7 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public abstract class GeoShapeBase
+	public abstract class GeoShapeBase : IGeoShape
 	{
 	    protected GeoShapeBase(string type)
 		{
