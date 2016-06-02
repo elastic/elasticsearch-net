@@ -3562,7 +3562,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ReindexRethrottle
 	///<pre>
-	///https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html
+	///https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html
 	///</pre>
 	///</summary>
 	public class ReindexRethrottleRequestParameters : FluentRequestParameters<ReindexRethrottleRequestParameters> 

@@ -1086,9 +1086,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		//TODO THIS METHOD IS UNMAPPED!
-	
-	}
+		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> 
@@ -4325,7 +4323,7 @@ namespace Nest
 	{
 		TaskId TaskId { get; }
 	 } 
-	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	///<summary>Request parameters for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleRequest  : PlainRequestBase<ReindexRethrottleRequestParameters>, IReindexRethrottleRequest
 	{
 		protected IReindexRethrottleRequest Self => this;

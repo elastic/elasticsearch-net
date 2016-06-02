@@ -73,7 +73,6 @@ namespace Tests.Cluster.NodesStats
 			index.Get.Should().NotBeNull();
 			index.Indexing.Should().NotBeNull();
 			index.Merges.Should().NotBeNull();
-			index.Percolator.Should().NotBeNull();
 			index.QueryCache.Should().NotBeNull();
 			index.Recovery.Should().NotBeNull();
 

@@ -127,12 +127,10 @@ namespace Tests.Framework.Integration
 
 		private void InstallPlugins()
 		{
-			foreach (var plugin in ElasticsearchPlugins.Supported)
+			foreach (var plugin in ElasticsearchPluginCollection.Supported.Where(plugin => plugin.IsValid(this.Version)))
 			{
-				var installCommand = plugin.Value;
-				var installParameter = installCommand.InstallParameter != null ? installCommand.InstallParameter(this.Version) : installCommand.Moniker;
-
-				var folder = installCommand.FolderName ?? installCommand.Moniker;
+				var installParameter = plugin.InstallParamater(this.Version);
+				var folder = plugin.FolderName;
 				var pluginFolder = Path.Combine(this.ElasticsearchHome, "plugins", folder);
 
 				if (!Directory.Exists(this.ElasticsearchHome)) continue;
@@ -140,7 +138,7 @@ namespace Tests.Framework.Integration
 				// assume plugin already installed
 				if (Directory.Exists(pluginFolder)) continue;
 
-				Console.WriteLine($"Installing elasticsearch plugin: {installCommand.Moniker} ...");
+				Console.WriteLine($"Installing elasticsearch plugin: {plugin.Moniker} ...");
 				var timeout = TimeSpan.FromSeconds(120);
 				var handle = new ManualResetEvent(false);
 				Task.Run(() =>
@@ -152,21 +150,21 @@ namespace Tests.Framework.Integration
 						o.Subscribe(c=>Console.WriteLine(c.Data),
 							(e) =>
 							{
-								Console.WriteLine($"Failed installing elasticsearch plugin: {installCommand.Moniker}");
+								Console.WriteLine($"Failed installing elasticsearch plugin: {plugin.Moniker}");
 								handle.Set();
 								throw e;
 							},
 							() =>
 							{
-								Console.WriteLine($"Finished installing elasticsearch plugin: {installCommand.Moniker} exit code: {p.ExitCode}");
+								Console.WriteLine($"Finished installing elasticsearch plugin: {plugin.Moniker} exit code: {p.ExitCode}");
 								handle.Set();
 							});
 						if (!handle.WaitOne(timeout, true))
-							throw new Exception($"Could not install {installCommand.Moniker} within {timeout}");
+							throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
-					throw new Exception($"Could not install {installCommand.Moniker} within {timeout}");
+					throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
 			}
 		}
 

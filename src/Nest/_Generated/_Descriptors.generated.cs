@@ -732,9 +732,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterAllocationExplainDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
 	
 	}
 	
@@ -3735,7 +3732,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html</pre></summary>
+	///<summary>descriptor for ReindexRethrottle <pre>https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html</pre></summary>
 	public partial class ReindexRethrottleDescriptor  : RequestDescriptorBase<ReindexRethrottleDescriptor,ReindexRethrottleRequestParameters, IReindexRethrottleRequest>, IReindexRethrottleRequest
 	{ 
 		TaskId IReindexRethrottleRequest.TaskId => Self.RouteValues.Get<TaskId>("task_id");

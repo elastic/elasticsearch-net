@@ -2479,7 +2479,7 @@ namespace Nest
 					break;
 
 			}
-			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> ReindexRethrottleDispatchAsync<T>(IRequest<ReindexRethrottleRequestParameters> p ) where T : class
@@ -2491,7 +2491,7 @@ namespace Nest
 					break;
 
 			}
-			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle");
+			throw InvalidDispatch("ReindexRethrottle", p, new [] { POST }, "/_reindex/{task_id}/_rethrottle", "/_update_by_query/{task_id}/_rethrottle", "/_delete_by_query/{task_id}/_rethrottle");
 		}
 		
 		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(IRequest<RenderSearchTemplateRequestParameters> p , PostData<object> body) where T : class

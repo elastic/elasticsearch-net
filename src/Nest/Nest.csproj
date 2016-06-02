@@ -457,6 +457,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ServerErrorJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\SingleOrEnumerableConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\TimeSpanConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\VerbatimDictionaryKeysConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonNetSerializer.cs" />

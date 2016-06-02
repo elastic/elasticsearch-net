@@ -223,12 +223,11 @@ namespace Tests.Search.Request
 				}
 			}
 		};
-		[I]
-		public Task AssertResponse() => this.AssertOnAllResponses(r =>
+
+		protected override void ExpectResponse(ISearchResponse<Duke> response)
 		{
-			r.IsValid.Should().BeTrue();
-			r.Hits.Should().NotBeEmpty();
-			foreach (var hit in r.Hits)
+			response.Hits.Should().NotBeEmpty();
+			foreach (var hit in response.Hits)
 			{
 				hit.InnerHits.Should().NotBeEmpty();
 				hit.InnerHits.Should().ContainKey("earls");
@@ -249,13 +248,14 @@ namespace Tests.Search.Request
 					baron.Name.Should().NotBeNullOrWhiteSpace();
 				}
 			}
-		});
+		}
 	}
 
 	/**[float]
 	*== Query Inner Hits
 	*/
 	[Collection(TypeOfCluster.OwnIndex)]
+	[SkipVersion("5.0.0-alpha2", "broken in alpha2. response reason: Neither a nested or parent/child inner hit")]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
 		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -317,11 +317,10 @@ namespace Tests.Search.Request
 			}
 		};
 
-		[I]
-		public Task AssertResponse() => this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ISearchResponse<King> response)
 		{
-			r.Hits.Should().NotBeEmpty();
-			foreach (var hit in r.Hits)
+			response.Hits.Should().NotBeEmpty();
+			foreach (var hit in response.Hits)
 			{
 				var princes = hit.InnerHits["princes"].Documents<Prince>();
 				princes.Should().NotBeEmpty();
@@ -329,7 +328,6 @@ namespace Tests.Search.Request
 				var foes = hit.InnerHits["foes"].Documents<King>();
 				foes.Should().NotBeEmpty();
 			};
-		});
+		}
 	}
-
 }

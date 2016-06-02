@@ -6132,7 +6132,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html </para>	
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html </para>	
 	    ///</summary>
 		///<param name="task_id">The task id to rethrottle</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
@@ -6146,7 +6146,7 @@ namespace Elasticsearch.Net
 		///<para> - Stream, no deserialization, response stream is your responsibility </para>
 		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/plugins/master/plugins-reindex.html </para>	
+	    ///<para>See also: https://www.elastic.co/guide/en/elasticsearch/reference/master/docs-reindex.html </para>	
 	    ///</summary>
 		///<param name="task_id">The task id to rethrottle</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>

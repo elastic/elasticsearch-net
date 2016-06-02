@@ -49,19 +49,20 @@ namespace Tests.Framework.Integration
 			var attr = this.Version.Major >= 5 ? "attr." : "";
 			var indexedOrStored = this.Version > new ElasticsearchVersion("5.0.0-alpha1") ? "stored" : "indexed";
 			var shieldOrSecurity = this.Version > new ElasticsearchVersion("5.0.0-alpha1") ? "security" : "shield";
+			var es = this.Version > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
 
 			this.DefaultNodeSettings = new List<string>
 			{
-				$"es.cluster.name={this.FileSystem.ClusterName}",
-				$"es.node.name={this.FileSystem.NodeName}",
-				$"es.path.repo={this.FileSystem.RepositoryPath}",
-				$"es.script.inline=true",
-				$"es.script.{indexedOrStored}=true",
-				$"es.node.{attr}testingcluster=true"
+				$"{es}cluster.name={this.FileSystem.ClusterName}",
+				$"{es}node.name={this.FileSystem.NodeName}",
+				$"{es}path.repo={this.FileSystem.RepositoryPath}",
+				$"{es}script.inline=true",
+				$"{es}script.{indexedOrStored}=true",
+				$"{es}node.{attr}testingcluster=true"
 			};
 
 			if (!this.Version.IsSnapshot)
-				this.DefaultNodeSettings.Add($"es.xpack.{shieldOrSecurity}.enabled=" + (this._config.ShieldEnabled ? "true" : "false"));
+				this.DefaultNodeSettings.Add($"{es}xpack.{shieldOrSecurity}.enabled={this._config.ShieldEnabled.ToString().ToLowerInvariant()}");
 
 			if (this._config.RunIntegrationTests) return;
 			this.Port = 9200;
@@ -178,9 +179,24 @@ namespace Tests.Framework.Integration
 			//if the version we are running against is a s snapshot version we do not validate plugins
 			//because we can not reliably install plugins against snapshots
 			if (this.Version.IsSnapshot) return;
+			
+			var requiredMonikers = ElasticsearchPluginCollection.Supported
+				.Where(plugin => plugin.IsValid(this.Version) && this._config.RequiredPlugins.Contains(plugin.Plugin))
+				.Select(plugin => plugin.Moniker)
+				.ToList();
+
+			if (!requiredMonikers.Any()) return;
 			var checkPlugins = client.CatPlugins();
-			var requiredPluginMonikers = this._config.RequiredPlugins.Select(p => ElasticsearchPlugins.Supported[p].Moniker);
-			var missingPlugins = requiredPluginMonikers.Except(checkPlugins.Records.Select(r => r.Component)).ToList();
+
+			if (!checkPlugins.IsValid)
+			{
+				this.Fatal(handle, new Exception($"Failed to check plugins: {checkPlugins.DebugInformation}."));
+				return;
+			}
+
+			var missingPlugins = requiredMonikers
+				.Except((checkPlugins.Records ?? Enumerable.Empty<CatPluginsRecord>()).Select(r => r.Component))
+				.ToList();
 			if (!missingPlugins.Any()) return;
 
 			var e = new Exception($"Already running elasticsearch missed the following plugin(s): {string.Join(", ", missingPlugins)}.");

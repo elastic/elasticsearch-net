@@ -7,7 +7,7 @@ namespace Nest
 	/// </summary>
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercolateQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateQuery : IQuery
+	public interface IPercolateQuery : IFieldNameQuery
 	{
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
@@ -67,7 +67,7 @@ namespace Nest
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	public class PercolateQuery : QueryBase, IPercolateQuery
+	public class PercolateQuery : FieldNameQueryBase, IPercolateQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 
@@ -140,7 +140,7 @@ namespace Nest
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public class PercolateQueryDescriptor<T>
-		: QueryDescriptorBase<PercolateQueryDescriptor<T>, IPercolateQuery>
+		: FieldNameQueryDescriptorBase<PercolateQueryDescriptor<T>, IPercolateQuery, T>
 		, IPercolateQuery where T : class
 	{
 		TypeName IPercolateQuery.DocumentType { get; set; }

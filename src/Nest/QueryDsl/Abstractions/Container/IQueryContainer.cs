@@ -150,7 +150,7 @@ namespace Nest
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
 
-		[JsonProperty("percolator")]
+		[JsonProperty("percolate")]
 		IPercolateQuery Percolate { get; set; }
 
 		void Accept(IQueryVisitor visitor);
