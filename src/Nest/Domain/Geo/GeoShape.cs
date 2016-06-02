@@ -12,7 +12,7 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public abstract class GeoShape
+	public abstract class GeoShape : IGeoShape
 	{
 		public GeoShape(string type)
 		{

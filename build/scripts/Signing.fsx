@@ -10,7 +10,7 @@ open Projects
 type Sign() = 
     static let sn = if isMono then "sn" else Paths.Tool("sn/sn.exe")
     static let keyFile =  Paths.Keys("keypair.snk");
-    static let oficialToken = "96c599bbe3e70f5d"
+    static let officialToken = "96c599bbe3e70f5d"
 
     static let validate dll name = 
         let out = (ExecProcessAndReturnMessages(fun p ->
@@ -33,9 +33,9 @@ type Sign() =
     
         let valid = (out.ExitCode, token)
         match valid with
-        | (0, t) when t = oficialToken  -> 
+        | (0, t) when t = officialToken  -> 
           trace (sprintf "%s was signed with official key token %s" name t) 
-        | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name oficialToken t
+        | (_, t) -> traceFAKE "%s was not signed with the official token: %s but %s" name officialToken t
         
     static member CreateKeys () = 
         ExecProcess(fun p ->

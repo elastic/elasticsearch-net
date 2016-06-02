@@ -9,13 +9,11 @@ namespace Nest.Tests.Integration
 {
 	public class IntegrationTests
 	{
-
-		protected IElasticClient Client { get { return ElasticsearchConfiguration.Client.Value; } }
-		protected IElasticClient ClientThatThrows { get { return ElasticsearchConfiguration.ClientThatThrows.Value; } }
-		protected IElasticClient ClientNoRawResponse { get { return ElasticsearchConfiguration.ClientNoRawResponse.Value; } }
-		protected ElasticClient ThriftClient { get { return ElasticsearchConfiguration.ThriftClient.Value; } }
-
-		protected IConnectionSettingsValues Settings { get { return ElasticsearchConfiguration.Settings(); } }
+		protected virtual IElasticClient Client { get { return ElasticsearchConfiguration.Client.Value; } }
+		protected virtual IElasticClient ClientThatThrows { get { return ElasticsearchConfiguration.ClientThatThrows.Value; } }
+		protected virtual IElasticClient ClientNoRawResponse { get { return ElasticsearchConfiguration.ClientNoRawResponse.Value; } }
+		protected virtual ElasticClient ThriftClient { get { return ElasticsearchConfiguration.ThriftClient.Value; } }
+		protected virtual IConnectionSettingsValues Settings { get { return ElasticsearchConfiguration.Settings(); } }
 
 		protected ISearchResponse<T> SearchRaw<T>(string query) where T : class
 		{

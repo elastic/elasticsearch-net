@@ -11,9 +11,9 @@ type ProjectName(msbuild: string) =
     member this.NugetDescription = 
         match this.Nuget.ToLowerInvariant() with
         | f when f = "elasticsearch.net" -> 
-            Some "Elasticsearch.Net - oficial low level elasticsearch client"
+            Some "Elasticsearch.Net - official low level elasticsearch client"
         | f when f = "nest" -> 
-            Some "NEST - oficial high level elasticsearch client"
+            Some "NEST - official high level elasticsearch client"
         | f when f = "elasticsearch.net.connection.thrift" -> 
             Some "Add thrift support to elasticsearch."
         | f when f = "elasticsearch.net.connection.httpclient" -> 
