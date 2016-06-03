@@ -13,6 +13,7 @@ using Xunit;
 namespace Tests.Search.MultiSearch
 {
 	[Collection(TypeOfCluster.ReadOnly)]
+	[SkipVersion("5.0.0-alpha1", "format of percolate query changed.")]
 	public class MultiSearchApiTests : ApiIntegrationTestBase<IMultiSearchResponse, IMultiSearchRequest, MultiSearchDescriptor, MultiSearchRequest>
 	{
 		public MultiSearchApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -41,11 +42,10 @@ namespace Tests.Search.MultiSearch
 			new { from = 0, size = 5, query = new { match_all = new {} } },
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
-			new { index = "queries", type = ".percolator" },
-			// TODO: Remove .percolator type in 5.0.0-alpha2
-			new { query = new { percolator = new { document_type = "project", document = Project.InstanceAnonymous } } },
-			new { index = "queries", type = ".percolator" },
-			new { query = new { percolator = new { index = "project", type = "project", id = Project.Projects.First().Name, version = 1, document_type = "project" } } },
+			new { index = "queries", type = "query" },
+			new { query = new { percolate = new { document_type = "project", document = Project.InstanceAnonymous, field = "query" } } },
+			new { index = "queries", type = "query" },
+			new { query = new { percolate = new { index = "project", type = "project", id = Project.Projects.First().Name, version = 1, document_type = "project", field = "query" } } },
 		};
 
 		protected override Func<MultiSearchDescriptor, IMultiSearchRequest> Fluent => ms => ms
@@ -56,21 +56,25 @@ namespace Tests.Search.MultiSearch
 			.Search<Developer>("5developers", s => s.Query(q => q.MatchAll()).From(0).Size(5))
 			.Search<Developer>("infer_type_name", s => s.Index("devs").From(0).Size(5).MatchAll())
 			.Search<PercolatedQuery>("percolate_document", s => s
-				.Index<PercolatedQuery>().Type(".percolator").Query(q => q
+				.Index<PercolatedQuery>()
+				.Query(q => q
 					.Percolate(p => p
 						.DocumentType<Project>()
 						.Document(Project.Instance)
+						.Field(f => f.Query)
 					)
 				)
 			)
 			.Search<PercolatedQuery>("percolate_existing_document", s => s
-				.Index<PercolatedQuery>().Type(".percolator").Query(q => q
+				.Index<PercolatedQuery>()
+				.Query(q => q
 					.Percolate(p => p
 						.Index<Project>()
 						.Type<Project>()
 						.Id(Project.Projects.First().Name)
 						.Version(1)
 						.DocumentType<Project>()
+						.Field(f => f.Query)
 					)
 				)
 			);
@@ -83,16 +87,17 @@ namespace Tests.Search.MultiSearch
 				{ "dfs_projects", new SearchRequest<Project> { SearchType = SearchType.DfsQueryThenFetch} },
 				{ "5developers", new SearchRequest<Developer> { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
 				{ "infer_type_name", new SearchRequest<Developer>("devs") { From = 0, Size = 5, Query = new QueryContainer(new MatchAllQuery()) } },
-				{ "percolate_document", new SearchRequest<PercolatedQuery>(typeof(PercolatedQuery), ".percolator")
+				{ "percolate_document", new SearchRequest<PercolatedQuery>()
 					{
 						Query = new QueryContainer(new PercolateQuery
 						{
 							DocumentType = typeof(Project),
-							Document = Project.Instance
+							Document = Project.Instance,
+							Field = Infer.Field<PercolatedQuery>(f => f.Query)
 						})
 					}
 				},
-				{ "percolate_existing_document", new SearchRequest<PercolatedQuery>(typeof(PercolatedQuery), ".percolator")
+				{ "percolate_existing_document", new SearchRequest<PercolatedQuery>()
 					{
 						Query = new QueryContainer(new PercolateQuery
 						{
@@ -100,7 +105,8 @@ namespace Tests.Search.MultiSearch
 							Type = typeof(Project),
 							Id = Project.Projects.First().Name,
 							Version = 1,
-							DocumentType = typeof(Project)
+							DocumentType = typeof(Project),
+							Field = Infer.Field<PercolatedQuery>(f => f.Query)
 						})
 					}
 				},

@@ -93,7 +93,6 @@ namespace Tests.Cluster.ClusterStats
 
 			indices.Completion.Should().NotBeNull();
 			indices.Fielddata.Should().NotBeNull();
-			indices.Percolator.Should().NotBeNull();
 			indices.QueryCache.Should().NotBeNull();
 
 			indices.Segments.Should().NotBeNull();

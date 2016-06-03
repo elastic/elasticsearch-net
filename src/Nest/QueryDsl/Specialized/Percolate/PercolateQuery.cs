@@ -1,14 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Linq.Expressions;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercolateQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateQuery : IFieldNameQuery
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercolateQuery>))]
+	public interface IPercolateQuery : IQuery
 	{
+		/// <summary>
+		/// The name of the field containing the percolated query on an existing document. This is a required parameter.
+		/// </summary>
+		[JsonProperty("field")]
+		Field Field { get; set; }
+
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
 		/// </summary>
@@ -67,7 +75,7 @@ namespace Nest
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	public class PercolateQuery : FieldNameQueryBase, IPercolateQuery
+	public class PercolateQuery : QueryBase, IPercolateQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 
@@ -83,10 +91,16 @@ namespace Nest
 			}
 
 			return q.DocumentType.IsConditionless() ||
-				q.Type.IsConditionless() ||
-				q.Index == null ||
-				q.Id.IsConditionless();
+			       q.Type.IsConditionless() ||
+			       q.Index == null ||
+			       q.Id.IsConditionless() ||
+			       q.Field.IsConditionless();
 		}
+
+		/// <summary>
+		/// The name fo the field containing the percolated query on an existing document. This is a required parameter.
+		/// </summary>
+		public Field Field { get; set; }
 
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.
@@ -138,11 +152,12 @@ namespace Nest
 	/// <summary>
 	/// The percolate query can be used to match queries stored in an index
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
+	/// <typeparam name="T">The document type that contains the percolated query</typeparam>
 	public class PercolateQueryDescriptor<T>
-		: FieldNameQueryDescriptorBase<PercolateQueryDescriptor<T>, IPercolateQuery, T>
+		: QueryDescriptorBase<PercolateQueryDescriptor<T>, IPercolateQuery>
 		, IPercolateQuery where T : class
 	{
+		Field IPercolateQuery.Field { get; set; }
 		TypeName IPercolateQuery.DocumentType { get; set; }
 		object IPercolateQuery.Document { get; set; }
 		Id IPercolateQuery.Id { get; set; }
@@ -157,6 +172,16 @@ namespace Nest
 		/// in the request
 		/// </summary>
 		protected override bool Conditionless => PercolateQuery.IsConditionless(this);
+
+		/// <summary>
+		/// An expression for the name fo the field containing the percolated query on an existing document. This is a required parameter.
+		/// </summary>
+		public PercolateQueryDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+
+		/// <summary>
+		/// The name fo the field containing the percolated query on an existing document. This is a required parameter.
+		/// </summary>
+		public PercolateQueryDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
 		/// <summary>
 		/// The type / mapping of the document to percolate. This is a required parameter.

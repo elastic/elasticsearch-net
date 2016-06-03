@@ -500,7 +500,6 @@
     <Compile Include="CommonOptions\Stats\GetStats.cs" />
     <Compile Include="CommonOptions\Stats\IndexingStats.cs" />
     <Compile Include="CommonOptions\Stats\MergesStats.cs" />
-    <Compile Include="CommonOptions\Stats\PercolatorStats.cs" />
     <Compile Include="CommonOptions\Stats\PluginStats.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
