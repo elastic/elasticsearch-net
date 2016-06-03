@@ -147,7 +147,7 @@ namespace Tests.Framework.Integration
 			if (!this._config.TestAgainstAlreadyRunningElasticsearch)
 				return null;
 
-			var client = TestClient.GetClient();
+			var client = this.GetPrivateClient(null, false, this.Port);
 			if (!this.ValidateRunningVersion(client, handle))
 				return null;
 
@@ -179,7 +179,7 @@ namespace Tests.Framework.Integration
 			//if the version we are running against is a s snapshot version we do not validate plugins
 			//because we can not reliably install plugins against snapshots
 			if (this.Version.IsSnapshot) return;
-			
+
 			var requiredMonikers = ElasticsearchPluginCollection.Supported
 				.Where(plugin => plugin.IsValid(this.Version) && this._config.RequiredPlugins.Contains(plugin.Plugin))
 				.Select(plugin => plugin.Moniker)

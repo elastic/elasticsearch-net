@@ -184,6 +184,7 @@ namespace Tests.Framework.Integration
 			var folder = this.Version.Major >= 5 ? "x-pack" : "shield";
 			var plugin = this.Version.Major >= 5 ? "users" : "esusers";
 
+			EnsureRoles(folder);
 			var pluginBat = Path.Combine(this.ElasticsearchHome, "bin", folder, plugin) + ".bat";
 			foreach (var cred in ShieldInformation.AllUsers)
 			{
@@ -200,6 +201,69 @@ namespace Tests.Framework.Integration
 				var p = Process.Start(processInfo);
 				p.WaitForExit();
 			}
+		}
+
+		private void EnsureRoles(string securityFolder)
+		{
+			var rolesConfig = Path.Combine(this.ElasticsearchHome, "config", securityFolder, "roles.yml");
+			var lines = File.ReadAllLines(rolesConfig).ToList();
+			var saveFile = false;
+
+			if (!lines.Any(line => line.StartsWith("user:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# Read-only operations on indices",
+					"user:",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - read",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (!lines.Any(line => line.StartsWith("power_user:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# monitoring cluster privileges",
+					"# All operations on all indices",
+					"power_user:",
+					"  cluster:",
+					"    - monitor",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - all",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (!lines.Any(line => line.StartsWith("admin:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# All cluster rights",
+					"# All operations on all indices",
+					"admin:",
+					"  cluster:",
+					"    - all",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - all",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (saveFile) File.WriteAllLines(rolesConfig, lines);
 		}
 
 		private string GetApplicationDataDirectory()
