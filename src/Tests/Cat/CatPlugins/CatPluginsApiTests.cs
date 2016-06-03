@@ -25,7 +25,7 @@ namespace Tests.Cat.CatPlugins
 
 		protected override void ExpectResponse(ICatResponse<CatPluginsRecord> response)
 		{
-			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "delete-by-query");
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "mapper-murmur3");
 		}
 	}
 }

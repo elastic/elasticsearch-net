@@ -19,9 +19,9 @@ namespace CodeGeneration.LowLevelClient
 	{
 		static readonly RazorMachine RazorHelper = new RazorMachine();
 
-		public static void Generate(params string[] folders)
+		public static void Generate(string downloadBranch, params string[] folders)
 		{
-			var spec = CreateRestApiSpecModel(folders);
+			var spec = CreateRestApiSpecModel(downloadBranch, folders);
 			var actions = new Dictionary<Action<RestApiSpec>, string>
 			{
 				{  GenerateClientInterface, "Client interface" },
@@ -45,7 +45,7 @@ namespace CodeGeneration.LowLevelClient
 			}
 		}
 
-		private static RestApiSpec CreateRestApiSpecModel(string[] folders)
+		private static RestApiSpec CreateRestApiSpecModel(string downloadBranch, string[] folders)
 		{
 			var directories = Directory.GetDirectories(CodeConfiguration.RestSpecificationFolder, "*", SearchOption.AllDirectories)
 				.Where(f=>folders == null || folders.Length == 0 || folders.Contains(new DirectoryInfo(f).Name))
@@ -68,7 +68,7 @@ namespace CodeGeneration.LowLevelClient
 				}
 			}
 
-			return new RestApiSpec { Endpoints = endpoints };
+			return new RestApiSpec { Endpoints = endpoints, Commit = downloadBranch };
 		}
 
 
