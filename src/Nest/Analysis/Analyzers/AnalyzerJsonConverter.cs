@@ -27,8 +27,9 @@ namespace Nest
 				case "keyword": return o.ToObject<KeywordAnalyzer>(ElasticContractResolver.Empty);
 				case "whitespace": return o.ToObject<WhitespaceAnalyzer>(ElasticContractResolver.Empty);
 				case "simple": return o.ToObject<SimpleAnalyzer>(ElasticContractResolver.Empty);
+				case "fingerprint": return o.ToObject<FingerprintAnalyzer>(ElasticContractResolver.Empty);
 				default:
-					if (o.Property("tokenizer") != null) 
+					if (o.Property("tokenizer") != null)
 						return o.ToObject<CustomAnalyzer>(ElasticContractResolver.Empty);
 					return o.ToObject<LanguageAnalyzer>(ElasticContractResolver.Empty);
 			}

@@ -22,6 +22,8 @@ namespace Tests.Framework
 
 		public static Uri CreateNode(int? port = null) => new UriBuilder("http", Host, port.GetValueOrDefault(9200)).Uri;
 
+		public static string PercolatorType => Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1") ? ".percolator" : "query";
+
 		public static ConnectionSettings CreateSettings(
 			Func<ConnectionSettings, ConnectionSettings> modifySettings = null,
 			int port = 9200,
@@ -97,22 +99,16 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
-			.InferMappingFor<PercolatedQuery>(PercolatorInferrence)
+			.InferMappingFor<PercolatedQuery>(map => map
+				.IndexName("queries")
+				.TypeName(PercolatorType)
+			)
 			//We try and fetch the test name during integration tests when running fiddler to send the name
 			//as the TestMethod header, this allows us to quickly identify which test sent which request
 			.GlobalHeaders(new NameValueCollection
 			{
 				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
 			});
-
-		private static IClrTypeMapping<PercolatedQuery> PercolatorInferrence(ClrTypeMappingDescriptor<PercolatedQuery> map)
-		{
-			var typeName = Configuration.ElasticsearchVersion <= new ElasticsearchVersion("5.0.0-alpha1") ? ".percolator" : "query";
-			return map
-				.IndexName("queries")
-				.TypeName(typeName);
-		}
-
 
 		private static string ExpensiveTestNameForIntegrationTests()
 		{

@@ -170,6 +170,7 @@
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\CustomAnalyzer.cs" />
+    <Compile Include="Analysis\Analyzers\FingerprintAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\KeywordAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\PatternAnalyzer.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramSide.cs" />
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\ElisionTokenFilter.cs" />
+    <Compile Include="Analysis\TokenFilters\FingerprintTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\HunspellTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeepTypesTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeepWordsTokenFilter.cs" />

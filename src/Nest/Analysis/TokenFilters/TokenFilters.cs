@@ -50,7 +50,7 @@ namespace Nest
 			Assign(name, selector?.Invoke(new PhoneticTokenFilterDescriptor()));
 
 		/// <summary>
-		/// A token filter of type shingle that constructs shingles (token n-grams) from a token stream. 
+		/// A token filter of type shingle that constructs shingles (token n-grams) from a token stream.
 		/// <para>In other words, it creates combinations of tokens as a single token. </para>
 		/// </summary>
 		public TokenFiltersDescriptor Shingle(string name, Func<ShingleTokenFilterDescriptor, IShingleTokenFilter> selector) =>
@@ -63,20 +63,20 @@ namespace Nest
 			Assign(name, selector?.Invoke(new StopTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The synonym token filter allows to easily handle synonyms during the analysis process. 
+		/// The synonym token filter allows to easily handle synonyms during the analysis process.
 		/// </summary>
 		public TokenFiltersDescriptor Synonym(string name, Func<SynonymTokenFilterDescriptor, ISynonymTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new SynonymTokenFilterDescriptor()));
 
 		/// <summary>
-		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are 
+		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 		/// </summary>
 		public TokenFiltersDescriptor WordDelimiter(string name, Func<WordDelimiterTokenFilterDescriptor, IWordDelimiterTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new WordDelimiterTokenFilterDescriptor()));
 
 		/// <summary>
-		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are 
+		/// A token filter of type asciifolding that converts alphabetic, numeric, and symbolic Unicode characters which are
 		/// <para> not in the first 127 ASCII characters (the “Basic Latin” Unicode block) into their ASCII equivalents, if one exists.</para>
 		/// </summary>
 		public TokenFiltersDescriptor AsciiFolding(string name, Func<AsciiFoldingTokenFilterDescriptor, IAsciiFoldingTokenFilter> selector) =>
@@ -102,7 +102,7 @@ namespace Nest
 			Assign(name, selector?.Invoke(new ElisionTokenFilterDescriptor()));
 
 		/// <summary>
-		/// Basic support for hunspell stemming. 
+		/// Basic support for hunspell stemming.
 		///<para> Hunspell dictionaries will be picked up from a dedicated hunspell directory on the filesystem.</para>
 		/// </summary>
 		public TokenFiltersDescriptor Hunspell(string name, Func<HunspellTokenFilterDescriptor, IHunspellTokenFilter> selector) =>
@@ -127,7 +127,7 @@ namespace Nest
 			Assign(name, selector?.Invoke(new KeywordMarkerTokenFilterDescriptor()));
 
 		/// <summary>
-		///The kstem token filter is a high performance filter for english. 
+		///The kstem token filter is a high performance filter for english.
 		///<para> All terms must already be lowercased (use lowercase filter) for this filter to work correctly.</para>
 		/// </summary>
 		public TokenFiltersDescriptor KStem(string name, Func<KStemTokenFilterDescriptor, IKStemTokenFilter> selector = null) =>
@@ -165,7 +165,7 @@ namespace Nest
 			Assign(name, selector?.Invoke(new PatternCaptureTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The pattern_replace token filter allows to easily handle string replacements based on a regular expression. 
+		/// The pattern_replace token filter allows to easily handle string replacements based on a regular expression.
 		/// </summary>
 		public TokenFiltersDescriptor PatternReplace(string name, Func<PatternReplaceTokenFilterDescriptor, IPatternReplaceTokenFilter> selector) =>
 			Assign(name, selector?.Invoke(new PatternReplaceTokenFilterDescriptor()));
@@ -213,7 +213,7 @@ namespace Nest
 			Assign(name, selector.InvokeOrDefault(new TrimTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword (single token) 
+		/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword (single token)
 		/// <para> based mapped fields that are used for sorting in order to reduce memory usage.</para>
 		/// </summary>
 		public TokenFiltersDescriptor Truncate(string name, Func<TruncateTokenFilterDescriptor, ITruncateTokenFilter> selector) =>
@@ -230,6 +230,14 @@ namespace Nest
 		/// </summary>
 		public TokenFiltersDescriptor Uppercase(string name, Func<UppercaseTokenFilterDescriptor, IUppercaseTokenFilter> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new UppercaseTokenFilterDescriptor()));
+
+		/// <summary>
+		/// A token filter of type fingerprint The fingerprint token filter that emits a single token which is useful
+		/// for fingerprinting a body of text, and/or providing a token that can be clustered on.
+		/// It does this by sorting the tokens, deduplicating and then concatenating them back into a single token.
+		/// </summary>
+		public TokenFiltersDescriptor Fingerprint(string name, Func<FingerprintTokenFilterDescriptor, IFingerprintTokenFilter> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new FingerprintTokenFilterDescriptor()));
 
 	}
 }

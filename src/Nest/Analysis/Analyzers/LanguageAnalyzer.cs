@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// A set of analyzers aimed at analyzing specific language text. 
+	/// A set of analyzers aimed at analyzing specific language text.
 	/// </summary>
 	public interface ILanguageAnalyzer : IAnalyzer
 	{
@@ -15,7 +15,7 @@ namespace Nest
 		StopWords StopWords { get; set; }
 
 		/// <summary>
-		/// The stem_exclusion parameter allows you to specify an array of lowercase words that should not be stemmed. 
+		/// The stem_exclusion parameter allows you to specify an array of lowercase words that should not be stemmed.
 		/// </summary>
 		[JsonProperty("stem_exclusion")]
 		IEnumerable<string> StemExclusionList { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("stopwords_path")]
 		string StopwordsPath { get; set; }
-	} 
+	}
 
 	/// <inheritdoc/>
 	public class LanguageAnalyzer : AnalyzerBase, ILanguageAnalyzer

@@ -58,15 +58,21 @@ namespace Tests.Analysis.Analyzers
 					myWhiteSpace2 = new
 					{
 						type = "whitespace"
+					},
+					myFingerprint = new
+					{
+						type = "fingerprint",
+						preserve_original = true,
+						separator = ",",
+						max_output_size = 100,
+						stopwords = new[] { "a", "he", "the" }
 					}
-
 				}
 			}
 		};
 
-
 		/**
-		 * 
+		 *
 		 */
 		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
 		public static Func<IndexSettingsDescriptor, IPromise<IndexSettings>> FluentExample => s => s
@@ -86,6 +92,12 @@ namespace Tests.Analysis.Analyzers
 					.Stop("myStop", a => a.StopwordsPath("analysis/stopwords.txt"))
 					.Whitespace("myWhiteSpace")
 					.Whitespace("myWhiteSpace2")
+					.Fingerprint("myFingerprint", a => a
+						.PreserveOriginal()
+						.Separator(",")
+						.MaxOutputSize(100)
+						.StopWords("a", "he", "the")
+					)
 				)
 			);
 
@@ -99,21 +111,30 @@ namespace Tests.Analysis.Analyzers
 				{
 					Analyzers = new Nest.Analyzers
 					{
-							{ "myCustom", new CustomAnalyzer
+						{ "myCustom", new CustomAnalyzer
+						{
+							CharFilter = new [] { "stripMe", "patterned"},
+							Filter = new [] { "myAscii", "kstem"},
+							Tokenizer = "ng"
+						} },
+						{ "myKeyword", new KeywordAnalyzer() },
+						{ "myPattern", new PatternAnalyzer { Pattern = @"\w" } },
+						{ "myLanguage", new LanguageAnalyzer { Language = Language.Dutch } },
+						{ "mySimple", new SimpleAnalyzer() },
+						{ "mySnow", new SnowballAnalyzer { Language = SnowballLanguage.Dutch } },
+						{ "myStandard", new StandardAnalyzer { MaxTokenLength = 2 } },
+						{ "myStop", new StopAnalyzer { StopwordsPath = "analysis/stopwords.txt" } },
+						{ "myWhiteSpace", new WhitespaceAnalyzer() },
+						{ "myWhiteSpace2", new WhitespaceAnalyzer() },
+						{
+							"myFingerprint", new FingerprintAnalyzer
 							{
-								CharFilter = new [] { "stripMe", "patterned"},
-								Filter = new [] { "myAscii", "kstem"},
-								Tokenizer = "ng"
-							} },
-							{ "myKeyword", new KeywordAnalyzer() },
-							{ "myPattern", new PatternAnalyzer { Pattern = @"\w" } },
-							{ "myLanguage", new LanguageAnalyzer { Language = Language.Dutch } },
-							{ "mySimple", new SimpleAnalyzer() },
-							{ "mySnow", new SnowballAnalyzer { Language = SnowballLanguage.Dutch } },
-							{ "myStandard", new StandardAnalyzer { MaxTokenLength = 2 } },
-							{ "myStop", new StopAnalyzer { StopwordsPath = "analysis/stopwords.txt" } },
-							{ "myWhiteSpace", new WhitespaceAnalyzer() },
-							{ "myWhiteSpace2", new WhitespaceAnalyzer() }
+								PreserveOriginal = true,
+								Separator = ",",
+								MaxOutputSize = 100,
+								StopWords = new[] { "a", "he", "the" }
+							}
+						}
 					}
 				}
 			};

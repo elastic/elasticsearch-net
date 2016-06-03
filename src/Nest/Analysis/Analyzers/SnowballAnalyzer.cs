@@ -18,7 +18,7 @@ namespace Nest
 	/// <inheritdoc/>
 	public class SnowballAnalyzer : AnalyzerBase, ISnowballAnalyzer
 	{
-		public SnowballAnalyzer() { this.Type = "snowball"; }
+		public SnowballAnalyzer() : base("snowball") {}
 
 		public SnowballLanguage? Language { get; set; }
 

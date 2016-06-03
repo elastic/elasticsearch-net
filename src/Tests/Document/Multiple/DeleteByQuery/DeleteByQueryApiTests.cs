@@ -38,9 +38,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_delete_by_query?ignore_unavailable=true";
 
 		protected override bool SupportsDeserialization => false;
 

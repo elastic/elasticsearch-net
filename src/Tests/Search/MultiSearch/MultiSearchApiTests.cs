@@ -8,6 +8,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.Framework.Versions;
 using Xunit;
 
 namespace Tests.Search.MultiSearch
@@ -42,9 +43,9 @@ namespace Tests.Search.MultiSearch
 			new { from = 0, size = 5, query = new { match_all = new {} } },
 			new { index = "devs", type = "developer" },
 			new { from = 0, size = 5, query = new { match_all = new {} } },
-			new { index = "queries", type = "query" },
+			new { index = "queries", type = TestClient.PercolatorType },
 			new { query = new { percolate = new { document_type = "project", document = Project.InstanceAnonymous, field = "query" } } },
-			new { index = "queries", type = "query" },
+			new { index = "queries", type = TestClient.PercolatorType },
 			new { query = new { percolate = new { index = "project", type = "project", id = Project.Projects.First().Name, version = 1, document_type = "project", field = "query" } } },
 		};
 

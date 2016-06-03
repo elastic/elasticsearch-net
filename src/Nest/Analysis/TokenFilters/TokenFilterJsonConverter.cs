@@ -53,6 +53,7 @@ namespace Nest
 				case "unique": return o.ToObject<UniqueTokenFilter>(ElasticContractResolver.Empty);
 				case "uppercase": return o.ToObject<UppercaseTokenFilter>(ElasticContractResolver.Empty);
 				case "word_delimiter": return o.ToObject<WordDelimiterTokenFilter>(ElasticContractResolver.Empty);
+				case "fingerprint": return o.ToObject<FingerprintTokenFilter>(ElasticContractResolver.Empty);
 			}
 			return null;
 		}
