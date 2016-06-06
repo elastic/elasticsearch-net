@@ -29,7 +29,7 @@ namespace Nest
 		public IDeleteUserResponse DeleteUser(IDeleteUserRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.ShieldDeleteUserDispatch<DeleteUserResponse>(p)
+				(p, d) =>this.LowLevelDispatch.XpackSecurityDeleteUserDispatch<DeleteUserResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request) =>
 			this.Dispatcher.DispatchAsync<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse, IDeleteUserResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.ShieldDeleteUserDispatchAsync<DeleteUserResponse>(p)
+				(p,d ) => this.LowLevelDispatch.XpackSecurityDeleteUserDispatchAsync<DeleteUserResponse>(p)
 			);
 	}
 }

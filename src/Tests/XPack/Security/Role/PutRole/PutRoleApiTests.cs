@@ -27,7 +27,7 @@ namespace Tests.XPack.Security.Role.PutRole
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override string UrlPath => $"/_shield/role/{this.Role}";
+		protected override string UrlPath => $"/_xpack/security/role/{this.Role}";
 
 		protected override bool SupportsDeserialization => false;
 

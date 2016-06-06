@@ -29,7 +29,8 @@ namespace Tests.Framework.Integration
 		private IDisposable _processListener;
 
 		private readonly NodeConfiguration _config;
-		private ElasticsearchVersion Version => _config.ElasticsearchVersion;
+
+		public ElasticsearchVersion Version => _config.ElasticsearchVersion;
 		public INodeFileSystem FileSystem { get; }
 
 		public bool Started { get; private set; }

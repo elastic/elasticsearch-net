@@ -12,7 +12,7 @@ namespace Nest
 	{
 	}
 
-	[DescriptorFor("ShieldDeleteRole")]
+	[DescriptorFor("XpackSecurityDeleteRole")]
 	public partial class DeleteRoleDescriptor
 	{
 	}

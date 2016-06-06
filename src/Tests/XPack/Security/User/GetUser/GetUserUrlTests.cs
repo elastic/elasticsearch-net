@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.User.GetUser
 	{
 		[U] public async Task Urls()
 		{
-			await GET("/_shield/user")
+			await GET("/_xpack/security/user")
 				.Fluent(c => c.GetUser())
 				.Request(c => c.GetUser(new GetUserRequest()))
 				.FluentAsync(c => c.GetUserAsync())
@@ -17,7 +17,7 @@ namespace Tests.XPack.Security.User.GetUser
 				;
 
 			var users = "mpdreamz,gmarz,forloop";
-			await GET($"/_shield/user/{EscapeUriString(users)}")
+			await GET($"/_xpack/security/user/{EscapeUriString(users)}")
 				.Fluent(c => c.GetUser(f=>f.Username(users)))
 				.Request(c => c.GetUser(new GetUserRequest(users)))
 				.FluentAsync(c => c.GetUserAsync(f=>f.Username(users)))

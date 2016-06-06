@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.User.DeleteUser
 	{
 		[U] public async Task Urls()
 		{
-			await DELETE("/_shield/user/mpdreamz")
+			await DELETE("/_xpack/security/user/mpdreamz")
 				.Fluent(c => c.DeleteUser("mpdreamz"))
 				.Request(c => c.DeleteUser(new DeleteUserRequest("mpdreamz")))
 				.FluentAsync(c => c.DeleteUserAsync("mpdreamz"))

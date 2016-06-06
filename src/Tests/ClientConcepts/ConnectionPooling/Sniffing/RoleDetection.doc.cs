@@ -7,6 +7,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
+using Tests.Framework.Versions;
 using Xunit;
 using static Tests.Framework.TimesHelper;
 
@@ -145,11 +146,19 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 	[CollectionDefinition(TypeOfCluster.SniffRoleDetection)]
 	public class SniffRoleDetectionCluster : ClusterBase, ICollectionFixture<SniffRoleDetectionCluster>
 	{
-		protected override string[] ServerSettings => new[]
+		protected override string[] ServerSettings
 		{
-			"es.node.data=false",
-			"es.node.master=true",
-		};
+			get
+			{
+				var es = this.Node.Version > new ElasticsearchVersion("5.0.0-alpha2") ? "" : "es.";
+
+				return new[]
+				{
+					$"{es}node.data=false",
+					$"{es}node.master=true",
+				};
+			}
+		}
 	}
 
 	[Collection(TypeOfCluster.SniffRoleDetection)]

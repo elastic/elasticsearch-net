@@ -5,13 +5,11 @@ using System.Linq;
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class ScrollDescriptorOverrides : IDescriptorOverrides
+	public class ScrollDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
-			"scroll_id", "scroll" 
+			"scroll_id", "scroll"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

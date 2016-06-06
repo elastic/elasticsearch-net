@@ -28,7 +28,7 @@ namespace Tests.XPack.Graph.Explore
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/project/_graph/explore";
+		protected override string UrlPath => $"/project/project/_xpack/graph/_explore";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -96,7 +96,7 @@ namespace Tests.XPack.Graph.Explore
 			)
 		;
 
-		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>())
+		protected override GraphExploreRequest Initializer => new GraphExploreRequest(Index<Project>(), Type<Project>())
 		{
 			Query = new TermQuery { Field = Field<Project>(p => p.State), Value = StateOfBeing.VeryActive },
 			Vertices = new List<IGraphVertexDefinition>

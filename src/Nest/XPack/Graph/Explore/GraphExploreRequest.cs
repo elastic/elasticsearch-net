@@ -23,7 +23,7 @@ namespace Nest
 	public partial class GraphExploreRequest<T> : IGraphExploreRequest<T>
 		where T : class
 	{
-		public GraphExploreRequest() : this(typeof(T)){}
+		public GraphExploreRequest() : this(typeof(T), typeof(T)){}
 
 		public QueryContainer Query { get; set; }
 		public IEnumerable<IGraphVertexDefinition> Vertices { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 		IHop IHop.Connections { get; set; }
 		IGraphExploreControls IGraphExploreRequest.Controls { get; set; }
 
-		public GraphExploreDescriptor() : this(typeof(T)){}
+		public GraphExploreDescriptor() : base(r=> r.Optional("index", (Indices)typeof(T)).Optional("type", (Types)typeof(T))){ }
 
 		public GraphExploreDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));

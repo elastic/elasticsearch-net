@@ -3,11 +3,10 @@
     "documentation": "https://www.elastic.co/guide/en/graph/current/explore.html",
     "methods": ["GET", "POST"],
     "url": {
-      "path": "/{index}/_graph/explore",
-      "paths": ["/{index}/_graph/explore", "/{index}/{type}/_graph/explore"],   
+      "path": "/{index}/_xpack/graph/_explore",
+      "paths": ["/{index}/_xpack/graph/_explore", "/{index}/{type}/_xpack/graph/_explore"],   
       "parts" : {
         "index": {
-          "required" : true,
           "type": "list",
           "description": "A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices"
         },
@@ -28,7 +27,7 @@
       }
     },
     "body": {
-      "description" : "Graph Query DSL"
+      "description": "Graph Query DSL"
     }
   }
 }

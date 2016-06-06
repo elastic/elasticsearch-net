@@ -4738,7 +4738,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldAuthenticate
+	///<summary>Request parameters descriptor for XpackSecurityAuthenticate
 	///<pre>
 	///Retrieve details about the currently authenticated user
 	///</pre>
@@ -4756,7 +4756,29 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldClearCachedRealms
+	///<summary>Request parameters descriptor for XpackSecurityChangePassword
+	///<pre>
+	///Change the password of a user
+	///</pre>
+	///</summary>
+	public class ChangePasswordRequestParameters : FluentRequestParameters<ChangePasswordRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public ChangePasswordRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public ChangePasswordRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ChangePasswordRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for XpackSecurityClearCachedRealms
 	///<pre>
 	///Clears the internal user caches for specified realms
 	///</pre>
@@ -4766,7 +4788,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public ClearCachedRealmsRequestParameters Usernames(params string[] usernames) => this.AddQueryString("usernames", usernames);
+		public ClearCachedRealmsRequestParameters Usernames(string usernames) => this.AddQueryString("usernames", usernames);
 		
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -4778,14 +4800,14 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldClearCachedRoles
+	///<summary>Request parameters descriptor for XpackSecurityClearCachedRoles
 	///<pre>
 	///Clears the internal caches for specified roles
 	///</pre>
 	///</summary>
 	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		
 		///<summary>The URL-encoded request definition</summary>
 		public ClearCachedRolesRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -4796,7 +4818,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldDeleteRole
+	///<summary>Request parameters descriptor for XpackSecurityDeleteRole
 	///<pre>
 	///Remove a role from the native shield realm
 	///</pre>
@@ -4804,6 +4826,10 @@ namespace Elasticsearch.Net
 	public class DeleteRoleRequestParameters : FluentRequestParameters<DeleteRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public DeleteRoleRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -4814,7 +4840,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldDeleteUser
+	///<summary>Request parameters descriptor for XpackSecurityDeleteUser
 	///<pre>
 	///Remove a user from the native shield realm
 	///</pre>
@@ -4822,6 +4848,10 @@ namespace Elasticsearch.Net
 	public class DeleteUserRequestParameters : FluentRequestParameters<DeleteUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public DeleteUserRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public DeleteUserRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -4832,7 +4862,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldGetRole
+	///<summary>Request parameters descriptor for XpackSecurityGetRole
 	///<pre>
 	///Retrieve one or more roles from the native shield realm
 	///</pre>
@@ -4850,7 +4880,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldGetUser
+	///<summary>Request parameters descriptor for XpackSecurityGetUser
 	///<pre>
 	///Retrieve one or more users from the native shield realm
 	///</pre>
@@ -4868,7 +4898,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldPutRole
+	///<summary>Request parameters descriptor for XpackSecurityPutRole
 	///<pre>
 	///Update or create a role for the native shield realm
 	///</pre>
@@ -4876,6 +4906,10 @@ namespace Elasticsearch.Net
 	public class PutRoleRequestParameters : FluentRequestParameters<PutRoleRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public PutRoleRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public PutRoleRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -4886,7 +4920,7 @@ namespace Elasticsearch.Net
 		
 	}
 	
-	///<summary>Request parameters descriptor for ShieldPutUser
+	///<summary>Request parameters descriptor for XpackSecurityPutUser
 	///<pre>
 	///Update or create a user for the native shield realm
 	///</pre>
@@ -4894,6 +4928,10 @@ namespace Elasticsearch.Net
 	public class PutUserRequestParameters : FluentRequestParameters<PutUserRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		
+		///<summary>Refresh the index after performing the operation</summary>
+		public PutUserRequestParameters Refresh(bool refresh) => this.AddQueryString("refresh", refresh);
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public PutUserRequestParameters Source(string source) => this.AddQueryString("source", source);

@@ -1256,6 +1256,9 @@
     <Compile Include="XPack\Security\Role\PutRole\IndicesPrivileges.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleRequest.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleResponse.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordRequest.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordResponse.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ElasticClient-ChangePassword.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\ElasticClient-DeleteUser.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserRequest.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserResponse.cs" />

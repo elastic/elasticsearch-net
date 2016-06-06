@@ -10,7 +10,7 @@ namespace Tests.XPack.License.GetLicense
 	{
 		[U] public async Task Urls()
 		{
-			await GET("/_license")
+			await GET("/_xpack/license")
 				.Fluent(c => c.GetLicense())
 				.Request(c => c.GetLicense(new GetLicenseRequest()))
 				.FluentAsync(c => c.GetLicenseAsync())

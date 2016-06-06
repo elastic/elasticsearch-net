@@ -3,8 +3,8 @@
     "documentation": "https://www.elastic.co/guide/en/shield/current/license-management.html",
     "methods": ["PUT", "POST"],
     "url": {
-      "path": "/_license",
-      "paths": ["/_license"],
+      "path": "/_xpack/license",
+      "paths": ["/_xpack/license"],
       "parts" : {
       },
       "params": {
@@ -15,7 +15,7 @@
       }
     },
     "body": {
-      "description" : "licenses to be installed"
+      "description": "licenses to be installed"
     }
   }
 }

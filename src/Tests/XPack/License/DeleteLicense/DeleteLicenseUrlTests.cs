@@ -10,7 +10,7 @@ namespace Tests.XPack.License.DeleteLicense
 	{
 		[U] public async Task Urls()
 		{
-			await DELETE("/_license")
+			await DELETE("/_xpack/license")
 				.Fluent(c => c.DeleteLicense())
 				.Request(c => c.DeleteLicense(new DeleteLicenseRequest()))
 				.FluentAsync(c => c.DeleteLicenseAsync())

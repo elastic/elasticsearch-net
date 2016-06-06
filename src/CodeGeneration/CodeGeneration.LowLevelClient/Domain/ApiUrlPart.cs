@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
@@ -14,6 +15,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			get
 			{
+				if (ClrTypeNameOverride != null) return ClrTypeNameOverride;
+
 				switch(this.Name)
 				{
 					case "index": return this.Type == "string" ? "IndexName" : "Indices";
@@ -40,6 +43,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 				}
 			}
 		}
+
+		public string ClrTypeNameOverride { get; set; }
 
 		public string InterfaceName
 		{

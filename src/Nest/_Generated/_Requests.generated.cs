@@ -124,7 +124,7 @@ namespace Nest
 	public partial interface IAuthenticateRequest : IRequest<AuthenticateRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for ShieldAuthenticate <pre>Retrieve details about the currently authenticated user</pre></summary>
+	///<summary>Request parameters for XpackSecurityAuthenticate <pre>Retrieve details about the currently authenticated user</pre></summary>
 	public partial class AuthenticateRequest  : PlainRequestBase<AuthenticateRequestParameters>, IAuthenticateRequest
 	{
 		protected IAuthenticateRequest Self => this;
@@ -964,22 +964,52 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IChangePasswordRequest : IRequest<ChangePasswordRequestParameters> 
+	{
+		Name Username { get; }
+	 } 
+	///<summary>Request parameters for XpackSecurityChangePassword <pre>Change the password of a user</pre></summary>
+	public partial class ChangePasswordRequest  : PlainRequestBase<ChangePasswordRequestParameters>, IChangePasswordRequest
+	{
+		protected IChangePasswordRequest Self => this;
+		Name IChangePasswordRequest.Username => Self.RouteValues.Get<Name>("username");
+			/// <summary>/_xpack/security/user/{username}/_password</summary>
+///<param name="username">Optional, accepts null</param>
+		public ChangePasswordRequest(Name username) : base(r=>r.Optional("username", username)){}
+		
+
+		/// <summary>/_xpack/security/user/_password</summary>
+		public ChangePasswordRequest() : base(){}
+		
+
+			///<summary>Refresh the index after performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClearCachedRealmsRequest : IRequest<ClearCachedRealmsRequestParameters> 
 	{
 		Names Realms { get; }
 	 } 
-	///<summary>Request parameters for ShieldClearCachedRealms <pre>Clears the internal user caches for specified realms</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRealms <pre>Clears the internal user caches for specified realms</pre></summary>
 	public partial class ClearCachedRealmsRequest  : PlainRequestBase<ClearCachedRealmsRequestParameters>, IClearCachedRealmsRequest
 	{
 		protected IClearCachedRealmsRequest Self => this;
 		Names IClearCachedRealmsRequest.Realms => Self.RouteValues.Get<Names>("realms");
-			/// <summary>/_shield/realm/{realms}/_clear_cache</summary>
+			/// <summary>/_xpack/security/realm/{realms}/_clear_cache</summary>
 ///<param name="realms">this parameter is required</param>
 		public ClearCachedRealmsRequest(Names realms) : base(r=>r.Required("realms", realms)){}
 		
 
 			///<summary>Comma-separated list of usernames to clear from the cache</summary>
-		public  string[] Usernames { get { return Q< string[]>("usernames"); } set { Q("usernames", value); } }
+		public string Usernames { get { return Q<string>("usernames"); } set { Q("usernames", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -994,12 +1024,12 @@ namespace Nest
 	{
 		Names Name { get; }
 	 } 
-	///<summary>Request parameters for ShieldClearCachedRoles <pre>Clears the internal caches for specified roles</pre></summary>
+	///<summary>Request parameters for XpackSecurityClearCachedRoles <pre>Clears the internal caches for specified roles</pre></summary>
 	public partial class ClearCachedRolesRequest  : PlainRequestBase<ClearCachedRolesRequestParameters>, IClearCachedRolesRequest
 	{
 		protected IClearCachedRolesRequest Self => this;
 		Names IClearCachedRolesRequest.Name => Self.RouteValues.Get<Names>("name");
-			/// <summary>/_shield/role/{name}/_clear_cache</summary>
+			/// <summary>/_xpack/security/role/{name}/_clear_cache</summary>
 ///<param name="name">this parameter is required</param>
 		public ClearCachedRolesRequest(Names name) : base(r=>r.Required("name", name)){}
 		
@@ -2156,17 +2186,20 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for ShieldDeleteRole <pre>Remove a role from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteRole <pre>Remove a role from the native shield realm</pre></summary>
 	public partial class DeleteRoleRequest  : PlainRequestBase<DeleteRoleRequestParameters>, IDeleteRoleRequest
 	{
 		protected IDeleteRoleRequest Self => this;
 		Name IDeleteRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_shield/role/{name}</summary>
+			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name">this parameter is required</param>
 		public DeleteRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>The URL-encoded request definition</summary>
+			///<summary>Refresh the index after performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2257,17 +2290,20 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for ShieldDeleteUser <pre>Remove a user from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityDeleteUser <pre>Remove a user from the native shield realm</pre></summary>
 	public partial class DeleteUserRequest  : PlainRequestBase<DeleteUserRequestParameters>, IDeleteUserRequest
 	{
 		protected IDeleteUserRequest Self => this;
 		Name IDeleteUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_shield/user/{username}</summary>
+			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username">this parameter is required</param>
 		public DeleteUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		
 
-			///<summary>The URL-encoded request definition</summary>
+			///<summary>Refresh the index after performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -3091,17 +3127,17 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for ShieldGetRole <pre>Retrieve one or more roles from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetRole <pre>Retrieve one or more roles from the native shield realm</pre></summary>
 	public partial class GetRoleRequest  : PlainRequestBase<GetRoleRequestParameters>, IGetRoleRequest
 	{
 		protected IGetRoleRequest Self => this;
 		Name IGetRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_shield/role/{name}</summary>
+			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name">Optional, accepts null</param>
 		public GetRoleRequest(Name name) : base(r=>r.Optional("name", name)){}
 		
 
-		/// <summary>/_shield/role</summary>
+		/// <summary>/_xpack/security/role</summary>
 		public GetRoleRequest() : base(){}
 		
 
@@ -3196,17 +3232,17 @@ namespace Nest
 	{
 		Names Username { get; }
 	 } 
-	///<summary>Request parameters for ShieldGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityGetUser <pre>Retrieve one or more users from the native shield realm</pre></summary>
 	public partial class GetUserRequest  : PlainRequestBase<GetUserRequestParameters>, IGetUserRequest
 	{
 		protected IGetUserRequest Self => this;
 		Names IGetUserRequest.Username => Self.RouteValues.Get<Names>("username");
-			/// <summary>/_shield/user/{username}</summary>
+			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username">Optional, accepts null</param>
 		public GetUserRequest(Names username) : base(r=>r.Optional("username", username)){}
 		
 
-		/// <summary>/_shield/user</summary>
+		/// <summary>/_xpack/security/user</summary>
 		public GetUserRequest() : base(){}
 		
 
@@ -3230,12 +3266,12 @@ namespace Nest
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_graph/explore</summary>
+			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_graph/explore</summary>
+		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -3260,12 +3296,12 @@ namespace Nest
 		protected IGraphExploreRequest Self => this;
 		Indices IGraphExploreRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGraphExploreRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_graph/explore</summary>
+			/// <summary>/{index}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>
 		public GraphExploreRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		/// <summary>/{index}/{type}/_graph/explore</summary>
+		/// <summary>/{index}/{type}/_xpack/graph/_explore</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">Optional, accepts null</param>
 		public GraphExploreRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
@@ -4317,17 +4353,20 @@ namespace Nest
 	{
 		Name Name { get; }
 	 } 
-	///<summary>Request parameters for ShieldPutRole <pre>Update or create a role for the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutRole <pre>Update or create a role for the native shield realm</pre></summary>
 	public partial class PutRoleRequest  : PlainRequestBase<PutRoleRequestParameters>, IPutRoleRequest
 	{
 		protected IPutRoleRequest Self => this;
 		Name IPutRoleRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_shield/role/{name}</summary>
+			/// <summary>/_xpack/security/role/{name}</summary>
 ///<param name="name">this parameter is required</param>
 		public PutRoleRequest(Name name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>The URL-encoded request definition</summary>
+			///<summary>Refresh the index after performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -4389,17 +4428,20 @@ namespace Nest
 	{
 		Name Username { get; }
 	 } 
-	///<summary>Request parameters for ShieldPutUser <pre>Update or create a user for the native shield realm</pre></summary>
+	///<summary>Request parameters for XpackSecurityPutUser <pre>Update or create a user for the native shield realm</pre></summary>
 	public partial class PutUserRequest  : PlainRequestBase<PutUserRequestParameters>, IPutUserRequest
 	{
 		protected IPutUserRequest Self => this;
 		Name IPutUserRequest.Username => Self.RouteValues.Get<Name>("username");
-			/// <summary>/_shield/user/{username}</summary>
+			/// <summary>/_xpack/security/user/{username}</summary>
 ///<param name="username">this parameter is required</param>
 		public PutUserRequest(Name username) : base(r=>r.Required("username", username)){}
 		
 
-			///<summary>The URL-encoded request definition</summary>
+			///<summary>Refresh the index after performing the operation</summary>
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>

@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.Role.PutRole
 	{
 		[U] public async Task Urls()
 		{
-			await PUT("/_shield/role/mpdreamz")
+			await PUT("/_xpack/security/role/mpdreamz")
 				.Fluent(c => c.PutRole("mpdreamz"))
 				.Request(c => c.PutRole(new PutRoleRequest("mpdreamz")))
 				.FluentAsync(c => c.PutRoleAsync("mpdreamz"))

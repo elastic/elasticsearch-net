@@ -608,6 +608,7 @@
     <Compile Include="XPack\Security\Role\PutRole\PutRoleApiTests.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\RoleCrudTests.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordUrlTests.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserUrlTests.cs" />
     <Compile Include="XPack\Security\User\GetUser\GetUserUrlTests.cs" />
     <Compile Include="XPack\Security\User\PutUser\PutUserApiTests.cs" />

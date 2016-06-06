@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.Role.GetRole
 	{
 		[U] public async Task Urls()
 		{
-			await GET("/_shield/role")
+			await GET("/_xpack/security/role")
 				.Fluent(c => c.GetRole())
 				.Request(c => c.GetRole(new GetRoleRequest()))
 				.FluentAsync(c => c.GetRoleAsync())
@@ -17,7 +17,7 @@ namespace Tests.XPack.Security.Role.GetRole
 				;
 
 			var users = "admin,user,nest_user";
-			await GET($"/_shield/role/{EscapeUriString(users)}")
+			await GET($"/_xpack/security/role/{EscapeUriString(users)}")
 				.Fluent(c => c.GetRole(f=>f.Name(users)))
 				.Request(c => c.GetRole(new GetRoleRequest(users)))
 				.FluentAsync(c => c.GetRoleAsync(f=>f.Name(users)))

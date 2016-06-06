@@ -8,7 +8,7 @@ namespace Tests.XPack.Security.User.PutUser
 	{
 		[U] public async Task Urls()
 		{
-			await UrlTester.PUT("/_shield/user/mpdreamz")
+			await UrlTester.PUT("/_xpack/security/user/mpdreamz")
 				.Fluent(c => c.PutUser("mpdreamz"))
 				.Request(c => c.PutUser(new PutUserRequest("mpdreamz")))
 				.FluentAsync(c => c.PutUserAsync("mpdreamz"))

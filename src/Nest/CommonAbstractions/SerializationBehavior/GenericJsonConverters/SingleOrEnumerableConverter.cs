@@ -9,12 +9,9 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType == JsonToken.StartArray)
-			{
-				return serializer.Deserialize<T[]>(reader);
-			}
-
-			return new[] { serializer.Deserialize<T>(reader) };
+			return reader.TokenType == JsonToken.StartArray
+				? serializer.Deserialize<T[]>(reader)
+				: new[] { serializer.Deserialize<T>(reader) };
 		}
 
 		public override bool CanWrite => false;

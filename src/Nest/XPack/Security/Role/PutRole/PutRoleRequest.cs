@@ -26,7 +26,7 @@ namespace Nest
 		public IEnumerable<IIndicesPrivileges> Indices { get; set; }
 	}
 
-	[DescriptorFor("ShieldPutRole")]
+	[DescriptorFor("XpackSecurityPutRole")]
 	public partial class PutRoleDescriptor
 	{
 		IEnumerable<string> IPutRoleRequest.Cluster { get; set; }
