@@ -115,6 +115,8 @@
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregate.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregation.cs" />
+    <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregate.cs" />
+    <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregation.cs" />
     <Compile Include="Aggregations\Metric\Max\MaxAggregation.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregate.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregation.cs" />

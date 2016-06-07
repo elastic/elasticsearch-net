@@ -34,11 +34,11 @@ namespace Nest
 
 			IAggregate aggregate = null;
 
-			var property = reader.Value as string;
+			var property = (string)reader.Value;
 			if (_numeric.IsMatch(property))
 				aggregate = GetPercentilesAggregate(reader, serializer, oldFormat: true);
 
-			var meta = (property == "meta") ? GetMetadata(reader) : null;
+			var meta = property == "meta" ? GetMetadata(reader) : null;
 
 			if (aggregate != null)
 			{
@@ -46,7 +46,7 @@ namespace Nest
 				return aggregate;
 			}
 
-			property = reader.Value as string;
+			property = (string)reader.Value;
 
 			switch (property)
 			{
@@ -73,6 +73,9 @@ namespace Nest
 					break;
 				case "hits":
 					aggregate = GetTopHitsAggregate(reader, serializer);
+					break;
+				case "location":
+					aggregate = GetGeoCentroidAggregate(reader, serializer);
 					break;
 				default:
 					return null;
@@ -144,6 +147,14 @@ namespace Nest
 			var hits = o["hits"].Children().OfType<JObject>().Select(s => s);
 			reader.Read();
 			return new TopHitsAggregate(hits, serializer) { Total = total, MaxScore = maxScore };
+		}
+
+		private IAggregate GetGeoCentroidAggregate(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var geoCentroid = new GeoCentroidAggregate { Location = serializer.Deserialize<GeoLocation>(reader) };
+			reader.Read();
+			return geoCentroid;
 		}
 
 		private IAggregate GetGeoBoundsAggregate(JsonReader reader, JsonSerializer serializer)
