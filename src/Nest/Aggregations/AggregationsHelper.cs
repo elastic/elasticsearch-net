@@ -95,6 +95,8 @@ namespace Nest
 
 		public SingleBucketAggregate Sampler(string key) => this.TryGet<SingleBucketAggregate>(key);
 
+		public GeoCentroidAggregate GeoCentroid(string key) => this.TryGet<GeoCentroidAggregate>(key);
+
 		public SignificantTermsAggregate SignificantTerms(string key)
 		{
 			var bucket = this.TryGet<BucketAggregate>(key);

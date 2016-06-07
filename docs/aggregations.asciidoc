@@ -50,6 +50,8 @@ exposes all of the available Aggregation types
 
 * <<geo-bounds-aggregation-usage,Geo Bounds Aggregation Usage>>
 
+* <<geo-centroid-aggregation-usage,Geo Centroid Aggregation Usage>>
+
 * <<max-aggregation-usage,Max Aggregation Usage>>
 
 * <<min-aggregation-usage,Min Aggregation Usage>>

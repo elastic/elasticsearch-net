@@ -115,6 +115,8 @@
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregate.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregation.cs" />
+    <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregate.cs" />
+    <Compile Include="Aggregations\Metric\GeoCentroid\GeoCentroidAggregation.cs" />
     <Compile Include="Aggregations\Metric\Max\MaxAggregation.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregate.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregation.cs" />
@@ -1292,6 +1294,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

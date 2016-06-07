@@ -74,6 +74,9 @@ namespace Nest
 				case "hits":
 					aggregate = GetTopHitsAggregate(reader, serializer);
 					break;
+				case "location":
+					aggregate = GetGeoCentroidAggregate(reader, serializer);
+					break;
 				default:
 					return null;
 			}
@@ -144,6 +147,14 @@ namespace Nest
 			var hits = o["hits"].Children().OfType<JObject>().Select(s => s);
 			reader.Read();
 			return new TopHitsAggregate(hits, serializer) { Total = total, MaxScore = maxScore };
+		}
+
+		private IAggregate GetGeoCentroidAggregate(JsonReader reader, JsonSerializer serializer)
+		{
+			reader.Read();
+			var geoCentroid = new GeoCentroidAggregate { Location = serializer.Deserialize<GeoLocation>(reader) };
+			reader.Read();
+			return geoCentroid;
 		}
 
 		private IAggregate GetGeoBoundsAggregate(JsonReader reader, JsonSerializer serializer)

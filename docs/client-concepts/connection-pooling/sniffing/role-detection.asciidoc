@@ -45,6 +45,38 @@ await audit.TraceStartup();
 var audit = new Auditor(() => Framework.Cluster
     .Nodes(10)
     .Sniff(s => s.SucceedAlways()
+        .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).HttpDisabled(9201))
+    )
+    .SniffingConnectionPool()
+    .AllDefaults()
+)
+{
+    AssertPoolBeforeCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+        pool.Nodes.Where(n => n.HttpEnabled).Should().HaveCount(10);
+        pool.Nodes.Should().OnlyContain(n => n.Uri.Host == "localhost");
+    },
+
+    AssertPoolAfterCall = (pool) =>
+    {
+        pool.Should().NotBeNull();
+        pool.Nodes.Should().HaveCount(7, "we filtered the node that stores no data");
+        pool.Nodes.Should().NotContain(n=>n.Uri.Port == 9201);
+        pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+    }
+};
+
+await audit.TraceStartup();
+----
+
+[source,csharp]
+----
+var audit = new Auditor(() => Framework.Cluster
+    .Nodes(10)
+    .Sniff(s => s.SucceedAlways()
         .Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202).SniffShouldReturnFqdn())
     )
     .SniffingConnectionPool()

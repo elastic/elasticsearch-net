@@ -137,6 +137,77 @@ new TermQuery
 }
 ----
 
+=== Fluent DSL Example
+
+[source,csharp]
+----
+q
+.Bool(b => b
+    .Filter(f => !f
+        .Term(t => t
+            .Verbatim()
+            .Field(p => p.Name)
+            .Value("")
+        ) && f
+        .Exists(e => e
+            .Field(p => p.NumberOfCommits)
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new BoolQuery
+{
+    Filter = new QueryContainer[] {
+        !new TermQuery
+        {
+            IsVerbatim = true,
+            Field = "name",
+            Value = ""
+        } &&
+        new ExistsQuery
+        {
+            Field = "numberOfCommits"
+        }
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "bool": {
+    "filter": [
+      {
+        "bool": {
+          "must": [
+            {
+              "exists": {
+                "field": "numberOfCommits"
+              }
+            }
+          ],
+          "must_not": [
+            {
+              "term": {
+                "name": {
+                  "value": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+----
+
 [source,csharp]
 ----
 var e = Assert.Throws<ArgumentException>(() =>
