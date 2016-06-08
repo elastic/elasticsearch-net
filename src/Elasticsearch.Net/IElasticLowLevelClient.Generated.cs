@@ -7586,7 +7586,7 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRealmsAsync<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
+		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -7599,7 +7599,7 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> XpackSecurityClearCachedRoles<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
+		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -7612,7 +7612,7 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
+		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -7623,9 +7623,9 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> XpackSecurityClearCachedRolesPost<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> XpackSecurityClearCachedRolesPut<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
 		
-		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache
+		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
 		///<para> - byte[], no deserialization, but the response stream will be closed </para>
@@ -7636,7 +7636,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesPostAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesPutAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /_xpack/security/role/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

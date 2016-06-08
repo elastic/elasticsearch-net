@@ -8147,34 +8147,6 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRealmsAsync<T>(string realms, Func<ClearCachedRealmsRequestParameters, ClearCachedRealmsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/realm/{realms.NotNull("realms")}/_clear_cache"), null, _params(requestParameters));
 		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: Clears the internal caches for specified roles </para>	
-	    ///</summary>
-		///<param name="name">Role name</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityClearCachedRoles<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
-		
-		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
-		///<para> - byte[], no deserialization, but the response stream will be closed </para>
-		///<para> - Stream, no deserialization, response stream is your responsibility </para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
-	    ///<para>See also: Clears the internal caches for specified roles </para>	
-	    ///</summary>
-		///<param name="name">Role name</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
-		
 		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
@@ -8186,7 +8158,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> XpackSecurityClearCachedRolesPost<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> XpackSecurityClearCachedRoles<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_xpack/security/role/{name}/_clear_cache 
@@ -8200,8 +8172,36 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">Role name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesPostAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal caches for specified roles </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> XpackSecurityClearCachedRolesPut<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
+		
+		///<summary>Represents a PUT on /_xpack/security/role/{name}/_clear_cache 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+		///<para> - byte[], no deserialization, but the response stream will be closed </para>
+		///<para> - Stream, no deserialization, response stream is your responsibility </para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed </para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+	    ///<para>See also: Clears the internal caches for specified roles </para>	
+	    ///</summary>
+		///<param name="name">Role name</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesPutAsync<T>(string name, Func<ClearCachedRolesRequestParameters, ClearCachedRolesRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(PUT, Url($"_xpack/security/role/{name.NotNull("name")}/_clear_cache"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_xpack/security/role/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

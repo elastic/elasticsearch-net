@@ -56,9 +56,9 @@ namespace Tests.Ingest.PutPipeline
 				{
 					date = new
 					{
-						match_field = "startedOn",
+						field = "startedOn",
 						target_field = "timestamp",
-						match_formats = new [] { "dd/MM/yyyy hh:mm:ss" },
+						formats = new [] { "dd/MM/yyyy hh:mm:ss" },
 						timezone = "Europe/Amsterdam"
 					}
 				},
@@ -91,7 +91,7 @@ namespace Tests.Ingest.PutPipeline
 					grok = new
 					{
 						field = "description",
-						pattern = "my %{FAVORITE_DOG:dog} is colored %{RGB:color}",
+						patterns = new[] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
 						pattern_definitions = new Dictionary<string, string>
 						{
 							{ "FAVORITE_DOG", "border collie" },
@@ -135,7 +135,7 @@ namespace Tests.Ingest.PutPipeline
 					rename = new
 					{
 						field = "leadDeveloper",
-						to = "projectLead"
+						target_field = "projectLead"
 					}
 				},
 				new
@@ -204,7 +204,7 @@ namespace Tests.Ingest.PutPipeline
 				)
 				.Grok<Project>(gk => gk
 					.Field(p => p.Description)
-					.Pattern("my %{FAVORITE_DOG:dog} is colored %{RGB:color}")
+					.Patterns("my %{FAVORITE_DOG:dog} is colored %{RGB:color}")
 					.PatternDefinitions(pds => pds
 						.Add("FAVORITE_DOG", "border collie")
 						.Add("RGB", "RED|BLUE|GREEN")
@@ -286,7 +286,7 @@ namespace Tests.Ingest.PutPipeline
 				new GrokProcessor
 				{
 					Field = "description",
-					Pattern = "my %{FAVORITE_DOG:dog} is colored %{RGB:color}",
+					Patterns = new [] { "my %{FAVORITE_DOG:dog} is colored %{RGB:color}" },
 					PatternDefinitions = new Dictionary<string, string>
 					{
 						{ "FAVORITE_DOG", "border collie" },

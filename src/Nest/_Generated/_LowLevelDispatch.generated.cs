@@ -3294,32 +3294,32 @@ namespace Nest
 		{
 			switch(p.HttpMethod)
 			{
-				case PUT:
+				case POST:
 					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRoles<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRolesPost<T>(p.RouteValues.Name,u => p.RequestParameters);
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRolesPut<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { PUT, POST }, "/_xpack/security/role/{name}/_clear_cache");
+			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST, PUT }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> XpackSecurityClearCachedRolesDispatchAsync<T>(IRequest<ClearCachedRolesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
-				case PUT:
+				case POST:
 					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRolesAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
-				case POST:
-					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRolesPostAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.XpackSecurityClearCachedRolesPutAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { PUT, POST }, "/_xpack/security/role/{name}/_clear_cache");
+			throw InvalidDispatch("XpackSecurityClearCachedRoles", p, new [] { POST, PUT }, "/_xpack/security/role/{name}/_clear_cache");
 		}
 		
 		internal ElasticsearchResponse<T> XpackSecurityDeleteRoleDispatch<T>(IRequest<DeleteRoleRequestParameters> p ) where T : class

@@ -76,10 +76,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected object QueryJson => new
 		{
-			percolator = new
+			percolate = new
 			{
 				document_type = "project",
-				document = Project.InstanceAnonymous
+				document = Project.InstanceAnonymous,
+				field = "query"
 			}
 		};
 
@@ -96,12 +97,14 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			DocumentType = typeof(Project),
 			Document = Project.Instance,
+			Field = Infer.Field<PercolatedQuery>(f => f.Query)
 		};
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<PercolatedQuery> q) => q
 			.Percolate(p => p
 				.DocumentType(typeof(Project))
 				.Document(Project.Instance)
+				.Field(f => f.Query)
 			);
 
 		protected override void ExpectResponse(ISearchResponse<PercolatedQuery> response)

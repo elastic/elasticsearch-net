@@ -4807,7 +4807,7 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class ClearCachedRolesRequestParameters : FluentRequestParameters<ClearCachedRolesRequestParameters> 
 	{
-		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>The URL-encoded request definition</summary>
 		public ClearCachedRolesRequestParameters Source(string source) => this.AddQueryString("source", source);

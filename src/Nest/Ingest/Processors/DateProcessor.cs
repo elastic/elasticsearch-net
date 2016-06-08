@@ -12,13 +12,13 @@ namespace Nest
 	[JsonConverter(typeof(ProcessorJsonConverter<DateProcessor>))]
 	public interface IDateProcessor : IProcessor
 	{
-		[JsonProperty("match_field")]
+		[JsonProperty("field")]
 		Field Field { get; set; }
 
 		[JsonProperty("target_field")]
 		Field TargetField { get; set; }
 
-		[JsonProperty("match_formats")]
+		[JsonProperty("formats")]
 		IEnumerable<string> Formats { get; set; }
 
 		[JsonProperty("timezone")]

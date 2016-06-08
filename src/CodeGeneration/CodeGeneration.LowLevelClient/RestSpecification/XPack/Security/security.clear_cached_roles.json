@@ -1,7 +1,7 @@
 {
   "xpack.security.clear_cached_roles": {
     "documentation": "Clears the internal caches for specified roles",
-    "methods": [ "PUT", "POST" ],
+    "methods": [ "POST", "PUT" ],
     "url": {
       "path": "/_xpack/security/role/{name}/_clear_cache",
       "paths": [ "/_xpack/security/role/{name}/_clear_cache" ],

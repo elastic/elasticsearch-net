@@ -544,6 +544,7 @@
     <Compile Include="Document\Multiple\ReindexRethrottle\ElasticClient-ReindexRethrottle.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
+    <Compile Include="Document\Multiple\Retries.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />
