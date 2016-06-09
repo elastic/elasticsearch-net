@@ -68,9 +68,10 @@ namespace Tests.Search.Request
 			var firstQuery = firstSearch.Query.First();
 			firstQuery.Breakdown.Should().NotBeNull();
 			firstQuery.Breakdown.CreateWeight.Should().BeGreaterThan(0);
+			firstQuery.Breakdown.BuildScorer.Should().BeGreaterThan(0);
 
-			firstQuery.Lucene.Should().NotBeNullOrWhiteSpace();
-			firstQuery.QueryType.Should().NotBeNullOrWhiteSpace();
+			firstQuery.Description.Should().NotBeNullOrWhiteSpace();
+			firstQuery.Type.Should().NotBeNullOrWhiteSpace();
 			firstQuery.Time.Should().BeGreaterOrEqualTo(TimeSpan.FromMilliseconds(0.000001));
 			firstQuery.Children.Should().NotBeNullOrEmpty();
 
@@ -78,10 +79,6 @@ namespace Tests.Search.Request
 			firstCollector.Name.Should().NotBeNullOrEmpty();
 			firstCollector.Reason.Should().NotBeNullOrEmpty();
 			firstCollector.Time.Should().BeGreaterOrEqualTo(TimeSpan.FromMilliseconds(0.000001));
-
-
-
-
 		});
 	}
 }
