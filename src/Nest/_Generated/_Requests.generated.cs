@@ -4571,7 +4571,7 @@ namespace Nest
 		
 
 			///<summary>The throttle to set on this request in sub-requests per second. 0 means set no throttle. As does &quot;unlimited&quot;. Otherwise it must be a float.</summary>
-		public float RequestsPerSecond { get { return Q<float>("requests_per_second"); } set { Q("requests_per_second", value); } }
+		public float RequestsPerSecond { get { var q = Q<string>("requests_per_second"); return (q == "unlimited")? float.PositiveInfinity : float.Parse(q); } set { Q("requests_per_second", value == float.PositiveInfinity ? "unlimited" : value.ToString()); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

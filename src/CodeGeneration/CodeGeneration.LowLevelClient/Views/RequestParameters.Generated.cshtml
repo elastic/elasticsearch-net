@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
           }
 		<text>
 		///<summary>@kv.Value.Description</summary>
-		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm) => this.AddQueryString("@kv.Value.OriginalQueryStringParamName", @setter);
+		@Raw(kv.Value.FluentGenerator.Invoke(method.QueryStringParamName, mm, kv.Value.OriginalQueryStringParamName, setter))
 		</text>
 	  }
 	}</text>

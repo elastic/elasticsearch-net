@@ -50,7 +50,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
-			var reindex = client.UpdateByQuery<Project>(Nest.Indices.Index<Project>(), Types.Type<Project>(), u => u
+			var reindex = client.UpdateByQuery<Project>(u => u
 				.Conflicts(Conflicts.Proceed)
 				.Query(q => q.MatchAll())
 				.Script(s => s.Inline("ctx._source.numberOfCommits+10"))
@@ -90,17 +90,17 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=0";
+		protected override string UrlPath => $"/_reindex/{TaskId.NodeId}%3A{TaskId.TaskNumber}/_rethrottle?requests_per_second=unlimited";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<ReindexRethrottleDescriptor, IReindexRethrottleRequest> Fluent => d => d
 			.TaskId(TaskId)
-			.RequestsPerSecond(0);
+			.RequestsPerSecond(float.PositiveInfinity);
 
 		protected override ReindexRethrottleRequest Initializer => new ReindexRethrottleRequest(TaskId)
 		{
-			RequestsPerSecond = 0,
+			RequestsPerSecond = float.PositiveInfinity,
 		};
 
 		protected override void ExpectResponse(IReindexRethrottleResponse response)
@@ -135,6 +135,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 
 			task.StartTimeInMilliseconds.Should().BeGreaterThan(0);
 			task.RunningTimeInNanoseconds.Should().BeGreaterThan(0);
+			task.Cancellable.Should().BeTrue();
 		}
 
 		protected override object ExpectJson => null;

@@ -3754,7 +3754,7 @@ namespace Elasticsearch.Net
 		public override HttpMethod DefaultHttpMethod => HttpMethod.POST;
 		
 		///<summary>The throttle to set on this request in sub-requests per second. 0 means set no throttle. As does &quot;unlimited&quot;. Otherwise it must be a float.</summary>
-		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second);
+		public ReindexRethrottleRequestParameters RequestsPerSecond(float requests_per_second) => this.AddQueryString("requests_per_second", requests_per_second == float.PositiveInfinity ? "unlimited" : requests_per_second.ToString());
 		
 		
 		///<summary>The URL-encoded request definition</summary>
