@@ -10,7 +10,7 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 		[U] public async Task Urls()
 		{
 			var role = "some_role";
-			await PUT($"/_xpack/security/role/{role}/_clear_cache")
+			await POST($"/_xpack/security/role/{role}/_clear_cache")
 				.Fluent(c => c.ClearCachedRoles(role))
 				.Request(c => c.ClearCachedRoles(new ClearCachedRolesRequest(role)))
 				.FluentAsync(c => c.ClearCachedRolesAsync(role))
