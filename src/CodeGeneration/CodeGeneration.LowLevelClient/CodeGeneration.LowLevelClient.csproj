@@ -72,6 +72,7 @@
     <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\PutIndexTemplateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\ReindexRethrottleDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ScrollDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ReindexOnServerDescriptorOverrides.cs" />

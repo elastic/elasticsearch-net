@@ -12,16 +12,16 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		[U] public async Task Urls()
 		{
 			await POST("/project/_delete_by_query")
-				.Fluent(c => c.DeleteByQuery<Project>("project", Types.All,d => d))
+				.Fluent(c => c.DeleteByQuery<Project>(d => d.AllTypes()))
 				.Request(c => c.DeleteByQuery(new DeleteByQueryRequest<Project>("project")))
-				.FluentAsync(c => c.DeleteByQueryAsync<Project>("project", Types.All, d => d))
+				.FluentAsync(c => c.DeleteByQueryAsync<Project>(d => d.AllTypes()))
 				.RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest<Project>("project")))
 				;
 
 			await POST("/project/project/_delete_by_query")
-				.Fluent(c => c.DeleteByQuery<Project>("project", Type<Project>(), d=>d))
+				.Fluent(c => c.DeleteByQuery<Project>(d => d))
 				.Request(c => c.DeleteByQuery(new DeleteByQueryRequest<Project>("project", "project")))
-				.FluentAsync(c => c.DeleteByQueryAsync<Project>(Index<Project>(), Type<Project>(), d=>d))
+				.FluentAsync(c => c.DeleteByQueryAsync<Project>(d => d))
 				.RequestAsync(c => c.DeleteByQueryAsync(new DeleteByQueryRequest<Project>("project", "project")))
 				;
 		}

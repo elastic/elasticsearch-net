@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IDeleteByQueryRequest 
+	public partial interface IDeleteByQueryRequest
 	{
 		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
@@ -11,15 +11,17 @@ namespace Nest
 
 	public interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest where T : class { }
 
-	public partial class DeleteByQueryRequest 
+	public partial class DeleteByQueryRequest
 	{
 		public QueryContainer Query { get; set; }
 
 	}
-	
+
 	public partial class DeleteByQueryRequest<T> : IDeleteByQueryRequest<T>
 		where T : class
 	{
+		public DeleteByQueryRequest() : this(typeof(T), typeof(T)){ }
+
 		public QueryContainer Query { get; set; }
 	}
 

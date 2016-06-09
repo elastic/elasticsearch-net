@@ -22,12 +22,15 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			foreach (var index in values.Values)
 			{
 				this.Client.IndexMany(Project.Projects, index);
-				this.Client.Refresh(index);
+				var cloneIndex = index + "-clone";
+				this.Client.CreateIndex(cloneIndex);
+
+				this.Client.Refresh(Index(index).And(cloneIndex));
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.DeleteByQuery(this.Indices, Types.All, f),
-			fluentAsync: (client, f) => client.DeleteByQueryAsync(this.Indices, Types.All, f),
+			fluent: (client, f) => client.DeleteByQuery(f),
+			fluentAsync: (client, f) => client.DeleteByQueryAsync(f),
 			request: (client, r) => client.DeleteByQuery(r),
 			requestAsync: (client, r) => client.DeleteByQueryAsync(r)
 		);
@@ -40,7 +43,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/_delete_by_query?ignore_unavailable=true";
+		protected override string UrlPath => $"/{CallIsolatedValue}%2C{SecondIndex}/project/_delete_by_query?ignore_unavailable=true";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -59,6 +62,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.Indices);
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
+			.Index(this.Indices)
 			.IgnoreUnavailable()
 			.Query(q=>q
 				.Ids(ids=>ids
@@ -67,7 +71,7 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				)
 			);
 
-		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.Indices)
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.Indices, Type<Project>())
 		{
 			IgnoreUnavailable = true,
 			Query = new IdsQuery
@@ -79,9 +83,121 @@ namespace Tests.Document.Multiple.DeleteByQuery
 
 		protected override void ExpectResponse(IDeleteByQueryResponse response)
 		{
-			response.Indices.Should().NotBeEmpty().And.HaveCount(2).And.ContainKey(CallIsolatedValue);
-			response.Indices[CallIsolatedValue].Deleted.Should().Be(1);
-			response.Indices[CallIsolatedValue].Found.Should().Be(1);
+			response.Took.Should().BeGreaterThan(0);
+			response.Total.Should().Be(1);
+			response.Deleted.Should().Be(1);
+
+			response.Retries.Should().NotBeNull();
+			response.Retries.Bulk.Should().Be(0);
+			response.Retries.Search.Should().Be(0);
+
+			response.RequestsPerSecond.Match(
+				unlimited => unlimited.Should().Be("unlimited"),
+				f => f.Should().Be(0));
+
+			response.Failures.Should().BeEmpty();
+		}
+	}
+
+
+	[Collection(TypeOfCluster.OwnIndex)]
+	public class DeleteByQueryWaitForCompletionApiTests : DeleteByQueryApiTests
+	{
+		public DeleteByQueryWaitForCompletionApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query?wait_for_completion=false&conflicts=proceed";
+
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
+
+		protected override object ExpectJson => new { };
+
+		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
+			.Index(this.CallIsolatedValue)
+			.WaitForCompletion(false)
+			.Conflicts(Conflicts.Proceed);
+
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
+		{
+			WaitForCompletion = false,
+			Conflicts = Conflicts.Proceed
+		};
+
+		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		{
+			response.Task.Should().NotBeNull();
+			response.Task.TaskNumber.Should().BeGreaterThan(0);
+			response.Task.NodeId.Should().NotBeNullOrWhiteSpace();
+			response.Task.FullyQualifiedId.Should().NotBeNullOrWhiteSpace();
+		}
+	}
+
+	[Collection(TypeOfCluster.OwnIndex)]
+	public class DeleteByQueryWithFailuresApiTests : DeleteByQueryApiTests
+	{
+		public DeleteByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
+		{
+			foreach (var index in values.Values)
+			{
+				this.Client.CreateIndex(index, c => c
+					.Settings(s => s
+						.RefreshInterval(-1)
+					)
+				);
+				this.Client.Index(new Project { Name = "project1", Description = "description" }, i => i.Index(index).Id(1).Refresh());
+				this.Client.Index(new Project { Name = "project2", Description = "description" }, i => i.Index(index).Id(1));
+			}
+		}
+
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 409;
+
+		protected override string UrlPath => $"/{CallIsolatedValue}/project/_delete_by_query";
+		protected override object ExpectJson =>
+			new
+			{
+				query = new { match = new { description = new { query = "description" } } }
+			};
+
+		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.CallIsolatedValue);
+
+		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
+			.Index(this.CallIsolatedValue)
+			.Query(q => q
+				.Match(m => m
+					.Field(p => p.Description)
+					.Query("description")
+				)
+			)
+			;
+
+		protected override DeleteByQueryRequest Initializer => new DeleteByQueryRequest(this.CallIsolatedValue, Type<Project>())
+		{
+			Query = new MatchQuery
+			{
+				Field = Field<Project>(p => p.Description),
+				Query = "description"
+			},
+		};
+
+		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		{
+			response.VersionConflicts.Should().Be(1);
+			response.Failures.Should().NotBeEmpty();
+			var failure = response.Failures.First();
+
+			failure.Index.Should().NotBeNullOrWhiteSpace();
+			failure.Type.Should().NotBeNullOrWhiteSpace();
+			failure.Status.Should().Be(409);
+			failure.Id.Should().NotBeNullOrWhiteSpace();
+
+			failure.Cause.Should().NotBeNull();
+			failure.Cause.IndexUniqueId.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Reason.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Index.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Shard.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Type.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 }

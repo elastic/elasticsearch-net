@@ -86,7 +86,7 @@ namespace Nest
 		{
 		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
-		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q("@original", @setter); } }
+		@Raw(kv.Value.Generator.Invoke(fieldType, mm, original, setter))
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)
