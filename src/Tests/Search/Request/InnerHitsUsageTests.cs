@@ -160,66 +160,93 @@ namespace Tests.Search.Request
 
 
 	/**[float]
-	*== Top Level Inner Hits
+	*== Inner Hits in descending Has Child Queries
+	*
+	* Inner Hits can be defined on descending `has_child` queries to return details of descendent children e.g. children,
+	* grandchildren, great-grandchildren, etc. In previous versions of Elasticsearch, Top Level Inner Hits would have been
+	* used to achieve this.
 	*/
 	[Collection(TypeOfCluster.OwnIndex)]
-	public class TopLevelInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
+	public class DescendentHasChildInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public TopLevelInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DescendentHasChildInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
-		protected override IndexName Index => TopLevelInnerHitsApiTests.IndexName;
+		protected override IndexName Index => DescendentHasChildInnerHitsApiTests.IndexName;
 
 		protected override object ExpectJson { get; } = new
 		{
-			inner_hits = new
+			query = new
 			{
-				earls = new
+				has_child = new
 				{
 					type = "earl",
-					fielddata_fields = new[] { "name" },
 					inner_hits = new
 					{
-						barons = new
-						{
-							type = "baron"
-						}
+						name = "earls",
+						size = 5,
+						fielddata_fields = new[] { "name" }
 					},
-					size = 5
+					query = new
+					{
+						has_child = new
+						{
+							type = "baron",
+							inner_hits = new
+							{
+								name = "barons"
+							},
+							query = new
+							{
+								match_all = new {}
+							}
+						}
+					}
 				}
 			}
 		};
 
 		protected override Func<SearchDescriptor<Duke>, ISearchRequest> Fluent => s => s
 			.Index(Index)
-			.InnerHits(ih => ih
-				.Type<Earl>("earls", g => g
-					.Size(5)
-					.FielddataFields(p => p.Name)
-					.InnerHits(iih => iih
-						.Type<Baron>("barons")
+			.Query(q => q
+				.HasChild<Earl>(child => child
+					.InnerHits(i => i
+						.Name("earls")
+						.Size(5)
+						.FielddataFields(p => p.Name)
+					)
+					.Query(cq => cq
+						.HasChild<Baron>(grandchild => grandchild
+							.InnerHits(i => i
+								.Name("barons")
+							)
+							.Query(gq => gq
+								.MatchAll()
+							)
+						)
 					)
 				)
 			);
 
 		protected override SearchRequest<Duke> Initializer => new SearchRequest<Duke>(Index, typeof(Duke))
 		{
-			InnerHits = new TopLevelInnerHits
+			Query = new HasChildQuery
 			{
-				{ "earls", new TopLevelInnerHit
+				Type = typeof(Earl),
+				InnerHits = new InnerHits
+				{
+					Name = "earls",
+					Size = 5,
+					FielddataFields = new List<Field> { Infer.Field<Earl>(p => p.Name) }
+				},
+				Query = new HasChildQuery
+				{
+					Type = typeof(Baron),
+					InnerHits = new InnerHits
 					{
-						Type = typeof(Earl),
-						Size = 5,
-						FielddataFields = new Field[] { "name"},
-						InnerHits = new TopLevelInnerHits
-						{
-							{ "barons", new TopLevelInnerHit
-								{
-									Type = typeof(Baron)
-								}
-							}
-						}
-					}
+						Name = "barons"
+					},
+					Query = new MatchAllQuery()
 				}
 			}
 		};

@@ -76,9 +76,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "post_filter")]
 		QueryContainer PostFilter { get; set; }
 
-		[JsonProperty(PropertyName = "inner_hits")]
-		ITopLevelInnerHits InnerHits { get; set; }
-
 		string Preference { get; }
 
 		string Routing { get; }
@@ -114,7 +111,6 @@ namespace Nest
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
-		public ITopLevelInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -157,7 +153,6 @@ namespace Nest
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public QueryContainer PostFilter { get; set; }
-		public ITopLevelInnerHits InnerHits { get; set; }
 		public QueryContainer Query { get; set; }
 		public IList<IRescore> Rescore { get; set; }
 		public ISuggestContainer Suggest { get; set; }
@@ -219,7 +214,6 @@ namespace Nest
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
 		ISourceFilter ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
-		ITopLevelInnerHits ISearchRequest.InnerHits { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
@@ -377,9 +371,6 @@ namespace Nest
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> Sort(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) => Assign(a => a.Sort = selector?.Invoke(new SortDescriptor<T>())?.Value);
-
-		public SearchDescriptor<T> InnerHits(Func<TopLevelInnerHitsDescriptor<T>, IPromise<ITopLevelInnerHits>> selector) =>
-			Assign(a => a.InnerHits = selector?.Invoke(new TopLevelInnerHitsDescriptor<T>())?.Value);
 
 		///<summary>
 		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester
