@@ -35,7 +35,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "fuzzy_max_expansions")]
 		int? FuzzyMaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "fuziness")]
+		[JsonProperty(PropertyName = "fuzziness")]
 		Fuzziness Fuzziness { get; set; }
 
 		[JsonProperty(PropertyName = "fuzzy_prefix_length")]
@@ -186,7 +186,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool? enablePositionIncrements = true) =>
 			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
 
-		public QueryStringQueryDescriptor<T> Fuziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
+		public QueryStringQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
 		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
 
