@@ -7,6 +7,14 @@ namespace Nest
 	{
 		public ProcessorsDescriptor() : base(new List<IProcessor>()) { }
 
+		/// <summary>
+		/// The ingest attachment plugin lets Elasticsearch extract file attachments in common formats (such as PPT, XLS, and PDF)
+		/// by using the Apache text extraction library Tika. You can use the ingest attachment plugin as a replacement
+		/// for the mapper attachment plugin. The ingest-attachment plugin must be installed for this functionality.
+		/// </summary>
+		public ProcessorsDescriptor Attachment<T>(Func<AttachmentProcessorDescriptor<T>, IAttachmentProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new AttachmentProcessorDescriptor<T>())));
+
 		public ProcessorsDescriptor Append<T>(Func<AppendProcessorDescriptor<T>, IAppendProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new AppendProcessorDescriptor<T>())));
 
@@ -22,14 +30,19 @@ namespace Nest
 		public ProcessorsDescriptor Fail(Func<FailProcessorDescriptor, IFailProcessor> selector) =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new FailProcessorDescriptor())));
 
-
 		public ProcessorsDescriptor Foreach<T>(Func<ForeachProcessorDescriptor<T>, IForeachProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new ForeachProcessorDescriptor<T>())));
 
+		/// <summary>
+		/// The GeoIP processor adds information about the geographical location of IP addresses, based on data from the Maxmind databases.
+		/// This processor adds this information by default under the geoip field. The ingest-geoip plugin must be installed for this
+		/// functionality.
+		/// </summary>
+		public ProcessorsDescriptor GeoIp<T>(Func<GeoIpProcessorDescriptor<T>, IGeoIpProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new GeoIpProcessorDescriptor<T>())));
 
 		public ProcessorsDescriptor Grok<T>(Func<GrokProcessorDescriptor<T>, IGrokProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new GrokProcessorDescriptor<T>())));
-
 
 		public ProcessorsDescriptor Gsub<T>(Func<GsubProcessorDescriptor<T>, IGsubProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new GsubProcessorDescriptor<T>())));

@@ -1,7 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
+using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -10,12 +13,12 @@ using Xunit;
 namespace Tests.Document.Single.Index
 {
 	[Collection(TypeOfCluster.Indexing)]
-	public class IndexIngestApiTests :
+	public class IndexIngestGeoIpApiTests :
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
 
-		public IndexIngestApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		public IndexIngestGeoIpApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
 		}
 
@@ -30,6 +33,31 @@ namespace Tests.Document.Single.Index
 					{
 						TargetField = "lastSeen",
 						Field = "lastActivity"
+					},
+					new GeoIpProcessor
+					{
+						Field = "leadDeveloper.iPAddress",
+						TargetField = "leadDeveloper.geoIp"
+					},
+					new RenameProcessor
+					{
+						Field = "leadDeveloper.geoIp.continent_name",
+						TargetField = "leadDeveloper.geoIp.continentName",
+					},
+					new RenameProcessor
+					{
+						Field = "leadDeveloper.geoIp.city_name",
+						TargetField = "leadDeveloper.geoIp.cityName",
+					},
+					new RenameProcessor
+					{
+						Field = "leadDeveloper.geoIp.country_iso_code",
+						TargetField = "leadDeveloper.geoIp.countryIsoCode",
+					},
+					new RenameProcessor
+					{
+						Field = "leadDeveloper.geoIp.region_name",
+						TargetField = "leadDeveloper.geoIp.regionName",
 					}
 				}
 			});
@@ -39,6 +67,7 @@ namespace Tests.Document.Single.Index
 		{
 			State = StateOfBeing.Stable,
 			Name = CallIsolatedValue,
+			LeadDeveloper = new Developer { Gender = Gender.Male, Id  = 1, IPAddress = "193.4.250.122" },
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
@@ -56,7 +85,7 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override string UrlPath
-			=> $"/project/project/{CallIsolatedValue}?consistency=quorum&op_type=index&refresh=true&routing=route&pipeline={PipelineId}";
+			=> $"/project/project/{CallIsolatedValue}?refresh=true&pipeline={PipelineId}";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -64,6 +93,7 @@ namespace Tests.Document.Single.Index
 			new
 			{
 				name = CallIsolatedValue,
+				leadDeveloper = new { iPAddress = "193.4.250.122", gender = "Male", id = 1 },
 				state = "Stable",
 				startedOn = FixedDate,
 				lastActivity = FixedDate,
@@ -73,21 +103,36 @@ namespace Tests.Document.Single.Index
 		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
-			.Consistency(Consistency.Quorum)
-			.OpType(OpType.Index)
 			.Refresh()
-			.Pipeline(PipelineId)
-			.Routing("route");
+			.Pipeline(PipelineId);
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)
 			{
 				Refresh = true,
-				OpType = OpType.Index,
-				Consistency = Consistency.Quorum,
-				Routing = "route",
 				Pipeline = PipelineId
 			};
 
+		protected override void ExpectResponse(IIndexResponse response)
+		{
+			response.IsValid.Should().BeTrue();
+
+			var getResponse = this.Client.Get<Project>(response.Id);
+
+			getResponse.IsValid.Should().BeTrue();
+			getResponse.Source.Should().NotBeNull();
+			getResponse.Source.LeadDeveloper.Should().NotBeNull();
+
+			var geoIp = getResponse.Source.LeadDeveloper.GeoIp;
+
+			geoIp.Should().NotBeNull();
+			geoIp.ContinentName.Should().Be("Europe");
+			geoIp.CityName.Should().Be("Reykjavik");
+			geoIp.CountryIsoCode.Should().Be("IS");
+			geoIp.RegionName.Should().Be("Capital Region");
+			geoIp.Location.Should().NotBeNull();
+			geoIp.Location.Latitude.Should().Be(64.1383);
+			geoIp.Location.Longitude.Should().Be(-21.8959);
+		}
 	}
 }

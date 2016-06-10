@@ -758,6 +758,8 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
+    <Compile Include="Ingest\Processors\GeoIpProcessor.cs" />
+    <Compile Include="Ingest\Processors\AttachmentProcessor.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineRequest.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineResponse.cs" />

@@ -104,6 +104,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						nickname = new
 						{
 							type = "text"
+						},
+						geoIp = new
+						{
+							type = "object"
 						}
 					},
 					type = "object"
@@ -194,6 +198,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						.Text(t => t.Name(dv => dv.JobTitle))
 						.Text(t => t.Name(dv => dv.LastName))
 						.Text(t => t.Name(dv => dv.OnlineHandle))
+						.Object<GeoIp>(t => t.Name(dv => dv.GeoIp))
 					)
 				)
 				.Object<object>(o => o
@@ -245,6 +250,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 								{ p => p.LastName, new TextProperty() },
 								{ p => p.Location, new GeoPointProperty() },
 								{ p => p.OnlineHandle, new TextProperty() },
+								{ p => p.GeoIp, new ObjectProperty() },
 							}
 						}
 				},

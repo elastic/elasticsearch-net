@@ -36,7 +36,13 @@ namespace Tests.Framework.Integration
 		MapperMurmer3,
 
 		[Moniker("x-pack")]
-		XPack
+		XPack,
+
+		[Moniker("ingest-geoip")]
+		IngestGeoIp,
+
+		[Moniker("ingest-attachment")]
+		IngestAttachment
 	}
 
 	public static class ElasticsearchPluginExtensions
@@ -61,6 +67,10 @@ namespace Tests.Framework.Integration
 				new ElasticsearchPluginConfiguration(MapperAttachments),
 				new ElasticsearchPluginConfiguration(MapperMurmer3),
 				new ElasticsearchPluginConfiguration(ElasticsearchPlugin.XPack),
+				new ElasticsearchPluginConfiguration(IngestGeoIp,
+					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
+				new ElasticsearchPluginConfiguration(IngestAttachment,
+					version => version >= new ElasticsearchVersion("5.0.0-alpha3")),
 			};
 
 		protected override ElasticsearchPlugin GetKeyForItem(ElasticsearchPluginConfiguration item)

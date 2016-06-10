@@ -215,10 +215,13 @@
     <Compile Include="Document\Multiple\MultiGet\GetManyUrlTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestAttachmentApiTests.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
+    <Compile Include="Framework\MockData\GeoIp.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
     <Compile Include=".\Framework\Configuration\EnvironmentConfiguration.cs" />
@@ -348,7 +351,7 @@
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\TestRunnerFileSystem.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\XplatManualResetEvent.cs" />
     <Compile Include="Framework\MockData\PercolatedQuery.cs" />
-    <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestGeoIpApiTests.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\Configuration\Versions\SemVer.cs" />
