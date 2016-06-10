@@ -183,6 +183,9 @@ namespace Nest
 		[JsonProperty("sampler")]
 		ISamplerAggregation Sampler { get; set; }
 
+		[JsonProperty("geo_centroid")]
+		IGeoCentroidAggregation GeoCentroid { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -270,6 +273,8 @@ namespace Nest
 		public IBucketSelectorAggregation BucketSelector { get; set; }
 
 		public ISamplerAggregation Sampler { get; set; }
+
+		public IGeoCentroidAggregation GeoCentroid { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -383,6 +388,8 @@ namespace Nest
 		IBucketSelectorAggregation IAggregationContainer.BucketSelector { get; set; }
 
 		ISamplerAggregation IAggregationContainer.Sampler { get; set; }
+
+		IGeoCentroidAggregation IAggregationContainer.GeoCentroid { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -555,6 +562,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> Sampler(string name,
 			Func<SamplerAggregationDescriptor<T>, ISamplerAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
+
+		public AggregationContainerDescriptor<T> GeoCentroid(string name,
+			Func<GeoCentroidAggregationDescriptor<T>, IGeoCentroidAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoCentroid = d);
 
 		/// <summary>
 		/// Fluent methods do not assign to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

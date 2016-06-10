@@ -1,0 +1,140 @@
+:ref_current: https://www.elastic.co/guide/en/elasticsearch/reference/2.3
+
+:github: https://github.com/elastic/elasticsearch-net
+
+:nuget: https://www.nuget.org/packages
+
+[[geo-centroid-aggregation-usage]]
+== Geo Centroid Aggregation Usage
+
+A metric aggregation that computes the weighted centroid from all coordinate values 
+for a Geo-point datatype field.
+
+Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .GeoCentroid("centroid", gb => gb
+        .Field(p => p.Location)
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "centroid": {
+      "geo_centroid": {
+        "field": "location"
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var centroid = response.Aggs.GeoCentroid("centroid");
+centroid.Should().NotBeNull();
+centroid.Location.Should().NotBeNull();
+centroid.Location.Latitude.Should().NotBe(0);
+centroid.Location.Longitude.Should().NotBe(0);
+----
+
+[[geo-centroid-sub-aggregation]] 
+
+[[geo-centroid-sub-aggregation]]
+[float]
+== Geo Centroid Sub Aggregation 
+
+The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
+
+=== Fluent DSL Example
+
+[source,csharp]
+----
+s => s
+.Aggregations(a => a
+    .Terms("projects", t => t
+        .Field(p => p.Name)
+        .Aggregations(sa => sa
+            .GeoCentroid("centroid", gb => gb
+                .Field(p => p.Location)
+            )
+        )
+    )
+)
+----
+
+=== Object Initializer Syntax Example
+
+[source,csharp]
+----
+new SearchRequest<Project>
+{
+    Aggregations = new TermsAggregation("projects")
+    {
+        Field = Infer.Field<Project>(p => p.Name),
+        Aggregations = new GeoCentroidAggregation("centroid", Infer.Field<Project>(p => p.Location))
+    }
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "aggs": {
+    "projects": {
+      "terms": {
+        "field": "name"
+      },
+      "aggs": {
+        "centroid": {
+          "geo_centroid": {
+            "field": "location"
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+=== Handling Responses
+
+[source,csharp]
+----
+response.IsValid.Should().BeTrue();
+var projects = response.Aggs.Terms("projects");
+
+foreach (var bucket in projects.Buckets)
+{
+    var centroid = bucket.GeoCentroid("centroid");
+    centroid.Should().NotBeNull();
+    centroid.Location.Should().NotBeNull();
+
+    centroid.Location.Latitude.Should().NotBe(0);
+    centroid.Location.Longitude.Should().NotBe(0);
+}
+----
+

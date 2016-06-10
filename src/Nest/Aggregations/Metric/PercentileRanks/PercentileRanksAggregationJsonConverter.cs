@@ -19,7 +19,7 @@ namespace Nest
 			percentileRanks.Method = ReadMethodProperty(properties);
 			if (properties.ContainsKey("values"))
 				percentileRanks.Values = properties["values"].ToObject<List<double>>();
-			return percentileRanks;;
+			return percentileRanks;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
