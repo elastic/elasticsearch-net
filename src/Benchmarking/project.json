@@ -1,6 +1,6 @@
 {
-  "version": "5.0.0-alpha1",
-  "compilationOptions": {
+  "version": "5.0.0-alpha2",
+  "buildOptions": {
     "warningsAsErrors": false,
     "define": [ "LINQ", "NDESK_OPTIONS" ],
     "emitEntryPoint": true
@@ -13,12 +13,12 @@
   },
   "configurations": {
     "Debug": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "DEBUG", "TRACE" ]
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [ "RELEASE", "TRACE" ],
         "optimize": true
       }
@@ -28,7 +28,7 @@
     "Benchmarking": "Benchmarking"
   },
   "frameworks": {
-    "dnx451": {
+    "net451": {
       "frameworkAssemblies": {
         "System.Diagnostics.Tools": "",
         "System.IO.Compression.FileSystem": "",
@@ -39,20 +39,18 @@
       "dependencies": {
       }
     },
-    "dnxcore50": {
-      "compilationOptions": { "define": [ "DOTNETCORE" ] },
+    "netcoreapp1.0": {
+      "buildOptions": { "define": [ "DOTNETCORE" ] },
       "dependencies": {
-        "System.Collections": "4.0.11-beta-23225",
-        "System.Diagnostics.Tools": "4.0.1-beta-23225",
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
-        "System.Linq": "4.0.0-beta-23109",
-        "System.Linq.Queryable": "4.0.0-beta-23109",
-        "System.Net.Http": "4.0.1-beta-23225",
-        "System.Reflection": "4.1.0-beta-23225",
-        "System.Runtime": "4.0.21-beta-23225",
-        "System.Threading": "4.0.11-beta-23225",
-        "System.Threading.Timer": "4.0.0-beta-23109"
-      }
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0-rc2-3002702"
+        }
+      },
+      "imports": [
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   }
 }
