@@ -297,6 +297,9 @@
     <Compile Include="Cat\CatShards\CatShardsRecord.cs" />
     <Compile Include="Cat\CatShards\CatShardsRequest.cs" />
     <Compile Include="Cat\CatShards\ElasticClient-CatShards.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksRecord.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksRequest.cs" />
+    <Compile Include="Cat\CatTasks\ElasticClient-CatTasks.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecord.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecordJsonConverter.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRequest.cs" />

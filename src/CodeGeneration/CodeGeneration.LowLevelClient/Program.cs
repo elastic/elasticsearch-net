@@ -19,10 +19,19 @@ namespace CodeGeneration.LowLevelClient
 				answer = Console.ReadLine()?.Trim().ToLowerInvariant();
 				redownloadCoreSpecification = answer == "y";
 			}
+
 			if (redownloadCoreSpecification)
 			{
 				Console.Write("Branch to download specification from (default master): ");
 				downloadBranch = Console.ReadLine()?.Trim();
+			}
+			else
+			{
+				// read last downloaded branch from file.
+				if (File.Exists(CodeConfiguration.LastDownloadedVersionFile))
+				{
+					downloadBranch = File.ReadAllText(CodeConfiguration.LastDownloadedVersionFile);
+				}
 			}
 
 			if (redownloadCoreSpecification)

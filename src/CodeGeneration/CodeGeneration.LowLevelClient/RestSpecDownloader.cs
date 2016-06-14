@@ -51,6 +51,8 @@ namespace CodeGeneration.LowLevelClient
 					pbar.Tick($"Downloaded rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
 				}
 			}
+
+			File.WriteAllText(CodeConfiguration.LastDownloadedVersionFile, branch);
 		}
 
 		private void DownloadJsonDefinitions(Specification spec, IProgressBar pbar)

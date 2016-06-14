@@ -209,6 +209,8 @@
     <Compile Include="Cat\CatSegments\CatSegmentsUrlTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsApiTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsUrlTests.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksApiTests.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksUrlTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyApiTests.cs" />
