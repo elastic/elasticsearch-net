@@ -607,6 +607,8 @@
     <Compile Include="IndexModules\IndexSettings\Merge\MergePolicySettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSchedulerSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Queries\IQueriesCacheSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Queries\IQueriesSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettingsConverter.cs" />

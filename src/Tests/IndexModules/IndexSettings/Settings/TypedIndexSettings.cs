@@ -32,6 +32,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				{"index.unassigned.node_left.delayed_timeout", "1m" },
 				{"index.number_of_shards", 1},
 				{"index.store.type", "mmapfs"},
+				{"index.queries.cache.enabled", true},
 			};
 
 			/**
@@ -55,7 +56,8 @@ namespace Tests.IndexModules.IndexSettings.Settings
 				.TotalShardsPerNode(10)
 				.UnassignedNodeLeftDelayedTimeout(TimeSpan.FromMinutes(1))
 				.RefreshInterval(-1)
-				.FileSystemStorageImplementation(FileSystemStorageImplementation.MMap);
+				.FileSystemStorageImplementation(FileSystemStorageImplementation.MMap)
+				.Queries(q => q.Cache(c => c.Enabled()));
 
 			/**
 			 */
@@ -81,7 +83,8 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					RoutingAllocationTotalShardsPerNode = 10,
 					UnassignedNodeLeftDelayedTimeout = "1m",
 					RefreshInterval = -1,
-					FileSystemStorageImplementation = FileSystemStorageImplementation.MMap
+					FileSystemStorageImplementation = FileSystemStorageImplementation.MMap,
+					Queries = new QueriesSettings { Cache = new QueriesCacheSettings { Enabled = true } }
 				};
 		}
 	}

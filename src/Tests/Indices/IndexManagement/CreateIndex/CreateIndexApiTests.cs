@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -30,6 +31,7 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			{
 				{ "index.number_of_replicas", 1 },
 				{ "index.number_of_shards", 1 },
+				{ "index.queries.cache.enabled", true },
 			}
 		};
 
@@ -39,15 +41,43 @@ namespace Tests.Indices.IndexManagement.CreateIndex
 			.Settings(s => s
 				.NumberOfReplicas(1)
 				.NumberOfShards(1)
+				.Queries(q => q
+					.Cache(c => c
+						.Enabled()
+					)
+				)
 			);
 
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
 		{
-			Settings = new Nest.IndexSettings()
+			Settings = new Nest.IndexSettings
 			{
 				NumberOfReplicas = 1,
 				NumberOfShards = 1,
+				Queries = new QueriesSettings
+				{
+					Cache = new QueriesCacheSettings
+					{
+						Enabled = true
+					}
+				}
 			}
 		};
+
+		protected override void ExpectResponse(ICreateIndexResponse response)
+		{
+			response.IsValid.Should().BeTrue();
+
+			var indexSettings = this.Client.GetIndexSettings(g => g.Index(CallIsolatedValue));
+
+			indexSettings.IsValid.Should().BeTrue();
+			indexSettings.Indices.Should().NotBeEmpty().And.ContainKey(CallIsolatedValue);
+
+			var settings = indexSettings.Indices[CallIsolatedValue];
+
+			settings.Settings.NumberOfShards.Should().Be(1);
+			settings.Settings.NumberOfReplicas.Should().Be(1);
+			settings.Settings.Queries.Cache.Enabled.Should().Be(true);
+		}
 	}
 }

@@ -11,11 +11,11 @@ namespace Nest
 		private IDictionary Self => BackingDictionary;
 
 		protected IsADictionaryBase() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
-		//protected IsADictionaryBase(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
+
 		protected IsADictionaryBase(IDictionary<TKey, TValue> backingDictionary)
 		{
-			this.BackingDictionary = backingDictionary != null 
-				? new Dictionary<TKey, TValue>(backingDictionary) 
+			this.BackingDictionary = backingDictionary != null
+				? new Dictionary<TKey, TValue>(backingDictionary)
 				: new Dictionary<TKey, TValue>();
 		}
 
