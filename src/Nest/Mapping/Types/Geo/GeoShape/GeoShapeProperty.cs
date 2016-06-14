@@ -17,6 +17,14 @@ namespace Nest
 		[JsonProperty("tree_levels")]
 		int? TreeLevels { get; set; }
 
+		/// <summary>
+		/// defines the approach for how to represent shapes at indexing and search time.
+		/// It also influences the capabilities available so it is recommended to let
+		/// Elasticsearch set this parameter automatically.
+		/// </summary>
+		[JsonProperty("strategy")]
+		GeoStrategy? Strategy { get; set; }
+
 		[JsonProperty("distance_error_pct")]
 		double? DistanceErrorPercentage { get; set; }
 
@@ -36,6 +44,8 @@ namespace Nest
 
 		public int? TreeLevels { get; set; }
 
+		public GeoStrategy? Strategy { get; set; }
+
 		public double? DistanceErrorPercentage { get; set; }
 
 		public bool? PointsOnly { get; set; }
@@ -49,6 +59,7 @@ namespace Nest
 		Distance IGeoShapeProperty.Precision { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
+		GeoStrategy? IGeoShapeProperty.Strategy { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 		bool? IGeoShapeProperty.PointsOnly { get; set; }
 
@@ -57,6 +68,8 @@ namespace Nest
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree tree) => Assign(a => a.Tree = tree);
 
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
+
+		public GeoShapePropertyDescriptor<T> Strategy(GeoStrategy strategy) => Assign(a => a.Strategy = strategy);
 
 		public GeoShapePropertyDescriptor<T> Precision(double precision, DistanceUnit unit) =>
 			Assign(a => a.Precision = new Distance(precision, unit));

@@ -26,7 +26,6 @@ namespace Nest
 			if (j == null || !j.HasValues)
 				return null;
 
-
 			var firstProp = j.Properties().FirstOrDefault();
 			if (firstProp == null) return null;
 
@@ -45,9 +44,11 @@ namespace Nest
 			if (query == null) return null;
 			var boost = jo["boost"]?.Value<double>();
 			var name = jo["_name"]?.Value<string>();
+			var ignoreUnmapped = jo["ignore_unmapped"]?.Value<bool>();
 			query.Boost = boost;
 			query.Name = name;
 			query.Field = field;
+			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}
 

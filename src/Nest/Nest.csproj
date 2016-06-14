@@ -850,6 +850,7 @@
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoShapeAttribute.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoShapeProperty.cs" />
+    <Compile Include="Mapping\Types\Geo\GeoShape\GeoStrategy.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoTree.cs" />
     <Compile Include="Mapping\Types\Properties.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />

@@ -19,6 +19,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 		protected override object ShapeJson => new
 		{
 			type ="envelope",
+			ignore_unmapped = false,
 			coordinates = this._coordinates
 		};
 
@@ -27,6 +28,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
+			IgnoreUnmapped = false,
 			Shape = new EnvelopeGeoShape(this._coordinates)
 		};
 
@@ -35,6 +37,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
+				.IgnoreUnmapped()
 				.Coordinates(this._coordinates)
 			);
 

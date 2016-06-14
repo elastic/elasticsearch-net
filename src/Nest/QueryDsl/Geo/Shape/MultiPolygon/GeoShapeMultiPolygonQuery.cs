@@ -10,7 +10,7 @@ namespace Nest
 		IMultiPolygonGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeMultiPolygonQuery : FieldNameQueryBase, IGeoShapeMultiPolygonQuery
+	public class GeoShapeMultiPolygonQuery : GeoShapeQueryBase, IGeoShapeMultiPolygonQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public IMultiPolygonGeoShape Shape { get; set; }
@@ -19,8 +19,8 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapeMultiPolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
-	public class GeoShapeMultiPolygonQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
+	public class GeoShapeMultiPolygonQueryDescriptor<T>
+		: GeoShapeQueryDescriptorBase<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
 		, IGeoShapeMultiPolygonQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);

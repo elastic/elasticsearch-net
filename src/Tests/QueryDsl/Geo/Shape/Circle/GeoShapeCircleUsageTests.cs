@@ -15,6 +15,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 		{
 			type ="circle",
 			radius = "100m",
+			ignore_unmapped = true,
 			coordinates = this._coordinates
 		};
 
@@ -23,6 +24,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
+			IgnoreUnmapped = true,
 			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" }
 		};
 
@@ -31,6 +33,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
+				.IgnoreUnmapped(true)
 				.Coordinates(this._coordinates)
 				.Radius("100m")
 			);

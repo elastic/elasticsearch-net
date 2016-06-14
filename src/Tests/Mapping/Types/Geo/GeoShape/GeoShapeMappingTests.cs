@@ -8,6 +8,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 		[GeoShape(
 			Tree = GeoTree.Quadtree,
 			Orientation = GeoOrientation.ClockWise,
+			Strategy = GeoStrategy.Recursive,
 			TreeLevels = 3,
 			PointsOnly = true,
 			DistanceErrorPercentage = 1.0)]
@@ -28,6 +29,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 					type = "geo_shape",
 					tree = "quadtree",
 					orientation = "cw",
+					strategy = "recursive",
 					tree_levels = 3,
 					points_only = true,
 					distance_error_pct = 1.0
@@ -44,6 +46,7 @@ namespace Tests.Mapping.Types.Geo.GeoShape
 				.Name(o => o.Full)
 				.Tree(GeoTree.Quadtree)
 				.Orientation(GeoOrientation.ClockWise)
+				.Strategy(GeoStrategy.Recursive)
 				.TreeLevels(3)
 				.PointsOnly()
 				.DistanceErrorPercentage(1)
