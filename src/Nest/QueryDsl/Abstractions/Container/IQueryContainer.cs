@@ -88,7 +88,7 @@ namespace Nest
 		[JsonProperty("query_string")]
 		IQueryStringQuery QueryString { get; set; }
 
-		[JsonProperty("mlt")]
+		[JsonProperty("more_like_this")]
 		IMoreLikeThisQuery MoreLikeThis { get; set; }
 
 		[JsonProperty("span_first")]

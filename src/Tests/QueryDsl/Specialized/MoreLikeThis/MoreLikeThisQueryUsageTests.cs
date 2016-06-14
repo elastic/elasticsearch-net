@@ -13,7 +13,7 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override object QueryJson => new
 		{
-			mlt = new
+			more_like_this = new
 			{
 				fields = new[] { "name" },
 				minimum_should_match = 1,
