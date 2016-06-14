@@ -17,15 +17,12 @@ namespace Nest
 
 		protected override bool Conditionless => false;
 
-		internal override void InternalWrapInContainer(IQueryContainer container)
-		{
-			container.MatchAll = this;
-		}
+		internal override void InternalWrapInContainer(IQueryContainer container) => container.MatchAll = this;
 	}
 
 	public class MatchAllQueryDescriptor
 		: QueryDescriptorBase<MatchAllQueryDescriptor, IMatchAllQuery>
-		, IMatchAllQuery 
+		, IMatchAllQuery
 	{
 		protected override bool Conditionless => false;
 

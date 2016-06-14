@@ -311,6 +311,12 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.MatchAll = query ?? new MatchAllQuery());
 
 		/// <summary>
+		/// A query that matches no documents. This is the inverse of the match_all query.
+		/// </summary>
+		public QueryContainer MatchNone(Func<MatchNoneQueryDescriptor, IMatchNoneQuery> selector = null) =>
+			WrapInContainer(selector, (query, container) => container.MatchNone = query ?? new MatchNoneQuery());
+
+		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed).
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>

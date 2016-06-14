@@ -8,6 +8,7 @@ namespace Nest
 	{
 		private IBoolQuery _b;
 		private IMatchAllQuery _matchAllQuery;
+		private IMatchNoneQuery _matchNoneQuery;
 		private ITermQuery _term;
 		private IWildcardQuery _wildcard;
 		private IPrefixQuery _prefix;
@@ -70,6 +71,7 @@ namespace Nest
 		IRawQuery IQueryContainer.RawQuery { get { return _raw; } set { _raw = Set(value); } }
 		IBoolQuery IQueryContainer.Bool { get { return _b; } set { _b = Set(value); } }
 		IMatchAllQuery IQueryContainer.MatchAll { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
+		IMatchNoneQuery IQueryContainer.MatchNone { get { return _matchNoneQuery; } set { _matchNoneQuery = Set(value); } }
 		ITermQuery IQueryContainer.Term { get { return _term; } set { _term = Set(value); } }
 		IWildcardQuery IQueryContainer.Wildcard { get { return _wildcard; } set { _wildcard = Set(value); } }
 		IPrefixQuery IQueryContainer.Prefix { get { return _prefix; } set { _prefix = Set(value); } }

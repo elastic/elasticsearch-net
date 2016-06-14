@@ -106,6 +106,8 @@ namespace Nest
 
 		public virtual void Visit(IMatchAllQuery query) => Write("match_all");
 
+		public virtual void Visit(IMatchNoneQuery query) => Write("match_none");
+
 		public virtual void Visit(IMoreLikeThisQuery query) => Write("more_like_this");
 
 		public virtual void Visit(IMultiMatchQuery query) => Write("multi_match");

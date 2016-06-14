@@ -1051,6 +1051,7 @@
     <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\ParentId\ParentIdQuery.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
+    <Compile Include="QueryDsl\MatchNoneQuery.cs" />
     <Compile Include="QueryDsl\MultiTermQueryRewrite\RewriteMultiTerm.cs" />
     <Compile Include="QueryDsl\NestSpecific\ConditionlessQuery.cs" />
     <Compile Include="QueryDsl\NestSpecific\RawQuery.cs" />

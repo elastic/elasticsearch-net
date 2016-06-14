@@ -95,6 +95,9 @@ namespace Nest
 		public static QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
 			new QueryContainerDescriptor<T>().MatchAll(selector);
 
+		public static QueryContainer MatchNone(Func<MatchNoneQueryDescriptor, IMatchNoneQuery> selector = null) =>
+			new QueryContainerDescriptor<T>().MatchNone(selector);
+
 		public static QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().MatchPhrase(selector);
 

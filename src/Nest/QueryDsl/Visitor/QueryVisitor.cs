@@ -42,6 +42,7 @@
 #pragma warning restore 618
 		void Visit(IMatchQuery query);
 		void Visit(IMatchAllQuery query);
+		void Visit(IMatchNoneQuery query);
 		void Visit(IMoreLikeThisQuery query);
 		void Visit(IMultiMatchQuery query);
 		void Visit(INestedQuery query);
@@ -150,6 +151,8 @@
 		public virtual void Visit(IMatchQuery query) { }
 
 		public virtual void Visit(IMatchAllQuery query) { }
+
+		public virtual void Visit(IMatchNoneQuery query) { }
 
 		public virtual void Visit(IMoreLikeThisQuery query) { }
 

@@ -576,6 +576,7 @@
     <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
     <Compile Include="QueryDsl\ConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Joining\ParentId\ParentIdUsageTests.cs" />
+    <Compile Include="QueryDsl\MatchNoneQueryUsageTests.cs" />
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />

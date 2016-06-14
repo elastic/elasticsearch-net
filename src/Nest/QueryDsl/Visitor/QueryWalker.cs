@@ -10,6 +10,7 @@ namespace Nest
 		{
 			visitor.Visit(qd);
 			VisitQuery(qd.MatchAll, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.MatchNone, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MoreLikeThis, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MultiMatch, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.CommonTerms, visitor, (v, d) => v.Visit(d));

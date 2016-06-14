@@ -28,6 +28,9 @@ namespace Nest
 		[JsonProperty("match_all")]
 		IMatchAllQuery MatchAll { get; set; }
 
+		[JsonProperty("match_none")]
+		IMatchNoneQuery MatchNone { get; set; }
+
 		[JsonProperty("term")]
 		ITermQuery Term { get; set; }
 
