@@ -38,6 +38,11 @@ namespace Nest
 		[JsonProperty("norms_memory_in_bytes")]
 		public long NormsMemoryInBytes { get; set; }
 
+		[JsonProperty("points_memory")]
+		public string PointsMemory { get; set; }
+		[JsonProperty("points_memory_in_bytes")]
+		public long PointsMemoryInBytes { get; set; }
+
 		[JsonProperty("stored_fields_memory")]
 		public string StoredFieldsMemory { get; set; }
 		[JsonProperty("stored_fields_memory_in_bytes")]
