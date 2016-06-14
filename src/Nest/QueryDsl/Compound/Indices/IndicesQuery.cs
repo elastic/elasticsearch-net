@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesQueryDescriptor<object>>))]
+	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("indices")]
@@ -28,6 +29,7 @@ namespace Nest
 		public static implicit operator NoMatchQueryContainer(NoMatchShortcut shortcut) => new NoMatchQueryContainer { Shortcut = shortcut };
 	}
 
+	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public class IndicesQuery : QueryBase, IIndicesQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
@@ -40,6 +42,7 @@ namespace Nest
 			q.Indices == null || q.NoMatchQuery.NotWritable() && q.Query.NotWritable();
 	}
 
+	[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 	public class IndicesQueryDescriptor<T>
 		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery>
 		, IIndicesQuery where T : class

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -114,6 +115,7 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedQuery Nested { get; set; }
 
+		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 		[JsonProperty("indices")]
 		IIndicesQuery Indices { get; set; }
 

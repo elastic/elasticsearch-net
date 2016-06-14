@@ -37,7 +37,9 @@
 		void Visit(IHasChildQuery query);
 		void Visit(IHasParentQuery query);
 		void Visit(IIdsQuery query);
+#pragma warning disable 618
 		void Visit(IIndicesQuery query);
+#pragma warning restore 618
 		void Visit(IMatchQuery query);
 		void Visit(IMatchAllQuery query);
 		void Visit(IMoreLikeThisQuery query);
@@ -140,7 +142,9 @@
 
 		public virtual void Visit(IIdsQuery query) { }
 
+#pragma warning disable 618
 		public virtual void Visit(IIndicesQuery query) { }
+#pragma warning restore 618
 
 		public virtual void Visit(IMatchQuery query) { }
 

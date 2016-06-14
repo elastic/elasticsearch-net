@@ -37,7 +37,10 @@ namespace Nest
 		private ISpanWithinQuery _spanWithin;
 		private ISpanMultiTermQuery _spanMultiTerm;
 		private INestedQuery _nested;
+
+#pragma warning disable 618
 		private IIndicesQuery _indices;
+#pragma warning restore 618
 		private IFunctionScoreQuery _functionScore;
 		private ITemplateQuery _template;
 		private IGeoBoundingBoxQuery _geoBoundingBox;
@@ -96,7 +99,9 @@ namespace Nest
 		ISpanWithinQuery IQueryContainer.SpanWithin { get { return _spanWithin; } set { _spanWithin = Set(value); } }
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get { return _spanMultiTerm; } set { _spanMultiTerm = Set(value); } }
 		INestedQuery IQueryContainer.Nested { get { return _nested; } set { _nested = Set(value); } }
+#pragma warning disable 618
 		IIndicesQuery IQueryContainer.Indices { get { return _indices; } set { _indices = Set(value); } }
+#pragma warning restore 618
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get { return _functionScore; } set { _functionScore = Set(value); } }
 		ITemplateQuery IQueryContainer.Template { get { return _template; } set { _template = Set(value); } }
 		IGeoBoundingBoxQuery IQueryContainer.GeoBoundingBox { get { return _geoBoundingBox; } set { _geoBoundingBox = Set(value); } }

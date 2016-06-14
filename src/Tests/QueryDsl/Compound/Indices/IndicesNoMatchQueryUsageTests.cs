@@ -2,6 +2,8 @@
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 
+#pragma warning disable 618 // Deprecated in 5.0.0-alpha2 - see https://github.com/elastic/elasticsearch/issues/12017
+
 namespace Tests.QueryDsl.Compound.Indices
 {
 	public class IndicesNoMatchQueryUsageTests : QueryDslUsageTestsBase

@@ -85,6 +85,7 @@ namespace Nest
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);
 
+		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 		public static QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
 			new QueryContainerDescriptor<T>().Indices(selector);
 

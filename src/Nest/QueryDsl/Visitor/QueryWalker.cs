@@ -104,12 +104,14 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Query);
 			});
+#pragma warning disable 618
 			VisitQuery(qd.Indices, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				Accept(v, d.Query);
 				Accept(v, d.NoMatchQuery, VisitorScope.NoMatchQuery);
 			});
+#pragma warning restore 618
 			VisitQuery(qd.Nested, visitor, (v, d) =>
 			{
 				v.Visit(d);
@@ -166,7 +168,7 @@ namespace Nest
 
 		private static void Accept(IQueryVisitor visitor, IEnumerable<IQueryContainer> queries, VisitorScope scope = VisitorScope.Query)
 		{
-			if (!queries.HasAny()) return;
+			if (queries == null) return;
 			foreach (var f in queries) Accept(visitor, f, scope);
 		}
 
@@ -248,7 +250,7 @@ namespace Nest
 			if (qd == null) return;
 			VisitQuery(qd, visitor, (v, d) =>
 			{
-				visitor.Visit(qd as ISpanSubQuery);
+				visitor.Visit(qd);
 				scoped(v, d);
 			});
 		}
