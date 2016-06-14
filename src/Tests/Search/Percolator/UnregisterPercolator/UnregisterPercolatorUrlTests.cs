@@ -10,6 +10,7 @@ namespace Tests.Search.Percolator.UnregisterPercolator
 {
 	public class UnregisterPercolatorUrlTests
 	{
+		[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 		[U] public async Task Urls()
 		{
 			var name = "name-of-perc";

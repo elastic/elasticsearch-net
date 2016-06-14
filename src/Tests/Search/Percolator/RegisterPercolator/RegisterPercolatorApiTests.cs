@@ -13,6 +13,7 @@ using Xunit;
 namespace Tests.Search.Percolator.RegisterPercolator
 {
 	[Collection(TypeOfCluster.Indexing)]
+	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
 		public RegisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

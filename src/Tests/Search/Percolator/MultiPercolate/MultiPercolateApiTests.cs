@@ -14,7 +14,7 @@ using Xunit;
 namespace Tests.Search.Percolator.MultiPercolate
 {
 	[Collection(TypeOfCluster.Indexing)]
-	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated. TODO: Remove?")]
+	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 	public class MultiPercolateApiTests : ApiIntegrationTestBase<IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
 		public MultiPercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
