@@ -6,7 +6,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 {
-	public class GeoMultiPointUsageTests : ShapeQueryUsageTestsBase
+	public class GeoMultiPointUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoMultiPointUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -27,7 +27,8 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new MultiPointGeoShape(this._coordinates)
+			Shape = new MultiPointGeoShape(this._coordinates),
+			IgnoreUnmapped = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -36,6 +37,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 				.Boost(1.1)
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
+				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiPointQuery>(a => a.GeoShape as IGeoShapeMultiPointQuery)

@@ -450,7 +450,7 @@
     <Compile Include=".\QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
-    <Compile Include=".\QueryDsl\Geo\Shape\ShapeQueryUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />

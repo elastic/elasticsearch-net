@@ -6,7 +6,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 {
-	public class GeoMultiLineStringUsageTests : ShapeQueryUsageTestsBase
+	public class GeoMultiLineStringUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoMultiLineStringUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -28,7 +28,8 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new MultiLineStringGeoShape(this._coordinates)
+			Shape = new MultiLineStringGeoShape(this._coordinates),
+			IgnoreUnmapped = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -37,6 +38,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 				.Boost(1.1)
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
+				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeMultiLineStringQuery>(a => a.GeoShape as IGeoShapeMultiLineStringQuery)
