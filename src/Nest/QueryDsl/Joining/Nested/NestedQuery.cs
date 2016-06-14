@@ -20,6 +20,8 @@ namespace Nest
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
 
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class NestedQuery : QueryBase, INestedQuery
@@ -29,13 +31,14 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public Field Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
+		public bool? IgnoreUnmapped { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Nested = this;
 		internal static bool IsConditionless(INestedQuery q) => q.Path == null || q.Query.IsConditionless();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class NestedQueryDescriptor<T> 
+	public class NestedQueryDescriptor<T>
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 		, INestedQuery where T : class
 	{
@@ -44,8 +47,9 @@ namespace Nest
 		QueryContainer INestedQuery.Query { get; set; }
 		Field INestedQuery.Path { get; set; }
 		IInnerHits INestedQuery.InnerHits { get; set; }
+		bool? INestedQuery.IgnoreUnmapped { get; set; }
 
-		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public NestedQueryDescriptor<T> ScoreMode(NestedScoreMode scoreMode) => Assign(a => a.ScoreMode = scoreMode);
@@ -54,7 +58,10 @@ namespace Nest
 
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
-		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) => 
-			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));	
+		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
+			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+
+		public NestedQueryDescriptor<T> IgnoreUnmapped(bool ignoreUnmapped = false) =>
+			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

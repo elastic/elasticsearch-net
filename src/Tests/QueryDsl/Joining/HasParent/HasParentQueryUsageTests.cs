@@ -16,6 +16,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 				boost = 1.1,
 				type = "developer",
 				score = true,
+				ignore_unmapped = true,
 				query = new
 				{
 					match_all = new { }
@@ -34,7 +35,8 @@ namespace Tests.QueryDsl.Joining.HasParent
 			Type = Infer.Type<Developer>(),
 			InnerHits = new InnerHits { Explain = true },
 			Query = new MatchAllQuery(),
-			Score = true
+			Score = true,
+			IgnoreUnmapped = true
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -44,7 +46,7 @@ namespace Tests.QueryDsl.Joining.HasParent
 				.InnerHits(i=>i.Explain())
 				.Score(true)
 				.Query(qq=>qq.MatchAll())
-
+				.IgnoreUnmapped(true)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IHasParentQuery>(a => a.HasParent)

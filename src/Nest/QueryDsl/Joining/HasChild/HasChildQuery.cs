@@ -27,6 +27,9 @@ namespace Nest
 
 		[JsonProperty("inner_hits")]
 		IInnerHits InnerHits { get; set; }
+
+		[JsonProperty("ignore_unmapped")]
+		bool? IgnoreUnmapped { get; set; }
 	}
 
 	public class HasChildQuery : QueryBase, IHasChildQuery
@@ -42,6 +45,7 @@ namespace Nest
 		public int? MaxChildren { get; set; }
 		public QueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
+		public bool? IgnoreUnmapped { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.HasChild = this;
 		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless || q.Type == null;
@@ -62,6 +66,7 @@ namespace Nest
 		int? IHasChildQuery.MaxChildren { get; set; }
 		QueryContainer IHasChildQuery.Query { get; set; }
 		IInnerHits IHasChildQuery.InnerHits { get; set; }
+		bool? IHasChildQuery.IgnoreUnmapped { get; set; }
 
 		public HasChildQueryDescriptor()
 		{
@@ -84,5 +89,8 @@ namespace Nest
 
 		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
 			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
+
+		public HasChildQueryDescriptor<T> IgnoreUnmapped(bool ignoreUnmapped = false) =>
+			Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }
