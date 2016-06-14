@@ -475,11 +475,17 @@ namespace Nest
 		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
 
 		/// <summary>
-		/// percolate query can be used to match queries stored in an index.
+		/// The percolate query can be used to match queries stored in an index.
 		/// The percolate query itself contains the document that will be used as query
 		/// to match with the stored queries.
 		/// </summary>
 		public QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Percolate = query);
+
+		/// <summary>
+		/// The parent_id query can be used to find child documents which belong to a particular parent.
+		/// </summary>
+		public QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, IParentIdQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.ParentId = query);
 	}
 }

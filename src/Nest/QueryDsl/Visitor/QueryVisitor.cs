@@ -53,15 +53,15 @@
 		void Visit(ITermQuery query);
 		void Visit(IWildcardQuery query);
 		void Visit(ITermsQuery query);
-		void Visit(ITypeQuery filter);
-		void Visit(IScriptQuery filter);
-		void Visit(IMissingQuery filter);
-		void Visit(IGeoPolygonQuery filter);
-		void Visit(IGeoDistanceRangeQuery filter);
-		void Visit(IGeoDistanceQuery filter);
-		void Visit(IGeoBoundingBoxQuery filter);
+		void Visit(ITypeQuery query);
+		void Visit(IScriptQuery query);
+		void Visit(IMissingQuery query);
+		void Visit(IGeoPolygonQuery query);
+		void Visit(IGeoDistanceRangeQuery query);
+		void Visit(IGeoDistanceQuery query);
+		void Visit(IGeoBoundingBoxQuery query);
 		void Visit(IGeoHashCellQuery query);
-		void Visit(IExistsQuery filter);
+		void Visit(IExistsQuery query);
 		void Visit(IDateRangeQuery query);
 		void Visit(INumericRangeQuery query);
 		void Visit(ITermRangeQuery query);
@@ -88,6 +88,7 @@
 		void Visit(IGeoShapeCircleQuery query);
 		void Visit(IRawQuery query);
 		void Visit(IPercolateQuery query);
+		void Visit(IParentIdQuery query);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -227,5 +228,7 @@
 		public virtual void Visit(IRawQuery query) { }
 
 		public virtual void Visit(IPercolateQuery query) { }
+
+		public virtual void Visit(IParentIdQuery query) { }
 	}
 }

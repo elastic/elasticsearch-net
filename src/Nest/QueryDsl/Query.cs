@@ -113,6 +113,9 @@ namespace Nest
 		public static QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Nested(selector);
 
+		public static QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, IParentIdQuery> selector) =>
+			new QueryContainerDescriptor<T>().ParentId(selector);
+
 		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Percolate(selector);
 

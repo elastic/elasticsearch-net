@@ -79,6 +79,9 @@ namespace Nest
 		[JsonProperty("has_parent")]
 		IHasParentQuery HasParent { get; set; }
 
+		[JsonProperty("parent_id")]
+		IParentIdQuery ParentId { get; set; }
+
 		[JsonProperty("span_term")]
 		ISpanTermQuery SpanTerm { get; set; }
 
