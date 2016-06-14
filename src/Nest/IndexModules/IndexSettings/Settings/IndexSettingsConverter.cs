@@ -95,7 +95,8 @@ namespace Nest
 			newObject = newObject ?? new JObject();
 			foreach (var property in original.Properties())
 			{
-				if (property.Value is JObject && property.Name != "analysis") Flatten(property.Value.Value<JObject>(), property.Name + ".", newObject);
+				if (property.Value is JObject && property.Name != "analysis")
+					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
 				else newObject.Add(prefix + property.Name, property.Value);
 			}
 			return newObject;
