@@ -76,6 +76,9 @@ namespace Nest
 					case "set":
 						processors.Add(jsonProcessor.ToObject<SetProcessor>(serializer));
 						break;
+					case "sort":
+						processors.Add(jsonProcessor.ToObject<SortProcessor>(serializer));
+						break;
 					case "split":
 						processors.Add(jsonProcessor.ToObject<SplitProcessor>(serializer));
 						break;

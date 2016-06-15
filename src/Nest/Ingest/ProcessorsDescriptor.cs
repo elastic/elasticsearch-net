@@ -26,7 +26,6 @@ namespace Nest
 		public ProcessorsDescriptor Date<T>(Func<DateProcessorDescriptor<T>, IDateProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new DateProcessorDescriptor<T>())));
 
-
 		public ProcessorsDescriptor Fail(Func<FailProcessorDescriptor, IFailProcessor> selector) =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new FailProcessorDescriptor())));
 
@@ -62,10 +61,16 @@ namespace Nest
 		public ProcessorsDescriptor Rename<T>(Func<RenameProcessorDescriptor<T>, IRenameProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new RenameProcessorDescriptor<T>())));
 
-
 		public ProcessorsDescriptor Set<T>(Func<SetProcessorDescriptor<T>, ISetProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new SetProcessorDescriptor<T>())));
 
+		/// <summary>
+		/// The Sort processor sorts the elements of an array ascending or descending. Homogeneous arrays of numbers
+		/// will be sorted numerically, while arrays of strings or heterogeneous arrays
+		///  of strings and numbers will be sorted lexicographically.
+		/// </summary>
+		public ProcessorsDescriptor Sort<T>(Func<SortProcessorDescriptor<T>, ISortProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new SortProcessorDescriptor<T>())));
 
 		public ProcessorsDescriptor Split<T>(Func<SplitProcessorDescriptor<T>, ISplitProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new SplitProcessorDescriptor<T>())));
