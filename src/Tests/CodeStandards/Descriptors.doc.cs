@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
@@ -18,8 +19,8 @@ namespace Tests.CodeStandards
 			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
 
 			var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
-							  where t.IsClass() 
-								&& t.Name.Contains("Descriptor") 
+							  where t.IsClass()
+								&& t.Name.Contains("Descriptor")
 								&& !notDescriptors.Contains(t.Name)
 								&& !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
 							  select t.FullName;
@@ -65,9 +66,80 @@ namespace Tests.CodeStandards
 			selectorMethods.Should().BeEmpty();
 		}
 
+		/**
+		 * Descriptor methods that assign to a nullable bool property should accept
+		 * a nullable bool with a default value
+		 */
+		[U]
+		public void DescriptorMethodsAcceptNullableBoolsForQueriesWithNullableBoolProperties()
+		{
+			var queries =
+				from t in typeof(IQuery).Assembly().Types()
+				where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
+				where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
+				select t;
+
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				where t.GetInterfaces().Intersect(queries).Any()
+				select t;
+
+			var breakingDescriptors = new List<string>();
+
+			// exceptions
+			var parameterlessMethods = new List<MethodInfo>
+			{
+				typeof(BoolQueryDescriptor<>).GetMethod(nameof(BoolQueryDescriptor<object>.DisableCoord))
+			};
+
+			var nonDefaultValueMethods = new List<MethodInfo>
+			{
+				typeof(SpanNearQueryDescriptor<>).GetMethod(nameof(SpanNearQueryDescriptor<object>.CollectPayloads)),
+				typeof(SpanNearQueryDescriptor<>).GetMethod(nameof(SpanNearQueryDescriptor<object>.InOrder)),
+			};
+
+			foreach (var query in queries)
+			{
+				var descriptor = descriptors.First(d => query.IsAssignableFrom(d));
+				foreach (var boolProperty in query.GetProperties().Where(p => p.PropertyType == typeof(bool?)))
+				{
+					var descriptorMethod = descriptor.GetMethod(boolProperty.Name);
+					if (descriptorMethod == null)
+						throw new Exception($"No method for property {boolProperty.Name} on {descriptor.Name}");
+
+					var parameters = descriptorMethod.GetParameters();
+
+					if (!parameters.Any())
+					{
+						if (parameterlessMethods.Contains(descriptorMethod))
+							continue;
+
+						throw new Exception($"No parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+					}
+
+					if (parameters.Length > 1)
+						throw new Exception($"More than one parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+
+					if (parameters[0].ParameterType != typeof(bool?))
+						breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not take nullable bool");
+
+					if (!parameters[0].HasDefaultValue)
+					{
+						if (nonDefaultValueMethods.Contains(descriptorMethod))
+							continue;
+
+						breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not have a default value");
+					}
+				}
+			}
+
+			breakingDescriptors.Should().BeEmpty();
+		}
+
 		//TODO methods taking params should also have a version taking IEnumerable
 
-		//TODO methods named Index or Indices that 
+		//TODO methods named Index or Indices that
 
 		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
 		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
