@@ -86,8 +86,8 @@ namespace Nest
 	}
 
 	public class DateIndexNameProcessorDescriptor<T>
-: ProcessorDescriptorBase<DateIndexNameProcessorDescriptor<T>, IDateIndexNameProcessor>, IDateIndexNameProcessor
-where T : class
+		: ProcessorDescriptorBase<DateIndexNameProcessorDescriptor<T>, IDateIndexNameProcessor>, IDateIndexNameProcessor
+		where T : class
 	{
 		protected override string Name => "date_index_name";
 
