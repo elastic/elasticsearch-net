@@ -46,6 +46,9 @@ namespace Nest
 					case "date":
 						processors.Add(jsonProcessor.ToObject<DateProcessor>(serializer));
 						break;
+					case "date_index_name":
+						processors.Add(jsonProcessor.ToObject<DateIndexNameProcessor>(serializer));
+						break;
 					case "fail":
 						processors.Add(jsonProcessor.ToObject<FailProcessor>(serializer));
 						break;

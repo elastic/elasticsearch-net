@@ -26,6 +26,14 @@ namespace Nest
 		public ProcessorsDescriptor Date<T>(Func<DateProcessorDescriptor<T>, IDateProcessor> selector) where T : class  =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new DateProcessorDescriptor<T>())));
 
+		/// <summary>
+		/// The purpose of this processor is to point documents to the right time
+		/// based index based on a date or timestamp field in a document
+		/// by using the date math index name support.
+		/// </summary>
+		public ProcessorsDescriptor DateIndexName<T>(Func<DateIndexNameProcessorDescriptor<T>, IDateIndexNameProcessor> selector) where T : class  =>
+			Assign(a => a.AddIfNotNull(selector?.Invoke(new DateIndexNameProcessorDescriptor<T>())));
+
 		public ProcessorsDescriptor Fail(Func<FailProcessorDescriptor, IFailProcessor> selector) =>
 			Assign(a => a.AddIfNotNull(selector?.Invoke(new FailProcessorDescriptor())));
 
