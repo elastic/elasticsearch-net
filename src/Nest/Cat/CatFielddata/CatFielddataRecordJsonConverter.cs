@@ -6,56 +6,48 @@ namespace Nest
 {
 	internal class CatFielddataRecordJsonConverter : JsonConverter
 	{
-		public override bool CanWrite
-		{
-			get { return false; }
-		}
+		public override bool CanWrite => false;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			throw new NotSupportedException();
 		}
 
-
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var o = new CatFielddataRecord() { FieldSizes = new Dictionary<string, string>() };
+			var record = new CatFielddataRecord();
 			while (reader.Read())
 			{
 				var prop = reader.Value as string;
-				if (prop == null) return o;
+				if (prop == null) return record;
 
 				switch (prop)
 				{
 					case "id":
-						o.Id = reader.ReadAsString();
+						record.Id = reader.ReadAsString();
 						continue;
 					case "node":
 					case "n":
-						o.Node = reader.ReadAsString();
+						record.Node = reader.ReadAsString();
 						continue;
 					case "host":
-						o.Host = reader.ReadAsString();
+						record.Host = reader.ReadAsString();
 						continue;
 					case "ip":
-						o.Ip = reader.ReadAsString();
+						record.Ip = reader.ReadAsString();
 						continue;
-					case "total":
-						o.Total = reader.ReadAsString();
+					case "field":
+						record.Field = reader.ReadAsString();
 						continue;
-					default:
-						var value = reader.ReadAsString();
-						o.FieldSizes[prop] = value;
+					case "size":
+						record.Size = reader.ReadAsString();
 						continue;
 				}
 			}
-			return o;
+			return record;
 		}
 
-		public override bool CanConvert(Type objectType)
-		{
-			return objectType == typeof(CatFielddataRecord);
-		}
+		public override bool CanConvert(Type objectType) => objectType == typeof(CatFielddataRecord);
 	}
 }
