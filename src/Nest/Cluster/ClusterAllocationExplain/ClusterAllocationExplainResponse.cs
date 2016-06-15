@@ -14,8 +14,26 @@ namespace Nest
 		[JsonProperty("assigned")]
 		bool Assigned { get; set; }
 
+		[JsonProperty("assigned_node_id")]
+		string AssignedNodeId { get; set; }
+
+		[JsonProperty("shard_state_fetch_pending")]
+		bool ShardStateFetchPending { get; set; }
+
 		[JsonProperty("unassigned_info")]
 		UnassignedInformation UnassignedInformation { get; set; }
+
+		[JsonProperty("allocation_delay")]
+		string AllocationDelay { get; set; }
+
+		[JsonProperty("allocation_delay_ms")]
+		long AllocationDelayInMilliseconds { get; set; }
+
+		[JsonProperty("remaining_delay")]
+		string RemainingDelay { get; set; }
+
+		[JsonProperty("remaining_delay_ms")]
+		long RemainingDelayInMilliseconds { get; set; }
 
 		[JsonProperty("nodes")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -28,7 +46,19 @@ namespace Nest
 
 		public bool Assigned { get; set; }
 
+		public string AssignedNodeId { get; set; }
+
+		public bool ShardStateFetchPending { get; set; }
+
 		public UnassignedInformation UnassignedInformation { get; set; }
+
+		public string AllocationDelay { get; set; }
+
+		public long AllocationDelayInMilliseconds { get; set; }
+
+		public string RemainingDelay { get; set; }
+
+		public long RemainingDelayInMilliseconds { get; set; }
 
 		public Dictionary<string, NodeAllocationExplanation> Nodes { get; set; }
 	}
@@ -58,15 +88,28 @@ namespace Nest
 		[JsonProperty("node_attributes")]
 		public Dictionary<string,string> NodeAttributes { get; set; }
 
+		[JsonProperty("store")]
+		public AllocationStore Store { get; set; }
+
 		// TODO: Are there enum values for this?
 		[JsonProperty("final_decision")]
 		public string FinalDecision { get; set; }
+
+		[JsonProperty("final_explanation")]
+		public string FinalExplanation { get; set; }
 
 		[JsonProperty("weight")]
 		public float Weight { get; set; }
 
 		[JsonProperty("decisions")]
 		public IEnumerable<AllocationDecision> Decisions { get; set; }
+	}
+
+	[JsonObject]
+	public class AllocationStore
+	{
+		[JsonProperty("shard_copy")]
+		public string ShardCopy { get; set; }
 	}
 
 	[JsonObject]

@@ -212,7 +212,8 @@ namespace Tests.Framework.Integration
 
 			var exceptionMessageStart = "Server has license plugin installed, ";
 #if DOTNETCORE
-			var licenseFile = string.Empty;
+			var licensePath = @"C:\license.json";
+			var licenseFile = File.Exists(licensePath) ? licensePath : string.Empty;
 #else
 			var licenseFile = Environment.GetEnvironmentVariable("ES_LICENSE_FILE", EnvironmentVariableTarget.Machine);
 #endif
@@ -232,7 +233,13 @@ namespace Tests.Framework.Integration
 
 			Exception exception = null;
 
-			if (license.ApiCall.Success && license.License == null)
+			if (!license.IsValid)
+			{
+				exception = license.ApiCall.HttpStatusCode == 404
+					? new Exception($"{exceptionMessageStart} but the license was not found!")
+					: new Exception($"{exceptionMessageStart} but a {license.ApiCall.HttpStatusCode} was returned!");
+			}
+			else if (license.License == null)
 				exception = new Exception($"{exceptionMessageStart}  but the license was deleted!");
 
 			else if (license.License.Status == LicenseStatus.Expired)
