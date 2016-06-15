@@ -95,6 +95,7 @@ namespace Nest
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.Bool = this;
 
 		protected override bool Conditionless => IsConditionless(this);
+
 		internal static bool IsConditionless(IBoolQuery q) =>
 			q.Must.NotWritable() && q.MustNot.NotWritable() && q.Should.NotWritable() && q.Filter.NotWritable();
 	}
@@ -120,7 +121,7 @@ namespace Nest
 		/// the greater the chances that the document is a good match for the query.
 		/// </summary>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> DisableCoord() => Assign(a => a.DisableCoord = true);
+		public BoolQueryDescriptor<T> DisableCoord(bool? disableCoord = true) => Assign(a => a.DisableCoord = disableCoord);
 
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.

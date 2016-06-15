@@ -21,7 +21,7 @@ namespace Tests.Framework
 #endif
 		}
 
-		internal static bool IsGeneric(this Type type)
+		internal static bool IsGenericType(this Type type)
 		{
 #if DOTNETCORE
 			return type.GetTypeInfo().IsGenericType;
@@ -30,16 +30,7 @@ namespace Tests.Framework
 #endif
 		}
 
-		internal static bool IsAbstractClass(this Type type)
-		{
-#if DOTNETCORE
-			return type.GetTypeInfo().IsAbstract;
-#else
-			return type.IsAbstract;
-#endif
-		}
-
-		internal static bool IsValue(this Type type)
+		internal static bool IsValueType(this Type type)
 		{
 #if DOTNETCORE
 			return type.GetTypeInfo().IsValueType;

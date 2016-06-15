@@ -65,11 +65,11 @@ namespace Nest
 
 		public SpanNearQueryDescriptor<T> Slop(int? slop) => Assign(a => a.Slop = slop);
 
-		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder) => Assign(a => a.InOrder = inOrder);
+		public SpanNearQueryDescriptor<T> InOrder(bool? inOrder = false) => Assign(a => a.InOrder = inOrder);
 
 #pragma warning disable 618
 		[Obsolete("Payloads will be loaded when needed")]
-		public SpanNearQueryDescriptor<T> CollectPayloads(bool? collectPayloads) => Assign(a => a.CollectPayloads = collectPayloads);
+		public SpanNearQueryDescriptor<T> CollectPayloads(bool? collectPayloads = false) => Assign(a => a.CollectPayloads = collectPayloads);
 #pragma warning restore 618
 	}
 }

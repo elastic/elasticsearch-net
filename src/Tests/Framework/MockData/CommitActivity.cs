@@ -62,7 +62,7 @@ namespace Tests.Framework.MockData
 		{
 			if (reader.TokenType == JsonToken.Null)
 			{
-				if (!objectType.IsGeneric() || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
+				if (!objectType.IsGenericType() || objectType.GetGenericTypeDefinition() != typeof(Nullable<>))
 					throw new JsonSerializationException($"Cannot convert null value to {objectType}.");
 
 				return null;

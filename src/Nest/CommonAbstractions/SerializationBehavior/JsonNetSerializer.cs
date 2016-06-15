@@ -30,7 +30,7 @@ namespace Nest
 		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
-		/// this constructor is only here for stateful (de)serialization 
+		/// this constructor is only here for stateful (de)serialization
 		/// </summary>
 		internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
@@ -40,9 +40,7 @@ namespace Nest
 			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
 			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
-			//this._defaultSerializer.Formatting = Formatting.None; 
 			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
-			//indentedSerializer.Formatting = Formatting.Indented; 
 			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
 			{
 				{ SerializationFormatting.None, this._defaultSerializer },

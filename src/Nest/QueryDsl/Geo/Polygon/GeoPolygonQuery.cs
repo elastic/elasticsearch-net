@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -10,22 +11,28 @@ namespace Nest
 		[VariableField("points")]
 		IEnumerable<GeoLocation> Points { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
-	
+
 		[JsonProperty("validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
-	
+
 	}
 
 	public class GeoPolygonQuery : FieldNameQueryBase, IGeoPolygonQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public IEnumerable<GeoLocation> Points { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? Coerce { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
@@ -33,7 +40,7 @@ namespace Nest
 		internal static bool IsConditionless(IGeoPolygonQuery q) => q.Field == null || !q.Points.HasAny();
 	}
 
-	public class GeoPolygonQueryDescriptor<T> 
+	public class GeoPolygonQueryDescriptor<T>
 		: FieldNameQueryDescriptorBase<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery, T>
 		, IGeoPolygonQuery where T : class
 	{
@@ -47,8 +54,10 @@ namespace Nest
 
 		public GeoPolygonQueryDescriptor<T> Points(params GeoLocation[] points) => Assign(a => a.Points = points);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoPolygonQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoPolygonQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
 
 		public GeoPolygonQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);

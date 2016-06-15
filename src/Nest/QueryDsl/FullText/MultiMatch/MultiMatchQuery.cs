@@ -160,6 +160,8 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
 
+		public MultiMatchQueryDescriptor<T> UseDisMax(bool? useDisMax = true) => Assign(a => a.UseDisMax = useDisMax);
+
 		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
 	}
 }

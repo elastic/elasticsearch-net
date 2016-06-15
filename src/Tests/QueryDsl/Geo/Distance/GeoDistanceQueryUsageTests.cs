@@ -17,9 +17,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				distance = "200.0m",
 				optimize_bbox = "memory",
 				distance_type = "arc",
-				coerce = true,
-				ignore_malformed = true,
-				validation_method = "strict",
+				validation_method = "ignore_malformed",
 				location = new
 				{
 					lat = 34.0,
@@ -34,12 +32,10 @@ namespace Tests.QueryDsl.Geo.Distance
 			Name = "named_query",
 			Field = Infer.Field<Project>(p => p.Location),
 			DistanceType = GeoDistanceType.Arc,
-			Coerce = true,
 			Location = new GeoLocation(34,-34),
 			Distance = "200.0m",
-			IgnoreMalformed = true,
 			OptimizeBoundingBox = GeoOptimizeBBox.Memory,
-			ValidationMethod = GeoValidationMethod.Strict
+			ValidationMethod = GeoValidationMethod.IgnoreMalformed
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -48,12 +44,10 @@ namespace Tests.QueryDsl.Geo.Distance
 				.Name("named_query")
 				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
-				.Coerce()
 				.Location(34, -34)
 				.Distance("200.0m")
-				.IgnoreMalformed()
 				.Optimize(GeoOptimizeBBox.Memory)
-				.ValidationMethod(GeoValidationMethod.Strict)
+				.ValidationMethod(GeoValidationMethod.IgnoreMalformed)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoDistanceQuery>(a => a.GeoDistance)

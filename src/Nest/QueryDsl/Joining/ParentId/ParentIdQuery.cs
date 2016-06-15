@@ -27,7 +27,7 @@ namespace Nest
 		Id Id { get; set; }
 
 		/// <summary>
-		/// When set to true this will ignore an unmapped type and will not match any documents for 
+		/// When set to true this will ignore an unmapped type and will not match any documents for
 		/// this query. This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
 		[JsonProperty("ignore_unmapped")]
@@ -66,6 +66,6 @@ namespace Nest
 
 		public ParentIdQueryDescriptor<T> Type<TChild>() => Assign(a => a.Type = typeof(TChild));
 
-		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = false);
+		public ParentIdQueryDescriptor<T> IgnoreUnmapped(bool? ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }

@@ -35,6 +35,6 @@ namespace Nest
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
-		public TDescriptor IgnoreUnmapped(bool ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
+		public TDescriptor IgnoreUnmapped(bool? ignoreUnmapped = false) => Assign(a => a.IgnoreUnmapped = ignoreUnmapped);
 	}
 }
