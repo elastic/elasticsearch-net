@@ -201,7 +201,8 @@ namespace Tests.Document.Single.Attachment
 					ContentType = "application/pdf",
 					Content = Content,
 					Name = "content name",
-					Language = "en"
+					Language = "en",
+					DetectLanguage = true
 				}
 			};
 
@@ -217,7 +218,8 @@ namespace Tests.Document.Single.Attachment
 					_content = Content,
 					_content_type = "application/pdf",
 					_name = "content name",
-					_language = "en"
+					_language = "en",
+					_detect_language = true
 				}
 			};
 
