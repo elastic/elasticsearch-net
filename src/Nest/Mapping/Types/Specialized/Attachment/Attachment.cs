@@ -44,8 +44,7 @@ namespace Nest
 		public string Keywords { get; set; }
 
 		/// <summary>
-		/// The language of the attachment. Can be explicitly set. This requires
-		/// <see cref="DetectLanguage"/> to be set to <c>true</c>
+		/// The language of the attachment. Can be explicitly set.
 		/// </summary>
 		[JsonProperty("language")]
 		public string Language { get; set; }
