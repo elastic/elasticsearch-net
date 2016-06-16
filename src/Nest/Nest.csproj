@@ -825,6 +825,7 @@
     <Compile Include="Mapping\Types\PropertyBase.cs" />
     <Compile Include="Mapping\Types\PropertyDescriptorBase.cs" />
     <Compile Include="Mapping\Types\PropertyJsonConverter.cs" />
+    <Compile Include="Mapping\Types\Specialized\Attachment\Attachment.cs" />
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentAttribute.cs" />
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentProperty.cs" />
     <Compile Include="Mapping\Types\Specialized\Completion\CompletionAttribute.cs" />

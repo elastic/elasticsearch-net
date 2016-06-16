@@ -241,7 +241,6 @@
     <Compile Include=".\Framework\Integration\Process\ElasticsearchNode.cs" />
     <Compile Include=".\Framework\Integration\Process\MapperAttachmentPlugin.cs" />
     <Compile Include=".\Framework\Integration\Process\ObservableProcess.cs" />
-    <Compile Include=".\Framework\MockData\Attachment.cs" />
     <Compile Include=".\Framework\MockData\CommitActivity.cs" />
     <Compile Include=".\Framework\MockData\Developer.cs" />
     <Compile Include=".\Framework\MockData\Gender.cs" />
