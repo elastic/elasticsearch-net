@@ -30,9 +30,6 @@ namespace Nest
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
 
-		[JsonProperty("factor")]
-		int? Factor { get; set; }
-
 		[JsonProperty("offset")]
 		string Offset { get; set; }
 
@@ -69,7 +66,6 @@ namespace Nest
 
 		public int? MinimumDocumentCount { get; set; }
 		public string TimeZone { get; set; }
-		public int? Factor { get; set; }
 		public string Offset { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
@@ -113,8 +109,6 @@ namespace Nest
 
 		string IDateHistogramAggregation.TimeZone { get; set; }
 
-		int? IDateHistogramAggregation.Factor { get; set; }
-
 		string IDateHistogramAggregation.Offset { get; set; }
 
 		HistogramOrder IDateHistogramAggregation.Order { get; set; }
@@ -143,8 +137,6 @@ namespace Nest
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
 		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
-
-		public DateHistogramAggregationDescriptor<T> Interval(int factor) => Assign(a => a.Factor = factor);
 
 		public DateHistogramAggregationDescriptor<T> Offset(string offset) => Assign(a => a.Offset = offset);
 
