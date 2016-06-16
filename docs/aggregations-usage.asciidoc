@@ -44,6 +44,8 @@ include::aggregations/metric/extended-stats/extended-stats-aggregation-usage.asc
 
 include::aggregations/metric/geo-bounds/geo-bounds-aggregation-usage.asciidoc[]
 
+include::aggregations/metric/geo-centroid/geo-centroid-aggregation-usage.asciidoc[]
+
 include::aggregations/metric/max/max-aggregation-usage.asciidoc[]
 
 include::aggregations/metric/min/min-aggregation-usage.asciidoc[]

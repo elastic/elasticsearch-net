@@ -67,3 +67,17 @@ new BoolQuery()
 }
 ----
 
+[source,csharp]
+----
+Action query = () => this.Client.Search<Project>(s => s
+        .Query(q => q
+            .Bool(b => b
+                .Filter(f => f
+                    .Term(t => t.Name, null)
+                )
+            )
+        )
+    );
+query.ShouldNotThrow();
+----
+
