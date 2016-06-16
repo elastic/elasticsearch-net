@@ -13,18 +13,30 @@ namespace Nest
 	[JsonConverter(typeof(FieldValuesJsonConverter))]
 	public class FieldValues : IsADictionaryBase<string, object>
 	{
-		private Inferrer _inferrer;
+		private readonly Inferrer _inferrer;
 
-		public FieldValues(Inferrer inferrer, IDictionary<string, object> container) 
+		public FieldValues(Inferrer inferrer, IDictionary<string, object> container)
 			: base(container)
 		{
 			_inferrer = inferrer;
 		}
 
-		public K Value<K>(Field field) => ValuesOf<K>(field).FirstOrDefault();
+		public K Value<K>(Field field)
+		{
+			var values = ValuesOf<K>(field);
+			return values != null
+				? values.FirstOrDefault()
+				: default(K);
+		}
 
-		public K ValueOf<T, K>(Expression<Func<T, K>> objectPath) 
-			where T : class => Values<T, K>(objectPath).FirstOrDefault();
+		public K ValueOf<T, K>(Expression<Func<T, K>> objectPath)
+			where T : class
+		{
+			var values = Values(objectPath);
+			return values != null
+				? values.FirstOrDefault()
+				: default(K);
+		}
 
 		public K[] ValuesOf<K>(Field field)
 		{
