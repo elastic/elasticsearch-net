@@ -63,18 +63,7 @@ namespace Tests.Document.Single.Index
 					{
 						Field = "content",
 						TargetField = "attachment"
-					},
-					// rename extracted content_type and content_length fields
-					new RenameProcessor
-					{
-						Field = "attachment.content_type",
-						TargetField = "attachment.contentType"
-					},
-					new RenameProcessor
-					{
-						Field = "attachment.content_length",
-						TargetField = "attachment.contentLength"
-					},
+					}
 				}
 			});
 		}
@@ -140,6 +129,7 @@ namespace Tests.Document.Single.Index
 			attachment.Author.Should().Be("Russ Cam");
 			attachment.Language.Should().Be("fr");
 			attachment.ContentLength.Should().Be(93);
+			attachment.Content.Should().Contain("mapper-attachment support");
 		}
 	}
 }
