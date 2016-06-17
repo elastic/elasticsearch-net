@@ -803,7 +803,7 @@ var expected = new
 Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 ----
 
-Now lets specify a maxRecursion of 3 
+Now let's specify a maxRecursion of 3 
 
 [source,csharp]
 ----
@@ -924,7 +924,7 @@ It is also possible to apply a transformation on all or specific properties.
 `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,
 does nothing and acts as a blank canvas for you to implement your own visiting methods.
 
-For instance, lets create a custom visitor that disables doc values for numeric and boolean types
+For instance, let's create a custom visitor that disables doc values for numeric and boolean types
 (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 
 [source,csharp]
