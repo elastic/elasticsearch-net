@@ -18,8 +18,6 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				lte = "400.0mi",
 				distance_type = "arc",
 				optimize_bbox = "indexed",
-				coerce = true,
-				ignore_malformed = true,
 				validation_method = "strict",
 				_name = "named_query",
 				boost = 1.1,
@@ -37,9 +35,7 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			Name = "named_query",
 			Field = Infer.Field<Project>(p=>p.Location),
 			DistanceType = GeoDistanceType.Arc,
-			Coerce = true,
 			GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
-			IgnoreMalformed = true,
 			GreaterThan = Nest.Distance.Kilometers(200),
 			LessThan = Nest.Distance.Miles(400),
 			Location = new GeoLocation(40, -70),
@@ -54,10 +50,8 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.Name("named_query")
 				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
-				.Coerce()
 				.GreaterThanOrEqualTo(200, DistanceUnit.Kilometers)
 				.GreaterThan(200, DistanceUnit.Kilometers)
-				.IgnoreMalformed()
 				.Location(new GeoLocation(40, -70))
 				.Optimize(GeoOptimizeBBox.Indexed)
 				.LessThanOrEqualTo(Nest.Distance.Miles(400))

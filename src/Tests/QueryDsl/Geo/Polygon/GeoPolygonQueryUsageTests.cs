@@ -2,9 +2,8 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
 
-namespace Tests.QueryDsl.FullText.GeoPolygon
+namespace Tests.QueryDsl.Geo.Polygon
 {
 	public class GeoPolygonUsageTests : QueryDslUsageTestsBase
 	{
@@ -16,8 +15,6 @@ namespace Tests.QueryDsl.FullText.GeoPolygon
 			{
 				_name = "named_query",
 				boost = 1.1,
-				coerce = true,
-				ignore_malformed = true,
 				validation_method = "strict",
 				location = new
 				{
@@ -35,10 +32,8 @@ namespace Tests.QueryDsl.FullText.GeoPolygon
 			Boost = 1.1,
 			Name = "named_query",
 			ValidationMethod =	GeoValidationMethod.Strict,
-			Coerce = true,
-			IgnoreMalformed = true,
 			Points = new [] { new GeoLocation(45,-45), new GeoLocation(-34,34),  },
-			Field = Field<Project>(p=>p.Location)
+			Field = Infer.Field<Project>(p=>p.Location)
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -46,8 +41,6 @@ namespace Tests.QueryDsl.FullText.GeoPolygon
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
-				.IgnoreMalformed()
-				.Coerce()
 				.ValidationMethod(GeoValidationMethod.Strict)
 				.Points( new GeoLocation(45,-45), new GeoLocation(-34,34))
 			);
