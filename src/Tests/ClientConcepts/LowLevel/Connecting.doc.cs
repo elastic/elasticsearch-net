@@ -139,7 +139,7 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** === OnRequestCompleted
-         * You can pass a callback of type `Action<IApiCallDetails>` that can eaves drop every time a response (good or bad) is created.
+         * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
          * If you have complex logging needs this is a good place to add that in.
         */
 		[U]
@@ -254,7 +254,7 @@ namespace Tests.ClientConcepts.LowLevel
 			 * class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
 			 * property.
 			 *
-			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
+			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`:
 			 */
 
 #if !DOTNETCORE
