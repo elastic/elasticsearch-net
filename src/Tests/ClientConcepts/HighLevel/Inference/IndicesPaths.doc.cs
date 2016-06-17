@@ -12,7 +12,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		/**== Indices paths
 		*
 		* Some APIs in Elasticsearch take one or many index name or a special `_all` marker to send the request to all the indices
-		* In nest this is encoded using `Indices`.
+		* In NEST, this is encoded using `Indices`.
 		*
 		*=== Implicit Conversion
 		* Several types implicitly convert to `Indices`
