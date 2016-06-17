@@ -55,6 +55,9 @@ namespace Nest
 
 		[JsonProperty("running_time_in_nanos")]
 		public long RunningTimeInNanoseconds { get; internal set; }
+
+		[JsonProperty("cancellable")]
+		public bool Cancellable { get; internal set; }
 	}
 
 	public class ReindexStatus
@@ -81,13 +84,13 @@ namespace Nest
 		public long Noops { get; internal set; }
 
 		[JsonProperty("retries")]
-		public long Retries { get; internal set; }
+		public Retries Retries { get; internal set; }
 
 		[JsonProperty("throttled_millis")]
 		public long ThrottledInMilliseconds { get; internal set; }
 
 		[JsonProperty("requests_per_second")]
-		public Union<string,long> RequestsPerSecond { get; internal set; }
+		public Union<string,float> RequestsPerSecond { get; internal set; }
 
 		[JsonProperty("throttled_until_millis")]
 		public long ThrottledUntilInMilliseconds { get; internal set; }

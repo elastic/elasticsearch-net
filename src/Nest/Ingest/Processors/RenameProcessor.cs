@@ -16,7 +16,7 @@ namespace Nest
 		[JsonProperty("field")]
 		Field Field { get; set; }
 
-		[JsonProperty("to")]
+		[JsonProperty("target_field")]
 		Field TargetField { get; set; }
 	}
 

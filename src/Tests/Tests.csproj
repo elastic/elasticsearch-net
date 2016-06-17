@@ -209,16 +209,21 @@
     <Compile Include="Cat\CatSegments\CatSegmentsUrlTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsApiTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsUrlTests.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksApiTests.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksUrlTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyApiTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyUrlTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestAttachmentApiTests.cs" />
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
+    <Compile Include="Framework\MockData\GeoIp.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Audits.cs" />
     <Compile Include=".\Framework\Configuration\EnvironmentConfiguration.cs" />
@@ -348,7 +353,7 @@
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\TestRunnerFileSystem.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\XplatManualResetEvent.cs" />
     <Compile Include="Framework\MockData\PercolatedQuery.cs" />
-    <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
+    <Compile Include="Document\Single\Index\IndexIngestGeoIpApiTests.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\Configuration\Versions\SemVer.cs" />
@@ -369,7 +374,7 @@
     <Compile Include="Ingest\PipelineCrudTests.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineApiTests.cs" />
     <Compile Include="Ingest\PutPipeline\PutPipelineUrlTests.cs" />
-    <Compile Include="Ingest\SimulatePipeline\SImulatePipelineApiTests.cs" />
+    <Compile Include="Ingest\SimulatePipeline\SimulatePipelineApiTests.cs" />
     <Compile Include="Ingest\SimulatePipeline\SimulatePipelineUrlTests.cs" />
     <Compile Include="Mapping\Types\Core\Keyword\KeywordMappingTests.cs" />
     <Compile Include="Mapping\Types\Core\Percolator\PercolatorMappingTests.cs" />
@@ -447,7 +452,7 @@
     <Compile Include=".\QueryDsl\Geo\Shape\MultiPoint\GeoMultiPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include=".\QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
-    <Compile Include=".\QueryDsl\Geo\Shape\ShapeQueryUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryUsageTestsBase.cs" />
     <Compile Include=".\QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
     <Compile Include=".\QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />
@@ -570,12 +575,15 @@
     <Compile Include="Framework\EndpointTests\TestState\ClientMethod.cs" />
     <Compile Include="Framework\ManagedElasticsearch\Process\ElasticsearchConsoleOut.cs" />
     <Compile Include="QueryDsl\ConditionlessWhen.cs" />
+    <Compile Include="QueryDsl\Joining\ParentId\ParentIdUsageTests.cs" />
+    <Compile Include="QueryDsl\MatchNoneQueryUsageTests.cs" />
     <Compile Include="QueryDsl\NotConditionlessWhen.cs" />
     <Compile Include="QueryDsl\Specialized\Percolate\PercolateQueryUsageTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
+    <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />
@@ -608,6 +616,7 @@
     <Compile Include="XPack\Security\Role\PutRole\PutRoleApiTests.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\RoleCrudTests.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordUrlTests.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserUrlTests.cs" />
     <Compile Include="XPack\Security\User\GetUser\GetUserUrlTests.cs" />
     <Compile Include="XPack\Security\User\PutUser\PutUserApiTests.cs" />
@@ -618,6 +627,7 @@
     <None Include="client-concepts.asciidoc" />
     <None Include="common-options.asciidoc" />
     <None Include="connection-pooling.asciidoc" />
+    <None Include="Document\Single\Attachment\Attachment_Test_Document.pdf" />
     <None Include="high-level.asciidoc" />
     <None Include="index.asciidoc" />
     <None Include="intro.asciidoc" />
@@ -649,7 +659,6 @@
     <Content Include="ClientConcepts\LowLevel\pipeline.xml" />
     <Content Include="QueryDsl\BoolDsl\hadouken-indentation.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore' And $(TargetFrameworkVersion) == 'v4.5.1'">

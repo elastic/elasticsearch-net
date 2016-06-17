@@ -170,6 +170,7 @@
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\CustomAnalyzer.cs" />
+    <Compile Include="Analysis\Analyzers\FingerprintAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\KeywordAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\PatternAnalyzer.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramSide.cs" />
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\ElisionTokenFilter.cs" />
+    <Compile Include="Analysis\TokenFilters\FingerprintTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\HunspellTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeepTypesTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeepWordsTokenFilter.cs" />
@@ -295,6 +297,9 @@
     <Compile Include="Cat\CatShards\CatShardsRecord.cs" />
     <Compile Include="Cat\CatShards\CatShardsRequest.cs" />
     <Compile Include="Cat\CatShards\ElasticClient-CatShards.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksRecord.cs" />
+    <Compile Include="Cat\CatTasks\CatTasksRequest.cs" />
+    <Compile Include="Cat\CatTasks\ElasticClient-CatTasks.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecord.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRecordJsonConverter.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolRequest.cs" />
@@ -457,6 +462,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ServerErrorJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\SingleOrEnumerableConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\TimeSpanConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\VerbatimDictionaryKeysConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonNetSerializer.cs" />
@@ -499,7 +505,6 @@
     <Compile Include="CommonOptions\Stats\GetStats.cs" />
     <Compile Include="CommonOptions\Stats\IndexingStats.cs" />
     <Compile Include="CommonOptions\Stats\MergesStats.cs" />
-    <Compile Include="CommonOptions\Stats\PercolatorStats.cs" />
     <Compile Include="CommonOptions\Stats\PluginStats.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
@@ -542,6 +547,7 @@
     <Compile Include="Document\Multiple\ReindexRethrottle\ElasticClient-ReindexRethrottle.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexNode.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleResponse.cs" />
+    <Compile Include="Document\Multiple\Retries.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryRequest.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\UpdateByQueryResponse.cs" />
     <Compile Include="Document\Multiple\UpdateByQuery\ElasticClient-UpdateByQuery.cs" />
@@ -601,6 +607,8 @@
     <Compile Include="IndexModules\IndexSettings\Merge\MergePolicySettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSchedulerSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Queries\IQueriesCacheSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Queries\IQueriesSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettingsConverter.cs" />
@@ -755,6 +763,10 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusRequest.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponse.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
+    <Compile Include="Ingest\Processors\GeoIpProcessor.cs" />
+    <Compile Include="Ingest\Processors\AttachmentProcessor.cs" />
+    <Compile Include="Ingest\Processors\DateIndexNameProcessor.cs" />
+    <Compile Include="Ingest\Processors\SortProcessor.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticsearchCorePropertyAttributeBase.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineRequest.cs" />
     <Compile Include="Ingest\DeletePipeline\DeletePipelineResponse.cs" />
@@ -845,6 +857,7 @@
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoShapeAttribute.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoShapeProperty.cs" />
+    <Compile Include="Mapping\Types\Geo\GeoShape\GeoStrategy.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoTree.cs" />
     <Compile Include="Mapping\Types\Properties.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
@@ -1038,7 +1051,9 @@
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
+    <Compile Include="QueryDsl\Joining\ParentId\ParentIdQuery.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
+    <Compile Include="QueryDsl\MatchNoneQuery.cs" />
     <Compile Include="QueryDsl\MultiTermQueryRewrite\RewriteMultiTerm.cs" />
     <Compile Include="QueryDsl\NestSpecific\ConditionlessQuery.cs" />
     <Compile Include="QueryDsl\NestSpecific\RawQuery.cs" />
@@ -1155,9 +1170,7 @@
     <Compile Include="Search\Search\Hits\HitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
-    <Compile Include="Search\Search\InnerHits\TopLevelInnerHit.cs" />
     <Compile Include="Search\Search\InnerHits\InnerHits.cs" />
-    <Compile Include="Search\Search\InnerHits\TopLevelInnerHits.cs" />
     <Compile Include="Search\Search\Profile\Collector.cs" />
     <Compile Include="Search\Search\Profile\Profile.cs" />
     <Compile Include="Search\Search\Profile\QueryBreakdown.cs" />
@@ -1254,6 +1267,9 @@
     <Compile Include="XPack\Security\Role\PutRole\IndicesPrivileges.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleRequest.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleResponse.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordRequest.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ChangePasswordResponse.cs" />
+    <Compile Include="XPack\Security\User\ChangePassword\ElasticClient-ChangePassword.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\ElasticClient-DeleteUser.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserRequest.cs" />
     <Compile Include="XPack\Security\User\DeleteUser\DeleteUserResponse.cs" />

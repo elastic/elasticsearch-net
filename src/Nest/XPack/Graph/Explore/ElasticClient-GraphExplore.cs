@@ -25,7 +25,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IGraphExploreResponse GraphExplore<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector) where T : class =>
-			this.GraphExplore(selector?.Invoke(new GraphExploreDescriptor<T>(typeof(T))));
+			this.GraphExplore(selector?.Invoke(new GraphExploreDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IGraphExploreResponse GraphExplore(IGraphExploreRequest request) =>
@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector) where T : class =>
-			this.GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>(typeof(T))));
+			this.GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request) =>

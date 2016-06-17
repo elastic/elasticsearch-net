@@ -73,7 +73,6 @@ namespace Tests.Cluster.NodesStats
 			index.Get.Should().NotBeNull();
 			index.Indexing.Should().NotBeNull();
 			index.Merges.Should().NotBeNull();
-			index.Percolator.Should().NotBeNull();
 			index.QueryCache.Should().NotBeNull();
 			index.Recovery.Should().NotBeNull();
 
@@ -83,6 +82,7 @@ namespace Tests.Cluster.NodesStats
 			index.Segments.IndexWriterMaxMemoryInBytes.Should().BeGreaterThan(0);
 			index.Segments.MemoryInBytes.Should().BeGreaterThan(0);
 			index.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.PointsMemoryInBytes.Should().BeGreaterThan(0);
 			index.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
 			index.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
 

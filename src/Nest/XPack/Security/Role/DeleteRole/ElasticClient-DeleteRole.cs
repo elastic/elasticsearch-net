@@ -29,7 +29,7 @@ namespace Nest
 		public IDeleteRoleResponse DeleteRole(IDeleteRoleRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteRoleRequest, DeleteRoleRequestParameters, DeleteRoleResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.ShieldDeleteRoleDispatch<DeleteRoleResponse>(p)
+				(p, d) =>this.LowLevelDispatch.XpackSecurityDeleteRoleDispatch<DeleteRoleResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IDeleteRoleResponse> DeleteRoleAsync(IDeleteRoleRequest request) =>
 			this.Dispatcher.DispatchAsync<IDeleteRoleRequest, DeleteRoleRequestParameters, DeleteRoleResponse, IDeleteRoleResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.ShieldDeleteRoleDispatchAsync<DeleteRoleResponse>(p)
+				(p,d ) => this.LowLevelDispatch.XpackSecurityDeleteRoleDispatchAsync<DeleteRoleResponse>(p)
 			);
 	}
 }

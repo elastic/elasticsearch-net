@@ -9,6 +9,8 @@ namespace Nest
 	{
 		[EnumMember(Value="active")]
 		Active,
+		[EnumMember(Value = "valid")]
+		Valid,
 		[EnumMember(Value="invalid")]
 		Invalid,
 		[EnumMember(Value="expired")]

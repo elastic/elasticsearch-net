@@ -31,6 +31,7 @@ namespace Tests.QueryDsl.Joining.Nested
 						{ "curatedTags.name", new JArray("lorem", "ipsum") }
 					}
 				},
+				ignore_unmapped = false,
 				path = "curatedTags",
 				inner_hits = new
 				{
@@ -49,7 +50,8 @@ namespace Tests.QueryDsl.Joining.Nested
 			{
 				Field = Field<Project>(p => p.CuratedTags.First().Name),
 				Terms = new[] { "lorem", "ipsum" }
-			}
+			},
+			IgnoreUnmapped = false
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -64,6 +66,7 @@ namespace Tests.QueryDsl.Joining.Nested
 						.Terms("lorem", "ipsum")
 					)
 				)
+				.IgnoreUnmapped()
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<INestedQuery>(a => a.Nested)

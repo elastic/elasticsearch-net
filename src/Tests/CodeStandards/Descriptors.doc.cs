@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Nest;
@@ -18,8 +19,8 @@ namespace Tests.CodeStandards
 			var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
 
 			var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
-							  where t.IsClass() 
-								&& t.Name.Contains("Descriptor") 
+							  where t.IsClass()
+								&& t.Name.Contains("Descriptor")
 								&& !notDescriptors.Contains(t.Name)
 								&& !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
 							  select t.FullName;
@@ -42,20 +43,20 @@ namespace Tests.CodeStandards
 				let parameters = m.GetParameters()
 				from p in parameters
 				let type = p.ParameterType
-				let isGeneric = type.IsGeneric()
+				let isGeneric = type.IsGenericType()
 				where isGeneric
 				let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
 				where isFunc
                 let firstFuncArg = type.GetGenericArguments().First()
                 let secondFuncArg = type.GetGenericArguments().Last()
-                let isQueryFunc = firstFuncArg.IsGeneric() &&
+                let isQueryFunc = firstFuncArg.IsGenericType() &&
                     firstFuncArg.GetGenericTypeDefinition() == typeof(QueryContainerDescriptor<>) &&
                     typeof(QueryContainer).IsAssignableFrom(secondFuncArg)
                 where !isQueryFunc
                 let isFluentDictionaryFunc =
-                    firstFuncArg.IsGeneric() &&
+                    firstFuncArg.IsGenericType() &&
                     firstFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>) &&
-                    secondFuncArg.IsGeneric() &&
+                    secondFuncArg.IsGenericType() &&
                     secondFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>)
                 where !isFluentDictionaryFunc
                 let lastArgIsNotInterface = !secondFuncArg.IsInterface()
@@ -65,9 +66,87 @@ namespace Tests.CodeStandards
 			selectorMethods.Should().BeEmpty();
 		}
 
+		/**
+		 * Descriptor methods that assign to a nullable bool property should accept
+		 * a nullable bool with a default value
+		 */
+		[U]
+		public void DescriptorMethodsAcceptNullableBoolsForQueriesWithNullableBoolProperties()
+		{
+			var queries =
+				from t in typeof(IQuery).Assembly().Types()
+				where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
+				where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
+				select t;
+
+			var descriptors =
+				from t in typeof(DescriptorBase<,>).Assembly().Types()
+				where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+				where t.GetInterfaces().Intersect(queries).Any()
+				select t;
+
+			var breakingDescriptors = new List<string>();
+
+			foreach (var query in queries)
+			{
+				var descriptor = descriptors.First(d => query.IsAssignableFrom(d));
+				foreach (var boolProperty in query.GetProperties().Where(p => p.PropertyType == typeof(bool?)))
+				{
+					var descriptorMethod = descriptor.GetMethod(boolProperty.Name);
+					if (descriptorMethod == null)
+						throw new Exception($"No method for property {boolProperty.Name} on {descriptor.Name}");
+
+					var parameters = descriptorMethod.GetParameters();
+
+					if (!parameters.Any())
+						throw new Exception($"No parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+
+					if (parameters.Length > 1)
+						throw new Exception($"More than one parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+
+					if (parameters[0].ParameterType != typeof(bool?))
+						breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not take nullable bool");
+
+					if (!parameters[0].HasDefaultValue)
+						breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not have a default value");
+				}
+			}
+
+			breakingDescriptors.Should().BeEmpty();
+		}
+
+		//TODO descriptors taking a single valuetype parameter should always be nullable
+		//[U]
+		//public void DescriptorMethodsTakingSingleValueTypeShouldBeNullable()
+		//{
+		//	var descriptors =
+		//		from t in typeof(DescriptorBase<,>).Assembly().Types()
+		//		where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+		//		where !t.IsAbstract()
+		//		select t;
+
+		//	var breakingDescriptors = new List<string>();
+
+		//	foreach (var descriptor in descriptors)
+		//	{
+		//		foreach (var descriptorMethod in descriptor.Methods().Where(
+		//			m => m.GetParameters().Length == 1 &&
+		//			m.GetParameters().Any(p => p.ParameterType.IsValueType())))
+		//		{
+		//			foreach (var parameter in descriptorMethod.GetParameters())
+		//			{
+		//				if (!parameter.ParameterType.IsGenericType() || parameter.ParameterType.GetGenericTypeDefinition() != typeof(Nullable<>))
+		//					breakingDescriptors.Add($"{parameter.Name} on method {descriptorMethod.Name} of {descriptor.FullName} is not nullable");
+		//			}
+		//		}
+		//	}
+
+		//	breakingDescriptors.Should().BeEmpty();
+		//}
+
 		//TODO methods taking params should also have a version taking IEnumerable
 
-		//TODO methods named Index or Indices that 
+		//TODO methods named Index or Indices that
 
 		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
 		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
@@ -76,6 +155,6 @@ namespace Tests.CodeStandards
 
 		//TODO write tests that request expose QueryContainer/AggregationContainer not their interfaces
 
-		//TODO descriptors taking a single valuetype parameter should always be nullable
+
 	}
 }

@@ -33,10 +33,13 @@ namespace Nest
 		long Noops { get; }
 
 		[JsonProperty("retries")]
-		long Retries { get; }
+		Retries Retries { get; }
 
 		[JsonProperty("failures")]
 		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
+
+		[JsonProperty("requests_per_second")]
+		Union<string, float> RequestsPerSecond { get; }
 	}
 
 	public class UpdateByQueryResponse : ResponseBase, IUpdateByQueryResponse
@@ -62,8 +65,10 @@ namespace Nest
 
 		public long Noops { get; internal set; }
 
-		public long Retries { get; internal set; }
+		public Retries Retries { get; internal set; }
 
 		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
+
+		public Union<string, float> RequestsPerSecond { get; internal set; }
 	}
 }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression. 
+	/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression.
 	/// </summary>
 	public interface IPatternAnalyzer : IAnalyzer
 	{
@@ -22,19 +22,19 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("stopwords")]
 		StopWords StopWords { get; set; }
-	}	
-	
+	}
+
 	/// <inheritdoc/>
 	public class PatternAnalyzer : AnalyzerBase, IPatternAnalyzer
 	{
-		public PatternAnalyzer() { Type = "pattern"; }
+		public PatternAnalyzer() : base("pattern") {}
 
 		public bool? Lowercase { get; set; }
 
 		public string Pattern { get; set; }
 
 		public string Flags { get; set; }
-		
+
 		public StopWords StopWords { get; set; }
 	}
 
@@ -57,7 +57,7 @@ namespace Nest
 		public PatternAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public PatternAnalyzerDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
-		
+
 		public PatternAnalyzerDescriptor Flags(string flags) => Assign(a => a.Flags = flags);
 
 		public PatternAnalyzerDescriptor Lowercase(bool lowercase = true) => Assign(a => a.Lowercase = lowercase);

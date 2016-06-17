@@ -29,7 +29,7 @@ namespace Tests.CodeStandards
 		[U] public void StaticQueryExposesAll()
 		{
 			var staticProperties = from p in typeof(Query<>).GetMethods()
-								   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
+								   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name
 								   select name;
 
 			var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name);
@@ -39,7 +39,7 @@ namespace Tests.CodeStandards
 		[U] public void FluentDescriptorExposesAll()
 		{
 			var fluentMethods = from p in typeof(QueryContainerDescriptor<>).GetMethods()
-								   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
+								   let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name
 								   select name;
 
 			var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name);
@@ -63,6 +63,5 @@ namespace Tests.CodeStandards
 							   select q;
 			missingTypes.Should().BeEmpty();
 		}
-
 	}
 }

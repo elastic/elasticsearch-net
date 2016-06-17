@@ -107,7 +107,7 @@ namespace Tests.CodeStandards
 				from methodInfo in typeof(IElasticClient).GetMethods()
 				where
 					typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType) ||
-					(methodInfo.ReturnType.IsGeneric()
+					(methodInfo.ReturnType.IsGenericType()
 					 && typeof(Task<>) == methodInfo.ReturnType.GetGenericTypeDefinition()
 					 && typeof(IResponse).IsAssignableFrom(methodInfo.ReturnType.GetGenericArguments()[0]))
 				let method = new MethodWithRequestParameter(methodInfo)
@@ -157,7 +157,7 @@ namespace Tests.CodeStandards
 					? methodInfo.Name.Substring(0, methodInfo.Name.Length - "Async".Length)
 					: methodInfo.Name;
 
-				IsAsync = methodInfo.ReturnType.IsGeneric() &&
+				IsAsync = methodInfo.ReturnType.IsGenericType() &&
 						  methodInfo.ReturnType.GetGenericTypeDefinition() == typeof(Task<>);
 
 				MethodInfo = methodInfo;

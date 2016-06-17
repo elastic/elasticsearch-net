@@ -1,10 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
-using FluentAssertions;
 using Nest;
-using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
@@ -17,6 +14,10 @@ namespace Tests.Document.Single.Index
 		ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private static string PipelineId { get; } = "pipeline-" + Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		public IndexIngestApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -42,10 +43,6 @@ namespace Tests.Document.Single.Index
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
 		};
-
-		public IndexIngestApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
-		{
-		}
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Index<Project>(this.Document, f),
@@ -93,5 +90,4 @@ namespace Tests.Document.Single.Index
 			};
 
 	}
-
 }

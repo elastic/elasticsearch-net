@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -25,20 +27,20 @@ namespace Tests.Search.FieldStats
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => "/project/_field_stats";
+		protected override string UrlPath => "/project/_field_stats?level=indices";
 
 		protected override Func<FieldStatsDescriptor, IFieldStatsRequest> Fluent => d => d
-			.Fields(Field<Project>(p => p.Name));
-
-			// Causes a NPE on ES 2.0.0
+			.Fields(Fields<Project>("*"))
+			.Level(Level.Indices);
+			// TODO: These seem to never return stats...
 			//.IndexConstraints(cs => cs
 			//	.IndexConstraint(Field<Project>(p => p.StartedOn), c => c
 			//		.MinValue(min => min
-			//			.GreaterThanOrEqualTo("2014-01-01")
+			//			.GreaterThanOrEqualTo(Project.Projects.Min(p => p.StartedOn).ToString("yyyy-MM-dd"))
 			//			.Format("date_optional_time")
 			//		)
 			//		.MaxValue(max => max
-			//			.LessThan("2015-12-29")
+			//			.LessThan(Project.Projects.Max(p => p.StartedOn).ToString("yyyy-MM-dd"))
 			//			.Format("date_optional_time")
 			//		)
 			//	)
@@ -46,9 +48,9 @@ namespace Tests.Search.FieldStats
 
 		protected override FieldStatsRequest Initializer => new FieldStatsRequest(typeof(Project))
 		{
-			Fields = Field<Project>(p => p.Name)
-
-			// Causes a NPE on ES 2.0.0
+			Fields = Fields<Project>("*"),
+			Level = Level.Indices,
+			// TODO: These seem to never return stats...
 			//IndexConstraints = new IndexConstraints
 			//{
 			//	{
@@ -57,17 +59,26 @@ namespace Tests.Search.FieldStats
 			//		{
 			//			MinValue = new IndexConstraintComparison
 			//			{
-			//				GreaterThanOrEqualTo = "2014-01-01",
+			//				GreaterThanOrEqualTo = Project.Projects.Min(p => p.StartedOn).ToString("yyyy-MM-dd"),
 			//				Format = "date_optional_time"
 			//			},
 			//			MaxValue = new IndexConstraintComparison
 			//			{
-			//				LessThan = "2015-12-29",
+			//				LessThan = Project.Projects.Max(p => p.StartedOn).ToString("yyyy-MM-dd"),
 			//				Format = "date_optional_time"
 			//			}
 			//		}
 			//	}
 			//}
 		};
+
+		protected override void ExpectResponse(IFieldStatsResponse response)
+		{
+			foreach (var index in response.Indices)
+			{
+				var stats = index.Value;
+				stats.Fields.Should().NotBeEmpty();
+			}
+		}
 	}
 }

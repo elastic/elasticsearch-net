@@ -58,7 +58,7 @@ namespace Tests.Framework
 		}
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r => UrlTester.ComparePathAndQuerstring(this.UrlPath, r.ApiCall.Uri));
+			await this.AssertOnAllResponses(r => UrlTester.ComparePathAndQuerystring(this.UrlPath, r.ApiCall.Uri));
 
 		[U] protected async Task UsesCorrectHttpMethod() =>
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));

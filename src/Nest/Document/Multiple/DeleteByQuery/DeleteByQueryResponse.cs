@@ -5,42 +5,77 @@ namespace Nest
 {
 	public interface IDeleteByQueryResponse : IResponse
 	{
-		/// <summary>
-		/// The delete by query details for each affected index.
-		/// </summary>
-		[JsonProperty("_indices")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, DeleteByQueryIndicesResult> Indices { get; }
-
 		[JsonProperty("took")]
 		long Took { get; }
+
+		/// <summary>
+		/// Only has a value if WaitForCompletion is set to false on the request
+		/// </summary>
+		[JsonProperty("task")]
+		TaskId Task { get; }
 
 		[JsonProperty("timed_out")]
 		bool TimedOut { get; }
 
+		[JsonProperty("deleted")]
+		long Deleted { get; }
+
+		[JsonProperty("batches")]
+		long Batches { get; }
+
+		[JsonProperty("version_conflicts")]
+		long VersionConflicts { get; }
+
+		[JsonProperty("noops")]
+		long Noops { get; }
+
+		[JsonProperty("retries")]
+		Retries Retries { get; }
+
+		[JsonProperty("throttled_millis")]
+		long ThrottledMilliseconds { get; }
+
+		[JsonProperty("requests_per_second")]
+		Union<string, float> RequestsPerSecond { get; }
+
+		[JsonProperty("throttled_until_millis")]
+		long ThrottledUntilMilliseconds { get; }
+
+		[JsonProperty("total")]
+		long Total { get; }
+
+		[JsonProperty("failures")]
+		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
 	}
 
 	public class DeleteByQueryResponse : ResponseBase, IDeleteByQueryResponse
 	{
-		public IDictionary<string, DeleteByQueryIndicesResult> Indices { get; set; }
+		public override bool IsValid => this.ApiCall?.HttpStatusCode == 200 || !this.Failures.HasAny();
+
 		public long Took { get; internal set; }
+
+		public TaskId Task { get; internal set; }
+
 		public bool TimedOut { get; internal set; }
-	}
 
-	[JsonObject]
-	public class DeleteByQueryIndicesResult
-	{
-		[JsonProperty("found")]
-		public long Found { get; internal set; }
-
-		[JsonProperty("deleted")]
 		public long Deleted { get; internal set; }
 
-		[JsonProperty("missing")]
-		public long Missing { get; internal set; }
+		public long Batches { get; internal set; }
 
-		[JsonProperty("failed")]
-		public long Failed { get; internal set; }
+		public long VersionConflicts { get; internal set; }
 
+		public long Noops { get; internal set; }
+
+		public Retries Retries { get; internal set; }
+
+		public long ThrottledMilliseconds { get; internal set; }
+
+		public Union<string, float> RequestsPerSecond { get; internal set; }
+
+		public long ThrottledUntilMilliseconds { get; internal set; }
+
+		public long Total { get; internal set; }
+
+		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
 	}
 }

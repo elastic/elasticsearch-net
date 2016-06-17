@@ -95,11 +95,9 @@ namespace Nest
 
 	public class DynamicIndexSettings : IsADictionaryBase<string, object>, IDynamicIndexSettings
 	{
-		public DynamicIndexSettings() : base() { }
+		public DynamicIndexSettings() { }
+
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
-		public DynamicIndexSettings(Dictionary<string, object> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
 
 		/// <inheritdoc/>
 		public int? NumberOfReplicas { get; set; }

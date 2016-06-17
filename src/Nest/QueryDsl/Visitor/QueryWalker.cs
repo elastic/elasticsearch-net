@@ -10,6 +10,7 @@ namespace Nest
 		{
 			visitor.Visit(qd);
 			VisitQuery(qd.MatchAll, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.MatchNone, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MoreLikeThis, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.MultiMatch, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.CommonTerms, visitor, (v, d) => v.Visit(d));
@@ -62,6 +63,7 @@ namespace Nest
 			VisitQuery(qd.Template, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.RawQuery, visitor, (v, d) => v.Visit(d));
 			VisitQuery(qd.Percolate, visitor, (v, d) => v.Visit(d));
+			VisitQuery(qd.ParentId, visitor, (v, d) => v.Visit(d));
 
 			VisitQuery(qd.Bool, visitor, (v, d) =>
 			{
@@ -104,12 +106,14 @@ namespace Nest
 				v.Visit(d);
 				Accept(v, d.Query);
 			});
+#pragma warning disable 618
 			VisitQuery(qd.Indices, visitor, (v, d) =>
 			{
 				v.Visit(d);
 				Accept(v, d.Query);
 				Accept(v, d.NoMatchQuery, VisitorScope.NoMatchQuery);
 			});
+#pragma warning restore 618
 			VisitQuery(qd.Nested, visitor, (v, d) =>
 			{
 				v.Visit(d);
@@ -166,7 +170,7 @@ namespace Nest
 
 		private static void Accept(IQueryVisitor visitor, IEnumerable<IQueryContainer> queries, VisitorScope scope = VisitorScope.Query)
 		{
-			if (!queries.HasAny()) return;
+			if (queries == null) return;
 			foreach (var f in queries) Accept(visitor, f, scope);
 		}
 
@@ -248,7 +252,7 @@ namespace Nest
 			if (qd == null) return;
 			VisitQuery(qd, visitor, (v, d) =>
 			{
-				visitor.Visit(qd as ISpanSubQuery);
+				visitor.Visit(qd);
 				scoped(v, d);
 			});
 		}

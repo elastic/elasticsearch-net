@@ -116,7 +116,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var generated = $"public {m}({par}) : base({routing}){{}}";
 
 				// special case SearchRequest<T> to pass the type of T as the type, when only the index is specified.
-				if (m == "SearchRequest" && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				if ((m == "SearchRequest") && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 				{
 					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
 					generated = $"public {m}({par}) : this({cp.First().Key}, typeof({generic})){{}}";
@@ -191,7 +191,17 @@ namespace CodeGeneration.LowLevelClient.Domain
 				{
 					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required</param>"));
 				}
-				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+
+				var generated = $"public {m}({par}) : base({routing}){{}}";
+
+				// Add typeof(T) as the default type when only index specified
+				if ((m == "DeleteByQueryDescriptor" || m == "UpdateByQueryDescriptor") && cp.Count() == 1 && !string.IsNullOrEmpty(this.RequestTypeGeneric))
+				{
+					var generic = this.RequestTypeGeneric.Replace("<", "").Replace(">", "");
+					generated = $"public {m}({par}) : base({routing}.Required(\"type\", (Types)typeof({generic}))){{}}";
+				}
+
+				var c = new Constructor { Generated = generated, Description = doc };
 				ctors.Add(c);
 			}
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))

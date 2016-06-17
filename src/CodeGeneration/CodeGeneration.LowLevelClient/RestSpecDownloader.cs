@@ -15,7 +15,7 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> OnlineSpecifications = new Dictionary<string, string>
 		{
 			{ "Core", "https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api" },
-			{ "DeleteByQuery", "https://github.com/elastic/elasticsearch/tree/{version}/plugins/delete-by-query/src/test/resources/rest-api-spec/api" },
+			//{ "DeleteByQuery", "https://github.com/elastic/elasticsearch/tree/{version}/plugins/delete-by-query/src/test/resources/rest-api-spec/api" },
 		};
 		private class Specification
 		{
@@ -51,6 +51,8 @@ namespace CodeGeneration.LowLevelClient
 					pbar.Tick($"Downloaded rest-api-spec to {spec.FolderOnDisk} for branch {branch}");
 				}
 			}
+
+			File.WriteAllText(CodeConfiguration.LastDownloadedVersionFile, branch);
 		}
 
 		private void DownloadJsonDefinitions(Specification spec, IProgressBar pbar)

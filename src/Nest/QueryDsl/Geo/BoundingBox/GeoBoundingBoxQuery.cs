@@ -13,9 +13,11 @@ namespace Nest
 		[JsonProperty("type")]
 		GeoExecution? Type { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
 
@@ -29,7 +31,11 @@ namespace Nest
 		protected override bool Conditionless => IsConditionless(this);
 		public IBoundingBox BoundingBox { get; set; }
 		public GeoExecution? Type { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? Coerce { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
@@ -50,19 +56,21 @@ namespace Nest
 		bool? IGeoBoundingBoxQuery.IgnoreMalformed { get; set; }
 		GeoValidationMethod? IGeoBoundingBoxQuery.ValidationMethod { get; set; }
 
-		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) => 
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(double topLeftLat, double topLeftLon, double bottomRightLat, double bottomRightLon) =>
 			BoundingBox(f=>f.TopLeft(topLeftLat, topLeftLon).BottomRight(bottomRightLat, bottomRightLon));
 
-		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) => 
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(GeoLocation topLeft, GeoLocation bottomRight) =>
 			BoundingBox(f=>f.TopLeft(topLeft).BottomRight(bottomRight));
 
-		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) => 
+		public GeoBoundingBoxQueryDescriptor<T> BoundingBox(Func<BoundingBoxDescriptor, IBoundingBox> boundingBoxSelector) =>
 			Assign(a => a.BoundingBox = boundingBoxSelector?.Invoke(new BoundingBoxDescriptor()));
 
 		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution type) => Assign(a => a.Type = type);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoBoundingBoxQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoBoundingBoxQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
 
 		public GeoBoundingBoxQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);

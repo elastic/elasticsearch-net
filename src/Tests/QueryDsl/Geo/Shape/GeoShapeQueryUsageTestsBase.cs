@@ -1,0 +1,27 @@
+﻿using Tests.Framework.Integration;
+using Xunit;
+
+namespace Tests.QueryDsl
+{
+	[Collection(TypeOfCluster.ReadOnly)]
+	public abstract class GeoShapeQueryUsageTestsBase : QueryDslUsageTestsBase
+	{
+		public GeoShapeQueryUsageTestsBase(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+
+		protected override object QueryJson => new
+		{
+			geo_shape = new
+			{
+				location = new
+				{
+					_name="named_query",
+					boost = 1.1,
+					ignore_unmapped = false,
+					shape = this.ShapeJson
+				}
+			}
+		};
+
+		protected abstract object ShapeJson { get; }
+	}
+}

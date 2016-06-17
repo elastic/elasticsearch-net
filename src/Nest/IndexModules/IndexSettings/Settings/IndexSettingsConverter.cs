@@ -74,11 +74,11 @@ namespace Nest
 			d[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
 			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
-
 			var indexSettings = value as IIndexSettings;
 			d["index.number_of_shards"] = indexSettings?.NumberOfShards;
 			d[UpdatableIndexSettings.NumberOfReplicas] = indexSettings?.NumberOfReplicas;
 			d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
+			d["index.queries.cache.enabled"] = indexSettings?.Queries?.Cache?.Enabled;
 
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
 
@@ -92,7 +92,7 @@ namespace Nest
 			foreach (var property in original.Properties())
 			{
 				if (property.Value is JObject && property.Name != UpdatableIndexSettings.Analysis)
-					Flatten(property.Value.Value<JObject>(), property.Name + ".", newObject);
+					Flatten(property.Value.Value<JObject>(), prefix + property.Name + ".", newObject);
 				else newObject.Add(prefix + property.Name, property.Value);
 			}
 			return newObject;
@@ -183,6 +183,10 @@ namespace Nest
 			Set<int?>(s, settings, "index.number_of_shards", v => s.NumberOfShards = v);
 			Set<FileSystemStorageImplementation?>(s, settings, UpdatableIndexSettings.StoreType, v => s.FileSystemStorageImplementation = v,
 				serializer);
+
+			var queries = s.Queries = new QueriesSettings();
+			var queriesCache = s.Queries.Cache = new QueriesCacheSettings();
+			Set<bool?>(s, settings, "index.queries.cache.enabled", v => queriesCache.Enabled = v);
 
 			IDictionary dict = s;
 			foreach (var kv in settings)

@@ -12,16 +12,16 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		[U] public async Task Urls()
 		{
 			await POST("/project/_update_by_query")
-				.Fluent(c => c.UpdateByQuery<Project>("project", Types.All,d => d))
+				.Fluent(c => c.UpdateByQuery<Project>(d => d.AllTypes()))
 				.Request(c => c.UpdateByQuery(new UpdateByQueryRequest<Project>("project")))
-				.FluentAsync(c => c.UpdateByQueryAsync<Project>("project", Types.All, d => d))
+				.FluentAsync(c => c.UpdateByQueryAsync<Project>(d => d.AllTypes()))
 				.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project")))
 				;
 
 			await POST("/project/project/_update_by_query")
-				.Fluent(c => c.UpdateByQuery<Project>("project", Type<Project>(), d=>d))
+				.Fluent(c => c.UpdateByQuery<Project>(d => d))
 				.Request(c => c.UpdateByQuery(new UpdateByQueryRequest<Project>("project", "project")))
-				.FluentAsync(c => c.UpdateByQueryAsync<Project>(Index<Project>(), Type<Project>(), d=>d))
+				.FluentAsync(c => c.UpdateByQueryAsync<Project>(d => d))
 				.RequestAsync(c => c.UpdateByQueryAsync(new UpdateByQueryRequest<Project>("project", "project")))
 				;
 		}

@@ -33,6 +33,7 @@ namespace CodeGeneration.LowLevelClient
 		public static string EsNetFolder { get; } = $@"{Root}..\..\..\src\Elasticsearch.Net\";
 		public static string ViewFolder { get; } = $@"{Root}Views\";
 		public static string RestSpecificationFolder { get; } = $@"{Root}RestSpecification\";
+		public static string LastDownloadedVersionFile { get; } = Path.Combine(Root, "last_downloaded_version.txt");
 
 		public static readonly Dictionary<string, string> MethodNameOverrides =
 			(from f in new DirectoryInfo(NestFolder).GetFiles("*.cs", SearchOption.AllDirectories)

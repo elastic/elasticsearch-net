@@ -8,54 +8,59 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiMatchQueryDescriptor<object>>))]
 	public interface IMultiMatchQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "type")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[JsonProperty("type")]
 		TextQueryType? Type { get; set; }
 
-		[JsonProperty(PropertyName = "query")]
+		[JsonProperty("query")]
 		string Query { get; set; }
 
-		[JsonProperty(PropertyName = "analyzer")]
+		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "fuzzy_rewrite")]
-		[JsonConverter(typeof(StringEnumConverter))]
+		[JsonProperty("fuzzy_rewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
 
-		[JsonProperty(PropertyName = "fuzziness")]
+		/// <summary>
+		/// Allows fuzzy matching based on the type of field being queried.
+		/// Cannot be used with the
+		/// <see cref="TextQueryType.CrossFields"/>,
+		/// <see cref="TextQueryType.Phrase"/> or
+		/// <see cref="TextQueryType.PhrasePrefix"/> types.
+		/// </summary>
+		[JsonProperty("fuzziness")]
 		Fuzziness Fuzziness { get; set; }
 
-		[JsonProperty(PropertyName = "cutoff_frequency")]
+		[JsonProperty("cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
-		[JsonProperty(PropertyName = "prefix_length")]
+		[JsonProperty("prefix_length")]
 		int? PrefixLength { get; set; }
 
-		[JsonProperty(PropertyName = "max_expansions")]
+		[JsonProperty("max_expansions")]
 		int? MaxExpansions { get; set; }
 
-		[JsonProperty(PropertyName = "slop")]
+		[JsonProperty("slop")]
 		int? Slop { get; set; }
 
-		[JsonProperty(PropertyName = "lenient")]
+		[JsonProperty("lenient")]
 		bool? Lenient { get; set; }
 
-		[JsonProperty(PropertyName = "use_dis_max")]
+		[JsonProperty("use_dis_max")]
 		bool? UseDisMax { get; set; }
 
-		[JsonProperty(PropertyName = "tie_breaker")]
+		[JsonProperty("tie_breaker")]
 		double? TieBreaker { get; set; }
 
-		[JsonProperty(PropertyName = "minimum_should_match")]
+		[JsonProperty("minimum_should_match")]
 		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "operator")]
+		[JsonProperty("operator")]
 		Operator? Operator { get; set; }
 
-		[JsonProperty(PropertyName = "fields")]
+		[JsonProperty("fields")]
 		Fields Fields { get; set; }
 
-		[JsonProperty(PropertyName = "zero_terms_query")]
+		[JsonProperty("zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
 	}
 
@@ -66,6 +71,14 @@ namespace Nest
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
 		public RewriteMultiTerm? FuzzyRewrite { get; set; }
+
+		/// <summary>
+		/// Allows fuzzy matching based on the type of field being queried.
+		/// Cannot be used with the
+		/// <see cref="TextQueryType.CrossFields"/>,
+		/// <see cref="TextQueryType.Phrase"/> or
+		/// <see cref="TextQueryType.PhrasePrefix"/> types.
+		/// </summary>
 		public Fuzziness Fuzziness { get; set; }
 		public double? CutoffFrequency { get; set; }
 		public int? PrefixLength { get; set; }
@@ -116,6 +129,13 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
+		/// <summary>
+		/// Allows fuzzy matching based on the type of field being queried.
+		/// Cannot be used with the
+		/// <see cref="TextQueryType.CrossFields"/>,
+		/// <see cref="TextQueryType.Phrase"/> or
+		/// <see cref="TextQueryType.PhrasePrefix"/> types.
+		/// </summary>
 		public MultiMatchQueryDescriptor<T> Fuzziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
@@ -139,6 +159,8 @@ namespace Nest
 		public MultiMatchQueryDescriptor<T> TieBreaker(double? tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
 		public MultiMatchQueryDescriptor<T> Type(TextQueryType? type) => Assign(a => a.Type = type);
+
+		public MultiMatchQueryDescriptor<T> UseDisMax(bool? useDisMax = true) => Assign(a => a.UseDisMax = useDisMax);
 
 		public MultiMatchQueryDescriptor<T> ZeroTermsQuery(ZeroTermsQuery? zeroTermsQuery) => Assign(a => a.ZeroTermsQuery = zeroTermsQuery);
 	}

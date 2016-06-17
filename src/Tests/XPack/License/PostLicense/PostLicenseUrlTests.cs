@@ -10,7 +10,7 @@ namespace Tests.XPack.License.PostLicense
 	{
 		[U] public async Task Urls()
 		{
-			await PUT("/_license")
+			await PUT("/_xpack/license")
 				.Fluent(c => c.PostLicense())
 				.Request(c => c.PostLicense(new PostLicenseRequest()))
 				.FluentAsync(c => c.PostLicenseAsync())

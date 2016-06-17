@@ -285,16 +285,19 @@ module Tooling =
 
     type DnxTooling(exe) =
         member this.Exec runtime failedF workingDirectory arguments =
+            this.ExecWithTimeout runtime failedF workingDirectory arguments (TimeSpan.FromMinutes 30.)
+
+        member this.ExecWithTimeout runtime failedF workingDirectory arguments timeout =
             match (runtime, hasClr, hasCoreClr) with
             | (Core, _, Some c) ->
                 let proc = c.Process exe
-                execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
+                execProcessWithTimeout proc arguments timeout
             | (Desktop, Some d, _) ->
                 let proc = d.Process exe
-                execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)
+                execProcessWithTimeout proc arguments timeout
             | (Both, Some d, Some c) ->
                 let proc = d.Process exe
-                let result = execProcess proc arguments 
+                let result = execProcessWithTimeout proc arguments timeout
                 if result <> 0 then failwith (sprintf "Failed to run dnx tooling for %s args: %A" proc arguments)
                 let proc = c.Process exe
                 execProcessWithTimeout proc arguments (TimeSpan.FromMinutes 30.)

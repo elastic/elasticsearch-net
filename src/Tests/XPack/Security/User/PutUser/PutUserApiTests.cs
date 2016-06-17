@@ -25,7 +25,7 @@ namespace Tests.XPack.Security.User.PutUser
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 
-		protected override string UrlPath => $"/_shield/user/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_xpack/security/user/{CallIsolatedValue}";
 
 		protected override bool SupportsDeserialization => false;
 

@@ -127,12 +127,10 @@ namespace Tests.Framework.Integration
 
 		private void InstallPlugins()
 		{
-			foreach (var plugin in ElasticsearchPlugins.Supported)
+			foreach (var plugin in ElasticsearchPluginCollection.Supported.Where(plugin => plugin.IsValid(this.Version)))
 			{
-				var installCommand = plugin.Value;
-				var installParameter = installCommand.InstallParameter != null ? installCommand.InstallParameter(this.Version) : installCommand.Moniker;
-
-				var folder = installCommand.FolderName ?? installCommand.Moniker;
+				var installParameter = plugin.InstallParamater(this.Version);
+				var folder = plugin.FolderName;
 				var pluginFolder = Path.Combine(this.ElasticsearchHome, "plugins", folder);
 
 				if (!Directory.Exists(this.ElasticsearchHome)) continue;
@@ -140,7 +138,7 @@ namespace Tests.Framework.Integration
 				// assume plugin already installed
 				if (Directory.Exists(pluginFolder)) continue;
 
-				Console.WriteLine($"Installing elasticsearch plugin: {installCommand.Moniker} ...");
+				Console.WriteLine($"Installing elasticsearch plugin: {plugin.Moniker} ...");
 				var timeout = TimeSpan.FromSeconds(120);
 				var handle = new ManualResetEvent(false);
 				Task.Run(() =>
@@ -152,21 +150,21 @@ namespace Tests.Framework.Integration
 						o.Subscribe(c=>Console.WriteLine(c.Data),
 							(e) =>
 							{
-								Console.WriteLine($"Failed installing elasticsearch plugin: {installCommand.Moniker}");
+								Console.WriteLine($"Failed installing elasticsearch plugin: {plugin.Moniker}");
 								handle.Set();
 								throw e;
 							},
 							() =>
 							{
-								Console.WriteLine($"Finished installing elasticsearch plugin: {installCommand.Moniker} exit code: {p.ExitCode}");
+								Console.WriteLine($"Finished installing elasticsearch plugin: {plugin.Moniker} exit code: {p.ExitCode}");
 								handle.Set();
 							});
 						if (!handle.WaitOne(timeout, true))
-							throw new Exception($"Could not install {installCommand.Moniker} within {timeout}");
+							throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
 					}
 				});
 				if (!handle.WaitOne(timeout, true))
-					throw new Exception($"Could not install {installCommand.Moniker} within {timeout}");
+					throw new Exception($"Could not install {plugin.Moniker} within {timeout}");
 			}
 		}
 
@@ -186,6 +184,7 @@ namespace Tests.Framework.Integration
 			var folder = this.Version.Major >= 5 ? "x-pack" : "shield";
 			var plugin = this.Version.Major >= 5 ? "users" : "esusers";
 
+			EnsureRoles(folder);
 			var pluginBat = Path.Combine(this.ElasticsearchHome, "bin", folder, plugin) + ".bat";
 			foreach (var cred in ShieldInformation.AllUsers)
 			{
@@ -202,6 +201,69 @@ namespace Tests.Framework.Integration
 				var p = Process.Start(processInfo);
 				p.WaitForExit();
 			}
+		}
+
+		private void EnsureRoles(string securityFolder)
+		{
+			var rolesConfig = Path.Combine(this.ElasticsearchHome, "config", securityFolder, "roles.yml");
+			var lines = File.ReadAllLines(rolesConfig).ToList();
+			var saveFile = false;
+
+			if (!lines.Any(line => line.StartsWith("user:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# Read-only operations on indices",
+					"user:",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - read",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (!lines.Any(line => line.StartsWith("power_user:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# monitoring cluster privileges",
+					"# All operations on all indices",
+					"power_user:",
+					"  cluster:",
+					"    - monitor",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - all",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (!lines.Any(line => line.StartsWith("admin:")))
+			{
+				lines.InsertRange(0, new []
+				{
+					"# All cluster rights",
+					"# All operations on all indices",
+					"admin:",
+					"  cluster:",
+					"    - all",
+					"  indices:",
+					"    - names: '*'",
+					"      privileges:",
+					"        - all",
+					string.Empty
+				});
+
+				saveFile = true;
+			}
+
+			if (saveFile) File.WriteAllLines(rolesConfig, lines);
 		}
 
 		private string GetApplicationDataDirectory()

@@ -24,7 +24,7 @@ namespace Tests.XPack.Security.Authenticate
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 
-		protected override string UrlPath => $"/_shield/authenticate";
+		protected override string UrlPath => $"/_xpack/security/authenticate";
 
 		protected override bool SupportsDeserialization => true;
 

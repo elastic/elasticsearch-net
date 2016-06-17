@@ -8,6 +8,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Search.Percolator.RegisterPercolator
 {
+	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 	public class RegisterPercolatorUrlTests
 	{
 		[U] public async Task Urls()

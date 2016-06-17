@@ -13,7 +13,8 @@ using static Nest.Infer;
 namespace Tests.Document.Multiple.UpdateByQuery
 {
 	[Collection(TypeOfCluster.OwnIndex)]
-	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
+	public class UpdateByQueryApiTests
+		: ApiIntegrationTestBase<IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test
 		{
@@ -52,8 +53,8 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			}
 		}
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.UpdateByQuery(CallIsolatedValue, Type<Test>(), f),
-			fluentAsync: (client, f) => client.UpdateByQueryAsync(CallIsolatedValue, Type<Test>(), f),
+			fluent: (client, f) => client.UpdateByQuery(f),
+			fluentAsync: (client, f) => client.UpdateByQueryAsync(f),
 			request: (client, r) => client.UpdateByQuery(r),
 			requestAsync: (client, r) => client.UpdateByQueryAsync(r)
 		);
@@ -72,6 +73,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override UpdateByQueryDescriptor<Test> NewDescriptor() => new UpdateByQueryDescriptor<Test>(CallIsolatedValue).Type<Test>();
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
 			.Refresh()
 			.Conflicts(Conflicts.Proceed);
 
@@ -108,6 +110,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
 			.WaitForCompletion(false)
 			.Conflicts(Conflicts.Proceed);
 
@@ -158,6 +161,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			};
 
 		protected override Func<UpdateByQueryDescriptor<Test>, IUpdateByQueryRequest> Fluent => d => d
+			.Index(CallIsolatedValue)
 			.Query(q=>q.Match(m=>m.Field(p=>p.Flag).Query("bar")))
 			.Script(_script)
 			;
@@ -177,11 +181,18 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			response.VersionConflicts.Should().Be(1);
 			response.Failures.Should().NotBeEmpty();
 			var failure = response.Failures.First();
-			failure.Id.Should().NotBeNullOrWhiteSpace();
+
 			failure.Index.Should().NotBeNullOrWhiteSpace();
+			failure.Type.Should().NotBeNullOrWhiteSpace();
+			failure.Status.Should().Be(409);
+			failure.Id.Should().NotBeNullOrWhiteSpace();
+
 			failure.Cause.Should().NotBeNull();
-			failure.Cause.Type.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.IndexUniqueId.Should().NotBeNullOrWhiteSpace();
 			failure.Cause.Reason.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Index.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Shard.Should().NotBeNullOrWhiteSpace();
+			failure.Cause.Type.Should().NotBeNullOrWhiteSpace();
 		}
 	}
 }

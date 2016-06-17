@@ -29,7 +29,7 @@ namespace Nest
 		public IGetRoleResponse GetRole(IGetRoleRequest request) =>
 			this.Dispatcher.Dispatch<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.ShieldGetRoleDispatch<GetRoleResponse>(p)
+				(p, d) =>this.LowLevelDispatch.XpackSecurityGetRoleDispatch<GetRoleResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request) =>
 			this.Dispatcher.DispatchAsync<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse, IGetRoleResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.ShieldGetRoleDispatchAsync<GetRoleResponse>(p)
+				(p,d ) => this.LowLevelDispatch.XpackSecurityGetRoleDispatchAsync<GetRoleResponse>(p)
 			);
 	}
 }

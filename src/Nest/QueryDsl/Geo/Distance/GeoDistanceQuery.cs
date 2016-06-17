@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,25 +9,27 @@ namespace Nest
 	{
 		[VariableField]
 		GeoLocation Location { get; set; }
-		
+
 		[JsonProperty("distance")]
 		Distance Distance { get; set; }
-		
+
 		[JsonProperty("optimize_bbox")]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
-	
+
 		[JsonProperty("validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
-	
+
 	}
 
 	public class GeoDistanceQuery : FieldNameQueryBase, IGeoDistanceQuery
@@ -36,19 +39,23 @@ namespace Nest
 		public Distance Distance { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
-		public bool? Coerce { get; set; }
-		public bool? IgnoreMalformed { get; set; }
-		public GeoValidationMethod? ValidationMethod { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
+		public bool? Coerce { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
+		public bool? IgnoreMalformed { get; set; }
+
+		public GeoValidationMethod? ValidationMethod { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistance = this;
 
-		internal static bool IsConditionless(IGeoDistanceQuery q) => 
+		internal static bool IsConditionless(IGeoDistanceQuery q) =>
 			q.Location == null || q.Distance == null || q.Field.IsConditionless();
 	}
 
-	public class GeoDistanceQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T> 
+	public class GeoDistanceQueryDescriptor<T>
+		: FieldNameQueryDescriptorBase<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T>
 		, IGeoDistanceQuery where T : class
 	{
 		protected override bool Conditionless => GeoDistanceQuery.IsConditionless(this);
@@ -72,8 +79,10 @@ namespace Nest
 
 		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType type) => Assign(a => a.DistanceType = type);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoDistanceQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoDistanceQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
 
 		public GeoDistanceQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);

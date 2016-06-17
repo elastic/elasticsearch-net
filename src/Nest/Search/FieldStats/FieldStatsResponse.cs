@@ -43,6 +43,12 @@ namespace Nest
 		[JsonProperty("sum_total_term_freq")]
 		public long SumTotalTermFrequency { get; set; }
 
+		[JsonProperty("searchable")]
+		public bool Searchable { get; set; }
+
+		[JsonProperty("aggregatable")]
+		public bool Aggregatable { get; set; }
+
 		[JsonProperty("min_value")]
 		public string MinValue { get; set; }
 

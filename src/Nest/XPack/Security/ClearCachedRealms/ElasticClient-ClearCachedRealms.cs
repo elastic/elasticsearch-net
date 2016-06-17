@@ -29,7 +29,7 @@ namespace Nest
 		public IClearCachedRealmsResponse ClearCachedRealms(IClearCachedRealmsRequest request) =>
 			this.Dispatcher.Dispatch<IClearCachedRealmsRequest, ClearCachedRealmsRequestParameters, ClearCachedRealmsResponse>(
 				request,
-				(p, d) =>this.LowLevelDispatch.ShieldClearCachedRealmsDispatch<ClearCachedRealmsResponse>(p)
+				(p, d) =>this.LowLevelDispatch.XpackSecurityClearCachedRealmsDispatch<ClearCachedRealmsResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IClearCachedRealmsResponse> ClearCachedRealmsAsync(IClearCachedRealmsRequest request) =>
 			this.Dispatcher.DispatchAsync<IClearCachedRealmsRequest, ClearCachedRealmsRequestParameters, ClearCachedRealmsResponse, IClearCachedRealmsResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.ShieldClearCachedRealmsDispatchAsync<ClearCachedRealmsResponse>(p)
+				(p,d ) => this.LowLevelDispatch.XpackSecurityClearCachedRealmsDispatchAsync<ClearCachedRealmsResponse>(p)
 			);
 	}
 }

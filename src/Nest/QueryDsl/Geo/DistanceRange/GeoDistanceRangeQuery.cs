@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,10 +12,10 @@ namespace Nest
 
 		[JsonProperty("gte")]
 		Distance GreaterThanOrEqualTo { get; set; }
-		
+
 		[JsonProperty("lte")]
 		Distance LessThanOrEqualTo { get; set; }
-		
+
 		[JsonProperty("gt")]
 		Distance GreaterThan { get; set; }
 
@@ -23,19 +24,21 @@ namespace Nest
 
 		[JsonProperty("distance_type")]
 		GeoDistanceType? DistanceType { get; set; }
-		
+
 		[JsonProperty("optimize_bbox")]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
-		
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
 
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		[JsonProperty("ignore_malformed")]
 		bool? IgnoreMalformed { get; set; }
-	
+
 		[JsonProperty("validation_method")]
 		GeoValidationMethod? ValidationMethod { get; set; }
-	
+
 	}
 
 	public class GeoDistanceRangeQuery : FieldNameQueryBase, IGeoDistanceRangeQuery
@@ -48,18 +51,22 @@ namespace Nest
 		public Distance LessThanOrEqualTo { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? Coerce { get; set; }
+
+		[Obsolete("Deprecated. Use ValidationMethod")]
 		public bool? IgnoreMalformed { get; set; }
 		public GeoValidationMethod? ValidationMethod { get; set; }
 
 		internal override void InternalWrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
 
-		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => 
-			q.Field == null || q.Location == null 
+		internal static bool IsConditionless(IGeoDistanceRangeQuery q) =>
+			q.Field == null || q.Location == null
 			|| (q.LessThan == null && q.LessThanOrEqualTo == null && q.GreaterThanOrEqualTo == null && q.GreaterThan == null);
 	}
 
-	public class GeoDistanceRangeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T> 
+	public class GeoDistanceRangeQueryDescriptor<T> : FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T>
 		, IGeoDistanceRangeQuery where T : class
 	{
 		protected override bool Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
@@ -86,20 +93,21 @@ namespace Nest
 			Assign(a => a.GreaterThanOrEqualTo = new Distance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(Distance to) => Assign(a => a.LessThanOrEqualTo = to);
-		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(double distance, DistanceUnit unit) => 
+		public GeoDistanceRangeQueryDescriptor<T> LessThanOrEqualTo(double distance, DistanceUnit unit) =>
 			Assign(a => a.LessThanOrEqualTo = new Distance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> LessThan(Distance to) => Assign(a => a.LessThan = to);
-		public GeoDistanceRangeQueryDescriptor<T> LessThan(double distance, DistanceUnit unit) => 
+		public GeoDistanceRangeQueryDescriptor<T> LessThan(double distance, DistanceUnit unit) =>
 			Assign(a => a.LessThan = new Distance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 
 		public GeoDistanceRangeQueryDescriptor<T> DistanceType(GeoDistanceType geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
-
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoDistanceRangeQueryDescriptor<T> Coerce(bool? coerce = true) => Assign(a => a.Coerce = coerce);
 
+		[Obsolete("Deprecated. Use ValidationMethod(GeoValidationMethod? validation)")]
 		public GeoDistanceRangeQueryDescriptor<T> IgnoreMalformed(bool? ignore = true) => Assign(a => a.IgnoreMalformed = ignore);
 
 		public GeoDistanceRangeQueryDescriptor<T> ValidationMethod(GeoValidationMethod? validation) => Assign(a => a.ValidationMethod = validation);

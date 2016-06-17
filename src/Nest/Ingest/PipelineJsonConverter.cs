@@ -34,6 +34,9 @@ namespace Nest
 				var processorName = jsonProcessor.ToObject<JObject>().Properties().First().Name;
 				switch (processorName)
 				{
+					case "attachment":
+						processors.Add(jsonProcessor.ToObject<AttachmentProcessor>(serializer));
+						break;
 					case "append":
 						processors.Add(jsonProcessor.ToObject<AppendProcessor>(serializer));
 						break;
@@ -43,11 +46,17 @@ namespace Nest
 					case "date":
 						processors.Add(jsonProcessor.ToObject<DateProcessor>(serializer));
 						break;
+					case "date_index_name":
+						processors.Add(jsonProcessor.ToObject<DateIndexNameProcessor>(serializer));
+						break;
 					case "fail":
 						processors.Add(jsonProcessor.ToObject<FailProcessor>(serializer));
 						break;
 					case "foreach":
 						processors.Add(jsonProcessor.ToObject<ForeachProcessor>(serializer));
+						break;
+					case "geoip":
+						processors.Add(jsonProcessor.ToObject<GeoIpProcessor>(serializer));
 						break;
 					case "grok":
 						processors.Add(jsonProcessor.ToObject<GrokProcessor>(serializer));
@@ -69,6 +78,9 @@ namespace Nest
 						break;
 					case "set":
 						processors.Add(jsonProcessor.ToObject<SetProcessor>(serializer));
+						break;
+					case "sort":
+						processors.Add(jsonProcessor.ToObject<SortProcessor>(serializer));
 						break;
 					case "split":
 						processors.Add(jsonProcessor.ToObject<SplitProcessor>(serializer));

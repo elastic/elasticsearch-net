@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.Role.DeleteRole
 	{
 		[U] public async Task Urls()
 		{
-			await DELETE("/_shield/role/mpdreamz")
+			await DELETE("/_xpack/security/role/mpdreamz")
 				.Fluent(c => c.DeleteRole("mpdreamz"))
 				.Request(c => c.DeleteRole(new DeleteRoleRequest("mpdreamz")))
 				.FluentAsync(c => c.DeleteRoleAsync("mpdreamz"))

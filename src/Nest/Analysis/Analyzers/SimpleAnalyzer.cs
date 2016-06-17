@@ -8,7 +8,7 @@
 	/// <inheritdoc/>
 	public class SimpleAnalyzer : AnalyzerBase, ISimpleAnalyzer
 	{
-		public SimpleAnalyzer() { Type = "simple"; }
+		public SimpleAnalyzer() : base("simple") {}
 	}
 
 	/// <inheritdoc/>

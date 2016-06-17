@@ -26,6 +26,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* contains a `match` query.
 	*/
 	[Collection(TypeOfCluster.Indexing)]
+	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
 	public class PercolateQueryUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
@@ -75,10 +76,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected object QueryJson => new
 		{
-			percolator = new
+			percolate = new
 			{
 				document_type = "project",
-				document = Project.InstanceAnonymous
+				document = Project.InstanceAnonymous,
+				field = "query"
 			}
 		};
 
@@ -95,12 +97,14 @@ namespace Tests.QueryDsl.Specialized.Percolate
 		{
 			DocumentType = typeof(Project),
 			Document = Project.Instance,
+			Field = Infer.Field<PercolatedQuery>(f => f.Query)
 		};
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<PercolatedQuery> q) => q
 			.Percolate(p => p
 				.DocumentType(typeof(Project))
 				.Document(Project.Instance)
+				.Field(f => f.Query)
 			);
 
 		protected override void ExpectResponse(ISearchResponse<PercolatedQuery> response)
@@ -126,7 +130,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 	/**[float]
 	* == Percolate an existing document
-	* Instead of specifying a the source of the document being percolated, the source can also be
+	* Instead of specifying the source of the document being percolated, the source can also be
 	* retrieved from an already stored document. The percolate query will then internally execute a get request to fetch that document.
 	*
 	* The required fields to percolate an existing document are:
@@ -138,6 +142,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
 	*/
 	[Collection(TypeOfCluster.Indexing)]
+	[SkipVersion("5.0.0-alpha1", "percolate query changed property in query dsl from 'percolator' to 'percolate'")]
 	public class PercolateQueryExistingDocumentUsageTests : ApiIntegrationTestBase<ISearchResponse<PercolatedQuery>, ISearchRequest, SearchDescriptor<PercolatedQuery>, SearchRequest<PercolatedQuery>>
 	{
 		private static readonly string PercolatorId = RandomString();
@@ -188,12 +193,13 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		protected object QueryJson => new
 		{
-			percolator = new
+			percolate = new
 			{
 				type = "project",
 				index = "project",
 				id = Project.Instance.Name,
-				document_type = "project"
+				document_type = "project",
+				field = "query"
 			}
 		};
 
@@ -211,7 +217,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			Type = typeof(Project),
 			Index = IndexName.From<Project>(),
 			Id = Project.Instance.Name,
-			DocumentType = typeof(Project)
+			DocumentType = typeof(Project),
+			Field = Infer.Field<PercolatedQuery>(f => f.Query)
 		};
 
 		protected QueryContainer QueryFluent(QueryContainerDescriptor<PercolatedQuery> q) => q
@@ -219,7 +226,8 @@ namespace Tests.QueryDsl.Specialized.Percolate
 				.Type<Project>()
 				.Index<Project>()
 				.Id(Project.Instance.Name)
-				.DocumentType<Project>() // <1> specify the `type`, `index`, `id` and `document_type` of the document to fetch, to percolate.
+				.Field(f => f.Query)
+				.DocumentType<Project>() // <1> specify the `type`, `index`, `id`, `field`, `document_type` of the document to fetch, to percolate.
 			);
 
 		protected override void ExpectResponse(ISearchResponse<PercolatedQuery> response)

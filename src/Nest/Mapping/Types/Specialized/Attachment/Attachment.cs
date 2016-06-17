@@ -154,26 +154,82 @@ namespace Nest
 					if (reader.TokenType == JsonToken.PropertyName)
 					{
 						var propertyName = (string)reader.Value;
-						switch (propertyName)
+						switch (propertyName.ToLowerInvariant())
 						{
 							case "_content":
+							case "content":
 								attachment.Content = reader.ReadAsString();
 								break;
 							case "_name":
+							case "name":
 								attachment.Name = reader.ReadAsString();
 								break;
+							case "author":
+								attachment.Author = reader.ReadAsString();
+								break;
+							case "keywords":
+								attachment.Keywords = reader.ReadAsString();
+								break;
+							case "date":
+								reader.Read();
+								switch (reader.TokenType)
+								{
+									case JsonToken.String:
+										var value = (string)reader.Value;
+										if (!string.IsNullOrEmpty(value))
+											attachment.Date = Convert.ToDateTime(value);
+										break;
+									case JsonToken.Date:
+										attachment.Date = (DateTime?)reader.Value;
+										break;
+								}
+								break;
 							case "_content_type":
+							case "content_type":
+							case "contenttype":
 								attachment.ContentType = reader.ReadAsString();
 								break;
+							case "_content_length":
+							case "content_length":
+							case "contentlength":
+								reader.Read();
+								switch (reader.TokenType)
+								{
+									case JsonToken.String:
+										var value = (string)reader.Value;
+										if (!string.IsNullOrEmpty(value))
+											attachment.ContentLength = Convert.ToInt64(value);
+										break;
+									case JsonToken.Integer:
+									case JsonToken.Float:
+										attachment.ContentLength = (long?)reader.Value;
+										break;
+
+								}
+								break;
 							case "_language":
+							case "language":
 								attachment.Language = reader.ReadAsString();
 								break;
 							case "_detect_language":
 								attachment.DetectLanguage = reader.ReadAsBoolean();
 								break;
 							case "_indexed_chars":
+							case "indexed_chars":
 								reader.Read();
-								attachment.IndexedCharacters = (long?)reader.Value;
+								switch (reader.TokenType)
+								{
+									case JsonToken.String:
+										var value = (string)reader.Value;
+										if (!string.IsNullOrEmpty(value))
+											attachment.IndexedCharacters = Convert.ToInt64(value);
+										break;
+									case JsonToken.Integer:
+									case JsonToken.Float:
+										attachment.IndexedCharacters = (long?)reader.Value;
+										break;
+
+								}
 								break;
 						}
 					}

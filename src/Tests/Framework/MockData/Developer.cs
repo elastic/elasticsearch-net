@@ -12,6 +12,9 @@ namespace Tests.Framework.MockData
 		public string PrivateValue { get; set; }
 		public string IPAddress { get; set; }
 
+		// not populated by generator. Used by ingest geoip test
+		public GeoIp GeoIp { get; set; }
+
 		public new static Faker<Developer> Generator { get; } =
 			new Faker<Developer>()
 				.RuleFor(p => p.Id, p => IdState++)
@@ -25,7 +28,6 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.IPAddress, p => p.Internet.Ip())
 			;
 
-		public static IList<Developer> Developers { get; } =
-			Developer.Generator.Generate(1000).ToList();
+		public static IList<Developer> Developers { get; } = Developer.Generator.Generate(1000).ToList();
 	}
 }

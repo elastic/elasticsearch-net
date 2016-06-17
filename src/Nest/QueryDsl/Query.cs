@@ -85,6 +85,7 @@ namespace Nest
 		public static QueryContainer Ids(Func<IdsQueryDescriptor, IIdsQuery> selector) =>
 			new QueryContainerDescriptor<T>().Ids(selector);
 
+		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 		public static QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
 			new QueryContainerDescriptor<T>().Indices(selector);
 
@@ -93,6 +94,9 @@ namespace Nest
 
 		public static QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
 			new QueryContainerDescriptor<T>().MatchAll(selector);
+
+		public static QueryContainer MatchNone(Func<MatchNoneQueryDescriptor, IMatchNoneQuery> selector = null) =>
+			new QueryContainerDescriptor<T>().MatchNone(selector);
 
 		public static QueryContainer MatchPhrase(Func<MatchPhraseQueryDescriptor<T>, IMatchQuery> selector) =>
 			new QueryContainerDescriptor<T>().MatchPhrase(selector);
@@ -111,6 +115,9 @@ namespace Nest
 
 		public static QueryContainer Nested(Func<NestedQueryDescriptor<T>, INestedQuery> selector) =>
 			new QueryContainerDescriptor<T>().Nested(selector);
+
+		public static QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, IParentIdQuery> selector) =>
+			new QueryContainerDescriptor<T>().ParentId(selector);
 
 		public static QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			new QueryContainerDescriptor<T>().Percolate(selector);

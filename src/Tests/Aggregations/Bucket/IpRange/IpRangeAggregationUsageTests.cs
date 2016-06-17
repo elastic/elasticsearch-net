@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.IpRange
 {
+	[SkipVersion("5.0.0-alpha2", "broken in this release. error reason: Expected numeric type on field [leadDeveloper.iPAddress], but got [ip]")]
 	public class IpRangeAggregationUsageTests : AggregationUsageTestBase
 	{
 		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -24,7 +26,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 						ranges = new object[]
 						{
 							new { to = "10.0.0.5" },
-							new { from = "10.0.0.5" } 
+							new { from = "10.0.0.5" }
 						}
 					}
 				}

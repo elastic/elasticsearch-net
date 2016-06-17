@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters, 
-	/// and zero or more Char Filters. 
-	/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of 
+	/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
+	/// and zero or more Char Filters.
+	/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
 	/// logical/registered names of token filters.</para>
 	/// </summary>
 	public interface ICustomAnalyzer : IAnalyzer
@@ -30,7 +30,7 @@ namespace Nest
 		string Tokenizer { get; set; }
 
 		/// <summary>
-		/// An optional number of positions to increment between each field value of a 
+		/// An optional number of positions to increment between each field value of a
 		/// field using this analyzer.
 		/// </summary>
 		[JsonProperty("position_offset_gap")]
@@ -39,7 +39,7 @@ namespace Nest
 
 	public class CustomAnalyzer : AnalyzerBase, ICustomAnalyzer
 	{
-		public CustomAnalyzer()  { Type = "custom"; }
+		public CustomAnalyzer() : base("custom") {}
 
 		/// <inheritdoc/>
 		public string Tokenizer { get; set; }
@@ -54,7 +54,7 @@ namespace Nest
 		public int? PositionOffsetGap { get; set; }
 	}
 
-	public class CustomAnalyzerDescriptor 
+	public class CustomAnalyzerDescriptor
 		: AnalyzerDescriptorBase<CustomAnalyzerDescriptor, ICustomAnalyzer>, ICustomAnalyzer
 	{
 		protected override string Type => "custom";
@@ -63,7 +63,7 @@ namespace Nest
 		IEnumerable<string> ICustomAnalyzer.Filter { get; set; }
 		string ICustomAnalyzer.Tokenizer { get; set; }
 		int? ICustomAnalyzer.PositionOffsetGap { get; set; }
-		
+
 		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor Filters(params string[] filters) => Assign(a => a.Filter = filters);
 
@@ -80,8 +80,7 @@ namespace Nest
 		public CustomAnalyzerDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);
 
 		/// <inheritdoc/>
-		public CustomAnalyzerDescriptor PositionOffsetGap(int? positionOffsetGap) => 
+		public CustomAnalyzerDescriptor PositionOffsetGap(int? positionOffsetGap) =>
 			Assign(a => a.PositionOffsetGap = positionOffsetGap);
-
 	}
 }

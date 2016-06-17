@@ -5,13 +5,11 @@ using System.Linq;
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class ClearCacheDescriptorOverrides : IDescriptorOverrides
+	public class ClearCacheDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
 			"fielddata"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

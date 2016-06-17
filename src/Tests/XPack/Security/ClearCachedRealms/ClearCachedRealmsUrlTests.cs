@@ -9,7 +9,7 @@ namespace Tests.XPack.Security.ClearCachedRealms
 	{
 		[U] public async Task Urls()
 		{
-			await POST("/_shield/realm/mpdreamz/_clear_cache")
+			await POST("/_xpack/security/realm/mpdreamz/_clear_cache")
 				.Fluent(c => c.ClearCachedRealms("mpdreamz"))
 				.Request(c => c.ClearCachedRealms(new ClearCachedRealmsRequest("mpdreamz")))
 				.FluentAsync(c => c.ClearCachedRealmsAsync("mpdreamz"))
@@ -18,12 +18,11 @@ namespace Tests.XPack.Security.ClearCachedRealms
 
 
 			var users = "mpdreamz,gmarz,forloop";
-			var usersAsList = users.Split(',');
-			await POST($"/_shield/realm/mpdreamz/_clear_cache?usernames={EscapeUriString(users)}")
+			await POST($"/_xpack/security/realm/mpdreamz/_clear_cache?usernames={EscapeUriString(users)}")
 				.Fluent(c => c.ClearCachedRealms("mpdreamz", f=>f.Usernames(users)))
-				.Request(c => c.ClearCachedRealms(new ClearCachedRealmsRequest("mpdreamz") { Usernames = usersAsList }))
+				.Request(c => c.ClearCachedRealms(new ClearCachedRealmsRequest("mpdreamz") { Usernames = users }))
 				.FluentAsync(c => c.ClearCachedRealmsAsync("mpdreamz", f=>f.Usernames(users)))
-				.RequestAsync(c => c.ClearCachedRealmsAsync(new ClearCachedRealmsRequest("mpdreamz") { Usernames = usersAsList }))
+				.RequestAsync(c => c.ClearCachedRealmsAsync(new ClearCachedRealmsRequest("mpdreamz") { Usernames = users }))
 				;
 		}
 	}

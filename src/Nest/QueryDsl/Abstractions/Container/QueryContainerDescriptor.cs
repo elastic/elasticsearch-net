@@ -130,6 +130,7 @@ namespace Nest
 		/// only when executed on an index that matches a specific list of indices, and another query that executes
 		/// when it is executed on an index that does not match the listed indices.
 		/// </summary>
+		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 		public QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Indices = query);
 
@@ -310,6 +311,12 @@ namespace Nest
 			WrapInContainer(selector, (query, container) => container.MatchAll = query ?? new MatchAllQuery());
 
 		/// <summary>
+		/// A query that matches no documents. This is the inverse of the match_all query.
+		/// </summary>
+		public QueryContainer MatchNone(Func<MatchNoneQueryDescriptor, IMatchNoneQuery> selector = null) =>
+			WrapInContainer(selector, (query, container) => container.MatchNone = query ?? new MatchNoneQuery());
+
+		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed).
 		/// The term query maps to Lucene TermQuery.
 		/// </summary>
@@ -474,11 +481,17 @@ namespace Nest
 		public QueryContainer Type<TOther>() => this.Type(q => q.Value<TOther>());
 
 		/// <summary>
-		/// percolate query can be used to match queries stored in an index.
+		/// The percolate query can be used to match queries stored in an index.
 		/// The percolate query itself contains the document that will be used as query
 		/// to match with the stored queries.
 		/// </summary>
 		public QueryContainer Percolate(Func<PercolateQueryDescriptor<T>, IPercolateQuery> selector) =>
 			WrapInContainer(selector, (query, container) => container.Percolate = query);
+
+		/// <summary>
+		/// The parent_id query can be used to find child documents which belong to a particular parent.
+		/// </summary>
+		public QueryContainer ParentId(Func<ParentIdQueryDescriptor<T>, IParentIdQuery> selector) =>
+			WrapInContainer(selector, (query, container) => container.ParentId = query);
 	}
 }

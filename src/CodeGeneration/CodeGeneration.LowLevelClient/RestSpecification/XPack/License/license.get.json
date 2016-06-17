@@ -1,16 +1,16 @@
 {
   "license.get": {
     "documentation": "https://www.elastic.co/guide/en/shield/current/license-management.html",
-    "methods": ["GET"],
+    "methods": [ "GET" ],
     "url": {
-      "path": "/_license",
-      "paths": ["/_license"],
-      "parts" : {
+      "path": "/_xpack/license",
+      "paths": [ "/_xpack/license" ],
+      "parts": {
       },
       "params": {
         "local": {
-          "type" : "boolean",
-          "description" : "Return local information, do not retrieve the state from master node (default: false)"
+          "type": "boolean",
+          "description": "Return local information, do not retrieve the state from master node (default: false)"
         }
       }
     },

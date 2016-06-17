@@ -30,7 +30,7 @@ namespace Tests.XPack.Security.Role.ClearCachedRoles
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 
-		protected override string UrlPath => $"/_shield/role/{this.Role}/_clear_cache";
+		protected override string UrlPath => $"/_xpack/security/role/{this.Role}/_clear_cache";
 
 		protected override bool SupportsDeserialization => false;
 

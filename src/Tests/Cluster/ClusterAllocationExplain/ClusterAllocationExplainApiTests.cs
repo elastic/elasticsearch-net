@@ -54,15 +54,21 @@ namespace Tests.Cluster.ClusterAllocationExplain
 			response.Shard.Id.Should().Be(0);
 			response.Shard.IndexUniqueId.Should().NotBeNullOrEmpty();
 			response.Assigned.Should().BeTrue();
+			response.AssignedNodeId.Should().NotBeNullOrWhiteSpace();
+			response.ShardStateFetchPending.Should().BeFalse();
 
 			foreach (var node in response.Nodes)
 			{
 				var explanation = node.Value;
 
+
 				explanation.NodeName.Should().NotBeNullOrEmpty();
 				explanation.Weight.Should().BeGreaterOrEqualTo(0);
 				explanation.NodeAttributes.Should().NotBeEmpty();
+				explanation.Store.Should().NotBeNull();
+				explanation.Store.ShardCopy.Should().NotBeNullOrEmpty();
 				explanation.FinalDecision.Should().NotBeNullOrEmpty();
+				explanation.FinalExplanation.Should().NotBeNullOrEmpty();
 				explanation.Decisions.Should().NotBeNullOrEmpty();
 			}
 		}

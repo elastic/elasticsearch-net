@@ -25,7 +25,7 @@ namespace Tests.XPack.License.GetLicense
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => GET;
 
-		protected override string UrlPath => $"/_license";
+		protected override string UrlPath => $"/_xpack/license";
 
 		protected override bool SupportsDeserialization => true;
 

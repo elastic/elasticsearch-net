@@ -5,11 +5,11 @@ using System.Linq;
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class SearchDescriptorOverrides : IDescriptorOverrides
+	public class SearchDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
-			"size", 
+			"size",
 			"from",
 			"timeout",
 			"explain",
@@ -26,7 +26,5 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 			"terminate_after",
 			"fielddata_fields"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

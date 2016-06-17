@@ -10,7 +10,7 @@ namespace Nest
 		IMultiLineStringGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeMultiLineStringQuery : FieldNameQueryBase, IGeoShapeMultiLineStringQuery
+	public class GeoShapeMultiLineStringQuery : GeoShapeQueryBase, IGeoShapeMultiLineStringQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public IMultiLineStringGeoShape Shape { get; set; }
@@ -19,8 +19,8 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapeMultiLineStringQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
-	public class GeoShapeMultiLineStringQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery, T>
+	public class GeoShapeMultiLineStringQueryDescriptor<T>
+		: GeoShapeQueryDescriptorBase<GeoShapeMultiLineStringQueryDescriptor<T>, IGeoShapeMultiLineStringQuery, T>
 		, IGeoShapeMultiLineStringQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);

@@ -41,7 +41,7 @@ namespace Nest
 		long Noops { get; }
 
 		[JsonProperty("retries")]
-		long Retries { get; }
+		Retries Retries { get; }
 
 		[JsonProperty("failures")]
 		IEnumerable<BulkIndexByScrollFailure> Failures { get; }
@@ -74,7 +74,7 @@ namespace Nest
 
 		public long Noops { get; internal set; }
 
-		public long Retries { get; internal set; }
+		public Retries Retries { get; internal set; }
 
 		public IEnumerable<BulkIndexByScrollFailure> Failures { get; internal set; }
 	}

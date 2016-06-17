@@ -38,9 +38,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "fielddata")]
 		public FielddataStats Fielddata { get; set; }
 
-		[JsonProperty(PropertyName = "percolator")]
-		public PercolatorStats Percolator { get; set; }
-
 		[JsonProperty(PropertyName = "completion")]
 		public CompletionStats Completion { get; set; }
 

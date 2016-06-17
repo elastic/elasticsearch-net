@@ -16,8 +16,6 @@ namespace Tests.Ingest.SimulatePipeline
 	{
 		public SimulatePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		private static readonly string _id = "existing-pipeline";
-
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.SimulatePipeline(f),
 			fluentAsync: (client, f) => client.SimulatePipelineAsync(f),

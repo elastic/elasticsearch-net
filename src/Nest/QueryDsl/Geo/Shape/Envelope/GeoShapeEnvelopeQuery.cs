@@ -10,7 +10,7 @@ namespace Nest
 		IEnvelopeGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeEnvelopeQuery : FieldNameQueryBase, IGeoShapeEnvelopeQuery
+	public class GeoShapeEnvelopeQuery : GeoShapeQueryBase, IGeoShapeEnvelopeQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public IEnvelopeGeoShape Shape { get; set; }
@@ -19,8 +19,8 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapeEnvelopeQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
-	public class GeoShapeEnvelopeQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
+	public class GeoShapeEnvelopeQueryDescriptor<T>
+		: GeoShapeQueryDescriptorBase<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
 		, IGeoShapeEnvelopeQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);

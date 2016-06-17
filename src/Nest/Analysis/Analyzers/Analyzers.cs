@@ -26,29 +26,29 @@ namespace Nest
 		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 
 		/// <summary>
-		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters, 
-		/// and zero or more Char Filters. 
-		/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of 
+		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters,
+		/// and zero or more Char Filters.
+		/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of
 		/// logical/registered names of token filters.</para>
 		/// </summary>
 		public AnalyzersDescriptor Custom(string name, Func<CustomAnalyzerDescriptor, ICustomAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new CustomAnalyzerDescriptor()));
 
 		/// <summary>
-		/// An analyzer of type keyword that “tokenizes” an entire stream as a single token. This is useful for data like zip codes, ids and so on. 
+		/// An analyzer of type keyword that “tokenizes” an entire stream as a single token. This is useful for data like zip codes, ids and so on.
 		/// <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>
 		/// </summary>
 		public AnalyzersDescriptor Keyword(string name, Func<KeywordAnalyzerDescriptor, IKeywordAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new KeywordAnalyzerDescriptor()));
 
 		/// <summary>
-		/// A set of analyzers aimed at analyzing specific language text. 
+		/// A set of analyzers aimed at analyzing specific language text.
 		/// </summary>
 		public AnalyzersDescriptor Language(string name, Func<LanguageAnalyzerDescriptor, ILanguageAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new LanguageAnalyzerDescriptor()));
 
 		/// <summary>
-		/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression. 
+		/// An analyzer of type pattern that can flexibly separate text into terms via a regular expression.
 		/// </summary>
 		public AnalyzersDescriptor Pattern(string name, Func<PatternAnalyzerDescriptor, IPatternAnalyzer> selector) =>
 			Assign(name, selector?.Invoke(new PatternAnalyzerDescriptor()));
@@ -83,6 +83,13 @@ namespace Nest
 		/// </summary>
 		public AnalyzersDescriptor Whitespace(string name, Func<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer> selector = null) =>
 			Assign(name, selector.InvokeOrDefault(new WhitespaceAnalyzerDescriptor()));
+
+		/// <summary>
+		/// An analyzer of type fingerprint that implements a fingerprinting algorithm which
+		/// is used by the OpenRefine project to assist in clustering.
+		/// </summary>
+		public AnalyzersDescriptor Fingerprint(string name, Func<FingerprintAnalyzerDescriptor, IFingerprintAnalyzer> selector = null) =>
+			Assign(name, selector.InvokeOrDefault(new FingerprintAnalyzerDescriptor()));
 
 	}
 }

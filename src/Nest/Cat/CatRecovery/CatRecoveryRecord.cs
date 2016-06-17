@@ -23,8 +23,14 @@ namespace Nest
 		[JsonProperty("source_host")]
 		public string SourceHost { get; set; }
 
+		[JsonProperty("source_node")]
+		public string SourceNode { get; set; }
+
 		[JsonProperty("target_host")]
 		public string TargetHost { get; set; }
+
+		[JsonProperty("target_node")]
+		public string TargetNode { get; set; }
 
 		[JsonProperty("repository")]
 		public string Repository { get; set; }

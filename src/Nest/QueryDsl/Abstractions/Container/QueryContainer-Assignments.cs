@@ -8,6 +8,7 @@ namespace Nest
 	{
 		private IBoolQuery _b;
 		private IMatchAllQuery _matchAllQuery;
+		private IMatchNoneQuery _matchNoneQuery;
 		private ITermQuery _term;
 		private IWildcardQuery _wildcard;
 		private IPrefixQuery _prefix;
@@ -37,7 +38,10 @@ namespace Nest
 		private ISpanWithinQuery _spanWithin;
 		private ISpanMultiTermQuery _spanMultiTerm;
 		private INestedQuery _nested;
+
+#pragma warning disable 618
 		private IIndicesQuery _indices;
+#pragma warning restore 618
 		private IFunctionScoreQuery _functionScore;
 		private ITemplateQuery _template;
 		private IGeoBoundingBoxQuery _geoBoundingBox;
@@ -51,6 +55,7 @@ namespace Nest
 		private ITypeQuery _type;
 		private IRawQuery _raw;
 		private IPercolateQuery _percolate;
+		private IParentIdQuery _parentId;
 		private IQueryContainer Self => this;
 
 		internal IQuery ContainedQuery { get; set; }
@@ -66,6 +71,7 @@ namespace Nest
 		IRawQuery IQueryContainer.RawQuery { get { return _raw; } set { _raw = Set(value); } }
 		IBoolQuery IQueryContainer.Bool { get { return _b; } set { _b = Set(value); } }
 		IMatchAllQuery IQueryContainer.MatchAll { get { return _matchAllQuery; } set { _matchAllQuery = Set(value); } }
+		IMatchNoneQuery IQueryContainer.MatchNone { get { return _matchNoneQuery; } set { _matchNoneQuery = Set(value); } }
 		ITermQuery IQueryContainer.Term { get { return _term; } set { _term = Set(value); } }
 		IWildcardQuery IQueryContainer.Wildcard { get { return _wildcard; } set { _wildcard = Set(value); } }
 		IPrefixQuery IQueryContainer.Prefix { get { return _prefix; } set { _prefix = Set(value); } }
@@ -96,7 +102,9 @@ namespace Nest
 		ISpanWithinQuery IQueryContainer.SpanWithin { get { return _spanWithin; } set { _spanWithin = Set(value); } }
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get { return _spanMultiTerm; } set { _spanMultiTerm = Set(value); } }
 		INestedQuery IQueryContainer.Nested { get { return _nested; } set { _nested = Set(value); } }
+#pragma warning disable 618
 		IIndicesQuery IQueryContainer.Indices { get { return _indices; } set { _indices = Set(value); } }
+#pragma warning restore 618
 		IFunctionScoreQuery IQueryContainer.FunctionScore { get { return _functionScore; } set { _functionScore = Set(value); } }
 		ITemplateQuery IQueryContainer.Template { get { return _template; } set { _template = Set(value); } }
 		IGeoBoundingBoxQuery IQueryContainer.GeoBoundingBox { get { return _geoBoundingBox; } set { _geoBoundingBox = Set(value); } }
@@ -109,5 +117,6 @@ namespace Nest
 		IMissingQuery IQueryContainer.Missing { get { return _missing; } set { _missing = Set(value); } }
 		ITypeQuery IQueryContainer.Type { get { return _type; } set { _type = Set(value); } }
 		IPercolateQuery IQueryContainer.Percolate { get { return _percolate; } set { _percolate = Set(value); } }
+		IParentIdQuery IQueryContainer.ParentId { get { return _parentId; } set { _parentId = Set(value); } }
 	}
 }

@@ -46,7 +46,7 @@ namespace Tests.CodeStandards
 			var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
 				.Where(t => t.IsClass() && !exceptions.Contains(t))
 				.Where(t => t.Name.Split('`')[0].EndsWith("Base"))
-				.Where(t => !t.IsAbstractClass())
+				.Where(t => !t.IsAbstract())
 				.Select(t => t.Name.Split('`')[0])
 				.ToList();
 

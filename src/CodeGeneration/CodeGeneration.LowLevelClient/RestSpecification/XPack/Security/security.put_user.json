@@ -1,10 +1,10 @@
 {
-  "shield.put_user": {
+  "xpack.security.put_user": {
     "documentation": "Update or create a user for the native shield realm",
     "methods": [ "PUT", "POST" ],
     "url": {
-      "path": "/_shield/user/{username}",
-      "paths": [ "/_shield/user/{username}" ],
+      "path": "/_xpack/security/user/{username}",
+      "paths": [ "/_xpack/security/user/{username}" ],
       "parts": {
         "username": {
           "type" : "string",
@@ -12,7 +12,12 @@
           "required" : true
         }
       },
-      "params": {}
+      "params": {
+        "refresh": {
+          "type": "boolean",
+          "description": "Refresh the index after performing the operation"
+        }
+      }
     },
     "body": {
       "description" : "The user to add",

@@ -7,15 +7,22 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "version")]
 		string Version { get; set; }
-		
+
 		[JsonProperty(PropertyName = "type")]
 		string Type { get; }
 	}
 
 	public abstract class AnalyzerBase : IAnalyzer
 	{
+		internal AnalyzerBase() { }
+
+		protected AnalyzerBase(string type)
+		{
+			Type = type;
+		}
+
 		public string Version { get; set; }
-		
+
 		public virtual string Type { get; protected set; }
 	}
 
@@ -30,5 +37,5 @@ namespace Nest
 
 		public TAnalyzer Version(string version) => Assign(a => a.Version = version);
 	}
-		
+
 }

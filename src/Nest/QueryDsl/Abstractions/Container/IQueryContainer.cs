@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -26,6 +27,9 @@ namespace Nest
 
 		[JsonProperty("match_all")]
 		IMatchAllQuery MatchAll { get; set; }
+
+		[JsonProperty("match_none")]
+		IMatchNoneQuery MatchNone { get; set; }
 
 		[JsonProperty("term")]
 		ITermQuery Term { get; set; }
@@ -78,6 +82,9 @@ namespace Nest
 		[JsonProperty("has_parent")]
 		IHasParentQuery HasParent { get; set; }
 
+		[JsonProperty("parent_id")]
+		IParentIdQuery ParentId { get; set; }
+
 		[JsonProperty("span_term")]
 		ISpanTermQuery SpanTerm { get; set; }
 
@@ -87,7 +94,7 @@ namespace Nest
 		[JsonProperty("query_string")]
 		IQueryStringQuery QueryString { get; set; }
 
-		[JsonProperty("mlt")]
+		[JsonProperty("more_like_this")]
 		IMoreLikeThisQuery MoreLikeThis { get; set; }
 
 		[JsonProperty("span_first")]
@@ -114,6 +121,7 @@ namespace Nest
 		[JsonProperty("nested")]
 		INestedQuery Nested { get; set; }
 
+		[Obsolete("Deprecated. You can specify _index on the query to target specific indices")]
 		[JsonProperty("indices")]
 		IIndicesQuery Indices { get; set; }
 
@@ -150,7 +158,7 @@ namespace Nest
 		[JsonProperty("type")]
 		ITypeQuery Type { get; set; }
 
-		[JsonProperty("percolator")]
+		[JsonProperty("percolate")]
 		IPercolateQuery Percolate { get; set; }
 
 		void Accept(IQueryVisitor visitor);

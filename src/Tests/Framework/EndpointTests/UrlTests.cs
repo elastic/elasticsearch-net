@@ -67,11 +67,11 @@ namespace Tests.Framework
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
 			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
-			ComparePathAndQuerstring(this.ExpectedUrl, callDetails.Uri);
+			ComparePathAndQuerystring(this.ExpectedUrl, callDetails.Uri);
 			return this;
 		}
 
-		public static void ComparePathAndQuerstring(string expectedPathAndUri, Uri actualUri)
+		public static void ComparePathAndQuerystring(string expectedPathAndUri, Uri actualUri)
 		{
 			var paths = (expectedPathAndUri ?? "").Split(new[] {'?'}, 2);
 			string path = paths.First(), query = string.Empty;

@@ -20,7 +20,7 @@ namespace Tests.XPack.License.PostLicense
 		);
 
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_license?acknowledge=true";
+		protected override string UrlPath => $"/_xpack/license?acknowledge=true";
 
 		protected override bool SupportsDeserialization => false;
 

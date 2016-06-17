@@ -16,6 +16,7 @@ using static Nest.Infer;
 namespace Tests.Search.Percolator.Percolate
 {
 	[Collection(TypeOfCluster.Indexing)]
+	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 	public class PercolateApiTests : ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
 		public PercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -5,7 +5,7 @@ using static Nest.Infer;
 
 namespace Tests.QueryDsl.Geo.Shape.Circle
 {
-	public class GeoShapeCircleUsageTests : ShapeQueryUsageTestsBase
+	public class GeoShapeCircleUsageTests : GeoShapeQueryUsageTestsBase
 	{
 		public GeoShapeCircleUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
@@ -23,6 +23,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
+			IgnoreUnmapped = false,
 			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" }
 		};
 
@@ -31,6 +32,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 				.Name("named_query")
 				.Boost(1.1)
 				.Field(p=>p.Location)
+				.IgnoreUnmapped()
 				.Coordinates(this._coordinates)
 				.Radius("100m")
 			);

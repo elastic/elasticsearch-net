@@ -20,11 +20,11 @@ namespace Nest
 		[JsonProperty("max_token_length")]
 		int? MaxTokenLength { get; set; }
 	}
-	
+
 	/// <inheritdoc/>
 	public class StandardAnalyzer : AnalyzerBase, IStandardAnalyzer
 	{
-		public StandardAnalyzer() { Type = "standard"; }
+		public StandardAnalyzer() : base("standard") {}
 
 		/// <inheritdoc/>
 		public StopWords StopWords { get; set; }
@@ -50,8 +50,8 @@ namespace Nest
 
 		public StandardAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
-		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength) => 
+		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength) =>
 			Assign(a => a.MaxTokenLength = maxTokenLength);
-		
+
 	}
 }

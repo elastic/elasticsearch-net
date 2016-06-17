@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Nest
@@ -7,8 +8,8 @@ namespace Nest
 	public interface IIndexSettings : IDynamicIndexSettings
 	{
 		/// <summary>
-		/// The number of primary shards that an index should have. Defaults to 5. 
-		/// This setting can only be set at index creation time. It cannot be changed on a closed index. 
+		/// The number of primary shards that an index should have. Defaults to 5.
+		/// This setting can only be set at index creation time. It cannot be changed on a closed index.
 		/// </summary>
 		int? NumberOfShards { get; set; }
 
@@ -17,16 +18,18 @@ namespace Nest
 		/// <para>EXPERT MODE toggle</para>
 		/// </summary>
 		FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
+
+		/// <summary>
+		/// Settings associated with queries.
+		/// </summary>
+		IQueriesSettings Queries { get; set; }
 	}
 
 	/// <inheritdoc />
 	public class IndexSettings: DynamicIndexSettings, IIndexSettings
 	{
-		public IndexSettings() : base() { }
+		public IndexSettings() { }
 		public IndexSettings(IDictionary<string, object> container) : base(container) { }
-		public IndexSettings(Dictionary<string, object> container)
-			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
-		{ }
 
 		/// <inheritdoc />
 		public int? NumberOfShards { get; set; }
@@ -34,7 +37,8 @@ namespace Nest
 		/// <inheritdoc />
 		public FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 
-		//public void Add(string setting, object value) => _backingDictionary.Add(setting, value);
+		/// <inheritdoc />
+		public IQueriesSettings Queries { get; set; }
 	}
 
 	/// <inheritdoc />
@@ -50,6 +54,8 @@ namespace Nest
 		public IndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
 			Assign(a => a.FileSystemStorageImplementation = fs);
 
+		public IndexSettingsDescriptor Queries(Func<QueriesSettingsDescriptor, IQueriesSettings> selector) =>
+			Assign(a => a.Queries = selector?.Invoke(new QueriesSettingsDescriptor()));
 	}
 
 }
