@@ -860,7 +860,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 
 			Expect(expected).WhenSerializing((ICreateIndexRequest)descriptor);
 
-			/** Now lets specify a maxRecursion of 3 */
+			/** Now let's specify a maxRecursion of 3 */
 			var withMaxRecursionDescriptor = new CreateIndexDescriptor("myindex")
 				.Mappings(ms => ms
 					.Map<A>(m => m.AutoMap(3))
@@ -975,7 +975,7 @@ namespace Tests.ClientConcepts.HighLevel.Mapping
 		 * `.AutoMap()` internally implements the https://en.wikipedia.org/wiki/Visitor_pattern[visitor pattern]. The default visitor, `NoopPropertyVisitor`,
 		 * does nothing and acts as a blank canvas for you to implement your own visiting methods.
 		 *
-		 * For instance, lets create a custom visitor that disables doc values for numeric and boolean types
+		 * For instance, let's create a custom visitor that disables doc values for numeric and boolean types
 		 * (Not really a good idea in practice, but let's do it anyway for the sake of a clear example.)
 		 */
 		public class DisableDocValuesPropertyVisitor : NoopPropertyVisitor
