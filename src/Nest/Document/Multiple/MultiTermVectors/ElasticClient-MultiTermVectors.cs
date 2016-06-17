@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,10 @@ namespace Nest
 		IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request);
 
 		/// <inheritdoc/>
-		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null);
+		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request);
+		Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,20 +31,21 @@ namespace Nest
 			this.MultiTermVectors(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
 
 		///<inheritdoc/>
-		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) => 
+		public IMultiTermVectorsResponse MultiTermVectors(IMultiTermVectorsRequest request) =>
 			this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse>(
 				request,
 				this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorsResponse>
 			);
 
 		///<inheritdoc/>
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null) =>
-			this.MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()));
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.MultiTermVectorsAsync(selector.InvokeOrDefault(new MultiTermVectorsDescriptor()), cancellationToken);
 
 		///<inheritdoc/>
-		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request) => 
+		public Task<IMultiTermVectorsResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorsResponse, IMultiTermVectorsResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorsResponse>
 			);
 	}

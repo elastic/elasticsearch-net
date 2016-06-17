@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -16,10 +17,10 @@ namespace Nest
 		IChangePasswordResponse ChangePassword(IChangePasswordRequest request);
 
 		/// <inheritdoc/>
-		Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector);
+		Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request);
+		Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -36,14 +37,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector) =>
-			this.ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()));
+		public Task<IChangePasswordResponse> ChangePasswordAsync(Func<ChangePasswordDescriptor, IChangePasswordRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.ChangePasswordAsync(selector.InvokeOrDefault(new ChangePasswordDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request) =>
+		public Task<IChangePasswordResponse> ChangePasswordAsync(IChangePasswordRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IChangePasswordRequest, ChangePasswordRequestParameters, ChangePasswordResponse, IChangePasswordResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.XpackSecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.XpackSecurityChangePasswordDispatchAsync<ChangePasswordResponse>(p, d, c)
 			);
 	}
 }

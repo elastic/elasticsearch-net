@@ -186,6 +186,10 @@ namespace ApiGenerator.Domain
 						apiMethod.Arguments = string.Join(", ", args);
 						yield return apiMethod;
 
+						args = args.Concat(new[]
+						{
+							"CancellationToken cancellationToken = default(CancellationToken)"
+						}).ToList();
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -238,7 +242,10 @@ namespace ApiGenerator.Domain
 						};
 						PatchMethod(apiMethod);
 						yield return apiMethod;
-
+						args = args.Concat(new[]
+						{
+							"CancellationToken cancellationToken = default(CancellationToken)"
+						}).ToList();
 						apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,

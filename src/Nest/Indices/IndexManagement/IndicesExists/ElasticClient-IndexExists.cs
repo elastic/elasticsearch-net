@@ -5,12 +5,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using IndexExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Used to check if the index (indices) exists or not. 
+		/// Used to check if the index (indices) exists or not.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
@@ -20,10 +21,10 @@ namespace Nest
 		IExistsResponse IndexExists(IIndexExistsRequest request);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
+		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request);
+		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 
@@ -36,7 +37,7 @@ namespace Nest
 			this.IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IExistsResponse IndexExists(IIndexExistsRequest request) => 
+		public IExistsResponse IndexExists(IIndexExistsRequest request) =>
 			this.Dispatcher.Dispatch<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse>(
 				request,
 				new IndexExistConverter(DeserializeExistsResponse),
@@ -44,15 +45,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => 
-			this.IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
+		public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request) => 
+		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
+				cancellationToken,
 				new IndexExistConverter(DeserializeExistsResponse),
-				(p, d) => this.LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p)
+				(p, d, c) => this.LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p, c)
 			);
 	}
 }

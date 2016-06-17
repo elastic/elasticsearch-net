@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector);
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -26,20 +27,21 @@ namespace Nest
 			this.PutSearchTemplate(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
 
 		/// <inheritdoc/>
-		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request) => 
+		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request) =>
 			this.Dispatcher.Dispatch<IPutSearchTemplateRequest, PutSearchTemplateRequestParameters, PutSearchTemplateResponse>(
 				request,
 				this.LowLevelDispatch.PutTemplateDispatch<PutSearchTemplateResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector) => 
-			this.PutSearchTemplateAsync(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
+		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.PutSearchTemplateAsync(selector?.Invoke(new PutSearchTemplateDescriptor(id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request) => 
+		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IPutSearchTemplateRequest, PutSearchTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>
 			);
 	}

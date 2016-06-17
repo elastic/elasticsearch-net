@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -11,12 +12,15 @@ namespace Nest
 
 		/// <inheritdoc/>
 		ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request);
-		
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector = null);
-		
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(
+			Func<CatHealthDescriptor, ICatHealthRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request);
+		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,11 +35,13 @@ namespace Nest
 			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, ICatHealthRequest> selector = null) => 
-			this.CatHealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()));
+		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(
+			Func<CatHealthDescriptor, ICatHealthRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatHealthAsync(selector.InvokeOrDefault(new CatHealthDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request) => 
-			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
+		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, cancellationToken, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
 	}
 }

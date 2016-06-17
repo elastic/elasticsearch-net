@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,13 @@ namespace Nest
 		ICatResponse<CatRecoveryRecord> CatRecovery(ICatRecoveryRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null);
+		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(
+			Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request);
+		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 
@@ -31,11 +35,13 @@ namespace Nest
 			this.DoCat<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, this.LowLevelDispatch.CatRecoveryDispatch<CatResponse<CatRecoveryRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null) =>
-			this.CatRecoveryAsync(selector.InvokeOrDefault(new CatRecoveryDescriptor()));
+		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(
+			Func<CatRecoveryDescriptor, ICatRecoveryRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatRecoveryAsync(selector.InvokeOrDefault(new CatRecoveryDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request) =>
-			this.DoCatAsync<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, this.LowLevelDispatch.CatRecoveryDispatchAsync<CatResponse<CatRecoveryRecord>>);
+		public Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatRecoveryRequest, CatRecoveryRequestParameters, CatRecoveryRecord>(request, cancellationToken, this.LowLevelDispatch.CatRecoveryDispatchAsync<CatResponse<CatRecoveryRecord>>);
 	}
 }

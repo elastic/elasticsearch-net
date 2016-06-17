@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
 	public partial interface IElasticClient
@@ -20,10 +21,10 @@ namespace Nest
 		INodesStatsResponse NodesStats(INodesStatsRequest request);
 
 		/// <inheritdoc/>
-		Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null);
+		Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request);
+		Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,21 +34,22 @@ namespace Nest
 			this.NodesStats(selector.InvokeOrDefault(new NodesStatsDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesStatsResponse NodesStats(INodesStatsRequest request) => 
+		public INodesStatsResponse NodesStats(INodesStatsRequest request) =>
 			this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.NodesStatsDispatch<NodesStatsResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null) =>
-			this.NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()));
+		public Task<INodesStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, INodesStatsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.NodesStatsAsync(selector.InvokeOrDefault(new NodesStatsDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request) => 
+		public Task<INodesStatsResponse> NodesStatsAsync(INodesStatsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodesStatsResponse, INodesStatsResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.NodesStatsDispatchAsync<NodesStatsResponse>(p, c)
 			);
 	}
 }

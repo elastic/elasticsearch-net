@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request);
+		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null);
+		Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,13 +31,14 @@ namespace Nest
 		public IUpgradeResponse Upgrade(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
 			this.Upgrade(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
 
-		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request) =>
+		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p, c)
 			);
 
-		public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null) =>
-			this.UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)));
+		public Task<IUpgradeResponse> UpgradeAsync(Indices indices, Func<UpgradeDescriptor, IUpgradeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.UpgradeAsync(selector.InvokeOrDefault(new UpgradeDescriptor().Index(indices)), cancellationToken);
 	}
 }

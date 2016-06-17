@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -22,12 +23,12 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector)
+		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request)
+		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 	}
 
@@ -50,16 +51,17 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector)
+		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
-			this.PercolateAsync(selector?.Invoke(new PercolateDescriptor<T>(typeof(T), typeof(T))));
+			this.PercolateAsync(selector?.Invoke(new PercolateDescriptor<T>(typeof(T), typeof(T))), cancellationToken);
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request)
+		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
 			this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>
 			);
 	}

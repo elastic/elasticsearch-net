@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IPutUserResponse PutUser(IPutUserRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null);
+		Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IPutUserResponse> PutUserAsync(IPutUserRequest request);
+		Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,13 +34,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null) =>
-			this.PutUserAsync(selector.InvokeOrDefault(new PutUserDescriptor(username)));
+		public Task<IPutUserResponse> PutUserAsync(Name username, Func<PutUserDescriptor, IPutUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.PutUserAsync(selector.InvokeOrDefault(new PutUserDescriptor(username)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request) =>
+		public Task<IPutUserResponse> PutUserAsync(IPutUserRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IPutUserRequest, PutUserRequestParameters, PutUserResponse, IPutUserResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.XpackSecurityPutUserDispatchAsync<PutUserResponse>
 			);
 	}

@@ -234,7 +234,7 @@ namespace Tests.Framework
 			}
 		}
 
-		public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
+		public override Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken)
 		{
 			return Task.FromResult(this.Request<TReturn>(requestData));
 		}

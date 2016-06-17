@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IPostLicenseResponse PostLicense(IPostLicenseRequest request);
 
 		/// <inheritdoc/>
-		Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null);
+		Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request);
+		Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,13 +34,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null) =>
-			this.PostLicenseAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()));
+		public Task<IPostLicenseResponse> PostLicenseAsync(Func<PostLicenseDescriptor, IPostLicenseRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.PostLicenseAsync(selector.InvokeOrDefault(new PostLicenseDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request) =>
+		public Task<IPostLicenseResponse> PostLicenseAsync(IPostLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IPostLicenseRequest, PostLicenseRequestParameters, PostLicenseResponse, IPostLicenseResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.LicensePostDispatchAsync<PostLicenseResponse>
 			);
 	}

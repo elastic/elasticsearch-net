@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The explain api computes a score explanation for a query and a specific document. 
+		/// The explain api computes a score explanation for a query and a specific document.
 		/// This can give useful feedback whether a document matches or didn’t match a specific query.
 		/// <para> </para><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-explain.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/search-explain.html</a>
 		/// </summary>
@@ -19,11 +20,11 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document,Func<ExplainDescriptor<T>, IExplainRequest<T>> selector)
+		Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document,Func<ExplainDescriptor<T>, IExplainRequest<T>> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)
+		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 	}
@@ -37,22 +38,23 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IExplainResponse<T> Explain<T>(IExplainRequest<T> request)
-			where T : class => 
+			where T : class =>
 			this.Dispatcher.Dispatch<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>>(
 				request,
 				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
 			);
 
 		/// <inheritdoc/>
-		public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector)
-			where T : class => 
-			this.ExplainAsync<T>(selector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest<T>> selector, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.ExplainAsync<T>(selector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request)
-			where T : class => 
+		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
 			this.Dispatcher.DispatchAsync<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
 			);
 	}

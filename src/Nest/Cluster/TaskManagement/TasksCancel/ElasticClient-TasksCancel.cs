@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -16,10 +17,10 @@ namespace Nest
 		ITasksCancelResponse TasksCancel(ITasksCancelRequest request);
 
 		/// <inheritdoc/>
-		Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector = null);
+		Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request);
+		Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -36,14 +37,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector = null) =>
-			this.TasksCancelAsync(selector.InvokeOrDefault(new TasksCancelDescriptor()));
+		public Task<ITasksCancelResponse> TasksCancelAsync(Func<TasksCancelDescriptor, ITasksCancelRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.TasksCancelAsync(selector.InvokeOrDefault(new TasksCancelDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request) =>
+		public Task<ITasksCancelResponse> TasksCancelAsync(ITasksCancelRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<ITasksCancelRequest, TasksCancelRequestParameters, TasksCancelResponse, ITasksCancelResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.TasksCancelDispatchAsync<TasksCancelResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.TasksCancelDispatchAsync<TasksCancelResponse>(p, c)
 			);
 	}
 }

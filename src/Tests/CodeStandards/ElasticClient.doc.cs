@@ -7,6 +7,7 @@ using FluentAssertions.Common;
 using Nest;
 using Tests.Framework;
 using System.Reflection;
+using System.Threading;
 
 namespace Tests.CodeStandards
 {
@@ -118,7 +119,7 @@ namespace Tests.CodeStandards
 			{
 				foreach (var asyncMethod in methodGroup.Where(g => g.IsAsync))
 				{
-					var parameters = asyncMethod.MethodInfo.GetParameters();
+					var parameters = asyncMethod.MethodInfo.GetParameters().Where(p => p.ParameterType != typeof(CancellationToken)).ToArray();
 
 					var syncMethod = methodGroup.First(g =>
 						!g.IsAsync

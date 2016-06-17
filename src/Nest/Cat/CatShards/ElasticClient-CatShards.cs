@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		ICatResponse<CatShardsRecord> CatShards(ICatShardsRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null);
+		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request);
+		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,11 +31,11 @@ namespace Nest
 			this.DoCat<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, this.LowLevelDispatch.CatShardsDispatch<CatResponse<CatShardsRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null) =>
-			this.CatShardsAsync(selector.InvokeOrDefault(new CatShardsDescriptor()));
+		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, ICatShardsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatShardsAsync(selector.InvokeOrDefault(new CatShardsDescriptor()), cancellationToken);
 
-		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request) =>
-			this.DoCatAsync<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, this.LowLevelDispatch.CatShardsDispatchAsync<CatResponse<CatShardsRecord>>);
+		public Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatShardsRequest, CatShardsRequestParameters, CatShardsRecord>(request, cancellationToken, this.LowLevelDispatch.CatShardsDispatchAsync<CatResponse<CatShardsRecord>>);
 
 	}
 }

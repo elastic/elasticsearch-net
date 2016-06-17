@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -18,10 +19,10 @@ namespace Nest
 		IDeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null);
+		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request);
+		Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
@@ -31,21 +32,22 @@ namespace Nest
 			this.DeleteRepository(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
 
 		/// <inheritdoc/>
-		public IDeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request) => 
+		public IDeleteRepositoryResponse DeleteRepository(IDeleteRepositoryRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, DeleteRepositoryResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatch<DeleteRepositoryResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) => 
-			this.DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
+		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request) => 
+		public Task<IDeleteRepositoryResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, DeleteRepositoryResponse, IDeleteRepositoryResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<DeleteRepositoryResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<DeleteRepositoryResponse>(p, c)
 			);
 	}
 }

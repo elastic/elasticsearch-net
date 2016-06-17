@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,10 @@ namespace Nest
 		IAnalyzeResponse Analyze(IAnalyzeRequest request);
 
 		/// <inheritdoc/>
-		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector);
+		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request);
+		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,21 +32,22 @@ namespace Nest
 			this.Analyze(selector?.Invoke(new AnalyzeDescriptor()));
 
 		/// <inheritdoc/>
-		public IAnalyzeResponse Analyze(IAnalyzeRequest request) => 
+		public IAnalyzeResponse Analyze(IAnalyzeRequest request) =>
 			this.Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(request))
 			);
 
 		/// <inheritdoc/>
-		public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector) =>
-			this.AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()));
+		public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, IAnalyzeRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.AnalyzeAsync(selector?.Invoke(new AnalyzeDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request) => 
+		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(request))
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(request), c)
 			);
 
 		private static string MoveTextFromQueryString(IAnalyzeRequest d)

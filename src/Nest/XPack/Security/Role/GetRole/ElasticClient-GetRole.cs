@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IGetRoleResponse GetRole(IGetRoleRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null);
+		Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request);
+		Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null) =>
-			this.GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor()));
+		public Task<IGetRoleResponse> GetRoleAsync(Func<GetRoleDescriptor, IGetRoleRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.GetRoleAsync(selector.InvokeOrDefault(new GetRoleDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request) =>
+		public Task<IGetRoleResponse> GetRoleAsync(IGetRoleRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetRoleRequest, GetRoleRequestParameters, GetRoleResponse, IGetRoleResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.XpackSecurityGetRoleDispatchAsync<GetRoleResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.XpackSecurityGetRoleDispatchAsync<GetRoleResponse>(p, c)
 			);
 	}
 }

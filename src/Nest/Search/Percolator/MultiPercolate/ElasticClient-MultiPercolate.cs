@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -20,11 +21,11 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector);
+		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request);
+		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 	public partial class ElasticClient
 	{
@@ -42,14 +43,14 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector) =>
-			this.MultiPercolateAsync(selector?.Invoke(new MultiPercolateDescriptor()));
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.MultiPercolateAsync(selector?.Invoke(new MultiPercolateDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with multi search api")]
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request) =>
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
-				request, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
+				request, cancellationToken, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
 			);
 	}
 }

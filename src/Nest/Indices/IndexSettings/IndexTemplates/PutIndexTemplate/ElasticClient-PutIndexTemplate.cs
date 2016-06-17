@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Index templates allow to define templates that will automatically be applied to new indices created. 
-		/// <para>The templates include both settings and mappings, and a simple pattern template that controls if 
+		/// Index templates allow to define templates that will automatically be applied to new indices created.
+		/// <para>The templates include both settings and mappings, and a simple pattern template that controls if
 		/// the template will be applied to the index created. </para>
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
 		/// </summary>
@@ -20,33 +21,42 @@ namespace Nest
 		IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
+			Name name,
+			Func<PutIndexTemplateDescriptor,
+			IPutIndexTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request);
+		Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) => 
+		public IPutIndexTemplateResponse PutIndexTemplate(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
 			this.PutIndexTemplate(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
-		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) => 
+		public IPutIndexTemplateResponse PutIndexTemplate(IPutIndexTemplateRequest request) =>
 			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse>(
 				request,
 				this.LowLevelDispatch.IndicesPutTemplateDispatch<PutIndexTemplateResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(Name name, Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector) =>
-			this.PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)));
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(
+			Name name,
+			Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.PutIndexTemplateAsync(selector.InvokeOrDefault(new PutIndexTemplateDescriptor(name)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request) => 
+		public Task<IPutIndexTemplateResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, PutIndexTemplateResponse, IPutIndexTemplateResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<PutIndexTemplateResponse>
 			);
 	}

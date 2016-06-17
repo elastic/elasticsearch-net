@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -11,12 +12,15 @@ namespace Nest
 
 		/// <inheritdoc/>
 		ICatResponse<CatIndicesRecord> CatIndices(ICatIndicesRequest request);
-		
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null);
-		
+		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(
+			Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request);
+		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,11 +35,13 @@ namespace Nest
 			this.DoCat<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, this.LowLevelDispatch.CatIndicesDispatch<CatResponse<CatIndicesRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null) =>
-			this.CatIndicesAsync(selector.InvokeOrDefault(new CatIndicesDescriptor()));
+		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(
+			Func<CatIndicesDescriptor, ICatIndicesRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatIndicesAsync(selector.InvokeOrDefault(new CatIndicesDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request) =>
-			this.DoCatAsync<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, this.LowLevelDispatch.CatIndicesDispatchAsync<CatResponse<CatIndicesRecord>>);
+		public Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatIndicesRequest, CatIndicesRequestParameters, CatIndicesRecord>(request, cancellationToken, this.LowLevelDispatch.CatIndicesDispatchAsync<CatResponse<CatIndicesRecord>>);
 	}
 }

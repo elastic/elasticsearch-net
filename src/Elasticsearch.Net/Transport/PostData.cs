@@ -67,13 +67,13 @@ namespace Elasticsearch.Net
 			MemoryStream ms = null; Stream stream = null;
 			switch (Type)
 			{
-				case PostType.ByteArray: 
+				case PostType.ByteArray:
 					ms = new MemoryStream(WrittenBytes);
 					break;
 				case PostType.LiteralString:
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString?.Utf8Bytes()) : null;
 					break;
-				case PostType.EnumerableOfString: 
+				case PostType.EnumerableOfString:
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
@@ -91,7 +91,7 @@ namespace Elasticsearch.Net
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
-				case PostType.Serializable: 
+				case PostType.Serializable:
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
@@ -110,19 +110,19 @@ namespace Elasticsearch.Net
 				this.WrittenBytes = ms?.ToArray();
 		}
 
-		public async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken = default(CancellationToken))
+		public async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken)
 		{
 			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
 			switch (Type)
 			{
-				case PostType.ByteArray: 
+				case PostType.ByteArray:
 					ms = new MemoryStream(WrittenBytes);
 					break;
-				case PostType.LiteralString: 
+				case PostType.LiteralString:
 					ms = !string.IsNullOrEmpty(_literalString) ? new MemoryStream(_literalString.Utf8Bytes()) : null;
 					break;
-				case PostType.EnumerableOfString: 
+				case PostType.EnumerableOfString:
 					ms = _enumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", _enumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
 				case PostType.EnumerableOfObject:
@@ -139,7 +139,7 @@ namespace Elasticsearch.Net
 						await stream.WriteAsync(new byte[] { (byte)'\n' }, 0, 1, cancellationToken).ConfigureAwait(false);
 					}
 					break;
-				case PostType.Serializable: 
+				case PostType.Serializable:
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{

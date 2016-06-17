@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -18,10 +19,10 @@ namespace Nest
 		IBulkResponse Bulk(Func<BulkDescriptor, IBulkRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IBulkResponse> BulkAsync(IBulkRequest request);
+		Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector);
+		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -38,13 +39,13 @@ namespace Nest
 			this.Bulk(selector.InvokeOrDefault(new BulkDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IBulkResponse> BulkAsync(IBulkRequest request) =>
+		public Task<IBulkResponse> BulkAsync(IBulkRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IBulkRequest, BulkRequestParameters, BulkResponse, IBulkResponse>(
-				request, this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>
+				request, cancellationToken, this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector) =>
-			this.BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()));
+		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, IBulkRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.BulkAsync(selector.InvokeOrDefault(new BulkDescriptor()), cancellationToken);
 	}
 }

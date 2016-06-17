@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -11,12 +12,12 @@ namespace Nest
 
 		/// <inheritdoc/>
 		ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request);
-		
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null);
-		
+		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request);
+		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,12 +32,12 @@ namespace Nest
 			this.DoCat<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, this.LowLevelDispatch.CatAliasesDispatch<CatResponse<CatAliasesRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null) =>
-			this.CatAliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()));
+		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, ICatAliasesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatAliasesAsync(selector.InvokeOrDefault(new CatAliasesDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request) =>
-			this.DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, this.LowLevelDispatch.CatAliasesDispatchAsync<CatResponse<CatAliasesRecord>>);
+		public Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatAliasesRequest, CatAliasesRequestParameters, CatAliasesRecord>(request, cancellationToken, this.LowLevelDispatch.CatAliasesDispatchAsync<CatResponse<CatAliasesRecord>>);
 
 	}
 }

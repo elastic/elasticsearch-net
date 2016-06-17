@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -20,36 +21,37 @@ namespace Nest
 		IPutMappingResponse Map(IPutMappingRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
+		Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IPutMappingResponse> MapAsync(IPutMappingRequest request);
+		Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public IPutMappingResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
-			where T : class => 
+			where T : class =>
 			this.Map(selector?.Invoke(new PutMappingDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public IPutMappingResponse Map(IPutMappingRequest request) => 
+		public IPutMappingResponse Map(IPutMappingRequest request) =>
 			this.Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, PutMappingResponse>(
 				request,
 				this.LowLevelDispatch.IndicesPutMappingDispatch<PutMappingResponse>
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector)
-			where T : class => 
-			this.MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()));
+		public Task<IPutMappingResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.MapAsync(selector?.Invoke(new PutMappingDescriptor<T>()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request) => 
+		public Task<IPutMappingResponse> MapAsync(IPutMappingRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, PutMappingResponse, IPutMappingResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.IndicesPutMappingDispatchAsync<PutMappingResponse>
 			);
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		ICatResponse<CatNodesRecord> CatNodes(ICatNodesRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null);
+		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request);
+		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,11 +32,11 @@ namespace Nest
 			this.DoCat<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, this.LowLevelDispatch.CatNodesDispatch<CatResponse<CatNodesRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null) =>
-			this.CatNodesAsync(selector.InvokeOrDefault(new CatNodesDescriptor()));
+		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, ICatNodesRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatNodesAsync(selector.InvokeOrDefault(new CatNodesDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request) =>
-			this.DoCatAsync<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, this.LowLevelDispatch.CatNodesDispatchAsync<CatResponse<CatNodesRecord>>);
+		public Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatNodesRequest, CatNodesRequestParameters, CatNodesRecord>(request, cancellationToken, this.LowLevelDispatch.CatNodesDispatchAsync<CatResponse<CatNodesRecord>>);
 	}
 }

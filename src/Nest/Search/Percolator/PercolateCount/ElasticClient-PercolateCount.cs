@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,12 +18,12 @@ namespace Nest
 			where T : class;
 
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null)
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
+		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 	}
 
@@ -46,16 +47,17 @@ namespace Nest
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null)
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
-			this.PercolateCountAsync<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))));
+			this.PercolateCountAsync<T>(selector?.Invoke(new PercolateCountDescriptor<T>(typeof(T), typeof(T))), cancellationToken);
 
 		/// <inheritdoc/>
 		[Obsolete("Deprecated. Will be removed in the next major release. Use a percolate query with search api")]
-		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request)
+		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
 			this.Dispatcher.DispatchAsync<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.CountPercolateDispatchAsync<PercolateCountResponse>
 			);
 	}

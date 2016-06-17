@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,13 @@ namespace Nest
 		ICatResponse<CatSegmentsRecord> CatSegments(ICatSegmentsRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null);
+		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(
+			Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request);
+		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,12 +35,14 @@ namespace Nest
 			this.DoCat<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, this.LowLevelDispatch.CatSegmentsDispatch<CatResponse<CatSegmentsRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null) =>
-			this.CatSegmentsAsync(selector.InvokeOrDefault(new CatSegmentsDescriptor()));
+		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(
+			Func<CatSegmentsDescriptor, ICatSegmentsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatSegmentsAsync(selector.InvokeOrDefault(new CatSegmentsDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request) =>
-			this.DoCatAsync<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, this.LowLevelDispatch.CatSegmentsDispatchAsync<CatResponse<CatSegmentsRecord>>);
+		public Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatSegmentsRequest, CatSegmentsRequestParameters, CatSegmentsRecord>(request, cancellationToken, this.LowLevelDispatch.CatSegmentsDispatchAsync<CatResponse<CatSegmentsRecord>>);
 
 	}
 }

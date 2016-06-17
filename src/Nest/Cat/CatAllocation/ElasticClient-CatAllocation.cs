@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -11,12 +12,15 @@ namespace Nest
 
 		/// <inheritdoc/>
 		ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request);
-		
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null);
-		
+		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
+			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request);
+		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
@@ -30,11 +34,17 @@ namespace Nest
 			this.DoCat<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request, this.LowLevelDispatch.CatAllocationDispatch<CatResponse<CatAllocationRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null) =>
-			this.CatAllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()));
+		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(
+			Func<CatAllocationDescriptor, ICatAllocationRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatAllocationAsync(selector.InvokeOrDefault(new CatAllocationDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request) =>
-			this.DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(request, this.LowLevelDispatch.CatAllocationDispatchAsync<CatResponse<CatAllocationRecord>>);
+		public Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatAllocationRequest, CatAllocationRequestParameters, CatAllocationRecord>(
+				request,
+				cancellationToken,
+				this.LowLevelDispatch.CatAllocationDispatchAsync<CatResponse<CatAllocationRecord>>
+			);
 	}
 }

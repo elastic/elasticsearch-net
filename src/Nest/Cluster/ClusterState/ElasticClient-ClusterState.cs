@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,10 @@ namespace Nest
 		IClusterStateResponse ClusterState(IClusterStateRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null);
+		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request);
+		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,21 +31,22 @@ namespace Nest
 			this.ClusterState(selector.InvokeOrDefault(new ClusterStateDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterStateResponse ClusterState(IClusterStateRequest request) => 
+		public IClusterStateResponse ClusterState(IClusterStateRequest request) =>
 			this.Dispatcher.Dispatch<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null) =>
-			this.ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()));
+		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, IClusterStateRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.ClusterStateAsync(selector.InvokeOrDefault(new ClusterStateDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request) => 
+		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p, c)
 			);
 	}
 }

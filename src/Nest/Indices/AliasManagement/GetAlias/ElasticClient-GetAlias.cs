@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using GetAliasesConverter = Func<IApiCallDetails, Stream, GetAliasResponse>;
 
 	public partial interface IElasticClient
@@ -22,10 +23,13 @@ namespace Nest
 		IGetAliasResponse GetAlias(IGetAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetAliasResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector = null);
+		Task<IGetAliasResponse> GetAliasAsync(
+			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request);
+		Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -42,14 +46,17 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetAliasResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> selector = null) =>
-			this.GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()));
+		public Task<IGetAliasResponse> GetAliasAsync(
+			Func<GetAliasDescriptor, IGetAliasRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request) =>
+		public Task<IGetAliasResponse> GetAliasAsync(IGetAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasResponse, IGetAliasResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasResponse>(p, c)
 			);
 	}
 }

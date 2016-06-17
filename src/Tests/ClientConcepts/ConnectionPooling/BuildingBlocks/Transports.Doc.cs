@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework.MockData;
+using System.Threading;
 
 namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
@@ -45,6 +46,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 			response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(
 				HttpMethod.GET,
 				"/_search",
+				default(CancellationToken),
 				new { query = new { match_all = new { } } });
 		}
 	}

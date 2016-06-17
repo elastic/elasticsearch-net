@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,13 @@ namespace Nest
 		ICatResponse<CatThreadPoolRecord> CatThreadPool(ICatThreadPoolRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null);
+		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(
+			Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request);
+		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,11 +34,13 @@ namespace Nest
 			this.DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.LowLevelDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null) =>
-			this.CatThreadPoolAsync(selector.InvokeOrDefault(new CatThreadPoolDescriptor()));
+		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(
+			Func<CatThreadPoolDescriptor, ICatThreadPoolRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatThreadPoolAsync(selector.InvokeOrDefault(new CatThreadPoolDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request) =>
-			this.DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.LowLevelDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
+		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, cancellationToken, this.LowLevelDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
 	}
 }

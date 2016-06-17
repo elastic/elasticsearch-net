@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IGetUserResponse GetUser(IGetUserRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector = null);
+		Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IGetUserResponse> GetUserAsync(IGetUserRequest request);
+		Task<IGetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector = null) =>
-			this.GetUserAsync(selector.InvokeOrDefault(new GetUserDescriptor()));
+		public Task<IGetUserResponse> GetUserAsync(Func<GetUserDescriptor, IGetUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.GetUserAsync(selector.InvokeOrDefault(new GetUserDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request) =>
+		public Task<IGetUserResponse> GetUserAsync(IGetUserRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetUserRequest, GetUserRequestParameters, GetUserResponse, IGetUserResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.XpackSecurityGetUserDispatchAsync<GetUserResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.XpackSecurityGetUserDispatchAsync<GetUserResponse>(p, c)
 			);
 	}
 }

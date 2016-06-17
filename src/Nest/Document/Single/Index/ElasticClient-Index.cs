@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The index API adds or updates a typed JSON document in a specific index, making it searchable. 
+		/// The index API adds or updates a typed JSON document in a specific index, making it searchable.
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html</a>
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
@@ -19,10 +20,14 @@ namespace Nest
 		IIndexResponse Index(IIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null) where T : class;
+		Task<IIndexResponse> IndexAsync<T>(
+			T @object,
+			Func<IndexDescriptor<T>, IIndexRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
 		/// <inheritdoc/>
-		Task<IIndexResponse> IndexAsync(IIndexRequest request);
+		Task<IIndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,8 +36,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null)
 			where T : class =>
-			this.Index((@object is IIndexRequest) 
-				? (IIndexRequest)@object 
+			this.Index((@object is IIndexRequest)
+				? (IIndexRequest)@object
 				: selector.InvokeOrDefault(new IndexDescriptor<T>(@object)));
 
 		/// <inheritdoc/>
@@ -43,16 +48,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null)
-			where T : class => 
-			this.IndexAsync((@object is IIndexRequest) 
+		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.IndexAsync((@object is IIndexRequest)
 				? (IIndexRequest)@object
-				: selector.InvokeOrDefault(new IndexDescriptor<T>(@object)));
+				: selector.InvokeOrDefault(new IndexDescriptor<T>(@object)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IIndexResponse> IndexAsync(IIndexRequest request) =>
+		public Task<IIndexResponse> IndexAsync(IIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IIndexRequest, IndexRequestParameters, IndexResponse, IIndexResponse>(
-				request, this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>
+				request, cancellationToken, this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>
 			);
 	}
 }

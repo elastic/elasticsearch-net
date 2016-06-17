@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -19,16 +20,16 @@ namespace Nest
 		IRestoreResponse Restore(IRestoreRequest request);
 
 		/// <inheritdoc/>
-		Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null);
+		Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IRestoreResponse> RestoreAsync(IRestoreRequest request);
+		Task<IRestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IRestoreResponse Restore(IRestoreRequest request) => 
+		public IRestoreResponse Restore(IRestoreRequest request) =>
 			this.Dispatcher.Dispatch<IRestoreRequest, RestoreRequestParameters, RestoreResponse>(
 				request,
 				this.LowLevelDispatch.SnapshotRestoreDispatch<RestoreResponse>
@@ -39,14 +40,15 @@ namespace Nest
 			this.Restore(selector.InvokeOrDefault(new RestoreDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc/>
-		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request) => 
+		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IRestoreRequest, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d, c)
 			);
 
 		/// <inheritdoc/>
-		public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
-			this.RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository, snapshotName)));
+		public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository, snapshotName)), cancellationToken);
 	}
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using static Elasticsearch.Net.HttpMethod;
@@ -36,7 +37,7 @@ namespace Nest
 		};
 		foreach(var gen in generate)
 		{
-		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, @(Raw("PostData<object>")) body</text>}) where T : class
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(IRequest<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, @(Raw("PostData<object>")) body</text>}@(gen.Async ? ", CancellationToken cancellationToken" : string.Empty)) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -51,21 +52,34 @@ namespace Nest
 				@foreach (var dispatch in dispatches)
 				{
 					var method = dispatch.CsharpMethod;
-					var name = method.FullName + ((gen.Async) ? "Async<T>" : "<T>");
-					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck); 
+					var name = method.FullName;
+					var methodArguments = dispatch.MethodArguments;
+					if (gen.Async)
+					{
+						name += "Async<T>";
+						methodArguments = methodArguments.Concat(new[]
+						{
+							"cancellationToken"
+						});
+					}
+					else
+					{
+						name += "<T>";
+					}
+					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck);
 					if (i == 0 && !hasIfCheck)
 					{
-					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", methodArguments)));</text>
 					}
 					else
 					{
 						if (hasIfCheck)
 						{
-					<text>if (@Raw(dispatch.IfCheck)) return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>if (@Raw(dispatch.IfCheck)) return _lowLevel.@(Raw(name))(@Raw(string.Join(",", methodArguments)));</text>
 						}
 						else
 						{
-					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", methodArguments)));</text>
 						}
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)
@@ -79,7 +93,7 @@ namespace Nest
 			throw InvalidDispatch("@(endpoint.CsharpMethodName)", p, new [] { @(httpMethodsException) }, @Raw(endpointsException));
 		}
 		</text>
-	} 
 	}
-	}	
+	}
+	}
 }

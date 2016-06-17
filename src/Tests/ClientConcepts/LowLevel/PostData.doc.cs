@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
+using System.Threading;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -146,7 +147,7 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			using (var ms = new MemoryStream())
 			{
-				await postData.WriteAsync(ms, settings);
+				await postData.WriteAsync(ms, settings, default(CancellationToken));
 				var sentBytes = ms.ToArray();
 				sentBytes.Should().Equal(writes);
 				if (storesBytes)

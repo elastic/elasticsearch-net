@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 // ReSharper disable VirtualMemberNeverOverriden.Global
@@ -149,9 +150,9 @@ namespace Elasticsearch.Net
 			return builder.ToResponse();
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
-			var builder = new ResponseBuilder<TReturn>(requestData);
+			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
 			try
 			{
 				var request = this.CreateHttpWebRequest(requestData);
@@ -163,9 +164,9 @@ namespace Elasticsearch.Net
 					{
 						if (requestData.HttpCompression)
 							using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-								await data.WriteAsync(zipStream, requestData.ConnectionSettings).ConfigureAwait(false);
+								await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 						else
-							await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
+							await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 					}
 				}
 
