@@ -1,5 +1,13 @@
 :includes-from-dirs: query-dsl/compound,query-dsl/full-text,query-dsl/geo,query-dsl/joining,query-dsl/nest-specific,query-dsl/span,query-dsl/specialized,query-dsl/term-level
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/query-dsl-usage.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 include::query-dsl/compound/and/and-query-usage.asciidoc[]
 
 include::query-dsl/compound/bool/bool-dsl-complex-query-usage.asciidoc[]

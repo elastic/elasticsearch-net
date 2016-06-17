@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/Aggregations/Bucket/DateRange/DateRangeAggregationUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[date-range-aggregation-usage]]
 == Date Range Aggregation Usage
 

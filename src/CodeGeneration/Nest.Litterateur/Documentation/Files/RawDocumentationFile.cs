@@ -16,17 +16,17 @@ namespace Nest.Litterateur.Documentation.Files
 		public override void SaveToDocumentationFolder()
 		{
 			//we simply do a copy of the markdown file
-			var docFileName = this.CreateDocumentationLocation();
+			var destination = this.CreateDocumentationLocation();
 
 #if !DOTNETCORE
 			var document = Document.Load(FileLocation.FullName);
 
 			// make any modifications
-			var rawVisitor = new RawAsciidocVisitor(docFileName);
+			var rawVisitor = new RawAsciidocVisitor(FileLocation, destination);
 			document.Accept(rawVisitor);
 
 			// write out asciidoc to file
-			using (var visitor = new AsciiDocVisitor(docFileName.FullName))
+			using (var visitor = new AsciiDocVisitor(destination.FullName))
 			{
 				document.Accept(visitor);
 			}

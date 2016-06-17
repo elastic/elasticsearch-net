@@ -196,18 +196,17 @@ namespace Nest.Litterateur.Documentation.Files
 		}
 
 #if !DOTNETCORE
-		private void CleanDocumentAndWriteToFile(string body, FileInfo docFile)
+		private void CleanDocumentAndWriteToFile(string body, FileInfo destination)
 		{
 			// tidy up the asciidoc
 			var document = Document.Parse(body);
 
-			var visitor = new GeneratedAsciidocVisitor(docFile);
+			var visitor = new GeneratedAsciidocVisitor(this.FileLocation, destination);
 			document = visitor.Convert(document);
 
 			// add attributes and write to destination
-			using (var file = new StreamWriter(docFile.FullName))
+			using (var file = new StreamWriter(destination.FullName))
 			{
-
 				document.Accept(new AsciiDocVisitor(file));
 			}
 		}

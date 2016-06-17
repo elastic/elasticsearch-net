@@ -1,6 +1,14 @@
 [[elasticsearch-net-reference]]
 = Elasticsearch.Net and NEST:  the .NET clients
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/index.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 include::intro.asciidoc[]
 
 include::breaking-changes.asciidoc[]

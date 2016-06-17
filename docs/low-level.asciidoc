@@ -3,6 +3,14 @@
 [[elasticsearch-net]]
 = Client Concepts - Elasticsearch.Net
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/2.x/src/Tests/low-level.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [partintro]
 --
 The low level client, `ElasticLowLevelClient`, is a low level, dependency free client that has no 
