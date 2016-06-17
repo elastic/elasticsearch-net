@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Geo/DistanceRange/GeoDistanceRangeQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[geo-distance-range-query-usage]]
 == Geo Distance Range Query Usage
 
@@ -17,10 +25,8 @@ q
     .Name("named_query")
     .Field(p=>p.Location)
     .DistanceType(GeoDistanceType.Arc)
-    .Coerce()
     .GreaterThanOrEqualTo(200, DistanceUnit.Kilometers)
     .GreaterThan(200, DistanceUnit.Kilometers)
-    .IgnoreMalformed()
     .Location(new GeoLocation(40, -70))
     .Optimize(GeoOptimizeBBox.Indexed)
     .LessThanOrEqualTo(Nest.Distance.Miles(400))
@@ -39,9 +45,7 @@ new GeoDistanceRangeQuery
     Name = "named_query",
     Field = Infer.Field<Project>(p=>p.Location),
     DistanceType = GeoDistanceType.Arc,
-    Coerce = true,
     GreaterThanOrEqualTo = Nest.Distance.Kilometers(200),
-    IgnoreMalformed = true,
     GreaterThan = Nest.Distance.Kilometers(200),
     LessThan = Nest.Distance.Miles(400),
     Location = new GeoLocation(40, -70),
@@ -62,8 +66,6 @@ new GeoDistanceRangeQuery
     "lte": "400.0mi",
     "distance_type": "arc",
     "optimize_bbox": "indexed",
-    "coerce": true,
-    "ignore_malformed": true,
     "validation_method": "strict",
     "_name": "named_query",
     "boost": 1.1,

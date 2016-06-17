@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Geo/Shape/Point/GeoPointUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[geo-point-usage]]
 == Geo Point Usage
 
@@ -17,6 +25,7 @@ q
     .Boost(1.1)
     .Field(p=>p.Location)
     .Coordinates(this._coordinates)
+    .IgnoreUnmapped()
 )
 ----
 
@@ -29,7 +38,8 @@ new GeoShapePointQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Field<Project>(p=>p.Location),
-    Shape = new PointGeoShape(this._coordinates)
+    Shape = new PointGeoShape(this._coordinates),
+    IgnoreUnmapped = false
 }
 ----
 

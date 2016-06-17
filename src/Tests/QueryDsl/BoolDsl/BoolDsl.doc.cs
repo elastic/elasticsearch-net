@@ -69,7 +69,7 @@ namespace Tests.QueryDsl.BoolDsl
 		*                |___term
 		*....
 		*
-		* As you can image this becomes unwieldy quite fast the more complex a query becomes NEST can spot these and
+		* As you can imagine this becomes unwieldy quite fast the more complex a query becomes, NEST can spot these and
 		* join them together to become a single bool query
 		*
 		*....
@@ -90,7 +90,7 @@ namespace Tests.QueryDsl.BoolDsl
 				);
 		}
 
-		/** The bool DSL offers also a short hand notation to mark a query as a `must_not` using the `!` operator */
+		/** The bool DSL offers also a shorthand notation to mark a query as a `must_not` using the `!` operator */
 		[U] public void MustNotOperator()
 		{
 			Assert(q => !q.Query(), !Query, c => c.Bool.MustNot.Should().HaveCount(1));
@@ -187,7 +187,7 @@ namespace Tests.QueryDsl.BoolDsl
 				});
 		}
 
-		/* NEST will also do the same with `should`s or `||` when it sees that the boolean queries in play **ONLY** consist of `should` clauses.
+		/** NEST will also do the same with `should`s or `||` when it sees that the boolean queries in play **only** consist of `should` clauses.
 		* This is because the `bool` query does not quite follow the same boolean logic you expect from a programming language.
 		*
 		* To summarize, the latter:
@@ -202,8 +202,10 @@ namespace Tests.QueryDsl.BoolDsl
 		*    |___term
 		*    |___term
 		*....
-		* but `term1 && (term2 || term3 || term4)` does **NOT** become
-		*....
+		*
+		* but `term1 && (term2 || term3 || term4)` does **not** become
+		*
+		* ....
 		*bool
 		*|___must
 		*|   |___term1
@@ -218,7 +220,7 @@ namespace Tests.QueryDsl.BoolDsl
 		* When that `bool` query also has a `must` clause then the `should` clauses start acting as a _boost_ factor
 		* and none of them have to match, drastically altering its meaning.
 		*
-		* So in the previous you could get back results that **ONLY** contain `term1`. This is clearly not what you want in the strict boolean sense of the input.
+		* So in the previous you could get back results that **only** contain `term1`. This is clearly not what you want in the strict boolean sense of the input.
 		*
 		* To aid with this, NEST rewrites the previous query to
 		*....
@@ -254,7 +256,10 @@ namespace Tests.QueryDsl.BoolDsl
 		*
 		* There is another subtle situation where NEST will not blindly merge 2 bool queries with only should clauses. Imagine the following:
 		*
-		* `bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6`
+		* [source,shell]
+		* ----
+		* bool(should=term1, term2, term3, term4, minimum_should_match=2) || term5 || term6
+		* ----
 		*
 		* if NEST identified both sides of the OR operation as only containing `should` clauses and it would
 		* join them together it would give a different meaning to the `minimum_should_match` parameter of the first boolean query.
@@ -285,7 +290,7 @@ namespace Tests.QueryDsl.BoolDsl
 		/** === Locked bool queries
 		*
 		* NEST will not combine `bool` queries if any of the query metadata is set e.g if metadata such as `boost` or `name` are set,
-		* NEST will treat these as locked
+		* NEST will treat these as locked.
 		*
 		* Here we demonstrate that two locked `bool` queries are not combined
 		*/
@@ -321,14 +326,17 @@ namespace Tests.QueryDsl.BoolDsl
 				c => AssertDoesNotJoinOntoLockedBool(c, "leftBool"));
 		}
 
+		//hide
 		private static void AssertDoesNotJoinOntoLockedBool(IQueryContainer c, string firstName)
 		{
+			//hide
 			c.Bool.Should.Should().HaveCount(2);
 			var nestedBool = c.Bool.Should.Cast<IQueryContainer>().First(b=>!string.IsNullOrEmpty(b.Bool?.Name));
 			nestedBool.Bool.Should.Should().HaveCount(1);
 			nestedBool.Bool.Name.Should().Be(firstName);
 		}
 
+		//hide
 		private void Assert(
 			Func<QueryContainerDescriptor<Project>, QueryContainer> fluent,
 			QueryBase ois,
@@ -339,6 +347,7 @@ namespace Tests.QueryDsl.BoolDsl
 			assert((QueryContainer)ois);
 		}
 
+		//hide
 		private IQueryContainer Create(Func<QueryContainerDescriptor<Project>, QueryContainer> selector) => selector.Invoke(new QueryContainerDescriptor<Project>());
 	}
 }

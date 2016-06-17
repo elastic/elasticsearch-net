@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/CodeStandards/NamingConventions.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[naming-conventions]]
 == Naming Conventions
 
@@ -36,7 +44,7 @@ var exceptions = new[] { typeof(DateMath) };
 var baseClassesNotAbstract = typeof(IRequest).Assembly().GetTypes()
     .Where(t => t.IsClass() && !exceptions.Contains(t))
     .Where(t => t.Name.Split('`')[0].EndsWith("Base"))
-    .Where(t => !t.IsAbstractClass())
+    .Where(t => !t.IsAbstract())
     .Select(t => t.Name.Split('`')[0])
     .ToList();
 

@@ -4,13 +4,21 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/CodeStandards/Queries.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[queries]]
 == Queries
 
 [source,csharp]
 ----
 var staticProperties = from p in typeof(Query<>).GetMethods()
-                       let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
+                       let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name
                        select name;
 
 var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name);
@@ -21,7 +29,7 @@ staticProperties.Distinct().Should().Contain(placeHolders.Distinct());
 [source,csharp]
 ----
 var fluentMethods = from p in typeof(QueryContainerDescriptor<>).GetMethods()
-                       let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name 
+                       let name = p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name
                        select name;
 
 var placeHolders = QueryPlaceHolderProperties.Select(p => p.Name.StartsWith("GeoShape") ? "GeoShape" : p.Name);

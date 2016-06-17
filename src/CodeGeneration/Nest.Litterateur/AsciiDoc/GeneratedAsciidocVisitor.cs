@@ -18,12 +18,14 @@ namespace Nest.Litterateur.AsciiDoc
 	{
 		private static readonly Dictionary<string,string> Ids = new Dictionary<string, string>();
 
+		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
 		private Document _newDocument;
 		private bool _topLevel = true;
 
-		public GeneratedAsciidocVisitor(FileInfo destination)
+		public GeneratedAsciidocVisitor(FileInfo source, FileInfo destination)
 		{
+			_source = source;
 			_destination = destination;
 		}
 
@@ -59,15 +61,25 @@ namespace Nest.Litterateur.AsciiDoc
 				_newDocument.Attributes.Add(new AttributeEntry("ref_current", "https://www.elastic.co/guide/en/elasticsearch/reference/master"));
 			}
 
+			var github = "https://github.com/elastic/elasticsearch-net";
 			if (document.Attributes.All(a => a.Name != "github"))
 			{
-				_newDocument.Attributes.Add(new AttributeEntry("github", "https://github.com/elastic/elasticsearch-net"));
+				_newDocument.Attributes.Add(new AttributeEntry("github", github));
 			}
 
 			if (document.Attributes.All(a => a.Name != "nuget"))
 			{
 				_newDocument.Attributes.Add(new AttributeEntry("nuget", "https://www.nuget.org/packages"));
 			}
+
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/");
+			_newDocument.Insert(0, new Comment
+			{
+				Style = CommentStyle.MultiLine,
+				Text = $"IMPORTANT NOTE\r\n==============\r\nThis file has been generated from {originalFile}. \r\n" +
+					   "If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
+					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
+			});
 
 			// see if the document has some kind of top level title and add one with an anchor if not.
 			if (document.Title == null && document.Count > 0)

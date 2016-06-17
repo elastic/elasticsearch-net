@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Joining/HasParent/HasParentQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[has-parent-query-usage]]
 == Has Parent Query Usage
 
@@ -18,7 +26,7 @@ q
     .InnerHits(i=>i.Explain())
     .Score(true)
     .Query(qq=>qq.MatchAll())
-
+    .IgnoreUnmapped(true)
 )
 ----
 
@@ -33,7 +41,8 @@ new HasParentQuery
     Type = Infer.Type<Developer>(),
     InnerHits = new InnerHits { Explain = true },
     Query = new MatchAllQuery(),
-    Score = true
+    Score = true,
+    IgnoreUnmapped = true
 }
 ----
 
@@ -46,6 +55,7 @@ new HasParentQuery
     "boost": 1.1,
     "type": "developer",
     "score": true,
+    "ignore_unmapped": true,
     "query": {
       "match_all": {}
     },

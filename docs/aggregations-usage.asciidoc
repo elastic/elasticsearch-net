@@ -1,5 +1,13 @@
 :includes-from-dirs: aggregations/bucket,aggregations/metric,aggregations/pipeline
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/aggregations-usage.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 include::aggregations/bucket/children/children-aggregation-mapping.asciidoc[]
 
 include::aggregations/bucket/children/children-aggregation-usage.asciidoc[]

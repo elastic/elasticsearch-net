@@ -1,5 +1,13 @@
 :includes-from-dirs: query-dsl/compound,query-dsl/geo,query-dsl/joining,query-dsl/nest-specific,query-dsl/span,query-dsl/specialized,query-dsl/term-level
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/query-dsl-usage.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 include::query-dsl/compound/bool/bool-dsl-complex-query-usage.asciidoc[]
 
 include::query-dsl/compound/bool/bool-query-usage.asciidoc[]
@@ -61,6 +69,8 @@ include::query-dsl/joining/has-child/has-child-query-usage.asciidoc[]
 include::query-dsl/joining/has-parent/has-parent-query-usage.asciidoc[]
 
 include::query-dsl/joining/nested/nested-query-usage.asciidoc[]
+
+include::query-dsl/joining/parent-id/parent-id-usage.asciidoc[]
 
 include::query-dsl/nest-specific/raw/raw-combine-usage.asciidoc[]
 

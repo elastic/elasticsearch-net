@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Geo/Distance/GeoDistanceQueryUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[geo-distance-query-usage]]
 == Geo Distance Query Usage
 
@@ -17,12 +25,10 @@ q
     .Name("named_query")
     .Field(p=>p.Location)
     .DistanceType(GeoDistanceType.Arc)
-    .Coerce()
     .Location(34, -34)
     .Distance("200.0m")
-    .IgnoreMalformed()
     .Optimize(GeoOptimizeBBox.Memory)
-    .ValidationMethod(GeoValidationMethod.Strict)
+    .ValidationMethod(GeoValidationMethod.IgnoreMalformed)
 )
 ----
 
@@ -36,12 +42,10 @@ new GeoDistanceQuery
     Name = "named_query",
     Field = Infer.Field<Project>(p => p.Location),
     DistanceType = GeoDistanceType.Arc,
-    Coerce = true,
     Location = new GeoLocation(34,-34),
     Distance = "200.0m",
-    IgnoreMalformed = true,
     OptimizeBoundingBox = GeoOptimizeBBox.Memory,
-    ValidationMethod = GeoValidationMethod.Strict
+    ValidationMethod = GeoValidationMethod.IgnoreMalformed
 }
 ----
 
@@ -55,9 +59,7 @@ new GeoDistanceQuery
     "distance": "200.0m",
     "optimize_bbox": "memory",
     "distance_type": "arc",
-    "coerce": true,
-    "ignore_malformed": true,
-    "validation_method": "strict",
+    "validation_method": "ignore_malformed",
     "location": {
       "lat": 34.0,
       "lon": -34.0

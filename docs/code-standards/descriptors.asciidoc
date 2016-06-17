@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/CodeStandards/Descriptors.doc.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[descriptors]]
 == Descriptors
 
@@ -13,8 +21,8 @@ Every descriptor should inherit from `DescriptorBase`, this hides object members
 ----
 var notDescriptors = new[] { typeof(ClusterProcessOpenFileDescriptors).Name, "DescriptorForAttribute" };
 var descriptors = from t in typeof(DescriptorBase<,>).Assembly().Types()
-                  where t.IsClass() 
-                    && t.Name.Contains("Descriptor") 
+                  where t.IsClass()
+                    && t.Name.Contains("Descriptor")
                     && !notDescriptors.Contains(t.Name)
                     && !t.GetInterfaces().Any(i => i == typeof(IDescriptor))
                   select t.FullName;
@@ -36,20 +44,20 @@ var selectorMethods =
     let parameters = m.GetParameters()
     from p in parameters
     let type = p.ParameterType
-    let isGeneric = type.IsGeneric()
+    let isGeneric = type.IsGenericType()
     where isGeneric
     let isFunc = type.GetGenericTypeDefinition() == typeof(Func<,>)
     where isFunc
     let firstFuncArg = type.GetGenericArguments().First()
     let secondFuncArg = type.GetGenericArguments().Last()
-    let isQueryFunc = firstFuncArg.IsGeneric() &&
+    let isQueryFunc = firstFuncArg.IsGenericType() &&
         firstFuncArg.GetGenericTypeDefinition() == typeof(QueryContainerDescriptor<>) &&
         typeof(QueryContainer).IsAssignableFrom(secondFuncArg)
     where !isQueryFunc
     let isFluentDictionaryFunc =
-        firstFuncArg.IsGeneric() &&
+        firstFuncArg.IsGenericType() &&
         firstFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>) &&
-        secondFuncArg.IsGeneric() &&
+        secondFuncArg.IsGenericType() &&
         secondFuncArg.GetGenericTypeDefinition() == typeof(FluentDictionary<,>)
     where !isFluentDictionaryFunc
     let lastArgIsNotInterface = !secondFuncArg.IsInterface()
@@ -57,5 +65,55 @@ var selectorMethods =
     select $"{m.Name} on {m.DeclaringType.Name}";
 
 selectorMethods.Should().BeEmpty();
+----
+
+Descriptor methods that assign to a nullable bool property should accept
+a nullable bool with a default value
+
+[source,csharp]
+----
+var queries =
+    from t in typeof(IQuery).Assembly().Types()
+    where t.IsInterface() && typeof(IQuery).IsAssignableFrom(t)
+    where t.GetProperties().Any(p => p.PropertyType == typeof(bool?))
+    select t;
+
+var descriptors =
+    from t in typeof(DescriptorBase<,>).Assembly().Types()
+    where t.IsClass() && typeof(IDescriptor).IsAssignableFrom(t)
+    where t.GetInterfaces().Intersect(queries).Any()
+    select t;
+
+var breakingDescriptors = new List<string>();
+----
+
+[source,csharp]
+----
+foreach (var query in queries)
+{
+    var descriptor = descriptors.First(d => query.IsAssignableFrom(d));
+    foreach (var boolProperty in query.GetProperties().Where(p => p.PropertyType == typeof(bool?)))
+    {
+        var descriptorMethod = descriptor.GetMethod(boolProperty.Name);
+        if (descriptorMethod == null)
+            throw new Exception($"No method for property {boolProperty.Name} on {descriptor.Name}");
+
+        var parameters = descriptorMethod.GetParameters();
+
+        if (!parameters.Any())
+            throw new Exception($"No parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+
+        if (parameters.Length > 1)
+            throw new Exception($"More than one parameter for method {descriptorMethod.Name} on {descriptor.Name}");
+
+        if (parameters[0].ParameterType != typeof(bool?))
+            breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not take nullable bool");
+
+        if (!parameters[0].HasDefaultValue)
+            breakingDescriptors.Add($"{descriptor.FullName} method {descriptorMethod.Name} does not have a default value");
+    }
+}
+
+breakingDescriptors.Should().BeEmpty();
 ----
 

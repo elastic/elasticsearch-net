@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using AsciiDocNet;
 
 namespace Nest.Litterateur.AsciiDoc
@@ -12,6 +13,7 @@ namespace Nest.Litterateur.AsciiDoc
 	/// </summary>
 	public class RawAsciidocVisitor : NoopVisitor
 	{
+		private readonly FileInfo _source;
 		private readonly FileInfo _destination;
 
 		private static readonly Dictionary<string, string> IncludeDirectories = new Dictionary<string, string>
@@ -21,8 +23,9 @@ namespace Nest.Litterateur.AsciiDoc
 			{ "search.asciidoc", "search-usage.asciidoc" },
 		};
 
-		public RawAsciidocVisitor(FileInfo destination)
+		public RawAsciidocVisitor(FileInfo source, FileInfo destination)
 		{
+			_source = source;
 			_destination = destination;
 		}
 
@@ -33,6 +36,16 @@ namespace Nest.Litterateur.AsciiDoc
 			{
 				document.Attributes.Remove(directoryAttribute);
 			}
+
+			var github = "https://github.com/elastic/elasticsearch-net";
+			var originalFile = Regex.Replace(_source.FullName.Replace("\\", "/"), @"^(.*Tests/)", $"{github}/tree/master/src/Tests/");
+			document.Insert(0, new Comment
+			{
+				Style = CommentStyle.MultiLine,
+				Text = $"IMPORTANT NOTE\r\n==============\r\nThis file has been generated from {originalFile}. \r\n" +
+					   "If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,\r\n" +
+					   "please modify the original csharp file found at the link and submit the PR with that change. Thanks!"
+			});
 
 			// check if this document has generated includes to other files
 			var includeAttribute = document.Attributes.FirstOrDefault(a => a.Name == "includes-from-dirs");

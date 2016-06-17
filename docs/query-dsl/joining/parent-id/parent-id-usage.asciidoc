@@ -7,25 +7,27 @@
 ////
 IMPORTANT NOTE
 ==============
-This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/TermLevel/Missing/MissingQueryUsageTests.cs. 
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Joining/ParentId/ParentIdUsageTests.cs. 
 If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
 please modify the original csharp file found at the link and submit the PR with that change. Thanks!
 ////
 
-[[missing-query-usage]]
-== Missing Query Usage
+[[parent-id-usage]]
+== Parent Id Usage
+
+The `parent_id` query can be used to find child documents which belong to a particular parent.
+
+See the Elasticsearch documentation on {ref_current}/query-dsl-parent-id-query.html[parent_id query] for more details.
 
 === Fluent DSL Example
 
 [source,csharp]
 ----
 q
-.Missing(c => c
+.ParentId(p => p
     .Name("named_query")
-    .Boost(1.1)
-    .Field(p => p.Description)
-    .NullValue()
-    .Existence()
+    .Type<Developer>()
+    .Id(Project.Projects.First().Name)
 )
 ----
 
@@ -33,13 +35,11 @@ q
 
 [source,csharp]
 ----
-new MissingQuery
+new ParentIdQuery
 {
     Name = "named_query",
-    Boost = 1.1,
-    Field = "description",
-    NullValue = true,
-    Existence = true
+    Type = Infer.Type<Developer>(),
+    Id = Project.Projects.First().Name
 }
 ----
 
@@ -47,12 +47,10 @@ new MissingQuery
 .Example json output
 ----
 {
-  "missing": {
+  "parent_id": {
     "_name": "named_query",
-    "boost": 1.1,
-    "existence": true,
-    "field": "description",
-    "null_value": true
+    "type": "developer",
+    "id": "Lesch Group"
   }
 }
 ----

@@ -4,6 +4,14 @@
 
 :nuget: https://www.nuget.org/packages
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/QueryDsl/Compound/FullText/QueryString/QueryStringUsageTests.cs. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 [[query-string-usage]]
 == Query String Usage
 
@@ -32,7 +40,7 @@ q
     .FuzzyMaxExpansions(3)
     .FuzzyRewrite(RewriteMultiTerm.ConstantScore)
     .Rewrite(RewriteMultiTerm.ConstantScore)
-    .Fuziness(Fuzziness.Auto)
+    .Fuzziness(Fuzziness.Auto)
     .TieBreaker(1.2)
     .AnalyzeWildcard()
     .MinimumShouldMatch(2)
@@ -95,7 +103,7 @@ new QueryStringQuery
     "lowercase_expanded_terms": true,
     "enable_position_increments": true,
     "fuzzy_max_expansions": 3,
-    "fuziness": "AUTO",
+    "fuzziness": "AUTO",
     "fuzzy_prefix_length": 2,
     "analyze_wildcard": true,
     "auto_generate_phrase_queries": true,

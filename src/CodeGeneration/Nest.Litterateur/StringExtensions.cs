@@ -128,7 +128,8 @@ namespace Nest.Litterateur
 			{ "_templateString", "\"{ \\\"match\\\": { \\\"text\\\": \\\"{{query_string}}\\\" } }\"" },
 			{ "base.QueryJson", "new{ @bool = new { must = new[] { new { match_all = new { } } }, must_not = new[] { new { match_all = new { } } }, should = new[] { new { match_all = new { } } }, filter = new[] { new { match_all = new { } } }, minimum_should_match = 1, boost = 2.0, } }" },
 			{ "ExpectedTerms", "new [] { \"term1\", \"term2\" }" },
-			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" }
+			{ "_ctxNumberofCommits", "\"_source.numberOfCommits > 0\"" },
+			{ "Project.Projects.First().Name", "\"Lesch Group\"" }
 		};
 
 		public static bool TryGetJsonForAnonymousType(this string anonymousTypeString, out string json)

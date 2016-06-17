@@ -1,5 +1,13 @@
 :includes-from-dirs: search/request
 
+////
+IMPORTANT NOTE
+==============
+This file has been generated from https://github.com/elastic/elasticsearch-net/tree/master/src/Tests/search-usage.asciidoc. 
+If you wish to submit a PR for any spelling mistakes, typos or grammatical errors for this file,
+please modify the original csharp file found at the link and submit the PR with that change. Thanks!
+////
+
 include::search/request/explain-usage.asciidoc[]
 
 include::search/request/fielddata-fields-usage.asciidoc[]
