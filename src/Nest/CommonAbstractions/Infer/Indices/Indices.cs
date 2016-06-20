@@ -16,11 +16,19 @@ namespace Nest
 		{
 			private readonly List<IndexName> _indices = new List<IndexName>();
 			public IReadOnlyList<IndexName> Indices => _indices;
+
+			internal ManyIndices(IndexName index) { this._indices.Add(index); }
 			internal ManyIndices(IEnumerable<IndexName> indices) { this._indices.AddRange(indices); }
 
 			public ManyIndices And<T>()
 			{
 				this._indices.Add(typeof(T));
+				return this;
+			}
+
+			public ManyIndices And(IndexName index)
+			{
+				this._indices.Add(index);
 				return this;
 			}
 		}
@@ -36,17 +44,18 @@ namespace Nest
 
 		public static Indices Parse(string indicesString)
 		{
-			if (indicesString.IsNullOrEmpty()) throw new Exception("can not parse an empty string to Indices");
+			if (indicesString == null) throw new Exception("can not parse null to Indices");
+			if (indicesString.Length == 0) return All;
 			var indices = indicesString.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-			if (indices.Contains("_all")) return Indices.All;
+			if (indices.Contains("_all")) return All;
 			return Index(indices.Select(i => (IndexName)i));
 		}
 
 		public static implicit operator Indices(string indicesString) => Parse(indicesString);
 		public static implicit operator Indices(ManyIndices many) => new Indices(many);
 		public static implicit operator Indices(IndexName[] many) => new ManyIndices(many);
-		public static implicit operator Indices(IndexName index) => new ManyIndices(new[] { index });
-		public static implicit operator Indices(Type type) => new ManyIndices(new IndexName[] { type });
+		public static implicit operator Indices(IndexName index) => new ManyIndices(index);
+		public static implicit operator Indices(Type type) => new ManyIndices(type);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
@@ -59,6 +68,10 @@ namespace Nest
 						throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 
 					var infer = nestSettings.Inferrer;
+
+					if (many.Indices.Count == 1)
+						return infer.IndexName(many.Indices[0]);
+
 					var indices = many.Indices.Select(i => infer.IndexName(i)).Distinct();
 					return string.Join(",", indices);
 				}
