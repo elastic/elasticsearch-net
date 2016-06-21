@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
 	public interface IStringProperty : IDocValuesProperty
 	{
 		[JsonProperty("index")]
@@ -43,6 +44,7 @@ namespace Nest
 		IStringFielddata Fielddata { get; set; }
 	}
 
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
 	public class StringProperty : DocValuesPropertyBase, IStringProperty
 	{
 		public StringProperty() : base("string") { }
@@ -61,6 +63,7 @@ namespace Nest
 		public IStringFielddata Fielddata { get; set; }
 	}
 
+	[Obsolete("Only valid for indices created before Elasticsearch 5.0 and will be removed in the next major version.  For newly created indices, use `text` or `keyword` instead.")]
 	public class StringPropertyDescriptor<T>
 		: DocValuesPropertyDescriptorBase<StringPropertyDescriptor<T>, IStringProperty, T>, IStringProperty
 		where T : class
