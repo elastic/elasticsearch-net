@@ -17,8 +17,6 @@ please modify the original csharp file found at the link and submit the PR with 
 
 Allows to return the field data representation of a field for each hit.
 
-See the Elasticsearch documentation on {ref_current}/search-request-fielddata-fields.html[Field Data Fields] for more detail.
-
 === Fluent DSL Example
 
 [source,csharp]
