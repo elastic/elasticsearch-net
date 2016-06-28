@@ -93,9 +93,8 @@ namespace Nest
 			if (reader.TokenType != JsonToken.PropertyName)
 				return null;
 
-			IBucket item = null;
-
-			var property = reader.Value as string;
+			IBucket item;
+			var property = (string)reader.Value;
 
 			switch (property)
 			{
@@ -125,7 +124,7 @@ namespace Nest
 			reader.Read();
 			while (reader.TokenType != JsonToken.EndObject)
 			{
-				var key = reader.Value as string;
+				var key = (string)reader.Value;
 				reader.Read();
 				var value = reader.Value;
 				meta.Add(key, value);
@@ -330,16 +329,17 @@ namespace Nest
 			return extendedStatsMetric;
 		}
 
-		private IDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer)
+		private IDictionary<string, IAggregate> GetSubAggregates(JsonReader reader, JsonSerializer serializer, Dictionary<string, IAggregate> aggregates = null)
 		{
 			if (reader.TokenType != JsonToken.PropertyName)
-				return null;
+				return aggregates;
 
-			var nestedAggs = new Dictionary<string, IAggregate>();
+			var nestedAggs = aggregates ?? new Dictionary<string, IAggregate>();
+
 			var currentDepth = reader.Depth;
 			do
 			{
-				var fieldName = reader.Value as string;
+				var fieldName = (string)reader.Value;
 				reader.Read();
 				var agg = this.ReadAggregate(reader, serializer);
 				nestedAggs.Add(fieldName, agg);
@@ -353,14 +353,14 @@ namespace Nest
 		private IAggregate GetMultiBucketAggregate(JsonReader reader, JsonSerializer serializer)
 		{
 			var bucket = new BucketAggregate();
-			var property = reader.Value as string;
+			var property = (string)reader.Value;
 			if (property == "doc_count_error_upper_bound")
 			{
 				reader.Read();
 				bucket.DocCountErrorUpperBound = reader.Value as long?;
 				reader.Read();
 			}
-			property = reader.Value as string;
+			property = (string)reader.Value;
 			if (property == "sum_other_doc_count")
 			{
 				reader.Read();
@@ -537,7 +537,7 @@ namespace Nest
 		{
 			var key = reader.ReadAsString();
 			reader.Read();
-			var property = reader.Value as string;
+			var property = (string)reader.Value;
 			if (property == "from" || property == "to")
 				return GetRangeBucket(reader, serializer, key);
 
@@ -554,21 +554,30 @@ namespace Nest
 			keyItem.DocCount = docCount.GetValueOrDefault(0);
 			reader.Read();
 
-			var nextProperty = reader.Value as string;
+			Dictionary<string, IAggregate> aggregates = null;
+			var nextProperty = (string)reader.Value;
 			if (nextProperty == "score")
 			{
-				return GetSignificantTermsBucket(reader, serializer, keyItem);
+				reader.Read();
+				if (reader.TokenType == JsonToken.Float || reader.TokenType == JsonToken.Null)
+				{
+					return GetSignificantTermsBucket(reader, serializer, keyItem);
+				}
+
+				// score is the name of an aggregation
+				aggregates = new Dictionary<string, IAggregate>();
+				var aggregate = this.ReadAggregate(reader, serializer);
+				reader.Read();
+				aggregates.Add(nextProperty, aggregate);
 			}
 
-
-			keyItem.Aggregations = this.GetSubAggregates(reader, serializer);
+			keyItem.Aggregations = this.GetSubAggregates(reader, serializer, aggregates);
 			return keyItem;
 
 		}
 
 		private IBucket GetSignificantTermsBucket(JsonReader reader, JsonSerializer serializer, KeyedBucket keyItem)
 		{
-			reader.Read();
 			var score = reader.Value as double?;
 			reader.Read();
 			reader.Read();
