@@ -27,19 +27,22 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 
 		protected override object ExpectJson { get; } = new Dictionary<string, object>
 		{
-			{ "index.blocks.write", false }
+			{ "index.blocks.write", false },
+			{ "index.number_of_replicas", 2 }
 		};
 
 		protected override Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> Fluent => d => d
 			.IndexSettings(i => i
 				.BlocksWrite(false)
+				.NumberOfReplicas(2)
 			);
 
 		protected override UpdateIndexSettingsRequest Initializer => new UpdateIndexSettingsRequest
 		{
 			IndexSettings = new Nest.IndexSettings
 			{
-				BlocksWrite = false
+				BlocksWrite = false,
+				NumberOfReplicas = 2
 			}
 		};
 	}

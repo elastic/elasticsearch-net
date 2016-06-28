@@ -75,9 +75,11 @@ namespace Nest
 			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
 			var indexSettings = value as IIndexSettings;
-			d["index.number_of_shards"] = indexSettings?.NumberOfShards;
-			d[UpdatableIndexSettings.NumberOfReplicas] = indexSettings?.NumberOfReplicas;
-			d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
+			if (indexSettings != null)
+			{
+				d["index.number_of_shards"] = indexSettings?.NumberOfShards;
+				d[UpdatableIndexSettings.StoreType] = indexSettings?.FileSystemStorageImplementation;
+			}
 			d["index.queries.cache.enabled"] = indexSettings?.Queries?.Cache?.Enabled;
 
 			d[UpdatableIndexSettings.Analysis] = ds.Analysis;
