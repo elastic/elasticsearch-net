@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -33,5 +35,14 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		{
 			Local = true
 		};
+
+		protected override void ExpectResponse(IGetIndexSettingsResponse response)
+        {
+            response.Indices.Should().NotBeEmpty();
+            var index = response.Indices.First().Value;
+            index.Should().NotBeNull();
+            index.Settings.NumberOfShards.Should().HaveValue().And.BeGreaterThan(0);
+            index.Settings.NumberOfReplicas.Should().HaveValue();
+        }
 	}
 }
