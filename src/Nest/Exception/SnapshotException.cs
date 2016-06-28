@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	[Serializable]
 	public class SnapshotException : Exception
 	{
 		public IElasticsearchResponse Status { get; private set; }
@@ -12,5 +15,9 @@ namespace Nest
 		{
 			Status = status;
 		}
+
+		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected SnapshotException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
 	}
 }

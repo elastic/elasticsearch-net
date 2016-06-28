@@ -251,6 +251,7 @@
     <Compile Include="Core\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
+    <Compile Include="Extensions\SerializableExceptionTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\UriExtensionsTests.cs" />
     <Compile Include="BigBadUrlUnitTests.cs" />

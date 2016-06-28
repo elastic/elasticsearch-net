@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Elasticsearch.Net
 {
+	[Serializable]
 	public class ElasticsearchServerException : Exception
 	{
 		private static readonly Regex ExceptionSplitter = new Regex(@"^([^\[]*?)\[(.*)\]", RegexOptions.Singleline);
@@ -35,5 +38,23 @@ namespace Elasticsearch.Net
 			error.ExceptionType = matches.Groups[1].Value;
 			return matches.Groups[2].Value;
 		}
+
+
+		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        protected ElasticsearchServerException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.Status = info.GetInt32("Status");
+            this.ExceptionType = info.GetString("ExceptionType");
+        }
+
+		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new ArgumentNullException(nameof(info));
+
+            info.AddValue("Status", this.Status);
+            info.AddValue("ExceptionType", this.ExceptionType);
+            base.GetObjectData(info, context);
+        }
 	}
 }
