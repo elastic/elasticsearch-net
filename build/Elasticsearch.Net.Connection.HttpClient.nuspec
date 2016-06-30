@@ -13,7 +13,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>An IConnection implementation that uses System.Net.Http.HttpClient to talk with elasticsearch</description>
 		<dependencies>
-			<dependency id="Elasticsearch.Net" version="[1.8.2,2)"/>
+			<dependency id="Elasticsearch.Net" version="[1.8.3,2)"/>
 		</dependencies>
 		<tags>elasticsearch elastic search lucene thrift nest</tags>
 	</metadata>

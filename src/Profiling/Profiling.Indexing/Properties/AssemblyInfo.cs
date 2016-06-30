@@ -7,8 +7,8 @@ using System.Reflection;
 [assembly: AssemblyCompanyAttribute("Elasticsearch")]
 [assembly: AssemblyConfigurationAttribute("Release")]
 [assembly: AssemblyVersionAttribute("1.0.0")]
-[assembly: AssemblyFileVersionAttribute("1.8.2")]
-[assembly: AssemblyInformationalVersionAttribute("1.8.2")]
+[assembly: AssemblyFileVersionAttribute("1.8.3")]
+[assembly: AssemblyInformationalVersionAttribute("1.8.3")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = "1.0.0";
