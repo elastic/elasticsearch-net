@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 
 namespace Nest
 {
@@ -14,8 +15,10 @@ namespace Nest
 
 		public DispatchException(string msg, System.Exception exp) : base(msg, exp) { }
 
-        protected DispatchException(SerializationInfo info, StreamingContext context) 
-            : base(info, context) { }
+		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+		protected DispatchException(SerializationInfo info, StreamingContext context)
+			: base(info, context)
+		{ }
 
 	}
 }

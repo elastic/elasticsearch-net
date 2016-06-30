@@ -17,7 +17,7 @@ namespace Nest
 		}
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected SnapshotException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+		protected SnapshotException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 	}
 }

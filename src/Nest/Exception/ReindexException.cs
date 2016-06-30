@@ -6,7 +6,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	[Serializable]
-	public class ReindexException: Exception
+	public class ReindexException : Exception
 	{
 		public IElasticsearchResponse Status { get; private set; }
 
@@ -16,7 +16,7 @@ namespace Nest
 		}
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected ReindexException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+		protected ReindexException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
 	}
 }

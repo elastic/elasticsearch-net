@@ -20,11 +20,11 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected ElasticsearchAuthException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+		protected ElasticsearchAuthException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
 
-		internal ElasticsearchServerException ToElasticsearchServerException() => 
+		internal ElasticsearchServerException ToElasticsearchServerException() =>
 			this.Response == null ? null : new ElasticsearchServerException(this.StatusCode, this.ExceptionType);
 
 
@@ -40,19 +40,19 @@ namespace Elasticsearch.Net.Connection
 		protected override int StatusCode => 403;
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected ElasticsearchAuthorizationException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+		protected ElasticsearchAuthorizationException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
 
 		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) throw new ArgumentNullException(nameof(info));
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null) throw new ArgumentNullException(nameof(info));
 
-            info.AddValue("ExceptionType", this.ExceptionType);
-            info.AddValue("StatusCode", this.StatusCode);
-            base.GetObjectData(info, context);
-        }
+			info.AddValue("ExceptionType", this.ExceptionType);
+			info.AddValue("StatusCode", this.StatusCode);
+			base.GetObjectData(info, context);
+		}
 	}
 
 
@@ -66,19 +66,19 @@ namespace Elasticsearch.Net.Connection
 		public ElasticsearchAuthenticationException(ElasticsearchResponse<Stream> response) : base(response) { }
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected ElasticsearchAuthenticationException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+		protected ElasticsearchAuthenticationException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+		}
 
 		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) throw new ArgumentNullException(nameof(info));
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null) throw new ArgumentNullException(nameof(info));
 
-            info.AddValue("ExceptionType", this.ExceptionType);
-            info.AddValue("StatusCode", this.StatusCode);
-            base.GetObjectData(info, context);
-        }
+			info.AddValue("ExceptionType", this.ExceptionType);
+			info.AddValue("StatusCode", this.StatusCode);
+			base.GetObjectData(info, context);
+		}
 
 	}
 }

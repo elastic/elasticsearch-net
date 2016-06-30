@@ -41,20 +41,20 @@ namespace Elasticsearch.Net
 
 
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected ElasticsearchServerException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-            this.Status = info.GetInt32("Status");
-            this.ExceptionType = info.GetString("ExceptionType");
-        }
+		protected ElasticsearchServerException(SerializationInfo info, StreamingContext context) : base(info, context)
+		{
+			this.Status = info.GetInt32("Status");
+			this.ExceptionType = info.GetString("ExceptionType");
+		}
 
 		[SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            if (info == null) throw new ArgumentNullException(nameof(info));
+		public override void GetObjectData(SerializationInfo info, StreamingContext context)
+		{
+			if (info == null) throw new ArgumentNullException(nameof(info));
 
-            info.AddValue("Status", this.Status);
-            info.AddValue("ExceptionType", this.ExceptionType);
-            base.GetObjectData(info, context);
-        }
+			info.AddValue("Status", this.Status);
+			info.AddValue("ExceptionType", this.ExceptionType);
+			base.GetObjectData(info, context);
+		}
 	}
 }
