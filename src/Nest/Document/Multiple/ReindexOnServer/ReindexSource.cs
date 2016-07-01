@@ -17,7 +17,10 @@ namespace Nest
 
 		[JsonProperty("type")]
 		Types Type { get; set; }
-	}
+
+        [JsonProperty("size")]
+        int? Size { get; set; }
+    }
 
 	public class ReindexSource : IReindexSource
 	{
@@ -28,7 +31,9 @@ namespace Nest
 		public Indices Index { get; set; }
 
 		public Types Type { get; set; }
-	}
+
+        public int? Size { get; set; }
+    }
 
 	public class ReindexSourceDescriptor : DescriptorBase<ReindexSourceDescriptor, IReindexSource>, IReindexSource
 	{
@@ -36,8 +41,9 @@ namespace Nest
 		IList<ISort> IReindexSource.Sort { get; set; }
 		Indices IReindexSource.Index { get; set; }
 		Types IReindexSource.Type { get; set; }
+        int? IReindexSource.Size { get; set; }
 
-		public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
+        public ReindexSourceDescriptor Query<T>(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) where T : class =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		public ReindexSourceDescriptor Sort<T>(Func<SortDescriptor<T>, IPromise<IList<ISort>>> selector) where T : class =>
@@ -47,5 +53,6 @@ namespace Nest
 
 		public ReindexSourceDescriptor Type(Types types) => Assign(a => a.Type = types);
 
-	}
+        public ReindexSourceDescriptor Size(int? size) => Assign(a => a.Size = size);
+    }
 }
