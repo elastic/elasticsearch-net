@@ -54,7 +54,8 @@ namespace Tests.Document.Multiple.ReindexOnServer
 			.Source(s=>s
 				.Index(CallIsolatedValue)
 				.Type("test")
-				.Query<Test>(q=>q
+                .Size(100)
+                .Query<Test>(q=>q
 					.Match(m=>m
 						.Field(p=>p.Flag)
 						.Query("bar")
@@ -81,9 +82,10 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				Index = CallIsolatedValue,
 				Type = "test",
 				Query = new MatchQuery { Field = Field<Test>(p=>p.Flag), Query = "bar"},
-				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } }
+				Sort = new List<ISort> { new SortField { Field = "id", Order = SortOrder.Ascending } },
+                Size = 100
 
-			},
+            },
 			Destination = new ReindexDestination
 			{
 				Index = CallIsolatedValue + "-clone",
@@ -130,8 +132,9 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					index = CallIsolatedValue,
 					query = new { match = new { flag = new { query = "bar" } } },
 					sort = new [] { new { id = new { order = "asc" } } },
-					type = new [] { "test" }
-				}
+					type = new [] { "test" },
+                    size = 100
+                }
 			};
 	}
 }
