@@ -133,7 +133,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					sort = new [] { new { id = new { order = "asc" } } },
 					type = new [] { "test" },
                     size = 100
-                }
+				}
 			};
 	}
 }
