@@ -1,37 +1,41 @@
 {
+  "version": "5.0.0-alpha2",
   "authors": [
     "Elastic and contributors"
   ],
-  "owners": [
-    "Elastic"
-  ],
-  "projectUrl": "https://github.com/elastic/elasticsearch-net",
-  "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
-  "requireLicenseAcceptance": false,
-  "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
-  "summary": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
-  "description": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
-  "title": "NEST - Elasticsearch .NET client",
-  "tags": [
-    "elasticsearch",
-    "elastic",
-    "search",
-    "lucene",
-    "nest"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elastic/elasticsearch-net"
+  "packOptions": {
+    "owners": [
+      "Elastic"
+    ],
+    "projectUrl": "https://github.com/elastic/elasticsearch-net",
+    "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
+    "requireLicenseAcceptance": false,
+    "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
+    "summary": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
+    "description": "Strongly typed interface to Elasticsearch. Fluent and classic object initializer mappings of requests and responses. Uses and exposes Elasticsearch.Net",
+    "title": "NEST - Elasticsearch .NET client",
+    "tags": [
+      "elasticsearch",
+      "elastic",
+      "search",
+      "lucene",
+      "nest"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/elastic/elasticsearch-net"
+    },
+    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.0-alpha2"
   },
+
   "copyright": "2014-2016 Elasticsearch BV",
-  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.0-alpha2",
+  "buildOptions": {
   "version": "5.0.0-alpha2",
-  "compilationOptions": {
     "warningsAsErrors": false
   },
   "configurations": {
     "Debug": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "DEBUG",
           "TRACE"
@@ -39,7 +43,7 @@
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "RELEASE",
           "TRACE"
@@ -53,13 +57,11 @@
     "Elasticsearch.Net": {
       "target": "project"
     },
-    "Newtonsoft.Json": "8.0.2"
-  },
-  "commands": {
+    "Newtonsoft.Json": "9.0.1"
   },
   "frameworks": {
     "net46": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "NET46"
         ]
@@ -77,10 +79,15 @@
         "System.ServiceModel": {
           "type": "build"
         }
+      },
+      "dependencies": {
+        "System.Collections.Specialized": "4.0.1",
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.Linq.Queryable": "4.0.0"
       }
     },
     "net45": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "NET45"
         ]
@@ -100,23 +107,17 @@
         }
       }
     },
-    "dotnet5.1": {
-      "compilationOptions": {
+    "netstandard1.3": {
+      "buildOptions": {
         "define": [
           "DOTNETCORE"
         ]
       },
       "dependencies": {
-        "System.Collections": "4.0.11-beta-23225",
-        "System.IO.FileSystem": "4.0.1-beta-23225",
-        "System.Diagnostics.Tools": "4.0.1-beta-23225",
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
-        "System.Linq": "4.0.0-beta-23109",
-        "System.Linq.Expressions": "4.0.11-beta-23516",
-        "System.Linq.Queryable": "4.0.0-beta-23109",
-        "System.Runtime": "4.0.21-beta-23225",
-        "System.Threading": "4.0.11-beta-23225",
-        "System.Threading.Timer": "4.0.0-beta-23109"
+        "NETStandard.Library": "1.6.0",
+        "System.Collections.Specialized": "4.0.1",
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.Linq.Queryable": "4.0.1"
       }
     }
   }

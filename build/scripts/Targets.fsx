@@ -1,8 +1,3 @@
-// include Fake lib
-#I @"../../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
-open Fake 
-
 #load @"Paths.fsx"
 #load @"Projects.fsx"
 #load @"Versioning.fsx"
@@ -13,6 +8,11 @@ open Fake
 #load @"Releasing.fsx"
 #load @"Profiling.fsx"
 
+open System
+open System.IO
+
+open Fake 
+
 open Paths
 open Building
 open Testing
@@ -21,8 +21,6 @@ open Versioning
 open Documentation
 open Releasing
 open Profiling
-open System
-open System.IO
 
 let private buildFailed errors =
     raise (BuildException("The project build failed.", errors |> List.ofSeq))
@@ -33,7 +31,7 @@ let private testsFailed errors =
 // Default target
 Target "Build" <| fun _ -> traceHeader "STARTING BUILD"
 
-Target "Clean" <| fun _ -> CleanDir Paths.BuildOutput
+Target "Clean" <| fun _ -> Build.Clean()
 
 Target "BuildApp" <| fun _ -> Build.Compile()
 
@@ -66,8 +64,7 @@ Target "Version" <| fun _ ->
     Versioning.PatchProjectJsons()
 
 Target "Release" <| fun _ -> 
-    Release.PatchReleaseNotes()
-    Release.PackAllDnx()   
+    Release.NugetPack()   
     Sign.ValidateNugetDllAreSignedCorrectly()
     Versioning.ValidateArtifacts()
 
