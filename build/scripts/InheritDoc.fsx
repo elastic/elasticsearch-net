@@ -2,11 +2,11 @@
 #r @"FakeLib.dll"
 #r "System.Xml.Linq.dll"
 
-open System.Xml
-open System.Xml.XPath
 open System.Linq
-open System.Xml.Linq
 open System.Text.RegularExpressions
+open System.Xml
+open System.Xml.Linq
+open System.Xml.XPath
 
 let PatchXmlDoc = fun (file: string) ->
   let xml = XDocument.Load file

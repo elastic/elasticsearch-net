@@ -136,6 +136,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 	* The required fields to percolate an existing document are:
 	* - `index` in which the document resides
 	* - `type` of the document
+	* - `field` that contains the query
 	* - `id` of the document
 	* - `document_type` type / mapping of the document
 	*
@@ -161,6 +162,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 
 		public PercolateQueryExistingDocumentUsageTests(IndexingCluster i, EndpointUsage usage) : base(i, usage) { }
 
+		//hide
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
@@ -203,9 +205,11 @@ namespace Tests.QueryDsl.Specialized.Percolate
 			}
 		};
 
+		//hide
 		protected override Func<SearchDescriptor<PercolatedQuery>, ISearchRequest> Fluent => f =>
 			f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes();
 
+		//hide
 		protected override SearchRequest<PercolatedQuery> Initializer =>
 			new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
 			{

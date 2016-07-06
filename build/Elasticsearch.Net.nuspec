@@ -1,26 +1,49 @@
-<?xml version="1.0"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>Elasticsearch.Net</id>
-		<version>2.0.0-alpha2</version>
-		<title>Elasticsearch.Net - official low level elasticsearch client</title>
+		<version>$version$</version>
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
+		<licenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</licenseUrl>
+		<projectUrl>https://github.com/elastic/elasticsearch-net</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png</iconUrl>
-		<licenseUrl>https://github.com/elasticsearch/elasticsearch-net/blob/master/license.txt</licenseUrl>
-		<projectUrl>https://github.com/elasticsearch/elasticsearch-net</projectUrl>
-		<summary>
-			Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
-		</summary>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>
-			Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.
-		</description>
-		<tags>elasticsearch elastic search lucene nest</tags>
+		<description>Elasticsearch.Net</description>
+		<summary>Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.</summary>
+		<releaseNotes>See https://github.com/elastic/elasticsearch-net/releases/tag/$version$</releaseNotes>
+		<copyright>2014-2016 Elasticsearch BV</copyright>
+		<tags>elasticsearch,elastic,search,lucene,nest</tags>
+		<dependencies>
+			<group targetFramework=".NETFramework4.5" />
+			<group targetFramework=".NETFramework4.6">
+				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
+				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
+			</group>
+			<group targetFramework=".NETStandard1.3">
+				<dependency id="NETStandard.Library" version="[1.6.0, )" />
+				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
+				<dependency id="System.Runtime.Serialization.Primitives" version="[4.1.1, )" />
+				<dependency id="Microsoft.CSharp" version="[4.0.1, )" />
+				<dependency id="System.Dynamic.Runtime" version="[4.0.11, )" />
+				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
+				<dependency id="System.ComponentModel.TypeConverter" version="[4.1.0, )" />
+			</group>
+		</dependencies>
 	</metadata>
 	<files>
 		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.dll" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.pdb" target="lib\net45"/>
+		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.pdb.srcsrv" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net\net45\Elasticsearch.Net.XML" target="lib\net45"/>
+
+		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.dll" target="lib\net46"/>
+		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.pdb" target="lib\net46"/>
+		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.pdb.srcsrv" target="lib\net46"/>
+		<file src="output\Elasticsearch.Net\net46\Elasticsearch.Net.XML" target="lib\net46"/>
+
+		<file src="output\Elasticsearch.Net\netstandard1.3\Elasticsearch.Net.dll" target="lib\netstandard1.3"/>
+		<file src="output\Elasticsearch.Net\netstandard1.3\Elasticsearch.Net.pdb" target="lib\netstandard1.3"/>
+		<file src="output\Elasticsearch.Net\netstandard1.3\Elasticsearch.Net.pdb.srcsrv" target="lib\netstandard1.3"/>
 	</files>
 </package>

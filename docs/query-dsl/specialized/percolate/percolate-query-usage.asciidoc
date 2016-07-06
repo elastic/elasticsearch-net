@@ -149,73 +149,13 @@ The required fields to percolate an existing document are:
 
 * `type` of the document
 
+* `field` that contains the query
+
 * `id` of the document
 
 * `document_type` type / mapping of the document
 
 See the Elasticsearch documentation on {ref_current}/query-dsl-percolate-query.html[percolate query] for more details.
-
-[source,csharp]
-----
-foreach (var index in values.Values)
-{
-    this.Client.CreateIndex(index, c => c
-        .Mappings(m => m
-            .Map<Project>(mm => mm.AutoMap()
-                .Properties(Seeder.ProjectProperties)
-            )
-            .Map<PercolatedQuery>(mm => mm.AutoMap()
-                .Properties(Seeder.PercolatedQueryProperties)
-            )
-        )
-    );
-
-    this.Client.Index(new PercolatedQuery
-    {
-        Id = PercolatorId,
-        Query = new QueryContainer(new MatchQuery
-        {
-            Field = Infer.Field<Project>(f => f.LeadDeveloper.FirstName),
-            Query = "Martijn"
-        })
-    }, d => d.Index(index));
-
-    this.Client.Index(Project.Instance);
-    this.Client.Refresh(Nest.Indices.Index(index).And<Project>());
-}
-----
-
-=== Fluent DSL Example
-
-[source,csharp]
-----
-f =>
-f.Query(QueryFluent).Index(CallIsolatedValue).AllTypes()
-----
-
-=== Object Initializer Syntax Example
-
-[source,csharp]
-----
-new SearchRequest<PercolatedQuery>(CallIsolatedValue, Types.All)
-{
-    Query = this.QueryInitializer
-}
-----
-
-[source,javascript]
-.Example json output
-----
-{
-  "percolate": {
-    "type": "project",
-    "index": "project",
-    "id": "Durgan LLC",
-    "document_type": "project",
-    "field": "query"
-  }
-}
-----
 
 === Fluent DSL Example
 
@@ -243,6 +183,20 @@ new PercolateQuery
     Id = Project.Instance.Name,
     DocumentType = typeof(Project),
     Field = Infer.Field<PercolatedQuery>(f => f.Query)
+}
+----
+
+[source,javascript]
+.Example json output
+----
+{
+  "percolate": {
+    "type": "project",
+    "index": "project",
+    "id": "Durgan LLC",
+    "document_type": "project",
+    "field": "query"
+  }
 }
 ----
 

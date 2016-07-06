@@ -63,7 +63,6 @@
   <ItemGroup>
     <None Include="Releasing.fsx" />
     <None Include="Versioning.fsx" />
-    <None Include="Projects.fsx" />
     <None Include="Paths.fsx" />
     <None Include="Profiling.fsx" />
     <None Include="InheritDoc.fsx" />
@@ -72,6 +71,7 @@
     <None Include="Testing.fsx" />
     <None Include="Documentation.fsx" />
     <None Include="Targets.fsx" />
+    <None Include="Projects.fsx" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

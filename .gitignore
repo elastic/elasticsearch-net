@@ -34,7 +34,7 @@ _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
 
-.fake/*	
+.fake/*
 .fake
 packages/*
 paket.exe
@@ -69,7 +69,9 @@ YamlCache
 
 launchSettings.json
 # https://github.com/elastic/elasticsearch-net/pull/1822#issuecomment-183722698
+*.project.lock.json
 project.lock.json
 
 .idea/
 *.sln.iml
+/src/.vs/restore.dg
