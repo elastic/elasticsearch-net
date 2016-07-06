@@ -1,6 +1,4 @@
-﻿//TODO needs IFDEF?
-
-#if NET45
+﻿
 namespace System.Runtime.CompilerServices
 {
 	internal class FormattableStringFactory
@@ -37,4 +35,3 @@ namespace System
 		public string ToString(IFormatProvider formatProvider) => string.Format(formatProvider, _messageFormat, _args);
 	}
 }
-#endif

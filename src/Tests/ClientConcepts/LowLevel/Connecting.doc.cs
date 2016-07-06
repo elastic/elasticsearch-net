@@ -138,7 +138,7 @@ namespace Tests.ClientConcepts.LowLevel
 			*/
 		}
 
-        /** === OnRequestCompleted
+		/** === OnRequestCompleted
          * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
          * If you have complex logging needs this is a good place to add that in.
         */

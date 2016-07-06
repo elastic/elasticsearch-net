@@ -1,8 +1,12 @@
 ﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
+
 #load @"Paths.fsx"
+
 open System
+
 open Fake 
+
 open Paths
 
 module Documentation = 

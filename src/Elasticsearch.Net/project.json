@@ -1,37 +1,39 @@
 {
+  "version": "2.3.3",
   "authors": [
     "Elastic and contributors"
   ],
-  "owners": [
-    "Elastic"
-  ],
-  "projectUrl": "https://github.com/elastic/elasticsearch-net",
-  "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
-  "requireLicenseAcceptance": false,
-  "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
-  "summary": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
-  "description": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
-  "title": "Elasticsearch.NET - Official low level Elasticsearch client",
-  "tags": [
-    "elasticsearch",
-    "elastic",
-    "search",
-    "lucene",
-    "nest"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/elastic/elasticsearch-net"
+  "packOptions": {
+    "owners": [
+      "Elastic"
+    ],
+    "projectUrl": "https://github.com/elastic/elasticsearch-net",
+    "licenseUrl": "https://github.com/elastic/elasticsearch-net/blob/master/license.txt",
+    "requireLicenseAcceptance": false,
+    "iconUrl": "https://raw.githubusercontent.com/elastic/elasticsearch-net/master/build/nuget-icon.png",
+    "summary": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
+    "description": "Exposes all the elasticsearch API endpoints but leaves you in control of building the request and response bodies. Comes with built in cluster failover/connection pooling support.",
+    "title": "Elasticsearch.NET - Official low level Elasticsearch client",
+    "tags": [
+      "elasticsearch",
+      "elastic",
+      "search",
+      "lucene",
+      "nest"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/elastic/elasticsearch-net"
+    },
+    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.3.3"
   },
   "copyright": "2014-2016 Elasticsearch BV",
-  "version": "2.3.3",
-  "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.3.3",
-  "compilationOptions": {
+  "buildOptions": {
     "warningsAsErrors": false
   },
   "configurations": {
     "Debug": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "DEBUG",
           "TRACE"
@@ -39,7 +41,7 @@
       }
     },
     "Release": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "RELEASE",
           "TRACE"
@@ -49,13 +51,11 @@
       }
     }
   },
-  "dependencies": {
-  },
-  "commands": {
-  },
+  "dependencies": {},
+  "commands": {},
   "frameworks": {
     "net46": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "NET46"
         ]
@@ -70,10 +70,14 @@
         "System.Runtime.Serialization": {
           "type": "build"
         }
+      },
+      "dependencies": {
+        "System.Collections.Specialized": "4.0.1",
+        "System.Reflection.TypeExtensions": "4.1.0"
       }
     },
     "net45": {
-      "compilationOptions": {
+      "buildOptions": {
         "define": [
           "NET45"
         ]
@@ -90,35 +94,20 @@
         }
       }
     },
-    "dotnet5.1": {
-      "compilationOptions": {
+    "netstandard1.3": {
+      "buildOptions": {
         "define": [
           "DOTNETCORE"
         ]
       },
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23225",
-        "System.Collections": "4.0.11-beta-23225",
-        "System.Collections.Concurrent": "4.0.10-beta-23109",
-        "System.Collections.Specialized": "4.0.0-beta-23109",
-        "System.ComponentModel.TypeConverter": "4.0.0-beta-23109",
-        "System.Diagnostics.Tools": "4.0.1-beta-23225",
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
-        "System.IO.Compression": "4.0.0-beta-23109",
-        "System.Linq": "4.0.0-beta-23109",
-        "System.Linq.Expressions": "4.0.10-beta-23109",
-        "System.Net.Http": "4.0.1-beta-23225",
-        "System.Net.Requests": "4.0.11-beta-23516",
-        "System.Reflection": "4.1.0-beta-23225",
-        "System.Reflection.Extensions": "4.0.0-beta-23109",
-        "System.Reflection.Metadata": "1.1.0-alpha-00009",
-        "System.Reflection.Primitives": "4.0.0-beta-23109",
-        "System.Reflection.TypeExtensions": "4.0.0-beta-23109",
-        "System.Runtime": "4.0.21-beta-23225",
-        "System.Runtime.Serialization.Primitives": "4.0.10-beta-23109",
-        "System.Security.Cryptography.Encoding": "4.0.0-beta-23225",
-        "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23225",
-        "System.Text.RegularExpressions": "4.0.10-beta-23109"
+        "NETStandard.Library": "1.6.0",
+        "System.Collections.Specialized": "4.0.1",
+        "System.Runtime.Serialization.Primitives": "4.1.1",
+        "Microsoft.CSharp": "4.0.1",
+        "System.Dynamic.Runtime": "4.0.11",
+        "System.Reflection.TypeExtensions": "4.1.0",
+        "System.ComponentModel.TypeConverter": "4.1.0"
       }
     }
   }
