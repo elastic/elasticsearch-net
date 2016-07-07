@@ -70,10 +70,6 @@
         "System.Runtime.Serialization": {
           "type": "build"
         }
-      },
-      "dependencies": {
-        "System.Collections.Specialized": "4.0.1",
-        "System.Reflection.TypeExtensions": "4.1.0"
       }
     },
     "net45": {
