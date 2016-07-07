@@ -132,7 +132,7 @@ module Tooling =
         let targetLocation = "build/tools/nuget/nuget.exe" 
         if (not (File.Exists targetLocation))
         then
-            trace "Nuget not found %s. Downloading now"
+            trace (sprintf "Nuget not found at %s. Downloading now" targetLocation)
             let url = "http://dist.nuget.org/win-x86-commandline/latest/nuget.exe" 
             Directory.CreateDirectory("build/tools/nuget") |> ignore
             use webClient = new WebClient()
