@@ -6,6 +6,7 @@ namespace Elasticsearch.Net
 	{
 		public string Username { get; set; }
 		[Obsolete("Scheduled to be removed use Username instead, note the lowercase n")]
+		[CLSCompliant(false)]
 		public string UserName { get { return Username; } set { Username = value; } }
 		public string Password { get; set; }
 
