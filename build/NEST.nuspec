@@ -20,9 +20,6 @@
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
 			<group targetFramework=".NETFramework4.6">
-				<dependency id="System.Collections.Specialized" version="[4.0.1, )" />
-				<dependency id="System.Reflection.TypeExtensions" version="[4.1.0, )" />
-				<dependency id="System.Linq.Queryable" version="[4.0.0, )" />
 				<dependency id="Elasticsearch.Net" version="$version$" />
 				<dependency id="Newtonsoft.Json" version="[9,10)" />
 			</group>
