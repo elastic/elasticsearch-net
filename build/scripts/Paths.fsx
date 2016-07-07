@@ -132,7 +132,7 @@ module Tooling =
         let targetLocation = "build/tools/nuget/nuget.exe" 
         if (not (File.Exists targetLocation))
         then
-            trace "Nuget not found %s. Downloading now"
+            trace (sprintf "Nuget not found at %s. Downloading now" targetLocation)
             let url = "http://dist.nuget.org/win-x86-commandline/latest/nuget.exe" 
             Directory.CreateDirectory("build/tools/nuget") |> ignore
             use webClient = new WebClient()
@@ -209,7 +209,7 @@ module Tooling =
 
     let DotNet = new DotNetTooling("dotnet.exe")
 
-    type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; }
+    type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
 
     type DotNetFramework = 
         | Net45 
@@ -217,8 +217,8 @@ module Tooling =
         static member All = [Net45; Net46] 
         member this.Identifier = 
             match this with
-            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; }
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; }
+            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; DefineConstants = "TRACE;NET45"; }
+            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = "TRACE;NET46"; }
 
     type MsBuildTooling() =
        let msbuildProperties = [
@@ -227,6 +227,11 @@ module Tooling =
        ]
         
        member this.Exec output target framework projects =
-            MSBuild output target (msbuildProperties |> List.append [("TargetFrameworkVersion", framework.MSBuild)]) projects |> ignore
+            let properties = msbuildProperties 
+                             |> List.append [
+                                ("TargetFrameworkVersion", framework.MSBuild); 
+                                ("DefineConstants", framework.DefineConstants)
+                             ]
+            MSBuild output target properties projects |> ignore
 
     let MsBuild = new MsBuildTooling()
