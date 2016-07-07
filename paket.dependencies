@@ -12,7 +12,7 @@ nuget System.Collections.Immutable
 //tests
 nuget xunit 
 nuget FluentAssertions 
-nuget Bogus prerelease
+nuget Bogus
 nuget DiffPlex 
 
 // profiling / benchmarking
