@@ -78,11 +78,6 @@
         "System.ServiceModel": {
           "type": "build"
         }
-      },
-      "dependencies": {
-        "System.Collections.Specialized": "4.0.1",
-        "System.Reflection.TypeExtensions": "4.1.0",
-        "System.Linq.Queryable": "4.0.0"
       }
     },
     "net45": {
