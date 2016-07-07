@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,10 @@ namespace Nest
 		ICatResponse<CatHelpRecord> CatHelp(ICatHelpRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null);
+		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request);
+		Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -56,15 +57,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null) =>
-			this.CatHelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()));
+		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(Func<CatHelpDescriptor, ICatHelpRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatHelpAsync(selector.InvokeOrDefault(new CatHelpDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request) =>
+		public Task<ICatResponse<CatHelpRecord>> CatHelpAsync(ICatHelpRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<ICatHelpRequest, CatHelpRequestParameters, CatResponse<CatHelpRecord>, ICatResponse<CatHelpRecord>>(
 				request,
+				cancellationToken,
 				new Func<IApiCallDetails, Stream, CatResponse<CatHelpRecord>>(this.DeserializeCatHelpResponse),
-				(p, d) => this.LowLevelDispatch.CatHelpDispatchAsync<CatResponse<CatHelpRecord>>(p)
+				(p, d, c) => this.LowLevelDispatch.CatHelpDispatchAsync<CatResponse<CatHelpRecord>>(p, c)
 			);
 
 	}

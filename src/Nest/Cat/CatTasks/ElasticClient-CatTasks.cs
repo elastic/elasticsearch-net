@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -14,10 +15,13 @@ namespace Nest
 		ICatResponse<CatTasksRecord> CatTasks(ICatTasksRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(Func<CatTasksDescriptor, ICatTasksRequest> selector = null);
+		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(
+			Func<CatTasksDescriptor, ICatTasksRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request);
+		Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,13 +37,17 @@ namespace Nest
 				this.LowLevelDispatch.CatTasksDispatch<CatResponse<CatTasksRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(Func<CatTasksDescriptor, ICatTasksRequest> selector = null) =>
-			this.CatTasksAsync(selector.InvokeOrDefault(new CatTasksDescriptor()));
+		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(
+			Func<CatTasksDescriptor, ICatTasksRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatTasksAsync(selector.InvokeOrDefault(new CatTasksDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request) =>
+		public Task<ICatResponse<CatTasksRecord>> CatTasksAsync(ICatTasksRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.DoCatAsync<ICatTasksRequest, CatTasksRequestParameters, CatTasksRecord>(
 				request,
-				this.LowLevelDispatch.CatTasksDispatchAsync<CatResponse<CatTasksRecord>>);
+				cancellationToken,
+				this.LowLevelDispatch.CatTasksDispatchAsync<CatResponse<CatTasksRecord>>
+			);
 	}
 }

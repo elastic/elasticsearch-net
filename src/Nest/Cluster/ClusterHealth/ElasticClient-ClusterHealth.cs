@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,10 @@ namespace Nest
 		IClusterHealthResponse ClusterHealth(IClusterHealthRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null);
+		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request);
+		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,21 +31,22 @@ namespace Nest
 			this.ClusterHealth(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest request) => 
+		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest request) =>
 			this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<ClusterHealthResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null) =>
-			this.ClusterHealthAsync(selector.InvokeOrDefault(new ClusterHealthDescriptor()));
+		public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.ClusterHealthAsync(selector.InvokeOrDefault(new ClusterHealthDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request) => 
+		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse, IClusterHealthResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<ClusterHealthResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.ClusterHealthDispatchAsync<ClusterHealthResponse>(p, c)
 			);
 	}
 }

@@ -5,6 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using ExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
 	public partial interface IElasticClient
@@ -22,11 +23,11 @@ namespace Nest
 		IExistsResponse DocumentExists(IDocumentExistsRequest request);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null)
+		Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request);
+		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -36,7 +37,7 @@ namespace Nest
 			this.DocumentExists(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public IExistsResponse DocumentExists(IDocumentExistsRequest request) => 
+		public IExistsResponse DocumentExists(IDocumentExistsRequest request) =>
 			this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
 				request,
 				new ExistConverter(this.DeserializeExistsResponse),
@@ -44,15 +45,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null) where T : class =>
-			this.DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public Task<IExistsResponse> DocumentExistsAsync<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.DocumentExistsAsync(selector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request) => 
+		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				request,
+				cancellationToken,
 				new ExistConverter(this.DeserializeExistsResponse),
-				(p, d) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p)
+				(p, d, c) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p, c)
 			);
 	}
 }

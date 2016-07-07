@@ -6,13 +6,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	using System.Threading;
 	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
-	
+
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). 
-		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document 
+		/// Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing).
+		/// The response includes a docs array with all the fetched documents, each element similar in structure to a document
 		/// provided by the get API.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
@@ -23,10 +24,10 @@ namespace Nest
 		IMultiGetResponse MultiGet(IMultiGetRequest request);
 
 		/// <inheritdoc/>
-		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null);
+		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request);
+		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -36,7 +37,7 @@ namespace Nest
 			this.MultiGet(selector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(IMultiGetRequest request) => 
+		public IMultiGetResponse MultiGet(IMultiGetRequest request) =>
 			this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				request,
 				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
@@ -44,13 +45,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null) =>
-			this.MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()));
+		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.MultiGetAsync(selector.InvokeOrDefault(new MultiGetDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request) => 
+		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				request,
+				cancellationToken,
 				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
 				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);

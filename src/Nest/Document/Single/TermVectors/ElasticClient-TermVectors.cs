@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -20,11 +21,13 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector)
-			where T : class;
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(
+			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request)
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 	}
@@ -34,7 +37,7 @@ namespace Nest
 		///<inheritdoc/>
 		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
 			this.TermVectors(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
-		
+
 		///<inheritdoc/>
 		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> request) where T : class
 		{
@@ -45,13 +48,16 @@ namespace Nest
 		}
 
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector) where T : class =>
-			this.TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
-		
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(
+			Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class => this.TermVectorsAsync(selector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))), cancellationToken);
+
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request) where T : class => 
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
 			this.Dispatcher.DispatchAsync<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse>
 			);
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -19,11 +20,11 @@ namespace Nest
 		IUpdateByQueryResponse UpdateByQuery(IUpdateByQueryRequest request);
 
 		/// <inheritdoc/>
-		Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector)
+		Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request);
+		Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -41,13 +42,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector) where T : class =>
-			this.UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))));
+		public Task<IUpdateByQueryResponse> UpdateByQueryAsync<T>(Func<UpdateByQueryDescriptor<T>, IUpdateByQueryRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.UpdateByQueryAsync(selector?.Invoke(new UpdateByQueryDescriptor<T>(typeof(T))), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request) =>
+		public Task<IUpdateByQueryResponse> UpdateByQueryAsync(IUpdateByQueryRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IUpdateByQueryRequest, UpdateByQueryRequestParameters, UpdateByQueryResponse, IUpdateByQueryResponse>(
 				this.ForceConfiguration<IUpdateByQueryRequest, UpdateByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				cancellationToken,
 				this.LowLevelDispatch.UpdateByQueryDispatchAsync<UpdateByQueryResponse>
 			);
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IDeleteLicenseResponse DeleteLicense(IDeleteLicenseRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null);
+		Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request);
+		Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null) =>
-			this.DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()));
+		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(Func<DeleteLicenseDescriptor, IDeleteLicenseRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DeleteLicenseAsync(selector.InvokeOrDefault(new DeleteLicenseDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request) =>
+		public Task<IDeleteLicenseResponse> DeleteLicenseAsync(IDeleteLicenseRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteLicenseRequest, DeleteLicenseRequestParameters, DeleteLicenseResponse, IDeleteLicenseResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.LicenseDeleteDispatchAsync<DeleteLicenseResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.LicenseDeleteDispatchAsync<DeleteLicenseResponse>(p, c)
 			);
 	}
 }

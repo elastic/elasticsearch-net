@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
-	//TODO I Deleted DeleteExtensions, when we introduced Document as a parameter folks can do 
+	//TODO I Deleted DeleteExtensions, when we introduced Document as a parameter folks can do
 
 	//.Delete<T>(id)
 	//.Delete(Document.Id<T>(2))
@@ -18,7 +19,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		///The delete API allows to delete a typed JSON document from a specific index based on its id. 
+		///The delete API allows to delete a typed JSON document from a specific index based on its id.
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html</a>
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
@@ -29,10 +30,13 @@ namespace Nest
 		IDeleteResponse Delete(IDeleteRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class;
+		Task<IDeleteResponse> DeleteAsync<T>(
+			DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
 		/// <inheritdoc/>
-		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request);
+		Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -42,21 +46,24 @@ namespace Nest
 			this.Delete(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
-		public IDeleteResponse Delete(IDeleteRequest request) => 
+		public IDeleteResponse Delete(IDeleteRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteResponse> DeleteAsync<T>(DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null) where T : class => 
-			this.DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public Task<IDeleteResponse> DeleteAsync<T>(
+			DocumentPath<T> document, Func<DeleteDescriptor<T>, IDeleteRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class => this.DeleteAsync(selector.InvokeOrDefault(new DeleteDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request) => 
+		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p, c)
 			);
 	}
 }

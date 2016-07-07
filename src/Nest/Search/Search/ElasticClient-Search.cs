@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -31,18 +32,18 @@ namespace Nest
 		/// <inheritdoc/>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="selector">A descriptor that describes the parameters for the search operation</param>
-		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null) where T : class;
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class;
+		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class;
 	}
@@ -61,7 +62,7 @@ namespace Nest
 			this.Search<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class => 
+		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class =>
 			this.Search<T, T>(request);
 
 		/// <inheritdoc/>
@@ -76,28 +77,29 @@ namespace Nest
 				);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
-			where T : class => 
-			this.SearchAsync<T, T>(selector);
+		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.SearchAsync<T, T>(selector, cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null)
+		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class =>
-			this.SearchAsync<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()));
+			this.SearchAsync<TResult>(selector.InvokeOrDefault(new SearchDescriptor<T>()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class => 
-			this.SearchAsync<T, T>(request);
+		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.SearchAsync<T, T>(request, cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
+		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class =>
 			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
-				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
+					this.CovariantConverterWhenNeeded<T, TResult, ISearchRequest, SearchRequestParameters>(p.RouteValues, request), d, c
 					)
 				);
 

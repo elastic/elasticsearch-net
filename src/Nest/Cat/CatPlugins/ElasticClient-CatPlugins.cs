@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null);
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request);
+		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,11 +32,12 @@ namespace Nest
 			this.DoCat<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, this.LowLevelDispatch.CatPluginsDispatch<CatResponse<CatPluginsRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null) =>
-			this.CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()));
+		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(
+			Func<CatPluginsDescriptor, ICatPluginsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatPluginsAsync(selector.InvokeOrDefault(new CatPluginsDescriptor()), cancellationToken);
 
-		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request) =>
-			this.DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, this.LowLevelDispatch.CatPluginsDispatchAsync<CatResponse<CatPluginsRecord>>);
+		public Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatPluginsRequest, CatPluginsRequestParameters, CatPluginsRecord>(request, cancellationToken, this.LowLevelDispatch.CatPluginsDispatchAsync<CatResponse<CatPluginsRecord>>);
 
 	}
 }

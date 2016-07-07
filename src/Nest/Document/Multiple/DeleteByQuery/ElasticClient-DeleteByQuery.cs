@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -21,11 +22,11 @@ namespace Nest
 		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector)
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request);
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -43,13 +44,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector) where T : class =>
-			this.DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))));
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.DeleteByQueryAsync(selector?.Invoke(new DeleteByQueryDescriptor<T>(typeof(T))), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request) =>
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
 				this.ForceConfiguration<IDeleteByQueryRequest, DeleteByQueryRequestParameters>(request, c => c.AllowedStatusCodes = new[] { -1 }),
+				cancellationToken,
 				this.LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>
 			);
 	}

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static System.Net.DecompressionMethods;
 
@@ -78,7 +79,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
+				var response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)
@@ -92,14 +93,14 @@ namespace Elasticsearch.Net
 			return builder.ToResponse();
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class
 		{
 			var client = this.GetClient(requestData);
-			var builder = new ResponseBuilder<TReturn>(requestData);
+			var builder = new ResponseBuilder<TReturn>(requestData, cancellationToken);
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = await client.SendAsync(requestMessage, requestData.CancellationToken).ConfigureAwait(false);
+				var response = await client.SendAsync(requestMessage, cancellationToken).ConfigureAwait(false);
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)

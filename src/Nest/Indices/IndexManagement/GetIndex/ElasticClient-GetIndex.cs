@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using GetIndexResponseConverter = Func<IApiCallDetails, Stream, GetIndexResponse>;
 
 	public partial interface IElasticClient
@@ -17,10 +18,10 @@ namespace Nest
 		IGetIndexResponse GetIndex(IGetIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null);
+		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request);
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 
@@ -31,7 +32,7 @@ namespace Nest
 			this.GetIndex(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IGetIndexResponse GetIndex(IGetIndexRequest request) => 
+		public IGetIndexResponse GetIndex(IGetIndexRequest request) =>
 			this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				request,
 				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
@@ -39,15 +40,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null) =>
-			this.GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)));
+		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.GetIndexAsync(selector.InvokeOrDefault(new GetIndexDescriptor(indices)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request) => 
+		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				request,
+				cancellationToken,
 				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p)
+				(p, d, c) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p, c)
 			);
 
 		//TODO DictionaryResponse

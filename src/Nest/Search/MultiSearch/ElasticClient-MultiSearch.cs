@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	using System.Threading;
 	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
 
 	public partial interface IElasticClient
@@ -21,10 +22,10 @@ namespace Nest
 		IMultiSearchResponse MultiSearch(IMultiSearchRequest request);
 
 		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector);
+		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request);
+		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -51,23 +52,24 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector) =>
-			this.MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()));
+		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.MultiSearchAsync(selector?.Invoke(new MultiSearchDescriptor()), cancellationToken);
 
 
 		/// <inheritdoc />
-		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request)
+		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest request, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			return this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				request,
-				(p, d) =>
+				cancellationToken,
+				(p, d, c) =>
 				{
 					var converter = CreateMultiSearchDeserializer(p);
 					var serializer = new JsonNetSerializer(this.ConnectionSettings, converter);
 					var json = serializer.SerializeToBytes(p).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					request.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json, c);
 				}
 			);
 		}

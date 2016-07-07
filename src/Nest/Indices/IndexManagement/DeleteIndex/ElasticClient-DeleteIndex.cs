@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -17,10 +18,14 @@ namespace Nest
 		IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null);
+		Task<IDeleteIndexResponse> DeleteIndexAsync(
+			Indices indices,
+			Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request);
+		Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,21 +36,25 @@ namespace Nest
 			this.DeleteIndex(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) => 
+		public IDeleteIndexResponse DeleteIndex(IDeleteIndexRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatch<DeleteIndexResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteIndexResponse> DeleteIndexAsync(Indices indices, Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null) =>
-			this.DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)));
+		public Task<IDeleteIndexResponse> DeleteIndexAsync(
+			Indices indices,
+			Func<DeleteIndexDescriptor, IDeleteIndexRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.DeleteIndexAsync(selector.InvokeOrDefault(new DeleteIndexDescriptor(indices)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request) => 
+		public Task<IDeleteIndexResponse> DeleteIndexAsync(IDeleteIndexRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, DeleteIndexResponse, IDeleteIndexResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<DeleteIndexResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<DeleteIndexResponse>(p, c)
 			);
 	}
 }

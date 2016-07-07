@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -11,12 +12,12 @@ namespace Nest
 
 		/// <inheritdoc/>
 		ICatResponse<CatCountRecord> CatCount(ICatCountRequest request);
-		
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null);
-		
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request);
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -28,14 +29,14 @@ namespace Nest
 		/// <inheritdoc/>
 		public ICatResponse<CatCountRecord> CatCount(ICatCountRequest request)=>
 			this.DoCat<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, this.LowLevelDispatch.CatCountDispatch<CatResponse<CatCountRecord>>);
-		
+
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null) =>
-			this.CatCountAsync(selector.InvokeOrDefault(new CatCountDescriptor()));
-		
+		public Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, ICatCountRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatCountAsync(selector.InvokeOrDefault(new CatCountDescriptor()), cancellationToken);
+
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request) =>
-			this.DoCatAsync<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, this.LowLevelDispatch.CatCountDispatchAsync<CatResponse<CatCountRecord>>);
-		
+		public Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatCountRequest, CatCountRequestParameters, CatCountRecord>(request, cancellationToken, this.LowLevelDispatch.CatCountDispatchAsync<CatResponse<CatCountRecord>>);
+
 	}
 }

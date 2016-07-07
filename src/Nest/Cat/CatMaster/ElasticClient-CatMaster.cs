@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,13 @@ namespace Nest
 		ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector = null);
-		
+		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(
+			Func<CatMasterDescriptor, ICatMasterRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
+
 		/// <inheritdoc/>
-		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request);
+		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
@@ -30,12 +34,12 @@ namespace Nest
 			this.DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, this.LowLevelDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector = null) =>
-			this.CatMasterAsync(selector.InvokeOrDefault(new CatMasterDescriptor()));
+		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, ICatMasterRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.CatMasterAsync(selector.InvokeOrDefault(new CatMasterDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request) =>
-			this.DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, this.LowLevelDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
+		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request, cancellationToken, this.LowLevelDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
 	}
 }
-		
+

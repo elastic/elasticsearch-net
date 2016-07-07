@@ -8,6 +8,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
 	public partial interface IElasticClient
@@ -23,10 +24,10 @@ namespace Nest
 		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest request);
 
 		/// <inheritdoc/>
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request);
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -44,15 +45,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
-			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request) =>
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				request,
+				cancellationToken,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p)
+				(p, d, c) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p, c)
 			);
 
 

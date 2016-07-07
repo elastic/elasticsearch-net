@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IDeletePipelineResponse DeletePipeline(IDeletePipelineRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeletePipelineResponse> DeletePipelineAsync( Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null);
+		Task<IDeletePipelineResponse> DeletePipelineAsync( Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request);
+		Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			this.DeletePipeline(selector.InvokeOrDefault(new DeletePipelineDescriptor( id)));
 
 		/// <inheritdoc/>
-		public Task<IDeletePipelineResponse> DeletePipelineAsync( Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null) =>
-			this.DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor( id)));
+		public Task<IDeletePipelineResponse> DeletePipelineAsync( Id id, Func<DeletePipelineDescriptor, IDeletePipelineRequest> selector = null,CancellationToken cancellationToken = default(CancellationToken) ) =>
+			this.DeletePipelineAsync(selector.InvokeOrDefault(new DeletePipelineDescriptor( id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request) =>
+		public Task<IDeletePipelineResponse> DeletePipelineAsync(IDeletePipelineRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeletePipelineRequest, DeletePipelineRequestParameters, DeletePipelineResponse, IDeletePipelineResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IngestDeletePipelineDispatchAsync<DeletePipelineResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IngestDeletePipelineDispatchAsync<DeletePipelineResponse>(p, c)
 			);
 	}
 }

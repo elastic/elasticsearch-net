@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using System.IO;
+using System.Threading;
 
 namespace Nest
 {
@@ -19,10 +20,14 @@ namespace Nest
 		IGetResponse<T> Get<T>(IGetRequest request) where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(
+			DocumentPath<T> document,
+			Func<GetDescriptor<T>, IGetRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetResponse<T>> GetAsync<T>(IGetRequest request) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 	}
 
@@ -41,14 +46,18 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> selector = null) where T : class =>
-			this.GetAsync<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)));
+		public Task<IGetResponse<T>> GetAsync<T>(
+			DocumentPath<T> document,
+			Func<GetDescriptor<T>, IGetRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class => this.GetAsync<T>(selector.InvokeOrDefault(new GetDescriptor<T>(document)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request) where T : class =>
+		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
 			this.Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				request,
-				(p, d) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p, c)
 			);
 	}
 }

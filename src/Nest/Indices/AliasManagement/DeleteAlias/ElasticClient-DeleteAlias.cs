@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -14,30 +15,36 @@ namespace Nest
 		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request);
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
 		IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null);
+		Task<IDeleteAliasResponse> DeleteAliasAsync(
+			Indices indices,
+			Names names,
+			Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 	}
 
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request) => 
+		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest request) =>
 			this.Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request) => 
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p, c)
 			);
 
 		/// <inheritdoc/>
@@ -45,7 +52,11 @@ namespace Nest
 			this.DeleteAlias(selector.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null) =>
-			this.DeleteAliasAsync(selector.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)));
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(
+			Indices indices,
+			Names names,
+			Func<DeleteAliasDescriptor, IDeleteAliasRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.DeleteAliasAsync(selector.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)), cancellationToken);
 	}
 }

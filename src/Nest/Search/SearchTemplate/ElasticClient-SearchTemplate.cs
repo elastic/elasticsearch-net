@@ -3,13 +3,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The /_search/template endpoint allows to use the mustache language to pre render search 
+		/// The /_search/template endpoint allows to use the mustache language to pre render search
 		/// requests, before they are executed and fill existing templates with template parameters.
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
@@ -33,20 +34,20 @@ namespace Nest
 			where TResult : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)
+		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
+		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class;
 	}
@@ -73,22 +74,23 @@ namespace Nest
 				this.LowLevelDispatch.SearchTemplateDispatch<SearchResponse<TResult>>
 			);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector) where T : class =>
-			this.SearchTemplateAsync<T, T>(selector);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.SearchTemplateAsync<T, T>(selector, cancellationToken);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector)
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, ISearchTemplateRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class =>
-			this.SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()));
+			this.SearchTemplateAsync<T, TResult>(selector?.Invoke(new SearchTemplateDescriptor<T>()), cancellationToken);
 
-		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request) where T : class =>
-			this.SearchTemplateAsync<T, T>(request);
+		public Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.SearchTemplateAsync<T, T>(request, cancellationToken);
 
-		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
+		public Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 			where TResult : class =>
 			this.Dispatcher.DispatchAsync<ISearchTemplateRequest, SearchTemplateRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
+				cancellationToken,
 				this.CreateSearchDeserializer<T, TResult>(request),
 				this.LowLevelDispatch.SearchTemplateDispatchAsync<SearchResponse<TResult>>
 			);

@@ -111,12 +111,12 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock).ConfigureAwait(false);
+				await pipeline.FirstPoolUsageAsync(this.Settings.BootstrapLock, cancellationToken).ConfigureAwait(false);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
@@ -127,13 +127,13 @@ namespace Elasticsearch.Net
 					requestData.Node = node;
 					try
 					{
-						await pipeline.SniffOnStaleClusterAsync().ConfigureAwait(false);
-						await PingAsync(pipeline, node).ConfigureAwait(false);
-						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData).ConfigureAwait(false);
+						await pipeline.SniffOnStaleClusterAsync(cancellationToken).ConfigureAwait(false);
+						await PingAsync(pipeline, node, cancellationToken).ConfigureAwait(false);
+						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
 						if (!response.SuccessOrKnownError)
 						{
 							pipeline.MarkDead(node);
-							await pipeline.SniffOnConnectionFailureAsync().ConfigureAwait(false);
+							await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 						}
 					}
 					catch (PipelineException pipelineException) when (!pipelineException.Recoverable)
@@ -188,15 +188,15 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		private static async Task PingAsync(IRequestPipeline pipeline, Node node)
+		private static async Task PingAsync(IRequestPipeline pipeline, Node node, CancellationToken cancellationToken)
 		{
 			try
 			{
-				await pipeline.PingAsync(node).ConfigureAwait(false);
+				await pipeline.PingAsync(node, cancellationToken).ConfigureAwait(false);
 			}
 			catch (PipelineException e) when (e.Recoverable)
 			{
-				await pipeline.SniffOnConnectionFailureAsync().ConfigureAwait(false);
+				await pipeline.SniffOnConnectionFailureAsync(cancellationToken).ConfigureAwait(false);
 				throw;
 			}
 		}

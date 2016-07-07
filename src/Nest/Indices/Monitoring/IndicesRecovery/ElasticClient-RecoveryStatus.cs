@@ -6,6 +6,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	using System.Threading;
 	using RecoveryStatusConverter = Func<IApiCallDetails, Stream, RecoveryStatusResponse>;
 
 	public partial interface IElasticClient
@@ -17,10 +18,10 @@ namespace Nest
 		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request);
 
 		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request);
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -30,7 +31,7 @@ namespace Nest
 			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) => 
+		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest request) =>
 			this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				request,
 				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
@@ -38,15 +39,16 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
-			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request) => 
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				request,
+				cancellationToken,
 				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p)
+				(p, d, c) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p, c)
 			);
 
 		private RecoveryStatusResponse DeserializeRecoveryStatusResponse(IApiCallDetails response, Stream stream)

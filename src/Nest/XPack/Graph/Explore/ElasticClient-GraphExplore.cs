@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -14,11 +15,11 @@ namespace Nest
 		IGraphExploreResponse GraphExplore(IGraphExploreRequest request);
 
 		/// <inheritdoc/>
-		Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector)
+		Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request);
+		Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -35,13 +36,14 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector) where T : class =>
-			this.GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>()));
+		public Task<IGraphExploreResponse> GraphExploreAsync<T>(Func<GraphExploreDescriptor<T>, IGraphExploreRequest> selector, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.GraphExploreAsync(selector?.Invoke(new GraphExploreDescriptor<T>()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request) =>
+		public Task<IGraphExploreResponse> GraphExploreAsync(IGraphExploreRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IGraphExploreRequest, GraphExploreRequestParameters, GraphExploreResponse, IGraphExploreResponse>(
 				request,
+				cancellationToken,
 				this.LowLevelDispatch.GraphExploreDispatchAsync<GraphExploreResponse>
 			);
 	}

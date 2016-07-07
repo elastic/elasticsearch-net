@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IDeleteUserResponse DeleteUser(IDeleteUserRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null);
+		Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request);
+		Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null) =>
-			this.DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username)));
+		public Task<IDeleteUserResponse> DeleteUserAsync(Name username, Func<DeleteUserDescriptor, IDeleteUserRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DeleteUserAsync(selector.InvokeOrDefault(new DeleteUserDescriptor(username)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request) =>
+		public Task<IDeleteUserResponse> DeleteUserAsync(IDeleteUserRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IDeleteUserRequest, DeleteUserRequestParameters, DeleteUserResponse, IDeleteUserResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.XpackSecurityDeleteUserDispatchAsync<DeleteUserResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.XpackSecurityDeleteUserDispatchAsync<DeleteUserResponse>(p, c)
 			);
 	}
 }

@@ -65,11 +65,6 @@ namespace Elasticsearch.Net
 		bool EnableHttpPipelining { get; set; }
 
 		/// <summary>
-		/// The cancellation token to use to internally to cancel async operations
-		/// </summary>
-		CancellationToken CancellationToken { get; set; }
-
-		/// <summary>
 		/// Submit the request on behalf in the context of a different shield user
 		/// <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
 		/// </summary>
@@ -113,7 +108,6 @@ namespace Elasticsearch.Net
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; } = true;
-		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
 		string IRequestConfiguration.RunAs { get; set; }
 
 		public RequestConfigurationDescriptor(IRequestConfiguration config)
@@ -129,7 +123,6 @@ namespace Elasticsearch.Net
 			Self.AllowedStatusCodes = config?.AllowedStatusCodes;
 			Self.BasicAuthenticationCredentials = config?.BasicAuthenticationCredentials;
 			Self.EnableHttpPipelining = config?.EnableHttpPipelining ?? true;
-			Self.CancellationToken = config?.CancellationToken ?? default(CancellationToken);
 			Self.RunAs = config?.RunAs;
 		}
 
@@ -199,11 +192,6 @@ namespace Elasticsearch.Net
 		public RequestConfigurationDescriptor MaxRetries(int retry)
 		{
 			Self.MaxRetries = retry;
-			return this;
-		}
-		public RequestConfigurationDescriptor CancellationToken(CancellationToken token)
-		{
-			Self.CancellationToken = token;
 			return this;
 		}
 

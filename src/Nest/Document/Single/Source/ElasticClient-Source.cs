@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Nest
@@ -6,8 +7,8 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document, 
-		/// without any additional content around it. 
+		/// Use the /{index}/{type}/{id}/_source endpoint to get just the _source field of the document,
+		/// without any additional content around it.
 		/// <para> </para><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source">http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html#_source</a>
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
@@ -19,10 +20,13 @@ namespace Nest
 		T Source<T>(ISourceRequest request) where T : class;
 
 		/// <inheritdoc/>
-		Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector = null) where T : class;
+		Task<T> SourceAsync<T>(
+			DocumentPath<T> document,
+			Func<SourceDescriptor<T>, ISourceRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 		/// <inheritdoc/>
-		Task<T> SourceAsync<T>(ISourceRequest request) where T : class;
+		Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 
 	}
 
@@ -35,20 +39,23 @@ namespace Nest
 		/// <inheritdoc/>
 		public T Source<T>(ISourceRequest request) where T : class
 		{
-			request.RouteValues.Resolve(ConnectionSettings); 
+			request.RouteValues.Resolve(ConnectionSettings);
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(request);
 			return response.Body;
 		}
 
 		/// <inheritdoc/>
-		public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> selector = null) where T : class =>
-			this.SourceAsync<T>(selector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+		public Task<T> SourceAsync<T>(
+			DocumentPath<T> document,
+			Func<SourceDescriptor<T>, ISourceRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) where T : class => this.SourceAsync<T>(selector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)), cancellationToken);
 
 		/// <inheritdoc/>
-		public async Task<T> SourceAsync<T>(ISourceRequest request) where T : class
+		public async Task<T> SourceAsync<T>(ISourceRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class
 		{
 			request.RouteValues.Resolve(ConnectionSettings);
-			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request).ConfigureAwait(false);
+			var response = await this.LowLevelDispatch.GetSourceDispatchAsync<T>(request, cancellationToken).ConfigureAwait(false);
 			return response.Body;
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -12,10 +13,10 @@ namespace Nest
 		IForceMergeResponse ForceMerge(IForceMergeRequest request);
 
 		/// <inheritdoc/>
-		Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null);
+		Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request);
+		Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null) =>
-			this.ForceMergeAsync(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)));
+		public Task<IForceMergeResponse> ForceMergeAsync(Indices indices, Func<ForceMergeDescriptor, IForceMergeRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.ForceMergeAsync(selector.InvokeOrDefault(new ForceMergeDescriptor().Index(indices)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request) =>
+		public Task<IForceMergeResponse> ForceMergeAsync(IForceMergeRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IForceMergeRequest, ForceMergeRequestParameters, ForceMergeResponse, IForceMergeResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.IndicesForcemergeDispatchAsync<ForceMergeResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.IndicesForcemergeDispatchAsync<ForceMergeResponse>(p, c)
 			);
 	}
 }

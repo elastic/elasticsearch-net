@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -34,7 +35,8 @@ namespace Nest
 
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<IRequest<TParams>, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
+			CancellationToken cancellationToken,
+			Func<IRequest<TParams>, CancellationToken, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
@@ -45,8 +47,9 @@ namespace Nest
 					c.Accept = "application/json";
 					c.ContentType = "application/json";
 				}),
+				cancellationToken,
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
-				(p, d) => dispatch(p)
+				(p, d, c) => dispatch(p, c)
 			);
 
 	}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -17,10 +18,12 @@ namespace Elasticsearch.Net
 		public Stream Stream { get; set; }
 
 		private RequestData _requestData;
+		private CancellationToken _cancellationToken;
 
-		public ResponseBuilder(RequestData requestData)
+		public ResponseBuilder(RequestData requestData, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			_requestData = requestData;
+			_cancellationToken = cancellationToken;
 		}
 
 		public ElasticsearchResponse<TReturn> ToResponse()
@@ -87,7 +90,7 @@ namespace Elasticsearch.Net
 			if (NeedsToEagerReadStream())
 			{
 				var inMemoryStream = this._requestData.MemoryStreamFactory.Create();
-				await stream.CopyToAsync(inMemoryStream, BufferSize, this._requestData.CancellationToken).ConfigureAwait(false);
+				await stream.CopyToAsync(inMemoryStream, BufferSize, this._cancellationToken).ConfigureAwait(false);
 				bytes = this.SwapStreams(ref stream, ref inMemoryStream);
 			}
 
@@ -96,12 +99,12 @@ namespace Elasticsearch.Net
 				if (!SetSpecialTypes(stream, response, bytes))
 				{
 					if (this._requestData.CustomConverter != null) response.Body = this._requestData.CustomConverter(response, stream) as TReturn;
-					else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._requestData.CancellationToken).ConfigureAwait(false);
+					else response.Body = await this._requestData.ConnectionSettings.Serializer.DeserializeAsync<TReturn>(stream, this._cancellationToken).ConfigureAwait(false);
 				}
 			}
 			else if (response.HttpStatusCode != null)
 			{
-				response.ServerError = await ServerError.TryCreateAsync(stream, this._requestData.CancellationToken).ConfigureAwait(false);
+				response.ServerError = await ServerError.TryCreateAsync(stream, this._cancellationToken).ConfigureAwait(false);
 				if (this._requestData.ConnectionSettings.DisableDirectStreaming)
 					response.ResponseBodyInBytes = bytes;
 			}

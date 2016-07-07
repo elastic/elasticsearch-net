@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -25,8 +26,8 @@ namespace Elasticsearch.Net
 			_exception = exception;
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class =>
-			await this.ReturnConnectionStatusAsync<TReturn>(requestData).ConfigureAwait(false);
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken) where TReturn : class =>
+			await this.ReturnConnectionStatusAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
 
 		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class =>
 			this.ReturnConnectionStatus<TReturn>(requestData);
@@ -58,7 +59,7 @@ namespace Elasticsearch.Net
 			return cs;
 		}
 
-		protected async Task<ElasticsearchResponse<TReturn>> ReturnConnectionStatusAsync<TReturn>(RequestData requestData, byte[] responseBody = null, int? statusCode = null)
+		protected async Task<ElasticsearchResponse<TReturn>> ReturnConnectionStatusAsync<TReturn>(RequestData requestData, CancellationToken cancellationToken, byte[] responseBody = null, int? statusCode = null)
 			where TReturn : class
 		{
 			var body = responseBody ?? _responseBody;
@@ -69,9 +70,9 @@ namespace Elasticsearch.Net
 				{
 					if (requestData.HttpCompression)
 						using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-							await data.WriteAsync(zipStream, requestData.ConnectionSettings).ConfigureAwait(false);
+							await data.WriteAsync(zipStream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 					else
-						await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
+						await data.WriteAsync(stream, requestData.ConnectionSettings, cancellationToken).ConfigureAwait(false);
 				}
 			}
 

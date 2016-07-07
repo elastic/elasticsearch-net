@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,10 @@ namespace Nest
 		IAuthenticateResponse Authenticate(IAuthenticateRequest request);
 
 		/// <inheritdoc/>
-		Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null);
+		Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request);
+		Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -33,14 +34,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null) =>
-			this.AuthenticateAsync(selector.InvokeOrDefault(new AuthenticateDescriptor()));
+		public Task<IAuthenticateResponse> AuthenticateAsync(Func<AuthenticateDescriptor, IAuthenticateRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.AuthenticateAsync(selector.InvokeOrDefault(new AuthenticateDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request) =>
+		public Task<IAuthenticateResponse> AuthenticateAsync(IAuthenticateRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IAuthenticateRequest, AuthenticateRequestParameters, AuthenticateResponse, IAuthenticateResponse>(
 				request,
-				(p,d ) => this.LowLevelDispatch.XpackSecurityAuthenticateDispatchAsync<AuthenticateResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.XpackSecurityAuthenticateDispatchAsync<AuthenticateResponse>(p, c)
 			);
 	}
 }

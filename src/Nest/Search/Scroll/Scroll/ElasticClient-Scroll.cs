@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. 
-		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
+		/// A search request can be scrolled by specifying the scroll parameter.
+		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m),
 		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
-		/// order to continue and support it.</para><para> 
+		/// order to continue and support it.</para><para>
 		/// This is very similar in its idea to opening a cursor against a database.</para>
 		/// <para> </para><para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html</para>
 		/// </summary>
@@ -20,22 +21,22 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class;
 
 		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) 
+		ISearchResponse<T> Scroll<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request)
+		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null)
+		Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class => 
+		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class =>
 			this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
 				request,
 				(p, d) => this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(
@@ -48,16 +49,17 @@ namespace Nest
 			this.Scroll<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class => 
+		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
 			this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				request,
-				(p, d) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(
-					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(
+					this.CovariantConverterWhenNeeded<T, T, IScrollRequest, ScrollRequestParameters>(p.RouteValues, request), d, c
 				)
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null) where T : class => 
-			this.ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
+		public Task<ISearchResponse<T>> ScrollAsync<T>(Time scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) where T : class =>
+			this.ScrollAsync<T>(selector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)), cancellationToken);
 	}
 }

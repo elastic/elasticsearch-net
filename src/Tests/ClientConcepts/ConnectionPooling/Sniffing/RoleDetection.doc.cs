@@ -10,6 +10,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.Versions;
 using Xunit;
 using static Tests.Framework.TimesHelper;
+using System.Threading;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -194,7 +195,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		private async Task<Node> SniffAndReturnNodeAsync()
 		{
 			var pipeline = CreatePipeline();
-			await pipeline.SniffAsync();
+			await pipeline.SniffAsync(default(CancellationToken));
 			return AssertSniffResponse();
 		}
 

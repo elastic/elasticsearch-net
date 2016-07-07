@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -20,10 +21,10 @@ namespace Nest
 		IClusterAllocationExplainResponse ClusterAllocationExplain(IClusterAllocationExplainRequest request);
 
 		/// <inheritdoc/>
-		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null);
+		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken));
 
 		/// <inheritdoc/>
-		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request);
+		Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken cancellationToken = default(CancellationToken));
 	}
 
 	public partial class ElasticClient
@@ -40,14 +41,15 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null) =>
-			this.ClusterAllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()));
+		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(Func<ClusterAllocationExplainDescriptor, IClusterAllocationExplainRequest> selector = null, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.ClusterAllocationExplainAsync(selector.InvokeOrDefault(new ClusterAllocationExplainDescriptor()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request) =>
+		public Task<IClusterAllocationExplainResponse> ClusterAllocationExplainAsync(IClusterAllocationExplainRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<IClusterAllocationExplainRequest, ClusterAllocationExplainRequestParameters, ClusterAllocationExplainResponse, IClusterAllocationExplainResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.ClusterAllocationExplainDispatchAsync<ClusterAllocationExplainResponse>(p, d)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.ClusterAllocationExplainDispatchAsync<ClusterAllocationExplainResponse>(p, d, c)
 			);
 	}
 }

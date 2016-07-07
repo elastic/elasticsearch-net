@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -59,8 +60,8 @@ namespace Elasticsearch.Net
 			where T : class =>
 			this.Transport.Request<T>(method, path, data, requestParameters);
 
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, CancellationToken cancellationToken, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where T : class =>
-			this.Transport.RequestAsync<T>(method, path, data, requestParameters);
+			this.Transport.RequestAsync<T>(method, path, cancellationToken, data, requestParameters);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,11 +14,11 @@ namespace Nest
 		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
 
 		/// <inheritdoc/>
-		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
+		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
+		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 	public partial class ElasticClient
@@ -27,22 +28,23 @@ namespace Nest
 			this.SearchShards(selector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) => 
+		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) =>
 			this.Dispatcher.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector)
-			where T : class => 
-			this.SearchShardsAsync(selector?.Invoke(new SearchShardsDescriptor<T>()));
+		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> selector, CancellationToken cancellationToken = default(CancellationToken))
+			where T : class =>
+			this.SearchShardsAsync(selector?.Invoke(new SearchShardsDescriptor<T>()), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request) => 
+		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
 			this.Dispatcher.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
+				cancellationToken,
+				(p, d, c) => this.LowLevelDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p, c)
 			);
 	}
 }

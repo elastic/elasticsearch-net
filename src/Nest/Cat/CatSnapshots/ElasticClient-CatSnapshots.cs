@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using System.Threading;
 
 namespace Nest
 {
@@ -13,10 +14,14 @@ namespace Nest
 		ICatResponse<CatSnapshotsRecord> CatSnapshots(ICatSnapshotsRequest request);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null);
+		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(
+			Names repositories,
+			Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		);
 
 		/// <inheritdoc/>
-		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request);
+		Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken cancellationToken = default(CancellationToken));
 
 	}
 
@@ -31,12 +36,15 @@ namespace Nest
 			this.DoCat<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, this.LowLevelDispatch.CatSnapshotsDispatch<CatResponse<CatSnapshotsRecord>>);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(Names repositories, Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null) =>
-			this.CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor(repositories)));
+		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(
+			Names repositories,
+			Func<CatSnapshotsDescriptor, ICatSnapshotsRequest> selector = null,
+			CancellationToken cancellationToken = default(CancellationToken)
+		) => this.CatSnapshotsAsync(selector.InvokeOrDefault(new CatSnapshotsDescriptor(repositories)), cancellationToken);
 
 		/// <inheritdoc/>
-		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request) =>
-			this.DoCatAsync<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, this.LowLevelDispatch.CatSnapshotsDispatchAsync<CatResponse<CatSnapshotsRecord>>);
+		public Task<ICatResponse<CatSnapshotsRecord>> CatSnapshotsAsync(ICatSnapshotsRequest request, CancellationToken cancellationToken = default(CancellationToken)) =>
+			this.DoCatAsync<ICatSnapshotsRequest, CatSnapshotsRequestParameters, CatSnapshotsRecord>(request, cancellationToken, this.LowLevelDispatch.CatSnapshotsDispatchAsync<CatResponse<CatSnapshotsRecord>>);
 
 	}
 }
