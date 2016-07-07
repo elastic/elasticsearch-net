@@ -4,7 +4,7 @@
     "warningsAsErrors": false
   },
   "dependencies": {
-    "Bogus": "7.1.3",
+    "Bogus": "7.1.4",
     "DiffPlex": "2.0.0-alpha1",
     "Elasticsearch.Net": { "target": "project" },
     "FluentAssertions": "4.6.3",
