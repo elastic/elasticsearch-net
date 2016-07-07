@@ -27,10 +27,9 @@
     },
     "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/5.0.0-alpha2"
   },
-
   "copyright": "2014-2016 Elasticsearch BV",
   "buildOptions": {
-  "version": "5.0.0-alpha2",
+    "version": "5.0.0-alpha2",
     "warningsAsErrors": false
   },
   "configurations": {
