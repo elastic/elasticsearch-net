@@ -22,6 +22,8 @@ request block and provide responses for all of the below items.
  2.
  3.
 
+**Provide `ConnectionSettings` (if relevant)**:
+
 **Provide `DebugInformation` (if relevant)**:
 
 <!--
