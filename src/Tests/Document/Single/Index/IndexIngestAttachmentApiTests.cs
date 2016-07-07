@@ -42,7 +42,7 @@ namespace Tests.Document.Single.Index
 					.Mappings(m => m
 						.Map<IngestedAttachment>(mm => mm
 							.Properties(p => p
-								.String(s => s
+								.Text(s => s
 									.Name(f => f.Content)
 								)
 								.Object<Nest.Attachment>(o => o

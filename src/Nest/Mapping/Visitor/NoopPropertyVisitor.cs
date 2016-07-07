@@ -63,9 +63,12 @@ namespace Nest
 		public virtual void Visit(IKeywordProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
+
+#pragma warning disable 618
 		public virtual void Visit(IStringProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute)
 		{
 		}
+#pragma warning restore 618
 
 		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttributeBase attribute) => null;
 

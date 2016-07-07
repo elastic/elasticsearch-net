@@ -82,11 +82,12 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			this.Counts[key].Should().Be(count);
 		}
 
+#pragma warning disable 618
 		public void Visit(StringProperty mapping)
 		{
 			Increment("string");
 		}
-
+#pragma warning restore 618
 		public void Visit(DateProperty mapping)
 		{
 			Increment("date");

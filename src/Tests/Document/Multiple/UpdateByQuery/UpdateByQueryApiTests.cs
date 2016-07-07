@@ -28,6 +28,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		{
 			foreach (var index in values.Values)
 			{
+#pragma warning disable 618
 				this.Client.CreateIndex(index, c => c
 					.Mappings(m => m
 						.Map<Test>(map => map
@@ -38,6 +39,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 						)
 					)
 				);
+#pragma warning restore 618
 				this.Client.Index(new Test { Text = "words words", Flag = "bar" }, i=>i.Index(index).Refresh());
 				this.Client.Index(new Test { Text = "words words", Flag = "foo" }, i=>i.Index(index).Refresh());
 				this.Client.Map<Test>(m => m

@@ -48,7 +48,9 @@ namespace Nest
 						this.Accept(k.Fields);
 						break;
 					case "string":
+#pragma warning disable 618
 						var s = field as StringProperty;
+#pragma warning restore 618
 						if (s == null) continue;
 						this._visitor.Visit(s);
 						this.Accept(s.Fields);

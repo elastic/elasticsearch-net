@@ -1,6 +1,7 @@
 ﻿using System;
 using Nest;
 
+#pragma warning disable 618
 namespace Tests.Mapping.Types.Core.String
 {
 	public class StringTest
@@ -133,3 +134,4 @@ namespace Tests.Mapping.Types.Core.String
 			);
 	}
 }
+#pragma warning restore 618
