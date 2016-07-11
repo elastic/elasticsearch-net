@@ -135,6 +135,7 @@ namespace Tests.Framework.Integration
 				$"es.path.repo={this.RepositoryPath}",
 				$"es.script.inline=on",
 				$"es.script.indexed=on",
+				$"es.http.compression=true",
 				$"es.node.{attr}testingcluster=true",
 				$"es.shield.enabled=" + (shieldEnabled ? "true" : "false")
 			};
