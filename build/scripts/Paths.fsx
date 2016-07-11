@@ -179,7 +179,7 @@ module Tooling =
     type NpmTooling(npmId, binJs) =
         let modulePath =  sprintf "%s/node_modules/%s" Paths.ToolsFolder npmId
         let binPath =  sprintf "%s/%s" modulePath binJs
-        let npm =  sprintf "%s/%s" Paths.ToolsFolder Npm.Path
+        let npm = Npm.Path
         do
             if doesNotExist modulePath then
                 traceFAKE "npm module %s not found installing in %s" npmId modulePath
