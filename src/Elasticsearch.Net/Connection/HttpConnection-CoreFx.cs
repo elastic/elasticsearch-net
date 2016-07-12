@@ -144,21 +144,18 @@ namespace Elasticsearch.Net
 			if (data != null)
 			{
 				var stream = requestData.MemoryStreamFactory.Create();
-
+				requestMessage.Content = new StreamContent(stream);
 				if (requestData.HttpCompression)
 				{
-					using (var zipStream = new GZipStream(stream, CompressionMode.Compress))
-						data.Write(zipStream, requestData.ConnectionSettings);
-
-					requestMessage.Headers.Add("Content-Encoding", "gzip");
+					requestMessage.Content.Headers.Add("Content-Encoding", "gzip");
 					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
 					requestMessage.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
+					using (var zipStream = new GZipStream(stream, CompressionMode.Compress, true))
+						data.Write(zipStream, requestData.ConnectionSettings);
 				}
 				else
 					data.Write(stream, requestData.ConnectionSettings);
-
 				stream.Position = 0;
-				requestMessage.Content = new StreamContent(stream);
 			}
 			else
 			{
@@ -166,7 +163,9 @@ namespace Elasticsearch.Net
 				// Content gets diposed so can't be shared instance
 				requestMessage.Content = new ByteArrayContent(new byte[0]);
 			}
+
 			requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(requestData.ContentType);
+
 			return requestMessage;
 		}
 
