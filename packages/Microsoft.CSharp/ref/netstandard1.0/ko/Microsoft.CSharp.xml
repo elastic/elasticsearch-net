@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>CSharp의 동적 호출 사이트 바인더를 만드는 팩터리 메서드가 들어 있습니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 이항 연산 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 이항 연산 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="operation">이항 연산 종류입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>새 CSharp 변환 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 변환 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="type">변환할 대상 형식입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 인덱스 가져오기 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 인덱스 가져오기 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 멤버 가져오기 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 멤버 가져오기 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="name">가져올 멤버의 이름입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 호출 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 호출 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 생성자 호출 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 생성자 호출 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 멤버 호출 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 멤버 호출 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="name">호출할 멤버의 이름입니다.</param>
+      <param name="typeArguments">이 호출에 대해 지정된 형식 인수의 목록입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>새 CSharp 이벤트 확인 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 이벤트 확인 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="name">찾을 이벤트의 이름입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 인덱스 설정 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 인덱스 설정 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 멤버 설정 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 멤버 설정 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="name">설정할 멤버의 이름입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>새 CSharp 단항 연산 바인더를 초기화합니다.</summary>
+      <returns>새 CSharp 단항 연산 바인더를 반환합니다.</returns>
+      <param name="flags">바인더를 초기화하는 데 사용할 플래그입니다.</param>
+      <param name="operation">단항 연산 종류입니다.</param>
+      <param name="context">이 작업이 사용된 위치를 나타내는 <see cref="T:System.Type" />입니다.</param>
+      <param name="argumentInfo">이 작업의 인수에 사용할 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 인스턴스의 시퀀스입니다.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>호출 사이트의 특정 인수와 관련된 C# 동적 작업에 대한 정보를 나타냅니다.이 클래스의 인스턴스는 C# 컴파일러에서 생성됩니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <returns>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 클래스의 새 인스턴스입니다.</returns>
+      <param name="flags">인수의 플래그입니다.</param>
+      <param name="name">명명된 경우 인수의 이름이고, 그렇지 않으면 null입니다.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>호출 사이트의 특정 인수와 관련된 C# 동적 작업에 대한 정보를 나타냅니다.이 클래스의 인스턴스는 C# 컴파일러에서 생성됩니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>인수가 상수입니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>인수가 out 매개 변수에 전달됩니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>인수가 ref 매개 변수에 전달됩니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>인수가 소스에서 사용된 실제 형식 이름을 나타내는 <see cref="T:System.Type" />입니다.정적 호출의 대상 개체에만 사용됩니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>인수가 명명된 인수입니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>나타낼 추가 정보가 없습니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>바인딩하는 동안 인수의 컴파일 타임 형식을 고려해야 합니다.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>호출 사이트의 특정 인수와 관련되지 않은 C# 동적 작업에 대한 정보를 나타냅니다.이 클래스의 인스턴스는 C# 컴파일러에서 생성됩니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>바인더는 조건부 논리 연산자 계산에 속하는 논리적 AND 또는 논리적 OR를 나타냅니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>이 바인더에 대한 계산은 확인된 컨텍스트에서 발생합니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>바인더는 배열 생성 식에 사용할 암시적 변환을 나타냅니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>바인더는 명시적 변환을 나타냅니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>바인더는 단순한 이름에 대한 호출을 나타냅니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>바인더는 특수한 이름에 대한 호출을 나타냅니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>이 바인더에 필요한 추가 정보가 없습니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>바인더는 결과가 필요 없는 위치에서 사용되므로 void를 반환하는 메서드에 바인딩할 수 있습니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>바인딩의 결과가 인덱싱되어 인덱스 설정 또는 인덱스 가져오기 바인더를 가져옵니다.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>이 인덱스 설정 또는 멤버 설정의 값은 복합 할당 연산자에서 사용됩니다.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>C# 런타임 바인더의 동적 바인드가 처리될 때 발생하는 오류를 나타냅니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>지정된 오류 메시지가 있는 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외를 설명하는 메시지입니다.이 생성자의 호출자는 이 문자열이 현재 시스템 문화권에 맞게 지역화되었는지 확인하는 데 필요합니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>지정된 오류 메시지 및 해당 예외의 원인인 내부 예외에 대한 참조가 있는 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외에 대한 이유를 설명하는 오류 메시지입니다.</param>
+      <param name="innerException">현재 예외의 원인인 예외 또는 내부 예외가 지정되지 않은 경우 null 참조입니다.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>C# 런타임 바인더의 동적 바인드가 처리될 때 발생하는 오류를 나타냅니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>오류를 설명하는 시스템 제공 메시지를 사용하여 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>오류를 설명하는 지정된 메시지를 사용하여 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외를 설명하는 메시지입니다.이 생성자의 호출자는 이 문자열이 현재 시스템 문화권에 맞게 지역화되었는지 확인하는 데 필요합니다.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>지정된 오류 메시지와 이 예외의 원인인 내부 예외에 대한 참조를 갖는 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 클래스의 새 인스턴스를 초기화합니다.</summary>
+      <param name="message">예외에 대한 이유를 설명하는 오류 메시지입니다.</param>
+      <param name="innerException">현재 예외의 원인인 예외 또는 내부 예외가 지정되지 않은 경우 null 참조입니다.</param>
+    </member>
+  </members>
+</doc>

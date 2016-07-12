@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>Provides base input and output (I/O) types, including System.IO.Stream, System.IO.StreamReader and System.IO.StreamWriter, that allow reading and writing to data streams
+
+Commonly Used Types:
+System.IO.Stream
+System.IO.EndOfStreamException
+System.IO.MemoryStream
+System.IO.StreamReader
+System.IO.StreamWriter
+System.IO.StringWriter
+System.IO.TextWriter
+System.IO.TextReader
+ 
+When using NuGet 3.x this package requires at least version 3.4.</dc:description>
+  <dc:identifier>System.IO</dc:identifier>
+  <version>4.1.0</version>
+  <keywords></keywords>
+  <lastModifiedBy>NuGet.Packaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 6.3.9600.0;</lastModifiedBy>
+</coreProperties>

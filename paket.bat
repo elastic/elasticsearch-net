@@ -9,7 +9,7 @@ if not exist build\tools\nuget\nuget.exe (
 REM we need paket to call paket doh
 if not exist build\tools\Paket\tools\paket.exe (
     ECHO Paket not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "Paket" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+    "build\tools\nuget\nuget.exe" "install" "Paket" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Version" "2.66.10"
 )
 
 build\tools\Paket\tools\paket.exe %*

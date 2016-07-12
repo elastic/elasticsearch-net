@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>包含用于为 CSharp 创建动态调用站点联编程序的工厂方法。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 二元运算联编程序。</summary>
+      <returns>返回新的 CSharp 二元运算联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="operation">二元运算类型。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>初始化新的 CSharp 转换联编程序。</summary>
+      <returns>返回新的 CSharp 转换联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="type">要转换到的类型。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 获取索引联编程序。</summary>
+      <returns>返回新的 CSharp 获取索引联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 获取成员联编程序。</summary>
+      <returns>返回新的 CSharp 获取成员联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="name">要获取的成员名称。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 调用联编程序。</summary>
+      <returns>返回新的 CSharp 调用联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 调用构造函数联编程序。</summary>
+      <returns>返回新的 CSharp 调用构造函数联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 调用成员联编程序。</summary>
+      <returns>返回新的 CSharp 调用成员联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="name">要调用的成员名。</param>
+      <param name="typeArguments">为此调用指定的类型参数的列表。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>初始化新的 CSharp 事件联编程序。</summary>
+      <returns>返回新的 CSharp 事件联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="name">要查找的事件的名称。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 设置索引联编程序。</summary>
+      <returns>返回新的 CSharp 设置索引联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 设置成员联编程序。</summary>
+      <returns>返回新的 CSharp 设置成员联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="name">要设置的成员的名称。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 一元运算联编程序。</summary>
+      <returns>返回新的 CSharp 一元运算联编程序。</returns>
+      <param name="flags">用于初始化联编程序的标志。</param>
+      <param name="operation">一元运算类型。</param>
+      <param name="context">用于指示此操作的使用位置的 <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">此操作的参数所用的 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 实例序列。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>表示有关特定于调用站点上的特定参数的 C# 动态操作的信息。此类的实例由 C# 编译器生成。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 类的新实例。</summary>
+      <returns>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 类的新实例。</returns>
+      <param name="flags">参数的标志。</param>
+      <param name="name">如果已指定参数名称，则为相应的名称；否则为空。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>表示有关特定于调用站点上的特定参数的 C# 动态操作的信息。此类的实例由 C# 编译器生成。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>该参数是一个常量。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>将实参传递到 out 形参。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>将实参传递到 ref 形参。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>参数为 <see cref="T:System.Type" />，它指示源中使用的实际类型名称。仅用于静态调用中的目标对象。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>参数为命名参数。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>没有要表示的附加信息。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>在绑定期间，应考虑参数的编译时类型。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>表示不特定于调用站点上特定参数的 C# 动态操作的相关信息。此类的实例由 C# 编译器生成。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>此联编程序表示作为条件逻辑运算符计算的一部分的逻辑 AND 或逻辑 OR。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>在已检查的上下文中计算此联编程序。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>此联编程序表示要在数组创建表达式中使用的隐式转换。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>此联编程序表示显式转换。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>此联编程序表示对简单名称的调用。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>此联编程序表示对特殊名称的调用。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>此联编程序不需要附加信息。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>联编程序在不需要结果的位置中使用，因此可绑定到一个 void 返回方法。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>将为任何绑定的结果编制索引，以获得一个设置索引联编程序或获取索引联编程序。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>此设置索引或设置成员中的值为复合赋值运算符。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>表示在处理 C# 运行时联编程序中的动态绑定时发生的错误。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 类的新实例。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 类的新实例，它包含指定的错误消息。</summary>
+      <param name="message">描述该异常的消息。此构造函数的调用方需要确保此字符串已针对当前系统区域性进行了本地化。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 类的新实例，该实例具有指定的错误消息以及对导致此异常的内部异常的引用。</summary>
+      <param name="message">解释异常原因的错误信息。</param>
+      <param name="innerException">导致当前异常的异常；如果未指定内部异常，则为空引用。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>表示在处理 C# 运行时联编程序中的动态绑定时发生的错误。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>使用由系统提供的用来描述错误的消息初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 类的新实例。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>使用指定的描述错误的消息初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 类的新实例。</summary>
+      <param name="message">描述该异常的消息。此构造函数的调用方需要确保此字符串已针对当前系统区域性进行了本地化。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 类的新实例，该实例具有指定的错误消息以及对导致此异常的内部异常的引用。</summary>
+      <param name="message">解释异常原因的错误信息。</param>
+      <param name="innerException">导致当前异常的异常；如果未指定内部异常，则为空引用。</param>
+    </member>
+  </members>
+</doc>

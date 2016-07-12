@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>Contiene métodos de generador que permiten crear enlazadores de sitios de llamada dinámicos para CSharp.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones binarias de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones binarias de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="operation">Tipo de operación binaria.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>Inicializa un nuevo enlazador de conversiones de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de conversiones de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="type">Tipo en el que se va a convertir.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones de obtención de índice de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones de obtención de índice de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones de obtención de miembro de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones de obtención de miembro de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="name">Nombre del miembro que se va a obtener.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de invocaciones de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de invocaciones de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de invocaciones de constructor de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de invocaciones de constructor de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de invocaciones de miembro de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de invocaciones de miembro de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="name">Nombre del miembro al que se va a invocar.</param>
+      <param name="typeArguments">Lista de los argumentos de tipo especificados para esta invocación.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>Inicializa un nuevo enlazador de búsquedas de eventos de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de búsquedas de eventos de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="name">Nombre del evento que se va a buscar.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones de establecimiento de índice de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones de establecimiento de índice de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones de establecimiento de miembro de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones de establecimiento de miembro de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="name">Nombre del miembro que se va a establecer.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inicializa un nuevo enlazador de operaciones unarias de CSharp.</summary>
+      <returns>Devuelve un nuevo enlazador de operaciones unarias de CSharp.</returns>
+      <param name="flags">Marcas con las que se va a inicializar el enlazador.</param>
+      <param name="operation">Tipo de operación unaria.</param>
+      <param name="context">Objeto <see cref="T:System.Type" /> que indica dónde se usa esta operación.</param>
+      <param name="argumentInfo">Secuencia de instancias de <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> para los argumentos de esta operación.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>Representa información sobre las operaciones dinámicas de C# que son específicas de argumentos concretos en un lugar de llamada.Las instancias de esta clase se generan mediante el compilador de C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />.</summary>
+      <returns>Nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />.</returns>
+      <param name="flags">Marcas para el argumento.</param>
+      <param name="name">Nombre del argumento, si lo tiene; de lo contrario, NULL.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>Representa información sobre las operaciones dinámicas de C# que son específicas de argumentos concretos en un lugar de llamada.Las instancias de esta clase se generan mediante el compilador de C#.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>El argumento es una constante.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>El argumento se pasa a un parámetro out.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>El argumento se pasa a un parámetro ref.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>El argumento es un objeto <see cref="T:System.Type" /> que indica un nombre de tipo real utilizado en origen.Únicamente se usa para los objetos de destino en las llamadas estáticas.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>Es un argumento con nombre.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>Ninguna información adicional para representar.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>El tipo de tiempo de compilación del argumento debe considerarse durante el enlace.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>Representa información sobre las operaciones dinámicas de C# que no son específicas de argumentos concretos en un sitio de llamada.Las instancias de esta clase se generan mediante el compilador de C#.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>El enlazador representa un operador AND lógico u OR lógico que forma parte de una evaluación de operadores lógicos condicionales.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>La evaluación de este enlazador se lleva a cabo en un contexto comprobado.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>El enlazador representa una conversión implícita que se puede usar en una expresión de creación de matrices.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>El enlazador representa una conversión explícita.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>El enlazador representa una invocación en un nombre simple.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>El enlazador representa una invocación en un nombre especial.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>Este enlazador no requiere ninguna información adicional.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>El enlazador se usa en una posición que no requiere un resultado y, por lo tanto, se puede enlazar a un método que devuelva void.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>El resultado de cualquier enlace que se vaya a indizar obtiene un enlazador de índice set o de índice get.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>El valor de este índice o miembro set se convierte en un operador de asignación compuesto.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>Representa un error que se produce cuando se procesa un enlace dinámico en el enlazador en tiempo de ejecución de C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> que tiene un mensaje de error especificado.</summary>
+      <param name="message">Mensaje que describe la excepción.El llamador de este constructor debe asegurarse de que esta cadena se ha traducido para la actual referencia cultural del sistema.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> que tiene un mensaje de error especificado y una referencia a la excepción interna que representa la causa de esta excepción.</summary>
+      <param name="message">Mensaje de error que explica la razón de la excepción.</param>
+      <param name="innerException">Excepción que es la causa de la excepción actual, o una referencia nula si no se especifica ninguna excepción interna.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>Representa un error que se produce cuando se procesa un enlace dinámico en el enlazador en tiempo de ejecución de C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> con un mensaje proporcionado por el sistema que describe el error.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> con un mensaje de error especificado que describe el error.</summary>
+      <param name="message">Mensaje que describe la excepción.El llamador de este constructor debe asegurarse de que esta cadena se ha traducido para la actual referencia cultural del sistema.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>Inicializa una nueva instancia de la clase <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> que tiene un mensaje de error especificado y una referencia a la excepción interna que representa la causa de esta excepción.</summary>
+      <param name="message">Mensaje de error que explica la razón de la excepción.</param>
+      <param name="innerException">Excepción que es la causa de la excepción actual, o una referencia nula si no se especifica ninguna excepción interna.</param>
+    </member>
+  </members>
+</doc>

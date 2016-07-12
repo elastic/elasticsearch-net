@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>CSharp の動的呼び出しサイト バインダーを作成するファクトリ メソッドが含まれています。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しい二項演算バインダーを初期化します。</summary>
+      <returns>CSharp の新しい二項演算バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="operation">二項演算の種類。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>CSharp の新しい変換バインダーを初期化します。</summary>
+      <returns>CSharp の新しい変換バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="type">変換後の型。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいインデックス取得バインダーを初期化します。</summary>
+      <returns>CSharp の新しいインデックス取得バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいメンバー取得バインダーを初期化します。</summary>
+      <returns>CSharp の新しいメンバー取得バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="name">取得するメンバーの名前。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しい呼び出しバインダーを初期化します。</summary>
+      <returns>CSharp の新しい呼び出しバインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいコンストラクター バインダーを初期化します。</summary>
+      <returns>CSharp の新しいコンストラクター バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいメンバー呼び出しバインダーを初期化します。</summary>
+      <returns>CSharp の新しいメンバー呼び出しバインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="name">呼び出されるメンバーの名前。</param>
+      <param name="typeArguments">この呼び出しに対して指定する型引数のリスト。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>CSharp の新しいイベント確認バインダーを初期化します。</summary>
+      <returns>CSharp の新しいイベント確認バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="name">検索するイベントの名前。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいインデックス設定バインダーを初期化します。</summary>
+      <returns>CSharp の新しいインデックス設定バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しいメンバー設定バインダーを初期化します。</summary>
+      <returns>CSharp の新しいメンバー設定バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="name">設定するメンバーの名前。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>CSharp の新しい単項演算バインダーを初期化します。</summary>
+      <returns>CSharp の新しい単項演算バインダーを返します。</returns>
+      <param name="flags">バインダーの初期化に使用するフラグ。</param>
+      <param name="operation">単項演算の種類。</param>
+      <param name="context">この操作の使用場所を示す <see cref="T:System.Type" />。</param>
+      <param name="argumentInfo">この操作に対する引数の <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> インスタンスのシーケンス。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>呼び出しサイトにおける特定の引数に固有の、C# の動的操作に関する情報を表します。このクラスのインスタンスは、C# コンパイラによって生成されます。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> クラスの新しいインスタンスを初期化します。</summary>
+      <returns>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> クラスの新しいインスタンス。</returns>
+      <param name="flags">引数のフラグ。</param>
+      <param name="name">引数に名前がある場合はその名前。それ以外の場合は null。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>呼び出しサイトにおける特定の引数に固有の、C# の動的操作に関する情報を表します。このクラスのインスタンスは、C# コンパイラによって生成されます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>引数は定数です。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>引数は out パラメーターに渡されます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>引数は ref パラメーターに渡されます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>引数は、ソースで使用されている実際の型名を示す <see cref="T:System.Type" /> です。静的呼び出しのターゲット オブジェクトでのみ使用されます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>引数は名前付き引数です。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>追加情報はありません。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>引数のコンパイル時の型はバインディング時に考慮されます。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>呼び出しサイトにおける特定の引数に固有ではない、C# の動的操作に関する情報を表します。このクラスのインスタンスは、C# コンパイラによって生成されます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>このバインダーは、条件論理演算子の評価の一部である論理 AND または論理 OR を表します。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>このバインダーの評価は、checked コンテキストで行われます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>このバインダーは、配列作成式で使用する暗黙の型変換を表します。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>このバインダーは、明示的な変換を表します。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>このバインダーは、簡易名での呼び出しを表します。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>このバインダーは、特別な名前での呼び出しを表します。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>このバインダーに必要な追加情報はありません。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>バインダーは、結果を必要としない位置で使用されるため、戻り型が void のメソッドにバインドできます。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>どのバインドの結果にもインデックスが付けられます。インデックス設定バインダーまたはインデックス取得バインダーが必要です。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>このインデックス設定またはメンバー設定の値は複合代入演算子になります。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>C# ランタイム バインダーで動的バインドが処理されたときに発生するエラーを表します。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>指定したエラー メッセージを持つ、<see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">例外を説明するメッセージ。このコンストラクターの呼び出し元では、この文字列が現在のシステムのカルチャに合わせてローカライズ済みであることを確認しておく必要があります。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>指定したエラー メッセージおよびこの例外の原因である内部例外への参照を持つ、<see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">例外の原因を説明するエラー メッセージ。</param>
+      <param name="innerException">現在の例外の原因となった例外。内部例外が指定されていない場合は null 参照。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>C# ランタイム バインダーで動的バインドが処理されたときに発生するエラーを表します。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>エラーを説明するシステム提供のメッセージを使用して、<see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> クラスの新しいインスタンスを初期化します。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>エラーを説明する指定したメッセージを使用して、<see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">例外を説明するメッセージ。このコンストラクターの呼び出し元では、この文字列が現在のシステムのカルチャに合わせてローカライズ済みであることを確認しておく必要があります。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>指定したエラー メッセージおよびこの例外の原因である内部例外への参照を持つ、<see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> クラスの新しいインスタンスを初期化します。</summary>
+      <param name="message">例外の原因を説明するエラー メッセージ。</param>
+      <param name="innerException">現在の例外の原因となった例外。内部例外が指定されていない場合は null 参照。</param>
+    </member>
+  </members>
+</doc>

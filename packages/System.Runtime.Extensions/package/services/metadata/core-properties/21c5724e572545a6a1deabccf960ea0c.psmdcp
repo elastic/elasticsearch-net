@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>Provides commonly-used classes for performing mathematical functions, conversions, string comparisons and querying environment information.
+
+Commonly Used Types:
+System.Math
+System.Environment
+System.Random
+System.Progress&lt;T&gt;
+System.Convert
+System.Diagnostics.Stopwatch
+System.Runtime.Versioning.FrameworkName
+System.StringComparer
+System.IO.Path
+ 
+When using NuGet 3.x this package requires at least version 3.4.</dc:description>
+  <dc:identifier>System.Runtime.Extensions</dc:identifier>
+  <version>4.1.0</version>
+  <keywords></keywords>
+  <lastModifiedBy>NuGet.Packaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 6.3.9600.0;</lastModifiedBy>
+</coreProperties>

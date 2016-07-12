@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata minClientVersion="2.12">
+    <id>System.Reflection</id>
+    <version>4.1.0</version>
+    <title>System.Reflection</title>
+    <authors>Microsoft</authors>
+    <owners>microsoft,dotnetframework</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://go.microsoft.com/fwlink/?LinkId=329770</licenseUrl>
+    <projectUrl>https://dot.net/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <description>Provides types that retrieve information about assemblies, modules, members, parameters, and other entities in managed code by examining their metadata. These types also can be used to manipulate instances of loaded types, for example to hook up events or to invoke methods.
+
+Commonly Used Types:
+System.Reflection.MethodInfo
+System.Reflection.PropertyInfo
+System.Reflection.ParameterInfo
+System.Reflection.FieldInfo
+System.Reflection.ConstructorInfo
+System.Reflection.Assembly
+System.Reflection.MemberInfo
+System.Reflection.EventInfo
+System.Reflection.Module
+ 
+When using NuGet 3.x this package requires at least version 3.4.</description>
+    <releaseNotes>https://go.microsoft.com/fwlink/?LinkID=799417</releaseNotes>
+    <copyright>© Microsoft Corporation.  All rights reserved.</copyright>
+    <serviceable>true</serviceable>
+    <dependencies>
+      <group targetFramework="MonoAndroid1.0" />
+      <group targetFramework="MonoTouch1.0" />
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETFramework4.6.2" />
+      <group targetFramework=".NETCore5.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.IO" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.IO" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.3">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.IO" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.5">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.IO" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETPortable0.0-Profile259" />
+      <group targetFramework="Windows8.0" />
+      <group targetFramework="WindowsPhone8.0" />
+      <group targetFramework="WindowsPhoneApp8.1" />
+      <group targetFramework="Xamarin.iOS1.0" />
+      <group targetFramework="Xamarin.Mac2.0" />
+      <group targetFramework="Xamarin.TVOS1.0" />
+      <group targetFramework="Xamarin.WatchOS1.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.6.2" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

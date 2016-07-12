@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>Contiene metodi factory per creare gestori di associazione del sito di chiamata dinamica per CSharp.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione dell'operazione binaria di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione dell'operazione binaria di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="operation">Tipo di operazione binaria.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>Inizializza un nuovo gestore di associazione delle conversioni di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione delle conversioni di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="type">Tipo in cui eseguire la conversione.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione dell'indice get di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione dell'indice get di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione del membro get di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione del membro get di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="name">Nome del membro da ottenere.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione invoke di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione invoke di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione del costruttore invoke di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione del costruttore invoke di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione del membro invoke di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione del membro invoke di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="name">Nome del membro da richiamare,</param>
+      <param name="typeArguments">Elenco di argomenti del tipo specificati per la chiamata.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>Inizializza un nuovo gestore di associazione degli eventi is di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione degli eventi is di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="name">Nome dell'evento di cui eseguire la ricerca.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione dell'indice set di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione dell'indice set di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione del membro set di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione del membro set di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="name">Nome del membro da impostare.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Inizializza un nuovo gestore di associazione dell'operazione unaria di CSharp.</summary>
+      <returns>Restituisce un nuovo gestore di associazione dell'operazione unaria di CSharp.</returns>
+      <param name="flags">Flag con cui inizializzare il gestore di associazione.</param>
+      <param name="operation">Tipo di operazione unaria.</param>
+      <param name="context">Oggetto <see cref="T:System.Type" /> che indica il contesto in cui viene utilizzata l'operazione.</param>
+      <param name="argumentInfo">Sequenza di istanze di <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> per gli argomenti dell'operazione.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>Rappresenta informazioni sulle operazioni dinamiche in C# specifiche di determinati argomenti in un sito di chiamata.Istanze di questa classe vengono generate dal compilatore C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />.</summary>
+      <returns>Nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" />.</returns>
+      <param name="flags">Flag per l'argomento.</param>
+      <param name="name">Nome dell'argomento, se denominato; in caso contrario, null.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>Rappresenta informazioni sulle operazioni dinamiche in C# specifiche di determinati argomenti in un sito di chiamata.Istanze di questa classe vengono generate dal compilatore C#.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>L'argomento è una costante.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>L'argomento viene passato a un parametro out.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>L'argomento viene passato a un parametro ref.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>L'argomento è un oggetto <see cref="T:System.Type" /> che indica un nome di tipo effettivo utilizzato nell'origine.Utilizzato solo per gli oggetti di destinazione in chiamate statiche.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>L'argomento è un argomento denominato.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>Nessuna informazione aggiuntiva da rappresentare.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>Il tipo dell'argomento in fase di compilazione deve essere considerato durante l'associazione.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>Rappresenta informazioni sulle operazioni dinamiche in C# non specifiche di determinati argomenti in un sito di chiamata.Istanze di questa classe vengono generate dal compilatore C#.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>Il gestore di associazione rappresenta un operatore logico AND o OR che fa parte di una valutazione dell'operatore logico condizionale.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>La valutazione di questo gestore di associazione si verifica in un contesto verificato.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>Il gestore di associazione rappresenta una conversione implicita per l'utilizzo in un'espressione di creazione di una matrice.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>Il gestore di associazione rappresenta una conversione esplicita.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>Il gestore di associazione rappresenta una chiamata per un nome semplice.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>Il gestore di associazione rappresenta una chiamata per uno SpecialName.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>Non sono presenti informazioni aggiuntive necessarie per questo gestore di associazione.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>Il gestore di associazione viene utilizzato in una posizione che non richiede un risultato e può quindi essere associato a un metodo che restituisce void.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>Il risultato di qualsiasi associazione sarà indicizzato per ottenere un gestore di associazione dell'indice set o get.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>Il valore in questo indice set o membro set presenta un operatore di assegnazione composto.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>Rappresenta un errore che si verifica quando viene elaborata un'associazione dinamica nel gestore di associazione di runtime in C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> che include un messaggio di errore specificato.</summary>
+      <param name="message">Messaggio in cui viene descritta l'eccezione.È necessario che il chiamante del costruttore assicuri che la stringa sia stata localizzata per le impostazioni cultura correnti del sistema.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> che include un messaggio di errore specificato e un riferimento all'eccezione interna che ha generato l'eccezione.</summary>
+      <param name="message">Messaggio di errore nel quale viene indicato il motivo dell’eccezione</param>
+      <param name="innerException">Eccezione che ha provocato l'eccezione corrente o riferimento null se non è stata specificata alcuna eccezione interna.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>Rappresenta un errore che si verifica quando viene elaborata un'associazione dinamica nel gestore di associazione di runtime in C#.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> con un messaggio fornito dal sistema in cui viene descritto l'errore.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> con un messaggio specifico in cui viene descritto l'errore.</summary>
+      <param name="message">Messaggio in cui viene descritta l'eccezione.È necessario che il chiamante del costruttore assicuri che la stringa sia stata localizzata per le impostazioni cultura correnti del sistema.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>Inizializza una nuova istanza della classe <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> che include un messaggio di errore specificato e un riferimento all'eccezione interna che ha generato l'eccezione.</summary>
+      <param name="message">Messaggio di errore nel quale viene indicato il motivo dell’eccezione</param>
+      <param name="innerException">Eccezione che ha provocato l'eccezione corrente o riferimento null se non è stata specificata alcuna eccezione interna.</param>
+    </member>
+  </members>
+</doc>

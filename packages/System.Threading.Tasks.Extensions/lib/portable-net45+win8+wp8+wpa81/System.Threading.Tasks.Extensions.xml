@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Threading.Tasks.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1">
+            <summary>Provides an awaitable type that enables configured awaits on a <see cref="T:System.Threading.Tasks.ValueTask`1"/>.</summary>
+            <typeparam name="TResult">The type of the result produced.</typeparam>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1._value">
+            <summary>The wrapped <see cref="T:System.Threading.Tasks.ValueTask`1"/>.</summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1._continueOnCapturedContext">
+            <summary>true to attempt to marshal the continuation back to the original context captured; otherwise, false.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.#ctor(System.Threading.Tasks.ValueTask{`0},System.Boolean)">
+            <summary>Initializes the awaitable.</summary>
+            <param name="value">The wrapped <see cref="T:System.Threading.Tasks.ValueTask`1"/>.</param>
+            <param name="continueOnCapturedContext">
+            true to attempt to marshal the continuation back to the original synchronization context captured; otherwise, false.
+            </param>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.GetAwaiter">
+            <summary>Returns an awaiter for this <see cref="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1"/> instance.</summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter">
+            <summary>Provides an awaiter for a <see cref="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1"/>.</summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter._value">
+            <summary>The value being awaited.</summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter._continueOnCapturedContext">
+            <summary>The value to pass to ConfigureAwait.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter.#ctor(System.Threading.Tasks.ValueTask{`0},System.Boolean)">
+            <summary>Initializes the awaiter.</summary>
+            <param name="value">The value to be awaited.</param>
+            <param name="continueOnCapturedContext">The value to pass to ConfigureAwait.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter.IsCompleted">
+            <summary>Gets whether the <see cref="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1"/> has completed.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter.GetResult">
+            <summary>Gets the result of the ValueTask.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter.OnCompleted(System.Action)">
+            <summary>Schedules the continuation action for the <see cref="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1"/>.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1.ConfiguredValueTaskAwaiter.UnsafeOnCompleted(System.Action)">
+            <summary>Schedules the continuation action for the <see cref="T:System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1"/>.</summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ValueTaskAwaiter`1">
+            <summary>Provides an awaiter for a <see cref="T:System.Threading.Tasks.ValueTask`1"/>.</summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.ValueTaskAwaiter`1._value">
+            <summary>The value being awaited.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ValueTaskAwaiter`1.#ctor(System.Threading.Tasks.ValueTask{`0})">
+            <summary>Initializes the awaiter.</summary>
+            <param name="value">The value to be awaited.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.ValueTaskAwaiter`1.IsCompleted">
+            <summary>Gets whether the <see cref="T:System.Threading.Tasks.ValueTask`1"/> has completed.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ValueTaskAwaiter`1.GetResult">
+            <summary>Gets the result of the ValueTask.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ValueTaskAwaiter`1.OnCompleted(System.Action)">
+            <summary>Schedules the continuation action for this ValueTask.</summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.ValueTaskAwaiter`1.UnsafeOnCompleted(System.Action)">
+            <summary>Schedules the continuation action for this ValueTask.</summary>
+        </member>
+        <member name="T:System.Threading.Tasks.ValueTask`1">
+            <summary>
+            Provides a value type that wraps a <see cref="T:System.Threading.Tasks.Task`1"/> and a <typeparamref name="TResult"/>,
+            only one of which is used.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <remarks>
+            <para>
+            Methods may return an instance of this value type when it's likely that the result of their
+            operations will be available synchronously and when the method is expected to be invoked so
+            frequently that the cost of allocating a new <see cref="T:System.Threading.Tasks.Task`1"/> for each call will
+            be prohibitive.
+            </para>
+            <para>
+            There are tradeoffs to using a <see cref="T:System.Threading.Tasks.ValueTask`1"/> instead of a <see cref="T:System.Threading.Tasks.Task`1"/>.
+            For example, while a <see cref="T:System.Threading.Tasks.ValueTask`1"/> can help avoid an allocation in the case where the 
+            successful result is available synchronously, it also contains two fields whereas a <see cref="T:System.Threading.Tasks.Task`1"/>
+            as a reference type is a single field.  This means that a method call ends up returning two fields worth of
+            data instead of one, which is more data to copy.  It also means that if a method that returns one of these
+            is awaited within an async method, the state machine for that async method will be larger due to needing
+            to store the struct that's two fields instead of a single reference.
+            </para>
+            <para>
+            Further, for uses other than consuming the result of an asynchronous operation via await, 
+            <see cref="T:System.Threading.Tasks.ValueTask`1"/> can lead to a more convoluted programming model, which can in turn actually 
+            lead to more allocations.  For example, consider a method that could return either a <see cref="T:System.Threading.Tasks.Task`1"/> 
+            with a cached task as a common result or a <see cref="T:System.Threading.Tasks.ValueTask`1"/>.  If the consumer of the result 
+            wants to use it as a <see cref="T:System.Threading.Tasks.Task`1"/>, such as to use with in methods like Task.WhenAll and Task.WhenAny, 
+            the <see cref="T:System.Threading.Tasks.ValueTask`1"/> would first need to be converted into a <see cref="T:System.Threading.Tasks.Task`1"/> using 
+            <see cref="M:System.Threading.Tasks.ValueTask`1.AsTask"/>, which leads to an allocation that would have been avoided if a cached 
+            <see cref="T:System.Threading.Tasks.Task`1"/> had been used in the first place.
+            </para>
+            <para>
+            As such, the default choice for any asynchronous method should be to return a <see cref="T:System.Threading.Tasks.Task"/> or 
+            <see cref="T:System.Threading.Tasks.Task`1"/>. Only if performance analysis proves it worthwhile should a <see cref="T:System.Threading.Tasks.ValueTask`1"/> 
+            be used instead of <see cref="T:System.Threading.Tasks.Task`1"/>.  There is no non-generic version of <see cref="T:System.Threading.Tasks.ValueTask`1"/> 
+            as the Task.CompletedTask property may be used to hand back a successfully completed singleton in the case where
+            a <see cref="T:System.Threading.Tasks.Task"/>-returning method completes synchronously and successfully.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:System.Threading.Tasks.ValueTask`1._task">
+            <summary>The task to be used if the operation completed asynchronously or if it completed synchronously but non-successfully.</summary>
+        </member>
+        <member name="F:System.Threading.Tasks.ValueTask`1._result">
+            <summary>The result to be used if the operation completed successfully synchronously.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.#ctor(`0)">
+            <summary>Initialize the <see cref="T:System.Threading.Tasks.ValueTask`1"/> with the result of the successful operation.</summary>
+            <param name="result">The result.</param>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.#ctor(System.Threading.Tasks.Task{`0})">
+            <summary>
+            Initialize the <see cref="T:System.Threading.Tasks.ValueTask`1"/> with a <see cref="T:System.Threading.Tasks.Task`1"/> that represents the operation.
+            </summary>
+            <param name="task">The task.</param>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.GetHashCode">
+            <summary>Returns the hash code for this instance.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.Equals(System.Object)">
+            <summary>Returns a value indicating whether this value is equal to a specified <see cref="T:System.Object"/>.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.Equals(System.Threading.Tasks.ValueTask{`0})">
+            <summary>Returns a value indicating whether this value is equal to a specified <see cref="T:System.Threading.Tasks.ValueTask`1"/> value.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.op_Equality(System.Threading.Tasks.ValueTask{`0},System.Threading.Tasks.ValueTask{`0})">
+            <summary>Returns a value indicating whether two <see cref="T:System.Threading.Tasks.ValueTask`1"/> values are equal.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.op_Inequality(System.Threading.Tasks.ValueTask{`0},System.Threading.Tasks.ValueTask{`0})">
+            <summary>Returns a value indicating whether two <see cref="T:System.Threading.Tasks.ValueTask`1"/> values are not equal.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.AsTask">
+            <summary>
+            Gets a <see cref="T:System.Threading.Tasks.Task`1"/> object to represent this ValueTask.  It will
+            either return the wrapped task object if one exists, or it'll manufacture a new
+            task object to represent the result.
+            </summary>
+        </member>
+        <member name="P:System.Threading.Tasks.ValueTask`1.IsCompleted">
+            <summary>Gets whether the <see cref="T:System.Threading.Tasks.ValueTask`1"/> represents a completed operation.</summary>
+        </member>
+        <member name="P:System.Threading.Tasks.ValueTask`1.IsCompletedSuccessfully">
+            <summary>Gets whether the <see cref="T:System.Threading.Tasks.ValueTask`1"/> represents a successfully completed operation.</summary>
+        </member>
+        <member name="P:System.Threading.Tasks.ValueTask`1.IsFaulted">
+            <summary>Gets whether the <see cref="T:System.Threading.Tasks.ValueTask`1"/> represents a failed operation.</summary>
+        </member>
+        <member name="P:System.Threading.Tasks.ValueTask`1.IsCanceled">
+            <summary>Gets whether the <see cref="T:System.Threading.Tasks.ValueTask`1"/> represents a canceled operation.</summary>
+        </member>
+        <member name="P:System.Threading.Tasks.ValueTask`1.Result">
+            <summary>Gets the result.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.GetAwaiter">
+            <summary>Gets an awaiter for this value.</summary>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.ConfigureAwait(System.Boolean)">
+            <summary>Configures an awaiter for this value.</summary>
+            <param name="continueOnCapturedContext">
+            true to attempt to marshal the continuation back to the captured context; otherwise, false.
+            </param>
+        </member>
+        <member name="M:System.Threading.Tasks.ValueTask`1.ToString">
+            <summary>Gets a string-representation of this <see cref="T:System.Threading.Tasks.ValueTask`1"/>.</summary>
+        </member>
+    </members>
+</doc>

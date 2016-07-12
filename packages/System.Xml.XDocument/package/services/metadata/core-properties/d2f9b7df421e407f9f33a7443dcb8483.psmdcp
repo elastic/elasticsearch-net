@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>Provides the classes for Language-Integrated Query (LINQ) to Extensible Markup Language (XML). LINQ to XML is an in-memory XML programming interface that enables you to modify XML documents efficiently and easily.
+
+Commonly Used Types:
+System.Xml.Linq.XElement
+System.Xml.Linq.XAttribute
+System.Xml.Linq.XDocument
+System.Xml.Linq.XText
+System.Xml.Linq.XNode
+System.Xml.Linq.XContainer
+System.Xml.Linq.XComment
+System.Xml.Linq.XObject
+System.Xml.Linq.XProcessingInstruction
+System.Xml.Linq.XDocumentType
+ 
+When using NuGet 3.x this package requires at least version 3.4.</dc:description>
+  <dc:identifier>System.Xml.XDocument</dc:identifier>
+  <version>4.0.11</version>
+  <keywords></keywords>
+  <lastModifiedBy>NuGet.Packaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 6.3.9600.0;</lastModifiedBy>
+</coreProperties>

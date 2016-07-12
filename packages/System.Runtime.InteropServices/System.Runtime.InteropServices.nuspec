@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata minClientVersion="2.12">
+    <id>System.Runtime.InteropServices</id>
+    <version>4.1.0</version>
+    <title>System.Runtime.InteropServices</title>
+    <authors>Microsoft</authors>
+    <owners>microsoft,dotnetframework</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://go.microsoft.com/fwlink/?LinkId=329770</licenseUrl>
+    <projectUrl>https://dot.net/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <description>Provides types that support COM interop and platform invoke services.
+
+Commonly Used Types:
+System.Runtime.InteropServices.GCHandle
+System.Runtime.InteropServices.GuidAttribute
+System.Runtime.InteropServices.COMException
+System.DllNotFoundException
+System.Runtime.InteropServices.DllImportAttribute
+ 
+When using NuGet 3.x this package requires at least version 3.4.</description>
+    <releaseNotes>https://go.microsoft.com/fwlink/?LinkID=799417</releaseNotes>
+    <copyright>© Microsoft Corporation.  All rights reserved.</copyright>
+    <serviceable>true</serviceable>
+    <dependencies>
+      <group targetFramework="MonoAndroid1.0" />
+      <group targetFramework="MonoTouch1.0" />
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETCore5.0">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.Handles" version="4.0.1" />
+      </group>
+      <group targetFramework=".NETStandard1.1">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.2">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.3">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.Handles" version="4.0.1" />
+      </group>
+      <group targetFramework=".NETStandard1.5">
+        <dependency id="Microsoft.NETCore.Platforms" version="1.0.1" />
+        <dependency id="Microsoft.NETCore.Targets" version="1.0.1" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.Handles" version="4.0.1" />
+      </group>
+      <group targetFramework=".NETPortable0.0-Profile111" />
+      <group targetFramework="Windows8.0" />
+      <group targetFramework="WindowsPhoneApp8.1" />
+      <group targetFramework="Xamarin.iOS1.0" />
+      <group targetFramework="Xamarin.Mac2.0" />
+      <group targetFramework="Xamarin.TVOS1.0" />
+      <group targetFramework="Xamarin.WatchOS1.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.6.2" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.6.2" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.6.2" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

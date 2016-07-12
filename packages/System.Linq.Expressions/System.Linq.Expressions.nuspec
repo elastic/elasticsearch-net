@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata minClientVersion="2.12">
+    <id>System.Linq.Expressions</id>
+    <version>4.1.0</version>
+    <title>System.Linq.Expressions</title>
+    <authors>Microsoft</authors>
+    <owners>microsoft,dotnetframework</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://go.microsoft.com/fwlink/?LinkId=329770</licenseUrl>
+    <projectUrl>https://dot.net/</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <description>Provides classes, interfaces and enumerations that enable language-level code expressions to be represented as objects in the form of expression trees.
+
+Commonly Used Types:
+System.Linq.Expressions.Expression&lt;TDelegate&gt;
+System.Linq.Expressions.Expression
+System.Linq.Expressions.MemberExpression
+System.Linq.Expressions.ExpressionVisitor
+System.Linq.Expressions.MethodCallExpression
+System.Linq.IQueryable&lt;T&gt;
+System.Linq.IQueryable
+System.Linq.Expressions.NewExpression
+System.Linq.Expressions.ParameterExpression
+System.Linq.Expressions.ConstantExpression
+ 
+When using NuGet 3.x this package requires at least version 3.4.</description>
+    <releaseNotes>https://go.microsoft.com/fwlink/?LinkID=799417</releaseNotes>
+    <copyright>© Microsoft Corporation.  All rights reserved.</copyright>
+    <serviceable>true</serviceable>
+    <dependencies>
+      <group targetFramework="MonoAndroid1.0" />
+      <group targetFramework="MonoTouch1.0" />
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework=".NETFramework4.6.3" />
+      <group targetFramework=".NETCore5.0">
+        <dependency id="System.Collections" version="4.0.11" exclude="Compile" />
+        <dependency id="System.Diagnostics.Debug" version="4.0.11" exclude="Compile" />
+        <dependency id="System.Globalization" version="4.0.11" exclude="Compile" />
+        <dependency id="System.IO" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Linq" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Emit.ILGeneration" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Emit.Lightweight" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Extensions" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.TypeExtensions" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Resources.ResourceManager" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.Extensions" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Threading" version="4.0.11" exclude="Compile" />
+      </group>
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.3">
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Runtime" version="4.1.0" />
+      </group>
+      <group targetFramework=".NETStandard1.6">
+        <dependency id="System.Collections" version="4.0.11" exclude="Compile" />
+        <dependency id="System.Diagnostics.Debug" version="4.0.11" exclude="Compile" />
+        <dependency id="System.Globalization" version="4.0.11" exclude="Compile" />
+        <dependency id="System.IO" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Linq" version="4.1.0" exclude="Compile" />
+        <dependency id="System.ObjectModel" version="4.0.12" exclude="Compile" />
+        <dependency id="System.Reflection" version="4.1.0" />
+        <dependency id="System.Reflection.Emit" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Emit.ILGeneration" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Emit.Lightweight" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Extensions" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.Primitives" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Reflection.TypeExtensions" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Resources.ResourceManager" version="4.0.1" exclude="Compile" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.Extensions" version="4.1.0" exclude="Compile" />
+        <dependency id="System.Threading" version="4.0.11" exclude="Compile" />
+      </group>
+      <group targetFramework=".NETPortable0.0-Profile259" />
+      <group targetFramework="Windows8.0" />
+      <group targetFramework="WindowsPhone8.0" />
+      <group targetFramework="WindowsPhoneApp8.1" />
+      <group targetFramework="Xamarin.iOS1.0" />
+      <group targetFramework="Xamarin.Mac2.0" />
+      <group targetFramework="Xamarin.TVOS1.0" />
+      <group targetFramework="Xamarin.WatchOS1.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.6.3" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.6.3" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

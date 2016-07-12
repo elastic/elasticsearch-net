@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>Provides types and interfaces that allow the creation of observable types that provide notifications to clients when changes are made to it.
+
+Commonly Used Types:
+System.ComponentModel.INotifyPropertyChanged
+System.Collections.ObjectModel.ObservableCollection&lt;T&gt;
+System.ComponentModel.PropertyChangedEventHandler
+System.Windows.Input.ICommand
+System.Collections.Specialized.INotifyCollectionChanged
+System.Collections.Specialized.NotifyCollectionChangedEventArgs
+System.Collections.Specialized.NotifyCollectionChangedEventHandler
+System.Collections.ObjectModel.KeyedCollection&lt;TKey, TItem&gt;
+System.ComponentModel.PropertyChangedEventArgs
+System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;
+ 
+When using NuGet 3.x this package requires at least version 3.4.</dc:description>
+  <dc:identifier>System.ObjectModel</dc:identifier>
+  <version>4.0.12</version>
+  <keywords></keywords>
+  <lastModifiedBy>NuGet.Packaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 6.3.9600.0;</lastModifiedBy>
+</coreProperties>

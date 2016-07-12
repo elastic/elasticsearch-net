@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties">
+  <dc:creator>Microsoft</dc:creator>
+  <dc:description>Provides the System.Text.RegularExpressions.Regex class, an implementation of a regular expression engine.
+
+Commonly Used Types:
+System.Text.RegularExpressions.Regex
+System.Text.RegularExpressions.RegexOptions
+System.Text.RegularExpressions.Match
+System.Text.RegularExpressions.Group
+System.Text.RegularExpressions.Capture
+System.Text.RegularExpressions.MatchEvaluator
+ 
+When using NuGet 3.x this package requires at least version 3.4.</dc:description>
+  <dc:identifier>System.Text.RegularExpressions</dc:identifier>
+  <version>4.1.0</version>
+  <keywords></keywords>
+  <lastModifiedBy>NuGet.Packaging, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35;Microsoft Windows NT 6.3.9600.0;</lastModifiedBy>
+</coreProperties>

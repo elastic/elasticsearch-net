@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>包含建立 CSharp 動態呼叫位置繫結器的 Factory 方法。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 二進位運算繫結器。</summary>
+      <returns>傳回新的 CSharp 二進位運算繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="operation">二元運算類型。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>初始化新的 CSharp 轉換繫結器。</summary>
+      <returns>傳回新的 CSharp 轉換繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="type">要轉換成的型別。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp get 索引繫結器。</summary>
+      <returns>傳回新的 CSharp get 索引繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp get 成員繫結器。</summary>
+      <returns>傳回新的 CSharp get 成員繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="name">要取得的成員名稱。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 叫用繫結器。</summary>
+      <returns>傳回新的 CSharp 叫用繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 叫用建構函式繫結器。</summary>
+      <returns>傳回新的 CSharp 叫用建構函式繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 叫用成員繫結器。</summary>
+      <returns>傳回新的 CSharp 叫用成員繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="name">要叫用的成員名稱。</param>
+      <param name="typeArguments">為此叫用指定之型別引數的清單。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>初始化新的 CSharp Is 事件繫結器。</summary>
+      <returns>傳回新的 CSharp Is 事件繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="name">要尋找之事件的名稱。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp set 索引繫結器。</summary>
+      <returns>傳回新的 CSharp set 索引繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp set 成員繫結器。</summary>
+      <returns>傳回新的 CSharp set 成員繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="name">要設定之成員的名稱。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>初始化新的 CSharp 一元運算繫結器。</summary>
+      <returns>傳回新的 CSharp 一元運算繫結器。</returns>
+      <param name="flags">用來初始化繫結器的旗標。</param>
+      <param name="operation">一元運算類型。</param>
+      <param name="context">
+        <see cref="T:System.Type" />，指定在何處使用此作業。</param>
+      <param name="argumentInfo">
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 執行個體的序列，做為這個運算的引數。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>表示呼叫位置上特定引數特有的 C# 動態運算的相關資訊。這個類別的執行個體會由 C# 編譯器產生。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 類別的新執行個體。</summary>
+      <returns>
+        <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> 類別的新執行個體。</returns>
+      <param name="flags">引數的旗標。</param>
+      <param name="name">如果是具名引數，則為引數的名稱，否則為 null。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>表示呼叫位置上特定引數特有的 C# 動態運算的相關資訊。這個類別的執行個體會由 C# 編譯器產生。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>引數為常數。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>引數傳遞給 out 參數。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>引數傳遞給 ref 參數。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>引數為 <see cref="T:System.Type" />，表示來源中使用的實際型別名稱。只用於靜態呼叫中的目標物件。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>引數為具名引數。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>無其他要表示的資訊。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>繫結期間應該考慮引數的編譯時期型別。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>表示呼叫位置上非特定引數特有的 C# 動態運算的相關資訊。這個類別的執行個體會由 C# 編譯器產生。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>繫結器表示邏輯 AND 或邏輯 OR，這些是條件邏輯運算子評估的一部分。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>此繫結器的評估會在檢查的內容中進行。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>繫結器表示陣列建立運算式中使用的隱含轉換。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>繫結器表示明確轉換。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>繫結器表示在簡單名稱上叫用。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>繫結器表示在 Specialname 上叫用。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>此繫結器不需要額外的資訊。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>繫結器用於不需要結果的位置，因此可以繫結至傳回 Void 的方法。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>任何繫結的結果都會變成索引的 get 索引或 set 索引，或 get 索引繫結器。</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>此 set 索引或 set 成員中的值為複合指派運算子。</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>表示在處理 C# 執行階段繫結器中的動態繫結時所發生的錯誤。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 類別的新執行個體。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 類別的新執行個體，這個執行個體有指定的錯誤訊息。</summary>
+      <param name="message">說明例外狀況的訊息。這個建構函式的呼叫端必須確保這個字串已經為目前系統的文化特性當地語系化。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> 類別的新執行個體，這個執行個體有指定的錯誤訊息和造成這個例外狀況發生之內部例外狀況的參考。</summary>
+      <param name="message">解釋例外狀況原因的錯誤訊息。</param>
+      <param name="innerException">導致目前例外狀況發生的例外狀況，如果沒有指定內部例外狀況則為 null 參考。</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>表示在處理 C# 執行階段繫結器中的動態繫結時所發生的錯誤。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>以系統提供的錯誤說明訊息，初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 類別的新執行個體。</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>使用指定的錯誤說明訊息，初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 類別的新執行個體。</summary>
+      <param name="message">說明例外狀況的訊息。這個建構函式的呼叫端必須確保這個字串已經為目前系統的文化特性當地語系化。</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>初始化 <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> 類別的新執行個體，這個執行個體有指定的錯誤訊息和造成這個例外狀況發生之內部例外狀況的參考。</summary>
+      <param name="message">解釋例外狀況原因的錯誤訊息。</param>
+      <param name="innerException">導致目前例外狀況發生的例外狀況，如果沒有指定內部例外狀況則為 null 參考。</param>
+    </member>
+  </members>
+</doc>
