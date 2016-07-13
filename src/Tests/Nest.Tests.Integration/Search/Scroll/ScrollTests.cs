@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
-using FluentAssertions;
 
 namespace Nest.Tests.Integration.Search.Scroll
 {
@@ -107,6 +107,19 @@ namespace Nest.Tests.Integration.Search.Scroll
 				hitCount += results.Hits.Count();
 			}
 			Assert.AreEqual(scanResults.Total, hitCount);
+		}
+
+		private readonly string _scrollId = "c2Nhbjs1Ozc3NjgyOjYwZFRpNmJwVGZPdUpRNkh2cmRBSmc7Nzc2ODU6NjBkVGk2YnBUZk91SlE2SHZyZEFKZzs3NzY4NDo2MGRUaTZicFRmT3VKUTZIdnJkQUpnOzc3NjgxOjYwZFRpNmJwVGZPdUpRNkh2cmRBSmc7Nzc2ODM6NjBkVGk2YnBUZk91SlE2SHZyZEFKZzsxO3RvdGFsX2hpdHM6Mjs=";
+		[Test]
+		public void DoesNotThrowOnBase64()
+		{
+			var results = this.Client.Scroll<ElasticsearchProject>(s =>s
+				.Scroll("4s")
+				.ScrollId(_scrollId));
+
+			results.IsValid.Should().BeFalse();
+			results.RequestInformation.HttpStatusCode.Should().Be(503);
+
 		}
 	}
 }
