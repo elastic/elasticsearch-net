@@ -259,6 +259,12 @@ This will execute the same request, but this time `myJson` will be serialized by
 
 [Pull requests](https://github.com/elastic/elasticsearch-net/pulls) and [issues](https://github.com/elastic/elasticsearch-net/issues) are very much welcomed and appreciated.  If you'd like to report a bug or submit a feature/bug fix then please read our [contributing guide](contributing.md) first!
 
+## Blog posts 
+
+Starting this section (2016) to list blogposts from our users that might be super helpful in your journey to learn Elasticsearch from a .NET perspective
+
+- Read how buildclassifieds are using [ElasticSearch with ServiceStack (.NET)](http://buildclassifieds.com/2016/01/22/elasticsearch-and-servicestack/) in helping build a Classifieds Site.
+
 #### Many thanks to:
 * [Q42](https://q42.nl/) for supporting the development of NEST
 * [redgate](http://www.red-gate.com) for supplying @Mpdreamz with an ANTS Memory Profiler 8 & ANTS Performance Profiler 8 licenses
