@@ -71,6 +71,8 @@ launchSettings.json
 # https://github.com/elastic/elasticsearch-net/pull/1822#issuecomment-183722698
 *.project.lock.json
 project.lock.json
+.vs
+.vs/*
 
 .idea/
 *.sln.iml
