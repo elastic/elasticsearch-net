@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -25,11 +23,11 @@ namespace Nest
 					return g;
 
 				case "category":
+				default:
 					var c = new CategorySuggestContext();
 					serializer.Populate(jo.CreateReader(), c);
 					return c;
 			}
-			return null;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) { }

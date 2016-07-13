@@ -1,5 +1,5 @@
 ﻿# mode either u (unit test), i (integration test) or m (mixed mode)
-mode: u
+mode: m
 # the elasticsearch version that should be started
 # Can be a snapshot version of sonatype or "latest" to get the latest snapshot of sonatype
 elasticsearch_version: 5.0.0-alpha3

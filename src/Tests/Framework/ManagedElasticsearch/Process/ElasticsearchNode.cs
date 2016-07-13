@@ -2,15 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading;
 using Elasticsearch.Net;
 using Nest;
-using Tests.Framework;
-using System.Xml.Linq;
 using Tests.Framework.Versions;
 #if !DOTNETCORE
 using XplatManualResetEvent = System.Threading.ManualResetEvent;
