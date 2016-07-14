@@ -114,12 +114,3 @@ new SearchRequest<Project>()
     }
   }
 }
-----
-
-=== Handling Responses
-
-[source,csharp]
-----
-response.IsValid.Should().BeTrue();
-----
-
