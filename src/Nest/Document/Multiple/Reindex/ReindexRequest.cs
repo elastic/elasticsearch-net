@@ -93,16 +93,9 @@ namespace Nest
 		public ReindexDescriptor<T> AllTypes() => this.Type(Types.AllTypes);
 
 		/// <summary>
-		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from
-		/// the index we're reindexing from
+		/// CreateIndex selector if not explicitly specified will reuse settings from the originating index
 		/// </summary>
 		public ReindexDescriptor<T> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
 			Assign(a => a.CreateIndexRequest = createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(a.From)));
-
-		/// <summary>
-		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from
-		/// the index we're reindexing from
-		/// </summary>
-		public ReindexDescriptor<T> CreateIndex(ICreateIndexRequest createIndexRequest) => Assign(a => a.CreateIndexRequest = createIndexRequest);
 	}
 }
