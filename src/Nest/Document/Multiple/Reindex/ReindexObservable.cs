@@ -9,9 +9,9 @@ namespace Nest
 	{
 		private readonly IReindexRequest _reindexRequest;
 		private readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IElasticClient _client;
 
-		private IElasticClient _client { get; set; }
-		public Action<IHit<T>, T, IBulkIndexOperation<T>> Alter { get; private set; }
+		private Action<IHit<T>, T, IBulkIndexOperation<T>> Alter { get; set; }
 
 		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest reindexRequest)
 		{
@@ -57,17 +57,20 @@ namespace Nest
 			observer.OnCompleted();
 		}
 
+		private ElasticsearchClientException Throw(string message, IApiCallDetails details) =>
+			new ElasticsearchClientException(PipelineFailure.BadResponse, message, details);
+
 		private void ScrollToCompletion(IObserver<IReindexResponse<T>> observer, string fromIndex, string toIndex, Time scroll, ISearchResponse<T> searchResult)
 		{
 			if (searchResult == null || !searchResult.IsValid)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Reindexing to {toIndex} failed unexpectedly during searching index {fromIndex}.", searchResult.ApiCall);
+				throw Throw($"Reindexing to {toIndex} failed unexpectedly during searching index {fromIndex}.", searchResult?.ApiCall);
 			IBulkResponse indexResult = null;
 			int page = 0;
 			while (searchResult.IsValid && searchResult.Documents.HasAny())
 			{
 				indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				if (indexResult == null || !indexResult.IsValid)
-					throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Reindexing to {toIndex} failed unexpectedly during bulk indexing.", indexResult?.ApiCall);
+					throw Throw($"Reindexing to {toIndex} failed unexpectedly during bulk indexing.", indexResult?.ApiCall);
 				observer.OnNext(new ReindexResponse<T>()
 				{
 					BulkResponse = indexResult,
@@ -77,7 +80,7 @@ namespace Nest
 				page++;
 				searchResult = this._client.Scroll<T>(scroll, searchResult.ScrollId);
 				if (searchResult == null || !searchResult.IsValid)
-					throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Reindexing to {toIndex} failed unexpectedly during searching index {fromIndex}.", searchResult.ApiCall);
+					throw Throw($"Reindexing to {toIndex} failed unexpectedly during searching index {fromIndex}.", searchResult?.ApiCall);
 			}
 		}
 
@@ -92,7 +95,7 @@ namespace Nest
 				Scroll = scroll
 			});
 			if (searchResult.Total <= 0)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
+				throw Throw($"Source index {fromIndex} doesn't contain any documents.", searchResult.ApiCall);
 			return searchResult;
 		}
 
@@ -104,13 +107,13 @@ namespace Nest
 			var createIndexRequest = this._reindexRequest.CreateIndexRequest ?? new CreateIndexRequest(resolvedTo, originalIndexState);
 			var createIndexResponse = this._client.CreateIndex(createIndexRequest);
 			if (!createIndexResponse.IsValid)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed to create destination index {resolvedTo}.", createIndexResponse.ApiCall);
+				throw Throw($"Failed to create destination index {resolvedTo}.", createIndexResponse.ApiCall);
 		}
 
 		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult, IObserver<IReindexResponse<T>> observer, IndexName toIndex, int page)
 		{
 			if (!searchResult.IsValid)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Indexing failed on scroll #{page}.", searchResult.ApiCall);
+				throw Throw($"Indexing failed on scroll #{page}.", searchResult.ApiCall);
 
 			var hits = searchResult.Hits.ToList();
 			var bulkOperations = new List<IBulkOperation>(hits.Count);
@@ -132,7 +135,7 @@ namespace Nest
 
 			var indexResult = this._client.Bulk(new BulkRequest { Operations = bulkOperations });
 			if (!indexResult.IsValid)
-				throw new ElasticsearchClientException(PipelineFailure.BadResponse, $"Failed indexing page {page}.", indexResult.ApiCall);
+				throw Throw($"Failed indexing page {page}.", indexResult.ApiCall);
 
 			return indexResult;
 		}

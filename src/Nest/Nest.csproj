@@ -539,6 +539,10 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-Bulk.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
+    <Compile Include="Document\Multiple\PartitionedBulk\ElasticClient-PartitionedBulk.cs" />
+    <Compile Include="Document\Multiple\PartitionedBulk\BulkObservable.cs" />
+    <Compile Include="Document\Multiple\PartitionedBulk\PartitionedBulkRequest.cs" />
+    <Compile Include="Document\Multiple\PartitionedBulk\PartitionedBulkObserver.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexDestination.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRouting.cs" />
     <Compile Include="Document\Multiple\ReindexOnServer\ReindexRoutingJsonConverter.cs" />
