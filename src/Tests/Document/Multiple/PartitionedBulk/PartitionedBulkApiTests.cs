@@ -7,10 +7,10 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.Document.Multiple.PartitionedBulk
+namespace Tests.Document.Multiple.BulkAll
 {
 	[Collection(TypeOfCluster.Indexing)]
-	public class PartitionedBulkApiTests : SerializationTestBase
+	public class BulkAllApiTests : SerializationTestBase
 	{
 		private class SmallObject
 		{
@@ -27,7 +27,7 @@ namespace Tests.Document.Multiple.PartitionedBulk
 				yield return new SmallObject() { Id = i };
 		}
 
-		public PartitionedBulkApiTests(IndexingCluster cluster, EndpointUsage usage)
+		public BulkAllApiTests(IndexingCluster cluster, EndpointUsage usage)
 		{
 			this._client = cluster.Client();
 		}
@@ -43,16 +43,16 @@ namespace Tests.Document.Multiple.PartitionedBulk
 			var documents = this.CreateLazyStreamOfDocuments(numberOfDocuments);
 
 			//first we setup our cold observable
-			var observableBulk = this._client.PartitionedBulk(documents, f => f
+			var observableBulk = this._client.BulkAll(documents, f => f
 				.MaxDegreeOfParallelism(8)
-				.BackOff(TimeSpan.FromSeconds(10))
-				.NumberOfBackOffRetries(2)
+				.BackOffTime(TimeSpan.FromSeconds(10))
+				.BackOffRetries(2)
 				.Size(size)
 				.RefreshOnCompleted()
 				.Index(IndexName)
 			);
 			//we set up an observer
-			var bulkObserver = new PartitionedBulkObserver(
+			var bulkObserver = new BulkAllObserver(
 				onError: (e) => { throw e; },
 				onCompleted: () => handle.Set(),
 				onNext: (b) => Interlocked.Increment(ref seenPages)

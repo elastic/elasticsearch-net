@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace Nest
 {
-	public class PartitionedBulkObserver : CoordinatedRequestObserverBase<IBulkResponse>
+	public class BulkAllObserver : CoordinatedRequestObserverBase<IBulkAllResponse>
 	{
 		private long _totalNumberOfFailedBuffers;
 		private long _totalNumberOfRetries;
@@ -14,8 +14,8 @@ namespace Nest
 		internal void IncrementTotalNumberOfRetries() => Interlocked.Increment(ref _totalNumberOfRetries);
 		internal void IncrementTotalNumberOfFailedBuffers() => Interlocked.Increment(ref _totalNumberOfFailedBuffers);
 
-		public PartitionedBulkObserver(
-			Action<IBulkResponse> onNext = null,
+		public BulkAllObserver(
+			Action<IBulkAllResponse> onNext = null,
 			Action<Exception> onError = null,
 			Action onCompleted = null
 			)
