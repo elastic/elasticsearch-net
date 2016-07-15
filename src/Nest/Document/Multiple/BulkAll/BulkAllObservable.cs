@@ -20,9 +20,18 @@ namespace Nest
 		private Action _incrementFailed = () => { };
 		private Action _incrementRetries = () => { };
 
+		private readonly CancellationToken _cancelToken;
+		private readonly CancellationToken _compositeCancelToken;
+		private readonly CancellationTokenSource _compositeCancelTokenSource;
+
 		private Func<IBulkResponse, bool> HandleErrors { get; set; }
 
-		public BulkAllObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, IBulkAllRequest<T> partionedBulkRequest)
+		public BulkAllObservable(
+			IElasticClient client,
+			IConnectionSettingsValues connectionSettings,
+			IBulkAllRequest<T> partionedBulkRequest,
+			CancellationToken cancellationToken = default(CancellationToken)
+			)
 		{
 			this._client = client;
 			this._connectionSettings = connectionSettings;
@@ -33,6 +42,9 @@ namespace Nest
 			this._maxDegreeOfParallelism = this._partionedBulkRequest.MaxDegreeOfParallelism.HasValue
 				? this._partionedBulkRequest.MaxDegreeOfParallelism.Value
 				: 20;
+			this._cancelToken = cancellationToken;
+			this._compositeCancelTokenSource = CancellationTokenSource.CreateLinkedTokenSource(this._cancelToken);
+			this._compositeCancelToken = this._compositeCancelTokenSource.Token;
 		}
 
 		public IDisposable Subscribe(BulkAllObserver observer)
@@ -64,23 +76,37 @@ namespace Nest
 			var documents = this._partionedBulkRequest.Documents;
 			var partioned = new PartitionHelper<T>(documents, this._bulkSize, this._maxDegreeOfParallelism);
 			partioned.ForEachAsync(
-				(buffer, page) => BulkAsync(buffer, page, 0),
+				(buffer, page) => this.BulkAsync(buffer, page, 0),
 				(buffer, response) => observer.OnNext(response),
-				() =>
-				{
+				t => OnCompleted(t, observer)
+			);
+		}
+
+		private void OnCompleted(Task task, IObserver<IBulkAllResponse> observer)
+		{
+			switch (task.Status)
+			{
+				case TaskStatus.RanToCompletion:
 					if (this._partionedBulkRequest.RefreshOnCompleted)
 					{
 						var refresh = this._client.Refresh(this._partionedBulkRequest.Index);
 						if (!refresh.IsValid) throw Throw($"Refreshing after all documents have indexed failed", refresh.ApiCall);
 					}
 					observer.OnCompleted();
-
-				}
-			);
+					break;
+				case TaskStatus.Faulted:
+					observer.OnError(task.Exception.InnerException);
+					break;
+				case TaskStatus.Canceled:
+					observer.OnError(new TaskCanceledException(task));
+					break;
+			}
 		}
 
 		private async Task<IBulkAllResponse> BulkAsync(IList<T> buffer, long page, int backOffRetries)
 		{
+			this._compositeCancelToken.ThrowIfCancellationRequested();
+
 			var r = this._partionedBulkRequest;
 			var response = await this._client.BulkAsync(s =>
 			{
@@ -90,7 +116,9 @@ namespace Nest
 				if (!string.IsNullOrEmpty(r.Routing)) s.Pipeline(r.Routing);
 				if (r.Consistency.HasValue) s.Consistency(r.Consistency.Value);
 				return s;
-			});
+			}, this._compositeCancelToken);
+
+			this._compositeCancelToken.ThrowIfCancellationRequested();
 			if (!response.IsValid && backOffRetries < this._backOffRetries)
 			{
 				this._incrementRetries();
@@ -149,7 +177,7 @@ namespace Nest
 			public Task ForEachAsync<TResult>(
 				Func<IList<TDocument>, long, Task<TResult>> taskSelector,
 				Action<IList<TDocument>, TResult> resultProcessor,
-				Action onCompleted
+				Action<Task> done
 			)
 			{
 				var semaphore = new SemaphoreSlim(initialCount: _semaphoreSize, maxCount: _semaphoreSize);
@@ -157,8 +185,7 @@ namespace Nest
 				return Task.WhenAll(
 						from item in this
 						select ProcessAsync(item, taskSelector, resultProcessor, semaphore, page++)
-					)
-					.ContinueWith((t) => onCompleted());
+					).ContinueWith(done);
 			}
 
 			private async Task ProcessAsync<TSource, TResult>(
@@ -174,10 +201,19 @@ namespace Nest
 					var result = await taskSelector(item, page);
 					resultProcessor(item, result);
 				}
+				catch
+				{
+					throw;
+				}
 				finally { if (semaphoreSlim != null) semaphoreSlim.Release(); }
 			}
 		}
 
-		public void Dispose() { }
+		public bool IsDisposed { get; private set; }
+		public void Dispose()
+		{
+			this.IsDisposed = true;
+			this._compositeCancelTokenSource?.Cancel();
+		}
 	}
 }

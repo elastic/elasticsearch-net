@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Nest
 {
@@ -10,7 +11,11 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector">the descriptor to describe the reindex operation</param>
 		/// <returns>An IObservable&lt;IBulkAllResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		BulkAllObservable<T> BulkAll<T>(IEnumerable<T> documents, Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector = null)
+		BulkAllObservable<T> BulkAll<T>(
+			IEnumerable<T> documents,
+			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+			)
 			where T : class;
 
 		/// <summary>
@@ -18,19 +23,23 @@ namespace Nest
 		/// </summary>
 		/// <param name="request">a request object to describe the reindex operation</param>
 		/// <returns>An IObservable&lt;IBulkAllResponse&lt;T&gt;$gt; you can subscribe to to listen to the progress of the reindex process</returns>
-		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request) where T : class;
+		BulkAllObservable<T> BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken)) where T : class;
 	}
 
 	public partial class ElasticClient
 	{
 		///<inheritdoc />
-		public BulkAllObservable<T>  BulkAll<T>(IEnumerable<T> documents, Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector = null)
+		public BulkAllObservable<T>  BulkAll<T>(
+			IEnumerable<T> documents,
+			Func<BulkAllDescriptor<T>, IBulkAllRequest<T>> selector,
+			CancellationToken cancellationToken = default(CancellationToken)
+			)
 			where T : class =>
-			this.BulkAll<T>(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)));
+			this.BulkAll<T>(selector.InvokeOrDefault(new BulkAllDescriptor<T>(documents)), cancellationToken);
 
 		///<inheritdoc />
-		public BulkAllObservable<T>  BulkAll<T>(IBulkAllRequest<T> request)
+		public BulkAllObservable<T>  BulkAll<T>(IBulkAllRequest<T> request, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class =>
-			new BulkAllObservable<T>(this, ConnectionSettings, request);
+			new BulkAllObservable<T>(this, ConnectionSettings, request, cancellationToken);
 	}
 }

@@ -215,7 +215,7 @@
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyApiTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\GetManyUrlTests.cs" />
-    <Compile Include="Document\Multiple\PartitionedBulk\PartitionedBulkApiTests.cs" />
+    <Compile Include="Document\Multiple\BulkAll\BulkAllApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleApiTests.cs" />
     <Compile Include="Document\Multiple\ReindexRethrottle\ReindexRethrottleUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexIngestApiTests.cs" />
