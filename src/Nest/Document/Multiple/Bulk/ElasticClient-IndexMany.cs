@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Nest
@@ -25,7 +26,7 @@ namespace Nest
 			var bulkRequest = CreateIndexBulkRequest(objects, index, type);
 			return client.Bulk(bulkRequest);
 		}
-		
+
 
 		/// <summary>
 		/// Shortcut into the Bulk call that indexes the specified objects
@@ -36,13 +37,13 @@ namespace Nest
 		/// <param name="objects">List of objects to index, Id will be inferred (Id property or IdProperty attribute on type)</param>
 		/// <param name="index">Override the inferred indexname for T</param>
 		/// <param name="type">Override the inferred typename for T</param>
-		public static Task<IBulkResponse> IndexManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, string index = null, string type = null)
+		public static Task<IBulkResponse> IndexManyAsync<T>(this IElasticClient client, IEnumerable<T> objects, string index = null, string type = null, CancellationToken cancellationToken = default(CancellationToken))
 			where T : class
 		{
 			var bulkRequest = CreateIndexBulkRequest(objects, index, type);
-			return client.BulkAsync(bulkRequest);
+			return client.BulkAsync(bulkRequest, cancellationToken);
 		}
-		
+
 		private static BulkRequest CreateIndexBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			@objects.ThrowIfEmpty(nameof(objects));
