@@ -42,7 +42,7 @@ namespace Elasticsearch.Net
 				var failureReason = FailureReason.GetStringValue();
 				if (this.FailureReason == PipelineFailure.Unexpected && (this.AuditTrail.HasAny()))
 				{
-					failureReason = this.AuditTrail.Last().Event.GetStringValue();
+					failureReason = "Unrecoverable/Unexpected " + this.AuditTrail.Last().Event.GetStringValue();
 				}
 
 				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} {Request.Uri}");

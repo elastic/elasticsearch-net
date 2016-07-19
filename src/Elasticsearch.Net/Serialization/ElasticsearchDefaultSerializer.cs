@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 		{
 			if (stream == null)
 				return default(T);
-			
+
 			using (var ms = new MemoryStream())
 			using (stream)
 			{
@@ -45,7 +45,7 @@ namespace Elasticsearch.Net
 
 		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			var serialized = SimpleJson.SerializeObject(data);
+			var serialized = SimpleJson.SerializeObject(data, ElasticsearchDefaultSerializer.Strategy);
 			if (formatting == SerializationFormatting.None)
 				serialized = RemoveNewLinesAndTabs(serialized);
 			using (var ms = new MemoryStream(serialized.Utf8Bytes()))
