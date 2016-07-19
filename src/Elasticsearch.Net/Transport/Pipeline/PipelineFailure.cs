@@ -9,6 +9,7 @@
 		CouldNotStartSniffOnStartup,
 		MaxTimeoutReached,
 		MaxRetriesReached,
-		Unexpected
-	}	
+		Unexpected,
+		BadRequest
+	}
 }

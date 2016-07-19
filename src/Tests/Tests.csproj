@@ -586,6 +586,7 @@
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
+    <Compile Include="Reproduce\GithubIssue2052.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreUsageTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsApiTests.cs" />
     <Compile Include="XPack\Security\ClearCachedRealms\ClearCachedRealmsUrlTests.cs" />

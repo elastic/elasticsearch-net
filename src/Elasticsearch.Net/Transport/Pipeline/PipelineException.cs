@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
 {
@@ -13,7 +9,8 @@ namespace Elasticsearch.Net
 		public IApiCallDetails Response { get; internal set; }
 
 		public bool Recoverable =>
-			FailureReason == PipelineFailure.BadResponse
+			FailureReason == PipelineFailure.BadRequest
+			|| FailureReason == PipelineFailure.BadResponse
 			|| FailureReason == PipelineFailure.PingFailure;
 			//|| FailureReason == FailureReason.Unexpected;
 
@@ -39,8 +36,10 @@ namespace Elasticsearch.Net
 		{
 			switch(failure)
 			{
+				case PipelineFailure.BadRequest:
+					return "An error occurred trying to write the request datato the specified node.";
 				case PipelineFailure.BadResponse:
-					return "An error occurred trying to establish a connection with the specified node.";
+					return "An error occurred trying to read the response from the specified node.";
 				case PipelineFailure.BadAuthentication:
 					return "Could not authenticate with the specified node. Try verifying your credentials or check your Shield configuration.";
 				case PipelineFailure.PingFailure:

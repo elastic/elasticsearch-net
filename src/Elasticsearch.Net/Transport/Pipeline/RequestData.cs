@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Purify;
 
 namespace Elasticsearch.Net
@@ -18,6 +17,9 @@ namespace Elasticsearch.Net
 		public HttpMethod Method { get; private set; }
 		public string Path { get; }
 		public PostData<object> PostData { get; }
+		public bool MadeItToResponse { get; set;}
+		public AuditEvent OnFailureAuditEvent => this.MadeItToResponse ? AuditEvent.BadResponse : AuditEvent.BadRequest;
+		public PipelineFailure OnFailurePipelineFailure => this.MadeItToResponse ? PipelineFailure.BadResponse : PipelineFailure.BadRequest;
 
 		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
@@ -107,6 +109,7 @@ namespace Elasticsearch.Net
 				path += "&" + queryString.Substring(1, queryString.Length - 1);
 			return path;
 		}
+
 
 		protected bool Equals(RequestData other) =>
 			RequestTimeout.Equals(other.RequestTimeout)

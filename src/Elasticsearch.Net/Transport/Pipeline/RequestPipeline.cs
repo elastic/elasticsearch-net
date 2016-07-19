@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using static Elasticsearch.Net.AuditEvent;
@@ -242,7 +241,7 @@ namespace Elasticsearch.Net
 					var response = this._connection.Request<VoidResponse>(pingData);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
+					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure) { Response = response };
 				}
 				catch (Exception e)
 				{
@@ -266,7 +265,7 @@ namespace Elasticsearch.Net
 					var response = await this._connection.RequestAsync<VoidResponse>(pingData, cancellationToken).ConfigureAwait(false);
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
 					//ping should not silently accept bad but valid http responses
-					if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
+					if (!response.Success) throw new PipelineException(pingData.OnFailurePipelineFailure) { Response = response };
 				}
 				catch (Exception e)
 				{
@@ -320,7 +319,7 @@ namespace Elasticsearch.Net
 						var response = this._connection.Request<SniffResponse>(requestData);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
+						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { Response = response };
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						this.Refresh = true;
@@ -353,7 +352,7 @@ namespace Elasticsearch.Net
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData, cancellationToken).ConfigureAwait(false);
 						ThrowBadAuthPipelineExceptionWhenNeeded(response);
 						//sniff should not silently accept bad but valid http responses
-						if (!response.Success) throw new PipelineException(PipelineFailure.BadResponse) { Response = response };
+						if (!response.Success) throw new PipelineException(requestData.OnFailurePipelineFailure) { Response = response };
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
 						return;
@@ -383,13 +382,13 @@ namespace Elasticsearch.Net
 					response = this._connection.Request<TReturn>(requestData);
 					response.AuditTrail = this.AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					if (!response.Success) audit.Event = AuditEvent.BadResponse;
+					if (!response.Success) audit.Event = requestData.OnFailureAuditEvent;
 					return response;
 				}
 				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
-					audit.Event = AuditEvent.BadResponse;
+					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;
 				}
@@ -409,13 +408,13 @@ namespace Elasticsearch.Net
 					response = await this._connection.RequestAsync<TReturn>(requestData, cancellationToken).ConfigureAwait(false);
 					response.AuditTrail = this.AuditTrail;
 					ThrowBadAuthPipelineExceptionWhenNeeded(response);
-					if (!response.Success) audit.Event = AuditEvent.BadResponse;
+					if (!response.Success) audit.Event = requestData.OnFailureAuditEvent;
 					return response;
 				}
 				catch (Exception e)
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
-					audit.Event = AuditEvent.BadResponse;
+					audit.Event = requestData.OnFailureAuditEvent;
 					audit.Exception = e;
 					throw;
 				}
@@ -426,7 +425,7 @@ namespace Elasticsearch.Net
 			where TReturn : class
 		{
 			var callDetails = response ?? pipelineExceptions.LastOrDefault()?.Response;
-			var pipelineFailure = PipelineFailure.BadResponse;
+			var pipelineFailure = data.OnFailurePipelineFailure;
 			if (pipelineExceptions.HasAny())
 				pipelineFailure = pipelineExceptions.Last().FailureReason;
 

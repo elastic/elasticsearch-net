@@ -17,6 +17,7 @@ namespace Elasticsearch.Net
 		HealthyResponse,
 
 		MaxTimeoutReached,
-		MaxRetriesReached
+		MaxRetriesReached,
+		BadRequest
 	}
 }
