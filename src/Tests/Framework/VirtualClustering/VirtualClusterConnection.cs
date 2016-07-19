@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
 using Tests.Framework.MockResponses;
-using System.Net;
 
 namespace Tests.Framework
 {
@@ -96,6 +96,9 @@ namespace Tests.Framework
 			Func<TRule, byte[]> successResponse
 			) where TReturn : class where TRule : IRule
 		{
+			//TODO Make this pluggable?
+			requestData.MadeItToResponse = true;
+
 			var state = this.Calls[requestData.Uri.Port];
 			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
 			{
