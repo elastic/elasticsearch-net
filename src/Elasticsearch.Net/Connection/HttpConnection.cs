@@ -132,6 +132,7 @@ namespace Elasticsearch.Net
 							data.Write(stream, requestData.ConnectionSettings);
 					}
 				}
+				requestData.MadeItToResponse = true;
 
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't
@@ -168,6 +169,7 @@ namespace Elasticsearch.Net
 							await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
 					}
 				}
+				requestData.MadeItToResponse = true;
 
 				//http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.getresponsestream.aspx
 				//Either the stream or the response object needs to be closed but not both although it won't

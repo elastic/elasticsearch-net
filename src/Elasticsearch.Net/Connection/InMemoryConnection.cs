@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net
@@ -47,6 +45,7 @@ namespace Elasticsearch.Net
 						data.Write(stream, requestData.ConnectionSettings);
 				}
 			}
+			requestData.MadeItToResponse = true;
 
 			var builder = new ResponseBuilder<TReturn>(requestData)
 			{
@@ -74,6 +73,7 @@ namespace Elasticsearch.Net
 						await data.WriteAsync(stream, requestData.ConnectionSettings).ConfigureAwait(false);
 				}
 			}
+			requestData.MadeItToResponse = true;
 
 			var builder = new ResponseBuilder<TReturn>(requestData)
 			{

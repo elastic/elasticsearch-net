@@ -83,6 +83,7 @@ namespace Elasticsearch.Net
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				var response = client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
+				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)
@@ -104,6 +105,7 @@ namespace Elasticsearch.Net
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
 				var response = await client.SendAsync(requestMessage, requestData.CancellationToken).ConfigureAwait(false);
+				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
 
 				if (response.Content != null)

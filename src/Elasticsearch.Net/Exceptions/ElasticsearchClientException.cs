@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Elasticsearch.Net
@@ -16,7 +17,7 @@ namespace Elasticsearch.Net
 
 		public ElasticsearchClientException(string message) : base(message)
 		{
-			this.FailureReason = Net.PipelineFailure.Unexpected;
+			this.FailureReason = PipelineFailure.Unexpected;
 		}
 
 		public ElasticsearchClientException(PipelineFailure failure, string message, Exception innerException)
@@ -38,7 +39,13 @@ namespace Elasticsearch.Net
 			get
 			{
 				var sb = new StringBuilder();
-				sb.AppendLine($"# FailureReason: {FailureReason.GetStringValue()} when trying to {Request.Method.GetStringValue()} {Request.Uri}");
+				var failureReason = FailureReason.GetStringValue();
+				if (this.FailureReason == PipelineFailure.Unexpected && (this.AuditTrail.HasAny()))
+				{
+					failureReason = this.AuditTrail.Last().Event.GetStringValue();
+				}
+
+				sb.AppendLine($"# FailureReason: {failureReason} while attempting {Request.Method.GetStringValue()} {Request.Uri}");
 				if (this.Response != null)
 					ResponseStatics.DebugInformationBuilder(this.Response, sb);
 				else
