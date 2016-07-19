@@ -2,10 +2,10 @@
 
 namespace Nest
 {
-    /// <summary>
-    /// The reindex response for a reindexing step
-    /// </summary>
-    public interface IReindexResponse<T> where T : class
+	/// <summary>
+	/// The reindex response for a reindexing step
+	/// </summary>
+	public interface IReindexResponse<T> where T : class
     {
         /// <summary>
         /// The bulk result indexing the search results into the new index.
@@ -39,7 +39,7 @@ namespace Nest
 
 		public int Scroll { get; internal set; }
 
-		public bool IsValid => 
+		public bool IsValid =>
 			this.BulkResponse != null && this.BulkResponse.IsValid
 			&& this.SearchResponse != null && this.SearchResponse.IsValid;
 	}

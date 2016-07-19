@@ -82,7 +82,7 @@ namespace Tests.Document.Multiple.Reindex
 
 			var manyTypesObserver = new ReindexObserver<ILazyDocument>(
 				onError: (e) => { throw e; },
-				completed: () => ReindexManyTypesCompleted(handles),
+				onCompleted: () => ReindexManyTypesCompleted(handles),
 				alter: (h, d, i) =>
 				{
 					//This would be a great place to alter the
@@ -99,7 +99,7 @@ namespace Tests.Document.Multiple.Reindex
 
 			var singleTypeObserver = new ReindexObserver<Project>(
 				onError: (e) => { throw e; },
-				completed: () => ReindexSingleTypeCompleted(handles)
+				onCompleted: () => ReindexSingleTypeCompleted(handles)
 			);
 
 			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);

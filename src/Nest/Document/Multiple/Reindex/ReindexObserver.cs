@@ -9,9 +9,9 @@ namespace Nest
 		public ReindexObserver(
 			Action<IReindexResponse<T>> onNext = null,
 			Action<Exception> onError = null,
-			Action completed = null,
+			Action onCompleted = null,
 			Action<IHit<T>, T, IBulkIndexOperation<T>> alter = null)
-			: base(onNext, onError, completed)
+			: base(onNext, onError, onCompleted)
 		{
 			this.Alter = null;
 		}
