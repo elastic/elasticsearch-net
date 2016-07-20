@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
-using Nest;
+﻿using System.Threading.Tasks;
 using Tests.Framework;
 using static Elasticsearch.Net.AuditEvent;
 
@@ -69,6 +66,30 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways(503))
+				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
+				.StaticConnectionPool()
+				.Settings(s => s.DisablePing())
+			);
+
+			audit = await audit.TraceCall(
+				new ClientCall {
+					{ BadResponse, 9200 },
+					{ HealthyResponse, 9201 },
+				}
+			);
+		}
+
+		/**[[service-unavailable]]
+		*=== 504 Gateway Timeout
+		*
+		* Will be treated as an error that requires retrying
+		*/
+		[U]
+		public async Task Http504FallsOver()
+		{
+			var audit = new Auditor(() => Framework.Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.FailAlways(504))
 				.ClientCalls(r => r.OnPort(9201).SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())

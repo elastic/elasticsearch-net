@@ -73,6 +73,7 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public bool SuccessOrKnownError =>
 			this.Success || (HttpStatusCode >= 400 && HttpStatusCode < 599
+				&& HttpStatusCode != 504 //Gateway timeout needs to be retried
 				&& HttpStatusCode != 503 //service unavailable needs to be retried
 				&& HttpStatusCode != 502 //bad gateway needs to be retried
 			);
