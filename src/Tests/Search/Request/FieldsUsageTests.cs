@@ -24,7 +24,7 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			fields = new[] { "name", "startedOn" }
+			fields = new[] { "name", "startedOn", "dateString" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
