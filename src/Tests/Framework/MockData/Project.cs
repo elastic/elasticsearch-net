@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Bogus;
 using Nest;
@@ -14,6 +15,7 @@ namespace Tests.Framework.MockData
 		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
 		public DateTime StartedOn { get; set; }
+		public string DateString { get; set; }
 		public DateTime LastActivity { get; set; }
 		public Developer LeadDeveloper { get; set; }
 		public IEnumerable<Tag> Tags { get; set; }
@@ -29,6 +31,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
+				.RuleFor(p => p.DateString, (p, d) => d.StartedOn.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"))
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
@@ -60,6 +63,7 @@ namespace Tests.Framework.MockData
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
+			DateString = new DateTime(2015, 1, 1).ToString(CultureInfo.InvariantCulture),
 			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
 		};
 
@@ -69,6 +73,7 @@ namespace Tests.Framework.MockData
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
+			dateString = "2015-01-01T00:00:00",
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
 		};

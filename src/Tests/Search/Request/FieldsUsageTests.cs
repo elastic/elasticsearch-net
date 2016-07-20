@@ -12,8 +12,8 @@ namespace Tests.Search.Request
 {
 	/** Allows to selectively load specific stored fields for each document represented by a search hit.
 	*
-	* WARNING: The `fields` parameter is about fields that are explicitly marked as stored in the mapping, 
-	* which is off by default and generally not recommended. 
+	* WARNING: The `fields` parameter is about fields that are explicitly marked as stored in the mapping,
+	* which is off by default and generally not recommended.
 	* Use <<source-filtering-usage,source filtering>> instead to select subsets of the original source document to be returned.
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-fields.html[Fields] for more detail.
@@ -31,12 +31,13 @@ namespace Tests.Search.Request
 			.Fields(fs => fs
 				.Field(p => p.Name)
 				.Field(p => p.StartedOn)
+				.Field(p => p.DateString)
 			);
 
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = Fields<Project>(p => p.Name, p => p.StartedOn)
+				Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.DateString)
 			};
 
 		[I] protected Task FieldsAreReturned() => this.AssertOnAllResponses(r =>
@@ -45,12 +46,16 @@ namespace Tests.Search.Request
 			r.Fields.Count().Should().BeGreaterThan(0);
 			foreach (var fieldValues in r.Fields)
 			{
-				fieldValues.Count().Should().Be(2);
+				fieldValues.Count().Should().Be(3);
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();
 
 				var dateTime = fieldValues.ValueOf<Project, DateTime>(p => p.StartedOn);
 				dateTime.Should().BeAfter(default(DateTime));
+
+				var dateTimeAsString = fieldValues.ValueOf<Project, string>(p => p.DateString);
+				dateTimeAsString.Should().NotContain("/")
+					.And.MatchRegex(@"^\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d.*$");
 			}
 		});
 	}
