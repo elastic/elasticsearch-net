@@ -207,12 +207,23 @@ namespace Nest
 
 		private static void Set<T>(IIndexSettings s, IDictionary<string, JProperty> settings, string key, Action<T> assign, JsonSerializer serializer = null)
 		{
+			if (!settings.ContainsKey(key)) key = ToCamelCase(key);
 			if (!settings.ContainsKey(key)) return;
+
 			var v = settings[key];
 			T value = serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer);
 			assign(value);
 			s.Add(key, value);
 			settings.Remove(key);
 		}
+		private static string ToCamelCase(string indexSettingKey) =>
+			string.Join(".", indexSettingKey
+				.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries)
+				.Select(t=>t
+					.Split(new[] { "_" }, StringSplitOptions.RemoveEmptyEntries)
+					.Select((s,i) => i == 0 ? s : char.ToUpperInvariant(s[0]) + s.Substring(1, s.Length - 1))
+					.Aggregate(string.Empty, (s1, s2) => s1 + s2)
+				)
+			);
 	}
 }

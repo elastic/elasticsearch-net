@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 
@@ -34,7 +35,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 			};
 
 			/**
-			 * 
+			 *
 			 */
 			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Setting("any.setting", "can be set")
@@ -80,6 +81,25 @@ namespace Tests.IndexModules.IndexSettings.Settings
 					RefreshInterval = -1,
 					FileSystemStorageImplementation = FileSystemStorageImplementation.MMap
 				};
+		}
+
+
+		public class CamelCaseSettingsAreReadCorrectlyTests : SerializationTestBase
+		{
+			[U] public void CamelCasedTypedSettings()
+			{
+				var indexSettings = new Nest.IndexSettings
+				{
+					{ "index.numberOfShards", 2 }
+				};
+				var settings = this.Serialize(indexSettings);
+				var deserizalized = this.Deserialize<Nest.IndexSettings>(settings);
+
+				deserizalized.NumberOfShards.Should().Be(2);
+
+
+
+			}
 		}
 	}
 }
