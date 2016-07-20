@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -16,38 +17,65 @@ namespace Elasticsearch.Net
 			if (input is Exception)
 			{
 				var e = input as Exception;
-				var o = new JsonObject();
-
-				var si = new SerializationInfo(e.GetType(), new FormatterConverter());
-				var sc = new StreamingContext();
-				e.GetObjectData(si, sc);
-
-				var helpUrl = si.GetString("HelpURL");
-				var stackTrace = si.GetString("StackTraceString");
-				var remoteStackTrace = si.GetString("RemoteStackTraceString");
-				var remoteStackIndex = si.GetInt32("RemoteStackIndex");
-				var exceptionMethod = si.GetString("ExceptionMethod");
-				var hresult = si.GetInt32("HResult");
-				var source = si.GetString("Source");
-				var className = si.GetString("ClassName");
-
-				//TODO Loop over ISerializable data
-
-				o.Add("ClassName", className);
-				o.Add("Message", e.Message);
-				o.Add("Source", source);
-				o.Add("StackTraceString", stackTrace);
-				o.Add("RemoteStackTraceString", remoteStackTrace);
-				o.Add("RemoteStackIndex", remoteStackIndex);
-				o.Add("HResult", hresult);
-				o.Add("HelpURL", helpUrl);
-				this.WriteStructuredExceptionMethod(o, exceptionMethod);
-
-				output = o;
+				var exceptionsJson = this.FlattenExceptions(e).ToList();
+				var array = new JsonArray(exceptionsJson.Count);
+				array.AddRange(exceptionsJson);
+				output = array;
 				return true;
 
 			}
 			return base.TrySerializeNonPrimitiveObject(input, out output);
+		}
+
+
+		private IEnumerable<JsonObject> FlattenExceptions(Exception e)
+		{
+			int depth = 0;
+			int maxExceptions = 20;
+			do
+			{
+				JsonObject o = ToExceptionJsonObject(e, depth);
+				depth++;
+				yield return o;
+				e = e.InnerException;
+
+			}
+			while (depth < maxExceptions && e != null);
+		}
+
+
+
+
+		private JsonObject ToExceptionJsonObject(Exception e, int depth)
+		{
+			var o = new JsonObject();
+
+			var si = new SerializationInfo(e.GetType(), new FormatterConverter());
+			var sc = new StreamingContext();
+			e.GetObjectData(si, sc);
+
+			var helpUrl = si.GetString("HelpURL");
+			var stackTrace = si.GetString("StackTraceString");
+			var remoteStackTrace = si.GetString("RemoteStackTraceString");
+			var remoteStackIndex = si.GetInt32("RemoteStackIndex");
+			var exceptionMethod = si.GetString("ExceptionMethod");
+			var hresult = si.GetInt32("HResult");
+			var source = si.GetString("Source");
+			var className = si.GetString("ClassName");
+
+			//TODO Loop over ISerializable data
+
+			o.Add("Depth", depth);
+			o.Add("ClassName", className);
+			o.Add("Message", e.Message);
+			o.Add("Source", source);
+			o.Add("StackTraceString", stackTrace);
+			o.Add("RemoteStackTraceString", remoteStackTrace);
+			o.Add("RemoteStackIndex", remoteStackIndex);
+			o.Add("HResult", hresult);
+			o.Add("HelpURL", helpUrl);
+			this.WriteStructuredExceptionMethod(o, exceptionMethod);
+			return o;
 		}
 
 		private void WriteStructuredExceptionMethod(JsonObject o, string exceptionMethodString)
@@ -74,7 +102,6 @@ namespace Elasticsearch.Net
 			exceptionMethod.Add("Signature", signature);
 			exceptionMethod.Add("MemberType", memberType);
 			o.Add("ExceptionMethod", exceptionMethod);
-
 		}
 
 
