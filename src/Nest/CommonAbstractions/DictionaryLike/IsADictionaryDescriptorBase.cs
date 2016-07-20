@@ -7,10 +7,10 @@ namespace Nest
 
 	public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IIsADictionary
 	{
-		
+
 	}
 
-	public abstract class IsADictionaryDescriptorBase<TDescriptor, TInterface, TKey, TValue> 
+	public abstract class IsADictionaryDescriptorBase<TDescriptor, TInterface, TKey, TValue>
 		: DescriptorPromiseBase<TDescriptor, TInterface>
 		where TDescriptor : IsADictionaryDescriptorBase<TDescriptor, TInterface, TKey, TValue>
 		where TInterface : class, IIsADictionary<TKey, TValue>

@@ -2,7 +2,6 @@
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
 
 namespace Tests.Aggregations.Bucket.Children
 {
@@ -32,6 +31,10 @@ namespace Tests.Aggregations.Bucket.Children
 						max_per_child = new
 						{
 							max = new { field = "confidenceFactor" }
+						},
+						min_per_child = new
+						{
+							min = new { field = "confidenceFactor" }
 						}
 					}
 				}
@@ -44,6 +47,7 @@ namespace Tests.Aggregations.Bucket.Children
 					.Aggregations(childAggs => childAggs
 						.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 						.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 					)
 				)
 			);
@@ -54,8 +58,9 @@ namespace Tests.Aggregations.Bucket.Children
 				Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
 				{
 					Aggregations =
-						new AverageAggregation("average_per_child", "confidenceFactor") &&
-						new MaxAggregation("max_per_child", "confidenceFactor")
+						new AverageAggregation("average_per_child", "confidenceFactor")
+						&& new MaxAggregation("max_per_child", "confidenceFactor")
+						&& new MinAggregation("min_per_child", "confidenceFactor")
 				}
 			};
 	}

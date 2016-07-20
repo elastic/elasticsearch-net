@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.Aggregations.Visitor;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -606,6 +607,32 @@ namespace Nest
 		{
 			if (visitor.Scope == AggregationVisitorScope.Unknown) visitor.Scope = AggregationVisitorScope.Aggregation;
 			new AggregationWalker().Walk(this, visitor);
+		}
+
+		//always evaluate to false so that each side of && equation is evaluated
+		public static bool operator false(AggregationContainerDescriptor<T> a) => false;
+
+		//always evaluate to false so that each side of && equation is evaluated
+		public static bool operator true(AggregationContainerDescriptor<T> a) => false;
+
+
+		public static AggregationContainerDescriptor<T> operator &(AggregationContainerDescriptor<T> left, AggregationContainerDescriptor<T> right)
+		{
+			var d = new AggregationContainerDescriptor<T>();
+			var leftAggs = (IDictionary<string, IAggregationContainer>)((IAggregationContainer)left).Aggregations;
+			var rightAggs = (IDictionary<string, IAggregationContainer>)((IAggregationContainer)right).Aggregations;
+			foreach(var kv in rightAggs)
+			{
+				if (leftAggs.ContainsKey(kv.Key))
+				{
+					var message = $"Can not merge two {nameof(AggregationContainerDescriptor<T>)}'s";
+					message += $" {kv.Key} is defined in both";
+					throw new Exception(message);
+				}
+				leftAggs.Add(kv.Key, kv.Value);
+			}
+			((IAggregationContainer)d).Aggregations = ((IAggregationContainer)left).Aggregations;
+			return d;
 		}
 	}
 }
