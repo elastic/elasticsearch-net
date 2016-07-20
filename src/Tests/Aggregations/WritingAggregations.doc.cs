@@ -1,13 +1,13 @@
 ﻿using System;
-using Nest;
-using Tests.Framework;
-using Tests.Framework.MockData;
-using static Nest.Infer;
 using System.Collections.Generic;
 using System.Linq;
-using Tests.Aggregations.Bucket.Children;
-using Tests.Framework.Integration;
 using FluentAssertions;
+using Nest;
+using Tests.Aggregations.Bucket.Children;
+using Tests.Framework;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
+using static Nest.Infer;
 
 namespace Tests.Aggregations
 {
@@ -52,6 +52,13 @@ namespace Tests.Aggregations
 							{
 								field = "confidenceFactor"
 							}
+						},
+						min_per_child = new
+						{
+							min = new
+							{
+								field = "confidenceFactor"
+							}
 						}
 					}
 				}
@@ -68,6 +75,7 @@ namespace Tests.Aggregations
 					.Aggregations(childAggs => childAggs
 						.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 						.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 					)
 				)
 			);
@@ -85,6 +93,7 @@ namespace Tests.Aggregations
 					Aggregations =
 						new AverageAggregation("average_per_child", "confidenceFactor")
 						&& new MaxAggregation("max_per_child", "confidenceFactor")
+						&& new MinAggregation("min_per_child", "confidenceFactor")
 				}
 			};
 	}
@@ -106,6 +115,7 @@ namespace Tests.Aggregations
 					Aggregations =
 						new AverageAggregation("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 						&& new MaxAggregation("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+						&& new MinAggregation("min_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
 				}
 			};
 	}
@@ -125,7 +135,8 @@ namespace Tests.Aggregations
 				var aggregations = new List<Func<AggregationContainerDescriptor<CommitActivity>, IAggregationContainer>> //<1> a list of aggregation functions to apply
 				{
 					a => a.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
-					a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					a => a.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor)),
+					a => a.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 				};
 
 				return s => s
@@ -140,6 +151,30 @@ namespace Tests.Aggregations
 		}
 	}
 
+	public class AndMultipleDescriptorsUsage : Usage
+	{
+		/**
+		 * Combining multipe `AggregationDescriptor`'s is also possible using the bitwise `&` operator
+			*/
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent
+		{
+			get
+			{
+				var aggregations = new AggregationContainerDescriptor<CommitActivity>()
+					.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+					&& new AggregationContainerDescriptor<CommitActivity>()
+						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor));
+
+				return s => s
+					.Aggregations(aggs => aggs
+						.Children<CommitActivity>("name_of_child_agg", child => child
+							.Aggregations(childAggs => aggregations)
+						)
+					);
+			}
+		}
+	}
 	/**[[aggs-vs-aggregations]]
 	*=== Aggs vs. Aggregations
 	*
@@ -161,6 +196,7 @@ namespace Tests.Aggregations
 					.Aggregations(childAggs => childAggs
 						.Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 						.Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+						.Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
 					)
 				)
 			);
