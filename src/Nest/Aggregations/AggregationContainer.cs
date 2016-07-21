@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Aggregations.Visitor;
 using Newtonsoft.Json;
 
 namespace Nest

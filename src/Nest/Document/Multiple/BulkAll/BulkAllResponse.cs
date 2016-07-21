@@ -6,18 +6,18 @@ namespace Nest
 	///
 	/// </summary>
 	public interface IBulkAllResponse
-    {
-        /// <summary>This is the Nth buffer.</summary>
+	{
+		/// <summary>This is the Nth buffer.</summary>
 		long Page { get; }
 
-        /// <summary>The number of back off retries were needed to store this document.</summary>
+		/// <summary>The number of back off retries were needed to store this document.</summary>
 		int Retries { get; }
-    }
+	}
 
-    /// <summary>
-    /// POCO representing the reindex response for a each step
-    /// </summary>
-    [JsonObject]
+	/// <summary>
+	/// POCO representing the reindex response for a each step
+	/// </summary>
+	[JsonObject]
 	public class BulkAllResponse : IBulkAllResponse
 	{
 		/// <inheritdoc />
