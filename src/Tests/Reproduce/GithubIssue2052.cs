@@ -18,7 +18,11 @@ namespace Tests.Reproduce
 		private static object _bulkHeader =
 			 new { index = new { _index = "myIndex", _type = "myDocumentType" } };
 		private readonly ElasticLowLevelClient _client;
+#if !DOTNETCORE
 		private AssemblyName _assemblyName = new AssemblyName(typeof(GithubIssue2052).Assembly.FullName);
+#else
+		private AssemblyName _assemblyName = new AssemblyName(typeof(GithubIssue2052).GetTypeInfo().Assembly.FullName);
+#endif
 
 		public GithubIssue2052()
 		{
@@ -73,7 +77,7 @@ namespace Tests.Reproduce
 			int maxExceptions = 20;
 			do
 			{
-
+#if !DOTNETCORE
 				var si = new SerializationInfo(e.GetType(), new FormatterConverter());
 				var sc = new StreamingContext();
 				e.GetObjectData(si, sc);
@@ -86,6 +90,16 @@ namespace Tests.Reproduce
 				var hresult = si.GetInt32("HResult");
 				var source = si.GetString("Source");
 				var className = si.GetString("ClassName");
+#else
+				var helpUrl = e.HelpLink;
+				var stackTrace = e.StackTrace;
+				var remoteStackTrace = string.Empty;
+				var remoteStackIndex = string.Empty;
+				var exceptionMethod = string.Empty;
+				var hresult = e.HResult;
+				var source = e.Source;
+				var className = string.Empty;
+#endif
 
 				yield return new
 				{
@@ -98,7 +112,9 @@ namespace Tests.Reproduce
 					RemoteStackIndex = remoteStackIndex,
 					HResult = hresult,
 					HelpURL = helpUrl,
+#if !DOTNETCORE
 					ExceptionMethod = this.WriteStructuredExceptionMethod(exceptionMethod)
+#endif
 				};
 				depth++;
 				e = e.InnerException;
