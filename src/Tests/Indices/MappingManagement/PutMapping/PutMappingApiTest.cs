@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -49,6 +48,10 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 					},
 					type = "object"
+				},
+				dateString = new
+				{
+					type = "string"
 				},
 				description = new
 				{

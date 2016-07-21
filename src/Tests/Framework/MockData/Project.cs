@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using Bogus;
 using Nest;
@@ -63,7 +62,7 @@ namespace Tests.Framework.MockData
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1),
-			DateString = new DateTime(2015, 1, 1).ToString(CultureInfo.InvariantCulture),
+			DateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			Location = new SimpleGeoPoint { Lat = 42.1523, Lon = -80.321 }
 		};
 
@@ -73,7 +72,7 @@ namespace Tests.Framework.MockData
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
-			dateString = "2015-01-01T00:00:00",
+			dateString = new DateTime(2015, 1, 1).ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz"),
 			leadDeveloper = new { gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman" },
 			location = new { lat = Instance.Location.Lat, lon = Instance.Location.Lon }
 		};
