@@ -49,10 +49,11 @@ namespace Elasticsearch.Net
 		private JsonObject ToExceptionJsonObject(Exception e, int depth)
 		{
 			var o = new JsonObject();
-
+#if !DOTNETCORE
 			var si = new SerializationInfo(e.GetType(), new FormatterConverter());
 			var sc = new StreamingContext();
 			e.GetObjectData(si, sc);
+			//TODO Loop over ISerializable data
 
 			var helpUrl = si.GetString("HelpURL");
 			var stackTrace = si.GetString("StackTraceString");
@@ -62,8 +63,16 @@ namespace Elasticsearch.Net
 			var hresult = si.GetInt32("HResult");
 			var source = si.GetString("Source");
 			var className = si.GetString("ClassName");
-
-			//TODO Loop over ISerializable data
+#else
+			var helpUrl = e.HelpLink;
+			var stackTrace = e.StackTrace;
+			var remoteStackTrace = string.Empty;
+			var remoteStackIndex = string.Empty;
+			var exceptionMethod = string.Empty;
+			var hresult = e.HResult;
+			var source = e.Source;
+			var className = string.Empty;
+#endif
 
 			o.Add("Depth", depth);
 			o.Add("ClassName", className);
@@ -74,7 +83,9 @@ namespace Elasticsearch.Net
 			o.Add("RemoteStackIndex", remoteStackIndex);
 			o.Add("HResult", hresult);
 			o.Add("HelpURL", helpUrl);
+#if !DOTNETCORE
 			this.WriteStructuredExceptionMethod(o, exceptionMethod);
+#endif
 			return o;
 		}
 
