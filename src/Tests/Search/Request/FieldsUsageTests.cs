@@ -24,7 +24,7 @@ namespace Tests.Search.Request
 
 		protected override object ExpectJson => new
 		{
-			fields = new[] { "name", "startedOn", "dateString", "numberOfCommits" }
+			fields = new[] { "name", "startedOn", "numberOfCommits", "dateString" }
 		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -51,7 +51,7 @@ namespace Tests.Search.Request
 				var name = fieldValues.Value<string>(Field<Project>(p => p.Name));
 				name.Should().NotBeNullOrWhiteSpace();
 
-				
+
 				var numCommits = fieldValues.ValueOf<Project, int?>(p => p.NumberOfCommits);
 				numCommits.Should().BeGreaterThan(0);
 

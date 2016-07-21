@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -208,6 +209,7 @@ namespace Tests.Framework.Integration
 
 			var exceptionMessageStart = "Server has license plugin installed, ";
 #if DOTNETCORE
+			//TODO Why is this here hardcoded ?
 			var licensePath = @"C:\license.json";
 			var licenseFile = File.Exists(licensePath) ? licensePath : string.Empty;
 #else

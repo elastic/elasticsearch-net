@@ -62,7 +62,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				},
 				dateString = new
 				{
-					type = "string"
+					type = "text"
 				},
 				description = new
 				{
@@ -188,6 +188,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 					)
 				)
 				.Text(t => t.Name(p => p.Description))
+				.Text(t => t.Name(p => p.DateString))
 				.Text(s => s
 					.Name(p => p.Name)
 					.Index(false)
@@ -240,6 +241,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 						}
 				},
 				{ p => p.Description, new TextProperty() },
+				{ p => p.DateString, new TextProperty { } },
 				{ p => p.LastActivity, new DateProperty() },
 				{ p => p.LeadDeveloper, new ObjectProperty
 						{
@@ -270,7 +272,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.Name, new TextProperty { Index = false }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
 				{ p => p.StartedOn, new DateProperty() },
-				{ p => p.DateString, new TextProperty { } },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
 				{ p => p.Tags, new ObjectProperty

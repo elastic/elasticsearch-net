@@ -79,7 +79,7 @@ namespace Elasticsearch.Net
 			try
 			{
 				var requestMessage = CreateHttpRequestMessage(requestData);
-				var response = client.SendAsync(requestMessage, requestData.CancellationToken).GetAwaiter().GetResult();
+				var response = client.SendAsync(requestMessage).GetAwaiter().GetResult();
 				requestData.MadeItToResponse = true;
 				builder.StatusCode = (int)response.StatusCode;
 
