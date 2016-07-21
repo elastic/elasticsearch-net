@@ -75,8 +75,6 @@ namespace Nest
 						using (var sr = new StringReader(s))
 						using (var jr = new JsonTextReader(sr) { DateParseHandling = DateParseHandling.None })
 							return ForceNoDateInferrence.Deserialize<K>(jr);
-
-						return array.Root.ToObject<K>(ForceNoDateInferrence);
 					}
 					return array.ToObject<K>();
 				}

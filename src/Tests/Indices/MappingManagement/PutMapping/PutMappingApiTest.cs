@@ -187,7 +187,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 		{
 			Properties = new Properties<Project>
 			{
-
 				{ p => p.CuratedTags, new ObjectProperty
 						{
 							Properties = new Properties<Tag>
@@ -227,6 +226,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) { Index = NonStringIndexOption.NotAnalyzed } },
 				{ p => p.StartedOn, new DateProperty { Index = NonStringIndexOption.No } },
+				{ p => p.DateString, new StringProperty { } },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
 				{ p => p.Tags, new ObjectProperty
