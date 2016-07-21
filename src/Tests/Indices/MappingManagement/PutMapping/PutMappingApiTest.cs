@@ -270,6 +270,7 @@ namespace Tests.Indices.MappingManagement.PutMapping
 				{ p => p.Name, new TextProperty { Index = false }  },
 				{ p => p.NumberOfCommits, new NumberProperty(NumberType.Integer) },
 				{ p => p.StartedOn, new DateProperty() },
+				{ p => p.DateString, new TextProperty { } },
 				{ p => p.State, new NumberProperty(NumberType.Integer) },
 				{ p => p.Suggest, new CompletionProperty() },
 				{ p => p.Tags, new ObjectProperty
