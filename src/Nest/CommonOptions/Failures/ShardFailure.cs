@@ -42,5 +42,8 @@ namespace Nest
 	{
 		public string Type { get; internal set; }
 		public string Reason { get; internal set; }
+
+		[JsonProperty("caused_by")]
+		public CausedBy InnerCausedBy { get; internal set; }
 	}
 }
