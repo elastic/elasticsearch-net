@@ -112,6 +112,7 @@ namespace Elasticsearch.Net
 	{
 		public string Reason { get; set; }
 		public string Type { get; set; }
+		public CausedBy InnerCausedBy { get; set; }
 
 		internal static CausedBy Create(IDictionary<string, object> dict, IJsonSerializerStrategy strategy)
 		{
@@ -120,10 +121,16 @@ namespace Elasticsearch.Net
 			if (dict.TryGetValue("reason", out reason)) causedBy.Reason = Convert.ToString(reason);
 			object type;
 			if (dict.TryGetValue("type", out type)) causedBy.Type = Convert.ToString(type);
+			object innerCausedBy;
+			if (dict.TryGetValue("caused_by", out innerCausedBy))
+				causedBy.InnerCausedBy = (CausedBy)strategy.DeserializeObject(innerCausedBy, typeof(CausedBy));
+
 			return causedBy;
 		}
 
-		public override string ToString() => $"Type: {this.Type} Reason: \"{this.Reason}\"";
+		public override string ToString() => this.InnerCausedBy == null
+			? $"Type: {this.Type} Reason: \"{this.Reason}\""
+			: $"Type: {this.Type} Reason: \"{this.Reason}\" CausedBy: \"{this.InnerCausedBy}\"";
 	}
 
 	public class RootCause : IRootCause
