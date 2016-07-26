@@ -41,7 +41,7 @@ namespace Nest
 
 	public class UpdateByQueryResponse : ResponseBase, IUpdateByQueryResponse
 	{
-		public override bool IsValid => this.ApiCall?.HttpStatusCode == 200 || !this.Failures.HasAny();
+		public override bool IsValid => this.ApiCall?.HttpStatusCode == 200 && !this.Failures.HasAny();
 
 		public long Took { get; internal set; }
 
