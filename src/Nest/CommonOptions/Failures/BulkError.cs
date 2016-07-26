@@ -17,6 +17,9 @@ namespace Nest
 		[JsonProperty("reason")]
 		public string Reason { get; internal set; }
 
-		public override string ToString() => $"Type: {Type} Reason: \"{Reason}\"";
+		[JsonProperty("caused_by")]
+		public CausedBy CausedBy { get; internal set; }
+
+		public override string ToString() => $"Type: {Type} Reason: \"{Reason}\" CausedBy: \"{CausedBy}\"";
 	}
 }
