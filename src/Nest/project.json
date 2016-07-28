@@ -1,5 +1,5 @@
 {
-  "version": "2.4.1",
+  "version": "2.4.2",
   "authors": [
     "Elastic and contributors"
   ],
@@ -25,7 +25,7 @@
       "type": "git",
       "url": "https://github.com/elastic/elasticsearch-net"
     },
-    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.4.1"
+    "releaseNotes": "See https://github.com/elastic/elasticsearch-net/releases/tag/2.4.2"
   },
 
   "copyright": "2014-2016 Elasticsearch BV",
