@@ -3,15 +3,17 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.Framework;
 
 namespace Tests.Aggregations.Metric.GeoCentroid
 {
 	/**
-	 * A metric aggregation that computes the weighted centroid from all coordinate values 
+	 * A metric aggregation that computes the weighted centroid from all coordinate values
 	 * for a Geo-point datatype field.
-	 * 
+	 *
 	 * Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
 	 */
+	[SkipVersion("<2.1.0", "")]
 	public class GeoCentroidAggregationUsageTests : AggregationUsageTestBase
 	{
 		public GeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
@@ -55,11 +57,11 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 		}
 	}
 
-	/** 
+	/**
 	 *[float]
-	 *[[geo-centroid-sub-aggregation]] 
-	 *== Geo Centroid Sub Aggregation 
-	 * 
+	 *[[geo-centroid-sub-aggregation]]
+	 *== Geo Centroid Sub Aggregation
+	 *
 	 * The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 	 */
 	public class NestedGeoCentroidAggregationUsageTests : AggregationUsageTestBase
