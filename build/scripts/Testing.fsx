@@ -73,7 +73,7 @@ module Tests =
             |> Seq.map Paths.Quote
             |> Seq.iter(fun project -> 
                 Tooling.DotNet.Exec runtime TestFailure "." ["restore"; project;]
-                Tooling.DotNet.Exec runtime TestFailure "." ["test"; project;]) 
+                Tooling.DotNet.Exec runtime TestFailure "." ["test"; project; "-xml"; Paths.Output("TestResults.xml")]) 
 
     let RunUnitTests() =
         !! Paths.Source("Tests/project.json") 
