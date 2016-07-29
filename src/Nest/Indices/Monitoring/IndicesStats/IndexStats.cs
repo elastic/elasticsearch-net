@@ -50,9 +50,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "translog")]
 		public TranslogStats Translog { get; set; }
 
-		[JsonProperty(PropertyName = "suggest")]
-		public SuggestStats Suggest { get; set; }
-
 		[JsonProperty(PropertyName = "request_cache")]
 		public RequestCacheStats RequestCache { get; set; }
 
