@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\net45\</OutputPath>
+    <OutputPath>..\Nest\bin\Net45\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -503,7 +503,6 @@
     <Compile Include="CommonOptions\Stats\SearchStats.cs" />
     <Compile Include="CommonOptions\Stats\SegmentsStats.cs" />
     <Compile Include="CommonOptions\Stats\StoreStats.cs" />
-    <Compile Include="CommonOptions\Stats\SuggestStats.cs" />
     <Compile Include="CommonOptions\Stats\TranslogStats.cs" />
     <Compile Include="CommonOptions\Stats\WarmerStats.cs" />
     <Compile Include="CommonOptions\TimeUnit\Time.cs" />
