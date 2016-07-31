@@ -91,7 +91,9 @@ namespace Tests.CommonOptions.TimeUnit
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
-			(twoDays >= new Time("2d")).Should().BeTrue();
+
+            (twoDays != null).Should().BeTrue();
+            (twoDays >= new Time("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(twoWeeks);
 			(twoDays < twoWeeks).Should().BeTrue();
@@ -101,9 +103,10 @@ namespace Tests.CommonOptions.TimeUnit
 			/**
 			* And assert equality
 			*/
-			twoDays.Should().Be(new Time("2d"));
-			(twoDays == new Time("2d")).Should().BeTrue();
+			twoDays.Should().Be(new Time("2d"));        
+            (twoDays == new Time("2d")).Should().BeTrue();
 			(twoDays != new Time("2.1d")).Should().BeTrue();
+		    
 			(new Time("2.1d") == new Time(TimeSpan.FromDays(2.1))).Should().BeTrue();
 			(new Time("1") == new Time(1)).Should().BeTrue();
 			(new Time("-1") == new Time(-1)).Should().BeTrue();
