@@ -18,13 +18,5 @@ namespace Tests.Framework
 			}
 		}
 	}
-
-	public static class ZipFile
-	{
-		public static void ExtractToDirectory(string file, string directory)
-		{
-			throw new NotImplementedException("TODO");
-		}
-	}
 }
 #endif

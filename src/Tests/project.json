@@ -54,7 +54,8 @@
         "System.Diagnostics.Tools": "4.0.1",
         "System.Net.Http": "4.1.0",
         "System.Reflection": "4.1.0",
-        "System.Runtime": "4.1.0"
+        "System.Runtime": "4.1.0",
+        "System.IO.Compression.ZipFile":  "4.0.1" 
       },
       "imports": [
         "dnxcore50",
