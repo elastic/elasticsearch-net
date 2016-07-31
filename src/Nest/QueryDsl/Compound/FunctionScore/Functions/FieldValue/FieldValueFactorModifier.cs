@@ -9,7 +9,7 @@ namespace Nest
 	{
 		[EnumMember(Value = "none")]
 		None,
-		[EnumMember(Value = "count")]
+		[EnumMember(Value = "log")]
 		Log,
 		[EnumMember(Value = "log1p")]
 		Log1P,
