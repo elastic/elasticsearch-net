@@ -79,10 +79,9 @@ namespace Nest
 		public static bool operator >=(Time left, Time right) => left.CompareTo(right) > 0 || left.Equals(right);
 
 		public static bool operator ==(Time left, Time right) =>
-			object.ReferenceEquals(left, null) ? object.ReferenceEquals(right, null) : left.Equals(right);
+			ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.Equals(right);
 
-		public static bool operator !=(Time left, Time right) =>
-			!object.ReferenceEquals(left, null) && !object.ReferenceEquals(right, null) && !left.Equals(right);
+	    public static bool operator !=(Time left, Time right) => !(left == right);
 
 		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
 
@@ -96,7 +95,7 @@ namespace Nest
 		{
 			if (ReferenceEquals(null, other)) return false;
 			if (ReferenceEquals(this, other)) return true;
-			return (this.ApproximateMilliseconds == other.ApproximateMilliseconds);
+			return this.ApproximateMilliseconds == other.ApproximateMilliseconds;
 		}
 
 		public override bool Equals(object obj)

@@ -91,7 +91,8 @@ namespace Tests.CommonOptions.TimeUnit
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 			(oneAndHalfYear > twoWeeks).Should().BeTrue();
 			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
-			(twoDays >= new Time("2d")).Should().BeTrue();
+		    (twoDays != null).Should().BeTrue();
+            (twoDays >= new Time("2d")).Should().BeTrue();
 
 			twoDays.Should().BeLessThan(twoWeeks);
 			(twoDays < twoWeeks).Should().BeTrue();
