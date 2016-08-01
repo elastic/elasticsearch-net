@@ -87,6 +87,8 @@ namespace Nest
 		public long Timestamp { get; internal set; }
 		[JsonProperty("load_average")]
 		public float LoadAverage { get; internal set; }
+		[JsonProperty("percent")]
+		public float Percent { get; internal set; }
 
 		[JsonProperty("mem")]
 		public ExtendedMemoryStats Memory { get; internal set; }
