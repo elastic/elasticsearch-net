@@ -19,10 +19,10 @@ namespace Nest
 		protected ElasticContractResolver ContractResolver { get; }
 
 		//todo this internal smells
-		internal JsonSerializer Serializer => _defaultSerializer;
+		internal JsonSerializer Serializer => _defaultSerializer.Value;
 
-		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
-		private readonly JsonSerializer _defaultSerializer;
+		private readonly Lazy<Dictionary<SerializationFormatting, JsonSerializer>> _defaultSerializers;
+		private readonly Lazy<JsonSerializer> _defaultSerializer;
 
 		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings) { }
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
@@ -30,29 +30,30 @@ namespace Nest
 		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
 
 		/// <summary>
-		/// this constructor is only here for stateful (de)serialization 
+		/// this constructor is only here for stateful (de) serialization
 		/// </summary>
 		internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
 			this.Settings = settings;
 			var piggyBackState = stateFullConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = stateFullConverter };
+
 			// ReSharper disable once VirtualMemberCallInContructor
 			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
-			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
-			//this._defaultSerializer.Formatting = Formatting.None; 
-			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
-			//indentedSerializer.Formatting = Formatting.Indented; 
-			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
+			this._defaultSerializer = new Lazy<JsonSerializer>(() => JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None)));
+
+			var indentedSerializer = new Lazy<JsonSerializer>(() => JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented)));
+
+			this._defaultSerializers = new Lazy<Dictionary<SerializationFormatting, JsonSerializer>>(() => new Dictionary<SerializationFormatting, JsonSerializer>()
 			{
-				{ SerializationFormatting.None, this._defaultSerializer },
-				{ SerializationFormatting.Indented, indentedSerializer }
-			};
+				{ SerializationFormatting.None, this._defaultSerializer.Value },
+				{ SerializationFormatting.Indented, indentedSerializer.Value }
+			});
 		}
 
 		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			var serializer = _defaultSerializers[formatting];
+			var serializer = _defaultSerializers.Value[formatting];
 			using (var writer = new StreamWriter(writableStream, ExpectedEncoding, 8096, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
@@ -87,7 +88,7 @@ namespace Nest
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = this._defaultSerializer.Deserialize(jsonTextReader, typeof(T));
+				var t = this.Serializer.Deserialize(jsonTextReader, typeof(T));
 				return (T)t;
 			}
 		}
