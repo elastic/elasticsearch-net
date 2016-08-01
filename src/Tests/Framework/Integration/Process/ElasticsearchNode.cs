@@ -132,7 +132,7 @@ namespace Tests.Framework.Integration
 			{
 				$"es.cluster.name={this.ClusterName}",
 				$"es.node.name={this.NodeName}",
-				$"es.path.repo={this.RepositoryPath}",
+				$"es.path.repo=\"{this.RepositoryPath}\"",
 				$"es.script.inline=on",
 				$"es.script.indexed=on",
 				$"es.http.compression=true",
