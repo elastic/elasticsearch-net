@@ -35,7 +35,7 @@ type Release() =
         !! "build/output/_packages/*-ci*.nupkg"
         |> Seq.iter(fun f -> 
             let source = "https://www.myget.org/F/"+ feed + "/api/v2/package"
-            let success = Tooling.Nuget.Exec ["push"; f; accessKey; "-source"; source] 
+            let success = Tooling.Nuget.Exec ["push"; f; accessKey; "-source"; source; "-verbosity"; "detailed"; "-noninteractive"] 
             match success with
             | 0 -> traceFAKE "publish to myget succeeded" |> ignore
             | _ -> failwith "publish to myget failed" |> ignore
