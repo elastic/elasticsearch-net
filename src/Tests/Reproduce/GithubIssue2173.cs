@@ -11,8 +11,7 @@ namespace Tests.Reproduce
 {
 	public class GithubIssue2173
 	{
-		[I]
-		public void UpdateByQueryWithInvalidScript()
+		[I] public void UpdateByQueryWithInvalidScript()
 		{
 			var client = TestClient.GetClient();
 			var response = client.UpdateByQuery<Project>(typeof(Project), typeof(Project), u => u
