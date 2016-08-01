@@ -38,7 +38,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.DateString, p =>p.NumberOfCommits)
+				Fields = Fields<Project>(p => p.Name, p => p.StartedOn, p => p.NumberOfCommits, p => p.DateString)
 			};
 
 		[I] protected Task FieldsAreReturned() => this.AssertOnAllResponses(r =>
