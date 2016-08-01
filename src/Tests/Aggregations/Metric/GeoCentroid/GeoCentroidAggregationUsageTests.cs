@@ -64,6 +64,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 	 *
 	 * The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 	 */
+	[SkipVersion("<2.1.0", "")]
 	public class NestedGeoCentroidAggregationUsageTests : AggregationUsageTestBase
 	{
 		public NestedGeoCentroidAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
