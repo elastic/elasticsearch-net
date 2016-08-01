@@ -179,7 +179,12 @@ namespace Tests.Framework.Integration
 					.Fielddata()
 				)
 				.Date(d => d
+					.Store()
 					.Name(p => p.StartedOn)
+				)
+				.Text(d => d
+					.Store()
+					.Name(p => p.DateString)
 				)
 				.Keyword(d => d
 					.Name(p => p.State)
