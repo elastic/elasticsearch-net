@@ -28,5 +28,7 @@ namespace Nest
 
 		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<GeoCoordinate>>> coordinates) =>
 			Assign(a => a.Shape = new MultiPolygonGeoShape { Coordinates = coordinates });
+
+
 	}
 }

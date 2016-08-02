@@ -28,6 +28,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
 			Shape = new MultiPointGeoShape(this._coordinates),
+			Relation = GeoShapeRelation.Intersects,
 			IgnoreUnmapped = false
 		};
 
@@ -37,6 +38,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 				.Boost(1.1)
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
+				.Relation(GeoShapeRelation.Intersects)
 				.IgnoreUnmapped()
 			);
 

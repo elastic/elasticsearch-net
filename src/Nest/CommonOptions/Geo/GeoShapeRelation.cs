@@ -12,6 +12,8 @@ namespace Nest
 		[EnumMember(Value = "disjoint")]
 		Disjoint,
 		[EnumMember(Value = "within")]
-		Within
+		Within,
+		[EnumMember(Value = "contains")]
+		Contains
 	}
 }

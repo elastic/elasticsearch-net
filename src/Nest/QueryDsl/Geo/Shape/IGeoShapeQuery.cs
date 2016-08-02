@@ -7,6 +7,12 @@ namespace Nest
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		/// <summary>
+		/// Controls the spatial relation operator to used at search time.
+		/// </summary>
+		[JsonProperty("relation")]
+		GeoShapeRelation? Relation { get; set; }
+
+		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
 		/// </summary>
@@ -16,6 +22,11 @@ namespace Nest
 
 	public abstract class GeoShapeQueryBase : FieldNameQueryBase, IGeoShapeQuery
 	{
+		/// <summary>
+		/// Controls the spatial relation operator to used at search time.
+		/// </summary>
+		public GeoShapeRelation? Relation { get; set; }
+
 		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.
 		/// This can be useful when querying multiple indexes which might have different mappings.
@@ -30,6 +41,12 @@ namespace Nest
 		where T : class
 	{
 		bool? IGeoShapeQuery.IgnoreUnmapped { get; set; }
+		GeoShapeRelation? IGeoShapeQuery.Relation { get; set; }
+
+		/// <summary>
+		/// Controls the spatial relation operator to used at search time.
+		/// </summary>
+		public TDescriptor Relation(GeoShapeRelation relation) => Assign(a => a.Relation = relation);
 
 		/// <summary>
 		/// Will ignore an unmapped field and will not match any documents for this query.

@@ -36,6 +36,7 @@ namespace Nest
 			JToken shape;
 			JToken indexedShape;
 			IGeoShapeQuery query = null;
+
 			if (jo.TryGetValue("shape", out shape))
 				query = ParseShape(shape, serializer);
 			else if (jo.TryGetValue("indexed_shape", out indexedShape))
@@ -44,10 +45,12 @@ namespace Nest
 			if (query == null) return null;
 			var boost = jo["boost"]?.Value<double>();
 			var name = jo["_name"]?.Value<string>();
+			var relation = jo["relation"]?.Value<string>().ToEnum<GeoShapeRelation>();
 			var ignoreUnmapped = jo["ignore_unmapped"]?.Value<bool>();
 			query.Boost = boost;
 			query.Name = name;
 			query.Field = field;
+			query.Relation = relation;
 			query.IgnoreUnmapped = ignoreUnmapped;
 			return query;
 		}

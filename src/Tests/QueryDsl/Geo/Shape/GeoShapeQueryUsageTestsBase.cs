@@ -17,6 +17,7 @@ namespace Tests.QueryDsl
 					_name="named_query",
 					boost = 1.1,
 					ignore_unmapped = false,
+					relation = "intersects",
 					shape = this.ShapeJson
 				}
 			}
