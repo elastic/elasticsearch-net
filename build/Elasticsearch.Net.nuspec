@@ -3,6 +3,7 @@
 	<metadata>
 		<id>Elasticsearch.Net</id>
 		<version>$version$</version>
+		<title>Elasticsearch.Net - Elasticsearch .NET low level client</title>
 		<authors>Elastic and contributors</authors>
 		<owners>Elastic</owners>
 		<licenseUrl>https://github.com/elastic/elasticsearch-net/blob/master/license.txt</licenseUrl>
