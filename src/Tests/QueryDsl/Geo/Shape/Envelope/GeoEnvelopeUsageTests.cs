@@ -27,7 +27,8 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new EnvelopeGeoShape(this._coordinates)
+			Shape = new EnvelopeGeoShape(this._coordinates),
+			Relation = GeoShapeRelation.Intersects
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -36,6 +37,7 @@ namespace Tests.QueryDsl.Geo.Shape.Envelope
 				.Boost(1.1)
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
+				.Relation(GeoShapeRelation.Intersects)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeEnvelopeQuery>(a => a.GeoShape as IGeoShapeEnvelopeQuery)
