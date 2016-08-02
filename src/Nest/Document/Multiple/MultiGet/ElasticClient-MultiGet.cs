@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	using System.Threading;
 	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
 
 	public partial interface IElasticClient
@@ -40,7 +40,7 @@ namespace Nest
 		public IMultiGetResponse MultiGet(IMultiGetRequest request) =>
 			this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				request,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, new MultiGetHitJsonConverter(request))),
 				this.LowLevelDispatch.MgetDispatch<MultiGetResponse>
 			);
 
@@ -53,13 +53,15 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				request,
 				cancellationToken,
-				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, CreateCovariantMultiGetConverter(request))),
+				new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, new MultiGetHitJsonConverter(request))),
 				this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>
 			);
-		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>
-			new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
 
-		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitJsonConverter(descriptor);
-
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)
+		{
+			var serializer = this.Serializer as JsonNetSerializer ?? new JsonNetSerializer(this.ConnectionSettings);
+			serializer.Initialize(converter);
+			return serializer.Deserialize<MultiGetResponse>(stream);
+		}
 	}
 }

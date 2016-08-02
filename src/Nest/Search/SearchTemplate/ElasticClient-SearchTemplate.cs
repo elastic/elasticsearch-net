@@ -100,8 +100,10 @@ namespace Nest
 			where TResult : class
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
+			var serializer = this.Serializer as JsonNetSerializer ?? new JsonNetSerializer(this.ConnectionSettings);
+			serializer.Initialize(converter);
 			var dict = response.Success
-				? new JsonNetSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
+				? serializer.Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

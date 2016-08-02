@@ -16,27 +16,25 @@ namespace Nest
 		private static readonly Encoding ExpectedEncoding = new UTF8Encoding(false);
 
 		protected IConnectionSettingsValues Settings { get; }
-		protected ElasticContractResolver ContractResolver { get; }
+		protected ElasticContractResolver ContractResolver { get; private set; }
 
 		//todo this internal smells
 		internal JsonSerializer Serializer => _defaultSerializer;
 
-		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
-		private readonly JsonSerializer _defaultSerializer;
+		private Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
+		private JsonSerializer _defaultSerializer;
 
 		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings) { }
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
-		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
-
-		/// <summary>
-		/// this constructor is only here for stateful (de)serialization
-		/// </summary>
-		internal JsonNetSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
+		public JsonNetSerializer(IConnectionSettingsValues settings)
 		{
 			this.Settings = settings;
-			var piggyBackState = stateFullConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = stateFullConverter };
-			// ReSharper disable once VirtualMemberCallInContructor
+		}
+
+		public void Initialize(JsonConverter statefulConverter = null)
+		{
+			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
 			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
 
 			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
