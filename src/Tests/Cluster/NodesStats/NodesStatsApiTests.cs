@@ -99,6 +99,7 @@ namespace Tests.Cluster.NodesStats
 
 			os.Timestamp.Should().BeGreaterThan(0);
 			os.LoadAverage.Should().NotBe(0);
+			os.CpuPercent.Should().NotBe(0);
 
 			os.Memory.Should().NotBeNull();
 			os.Memory.TotalInBytes.Should().BeGreaterThan(0);
