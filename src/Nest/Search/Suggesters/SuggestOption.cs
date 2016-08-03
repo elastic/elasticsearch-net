@@ -24,6 +24,9 @@ namespace Nest
 		[JsonProperty("payload")]
 		public FieldValues Payload { get; internal set; }
 
+        [JsonProperty("collate_match")]
+        public bool CollateMatch { get; internal set; }
+
 		[JsonProperty("contexts")]
 		public IDictionary<string, IEnumerable<Context>> Contexts { get; internal set; }
 	}
