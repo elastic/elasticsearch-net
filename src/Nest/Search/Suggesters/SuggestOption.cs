@@ -31,7 +31,10 @@ namespace Nest
 		[JsonProperty("highlighted")]
 		public string Highlighted { get; internal set; }
 
-		public T Payload<T>(JsonSerializer serializer = null) 
+        [JsonProperty("collate_match")]
+        public bool CollateMatch { get; internal set; }
+
+        public T Payload<T>(JsonSerializer serializer = null) 
 			where T : class
 		{
 			if (_payload == null) return null;
@@ -61,7 +64,9 @@ namespace Nest
 				option.Score = (double)properties["score"];
 			if (properties.ContainsKey("text"))
 				option.Text = (string)properties["text"];
-			return option;
+            if (properties.ContainsKey("collate_match"))
+                option.CollateMatch = (bool)properties["collate_match"];
+            return option;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
