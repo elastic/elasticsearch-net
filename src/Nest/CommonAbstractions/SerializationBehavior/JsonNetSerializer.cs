@@ -32,18 +32,23 @@ namespace Nest
 			this.Settings = settings;
 		}
 
+		private static readonly object _initLock = new object();
+
 		public void Initialize(JsonConverter statefulConverter = null)
 		{
-			var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
-			this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
-
-			this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
-			var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
-			this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
+			lock (_initLock)
 			{
-				{ SerializationFormatting.None, this._defaultSerializer },
-				{ SerializationFormatting.Indented, indentedSerializer }
-			};
+				var piggyBackState = statefulConverter == null ? null : new JsonConverterPiggyBackState { ActualJsonConverter = statefulConverter };
+				this.ContractResolver = new ElasticContractResolver(this.Settings, this.ContractConverters) { PiggyBackState = piggyBackState };
+
+				this._defaultSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.None));
+				var indentedSerializer = JsonSerializer.Create(this.CreateSettings(SerializationFormatting.Indented));
+				this._defaultSerializers = new Dictionary<SerializationFormatting, JsonSerializer>
+				{
+					{ SerializationFormatting.None, this._defaultSerializer },
+					{ SerializationFormatting.Indented, indentedSerializer }
+				};
+			}
 		}
 
 		public virtual void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
