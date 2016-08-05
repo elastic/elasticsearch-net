@@ -22,7 +22,8 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new PointGeoShape(this._coordinates)
+			Shape = new PointGeoShape(this._coordinates),
+			Relation = GeoShapeRelation.Intersects
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -31,6 +32,7 @@ namespace Tests.QueryDsl.Geo.Shape.Point
 				.Boost(1.1)
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
+				.Relation(GeoShapeRelation.Intersects)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapePointQuery>(a => a.GeoShape as IGeoShapePointQuery)

@@ -17,13 +17,14 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 				{
 					_name="named_query",
 					boost = 1.1,
-					indexed_shape = new 
+					indexed_shape = new
 					{
 						id = 2,
 						type = "project",
 						index = "project",
 						path = "location"
-					}
+					},
+					relation = "intersects"
 				}
 			}
 		};
@@ -38,8 +39,9 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 				Id = 2,
 				Index = Index<Project>(),
 				Type = Type<Project>(),
-				Path = Field<Project>(p=>p.Location)
-			}
+				Path = Field<Project>(p=>p.Location),
+			},
+			Relation = GeoShapeRelation.Intersects
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -51,6 +53,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 					.Id(2)
 					.Path(pp=>pp.Location)
 				)
+				.Relation(GeoShapeRelation.Intersects)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoIndexedShapeQuery>(a => a.GeoShape as IGeoIndexedShapeQuery)

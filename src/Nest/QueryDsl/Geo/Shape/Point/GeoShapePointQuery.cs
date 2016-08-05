@@ -9,7 +9,7 @@ namespace Nest
 		IPointGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapePointQuery : FieldNameQueryBase, IGeoShapePointQuery
+	public class GeoShapePointQuery : GeoShapeQueryBase, IGeoShapePointQuery
 	{
 		protected override bool Conditionless => IsConditionless(this);
 		public IPointGeoShape Shape { get; set; }
@@ -18,8 +18,8 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapePointQuery q) => q.Field.IsConditionless() || q.Shape?.Coordinates == null;
 	}
 
-	public class GeoShapePointQueryDescriptor<T> 
-		: FieldNameQueryDescriptorBase<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery, T>
+	public class GeoShapePointQueryDescriptor<T>
+		: GeoShapeQueryDescriptorBase<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery, T>
 		, IGeoShapePointQuery where T : class
 	{
 		protected override bool Conditionless => GeoShapePointQuery.IsConditionless(this);

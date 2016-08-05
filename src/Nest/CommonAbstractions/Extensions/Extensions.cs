@@ -58,6 +58,8 @@ namespace Nest
 		internal static ConcurrentDictionary<string, object> _enumCache = new ConcurrentDictionary<string, object>();
 		internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
 		{
+			if (str == null) return null;
+
 			var enumType = typeof(T);
 			var key = $"{enumType.Name}.{str}";
 			object value;

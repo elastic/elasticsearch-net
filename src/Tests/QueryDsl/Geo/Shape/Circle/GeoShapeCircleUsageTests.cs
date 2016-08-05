@@ -23,7 +23,8 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			Name = "named_query",
 			Boost = 1.1,
 			Field = Field<Project>(p=>p.Location),
-			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" }
+			Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" },
+			Relation = GeoShapeRelation.Intersects
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -33,6 +34,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 				.Radius("100m")
+				.Relation(GeoShapeRelation.Intersects)
 			);
 
 		protected override ConditionlessWhen ConditionlessWhen => new ConditionlessWhen<IGeoShapeCircleQuery>(a => a.GeoShape as IGeoShapeCircleQuery)
