@@ -28,7 +28,7 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 
 		[JsonProperty(PropertyName = "version")]
 		bool? Version { get; set; }
@@ -42,6 +42,8 @@ namespace Nest
 
 	public class InnerHits : IInnerHits
 	{
+        private IInnerHits Self => this;
+
 		public string Name { get; set; }
 
 		public int? From { get; set; }
@@ -61,7 +63,10 @@ namespace Nest
 		public IList<Field> FielddataFields { get; set; }
 
 		public IScriptFields ScriptFields { get; set; }
-	}
+
+        Union<bool, ISourceFilter> IInnerHits.Source { get { return Self.Source; }  set { Self.Source = value; }
+        }
+    }
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class InnerHitsDescriptor<T> : DescriptorBase<InnerHitsDescriptor<T>, IInnerHits>, IInnerHits where T : class
@@ -72,7 +77,7 @@ namespace Nest
 		IList<ISort> IInnerHits.Sort { get; set; }
 		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
-		ISourceFilter IInnerHits.Source { get; set; }
+        Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
@@ -102,10 +107,10 @@ namespace Nest
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 
 		//TODO map source of union bool/SourceFileter
-		public InnerHitsDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public InnerHitsDescriptor<T> Source(bool include = true) => Assign(a => a.Source = new Union<bool, ISourceFilter>(include));
 
 		public InnerHitsDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(sourceSelector?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public InnerHitsDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> selector) => 
 			Assign(a => a.ScriptFields = selector?.Invoke(new ScriptFieldsDescriptor())?.Value);
