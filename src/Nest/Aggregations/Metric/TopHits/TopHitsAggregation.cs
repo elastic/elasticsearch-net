@@ -18,7 +18,7 @@ namespace Nest
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty("_source")]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter>  Source { get; set; }
 
 		[JsonProperty("highlight")]
 		IHighlight Highlight { get; set; }
@@ -39,7 +39,9 @@ namespace Nest
 
 	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
 	{
-		public int? From { get; set; }
+        private ITopHitsAggregation Self => this;
+
+        public int? From { get; set; }
 		public int? Size { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public ISourceFilter Source { get; set; }
@@ -49,7 +51,9 @@ namespace Nest
 		public Fields FielddataFields { get; set; }
 		public bool? Version { get; set; }
 
-		internal TopHitsAggregation() { }
+        Union<bool, ISourceFilter> ITopHitsAggregation.Source { get { return Self.Source; } set { Self.Source = value; } }
+
+        internal TopHitsAggregation() { }
 
 		public TopHitsAggregation(string name) : base(name, null) { }
 
@@ -67,7 +71,7 @@ namespace Nest
 
 		IList<ISort> ITopHitsAggregation.Sort { get; set; }
 
-		ISourceFilter ITopHitsAggregation.Source { get; set; }
+        Union<bool, ISourceFilter> ITopHitsAggregation.Source { get; set; }
 
 		IHighlight ITopHitsAggregation.Highlight { get; set; }
 
@@ -91,10 +95,10 @@ namespace Nest
 		});
 
 		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
-			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+			Assign(a => a.Source = !include ? new Union<bool, ISourceFilter>(false) : null);
 
 		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(sourceSelector?.Invoke(new SourceFilterDescriptor<T>())));
 
 		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
