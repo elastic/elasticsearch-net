@@ -33,7 +33,7 @@ namespace Nest
 		IList<ISort> IInnerHits.Sort { get; set; }
 		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
-		ISourceFilter IInnerHits.Source { get; set; }
+        Union<bool, ISourceFilter> IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IScriptFields IInnerHits.ScriptFields { get; set; }
