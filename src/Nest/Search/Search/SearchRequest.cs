@@ -64,8 +64,7 @@ namespace Nest
 		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
@@ -217,17 +216,17 @@ namespace Nest
 		Fields ISearchRequest.Fields { get; set; }
 		Fields ISearchRequest.FielddataFields { get; set; }
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
-		ISourceFilter ISearchRequest.Source { get; set; }
+        Union<bool, ISourceFilter> ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 		INamedInnerHits ISearchRequest.InnerHits { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
-		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = new Union<bool, ISourceFilter>(include));
 
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
+			Assign(a => a.Source = new Union<bool, ISourceFilter>(sourceSelector?.Invoke(new SourceFilterDescriptor<T>())));
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type
