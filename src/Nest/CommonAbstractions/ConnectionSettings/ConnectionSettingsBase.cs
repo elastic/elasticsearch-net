@@ -19,16 +19,23 @@ namespace Nest
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool)
-			: this(connectionPool, null, null) { }
+			: this(connectionPool, null, new SerializerFactory()) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection)
-			: this(connectionPool, connection, null) { }
+			: this(connectionPool, connection, new SerializerFactory()) { }
 
 		public ConnectionSettings(IConnectionPool connectionPool, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
+#pragma warning disable CS0618 // Type or member is obsolete
 			: this(connectionPool, null, serializerFactory) { }
+#pragma warning restore CS0618 // Type or member is obsolete
 
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, ISerializerFactory serializerFactory)
+			: base(connectionPool, connection, serializerFactory, s => serializerFactory.Create(s)) { }
+
+		[Obsolete("Please use the constructor taking ISerializerFactory instead of a Func")]
 		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory)
-			: base(connectionPool, connection, serializerFactory) { }
+			: base(connectionPool, connection, null, s => serializerFactory?.Invoke(s)) { }
+
 	}
 
 	/// <summary>
@@ -37,7 +44,7 @@ namespace Nest
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public abstract class ConnectionSettingsBase<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
-		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>
+		where TConnectionSettings : ConnectionSettingsBase<TConnectionSettings>, IConnectionSettingsValues
 	{
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
@@ -63,16 +70,35 @@ namespace Nest
 		private readonly FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		protected ConnectionSettingsBase(IConnectionPool connectionPool, IConnection connection, Func<TConnectionSettings, IElasticsearchSerializer> serializerFactory)
-			: base(connectionPool, connection, serializerFactory)
+		private readonly ISerializerFactory _serializerFactory;
+		ISerializerFactory IConnectionSettingsValues.SerializerFactory => _serializerFactory;
+
+		protected ConnectionSettingsBase(
+			IConnectionPool connectionPool,
+			IConnection connection,
+			ISerializerFactory serializerFactory,
+			Func<TConnectionSettings, IElasticsearchSerializer> serializerFactoryFunc
+			)
+			: base(connectionPool, connection, serializerFactoryFunc)
 		{
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
+			this._serializerFactory = serializerFactory ?? new SerializerFactory();
 
 			this._inferrer = new Inferrer(this);
 		}
+
+		protected ConnectionSettingsBase(
+			IConnectionPool connectionPool,
+			IConnection connection,
+			Func<TConnectionSettings, IElasticsearchSerializer> serializerFactoryFunc
+			)
+			: this(connectionPool, connection, null, serializerFactoryFunc) { }
+
+		IElasticsearchSerializer IConnectionSettingsValues.StatefulSerializer(JsonConverter converter) =>
+			this._serializerFactory.CreateStateful(this, converter);
 
 		/// <summary>
 		/// The default serializer for requests and responses
@@ -92,7 +118,7 @@ namespace Nest
 		/// <summary>
 		/// The default index to use when no index is specified.
 		/// </summary>
-		/// <param name="defaultIndex">When null/empty/not set might throw 
+		/// <param name="defaultIndex">When null/empty/not set might throw
 		/// <see cref="NullReferenceException"/> later on when not specifying index explicitly while indexing.
 		/// </param>
 		public TConnectionSettings DefaultIndex(string defaultIndex)
@@ -177,10 +203,10 @@ namespace Nest
 			var mapper = new PropertyMappingDescriptor<TDocument>();
 			propertiesSelector(mapper);
 			ApplyPropertyMappings(mapper.Mappings);
-			return (TConnectionSettings) this;
+			return (TConnectionSettings)this;
 		}
 
-		private void ApplyPropertyMappings<TDocument>(IList<IClrTypePropertyMapping<TDocument>> mappings) 
+		private void ApplyPropertyMappings<TDocument>(IList<IClrTypePropertyMapping<TDocument>> mappings)
 			where TDocument : class
 		{
 			foreach (var mapping in mappings)
@@ -198,7 +224,7 @@ namespace Nest
 				{
 					var newName = mapping.NewName;
 					var mappedAs = _propertyMappings[memberInfo].Name;
-					var typeName = typeof (TDocument).Name;
+					var typeName = typeof(TDocument).Name;
 					if (mappedAs.IsNullOrEmpty() && newName.IsNullOrEmpty())
 						throw new ArgumentException("Property mapping '{0}' on type is already ignored"
 							.F(e, newName, mappedAs, typeName));
@@ -228,12 +254,12 @@ namespace Nest
 			if (inferMapping.IdProperty != null)
 #pragma warning disable CS0618 // Type or member is obsolete but will be private in the future OK to call here
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
-#pragma warning restore CS0618 
+#pragma warning restore CS0618
 
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
-			
-			return (TConnectionSettings) this;
+
+			return (TConnectionSettings)this;
 		}
 
 	}

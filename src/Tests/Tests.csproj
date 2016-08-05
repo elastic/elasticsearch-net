@@ -553,6 +553,9 @@
     <Compile Include="ClientConcepts\HighLevel\Inference\IndexNameInference.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inference\IndicesPaths.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inference\PropertyInference.doc.cs" />
+    <Compile Include="ClientConcepts\Serializer\CustomConstructorSerializerSettingsTests.cs" />
+    <Compile Include="ClientConcepts\Serializer\FactorySerializerTests.cs" />
+    <Compile Include="ClientConcepts\Serializer\ModifySerializationSettingsTests.cs" />
     <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelApiTests.cs" />
     <Compile Include="Cluster\TaskManagement\TasksCancel\TasksCancelUrlTests.cs" />
     <Compile Include="Cluster\TaskManagement\TasksList\TasksListApiTests.cs" />
