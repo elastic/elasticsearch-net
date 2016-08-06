@@ -47,7 +47,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 			visitor.CountsShouldContainKeyAndCountBe("object", 4);
 			visitor.CountsShouldContainKeyAndCountBe("date", 4);
 			visitor.CountsShouldContainKeyAndCountBe("text", 10);
-			visitor.CountsShouldContainKeyAndCountBe("keyword", 10);
+			visitor.CountsShouldContainKeyAndCountBe("keyword", 9);
 			visitor.CountsShouldContainKeyAndCountBe("ip", 1);
 			visitor.CountsShouldContainKeyAndCountBe("number", 2);
 			visitor.CountsShouldContainKeyAndCountBe("geo_point", 2);
@@ -79,7 +79,7 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		public void CountsShouldContainKeyAndCountBe(string key, int count)
 		{
 			this.Counts.ContainsKey(key).Should().BeTrue();
-			this.Counts[key].Should().Be(count);
+			this.Counts[key].Should().Be(count, $"because there should be {count} {key} properties");
 		}
 
 #pragma warning disable 618

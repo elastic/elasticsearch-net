@@ -102,10 +102,10 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait N seconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(5));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 			observableBulk.Dispose();
 			//we wait N seconds to give in flight request a chance to cancel
-			handle.WaitOne(TimeSpan.FromSeconds(5));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
@@ -146,10 +146,10 @@ namespace Tests.Document.Multiple.BulkAll
 			observableBulk.Subscribe(bulkObserver);
 
 			//we wait Nseconds to see some bulks
-			handle.WaitOne(TimeSpan.FromSeconds(5));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 			tokenSource.Cancel();
 			//we wait Nseconds to give in flight request a chance to cancel
-			handle.WaitOne(TimeSpan.FromSeconds(5));
+			handle.WaitOne(TimeSpan.FromSeconds(3));
 
 			seenPages.Should().BeLessThan(pages).And.BeGreaterThan(0);
 			var count = this._client.Count<SmallObject>(f => f.Index(index));
