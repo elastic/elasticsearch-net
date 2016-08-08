@@ -76,6 +76,7 @@
     <Compile Include="Domain\Enums.Generated.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\IPropertyMapping.cs" />
+    <Compile Include="Domain\RequestParameters\AnalyzeRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\FluentRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
