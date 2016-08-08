@@ -32,7 +32,7 @@ namespace Nest
 			return new ArgumentException(sb.ToString());
 		}
 
-		private static Regex ReplaceParams = new Regex(@"\{(.+?)\}");
+		private static readonly Regex ReplaceParams = new Regex(@"\{(.+?)\}");
 
 		internal static string PrettyPrintEndpoint(IRequest request, string endpoint)
 		{

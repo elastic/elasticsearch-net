@@ -56,6 +56,42 @@ namespace Tests.Indices.MappingManagement.GetMapping
 		}
 	}
 
+	[Collection(TypeOfCluster.ReadOnly)]
+	public class GetMappingNonExistentIndexApiTests : ApiIntegrationTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	{
+		private string _nonExistentIndex = "non-existent-index";
+
+		public GetMappingNonExistentIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.GetMapping<Project>(f),
+			fluentAsync: (client, f) => client.GetMappingAsync<Project>(f),
+			request: (client, r) => client.GetMapping(r),
+			requestAsync: (client, r) => client.GetMappingAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => $"/{_nonExistentIndex}/_mapping?ignore_unavailable=true";
+
+		protected override Func<GetMappingDescriptor<Project>, IGetMappingRequest> Fluent => d => d
+			.Index(_nonExistentIndex)
+			.AllTypes()
+			.IgnoreUnavailable();
+
+		protected override GetMappingRequest Initializer => new GetMappingRequest(_nonExistentIndex, AllTypes)
+		{
+			IgnoreUnavailable = true
+		};
+
+		protected override void ExpectResponse(IGetMappingResponse response)
+		{
+			response.Mappings.Should().BeEmpty();
+			response.Mapping.Should().BeNull();
+		}
+	}
+
 	internal class TestVisitor : IMappingVisitor
 	{
 		public TestVisitor()

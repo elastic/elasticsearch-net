@@ -65,15 +65,13 @@ namespace Nest
 			) => this.Dispatcher.DispatchAsync<TRequest,TQueryString,TResponse,TResponseInterface>(descriptor, cancellationToken, null, dispatch);
 
 		async Task<TResponseInterface> IHighLevelToLowLevelDispatcher.DispatchAsync<TRequest, TQueryString, TResponse, TResponseInterface>(
-			TRequest request,
+			TRequest request, 
 			CancellationToken cancellationToken,
-			Func<IApiCallDetails, Stream, TResponse> responseGenerator,
+			Func<IApiCallDetails, Stream, TResponse> responseGenerator, 
 			Func<TRequest, PostData<object>, CancellationToken, Task<ElasticsearchResponse<TResponse>>> dispatch
 			)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
-			request.RequestParameters.DeserializationOverride(responseGenerator);
-
 			request.RequestParameters.DeserializationOverride(responseGenerator);
 			var response = await dispatch(request, request, cancellationToken).ConfigureAwait(false);
 			return ResultsSelector(response);
