@@ -5,13 +5,11 @@ using System.Linq;
 namespace ApiGenerator.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class MultiTermVectorsDescriptorOverrides : IDescriptorOverrides
+	public class MultiTermVectorsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
 			"ids"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

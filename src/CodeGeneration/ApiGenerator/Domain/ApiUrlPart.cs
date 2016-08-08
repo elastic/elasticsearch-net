@@ -14,7 +14,9 @@ namespace ApiGenerator.Domain
 		{
 			get
 			{
-				switch(this.Name)
+				if (ClrTypeNameOverride != null) return ClrTypeNameOverride;
+
+				switch (this.Name)
 				{
 					case "index": return this.Type == "string" ? "IndexName" : "Indices";
 					case "type": return this.Type == "string" ? "TypeName" : "Types";
@@ -40,6 +42,8 @@ namespace ApiGenerator.Domain
 				}
 			}
 		}
+
+		public string ClrTypeNameOverride { get; set; }
 
 		public string InterfaceName
 		{

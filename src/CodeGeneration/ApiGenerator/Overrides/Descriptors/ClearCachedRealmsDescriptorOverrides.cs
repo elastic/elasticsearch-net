@@ -9,7 +9,11 @@ namespace ApiGenerator.Overrides.Descriptors
 		{
 			var part = method.Parts.First(p => p.Name == "realms");
 			part.ClrTypeNameOverride = "Names";
-			return method;
+
+			var usernamesParam = method.Url.Params.First(p => p.Key == "usernames");
+			usernamesParam.Value.Type = "list";
+
+			return base.PatchMethod(method);
 		}
 	}
 }

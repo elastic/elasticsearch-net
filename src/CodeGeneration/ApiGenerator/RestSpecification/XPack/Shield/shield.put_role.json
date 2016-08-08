@@ -1,10 +1,10 @@
 {
-  "xpack.security.put_role": {
+  "shield.put_role": {
     "documentation": "Update or create a role for the native shield realm",
     "methods": [ "PUT", "POST" ],
     "url": {
-      "path": "/_xpack/security/role/{name}",
-      "paths": [ "/_xpack/security/role/{name}" ],
+      "path": "/_shield/role/{name}",
+      "paths": [ "/_shield/role/{name}" ],
       "parts": {
         "name": {
           "type" : "string",
@@ -12,12 +12,7 @@
           "required" : true
         }
       },
-      "params": {
-        "refresh": {
-          "type": "boolean",
-          "description": "Refresh the index after performing the operation"
-        }
-      }
+      "params": {}
     },
     "body": {
       "description" : "The role to add",

@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ApiGenerator.Overrides.Descriptors
 {
-	class FieldStatsDescriptorOverrides : IDescriptorOverrides
+	public class FieldStatsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IDictionary<string, string> RenameQueryStringParams => null;
-
-		public IEnumerable<string> SkipQueryStringParams => new [] 
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
-			// Always send fields via the body since the endpoint doesn't 
+			// Always send fields via the body since the endpoint doesn't
 			// allow a body at all if fields is in the query string.
 			"fields"
 		};

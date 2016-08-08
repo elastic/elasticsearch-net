@@ -3286,8 +3286,12 @@ namespace Nest
 					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRoles<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRolesPut<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
 			}
-			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST }, "/_shield/role/{name}/_clear_cache");
+			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST, PUT }, "/_shield/role/{name}/_clear_cache");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> ShieldClearCachedRolesDispatchAsync<T>(IRequest<ClearCachedRolesRequestParameters> p ) where T : class
@@ -3298,8 +3302,12 @@ namespace Nest
 					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRolesAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
 					break;
 
+				case PUT:
+					if (AllSetNoFallback(p.RouteValues.Name)) return _lowLevel.ShieldClearCachedRolesPutAsync<T>(p.RouteValues.Name,u => p.RequestParameters);
+					break;
+
 			}
-			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST }, "/_shield/role/{name}/_clear_cache");
+			throw InvalidDispatch("ShieldClearCachedRoles", p, new [] { POST, PUT }, "/_shield/role/{name}/_clear_cache");
 		}
 		
 		internal ElasticsearchResponse<T> ShieldDeleteRoleDispatch<T>(IRequest<DeleteRoleRequestParameters> p ) where T : class

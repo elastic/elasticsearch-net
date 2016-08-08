@@ -4,15 +4,14 @@ using System.Linq;
 
 namespace ApiGenerator.Overrides.Descriptors
 {
-	// ReSharper disable once UnusedMember.Global
-	public class NodesHotThreadsDescriptorOverrides : IDescriptorOverrides
+	public class NodesHotThreadsDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
 			"fielddata"
 		};
 
-		public IDictionary<string, string> RenameQueryStringParams => new Dictionary<string, string>
+		public override IDictionary<string, string> RenameQueryStringParams => new Dictionary<string, string>
 		{
 			{ "type", "thread_type"}
 		};
