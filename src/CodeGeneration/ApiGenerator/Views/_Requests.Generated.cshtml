@@ -84,7 +84,7 @@ namespace Nest
 		<text>///<summary>@kv.Value.Description</summary>
 		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
 		{
-		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
+		<text>[Obsolete("Scheduled to be removed in 5.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
 		@Raw(kv.Value.Generator.Invoke(fieldType, mm, original, setter))
 		</text>
