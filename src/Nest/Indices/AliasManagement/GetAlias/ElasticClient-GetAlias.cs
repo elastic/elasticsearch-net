@@ -5,12 +5,10 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetAliasesConverter = Func<IApiCallDetails, Stream, GetAliasesResponse>;
-
 	public partial interface IElasticClient
 	{
 		/// <summary>
-		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 
+		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches
 		/// the requested index aliases, if available. This api only serialises the found index aliases.
 		/// <para> Difference with GetAlias is that this call will also return indices without aliases set</para>
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
@@ -35,10 +33,10 @@ namespace Nest
 			this.GetAlias(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAlias(IGetAliasRequest request) => 
+		public IGetAliasesResponse GetAlias(IGetAliasRequest request) =>
 			this.Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse>(
 				request,
-				new GetAliasesConverter(DeserializeGetAliasesResponse),
+				DeserializeGetAliasesResponse,
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatch<GetAliasesResponse>(p)
 			);
 
@@ -47,10 +45,10 @@ namespace Nest
 			this.GetAliasAsync(selector.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request) => 
+		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest request) =>
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				request,
-				new GetAliasesConverter(DeserializeGetAliasesResponse),
+				DeserializeGetAliasesResponse,
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(p)
 			);
 	}
