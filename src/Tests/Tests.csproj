@@ -566,6 +566,8 @@
     <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
     <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
+    <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
     <Compile Include="Reproduce\GithubIssue2152.cs" />
