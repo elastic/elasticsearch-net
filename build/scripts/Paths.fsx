@@ -1,41 +1,84 @@
 ﻿#I @"../../packages/build/FAKE/tools"
-#I @"../../packages/build/FSharp.Data/lib/net40"
 #r @"FakeLib.dll"
 #r @"System.IO.Compression.FileSystem.dll"
-#r @"FSharp.Data.dll"
 
 open System
-open System.Collections.Generic
 open System.IO
 open System.Diagnostics
 open System.Net
-open System.Linq
 
 open Fake
 
-open FSharp.Data
-open FSharp.Data.JsonExtensions
+module Projects = 
+    type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
+
+    type DotNetFramework = 
+        | Net45 
+        | Net46 
+        | NetStandard1_3
+        static member All = [Net45; Net46; NetStandard1_3] 
+        member this.Identifier = 
+            match this with
+            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; DefineConstants = "TRACE;NET45"; }
+            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = "TRACE;NET46"; }
+            | NetStandard1_3 -> { MSBuild = "netstandard1.3"; Nuget = "netstandard1.3"; DefineConstants = "TRACE;DOTNETCORE"; }
+
+    type Project =
+        | Nest
+        | ElasticsearchNet
+
+    type PrivateProject =
+        | Tests
+
+    type DotNetProject = 
+        | Project of Project
+        | PrivateProject of PrivateProject
+
+        static member All = 
+            seq [
+                Project Project.ElasticsearchNet; 
+                Project Project.Nest; 
+                PrivateProject PrivateProject.Tests
+            ]
+
+        static member AllPublishable = seq [Project Project.ElasticsearchNet; Project Project.Nest;] 
+        static member Tests = seq [PrivateProject PrivateProject.Tests;] 
+
+        member this.Name =
+            match this with
+            | Project p ->
+                match p with
+                | Nest -> "Nest"
+                | ElasticsearchNet -> "Elasticsearch.Net"
+            | PrivateProject p ->
+                match p with
+                | Tests -> "Tests"
+       
+        static member TryFindName (name: string) =
+            DotNetProject.All
+            |> Seq.map(fun p -> p.Name)
+            |> Seq.tryFind(fun p -> p.ToLowerInvariant() = name.ToLowerInvariant())
+
 
 module Paths =
+    open Projects
+
+    let Repository = "https://github.com/elastic/elasticsearch-net"
 
     let BuildFolder = "build"
-
     let BuildOutput = sprintf "%s/output" BuildFolder
-    let ToolsFolder = "packages/build"
+
+
+    let ProjectOutputFolder (project:DotNetProject) (framework:DotNetFramework) = 
+        sprintf "%s/%s/%s" BuildOutput framework.Identifier.MSBuild project.Name
+
+    let Tool tool = sprintf "packages/build/%s" tool
     let CheckedInToolsFolder = "build/Tools"
     let KeysFolder = sprintf "%s/keys" BuildFolder
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
     
-    let Repository = "https://github.com/elastic/elasticsearch-net"
 
-    let MsBuildOutput =
-        !! "src/**/bin/**"
-        |> Seq.map DirectoryName
-        |> Seq.distinct
-        |> Seq.filter (fun f -> (f.EndsWith("Debug") || f.StartsWith("Release")) && not (f.Contains "CodeGeneration")) 
-
-    let Tool(tool) = sprintf "%s/%s" ToolsFolder tool
     let CheckedInTool(tool) = sprintf "%s/%s" CheckedInToolsFolder tool
     let Keys(keyFile) = sprintf "%s/%s" KeysFolder keyFile
     let Output(folder) = sprintf "%s/%s" BuildOutput folder
@@ -45,25 +88,9 @@ module Paths =
     let BinFolder(folder) = 
         let f = replace @"\" "/" folder
         sprintf "%s/%s/bin/Release" SourceFolder f
-    let Quote(path) = sprintf "\"%s\"" path
-
-    let Net45BinFolder(projectName) =
-        let binFolder = BinFolder projectName
-        sprintf "%s/net45" binFolder
-
-    let Net46BinFolder(projectName) =
-        let binFolder = BinFolder projectName
-        sprintf "%s/net46" binFolder
-
-    let NetStandard13BinFolder(projectName) =
-        let binFolder = BinFolder(projectName)
-        sprintf "%s/netstandard1.3" binFolder
 
     let ProjectJson(projectName) =
         Source(sprintf "%s/project.json" projectName)
-
-    let CsProj(projectName) = 
-        Source(sprintf "%s/%s.csproj" projectName projectName)
 
 module Tooling = 
 
@@ -100,7 +127,6 @@ module Tooling =
             exit exitCode
         ()
 
-    let private exec = execAt Environment.CurrentDirectory
 
     let execProcessWithTimeout proc arguments timeout = 
         let args = arguments |> String.concat " "
@@ -123,7 +149,11 @@ module Tooling =
     let private defaultTimeout = TimeSpan.FromMinutes (if isLocalBuild then 5.0 else 15.0)
 
     let execProcess proc arguments =
-        execProcessWithTimeout proc arguments defaultTimeout
+        let exitCode = execProcessWithTimeout proc arguments defaultTimeout
+        match exitCode with
+        | 0 -> exitCode
+        | _ -> failwithf "Calling %s resulted in unexpected exitCode %i" proc exitCode 
+
 
     let execProcessAndReturnMessages proc arguments =
         execProcessWithTimeoutAndReturnMessages proc arguments defaultTimeout
@@ -162,7 +192,7 @@ module Tooling =
         member this.Path = sprintf "%s/%s" dotTraceDirectory path
         member this.Exec arguments = 
             this.Bootstrap()
-            exec this.Path arguments
+            execAt Environment.CurrentDirectory this.Path arguments
 
     let Nuget = new BuildTooling(nugetFile)
     let GitLink = new BuildTooling(Paths.Tool("gitlink/lib/net45/gitlink.exe"))
@@ -176,62 +206,37 @@ module Tooling =
     //only used to boostrap fake itself
     let Fake = new BuildTooling("FAKE/tools/FAKE.exe")
 
-    type NpmTooling(npmId, binJs) =
-        let modulePath =  sprintf "%s/node_modules/%s" Paths.ToolsFolder npmId
-        let binPath =  sprintf "%s/%s" modulePath binJs
-        let npm = Npm.Path
-        do
-            if doesNotExist modulePath then
-                traceFAKE "npm module %s not found installing in %s" npmId modulePath
-                if (isMono) then
-                    execProcess "npm" ["install"; npmId; "--prefix"; "./packages/build" ] |> ignore
-                else 
-                Node.Exec [npm; "install"; npmId; "--prefix"; "./packages/build" ] |> ignore
-        member this.Path = binPath
-
-        member this.Exec arguments =
-                if (isMono) then
-                    (execProcess "node" <| binPath :: arguments) |> ignore
-                else
-                    exec Node.Path <| binPath :: arguments
-
-    let Notifier = new NpmTooling("node-notifier", "bin.js")
-
     type DotNetRuntime = | Desktop | Core | Both
 
     type DotNetTooling(exe) =
-       member this.Exec runtime failedF workingDirectory arguments =
-            this.ExecWithTimeout runtime failedF workingDirectory arguments (TimeSpan.FromMinutes 30.)
+       member this.Exec arguments =
+            this.ExecWithTimeout arguments (TimeSpan.FromMinutes 30.)
 
-        member this.ExecWithTimeout runtime failedF workingDirectory arguments timeout =
+        member this.ExecWithTimeout arguments timeout =
             let result = execProcessWithTimeout exe arguments timeout
             if result <> 0 then failwith (sprintf "Failed to run dotnet tooling for %s args: %A" exe arguments)
 
     let DotNet = new DotNetTooling("dotnet.exe")
 
-    type DotNetFrameworkIdentifier = { MSBuild: string; Nuget: string; DefineConstants: string; }
-
-    type DotNetFramework = 
-        | Net45 
-        | Net46 
-        static member All = [Net45; Net46] 
-        member this.Identifier = 
-            match this with
-            | Net45 -> { MSBuild = "v4.5"; Nuget = "net45"; DefineConstants = "TRACE;NET45"; }
-            | Net46 -> { MSBuild = "v4.6"; Nuget = "net46"; DefineConstants = "TRACE;NET46"; }
-
     type MsBuildTooling() =
-       let msbuildProperties = [
-            ("Configuration","Release"); 
-            ("PreBuildEvent","echo");
-       ]
+
+        member this.Build(target, framework:Projects.DotNetFrameworkIdentifier) =
+            let solution = Paths.Source "Elasticsearch.sln";
+            let setParams defaults =
+                { defaults with
+                    Verbosity = Some(Quiet)
+                    Targets = [target]
+                    Properties =
+                        [
+                            "OutputPathBaseDir", Path.GetFullPath "build\\output"
+                            "Optimize", "True"
+                            "Configuration", "Release"
+                            "TargetFrameworkVersion", framework.MSBuild
+                            "DefineConstants", framework.DefineConstants
+                        ]
+                 }
         
-       member this.Exec output target framework projects =
-            let properties = msbuildProperties 
-                             |> List.append [
-                                ("TargetFrameworkVersion", framework.MSBuild); 
-                                ("DefineConstants", framework.DefineConstants)
-                             ]
-            MSBuild output target properties projects |> ignore
+            build setParams solution 
 
     let MsBuild = new MsBuildTooling()
+
