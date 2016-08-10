@@ -296,7 +296,8 @@ list.ShouldAllBeEquivalentTo(new []
 [[configuring-ssl]]
 === Configuring SSL
 
-SSL must be configured outside of the client using .NET's http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
+SSL must be configured outside of the client using .NET's
+ http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
 class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
 property.
 
