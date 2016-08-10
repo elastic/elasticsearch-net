@@ -274,11 +274,23 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
-			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+			private int _maxDepth;
+
+			public MyJsonNetSerializer(IConnectionSettingsValues settings, int maxDepth)
+				: base(settings)
+			{
+				this._maxDepth = maxDepth;
+			}
 
 			public int CallToModify { get; set; } = 0;
 
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+			public int SetMaxDepth { get; set; }
+
+			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+			{
+				++CallToModify;
+				SetMaxDepth = _maxDepth;
+			} //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
 
 			public int CallToContractConverter { get; set; } = 0;
 
@@ -300,7 +312,8 @@ namespace Tests.ClientConcepts.LowLevel
 		public void ModifyJsonSerializerSettingsIsCalled()
 		{
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s));
+			var maxDepth = 8;
+			var settings = new ConnectionSettings(connectionPool, new InMemoryConnection(), s => new MyJsonNetSerializer(s, maxDepth));
 			var client = new ElasticClient(settings);
 			client.RootNodeInfo();
 			client.RootNodeInfo();
@@ -309,6 +322,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			serializer.SerializeToString(new Project { });
 			serializer.CallToContractConverter.Should().BeGreaterThan(0);
+			serializer.SetMaxDepth.Should().Be(maxDepth);
 		}
 	}
 }
