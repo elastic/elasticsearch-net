@@ -71,6 +71,10 @@ namespace Nest
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
+			var serializer = ((IConnectionConfigurationValues)this).Serializer as JsonNetSerializer;
+			if (serializer != null)
+				serializer.Initialize();
+
 			this._inferrer = new Inferrer(this);
 		}
 
@@ -78,7 +82,12 @@ namespace Nest
 		/// The default serializer for requests and responses
 		/// </summary>
 		/// <returns></returns>
-		protected override IElasticsearchSerializer DefaultSerializer(TConnectionSettings settings) => new JsonNetSerializer(settings);
+		protected override IElasticsearchSerializer DefaultSerializer(TConnectionSettings settings)
+		{
+			var serializer = new JsonNetSerializer(settings);
+			serializer.Initialize();
+			return serializer;
+		}
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90
@@ -92,7 +101,7 @@ namespace Nest
 		/// <summary>
 		/// The default index to use when no index is specified.
 		/// </summary>
-		/// <param name="defaultIndex">When null/empty/not set might throw 
+		/// <param name="defaultIndex">When null/empty/not set might throw
 		/// <see cref="NullReferenceException"/> later on when not specifying index explicitly while indexing.
 		/// </param>
 		public TConnectionSettings DefaultIndex(string defaultIndex)
@@ -180,7 +189,7 @@ namespace Nest
 			return (TConnectionSettings) this;
 		}
 
-		private void ApplyPropertyMappings<TDocument>(IList<IClrTypePropertyMapping<TDocument>> mappings) 
+		private void ApplyPropertyMappings<TDocument>(IList<IClrTypePropertyMapping<TDocument>> mappings)
 			where TDocument : class
 		{
 			foreach (var mapping in mappings)
@@ -228,11 +237,11 @@ namespace Nest
 			if (inferMapping.IdProperty != null)
 #pragma warning disable CS0618 // Type or member is obsolete but will be private in the future OK to call here
 				this.MapIdPropertyFor<TDocument>(inferMapping.IdProperty);
-#pragma warning restore CS0618 
+#pragma warning restore CS0618
 
 			if (inferMapping.Properties != null)
 				this.ApplyPropertyMappings<TDocument>(inferMapping.Properties);
-			
+
 			return (TConnectionSettings) this;
 		}
 

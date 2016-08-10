@@ -275,11 +275,22 @@ namespace Tests.ClientConcepts.LowLevel
 		*/
 		public class MyJsonNetSerializer : JsonNetSerializer
 		{
-			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings) { }
+			private string _assignedInConstructor;
+			public MyJsonNetSerializer(IConnectionSettingsValues settings) : base(settings)
+			{
+				this._assignedInConstructor = "foo";
+			}
 
 			public int CallToModify { get; set; } = 0;
 
-			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings) => ++CallToModify; //<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+			public string MyProperty { get; set; }
+
+			//<1> Override ModifyJsonSerializerSettings if you need access to `JsonSerializerSettings`
+			protected override void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+			{
+				++CallToModify;
+				MyProperty = _assignedInConstructor;
+			}
 
 			public int CallToContractConverter { get; set; } = 0;
 
@@ -307,7 +318,7 @@ namespace Tests.ClientConcepts.LowLevel
 			client.RootNodeInfo();
 			var serializer = ((IConnectionSettingsValues)settings).Serializer as MyJsonNetSerializer;
 			serializer.CallToModify.Should().BeGreaterThan(0);
-
+			serializer.MyProperty.Should().Be("foo");
 			serializer.SerializeToString(new Project { });
 			serializer.CallToContractConverter.Should().BeGreaterThan(0);
 		}

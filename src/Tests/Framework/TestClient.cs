@@ -54,11 +54,12 @@ namespace Tests.Framework
 			string contentType = "application/json",
 			Exception exception = null)
 		{
-			var serializer = new JsonNetSerializer(new ConnectionSettings());
 			byte[] fixedResult;
 
 			if (contentType == "application/json")
 			{
+				var serializer = new JsonNetSerializer(new ConnectionSettings());
+				serializer.Initialize();
 				using (var ms = new MemoryStream())
 				{
 					serializer.Serialize(response, ms);
