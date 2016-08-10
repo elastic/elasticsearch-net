@@ -24,7 +24,14 @@ namespace Nest
 		private readonly Dictionary<SerializationFormatting, JsonSerializer> _defaultSerializers;
 		private readonly JsonSerializer _defaultSerializer;
 
-		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings) { }
+		protected virtual void ModifyJsonSerializerSettings(JsonSerializerSettings settings)
+		{
+			// Apply custom serialization settings from the connection serializer, if any; avoiding infinite loop with 'this' check.
+			var jsonNetSerializer = this.Settings?.Serializer as JsonNetSerializer;
+			if (jsonNetSerializer != null && jsonNetSerializer != this)
+				jsonNetSerializer.ModifyJsonSerializerSettings(settings);
+		}
+
 		protected virtual IList<Func<Type, JsonConverter>> ContractConverters => null;
 
 		public JsonNetSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
