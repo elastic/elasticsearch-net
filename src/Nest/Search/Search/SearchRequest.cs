@@ -65,7 +65,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_source")]
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
-		ISourceFilter Source { get; set; }
+		object Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
 		AggregationDictionary Aggregations { get; set; }
@@ -212,13 +212,19 @@ namespace Nest
 		Fields ISearchRequest.Fields { get; set; }
 		Fields ISearchRequest.FielddataFields { get; set; }
 		IScriptFields ISearchRequest.ScriptFields { get; set; }
-		ISourceFilter ISearchRequest.Source { get; set; }
+		object ISearchRequest.Source { get; set; }
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
 			Assign(a => a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 
-		public SearchDescriptor<T> Source(bool include = true) => Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		public SearchDescriptor<T> Source(bool include = true) => Assign(a => {
+            if (!include) {
+                a.Source = false;
+            } else {
+                a.Source = null;
+            }
+        });
 
 		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));

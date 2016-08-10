@@ -4760,8 +4760,20 @@ namespace Nest
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+
+        object ISearchRequest.Source
+        {
+            get
+            {
+                return Self.Source;
+            }
+
+            set
+            {
+                Self.Source = value;
+            }
+        }
+    }
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest  : PlainRequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -4844,8 +4856,20 @@ namespace Nest
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
+
+        object ISearchRequest.Source
+        {
+            get
+            {
+                return Self.Source;
+            }
+
+            set
+            {
+                Self.Source = value;
+            }
+        }
+    }
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters> 
