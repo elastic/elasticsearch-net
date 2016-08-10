@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0-alpha3",
+  "version": "2.5.0-ci20160810081439",
   "buildOptions": {
     "warningsAsErrors": false
   },
@@ -29,19 +29,6 @@
   },
   "testRunner": "xunit",
   "frameworks": {
-    "net451": {
-      "frameworkAssemblies": {
-        "System.Diagnostics.Tools": "",
-        "System.IO.Compression.FileSystem": "",
-        "System.Reflection": "",
-        "System.Runtime": "",
-        "System.Linq": "",
-        "System.Threading.Tasks": ""
-      },
-      "dependencies": {
-        "Microsoft.NETCore.Platforms": "1.0.1"
-      }
-    },
     "netcoreapp1.0": {
       "buildOptions": { "define": [ "DOTNETCORE" ] },
       "dependencies": {
