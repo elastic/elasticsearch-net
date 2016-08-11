@@ -6,6 +6,8 @@ using System.IO.Compression;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,22 +42,7 @@ namespace Elasticsearch.Net
 			{
 				if (this._clients.TryGetValue(hashCode, out client)) return client;
 
-				var handler = new HttpClientHandler
-				{
-					AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
-				};
-
-				if (!requestData.ProxyAddress.IsNullOrEmpty())
-				{
-					var uri = new Uri(requestData.ProxyAddress);
-					var proxy = new WebProxy(uri);
-					var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
-					proxy.Credentials = credentials;
-					handler.Proxy = proxy;
-				}
-
-				if (requestData.DisableAutomaticProxyDetection)
-					handler.Proxy = null;
+				var handler = CreateHttpClientHandler(requestData);
 
 				client = new HttpClient(handler, false)
 				{
@@ -64,8 +51,6 @@ namespace Elasticsearch.Net
 
 				client.DefaultRequestHeaders.ExpectContinue = false;
 
-				//TODO add headers
-				//client.DefaultRequestHeaders =
 				this._clients.TryAdd(hashCode, client);
 				return client;
 			}
@@ -114,6 +99,28 @@ namespace Elasticsearch.Net
 			}
 
 			return await builder.ToResponseAsync().ConfigureAwait(false);
+		}
+
+		protected virtual HttpClientHandler CreateHttpClientHandler(RequestData requestData)
+		{
+			var handler = new HttpClientHandler
+			{
+				AutomaticDecompression = requestData.HttpCompression ? GZip | Deflate : None
+			};
+
+			if (!requestData.ProxyAddress.IsNullOrEmpty())
+			{
+				var uri = new Uri(requestData.ProxyAddress);
+				var proxy = new WebProxy(uri);
+				var credentials = new NetworkCredential(requestData.ProxyUsername, requestData.ProxyPassword);
+				proxy.Credentials = credentials;
+				handler.Proxy = proxy;
+			}
+
+			if (requestData.DisableAutomaticProxyDetection)
+				handler.Proxy = null;
+
+			return handler;
 		}
 
 		protected virtual HttpRequestMessage CreateHttpRequestMessage(RequestData requestData)
