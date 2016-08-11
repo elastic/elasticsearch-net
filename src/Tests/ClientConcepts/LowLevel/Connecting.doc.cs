@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit;
+using System.Net.Http;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -248,24 +249,41 @@ namespace Tests.ClientConcepts.LowLevel
 			/**
 			 * [[configuring-ssl]]
 			 * === Configuring SSL
-			 * SSL must be configured outside of the client using .NET's
-			 * http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager]
-			 * class and setting the http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager.servercertificatevalidationcallback.aspx[ServerCertificateValidationCallback]
-			 * property.
+			 * SSL can be configured via the `ServerCertificateValidationCallback` property on either `ServerPointManager` or `HttpClientHandler`
+			 * depending on which version of the .NET framework is in use.
 			 *
-			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`:
+			 * On the full .NET Framework, this must be done outside of the client using .NET's built-in
+			 * http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
+			 *
 			 */
 
 #if !DOTNETCORE
 			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 #endif
 			/**
+			 * The bare minimum to make .NET accept self-signed SSL certs that are not in the Windows CA store would be to have the callback simply return `true`.
+			 *
 			 * However, this will accept **all** requests from the AppDomain to untrusted SSL sites,
 			 * therefore **we recommend doing some minimal introspection on the passed in certificate.**
-			 *
-			 * IMPORTANT: Using `ServicePointManager` does not work on **Core CLR** as the request does not go through `ServicePointManager`; please file an {github}/issues[issue] if you need support for certificate validation on Core CLR.
 			 */
 		}
+
+		/*
+		 * If running on Core CLR, then a custom connection type must be created by deriving from `HttpConnection` and
+		 * overriding the `CreateHttpClientHandler` method in order to set the `ServerCertificateCustomValidationCallback` property:
+		*/
+
+#if DOTNETCORE
+		public class SecureHttpConnection : HttpConnection
+		{
+			protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
+			{
+				var handler = base.CreateHttpClientHandler(requestData);
+				handler.ServerCertificateCustomValidationCallback = (sender, cert, chain, errors) => true;
+				return handler;
+			}
+		}
+#endif
 
 		/**=== Overriding default Json.NET behavior
 		*
