@@ -6,11 +6,10 @@ using Xunit;
 
 namespace Tests.Modules.Scripting
 {
-	[Collection(IntegrationContext.Indexing)]
 	public class ScriptingCrudTests
 		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse, IDeleteScriptResponse>
 	{
-		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public ScriptingCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
 			CreateInitializer,

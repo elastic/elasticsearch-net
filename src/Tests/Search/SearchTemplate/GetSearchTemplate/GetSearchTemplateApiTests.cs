@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Search.SearchTemplate.GetSearchTemplate
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class GetSearchTemplateApiTests : ApiTestBase<IGetSearchTemplateResponse, IGetSearchTemplateRequest, GetSearchTemplateDescriptor, GetSearchTemplateRequest>
+	public class GetSearchTemplateApiTests : ApiTestBase<ReadOnlyCluster, IGetSearchTemplateResponse, IGetSearchTemplateRequest, GetSearchTemplateDescriptor, GetSearchTemplateRequest>
 	{
 		public GetSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -18,7 +17,7 @@ namespace Tests.Search.SearchTemplate.GetSearchTemplate
 			request: (c, r) => c.GetSearchTemplate(r),
 			requestAsync: (c, r) => c.GetSearchTemplateAsync(r)
 		);
-		
+
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_search/template/{CallIsolatedValue}";
 

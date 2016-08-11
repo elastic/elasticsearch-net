@@ -14,14 +14,13 @@ using Xunit;
 
 namespace Tests.Search.MultiSearch
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiSearchLowLevelPostDataTests
+	public class MultiSearchLowLevelPostDataTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private IElasticClient _client;
 
 		public MultiSearchLowLevelPostDataTests(ReadOnlyCluster cluster, EndpointUsage usage)
 		{
-			_client = cluster.Client();
+			_client = cluster.Client;
 		}
 
 		protected List<object> Search => new object[]
@@ -88,7 +87,7 @@ namespace Tests.Search.MultiSearch
 		public void AssertResponse(ElasticsearchResponse<dynamic> response)
 		{
 			response.Success.Should().BeTrue();
-	
+
 			var r = response.Body;
 
 			JArray responses = r.responses;

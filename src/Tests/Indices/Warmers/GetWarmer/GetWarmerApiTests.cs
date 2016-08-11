@@ -9,8 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Indices.Warmers.GetWarmer
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class GetWarmerApiTests : ApiTestBase<IGetWarmerResponse, IGetWarmerRequest, GetWarmerDescriptor, GetWarmerRequest>
+	public class GetWarmerApiTests : ApiTestBase<ReadOnlyCluster, IGetWarmerResponse, IGetWarmerRequest, GetWarmerDescriptor, GetWarmerRequest>
 	{
 		public GetWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

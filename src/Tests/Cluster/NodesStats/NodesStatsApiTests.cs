@@ -9,8 +9,7 @@ using Xunit;
 
 namespace Tests.Cluster.NodesStats
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class NodesStatsApiTests : ApiIntegrationTestBase<INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
+	public class NodesStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, INodesStatsResponse, INodesStatsRequest, NodesStatsDescriptor, NodesStatsRequest>
 	{
 		public NodesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -114,7 +113,7 @@ namespace Tests.Cluster.NodesStats
 			os.Swap.UsedInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ProcessStats process)	
+		protected void Assert(ProcessStats process)
 		{
 			process.Should().NotBeNull();
 
@@ -127,7 +126,7 @@ namespace Tests.Cluster.NodesStats
 			process.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
 		}
 
-		protected void Assert(ScriptStats script)	
+		protected void Assert(ScriptStats script)
 		{
 			script.Should().NotBeNull();
 		}
@@ -182,7 +181,7 @@ namespace Tests.Cluster.NodesStats
 		}
 
 		protected void Assert(NodeJvmStats jvm)
-		{	
+		{
 			jvm.Should().NotBeNull();
 
 			jvm.Timestamp.Should().BeGreaterThan(0);

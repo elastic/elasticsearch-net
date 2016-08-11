@@ -13,10 +13,9 @@ using static Nest.Infer;
 
 namespace Tests.Search.Percolator.Percolate
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class PercolateApiTests : ApiIntegrationTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	public class PercolateApiTests : ApiIntegrationTestBase<WritableCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
-		public PercolateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PercolateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private string Index => this.CallIsolatedValue + "-index";
 
@@ -98,8 +97,7 @@ namespace Tests.Search.Percolator.Percolate
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class PercolateExistingDocApiTests : ApiTestBase<IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
+	public class PercolateExistingDocApiTests : ApiTestBase<ReadOnlyCluster, IPercolateResponse, IPercolateRequest<Project>, PercolateDescriptor<Project>, PercolateRequest<Project>>
 	{
 		public PercolateExistingDocApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

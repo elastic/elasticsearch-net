@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.Search.Percolator.RegisterPercolator
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
+	public class RegisterPercolatorApiTests : ApiIntegrationTestBase<WritableCluster, IRegisterPercolatorResponse, IRegisterPercolatorRequest, RegisterPercolatorDescriptor<Project>, RegisterPercolatorRequest>
 	{
-		public RegisterPercolatorApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RegisterPercolatorApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void OnBeforeCall(IElasticClient client)
 		{
@@ -39,7 +38,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 		protected override string UrlPath => $"/{CallIsolatedValue}-index/.percolator/{this.CallIsolatedValue}";
 
 		protected override RegisterPercolatorDescriptor<Project> NewDescriptor() => new RegisterPercolatorDescriptor<Project>(this.CallIsolatedValue);
-		
+
 		protected override object ExpectJson => new
 		{
 			query = new

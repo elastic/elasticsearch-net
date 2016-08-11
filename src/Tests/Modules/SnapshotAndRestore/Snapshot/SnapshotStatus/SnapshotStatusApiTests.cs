@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class SnapshotStatusApiTests : ApiTestBase<ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
+	public class SnapshotStatusApiTests : ApiTestBase<ReadOnlyCluster, ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>
 	{
 		public SnapshotStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

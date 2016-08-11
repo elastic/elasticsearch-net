@@ -9,15 +9,12 @@ using static Nest.Infer;
 
 namespace Tests.Indices.MappingManagement.PutMapping
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class PutMappingApiTests : ApiIntegrationTestBase<IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public class PutMappingApiTests
+		: ApiIntegrationAgainstNewIndexTestBase
+			<WritableCluster, IPutMappingResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		public PutMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutMappingApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-		}
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Map(f),
 			fluentAsync: (client, f) => client.MapAsync(f),

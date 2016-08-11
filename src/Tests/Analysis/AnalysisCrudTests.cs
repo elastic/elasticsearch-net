@@ -9,9 +9,8 @@ using static Tests.Framework.Promisify;
 namespace Tests.Analysis
 {
 
-	[Collection(IntegrationContext.Indexing)]
 	public class AnalysisCrudTests
-		: CrudTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
+		: CrudWithNoDeleteTestBase<ICreateIndexResponse, IGetIndexSettingsResponse, IUpdateIndexSettingsResponse>
 	{
 		/**
 		* == Analysis crud
@@ -22,7 +21,7 @@ namespace Tests.Analysis
 		*/
 		protected override bool SupportsDeletes => false;
 
-		public AnalysisCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AnalysisCrudTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		/**
 		* We can create the analysis settings as part of the create index call

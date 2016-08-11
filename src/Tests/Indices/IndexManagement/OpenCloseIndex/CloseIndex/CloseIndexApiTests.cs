@@ -1,22 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
+using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class CloseIndexApiTests : ApiIntegrationTestBase<ICloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
+	public class CloseIndexApiTests : ApiIntegrationAgainstNewIndexTestBase<WritableCluster, ICloseIndexResponse, ICloseIndexRequest, CloseIndexDescriptor, CloseIndexRequest>
 	{
-		public CloseIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-			client.ClusterHealth(f => f.WaitForStatus(WaitForStatus.Yellow));
-		}
+		public CloseIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CloseIndex(CallIsolatedValue),

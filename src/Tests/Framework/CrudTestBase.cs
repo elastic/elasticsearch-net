@@ -6,20 +6,34 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
+	public abstract class CrudWithNoDeleteTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
 		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponseBase>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 	{
-	    protected CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+	    protected CrudWithNoDeleteTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 	}
 
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+		: CrudTestBase<WritableCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+			where TCreateResponse : class, IResponse
+			where TReadResponse : class, IResponse
+			where TUpdateResponse : class, IResponse
+			where TDeleteResponse : class, IResponse
+	{
+		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		}
+	}
+
+	public abstract class CrudTestBase<TCluster, TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse> : IClusterFixture<TCluster>
+			where TCluster : ClusterBase, new()
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -32,10 +46,10 @@ namespace Tests.Framework
 		private LazyResponses _deleteResponse;
 		private LazyResponses _deleteGetResponse;
 
-		readonly IIntegrationCluster _cluster;
+		readonly ClusterBase _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		protected CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage)
+		protected CrudTestBase(ClusterBase cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;
@@ -84,8 +98,7 @@ namespace Tests.Framework
 		}
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected int IntegrationPort { get; set; } = 9200;
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
-		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
+		protected virtual IElasticClient Client => this._cluster.Client;
 
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
 			where TResponse : class, IResponse
@@ -93,15 +106,15 @@ namespace Tests.Framework
 			//hack to make sure these are resolved in the right order, calling twice yields cached results so
 			//should be fast
 			await this._createResponse;
-			this.WaitForYellow();
+			//this.WaitForYellow();
 			await this._createGetResponse;
 			await this._updateResponse;
-			this.WaitForYellow();
+			//this.WaitForYellow();
 			await this._updateGetResponse;
 			if (this.SupportsDeletes)
 			{
 				await this._deleteResponse;
-				this.WaitForYellow();
+				//this.WaitForYellow();
 				await this._deleteGetResponse;
 			}
 
@@ -125,7 +138,7 @@ namespace Tests.Framework
 
 		protected void WaitForYellow()
 		{
-			this.Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow));
+			//this.Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow));
 		}
 
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
@@ -147,24 +160,20 @@ namespace Tests.Framework
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
 		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
 
-		[I] protected virtual async Task CreateCallIsValid() =>
-			await this.AssertOnCreate(r => r.IsValid.Should().Be(true, "{0}", r.DebugInformation));
+		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.ShouldBeValid());
 		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
-			r.IsValid.Should().Be(true, "{0}", r.DebugInformation);
+			r.ShouldBeValid();
 			ExpectAfterCreate(r);
 		});
 
-		[I] protected virtual async Task UpdateCallIsValid()
-				=> await this.AssertOnUpdate(r => r.IsValid.Should().Be(true, "{0}", r.DebugInformation));
+		[I] protected virtual async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.ShouldBeValid());
 
 		[I] protected virtual async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
-			r.IsValid.Should().Be(true, "{0}", r.DebugInformation);
+			r.ShouldBeValid();
 			ExpectAfterUpdate(r);
 		});
 
-		[I] protected virtual async Task DeleteCallIsValid() =>
-			await this.AssertOnDelete(r => r.IsValid.Should().Be(true, "{0}", r.DebugInformation));
-		[I] protected virtual async Task GetAfterDeleteIsValid() => await
-			this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false, "{0}", r.DebugInformation));
+		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.ShouldBeValid());
+		[I] protected virtual async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.ShouldNotBeValid());
 	}
 }

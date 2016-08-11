@@ -76,8 +76,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		public void ExplicitIndexOnRequest()
 		{
 			Uri requestUri = null;
-			var client = TestClient.GetInMemoryClient(s => s
-				.OnRequestCompleted(r => { requestUri = r.Uri; }));
+			var client = TestClient.GetInMemoryClient(s=>s.OnRequestCompleted(r => { requestUri = r.Uri; }));
 
 			var response = client.Search<Project>(s => s.Index("some-other-index")); //<1> Provide the index name on the request
 
@@ -91,7 +90,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void ExplicitIndexOnRequestTakesPrecedence()
 		{
-			var client = TestClient.GetInMemoryClient(s =>
+			var client = TestClient.GetInMemoryClient(s=>
 				new ConnectionSettings()
 					.DefaultIndex("defaultindex")
 					.MapDefaultTypeIndices(m => m

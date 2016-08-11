@@ -12,9 +12,8 @@ using Tests.Framework.MockData;
 
 namespace Tests.Reproduce
 {
-	[Collection(IntegrationContext.ReadOnly)]
 	[SkipVersion("<2.1.0", "")]
-	public class GithubIssue1863
+	public class GithubIssue1863 : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly ReadOnlyCluster _cluster;
 
@@ -26,7 +25,7 @@ namespace Tests.Reproduce
 		[I]
 		public void ConcreteTypeConverterThrowsExceptionOnNullScore()
 		{
-			var client = _cluster.Client(s => s);
+			var client = _cluster.Client;
 			var response = client.Search<Project>(s => s
 				.ConcreteTypeSelector((d,h) => typeof(Project))
 				.Sort(srt => srt.Ascending(p => p.StartedOn))

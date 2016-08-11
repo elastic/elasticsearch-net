@@ -134,6 +134,10 @@ namespace Elasticsearch.Net
 		Action<IApiCallDetails> _completedRequestHandler = DefaultCompletedRequestHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.OnRequestCompleted => _completedRequestHandler;
 
+		private static void DefaultRequestDataCreated(RequestData response) { }
+		private Action<RequestData> _onRequestDataCreated = DefaultRequestDataCreated;
+		Action<RequestData> IConnectionConfigurationValues.OnRequestDataCreated => _onRequestDataCreated;
+
 		private readonly NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
@@ -302,6 +306,9 @@ namespace Elasticsearch.Net
 		/// </summary>
 		public T OnRequestCompleted(Action<IApiCallDetails> handler) =>
 			Assign(a => a._completedRequestHandler += handler ?? DefaultCompletedRequestHandler);
+
+		public T OnRequestDataCreated(Action<RequestData> handler) =>
+			Assign(a => a._onRequestDataCreated += handler ?? DefaultRequestDataCreated);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.

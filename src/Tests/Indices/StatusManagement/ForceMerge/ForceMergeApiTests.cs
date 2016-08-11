@@ -12,16 +12,10 @@ using static Nest.Infer;
 
 namespace Tests.Indices.StatusManagement.ForceMerge
 {
-	[Collection(IntegrationContext.OwnIndex)]
 	[SkipVersion("<2.1.0", "")]
-	public class ForceMergeApiTests : ApiIntegrationTestBase<IForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor, ForceMergeRequest>
+	public class ForceMergeApiTests : ApiIntegrationAgainstNewIndexTestBase<IntrusiveOperationCluster, IForceMergeResponse, IForceMergeRequest, ForceMergeDescriptor, ForceMergeRequest>
 	{
-		public ForceMergeApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-		}
+		public ForceMergeApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.ForceMerge(CallIsolatedValue, f),

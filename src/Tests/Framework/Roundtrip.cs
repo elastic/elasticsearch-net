@@ -11,20 +11,21 @@ namespace Tests.Framework
 {
 	public class RoundTripper : SerializationTestBase
 	{
+
 		protected override object ExpectJson { get; }
 
 		internal RoundTripper(
-			object expected, 
+			object expected,
 			Func<ConnectionSettings, ConnectionSettings> settings = null,
-			Func<ConnectionSettings, IElasticsearchSerializer> serializerFactory = null
-			) 
+			Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory = null
+			)
 		{
-			this._serializerFactory = serializerFactory;
 			this.ExpectJson = expected;
 			this._connectionSettingsModifier = settings;
 
 			this._expectedJsonString = this.Serialize(expected);
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
+			this._serializerFactory = _serializerFactory;
 		}
 
 		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
@@ -34,15 +35,15 @@ namespace Tests.Framework
 		}
 		public RoundTripper WhenInferringIdOn<T>(T project) where T : class
 		{
-			this.GetClient().Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
+			this.Client.Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
 			return this;
 		}
-		public RoundTripper ForField(Field field) 
+		public RoundTripper ForField(Field field)
 		{
-			this.GetClient().Infer.Field(field).Should().Be((string)this.ExpectJson);
+			this.Client.Infer.Field(field).Should().Be((string)this.ExpectJson);
 			return this;
 		}
-		
+
 		public RoundTripper AsPropertiesOf<T>(T document) where T : class
 		{
 			var jo = JObject.Parse(this.Serialize(document));
@@ -76,9 +77,9 @@ namespace Tests.Framework
 			this._serializerFactory = serializerFactory;
 			return this;
 		}
-			
 
-		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, _serializerFactory);
+
+		public RoundTripper Expect(object expected) =>  new RoundTripper(expected, _connectionSettingsModifier, this._serializerFactory);
 	}
 
 	public class RoundTripper<T> : RoundTripper

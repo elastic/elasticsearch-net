@@ -7,13 +7,11 @@ using Xunit;
 
 namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 {
-	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateAzureRepositoryApiTests : ApiTestBase<ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateAzureRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateAzureRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateAzureRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "repository1";
-
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CreateRepository(_name, f),
@@ -48,7 +46,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 					.BasePath("foopath")
 					.Compress()
 					.ChunkSize("64mb")
-                )
+				)
 			);
 
 		protected override CreateRepositoryRequest Initializer => new CreateRepositoryRequest(_name)
@@ -66,10 +64,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateHdfsRepositoryApiTests : ApiTestBase<ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateHdfsRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateHdfsRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateHdfsRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "repository1";
 
@@ -96,7 +93,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				conf_location = "fooconflocation",
 				compress = true,
 				concurrent_streams = 5,
-                chunk_size = "64mb"
+				chunk_size = "64mb"
 			}
 		};
 
@@ -128,10 +125,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateFileSystemRepositoryApiTests : ApiTestBase<ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateFileSystemRepositoryApiTests
+		: ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateFileSystemRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateFileSystemRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "repository1";
 
@@ -154,7 +151,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 				location = "some/location",
 				compress = true,
 				concurrent_streams = 5,
-                chunk_size = "64mb",
+				chunk_size = "64mb",
 				max_restore_bytes_per_second = "100mb",
 				max_snapshot_bytes_per_second = "200mb"
 			}
@@ -186,10 +183,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateReadOnlyUrlRepositoryApiTests : ApiTestBase<ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateReadOnlyUrlRepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateReadOnlyUrlRepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateReadOnlyUrlRepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "repository1";
 
@@ -232,10 +228,9 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		};
 	}
 
-	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateS3RepositoryApiTests : ApiTestBase<ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
+	public class CreateS3RepositoryApiTests : ApiTestBase<WritableCluster, ICreateRepositoryResponse, ICreateRepositoryRequest, CreateRepositoryDescriptor, CreateRepositoryRequest>
 	{
-		public CreateS3RepositoryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateS3RepositoryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static readonly string _name = "repository1";
 
