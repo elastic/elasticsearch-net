@@ -8,16 +8,11 @@ using static Nest.Infer;
 
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
-	[Collection(TypeOfCluster.Indexing)]
 	public class DeleteIndexApiTests
-		: ApiIntegrationTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+		: ApiIntegrationAgainstNewIndexTestBase
+			<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
-		public DeleteIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
-		{
-			foreach (var index in values.Values) client.CreateIndex(index);
-		}
+		public DeleteIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteIndex(CallIsolatedValue),
@@ -34,10 +29,10 @@ namespace Tests.Indices.IndexManagement.DeleteIndex
 		protected override DeleteIndexRequest Initializer => new DeleteIndexRequest(CallIsolatedValue);
 	}
 
-	[Collection(TypeOfCluster.Indexing)]
-	public class DeleteAllIndicesApiTests : ApiTestBase<IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+	public class DeleteAllIndicesApiTests
+		: ApiTestBase<WritableCluster, IDeleteIndexResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
-		public DeleteAllIndicesApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteAllIndicesApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteIndex(AllIndices),

@@ -11,35 +11,37 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class GetAliasesPointingToIndexTests
+	public class GetAliasesPointingToIndexTests : SimpleIntegration, IClusterFixture<WritableCluster>
 	{
-		private readonly OwnIndexCluster _cluster;
+		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;
-		private static readonly string Index = "aliases-index";
+		private static string Unique = RandomString();
+		private static readonly string Index = "aliases-index-" + Unique;
+		private static string Alias(int alias) => "aliases-index-" + Unique + "-alias-" + alias;
 
-		public GetAliasesPointingToIndexTests(OwnIndexCluster cluster)
+		public GetAliasesPointingToIndexTests(WritableCluster cluster) : base(cluster)
 		{
 			_cluster = cluster;
-			_client = _cluster.Client();
+			_client = _cluster.Client;
 
-			if (_client.IndexExists(Index).Exists)
-				_client.DeleteIndex(Index);
+			if (_client.IndexExists(Index).Exists) return;
+			lock(Unique)
+			{
+				if (_client.IndexExists(Index).Exists) return;
+				var createResponse = _client.CreateIndex(Index, c => c
+					.Settings(s => s
+						.NumberOfShards(1)
+						.NumberOfReplicas(0)
+					)
+					.Aliases(a => a
+						.Alias(Alias(1))
+						.Alias(Alias(2))
+						.Alias(Alias(3))
+					)
+				);
 
-			var createResponse = _client.CreateIndex(Index, c => c
-				.Settings(s => s
-					.NumberOfShards(1)
-					.NumberOfReplicas(0)
-				)
-				.Aliases(a => a
-					.Alias("alias-1")
-					.Alias("alias-2")
-					.Alias("alias-3")
-				)
-			);
-
-			if (!createResponse.IsValid)
-				throw new Exception("problem creating index for integration test");
+				createResponse.ShouldBeValid();
+			}
 		}
 
 		[I]
@@ -48,9 +50,9 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 			var aliasesPointingToIndex = _client.GetAliasesPointingToIndex(Index);
 
 			aliasesPointingToIndex.Should().NotBeEmpty().And.HaveCount(3);
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-1").Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-2").Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-3").Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(1)).Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(2)).Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(3)).Should().NotBeNull();
 		}
 
 		[I]
@@ -59,9 +61,9 @@ namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 			var aliasesPointingToIndex = await _client.GetAliasesPointingToIndexAsync(Index);
 
 			aliasesPointingToIndex.Should().NotBeEmpty().And.HaveCount(3);
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-1").Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-2").Should().NotBeNull();
-			aliasesPointingToIndex.FirstOrDefault(a => a.Name == "alias-3").Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(1)).Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(2)).Should().NotBeNull();
+			aliasesPointingToIndex.FirstOrDefault(a => a.Name == Alias(3)).Should().NotBeNull();
 		}
 	}
 }

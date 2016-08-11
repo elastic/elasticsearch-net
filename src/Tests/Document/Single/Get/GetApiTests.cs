@@ -10,8 +10,7 @@ using FluentAssertions;
 
 namespace Tests.Document.Single.Get
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetApiTests : ApiIntegrationTestBase<IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	public class GetApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
 		protected string ProjectId => Project.Projects.First().Name;
 
@@ -43,7 +42,6 @@ namespace Tests.Document.Single.Get
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class GetApiFieldsTests : GetApiTests
 	{
 		public GetApiFieldsTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
@@ -52,7 +50,7 @@ namespace Tests.Document.Single.Get
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => g => g
 			.Fields(
-				p => p.Name, 
+				p => p.Name,
 				p => p.NumberOfCommits
 			);
 

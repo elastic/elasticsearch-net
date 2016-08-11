@@ -24,7 +24,25 @@ namespace Tests.Framework
 			SetupSerialization();
 		}
 
-		protected SerializationTestBase(IIntegrationCluster cluster) { }
+		protected SerializationTestBase(ClusterBase cluster)
+		{
+		}
+
+		protected TObject Deserialize<TObject>(string json) =>
+			Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+
+		protected string Serialize<TObject>(TObject o)
+		{
+			var bytes = Serializer.SerializeToBytes(o);
+			return Encoding.UTF8.GetString(bytes);
+		}
+
+		protected IElasticsearchSerializer Serializer => Client.Serializer;
+
+		protected virtual IElasticClient Client =>
+			_connectionSettingsModifier == null && _serializerFactory == null
+			? TestClient.DefaultInMemoryClient
+			: TestClient.GetInMemoryClient(_connectionSettingsModifier, _serializerFactory);
 
 		protected void SetupSerialization()
 		{
@@ -99,15 +117,6 @@ namespace Tests.Framework
 				if (o != null)
 					Sort(o);
 			}
-		}
-
-		protected TObject Deserialize<TObject>(string json) =>
-			Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
-
-		protected string Serialize<TObject>(TObject o)
-		{
-			var bytes = Serializer.SerializeToBytes(o);
-			return Encoding.UTF8.GetString(bytes);
 		}
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)

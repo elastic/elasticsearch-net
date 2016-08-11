@@ -7,8 +7,7 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesStats
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class IndicesStatsApiTests : ApiIntegrationTestBase<IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
+	public class IndicesStatsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
 	{
 		public IndicesStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

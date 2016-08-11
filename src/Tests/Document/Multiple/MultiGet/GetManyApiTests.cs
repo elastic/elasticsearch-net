@@ -12,8 +12,7 @@ using Xunit;
 
 namespace Tests.Document.Multiple.MultiGet
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GetManyApiTests
+	public class GetManyApiTests : IClusterFixture<ReadOnlyCluster>
 	{
 		private readonly ReadOnlyCluster _cluster;
 		private readonly IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
@@ -22,7 +21,7 @@ namespace Tests.Document.Multiple.MultiGet
 		public GetManyApiTests(ReadOnlyCluster cluster)
 		{
 			_cluster = cluster;
-			_client = _cluster.Client();
+			_client = _cluster.Client;
 		}
 
 		[I]

@@ -6,11 +6,10 @@ using Xunit;
 
 namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class DeleteIndexTemplateApiTests 
-		: ApiTestBase<IDeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest>
+	public class DeleteIndexTemplateApiTests
+		: ApiTestBase<WritableCluster, IDeleteIndexTemplateResponse, IDeleteIndexTemplateRequest, DeleteIndexTemplateDescriptor, DeleteIndexTemplateRequest>
 	{
-		public DeleteIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteIndexTemplateApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.DeleteIndexTemplate(CallIsolatedValue),
 			fluentAsync: (client, f) => client.DeleteIndexTemplateAsync(CallIsolatedValue),

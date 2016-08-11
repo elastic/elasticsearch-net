@@ -8,18 +8,17 @@ using Xunit;
 
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class OpenIndexApiTests 
-		: ApiIntegrationTestBase<IOpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
+	public class OpenIndexApiTests
+		: ApiIntegrationTestBase<WritableCluster, IOpenIndexResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{
-		public OpenIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public OpenIndexApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
 			foreach (var index in values.Values)
 			{
 				client.CreateIndex(index);
-				client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow));
+				client.ClusterHealth(h => h.WaitForStatus(WaitForStatus.Yellow).Index(index));
 				client.CloseIndex(index);
 			}
 		}

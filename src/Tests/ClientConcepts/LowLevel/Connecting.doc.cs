@@ -142,14 +142,14 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** === OnRequestCompleted
-         * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
-         * If you have complex logging needs this is a good place to add that in.
-        */
+		 * You can pass a callback of type `Action<IApiCallDetails>` that can eavesdrop every time a response (good or bad) is created.
+		 * If you have complex logging needs this is a good place to add that in.
+		*/
 		[U]
 		public void OnRequestCompletedIsCalled()
 		{
 			var counter = 0;
-			var client = TestClient.GetClient(s => s.OnRequestCompleted(r => counter++));
+			var client = TestClient.GetInMemoryClient(s => s.OnRequestCompleted(r => counter++));
 			client.RootNodeInfo();
 			counter.Should().Be(1);
 			client.RootNodeInfoAsync();

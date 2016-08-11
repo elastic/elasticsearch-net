@@ -8,10 +8,10 @@ using Xunit;
 
 namespace Tests.XPack.Security.Authenticate
 {
-	[Collection(TypeOfCluster.Shield)]
-	public class AuthenticateApiTests : ApiIntegrationTestBase<IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class AuthenticateApiTests : ApiIntegrationTestBase<XPackCluster, IAuthenticateResponse, IAuthenticateRequest, AuthenticateDescriptor, AuthenticateRequest>
 	{
-		public AuthenticateApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AuthenticateApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Authenticate(f),
@@ -35,10 +35,10 @@ namespace Tests.XPack.Security.Authenticate
 		}
 	}
 
-	[Collection(TypeOfCluster.Shield)]
+	[SkipVersion("<2.3.0", "")]
 	public class AuthenticateRequestConfigurationApiTests : AuthenticateApiTests
 	{
-		public AuthenticateRequestConfigurationApiTests(ShieldCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AuthenticateRequestConfigurationApiTests(XPackCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override AuthenticateRequest Initializer => new AuthenticateRequest
 		{

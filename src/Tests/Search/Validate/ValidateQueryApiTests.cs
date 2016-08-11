@@ -8,9 +8,8 @@ using FluentAssertions;
 
 namespace Tests.Search.Validate
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ValidateQueryApiTests 
-		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+	public class ValidateQueryApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
 		public ValidateQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -27,9 +26,8 @@ namespace Tests.Search.Validate
 		protected override string UrlPath => "/project/project/_validate/query";
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class ValidateInvalidQueryApiTests 
-		: ApiIntegrationTestBase<IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+	public class ValidateInvalidQueryApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IValidateQueryResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
 		public ValidateInvalidQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -57,7 +55,7 @@ namespace Tests.Search.Validate
 					Query = "shouldbeadate"
 				}
 			)
-        };
+		};
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;

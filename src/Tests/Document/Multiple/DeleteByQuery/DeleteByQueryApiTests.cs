@@ -12,10 +12,9 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.DeleteByQuery
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
+	public class DeleteByQueryApiTests : ApiIntegrationTestBase<WritableCluster, IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
-		public DeleteByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DeleteByQueryApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

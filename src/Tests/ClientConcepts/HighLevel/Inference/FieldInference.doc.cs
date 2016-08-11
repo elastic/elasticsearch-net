@@ -323,8 +323,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U]
 		public void ExpressionsAreCachedButSeeDifferentTypes()
 		{
-			var connectionSettings = TestClient.CreateSettings(forceInMemory: true);
-			var client = new ElasticClient(connectionSettings);
+			var client = TestClient.Default;
 
 			var fieldNameOnA = client.Infer.Field(Field<A>(p => p.C.Name));
 			var fieldNameOnB = client.Infer.Field(Field<B>(p => p.C.Name));
@@ -342,7 +341,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			* now when we resolve the field path for property `C` on `A`, it will be different than
 			* for property `C` on `B`
 			*/
-			var newConnectionSettings = TestClient.CreateSettings(forceInMemory: true, modifySettings: s => s
+			var newConnectionSettings = TestClient.CreateSettings(modifySettings: s => s
 				.InferMappingFor<A>(m => m
 					.Rename(p => p.C, "d")
 				)

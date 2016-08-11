@@ -10,7 +10,6 @@ nuget RazorMachine 2.6.1
 nuget System.Collections.Immutable
 
 //tests
-nuget xunit 
 nuget FluentAssertions 
 nuget Bogus
 nuget DiffPlex 
@@ -26,6 +25,10 @@ source https://api.nuget.org/v3/index.json
 
 nuget AsciiDocNet
 
+source https://www.myget.org/F/xunit/
+nuget xunit 2.2.0-beta3-build3330
+nuget xunit.abstractions 2.0.1-rc2
+
 group build
 
     source https://www.nuget.org/api/v2
@@ -33,4 +36,6 @@ group build
     nuget FAKE
     nuget FSharp.Data
     nuget GitLink prerelease
-    nuget xunit.runner.console
+
+    source https://www.myget.org/F/xunit/
+    nuget xunit.runner.console 2.2.0-beta3-build3330

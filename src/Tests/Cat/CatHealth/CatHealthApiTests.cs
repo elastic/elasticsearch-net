@@ -8,8 +8,7 @@ using Xunit;
 
 namespace Tests.Cat.CatHealth
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatHealthApiTests : ApiIntegrationTestBase<ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
+	public class CatHealthApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
 	{
 		public CatHealthApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

@@ -6,11 +6,13 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class ApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
-		: SerializationTestBase
+	public abstract class ApiTestBase<TCluster, TResponse, TInterface, TDescriptor, TInitializer>
+		: SerializationTestBase, IClusterFixture<TCluster>
+		where TCluster : ClusterBase, new()
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -24,18 +26,14 @@ namespace Tests.Framework
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected bool RanIntegrationSetup => this._usage?.CalledSetup ?? false;
 
-		protected IIntegrationCluster Cluster { get; }
+		protected ClusterBase Cluster { get; }
 
 		protected string CallIsolatedValue => _uniqueValues.Value;
 		protected T ExtendedValue<T>(string key) where T : class => this._uniqueValues.ExtendedValue<T>(key);
-		protected void ExtendedValue<T>(string key, T value) where T : class => this._uniqueValues.ExtendedValue(key, value);
+
 		protected virtual void IntegrationSetup(IElasticClient client, CallUniqueValues values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
 		protected virtual void OnAfterCall(IElasticClient client) { }
-
-		protected virtual bool ForceInMemory => true;
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
-		protected override IElasticClient Client => this.Cluster.Client(GetConnectionSettings, this.ForceInMemory);
 
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
@@ -46,7 +44,7 @@ namespace Tests.Framework
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster)
+		protected ApiTestBase(ClusterBase cluster, EndpointUsage usage) : base(cluster)
 		{
 			this._usage = usage;
 			this.Cluster = cluster;
@@ -58,7 +56,7 @@ namespace Tests.Framework
 		}
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r => UrlTester.ComparePathAndQuerystring(this.UrlPath, r.ApiCall.Uri));
+			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
 		[U] protected async Task UsesCorrectHttpMethod() =>
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
@@ -87,6 +85,7 @@ namespace Tests.Framework
 					this._usage.CalledSetup = true;
 				}
 
+
 				var dict = new Dictionary<ClientMethod, IResponse>();
 				_uniqueValues.CurrentView = ClientMethod.Fluent;
 
@@ -111,6 +110,8 @@ namespace Tests.Framework
 				return dict;
 			});
 		}
+
+		private void AssertUrl(Uri u) => u.PathEquals(this.UrlPath);
 
 		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{

@@ -5,6 +5,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 using System.Collections.Generic;
+using Tests.Framework;
 
 namespace Tests.Aggregations.Metric.Average
 {
@@ -13,7 +14,7 @@ namespace Tests.Aggregations.Metric.Average
 		public AverageAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		protected override object ExpectJson => new
 		{
@@ -66,7 +67,7 @@ namespace Tests.Aggregations.Metric.Average
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var commitsAvg = response.Aggs.Average("average_commits");
 			commitsAvg.Should().NotBeNull();
 			commitsAvg.Value.Should().BeGreaterThan(0);

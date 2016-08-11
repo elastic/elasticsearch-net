@@ -60,7 +60,7 @@ namespace Tests.Aggregations.Bucket.IpRange
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var ipRanges = response.Aggs.IpRange("ip_ranges");
 			ipRanges.Should().NotBeNull();
 			ipRanges.Buckets.Should().NotBeNull();

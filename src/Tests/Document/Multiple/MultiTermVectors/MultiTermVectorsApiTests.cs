@@ -11,8 +11,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.MultiTermVectors
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -51,6 +50,35 @@ namespace Tests.Document.Multiple.MultiTermVectors
 				}
 			}).Take(2)
 		};
+
+		protected override void ExpectResponse(IMultiTermVectorsResponse response)
+		{
+			response.ShouldBeValid();
+			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
+			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
+
+			termvectorDoc.Should().NotBeNull();
+			termvectorDoc.Index.Should().NotBeNull();
+			termvectorDoc.Type.Should().NotBeNull();
+			termvectorDoc.Id.Should().NotBeNull();
+			termvectorDoc.Took.Should().BeGreaterThan(0);
+
+			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
+			var vectors = termvectorDoc.TermVectors["firstName"];
+			vectors.Terms.Should().NotBeEmpty();
+			foreach (var vectorTerm in vectors.Terms)
+			{
+				vectorTerm.Key.Should().NotBeNullOrWhiteSpace();
+				vectorTerm.Value.Should().NotBeNull();
+				vectorTerm.Value.TermFrequency.Should().BeGreaterThan(0);
+				vectorTerm.Value.DocumentFrequency.Should().BeGreaterThan(0);
+				vectorTerm.Value.TotalTermFrequency.Should().BeGreaterThan(0);
+				vectorTerm.Value.Tokens.Should().NotBeEmpty();
+
+				var token = vectorTerm.Value.Tokens.First();
+				token.EndOffset.Should().BeGreaterThan(0);
+			}
+		}
 
 		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
 			.Index<Developer>()

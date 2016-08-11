@@ -12,9 +12,8 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.UpdateByQuery
 {
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class UpdateByQueryApiTests
-		: ApiIntegrationTestBase<IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class UpdateByQueryApiTests : ApiIntegrationTestBase<IntrusiveOperationCluster, IUpdateByQueryResponse, IUpdateByQueryRequest, UpdateByQueryDescriptor<UpdateByQueryApiTests.Test>, UpdateByQueryRequest>
 	{
 		public class Test
 		{
@@ -22,7 +21,7 @@ namespace Tests.Document.Multiple.UpdateByQuery
 			public string Flag { get; set; }
 		}
 
-		public UpdateByQueryApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateByQueryApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{
@@ -104,10 +103,10 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		}
 	}
 
-	[Collection(TypeOfCluster.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryWaitForCompletionApiTests : UpdateByQueryApiTests
 	{
-		public UpdateByQueryWaitForCompletionApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateByQueryWaitForCompletionApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override string UrlPath => $"/{CallIsolatedValue}/test/_update_by_query?wait_for_completion=false&conflicts=proceed";
 
@@ -131,10 +130,10 @@ namespace Tests.Document.Multiple.UpdateByQuery
 		}
 	}
 
-	[Collection(TypeOfCluster.OwnIndex)]
+	[SkipVersion("<2.3.0", "")]
 	public class UpdateByQueryWithFailuresApiTests : UpdateByQueryApiTests
 	{
-		public UpdateByQueryWithFailuresApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UpdateByQueryWithFailuresApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

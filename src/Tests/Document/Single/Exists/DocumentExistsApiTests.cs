@@ -9,10 +9,9 @@ using Xunit;
 
 namespace Tests.Document.Single.Exists
 {
-	[Collection(TypeOfCluster.Indexing)]
-	public class DocumentExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>
+	public class DocumentExistsApiTests : ApiIntegrationTestBase<WritableCluster, IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>
 	{
-		public DocumentExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public DocumentExistsApiTests(WritableCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values)
 		{

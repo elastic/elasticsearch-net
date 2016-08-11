@@ -129,17 +129,13 @@ namespace Tests.Search.Request
 	*
 	* See the Elasticsearch documentation on {ref_current}/search-request-inner-hits.html[Inner hits] for more detail.
 	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
+	public abstract class InnerHitsApiTestsBase<TRoyal> : ApiIntegrationTestBase<IntrusiveOperationCluster, ISearchResponse<TRoyal>, ISearchRequest, SearchDescriptor<TRoyal>, SearchRequest<TRoyal>>
 		where TRoyal : class, IRoyal
 	{
-		public InnerHitsApiTestsBase(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public InnerHitsApiTestsBase(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected abstract IndexName Index { get; }
 		protected override void IntegrationSetup(IElasticClient client, CallUniqueValues values) => new RoyalSeeder(this.Client, Index).Seed();
-
-		protected override ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings
-			.DisableDirectStreaming();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<TRoyal>(f),
@@ -166,10 +162,9 @@ namespace Tests.Search.Request
 	* grandchildren, great-grandchildren, etc. In previous versions of Elasticsearch, Top Level Inner Hits would have been
 	* used to achieve this.
 	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	public class DescendentHasChildInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
+	public class GlobalInnerHitsApiTests : InnerHitsApiTestsBase<Duke>
 	{
-		public DescendentHasChildInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public GlobalInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => DescendentHasChildInnerHitsApiTests.IndexName;
@@ -253,8 +248,9 @@ namespace Tests.Search.Request
 
 		protected override void ExpectResponse(ISearchResponse<Duke> response)
 		{
-			response.Hits.Should().NotBeEmpty();
-			foreach (var hit in response.Hits)
+			r.ShouldBeValid();
+			r.Hits.Should().NotBeEmpty();
+			foreach (var hit in r.Hits)
 			{
 				hit.InnerHits.Should().NotBeEmpty();
 				hit.InnerHits.Should().ContainKey("earls");
@@ -281,11 +277,9 @@ namespace Tests.Search.Request
 	/**[float]
 	*== Query Inner Hits
 	*/
-	[Collection(TypeOfCluster.OwnIndex)]
-	[SkipVersion("5.0.0-alpha2", "broken in alpha2. response reason: Neither a nested or parent/child inner hit")]
 	public class QueryInnerHitsApiTests : InnerHitsApiTestsBase<King>
 	{
-		public QueryInnerHitsApiTests(OwnIndexCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public QueryInnerHitsApiTests(IntrusiveOperationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		private static IndexName IndexName { get; } = RandomString();
 		protected override IndexName Index => QueryInnerHitsApiTests.IndexName;

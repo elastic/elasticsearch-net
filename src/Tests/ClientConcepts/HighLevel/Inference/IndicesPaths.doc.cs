@@ -54,8 +54,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
-			var singleString = Index("name1"); // <1> specifying a single index using a string
-			var singleTyped = Index<Project>(); //<2> specifying a single index using a type
+			var client = TestClient.Default;
 
 			ISearchRequest singleStringRequest = new SearchDescriptor<Project>().Index(singleString);
 			ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(singleTyped);
@@ -73,6 +72,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var manyStrings = Index("name1", "name2"); //<1> specifying multiple indices using strings
 			var manyTypes = Index<Project>().And<Developer>(); //<2> specifying multiple indices using types
+			var client = TestClient.Default;
 
 			ISearchRequest manyStringRequest = new SearchDescriptor<Project>().Index(manyStrings);
 			ISearchRequest manyTypedRequest = new SearchDescriptor<Project>().Index(manyTypes);
@@ -94,6 +94,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		{
 			var indicesAll = All;
 			var allIndices = AllIndices;
+			var client = TestClient.Default;
 
 			ISearchRequest indicesAllRequest = new SearchDescriptor<Project>().Index(indicesAll);
 			ISearchRequest allIndicesRequest = new SearchDescriptor<Project>().Index(allIndices);

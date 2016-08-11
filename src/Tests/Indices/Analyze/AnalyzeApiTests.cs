@@ -7,9 +7,8 @@ using Xunit;
 
 namespace Tests.Indices.Analyze
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class AnalyzeApiTests 
-		: ApiIntegrationTestBase<IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
+	public class AnalyzeApiTests
+		: ApiIntegrationTestBase<ReadOnlyCluster, IAnalyzeResponse, IAnalyzeRequest, AnalyzeDescriptor, AnalyzeRequest>
 	{
 		public AnalyzeApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

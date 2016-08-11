@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -52,7 +53,7 @@ namespace Tests.Aggregations.Bucket.GeoHashGrid
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var myGeoHashGrid = response.Aggs.GeoHash("my_geohash_grid");
 			myGeoHashGrid.Should().NotBeNull();
 		}

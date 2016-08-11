@@ -8,8 +8,7 @@ using Xunit;
 
 namespace Tests.Cat.CatCount
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatCountApiTests : ApiIntegrationTestBase<ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+	public class CatCountApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -30,8 +29,7 @@ namespace Tests.Cat.CatCount
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatCountSingleIndexApiTests : ApiIntegrationTestBase<ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
+	public class CatCountSingleIndexApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatCountRecord>, ICatCountRequest, CatCountDescriptor, CatCountRequest>
 	{
 		public CatCountSingleIndexApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

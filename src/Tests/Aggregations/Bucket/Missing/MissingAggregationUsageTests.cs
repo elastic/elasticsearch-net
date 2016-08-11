@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
@@ -43,7 +44,7 @@ namespace Tests.Aggregations.Bucket.Missing
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var projectsWithoutDesc = response.Aggs.Missing("projects_without_a_description");
 			projectsWithoutDesc.Should().NotBeNull();
 		}

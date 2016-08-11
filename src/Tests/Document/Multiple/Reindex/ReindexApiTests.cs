@@ -10,10 +10,9 @@ using Xunit;
 
 namespace Tests.Document.Multiple.Reindex
 {
-	[CollectionDefinition(TypeOfCluster.Reindex)]
-	public class ReindexCluster : ClusterBase, ICollectionFixture<ReindexCluster>, IClassFixture<EndpointUsage>
+	public class ReindexCluster : ClusterBase
 	{
-		protected override void Boostrap()
+		public override void Bootstrap()
 		{
 			var seeder = new Seeder(this.Node);
 			seeder.DeleteIndicesAndTemplates();
@@ -21,8 +20,7 @@ namespace Tests.Document.Multiple.Reindex
 		}
 	}
 
-	[Collection(TypeOfCluster.Reindex)]
-	public class ReindexApiTests : SerializationTestBase
+	public class ReindexApiTests : SerializationTestBase, IClusterFixture<ReindexCluster>
 	{
 		private readonly IObservable<IReindexResponse<ILazyDocument>> _reindexManyTypesResult;
 		private readonly IObservable<IReindexResponse<Project>> _reindexSingleTypeResult;
@@ -36,7 +34,7 @@ namespace Tests.Document.Multiple.Reindex
 
 		public ReindexApiTests(ReindexCluster cluster, EndpointUsage usage)
 		{
-			this._client = cluster.Client();
+			this._client = cluster.Client;
 
 			// create a couple of projects
 			var projects = Project.Generator.Generate(2).ToList();
@@ -63,7 +61,7 @@ namespace Tests.Document.Multiple.Reindex
 			}
 
 			var bulkResult = this._client.Bulk(b => bb);
-			bulkResult.IsValid.Should().BeTrue();
+			bulkResult.ShouldBeValid();
 
 			this._client.Refresh(IndexName);
 
@@ -102,7 +100,29 @@ namespace Tests.Document.Multiple.Reindex
 				onCompleted: () => ReindexSingleTypeCompleted(handles)
 			);
 
-			this._reindexSingleTypeResult.Subscribe(singleTypeObserver);
+						var searchResult = this._client.Search<CommitActivity>(s => s
+							.Index(NewManyTypesIndexName)
+							.From(0)
+							.Size(100)
+							.Query(q => q.MatchAll())
+							.SearchType(SearchType.Scan)
+							.Scroll(scroll)
+						);
+
+						do
+						{
+							var result = searchResult;
+							searchResult = this._client.Scroll<CommitActivity>(scroll, result.ScrollId);
+							foreach (var hit in searchResult.Hits)
+							{
+								hit.Timestamp.Should().HaveValue();
+								hit.Parent.Should().NotBeNullOrEmpty();
+								hit.Routing.Should().NotBeNullOrEmpty();
+							}
+						} while (searchResult.IsValid && searchResult.Documents.Any());
+						handles[0].Set();
+					}
+				);
 
 			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
 		}

@@ -9,8 +9,7 @@ using static Nest.Infer;
 
 namespace Tests.Document.Single.TermVectors
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class TermVectorsApiTests : ApiIntegrationTestBase<ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
+	public class TermVectorsApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
 	{
 		public TermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

@@ -7,13 +7,14 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.XPack.Security;
 using Xunit;
 using static Nest.Infer;
 
 namespace Tests.XPack.Graph.Explore
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class GraphExploreApiTests : ApiIntegrationTestBase<IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
+	[SkipVersion("<2.3.0", "")]
+	public class GraphExploreApiTests : ApiIntegrationTestBase<ReadOnlyCluster, IGraphExploreResponse, IGraphExploreRequest, GraphExploreDescriptor<Project>, GraphExploreRequest>
 	{
 		public GraphExploreApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

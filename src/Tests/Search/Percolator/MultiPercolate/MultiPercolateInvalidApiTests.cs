@@ -13,10 +13,8 @@ using Xunit;
 
 namespace Tests.Search.Percolator.MultiPercolate
 {
-	[Collection(TypeOfCluster.ReadOnly)]
-	[SkipVersion("5.0.0-alpha2,5.0.0-alpha3", "deprecated")]
 	public class MultiPercolateInvalidApiTests
-		: ApiIntegrationTestBase<IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IMultiPercolateResponse, IMultiPercolateRequest, MultiPercolateDescriptor, MultiPercolateRequest>
 	{
 		public MultiPercolateInvalidApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -71,7 +69,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			responses.Should().HaveCount(4);
 			foreach (var r in responses.Skip(1))
 			{
-				r.IsValid.Should().BeFalse();
+				r.ShouldNotBeValid();
 				r.ServerError.Should().NotBeNull();
 				r.ServerError.Error.Should().NotBeNull();
 
@@ -80,7 +78,7 @@ namespace Tests.Search.Percolator.MultiPercolate
 			responses[1].ServerError.Error.Type.Should().Be("index_not_found_exception");
 
 			var validResponse = responses.First();
-			validResponse.IsValid.Should().BeTrue();
+			validResponse.ShouldBeValid();
 			validResponse.Matches.Should().NotBeNull().And.BeEmpty();
 			validResponse.Shards.Should().NotBeNull();
 			validResponse.Shards.Total.Should().Be(validResponse.Shards.Successful);

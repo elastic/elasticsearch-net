@@ -3,6 +3,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Xunit;
 
 namespace Tests.Aggregations.Metric.GeoCentroid
 {
@@ -45,7 +46,7 @@ namespace Tests.Aggregations.Metric.GeoCentroid
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			response.IsValid.Should().BeTrue();
+			response.ShouldBeValid();
 			var centroid = response.Aggs.GeoCentroid("centroid");
 			centroid.Should().NotBeNull();
 			centroid.Location.Should().NotBeNull();

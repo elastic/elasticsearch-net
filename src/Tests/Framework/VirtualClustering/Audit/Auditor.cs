@@ -101,7 +101,7 @@ namespace Tests.Framework
 			Action call = () => { this.Response = this._cluster.ClientCall(callTrace?.RequestOverrides); };
 			call.ShouldNotThrow();
 
-			this.Response.IsValid.Should().BeFalse();
+			this.Response.ShouldNotBeValid();
 			var exception = this.Response.ApiCall.OriginalException as ElasticsearchClientException;
 			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
 			assert(exception);
@@ -113,7 +113,7 @@ namespace Tests.Framework
 			this._clusterAsync.ClientThrows(false);
 			Func<Task> callAsync = async () => { this.ResponseAsync = await this._clusterAsync.ClientCallAsync(callTrace?.RequestOverrides); };
 			callAsync.ShouldNotThrow();
-			this.ResponseAsync.IsValid.Should().BeFalse();
+			this.ResponseAsync.ShouldNotBeValid();
 			exception = this.ResponseAsync.ApiCall.OriginalException as ElasticsearchClientException;
 			exception.Should().NotBeNull("OriginalException on response is not expected ElasticsearchClientException");
 			assert(exception);
