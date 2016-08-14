@@ -6,7 +6,6 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	using System.Threading;
-	using GetAliasesConverter = Func<IApiCallDetails, Stream, GetAliasResponse>;
 
 	public partial interface IElasticClient
 	{

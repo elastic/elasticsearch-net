@@ -359,6 +359,8 @@
     <Compile Include="Framework\VirtualClustering\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\Configuration\Versions\SemVer.cs" />
     <Compile Include="Framework\XUnitPlumbing\UnitTestDiscoverer.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexApiTests.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateApiTests.cs" />

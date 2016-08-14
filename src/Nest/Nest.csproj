@@ -659,6 +659,8 @@
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasResponse.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\ElasticClient-DeleteAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAlias\ElasticClient-GetAlias.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\ElasticClient-GetAliasesPointingToIndex.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAlias\GetAliasResponse.cs" />
     <Compile Include="Indices\AliasManagement\GetAlias\GetAliasRequest.cs" />
     <Compile Include="Indices\AliasManagement\PutAlias\ElasticClient-PutAlias.cs" />
