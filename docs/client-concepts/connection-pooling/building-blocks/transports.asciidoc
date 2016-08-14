@@ -55,6 +55,7 @@ var response = inMemoryTransport.Request<SearchResponse<Project>>(
 response = await inMemoryTransport.RequestAsync<SearchResponse<Project>>(
     HttpMethod.GET,
     "/_search",
+    default(CancellationToken),
     new { query = new { match_all = new { } } });
 ----
 

@@ -121,6 +121,8 @@ oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
 
 (oneAndHalfYear >= twoWeeks).Should().BeTrue();
 
+(twoDays != null).Should().BeTrue();
+
 (twoDays >= new Time("2d")).Should().BeTrue();
 
 twoDays.Should().BeLessThan(twoWeeks);

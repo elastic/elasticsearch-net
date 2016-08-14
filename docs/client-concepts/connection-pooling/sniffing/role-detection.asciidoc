@@ -122,7 +122,7 @@ pipeline.Sniff();
 ----
 var pipeline = CreatePipeline();
 
-await pipeline.SniffAsync();
+await pipeline.SniffAsync(default(CancellationToken));
 ----
 
 [source,csharp]

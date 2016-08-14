@@ -28,6 +28,7 @@ q
         .Id(2)
         .Path(pp=>pp.Location)
     )
+    .Relation(GeoShapeRelation.Intersects)
 )
 ----
 
@@ -45,8 +46,9 @@ new GeoIndexedShapeQuery
         Id = 2,
         Index = Index<Project>(),
         Type = Type<Project>(),
-        Path = Field<Project>(p=>p.Location)
-    }
+        Path = Field<Project>(p=>p.Location),
+    },
+    Relation = GeoShapeRelation.Intersects
 }
 ----
 
@@ -63,7 +65,8 @@ new GeoIndexedShapeQuery
         "type": "project",
         "index": "project",
         "path": "location"
-      }
+      },
+      "relation": "intersects"
     }
   }
 }

@@ -7,7 +7,7 @@ namespace Nest
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
 		/// <summary>
-		/// Controls the spatial relation operator to used at search time.
+		/// Controls the spatial relation operator to use at search time.
 		/// </summary>
 		[JsonProperty("relation")]
 		GeoShapeRelation? Relation { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 	public abstract class GeoShapeQueryBase : FieldNameQueryBase, IGeoShapeQuery
 	{
 		/// <summary>
-		/// Controls the spatial relation operator to used at search time.
+		/// Controls the spatial relation operator to use at search time.
 		/// </summary>
 		public GeoShapeRelation? Relation { get; set; }
 

@@ -30,6 +30,7 @@ s => s
         .Aggregations(childAggs => childAggs
             .Average("average_per_child", avg => avg.Field(p => p.ConfidenceFactor))
             .Max("max_per_child", avg => avg.Field(p => p.ConfidenceFactor))
+            .Min("min_per_child", avg => avg.Field(p => p.ConfidenceFactor))
         )
     )
 )
@@ -44,8 +45,9 @@ new SearchRequest<Project>
     Aggregations = new ChildrenAggregation("name_of_child_agg", typeof(CommitActivity))
     {
         Aggregations =
-            new AverageAggregation("average_per_child", "confidenceFactor") &&
-            new MaxAggregation("max_per_child", "confidenceFactor")
+            new AverageAggregation("average_per_child", "confidenceFactor")
+            && new MaxAggregation("max_per_child", "confidenceFactor")
+            && new MinAggregation("min_per_child", "confidenceFactor")
     }
 }
 ----
@@ -67,6 +69,11 @@ new SearchRequest<Project>
         },
         "max_per_child": {
           "max": {
+            "field": "confidenceFactor"
+          }
+        },
+        "min_per_child": {
+          "min": {
             "field": "confidenceFactor"
           }
         }

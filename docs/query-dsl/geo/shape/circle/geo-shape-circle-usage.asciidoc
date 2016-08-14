@@ -27,6 +27,7 @@ q
     .IgnoreUnmapped()
     .Coordinates(this._coordinates)
     .Radius("100m")
+    .Relation(GeoShapeRelation.Intersects)
 )
 ----
 
@@ -39,8 +40,9 @@ new GeoShapeCircleQuery
     Name = "named_query",
     Boost = 1.1,
     Field = Field<Project>(p=>p.Location),
-    IgnoreUnmapped = false,
-    Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" }
+    Shape = new CircleGeoShape(this._coordinates) { Radius = "100m" },
+    Relation = GeoShapeRelation.Intersects,
+    IgnoreUnmapped = false
 }
 ----
 
