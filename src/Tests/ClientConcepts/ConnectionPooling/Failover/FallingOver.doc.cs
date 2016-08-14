@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.FailOver
 			);
 		}
 
-		/**[[service-unavailable]]
+		/**[[gateway-timeout]]
 		*=== 504 Gateway Timeout
 		*
 		* Will be treated as an error that requires retrying
