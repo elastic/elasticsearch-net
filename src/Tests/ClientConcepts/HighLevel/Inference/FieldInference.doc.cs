@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -233,7 +233,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 			Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
 
 			/**
-			* If you are using Elasticearch's {ref_current}/_multi_fields.html[multi_fields], which you really should as they allow
+			* If you are using Elasticearch's multi fields, which you really should as they allow
 			* you to analyze a string in a number of different ways, these __"virtual"__ sub fields
 			* do not always map back on to your POCO. By calling `.Suffix()` on expressions, you describe the sub fields that
 			* should be mapped and <<auto-map, how they are mapped>>

@@ -33,6 +33,5 @@ module Benchmarker =
    let Run() =
         !! Paths.Source("Benchmarking/project.json") 
         |> Seq.map DirectoryName
-        |> Seq.map Paths.Quote
         |> Seq.iter(fun project -> 
-                Tooling.DotNet.Exec Tooling.DotNetRuntime.Both failure "." ["--project"; project; "run"; "-i false"; "-t 5"])
+                Tooling.DotNet.Exec ["--project"; project; "run"; "-i false"; "-t 5"])

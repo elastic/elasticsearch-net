@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ApiGenerator.Domain
@@ -10,6 +11,12 @@ namespace ApiGenerator.Domain
 		public string Type { get; set; }
 		public string Description { get; set; }
 		public IEnumerable<string> Options { get; set; }
+
+		public ApiQueryParameters()
+		{
+			FluentGenerator = (queryStringParamName, mm, original, setter) =>
+				$"public {queryStringParamName} {mm.ToPascalCase()}({CsharpType(mm)} {mm}) => this.AddQueryString(\"{original}\", {setter});";
+		}
 
 		public string CsharpType(string paramName)
 		{
@@ -49,5 +56,11 @@ namespace ApiGenerator.Domain
 					return csharpType;
 			}
 		}
+
+		public Func<string, string, string, string, string> Generator { get; set; } =
+			(fieldType, mm, original, setter) =>
+				$"public {fieldType} {mm} {{ get {{ return Q<{fieldType}>(\"{original}\"); }} set {{ Q(\"{original}\", {setter}); }} }}";
+
+		public Func<string, string, string, string, string> FluentGenerator { get; set; }
 	}
 }

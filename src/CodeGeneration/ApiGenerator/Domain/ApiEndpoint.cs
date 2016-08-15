@@ -320,6 +320,8 @@ namespace ApiGenerator.Domain
 					{
 						skipList = overrides.SkipQueryStringParams ?? skipList;
 						renameList = overrides.RenameQueryStringParams ?? renameList;
+
+						overrides.PatchMethod(method);
 					}
 				}
 

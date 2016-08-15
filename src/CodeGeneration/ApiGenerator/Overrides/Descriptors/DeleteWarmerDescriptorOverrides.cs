@@ -5,13 +5,11 @@ using System.Linq;
 namespace ApiGenerator.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class DeleteWarmerDescriptorOverrides : IDescriptorOverrides
+	public class DeleteWarmerDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
 			"name"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

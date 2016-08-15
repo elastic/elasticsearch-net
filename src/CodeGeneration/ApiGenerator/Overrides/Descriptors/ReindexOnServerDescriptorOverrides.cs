@@ -3,14 +3,12 @@
 namespace ApiGenerator.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class ReindexOnServerDescriptorOverrides : IDescriptorOverrides
+	public class ReindexOnServerDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
 			"source"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 
 }

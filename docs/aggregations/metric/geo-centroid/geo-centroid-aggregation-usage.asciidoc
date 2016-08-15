@@ -15,7 +15,7 @@ please modify the original csharp file found at the link and submit the PR with 
 [[geo-centroid-aggregation-usage]]
 == Geo Centroid Aggregation Usage
 
-A metric aggregation that computes the weighted centroid from all coordinate values 
+A metric aggregation that computes the weighted centroid from all coordinate values
 for a Geo-point datatype field.
 
 Be sure to read the Elasticsearch documentation on {ref_current}/search-aggregations-metrics-geocentroid-aggregation.html[Geo Centroid Aggregation]
@@ -68,11 +68,9 @@ centroid.Location.Latitude.Should().NotBe(0);
 centroid.Location.Longitude.Should().NotBe(0);
 ----
 
-[[geo-centroid-sub-aggregation]] 
-
 [[geo-centroid-sub-aggregation]]
 [float]
-== Geo Centroid Sub Aggregation 
+== Geo Centroid Sub Aggregation
 
 The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations
 

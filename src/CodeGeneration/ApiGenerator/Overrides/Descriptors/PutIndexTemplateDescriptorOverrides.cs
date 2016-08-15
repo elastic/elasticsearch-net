@@ -5,13 +5,11 @@ using System.Linq;
 namespace ApiGenerator.Overrides.Descriptors
 {
 	// ReSharper disable once UnusedMember.Global
-	public class PutIndexTemplateDescriptorOverrides : IDescriptorOverrides
+	public class PutIndexTemplateDescriptorOverrides : DescriptorOverridesBase
 	{
-		public IEnumerable<string> SkipQueryStringParams => new []
+		public override IEnumerable<string> SkipQueryStringParams => new []
 		{
-			"order" 
+			"order"
 		};
-
-		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

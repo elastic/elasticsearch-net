@@ -4,29 +4,30 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	/// <summary>Implements several handy alias extensions.
+	/// <summary>
+	/// Implements several handy alias extensions.
 	/// </summary>
 	public static class IndicesPointingToAliasExtensions
 	{
 		/// <summary>
-		/// Returns a list of indices that have the specified aliasName applied to them. Simplified version of GetAliases.
+		/// Returns a list of indices that have the specified alias applied to them. Simplified version of GetAliases.
 		/// </summary>
-		/// <param name="client"></param>
+		/// <param name="client">The client</param>
 		/// <param name="aliasName">The exact alias name</param>
 		public static IList<string> GetIndicesPointingToAlias(this IElasticClient client, string aliasName)
 		{
-			var aliasesResponse = client.GetAlias(a => a.Alias(aliasName));
+			var aliasesResponse = client.GetAlias(a => a.Name(aliasName));
 			return IndicesPointingToAlias(aliasName, aliasesResponse);
 		}
 
 		/// <summary>
-		/// Returns a list of indices that have the specified aliasName applied to them. Simplified version of GetAliases.
+		/// Returns a list of indices that have the specified alias applied to them. Simplified version of GetAliases.
 		/// </summary>
-		/// <param name="client"></param>
+		/// <param name="client">The client</param>
 		/// <param name="aliasName">The exact alias name</param>
 		public static async Task<IList<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
 		{
-			var response = await client.GetAliasAsync(a => a.Index(aliasName)).ConfigureAwait(false);
+			var response = await client.GetAliasAsync(a => a.Name(aliasName)).ConfigureAwait(false);
 			return IndicesPointingToAlias(aliasName, response);
 		}
 
