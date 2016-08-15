@@ -259,6 +259,28 @@ This will execute the same request, but this time `myJson` will be serialized by
 
 [Pull requests](https://github.com/elastic/elasticsearch-net/pulls) and [issues](https://github.com/elastic/elasticsearch-net/issues) are very much welcomed and appreciated.  If you'd like to report a bug or submit a feature/bug fix then please read our [contributing guide](contributing.md) first!
 
+### Generating documentation from tests
+
+[All Elastucsearch.Net and NEST documentation on elastic.co](https://www.elastic.co/guide/en/elasticsearch/client/net-api/index.html) is generated from code within the [Tests project](src/Tests) using [Roslyn](https://github.com/dotnet/roslyn); multi-line comments serve as the main bodies of text, intermixed with code samples that test the documented components. The intention is to reduce the likelihood of documentation becoming outdated as the source changes. 
+
+Text within multi-line comments conforms to [asciidoc](http://asciidoc.org/), a lightweight markdown style text format well suited to technical documentation. To generate the asciidoc files from the test files, you need to run the [DocGenerator](src/CodeGeneration/DocGenerator) console application which will output the documentation files in the docs output directory. To verify that the generated asciidoc files can generate the documentation for the website, [clone the elastic docs repo](https://github.com/elastic/docs) and follow the instructions there for building documentation locally. as an example, suppose I have cloned the elastic docs to `c:\source\elastic-docs`, then to verify the generated asciidoc files for NEST are valid would be as following (using Cygwin on Windows)
+
+```sh
+cd /cygdrive/c/source/elastic-docs
+
+./build_docs.pl --doc /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
+```
+
+the result of running this for a successful build will be
+
+```sh
+Building HTML from /cygdrive/c/source/elasticsearch-net-master/docs/index.asciidoc
+Done
+See: /cygdrive/c/source/elasticsearch-docs/html_docs/index.html
+```
+
+[Pull Requests](https://github.com/elastic/elasticsearch-net/pulls) are most welcome for areas of documentation that need improving.
+
 ## Blog posts 
 
 Starting this section (2016) to list blogposts from our users that might be super helpful in your journey to learn Elasticsearch from a .NET perspective
