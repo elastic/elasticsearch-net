@@ -439,7 +439,7 @@ namespace Elasticsearch.Net
 			{
 				pipelineFailure = PipelineFailure.MaxTimeoutReached;
 				this.Audit(MaxTimeoutReached);
-				exceptionMessage = "Maximum timout reached while retrying request";
+				exceptionMessage = "Maximum timeout reached while retrying request";
 			}
 			else if (this.Retried >= this.MaxRetries && this.MaxRetries > 0)
 			{
