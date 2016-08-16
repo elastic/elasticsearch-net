@@ -72,10 +72,6 @@ namespace Nest
 		internal static SourceRequestParameters _SourceInclude<T>(this SourceRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(Field)e));
 		
-		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		internal static AnalyzeRequestParameters _Field<T>(this AnalyzeRequestParameters qs, Expression<Func<T, object>> field) where T : class =>
-			qs.AddQueryString("field", (Field)field);
-		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		internal static ClearCacheRequestParameters _Fields<T>(this ClearCacheRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
