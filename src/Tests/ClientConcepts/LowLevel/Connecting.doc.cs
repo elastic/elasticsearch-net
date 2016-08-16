@@ -11,7 +11,9 @@ using Newtonsoft.Json;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit;
+#if DOTNETCORE
 using System.Net.Http;
+#endif
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -172,10 +174,10 @@ namespace Tests.ClientConcepts.LowLevel
 		}
 
 		/** [[complex-logging]]
-	* === Complex logging with OnRequestCompleted
-	* Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
-        * to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
-	*/
+		* === Complex logging with OnRequestCompleted
+		* Here's an example of using `OnRequestCompleted()` for complex logging. Remember, if you would also like
+		* to capture the request and/or response bytes, you also need to set `.DisableDirectStreaming()` to `true`
+		*/
 		[U]
 		public async Task UsingOnRequestCompletedForLogging()
 		{
@@ -257,7 +259,6 @@ namespace Tests.ClientConcepts.LowLevel
 			 * http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx[ServicePointManager] class:
 			 *
 			 */
-
 #if !DOTNETCORE
 			ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 #endif
@@ -269,12 +270,11 @@ namespace Tests.ClientConcepts.LowLevel
 			 */
 		}
 
-		/*
+#if DOTNETCORE
+		/**
 		 * If running on Core CLR, then a custom connection type must be created by deriving from `HttpConnection` and
 		 * overriding the `CreateHttpClientHandler` method in order to set the `ServerCertificateCustomValidationCallback` property:
 		*/
-
-#if DOTNETCORE
 		public class SecureHttpConnection : HttpConnection
 		{
 			protected override HttpClientHandler CreateHttpClientHandler(RequestData requestData)
@@ -308,7 +308,6 @@ namespace Tests.ClientConcepts.LowLevel
 					return null;
 				}
 			};
-
 		}
 
 		/**
