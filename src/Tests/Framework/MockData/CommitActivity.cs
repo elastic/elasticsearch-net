@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Bogus;
 using Nest;
 using Newtonsoft.Json;
@@ -35,7 +37,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Duration, p => p.Random.ArrayElement(new TimeSpan?[]
 				{
 					TimeSpan.MinValue,
-					TimeSpan.MaxValue, 
+					TimeSpan.MaxValue,
 					TimeSpan.FromMinutes(7.5),
 					TimeSpan.Zero,
 					null,
@@ -43,6 +45,9 @@ namespace Tests.Framework.MockData
 					TimeSpan.FromDays(5),
 				}))
 			;
+
+		public static IList<CommitActivity> CommitActivities { get; } =
+			CommitActivity.Generator.Generate(1000).ToList();
 	}
 
 	internal class StringTimeSpanConverter : JsonConverter

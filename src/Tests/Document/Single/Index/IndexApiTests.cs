@@ -23,7 +23,7 @@ namespace Tests.Document.Single.Index
 			StartedOn = FixedDate,
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> {new Tag {Name = "x", Added = FixedDate}},
-			
+
 		};
 
 		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -112,7 +112,7 @@ namespace Tests.Document.Single.Index
 		public void Index()
 		{
 			var indexName = this.RandomString();
-			var commitActivity = CommitActivity.Generator.Generate(1).First();
+			var commitActivity = CommitActivity.CommitActivities.First();
 			var indexResult = this.Client.Index(commitActivity, f => f.Index(indexName));
 			indexResult.IsValid.Should().BeTrue();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(201);

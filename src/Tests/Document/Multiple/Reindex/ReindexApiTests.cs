@@ -21,7 +21,7 @@ namespace Tests.Document.Multiple.Reindex
 			seeder.DeleteIndicesAndTemplates();
 			seeder.CreateIndices();
 		}
-	} 
+	}
 
 	[Collection(IntegrationContext.Reindex)]
 	public class ReindexApiTests : SerializationTestBase
@@ -45,7 +45,7 @@ namespace Tests.Document.Multiple.Reindex
 			var indexProjectsResponse = this._client.IndexMany(projects, IndexName);
 
 			// create a thousand commits and associate with the projects
-			var commits = CommitActivity.Generator.Generate(1000).ToList();
+			var commits = CommitActivity.CommitActivities;
 			var bb = new BulkDescriptor();
 			for (int index = 0; index < commits.Count; index++)
 			{
@@ -100,7 +100,7 @@ namespace Tests.Document.Multiple.Reindex
 							.SearchType(SearchType.Scan)
 							.Scroll(scroll)
 						);
-			
+
 						do
 						{
 							var result = searchResult;
