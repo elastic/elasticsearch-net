@@ -44,7 +44,7 @@ namespace Tests.Document.Multiple.Reindex
 			this._client.Refresh(IndexName);
 
 			// create a thousand commits and associate with the projects
-			var commits = CommitActivity.Generator.Generate(1000).ToList();
+			var commits = CommitActivity.CommitActivities;
 			var bb = new BulkDescriptor();
 			for (int index = 0; index < commits.Count; index++)
 			{

@@ -32,7 +32,6 @@ namespace Nest
 		public bool? IgnoreMissing { get; set; }
 	}
 
-
 	public class TimestampFieldDescriptor<T> : DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
 	{
 		bool ITimestampField.Enabled { get; set;}
