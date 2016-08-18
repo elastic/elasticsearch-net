@@ -11,7 +11,7 @@ open Tooling;
 
 type Build() = 
 
-    static let runningRelease = getBuildParam "target" = "release"
+    static let runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
 
     static let compileCore() =
         DotNetProject.AllPublishable
@@ -42,7 +42,7 @@ type Build() =
                               | Some c -> Seq.append ["-s"; c] 
                               | None -> Seq.append Seq.empty
                            |> Seq.append ["."; "-u"; Paths.Repository; "-d"; (Paths.ProjectOutputFolder p framework); "-include"; projectName]
-                GitLink.Exec args 
+                GitLink.Exec ["."; "-u"; Paths.Repository; "-d"; (Paths.ProjectOutputFolder p framework); "-include"; projectName]
                 |> ignore
             link DotNetFramework.Net45
             link DotNetFramework.Net46
