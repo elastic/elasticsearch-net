@@ -9,14 +9,22 @@ namespace Nest
 		where TDocument : class
 	{
 		/// <summary>
-		/// An optional document to get termvectors for instead of using an already indexed document
+		/// An optional document to get term vectors for instead of using an already indexed document
 		/// </summary>
 		[JsonProperty("doc")]
 		TDocument Document { get; set; }
 
+		/// <summary>
+		/// Provide a different analyzer than the one at the field.
+		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+		/// </summary>
 		[JsonProperty("per_field_analyzer")]
 		IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
+		/// <summary>
+		/// Filter the terms returned based on their TF-IDF scores.
+		/// This can be useful in order find out a good characteristic vector of a document.
+		/// </summary>
 		[JsonProperty("filter")]
 		ITermVectorFilter Filter { get; set; }
 	}
@@ -26,10 +34,21 @@ namespace Nest
 	{
 		HttpMethod IRequest.HttpMethod => (this.Document != null || this.Filter != null) ? HttpMethod.POST : HttpMethod.GET;
 
+		/// <summary>
+		/// An optional document to get term vectors for instead of using an already indexed document
+		/// </summary>
 		public TDocument Document { get; set; }
 
+		/// <summary>
+		/// Provide a different analyzer than the one at the field.
+		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+		/// </summary>
 		public IPerFieldAnalyzer PerFieldAnalyzer { get; set; }
 
+		/// <summary>
+		/// Filter the terms returned based on their TF-IDF scores.
+		/// This can be useful in order find out a good characteristic vector of a document.
+		/// </summary>
 		public ITermVectorFilter Filter { get; set; }
 
 		partial void DocumentFromPath(TDocument document)
@@ -51,11 +70,22 @@ namespace Nest
 
 		ITermVectorFilter ITermVectorsRequest<TDocument>.Filter { get; set; }
 
+		/// <summary>
+		/// An optional document to get term vectors for instead of using an already indexed document
+		/// </summary>
 		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
 
+		/// <summary>
+		/// Provide a different analyzer than the one at the field.
+		/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+		/// </summary>
 		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(Func<PerFieldAnalyzerDescriptor<TDocument>, IPromise<IPerFieldAnalyzer>> analyzerSelector) =>
 			Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new PerFieldAnalyzerDescriptor<TDocument>())?.Value);
 
+		/// <summary>
+		/// Filter the terms returned based on their TF-IDF scores.
+		/// This can be useful in order find out a good characteristic vector of a document.
+		/// </summary>
 		public TermVectorsDescriptor<TDocument> Filter(Func<TermVectorFilterDescriptor, ITermVectorFilter> filterSelector) =>
 			Assign(a => a.Filter = filterSelector?.Invoke(new TermVectorFilterDescriptor()));
 	}
