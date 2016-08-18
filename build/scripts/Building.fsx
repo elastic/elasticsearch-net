@@ -11,7 +11,7 @@ open Tooling;
 
 type Build() = 
 
-    static let runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "canary" || getBuildParam "target" = "release"
+    static let runningRelease = hasBuildParam "version" || hasBuildParam "apikey" || getBuildParam "target" = "release"
 
     static let compileCore() =
         DotNetProject.AllPublishable
