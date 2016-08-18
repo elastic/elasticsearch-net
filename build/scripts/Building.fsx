@@ -34,13 +34,14 @@ type Build() =
                 //TC sets these so gitlink does not need to recreate
                 let branch = environVarOrNone "GITBRANCH"
                 let commit = environVarOrNone "GITCOMMIT"
-                let args = seq["."; "-u"; Paths.Repository; "-d"; (Paths.ProjectOutputFolder p framework); "-include"; projectName]
+                let args = Seq.empty
                            |> match branch with
                               | Some b -> Seq.append ["-b"; b] 
-                              | None -> Seq.append ["";""]
+                              | None -> Seq.append Seq.empty
                            |> match commit with
                               | Some c -> Seq.append ["-s"; c] 
-                              | None -> Seq.append ["";""]
+                              | None -> Seq.append Seq.empty
+                           |> Seq.append ["."; "-u"; Paths.Repository; "-d"; (Paths.ProjectOutputFolder p framework); "-include"; projectName]
                 GitLink.Exec args 
                 |> ignore
             link DotNetFramework.Net45
