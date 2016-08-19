@@ -166,7 +166,7 @@ namespace Tests.Analysis
 			var indexSettings = index.Settings;
 			indexSettings.Analysis.Should().NotBeNull();
 			indexSettings.Analysis.CharFilters.Should().NotBeNull();
-
+			indexSettings.Analysis.CharFilters.Should().ContainKey("differentHtml");
 			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["differentHtml"];
 			firstHtmlCharFilter.Should().NotBeNull();
 		}
