@@ -14,7 +14,6 @@ using static Nest.Infer;
 
 namespace Tests.Document.Multiple.ReindexRethrottle
 {
-	[Collection(TypeOfCluster.Reindex)]
 	public class ReindexRethrottleReindexApiTests : ReindexRethrottleApiTests
 	{
 		public ReindexRethrottleReindexApiTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -41,7 +40,6 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 		}
 	}
 
-	[Collection(TypeOfCluster.Reindex)]
 	public class ReindexRethrottleUpdateByQueryTests : ReindexRethrottleApiTests
 	{
 		public ReindexRethrottleUpdateByQueryTests(ReindexCluster cluster, EndpointUsage usage) : base(cluster, usage)
@@ -65,7 +63,7 @@ namespace Tests.Document.Multiple.ReindexRethrottle
 	}
 
 	public abstract class ReindexRethrottleApiTests
-		: ApiIntegrationTestBase<IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor, ReindexRethrottleRequest>
+		: ApiIntegrationTestBase<ReindexCluster, IReindexRethrottleResponse, IReindexRethrottleRequest, ReindexRethrottleDescriptor, ReindexRethrottleRequest>
 	{
 		protected TaskId TaskId => this.RanIntegrationSetup ? this.ExtendedValue<TaskId>(TaskIdKey) : "foo:1";
 

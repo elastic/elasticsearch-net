@@ -29,8 +29,7 @@ namespace Tests.Cat.CatHealth
 		}
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
-	public class CatHealthNoTimestampApiTests : ApiIntegrationTestBase<ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
+	public class CatHealthNoTimestampApiTests : ApiIntegrationTestBase<ReadOnlyCluster, ICatResponse<CatHealthRecord>, ICatHealthRequest, CatHealthDescriptor, CatHealthRequest>
 	{
 		public CatHealthNoTimestampApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

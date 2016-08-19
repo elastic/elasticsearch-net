@@ -9,9 +9,8 @@ using System.Collections.Generic;
 
 namespace Tests.Ingest.PutPipeline
 {
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class PutPipelineApiTests
-		: ApiIntegrationTestBase<IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, IPutPipelineResponse, IPutPipelineRequest, PutPipelineDescriptor, PutPipelineRequest>
 	{
 		public PutPipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

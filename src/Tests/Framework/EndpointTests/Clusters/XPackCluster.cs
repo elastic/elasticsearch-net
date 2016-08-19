@@ -3,8 +3,8 @@ using Xunit;
 
 namespace Tests.Framework.Integration
 {
+	[RequiresPlugin(ElasticsearchPlugin.XPack)]
 	public class XPackCluster : ClusterBase
 	{
-		protected override bool EnableShield => true;
 	}
 }

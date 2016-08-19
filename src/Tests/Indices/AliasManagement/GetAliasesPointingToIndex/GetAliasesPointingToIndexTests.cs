@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Tests.Indices.AliasManagement.GetAliasesPointingToIndex
 {
-	public class GetAliasesPointingToIndexTests : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class GetAliasesPointingToIndexTests : IntegrationDocumentationTestBase, IClusterFixture<WritableCluster>
 	{
 		private readonly WritableCluster _cluster;
 		private readonly IElasticClient _client;

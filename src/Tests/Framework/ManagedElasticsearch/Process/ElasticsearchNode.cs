@@ -35,7 +35,6 @@ namespace Tests.Framework.Integration
 		public int Port { get; private set; }
 		private int? ProcessId { get; set; }
 
-
 		private readonly Subject<XplatManualResetEvent> _blockingSubject = new Subject<XplatManualResetEvent>();
 		public IObservable<XplatManualResetEvent> BootstrapWork => _blockingSubject;
 
@@ -64,6 +63,28 @@ namespace Tests.Framework.Integration
 
 			if (this._config.RunIntegrationTests) return;
 			this.Port = 9200;
+		}
+
+		private object _lockGetClient = new object { };
+		private IElasticClient _client;
+		public IElasticClient Client
+		{
+			get
+			{
+				if (!this.Started && TestClient.Configuration.RunIntegrationTests)
+					throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
+
+				if (this._client != null) return this._client;
+
+				lock (_lockGetClient)
+				{
+					if (this._client != null) return this._client;
+
+					var port = this.Started ? this.Port : 9200;
+					this._client = TestClient.GetClient(ComposeSettings, port);
+					return this.Client;
+				}
+			}
 		}
 
 		public IObservable<ElasticsearchConsoleOut> Start(string[] additionalSettings = null)
@@ -295,14 +316,6 @@ namespace Tests.Framework.Integration
 			}
 		}
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false)
-		{
-			if (!this.Started && TestClient.Configuration.RunIntegrationTests)
-				throw new Exception("can not request a client from an ElasticsearchNode if that node hasn't started yet");
-			var port = this.Started ? this.Port : 9200;
-			return GetPrivateClient(settings, forceInMemory, port);
-		}
-
 		private ConnectionSettings ClusterSettings(ConnectionSettings s, Func<ConnectionSettings, ConnectionSettings> settings) =>
 			AddBasicAuthentication(AppendClusterNameToHttpHeaders(settings(s)));
 
@@ -314,6 +327,8 @@ namespace Tests.Framework.Integration
 				: TestClient.GetClient(s => ClusterSettings(s, settings), port);
 			return client;
 		}
+
+		private ConnectionSettings ComposeSettings(ConnectionSettings s) => AddBasicAuthentication(AppendClusterNameToHttpHeaders(s));
 
 		private ConnectionSettings AddBasicAuthentication(ConnectionSettings settings) =>
 			!this._config.ShieldEnabled ? settings : settings.BasicAuthentication("es_admin", "es_admin");

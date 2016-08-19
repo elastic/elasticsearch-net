@@ -227,6 +227,9 @@
     <Compile Include="Framework\EndpointTests\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\EndpointTests\ApiTestBase.cs" />
     <Compile Include="Framework\EndpointTests\TestState\AsyncLazy.cs" />
+    <Compile Include="Framework\EndpointTests\Clusters\IntrusiveOperationCluster.cs" />
+    <Compile Include="Framework\EndpointTests\Clusters\WritableCluster.cs" />
+    <Compile Include="Framework\Extensions\ShouldExtensions.cs" />
     <Compile Include="Framework\ManagedElasticsearch\FileSystem\INodeFileSystem.cs" />
     <Compile Include="Framework\MockData\GeoIp.cs" />
     <Compile Include="Framework\VirtualClustering\Audit\Auditor.cs" />
@@ -245,9 +248,6 @@
     <Compile Include=".\Framework\Extensions\WebClient-CoreFx.cs" />
     <Compile Include="Framework\EndpointTests\Bootstrappers\Seeder.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\ClusterBase.cs" />
-    <Compile Include="Framework\EndpointTests\Clusters\IIntegrationCluster.cs" />
-    <Compile Include="Framework\EndpointTests\Clusters\IndexingCluster.cs" />
-    <Compile Include="Framework\EndpointTests\Clusters\OwnIndexCluster.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\ReadOnlyCluster.cs" />
     <Compile Include="Framework\EndpointTests\TestState\EndpointUsage.cs" />
     <Compile Include="Framework\EndpointTests\Clusters\TypeOfCluster.cs" />
@@ -590,19 +590,12 @@
     <Compile Include="Search\MultiSearch\MultiSearchApiTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchInvalidApiTests.cs" />
     <Compile Include="Framework\Extensions\UriExtensions.cs" />
-    <Compile Include="Framework\Integration\CallUniqueValues.cs" />
-    <Compile Include="Framework\Integration\ClientMethod.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchMessage.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchNodeInfo.cs" />
-    <Compile Include="Framework\Integration\Process\ElasticsearchVersionInfo.cs" />
     <Compile Include="Framework\Xunit\ForEachAsyncExtensions.cs" />
     <Compile Include="Framework\Xunit\IClusterFixture.cs" />
     <Compile Include="Framework\Xunit\TestAssemblyRunner.cs" />
     <Compile Include="Framework\Xunit\TestCollectionRunner.cs" />
     <Compile Include="Framework\Xunit\TestFramework.cs" />
     <Compile Include="Framework\Xunit\TestFrameworkExecutor.cs" />
-    <Compile Include="Indices\AliasManagement\GetIndicesPointingToAlias\GetIndicesPointingToAliasTests.cs" />
-    <Compile Include="Indices\AliasManagement\GetAliasesPointingToIndex\GetAliasesPointingToIndexTests.cs" />
     <Compile Include="Properties\Xunit.cs" />
     <Compile Include="QueryDsl\Verbatim\VerbatimAndStrictQueryUsageTests.cs" />
     <Compile Include="Reproduce\GithubIssue2101.cs" />
@@ -635,7 +628,7 @@
     <Compile Include="XPack\License\PostLicense\PostLicenseApiTests.cs" />
     <Compile Include="XPack\Security\Authenticate\AuthenticateApiTests.cs" />
     <Compile Include="XPack\Security\Authenticate\AuthenticateUrlTests.cs" />
-    <Compile Include="Framework\Integration\Clusters\XPackCluster.cs" />
+    <Compile Include="Framework\EndpointTests\Clusters\XPackCluster.cs" />
     <Compile Include="XPack\Security\Role\DeleteRole\DeleteRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\GetRole\GetRoleUrlTests.cs" />
     <Compile Include="XPack\Security\Role\PutRole\PutRoleApiTests.cs" />
@@ -937,17 +930,6 @@
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-          <Private>True</Private>
-          <Paket>True</Paket>
-        </Reference>
-      </ItemGroup>
-    </When>
-  </Choose>
-  <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6' Or $(TargetFrameworkVersion) == 'v4.6.1' Or $(TargetFrameworkVersion) == 'v4.6.2' Or $(TargetFrameworkVersion) == 'v4.6.3')) Or ($(TargetFrameworkIdentifier) == 'Silverlight' And $(TargetFrameworkVersion) == 'v5.0') Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch') Or ($(TargetFrameworkIdentifier) == 'Xamarin.iOS') Or ($(TargetFrameworkProfile) == 'Profile14') Or ($(TargetFrameworkProfile) == 'Profile19') Or ($(TargetFrameworkProfile) == 'Profile24')">
-      <ItemGroup>
-        <Reference Include="SemVer">
-          <HintPath>..\..\packages\SemanticVersioning\lib\portable-net40+sl50+MonoAndroid10+xamarinios10+MonoTouch10\SemVer.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -2158,7 +2140,7 @@
     </When>
   </Choose>
   <Choose>
-    <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And ($(TargetFrameworkVersion) == 'v1.3' Or $(TargetFrameworkVersion) == 'v1.4' Or $(TargetFrameworkVersion) == 'v1.5' Or $(TargetFrameworkVersion) == 'v1.6')) Or ($(TargetFrameworkIdentifier) == '.NETCoreApp' And $(TargetFrameworkVersion) == 'v1.0')">
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETStandard' And $(TargetFrameworkVersion) == 'v1.6') Or ($(TargetFrameworkIdentifier) == '.NETCoreApp' And $(TargetFrameworkVersion) == 'v1.0')">
       <ItemGroup>
         <Reference Include="System.Threading.Thread">
           <HintPath>..\..\packages\System.Threading.Thread\ref\netstandard1.3\System.Threading.Thread.dll</HintPath>

@@ -7,10 +7,13 @@ using Nest;
 
 namespace Tests.Framework.Integration
 {
-	public abstract class ClusterBase : IIntegrationCluster, IDisposable
+	public abstract class ClusterBase : IDisposable
 	{
 		public ElasticsearchNode Node { get; }
-		private IObservable<ElasticsearchConsoleOut> ConsoleOut { get; set; }
+
+		public IElasticClient Client => this.Node.Client;
+
+		public virtual int MaxConcurrency => 0;
 
 		protected ClusterBase()
 		{
@@ -23,10 +26,9 @@ namespace Tests.Framework.Integration
 			this.Node = new ElasticsearchNode(nodeConfig, new TestRunnerFileSystem(nodeConfig));
 			this.Node.BootstrapWork.Subscribe(handle =>
 			{
-				this.Boostrap();
+				this.Bootstrap();
 				handle.Set();
 			});
-			this.ConsoleOut = this.Node.Start(this.ServerSettings);
 		}
 
 		private static ElasticsearchPlugin[] RequiredPlugins(Type type)
@@ -44,10 +46,14 @@ namespace Tests.Framework.Integration
 
 		protected virtual string[] ServerSettings { get; } = new string[] { };
 
-		protected virtual void Boostrap() { }
+		public virtual void Bootstrap() { }
+
+		public void Start()
+		{
+			this.Node.Start(this.ServerSettings);
+		}
 
 		public void Dispose() => this.Node?.Dispose();
 
-		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null, bool forceInMemory = false) => this.Node.Client(settings, forceInMemory);
 	}
 }

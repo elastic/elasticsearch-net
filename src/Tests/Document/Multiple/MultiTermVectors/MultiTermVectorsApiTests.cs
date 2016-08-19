@@ -114,33 +114,5 @@ namespace Tests.Document.Multiple.MultiTermVectors
 					}
 				})
 		};
-
-		protected override void ExpectResponse(IMultiTermVectorsResponse response)
-		{
-			response.IsValid.Should().BeTrue();
-			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
-			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
-
-			termvectorDoc.Should().NotBeNull();
-			termvectorDoc.Index.Should().NotBeNull();
-			termvectorDoc.Type.Should().NotBeNull();
-			termvectorDoc.Id.Should().NotBeNull();
-
-			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
-			var vectors = termvectorDoc.TermVectors["firstName"];
-			vectors.Terms.Should().NotBeEmpty();
-			foreach (var vectorTerm in vectors.Terms)
-			{
-				vectorTerm.Key.Should().NotBeNullOrWhiteSpace();
-				vectorTerm.Value.Should().NotBeNull();
-				vectorTerm.Value.TermFrequency.Should().BeGreaterThan(0);
-				vectorTerm.Value.DocumentFrequency.Should().BeGreaterThan(0);
-				vectorTerm.Value.TotalTermFrequency.Should().BeGreaterThan(0);
-				vectorTerm.Value.Tokens.Should().NotBeEmpty();
-
-				var token = vectorTerm.Value.Tokens.First();
-				token.EndOffset.Should().BeGreaterThan(0);
-			}
-		}
 	}
 }

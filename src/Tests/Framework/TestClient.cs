@@ -63,6 +63,10 @@ namespace Tests.Framework
 				.Ignore(p => p.PrivateValue)
 				.Rename(p => p.OnlineHandle, "nickname")
 			)
+			.InferMappingFor<PercolatedQuery>(map => map
+				.IndexName("queries")
+				.TypeName(PercolatorType)
+			)
 			//TODO make this random
 			//.EnableHttpCompression()
 			.OnRequestDataCreated(data=> data.Headers.Add("TestMethod", ExpensiveTestNameForIntegrationTests()));
@@ -117,38 +121,6 @@ namespace Tests.Framework
 			var settings = (modifySettings != null) ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings);
 		}
-
-		private static IConnection CreateConnection(ConnectionSettings settings = null, bool forceInMemory = false) =>
-			Configuration.RunIntegrationTests && !forceInMemory
-				? ((IConnection)new HttpConnection())
-				: new InMemoryConnection();
-
-		private static ConnectionSettings DefaultSettings(ConnectionSettings settings) => settings
-			.DefaultIndex("default-index")
-			.PrettyJson()
-			.InferMappingFor<Project>(map => map
-				.IndexName("project")
-				.IdProperty(p => p.Name)
-			)
-			.InferMappingFor<CommitActivity>(map => map
-				.IndexName("project")
-				.TypeName("commits")
-			)
-			.InferMappingFor<Developer>(map => map
-				.IndexName("devs")
-				.Ignore(p => p.PrivateValue)
-				.Rename(p => p.OnlineHandle, "nickname")
-			)
-			.InferMappingFor<PercolatedQuery>(map => map
-				.IndexName("queries")
-				.TypeName(PercolatorType)
-			)
-			//We try and fetch the test name during integration tests when running fiddler to send the name
-			//as the TestMethod header, this allows us to quickly identify which test sent which request
-			.GlobalHeaders(new NameValueCollection
-			{
-				{ "TestMethod", ExpensiveTestNameForIntegrationTests() }
-			});
 
 		private static string ExpensiveTestNameForIntegrationTests()
 		{

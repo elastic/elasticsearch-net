@@ -16,7 +16,7 @@ namespace Xunit
 		{
 			var config = TestClient.Configuration;
 			Console.WriteLine("Starting tests using config:");
-			Console.WriteLine($" - {nameof(config.DoNotSpawnIfAlreadyRunning)}: {config.DoNotSpawnIfAlreadyRunning}");
+			Console.WriteLine($" - {nameof(config.TestAgainstAlreadyRunningElasticsearch)}: {config.TestAgainstAlreadyRunningElasticsearch}");
 			Console.WriteLine($" - {nameof(config.ElasticsearchVersion)}: {config.ElasticsearchVersion}");
 			Console.WriteLine($" - {nameof(config.ForceReseed)}: {config.ForceReseed}");
 			Console.WriteLine($" - {nameof(config.Mode)}: {config.Mode.ToString()}");

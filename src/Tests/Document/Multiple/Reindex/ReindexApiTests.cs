@@ -100,29 +100,6 @@ namespace Tests.Document.Multiple.Reindex
 				onCompleted: () => ReindexSingleTypeCompleted(handles)
 			);
 
-						var searchResult = this._client.Search<CommitActivity>(s => s
-							.Index(NewManyTypesIndexName)
-							.From(0)
-							.Size(100)
-							.Query(q => q.MatchAll())
-							.SearchType(SearchType.Scan)
-							.Scroll(scroll)
-						);
-
-						do
-						{
-							var result = searchResult;
-							searchResult = this._client.Scroll<CommitActivity>(scroll, result.ScrollId);
-							foreach (var hit in searchResult.Hits)
-							{
-								hit.Timestamp.Should().HaveValue();
-								hit.Parent.Should().NotBeNullOrEmpty();
-								hit.Routing.Should().NotBeNullOrEmpty();
-							}
-						} while (searchResult.IsValid && searchResult.Documents.Any());
-						handles[0].Set();
-					}
-				);
 
 			WaitHandle.WaitAll(handles, TimeSpan.FromMinutes(3));
 		}

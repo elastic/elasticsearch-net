@@ -64,7 +64,6 @@
     <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ClearCachedRealmsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ClearCachedRolesDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\DescriptorOverridesBase.cs" />
     <Compile Include="Overrides\Descriptors\FieldStatsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\GraphExploreDescriptorOverrides.cs" />

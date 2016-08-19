@@ -10,9 +10,8 @@ using System.Linq;
 
 namespace Tests.Ingest.SimulatePipeline
 {
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SimulatePipelineApiTests
-		: ApiIntegrationTestBase<ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor, SimulatePipelineRequest>
+		: ApiIntegrationTestBase<ReadOnlyCluster, ISimulatePipelineResponse, ISimulatePipelineRequest, SimulatePipelineDescriptor, SimulatePipelineRequest>
 	{
 		public SimulatePipelineApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -201,7 +200,6 @@ namespace Tests.Ingest.SimulatePipeline
 		};
 	}
 
-	[Collection(TypeOfCluster.ReadOnly)]
 	public class SimulatePipelineVerboseApiTests : SimulatePipelineApiTests
 	{
 		public SimulatePipelineVerboseApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

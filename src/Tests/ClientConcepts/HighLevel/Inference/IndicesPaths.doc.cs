@@ -54,7 +54,11 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		*/
 		[U] public void UsingStaticPropertyField()
 		{
+
 			var client = TestClient.Default;
+
+			var singleString = Index("name1"); // <1> specifying a single index using a string
+			var singleTyped = Index<Project>(); //<2> specifying a single index using a type
 
 			ISearchRequest singleStringRequest = new SearchDescriptor<Project>().Index(singleString);
 			ISearchRequest singleTypedRequest = new SearchDescriptor<Project>().Index(singleTyped);

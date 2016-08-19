@@ -13,14 +13,9 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 	/**[[property-inference]]
 	* == Property Name Inference
 	*/
-	public class PropertyNames : SimpleIntegration, IClusterFixture<WritableCluster>
+	public class PropertyNames : IntegrationDocumentationTestBase , IClusterFixture<WritableCluster>
 	{
-		public PropertyNames(IndexingCluster cluster) : base(cluster) { }
-
-		public PropertyNames(WritableCluster cluster) : base(cluster)
-		{
-			_client = cluster.Client;
-		}
+		public PropertyNames(WritableCluster cluster) : base(cluster) { }
 
 		/**=== Appending suffixes to a Lambda expression body
 		 * Suffixes can be appended to the body of a lambda expression, useful in cases where

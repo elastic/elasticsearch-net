@@ -247,7 +247,6 @@ NUGET
     runtime.native.System.Security.Cryptography (4.0) - framework: >= netstandard13
       Microsoft.NETCore.Platforms (>= 1.0.1)
       Microsoft.NETCore.Targets (>= 1.0.1)
-    SemanticVersioning (0.6.17)
     ShellProgressBar (3.0)
     System.AppContext (4.1) - framework: >= netstandard13
       System.Runtime (>= 4.1) - framework: dnxcore50, netstandard13, >= netstandard15

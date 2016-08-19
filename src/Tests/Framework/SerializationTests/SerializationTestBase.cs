@@ -19,6 +19,16 @@ namespace Tests.Framework
 		protected string _expectedJsonString;
 		protected JToken _expectedJsonJObject;
 
+		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
+		protected Func<ConnectionSettings, IElasticsearchSerializer> _serializerFactory;
+
+		protected IElasticsearchSerializer Serializer => Client.Serializer;
+
+		protected virtual IElasticClient Client =>
+			_connectionSettingsModifier == null && _serializerFactory == null
+			? TestClient.DefaultInMemoryClient
+			: TestClient.GetInMemoryClientWithSerializerFactory(_connectionSettingsModifier, _serializerFactory);
+
 		protected SerializationTestBase()
 		{
 			SetupSerialization();
@@ -37,13 +47,6 @@ namespace Tests.Framework
 			return Encoding.UTF8.GetString(bytes);
 		}
 
-		protected IElasticsearchSerializer Serializer => Client.Serializer;
-
-		protected virtual IElasticClient Client =>
-			_connectionSettingsModifier == null && _serializerFactory == null
-			? TestClient.DefaultInMemoryClient
-			: TestClient.GetInMemoryClient(_connectionSettingsModifier, _serializerFactory);
-
 		protected void SetupSerialization()
 		{
 			var o = this.ExpectJson;
@@ -56,9 +59,6 @@ namespace Tests.Framework
 				throw new ArgumentNullException(nameof(this._expectedJsonString));
 		}
 
-		protected virtual IElasticClient Client => TestClient.GetInMemoryClient();
-		private IElasticsearchSerializer Serializer => Client.Serializer;
-
 		private bool SerializesAndMatches(object o, int iteration, out string serialized)
 		{
 			if (this._expectedJsonJObject.Type != JTokenType.Array)
@@ -68,7 +68,7 @@ namespace Tests.Framework
 			serialized = this.Serialize(o);
 			var lines = serialized.Split(new [] { '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 			var zipped = jArray.Children<JObject>().Zip(lines, (j, s) => new {j, s});
-			var matches = zipped.Select(z => this.TokenMatches(z.j, this.Serialize(z.j), iteration, z.s)).ToList();
+			var matches = zipped.Select((z, i) => this.TokenMatches(z.j, this.Serialize(z.j), iteration, z.s, i)).ToList();
 			matches.Should().OnlyContain(b => b);
 			matches.Count.Should().Be(lines.Count);
 			return matches.All(b => b);
@@ -80,7 +80,7 @@ namespace Tests.Framework
 			return TokenMatches(expectedJson, expectedString, iteration, serialized);
 		}
 
-		private bool TokenMatches(JToken expectedJson, string expectedString,int iteration, string actual)
+		private bool TokenMatches(JToken expectedJson, string expectedString,int iteration, string actual, int item = -1)
 		{
 			var actualJson = JToken.Parse(actual);
 			var matches = JToken.DeepEquals(expectedJson, actualJson);
@@ -95,6 +95,8 @@ namespace Tests.Framework
 			var message = "This is the first time I am serializing";
 			if (iteration > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
+
+			if (item > -1) message += $". This is while comparing the {item.ToOrdinal()} item";
 
 			sortedExpected.Diff(sortedActual, message);
 			return false;
