@@ -77,7 +77,9 @@ namespace Tests.Framework
 			)
 		{
 			createPool = createPool ?? (u => new SingleNodeConnectionPool(u));
+#pragma warning disable CS0618 // Type or member is obsolete
 			var defaultSettings = DefaultSettings(new ConnectionSettings(createPool(CreateUri(port)), CreateConnection(forceInMemory: forceInMemory), serializerFactory));
+#pragma warning restore CS0618 // Type or member is obsolete
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}

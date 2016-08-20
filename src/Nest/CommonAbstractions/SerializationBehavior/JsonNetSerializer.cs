@@ -138,7 +138,9 @@ namespace Nest
 				NullValueHandling = NullValueHandling.Ignore
 			};
 
+#pragma warning disable CS0618 // Type or member is obsolete
 			this.ModifyJsonSerializerSettings(settings);
+#pragma warning restore CS0618 // Type or member is obsolete
 
 			var contract = settings.ContractResolver as ElasticContractResolver;
 			if (contract == null) throw new Exception($"NEST needs an instance of {nameof(ElasticContractResolver)} registered on Json.NET's JsonSerializerSettings");
