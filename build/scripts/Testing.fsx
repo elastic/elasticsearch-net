@@ -11,7 +11,7 @@ open Tooling
 
 module Tests = 
     let private testProjectJson parallelization =
-        DotNetProject.AllPublishable
+        DotNetProject.All
         |> Seq.iter(fun p -> 
             let path = Paths.ProjectJson p.Name
             DotNet.Exec ["restore"; path; "--verbosity Warning"]
