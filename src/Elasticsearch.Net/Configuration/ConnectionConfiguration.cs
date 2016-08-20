@@ -151,7 +151,6 @@ namespace Elasticsearch.Net
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
 		private readonly IConnectionPool _connectionPool;
-		private readonly Func<T, IElasticsearchSerializer> _serializerFactory;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
 		private readonly IConnection _connection;
@@ -164,9 +163,8 @@ namespace Elasticsearch.Net
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
-			this._serializerFactory = serializerFactory ?? (c=>this.DefaultSerializer((T)this));
 			// ReSharper disable once VirtualMemberCallInContructor
-			this._serializer = _serializerFactory((T)this);
+			this._serializer = serializerFactory?.Invoke((T)this) ?? this.DefaultSerializer((T)this);
 
 			this._requestTimeout = ConnectionConfiguration.DefaultTimeout;
 			this._sniffOnConnectionFault = true;

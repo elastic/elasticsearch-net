@@ -10,12 +10,12 @@ using Xunit;
 
 namespace Tests.ClientConcepts.ServerError
 {
-    public class ServerErrorTests : SerializationTestBase
-    {
+	public class ServerErrorTests : SerializationTestBase
+	{
 		[U]
-	    public void CanDeserializeServerError()
-	    {
-		    var serverErrorJson = @"{
+		public void CanDeserializeServerError()
+		{
+			var serverErrorJson = @"{
 			   ""error"": {
 				  ""root_cause"": [
 					 {
@@ -33,14 +33,14 @@ namespace Tests.ClientConcepts.ServerError
 			   ""status"": 400
 			}";
 
-		    var serverError = this.Deserialize<Elasticsearch.Net.ServerError>(serverErrorJson);
+			var serverError = this.Deserialize<Elasticsearch.Net.ServerError>(serverErrorJson);
 
-		    serverError.Should().NotBeNull();
+			serverError.Should().NotBeNull();
 			serverError.Status.Should().Be(400);
 
 			serverError.Error.Should().NotBeNull();
 			serverError.Error.RootCause.Count.Should().Be(1);
 			serverError.Error.CausedBy.Should().NotBeNull();
-	    }
-    }
+		}
+	}
 }
