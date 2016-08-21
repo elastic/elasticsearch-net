@@ -26,6 +26,8 @@ Target "Clean" <| fun _ -> Build.Clean()
 Target "BuildApp" <| fun _ -> Build.Compile()
 
 Target "Test"  <| fun _ -> Tests.RunUnitTests()
+
+Target "TestForever"  <| fun _ -> Tests.RunUnitTestsForever()
     
 Target "QuickTest"  <| fun _ -> Tests.RunUnitTests()
 
@@ -58,6 +60,10 @@ Target "Canary" <| fun _ ->
   ==> "BuildApp"
   =?> ("Test", (not ((getBuildParam "skiptests") = "1")))
   ==> "Build"
+
+"Clean" 
+  ==> "BuildApp"
+  ==> "TestForever"
 
 "Clean" 
   ==> "BuildApp"

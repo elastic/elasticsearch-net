@@ -27,6 +27,9 @@ module Tests =
         |> ignore
         
 
+    let RunUnitTestsForever() = 
+        while true do testDesktopClr "all"
+        
     let RunUnitTests() = 
         testDesktopClr "all"
         testProjectJson "all"

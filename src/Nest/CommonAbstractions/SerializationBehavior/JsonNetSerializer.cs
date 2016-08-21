@@ -91,14 +91,16 @@ namespace Nest
 			}
 		}
 
-		protected readonly ConcurrentDictionary<int, IPropertyMapping> Properties = new ConcurrentDictionary<int, IPropertyMapping>();
+		protected readonly ConcurrentDictionary<string, IPropertyMapping> Properties = new ConcurrentDictionary<string, IPropertyMapping>();
 
 		public virtual IPropertyMapping CreatePropertyMapping(MemberInfo memberInfo)
 		{
 			IPropertyMapping mapping;
-			if (Properties.TryGetValue(memberInfo.GetHashCode(), out mapping)) return mapping;
+			var memberInfoString = $"{memberInfo.DeclaringType?.FullName}.{memberInfo.Name}";
+			if (Properties.TryGetValue(memberInfoString, out mapping))
+				return mapping;
 			mapping =  PropertyMappingFromAtrributes(memberInfo);
-			this.Properties.TryAdd(memberInfo.GetHashCode(), mapping);
+			this.Properties.TryAdd(memberInfoString, mapping);
 			return mapping;
 		}
 
