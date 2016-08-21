@@ -38,7 +38,7 @@ namespace Nest
 			this._partionedBulkRequest = partionedBulkRequest;
 			this._backOffRetries = this._partionedBulkRequest.BackOffRetries.GetValueOrDefault(0);
 			this._backOffTime = (this._partionedBulkRequest?.BackOffTime?.ToTimeSpan() ?? TimeSpan.FromMinutes(1));
-			this._bulkSize = this._partionedBulkRequest.Size.HasValue ? this._partionedBulkRequest.Size.Value : 1000;
+			this._bulkSize = this._partionedBulkRequest.Size ?? 1000;
 			this._maxDegreeOfParallelism = this._partionedBulkRequest.MaxDegreeOfParallelism.HasValue
 				? this._partionedBulkRequest.MaxDegreeOfParallelism.Value
 				: 20;
@@ -113,7 +113,7 @@ namespace Nest
 				s.IndexMany(buffer).Index(r.Index).Type(r.Type);
 				if (!string.IsNullOrEmpty(r.Pipeline)) s.Pipeline(r.Pipeline);
 				if (r.Refresh) s.Refresh(r.Refresh);
-				if (!string.IsNullOrEmpty(r.Routing)) s.Pipeline(r.Routing);
+				if (!string.IsNullOrEmpty(r.Routing)) s.Routing(r.Routing);
 				if (r.Consistency.HasValue) s.Consistency(r.Consistency.Value);
 				return s;
 			}, this._compositeCancelToken);
@@ -123,7 +123,7 @@ namespace Nest
 			{
 				this._incrementRetries();
 				//wait before or after fishing out retriable docs?
-				await Task.Delay(this._backOffTime);
+				await Task.Delay(this._backOffTime, this._compositeCancelToken);
 				var retryDocuments = response.Items.Zip(buffer, (i, d) => new { i, d })
 					.Where(x => x.i.Status == 429)
 					.Select(x => x.d)
@@ -164,7 +164,7 @@ namespace Nest
 				}
 			}
 
-			IEnumerable<TDocument> GetNextBatch(IEnumerator<TDocument> enumerator)
+			private IEnumerable<TDocument> GetNextBatch(IEnumerator<TDocument> enumerator)
 			{
 				for (int i = 0; i < _partitionSize; ++i)
 				{
@@ -205,7 +205,10 @@ namespace Nest
 				{
 					throw;
 				}
-				finally { if (semaphoreSlim != null) semaphoreSlim.Release(); }
+				finally
+				{
+					semaphoreSlim?.Release();
+				}
 			}
 		}
 
