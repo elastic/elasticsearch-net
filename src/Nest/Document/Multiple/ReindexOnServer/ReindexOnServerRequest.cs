@@ -1,6 +1,8 @@
 ﻿using System;
 using System.CodeDom;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
@@ -17,6 +19,10 @@ namespace Nest
 
 		[JsonProperty("size")]
 		long? Size { get; set; }
+
+        [JsonProperty("conflicts")]
+        [JsonConverter(typeof(StringEnumConverter))]
+		Conflicts? Conflicts { get; set; }
 	}
 
 	public partial class ReindexOnServerRequest
@@ -25,6 +31,7 @@ namespace Nest
 		public IReindexDestination Destination { get; set; }
 		public IScript Script { get; set; }
 		public long? Size { get; set; }
+		public Conflicts? Conflicts { get; set; }
 	}
 
 	[DescriptorFor("Reindex")]
@@ -34,6 +41,7 @@ namespace Nest
 		IReindexDestination IReindexOnServerRequest.Destination { get; set; }
 		IScript IReindexOnServerRequest.Script { get; set; }
 		long? IReindexOnServerRequest.Size { get; set; }
+		Conflicts? IReindexOnServerRequest.Conflicts { get; set; }
 
 		public ReindexOnServerDescriptor Source(Func<ReindexSourceDescriptor, IReindexSource> selector = null) =>
 			Assign(a => a.Source = selector.InvokeOrDefault(new ReindexSourceDescriptor()));
@@ -47,5 +55,7 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public ReindexOnServerDescriptor Size(long? size) => Assign(a => a.Size = size);
+
+		public ReindexOnServerDescriptor Conflicts(Conflicts conflicts) => Assign(a => a.Conflicts = conflicts);
 	}
 }

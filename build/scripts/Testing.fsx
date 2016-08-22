@@ -11,7 +11,8 @@ open Projects
 module Tests = 
     let private testProjectJson parallelization =
         let p = Paths.Source "Tests/project.json"
-        Tooling.DotNet.Exec ["restore"; p;]
+        Tooling.DotNet.Exec ["restore"; p; "--verbosity Warning"]
+        Tooling.DotNet.Exec ["build"; p; "--configuration Release"; "-f"; "netcoreapp1.0"]
         Tooling.DotNet.Exec ["test"; p; "-parallel"; parallelization; "-xml"; Paths.Output("TestResults-Core-Clr.xml")]
 
     let private testDesktopClr parallelization = 

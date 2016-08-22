@@ -72,6 +72,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				.Routing(ReindexRouting.Discard)
 			)
 			.Script(_script)
+            .Conflicts(Conflicts.Proceed)
 			.Refresh();
 
 		protected override ReindexOnServerRequest Initializer => new ReindexOnServerRequest()
@@ -94,6 +95,7 @@ namespace Tests.Document.Multiple.ReindexOnServer
 				Routing = ReindexRouting.Discard
 			},
 			Script = new InlineScript(_script),
+            Conflicts = Conflicts.Proceed,
 			Refresh = true,
 		};
 
@@ -133,7 +135,8 @@ namespace Tests.Document.Multiple.ReindexOnServer
 					sort = new [] { new { id = new { order = "asc" } } },
 					type = new [] { "test" },
 					size = 100
-				}
+				},
+                conflicts = "proceed"
 			};
 	}
 }
