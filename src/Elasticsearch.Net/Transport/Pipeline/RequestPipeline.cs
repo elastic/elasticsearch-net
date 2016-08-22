@@ -124,15 +124,17 @@ namespace Elasticsearch.Net
             if (!semaphore.Wait(this._settings.RequestTimeout))
             {
                 if (this.FirstPoolUsageNeedsSniffing)
-                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
                 return;
             }
+
             if (!this.FirstPoolUsageNeedsSniffing)
             {
                 semaphore.Release();
                 return;
             }
-			try
+
+            try
 			{
 				using (this.Audit(SniffOnStartup))
 				{
@@ -153,7 +155,7 @@ namespace Elasticsearch.Net
             if (!success)
             {
                 if(this.FirstPoolUsageNeedsSniffing)
-                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+                    throw new PipelineException(PipelineFailure.CouldNotStartSniffOnStartup, null);
                 return;
             }
 
